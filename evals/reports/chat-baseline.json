@@ -1,0 +1,820 @@
+{
+  "schema_version": 1,
+  "version": "0.1.1",
+  "captured_at": "2026-10-14T23:05:50.321587+00:00",
+  "environment": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.13.0"
+  },
+  "status": "passed_with_documented_limits",
+  "checks": [
+    {
+      "command": [
+        "python",
+        "tools/check_seed.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"ok\": true,\n  \"errors\": [],\n  \"checked_assets\": 22,\n  \"fixture_cases\": 12\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_auto_starts_default_and_sends_only_explicit_text (test_chat.ChatTests.test_auto_starts_default_and_sends_only_explicit_text) ... ok\ntest_cli_single_message_uses_selected_provider (test_chat.ChatTests.test_cli_single_message_uses_selected_provider) ... ok\ntest_each_provider_is_attempted_at_most_once (test_chat.ChatTests.test_each_provider_is_attempted_at_most_once) ... ok\ntest_explicit_rejections_allow_bounded_auto_fallback (test_chat.ChatTests.test_explicit_rejections_allow_bounded_auto_fallback) ... ok\ntest_history_is_trimmed_by_messages_bytes_and_local_context (test_chat.ChatTests.test_history_is_trimmed_by_messages_bytes_and_local_context) ... ok\ntest_interactive_commands_change_provider_clear_history_and_exit (test_chat.ChatTests.test_interactive_commands_change_provider_clear_history_and_exit) ... ok\ntest_invalid_history_and_oversize_message_are_never_sent (test_chat.ChatTests.test_invalid_history_and_oversize_message_are_never_sent) ... ok\ntest_manual_selection_never_falls_back_after_quota_error (test_chat.ChatTests.test_manual_selection_never_falls_back_after_quota_error) ... ok\ntest_models_is_redacted_readonly_and_does_not_impose_call_cap (test_chat.ChatTests.test_models_is_redacted_readonly_and_does_not_impose_call_cap) ... ok\ntest_non_success_text_is_not_returned (test_chat.ChatTests.test_non_success_text_is_not_returned) ... ok\ntest_route_budget_limits_next_attempt_and_provider_deadline (test_chat.ChatTests.test_route_budget_limits_next_attempt_and_provider_deadline) ... ok\ntest_stop_after_response_discards_text_and_stops_routing (test_chat.ChatTests.test_stop_after_response_discards_text_and_stops_routing) ... ok\ntest_stop_preserves_unknown_inflight_outcome (test_chat.ChatTests.test_stop_preserves_unknown_inflight_outcome) ... ok\ntest_stopped_core_does_not_call_provider (test_chat.ChatTests.test_stopped_core_does_not_call_provider) ... ok\ntest_unexpected_gateway_error_is_unknown_without_retry (test_chat.ChatTests.test_unexpected_gateway_error_is_unknown_without_retry) ... ok\ntest_unknown_authentication_and_invalid_request_do_not_fallback (test_chat.ChatTests.test_unknown_authentication_and_invalid_request_do_not_fallback) ... ok\ntest_actual_capability_outputs_match_declared_schemas (test_core.CoreTests.test_actual_capability_outputs_match_declared_schemas) ... ok\ntest_artifact_collision_becomes_unknown_without_overwrite (test_core.CoreTests.test_artifact_collision_becomes_unknown_without_overwrite) ... ok\ntest_cancel_during_scan_prevents_final_effect (test_core.CoreTests.test_cancel_during_scan_prevents_final_effect) ... ok\ntest_cancel_prepared_task_persists_without_effect (test_core.CoreTests.test_cancel_prepared_task_persists_without_effect) ... ok\ntest_cli_commands_from_repository_root (test_core.CoreTests.test_cli_commands_from_repository_root) ... ok\ntest_corrupt_task_history_cannot_roll_back_stop (test_core.CoreTests.test_corrupt_task_history_cannot_roll_back_stop) ... ok\ntest_count_and_byte_limits_fail_without_artifact (test_core.CoreTests.test_count_and_byte_limits_fail_without_artifact) ... ok\ntest_crash_before_or_after_effect_recovers_unknown_and_does_not_replay (test_core.CoreTests.test_crash_before_or_after_effect_recovers_unknown_and_does_not_replay) ... ok\ntest_empty_directory_and_subset_are_supported (test_core.CoreTests.test_empty_directory_and_subset_are_supported) ... ok\ntest_empty_directory_queue_obeys_total_scan_deadline (test_core.CoreTests.test_empty_directory_queue_obeys_total_scan_deadline) ... ok\ntest_idempotency_parameter_conflict_rejected (test_core.CoreTests.test_idempotency_parameter_conflict_rejected) ... ok\ntest_init_cannot_widen_root_or_reset_missing_database (test_core.CoreTests.test_init_cannot_widen_root_or_reset_missing_database) ... ok\ntest_inventory_real_artifact_and_stable_replay (test_core.CoreTests.test_inventory_real_artifact_and_stable_replay) ... ok\ntest_live_owner_is_not_recovered_and_competing_worker_is_rejected (test_core.CoreTests.test_live_owner_is_not_recovered_and_competing_worker_is_rejected) ... ok\ntest_missing_or_corrupt_control_fails_closed (test_core.CoreTests.test_missing_or_corrupt_control_fails_closed) ... ok\ntest_path_escape_and_data_overlap_rejected (test_core.CoreTests.test_path_escape_and_data_overlap_rejected) ... ok\ntest_permission_failure_is_recorded (test_core.CoreTests.test_permission_failure_is_recorded) ... ok\ntest_public_contracts_and_seed_policy_match (test_core.CoreTests.test_public_contracts_and_seed_policy_match) ... ok\ntest_stop_during_scan_prevents_final_effect (test_core.CoreTests.test_stop_during_scan_prevents_final_effect) ... ok\ntest_stop_persists_across_restart_and_init (test_core.CoreTests.test_stop_persists_across_restart_and_init) ... ok\ntest_symlink_is_rejected (test_core.CoreTests.test_symlink_is_rejected) ... skipped \"OS denied test symlink creation: [WinError 1314] 客户端没有所需的特权。: 'C:\\\\\\\\Users\\\\\\\\samuel\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\jarvis-core-test-gmz6437t\\\\\\\\outside.txt' -> 'C:\\\\\\\\Users\\\\\\\\samuel\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\jarvis-core-test-gmz6437t\\\\\\\\input\\\\\\\\linked.txt'\"\ntest_tampered_confirmed_artifact_is_not_silently_rebuilt (test_core.CoreTests.test_tampered_confirmed_artifact_is_not_silently_rebuilt) ... ok\ntest_windows_junction_is_rejected (test_core.CoreTests.test_windows_junction_is_rejected) ... ok\ntest_exact_fifteen_second_boundary_is_accepted (test_diagnostics.DiagnosticsTests.test_exact_fifteen_second_boundary_is_accepted) ... ok\ntest_fresh_model_status_creates_no_directory_or_database (test_diagnostics.DiagnosticsTests.test_fresh_model_status_creates_no_directory_or_database) ... ok\ntest_local_probe_disables_proxy_environment_in_default_client (test_diagnostics.DiagnosticsTests.test_local_probe_disables_proxy_environment_in_default_client) ... ok\ntest_pcm16_over_fifteen_seconds_is_rejected_before_inference (test_diagnostics.DiagnosticsTests.test_pcm16_over_fifteen_seconds_is_rejected_before_inference) ... ok\ntest_short_pcm16_is_accepted_and_normalized_to_sixteen_khz (test_diagnostics.DiagnosticsTests.test_short_pcm16_is_accepted_and_normalized_to_sixteen_khz) ... ok\ntest_bad_vertex_token_host_rejected_before_refresh (test_models.ModelTests.test_bad_vertex_token_host_rejected_before_refresh) ... ok\ntest_billing_and_rate_errors_are_distinguished_without_leaking_body (test_models.ModelTests.test_billing_and_rate_errors_are_distinguished_without_leaking_body) ... ok\ntest_complete_error_body_can_refine_status_to_billing_error (test_models.ModelTests.test_complete_error_body_can_refine_status_to_billing_error) ... ok\ntest_connection_failure_is_safe_to_route_elsewhere (test_models.ModelTests.test_connection_failure_is_safe_to_route_elsewhere) ... ok\ntest_error_body_failure_preserves_known_http_classification (test_models.ModelTests.test_error_body_failure_preserves_known_http_classification) ... ok\ntest_history_bytes_and_roles_cannot_bypass_local_limit (test_models.ModelTests.test_history_bytes_and_roles_cannot_bypass_local_limit) ... ok\ntest_history_is_mapped_to_native_provider_roles (test_models.ModelTests.test_history_is_mapped_to_native_provider_roles) ... ok\ntest_invalid_config_rejects_exfiltration_endpoint (test_models.ModelTests.test_invalid_config_rejects_exfiltration_endpoint) ... ok\ntest_local_has_no_credential_access (test_models.ModelTests.test_local_has_no_credential_access) ... ok\ntest_malformed_dispatched_response_is_unknown (test_models.ModelTests.test_malformed_dispatched_response_is_unknown) ... ok\ntest_openai_multiple_output_items (test_models.ModelTests.test_openai_multiple_output_items) ... ok\ntest_stop_after_request_discards_output (test_models.ModelTests.test_stop_after_request_discards_output) ... ok\ntest_stop_before_dispatch_prevents_network (test_models.ModelTests.test_stop_before_dispatch_prevents_network) ... ok\ntest_stop_during_error_body_overrides_routing_but_not_known_outcome (test_models.ModelTests.test_stop_during_error_body_overrides_routing_but_not_known_outcome) ... ok\ntest_stop_wins_admission_transaction (test_models.ModelTests.test_stop_wins_admission_transaction) ... ok\ntest_total_deadline_cancels_slow_response (test_models.ModelTests.test_total_deadline_cancels_slow_response) ... ok\ntest_total_deadline_during_error_body_preserves_rejection (test_models.ModelTests.test_total_deadline_during_error_body_preserves_rejection) ... ok\ntest_transport_uncertainty_has_no_retry (test_models.ModelTests.test_transport_uncertainty_has_no_retry) ... ok\ntest_usage_history_never_blocks_new_request (test_models.ModelTests.test_usage_history_never_blocks_new_request) ... ok\ntest_usage_rejects_nonfinite_values_and_arbitrary_metadata (test_models.ModelTests.test_usage_rejects_nonfinite_values_and_arbitrary_metadata) ... ok\ntest_vault_roundtrip_and_tamper_rejection (test_models.ModelTests.test_vault_roundtrip_and_tamper_rejection) ... ok\ntest_action_dispatching_and_unknown_are_valid_states (test_seed.ContractTests.test_action_dispatching_and_unknown_are_valid_states) ... ok\ntest_artifact_paths_cannot_escape_or_be_absolute (test_seed.ContractTests.test_artifact_paths_cannot_escape_or_be_absolute) ... ok\ntest_contracts_reject_unknown_fields_and_versions (test_seed.ContractTests.test_contracts_reject_unknown_fields_and_versions) ... ok\ntest_each_contract_has_positive_and_negative_examples (test_seed.ContractTests.test_each_contract_has_positive_and_negative_examples) ... ok\ntest_inventory_argument_schema_enforces_scope_shape_and_limits (test_seed.ContractTests.test_inventory_argument_schema_enforces_scope_shape_and_limits) ... ok\ntest_inventory_output_rejects_old_shape_and_unbounded_metadata (test_seed.ContractTests.test_inventory_output_rejects_old_shape_and_unbounded_metadata) ... ok\ntest_nested_unknown_field_is_rejected (test_seed.ContractTests.test_nested_unknown_field_is_rejected) ... ok\ntest_planned_capability_must_not_contain_executor (test_seed.ContractTests.test_planned_capability_must_not_contain_executor) ... ok\ntest_status_degraded_branches_are_closed_and_require_evidence (test_seed.ContractTests.test_status_degraded_branches_are_closed_and_require_evidence) ... ok\ntest_status_embedded_contracts_match_authoritative_schemas (test_seed.ContractTests.test_status_embedded_contracts_match_authoritative_schemas) ... ok\ntest_current_bundle_passes_and_checker_does_not_write (test_seed.SeedIntegrityTests.test_current_bundle_passes_and_checker_does_not_write) ... ok\ntest_duplicate_asset_and_duplicate_json_keys_are_rejected (test_seed.SeedIntegrityTests.test_duplicate_asset_and_duplicate_json_keys_are_rejected) ... ok\ntest_external_schema_references_are_rejected_without_network (test_seed.SeedIntegrityTests.test_external_schema_references_are_rejected_without_network) ... ok\ntest_fixture_expectations_cannot_silently_disagree (test_seed.SeedIntegrityTests.test_fixture_expectations_cannot_silently_disagree) ... ok\ntest_knowledge_cannot_promote_itself_to_rules (test_seed.SeedIntegrityTests.test_knowledge_cannot_promote_itself_to_rules) ... ok\ntest_missing_and_traversal_manifest_references_are_rejected (test_seed.SeedIntegrityTests.test_missing_and_traversal_manifest_references_are_rejected) ... ok\ntest_missing_source_anchor_is_reported (test_seed.SeedIntegrityTests.test_missing_source_anchor_is_reported) ... ok\ntest_plain_asset_drift_is_rejected (test_seed.SeedIntegrityTests.test_plain_asset_drift_is_rejected) ... ok\ntest_planned_build_cannot_be_enabled_by_catalog_edit (test_seed.SeedIntegrityTests.test_planned_build_cannot_be_enabled_by_catalog_edit) ... ok\ntest_rule_change_fails_even_if_manifest_hash_is_changed (test_seed.SeedIntegrityTests.test_rule_change_fails_even_if_manifest_hash_is_changed) ... ok\ntest_skill_must_reference_known_capability (test_seed.SeedIntegrityTests.test_skill_must_reference_known_capability) ... ok\ntest_unregistered_seed_asset_is_rejected (test_seed.SeedIntegrityTests.test_unregistered_seed_asset_is_rejected) ... ok\ntest_body_size_and_content_type_are_bounded (test_web.WebTests.test_body_size_and_content_type_are_bounded) ... ok\ntest_chat_passes_valid_history_without_saving_it (test_web.WebTests.test_chat_passes_valid_history_without_saving_it) ... ok\ntest_exceptions_do_not_return_private_details (test_web.WebTests.test_exceptions_do_not_return_private_details) ... ok\ntest_foreign_host_and_origin_are_rejected (test_web.WebTests.test_foreign_host_and_origin_are_rejected) ... ok\ntest_index_has_nonce_and_restrictive_headers (test_web.WebTests.test_index_has_nonce_and_restrictive_headers) ... ok\ntest_invalid_json_unknown_fields_and_history_are_rejected (test_web.WebTests.test_invalid_json_unknown_fields_and_history_are_rejected) ... ok\ntest_models_and_status_are_guarded_and_minimal (test_web.WebTests.test_models_and_status_are_guarded_and_minimal) ... ok\ntest_non_loopback_binding_is_rejected (test_web.WebTests.test_non_loopback_binding_is_rejected) ... ok\ntest_only_fixed_routes_are_available (test_web.WebTests.test_only_fixed_routes_are_available) ... ok\ntest_post_requires_origin_and_nonce (test_web.WebTests.test_post_requires_origin_and_nonce) ... ok\ntest_timeout_retains_slots_until_real_workers_finish (test_web.WebTests.test_timeout_retains_slots_until_real_workers_finish) ... ok\ntest_two_inflight_requests_reject_third_until_completion (test_web.WebTests.test_two_inflight_requests_reject_third_until_completion) ... ok\n\n----------------------------------------------------------------------\nRan 99 tests in 6.359s\n\nOK (skipped=1)\n"
+    },
+    {
+      "command": [
+        "python",
+        "tools/manage_models.py",
+        "verify",
+        "--profile",
+        "local-small-cpu"
+      ],
+      "exit_code": 0,
+      "stdout": "PROFILE local-small-cpu files=17 bytes=961591814 root=H:\\JarvisData\\models\nOK llm/qwen3-0.6b/Qwen3-0.6B-Q8_0.gguf\nOK llm/qwen3-0.6b/LICENSE\nOK stt/sensevoice-small/model.int8.onnx\nOK stt/sensevoice-small/tokens.txt\nOK stt/sensevoice-small/LICENSE\nOK stt/sensevoice-small/test_wavs/zh.wav\nOK tts/vits-aishell3-low/model.onnx\nOK tts/vits-aishell3-low/lexicon.txt\nOK tts/vits-aishell3-low/tokens.txt\nOK tts/vits-aishell3-low/speakers.txt\nOK tts/vits-aishell3-low/date.fst\nOK tts/vits-aishell3-low/number.fst\nOK tts/vits-aishell3-low/phone.fst\nOK tts/vits-aishell3-low/new_heteronym.fst\nOK speaker/campplus-zh/model.onnx\nOK vad/silero/silero_vad.onnx\nOK runtimes/llama-b11617-bin-win-cpu-x64.zip\nVERIFICATION errors=0\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python",
+        "tools/check_docs.py",
+        "--root",
+        "."
+      ],
+      "exit_code": 0,
+      "stdout": "OK documents=23 diagrams=18 artifacts=36 errors=0\n",
+      "stderr": ""
+    }
+  ],
+  "secret_scan": {
+    "status": "passed",
+    "files": 99,
+    "matched_paths": [],
+    "scope": "source/document text; exact configured key material"
+  },
+  "diagnostics": {
+    "local_llm": {
+      "source_sha256": "8a00f2a609d1f752c15e0a2e82df5be9ce12aa3cb3f13400511d46155eccd6aa",
+      "result": {
+        "provider": "local",
+        "model": "qwen3-0.6b",
+        "request_id": "cc9c2cb0085b4e179c97f555ab1993e5",
+        "dispatch_admitted": true,
+        "http_status": 200,
+        "usage": {
+          "completion_tokens": 6,
+          "prompt_tokens": 29,
+          "total_tokens": 35
+        },
+        "outcome_uncertain": false,
+        "elapsed_seconds": 0.454,
+        "status": "SUCCEEDED",
+        "automatic_retry": false,
+        "text": "我可以帮助整理文件。",
+        "startup_and_probe_seconds": 1.68,
+        "profile": {
+          "threads": 4,
+          "context": 2048,
+          "gpu_layers": 0,
+          "parallel": 1
+        }
+      }
+    },
+    "speech": {
+      "source_sha256": "5dc7a8cda1491fefe97ce1669e6041f33ffc840e5f8c133d75afebf7054803c0",
+      "result": {
+        "synthetic_audio": "%LOCALAPPDATA%/Jarvis/data/diagnostics/speech/synthetic-speech-test.wav",
+        "tts_sample_rate": 8000,
+        "tts_duration_seconds": 7.023,
+        "tts_prompt": "你好，我是你的本地助手。现在正在测试语音识别和语音合成。",
+        "synthetic_transcript": "你老古是你的本地助手，现在正在说是语音识结和语音合成。",
+        "publisher_fixture_transcript": "开饭时间早上9点至下午5点。",
+        "speaker_embedding_dimensions": 192,
+        "speaker_embedding_finite": true,
+        "speaker_embedding_valid": true,
+        "owner_enrolled": false,
+        "voice_authentication_granted": false,
+        "vad_segments": 1,
+        "timings": {
+          "tts_seconds_including_load": 0.671,
+          "asr_seconds_including_load": 1.099,
+          "speaker_seconds_including_load": 0.327
+        },
+        "status": "passed",
+        "limits": "File-only smoke test; no microphone, speaker identity enrollment, spoof defense or voice quality benchmark."
+      }
+    },
+    "chat_connectivity": {
+      "source_sha256": "ef483180997b5f5ecfa205d6e0ea8404983404d09bcbcb481ee930ec044599b3",
+      "result": {
+        "version": "0.1.1",
+        "tested_at": "2026-10-14T22:56:00.103374+00:00",
+        "local_call_limit": null,
+        "results": [
+          {
+            "provider": "bailian",
+            "model": "qwen-flash",
+            "request_id": "32dc5c8aed034a778f1ce35a84ffb021",
+            "dispatch_admitted": true,
+            "http_status": 200,
+            "usage": {
+              "completion_tokens": 4,
+              "prompt_tokens": 15,
+              "total_tokens": 19
+            },
+            "outcome_uncertain": false,
+            "elapsed_seconds": 0.603,
+            "status": "SUCCEEDED",
+            "automatic_retry": false,
+            "text": "JARVIS_READY"
+          },
+          {
+            "provider": "xai",
+            "model": "grok-4-1-fast-non-reasoning",
+            "request_id": "28b7d754ba7d48ecae5729658766048e",
+            "dispatch_admitted": true,
+            "http_status": 200,
+            "usage": {
+              "prompt_tokens": 190,
+              "completion_tokens": 4,
+              "total_tokens": 194,
+              "num_sources_used": 0,
+              "cost_in_usd_ticks": 1131000
+            },
+            "outcome_uncertain": false,
+            "elapsed_seconds": 2.547,
+            "status": "SUCCEEDED",
+            "automatic_retry": false,
+            "text": "JARVIS_READY"
+          },
+          {
+            "provider": "openai",
+            "model": "gpt-5.6-luna",
+            "request_id": "f36a623add3d416fb0cfd0aac60c474f",
+            "dispatch_admitted": true,
+            "http_status": 200,
+            "usage": {
+              "input_tokens": 13,
+              "output_tokens": 8,
+              "total_tokens": 21
+            },
+            "outcome_uncertain": false,
+            "elapsed_seconds": 4.195,
+            "status": "SUCCEEDED",
+            "automatic_retry": false,
+            "text": "JARVIS_READY"
+          },
+          {
+            "provider": "vertex",
+            "model": "gemini-3.1-flash-lite",
+            "request_id": "b3a1d19a813345c694a7835cc0bbf5c2",
+            "dispatch_admitted": true,
+            "http_status": 200,
+            "usage": {
+              "promptTokenCount": 7,
+              "candidatesTokenCount": 4,
+              "totalTokenCount": 11
+            },
+            "outcome_uncertain": false,
+            "elapsed_seconds": 4.94,
+            "status": "SUCCEEDED",
+            "automatic_retry": false,
+            "text": "JARVIS_READY"
+          }
+        ]
+      }
+    },
+    "web_chat": {
+      "source_sha256": "c3cafcc6f7235569a2eff139bccf52a57f07d10e69fadda7fa5ce764c8e4b092",
+      "result": {
+        "version": "0.1.1",
+        "captured_at": "2026-10-14T23:05:24.993110+00:00",
+        "method": "CUA real browser interaction at http://127.0.0.1:18181",
+        "status": "passed_with_documented_limits",
+        "observations": [
+          {
+            "check": "model_selector",
+            "result": "auto plus vertex, bailian, openai, xai, local are selectable"
+          },
+          {
+            "check": "local_two_turn_context",
+            "result": "First reply 记住了。; next reply 蓝鲸; usage totals 32 and 56"
+          },
+          {
+            "check": "switch_to_openai_with_history",
+            "result": "OpenAI replied 蓝鲸 using prior local conversation; total_tokens 86"
+          },
+          {
+            "check": "clear_history",
+            "result": "UI showed no retained history before next request"
+          },
+          {
+            "check": "auto_primary",
+            "result": "Google Vertex returned Jarvis 已就绪。; totalTokenCount 15"
+          },
+          {
+            "check": "service_restart_after_error_classification_fix",
+            "result": "Restarted web server only; refreshed page had zero retained messages; local returned 服务正常。; total_tokens 22"
+          },
+          {
+            "check": "interface",
+            "result": "Narrow in-app viewport: readable model selector, conversation, usage, history disclosure and send button; no overlapping content observed"
+          }
+        ],
+        "limitations": [
+          "Synthetic prompts only; not a model quality benchmark.",
+          "Cloud quota and failover faults were mocked in regression tests, not induced by spending account balances.",
+          "Real OpenAI/Vertex UI calls preceded the final HTTP error-body classification fix; post-fix local UI smoke and full mock regression cover final source.",
+          "No microphone, hardware, autonomous tools or persistent conversation memory tested."
+        ],
+        "screenshot": {
+          "path": "H:/JarvisData/jarvis-chat-0.1.1.jpg",
+          "sha256": "fea15619b0780fc33c750307b8b7d2e8531fda314c7bca759d2fac1968f6051b"
+        },
+        "source_sha256": {
+          "apps\\web\\server.py": "020873f726efd6983a61e6d97e3a52ba3ab7357200379e82387a90c19d67c98f",
+          "apps\\web\\index.html": "f7f8efad1f26fff09a35ab5c1151229f22b1dcd8a7607caf5c0e7e1c0c827343",
+          "runtime\\node-host\\jarvis_core\\chat.py": "ca708b40c1631cf90f4de858907c8d14a1219ab96b99ca2ea77494af7dcc7e74",
+          "adapters\\models\\provider-native\\jarvis_models\\gateway.py": "1149b4827cd3b83fa7efb277966ad7f03e4ced6f75a45f45d4f544ff930dd124"
+        },
+        "requests": [
+          {
+            "request_id": "e1854f9d1a5d4f44a71d5ee1d7c5485d",
+            "provider": "local",
+            "model": "qwen3-0.6b",
+            "created_at": "2026-10-14T23:02:54.113756+00:00",
+            "status": "SUCCEEDED",
+            "metadata": {
+              "provider": "local",
+              "model": "qwen3-0.6b",
+              "request_id": "e1854f9d1a5d4f44a71d5ee1d7c5485d",
+              "dispatch_admitted": true,
+              "http_status": 200,
+              "usage": {
+                "completion_tokens": 4,
+                "prompt_tokens": 28,
+                "total_tokens": 32
+              },
+              "outcome_uncertain": false,
+              "elapsed_seconds": 0.287
+            }
+          },
+          {
+            "request_id": "3bc46de06800480598d1f12a0d6e434c",
+            "provider": "local",
+            "model": "qwen3-0.6b",
+            "created_at": "2026-10-14T23:03:02.930584+00:00",
+            "status": "SUCCEEDED",
+            "metadata": {
+              "provider": "local",
+              "model": "qwen3-0.6b",
+              "request_id": "3bc46de06800480598d1f12a0d6e434c",
+              "dispatch_admitted": true,
+              "http_status": 200,
+              "usage": {
+                "completion_tokens": 3,
+                "prompt_tokens": 53,
+                "total_tokens": 56
+              },
+              "outcome_uncertain": false,
+              "elapsed_seconds": 0.258
+            }
+          },
+          {
+            "request_id": "c1e071c9d60142cbb87be889cc723fbd",
+            "provider": "openai",
+            "model": "gpt-5.6-luna",
+            "created_at": "2026-10-14T23:03:10.719792+00:00",
+            "status": "SUCCEEDED",
+            "metadata": {
+              "provider": "openai",
+              "model": "gpt-5.6-luna",
+              "request_id": "c1e071c9d60142cbb87be889cc723fbd",
+              "dispatch_admitted": true,
+              "http_status": 200,
+              "usage": {
+                "input_tokens": 80,
+                "output_tokens": 6,
+                "total_tokens": 86
+              },
+              "outcome_uncertain": false,
+              "elapsed_seconds": 2.713
+            }
+          },
+          {
+            "request_id": "eadfb530cf0a419f87a381d0fff0981b",
+            "provider": "vertex",
+            "model": "gemini-3.1-flash-lite",
+            "created_at": "2026-10-14T23:03:34.555240+00:00",
+            "status": "SUCCEEDED",
+            "metadata": {
+              "provider": "vertex",
+              "model": "gemini-3.1-flash-lite",
+              "request_id": "eadfb530cf0a419f87a381d0fff0981b",
+              "dispatch_admitted": true,
+              "http_status": 200,
+              "usage": {
+                "promptTokenCount": 9,
+                "candidatesTokenCount": 6,
+                "totalTokenCount": 15
+              },
+              "outcome_uncertain": false,
+              "elapsed_seconds": 4.235
+            }
+          },
+          {
+            "request_id": "790cb18b4a2b45b0a5344679663d9ece",
+            "provider": "local",
+            "model": "qwen3-0.6b",
+            "created_at": "2026-10-14T23:04:27.445325+00:00",
+            "status": "SUCCEEDED",
+            "metadata": {
+              "provider": "local",
+              "model": "qwen3-0.6b",
+              "request_id": "790cb18b4a2b45b0a5344679663d9ece",
+              "dispatch_admitted": true,
+              "http_status": 200,
+              "usage": {
+                "completion_tokens": 4,
+                "prompt_tokens": 18,
+                "total_tokens": 22
+              },
+              "outcome_uncertain": false,
+              "elapsed_seconds": 0.277
+            }
+          }
+        ]
+      }
+    },
+    "existing_model_probes": [
+      {
+        "provider": "vertex",
+        "model": "gemini-3.1-flash-lite",
+        "created_at": "2026-10-14T18:39:48.477623+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "vertex",
+          "model": "gemini-3.1-flash-lite",
+          "request_id": "79aee81fa3d64069977e78deab9bbea3",
+          "http_status": 200,
+          "usage": {
+            "promptTokenCount": 12,
+            "candidatesTokenCount": 5,
+            "totalTokenCount": 17
+          },
+          "elapsed_seconds": 6.338
+        }
+      },
+      {
+        "provider": "bailian",
+        "model": "qwen-flash",
+        "created_at": "2026-10-14T18:40:47.278908+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "bailian",
+          "model": "qwen-flash",
+          "request_id": "ee639438d3ee44638bb138e3beb665f3",
+          "http_status": 200,
+          "usage": {
+            "completion_tokens": 4,
+            "prompt_tokens": 21,
+            "total_tokens": 25
+          },
+          "elapsed_seconds": 0.608
+        }
+      },
+      {
+        "provider": "openai",
+        "model": "gpt-5.6-luna",
+        "created_at": "2026-10-14T18:40:47.337738+00:00",
+        "status": "UNKNOWN",
+        "metadata": {
+          "provider": "openai",
+          "model": "gpt-5.6-luna",
+          "request_id": "ad6b81ceca1a48f3af2fe75456efc884",
+          "error": "transport_error_no_automatic_retry",
+          "elapsed_seconds": 12.88
+        }
+      },
+      {
+        "provider": "xai",
+        "model": "grok-4-1-fast-non-reasoning",
+        "created_at": "2026-10-14T18:40:47.353069+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "xai",
+          "model": "grok-4-1-fast-non-reasoning",
+          "request_id": "7e4b0dd4e2f445bb9a6542e9f2759bcb",
+          "http_status": 200,
+          "usage": {
+            "prompt_tokens": 196,
+            "completion_tokens": 4,
+            "total_tokens": 200,
+            "num_sources_used": 0,
+            "cost_in_usd_ticks": 1206000
+          },
+          "elapsed_seconds": 3.327
+        }
+      },
+      {
+        "provider": "local",
+        "model": "qwen3-0.6b",
+        "created_at": "2026-10-14T19:03:47.459426+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "local",
+          "model": "qwen3-0.6b",
+          "request_id": "ad56a5169c0246d4b18cca54c5fe60e6",
+          "http_status": 200,
+          "usage": {
+            "completion_tokens": 6,
+            "prompt_tokens": 29,
+            "total_tokens": 35
+          },
+          "elapsed_seconds": 0.279
+        }
+      },
+      {
+        "provider": "local",
+        "model": "qwen3-0.6b",
+        "created_at": "2026-10-14T19:09:43.700353+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "local",
+          "model": "qwen3-0.6b",
+          "request_id": "cc9c2cb0085b4e179c97f555ab1993e5",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "completion_tokens": 6,
+            "prompt_tokens": 29,
+            "total_tokens": 35
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 0.454
+        }
+      },
+      {
+        "provider": "vertex",
+        "model": "gemini-3.1-flash-lite",
+        "created_at": "2026-10-14T21:50:28.579738+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "vertex",
+          "model": "gemini-3.1-flash-lite",
+          "request_id": "9b10df3e371a4a0d95befdfa0e0a258f",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "promptTokenCount": 14,
+            "candidatesTokenCount": 5,
+            "totalTokenCount": 19
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 5.324
+        }
+      },
+      {
+        "provider": "local",
+        "model": "qwen3-0.6b",
+        "created_at": "2026-10-14T21:51:00.548300+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "local",
+          "model": "qwen3-0.6b",
+          "request_id": "b230398be2524980b44a38003803abb6",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "completion_tokens": 26,
+            "prompt_tokens": 28,
+            "total_tokens": 54
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 0.628
+        }
+      },
+      {
+        "provider": "openai",
+        "model": "gpt-5.6-luna",
+        "created_at": "2026-10-14T22:55:55.143257+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "openai",
+          "model": "gpt-5.6-luna",
+          "request_id": "f36a623add3d416fb0cfd0aac60c474f",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 13,
+            "output_tokens": 8,
+            "total_tokens": 21
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 4.195
+        }
+      },
+      {
+        "provider": "bailian",
+        "model": "qwen-flash",
+        "created_at": "2026-10-14T22:55:55.149735+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "bailian",
+          "model": "qwen-flash",
+          "request_id": "32dc5c8aed034a778f1ce35a84ffb021",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "completion_tokens": 4,
+            "prompt_tokens": 15,
+            "total_tokens": 19
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 0.603
+        }
+      },
+      {
+        "provider": "vertex",
+        "model": "gemini-3.1-flash-lite",
+        "created_at": "2026-10-14T22:55:55.154603+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "vertex",
+          "model": "gemini-3.1-flash-lite",
+          "request_id": "b3a1d19a813345c694a7835cc0bbf5c2",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "promptTokenCount": 7,
+            "candidatesTokenCount": 4,
+            "totalTokenCount": 11
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 4.94
+        }
+      },
+      {
+        "provider": "xai",
+        "model": "grok-4-1-fast-non-reasoning",
+        "created_at": "2026-10-14T22:55:55.165697+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "xai",
+          "model": "grok-4-1-fast-non-reasoning",
+          "request_id": "28b7d754ba7d48ecae5729658766048e",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "prompt_tokens": 190,
+            "completion_tokens": 4,
+            "total_tokens": 194,
+            "num_sources_used": 0,
+            "cost_in_usd_ticks": 1131000
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 2.547
+        }
+      },
+      {
+        "provider": "local",
+        "model": "qwen3-0.6b",
+        "created_at": "2026-10-14T22:58:25.005474+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "local",
+          "model": "qwen3-0.6b",
+          "request_id": "e6a6c31ecc534996a37439ac3c7503b3",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "completion_tokens": 13,
+            "prompt_tokens": 18,
+            "total_tokens": 31
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 0.408
+        }
+      },
+      {
+        "provider": "local",
+        "model": "qwen3-0.6b",
+        "created_at": "2026-10-14T23:02:54.113756+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "local",
+          "model": "qwen3-0.6b",
+          "request_id": "e1854f9d1a5d4f44a71d5ee1d7c5485d",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "completion_tokens": 4,
+            "prompt_tokens": 28,
+            "total_tokens": 32
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 0.287
+        }
+      },
+      {
+        "provider": "local",
+        "model": "qwen3-0.6b",
+        "created_at": "2026-10-14T23:03:02.930584+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "local",
+          "model": "qwen3-0.6b",
+          "request_id": "3bc46de06800480598d1f12a0d6e434c",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "completion_tokens": 3,
+            "prompt_tokens": 53,
+            "total_tokens": 56
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 0.258
+        }
+      },
+      {
+        "provider": "openai",
+        "model": "gpt-5.6-luna",
+        "created_at": "2026-10-14T23:03:10.719792+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "openai",
+          "model": "gpt-5.6-luna",
+          "request_id": "c1e071c9d60142cbb87be889cc723fbd",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 80,
+            "output_tokens": 6,
+            "total_tokens": 86
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 2.713
+        }
+      },
+      {
+        "provider": "vertex",
+        "model": "gemini-3.1-flash-lite",
+        "created_at": "2026-10-14T23:03:34.555240+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "vertex",
+          "model": "gemini-3.1-flash-lite",
+          "request_id": "eadfb530cf0a419f87a381d0fff0981b",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "promptTokenCount": 9,
+            "candidatesTokenCount": 6,
+            "totalTokenCount": 15
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 4.235
+        }
+      },
+      {
+        "provider": "local",
+        "model": "qwen3-0.6b",
+        "created_at": "2026-10-14T23:04:27.445325+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "local",
+          "model": "qwen3-0.6b",
+          "request_id": "790cb18b4a2b45b0a5344679663d9ece",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "completion_tokens": 4,
+            "prompt_tokens": 18,
+            "total_tokens": 22
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 0.277
+        }
+      }
+    ]
+  },
+  "diagnostic_scope": "Previously executed synthetic-input smoke tests; no paid requests from this collector.",
+  "source_sha256": {
+    "README.md": "a3976fecae24c065146e34b11742f78b2aedc0c2e5e22bcb42fa9c5a109adb5c",
+    "AGENTS.md": "46821ce21249deaac9ffe93800ceb718cbf2c668030db0c919853d5d2c9e8feb",
+    "pyproject.toml": "44c4368c5260f943b10a035b2d354c61d49916d4e671c4b385ebb816b28d5b6a",
+    "uv.lock": "0d38ed3cf9b1a860dafc9ae51ef851425c1e6f3f4a9e4cb48f26ccff6744f7ed",
+    "jarvis.ps1": "347f21192d63a9d2e0debfe85edd45713a5fdbcb448f412b13ef1c742e5893ca",
+    "docs/MAINTENANCE.md": "6fd78d24d1e7f082743d5f023a2318abf14008a67e8ee013c69b375ad6dc7440",
+    "docs/product-requirements.md": "cd68eaf7eaac21e807c821881c7d541b2e5940a9af184a8c2f17518b85fa78bd",
+    "docs/core-bootstrap.md": "24f07db0e1cc186293c450c23bc64ca52c05b4513605bf41756067e38d39d9ff",
+    "docs/architecture.md": "61756cdad80a70a5982125c5054e38826a8324dbe063cb0776e77d2f49ea5a49",
+    "docs/contracts.md": "03592f0b875dd8bad3da3f66d4dec4b6897f150e4eafb372f29b2c5e93e5f067",
+    "docs/federation.md": "81a6ee1d41530d875be4df8d3b14f94c70c65be60c20b5ae8a060f254951e2f5",
+    "docs/models-offline.md": "71468aa0ce50d8ac9cb24168322fb2586f36c3ee675c78809fdeb686c7a6717b",
+    "docs/interaction-persona.md": "de025fd9ad392136b33735551e251247880875218188681d4d3bec31dc9fa1e5",
+    "docs/tasks-agents.md": "02b50014cfec5a6e05e1171f306421e115bb57e2ba7134d541208545fe6fc8a0",
+    "docs/knowledge-learning.md": "0f537547a8e22db619bdf051ef066111677f5f896e27b08e9f56e70879023d81",
+    "docs/simulation.md": "58d2d19e5d7272fb6c13da01c7acf3d474813e9bef30ef5b13885e40a1dc632f",
+    "docs/evolution-release.md": "0ca7ff6beab1be93435741751edf21392cc57540243e3fb6b10e18e764e5f134",
+    "docs/toolchains.md": "55985627d12ff89b8d753389571956fb489504fcacc9b93a36b839ac059b83eb",
+    "docs/security-sovereignty.md": "d60dd6e59c06c39acd9324a211d1e0c5d5c764d688bff3ee808ac673a8375dd7",
+    "docs/stack-project-layout.md": "4795312dcfbd03cd01a82c59121bda0527dc131666b179ddf5a6d1c9f1ea8eaf",
+    "docs/health-maintenance.md": "da8ed5a3519200786cc50c26992ef5d2401b3791b234f68f279ece9cbce80134",
+    "docs/delivery-validation.md": "64e2ca24d24fdf9e1d239015e33eb39b1e021b98d025841795bd365a9914ef88",
+    "docs/decisions-review.md": "01dfba09c4901f739912d52c343e3adb86fd3e86347e8315cb753596fe9b2ef8",
+    "docs/references.md": "57d0ce114ef7c9b154030f64662a5da537a4979ddaf4eca79d74e713552253cc",
+    "docs/README.md": "691559860cd1b4a2c8e5a72b573929ed8df3e9410292c6163fb52b6e31ece39a",
+    "docs/architecture-atlas.md": "a5136091148be9a7d539141d1f03ffc345ea0eb0f27eac05d40005ff34093789",
+    "docs/manifest.json": "2f459372915de058ff1af11136248ca3fba9835a752a6195338a5fef858b9750",
+    "docs/diagrams/overview.mmd": "f8b2c5d1b3ef719e514b9e674f3e22373f5911df178a42634f1cd968f1b9decc",
+    "docs/diagrams/system-boundaries.mmd": "ec4313793831a464b9f2085d17b81d00e1ed54db4c330d6731a27cfcd5f840cf",
+    "docs/diagrams/windows-deployment.mmd": "c0944a76ba661adb3df5435c201548ac9f74c38030f8e42b8dd8bc71137978ca",
+    "docs/diagrams/federation-deployment.mmd": "eee4edc36a4e4c89368fc91c8f714ed15a3c5b5b8859ea249f75b58a8bab8c87",
+    "docs/diagrams/state-ownership.mmd": "04d37ba640d45e3c31773185e7e1623a0d8b9bfe4ae6cd4b6c59b874a5f4b3e9",
+    "docs/diagrams/build-and-release.mmd": "bf09533ac39e15c4806f7e69e13c5140c331e2b79f4255527acf53517e599b93",
+    "docs/diagrams/seed-core.mmd": "476571609db2af97f5c0c6530c8935269d69f0cd9cd245bb56e3d1edf53b1181",
+    "docs/diagrams/health-and-repair.mmd": "cba919957bf125747eb22a8745bb7d72c8b8683c0aa2d6cda5cffa6a478b5e95",
+    "docs/diagrams/federation-reconnect.mmd": "a724de1993222fca9840c7b21bd81d70e5fa37280951e4bc7d44788b1a9ba16c",
+    "docs/diagrams/model-routing.mmd": "0ebd3d28dd12bdde1d31b4fc59522a718bfb5fd36f415bca00dcd09655d99422",
+    "docs/diagrams/task-lifecycle.mmd": "f79667dc3676876ffebff4e4ba8b7ea8876fa6e9fe99cd4821cc284033230ff9",
+    "docs/diagrams/evolution-pipeline.mmd": "028cfc0d020a29a5250848bd3150ed2b2a0ff3f36624b4354b0c44cbf5eac197",
+    "docs/diagrams/parallel-dialogue-task.mmd": "2dba3871c67a4eb2eb729ed2d67b972a6cbf5fbc5a67f3787aba03db9c18d0e7",
+    "docs/diagrams/offline-task-flow.mmd": "05c6ff7ec5e31b42c631065d0e13a7044eee6f9a88c3d2e814406997e5aa65a1",
+    "docs/diagrams/agent-team-lifecycle.mmd": "1fc190a8f3d9f0a011662e1dae62cf1b672c7c085a02795af8f48a455137df80",
+    "docs/diagrams/knowledge-learning-flow.mmd": "6876344105d8d116dadd7bad7b887605b3fc77f2b220906c3f76928b08dbcc96",
+    "docs/diagrams/network-recovery.mmd": "1ddd2ce0c11674582a50ced4a93cf31a67cd84b65005d09d0e7d72c4f5480178",
+    "docs/diagrams/safety-shutdown.mmd": "4475dac219bb7dd273b6d022ce71c23d9b600c15d738047d7d03c142ea58f235",
+    "docs/diagrams/render-validation.json": "2717417b344c294a3a76e8c4f964b7060bac08922fd2ee62a1ba6907b120fd1a",
+    "tools/check_docs.py": "b4811ca649cef06d3a73c04f9891c4f7c1620c2f60b1864238f3b23251992d4e",
+    "tools/package.json": "669963bb089dc027093541e6d4ea74caec594ec63e5c1fe223de597ccc2b1c02",
+    "tools/model_probe.py": "4aa49c0c64df97a7c6408a8ab580425b9791d77770ba20eac70022ad3a8cf2c3",
+    "tools/manage_models.py": "5f8cc6cce6c89d24431c27cbd54a1be93d4a8331edc8ef656a7dbdb96afeec10",
+    "tools/check_seed.py": "a9bd287f2b8c9369ca766b33903936b9067098481e243186b95d693b2ae36f5c",
+    "tools/speech_probe.py": "6f7e01bbc75edf46b49c4a80470dc74ace3f3ea1f301012d47ee9149a8b14946",
+    "tools/local_llm.py": "267a571dea347919424bf2d81eaabef4d4b46cb41363b5e59a1c36a8849eea81",
+    "tools/verify_baseline.py": "122208f2623550d71218853eb5a8287e55515967f38a94d458fce6511a243a3d",
+    "adapters/models/provider-native/jarvis_models/__init__.py": "540da8307103109969366729f5a547c81bc88b269a7f723a476c1a753c856d6f",
+    "adapters/models/provider-native/jarvis_models/vault.py": "3d61692b5301561b8d2be4f1f1f827c5330b1991af457b84cfd306b544989200",
+    "adapters/models/provider-native/jarvis_models/gateway.py": "1149b4827cd3b83fa7efb277966ad7f03e4ced6f75a45f45d4f544ff930dd124",
+    "config/model-profiles/providers.json": "e60a4395f0218e0b368b7b0063d26d6241497b82e4ad4443dc9ee05183e748e0",
+    "config/model-profiles/local-candidates.json": "8c453597ff55573955798f9be504ff479d356967ed5a4ce820178b761d4ed5df",
+    "runtime/node-host/jarvis_core/__init__.py": "92307372aa2201f14c57d99856f8e35a3938c696489addbc920696fefde3a0dc",
+    "runtime/node-host/jarvis_core/policy.py": "1065143f3d1d6b0af63b002903241161b464199a3238755a9762b2a762d8106e",
+    "runtime/node-host/jarvis_core/ledger.py": "e48d4888e644c281e34490759bb79100d59f67e79711e256d8cb4a7d98fd4df3",
+    "runtime/node-host/jarvis_core/service.py": "e16b72aea6951e797590f8ca508c85267729d0626361f0e036aeff63822c8a4d",
+    "runtime/node-host/jarvis_core/chat.py": "ca708b40c1631cf90f4de858907c8d14a1219ab96b99ca2ea77494af7dcc7e74",
+    "tests/test_models.py": "47befc7b38ded8828f2233fb148c885a8b211332da37d3759b890fdb7b0eda0e",
+    "tests/test_core.py": "320f6d3e8fcdacc988fbc34c9302e4ff12a29e33a512db6982ef26e03883165a",
+    "tests/test_seed.py": "cff5748ace20be320c0fffa55bad4f38abb13637ed467bf5433bfc5f3e2a525c",
+    "tests/test_diagnostics.py": "6cc41aa7473c20b7e7c9a86672be9317b1843469abea462d66323cdce4540d5b",
+    "tests/test_web.py": "4e890b04c8ed1725b2dd9bdc9b3754be8d34281f7653c43ea30b1a6571c21fc6",
+    "tests/test_chat.py": "09335936d4c745e69422e93314431bc8d8066d372369ac3e76044424b8f0b5f1",
+    "tests/fixtures/contracts/task.valid.json": "abb99190b9ae587bb9d9c7a8847f23e830e22e1b0745f5bbe6a59a77d70a7c76",
+    "tests/fixtures/contracts/task.invalid.json": "4ed36b65d978abb8c7acb6e67b353cc74c776274749298441aa73748a574d173",
+    "tests/fixtures/contracts/action.valid.json": "4474dca86ef23d43fa0a1071b399e9af9f82db20bffeb6817ab867f746f3cb4b",
+    "tests/fixtures/contracts/action.invalid.json": "a7aff363f89503a9a7506356ed07207df3416b5657e0eb686e8633424c6ee323",
+    "tests/fixtures/contracts/capability.valid.json": "ae8c2fc5861d03f523957452a3cbc06846c6964e088101a3546662230b38766f",
+    "tests/fixtures/contracts/capability.invalid.json": "c37f2bf090f5dc3a5f4df3897478675a647664b7fb68819b8f53987c9604df65",
+    "tests/fixtures/contracts/artifact.valid.json": "95dfd2ac0f1419ba80b4c1bd16265cd70c55e829cb4cb7df337a5eeccd2f06c1",
+    "tests/fixtures/contracts/artifact.invalid.json": "9f424ceb5011f1faaa030ceecefea174321d748323fb180271919fa9e5f1922c",
+    "tests/fixtures/contracts/module.valid.json": "4014ba0c3d8237219b72a0fcb4e52d19fc3c47639e4d56ad7abe3819b3570758",
+    "tests/fixtures/contracts/module.invalid.json": "6003549dbdb51ce9a9d5ae484c4b35c549c0228236ba996e283af7fa5d8750d5",
+    "tests/fixtures/contracts/build-profile.valid.json": "44ee77da1505a6d20b35dc36677076f06ad7e05785fb2303347e598d5c70fca0",
+    "tests/fixtures/contracts/build-profile.invalid.json": "c7ed12d0e46d397384dd941de09dcf31cdcacd8b1e2f6e440c487caa8386e3a7",
+    "tests/fixtures/contracts/cases.json": "2f8167f5fba18a24078411c61b2f45c086dc76a4ae28adb61ede3f68cfe14a5e",
+    "tests/fixtures/workspace/hello.txt": "1989e3e4546269bc7fa3f2afa82da00f6fb5d79bc3f97a01998ca36fb476263d",
+    "tests/fixtures/workspace/中文样例.txt": "0067290cf6d5bcc813ef02d3d6030634efcb54d6a41244504ab7101c142c5222",
+    "contracts/schemas/task.schema.json": "227cbb75a62797a7310c622a63155bcb5e45495ffbc578cb76e11ccda81e35d2",
+    "contracts/schemas/action.schema.json": "e1b4b61aee7f78970fc88d2c343fe0f5e6b771706eff3b71e1b60d032ca40393",
+    "contracts/schemas/capability.schema.json": "8f60fa34be14175342c93a7707ea91a84afe38382ef98fa2456fe01ef6fb2c05",
+    "contracts/schemas/artifact.schema.json": "f097532556e7072e6d914fea345e7e7de77d949c443d1b5daacef7dbc4c10149",
+    "contracts/schemas/module.schema.json": "7d98541de6ade3ae6a3d6fa04a7e4ecfe281efe9a5b3419b4abd406c1fe27233",
+    "contracts/schemas/build-profile.schema.json": "4e169c2a0c420ce74e2878804bb9585fe2fb8ff527ce7ce68c97578a2d33798e",
+    "seed/skills/catalog.json": "f852b36838a2f1d36677305e1bfa52748c9d70cab9b9030fed8991da92d9a12d",
+    "seed/rules/baseline.json": "00f2178f677ef3c2ed8b449cfe1ab20437bcecc1a000ed68f7bcd54c4c2a94aa",
+    "seed/knowledge/bootstrap.json": "be89ee9b849ea35a774637ffdb9b8945195b03293c38a84a542a9b8fa9efe7e3",
+    "seed/system-manifest/seed-bundle.json": "45a267b0ddf8068390049fd29b8e81ec0d2e466cc7780a2194285906d7c85bd7",
+    "apps/cli/main.py": "8f4828ace887c61854533393f15cac76cc8cee70e43457252d6ad5d5186267e9",
+    "apps/web/server.py": "020873f726efd6983a61e6d97e3a52ba3ab7357200379e82387a90c19d67c98f",
+    "apps/web/index.html": "f7f8efad1f26fff09a35ab5c1151229f22b1dcd8a7607caf5c0e7e1c0c827343",
+    "evals/reports/k0-baseline.json": "70f0abd3cf7e1edec1b531c6de151833125237f8234b2eec1aa1344f42453081"
+  },
+  "limitations": [
+    "K1 and K2 gates incomplete; no OS isolation, authenticated recovery or autonomous code release.",
+    "One Windows symlink test may be skipped when OS privilege is unavailable; inspect unittest output.",
+    "Voiceprint owner enrollment and anti-spoof evaluation not performed; speech smoke is not an accuracy benchmark.",
+    "Older UNKNOWN outcomes remain in the journal; later successful requests do not resolve their billing status.",
+    "Model download bytes are not peak RAM; true network-disconnected install and GPU inference not tested.",
+    "Model probes predate this capture; source hashes identify the current checked source, not an assertion of cloud retest."
+  ]
+}

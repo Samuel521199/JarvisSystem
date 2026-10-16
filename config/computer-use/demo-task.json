@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "url": "https://jarvis-demo.invalid/",
+  "goal": "把项目名称填写为 Jarvis Demo，类别选择 research，勾选启用，最后点击保存。",
+  "allowed_origins": ["https://jarvis-demo.invalid"],
+  "targets": [
+    {"id":"project","role":"textbox","name":"项目名称","actions":["fill"],"values":["Jarvis Demo"]},
+    {"id":"category","role":"combobox","name":"类别","actions":["select"],"values":["research"]},
+    {"id":"enabled","role":"checkbox","name":"启用","actions":["check"],"values":[true]},
+    {"id":"save","role":"button","name":"保存","actions":["click"],"values":[]}
+  ],
+  "success": {"role":"status","text":"已保存：Jarvis Demo / research / enabled"},
+  "max_steps": 6,
+  "timeout_seconds": 300
+}

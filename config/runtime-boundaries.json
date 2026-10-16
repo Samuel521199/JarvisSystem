@@ -1,0 +1,120 @@
+{
+  "schema_version": "1.0.0",
+  "scope": "Current implementation declarations, not deployment evidence or authorization",
+  "roles": [
+    {
+      "role": "preflight_cli",
+      "entry": "apps/cli/main.py preflight",
+      "access": {
+        "source": "read selected files",
+        "data": "metadata only",
+        "credentials": "none",
+        "network": "loopback bind only"
+      }
+    },
+    {
+      "role": "business_host",
+      "entry": "runtime/node-host/jarvis_core/service.py",
+      "boundary": "same OS user as caller",
+      "access": {
+        "ledger": "read/write",
+        "sample_input": "metadata read",
+        "artifacts": "write"
+      }
+    },
+    {
+      "role": "inventory_worker",
+      "entry": "runtime/worker-host/worker.py",
+      "boundary": "Windows LPAC and kill-on-close Job; fixed metadata operation only",
+      "access": {
+        "declared_input": "read-only staged metadata JSON",
+        "declared_output": "bounded inherited pipe; Host validates and commits",
+        "network": "no network capability",
+        "credentials": "not staged",
+        "capabilities": [
+          "registryRead"
+        ],
+        "runtime": "pinned small Python bundle on ACL-capable volume",
+        "limits": "one process, 256 MiB commit, Host-enforced CPU/wall deadlines"
+      }
+    },
+    {
+      "role": "model_adapter",
+      "entry": "adapters/models/provider-native/jarvis_models/gateway.py",
+      "boundary": "caller OS user",
+      "access": {
+        "credentials": "DPAPI vault when cloud requests require it",
+        "network": "configured provider"
+      }
+    },
+    {
+      "role": "control_store",
+      "entry": "runtime/sovereignty-supervisor/jarvis_safety/store.py",
+      "boundary": "legacy-compatible SQLite events, epoch and pending markers; same OS user; ordinary chat cancellation does not latch global stop"
+    },
+    {
+      "role": "recovery_cli",
+      "entry": "runtime/recovery-cli/main.py",
+      "boundary": "independent local status and explicit legacy-state migration only; no recovery keys, passwords or daily global stop; protected identity deferred"
+    },
+    {
+      "role": "computer_browser",
+      "entry": "apps/computer-use/main.py",
+      "boundary": "optional same-user Host with fresh sandboxed Edge context and Windows lifecycle Job; not LPAC",
+      "access": {
+        "page": "explicit task origins/targets/values; no redirects",
+        "model": "existing gateway, DOM text only",
+        "journal": "shared core ledger and computer_steps",
+        "credentials": "not injected into page",
+        "lifecycle": "one execution lock; no persistent browser"
+      }
+    },
+    {
+      "role": "computer_web_admission",
+      "entry": "adapters/computer-use/jarvis_computer/web.py",
+      "boundary": "same-user loopback web process; nonce/origin; one shared inventory/browser FIFO dispatcher, global execution lock; at most 20 waiting tasks",
+      "access": {
+        "task_state": "existing ledger; atomic queue metadata, no duplicate task status",
+        "model": "scoped existing gateway",
+        "artifacts": "verified inventory or browser receipts; fixed initialized inventory root",
+        "restart": "reconcile UNKNOWN; preserve PREPARED paused for explicit continuation"
+      }
+    },
+    {
+      "role": "workspace_export",
+      "entry": "runtime/node-host/jarvis_core/workspace.py",
+      "boundary": "same-user loopback UI, explicit user-selected project and destination; no model filesystem tools",
+      "access": {
+        "projects": "directory identity metadata; workspace.db registry",
+        "output": "exclusive creation of bounded UTF-8 text at a user-selected destination; core effect guard",
+        "input": "no reading or uploading project file contents",
+        "picker": "short-lived native Tk folder chooser; typed absolute path fallback"
+      }
+    },
+    {
+      "role": "worker_residue_recovery",
+      "entry": "runtime/node-host/jarvis_core/worker_recovery.py",
+      "boundary": "same-user registered fixed stages only; OS lease plus terminated process check; retain legacy or changed entries; no PID killing"
+    },
+    {
+      "role": "runtime_candidate_package",
+      "entry": "tools/release_bundle.py",
+      "boundary": "pinned archive and exclusive new-slot extraction; no credentials or live data bundled; explicit runtime slots handle verification and next-launch selection"
+    },
+    {
+      "role": "browser_residue_recovery",
+      "entry": "runtime/node-host/jarvis_core/browser_recovery.py",
+      "boundary": "registered private stages only; owner lease, directory identity and driver/Job termination checks; no user profiles or PID killing"
+    },
+    {
+      "role": "local_runtime_slots",
+      "entry": "runtime/node-host/jarvis_core/releases.py",
+      "boundary": "same-user explicit install, isolated health, atomic next-launch selection and rollback; start may choose one verified previous version before business launch; durable attempt records; no database downgrade, runtime crash watchdog or hot swap"
+    },
+    {
+      "role": "queue_memory_admission",
+      "entry": "runtime/node-host/jarvis_core/resources.py",
+      "boundary": "Windows physical and calling-process commit headroom before queued inventory/browser dispatch; transient wait with hysteresis, not OS reservation, process limits or a global scheduler"
+    }
+  ]
+}

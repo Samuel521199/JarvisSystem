@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0.0",
+  "id": "jarvis.example.module",
+  "version": "1.0.0",
+  "status": "planned",
+  "artifact_digest": null,
+  "signature_ref": null,
+  "platforms": [
+    "windows-x86_64"
+  ],
+  "runtime": "python-worker",
+  "entrypoint": null,
+  "contracts": {
+    "provides": [
+      "system.status.v1"
+    ],
+    "requires": [],
+    "protocol_range": ">=1.0 <2.0"
+  },
+  "state": {
+    "schema_version": 1,
+    "migrate_from": []
+  },
+  "execution": {
+    "checkpoint_supported": false,
+    "concurrency": 1
+  },
+  "permissions": {
+    "filesystem_scopes": [],
+    "network_scopes": [],
+    "device_scopes": []
+  },
+  "resources": {
+    "memory_mb": 64,
+    "timeout_seconds": 30
+  },
+  "release": {
+    "evaluation_suite": "k0-schema-fixtures",
+    "rollback_strategy": "not-installed"
+  }
+}

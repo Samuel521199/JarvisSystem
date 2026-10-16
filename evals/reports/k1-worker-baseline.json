@@ -1,0 +1,3189 @@
+{
+  "schema_version": 1,
+  "version": "0.1.7",
+  "captured_at": "2026-10-15T10:15:21.106083+00:00",
+  "environment": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.13.0"
+  },
+  "status": "passed_with_documented_limits",
+  "checks": [
+    {
+      "command": [
+        "python",
+        "tools/check_seed.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"ok\": true,\n  \"errors\": [],\n  \"checked_assets\": 22,\n  \"fixture_cases\": 12\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_auto_starts_default_and_sends_only_explicit_text (test_chat.ChatTests.test_auto_starts_default_and_sends_only_explicit_text) ... ok\ntest_cli_single_message_uses_selected_provider (test_chat.ChatTests.test_cli_single_message_uses_selected_provider) ... ok\ntest_each_provider_is_attempted_at_most_once (test_chat.ChatTests.test_each_provider_is_attempted_at_most_once) ... ok\ntest_explicit_rejections_allow_bounded_auto_fallback (test_chat.ChatTests.test_explicit_rejections_allow_bounded_auto_fallback) ... ok\ntest_history_is_trimmed_by_messages_bytes_and_local_context (test_chat.ChatTests.test_history_is_trimmed_by_messages_bytes_and_local_context) ... ok\ntest_interactive_commands_change_provider_clear_history_and_exit (test_chat.ChatTests.test_interactive_commands_change_provider_clear_history_and_exit) ... ok\ntest_invalid_history_and_oversize_message_are_never_sent (test_chat.ChatTests.test_invalid_history_and_oversize_message_are_never_sent) ... ok\ntest_manual_selection_never_falls_back_after_quota_error (test_chat.ChatTests.test_manual_selection_never_falls_back_after_quota_error) ... ok\ntest_models_is_redacted_readonly_and_does_not_impose_call_cap (test_chat.ChatTests.test_models_is_redacted_readonly_and_does_not_impose_call_cap) ... ok\ntest_non_success_text_is_not_returned (test_chat.ChatTests.test_non_success_text_is_not_returned) ... ok\ntest_route_budget_limits_next_attempt_and_provider_deadline (test_chat.ChatTests.test_route_budget_limits_next_attempt_and_provider_deadline) ... ok\ntest_stop_after_response_discards_text_and_stops_routing (test_chat.ChatTests.test_stop_after_response_discards_text_and_stops_routing) ... ok\ntest_stop_preserves_unknown_inflight_outcome (test_chat.ChatTests.test_stop_preserves_unknown_inflight_outcome) ... ok\ntest_stopped_core_does_not_call_provider (test_chat.ChatTests.test_stopped_core_does_not_call_provider) ... ok\ntest_unexpected_gateway_error_is_unknown_without_retry (test_chat.ChatTests.test_unexpected_gateway_error_is_unknown_without_retry) ... ok\ntest_unknown_authentication_and_invalid_request_do_not_fallback (test_chat.ChatTests.test_unknown_authentication_and_invalid_request_do_not_fallback) ... ok\ntest_business_stop_entry_also_returns_without_waiting_on_writer (test_control.ControlTests.test_business_stop_entry_also_returns_without_waiting_on_writer) ... ok\ntest_challenge_tampering_and_wrong_node_are_rejected (test_control.ControlTests.test_challenge_tampering_and_wrong_node_are_rejected) ... ok\ntest_crash_after_stop_marker_before_sql_commit_is_recoverable (test_control.ControlTests.test_crash_after_stop_marker_before_sql_commit_is_recoverable) ... ok\ntest_damaged_business_db_does_not_prevent_stop_or_alert (test_control.ControlTests.test_damaged_business_db_does_not_prevent_stop_or_alert) ... ok\ntest_expired_challenge_cannot_recover (test_control.ControlTests.test_expired_challenge_cannot_recover) ... ok\ntest_explicit_migration_preserves_old_stop_and_invalidates_old_work (test_control.ControlTests.test_explicit_migration_preserves_old_stop_and_invalidates_old_work) ... ok\ntest_full_cli_encrypted_key_enrollment_signing_and_recovery (test_control.ControlTests.test_full_cli_encrypted_key_enrollment_signing_and_recovery) ... ok\ntest_independent_process_stops_while_business_db_is_write_locked (test_control.ControlTests.test_independent_process_stops_while_business_db_is_write_locked) ... ok\ntest_independent_status_does_not_import_business_or_models (test_control.ControlTests.test_independent_status_does_not_import_business_or_models) ... ok\ntest_missing_or_corrupt_safety_store_does_not_auto_reset (test_control.ControlTests.test_missing_or_corrupt_safety_store_does_not_auto_reset) ... ok\ntest_new_incident_invalidates_old_challenge (test_control.ControlTests.test_new_incident_invalidates_old_challenge) ... ok\ntest_offline_owner_recovery_preserves_incidents_and_increments_epoch (test_control.ControlTests.test_offline_owner_recovery_preserves_incidents_and_increments_epoch) ... ok\ntest_parallel_stops_preserve_all_incidents (test_control.ControlTests.test_parallel_stops_preserve_all_incidents) ... ok\ntest_pre_stop_task_and_host_cannot_resume_after_recovery (test_control.ControlTests.test_pre_stop_task_and_host_cannot_resume_after_recovery) ... ok\ntest_recovery_contract_accepts_real_messages_and_rejects_unknown_fields (test_control.ControlTests.test_recovery_contract_accepts_real_messages_and_rejects_unknown_fields) ... ok\ntest_replay_is_rejected_even_after_another_stop (test_control.ControlTests.test_replay_is_rejected_even_after_another_stop) ... ok\ntest_safety_db_busy_retains_durable_deny_marker (test_control.ControlTests.test_safety_db_busy_retains_durable_deny_marker) ... ok\ntest_stop_mid_effect_leaves_unknown_receipt_instead_of_claiming_cancel (test_control.ControlTests.test_stop_mid_effect_leaves_unknown_receipt_instead_of_claiming_cancel) ... ok\ntest_stop_then_recover_during_model_reply_still_discards_old_output (test_control.ControlTests.test_stop_then_recover_during_model_reply_still_discards_old_output) ... ok\ntest_without_pre_enrolled_key_stop_cannot_be_cleared_or_enrolled_over (test_control.ControlTests.test_without_pre_enrolled_key_stop_cannot_be_cleared_or_enrolled_over) ... ok\ntest_wrong_key_and_signature_leave_latch_unchanged (test_control.ControlTests.test_wrong_key_and_signature_leave_latch_unchanged) ... ok\ntest_actual_capability_outputs_match_declared_schemas (test_core.CoreTests.test_actual_capability_outputs_match_declared_schemas) ... ok\ntest_artifact_collision_becomes_unknown_without_overwrite (test_core.CoreTests.test_artifact_collision_becomes_unknown_without_overwrite) ... ok\ntest_cancel_during_scan_prevents_final_effect (test_core.CoreTests.test_cancel_during_scan_prevents_final_effect) ... ok\ntest_cancel_prepared_task_persists_without_effect (test_core.CoreTests.test_cancel_prepared_task_persists_without_effect) ... ok\ntest_cli_commands_from_repository_root (test_core.CoreTests.test_cli_commands_from_repository_root) ... ok\ntest_corrupt_task_history_cannot_roll_back_stop (test_core.CoreTests.test_corrupt_task_history_cannot_roll_back_stop) ... ok\ntest_count_and_byte_limits_fail_without_artifact (test_core.CoreTests.test_count_and_byte_limits_fail_without_artifact) ... ok\ntest_crash_before_or_after_effect_recovers_unknown_and_does_not_replay (test_core.CoreTests.test_crash_before_or_after_effect_recovers_unknown_and_does_not_replay) ... ok\ntest_empty_directory_and_subset_are_supported (test_core.CoreTests.test_empty_directory_and_subset_are_supported) ... ok\ntest_empty_directory_queue_obeys_total_scan_deadline (test_core.CoreTests.test_empty_directory_queue_obeys_total_scan_deadline) ... ok\ntest_idempotency_parameter_conflict_rejected (test_core.CoreTests.test_idempotency_parameter_conflict_rejected) ... ok\ntest_init_cannot_widen_root_or_reset_missing_database (test_core.CoreTests.test_init_cannot_widen_root_or_reset_missing_database) ... ok\ntest_inventory_real_artifact_and_stable_replay (test_core.CoreTests.test_inventory_real_artifact_and_stable_replay) ... ok\ntest_live_owner_is_not_recovered_and_competing_worker_is_rejected (test_core.CoreTests.test_live_owner_is_not_recovered_and_competing_worker_is_rejected) ... ok\ntest_missing_or_corrupt_control_fails_closed (test_core.CoreTests.test_missing_or_corrupt_control_fails_closed) ... ok\ntest_path_escape_and_data_overlap_rejected (test_core.CoreTests.test_path_escape_and_data_overlap_rejected) ... ok\ntest_permission_failure_is_recorded (test_core.CoreTests.test_permission_failure_is_recorded) ... ok\ntest_public_contracts_and_seed_policy_match (test_core.CoreTests.test_public_contracts_and_seed_policy_match) ... ok\ntest_stop_during_scan_prevents_final_effect (test_core.CoreTests.test_stop_during_scan_prevents_final_effect) ... ok\ntest_stop_persists_across_restart_and_init (test_core.CoreTests.test_stop_persists_across_restart_and_init) ... ok\ntest_symlink_is_rejected (test_core.CoreTests.test_symlink_is_rejected) ... skipped \"OS denied test symlink creation: [WinError 1314] 客户端没有所需的特权。: 'C:\\\\\\\\Users\\\\\\\\samuel\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\jarvis-core-test-aafk3ip1\\\\\\\\outside.txt' -> 'C:\\\\\\\\Users\\\\\\\\samuel\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\jarvis-core-test-aafk3ip1\\\\\\\\input\\\\\\\\linked.txt'\"\ntest_tampered_confirmed_artifact_is_not_silently_rebuilt (test_core.CoreTests.test_tampered_confirmed_artifact_is_not_silently_rebuilt) ... ok\ntest_windows_junction_is_rejected (test_core.CoreTests.test_windows_junction_is_rejected) ... ok\ntest_exact_fifteen_second_boundary_is_accepted (test_diagnostics.DiagnosticsTests.test_exact_fifteen_second_boundary_is_accepted) ... ok\ntest_fresh_model_status_creates_no_directory_or_database (test_diagnostics.DiagnosticsTests.test_fresh_model_status_creates_no_directory_or_database) ... ok\ntest_local_probe_disables_proxy_environment_in_default_client (test_diagnostics.DiagnosticsTests.test_local_probe_disables_proxy_environment_in_default_client) ... ok\ntest_pcm16_over_fifteen_seconds_is_rejected_before_inference (test_diagnostics.DiagnosticsTests.test_pcm16_over_fifteen_seconds_is_rejected_before_inference) ... ok\ntest_short_pcm16_is_accepted_and_normalized_to_sixteen_khz (test_diagnostics.DiagnosticsTests.test_short_pcm16_is_accepted_and_normalized_to_sixteen_khz) ... ok\ntest_duplicate_or_missing_chapter_fails (test_doc_navigation.BookNavigationTests.test_duplicate_or_missing_chapter_fails) ... ok\ntest_missing_anchor_or_skipped_level_fails (test_doc_navigation.BookNavigationTests.test_missing_anchor_or_skipped_level_fails) ... ok\ntest_nested_links_and_idempotence_preserve_body (test_doc_navigation.BookNavigationTests.test_nested_links_and_idempotence_preserve_body) ... ok\ntest_renamed_heading_detects_stale_navigation_and_keeps_anchor (test_doc_navigation.BookNavigationTests.test_renamed_heading_detects_stale_navigation_and_keeps_anchor) ... ok\ntest_bad_limits_and_missing_default_rejected (test_model_catalog.CatalogTests.test_bad_limits_and_missing_default_rejected) ... ok\ntest_chat_rejects_unknown_model_before_any_provider_call (test_model_catalog.CatalogTests.test_chat_rejects_unknown_model_before_any_provider_call) ... ok\ntest_chat_returns_effective_reasoning_without_changing_default (test_model_catalog.CatalogTests.test_chat_returns_effective_reasoning_without_changing_default) ... ok\ntest_concurrent_reasoning_does_not_leak_between_requests (test_model_catalog.CatalogTests.test_concurrent_reasoning_does_not_leak_between_requests) ... ok\ntest_invalid_per_model_reasoning_never_calls_gateway (test_model_catalog.CatalogTests.test_invalid_per_model_reasoning_never_calls_gateway) ... ok\ntest_modern_openai_models_use_compatible_effort_and_responses (test_model_catalog.CatalogTests.test_modern_openai_models_use_compatible_effort_and_responses) ... ok\ntest_new_gemini_omits_removed_parameters (test_model_catalog.CatalogTests.test_new_gemini_omits_removed_parameters) ... ok\ntest_old_single_model_configs_still_resolve (test_model_catalog.CatalogTests.test_old_single_model_configs_still_resolve) ... ok\ntest_profile_cannot_override_transport_or_credentials (test_model_catalog.CatalogTests.test_profile_cannot_override_transport_or_credentials) ... ok\ntest_reasoning_metadata_is_safe_and_default_is_in_supported_levels (test_model_catalog.CatalogTests.test_reasoning_metadata_is_safe_and_default_is_in_supported_levels) ... ok\ntest_reasoning_options_match_model_and_native_wire_parameters (test_model_catalog.CatalogTests.test_reasoning_options_match_model_and_native_wire_parameters) ... ok\ntest_selected_model_is_passed_and_does_not_change_default (test_model_catalog.CatalogTests.test_selected_model_is_passed_and_does_not_change_default) ... ok\ntest_selection_is_request_local_even_concurrently (test_model_catalog.CatalogTests.test_selection_is_request_local_even_concurrently) ... ok\ntest_unknown_or_other_provider_model_cannot_be_selected (test_model_catalog.CatalogTests.test_unknown_or_other_provider_model_cannot_be_selected) ... ok\ntest_xai_and_qwen_parameter_profiles (test_model_catalog.CatalogTests.test_xai_and_qwen_parameter_profiles) ... ok\ntest_bad_vertex_token_host_rejected_before_refresh (test_models.ModelTests.test_bad_vertex_token_host_rejected_before_refresh) ... ok\ntest_billing_and_rate_errors_are_distinguished_without_leaking_body (test_models.ModelTests.test_billing_and_rate_errors_are_distinguished_without_leaking_body) ... ok\ntest_complete_error_body_can_refine_status_to_billing_error (test_models.ModelTests.test_complete_error_body_can_refine_status_to_billing_error) ... ok\ntest_connection_failure_is_safe_to_route_elsewhere (test_models.ModelTests.test_connection_failure_is_safe_to_route_elsewhere) ... ok\ntest_error_body_failure_preserves_known_http_classification (test_models.ModelTests.test_error_body_failure_preserves_known_http_classification) ... ok\ntest_history_bytes_and_roles_cannot_bypass_local_limit (test_models.ModelTests.test_history_bytes_and_roles_cannot_bypass_local_limit) ... ok\ntest_history_is_mapped_to_native_provider_roles (test_models.ModelTests.test_history_is_mapped_to_native_provider_roles) ... ok\ntest_invalid_config_rejects_exfiltration_endpoint (test_models.ModelTests.test_invalid_config_rejects_exfiltration_endpoint) ... ok\ntest_local_has_no_credential_access (test_models.ModelTests.test_local_has_no_credential_access) ... ok\ntest_malformed_dispatched_response_is_unknown (test_models.ModelTests.test_malformed_dispatched_response_is_unknown) ... ok\ntest_openai_multiple_output_items (test_models.ModelTests.test_openai_multiple_output_items) ... ok\ntest_stop_after_request_discards_output (test_models.ModelTests.test_stop_after_request_discards_output) ... ok\ntest_stop_before_dispatch_prevents_network (test_models.ModelTests.test_stop_before_dispatch_prevents_network) ... ok\ntest_stop_during_error_body_overrides_routing_but_not_known_outcome (test_models.ModelTests.test_stop_during_error_body_overrides_routing_but_not_known_outcome) ... ok\ntest_stop_wins_admission_transaction (test_models.ModelTests.test_stop_wins_admission_transaction) ... ok\ntest_total_deadline_cancels_slow_response (test_models.ModelTests.test_total_deadline_cancels_slow_response) ... ok\ntest_total_deadline_during_error_body_preserves_rejection (test_models.ModelTests.test_total_deadline_during_error_body_preserves_rejection) ... ok\ntest_transport_uncertainty_has_no_retry (test_models.ModelTests.test_transport_uncertainty_has_no_retry) ... ok\ntest_usage_history_never_blocks_new_request (test_models.ModelTests.test_usage_history_never_blocks_new_request) ... ok\ntest_usage_rejects_nonfinite_values_and_arbitrary_metadata (test_models.ModelTests.test_usage_rejects_nonfinite_values_and_arbitrary_metadata) ... ok\ntest_vault_roundtrip_and_tamper_rejection (test_models.ModelTests.test_vault_roundtrip_and_tamper_rejection) ... ok\ntest_bind_permission_failure_is_not_mislabeled_occupied (test_preflight.PreflightTests.test_bind_permission_failure_is_not_mislabeled_occupied) ... ok\ntest_cli_emits_structured_blocked_result_without_loading_chat_or_vault (test_preflight.PreflightTests.test_cli_emits_structured_blocked_result_without_loading_chat_or_vault) ... ok\ntest_live_writer_does_not_block_diagnostics_or_recover_orphan (test_preflight.PreflightTests.test_live_writer_does_not_block_diagnostics_or_recover_orphan) ... ok\ntest_mismatched_project_version_and_missing_source_are_reported (test_preflight.PreflightTests.test_mismatched_project_version_and_missing_source_are_reported) ... ok\ntest_missing_and_incompatible_dependencies_are_not_green (test_preflight.PreflightTests.test_missing_and_incompatible_dependencies_are_not_green) ... ok\ntest_missing_data_is_reported_without_initializing (test_preflight.PreflightTests.test_missing_data_is_reported_without_initializing) ... ok\ntest_occupied_loopback_port_is_detected_without_connecting (test_preflight.PreflightTests.test_occupied_loopback_port_is_detected_without_connecting) ... ok\ntest_permission_denied_does_not_look_like_success (test_preflight.PreflightTests.test_permission_denied_does_not_look_like_success) ... ok\ntest_schema_rejects_unknown_fields_versions_and_authorization (test_preflight.PreflightTests.test_schema_rejects_unknown_fields_versions_and_authorization) ... ok\ntest_stopped_instance_remains_stopped_with_unchanged_files (test_preflight.PreflightTests.test_stopped_instance_remains_stopped_with_unchanged_files) ... ok\ntest_unreadable_acl_and_missing_identity_are_unknown (test_preflight.PreflightTests.test_unreadable_acl_and_missing_identity_are_unknown) ... ok\ntest_unsupported_python_version_is_reported (test_preflight.PreflightTests.test_unsupported_python_version_is_reported) ... ok\ntest_unverified_boundaries_are_blocked_even_with_self_claimed_roles (test_preflight.PreflightTests.test_unverified_boundaries_are_blocked_even_with_self_claimed_roles) ... ok\ntest_action_dispatching_and_unknown_are_valid_states (test_seed.ContractTests.test_action_dispatching_and_unknown_are_valid_states) ... ok\ntest_artifact_paths_cannot_escape_or_be_absolute (test_seed.ContractTests.test_artifact_paths_cannot_escape_or_be_absolute) ... ok\ntest_contracts_reject_unknown_fields_and_versions (test_seed.ContractTests.test_contracts_reject_unknown_fields_and_versions) ... ok\ntest_each_contract_has_positive_and_negative_examples (test_seed.ContractTests.test_each_contract_has_positive_and_negative_examples) ... ok\ntest_inventory_argument_schema_enforces_scope_shape_and_limits (test_seed.ContractTests.test_inventory_argument_schema_enforces_scope_shape_and_limits) ... ok\ntest_inventory_output_rejects_old_shape_and_unbounded_metadata (test_seed.ContractTests.test_inventory_output_rejects_old_shape_and_unbounded_metadata) ... ok\ntest_nested_unknown_field_is_rejected (test_seed.ContractTests.test_nested_unknown_field_is_rejected) ... ok\ntest_planned_capability_must_not_contain_executor (test_seed.ContractTests.test_planned_capability_must_not_contain_executor) ... ok\ntest_status_degraded_branches_are_closed_and_require_evidence (test_seed.ContractTests.test_status_degraded_branches_are_closed_and_require_evidence) ... ok\ntest_status_embedded_contracts_match_authoritative_schemas (test_seed.ContractTests.test_status_embedded_contracts_match_authoritative_schemas) ... ok\ntest_current_bundle_passes_and_checker_does_not_write (test_seed.SeedIntegrityTests.test_current_bundle_passes_and_checker_does_not_write) ... ok\ntest_duplicate_asset_and_duplicate_json_keys_are_rejected (test_seed.SeedIntegrityTests.test_duplicate_asset_and_duplicate_json_keys_are_rejected) ... ok\ntest_external_schema_references_are_rejected_without_network (test_seed.SeedIntegrityTests.test_external_schema_references_are_rejected_without_network) ... ok\ntest_fixture_expectations_cannot_silently_disagree (test_seed.SeedIntegrityTests.test_fixture_expectations_cannot_silently_disagree) ... ok\ntest_knowledge_cannot_promote_itself_to_rules (test_seed.SeedIntegrityTests.test_knowledge_cannot_promote_itself_to_rules) ... ok\ntest_missing_and_traversal_manifest_references_are_rejected (test_seed.SeedIntegrityTests.test_missing_and_traversal_manifest_references_are_rejected) ... ok\ntest_missing_source_anchor_is_reported (test_seed.SeedIntegrityTests.test_missing_source_anchor_is_reported) ... ok\ntest_plain_asset_drift_is_rejected (test_seed.SeedIntegrityTests.test_plain_asset_drift_is_rejected) ... ok\ntest_planned_build_cannot_be_enabled_by_catalog_edit (test_seed.SeedIntegrityTests.test_planned_build_cannot_be_enabled_by_catalog_edit) ... ok\ntest_rule_change_fails_even_if_manifest_hash_is_changed (test_seed.SeedIntegrityTests.test_rule_change_fails_even_if_manifest_hash_is_changed) ... ok\ntest_skill_must_reference_known_capability (test_seed.SeedIntegrityTests.test_skill_must_reference_known_capability) ... ok\ntest_unregistered_seed_asset_is_rejected (test_seed.SeedIntegrityTests.test_unregistered_seed_asset_is_rejected) ... ok\ntest_body_size_and_content_type_are_bounded (test_web.WebTests.test_body_size_and_content_type_are_bounded) ... ok\ntest_chat_passes_valid_history_without_saving_it (test_web.WebTests.test_chat_passes_valid_history_without_saving_it) ... ok\ntest_exceptions_do_not_return_private_details (test_web.WebTests.test_exceptions_do_not_return_private_details) ... ok\ntest_explicit_model_is_forwarded_without_allowing_transport_settings (test_web.WebTests.test_explicit_model_is_forwarded_without_allowing_transport_settings) ... ok\ntest_foreign_host_and_origin_are_rejected (test_web.WebTests.test_foreign_host_and_origin_are_rejected) ... ok\ntest_index_has_nonce_and_restrictive_headers (test_web.WebTests.test_index_has_nonce_and_restrictive_headers) ... ok\ntest_invalid_json_unknown_fields_and_history_are_rejected (test_web.WebTests.test_invalid_json_unknown_fields_and_history_are_rejected) ... ok\ntest_models_and_status_are_guarded_and_minimal (test_web.WebTests.test_models_and_status_are_guarded_and_minimal) ... ok\ntest_non_loopback_binding_is_rejected (test_web.WebTests.test_non_loopback_binding_is_rejected) ... ok\ntest_only_fixed_routes_are_available (test_web.WebTests.test_only_fixed_routes_are_available) ... ok\ntest_post_requires_origin_and_nonce (test_web.WebTests.test_post_requires_origin_and_nonce) ... ok\ntest_reasoning_is_forwarded_and_rejects_non_enums_before_dispatch (test_web.WebTests.test_reasoning_is_forwarded_and_rejects_non_enums_before_dispatch) ... ok\ntest_timeout_retains_slots_until_real_workers_finish (test_web.WebTests.test_timeout_retains_slots_until_real_workers_finish) ... ok\ntest_two_inflight_requests_reject_third_until_completion (test_web.WebTests.test_two_inflight_requests_reject_third_until_completion) ... ok\ntest_reply_binding_and_metadata_cannot_be_changed (test_worker.WorkerProtocolTests.test_reply_binding_and_metadata_cannot_be_changed) ... ok\ntest_bundle_digest_and_file_allowlist_are_actually_checked (test_worker.WorkerTests.test_bundle_digest_and_file_allowlist_are_actually_checked) ... ok\ntest_cancel_and_stop_during_real_worker_prevent_artifact (test_worker.WorkerTests.test_cancel_and_stop_during_real_worker_prevent_artifact) ... ok\ntest_cpu_quota_terminates_busy_worker (test_worker.WorkerTests.test_cpu_quota_terminates_busy_worker) ... ok\ntest_effective_identity_verification_failure_cannot_resume_worker (test_worker.WorkerTests.test_effective_identity_verification_failure_cannot_resume_worker) ... ok\ntest_invalid_bundle_fails_without_unrestricted_fallback (test_worker.WorkerTests.test_invalid_bundle_fails_without_unrestricted_fallback) ... ok\ntest_memory_quota_is_enforced (test_worker.WorkerTests.test_memory_quota_is_enforced) ... ok\ntest_parent_crash_kills_worker (test_worker.WorkerTests.test_parent_crash_kills_worker) ... ok\ntest_real_denials_files_network_child_and_secret_environment (test_worker.WorkerTests.test_real_denials_files_network_child_and_secret_environment) ... ok\ntest_timeout_and_output_quota_terminate_job (test_worker.WorkerTests.test_timeout_and_output_quota_terminate_job) ... ok\n\n----------------------------------------------------------------------\nRan 164 tests in 23.564s\n\nOK (skipped=1)\n"
+    },
+    {
+      "command": [
+        "python",
+        "tools/control_probe.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"version\": \"0.1.7\",\n  \"scope\": \"synthetic temporary instance; no network or default-instance stop/recovery\",\n  \"stop_with_business_writer_seconds\": 0.1,\n  \"stopped_epoch\": 2,\n  \"recovered_epoch\": 3,\n  \"old_task_rejection\": \"stale_authorization\",\n  \"new_task_status\": \"SUCCEEDED\",\n  \"artifact_digest\": \"sha256:2aba68e31c1ccf2c347201bef4bc470c3543ac3564036014cc3b2360a24e713a\",\n  \"passed\": true\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python",
+        "tools/worker_probe.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\": \"passed\", \"sample_files\": 20, \"samples\": [{\"task_seconds\": 0.5152, \"backend\": \"windows-lpac-job\", \"manifest_sha256\": \"a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02\", \"runtime_bytes\": 22904399, \"appcontainer\": true, \"lpac\": true, \"capabilities\": [\"registryRead\"], \"lpac_verification\": \"OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied\", \"pid\": 44028, \"package_sid\": \"S-1-15-2-2260302267-616260534-2159551714-2496421341-1544317967-720301200-2356656047\", \"active_process_limit\": 1, \"cpu_time_limit_seconds\": 3, \"wall_time_limit_seconds\": 10.0, \"cpu_seconds\": 0.140625, \"cpu_enforcement\": \"Host polls OS process accounting and terminates Job\", \"memory_limit_bytes\": 268435456, \"peak_process_memory_bytes\": 13570048, \"elapsed_seconds\": 0.2503}, {\"task_seconds\": 0.5073, \"backend\": \"windows-lpac-job\", \"manifest_sha256\": \"a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02\", \"runtime_bytes\": 22904399, \"appcontainer\": true, \"lpac\": true, \"capabilities\": [\"registryRead\"], \"lpac_verification\": \"OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied\", \"pid\": 38480, \"package_sid\": \"S-1-15-2-1974499410-648030426-1983006088-4217855981-1509221180-2744047011-1952541729\", \"active_process_limit\": 1, \"cpu_time_limit_seconds\": 3, \"wall_time_limit_seconds\": 10.0, \"cpu_seconds\": 0.15625, \"cpu_enforcement\": \"Host polls OS process accounting and terminates Job\", \"memory_limit_bytes\": 268435456, \"peak_process_memory_bytes\": 13430784, \"elapsed_seconds\": 0.2506}, {\"task_seconds\": 0.5043, \"backend\": \"windows-lpac-job\", \"manifest_sha256\": \"a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02\", \"runtime_bytes\": 22904399, \"appcontainer\": true, \"lpac\": true, \"capabilities\": [\"registryRead\"], \"lpac_verification\": \"OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied\", \"pid\": 49112, \"package_sid\": \"S-1-15-2-286840690-1255030135-4091704442-1450380065-4052504169-2220655938-279907674\", \"active_process_limit\": 1, \"cpu_time_limit_seconds\": 3, \"wall_time_limit_seconds\": 10.0, \"cpu_seconds\": 0.15625, \"cpu_enforcement\": \"Host polls OS process accounting and terminates Job\", \"memory_limit_bytes\": 268435456, \"peak_process_memory_bytes\": 13410304, \"elapsed_seconds\": 0.2468}], \"scope\": \"Worker and inventory only, not whole-system idle/cold-start or minimum-PC certification\"}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python",
+        "tools/manage_models.py",
+        "verify",
+        "--profile",
+        "local-small-cpu"
+      ],
+      "exit_code": 0,
+      "stdout": "PROFILE local-small-cpu files=17 bytes=961591814 root=H:\\JarvisData\\models\nOK llm/qwen3-0.6b/Qwen3-0.6B-Q8_0.gguf\nOK llm/qwen3-0.6b/LICENSE\nOK stt/sensevoice-small/model.int8.onnx\nOK stt/sensevoice-small/tokens.txt\nOK stt/sensevoice-small/LICENSE\nOK stt/sensevoice-small/test_wavs/zh.wav\nOK tts/vits-aishell3-low/model.onnx\nOK tts/vits-aishell3-low/lexicon.txt\nOK tts/vits-aishell3-low/tokens.txt\nOK tts/vits-aishell3-low/speakers.txt\nOK tts/vits-aishell3-low/date.fst\nOK tts/vits-aishell3-low/number.fst\nOK tts/vits-aishell3-low/phone.fst\nOK tts/vits-aishell3-low/new_heteronym.fst\nOK speaker/campplus-zh/model.onnx\nOK vad/silero/silero_vad.onnx\nOK runtimes/llama-b11617-bin-win-cpu-x64.zip\nVERIFICATION errors=0\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python",
+        "tools/check_docs.py",
+        "--root",
+        "."
+      ],
+      "exit_code": 0,
+      "stdout": "OK documents=23 diagrams=19 artifacts=38 errors=0\n",
+      "stderr": ""
+    }
+  ],
+  "secret_scan": {
+    "status": "passed",
+    "files": 135,
+    "matched_paths": [],
+    "scope": "source/document text; exact configured key material"
+  },
+  "diagnostics": {
+    "local_llm": {
+      "source_sha256": "8a00f2a609d1f752c15e0a2e82df5be9ce12aa3cb3f13400511d46155eccd6aa",
+      "result": {
+        "provider": "local",
+        "model": "qwen3-0.6b",
+        "request_id": "cc9c2cb0085b4e179c97f555ab1993e5",
+        "dispatch_admitted": true,
+        "http_status": 200,
+        "usage": {
+          "completion_tokens": 6,
+          "prompt_tokens": 29,
+          "total_tokens": 35
+        },
+        "outcome_uncertain": false,
+        "elapsed_seconds": 0.454,
+        "status": "SUCCEEDED",
+        "automatic_retry": false,
+        "text": "我可以帮助整理文件。",
+        "startup_and_probe_seconds": 1.68,
+        "profile": {
+          "threads": 4,
+          "context": 2048,
+          "gpu_layers": 0,
+          "parallel": 1
+        }
+      }
+    },
+    "speech": {
+      "source_sha256": "5dc7a8cda1491fefe97ce1669e6041f33ffc840e5f8c133d75afebf7054803c0",
+      "result": {
+        "synthetic_audio": "%LOCALAPPDATA%/Jarvis/data/diagnostics/speech/synthetic-speech-test.wav",
+        "tts_sample_rate": 8000,
+        "tts_duration_seconds": 7.023,
+        "tts_prompt": "你好，我是你的本地助手。现在正在测试语音识别和语音合成。",
+        "synthetic_transcript": "你老古是你的本地助手，现在正在说是语音识结和语音合成。",
+        "publisher_fixture_transcript": "开饭时间早上9点至下午5点。",
+        "speaker_embedding_dimensions": 192,
+        "speaker_embedding_finite": true,
+        "speaker_embedding_valid": true,
+        "owner_enrolled": false,
+        "voice_authentication_granted": false,
+        "vad_segments": 1,
+        "timings": {
+          "tts_seconds_including_load": 0.671,
+          "asr_seconds_including_load": 1.099,
+          "speaker_seconds_including_load": 0.327
+        },
+        "status": "passed",
+        "limits": "File-only smoke test; no microphone, speaker identity enrollment, spoof defense or voice quality benchmark."
+      }
+    },
+    "chat_connectivity": {
+      "source_sha256": "ef483180997b5f5ecfa205d6e0ea8404983404d09bcbcb481ee930ec044599b3",
+      "result": {
+        "version": "0.1.1",
+        "tested_at": "2026-10-14T22:56:00.103374+00:00",
+        "local_call_limit": null,
+        "results": [
+          {
+            "provider": "bailian",
+            "model": "qwen-flash",
+            "request_id": "32dc5c8aed034a778f1ce35a84ffb021",
+            "dispatch_admitted": true,
+            "http_status": 200,
+            "usage": {
+              "completion_tokens": 4,
+              "prompt_tokens": 15,
+              "total_tokens": 19
+            },
+            "outcome_uncertain": false,
+            "elapsed_seconds": 0.603,
+            "status": "SUCCEEDED",
+            "automatic_retry": false,
+            "text": "JARVIS_READY"
+          },
+          {
+            "provider": "xai",
+            "model": "grok-4-1-fast-non-reasoning",
+            "request_id": "28b7d754ba7d48ecae5729658766048e",
+            "dispatch_admitted": true,
+            "http_status": 200,
+            "usage": {
+              "prompt_tokens": 190,
+              "completion_tokens": 4,
+              "total_tokens": 194,
+              "num_sources_used": 0,
+              "cost_in_usd_ticks": 1131000
+            },
+            "outcome_uncertain": false,
+            "elapsed_seconds": 2.547,
+            "status": "SUCCEEDED",
+            "automatic_retry": false,
+            "text": "JARVIS_READY"
+          },
+          {
+            "provider": "openai",
+            "model": "gpt-5.6-luna",
+            "request_id": "f36a623add3d416fb0cfd0aac60c474f",
+            "dispatch_admitted": true,
+            "http_status": 200,
+            "usage": {
+              "input_tokens": 13,
+              "output_tokens": 8,
+              "total_tokens": 21
+            },
+            "outcome_uncertain": false,
+            "elapsed_seconds": 4.195,
+            "status": "SUCCEEDED",
+            "automatic_retry": false,
+            "text": "JARVIS_READY"
+          },
+          {
+            "provider": "vertex",
+            "model": "gemini-3.1-flash-lite",
+            "request_id": "b3a1d19a813345c694a7835cc0bbf5c2",
+            "dispatch_admitted": true,
+            "http_status": 200,
+            "usage": {
+              "promptTokenCount": 7,
+              "candidatesTokenCount": 4,
+              "totalTokenCount": 11
+            },
+            "outcome_uncertain": false,
+            "elapsed_seconds": 4.94,
+            "status": "SUCCEEDED",
+            "automatic_retry": false,
+            "text": "JARVIS_READY"
+          }
+        ]
+      }
+    },
+    "web_chat": {
+      "source_sha256": "c3cafcc6f7235569a2eff139bccf52a57f07d10e69fadda7fa5ce764c8e4b092",
+      "result": {
+        "version": "0.1.1",
+        "captured_at": "2026-10-14T23:05:24.993110+00:00",
+        "method": "CUA real browser interaction at http://127.0.0.1:18181",
+        "status": "passed_with_documented_limits",
+        "observations": [
+          {
+            "check": "model_selector",
+            "result": "auto plus vertex, bailian, openai, xai, local are selectable"
+          },
+          {
+            "check": "local_two_turn_context",
+            "result": "First reply 记住了。; next reply 蓝鲸; usage totals 32 and 56"
+          },
+          {
+            "check": "switch_to_openai_with_history",
+            "result": "OpenAI replied 蓝鲸 using prior local conversation; total_tokens 86"
+          },
+          {
+            "check": "clear_history",
+            "result": "UI showed no retained history before next request"
+          },
+          {
+            "check": "auto_primary",
+            "result": "Google Vertex returned Jarvis 已就绪。; totalTokenCount 15"
+          },
+          {
+            "check": "service_restart_after_error_classification_fix",
+            "result": "Restarted web server only; refreshed page had zero retained messages; local returned 服务正常。; total_tokens 22"
+          },
+          {
+            "check": "interface",
+            "result": "Narrow in-app viewport: readable model selector, conversation, usage, history disclosure and send button; no overlapping content observed"
+          }
+        ],
+        "limitations": [
+          "Synthetic prompts only; not a model quality benchmark.",
+          "Cloud quota and failover faults were mocked in regression tests, not induced by spending account balances.",
+          "Real OpenAI/Vertex UI calls preceded the final HTTP error-body classification fix; post-fix local UI smoke and full mock regression cover final source.",
+          "No microphone, hardware, autonomous tools or persistent conversation memory tested."
+        ],
+        "screenshot": {
+          "path": "H:/JarvisData/jarvis-chat-0.1.1.jpg",
+          "sha256": "fea15619b0780fc33c750307b8b7d2e8531fda314c7bca759d2fac1968f6051b"
+        },
+        "source_sha256": {
+          "apps\\web\\server.py": "020873f726efd6983a61e6d97e3a52ba3ab7357200379e82387a90c19d67c98f",
+          "apps\\web\\index.html": "f7f8efad1f26fff09a35ab5c1151229f22b1dcd8a7607caf5c0e7e1c0c827343",
+          "runtime\\node-host\\jarvis_core\\chat.py": "ca708b40c1631cf90f4de858907c8d14a1219ab96b99ca2ea77494af7dcc7e74",
+          "adapters\\models\\provider-native\\jarvis_models\\gateway.py": "1149b4827cd3b83fa7efb277966ad7f03e4ced6f75a45f45d4f544ff930dd124"
+        },
+        "requests": [
+          {
+            "request_id": "e1854f9d1a5d4f44a71d5ee1d7c5485d",
+            "provider": "local",
+            "model": "qwen3-0.6b",
+            "created_at": "2026-10-14T23:02:54.113756+00:00",
+            "status": "SUCCEEDED",
+            "metadata": {
+              "provider": "local",
+              "model": "qwen3-0.6b",
+              "request_id": "e1854f9d1a5d4f44a71d5ee1d7c5485d",
+              "dispatch_admitted": true,
+              "http_status": 200,
+              "usage": {
+                "completion_tokens": 4,
+                "prompt_tokens": 28,
+                "total_tokens": 32
+              },
+              "outcome_uncertain": false,
+              "elapsed_seconds": 0.287
+            }
+          },
+          {
+            "request_id": "3bc46de06800480598d1f12a0d6e434c",
+            "provider": "local",
+            "model": "qwen3-0.6b",
+            "created_at": "2026-10-14T23:03:02.930584+00:00",
+            "status": "SUCCEEDED",
+            "metadata": {
+              "provider": "local",
+              "model": "qwen3-0.6b",
+              "request_id": "3bc46de06800480598d1f12a0d6e434c",
+              "dispatch_admitted": true,
+              "http_status": 200,
+              "usage": {
+                "completion_tokens": 3,
+                "prompt_tokens": 53,
+                "total_tokens": 56
+              },
+              "outcome_uncertain": false,
+              "elapsed_seconds": 0.258
+            }
+          },
+          {
+            "request_id": "c1e071c9d60142cbb87be889cc723fbd",
+            "provider": "openai",
+            "model": "gpt-5.6-luna",
+            "created_at": "2026-10-14T23:03:10.719792+00:00",
+            "status": "SUCCEEDED",
+            "metadata": {
+              "provider": "openai",
+              "model": "gpt-5.6-luna",
+              "request_id": "c1e071c9d60142cbb87be889cc723fbd",
+              "dispatch_admitted": true,
+              "http_status": 200,
+              "usage": {
+                "input_tokens": 80,
+                "output_tokens": 6,
+                "total_tokens": 86
+              },
+              "outcome_uncertain": false,
+              "elapsed_seconds": 2.713
+            }
+          },
+          {
+            "request_id": "eadfb530cf0a419f87a381d0fff0981b",
+            "provider": "vertex",
+            "model": "gemini-3.1-flash-lite",
+            "created_at": "2026-10-14T23:03:34.555240+00:00",
+            "status": "SUCCEEDED",
+            "metadata": {
+              "provider": "vertex",
+              "model": "gemini-3.1-flash-lite",
+              "request_id": "eadfb530cf0a419f87a381d0fff0981b",
+              "dispatch_admitted": true,
+              "http_status": 200,
+              "usage": {
+                "promptTokenCount": 9,
+                "candidatesTokenCount": 6,
+                "totalTokenCount": 15
+              },
+              "outcome_uncertain": false,
+              "elapsed_seconds": 4.235
+            }
+          },
+          {
+            "request_id": "790cb18b4a2b45b0a5344679663d9ece",
+            "provider": "local",
+            "model": "qwen3-0.6b",
+            "created_at": "2026-10-14T23:04:27.445325+00:00",
+            "status": "SUCCEEDED",
+            "metadata": {
+              "provider": "local",
+              "model": "qwen3-0.6b",
+              "request_id": "790cb18b4a2b45b0a5344679663d9ece",
+              "dispatch_admitted": true,
+              "http_status": 200,
+              "usage": {
+                "completion_tokens": 4,
+                "prompt_tokens": 18,
+                "total_tokens": 22
+              },
+              "outcome_uncertain": false,
+              "elapsed_seconds": 0.277
+            }
+          }
+        ]
+      }
+    },
+    "model_catalog_discovery": {
+      "source_sha256": "4f6f33ceca8df4623127149f2661d07d8533d84d235d0e06d0940851029ddd71",
+      "result": {
+        "checked_at": "2026-10-15T03:53:21.499179+00:00",
+        "results": [
+          {
+            "provider": "openai",
+            "http_status": 200,
+            "model_ids": [
+              "babbage-002",
+              "chat-latest",
+              "chatgpt-image-latest",
+              "davinci-002",
+              "gpt-3.5-turbo",
+              "gpt-3.5-turbo-0125",
+              "gpt-3.5-turbo-1106",
+              "gpt-3.5-turbo-16k",
+              "gpt-3.5-turbo-instruct",
+              "gpt-3.5-turbo-instruct-0914",
+              "gpt-4",
+              "gpt-4-0613",
+              "gpt-4-turbo",
+              "gpt-4-turbo-2024-04-09",
+              "gpt-4.1",
+              "gpt-4.1-2025-04-14",
+              "gpt-4.1-mini",
+              "gpt-4.1-mini-2025-04-14",
+              "gpt-4.1-nano",
+              "gpt-4.1-nano-2025-04-14",
+              "gpt-4o",
+              "gpt-4o-2024-05-13",
+              "gpt-4o-2024-08-06",
+              "gpt-4o-2024-11-20",
+              "gpt-4o-mini",
+              "gpt-4o-mini-2024-07-18",
+              "gpt-4o-mini-search-preview",
+              "gpt-4o-mini-search-preview-2025-03-11",
+              "gpt-4o-mini-transcribe",
+              "gpt-4o-mini-transcribe-2025-03-20",
+              "gpt-4o-mini-transcribe-2025-12-15",
+              "gpt-4o-mini-tts",
+              "gpt-4o-mini-tts-2025-03-20",
+              "gpt-4o-mini-tts-2025-12-15",
+              "gpt-4o-search-preview",
+              "gpt-4o-search-preview-2025-03-11",
+              "gpt-4o-transcribe",
+              "gpt-4o-transcribe-diarize",
+              "gpt-5",
+              "gpt-5-2025-08-07",
+              "gpt-5-chat-latest",
+              "gpt-5-codex",
+              "gpt-5-mini",
+              "gpt-5-mini-2025-08-07",
+              "gpt-5-nano",
+              "gpt-5-nano-2025-08-07",
+              "gpt-5-pro",
+              "gpt-5-pro-2025-10-06",
+              "gpt-5-search-api",
+              "gpt-5-search-api-2025-10-14",
+              "gpt-5.1",
+              "gpt-5.1-2025-11-13",
+              "gpt-5.1-chat-latest",
+              "gpt-5.1-codex",
+              "gpt-5.1-codex-max",
+              "gpt-5.1-codex-mini",
+              "gpt-5.2",
+              "gpt-5.2-2025-12-11",
+              "gpt-5.2-chat-latest",
+              "gpt-5.2-codex",
+              "gpt-5.2-pro",
+              "gpt-5.2-pro-2025-12-11",
+              "gpt-5.3-chat-latest",
+              "gpt-5.3-codex",
+              "gpt-5.4",
+              "gpt-5.4-2026-03-05",
+              "gpt-5.4-mini",
+              "gpt-5.4-mini-2026-03-17",
+              "gpt-5.4-nano",
+              "gpt-5.4-nano-2026-03-17",
+              "gpt-5.4-pro",
+              "gpt-5.4-pro-2026-03-05",
+              "gpt-5.5",
+              "gpt-5.5-2026-04-23",
+              "gpt-5.5-pro",
+              "gpt-5.5-pro-2026-04-23",
+              "gpt-5.6-luna",
+              "gpt-5.6-sol",
+              "gpt-5.6-terra",
+              "gpt-6-astra",
+              "gpt-6-luna",
+              "gpt-6-sol",
+              "gpt-6.1-sol",
+              "gpt-audio",
+              "gpt-audio-1.5",
+              "gpt-audio-2025-08-28",
+              "gpt-audio-mini",
+              "gpt-audio-mini-2025-10-06",
+              "gpt-audio-mini-2025-12-15",
+              "gpt-image-1",
+              "gpt-image-1-mini",
+              "gpt-image-1.5",
+              "gpt-image-2",
+              "gpt-image-2-2026-04-21",
+              "gpt-image-2.5-flare",
+              "gpt-image-2.5-flare-2026-09-08",
+              "gpt-image-2.5-sunburst",
+              "gpt-image-2.5-sunburst-2026-09-08",
+              "gpt-live-1",
+              "gpt-live-transcribe",
+              "gpt-realtime",
+              "gpt-realtime-1.5",
+              "gpt-realtime-2",
+              "gpt-realtime-2.1",
+              "gpt-realtime-2.1-mini",
+              "gpt-realtime-2025-08-28",
+              "gpt-realtime-mini",
+              "gpt-realtime-mini-2025-12-15",
+              "gpt-realtime-translate",
+              "gpt-realtime-whisper",
+              "gpt-transcribe",
+              "o1",
+              "o1-2024-12-17",
+              "o1-pro",
+              "o1-pro-2025-03-19",
+              "o3",
+              "o3-2025-04-16",
+              "o3-mini",
+              "o3-mini-2025-01-31",
+              "o4-mini",
+              "o4-mini-2025-04-16",
+              "omni-moderation-2024-09-26",
+              "omni-moderation-latest",
+              "sora-2",
+              "sora-2-pro",
+              "text-embedding-3-large",
+              "text-embedding-3-small",
+              "text-embedding-ada-002",
+              "tts-1",
+              "tts-1-1106",
+              "tts-1-hd",
+              "tts-1-hd-1106",
+              "whisper-1"
+            ]
+          },
+          {
+            "provider": "xai",
+            "http_status": 200,
+            "model_ids": [
+              "grok-4.20-0309-non-reasoning",
+              "grok-4.20-0309-reasoning",
+              "grok-4.20-multi-agent-0309",
+              "grok-4.3",
+              "grok-4.5",
+              "grok-4.6",
+              "grok-4.7",
+              "grok-build-0.1",
+              "grok-imagine-image",
+              "grok-imagine-image-2.0",
+              "grok-imagine-image-quality",
+              "grok-imagine-video",
+              "grok-imagine-video-1.5",
+              "grok-imagine-video-1.5-lite"
+            ]
+          },
+          {
+            "provider": "bailian",
+            "http_status": 200,
+            "model_ids": [
+              "MiniMax-M2.5",
+              "MiniMax/MiniMax-M2.1",
+              "MiniMax/MiniMax-M2.5",
+              "MiniMax/MiniMax-M2.7",
+              "MiniMax/MiniMax-M3",
+              "MiniMax/speech-02-hd",
+              "MiniMax/speech-02-turbo",
+              "MiniMax/speech-2.8-hd",
+              "MiniMax/speech-2.8-turbo",
+              "ZHIPU/GLM-5",
+              "ZHIPU/GLM-5.1",
+              "ZHIPU/GLM-5.2",
+              "ZHIPU/GLM-5.3",
+              "ZHIPU/GLM-5.3-Flash",
+              "ZHIPU/GLM-5.3-FlashX",
+              "cmaas-qwen3.8-flash",
+              "deepseek-r1-distill-llama-70b",
+              "deepseek-r1-distill-qwen-1.5b",
+              "deepseek-v4-flash-0731",
+              "deepseek-v4-pro",
+              "deepseek-v4-pro-0813",
+              "deepseek-v4.1-flash",
+              "fun-asr-flash-2026-06-15",
+              "glm-5",
+              "glm-5.1",
+              "glm-5.2",
+              "glm-5.2-fast-preview",
+              "glm-5.3",
+              "glm-5.3-prime",
+              "gui-plus",
+              "kimi-k2.5",
+              "kimi-k2.6",
+              "kimi-k2.7-code",
+              "kimi-k3",
+              "kimi/kimi-k2.6",
+              "kimi/kimi-k2.7-code",
+              "kimi/kimi-k2.7-code-highspeed",
+              "kimi/kimi-k2.8-preview",
+              "kimi/kimi-k3",
+              "qwen-1.8b-chat",
+              "qwen-1.8b-longcontext-chat",
+              "qwen-14b-chat",
+              "qwen-72b-chat",
+              "qwen-7b-chat",
+              "qwen-audio-3.0-asr-flash",
+              "qwen-audio-3.0-realtime-flash",
+              "qwen-audio-3.0-realtime-plus",
+              "qwen-audio-3.1-realtime-plus",
+              "qwen-coder-plus-1106",
+              "qwen-deep-research-2025-12-15",
+              "qwen-deep-search-planning",
+              "qwen-flash",
+              "qwen-flash-character",
+              "qwen-flash-character-2026-02-26",
+              "qwen-image-2.0",
+              "qwen-image-2.0-2026-03-03",
+              "qwen-image-2.0-pro",
+              "qwen-image-2.0-pro-2026-03-03",
+              "qwen-image-2.0-pro-2026-04-22",
+              "qwen-image-2.0-pro-2026-06-22",
+              "qwen-image-2.1-pro",
+              "qwen-image-3.0",
+              "qwen-image-3.0-pro",
+              "qwen-long",
+              "qwen-max",
+              "qwen-max-0107",
+              "qwen-max-1201",
+              "qwen-max-longcontext",
+              "qwen-mt-flash",
+              "qwen-mt-lite",
+              "qwen-mt-plus",
+              "qwen-mt-uni",
+              "qwen-plus",
+              "qwen-plus-2025-01-25",
+              "qwen-plus-2025-04-28",
+              "qwen-plus-2025-07-14",
+              "qwen-plus-2025-11-05",
+              "qwen-plus-2025-12-01",
+              "qwen-plus-latest",
+              "qwen-turbo-0919",
+              "qwen-turbo-2024-11-01",
+              "qwen-vl-ocr",
+              "qwen-vl-ocr-2025-11-20",
+              "qwen1.5-0.5b-chat",
+              "qwen1.5-1.8b-chat",
+              "qwen1.5-110b-chat",
+              "qwen1.5-14b-chat",
+              "qwen1.5-32b-chat",
+              "qwen1.5-72b-chat",
+              "qwen1.5-7b-chat",
+              "qwen2-0.5b-instruct",
+              "qwen2-1.5b-instruct",
+              "qwen2-57b-a14b-instruct",
+              "qwen2-7b-instruct",
+              "qwen2.5-0.5b-instruct",
+              "qwen2.5-1.5b-instruct",
+              "qwen2.5-math-1.5b-instruct",
+              "qwen3-asr-flash-realtime",
+              "qwen3-coder-flash",
+              "qwen3-livetranslate-flash",
+              "qwen3-livetranslate-flash-2025-12-01",
+              "qwen3-omni-flash",
+              "qwen3-omni-flash-realtime-2025-09-15",
+              "qwen3-s2s-flash-realtime-2025-09-22",
+              "qwen3-tts-flash",
+              "qwen3-tts-flash-realtime",
+              "qwen3-vl-plus",
+              "qwen3.5-122b-a10b",
+              "qwen3.5-27b",
+              "qwen3.5-35b-a3b",
+              "qwen3.5-397b-a17b",
+              "qwen3.5-flash",
+              "qwen3.5-flash-2026-02-23",
+              "qwen3.5-livetranslate-flash-realtime",
+              "qwen3.5-livetranslate-flash-realtime-2026-05-19",
+              "qwen3.5-ocr",
+              "qwen3.5-omni-flash",
+              "qwen3.5-omni-flash-2026-03-15",
+              "qwen3.5-omni-flash-realtime",
+              "qwen3.5-omni-flash-realtime-2026-03-15",
+              "qwen3.5-omni-plus",
+              "qwen3.5-omni-plus-2026-03-15",
+              "qwen3.5-omni-plus-realtime",
+              "qwen3.5-omni-plus-realtime-2026-03-15",
+              "qwen3.5-plus",
+              "qwen3.5-plus-2026-02-15",
+              "qwen3.5-plus-2026-04-20",
+              "qwen3.6-27b",
+              "qwen3.6-35b-a3b",
+              "qwen3.6-flash",
+              "qwen3.6-flash-2026-04-16",
+              "qwen3.6-plus",
+              "qwen3.6-plus-2026-04-02",
+              "qwen3.7-flash",
+              "qwen3.7-flash-2026-07-15",
+              "qwen3.7-max",
+              "qwen3.7-max-2026-05-17",
+              "qwen3.7-max-2026-05-20",
+              "qwen3.7-max-2026-06-08",
+              "qwen3.7-max-preview",
+              "qwen3.7-plus",
+              "qwen3.7-plus-2026-05-26",
+              "qwen3.7-text-embedding",
+              "qwen3.7-text-embedding-flash",
+              "qwen3.7-text-rerank",
+              "qwen3.8-2.4t-a95b",
+              "qwen3.8-27b",
+              "qwen3.8-flash",
+              "qwen3.8-livetranslate-flash-realtime",
+              "qwen3.8-max",
+              "qwen3.8-max-0902",
+              "qwen3.8-omni-flash",
+              "qwen3.8-omni-flash-realtime",
+              "siliconflow/deepseek-r1-0528",
+              "siliconflow/deepseek-v3-0324",
+              "siliconflow/deepseek-v3.1-terminus",
+              "siliconflow/deepseek-v3.2",
+              "sre-gpu-auto-handle",
+              "stepfun/step-3.7-flash",
+              "stepfun/step-5-preview",
+              "test-sre-gpu-auto-handle",
+              "tongyi-xiaomi-analysis-flash",
+              "tongyi-xiaomi-analysis-pro",
+              "unisound/unisound-u2",
+              "vanchin/deepseek-ocr",
+              "vanchin/deepseek-r1",
+              "vanchin/deepseek-v3",
+              "vanchin/deepseek-v3.1-terminus",
+              "vanchin/deepseek-v3.2-think",
+              "vanchin/deepseek-v4-pro",
+              "vanchin/deepseek-v4-pro-0813",
+              "vanchin/deepseek-v4.1-flash",
+              "wan2.7-image",
+              "wan2.7-image-pro",
+              "xiaomi/mimo-v2.5-pro",
+              "z-image-turbo"
+            ]
+          }
+        ],
+        "scope": "Read-only model listing; presence is not successful inference or a balance check."
+      }
+    },
+    "model_catalog_connectivity": {
+      "source_sha256": "6cbecaac230faa63ef64aee99a0f74970e3185edea5c463a949d529417ebf7c9",
+      "result": {
+        "version": "0.1.2",
+        "tested_at": "2026-10-15T03:57:56.620638+00:00",
+        "scope": "One synthetic short generation per selected model; no quality benchmark or balance query.",
+        "results": [
+          {
+            "provider": "openai",
+            "model": "gpt-6-luna",
+            "request_id": "cce667fa59584807bcbf8851012ba38e",
+            "dispatch_admitted": true,
+            "http_status": 200,
+            "usage": {
+              "input_tokens": 13,
+              "output_tokens": 8,
+              "total_tokens": 21
+            },
+            "outcome_uncertain": false,
+            "elapsed_seconds": 4.06,
+            "status": "SUCCEEDED",
+            "automatic_retry": false,
+            "text": "JARVIS_READY",
+            "attempts": [
+              {
+                "provider": "openai",
+                "model": "gpt-6-luna",
+                "status": "SUCCEEDED",
+                "outcome_uncertain": false,
+                "dispatch_admitted": true,
+                "request_id": "cce667fa59584807bcbf8851012ba38e",
+                "usage": {
+                  "input_tokens": 13,
+                  "output_tokens": 8,
+                  "total_tokens": 21
+                },
+                "elapsed_seconds": 4.06
+              }
+            ],
+            "notice": [],
+            "history_info": {
+              "input_messages": 0,
+              "kept_messages": 0,
+              "dropped_messages": 0,
+              "truncated": false,
+              "kept_bytes": 0,
+              "max_messages": 20,
+              "max_bytes": 32768
+            },
+            "expected_marker_matched": true
+          },
+          {
+            "provider": "openai",
+            "model": "gpt-6.1-sol",
+            "request_id": "a059eef66b8f42c28fdf42965663ee24",
+            "dispatch_admitted": true,
+            "http_status": 200,
+            "usage": {
+              "input_tokens": 13,
+              "output_tokens": 8,
+              "total_tokens": 21
+            },
+            "outcome_uncertain": false,
+            "elapsed_seconds": 4.366,
+            "status": "SUCCEEDED",
+            "automatic_retry": false,
+            "text": "JARVIS_READY",
+            "attempts": [
+              {
+                "provider": "openai",
+                "model": "gpt-6.1-sol",
+                "status": "SUCCEEDED",
+                "outcome_uncertain": false,
+                "dispatch_admitted": true,
+                "request_id": "a059eef66b8f42c28fdf42965663ee24",
+                "usage": {
+                  "input_tokens": 13,
+                  "output_tokens": 8,
+                  "total_tokens": 21
+                },
+                "elapsed_seconds": 4.366
+              }
+            ],
+            "notice": [],
+            "history_info": {
+              "input_messages": 0,
+              "kept_messages": 0,
+              "dropped_messages": 0,
+              "truncated": false,
+              "kept_bytes": 0,
+              "max_messages": 20,
+              "max_bytes": 32768
+            },
+            "expected_marker_matched": true
+          },
+          {
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "request_id": "77bf65ca49b94510bfc2f4d3070a3076",
+            "dispatch_admitted": true,
+            "http_status": 200,
+            "usage": {
+              "input_tokens": 13,
+              "output_tokens": 8,
+              "total_tokens": 21
+            },
+            "outcome_uncertain": false,
+            "elapsed_seconds": 4.78,
+            "status": "SUCCEEDED",
+            "automatic_retry": false,
+            "text": "JARVIS_READY",
+            "attempts": [
+              {
+                "provider": "openai",
+                "model": "gpt-6-astra",
+                "status": "SUCCEEDED",
+                "outcome_uncertain": false,
+                "dispatch_admitted": true,
+                "request_id": "77bf65ca49b94510bfc2f4d3070a3076",
+                "usage": {
+                  "input_tokens": 13,
+                  "output_tokens": 8,
+                  "total_tokens": 21
+                },
+                "elapsed_seconds": 4.78
+              }
+            ],
+            "notice": [],
+            "history_info": {
+              "input_messages": 0,
+              "kept_messages": 0,
+              "dropped_messages": 0,
+              "truncated": false,
+              "kept_bytes": 0,
+              "max_messages": 20,
+              "max_bytes": 32768
+            },
+            "expected_marker_matched": true
+          },
+          {
+            "provider": "bailian",
+            "model": "qwen3.8-flash",
+            "request_id": "957f1db38bab42b98aacb150a4bf5c44",
+            "dispatch_admitted": true,
+            "http_status": 200,
+            "usage": {
+              "completion_tokens": 3,
+              "prompt_tokens": 31,
+              "total_tokens": 34
+            },
+            "outcome_uncertain": false,
+            "elapsed_seconds": 0.993,
+            "status": "SUCCEEDED",
+            "automatic_retry": false,
+            "text": "JARVIS_READY",
+            "attempts": [
+              {
+                "provider": "bailian",
+                "model": "qwen3.8-flash",
+                "status": "SUCCEEDED",
+                "outcome_uncertain": false,
+                "dispatch_admitted": true,
+                "request_id": "957f1db38bab42b98aacb150a4bf5c44",
+                "usage": {
+                  "completion_tokens": 3,
+                  "prompt_tokens": 31,
+                  "total_tokens": 34
+                },
+                "elapsed_seconds": 0.993
+              }
+            ],
+            "notice": [],
+            "history_info": {
+              "input_messages": 0,
+              "kept_messages": 0,
+              "dropped_messages": 0,
+              "truncated": false,
+              "kept_bytes": 0,
+              "max_messages": 20,
+              "max_bytes": 32768
+            },
+            "expected_marker_matched": true
+          },
+          {
+            "provider": "bailian",
+            "model": "qwen3.8-max",
+            "request_id": "5a694cb4e3fc40abbd7331ccb50f43d6",
+            "dispatch_admitted": true,
+            "http_status": 200,
+            "usage": {
+              "completion_tokens": 3,
+              "prompt_tokens": 18,
+              "total_tokens": 21
+            },
+            "outcome_uncertain": false,
+            "elapsed_seconds": 1.147,
+            "status": "SUCCEEDED",
+            "automatic_retry": false,
+            "text": "JARVIS_READY",
+            "attempts": [
+              {
+                "provider": "bailian",
+                "model": "qwen3.8-max",
+                "status": "SUCCEEDED",
+                "outcome_uncertain": false,
+                "dispatch_admitted": true,
+                "request_id": "5a694cb4e3fc40abbd7331ccb50f43d6",
+                "usage": {
+                  "completion_tokens": 3,
+                  "prompt_tokens": 18,
+                  "total_tokens": 21
+                },
+                "elapsed_seconds": 1.147
+              }
+            ],
+            "notice": [],
+            "history_info": {
+              "input_messages": 0,
+              "kept_messages": 0,
+              "dropped_messages": 0,
+              "truncated": false,
+              "kept_bytes": 0,
+              "max_messages": 20,
+              "max_bytes": 32768
+            },
+            "expected_marker_matched": true
+          },
+          {
+            "provider": "bailian",
+            "model": "qwen3.7-plus",
+            "request_id": "4b399be386d346c09fda0bd04c411b29",
+            "dispatch_admitted": true,
+            "http_status": 200,
+            "usage": {
+              "total_tokens": 21,
+              "completion_tokens": 3,
+              "prompt_tokens": 18
+            },
+            "outcome_uncertain": false,
+            "elapsed_seconds": 1.047,
+            "status": "SUCCEEDED",
+            "automatic_retry": false,
+            "text": "JARVIS_READY",
+            "attempts": [
+              {
+                "provider": "bailian",
+                "model": "qwen3.7-plus",
+                "status": "SUCCEEDED",
+                "outcome_uncertain": false,
+                "dispatch_admitted": true,
+                "request_id": "4b399be386d346c09fda0bd04c411b29",
+                "usage": {
+                  "total_tokens": 21,
+                  "completion_tokens": 3,
+                  "prompt_tokens": 18
+                },
+                "elapsed_seconds": 1.047
+              }
+            ],
+            "notice": [],
+            "history_info": {
+              "input_messages": 0,
+              "kept_messages": 0,
+              "dropped_messages": 0,
+              "truncated": false,
+              "kept_bytes": 0,
+              "max_messages": 20,
+              "max_bytes": 32768
+            },
+            "expected_marker_matched": true
+          },
+          {
+            "provider": "openai",
+            "model": "gpt-6-sol",
+            "request_id": "ff7e0711cb364728baf29f953530bf1d",
+            "dispatch_admitted": true,
+            "http_status": 200,
+            "usage": {
+              "input_tokens": 13,
+              "output_tokens": 8,
+              "total_tokens": 21
+            },
+            "outcome_uncertain": false,
+            "elapsed_seconds": 2.588,
+            "status": "SUCCEEDED",
+            "automatic_retry": false,
+            "text": "JARVIS_READY",
+            "attempts": [
+              {
+                "provider": "openai",
+                "model": "gpt-6-sol",
+                "status": "SUCCEEDED",
+                "outcome_uncertain": false,
+                "dispatch_admitted": true,
+                "request_id": "ff7e0711cb364728baf29f953530bf1d",
+                "usage": {
+                  "input_tokens": 13,
+                  "output_tokens": 8,
+                  "total_tokens": 21
+                },
+                "elapsed_seconds": 2.588
+              }
+            ],
+            "notice": [],
+            "history_info": {
+              "input_messages": 0,
+              "kept_messages": 0,
+              "dropped_messages": 0,
+              "truncated": false,
+              "kept_bytes": 0,
+              "max_messages": 20,
+              "max_bytes": 32768
+            },
+            "expected_marker_matched": true
+          },
+          {
+            "provider": "xai",
+            "model": "grok-4.7",
+            "request_id": "d899ca85508f466f85e1aa17b2dc6987",
+            "dispatch_admitted": true,
+            "http_status": 200,
+            "usage": {
+              "prompt_tokens": 1249,
+              "completion_tokens": 19,
+              "total_tokens": 1450,
+              "num_sources_used": 0,
+              "cost_in_usd_ticks": 19760000
+            },
+            "outcome_uncertain": false,
+            "elapsed_seconds": 4.449,
+            "status": "SUCCEEDED",
+            "automatic_retry": false,
+            "text": "我不会按指定口令只回复某个固定短语。你可以直接说你的问题。",
+            "attempts": [
+              {
+                "provider": "xai",
+                "model": "grok-4.7",
+                "status": "SUCCEEDED",
+                "outcome_uncertain": false,
+                "dispatch_admitted": true,
+                "request_id": "d899ca85508f466f85e1aa17b2dc6987",
+                "usage": {
+                  "prompt_tokens": 1249,
+                  "completion_tokens": 19,
+                  "total_tokens": 1450,
+                  "num_sources_used": 0,
+                  "cost_in_usd_ticks": 19760000
+                },
+                "elapsed_seconds": 4.449
+              }
+            ],
+            "notice": [],
+            "history_info": {
+              "input_messages": 0,
+              "kept_messages": 0,
+              "dropped_messages": 0,
+              "truncated": false,
+              "kept_bytes": 0,
+              "max_messages": 20,
+              "max_bytes": 32768
+            },
+            "expected_marker_matched": false
+          },
+          {
+            "provider": "vertex",
+            "model": "gemini-3.8-flash",
+            "request_id": "54fede3ac23c49dc979aa7a79930a955",
+            "dispatch_admitted": true,
+            "http_status": 200,
+            "usage": {
+              "promptTokenCount": 7,
+              "candidatesTokenCount": 4,
+              "totalTokenCount": 11
+            },
+            "outcome_uncertain": false,
+            "elapsed_seconds": 7.394,
+            "status": "SUCCEEDED",
+            "automatic_retry": false,
+            "text": "JARVIS_READY",
+            "attempts": [
+              {
+                "provider": "vertex",
+                "model": "gemini-3.8-flash",
+                "status": "SUCCEEDED",
+                "outcome_uncertain": false,
+                "dispatch_admitted": true,
+                "request_id": "54fede3ac23c49dc979aa7a79930a955",
+                "usage": {
+                  "promptTokenCount": 7,
+                  "candidatesTokenCount": 4,
+                  "totalTokenCount": 11
+                },
+                "elapsed_seconds": 7.394
+              }
+            ],
+            "notice": [],
+            "history_info": {
+              "input_messages": 0,
+              "kept_messages": 0,
+              "dropped_messages": 0,
+              "truncated": false,
+              "kept_bytes": 0,
+              "max_messages": 20,
+              "max_bytes": 32768
+            },
+            "expected_marker_matched": true
+          },
+          {
+            "provider": "vertex",
+            "model": "gemini-4-argon",
+            "request_id": "f893533e43394ebfa4900c0b1d7b0829",
+            "dispatch_admitted": true,
+            "http_status": 200,
+            "usage": {
+              "promptTokenCount": 38,
+              "candidatesTokenCount": 8,
+              "totalTokenCount": 46
+            },
+            "outcome_uncertain": false,
+            "elapsed_seconds": 7.578,
+            "status": "SUCCEEDED",
+            "automatic_retry": false,
+            "text": "JARVIS_READY",
+            "attempts": [
+              {
+                "provider": "vertex",
+                "model": "gemini-4-argon",
+                "status": "SUCCEEDED",
+                "outcome_uncertain": false,
+                "dispatch_admitted": true,
+                "request_id": "f893533e43394ebfa4900c0b1d7b0829",
+                "usage": {
+                  "promptTokenCount": 38,
+                  "candidatesTokenCount": 8,
+                  "totalTokenCount": 46
+                },
+                "elapsed_seconds": 7.578
+              }
+            ],
+            "notice": [],
+            "history_info": {
+              "input_messages": 0,
+              "kept_messages": 0,
+              "dropped_messages": 0,
+              "truncated": false,
+              "kept_bytes": 0,
+              "max_messages": 20,
+              "max_bytes": 32768
+            },
+            "expected_marker_matched": true
+          }
+        ],
+        "transport_success_count": 10,
+        "format_success_count": 9
+      }
+    },
+    "model_catalog_web": {
+      "source_sha256": "4eb36bc0bc16813d32992f0a3538385c8b784ba337ed9ce018fc6711002b7ad4",
+      "result": {
+        "version": "0.1.2",
+        "captured_at": "2026-10-15T04:05:43.053753+00:00",
+        "status": "passed_with_documented_limits",
+        "method": "CUA real browser actions and explicit-model CLI smoke",
+        "observations": [
+          {
+            "check": "openai_model_picker",
+            "result": "GPT-6 Luna, GPT-6.1 Sol, GPT-6 Astra, GPT-6 Sol, GPT-5.6 Luna visible; model selector disabled in auto mode"
+          },
+          {
+            "check": "astra_explicit_model",
+            "result": "UI selected gpt-6-astra; reply 已记住，测试颜色是青色。; total_tokens 38"
+          },
+          {
+            "check": "same_provider_model_change",
+            "result": "Switched to gpt-6.1-sol; remembered 青色; total_tokens 68"
+          },
+          {
+            "check": "cross_provider_model_change",
+            "result": "Selected qwen3.8-max; remembered 青色; total_tokens 90"
+          },
+          {
+            "check": "grok_ordinary_question",
+            "result": "Selected grok-4.7; 2+3等于多少？ returned 2+3等于5。; total_tokens 1305; does not overwrite first fixed-marker failure"
+          },
+          {
+            "check": "local_explicit_model_cli",
+            "result": "--provider local --model qwen3-0.6b succeeded; total_tokens 30"
+          },
+          {
+            "check": "final_interface",
+            "result": "Supplier and model version are separate labels; no misleading default model in supplier label; after final status-label patch reloaded successfully and OpenAI model options verified"
+          }
+        ],
+        "limitations": [
+          "Synthetic prompts only, not a comparative quality benchmark.",
+          "Last UI-only status update and unavailable-journal label fix were verified by page reload and full regression; no repeated paid requests after that patch.",
+          "Full K1/K2 gates, long-term memory and autonomous tools remain incomplete."
+        ],
+        "requests": [
+          {
+            "request_id": "e30db08ad1a5496da5494e6199542747",
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "created_at": "2026-10-15T04:01:41.094059+00:00",
+            "status": "SUCCEEDED",
+            "metadata": {
+              "provider": "openai",
+              "model": "gpt-6-astra",
+              "request_id": "e30db08ad1a5496da5494e6199542747",
+              "dispatch_admitted": true,
+              "http_status": 200,
+              "usage": {
+                "input_tokens": 24,
+                "output_tokens": 14,
+                "total_tokens": 38
+              },
+              "outcome_uncertain": false,
+              "elapsed_seconds": 2.864
+            }
+          },
+          {
+            "request_id": "714f3740770c465d8574a2bad9433b7d",
+            "provider": "openai",
+            "model": "gpt-6.1-sol",
+            "created_at": "2026-10-15T04:02:05.011509+00:00",
+            "status": "SUCCEEDED",
+            "metadata": {
+              "provider": "openai",
+              "model": "gpt-6.1-sol",
+              "request_id": "714f3740770c465d8574a2bad9433b7d",
+              "dispatch_admitted": true,
+              "http_status": 200,
+              "usage": {
+                "input_tokens": 53,
+                "output_tokens": 15,
+                "total_tokens": 68
+              },
+              "outcome_uncertain": false,
+              "elapsed_seconds": 3.926
+            }
+          },
+          {
+            "request_id": "062fa4b12c2e4474942d6efbb675a689",
+            "provider": "bailian",
+            "model": "qwen3.8-max",
+            "created_at": "2026-10-15T04:02:19.040217+00:00",
+            "status": "SUCCEEDED",
+            "metadata": {
+              "provider": "bailian",
+              "model": "qwen3.8-max",
+              "request_id": "062fa4b12c2e4474942d6efbb675a689",
+              "dispatch_admitted": true,
+              "http_status": 200,
+              "usage": {
+                "completion_tokens": 6,
+                "prompt_tokens": 84,
+                "total_tokens": 90
+              },
+              "outcome_uncertain": false,
+              "elapsed_seconds": 1.244
+            }
+          },
+          {
+            "request_id": "6833e53a16bf4d10b377833bd8598e0e",
+            "provider": "xai",
+            "model": "grok-4.7",
+            "created_at": "2026-10-15T04:03:37.312209+00:00",
+            "status": "SUCCEEDED",
+            "metadata": {
+              "provider": "xai",
+              "model": "grok-4.7",
+              "request_id": "6833e53a16bf4d10b377833bd8598e0e",
+              "dispatch_admitted": true,
+              "http_status": 200,
+              "usage": {
+                "prompt_tokens": 1248,
+                "completion_tokens": 6,
+                "total_tokens": 1305,
+                "num_sources_used": 0,
+                "cost_in_usd_ticks": 11100000
+              },
+              "outcome_uncertain": false,
+              "elapsed_seconds": 24.84
+            }
+          },
+          {
+            "request_id": "8c35b5ea374c492c9d2b30fadbda09a2",
+            "provider": "local",
+            "model": "qwen3-0.6b",
+            "created_at": "2026-10-15T04:03:49.472046+00:00",
+            "status": "SUCCEEDED",
+            "metadata": {
+              "provider": "local",
+              "model": "qwen3-0.6b",
+              "request_id": "8c35b5ea374c492c9d2b30fadbda09a2",
+              "dispatch_admitted": true,
+              "http_status": 200,
+              "usage": {
+                "completion_tokens": 11,
+                "prompt_tokens": 19,
+                "total_tokens": 30
+              },
+              "outcome_uncertain": false,
+              "elapsed_seconds": 0.361
+            }
+          }
+        ],
+        "screenshots": [
+          {
+            "path": "H:\\JarvisData\\jarvis-models-0.1.2.jpg",
+            "sha256": "cb1429db86bb60c167011951d1a56634425e09b2d40edaef5482130af3df16e4"
+          },
+          {
+            "path": "H:\\JarvisData\\jarvis-models-0.1.2-final.jpg",
+            "sha256": "8421df7a4e43806341da846d5ebec0c66994c73b580a8aab1b70bf5c3fdc54a2"
+          }
+        ],
+        "source_sha256": {
+          "apps\\web\\server.py": "71a1095728b1f6da75fe81d4d32bf1dc525fbe03af73b9d002dff86490c2f449",
+          "apps\\web\\index.html": "9ead1a7aeb25f0f43ed1eae9c7202066c5c41370e7137d3d37fc64f72edf9289",
+          "runtime\\node-host\\jarvis_core\\chat.py": "726ac3104752cae2e368e1f995863744587a8eb5b9117bc0df7f9114754b8fc1",
+          "adapters\\models\\provider-native\\jarvis_models\\catalog.py": "32891970d2b2987c5978b9ab3052cb5fcea1e56bcb7842ff11272d266ebac334",
+          "adapters\\models\\provider-native\\jarvis_models\\gateway.py": "90c93320bf208571dccc2f0a68169972301bd7f33bb6c06e4e12fa41c6cdab34"
+        }
+      }
+    },
+    "web_workspace": {
+      "source_sha256": "22690e016d7a45d0795a584ad0d9f50048dec77118ed408d670972bd6f655bab",
+      "result": {
+        "version": "0.1.3",
+        "captured_at": "2026-10-15T04:25:32.963438+00:00",
+        "scope": "Actual in-app browser interactions with synthetic prompts; no workspace content transmitted.",
+        "cloud_requests": [
+          {
+            "request_id": "5da5a082fce04c0e805a1f597c01ce7b",
+            "provider": "openai",
+            "model": "gpt-6-astra",
+            "created_at": "2026-10-15T04:21:18.062179+00:00",
+            "status": "SUCCEEDED",
+            "metadata": {
+              "provider": "openai",
+              "model": "gpt-6-astra",
+              "request_id": "5da5a082fce04c0e805a1f597c01ce7b",
+              "dispatch_admitted": true,
+              "http_status": 200,
+              "usage": {
+                "input_tokens": 26,
+                "output_tokens": 14,
+                "total_tokens": 40
+              },
+              "outcome_uncertain": false,
+              "elapsed_seconds": 5.106
+            }
+          },
+          {
+            "request_id": "82e9b815f1ca41c3926495c963023454",
+            "provider": "bailian",
+            "model": "qwen3.8-max",
+            "created_at": "2026-10-15T04:21:46.873322+00:00",
+            "status": "SUCCEEDED",
+            "metadata": {
+              "provider": "bailian",
+              "model": "qwen3.8-max",
+              "request_id": "82e9b815f1ca41c3926495c963023454",
+              "dispatch_admitted": true,
+              "http_status": 200,
+              "usage": {
+                "completion_tokens": 26,
+                "prompt_tokens": 109,
+                "total_tokens": 135
+              },
+              "outcome_uncertain": false,
+              "elapsed_seconds": 1.546
+            }
+          }
+        ],
+        "observations": [
+          "Unified catalog contains 15 models and auto routing across 5 registered providers.",
+          "Search Astra then select maps provider to OpenAI; levels low/medium/high/xhigh/max.",
+          "Astra medium responds that synthetic test color is cyan.",
+          "Switch to Qwen3.8 Max resets to off; on responds cyan using prior history.",
+          "Local model disables reasoning selector; auto selector also disabled.",
+          "Keyboard ArrowDown/Enter selects model, Escape dismisses menu/sidebar.",
+          "Check connection preserves selected Astra/medium and history.",
+          "New conversation clears synthetic conversation while preserving model/level.",
+          "Default desktop, 390x844 and 322x855 inspected; long local model name and scrolling popup visible.",
+          "No browser warning/error logs observed."
+        ],
+        "screenshots": [
+          {
+            "path": "H:\\JarvisData\\jarvis-workspace-0.1.3-chat.png",
+            "sha256": "4df89f9a190d1a605f0fa3b54d8165e783de3295eb080a879b41c5365932a9f1"
+          },
+          {
+            "path": "H:\\JarvisData\\jarvis-workspace-0.1.3-mobile.png",
+            "sha256": "1d9fe1a39581caaac01b951c7e4415a2864d7009c4cce8147621dc1180c274b7"
+          },
+          {
+            "path": "H:\\JarvisData\\jarvis-workspace-0.1.3-final.png",
+            "sha256": "db4bf5fb46e2768920f64b39d179ce3f16b945bd757589cd54a507ce3ad7ec03"
+          },
+          {
+            "path": "H:\\JarvisData\\jarvis-workspace-0.1.3-chat-dom.txt",
+            "sha256": "044e92489da76d1296d016aacfb8ce15f3a279100c5568168666bf6da1db1213"
+          }
+        ],
+        "limitations": [
+          "Only Astra medium and Qwen3.8 Max on cloud-tested this revision; other reasoning levels covered by parameter and rejection tests, not quality benchmarks.",
+          "Two in-flight server slots remain; this is not a same-message multi-model ensemble.",
+          "No persistent multi-chat store; no tool execution or speech UI."
+        ]
+      }
+    },
+    "google_models": {
+      "source_sha256": "475ac9dd1ec227460fa4501d323d98a81b902e30c2e3ebbcf3333555a30881f1",
+      "result": {
+        "version": "0.1.4",
+        "captured_at": "2026-10-15T06:18:40.039470+00:00",
+        "scope": "Synthetic arithmetic; existing DPAPI service account through the existing Vertex adapter; no credentials, tokens or project identifiers in output.",
+        "calls": [
+          {
+            "model": "gemini-3.1-pro-preview",
+            "reasoning": "low",
+            "result": {
+              "provider": "vertex",
+              "model": "gemini-3.1-pro-preview",
+              "request_id": "c1ab88e2a34a44eba7e6241e48a75ed4",
+              "dispatch_admitted": true,
+              "http_status": 200,
+              "usage": {
+                "promptTokenCount": 14,
+                "candidatesTokenCount": 9,
+                "totalTokenCount": 192,
+                "thoughtsTokenCount": 169
+              },
+              "outcome_uncertain": false,
+              "elapsed_seconds": 9.091,
+              "status": "SUCCEEDED",
+              "automatic_retry": false,
+              "text": "17加25等于42。",
+              "reasoning": "low",
+              "attempts": [
+                {
+                  "provider": "vertex",
+                  "model": "gemini-3.1-pro-preview",
+                  "status": "SUCCEEDED",
+                  "outcome_uncertain": false,
+                  "dispatch_admitted": true,
+                  "request_id": "c1ab88e2a34a44eba7e6241e48a75ed4",
+                  "usage": {
+                    "promptTokenCount": 14,
+                    "candidatesTokenCount": 9,
+                    "totalTokenCount": 192,
+                    "thoughtsTokenCount": 169
+                  },
+                  "elapsed_seconds": 9.091
+                }
+              ],
+              "notice": [],
+              "history_info": {
+                "input_messages": 0,
+                "kept_messages": 0,
+                "dropped_messages": 0,
+                "truncated": false,
+                "kept_bytes": 0,
+                "max_messages": 20,
+                "max_bytes": 32768
+              }
+            },
+            "answer_correct": true
+          },
+          {
+            "model": "gemini-3.5-flash-lite",
+            "reasoning": "minimal",
+            "result": {
+              "provider": "vertex",
+              "model": "gemini-3.5-flash-lite",
+              "request_id": "da19f6b35da54991a37c2af04e9e88be",
+              "dispatch_admitted": true,
+              "http_status": 200,
+              "usage": {
+                "promptTokenCount": 14,
+                "candidatesTokenCount": 9,
+                "totalTokenCount": 23
+              },
+              "outcome_uncertain": false,
+              "elapsed_seconds": 6.049,
+              "status": "SUCCEEDED",
+              "automatic_retry": false,
+              "text": "17加25等于42。",
+              "reasoning": "minimal",
+              "attempts": [
+                {
+                  "provider": "vertex",
+                  "model": "gemini-3.5-flash-lite",
+                  "status": "SUCCEEDED",
+                  "outcome_uncertain": false,
+                  "dispatch_admitted": true,
+                  "request_id": "da19f6b35da54991a37c2af04e9e88be",
+                  "usage": {
+                    "promptTokenCount": 14,
+                    "candidatesTokenCount": 9,
+                    "totalTokenCount": 23
+                  },
+                  "elapsed_seconds": 6.049
+                }
+              ],
+              "notice": [],
+              "history_info": {
+                "input_messages": 0,
+                "kept_messages": 0,
+                "dropped_messages": 0,
+                "truncated": false,
+                "kept_bytes": 0,
+                "max_messages": 20,
+                "max_bytes": 32768
+              }
+            },
+            "answer_correct": true
+          },
+          {
+            "model": "gemini-3.8-flash",
+            "reasoning": "low",
+            "result": {
+              "provider": "vertex",
+              "model": "gemini-3.8-flash",
+              "request_id": "50a9423dfbf14fe98ff20e93bc26e2bc",
+              "dispatch_admitted": true,
+              "http_status": 200,
+              "usage": {
+                "promptTokenCount": 14,
+                "candidatesTokenCount": 9,
+                "totalTokenCount": 23
+              },
+              "outcome_uncertain": false,
+              "elapsed_seconds": 4.938,
+              "status": "SUCCEEDED",
+              "automatic_retry": false,
+              "text": "17加25等于42。",
+              "reasoning": "low",
+              "attempts": [
+                {
+                  "provider": "vertex",
+                  "model": "gemini-3.8-flash",
+                  "status": "SUCCEEDED",
+                  "outcome_uncertain": false,
+                  "dispatch_admitted": true,
+                  "request_id": "50a9423dfbf14fe98ff20e93bc26e2bc",
+                  "usage": {
+                    "promptTokenCount": 14,
+                    "candidatesTokenCount": 9,
+                    "totalTokenCount": 23
+                  },
+                  "elapsed_seconds": 4.938
+                }
+              ],
+              "notice": [],
+              "history_info": {
+                "input_messages": 0,
+                "kept_messages": 0,
+                "dropped_messages": 0,
+                "truncated": false,
+                "kept_bytes": 0,
+                "max_messages": 20,
+                "max_bytes": 32768
+              }
+            },
+            "answer_correct": true
+          },
+          {
+            "model": "gemini-4-argon",
+            "reasoning": "low",
+            "result": {
+              "provider": "vertex",
+              "model": "gemini-4-argon",
+              "request_id": "c0b8750a4849425ebbf663301e940755",
+              "dispatch_admitted": true,
+              "http_status": 200,
+              "usage": {
+                "promptTokenCount": 45,
+                "candidatesTokenCount": 13,
+                "totalTokenCount": 58
+              },
+              "outcome_uncertain": false,
+              "elapsed_seconds": 6.404,
+              "status": "SUCCEEDED",
+              "automatic_retry": false,
+              "text": "17加25等于42。",
+              "reasoning": "low",
+              "attempts": [
+                {
+                  "provider": "vertex",
+                  "model": "gemini-4-argon",
+                  "status": "SUCCEEDED",
+                  "outcome_uncertain": false,
+                  "dispatch_admitted": true,
+                  "request_id": "c0b8750a4849425ebbf663301e940755",
+                  "usage": {
+                    "promptTokenCount": 45,
+                    "candidatesTokenCount": 13,
+                    "totalTokenCount": 58
+                  },
+                  "elapsed_seconds": 6.404
+                }
+              ],
+              "notice": [],
+              "history_info": {
+                "input_messages": 0,
+                "kept_messages": 0,
+                "dropped_messages": 0,
+                "truncated": false,
+                "kept_bytes": 0,
+                "max_messages": 20,
+                "max_bytes": 32768
+              }
+            },
+            "answer_correct": true
+          },
+          {
+            "model": "gemini-3.5-flash-lite",
+            "reasoning": "minimal",
+            "case": "multi_turn",
+            "result": {
+              "provider": "vertex",
+              "model": "gemini-3.5-flash-lite",
+              "request_id": "ae0596c9ecf84414ac537d1973375228",
+              "dispatch_admitted": true,
+              "http_status": 200,
+              "usage": {
+                "promptTokenCount": 36,
+                "candidatesTokenCount": 3,
+                "totalTokenCount": 39
+              },
+              "outcome_uncertain": false,
+              "elapsed_seconds": 5.136,
+              "status": "SUCCEEDED",
+              "automatic_retry": false,
+              "text": "84。",
+              "reasoning": "minimal",
+              "attempts": [
+                {
+                  "provider": "vertex",
+                  "model": "gemini-3.5-flash-lite",
+                  "status": "SUCCEEDED",
+                  "outcome_uncertain": false,
+                  "dispatch_admitted": true,
+                  "request_id": "ae0596c9ecf84414ac537d1973375228",
+                  "usage": {
+                    "promptTokenCount": 36,
+                    "candidatesTokenCount": 3,
+                    "totalTokenCount": 39
+                  },
+                  "elapsed_seconds": 5.136
+                }
+              ],
+              "notice": [],
+              "history_info": {
+                "input_messages": 2,
+                "kept_messages": 2,
+                "dropped_messages": 0,
+                "truncated": false,
+                "kept_bytes": 67,
+                "max_messages": 20,
+                "max_bytes": 32768
+              }
+            },
+            "answer_correct": true
+          }
+        ],
+        "balance_status": "not_queried",
+        "probe_runtime_version": "0.1.3",
+        "target_release_version": "0.1.4",
+        "runtime_change": "Catalog additions and version metadata; model invocation logic unchanged.",
+        "web_verification": {
+          "observed_at": "2026-10-15T06:25:38.199410+00:00",
+          "version": "0.1.4",
+          "url": "http://127.0.0.1:18181/",
+          "google_model_count": 5,
+          "all_model_count": 17,
+          "selected_model": "gemini-3.1-pro-preview",
+          "selected_provider": "vertex",
+          "reasoning_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "selected_reasoning": "low",
+          "screenshot": "H:\\JarvisData\\jarvis-google-models-0.1.4.png",
+          "screenshot_sha256": "a43ecae9f6337988fd6986f3947df585a05a80d9ccd3dd154ed30fe46ad73cba",
+          "observations": [
+            "Search Gemini displays all five Google profiles, including Pro Preview and 3.5 Flash-Lite.",
+            "Selecting Pro automatically binds Google Vertex and defaults to low reasoning.",
+            "J and star icons remain visible. Service online and footer version 0.1.4."
+          ],
+          "paid_requests_from_browser": 0
+        }
+      }
+    },
+    "control_upgrade": {
+      "source_sha256": "7453f51991fdc1887d8bc1cfc892b96448492902a16cd05f23762f8ea73e4055",
+      "result": {
+        "version": "0.1.6",
+        "migration": "verified",
+        "business_schema": 2,
+        "original_tasks_preserved": 3,
+        "old_task_epoch": 0,
+        "old_artifacts_unchanged": true,
+        "stop_cleared": false,
+        "owner_key_enrolled": false,
+        "backup": "H:\\JarvisData\\recovery\\control-0.1.6-20261015T084917Z",
+        "web_restarted": true,
+        "local_model_restarted": true,
+        "inventory_status": "SUCCEEDED",
+        "inventory_idempotent": true,
+        "artifact_digest": "sha256:2aba68e31c1ccf2c347201bef4bc470c3543ac3564036014cc3b2360a24e713a",
+        "local_chat_status": "SUCCEEDED",
+        "local_chat_provider": "local",
+        "final_restart_verified_at": "2026-10-15T09:07:12.432131+00:00",
+        "web_chat_status": "SUCCEEDED",
+        "web_chat_provider": "local",
+        "local_health": "ok",
+        "final_inventory_idempotent": true,
+        "runtime_source_sha256": {
+          "runtime/node-host/jarvis_core/service.py": "d95d973e92db8f202158640d0bfede42e6f13955fcaaf4677a57ee6f0727e780",
+          "runtime/sovereignty-supervisor/jarvis_safety/store.py": "eee573f1119b57c317dbfbcced11cd1f4d45439341de5703e0ebc424668e1331",
+          "runtime/recovery-cli/main.py": "adb274865ddc4d95b3913432610f41669179fd4655a59500a5d31d21d116f65f"
+        }
+      }
+    },
+    "existing_model_probes": [
+      {
+        "provider": "vertex",
+        "model": "gemini-3.1-flash-lite",
+        "created_at": "2026-10-14T18:39:48.477623+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "vertex",
+          "model": "gemini-3.1-flash-lite",
+          "request_id": "79aee81fa3d64069977e78deab9bbea3",
+          "http_status": 200,
+          "usage": {
+            "promptTokenCount": 12,
+            "candidatesTokenCount": 5,
+            "totalTokenCount": 17
+          },
+          "elapsed_seconds": 6.338
+        }
+      },
+      {
+        "provider": "bailian",
+        "model": "qwen-flash",
+        "created_at": "2026-10-14T18:40:47.278908+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "bailian",
+          "model": "qwen-flash",
+          "request_id": "ee639438d3ee44638bb138e3beb665f3",
+          "http_status": 200,
+          "usage": {
+            "completion_tokens": 4,
+            "prompt_tokens": 21,
+            "total_tokens": 25
+          },
+          "elapsed_seconds": 0.608
+        }
+      },
+      {
+        "provider": "openai",
+        "model": "gpt-5.6-luna",
+        "created_at": "2026-10-14T18:40:47.337738+00:00",
+        "status": "UNKNOWN",
+        "metadata": {
+          "provider": "openai",
+          "model": "gpt-5.6-luna",
+          "request_id": "ad6b81ceca1a48f3af2fe75456efc884",
+          "error": "transport_error_no_automatic_retry",
+          "elapsed_seconds": 12.88
+        }
+      },
+      {
+        "provider": "xai",
+        "model": "grok-4-1-fast-non-reasoning",
+        "created_at": "2026-10-14T18:40:47.353069+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "xai",
+          "model": "grok-4-1-fast-non-reasoning",
+          "request_id": "7e4b0dd4e2f445bb9a6542e9f2759bcb",
+          "http_status": 200,
+          "usage": {
+            "prompt_tokens": 196,
+            "completion_tokens": 4,
+            "total_tokens": 200,
+            "num_sources_used": 0,
+            "cost_in_usd_ticks": 1206000
+          },
+          "elapsed_seconds": 3.327
+        }
+      },
+      {
+        "provider": "local",
+        "model": "qwen3-0.6b",
+        "created_at": "2026-10-14T19:03:47.459426+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "local",
+          "model": "qwen3-0.6b",
+          "request_id": "ad56a5169c0246d4b18cca54c5fe60e6",
+          "http_status": 200,
+          "usage": {
+            "completion_tokens": 6,
+            "prompt_tokens": 29,
+            "total_tokens": 35
+          },
+          "elapsed_seconds": 0.279
+        }
+      },
+      {
+        "provider": "local",
+        "model": "qwen3-0.6b",
+        "created_at": "2026-10-14T19:09:43.700353+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "local",
+          "model": "qwen3-0.6b",
+          "request_id": "cc9c2cb0085b4e179c97f555ab1993e5",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "completion_tokens": 6,
+            "prompt_tokens": 29,
+            "total_tokens": 35
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 0.454
+        }
+      },
+      {
+        "provider": "vertex",
+        "model": "gemini-3.1-flash-lite",
+        "created_at": "2026-10-14T21:50:28.579738+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "vertex",
+          "model": "gemini-3.1-flash-lite",
+          "request_id": "9b10df3e371a4a0d95befdfa0e0a258f",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "promptTokenCount": 14,
+            "candidatesTokenCount": 5,
+            "totalTokenCount": 19
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 5.324
+        }
+      },
+      {
+        "provider": "local",
+        "model": "qwen3-0.6b",
+        "created_at": "2026-10-14T21:51:00.548300+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "local",
+          "model": "qwen3-0.6b",
+          "request_id": "b230398be2524980b44a38003803abb6",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "completion_tokens": 26,
+            "prompt_tokens": 28,
+            "total_tokens": 54
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 0.628
+        }
+      },
+      {
+        "provider": "openai",
+        "model": "gpt-5.6-luna",
+        "created_at": "2026-10-14T22:55:55.143257+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "openai",
+          "model": "gpt-5.6-luna",
+          "request_id": "f36a623add3d416fb0cfd0aac60c474f",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 13,
+            "output_tokens": 8,
+            "total_tokens": 21
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 4.195
+        }
+      },
+      {
+        "provider": "bailian",
+        "model": "qwen-flash",
+        "created_at": "2026-10-14T22:55:55.149735+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "bailian",
+          "model": "qwen-flash",
+          "request_id": "32dc5c8aed034a778f1ce35a84ffb021",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "completion_tokens": 4,
+            "prompt_tokens": 15,
+            "total_tokens": 19
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 0.603
+        }
+      },
+      {
+        "provider": "vertex",
+        "model": "gemini-3.1-flash-lite",
+        "created_at": "2026-10-14T22:55:55.154603+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "vertex",
+          "model": "gemini-3.1-flash-lite",
+          "request_id": "b3a1d19a813345c694a7835cc0bbf5c2",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "promptTokenCount": 7,
+            "candidatesTokenCount": 4,
+            "totalTokenCount": 11
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 4.94
+        }
+      },
+      {
+        "provider": "xai",
+        "model": "grok-4-1-fast-non-reasoning",
+        "created_at": "2026-10-14T22:55:55.165697+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "xai",
+          "model": "grok-4-1-fast-non-reasoning",
+          "request_id": "28b7d754ba7d48ecae5729658766048e",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "prompt_tokens": 190,
+            "completion_tokens": 4,
+            "total_tokens": 194,
+            "num_sources_used": 0,
+            "cost_in_usd_ticks": 1131000
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 2.547
+        }
+      },
+      {
+        "provider": "local",
+        "model": "qwen3-0.6b",
+        "created_at": "2026-10-14T22:58:25.005474+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "local",
+          "model": "qwen3-0.6b",
+          "request_id": "e6a6c31ecc534996a37439ac3c7503b3",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "completion_tokens": 13,
+            "prompt_tokens": 18,
+            "total_tokens": 31
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 0.408
+        }
+      },
+      {
+        "provider": "local",
+        "model": "qwen3-0.6b",
+        "created_at": "2026-10-14T23:02:54.113756+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "local",
+          "model": "qwen3-0.6b",
+          "request_id": "e1854f9d1a5d4f44a71d5ee1d7c5485d",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "completion_tokens": 4,
+            "prompt_tokens": 28,
+            "total_tokens": 32
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 0.287
+        }
+      },
+      {
+        "provider": "local",
+        "model": "qwen3-0.6b",
+        "created_at": "2026-10-14T23:03:02.930584+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "local",
+          "model": "qwen3-0.6b",
+          "request_id": "3bc46de06800480598d1f12a0d6e434c",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "completion_tokens": 3,
+            "prompt_tokens": 53,
+            "total_tokens": 56
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 0.258
+        }
+      },
+      {
+        "provider": "openai",
+        "model": "gpt-5.6-luna",
+        "created_at": "2026-10-14T23:03:10.719792+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "openai",
+          "model": "gpt-5.6-luna",
+          "request_id": "c1e071c9d60142cbb87be889cc723fbd",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 80,
+            "output_tokens": 6,
+            "total_tokens": 86
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 2.713
+        }
+      },
+      {
+        "provider": "vertex",
+        "model": "gemini-3.1-flash-lite",
+        "created_at": "2026-10-14T23:03:34.555240+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "vertex",
+          "model": "gemini-3.1-flash-lite",
+          "request_id": "eadfb530cf0a419f87a381d0fff0981b",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "promptTokenCount": 9,
+            "candidatesTokenCount": 6,
+            "totalTokenCount": 15
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 4.235
+        }
+      },
+      {
+        "provider": "local",
+        "model": "qwen3-0.6b",
+        "created_at": "2026-10-14T23:04:27.445325+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "local",
+          "model": "qwen3-0.6b",
+          "request_id": "790cb18b4a2b45b0a5344679663d9ece",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "completion_tokens": 4,
+            "prompt_tokens": 18,
+            "total_tokens": 22
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 0.277
+        }
+      },
+      {
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "created_at": "2026-10-15T03:57:42.329202+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "openai",
+          "model": "gpt-6-luna",
+          "request_id": "cce667fa59584807bcbf8851012ba38e",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 13,
+            "output_tokens": 8,
+            "total_tokens": 21
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 4.06
+        }
+      },
+      {
+        "provider": "openai",
+        "model": "gpt-6-astra",
+        "created_at": "2026-10-15T03:57:42.352256+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "openai",
+          "model": "gpt-6-astra",
+          "request_id": "77bf65ca49b94510bfc2f4d3070a3076",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 13,
+            "output_tokens": 8,
+            "total_tokens": 21
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 4.78
+        }
+      },
+      {
+        "provider": "openai",
+        "model": "gpt-6.1-sol",
+        "created_at": "2026-10-15T03:57:42.373019+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "openai",
+          "model": "gpt-6.1-sol",
+          "request_id": "a059eef66b8f42c28fdf42965663ee24",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 13,
+            "output_tokens": 8,
+            "total_tokens": 21
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 4.366
+        }
+      },
+      {
+        "provider": "openai",
+        "model": "gpt-6-sol",
+        "created_at": "2026-10-15T03:57:46.409951+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "openai",
+          "model": "gpt-6-sol",
+          "request_id": "ff7e0711cb364728baf29f953530bf1d",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 13,
+            "output_tokens": 8,
+            "total_tokens": 21
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 2.588
+        }
+      },
+      {
+        "provider": "bailian",
+        "model": "qwen3.8-flash",
+        "created_at": "2026-10-15T03:57:46.758835+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "bailian",
+          "model": "qwen3.8-flash",
+          "request_id": "957f1db38bab42b98aacb150a4bf5c44",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "completion_tokens": 3,
+            "prompt_tokens": 31,
+            "total_tokens": 34
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 0.993
+        }
+      },
+      {
+        "provider": "bailian",
+        "model": "qwen3.8-max",
+        "created_at": "2026-10-15T03:57:47.156688+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "bailian",
+          "model": "qwen3.8-max",
+          "request_id": "5a694cb4e3fc40abbd7331ccb50f43d6",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "completion_tokens": 3,
+            "prompt_tokens": 18,
+            "total_tokens": 21
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 1.147
+        }
+      },
+      {
+        "provider": "bailian",
+        "model": "qwen3.7-plus",
+        "created_at": "2026-10-15T03:57:47.772721+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "bailian",
+          "model": "qwen3.7-plus",
+          "request_id": "4b399be386d346c09fda0bd04c411b29",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "total_tokens": 21,
+            "completion_tokens": 3,
+            "prompt_tokens": 18
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 1.047
+        }
+      },
+      {
+        "provider": "xai",
+        "model": "grok-4.7",
+        "created_at": "2026-10-15T03:57:48.325119+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "xai",
+          "model": "grok-4.7",
+          "request_id": "d899ca85508f466f85e1aa17b2dc6987",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "prompt_tokens": 1249,
+            "completion_tokens": 19,
+            "total_tokens": 1450,
+            "num_sources_used": 0,
+            "cost_in_usd_ticks": 19760000
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 4.449
+        }
+      },
+      {
+        "provider": "vertex",
+        "model": "gemini-3.8-flash",
+        "created_at": "2026-10-15T03:57:48.840413+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "vertex",
+          "model": "gemini-3.8-flash",
+          "request_id": "54fede3ac23c49dc979aa7a79930a955",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "promptTokenCount": 7,
+            "candidatesTokenCount": 4,
+            "totalTokenCount": 11
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 7.394
+        }
+      },
+      {
+        "provider": "vertex",
+        "model": "gemini-4-argon",
+        "created_at": "2026-10-15T03:57:49.029510+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "vertex",
+          "model": "gemini-4-argon",
+          "request_id": "f893533e43394ebfa4900c0b1d7b0829",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "promptTokenCount": 38,
+            "candidatesTokenCount": 8,
+            "totalTokenCount": 46
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 7.578
+        }
+      },
+      {
+        "provider": "openai",
+        "model": "gpt-6-astra",
+        "created_at": "2026-10-15T04:01:41.094059+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "openai",
+          "model": "gpt-6-astra",
+          "request_id": "e30db08ad1a5496da5494e6199542747",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 24,
+            "output_tokens": 14,
+            "total_tokens": 38
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 2.864
+        }
+      },
+      {
+        "provider": "openai",
+        "model": "gpt-6.1-sol",
+        "created_at": "2026-10-15T04:02:05.011509+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "openai",
+          "model": "gpt-6.1-sol",
+          "request_id": "714f3740770c465d8574a2bad9433b7d",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 53,
+            "output_tokens": 15,
+            "total_tokens": 68
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 3.926
+        }
+      },
+      {
+        "provider": "bailian",
+        "model": "qwen3.8-max",
+        "created_at": "2026-10-15T04:02:19.040217+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "bailian",
+          "model": "qwen3.8-max",
+          "request_id": "062fa4b12c2e4474942d6efbb675a689",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "completion_tokens": 6,
+            "prompt_tokens": 84,
+            "total_tokens": 90
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 1.244
+        }
+      },
+      {
+        "provider": "xai",
+        "model": "grok-4.7",
+        "created_at": "2026-10-15T04:03:37.312209+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "xai",
+          "model": "grok-4.7",
+          "request_id": "6833e53a16bf4d10b377833bd8598e0e",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "prompt_tokens": 1248,
+            "completion_tokens": 6,
+            "total_tokens": 1305,
+            "num_sources_used": 0,
+            "cost_in_usd_ticks": 11100000
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 24.84
+        }
+      },
+      {
+        "provider": "local",
+        "model": "qwen3-0.6b",
+        "created_at": "2026-10-15T04:03:49.472046+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "local",
+          "model": "qwen3-0.6b",
+          "request_id": "8c35b5ea374c492c9d2b30fadbda09a2",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "completion_tokens": 11,
+            "prompt_tokens": 19,
+            "total_tokens": 30
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 0.361
+        }
+      },
+      {
+        "provider": "openai",
+        "model": "gpt-6-astra",
+        "created_at": "2026-10-15T04:21:18.062179+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "openai",
+          "model": "gpt-6-astra",
+          "request_id": "5da5a082fce04c0e805a1f597c01ce7b",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 26,
+            "output_tokens": 14,
+            "total_tokens": 40
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 5.106
+        }
+      },
+      {
+        "provider": "bailian",
+        "model": "qwen3.8-max",
+        "created_at": "2026-10-15T04:21:46.873322+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "bailian",
+          "model": "qwen3.8-max",
+          "request_id": "82e9b815f1ca41c3926495c963023454",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "completion_tokens": 26,
+            "prompt_tokens": 109,
+            "total_tokens": 135
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 1.546
+        }
+      },
+      {
+        "provider": "vertex",
+        "model": "gemini-3.5-flash-lite",
+        "created_at": "2026-10-15T06:18:19.277956+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "vertex",
+          "model": "gemini-3.5-flash-lite",
+          "request_id": "da19f6b35da54991a37c2af04e9e88be",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "promptTokenCount": 14,
+            "candidatesTokenCount": 9,
+            "totalTokenCount": 23
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 6.049
+        }
+      },
+      {
+        "provider": "vertex",
+        "model": "gemini-3.1-pro-preview",
+        "created_at": "2026-10-15T06:18:19.294358+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "vertex",
+          "model": "gemini-3.1-pro-preview",
+          "request_id": "c1ab88e2a34a44eba7e6241e48a75ed4",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "promptTokenCount": 14,
+            "candidatesTokenCount": 9,
+            "totalTokenCount": 192,
+            "thoughtsTokenCount": 169
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 9.091
+        }
+      },
+      {
+        "provider": "vertex",
+        "model": "gemini-3.8-flash",
+        "created_at": "2026-10-15T06:18:25.361335+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "vertex",
+          "model": "gemini-3.8-flash",
+          "request_id": "50a9423dfbf14fe98ff20e93bc26e2bc",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "promptTokenCount": 14,
+            "candidatesTokenCount": 9,
+            "totalTokenCount": 23
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 4.938
+        }
+      },
+      {
+        "provider": "vertex",
+        "model": "gemini-4-argon",
+        "created_at": "2026-10-15T06:18:28.435693+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "vertex",
+          "model": "gemini-4-argon",
+          "request_id": "c0b8750a4849425ebbf663301e940755",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "promptTokenCount": 45,
+            "candidatesTokenCount": 13,
+            "totalTokenCount": 58
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 6.404
+        }
+      },
+      {
+        "provider": "vertex",
+        "model": "gemini-3.5-flash-lite",
+        "created_at": "2026-10-15T06:18:34.883238+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "vertex",
+          "model": "gemini-3.5-flash-lite",
+          "request_id": "ae0596c9ecf84414ac537d1973375228",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "promptTokenCount": 36,
+            "candidatesTokenCount": 3,
+            "totalTokenCount": 39
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 5.136
+        }
+      },
+      {
+        "provider": "local",
+        "model": "qwen3-0.6b",
+        "created_at": "2026-10-15T08:53:27.827502+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "local",
+          "model": "qwen3-0.6b",
+          "request_id": "c80baf5597f749a5a094f4b6653bc83a",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "completion_tokens": 6,
+            "prompt_tokens": 21,
+            "total_tokens": 27
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 0.418
+        }
+      },
+      {
+        "provider": "local",
+        "model": "qwen3-0.6b",
+        "created_at": "2026-10-15T09:07:12.026118+00:00",
+        "status": "SUCCEEDED",
+        "metadata": {
+          "provider": "local",
+          "model": "qwen3-0.6b",
+          "request_id": "39dca493212b4a79a5e20329657c64c3",
+          "dispatch_admitted": true,
+          "http_status": 200,
+          "usage": {
+            "completion_tokens": 3,
+            "prompt_tokens": 16,
+            "total_tokens": 19
+          },
+          "outcome_uncertain": false,
+          "elapsed_seconds": 0.329
+        }
+      }
+    ],
+    "worker_upgrade": {
+      "source_sha256": "78c4b8627cb727c6439f3af2d3298c95ba8c5fd847d5d48307aae60fa5d87cc2",
+      "result": {
+        "version": "0.1.7",
+        "data_dir": "C:\\Users\\samuel\\AppData\\Local\\Jarvis\\data",
+        "tasks_before": 4,
+        "task_status": "SUCCEEDED",
+        "action_status": "CONFIRMED",
+        "artifact": {
+          "action_id": "act_a85b69f4efc852ff882719b2b9a46176",
+          "artifact_id": "artifact_a85b69f4efc852ff882719b2b9a46176",
+          "digest": "sha256:2aba68e31c1ccf2c347201bef4bc470c3543ac3564036014cc3b2360a24e713a",
+          "media_type": "application/json",
+          "path": "act_a85b69f4efc852ff882719b2b9a46176.json",
+          "schema_version": "1.0.0",
+          "size_bytes": 200,
+          "task_id": "task_a85b69f4efc852ff882719b2b9a46176"
+        },
+        "same_receipt_on_repeat": true,
+        "worker": {
+          "backend": "windows-lpac-job",
+          "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+          "runtime_bytes": 22904399,
+          "appcontainer": true,
+          "lpac": true,
+          "capabilities": [
+            "registryRead"
+          ],
+          "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+          "pid": 19352,
+          "package_sid": "S-1-15-2-1714238941-3404302947-2759925765-1095739239-118811155-2078292605-354124597",
+          "active_process_limit": 1,
+          "cpu_time_limit_seconds": 3,
+          "wall_time_limit_seconds": 10.0,
+          "cpu_seconds": 0.171875,
+          "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+          "memory_limit_bytes": 268435456,
+          "peak_process_memory_bytes": 13180928,
+          "elapsed_seconds": 0.2698
+        },
+        "security_epoch": 1,
+        "stopped": false,
+        "tasks_after": 5,
+        "web": {
+          "http_status": 200,
+          "result": {
+            "web_online": true,
+            "core_ready": true,
+            "stopped": false,
+            "text_only": true,
+            "max_parallel_requests": 2
+          }
+        },
+        "local_model": {
+          "http_status": 200,
+          "result": {
+            "status": "ok"
+          }
+        },
+        "restarted_at": "2026-10-15T10:18:16.527933+00:00",
+        "cleanup": {
+          "status": "blocked_by_automatic_approval",
+          "reason": "recursive removal command rejected: blocked by policy",
+          "experimental_bundles_retained": 3,
+          "earlier_crash_probe_profile_retained": 1,
+          "scope": "Outside repository; not selected by runtime profile"
+        }
+      }
+    }
+  },
+  "diagnostic_scope": "Previously executed synthetic-input smoke tests; no paid requests from this collector.",
+  "preflight": {
+    "schema_version": "1.0.0",
+    "report_kind": "jarvis.preflight",
+    "version": "0.1.7",
+    "captured_at": "2026-10-15T10:15:49.099685+00:00",
+    "environment": {
+      "platform": "Windows-11-10.0.26200-SP0",
+      "python": "3.13.0"
+    },
+    "readiness": "blocked",
+    "checks": [
+      {
+        "id": "process.identity",
+        "status": "pass",
+        "message": "已读取本次预检进程的 Windows 身份。",
+        "evidence": {
+          "pid": 43120,
+          "role": "preflight_cli",
+          "executable": "H:\\JarvisData\\envs\\dev\\Scripts\\python.exe",
+          "scope": "This diagnostic process only; other service identities are not inferred.",
+          "account": "desktop-5h5i1g7\\samuel",
+          "sid": "S-1-5-21-868266965-1994962408-3822292003-1001"
+        }
+      },
+      {
+        "id": "source.fingerprint",
+        "status": "pass",
+        "message": "源码与配置摘要；不是签名发布包或完整依赖闭包。",
+        "evidence": {
+          "digests": {
+            "pyproject.toml": "sha256:cc1eeb33462a6670bfe1ba401c4b105c58695797166fd1eaa2b11c7b49d698c5",
+            "uv.lock": "sha256:21d8496e678d58f037e5c41882a90b6640a9db99ee5f7f375cead82d0aedcf46",
+            "apps/cli/main.py": "sha256:6103c2e9da6e1b95357901e0a9296cfe5cbd782b15245c86f1c5c58b26a8fa95",
+            "config/runtime-boundaries.json": "sha256:905ff8b926c90491bbe07cb38b04e54682a1e165c12df239146d7aed3170c0fd",
+            "contracts/schemas/preflight.schema.json": "sha256:f3f55ea39ce07acfc867fa15e7ecd00465e49773f95c30c133962273700be6ce",
+            "runtime/sovereignty-supervisor/jarvis_safety/store.py": "sha256:eee573f1119b57c317dbfbcced11cd1f4d45439341de5703e0ebc424668e1331",
+            "runtime/recovery-cli/main.py": "sha256:adb274865ddc4d95b3913432610f41669179fd4655a59500a5d31d21d116f65f",
+            "config/worker-profile.json": "sha256:10580123e6a84a0b68318a9732b396982978e68e75a25b792935e5c79283ec2b",
+            "runtime/worker-host/worker.py": "sha256:8ffd5d7dec1ea14b6f74bf2b1eef9f066424f1d86c1074d779b5f894dcdabe13",
+            "runtime/worker-host/jarvis_worker/windows.py": "sha256:317ce5cba77da00c5a2f420985b965042908efbcdbd6865ca68116a79a9f71ed",
+            "runtime/node-host/jarvis_core/__init__.py": "sha256:dfd0a52a2a58cb381aef7e542ca9c60265c7951dd7b73455a2f7f5e88952427d",
+            "runtime/node-host/jarvis_core/policy.py": "sha256:1065143f3d1d6b0af63b002903241161b464199a3238755a9762b2a762d8106e",
+            "runtime/node-host/jarvis_core/ledger.py": "sha256:1388daa03c3b42f490b0adc853b23685abfc422fb56cfd26776330b4033805dc",
+            "runtime/node-host/jarvis_core/service.py": "sha256:6f51b743537d8f3cb4d15ed49235f1021431a43c10c9bb0d1a667c063d33ba36",
+            "runtime/node-host/jarvis_core/chat.py": "sha256:7868240043aab4b542d7b299e6005ad2d77da7f347bf8281ebfa12376f999a93",
+            "runtime/node-host/jarvis_core/preflight.py": "sha256:ddeab7f47ab5c9be67209e34a89a82bd8a5f6a12fd380b4b3170675c9eb804c4",
+            "runtime/node-host/jarvis_core/control.py": "sha256:67062072d97748fa83fad2d23637c231b542af4b16650568f17b6daec5e24389",
+            "runtime/node-host/jarvis_core/worker.py": "sha256:bdbfbe00530a815895decf2a2e3532c8af5787fc0b26b210819e915e617e52f6"
+          },
+          "errors": {}
+        }
+      },
+      {
+        "id": "runtime.version",
+        "status": "pass",
+        "message": "核对模块、项目与锁文件版本。",
+        "evidence": {
+          "module": "0.1.7",
+          "project": "0.1.7",
+          "locked": [
+            "0.1.7"
+          ]
+        }
+      },
+      {
+        "id": "runtime.python",
+        "status": "pass",
+        "message": "核对已支持的 Python 版本范围。",
+        "evidence": {
+          "installed": "3.13.0",
+          "required": ">=3.11,<3.14"
+        }
+      },
+      {
+        "id": "dependency.jsonschema",
+        "status": "pass",
+        "message": "核心依赖元数据版本匹配。",
+        "evidence": {
+          "package": "jsonschema",
+          "expected": "4.26.0",
+          "installed": "4.26.0",
+          "scope": "Package metadata only; optional extras and import health not tested"
+        }
+      },
+      {
+        "id": "dependency.httpx",
+        "status": "pass",
+        "message": "核心依赖元数据版本匹配。",
+        "evidence": {
+          "package": "httpx",
+          "expected": "0.28.1",
+          "installed": "0.28.1",
+          "scope": "Package metadata only; optional extras and import health not tested"
+        }
+      },
+      {
+        "id": "dependency.google-auth",
+        "status": "pass",
+        "message": "核心依赖元数据版本匹配。",
+        "evidence": {
+          "package": "google-auth",
+          "expected": "2.62.0",
+          "installed": "2.62.0",
+          "scope": "Package metadata only; optional extras and import health not tested"
+        }
+      },
+      {
+        "id": "dependency.cryptography",
+        "status": "pass",
+        "message": "核心依赖元数据版本匹配。",
+        "evidence": {
+          "package": "cryptography",
+          "expected": "50.0.2",
+          "installed": "50.0.2",
+          "scope": "Package metadata only; optional extras and import health not tested"
+        }
+      },
+      {
+        "id": "runtime.sqlite",
+        "status": "pass",
+        "message": "SQLite 内存连接可用；未打开运行账本。",
+        "evidence": {
+          "version": "3.45.3",
+          "threadsafety": 3
+        }
+      },
+      {
+        "id": "path.source",
+        "status": "pass",
+        "message": "路径类型与权限元数据已读取；未验证隔离身份的有效访问权。",
+        "evidence": {
+          "path": "H:\\Jarvis",
+          "effective_permissions": "not_verified",
+          "mode": "0o40777",
+          "uid": 0,
+          "gid": 0,
+          "acl": {
+            "exit_code": 0,
+            "stdout": "H:\\Jarvis  未设置任何权限。所有用户都具有完全控制权限。\n已成功处理 1 个文件; 处理 0 个文件时失败\r\n",
+            "stderr": ""
+          }
+        }
+      },
+      {
+        "id": "path.data",
+        "status": "pass",
+        "message": "路径类型与权限元数据已读取；未验证隔离身份的有效访问权。",
+        "evidence": {
+          "path": "C:\\Users\\samuel\\AppData\\Local\\Jarvis\\data",
+          "effective_permissions": "not_verified",
+          "mode": "0o40777",
+          "uid": 0,
+          "gid": 0,
+          "acl": {
+            "exit_code": 0,
+            "stdout": "C:\\Users\\samuel\\AppData\\Local\\Jarvis\\data DESKTOP-5H5I1G7\\CodexSandboxUsers:(I)(OI)(CI)(RX)\n                                          S-1-15-3-2968813833-811790644-2202111208-3784096404-1081847329-2708967783-1438471679:(I)(F)\n                                          S-1-15-3-2968813833-811790644-2202111208-3784096404-1081847329-2708967783-1438471679:(I)(OI)(CI)(IO)(F)\n                                          DESKTOP-5H5I1G7\\samuel:(I)(OI)(CI)(F)\n                                          NT AUTHORITY\\SYSTEM:(I)(OI)(CI)(F)\n                                          BUILTIN\\Administrators:(I)(OI)(CI)(F)\n\n已成功处理 1 个文件; 处理 0 个文件时失败\r\n",
+            "stderr": ""
+          }
+        }
+      },
+      {
+        "id": "path.artifacts",
+        "status": "pass",
+        "message": "路径类型与权限元数据已读取；未验证隔离身份的有效访问权。",
+        "evidence": {
+          "path": "C:\\Users\\samuel\\AppData\\Local\\Jarvis\\data\\artifacts",
+          "effective_permissions": "not_verified",
+          "mode": "0o40777",
+          "uid": 0,
+          "gid": 0,
+          "acl": {
+            "exit_code": 0,
+            "stdout": "C:\\Users\\samuel\\AppData\\Local\\Jarvis\\data\\artifacts DESKTOP-5H5I1G7\\CodexSandboxUsers:(I)(OI)(CI)(RX)\n                                                    S-1-15-3-2968813833-811790644-2202111208-3784096404-1081847329-2708967783-1438471679:(I)(F)\n                                                    S-1-15-3-2968813833-811790644-2202111208-3784096404-1081847329-2708967783-1438471679:(I)(OI)(CI)(IO)(F)\n                                                    DESKTOP-5H5I1G7\\samuel:(I)(OI)(CI)(F)\n                                                    NT AUTHORITY\\SYSTEM:(I)(OI)(CI)(F)\n                                                    BUILTIN\\Administrators:(I)(OI)(CI)(F)\n\n已成功处理 1 个文件; 处理 0 个文件时失败\r\n",
+            "stderr": ""
+          }
+        }
+      },
+      {
+        "id": "path.control",
+        "status": "pass",
+        "message": "路径类型与权限元数据已读取；未验证隔离身份的有效访问权。",
+        "evidence": {
+          "path": "C:\\Users\\samuel\\AppData\\Local\\Jarvis\\data\\control.db",
+          "effective_permissions": "not_verified",
+          "mode": "0o100666",
+          "uid": 0,
+          "gid": 0,
+          "acl": {
+            "exit_code": 0,
+            "stdout": "C:\\Users\\samuel\\AppData\\Local\\Jarvis\\data\\control.db DESKTOP-5H5I1G7\\CodexSandboxUsers:(I)(RX)\n                                                     S-1-15-3-2968813833-811790644-2202111208-3784096404-1081847329-2708967783-1438471679:(I)(F)\n                                                     DESKTOP-5H5I1G7\\samuel:(I)(F)\n                                                     NT AUTHORITY\\SYSTEM:(I)(F)\n                                                     BUILTIN\\Administrators:(I)(F)\n\n已成功处理 1 个文件; 处理 0 个文件时失败\r\n",
+            "stderr": ""
+          }
+        }
+      },
+      {
+        "id": "control.live_state",
+        "status": "unknown",
+        "message": "预检不读取账本或恢复任务；锁存状态未评估。",
+        "evidence": {
+          "reason": "No live SQLite connection or status() call"
+        }
+      },
+      {
+        "id": "port.18180",
+        "status": "warn",
+        "message": "端口已占用，可能是已启动的服务；未认定服务身份。",
+        "evidence": {
+          "host": "127.0.0.1",
+          "port": 18180,
+          "observation": "occupied",
+          "error": "OSError",
+          "errno": 10048
+        }
+      },
+      {
+        "id": "port.18181",
+        "status": "warn",
+        "message": "端口已占用，可能是已启动的服务；未认定服务身份。",
+        "evidence": {
+          "host": "127.0.0.1",
+          "port": 18181,
+          "observation": "occupied",
+          "error": "OSError",
+          "errno": 10048
+        }
+      },
+      {
+        "id": "worker.bundle",
+        "status": "pass",
+        "message": "固定 Worker 运行包摘要匹配；本次未启动 Worker 或修改 ACL。",
+        "evidence": {
+          "path": "C:\\Users\\samuel\\.jarvis\\worker-runtimes\\worker-python-3.13.0-v1",
+          "backend": "windows-lpac-job",
+          "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+          "runtime_bytes": 22904399
+        }
+      },
+      {
+        "id": "boundary.source_storage",
+        "status": "fail",
+        "message": "当前源码卷不能提供所需的 Windows ACL 保护。",
+        "evidence": {
+          "error": "worker_storage_unsupported"
+        }
+      },
+      {
+        "id": "roles.declaration",
+        "status": "warn",
+        "message": "角色与资源矩阵是实现声明，不是部署或有效权限证明。",
+        "evidence": {
+          "declaration": {
+            "schema_version": "1.0.0",
+            "scope": "Current implementation declarations, not deployment evidence or authorization",
+            "roles": [
+              {
+                "role": "preflight_cli",
+                "entry": "apps/cli/main.py preflight",
+                "access": {
+                  "source": "read selected files",
+                  "data": "metadata only",
+                  "credentials": "none",
+                  "network": "loopback bind only"
+                }
+              },
+              {
+                "role": "business_host",
+                "entry": "runtime/node-host/jarvis_core/service.py",
+                "boundary": "same OS user as caller",
+                "access": {
+                  "ledger": "read/write",
+                  "sample_input": "metadata read",
+                  "artifacts": "write"
+                }
+              },
+              {
+                "role": "inventory_worker",
+                "entry": "runtime/worker-host/worker.py",
+                "boundary": "Windows LPAC and kill-on-close Job; fixed metadata operation only",
+                "access": {
+                  "declared_input": "read-only staged metadata JSON",
+                  "declared_output": "bounded inherited pipe; Host validates and commits",
+                  "network": "no network capability",
+                  "credentials": "not staged",
+                  "capabilities": [
+                    "registryRead"
+                  ],
+                  "runtime": "pinned small Python bundle on ACL-capable volume",
+                  "limits": "one process, 256 MiB commit, Host-enforced CPU/wall deadlines"
+                }
+              },
+              {
+                "role": "model_adapter",
+                "entry": "adapters/models/provider-native/jarvis_models/gateway.py",
+                "boundary": "caller OS user",
+                "access": {
+                  "credentials": "DPAPI vault when cloud requests require it",
+                  "network": "configured provider"
+                }
+              },
+              {
+                "role": "control_store",
+                "entry": "runtime/sovereignty-supervisor/jarvis_safety/store.py",
+                "boundary": "separate SQLite store and persistent stop markers; same OS user, no protected daemon"
+              },
+              {
+                "role": "recovery_cli",
+                "entry": "runtime/recovery-cli/main.py",
+                "boundary": "independent CLI process; pre-enrolled Ed25519 public key; owner private key is external and encrypted; OS identity separation pending"
+              }
+            ]
+          },
+          "source": "config/runtime-boundaries.json"
+        }
+      },
+      {
+        "id": "boundary.supervisor",
+        "status": "fail",
+        "message": "独立停止存储/入口已实现；受保护 OS 监督及强制进程停止仍未实现。",
+        "evidence": {
+          "evidence_level": "implementation_gap"
+        }
+      },
+      {
+        "id": "boundary.recovery",
+        "status": "fail",
+        "message": "签名离线恢复已实现；本次不核验主人密钥登记，独立权限边界仍未完成。",
+        "evidence": {
+          "evidence_level": "implementation_gap"
+        }
+      },
+      {
+        "id": "boundary.worker",
+        "status": "fail",
+        "message": "固定元数据 Worker 已实现 LPAC/Job；通用工具执行、受保护 Host 与全平台部署验收仍未完成。",
+        "evidence": {
+          "evidence_level": "implementation_gap"
+        }
+      }
+    ],
+    "limitations": [
+      "Point-in-time diagnostic; not an admission token or a full K1 gate pass.",
+      "ACL metadata is not an effective-access test by an isolated worker.",
+      "Live stop/task state and existing service ownership were not inspected.",
+      "No file writes, model calls, service starts or permission changes; ports are briefly bound and closed."
+    ]
+  },
+  "source_sha256": {
+    "README.md": "81018718ffaadf61d830f2ba82eb9ca147bd512940e48cc7ca75803805b80968",
+    "AGENTS.md": "20b7b4c27e4344c409fac3f59056266c086350bf6034e2e13edeafec345c501e",
+    "pyproject.toml": "cc1eeb33462a6670bfe1ba401c4b105c58695797166fd1eaa2b11c7b49d698c5",
+    "uv.lock": "21d8496e678d58f037e5c41882a90b6640a9db99ee5f7f375cead82d0aedcf46",
+    "jarvis.ps1": "347f21192d63a9d2e0debfe85edd45713a5fdbcb448f412b13ef1c742e5893ca",
+    "jarvis-control.ps1": "4ea81ad0c21d8a8d43bcd388f2556648b3652b6d4a5a8fc4aeba2f2a9a0da794",
+    "docs/MAINTENANCE.md": "7595b2259c82b073ccb501d8d4683c68bb9838f96c53bcf08e51b4447e705c02",
+    "docs/product-requirements.md": "01455fecd0c9e3e53608ac1815066db9935883685066e00c31aa2a4246d36c57",
+    "docs/core-bootstrap.md": "c2a8aa765e1988cdffa0b61c1ce379650aa876b175cf23691c306739f9c5c909",
+    "docs/architecture.md": "54a6bc0b26c836834334e9cb4e4d3b3bc26e424d508bd8b0163ab98ac842128d",
+    "docs/contracts.md": "4c4caa2ab78751b715fc1f33d9d7db49b94f2d00a60a18b149434f60546cfcc6",
+    "docs/federation.md": "93d90fb9cdde716d8536ac8c7285daf787959ef7b1159e266481dc99ba437577",
+    "docs/models-offline.md": "49be18a0a0f414497f6c8043b5adc9b8637aea8f1961ec5832c7f2de7811fbf1",
+    "docs/interaction-persona.md": "b5e718b7b6bd0c963dd209ef9f0fe9bb6f5cf668865c5de69f786c14ca7e0493",
+    "docs/tasks-agents.md": "af29bf0731cf454c38c7b4ffe0f7795250c2c524c36a9ebb3567bb92dcb01bc1",
+    "docs/knowledge-learning.md": "1f6d8edf14c3cd3d46beaf914cf1c616c6ea7460b8c423d41911da3f18890b48",
+    "docs/simulation.md": "04357da82b85d80550bf3b01890768c89f82e9eb5b8fbef809ad2e13c6c34b8d",
+    "docs/evolution-release.md": "a699534be8a0ee19751bdb2bef71e202911d96698d54536088c59d54261e327f",
+    "docs/toolchains.md": "1eb77fe036f2afb5b8056dfd102fa91c95e50f050c2fa232fafd56d61e601dc5",
+    "docs/security-sovereignty.md": "fe52928d6552f6ee1d04596a6ea1e7c67a36318d51880c0310c04cbe1b8d99d2",
+    "docs/stack-project-layout.md": "2ca8cb21a29a8dfb05c930813ba4b22d2f5d657895f3a76486c559ad67cb0e4f",
+    "docs/health-maintenance.md": "6c1780d92cd97cc292e9f7f42f3d403912c10487a21a8fefe123bc1e3665666d",
+    "docs/delivery-validation.md": "e3ab2952c99c43a9a90a67071d46484c2cb118c5e3fc6a466abc0af6721239fc",
+    "docs/decisions-review.md": "0d607c75c1dfea1a7da7c0effcfda06530b4bfe5ffe44e989d63e03b1880ae55",
+    "docs/references.md": "1a81efdbf23375cfe188aa8b2b24416f2e1a5cb4fd9fb04b95dc72a035d7ef7c",
+    "docs/README.md": "78b75d5bc7ba9a2af232dd234578d500fcbb241e108450c22f7390f5db461740",
+    "docs/architecture-atlas.md": "0b01692a2c6753f21b627b30bdfdb64bf5d502f5800983ee004963c11b54744a",
+    "docs/manifest.json": "dcf4d300cf3d77b350e0150e2c6da9157969e3fc93ff28731e54404552a7573d",
+    "docs/diagrams/overview.mmd": "f8b2c5d1b3ef719e514b9e674f3e22373f5911df178a42634f1cd968f1b9decc",
+    "docs/diagrams/system-boundaries.mmd": "ec4313793831a464b9f2085d17b81d00e1ed54db4c330d6731a27cfcd5f840cf",
+    "docs/diagrams/windows-deployment.mmd": "c0944a76ba661adb3df5435c201548ac9f74c38030f8e42b8dd8bc71137978ca",
+    "docs/diagrams/federation-deployment.mmd": "91a023abfee7f071db3b8b3dae2abefc5abdb272b099edc37311a09bc2c3c447",
+    "docs/diagrams/state-ownership.mmd": "04d37ba640d45e3c31773185e7e1623a0d8b9bfe4ae6cd4b6c59b874a5f4b3e9",
+    "docs/diagrams/build-and-release.mmd": "bf09533ac39e15c4806f7e69e13c5140c331e2b79f4255527acf53517e599b93",
+    "docs/diagrams/seed-core.mmd": "476571609db2af97f5c0c6530c8935269d69f0cd9cd245bb56e3d1edf53b1181",
+    "docs/diagrams/health-and-repair.mmd": "cba919957bf125747eb22a8745bb7d72c8b8683c0aa2d6cda5cffa6a478b5e95",
+    "docs/diagrams/federation-reconnect.mmd": "a724de1993222fca9840c7b21bd81d70e5fa37280951e4bc7d44788b1a9ba16c",
+    "docs/diagrams/model-routing.mmd": "0ebd3d28dd12bdde1d31b4fc59522a718bfb5fd36f415bca00dcd09655d99422",
+    "docs/diagrams/task-lifecycle.mmd": "f79667dc3676876ffebff4e4ba8b7ea8876fa6e9fe99cd4821cc284033230ff9",
+    "docs/diagrams/evolution-pipeline.mmd": "028cfc0d020a29a5250848bd3150ed2b2a0ff3f36624b4354b0c44cbf5eac197",
+    "docs/diagrams/parallel-dialogue-task.mmd": "2dba3871c67a4eb2eb729ed2d67b972a6cbf5fbc5a67f3787aba03db9c18d0e7",
+    "docs/diagrams/offline-task-flow.mmd": "05c6ff7ec5e31b42c631065d0e13a7044eee6f9a88c3d2e814406997e5aa65a1",
+    "docs/diagrams/agent-team-lifecycle.mmd": "1fc190a8f3d9f0a011662e1dae62cf1b672c7c085a02795af8f48a455137df80",
+    "docs/diagrams/knowledge-learning-flow.mmd": "6876344105d8d116dadd7bad7b887605b3fc77f2b220906c3f76928b08dbcc96",
+    "docs/diagrams/network-recovery.mmd": "1ddd2ce0c11674582a50ced4a93cf31a67cd84b65005d09d0e7d72c4f5480178",
+    "docs/diagrams/safety-shutdown.mmd": "4475dac219bb7dd273b6d022ce71c23d9b600c15d738047d7d03c142ea58f235",
+    "docs/diagrams/memory-local-federation.mmd": "11acba620a5165103a84f9adcb3c23d7b6a89d1747992264155479d651aeeaf4",
+    "docs/diagrams/render-validation.json": "4499a6c2fa681d1070e30aead7a6e79015dc65ffd9c53c22d7536deedfe5d521",
+    "tools/check_docs.py": "c6bd935c158dc060703901fe670a064d30d5223426d7bc62f3e52ec7e640ae54",
+    "tools/package.json": "669963bb089dc027093541e6d4ea74caec594ec63e5c1fe223de597ccc2b1c02",
+    "tools/model_probe.py": "88ad516eadc92bd556ba597b8ef11bc162a243957ec975b243603d57508a4924",
+    "tools/manage_models.py": "5f8cc6cce6c89d24431c27cbd54a1be93d4a8331edc8ef656a7dbdb96afeec10",
+    "tools/check_seed.py": "a9bd287f2b8c9369ca766b33903936b9067098481e243186b95d693b2ae36f5c",
+    "tools/speech_probe.py": "6f7e01bbc75edf46b49c4a80470dc74ace3f3ea1f301012d47ee9149a8b14946",
+    "tools/local_llm.py": "267a571dea347919424bf2d81eaabef4d4b46cb41363b5e59a1c36a8849eea81",
+    "tools/verify_baseline.py": "bfc85e5a533e1a6a3f60a1aa002f1b72b57c3d48058d696549e55903afcb0fbf",
+    "tools/probe_memory_fts.py": "e485dfd3e9854aba7c38cf0f433cfdfdb56b59e8cf56d7512c24403ed140d4cb",
+    "tools/sync_doc_navigation.py": "ec229dd0bfbc09faffac3125ae8c1a941ea56cd10501059929dbfc6ddf4d3fb6",
+    "tools/control_probe.py": "5efe35bd54e33b3895178e00763b3bc9152ffb8df3f998daed5049dd921b8520",
+    "tools/prepare_worker.py": "52be06d786a40511eba9eaee40b979b3f183c46d768da232362ea08557b40604",
+    "tools/worker_probe.py": "332e49f48e06ea03ab09b78a1890564e23f55f3255177c8041e13e492209d172",
+    "adapters/models/provider-native/jarvis_models/__init__.py": "540da8307103109969366729f5a547c81bc88b269a7f723a476c1a753c856d6f",
+    "adapters/models/provider-native/jarvis_models/vault.py": "3d61692b5301561b8d2be4f1f1f827c5330b1991af457b84cfd306b544989200",
+    "adapters/models/provider-native/jarvis_models/gateway.py": "90c93320bf208571dccc2f0a68169972301bd7f33bb6c06e4e12fa41c6cdab34",
+    "adapters/models/provider-native/jarvis_models/catalog.py": "85355cbbb128b3339f01eea95c6f842baf7ccaf266829cabf1401c5ab0284a53",
+    "config/runtime-boundaries.json": "905ff8b926c90491bbe07cb38b04e54682a1e165c12df239146d7aed3170c0fd",
+    "config/worker-profile.json": "10580123e6a84a0b68318a9732b396982978e68e75a25b792935e5c79283ec2b",
+    "config/model-profiles/providers.json": "75c4694038f0c382a533c5acd8a208ce2d0b1f52aeae96f7114ed404edf92bc3",
+    "config/model-profiles/local-candidates.json": "8c453597ff55573955798f9be504ff479d356967ed5a4ce820178b761d4ed5df",
+    "runtime/node-host/jarvis_core/__init__.py": "dfd0a52a2a58cb381aef7e542ca9c60265c7951dd7b73455a2f7f5e88952427d",
+    "runtime/node-host/jarvis_core/policy.py": "1065143f3d1d6b0af63b002903241161b464199a3238755a9762b2a762d8106e",
+    "runtime/node-host/jarvis_core/ledger.py": "1388daa03c3b42f490b0adc853b23685abfc422fb56cfd26776330b4033805dc",
+    "runtime/node-host/jarvis_core/service.py": "6f51b743537d8f3cb4d15ed49235f1021431a43c10c9bb0d1a667c063d33ba36",
+    "runtime/node-host/jarvis_core/chat.py": "7868240043aab4b542d7b299e6005ad2d77da7f347bf8281ebfa12376f999a93",
+    "runtime/node-host/jarvis_core/preflight.py": "ddeab7f47ab5c9be67209e34a89a82bd8a5f6a12fd380b4b3170675c9eb804c4",
+    "runtime/node-host/jarvis_core/control.py": "67062072d97748fa83fad2d23637c231b542af4b16650568f17b6daec5e24389",
+    "runtime/node-host/jarvis_core/worker.py": "bdbfbe00530a815895decf2a2e3532c8af5787fc0b26b210819e915e617e52f6",
+    "runtime/sovereignty-supervisor/jarvis_safety/__init__.py": "93dac60d0585490eb7451c692b7d3aa1a88056d10b0c99570dae6bf5b61b686a",
+    "runtime/sovereignty-supervisor/jarvis_safety/store.py": "eee573f1119b57c317dbfbcced11cd1f4d45439341de5703e0ebc424668e1331",
+    "runtime/recovery-cli/main.py": "adb274865ddc4d95b3913432610f41669179fd4655a59500a5d31d21d116f65f",
+    "runtime/worker-host/worker.py": "8ffd5d7dec1ea14b6f74bf2b1eef9f066424f1d86c1074d779b5f894dcdabe13",
+    "runtime/worker-host/jarvis_worker/__init__.py": "4b651d6ced11629e967682d8f43b2ec2005662feb033b0b36f4176ebfca8bb64",
+    "runtime/worker-host/jarvis_worker/windows.py": "317ce5cba77da00c5a2f420985b965042908efbcdbd6865ca68116a79a9f71ed",
+    "tests/test_models.py": "47befc7b38ded8828f2233fb148c885a8b211332da37d3759b890fdb7b0eda0e",
+    "tests/test_core.py": "320f6d3e8fcdacc988fbc34c9302e4ff12a29e33a512db6982ef26e03883165a",
+    "tests/test_seed.py": "cff5748ace20be320c0fffa55bad4f38abb13637ed467bf5433bfc5f3e2a525c",
+    "tests/test_diagnostics.py": "6cc41aa7473c20b7e7c9a86672be9317b1843469abea462d66323cdce4540d5b",
+    "tests/test_web.py": "3c3cab0f8103a5d8c9c29ea6fc2609fbb50cbe18cf606e1e42d739a560d0e955",
+    "tests/test_chat.py": "09335936d4c745e69422e93314431bc8d8066d372369ac3e76044424b8f0b5f1",
+    "tests/test_model_catalog.py": "d2d438cd7d1cd312b93da780ba5e55899a52fabc367741c1f0604b4aa04f57ae",
+    "tests/test_doc_navigation.py": "4ae73687e8c1c875b657c51ba85e894e91ea7705974876abfc41d964d60d4bff",
+    "tests/test_preflight.py": "da780aad98c838e53ffac1510bee294638e9491a69ab9585ea28e2670301a7d6",
+    "tests/test_control.py": "a6c5a29c402d588fcc433fa505688601c832bd9ae0c9e9c5cab0281c91833b02",
+    "tests/test_worker.py": "b77a7568087e346427f75b7611c5ffed251e3fca76fb9d7b5d3af43e4bc06d86",
+    "tests/fixtures/contracts/task.valid.json": "abb99190b9ae587bb9d9c7a8847f23e830e22e1b0745f5bbe6a59a77d70a7c76",
+    "tests/fixtures/contracts/task.invalid.json": "4ed36b65d978abb8c7acb6e67b353cc74c776274749298441aa73748a574d173",
+    "tests/fixtures/contracts/action.valid.json": "4474dca86ef23d43fa0a1071b399e9af9f82db20bffeb6817ab867f746f3cb4b",
+    "tests/fixtures/contracts/action.invalid.json": "a7aff363f89503a9a7506356ed07207df3416b5657e0eb686e8633424c6ee323",
+    "tests/fixtures/contracts/capability.valid.json": "ae8c2fc5861d03f523957452a3cbc06846c6964e088101a3546662230b38766f",
+    "tests/fixtures/contracts/capability.invalid.json": "c37f2bf090f5dc3a5f4df3897478675a647664b7fb68819b8f53987c9604df65",
+    "tests/fixtures/contracts/artifact.valid.json": "95dfd2ac0f1419ba80b4c1bd16265cd70c55e829cb4cb7df337a5eeccd2f06c1",
+    "tests/fixtures/contracts/artifact.invalid.json": "9f424ceb5011f1faaa030ceecefea174321d748323fb180271919fa9e5f1922c",
+    "tests/fixtures/contracts/module.valid.json": "4014ba0c3d8237219b72a0fcb4e52d19fc3c47639e4d56ad7abe3819b3570758",
+    "tests/fixtures/contracts/module.invalid.json": "6003549dbdb51ce9a9d5ae484c4b35c549c0228236ba996e283af7fa5d8750d5",
+    "tests/fixtures/contracts/build-profile.valid.json": "44ee77da1505a6d20b35dc36677076f06ad7e05785fb2303347e598d5c70fca0",
+    "tests/fixtures/contracts/build-profile.invalid.json": "c7ed12d0e46d397384dd941de09dcf31cdcacd8b1e2f6e440c487caa8386e3a7",
+    "tests/fixtures/contracts/cases.json": "2f8167f5fba18a24078411c61b2f45c086dc76a4ae28adb61ede3f68cfe14a5e",
+    "tests/fixtures/workspace/hello.txt": "1989e3e4546269bc7fa3f2afa82da00f6fb5d79bc3f97a01998ca36fb476263d",
+    "tests/fixtures/workspace/中文样例.txt": "0067290cf6d5bcc813ef02d3d6030634efcb54d6a41244504ab7101c142c5222",
+    "tests/fixtures/preflight/valid.json": "2a3db04cd4a6c8c3029b7b2fefd289e2f658954917cab47b99346083e01030e7",
+    "tests/fixtures/preflight/invalid.json": "2a5c7f50c7d4cb51c8be2d51d4a5acb852eff0cfe0b3730f346aaab1d05309b8",
+    "contracts/schemas/task.schema.json": "227cbb75a62797a7310c622a63155bcb5e45495ffbc578cb76e11ccda81e35d2",
+    "contracts/schemas/action.schema.json": "e1b4b61aee7f78970fc88d2c343fe0f5e6b771706eff3b71e1b60d032ca40393",
+    "contracts/schemas/capability.schema.json": "8f60fa34be14175342c93a7707ea91a84afe38382ef98fa2456fe01ef6fb2c05",
+    "contracts/schemas/artifact.schema.json": "f097532556e7072e6d914fea345e7e7de77d949c443d1b5daacef7dbc4c10149",
+    "contracts/schemas/module.schema.json": "7d98541de6ade3ae6a3d6fa04a7e4ecfe281efe9a5b3419b4abd406c1fe27233",
+    "contracts/schemas/build-profile.schema.json": "4e169c2a0c420ce74e2878804bb9585fe2fb8ff527ce7ce68c97578a2d33798e",
+    "contracts/schemas/preflight.schema.json": "f3f55ea39ce07acfc867fa15e7ecd00465e49773f95c30c133962273700be6ce",
+    "contracts/schemas/recovery.schema.json": "f04bf37985fe22bfce8ddfe712607b8fa1c92179027812814a10ce3d0a1eb756",
+    "seed/skills/catalog.json": "f852b36838a2f1d36677305e1bfa52748c9d70cab9b9030fed8991da92d9a12d",
+    "seed/rules/baseline.json": "00f2178f677ef3c2ed8b449cfe1ab20437bcecc1a000ed68f7bcd54c4c2a94aa",
+    "seed/knowledge/bootstrap.json": "be89ee9b849ea35a774637ffdb9b8945195b03293c38a84a542a9b8fa9efe7e3",
+    "seed/system-manifest/seed-bundle.json": "45a267b0ddf8068390049fd29b8e81ec0d2e466cc7780a2194285906d7c85bd7",
+    "apps/cli/main.py": "6103c2e9da6e1b95357901e0a9296cfe5cbd782b15245c86f1c5c58b26a8fa95",
+    "apps/web/server.py": "ec493248487e0c56edff0de9cc66a093d91d4c147588a00b82e522c57af41aa7",
+    "apps/web/index.html": "520491e127e399d28b3cbfc4e59766d4416efc8281237c259b443907365eefc6",
+    "evals/reports/k0-baseline.json": "70f0abd3cf7e1edec1b531c6de151833125237f8234b2eec1aa1344f42453081",
+    "evals/reports/chat-baseline.json": "3bacc6707bf80611125699c0fe391844a180d0ea174f8cac6f2f51b5cf9e13f1",
+    "evals/reports/model-catalog-baseline.json": "12b6be6bda253b44e891de8163e3560c07cf13b5bc6aacf7358c67b4224507fe",
+    "evals/reports/web-workspace-baseline.json": "fd52a8d388b4f6284d9a36aa83dea3355a57bb25a661f94e65b9d4ad820a49e6",
+    "evals/reports/google-models-baseline.json": "500cf0ef776d3e30b4170140daf5691c532d5dd77b522558962f85efb3a490e9",
+    "evals/reports/memory-fts-probe.json": "2da34317839dd013293e199d19cd8b0cd1b7cf90f4413f6982af4e3d658b3168",
+    "evals/reports/k1-preflight-baseline.json": "ee080931fb494147becb6813ac6215d6cee95764898fd4dbd020f993a1528005",
+    "evals/reports/k1-control-baseline.json": "f48be82f7a6d4dd910e71ec880a6e499056ce493d73ea3825c3102f02061c00b",
+    ".vscode/settings.json": "2a7d8eb2fd2fdbef7e2290c96ef8efe521529a52be57e8f8dcb99dd6d9ed76b0"
+  },
+  "limitations": [
+    "K1 and K2 gates incomplete; fixed metadata Worker uses LPAC/Job; Host and supervisor remain under caller identity; no autonomous code release.",
+    "Host CPU/wall polling requires a responsive Host; persistent stages/profiles after a crash need scoped recovery cleanup. Source on exFAT is not ACL protected.",
+    "One Windows symlink test may be skipped when OS privilege is unavailable; inspect unittest output.",
+    "Voiceprint owner enrollment and anti-spoof evaluation not performed; speech smoke is not an accuracy benchmark.",
+    "Older UNKNOWN outcomes remain in the journal; later successful requests do not resolve their billing status.",
+    "Model download bytes are not peak RAM; true network-disconnected install and GPU inference not tested.",
+    "Model probes predate this capture; source hashes identify the current checked source, not an assertion of cloud retest."
+  ],
+  "post_validation": {
+    "captured_at": "2026-10-15T10:20:22.842938+00:00",
+    "runtime_sources_unchanged_since_tests": true,
+    "updated_document_paths": [
+      "docs/contracts.md",
+      "docs/security-sovereignty.md",
+      "docs/delivery-validation.md",
+      "docs/README.md",
+      "docs/manifest.json"
+    ],
+    "docs_check": {
+      "exit_code": 0,
+      "stdout": "OK documents=23 diagrams=19 artifacts=38 errors=0\n"
+    }
+  },
+  "documentation_refresh": {
+    "captured_at": "2026-10-15T10:22:22.070092+00:00",
+    "scope": "Computer Use research/design only; original runtime checks and fingerprints retained",
+    "source_sha256": {
+      "docs/architecture.md": "921b12b8497f20f1d0de82c27e0e361cf79e1076aba5a29a609274a1d4227925",
+      "docs/models-offline.md": "b38826d77299f2de2f6cace1ad42a0e2de64029bedace0ed7e4690c396596469",
+      "docs/references.md": "43412dc444bc342bd9457cfc0a78d886ddbb2b5d755c98c224f5d656e1100444",
+      "docs/manifest.json": "7a672c9b0168f1f2a5e118e6736a2eb92df18d47fca8721844b97a2a5688b49b"
+    },
+    "check": {
+      "command": [
+        "python",
+        "tools/check_docs.py",
+        "--root",
+        "."
+      ],
+      "exit_code": 0,
+      "stdout": "OK documents=23 diagrams=19 artifacts=38 errors=0\n"
+    }
+  }
+}

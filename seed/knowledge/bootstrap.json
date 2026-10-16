@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0.0",
+  "knowledge_id": "jarvis.k0.knowledge",
+  "version": "1.0.0",
+  "authority": "reference_only",
+  "records": [
+    {
+      "record_id": "project.definition",
+      "kind": "original_evidence",
+      "source": "docs/product-requirements.md",
+      "version": "1.0.0",
+      "evidence_ref": "docs/product-requirements.md",
+      "validity": "design_baseline",
+      "scope": "project",
+      "owner": "project",
+      "privacy": "local_only",
+      "content": "Jarvis 的目标是离线可独立运行、联网协同并经验证扩展能力；种子资产不代表完整系统已实现。"
+    },
+    {
+      "record_id": "core.sequence",
+      "kind": "original_evidence",
+      "source": "docs/core-bootstrap.md#bootstrap-5",
+      "version": "1.0.0",
+      "evidence_ref": "docs/core-bootstrap.md#bootstrap-5",
+      "validity": "design_baseline",
+      "scope": "project",
+      "owner": "project",
+      "privacy": "local_only",
+      "content": "K0—K6 是唯一实施顺序；先建立任务、动作、受限能力、评估与恢复闭环。"
+    },
+    {
+      "record_id": "contracts.lifecycle",
+      "kind": "original_evidence",
+      "source": "docs/contracts.md#interfaces-2",
+      "version": "1.0.0",
+      "evidence_ref": "docs/contracts.md#interfaces-2",
+      "validity": "design_baseline",
+      "scope": "project",
+      "owner": "project",
+      "privacy": "local_only",
+      "content": "动作在发出前持久记录 DISPATCHING；结果不明为 UNKNOWN，必须对账。"
+    },
+    {
+      "record_id": "security.boundary",
+      "kind": "original_evidence",
+      "source": "docs/security-sovereignty.md#product-definition-6",
+      "version": "1.0.0",
+      "evidence_ref": "docs/security-sovereignty.md#product-definition-6",
+      "validity": "design_baseline",
+      "scope": "project",
+      "owner": "project",
+      "privacy": "local_only",
+      "content": "G0 是最高规范。本种子不证明模型语义安全或 OS 隔离，需要具体实现与独立验收。"
+    },
+    {
+      "record_id": "skills.limit",
+      "kind": "original_evidence",
+      "source": "docs/core-bootstrap.md#system-health-1",
+      "version": "1.0.0",
+      "evidence_ref": "docs/core-bootstrap.md#system-health-1",
+      "validity": "design_baseline",
+      "scope": "project",
+      "owner": "project",
+      "privacy": "local_only",
+      "content": "首期技能是状态、样例目录元数据与产物输出；候选构建保留为 planned。"
+    }
+  ]
+}

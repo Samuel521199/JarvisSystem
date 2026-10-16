@@ -1,0 +1,28 @@
+# Local credentials and runtime data are outside the source tree.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.dpapi
+credentials*.json
+*service-account*.json
+*.sqlite*
+*.db
+*.db-*
+__pycache__/
+*.py[cod]
+.venv/
+node_modules/
+.pytest_cache/
+.coverage
+dist/
+build/
+*.egg-info/
+*.partial
+*.gguf
+*.onnx
+*.wav
+# Rebuildable local runtime archives; source, diagrams and evidence remain tracked.
+/artifacts/releases/*.zip
+*.log

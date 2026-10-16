@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0.0",
+  "build_profile_id": "python.seed.planned",
+  "version": "1.0.0",
+  "status": "planned",
+  "language": "python",
+  "toolchain_ref": "toolchain.python.planned",
+  "target": {
+    "os": "windows",
+    "arch": "x86_64",
+    "abi": "cpython"
+  },
+  "commands": {
+    "build": [
+      [
+        "python",
+        "-m",
+        "build",
+        "--no-isolation"
+      ]
+    ],
+    "test": [
+      [
+        "python",
+        "-m",
+        "unittest"
+      ]
+    ]
+  },
+  "dependency_lock_refs": [
+    "toolchain-lock:planned"
+  ],
+  "network_mode": "denied",
+  "resource_limits": {
+    "memory_mb": 256,
+    "timeout_seconds": 60,
+    "max_processes": 2
+  },
+  "outputs": [
+    "dist/example.whl"
+  ],
+  "offline_verified": false,
+  "target_verified": false
+}

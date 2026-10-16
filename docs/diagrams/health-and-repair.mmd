@@ -1,0 +1,30 @@
+flowchart TB
+    Evidence["运行指标、任务结果、变更与知识证据"]
+    Check["健康检查：规则、基线与完整性"]
+    Latch{"G0 违规或失去可信控制？"}
+    Stop["独立锁存停止：仅保留固定安全功能"]
+    Classify["定位影响范围：生成 HealthReport"]
+    Known{"存在已验证的恢复配方？"}
+    Repair["普通故障：限额执行配方"]
+    Candidate["代码缺陷：隔离修复候选"]
+    Verify["独立验证：结构、回归、数据与恢复"]
+    Result{"满足准入与实际健康条件？"}
+    Adopt["逐步采用并观察"]
+    Fallback["兼容回退、降级或等待维护"]
+    Evidence --> Check
+    Check --> Latch
+    Latch -->|"是"| Stop
+    Latch -->|"否"| Classify
+    Classify -->|"需要处理"| Known
+    Classify -->|"正常或无需改动"| Observe["继续观察或等待"]
+    Observe --> Evidence
+    Known -->|"是"| Repair
+    Known -->|"无配方且不宜自动改代码"| Fallback
+    Known -->|"否且需要改代码"| Candidate
+    Repair --> Verify
+    Candidate --> Verify
+    Verify --> Result
+    Result -->|"是"| Adopt
+    Result -->|"否或超额"| Fallback
+    Adopt --> Evidence
+    Fallback --> Evidence

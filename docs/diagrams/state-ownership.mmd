@@ -1,0 +1,18 @@
+flowchart LR
+    Worker["Agent / Worker：提出意图"]
+    Task["Task Runtime：唯一调度写入口"]
+    Local[("control.db：任务、预算预留、动作意图、outbox")]
+    Dispatch["Action Dispatcher：发送与查询回执"]
+    Device["执行端：去重、代际检查、实际效果"]
+    Memory["Memory API：来源、事实、纠错"]
+    MemDB[("memory.db 与派生索引")]
+    Peer["同步接收：inbox 去重与冲突对账"]
+    Worker --> Task
+    Task --> Local
+    Local --> Dispatch
+    Dispatch <--> Device
+    Dispatch --> Task
+    Worker --> Memory
+    Memory --> MemDB
+    Peer --> Task
+    Peer --> Memory

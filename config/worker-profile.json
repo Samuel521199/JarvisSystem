@@ -1,0 +1,6 @@
+{
+  "schema_version": 1,
+  "backend": "windows-lpac-job",
+  "runtime_directory": "worker-python-3.13.0-v1",
+  "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02"
+}

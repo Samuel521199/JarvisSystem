@@ -1,0 +1,10 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>Jarvis Computer Use 演示</title>
+<style>body{font:18px system-ui;background:#edf2f7;color:#162b42;max-width:650px;margin:70px auto}main{background:white;padding:36px;border-radius:20px;box-shadow:0 12px 35px #102d4514}label{display:block;margin:22px 0}input[type=text],select{display:block;margin-top:8px;font:inherit;padding:10px;width:90%;border:1px solid #b3c6d8;border-radius:8px}button{background:#162b42;color:white;border:0;border-radius:9px;font:inherit;padding:12px 30px}p[role=status]{min-height:50px;color:#176745}small{color:#536b80}</style>
+<main><small>JARVIS · 独立浏览器模块</small><h1>让 Jarvis 完成一次真实界面操作</h1>
+<p>本页为离线合成演示，没有提交到任何外部服务。</p>
+<label>项目名称<input type="text" id="project" autocomplete="off"></label>
+<label>类别<select id="category"><option value="general">一般</option><option value="research">研究</option></select></label>
+<label><input type="checkbox" id="enabled">启用</label><button type="button" id="save">保存</button>
+<p role="status" aria-live="polite">等待操作</p></main>
+<script>document.querySelector('#save').onclick=()=>{document.querySelector('[role=status]').textContent='已保存：'+document.querySelector('#project').value+' / '+document.querySelector('#category').value+' / '+(document.querySelector('#enabled').checked?'enabled':'disabled');};</script>
+</html>

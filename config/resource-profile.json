@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "foreground_reserve_mib": 1024,
+  "resume_margin_mib": 256,
+  "recovery_seconds": 2,
+  "retry_seconds": 2,
+  "task_memory_mib": {
+    "filesystem.read_sample.v1": 256,
+    "browser.operate.v1": 1024
+  }
+}

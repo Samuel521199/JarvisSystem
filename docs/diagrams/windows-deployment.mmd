@@ -1,0 +1,41 @@
+flowchart TB
+    subgraph Protected["受保护权限域"]
+      Safety["独立监督：锁存、撤权、固定告警"]
+      Recovery["独立恢复：启动、健康、槽位选择"]
+      Lock[("受保护锁存记录与信任根")]
+      Safety --> Lock
+      Lock -.-> Recovery
+    end
+    subgraph Service["受信服务账户"]
+      Host["node-host：任务账本与确定性控制"]
+      Gate["动作与外发网关：执行前校验"]
+      DB[("本地任务、预算、动作、outbox")]
+      Host <--> DB
+      Host --> Gate
+    end
+    subgraph Restricted["受限工作账户"]
+      Dialogue["实时对话 Worker"]
+      Tasks["任务 Worker 池"]
+      Model["本地模型服务"]
+      Lab["研发 Worker：仅候选源码"]
+      Builder["隔离构建与验证环境：按需启动"]
+      Dialogue <--> Model
+      Tasks <--> Model
+      Lab --> Builder
+    end
+    subgraph UserSession["主人登录会话"]
+      UI["界面与音频输入输出"]
+      Desktop["受控桌面助手"]
+    end
+    UI <--> Dialogue
+    Dialogue --> Host
+    Tasks <--> Host
+    Host --> Lab
+    Gate --> Desktop
+    Gate --> Remote["获授权网络与设备接口"]
+    Host --> UI
+    Safety -.-> Host
+    Safety -.-> Gate
+    Safety -.-> Restricted
+    Recovery -.-> Host
+    Recovery -.-> Restricted

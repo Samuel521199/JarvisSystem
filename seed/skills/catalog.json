@@ -1,0 +1,972 @@
+{
+  "schema_version": "1.0.0",
+  "catalog_id": "jarvis.k0.skills",
+  "version": "1.0.0",
+  "availability_semantics": "声明不授予权限；available 还要求宿主注册对应执行器并逐次检查当前授权。",
+  "capabilities": [
+    {
+      "schema_version": "1.0.0",
+      "capability_id": "system.status.v1",
+      "version": "1.0.0",
+      "status": "available",
+      "description": "查询本机确定性核心状态；不等于证明全部语义安全。",
+      "effect": "read",
+      "executor_ref": "core.status",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "description": "Strict status results: uninitialized, normal (optionally task detail), or stopped with diagnostic failure. Embedded public contracts must match contracts/schemas.",
+        "$defs": {
+          "task": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "title": "Jarvis task v1",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "schema_version": {
+                "const": "1.0.0"
+              },
+              "task_id": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$"
+              },
+              "goal_id": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "parent_task_id": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "scope": {
+                "enum": [
+                  "local",
+                  "community"
+                ]
+              },
+              "owner_node_id": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$"
+              },
+              "owner_epoch": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "workflow_version": {
+                "type": "string",
+                "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[A-Za-z0-9.-]+)?$"
+              },
+              "skill_version": {
+                "type": "string",
+                "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[A-Za-z0-9.-]+)?$"
+              },
+              "planning_policy_version": {
+                "type": "string",
+                "minLength": 1
+              },
+              "authorization_ref": {
+                "type": "string",
+                "minLength": 1
+              },
+              "checkpoint_schema": {
+                "type": "string",
+                "minLength": 1
+              },
+              "budget": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "max_cost_units": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "max_runtime_seconds": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "max_attempts": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "max_cost_units",
+                  "max_runtime_seconds",
+                  "max_attempts"
+                ]
+              },
+              "required_capabilities": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "uniqueItems": true
+              },
+              "cancellation_ref": {
+                "type": "string",
+                "minLength": 1
+              },
+              "status": {
+                "enum": [
+                  "CREATED",
+                  "PLANNED",
+                  "READY",
+                  "RUNNING",
+                  "WAITING",
+                  "PAUSED",
+                  "VERIFYING",
+                  "SUCCEEDED",
+                  "UNKNOWN",
+                  "FAILED",
+                  "CANCELLING",
+                  "CANCELLED"
+                ]
+              },
+              "title": {
+                "type": "string",
+                "minLength": 1
+              },
+              "created_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "updated_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "result_refs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "uniqueItems": true
+              }
+            },
+            "required": [
+              "schema_version",
+              "task_id",
+              "goal_id",
+              "parent_task_id",
+              "scope",
+              "owner_node_id",
+              "owner_epoch",
+              "workflow_version",
+              "skill_version",
+              "planning_policy_version",
+              "authorization_ref",
+              "checkpoint_schema",
+              "budget",
+              "required_capabilities",
+              "cancellation_ref",
+              "status"
+            ]
+          },
+          "action": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "title": "Jarvis action v1",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "schema_version": {
+                "const": "1.0.0"
+              },
+              "action_id": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$"
+              },
+              "intent_id": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$"
+              },
+              "task_id": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$"
+              },
+              "capability_id": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$"
+              },
+              "resource_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "host_instance_id": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$"
+              },
+              "host_epoch": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "owner_epoch": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "enforcement_policy_version": {
+                "type": "string",
+                "minLength": 1
+              },
+              "arguments_digest": {
+                "type": "string",
+                "pattern": "^sha256:[0-9a-f]{64}$"
+              },
+              "idempotency_support": {
+                "enum": [
+                  "receiver_verified",
+                  "local_ledger",
+                  "none"
+                ]
+              },
+              "status": {
+                "enum": [
+                  "PREPARED",
+                  "DISPATCHING",
+                  "UNKNOWN",
+                  "CONFIRMED",
+                  "FAILED",
+                  "CANCELLED"
+                ]
+              },
+              "attempt_id": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$"
+              },
+              "arguments": {
+                "type": "object",
+                "description": "Validate again against the referenced capability input_schema; this payload does not grant permission."
+              },
+              "receipt_ref": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "error": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "code": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "message": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    },
+                    "required": [
+                      "code",
+                      "message"
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "schema_version",
+              "action_id",
+              "intent_id",
+              "task_id",
+              "capability_id",
+              "resource_id",
+              "host_instance_id",
+              "host_epoch",
+              "owner_epoch",
+              "enforcement_policy_version",
+              "arguments_digest",
+              "idempotency_support",
+              "status"
+            ]
+          },
+          "artifact": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "title": "Jarvis artifact v1",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "schema_version": {
+                "const": "1.0.0"
+              },
+              "artifact_id": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$"
+              },
+              "task_id": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$"
+              },
+              "action_id": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$"
+              },
+              "path": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^(?!/)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*//)[^\\\\:\\u0000]+$",
+                "description": "Normalized relative path. Runtime must additionally resolve links and enforce its allowed root."
+              },
+              "digest": {
+                "type": "string",
+                "pattern": "^sha256:[0-9a-f]{64}$"
+              },
+              "media_type": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9.+-]+/[A-Za-z0-9.+-]+$"
+              },
+              "size_bytes": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "kind": {
+                "enum": [
+                  "report",
+                  "inventory",
+                  "code",
+                  "package",
+                  "other"
+                ]
+              },
+              "created_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "privacy": {
+                "enum": [
+                  "local_only",
+                  "selected_nodes",
+                  "community"
+                ]
+              },
+              "producer": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "module_id": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$"
+                  },
+                  "version": {
+                    "type": "string",
+                    "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[A-Za-z0-9.-]+)?$"
+                  }
+                },
+                "required": [
+                  "module_id",
+                  "version"
+                ]
+              }
+            },
+            "required": [
+              "schema_version",
+              "artifact_id",
+              "task_id",
+              "action_id",
+              "path",
+              "digest",
+              "media_type",
+              "size_bytes"
+            ]
+          }
+        },
+        "oneOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "initialized": {
+                "const": false
+              },
+              "stopped": {
+                "const": true
+              },
+              "reason": {
+                "const": "not_initialized"
+              },
+              "version": {
+                "type": "string",
+                "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[A-Za-z0-9.-]+)?$"
+              },
+              "limitations": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "minItems": 1
+              }
+            },
+            "required": [
+              "initialized",
+              "stopped",
+              "reason",
+              "version",
+              "limitations"
+            ]
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "initialized": {
+                "const": true
+              },
+              "stopped": {
+                "type": "boolean"
+              },
+              "stop_reason": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "stopped_at": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "version": {
+                "type": "string",
+                "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[A-Za-z0-9.-]+)?$"
+              },
+              "policy_version": {
+                "type": "string",
+                "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[A-Za-z0-9.-]+)?$"
+              },
+              "allowed_root": {
+                "type": "string",
+                "minLength": 1
+              },
+              "artifact_dir": {
+                "type": "string",
+                "minLength": 1
+              },
+              "capabilities": {
+                "type": "array",
+                "items": {
+                  "enum": [
+                    "system.status.v1",
+                    "filesystem.read_sample.v1",
+                    "artifact.write.v1"
+                  ]
+                },
+                "minItems": 3,
+                "maxItems": 3,
+                "uniqueItems": true
+              },
+              "action_counts": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "PREPARED": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "DISPATCHING": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "UNKNOWN": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "CONFIRMED": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "FAILED": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "CANCELLED": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                },
+                "required": []
+              },
+              "tasks": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/task"
+                },
+                "maxItems": 100
+              },
+              "pending": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "recovered_unknown": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$"
+                },
+                "uniqueItems": true
+              },
+              "limitations": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "minItems": 1
+              },
+              "record": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "task": {
+                    "$ref": "#/$defs/task"
+                  },
+                  "action": {
+                    "$ref": "#/$defs/action"
+                  },
+                  "artifact": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/$defs/artifact"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "cancel_requested": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "task",
+                  "action",
+                  "artifact",
+                  "cancel_requested"
+                ]
+              },
+              "reconciliation_error": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "initialized",
+              "stopped",
+              "stop_reason",
+              "stopped_at",
+              "version",
+              "policy_version",
+              "allowed_root",
+              "artifact_dir",
+              "capabilities",
+              "action_counts",
+              "tasks",
+              "pending",
+              "recovered_unknown",
+              "limitations"
+            ]
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "initialized": {
+                "const": true
+              },
+              "stopped": {
+                "const": true
+              },
+              "stop_reason": {
+                "type": "string",
+                "minLength": 1
+              },
+              "diagnostic_error": {
+                "type": "string",
+                "minLength": 1
+              },
+              "limitations": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "minItems": 1
+              },
+              "reconciliation_error": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "initialized",
+              "stopped",
+              "stop_reason",
+              "diagnostic_error",
+              "limitations"
+            ]
+          }
+        ]
+      },
+      "permissions": {
+        "filesystem_scopes": [],
+        "network_scopes": [],
+        "device_scopes": []
+      },
+      "idempotency_support": "local_ledger"
+    },
+    {
+      "schema_version": "1.0.0",
+      "capability_id": "filesystem.read_sample.v1",
+      "version": "1.0.0",
+      "status": "available",
+      "description": "只读取宿主绑定样例目录内的目录项元数据；不读取文件正文，不跟随越界链接。",
+      "effect": "read",
+      "executor_ref": "core.inventory",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "relative_path": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))[^\\\\:\\u0000]+$"
+          },
+          "max_files": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          "max_bytes": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10485760
+          }
+        },
+        "required": [
+          "relative_path",
+          "max_files",
+          "max_bytes"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "schema_version": {
+            "const": "1.0.0"
+          },
+          "relative_path": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))[^\\\\:\\u0000]+$"
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "^(?!/)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*//)[^\\\\:\\u0000]+$",
+                  "description": "Normalized relative path. Runtime must additionally resolve links and enforce its allowed root."
+                },
+                "size_bytes": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 10485760
+                },
+                "type": {
+                  "type": "string",
+                  "pattern": "^(?:file|\\..+)$"
+                }
+              },
+              "required": [
+                "path",
+                "size_bytes",
+                "type"
+              ]
+            },
+            "maxItems": 1000
+          },
+          "total_files": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1000
+          },
+          "total_bytes": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 10485760
+          }
+        },
+        "required": [
+          "schema_version",
+          "relative_path",
+          "files",
+          "total_files",
+          "total_bytes"
+        ],
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "description": "Inventory JSON inside the resulting artifact; the task/action/receipt envelope is validated by the public contracts. Runtime additionally checks totals, root identity and current limits."
+      },
+      "permissions": {
+        "filesystem_scopes": [
+          "sample-input"
+        ],
+        "network_scopes": [],
+        "device_scopes": []
+      },
+      "idempotency_support": "local_ledger"
+    },
+    {
+      "schema_version": "1.0.0",
+      "capability_id": "artifact.write.v1",
+      "version": "1.0.0",
+      "status": "available",
+      "description": "仅将宿主确认的结果写到产物根，不覆盖生产、样例原件或根控制材料。",
+      "effect": "write",
+      "executor_ref": "core.write_artifact",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(?!/)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*//)[^\\\\:\\u0000]+$",
+            "description": "Normalized relative path. Runtime must additionally resolve links and enforce its allowed root."
+          },
+          "content": {
+            "type": "string",
+            "maxLength": 10485760
+          }
+        },
+        "required": [
+          "path",
+          "content"
+        ]
+      },
+      "output_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": "https://jarvis.local/contracts/artifact/1.0.0",
+        "title": "Jarvis artifact v1",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "schema_version": {
+            "const": "1.0.0"
+          },
+          "artifact_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$"
+          },
+          "task_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$"
+          },
+          "action_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$"
+          },
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(?!/)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*//)[^\\\\:\\u0000]+$",
+            "description": "Normalized relative path. Runtime must additionally resolve links and enforce its allowed root."
+          },
+          "digest": {
+            "type": "string",
+            "pattern": "^sha256:[0-9a-f]{64}$"
+          },
+          "media_type": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9.+-]+/[A-Za-z0-9.+-]+$"
+          },
+          "size_bytes": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "kind": {
+            "enum": [
+              "report",
+              "inventory",
+              "code",
+              "package",
+              "other"
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "privacy": {
+            "enum": [
+              "local_only",
+              "selected_nodes",
+              "community"
+            ]
+          },
+          "producer": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "module_id": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$"
+              },
+              "version": {
+                "type": "string",
+                "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[A-Za-z0-9.-]+)?$"
+              }
+            },
+            "required": [
+              "module_id",
+              "version"
+            ]
+          }
+        },
+        "required": [
+          "schema_version",
+          "artifact_id",
+          "task_id",
+          "action_id",
+          "path",
+          "digest",
+          "media_type",
+          "size_bytes"
+        ]
+      },
+      "permissions": {
+        "filesystem_scopes": [
+          "artifact-output"
+        ],
+        "network_scopes": [],
+        "device_scopes": []
+      },
+      "idempotency_support": "local_ledger"
+    },
+    {
+      "schema_version": "1.0.0",
+      "capability_id": "build.candidate.v1",
+      "version": "1.0.0",
+      "status": "planned",
+      "description": "候选构建尚未实现；不得调用，不能借此运行任意 shell。",
+      "effect": "build",
+      "executor_ref": null,
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "build_profile_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$"
+          }
+        },
+        "required": [
+          "build_profile_id"
+        ]
+      },
+      "output_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "artifact_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$"
+          }
+        },
+        "required": [
+          "artifact_id"
+        ]
+      },
+      "permissions": {
+        "filesystem_scopes": [
+          "candidate-workspace"
+        ],
+        "network_scopes": [],
+        "device_scopes": []
+      },
+      "idempotency_support": "none"
+    }
+  ],
+  "skills": [
+    {
+      "skill_id": "status_query",
+      "version": "1.0.0",
+      "status": "available",
+      "capability_refs": [
+        "system.status.v1"
+      ],
+      "description": "查询当前状态"
+    },
+    {
+      "skill_id": "sample_metadata_read",
+      "version": "1.0.0",
+      "status": "available",
+      "capability_refs": [
+        "filesystem.read_sample.v1"
+      ],
+      "description": "读取限定样例目录元数据"
+    },
+    {
+      "skill_id": "artifact_output",
+      "version": "1.0.0",
+      "status": "available",
+      "capability_refs": [
+        "artifact.write.v1"
+      ],
+      "description": "输出结构化产物"
+    },
+    {
+      "skill_id": "candidate_build",
+      "version": "1.0.0",
+      "status": "planned",
+      "capability_refs": [
+        "build.candidate.v1"
+      ],
+      "description": "后续 K3 实现并验收后才可启用"
+    }
+  ]
+}

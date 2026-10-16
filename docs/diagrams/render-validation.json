@@ -1,0 +1,427 @@
+{
+  "schema_version": 1,
+  "generator": {
+    "name": "jarvis-docs-tools",
+    "version": "1.0.0",
+    "source": "tools/render_docs.cjs",
+    "source_sha256": "1b22c105d6109f9528be34f14a789b738cf21c145fad82c7f94dc549cf8ac3e8",
+    "package_sha256": "669963bb089dc027093541e6d4ea74caec594ec63e5c1fe223de597ccc2b1c02",
+    "mermaid_version": "11.12.2",
+    "mermaid_bundle_sha256": "d0830a6c05546e9edb8fe20a8f545f3e0dc7c4c3134d584bad9c13a99d7a71e0",
+    "playwright_version": "1.62.1",
+    "browser_engine": "chromium",
+    "browser_source": "system-edge",
+    "browser_version": "149.0.4022.69"
+  },
+  "settings": {
+    "theme": "neutral",
+    "font_family": "\"Microsoft YaHei\", \"Noto Sans CJK SC\", sans-serif",
+    "background": "#ffffff",
+    "padding_css_px": 20,
+    "device_scale_factor": 2,
+    "deterministic_ids": true,
+    "random_seed_strategy": "source-sha256-xorshift32"
+  },
+  "status": "passed",
+  "checks": [
+    {
+      "source": "docs/diagrams/agent-team-lifecycle.mmd",
+      "source_sha256": "1fc190a8f3d9f0a011662e1dae62cf1b672c7c085a02795af8f48a455137df80",
+      "parse": "passed",
+      "render": "passed",
+      "diagram_type": "flowchart-v2",
+      "dimensions_css_px": {
+        "width": 939,
+        "height": 1598
+      },
+      "artifacts": [
+        {
+          "path": "docs/diagrams/agent-team-lifecycle.svg",
+          "sha256": "fa8c414f8a92870bcb4e65d79c990b30c845b3f8b647d4732fd762bdc622b04f"
+        },
+        {
+          "path": "docs/diagrams/agent-team-lifecycle.png",
+          "sha256": "1b84a82140b084f3cb3932ecc9e756f1e8679a0584de460128d9e2b8543287f1"
+        }
+      ]
+    },
+    {
+      "source": "docs/diagrams/build-and-release.mmd",
+      "source_sha256": "bf09533ac39e15c4806f7e69e13c5140c331e2b79f4255527acf53517e599b93",
+      "parse": "passed",
+      "render": "passed",
+      "diagram_type": "flowchart-v2",
+      "dimensions_css_px": {
+        "width": 755,
+        "height": 1367
+      },
+      "artifacts": [
+        {
+          "path": "docs/diagrams/build-and-release.svg",
+          "sha256": "1ad0aa8b05d3cc4c94fa1427e7fc7fd3473d5d03674f34d9fb46a0f498946f90"
+        },
+        {
+          "path": "docs/diagrams/build-and-release.png",
+          "sha256": "4e2e54780ce89f3620bc2807064540d815e1ab5c41dc5f499d38ae968c83ead8"
+        }
+      ]
+    },
+    {
+      "source": "docs/diagrams/evolution-pipeline.mmd",
+      "source_sha256": "028cfc0d020a29a5250848bd3150ed2b2a0ff3f36624b4354b0c44cbf5eac197",
+      "parse": "passed",
+      "render": "passed",
+      "diagram_type": "flowchart-v2",
+      "dimensions_css_px": {
+        "width": 731,
+        "height": 1582
+      },
+      "artifacts": [
+        {
+          "path": "docs/diagrams/evolution-pipeline.svg",
+          "sha256": "1931896184dc488abe287c355d2b5544e873c254c0d2985013eab7ab4d0f6a2b"
+        },
+        {
+          "path": "docs/diagrams/evolution-pipeline.png",
+          "sha256": "bea6bc64c2ebc4c61a7adfee7a2b481bf4544ce57a0da6c95d28781eda5c2476"
+        }
+      ]
+    },
+    {
+      "source": "docs/diagrams/federation-deployment.mmd",
+      "source_sha256": "91a023abfee7f071db3b8b3dae2abefc5abdb272b099edc37311a09bc2c3c447",
+      "parse": "passed",
+      "render": "passed",
+      "diagram_type": "flowchart-v2",
+      "dimensions_css_px": {
+        "width": 1210,
+        "height": 537
+      },
+      "artifacts": [
+        {
+          "path": "docs/diagrams/federation-deployment.svg",
+          "sha256": "3de0523cefa614ab85e2e1c17875f58ac121398d93160beef2709455567e278c"
+        },
+        {
+          "path": "docs/diagrams/federation-deployment.png",
+          "sha256": "41fabba8a413e1fbccbba42e561261f79d6d58b990928395bb7856e62db7275a"
+        }
+      ]
+    },
+    {
+      "source": "docs/diagrams/federation-reconnect.mmd",
+      "source_sha256": "a724de1993222fca9840c7b21bd81d70e5fa37280951e4bc7d44788b1a9ba16c",
+      "parse": "passed",
+      "render": "passed",
+      "diagram_type": "flowchart-v2",
+      "dimensions_css_px": {
+        "width": 749,
+        "height": 1798
+      },
+      "artifacts": [
+        {
+          "path": "docs/diagrams/federation-reconnect.svg",
+          "sha256": "abc604642b2b1ca49669f7b358b973299f999b915553058c490b6b48e8bd8e9d"
+        },
+        {
+          "path": "docs/diagrams/federation-reconnect.png",
+          "sha256": "8064b11b2f0326f51238067e319515520b35a082879533cbd754e38a45667429"
+        }
+      ]
+    },
+    {
+      "source": "docs/diagrams/health-and-repair.mmd",
+      "source_sha256": "cba919957bf125747eb22a8745bb7d72c8b8683c0aa2d6cda5cffa6a478b5e95",
+      "parse": "passed",
+      "render": "passed",
+      "diagram_type": "flowchart-v2",
+      "dimensions_css_px": {
+        "width": 1205,
+        "height": 1689
+      },
+      "artifacts": [
+        {
+          "path": "docs/diagrams/health-and-repair.svg",
+          "sha256": "a135797727681b4b0bb1c2ae7ab413b380b0a3d4dd1d0dfcebdcc4a16ad07621"
+        },
+        {
+          "path": "docs/diagrams/health-and-repair.png",
+          "sha256": "bb9718683b6508f5476d67c6b6505447263ecbb4a45434099fa33055645144db"
+        }
+      ]
+    },
+    {
+      "source": "docs/diagrams/knowledge-learning-flow.mmd",
+      "source_sha256": "6876344105d8d116dadd7bad7b887605b3fc77f2b220906c3f76928b08dbcc96",
+      "parse": "passed",
+      "render": "passed",
+      "diagram_type": "flowchart-v2",
+      "dimensions_css_px": {
+        "width": 1261,
+        "height": 1326
+      },
+      "artifacts": [
+        {
+          "path": "docs/diagrams/knowledge-learning-flow.svg",
+          "sha256": "819878b2f6bf535e4ea0cbff98313a5670689bdaa950136ef144500cf5049090"
+        },
+        {
+          "path": "docs/diagrams/knowledge-learning-flow.png",
+          "sha256": "ad2b0fdf1c760485253becc41078c664ed82ca7d27591d2ba7774754d14f6e7c"
+        }
+      ]
+    },
+    {
+      "source": "docs/diagrams/memory-local-federation.mmd",
+      "source_sha256": "11acba620a5165103a84f9adcb3c23d7b6a89d1747992264155479d651aeeaf4",
+      "parse": "passed",
+      "render": "passed",
+      "diagram_type": "flowchart-v2",
+      "dimensions_css_px": {
+        "width": 1394,
+        "height": 1040
+      },
+      "artifacts": [
+        {
+          "path": "docs/diagrams/memory-local-federation.svg",
+          "sha256": "cbde87013d053befe349a3badfb2a911232c02a03d428f96ca3922dcf61bd441"
+        },
+        {
+          "path": "docs/diagrams/memory-local-federation.png",
+          "sha256": "590482d066f7a0811a6d97d787cb3be50e1b37805e1b785822786aa4cc13003a"
+        }
+      ]
+    },
+    {
+      "source": "docs/diagrams/model-routing.mmd",
+      "source_sha256": "0ebd3d28dd12bdde1d31b4fc59522a718bfb5fd36f415bca00dcd09655d99422",
+      "parse": "passed",
+      "render": "passed",
+      "diagram_type": "flowchart-v2",
+      "dimensions_css_px": {
+        "width": 720,
+        "height": 1574
+      },
+      "artifacts": [
+        {
+          "path": "docs/diagrams/model-routing.svg",
+          "sha256": "30beed471adba88b0fc5e5c8f56d430d5f7e16535f501e6c9c5f2bc4b1286ce1"
+        },
+        {
+          "path": "docs/diagrams/model-routing.png",
+          "sha256": "d5e86f5bb9ea99d5a3ac175c79d533198ef517494162db53a9b4caa86f1c5806"
+        }
+      ]
+    },
+    {
+      "source": "docs/diagrams/network-recovery.mmd",
+      "source_sha256": "1ddd2ce0c11674582a50ced4a93cf31a67cd84b65005d09d0e7d72c4f5480178",
+      "parse": "passed",
+      "render": "passed",
+      "diagram_type": "flowchart-v2",
+      "dimensions_css_px": {
+        "width": 1001,
+        "height": 1673
+      },
+      "artifacts": [
+        {
+          "path": "docs/diagrams/network-recovery.svg",
+          "sha256": "5d921fa7f07173b630de5f106d6be16545b49b8d636b604ec0e4e43c3b3e722c"
+        },
+        {
+          "path": "docs/diagrams/network-recovery.png",
+          "sha256": "e32841cc439b35626e0faab80abf04a7260c40be7b85c01a5b0b7d6995374bb3"
+        }
+      ]
+    },
+    {
+      "source": "docs/diagrams/offline-task-flow.mmd",
+      "source_sha256": "05c6ff7ec5e31b42c631065d0e13a7044eee6f9a88c3d2e814406997e5aa65a1",
+      "parse": "passed",
+      "render": "passed",
+      "diagram_type": "flowchart-v2",
+      "dimensions_css_px": {
+        "width": 816,
+        "height": 1262
+      },
+      "artifacts": [
+        {
+          "path": "docs/diagrams/offline-task-flow.svg",
+          "sha256": "eb50c5e67da7f778c2995fcc81288bff3dd0bb5cd98c44ea425219c019d29924"
+        },
+        {
+          "path": "docs/diagrams/offline-task-flow.png",
+          "sha256": "258338ebc1875f0a9a53158319aababf87edb062ab9b3f65eb6ac75162c913f5"
+        }
+      ]
+    },
+    {
+      "source": "docs/diagrams/overview.mmd",
+      "source_sha256": "f8b2c5d1b3ef719e514b9e674f3e22373f5911df178a42634f1cd968f1b9decc",
+      "parse": "passed",
+      "render": "passed",
+      "diagram_type": "flowchart-v2",
+      "dimensions_css_px": {
+        "width": 1622,
+        "height": 1262
+      },
+      "artifacts": [
+        {
+          "path": "docs/diagrams/overview.svg",
+          "sha256": "f7d83a0209d7a7917eeb861ea8dc188ea7c53406aac074f7a4c66f0efecb4018"
+        },
+        {
+          "path": "docs/diagrams/overview.png",
+          "sha256": "f742011d9412ea2b61a41a41b9c902014d414ef331428e2366977f762dd17697"
+        }
+      ]
+    },
+    {
+      "source": "docs/diagrams/parallel-dialogue-task.mmd",
+      "source_sha256": "2dba3871c67a4eb2eb729ed2d67b972a6cbf5fbc5a67f3787aba03db9c18d0e7",
+      "parse": "passed",
+      "render": "passed",
+      "diagram_type": "sequence",
+      "dimensions_css_px": {
+        "width": 1513,
+        "height": 865
+      },
+      "artifacts": [
+        {
+          "path": "docs/diagrams/parallel-dialogue-task.svg",
+          "sha256": "73c154c1440ae3d03f14db6a8c687f6e3759bb33c9d0f82e44cb7d0e6b35d957"
+        },
+        {
+          "path": "docs/diagrams/parallel-dialogue-task.png",
+          "sha256": "6f7469c116508f4099b1fce9a5e967d45f2763788bbf5570b6e4643a966f0de7"
+        }
+      ]
+    },
+    {
+      "source": "docs/diagrams/safety-shutdown.mmd",
+      "source_sha256": "4475dac219bb7dd273b6d022ce71c23d9b600c15d738047d7d03c142ea58f235",
+      "parse": "passed",
+      "render": "passed",
+      "diagram_type": "flowchart-v2",
+      "dimensions_css_px": {
+        "width": 1015,
+        "height": 1358
+      },
+      "artifacts": [
+        {
+          "path": "docs/diagrams/safety-shutdown.svg",
+          "sha256": "697bcf46453fb9f926384d184a3f2a84d4c90d4d4bedb6adc7cc6e4f094c39b1"
+        },
+        {
+          "path": "docs/diagrams/safety-shutdown.png",
+          "sha256": "10c9bd7b62f87423f82d04d43259a0faed0ec4c527058afb56996a66f46be5e3"
+        }
+      ]
+    },
+    {
+      "source": "docs/diagrams/seed-core.mmd",
+      "source_sha256": "476571609db2af97f5c0c6530c8935269d69f0cd9cd245bb56e3d1edf53b1181",
+      "parse": "passed",
+      "render": "passed",
+      "diagram_type": "flowchart-v2",
+      "dimensions_css_px": {
+        "width": 1145,
+        "height": 1238
+      },
+      "artifacts": [
+        {
+          "path": "docs/diagrams/seed-core.svg",
+          "sha256": "5b3795fdfc8d1b58346ca7131d78322bf02f2ed4d2df917a6f7a009e97343160"
+        },
+        {
+          "path": "docs/diagrams/seed-core.png",
+          "sha256": "458107af5d8e5c8acfd00a85f267c3360ac593ce6ff8be8612f70e5d18a82cd1"
+        }
+      ]
+    },
+    {
+      "source": "docs/diagrams/state-ownership.mmd",
+      "source_sha256": "04d37ba640d45e3c31773185e7e1623a0d8b9bfe4ae6cd4b6c59b874a5f4b3e9",
+      "parse": "passed",
+      "render": "passed",
+      "diagram_type": "flowchart-v2",
+      "dimensions_css_px": {
+        "width": 1511,
+        "height": 353
+      },
+      "artifacts": [
+        {
+          "path": "docs/diagrams/state-ownership.svg",
+          "sha256": "db7f3ef7eaa8dcd8016afda7148768de6e7cd7f286b472687b56a6ba7319b24a"
+        },
+        {
+          "path": "docs/diagrams/state-ownership.png",
+          "sha256": "158526323702b8b191645083ef5a68658fdb9fc75193d379de189349e123ffca"
+        }
+      ]
+    },
+    {
+      "source": "docs/diagrams/system-boundaries.mmd",
+      "source_sha256": "ec4313793831a464b9f2085d17b81d00e1ed54db4c330d6731a27cfcd5f840cf",
+      "parse": "passed",
+      "render": "passed",
+      "diagram_type": "flowchart-v2",
+      "dimensions_css_px": {
+        "width": 1176,
+        "height": 672
+      },
+      "artifacts": [
+        {
+          "path": "docs/diagrams/system-boundaries.svg",
+          "sha256": "64857bb3c817065868c661201a3e83ecee8bd456043a357cfd893a7ffa9789b9"
+        },
+        {
+          "path": "docs/diagrams/system-boundaries.png",
+          "sha256": "6123371cfd70de95657a638ae718c1e52a606aa447672ea8067b0ec2d623ef9b"
+        }
+      ]
+    },
+    {
+      "source": "docs/diagrams/task-lifecycle.mmd",
+      "source_sha256": "f79667dc3676876ffebff4e4ba8b7ea8876fa6e9fe99cd4821cc284033230ff9",
+      "parse": "passed",
+      "render": "passed",
+      "diagram_type": "stateDiagram",
+      "dimensions_css_px": {
+        "width": 1093,
+        "height": 836
+      },
+      "artifacts": [
+        {
+          "path": "docs/diagrams/task-lifecycle.svg",
+          "sha256": "99292a5cae7d5fd2d32ac3dd0e7d327ccc73db1378e0064a5b24ed3362362fd5"
+        },
+        {
+          "path": "docs/diagrams/task-lifecycle.png",
+          "sha256": "87e5aa181ec7a9ec2fe54dc4dd7fdf2bd9430eef7eede33e7657ff27a544c937"
+        }
+      ]
+    },
+    {
+      "source": "docs/diagrams/windows-deployment.mmd",
+      "source_sha256": "c0944a76ba661adb3df5435c201548ac9f74c38030f8e42b8dd8bc71137978ca",
+      "parse": "passed",
+      "render": "passed",
+      "diagram_type": "flowchart-v2",
+      "dimensions_css_px": {
+        "width": 1670,
+        "height": 1117
+      },
+      "artifacts": [
+        {
+          "path": "docs/diagrams/windows-deployment.svg",
+          "sha256": "883b302f1eeb400f3bc3e9119ba20f9d2052cfe67e343a469ec57653a950a905"
+        },
+        {
+          "path": "docs/diagrams/windows-deployment.png",
+          "sha256": "5edadc495d54d674e45e8f44d401a70e4ebad94bf74c8f23745a7085c998bc79"
+        }
+      ]
+    }
+  ]
+}

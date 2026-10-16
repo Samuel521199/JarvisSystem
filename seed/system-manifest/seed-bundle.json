@@ -1,0 +1,150 @@
+{
+  "schema_version": "1.0.0",
+  "bundle_id": "jarvis.k0.seed",
+  "version": "1.0.0",
+  "scope": "K0",
+  "status": "k0_assets",
+  "specification_summary": {
+    "version": "1.0.0",
+    "text": "K0: six versioned contracts; separate reference knowledge, protected rules, and declared skills; status/sample metadata/artifact output only; candidate build remains planned; validation is not proof of semantic safety or OS isolation.",
+    "sha256": "sha256:67befd3c4b9a39b3d1f60f1327c5cb923ba36401b27ff02d58498342ff64d565",
+    "source_refs": [
+      "docs/core-bootstrap.md#bootstrap-5",
+      "docs/contracts.md#interfaces",
+      "docs/security-sovereignty.md#product-definition-6"
+    ]
+  },
+  "rules_baseline": {
+    "path": "seed/rules/baseline.json",
+    "version": "1.0.0",
+    "sha256": "sha256:00f2178f677ef3c2ed8b449cfe1ab20437bcecc1a000ed68f7bcd54c4c2a94aa"
+  },
+  "contracts": {
+    "task": "contracts/schemas/task.schema.json",
+    "action": "contracts/schemas/action.schema.json",
+    "capability": "contracts/schemas/capability.schema.json",
+    "artifact": "contracts/schemas/artifact.schema.json",
+    "module": "contracts/schemas/module.schema.json",
+    "build-profile": "contracts/schemas/build-profile.schema.json"
+  },
+  "assets": [
+    {
+      "path": "contracts/schemas/task.schema.json",
+      "kind": "schema",
+      "sha256": "sha256:227cbb75a62797a7310c622a63155bcb5e45495ffbc578cb76e11ccda81e35d2"
+    },
+    {
+      "path": "contracts/schemas/action.schema.json",
+      "kind": "schema",
+      "sha256": "sha256:e1b4b61aee7f78970fc88d2c343fe0f5e6b771706eff3b71e1b60d032ca40393"
+    },
+    {
+      "path": "contracts/schemas/capability.schema.json",
+      "kind": "schema",
+      "sha256": "sha256:8f60fa34be14175342c93a7707ea91a84afe38382ef98fa2456fe01ef6fb2c05"
+    },
+    {
+      "path": "contracts/schemas/artifact.schema.json",
+      "kind": "schema",
+      "sha256": "sha256:f097532556e7072e6d914fea345e7e7de77d949c443d1b5daacef7dbc4c10149"
+    },
+    {
+      "path": "contracts/schemas/module.schema.json",
+      "kind": "schema",
+      "sha256": "sha256:7d98541de6ade3ae6a3d6fa04a7e4ecfe281efe9a5b3419b4abd406c1fe27233"
+    },
+    {
+      "path": "contracts/schemas/build-profile.schema.json",
+      "kind": "schema",
+      "sha256": "sha256:4e169c2a0c420ce74e2878804bb9585fe2fb8ff527ce7ce68c97578a2d33798e"
+    },
+    {
+      "path": "seed/knowledge/bootstrap.json",
+      "kind": "knowledge",
+      "sha256": "sha256:be89ee9b849ea35a774637ffdb9b8945195b03293c38a84a542a9b8fa9efe7e3"
+    },
+    {
+      "path": "seed/rules/baseline.json",
+      "kind": "rules",
+      "sha256": "sha256:00f2178f677ef3c2ed8b449cfe1ab20437bcecc1a000ed68f7bcd54c4c2a94aa"
+    },
+    {
+      "path": "seed/skills/catalog.json",
+      "kind": "skills",
+      "sha256": "sha256:f852b36838a2f1d36677305e1bfa52748c9d70cab9b9030fed8991da92d9a12d"
+    },
+    {
+      "path": "tests/fixtures/contracts/action.invalid.json",
+      "kind": "fixture",
+      "sha256": "sha256:a7aff363f89503a9a7506356ed07207df3416b5657e0eb686e8633424c6ee323"
+    },
+    {
+      "path": "tests/fixtures/contracts/action.valid.json",
+      "kind": "fixture",
+      "sha256": "sha256:4474dca86ef23d43fa0a1071b399e9af9f82db20bffeb6817ab867f746f3cb4b"
+    },
+    {
+      "path": "tests/fixtures/contracts/artifact.invalid.json",
+      "kind": "fixture",
+      "sha256": "sha256:9f424ceb5011f1faaa030ceecefea174321d748323fb180271919fa9e5f1922c"
+    },
+    {
+      "path": "tests/fixtures/contracts/artifact.valid.json",
+      "kind": "fixture",
+      "sha256": "sha256:95dfd2ac0f1419ba80b4c1bd16265cd70c55e829cb4cb7df337a5eeccd2f06c1"
+    },
+    {
+      "path": "tests/fixtures/contracts/build-profile.invalid.json",
+      "kind": "fixture",
+      "sha256": "sha256:c7ed12d0e46d397384dd941de09dcf31cdcacd8b1e2f6e440c487caa8386e3a7"
+    },
+    {
+      "path": "tests/fixtures/contracts/build-profile.valid.json",
+      "kind": "fixture",
+      "sha256": "sha256:44ee77da1505a6d20b35dc36677076f06ad7e05785fb2303347e598d5c70fca0"
+    },
+    {
+      "path": "tests/fixtures/contracts/capability.invalid.json",
+      "kind": "fixture",
+      "sha256": "sha256:c37f2bf090f5dc3a5f4df3897478675a647664b7fb68819b8f53987c9604df65"
+    },
+    {
+      "path": "tests/fixtures/contracts/capability.valid.json",
+      "kind": "fixture",
+      "sha256": "sha256:ae8c2fc5861d03f523957452a3cbc06846c6964e088101a3546662230b38766f"
+    },
+    {
+      "path": "tests/fixtures/contracts/cases.json",
+      "kind": "fixture",
+      "sha256": "sha256:2f8167f5fba18a24078411c61b2f45c086dc76a4ae28adb61ede3f68cfe14a5e"
+    },
+    {
+      "path": "tests/fixtures/contracts/module.invalid.json",
+      "kind": "fixture",
+      "sha256": "sha256:6003549dbdb51ce9a9d5ae484c4b35c549c0228236ba996e283af7fa5d8750d5"
+    },
+    {
+      "path": "tests/fixtures/contracts/module.valid.json",
+      "kind": "fixture",
+      "sha256": "sha256:4014ba0c3d8237219b72a0fcb4e52d19fc3c47639e4d56ad7abe3819b3570758"
+    },
+    {
+      "path": "tests/fixtures/contracts/task.invalid.json",
+      "kind": "fixture",
+      "sha256": "sha256:4ed36b65d978abb8c7acb6e67b353cc74c776274749298441aa73748a574d173"
+    },
+    {
+      "path": "tests/fixtures/contracts/task.valid.json",
+      "kind": "fixture",
+      "sha256": "sha256:abb99190b9ae587bb9d9c7a8847f23e830e22e1b0745f5bbe6a59a77d70a7c76"
+    }
+  ],
+  "fixture_index": "tests/fixtures/contracts/cases.json",
+  "limitations": [
+    "Hashes detect accidental or unapproved asset drift only while the independent checker and host trust boundary remain trusted.",
+    "A candidate able to replace both this checker and its trust state can bypass this development-time check; OS isolation is not established by these files.",
+    "Schema validity is not authorization, correct execution, or proof of G0 semantic compliance.",
+    "Capability availability still requires a registered runtime executor and current host authorization.",
+    "Candidate builds and autonomous publication remain planned and unavailable."
+  ]
+}

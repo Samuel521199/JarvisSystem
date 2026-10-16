@@ -1,0 +1,21 @@
+flowchart TB
+    Owner["主人：目标、预算、身份与停止权"]
+    subgraph J["Jarvis 系统边界"]
+      Control["控制域：身份、授权、任务账本、停机锁"]
+      Interaction["交互域：人格、语音、界面"]
+      Work["工作域：规划、Agent、知识、模拟"]
+      Build["研发域：生成、构建、验证候选版本"]
+      Effects["受控出口：动作、输出、模型外发、委派"]
+      Release["发布控制：证据准入、版本与迁移"]
+    end
+    Owner <--> Interaction
+    Owner --> Control
+    Interaction <--> Work
+    Work --> Effects
+    Work --> Build
+    Build --> Release
+    Release -.-> Work
+    Control -.-> Effects
+    Control -.-> Release
+    Effects <--> External["外部：设备、桌面、互联网、远端模型"]
+    Control <--> Peers["已配对节点：授权范围内共同体"]

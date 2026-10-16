@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0.0",
+  "action_id": "action_example",
+  "intent_id": "intent_example",
+  "task_id": "task_example",
+  "capability_id": "filesystem.read_sample.v1",
+  "resource_id": "sample-input",
+  "host_instance_id": "host_example",
+  "host_epoch": 1,
+  "owner_epoch": 1,
+  "enforcement_policy_version": "1.0.0",
+  "arguments_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+  "idempotency_support": "local_ledger",
+  "status": "DISPATCHED",
+  "arguments": {
+    "relative_path": ".",
+    "max_files": 1000,
+    "max_bytes": 10485760
+  }
+}

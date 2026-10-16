@@ -1,0 +1,2327 @@
+{
+  "schema_version": 1,
+  "version": "0.1.17",
+  "captured_at": "2026-10-16T01:07:01.549947+00:00",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "logical_cpus": 32,
+  "thresholds": {
+    "minimum_seconds": 300,
+    "private_bytes": 536870912,
+    "cpu_percent_one_core": 1.0,
+    "ready_seconds": 5.0
+  },
+  "startup_condition": "Fresh Python process and fresh synthetic data; OS file caches not flushed.",
+  "samples": [
+    {
+      "elapsed_seconds": 0.010528600003453903,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 851968,
+          "working_bytes": 4268032
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1306624,
+          "working_bytes": 7467008
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.234375,
+          "private_bytes": 27136000,
+          "working_bytes": 40431616
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108290768896,
+        "commit_available_bytes": 111997796352
+      }
+    },
+    {
+      "elapsed_seconds": 5.03110359999846,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 851968,
+          "working_bytes": 4268032
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1306624,
+          "working_bytes": 7467008
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.234375,
+          "private_bytes": 27136000,
+          "working_bytes": 40431616
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108299796480,
+        "commit_available_bytes": 111998562304
+      }
+    },
+    {
+      "elapsed_seconds": 10.048817100003362,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 851968,
+          "working_bytes": 4268032
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1306624,
+          "working_bytes": 7467008
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.234375,
+          "private_bytes": 27136000,
+          "working_bytes": 40431616
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108314128384,
+        "commit_available_bytes": 112013307904
+      }
+    },
+    {
+      "elapsed_seconds": 15.065780099997937,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 851968,
+          "working_bytes": 4268032
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1306624,
+          "working_bytes": 7467008
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.234375,
+          "private_bytes": 27136000,
+          "working_bytes": 40431616
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108311351296,
+        "commit_available_bytes": 112019283968
+      }
+    },
+    {
+      "elapsed_seconds": 20.082527600003232,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 851968,
+          "working_bytes": 4268032
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1306624,
+          "working_bytes": 7467008
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.234375,
+          "private_bytes": 27136000,
+          "working_bytes": 40431616
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108195115008,
+        "commit_available_bytes": 111861047296
+      }
+    },
+    {
+      "elapsed_seconds": 25.098808399998234,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 851968,
+          "working_bytes": 4268032
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1306624,
+          "working_bytes": 7467008
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.234375,
+          "private_bytes": 27136000,
+          "working_bytes": 40431616
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108217602048,
+        "commit_available_bytes": 111903207424
+      }
+    },
+    {
+      "elapsed_seconds": 30.116878499997256,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.234375,
+          "private_bytes": 27209728,
+          "working_bytes": 40480768
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108276441088,
+        "commit_available_bytes": 111979831296
+      }
+    },
+    {
+      "elapsed_seconds": 35.12959389999742,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.234375,
+          "private_bytes": 27209728,
+          "working_bytes": 40480768
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108276531200,
+        "commit_available_bytes": 111597649920
+      }
+    },
+    {
+      "elapsed_seconds": 40.14325639999879,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.234375,
+          "private_bytes": 27209728,
+          "working_bytes": 40480768
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108259811328,
+        "commit_available_bytes": 111851638784
+      }
+    },
+    {
+      "elapsed_seconds": 45.15714519999892,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.234375,
+          "private_bytes": 27209728,
+          "working_bytes": 40480768
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108233912320,
+        "commit_available_bytes": 111914057728
+      }
+    },
+    {
+      "elapsed_seconds": 50.17049810000026,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.25,
+          "private_bytes": 27209728,
+          "working_bytes": 40480768
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108104228864,
+        "commit_available_bytes": 111602012160
+      }
+    },
+    {
+      "elapsed_seconds": 55.185588400003326,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.25,
+          "private_bytes": 27209728,
+          "working_bytes": 40480768
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108307075072,
+        "commit_available_bytes": 111967031296
+      }
+    },
+    {
+      "elapsed_seconds": 60.199379300000146,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.25,
+          "private_bytes": 27095040,
+          "working_bytes": 40415232
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108317020160,
+        "commit_available_bytes": 112022499328
+      }
+    },
+    {
+      "elapsed_seconds": 65.21654110000236,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.25,
+          "private_bytes": 27095040,
+          "working_bytes": 40415232
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108282916864,
+        "commit_available_bytes": 111539539968
+      }
+    },
+    {
+      "elapsed_seconds": 70.22866470000008,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.25,
+          "private_bytes": 27095040,
+          "working_bytes": 40415232
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108206538752,
+        "commit_available_bytes": 111506604032
+      }
+    },
+    {
+      "elapsed_seconds": 75.24477209999895,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.25,
+          "private_bytes": 27095040,
+          "working_bytes": 40415232
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108241776640,
+        "commit_available_bytes": 111948709888
+      }
+    },
+    {
+      "elapsed_seconds": 80.25789200000145,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.25,
+          "private_bytes": 27095040,
+          "working_bytes": 40415232
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108251066368,
+        "commit_available_bytes": 111997628416
+      }
+    },
+    {
+      "elapsed_seconds": 85.27012000000104,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.25,
+          "private_bytes": 27095040,
+          "working_bytes": 40415232
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108202917888,
+        "commit_available_bytes": 111933296640
+      }
+    },
+    {
+      "elapsed_seconds": 90.28344110000035,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.25,
+          "private_bytes": 27095040,
+          "working_bytes": 40415232
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108170141696,
+        "commit_available_bytes": 111906131968
+      }
+    },
+    {
+      "elapsed_seconds": 95.29720629999792,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.25,
+          "private_bytes": 27095040,
+          "working_bytes": 40415232
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108201594880,
+        "commit_available_bytes": 111951323136
+      }
+    },
+    {
+      "elapsed_seconds": 100.31002530000114,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.25,
+          "private_bytes": 27095040,
+          "working_bytes": 40415232
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108163223552,
+        "commit_available_bytes": 111906738176
+      }
+    },
+    {
+      "elapsed_seconds": 105.32376910000312,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.25,
+          "private_bytes": 27095040,
+          "working_bytes": 40415232
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108166074368,
+        "commit_available_bytes": 111914205184
+      }
+    },
+    {
+      "elapsed_seconds": 110.343918999999,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.265625,
+          "private_bytes": 27095040,
+          "working_bytes": 40415232
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108065460224,
+        "commit_available_bytes": 111693578240
+      }
+    },
+    {
+      "elapsed_seconds": 115.3607445000016,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.265625,
+          "private_bytes": 27095040,
+          "working_bytes": 40415232
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108163637248,
+        "commit_available_bytes": 111762206720
+      }
+    },
+    {
+      "elapsed_seconds": 120.38029880000249,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.265625,
+          "private_bytes": 27095040,
+          "working_bytes": 40415232
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108346748928,
+        "commit_available_bytes": 112087605248
+      }
+    },
+    {
+      "elapsed_seconds": 125.39837160000025,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.265625,
+          "private_bytes": 27095040,
+          "working_bytes": 40415232
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108358983680,
+        "commit_available_bytes": 112099360768
+      }
+    },
+    {
+      "elapsed_seconds": 130.41502690000198,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.265625,
+          "private_bytes": 27095040,
+          "working_bytes": 40415232
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108268183552,
+        "commit_available_bytes": 111988072448
+      }
+    },
+    {
+      "elapsed_seconds": 135.43398989999696,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.265625,
+          "private_bytes": 27021312,
+          "working_bytes": 40378368
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108272381952,
+        "commit_available_bytes": 111990423552
+      }
+    },
+    {
+      "elapsed_seconds": 140.44695160000265,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.265625,
+          "private_bytes": 27021312,
+          "working_bytes": 40378368
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108144431104,
+        "commit_available_bytes": 111486963712
+      }
+    },
+    {
+      "elapsed_seconds": 145.45938890000252,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.265625,
+          "private_bytes": 27021312,
+          "working_bytes": 40378368
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108277112832,
+        "commit_available_bytes": 111756029952
+      }
+    },
+    {
+      "elapsed_seconds": 150.47251949999918,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.265625,
+          "private_bytes": 27021312,
+          "working_bytes": 40378368
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108246700032,
+        "commit_available_bytes": 111838068736
+      }
+    },
+    {
+      "elapsed_seconds": 155.4857531000016,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.265625,
+          "private_bytes": 27021312,
+          "working_bytes": 40378368
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108161921024,
+        "commit_available_bytes": 111600078848
+      }
+    },
+    {
+      "elapsed_seconds": 160.49934429999848,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.265625,
+          "private_bytes": 27021312,
+          "working_bytes": 40378368
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108065898496,
+        "commit_available_bytes": 111359823872
+      }
+    },
+    {
+      "elapsed_seconds": 165.51278260000254,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.265625,
+          "private_bytes": 27021312,
+          "working_bytes": 40378368
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108051341312,
+        "commit_available_bytes": 111456444416
+      }
+    },
+    {
+      "elapsed_seconds": 170.525842199997,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.265625,
+          "private_bytes": 27021312,
+          "working_bytes": 40378368
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108067631104,
+        "commit_available_bytes": 111551623168
+      }
+    },
+    {
+      "elapsed_seconds": 175.54066469999816,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.265625,
+          "private_bytes": 27021312,
+          "working_bytes": 40378368
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108066365440,
+        "commit_available_bytes": 111534694400
+      }
+    },
+    {
+      "elapsed_seconds": 180.5537955999971,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.265625,
+          "private_bytes": 27021312,
+          "working_bytes": 40378368
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108084436992,
+        "commit_available_bytes": 111562653696
+      }
+    },
+    {
+      "elapsed_seconds": 185.5660147000017,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.265625,
+          "private_bytes": 27021312,
+          "working_bytes": 40378368
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108077965312,
+        "commit_available_bytes": 111550226432
+      }
+    },
+    {
+      "elapsed_seconds": 190.57983850000164,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.265625,
+          "private_bytes": 27021312,
+          "working_bytes": 40378368
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108060569600,
+        "commit_available_bytes": 111543115776
+      }
+    },
+    {
+      "elapsed_seconds": 195.59322370000154,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.265625,
+          "private_bytes": 27021312,
+          "working_bytes": 40378368
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108055625728,
+        "commit_available_bytes": 111496585216
+      }
+    },
+    {
+      "elapsed_seconds": 200.60750710000138,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.265625,
+          "private_bytes": 27021312,
+          "working_bytes": 40378368
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108095012864,
+        "commit_available_bytes": 111574073344
+      }
+    },
+    {
+      "elapsed_seconds": 205.62157489999663,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.265625,
+          "private_bytes": 27021312,
+          "working_bytes": 40378368
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108097224704,
+        "commit_available_bytes": 111641849856
+      }
+    },
+    {
+      "elapsed_seconds": 210.63448680000147,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.265625,
+          "private_bytes": 27021312,
+          "working_bytes": 40378368
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108082745344,
+        "commit_available_bytes": 111465816064
+      }
+    },
+    {
+      "elapsed_seconds": 215.64758620000066,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.265625,
+          "private_bytes": 27021312,
+          "working_bytes": 40378368
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108021022720,
+        "commit_available_bytes": 111499927552
+      }
+    },
+    {
+      "elapsed_seconds": 220.66074479999952,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.28125,
+          "private_bytes": 27021312,
+          "working_bytes": 40378368
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108033060864,
+        "commit_available_bytes": 111524278272
+      }
+    },
+    {
+      "elapsed_seconds": 225.67377549999946,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.28125,
+          "private_bytes": 27021312,
+          "working_bytes": 40378368
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108035203072,
+        "commit_available_bytes": 111609610240
+      }
+    },
+    {
+      "elapsed_seconds": 230.68726669999887,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.28125,
+          "private_bytes": 27021312,
+          "working_bytes": 40378368
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108005908480,
+        "commit_available_bytes": 111603781632
+      }
+    },
+    {
+      "elapsed_seconds": 235.70001400000183,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.28125,
+          "private_bytes": 27021312,
+          "working_bytes": 40378368
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108020375552,
+        "commit_available_bytes": 111634841600
+      }
+    },
+    {
+      "elapsed_seconds": 240.71364080000058,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.296875,
+          "private_bytes": 27021312,
+          "working_bytes": 40378368
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108029739008,
+        "commit_available_bytes": 111647035392
+      }
+    },
+    {
+      "elapsed_seconds": 245.7261839999992,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.296875,
+          "private_bytes": 27021312,
+          "working_bytes": 40378368
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108060741632,
+        "commit_available_bytes": 111566159872
+      }
+    },
+    {
+      "elapsed_seconds": 250.73981900000217,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.296875,
+          "private_bytes": 27021312,
+          "working_bytes": 40378368
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108071469056,
+        "commit_available_bytes": 111576825856
+      }
+    },
+    {
+      "elapsed_seconds": 255.75281790000008,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.296875,
+          "private_bytes": 27021312,
+          "working_bytes": 40378368
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108084662272,
+        "commit_available_bytes": 111629471744
+      }
+    },
+    {
+      "elapsed_seconds": 260.76717749999807,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.296875,
+          "private_bytes": 27021312,
+          "working_bytes": 40378368
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108090179584,
+        "commit_available_bytes": 111569575936
+      }
+    },
+    {
+      "elapsed_seconds": 265.78084769999987,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.296875,
+          "private_bytes": 27021312,
+          "working_bytes": 40378368
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108093206528,
+        "commit_available_bytes": 111573712896
+      }
+    },
+    {
+      "elapsed_seconds": 270.7941682000019,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.296875,
+          "private_bytes": 27021312,
+          "working_bytes": 40378368
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108076498944,
+        "commit_available_bytes": 111573995520
+      }
+    },
+    {
+      "elapsed_seconds": 275.80721110000013,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.296875,
+          "private_bytes": 27021312,
+          "working_bytes": 40378368
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108107931648,
+        "commit_available_bytes": 111614779392
+      }
+    },
+    {
+      "elapsed_seconds": 280.8196903999997,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.296875,
+          "private_bytes": 27021312,
+          "working_bytes": 40378368
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108065378304,
+        "commit_available_bytes": 111558737920
+      }
+    },
+    {
+      "elapsed_seconds": 285.8350457999986,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.296875,
+          "private_bytes": 27021312,
+          "working_bytes": 40378368
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108145029120,
+        "commit_available_bytes": 111660253184
+      }
+    },
+    {
+      "elapsed_seconds": 290.84815569999773,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.296875,
+          "private_bytes": 27021312,
+          "working_bytes": 40378368
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108146446336,
+        "commit_available_bytes": 111654535168
+      }
+    },
+    {
+      "elapsed_seconds": 295.8613222999993,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 823296,
+          "working_bytes": 4255744
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1265664,
+          "working_bytes": 7446528
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.3125,
+          "private_bytes": 27021312,
+          "working_bytes": 40378368
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108110581760,
+        "commit_available_bytes": 111547449344
+      }
+    },
+    {
+      "elapsed_seconds": 300.0236819999991,
+      "processes": [
+        {
+          "pid": 22316,
+          "parent_pid": 26812,
+          "name": "python.exe",
+          "created_ticks": 134365864216496612,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 892928,
+          "working_bytes": 4378624
+        },
+        {
+          "pid": 40696,
+          "parent_pid": 22316,
+          "name": "conhost.exe",
+          "created_ticks": 134365864216659776,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 1343488,
+          "working_bytes": 7569408
+        },
+        {
+          "pid": 43872,
+          "parent_pid": 22316,
+          "name": "python.exe",
+          "created_ticks": 134365864216828526,
+          "cpu_seconds": 0.3125,
+          "private_bytes": 27095040,
+          "working_bytes": 40517632
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 108116922368,
+        "commit_available_bytes": 111545925632
+      }
+    }
+  ],
+  "status": "passed_on_this_machine",
+  "limits": "This development PC only; not the 4 CPU/8 GiB target, offline acceptance, or a model/browser load test. No user data or credentials are read by a model call. Sampler is excluded; all observed synthetic Host descendants are included. Short-lived processes between samples are not observable. No independent supervisor is implemented.",
+  "ready": {
+    "pid": 43872,
+    "port": 54378
+  },
+  "ready_status": {
+    "web_online": true,
+    "core_ready": true,
+    "stopped": false,
+    "assistant_state": "standby",
+    "active_tasks": 0,
+    "text_only": false,
+    "chat_text_only": true,
+    "computer_tasks": true,
+    "max_parallel_requests": 2,
+    "active_chat_requests": 0
+  },
+  "launcher_pid": 22316,
+  "final_status": {
+    "web_online": true,
+    "core_ready": true,
+    "stopped": false,
+    "assistant_state": "standby",
+    "active_tasks": 0,
+    "text_only": false,
+    "chat_text_only": true,
+    "computer_tasks": true,
+    "max_parallel_requests": 2,
+    "active_chat_requests": 0
+  },
+  "summary": {
+    "status": "passed_on_this_machine",
+    "checks": {
+      "full_duration": true,
+      "stable_process_tree": true,
+      "private_memory": true,
+      "idle_cpu": true,
+      "ready_time": true
+    },
+    "elapsed_seconds": 300.01315339999564,
+    "ready_seconds": 0.3205489000029047,
+    "cpu_percent_one_core": 0.02604052492853173,
+    "peak_private_bytes": 29331456,
+    "peak_working_bytes": 52465664
+  },
+  "host_exit_code": 0,
+  "source_sha256": {
+    "tools/probe_idle_resources.py": "34659446733777011af6941b3fbfe6ff7b1d063f3ad60d1ff31addaad209311e",
+    "apps/web/server.py": "fca55a85a80106145c3d306d44968ba6f713c9a1680c24620c08de075ecc40ca",
+    "runtime/node-host/jarvis_core/resources.py": "7c760896afedc549a3d22d8e0113611030ffa1b0db51ddf4c8933dc89b1e4bd5",
+    "runtime/node-host/jarvis_core/task_queue.py": "343b556ea7854ace41ae6b066ab81a0415e266b092b9d761dede899d47a275d8",
+    "adapters/computer-use/jarvis_computer/task_queue.py": "c04ebccd8204d2d67f5a7adad20e699b6f3ebbb1158766b7d1583893753a21f9"
+  }
+}

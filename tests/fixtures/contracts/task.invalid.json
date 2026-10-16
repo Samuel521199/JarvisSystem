@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0.0",
+  "task_id": "task_example",
+  "goal_id": "goal_example",
+  "parent_task_id": null,
+  "scope": "local",
+  "owner_node_id": "node_local",
+  "owner_epoch": 1,
+  "workflow_version": "1.0.0",
+  "skill_version": "1.0.0",
+  "planning_policy_version": "1.0.0",
+  "authorization_ref": "grant_sample",
+  "checkpoint_schema": "task.checkpoint.v1",
+  "budget": {
+    "max_cost_units": 0,
+    "max_runtime_seconds": 30,
+    "max_attempts": 0
+  },
+  "required_capabilities": [
+    "filesystem.read_sample.v1",
+    "artifact.write.v1"
+  ],
+  "cancellation_ref": "cancel_example",
+  "status": "READY"
+}

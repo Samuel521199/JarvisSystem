@@ -1,0 +1,22 @@
+[project]
+name = "jarvis-seed"
+version = "0.1.17"
+description = "K0 contracts and a restricted local core prototype"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+  "jsonschema==4.26.0",
+  "httpx==0.28.1",
+  "google-auth[requests]==2.62.0",
+  "cryptography==50.0.2",
+]
+
+[project.optional-dependencies]
+computer = ["playwright==1.64.0"]
+speech = [
+    "numpy>=2.2,<3",
+    "sherpa-onnx==1.13.8",
+    "sherpa-onnx-core==1.13.8",
+]
+
+[tool.uv]
+package = false

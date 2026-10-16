@@ -1,0 +1,26 @@
+flowchart TB
+    Agent["研发 Agent：问题、候选源码与变更理由"]
+    Plan["Build Planner：目标平台、预算、构建配方"]
+    Registry["Toolchain Registry：版本与兼容矩阵"]
+    Fetch["受控依赖准备：下载、来源与完整性校验"]
+    Cache[("只读 SDK、依赖闭包与构建模板")]
+    Build["隔离 Build Runner：封网编译与打包"]
+    Art["产物收集：哈希、依赖清单、构建证据"]
+    Verify["独立验证：契约、保留测试、目标平台"]
+    Release["发布控制：核对证据并授权版本"]
+    Run["生产运行：新任务灰度、旧任务保留"]
+    Agent --> Plan
+    Plan --> Registry
+    Registry --> Fetch
+    Fetch --> Cache
+    Cache --> Build
+    Plan --> Build
+    Build --> Art
+    Art --> Verify
+    Verify -->|"通过"| Release
+    Verify -->|"失败报告"| Agent
+    Release --> Run
+    Stop["G0 锁存：优先于构建、测试、发布和回退"]
+    Stop -.-> Plan
+    Stop -.-> Build
+    Stop -.-> Release

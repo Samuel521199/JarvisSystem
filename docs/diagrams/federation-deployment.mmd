@@ -1,0 +1,20 @@
+flowchart TB
+    subgraph A["完整节点 A：桌面"]
+      AR["本地人格、模型、任务与能力"]
+      AS[("本地记忆与账本")]
+      AR <--> AS
+    end
+    subgraph B["完整节点 B：另一台 PC"]
+      BR["本地人格、模型、任务与能力"]
+      BS[("本地记忆与账本")]
+      CO["本节点兼任共同体协调者"]
+      BR <--> BS
+      BR <--> CO
+    end
+    Phone["轻节点：手机交互与系统允许的局部能力"]
+    AR <-->|"已配对 LAN 或 VPN；同步与对账"| BR
+    CO -.->|"受租约和代际约束的委派"| AR
+    Phone <-->|"连接可用时"| BR
+    Cloud["可选互联网模型与服务"]
+    AR -.-> Cloud
+    BR -.-> Cloud

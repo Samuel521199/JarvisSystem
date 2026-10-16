@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jarvis.local/contracts/capability/1.0.0",
+  "title": "Jarvis capability v1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "capability_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[A-Za-z0-9.-]+)?$"
+    },
+    "status": {
+      "enum": [
+        "planned",
+        "available",
+        "disabled"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "effect": {
+      "enum": [
+        "read",
+        "write",
+        "control",
+        "build"
+      ]
+    },
+    "executor_ref": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "input_schema": {
+      "type": "object"
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "permissions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "filesystem_scopes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "network_scopes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "device_scopes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "filesystem_scopes",
+        "network_scopes",
+        "device_scopes"
+      ]
+    },
+    "idempotency_support": {
+      "enum": [
+        "receiver_verified",
+        "local_ledger",
+        "none"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "capability_id",
+    "version",
+    "status",
+    "description",
+    "effect",
+    "executor_ref",
+    "input_schema",
+    "output_schema",
+    "permissions",
+    "idempotency_support"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "planned"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "executor_ref": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "available"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "executor_ref": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  ]
+}

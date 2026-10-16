@@ -1,0 +1,84 @@
+{
+  "schema_version": "1.0.0",
+  "capability_id": "filesystem.read_sample.v1",
+  "version": "1.0.0",
+  "status": "available",
+  "description": "只读取宿主绑定样例目录内的目录项元数据；不读取文件正文，不跟随越界链接。",
+  "effect": "read",
+  "executor_ref": null,
+  "input_schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "relative_path": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))[^\\\\:\\u0000]+$"
+      },
+      "max_files": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 1000
+      },
+      "max_bytes": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 10485760
+      }
+    },
+    "required": [
+      "relative_path",
+      "max_files",
+      "max_bytes"
+    ]
+  },
+  "output_schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "entries": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^(?!/)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*//)[^\\\\:\\u0000]+$",
+              "description": "Normalized relative path. Runtime must additionally resolve links and enforce its allowed root."
+            },
+            "size_bytes": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "kind": {
+              "enum": [
+                "file",
+                "directory"
+              ]
+            }
+          },
+          "required": [
+            "path",
+            "size_bytes",
+            "kind"
+          ]
+        }
+      }
+    },
+    "required": [
+      "entries"
+    ]
+  },
+  "permissions": {
+    "filesystem_scopes": [
+      "sample-input"
+    ],
+    "network_scopes": [],
+    "device_scopes": []
+  },
+  "idempotency_support": "local_ledger"
+}

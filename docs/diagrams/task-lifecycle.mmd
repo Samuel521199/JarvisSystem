@@ -1,0 +1,24 @@
+stateDiagram-v2
+    [*] --> Created
+    Created --> Planned
+    Planned --> Ready
+    Ready --> Running
+    Running --> Waiting: 等待资源或输入
+    Waiting --> Ready: 条件满足
+    Running --> Paused: 用户暂停或安全检查点
+    Paused --> Ready: 恢复
+    Running --> Verifying: 执行结束
+    Verifying --> Succeeded: 证据通过
+    Verifying --> Ready: 可修复且预算允许
+    Running --> Unknown: 外部动作结果不明
+    Unknown --> Verifying: 查询确认
+    Unknown --> Waiting: 无法确认
+    Running --> Failed: 不可恢复或预算耗尽
+    Created --> Cancelled
+    Ready --> Cancelled
+    Paused --> Cancelled
+    Running --> Cancelling: 请求取消
+    Cancelling --> Cancelled: 到达可停止点
+    Succeeded --> [*]
+    Failed --> [*]
+    Cancelled --> [*]

@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-10-15T07:18:21.050100+00:00",
+  "python_version": "3.13.0",
+  "sqlite_version": "3.45.3",
+  "script_sha256": "e485dfd3e9854aba7c38cf0f433cfdfdb56b59e8cf56d7512c24403ed140d4cb",
+  "scope": "Synthetic single-row MATCH behavior only; not a quality or performance benchmark.",
+  "results": [
+    {
+      "table": "unicode61",
+      "tokenizer": "unicode61",
+      "input": "贾维斯需要离线记忆和知识管理",
+      "matches": {
+        "离线": 0,
+        "离线记忆": 0,
+        "知识管理": 0
+      }
+    },
+    {
+      "table": "trigram",
+      "tokenizer": "trigram",
+      "input": "贾维斯需要离线记忆和知识管理",
+      "matches": {
+        "离线": 0,
+        "离线记忆": 1,
+        "知识管理": 1
+      }
+    },
+    {
+      "table": "manual_token_control",
+      "tokenizer": "unicode61",
+      "input": "贾维斯 需要 离线 记忆 和 知识 管理 离线记忆 知识管理",
+      "matches": {
+        "离线": 1,
+        "离线记忆": 1,
+        "知识管理": 1
+      }
+    }
+  ]
+}

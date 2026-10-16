@@ -1,0 +1,183 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jarvis.local/contracts/build-profile/1.0.0",
+  "title": "Jarvis build-profile v1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "build_profile_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[A-Za-z0-9.-]+)?$"
+    },
+    "status": {
+      "enum": [
+        "planned",
+        "ready",
+        "disabled"
+      ]
+    },
+    "language": {
+      "type": "string",
+      "minLength": 1
+    },
+    "toolchain_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "os": {
+          "enum": [
+            "windows",
+            "linux",
+            "macos"
+          ]
+        },
+        "arch": {
+          "type": "string",
+          "minLength": 1
+        },
+        "abi": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "os",
+        "arch",
+        "abi"
+      ]
+    },
+    "commands": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "build": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "test": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      },
+      "required": [
+        "build",
+        "test"
+      ]
+    },
+    "dependency_lock_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "network_mode": {
+      "enum": [
+        "denied",
+        "allowlisted"
+      ]
+    },
+    "resource_limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "memory_mb": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "timeout_seconds": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_processes": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "memory_mb",
+        "timeout_seconds",
+        "max_processes"
+      ]
+    },
+    "outputs": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "^(?!/)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*//)[^\\\\:\\u0000]+$",
+        "description": "Normalized relative path. Runtime must additionally resolve links and enforce its allowed root."
+      }
+    },
+    "offline_verified": {
+      "type": "boolean"
+    },
+    "target_verified": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "schema_version",
+    "build_profile_id",
+    "version",
+    "status",
+    "language",
+    "toolchain_ref",
+    "target",
+    "commands",
+    "dependency_lock_refs",
+    "network_mode",
+    "resource_limits",
+    "outputs",
+    "offline_verified",
+    "target_verified"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "ready"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "target_verified": {
+            "const": true
+          }
+        }
+      }
+    }
+  ]
+}

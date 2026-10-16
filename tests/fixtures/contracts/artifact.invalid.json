@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0.0",
+  "artifact_id": "artifact_example",
+  "task_id": "task_example",
+  "action_id": "action_example",
+  "path": "../outside.txt",
+  "digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+  "media_type": "application/json",
+  "size_bytes": 12
+}

@@ -1,0 +1,395 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-10-15",
+  "default_root": "H:/JarvisData/models",
+  "max_total_bytes": 2000000000,
+  "default_profile": "local-small-cpu",
+  "profile_status": "download_verified_and_local_smoke_passed_not_quality_or_identity_validated",
+  "profiles": {
+    "local-small-cpu": {
+      "description": "Small CPU-first offline text and Mandarin speech prototype; downloads only explicit artifacts.",
+      "file_ids": [
+        "qwen3-0.6b-1",
+        "qwen3-0.6b-2",
+        "sensevoice-int8-1",
+        "sensevoice-int8-2",
+        "sensevoice-int8-3",
+        "sensevoice-int8-4",
+        "vits-aishell3-low-1",
+        "vits-aishell3-low-2",
+        "vits-aishell3-low-3",
+        "vits-aishell3-low-4",
+        "vits-aishell3-low-5",
+        "vits-aishell3-low-6",
+        "vits-aishell3-low-7",
+        "vits-aishell3-low-8",
+        "campplus-zh-1",
+        "silero-vad-1",
+        "llamacpp-win-cpu"
+      ],
+      "max_total_bytes": 2000000000,
+      "total_bytes": 961591814
+    }
+  },
+  "components": [
+    {
+      "id": "qwen3-0.6b",
+      "name": "Qwen3 0.6B Q8_0 official GGUF",
+      "purpose": "Small offline Chinese dialogue, classification and constrained templates; no autonomous authorization decisions.",
+      "license": {
+        "id": "Apache-2.0",
+        "source": "https://huggingface.co/Qwen/Qwen3-0.6B-GGUF/blob/23749fefcc72300e3a2ad315e1317431b06b590a/LICENSE",
+        "status": "publisher_declared"
+      },
+      "runtime": {
+        "provider": "llama.cpp",
+        "device": "cpu",
+        "threads": 4,
+        "context_tokens": 2048,
+        "max_output_tokens": 256,
+        "parallel_sequences": 1,
+        "enable_thinking": false,
+        "gpu_layers": 0
+      },
+      "limitations": [
+        "0.6B is not a substitute for a strong cloud reasoning model.",
+        "Validate format and behavior before routing any task; model output never grants permissions.",
+        "Disable thinking in chat template/runtime configuration; a prompt alone is not a hard resource bound."
+      ]
+    },
+    {
+      "id": "sensevoice-int8",
+      "name": "SenseVoiceSmall int8 ONNX 2024-07-17",
+      "purpose": "Mandarin-first speech to text, with Cantonese/English/Japanese/Korean support.",
+      "license": {
+        "id": "LicenseRef-FunASR-Model",
+        "source": "https://huggingface.co/FunAudioLLM/SenseVoiceSmall/tree/3847d57b6bdf2dd8875cb1508d2af43d80a16bf7",
+        "license_pointer": "https://github.com/modelscope/FunASR/blob/main/MODEL_LICENSE",
+        "status": "custom_terms_commercial_and_redistribution_not_confirmed",
+        "note": "The converted LICENSE is only a pointer; do not infer the model license from sherpa-onnx or FunASR code licenses."
+      },
+      "runtime": {
+        "provider": "sherpa-onnx",
+        "device": "cpu",
+        "threads": 2,
+        "sample_rate_hz": 16000,
+        "language": "zh",
+        "use_itn": true,
+        "max_segment_seconds": 15
+      },
+      "limitations": [
+        "Non-streaming recognizer; use short VAD segments rather than claiming native incremental recognition.",
+        "Benchmark latency and recognition on the actual microphone; supplied zh.wav is only a smoke-test fixture."
+      ]
+    },
+    {
+      "id": "vits-aishell3-low",
+      "name": "Icefall AISHELL3 VITS low (174 preset speakers)",
+      "purpose": "Small CPU Mandarin speech synthesis using a preset voice; no voice cloning.",
+      "license": {
+        "id": "Apache-2.0",
+        "source": "https://huggingface.co/csukuangfj/icefall-tts-aishell3-vits-low-2024-04-06/blob/57345c004e13ed640e408c4c29ab56187b18f065/README.md",
+        "status": "publisher_model_card_declared",
+        "note": "Preserve attribution; data/voice-related rights for redistribution are not independently audited."
+      },
+      "runtime": {
+        "provider": "sherpa-onnx",
+        "device": "cpu",
+        "threads": 2,
+        "speaker_id": 0,
+        "model": "tts/vits-aishell3-low/model.onnx",
+        "lexicon": "tts/vits-aishell3-low/lexicon.txt",
+        "tokens": "tts/vits-aishell3-low/tokens.txt",
+        "rule_fsts": [
+          "tts/vits-aishell3-low/phone.fst",
+          "tts/vits-aishell3-low/date.fst",
+          "tts/vits-aishell3-low/number.fst"
+        ]
+      },
+      "limitations": [
+        "Mandarin only; limited naturalness and pronunciation, not an imitation of a real friend.",
+        "Omit the 180 MB optional rule.far and all training checkpoints; measure normalization for actual use cases."
+      ]
+    },
+    {
+      "id": "campplus-zh",
+      "name": "CAM++ Chinese 16 kHz speaker embedding",
+      "purpose": "Optional speaker similarity signal only.",
+      "license": {
+        "id": "Apache-2.0",
+        "source": "https://modelscope.cn/models/iic/speech_campplus_sv_zh-cn_16k-common",
+        "status": "upstream_model_card_declared",
+        "note": "ONNX redistribution has no standalone license metadata; preserve upstream attribution."
+      },
+      "runtime": {
+        "provider": "sherpa-onnx",
+        "device": "cpu",
+        "threads": 1,
+        "sample_rate_hz": 16000
+      },
+      "limitations": [
+        "No owner recording exists: enrollment is unavailable, and no identity match may be fabricated.",
+        "Never independently authorize actions, unlock G0, or replace an owner credential.",
+        "No calibrated threshold or anti-replay guarantee; embedding extraction is not liveness verification."
+      ]
+    },
+    {
+      "id": "silero-vad",
+      "name": "Silero VAD ONNX (sherpa maintainer snapshot)",
+      "purpose": "Detect speech boundaries; not speech transcription or identity.",
+      "license": {
+        "id": "MIT",
+        "source": "https://github.com/snakers4/silero-vad/blob/master/LICENSE",
+        "status": "upstream_project_declared"
+      },
+      "runtime": {
+        "provider": "sherpa-onnx",
+        "device": "cpu",
+        "threads": 1,
+        "sample_rate_hz": 16000
+      },
+      "limitations": [
+        "Voice activity detection alone cannot distinguish the owner, a television, or replayed speech."
+      ]
+    },
+    {
+      "id": "llamacpp",
+      "name": "llama.cpp b11617 Windows x64 CPU archive",
+      "purpose": "Offline GGUF inference runtime; archive is downloaded but never unpacked or executed by this tool.",
+      "license": {
+        "id": "MIT",
+        "source": "https://github.com/ggml-org/llama.cpp/blob/b11617/LICENSE",
+        "status": "publisher_declared"
+      },
+      "runtime": {
+        "provider": "llama.cpp",
+        "device": "cpu"
+      },
+      "limitations": [
+        "Review and unpack separately into a versioned runtime directory before execution.",
+        "Bind a later local server to loopback; do not expose an unauthenticated listener to the network."
+      ]
+    }
+  ],
+  "files": [
+    {
+      "id": "qwen3-0.6b-1",
+      "component": "qwen3-0.6b",
+      "kind": "llm",
+      "path": "llm/qwen3-0.6b/Qwen3-0.6B-Q8_0.gguf",
+      "url": "https://huggingface.co/Qwen/Qwen3-0.6B-GGUF/resolve/23749fefcc72300e3a2ad315e1317431b06b590a/Qwen3-0.6B-Q8_0.gguf",
+      "revision": "23749fefcc72300e3a2ad315e1317431b06b590a",
+      "size_bytes": 639446688,
+      "sha256": "9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031",
+      "hash_source": "publisher_huggingface_lfs_sha256",
+      "metadata_url": "https://huggingface.co/api/models/Qwen/Qwen3-0.6B-GGUF/revision/23749fefcc72300e3a2ad315e1317431b06b590a?blobs=true"
+    },
+    {
+      "id": "qwen3-0.6b-2",
+      "component": "qwen3-0.6b",
+      "kind": "llm",
+      "path": "llm/qwen3-0.6b/LICENSE",
+      "url": "https://huggingface.co/Qwen/Qwen3-0.6B-GGUF/resolve/23749fefcc72300e3a2ad315e1317431b06b590a/LICENSE",
+      "revision": "23749fefcc72300e3a2ad315e1317431b06b590a",
+      "size_bytes": 11544,
+      "sha256": "5de36594c10839788a8c589443a8ef9d8b8d17c65a1b5807206ae037fc36c6bd",
+      "hash_source": "sha256_calculated_from_https_bytes_verified_against_pinned_git_blob_sha1",
+      "metadata_url": "https://huggingface.co/api/models/Qwen/Qwen3-0.6B-GGUF/revision/23749fefcc72300e3a2ad315e1317431b06b590a?blobs=true"
+    },
+    {
+      "id": "sensevoice-int8-1",
+      "component": "sensevoice-int8",
+      "kind": "stt",
+      "path": "stt/sensevoice-small/model.int8.onnx",
+      "url": "https://huggingface.co/csukuangfj/sherpa-onnx-sense-voice-zh-en-ja-ko-yue-2024-07-17/resolve/2365baeacb507f821a0c8120fcee3d484dba7a07/model.int8.onnx",
+      "revision": "2365baeacb507f821a0c8120fcee3d484dba7a07",
+      "size_bytes": 239233841,
+      "sha256": "c71f0ce00bec95b07744e116345e33d8cbbe08cef896382cf907bf4b51a2cd51",
+      "hash_source": "publisher_huggingface_lfs_sha256",
+      "metadata_url": "https://huggingface.co/api/models/csukuangfj/sherpa-onnx-sense-voice-zh-en-ja-ko-yue-2024-07-17/revision/2365baeacb507f821a0c8120fcee3d484dba7a07?blobs=true"
+    },
+    {
+      "id": "sensevoice-int8-2",
+      "component": "sensevoice-int8",
+      "kind": "stt",
+      "path": "stt/sensevoice-small/tokens.txt",
+      "url": "https://huggingface.co/csukuangfj/sherpa-onnx-sense-voice-zh-en-ja-ko-yue-2024-07-17/resolve/2365baeacb507f821a0c8120fcee3d484dba7a07/tokens.txt",
+      "revision": "2365baeacb507f821a0c8120fcee3d484dba7a07",
+      "size_bytes": 315894,
+      "sha256": "f449eb28dc567533d7fa59be34e2abca8784f771850c78a47fb731a31429a1dc",
+      "hash_source": "sha256_calculated_from_https_bytes_verified_against_pinned_git_blob_sha1",
+      "metadata_url": "https://huggingface.co/api/models/csukuangfj/sherpa-onnx-sense-voice-zh-en-ja-ko-yue-2024-07-17/revision/2365baeacb507f821a0c8120fcee3d484dba7a07?blobs=true"
+    },
+    {
+      "id": "sensevoice-int8-3",
+      "component": "sensevoice-int8",
+      "kind": "stt",
+      "path": "stt/sensevoice-small/LICENSE",
+      "url": "https://huggingface.co/csukuangfj/sherpa-onnx-sense-voice-zh-en-ja-ko-yue-2024-07-17/resolve/2365baeacb507f821a0c8120fcee3d484dba7a07/LICENSE",
+      "revision": "2365baeacb507f821a0c8120fcee3d484dba7a07",
+      "size_bytes": 71,
+      "sha256": "221c6df10b0931a5629adad671ea48fb7747e034c414b6d2bfa275bc3dd4ea17",
+      "hash_source": "sha256_calculated_from_https_bytes_verified_against_pinned_git_blob_sha1",
+      "metadata_url": "https://huggingface.co/api/models/csukuangfj/sherpa-onnx-sense-voice-zh-en-ja-ko-yue-2024-07-17/revision/2365baeacb507f821a0c8120fcee3d484dba7a07?blobs=true"
+    },
+    {
+      "id": "sensevoice-int8-4",
+      "component": "sensevoice-int8",
+      "kind": "stt",
+      "path": "stt/sensevoice-small/test_wavs/zh.wav",
+      "url": "https://huggingface.co/csukuangfj/sherpa-onnx-sense-voice-zh-en-ja-ko-yue-2024-07-17/resolve/2365baeacb507f821a0c8120fcee3d484dba7a07/test_wavs/zh.wav",
+      "revision": "2365baeacb507f821a0c8120fcee3d484dba7a07",
+      "size_bytes": 178988,
+      "sha256": "b77f1794fe374a0ba1ee1dc458bfaf9349496cbbfc32780c50ba3c5a7ad8e373",
+      "hash_source": "sha256_calculated_from_https_bytes_verified_against_pinned_git_blob_sha1",
+      "metadata_url": "https://huggingface.co/api/models/csukuangfj/sherpa-onnx-sense-voice-zh-en-ja-ko-yue-2024-07-17/revision/2365baeacb507f821a0c8120fcee3d484dba7a07?blobs=true"
+    },
+    {
+      "id": "vits-aishell3-low-1",
+      "component": "vits-aishell3-low",
+      "kind": "tts",
+      "path": "tts/vits-aishell3-low/model.onnx",
+      "url": "https://huggingface.co/csukuangfj/icefall-tts-aishell3-vits-low-2024-04-06/resolve/57345c004e13ed640e408c4c29ab56187b18f065/exp/vits-epoch-960.onnx",
+      "revision": "57345c004e13ed640e408c4c29ab56187b18f065",
+      "size_bytes": 30482262,
+      "sha256": "5511d651b7840c0a93a6bbfd4afd070a2c7f39ca1ec3ff2ecd73191519bbb852",
+      "hash_source": "publisher_huggingface_lfs_sha256",
+      "metadata_url": "https://huggingface.co/api/models/csukuangfj/icefall-tts-aishell3-vits-low-2024-04-06/revision/57345c004e13ed640e408c4c29ab56187b18f065?blobs=true"
+    },
+    {
+      "id": "vits-aishell3-low-2",
+      "component": "vits-aishell3-low",
+      "kind": "tts",
+      "path": "tts/vits-aishell3-low/lexicon.txt",
+      "url": "https://huggingface.co/csukuangfj/icefall-tts-aishell3-vits-low-2024-04-06/resolve/57345c004e13ed640e408c4c29ab56187b18f065/data/lexicon.txt",
+      "revision": "57345c004e13ed640e408c4c29ab56187b18f065",
+      "size_bytes": 2042943,
+      "sha256": "ab2e61d357551e7b24ddd965d924aca784c20165ff58c150794e539c6b5e9e35",
+      "hash_source": "sha256_calculated_from_https_bytes_verified_against_pinned_git_blob_sha1",
+      "metadata_url": "https://huggingface.co/api/models/csukuangfj/icefall-tts-aishell3-vits-low-2024-04-06/revision/57345c004e13ed640e408c4c29ab56187b18f065?blobs=true"
+    },
+    {
+      "id": "vits-aishell3-low-3",
+      "component": "vits-aishell3-low",
+      "kind": "tts",
+      "path": "tts/vits-aishell3-low/tokens.txt",
+      "url": "https://huggingface.co/csukuangfj/icefall-tts-aishell3-vits-low-2024-04-06/resolve/57345c004e13ed640e408c4c29ab56187b18f065/data/tokens.txt",
+      "revision": "57345c004e13ed640e408c4c29ab56187b18f065",
+      "size_bytes": 1671,
+      "sha256": "50b45a7b7de1752fd3c7b4755661c285f1547f59186eca2281089a81307ad953",
+      "hash_source": "sha256_calculated_from_https_bytes_verified_against_pinned_git_blob_sha1",
+      "metadata_url": "https://huggingface.co/api/models/csukuangfj/icefall-tts-aishell3-vits-low-2024-04-06/revision/57345c004e13ed640e408c4c29ab56187b18f065?blobs=true"
+    },
+    {
+      "id": "vits-aishell3-low-4",
+      "component": "vits-aishell3-low",
+      "kind": "tts",
+      "path": "tts/vits-aishell3-low/speakers.txt",
+      "url": "https://huggingface.co/csukuangfj/icefall-tts-aishell3-vits-low-2024-04-06/resolve/57345c004e13ed640e408c4c29ab56187b18f065/data/speakers.txt",
+      "revision": "57345c004e13ed640e408c4c29ab56187b18f065",
+      "size_bytes": 1392,
+      "sha256": "50a825fc9a89172eee04a4d68869d933d0eca0d847f3b6fcffff9514cc72442d",
+      "hash_source": "sha256_calculated_from_https_bytes_verified_against_pinned_git_blob_sha1",
+      "metadata_url": "https://huggingface.co/api/models/csukuangfj/icefall-tts-aishell3-vits-low-2024-04-06/revision/57345c004e13ed640e408c4c29ab56187b18f065?blobs=true"
+    },
+    {
+      "id": "vits-aishell3-low-5",
+      "component": "vits-aishell3-low",
+      "kind": "tts",
+      "path": "tts/vits-aishell3-low/date.fst",
+      "url": "https://huggingface.co/csukuangfj/icefall-tts-aishell3-vits-low-2024-04-06/resolve/57345c004e13ed640e408c4c29ab56187b18f065/data/date.fst",
+      "revision": "57345c004e13ed640e408c4c29ab56187b18f065",
+      "size_bytes": 59154,
+      "sha256": "eb8aa079ae3cb81d8f4404992f39d61a0cb990947512b5b8d1e54d1f6980e718",
+      "hash_source": "sha256_calculated_from_https_bytes_verified_against_pinned_git_blob_sha1",
+      "metadata_url": "https://huggingface.co/api/models/csukuangfj/icefall-tts-aishell3-vits-low-2024-04-06/revision/57345c004e13ed640e408c4c29ab56187b18f065?blobs=true"
+    },
+    {
+      "id": "vits-aishell3-low-6",
+      "component": "vits-aishell3-low",
+      "kind": "tts",
+      "path": "tts/vits-aishell3-low/number.fst",
+      "url": "https://huggingface.co/csukuangfj/icefall-tts-aishell3-vits-low-2024-04-06/resolve/57345c004e13ed640e408c4c29ab56187b18f065/data/number.fst",
+      "revision": "57345c004e13ed640e408c4c29ab56187b18f065",
+      "size_bytes": 64482,
+      "sha256": "743f402181fcfebf76cc2f0546b71fa26476e626fbe4e460fb7b4c3a7a8bd5bd",
+      "hash_source": "sha256_calculated_from_https_bytes_verified_against_pinned_git_blob_sha1",
+      "metadata_url": "https://huggingface.co/api/models/csukuangfj/icefall-tts-aishell3-vits-low-2024-04-06/revision/57345c004e13ed640e408c4c29ab56187b18f065?blobs=true"
+    },
+    {
+      "id": "vits-aishell3-low-7",
+      "component": "vits-aishell3-low",
+      "kind": "tts",
+      "path": "tts/vits-aishell3-low/phone.fst",
+      "url": "https://huggingface.co/csukuangfj/icefall-tts-aishell3-vits-low-2024-04-06/resolve/57345c004e13ed640e408c4c29ab56187b18f065/data/phone.fst",
+      "revision": "57345c004e13ed640e408c4c29ab56187b18f065",
+      "size_bytes": 88630,
+      "sha256": "1ac2b6fa56b1442320c4de7db08353bab8963a2b57f365eebcdd3a2d3562f8d7",
+      "hash_source": "sha256_calculated_from_https_bytes_verified_against_pinned_git_blob_sha1",
+      "metadata_url": "https://huggingface.co/api/models/csukuangfj/icefall-tts-aishell3-vits-low-2024-04-06/revision/57345c004e13ed640e408c4c29ab56187b18f065?blobs=true"
+    },
+    {
+      "id": "vits-aishell3-low-8",
+      "component": "vits-aishell3-low",
+      "kind": "tts",
+      "path": "tts/vits-aishell3-low/new_heteronym.fst",
+      "url": "https://huggingface.co/csukuangfj/icefall-tts-aishell3-vits-low-2024-04-06/resolve/57345c004e13ed640e408c4c29ab56187b18f065/data/new_heteronym.fst",
+      "revision": "57345c004e13ed640e408c4c29ab56187b18f065",
+      "size_bytes": 21974,
+      "sha256": "ca14b2127e27baa571664e4bb791e143e7425f56a6bc29db08d74f97e6aa4e29",
+      "hash_source": "sha256_calculated_from_https_bytes_verified_against_pinned_git_blob_sha1",
+      "metadata_url": "https://huggingface.co/api/models/csukuangfj/icefall-tts-aishell3-vits-low-2024-04-06/revision/57345c004e13ed640e408c4c29ab56187b18f065?blobs=true"
+    },
+    {
+      "id": "campplus-zh-1",
+      "component": "campplus-zh",
+      "kind": "speaker_embedding",
+      "path": "speaker/campplus-zh/model.onnx",
+      "url": "https://huggingface.co/csukuangfj/speaker-embedding-models/resolve/0743f301363dec56491a490f6d6cbc9d67f9a3bf/3dspeaker_speech_campplus_sv_zh-cn_16k-common.onnx",
+      "revision": "0743f301363dec56491a490f6d6cbc9d67f9a3bf",
+      "size_bytes": 28281138,
+      "sha256": "f682b514c05d947ee3fa91cd6ec6c5c7543479a128373fa29b1faedccd21fd11",
+      "hash_source": "publisher_huggingface_lfs_sha256",
+      "metadata_url": "https://huggingface.co/api/models/csukuangfj/speaker-embedding-models/revision/0743f301363dec56491a490f6d6cbc9d67f9a3bf?blobs=true"
+    },
+    {
+      "id": "silero-vad-1",
+      "component": "silero-vad",
+      "kind": "vad",
+      "path": "vad/silero/silero_vad.onnx",
+      "url": "https://huggingface.co/csukuangfj/vad/resolve/fba88cd2e921609e7675c3aaf51e0b9b295da4bc/silero_vad.onnx",
+      "revision": "fba88cd2e921609e7675c3aaf51e0b9b295da4bc",
+      "size_bytes": 1807522,
+      "sha256": "a35ebf52fd3ce5f1469b2a36158dba761bc47b973ea3382b3186ca15b1f5af28",
+      "hash_source": "publisher_huggingface_lfs_sha256",
+      "metadata_url": "https://huggingface.co/api/models/csukuangfj/vad/revision/fba88cd2e921609e7675c3aaf51e0b9b295da4bc?blobs=true"
+    },
+    {
+      "id": "llamacpp-win-cpu",
+      "component": "llamacpp",
+      "kind": "runtime_archive",
+      "path": "runtimes/llama-b11617-bin-win-cpu-x64.zip",
+      "url": "https://github.com/ggml-org/llama.cpp/releases/download/b11617/llama-b11617-bin-win-cpu-x64.zip",
+      "revision": "b11617",
+      "asset_id": 640386677,
+      "size_bytes": 19553620,
+      "sha256": "1bad07f7993889a1f7431ad647904294f56919bf0bc84f4021327db1641a411c",
+      "hash_source": "publisher_github_release_asset_digest",
+      "metadata_url": "https://api.github.com/repos/ggml-org/llama.cpp/releases/tags/b11617"
+    }
+  ],
+  "sources": [
+    "https://huggingface.co/Qwen/Qwen3-0.6B-GGUF",
+    "https://k2-fsa.github.io/sherpa/onnx/sense-voice/pretrained.html",
+    "https://k2-fsa.github.io/sherpa/onnx/tts/pretrained_models/vits.html",
+    "https://k2-fsa.github.io/sherpa/onnx/speaker-identification/index.html",
+    "https://github.com/snakers4/silero-vad",
+    "https://github.com/ggml-org/llama.cpp/releases/tag/b11617"
+  ],
+  "notes": [
+    "No automatic network fallback or model enlargement.",
+    "This manifest contains no API keys and no remote-code execution instructions.",
+    "Only selected ONNX/GGUF artifacts, required data files, a test WAV, license pointers and a runtime ZIP are downloaded.",
+    "Resource figures are configuration limits, not measured performance promises."
+  ]
+}

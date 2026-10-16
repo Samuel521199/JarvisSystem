@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-10-16T01:12:40.533828+00:00",
+  "from_version": "0.1.12",
+  "version": "0.1.17",
+  "url": "http://127.0.0.1:18181/",
+  "runtime_mode": "source with existing prepared Python environment; not runtime-slot activation",
+  "tables_before": {
+    "control.db/tasks": {
+      "count": 10,
+      "sha256": "6863428907437270e7aaf2db527d70e9ea793415c44b772d65bad90864fded55"
+    },
+    "control.db/actions": {
+      "count": 10,
+      "sha256": "bf090e94ef7f41ca17f2ef423b25915931e6247c8752b28b2fe1ac1739066b43"
+    },
+    "control.db/artifacts": {
+      "count": 8,
+      "sha256": "d60dd48d565cf5a6fd7b796933c653ab66c9a05925d1379d99e9d568ff386686"
+    },
+    "workspace.db/projects": {
+      "count": 1,
+      "sha256": "77a2cdae0716f116bf9dbb9fa73f1cb23a9e766e293196689a0d5290828a225e"
+    },
+    "workspace.db/outputs": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    }
+  },
+  "tables_after": {
+    "control.db/tasks": {
+      "count": 10,
+      "sha256": "6863428907437270e7aaf2db527d70e9ea793415c44b772d65bad90864fded55"
+    },
+    "control.db/actions": {
+      "count": 10,
+      "sha256": "bf090e94ef7f41ca17f2ef423b25915931e6247c8752b28b2fe1ac1739066b43"
+    },
+    "control.db/artifacts": {
+      "count": 8,
+      "sha256": "d60dd48d565cf5a6fd7b796933c653ab66c9a05925d1379d99e9d568ff386686"
+    },
+    "workspace.db/projects": {
+      "count": 1,
+      "sha256": "77a2cdae0716f116bf9dbb9fa73f1cb23a9e766e293196689a0d5290828a225e"
+    },
+    "workspace.db/outputs": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    }
+  },
+  "tables_unchanged": true,
+  "artifact_files": 12,
+  "artifact_content_unchanged": true,
+  "assistant_status": {
+    "web_online": true,
+    "core_ready": true,
+    "stopped": false,
+    "assistant_state": "standby",
+    "active_tasks": 0,
+    "text_only": false,
+    "chat_text_only": true,
+    "computer_tasks": true,
+    "max_parallel_requests": 2,
+    "active_chat_requests": 0
+  },
+  "source_sha256": {
+    "apps/web/server.py": "fca55a85a80106145c3d306d44968ba6f713c9a1680c24620c08de075ecc40ca",
+    "apps/web/index.html": "df275637f97aa857182abd0c2637127079c05c19bc0be2e53942d3ddff12ee91",
+    "apps/web/computer.js": "16474da801c368385186524ebaebad018c6d2019ed3631a613ca777da52ee2aa",
+    "apps/web/workspace.js": "c4a34d98fe2c951b72601cbb1fc95709af1baaafc367f4bce3252727b86fda58",
+    "runtime/node-host/jarvis_core/__init__.py": "74325ee26262b4febe92915394284e908308b257a53056ee76e562da2da3eda2"
+  },
+  "scope": "Live restart only after confirming no active chat or task; no paid model call, task submission, global stop latch or credential reset.",
+  "status": "passed"
+}

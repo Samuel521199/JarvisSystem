@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0.0",
+  "ruleset_id": "jarvis.k0.rules",
+  "version": "1.0.0",
+  "scope": "K0_K1",
+  "enforcement": {
+    "mode": "deterministic_known_boundaries",
+    "semantic_intent_proof": false,
+    "os_isolation_verified": false,
+    "fail_closed": true
+  },
+  "policy": {
+    "network_access": false,
+    "arbitrary_shell": false,
+    "device_control": false,
+    "production_write": false,
+    "unknown_action_replay": false,
+    "knowledge_can_grant_permissions": false,
+    "allowed_capabilities": [
+      "system.status.v1",
+      "filesystem.read_sample.v1",
+      "artifact.write.v1"
+    ],
+    "allowed_scope_ids": [
+      "sample-input",
+      "artifact-output"
+    ],
+    "max_files": 1000,
+    "max_bytes": 10485760
+  },
+  "rules": [
+    {
+      "rule_id": "G0",
+      "statement": "主人目标与控制权优先；本种子仅检查明确机器边界，不声称理解或证明所有内部意图。",
+      "source_ref": "docs/security-sovereignty.md#product-definition-6"
+    },
+    {
+      "rule_id": "R_STOP",
+      "statement": "有效停机锁优先于任务、模型与自动恢复；普通初始化不得清除锁存。",
+      "source_ref": "docs/security-sovereignty.md#sovereignty-shutdown"
+    },
+    {
+      "rule_id": "R_SCOPE",
+      "statement": "运行时绑定样例输入根和产物输出根，解析真实路径后逐次检查；范围名称不是授权。",
+      "source_ref": "docs/core-bootstrap.md#bootstrap-2"
+    },
+    {
+      "rule_id": "R_UNKNOWN",
+      "statement": "DISPATCHING 无终态回执按 UNKNOWN 对账；不盲目重发，不凭重复请求产生重复副作用。",
+      "source_ref": "docs/contracts.md#interfaces-2"
+    },
+    {
+      "rule_id": "R_SEPARATION",
+      "statement": "知识仅解释事实，规则由受保护加载路径执行，技能描述不能授予权限；候选不能改验收基线或生产。",
+      "source_ref": "docs/core-bootstrap.md#system-health-2"
+    },
+    {
+      "rule_id": "R_PLANNED",
+      "statement": "构建、外发、设备和自主发布尚未开放；planned 技能不得执行。",
+      "source_ref": "docs/core-bootstrap.md#bootstrap-5"
+    }
+  ]
+}

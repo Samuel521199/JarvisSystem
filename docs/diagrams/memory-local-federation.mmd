@@ -1,0 +1,39 @@
+flowchart TB
+  subgraph A["完整节点 A · 离线可用"]
+    direction TB
+    AIN["获准文档 / 会话 / 工具回执"]
+    ARAW["本地原件 + 来源摘要"]
+    AFACT["MemoryStore · SQLite<br/>事实修订 / 事件 / outbox + inbox"]
+    AIDX["可重建索引<br/>词项 + 可选向量 / 关系"]
+    AQ["本地查询<br/>权限 / 域 / 时间 / 删除过滤"]
+    AIN --> ARAW -->|"带来源候选，经规则应用"| AFACT
+    AFACT -->|"异步构建，标出水位"| AIDX
+    AIDX --> AQ
+    AFACT -->|"有效事实复核"| AQ
+  end
+  subgraph B["完整节点 B · 离线可用"]
+    direction TB
+    BIN["本机经历 + 已复制资料"]
+    BRAW["本地原件 + 来源摘要"]
+    BFACT["MemoryStore · SQLite<br/>事实修订 / 事件 / outbox + inbox"]
+    BIDX["可重建索引<br/>可采用不同嵌入模型"]
+    BQ["本地查询<br/>权限 / 域 / 时间 / 删除过滤"]
+    BIN --> BRAW -->|"带来源候选，经规则应用"| BFACT
+    BFACT -->|"异步构建，标出水位"| BIDX
+    BIDX --> BQ
+    BFACT -->|"有效事实复核"| BQ
+  end
+  SYNC["配对身份 + 授权同步<br/>安全对账 → 撤权 / 墓碑 → 缺失事件<br/>去重 / 因果分支 / 原件按需传输"]
+  AFACT <-->|"事件与确认"| SYNC
+  BFACT <-->|"事件与确认"| SYNC
+  REMOTE["可选稳定主机检索服务<br/>只持有获准索引与引用"]
+  AQ -. "在线可补充；离线仍查本地" .-> REMOTE
+  BQ -. "在线可补充；离线仍查本地" .-> REMOTE
+  NOTE["不共享活跃 DB/WAL，不混合不同向量空间<br/>同步事实不重放动作；冲突与缺失明确展示<br/>完整节点离线能力取决于已准备资料与模型"]
+  SYNC --- NOTE
+  classDef store fill:#e8f2ff,stroke:#446c9b,color:#152d47;
+  classDef derived fill:#edf7ed,stroke:#60885c,color:#244323;
+  classDef protocol fill:#fff1db,stroke:#af8549,color:#513b20;
+  class ARAW,AFACT,BRAW,BFACT store;
+  class AIDX,BIDX,REMOTE derived;
+  class SYNC,NOTE protocol;

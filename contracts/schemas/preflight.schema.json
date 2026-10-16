@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:jarvis:preflight:1.0.0",
+  "title": "Read-only readiness diagnostic, never an authorization token",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "report_kind", "version", "captured_at", "environment", "readiness", "checks", "limitations"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "report_kind": {"const": "jarvis.preflight"},
+    "version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "captured_at": {"type": "string", "format": "date-time"},
+    "environment": {
+      "type": "object", "additionalProperties": false, "required": ["platform", "python"],
+      "properties": {"platform": {"type": "string"}, "python": {"type": "string"}}
+    },
+    "readiness": {"enum": ["blocked", "incomplete"]},
+    "checks": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "status", "message", "evidence"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "status": {"enum": ["pass", "fail", "warn", "unknown"]},
+          "message": {"type": "string", "minLength": 1},
+          "evidence": {"type": "object", "description": "Platform-specific diagnostic observations, not authority or executable input"}
+        }
+      }
+    },
+    "limitations": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+  }
+}

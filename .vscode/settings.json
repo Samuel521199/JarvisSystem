@@ -1,0 +1,6 @@
+{
+  "markdown.preview.openMarkdownLinks": "inPreview",
+  "[markdown]": {
+    "editor.links": true
+  }
+}

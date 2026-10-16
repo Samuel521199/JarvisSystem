@@ -1,0 +1,11 @@
+{
+  "schema_version": "99.0.0",
+  "report_kind": "jarvis.preflight",
+  "version": "0.1.5",
+  "captured_at": "not-a-date",
+  "environment": {"platform": "synthetic", "python": "3.13.0"},
+  "readiness": "authorized",
+  "checks": [{"id": "boundary.worker", "status": "pass", "message": "Self declared", "evidence": {}}],
+  "limitations": [],
+  "grant_unrestricted_execution": true
+}

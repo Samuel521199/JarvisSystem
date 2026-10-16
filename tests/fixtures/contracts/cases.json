@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0.0",
+  "cases": [
+    {
+      "case_id": "task.valid",
+      "contract": "task",
+      "path": "tests/fixtures/contracts/task.valid.json",
+      "valid": true
+    },
+    {
+      "case_id": "task.invalid",
+      "contract": "task",
+      "path": "tests/fixtures/contracts/task.invalid.json",
+      "valid": false
+    },
+    {
+      "case_id": "action.valid",
+      "contract": "action",
+      "path": "tests/fixtures/contracts/action.valid.json",
+      "valid": true
+    },
+    {
+      "case_id": "action.invalid",
+      "contract": "action",
+      "path": "tests/fixtures/contracts/action.invalid.json",
+      "valid": false
+    },
+    {
+      "case_id": "capability.valid",
+      "contract": "capability",
+      "path": "tests/fixtures/contracts/capability.valid.json",
+      "valid": true
+    },
+    {
+      "case_id": "capability.invalid",
+      "contract": "capability",
+      "path": "tests/fixtures/contracts/capability.invalid.json",
+      "valid": false
+    },
+    {
+      "case_id": "artifact.valid",
+      "contract": "artifact",
+      "path": "tests/fixtures/contracts/artifact.valid.json",
+      "valid": true
+    },
+    {
+      "case_id": "artifact.invalid",
+      "contract": "artifact",
+      "path": "tests/fixtures/contracts/artifact.invalid.json",
+      "valid": false
+    },
+    {
+      "case_id": "module.valid",
+      "contract": "module",
+      "path": "tests/fixtures/contracts/module.valid.json",
+      "valid": true
+    },
+    {
+      "case_id": "module.invalid",
+      "contract": "module",
+      "path": "tests/fixtures/contracts/module.invalid.json",
+      "valid": false
+    },
+    {
+      "case_id": "build-profile.valid",
+      "contract": "build-profile",
+      "path": "tests/fixtures/contracts/build-profile.valid.json",
+      "valid": true
+    },
+    {
+      "case_id": "build-profile.invalid",
+      "contract": "build-profile",
+      "path": "tests/fixtures/contracts/build-profile.invalid.json",
+      "valid": false
+    }
+  ]
+}

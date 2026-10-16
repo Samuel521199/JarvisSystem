@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Browser action proposal v1",
+  "type": "object", "additionalProperties": false,
+  "required": ["observation_id", "op", "target", "value"],
+  "properties": {
+    "observation_id": {"type": "string", "pattern": "^[a-f0-9]{32}$"},
+    "op": {"enum": ["click", "fill", "select", "check"]},
+    "target": {"type": "string", "pattern": "^[a-z][a-z0-9_-]{0,39}$"},
+    "value": {"oneOf": [{"type": "null"}, {"type": "string", "maxLength": 2000}, {"type": "boolean"}]}
+  }
+}

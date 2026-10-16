@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0.0",
+  "report_kind": "jarvis.preflight",
+  "version": "0.1.5",
+  "captured_at": "2026-10-15T08:00:00+00:00",
+  "environment": {"platform": "synthetic", "python": "3.13.0"},
+  "readiness": "blocked",
+  "checks": [{"id": "boundary.worker", "status": "fail", "message": "No isolated worker", "evidence": {"evidence_level": "implementation_gap"}}],
+  "limitations": ["Synthetic contract fixture; not a deployment test"]
+}

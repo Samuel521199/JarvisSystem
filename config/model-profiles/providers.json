@@ -1,0 +1,264 @@
+{
+  "schema_version": 1,
+  "default_provider": "vertex",
+  "automatic_fallback": true,
+  "fallback_order": [
+    "vertex",
+    "bailian",
+    "openai",
+    "xai",
+    "local"
+  ],
+  "usage_policy": "notify_on_provider_exhaustion",
+  "max_prompt_bytes": 65536,
+  "max_output_tokens": 4096,
+  "local_max_prompt_bytes": 4096,
+  "local_max_output_tokens": 256,
+  "providers": {
+    "vertex": {
+      "model": "gemini-3.8-flash",
+      "location": "global",
+      "balance_hint": "owner_reported_higher_not_verified",
+      "models": {
+        "gemini-3.8-flash": {
+          "label": "Gemini 3.8 Flash",
+          "tier": "balanced",
+          "parameters": {
+            "thinking_level": "LOW",
+            "max_output_tokens": 8192
+          },
+          "reasoning_levels": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "gemini-4-argon": {
+          "label": "Gemini 4 Argon",
+          "tier": "advanced",
+          "parameters": {
+            "thinking_level": "LOW",
+            "max_output_tokens": 8192
+          },
+          "reasoning_levels": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "gemini-3.1-pro-preview": {
+          "label": "Gemini 3.1 Pro · Preview",
+          "tier": "advanced",
+          "parameters": {
+            "thinking_level": "LOW",
+            "max_output_tokens": 8192
+          },
+          "reasoning_levels": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "gemini-3.5-flash-lite": {
+          "label": "Gemini 3.5 Flash-Lite",
+          "tier": "economy",
+          "parameters": {
+            "thinking_level": "MINIMAL",
+            "max_output_tokens": 8192
+          },
+          "reasoning_levels": [
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "gemini-3.1-flash-lite": {
+          "label": "Gemini 3.1 Flash-Lite",
+          "tier": "economy",
+          "parameters": {
+            "thinking_level": "MINIMAL"
+          },
+          "reasoning_levels": [
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      }
+    },
+    "bailian": {
+      "model": "qwen3.8-flash",
+      "region": "beijing",
+      "models": {
+        "qwen3.8-flash": {
+          "label": "Qwen3.8 Flash",
+          "tier": "economy",
+          "parameters": {
+            "enable_thinking": false
+          },
+          "reasoning_levels": [
+            "off",
+            "on"
+          ]
+        },
+        "qwen3.8-max": {
+          "label": "Qwen3.8 Max",
+          "tier": "advanced",
+          "parameters": {
+            "enable_thinking": false
+          },
+          "reasoning_levels": [
+            "off",
+            "on"
+          ]
+        },
+        "qwen3.7-plus": {
+          "label": "Qwen3.7 Plus",
+          "tier": "balanced",
+          "parameters": {
+            "enable_thinking": false
+          },
+          "reasoning_levels": [
+            "off",
+            "on"
+          ]
+        },
+        "qwen-flash": {
+          "label": "Qwen Flash",
+          "tier": "previous",
+          "parameters": {
+            "enable_thinking": false
+          },
+          "reasoning_levels": [
+            "off",
+            "on"
+          ]
+        }
+      }
+    },
+    "openai": {
+      "model": "gpt-6-luna",
+      "balance_hint": "owner_reported_low_not_verified",
+      "models": {
+        "gpt-6-luna": {
+          "label": "GPT-6 Luna",
+          "tier": "economy",
+          "parameters": {
+            "reasoning_effort": "none"
+          },
+          "reasoning_levels": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        },
+        "gpt-6.1-sol": {
+          "label": "GPT-6.1 Sol",
+          "tier": "balanced",
+          "parameters": {
+            "reasoning_effort": "low",
+            "max_output_tokens": 8192
+          },
+          "reasoning_levels": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        },
+        "gpt-6-astra": {
+          "label": "GPT-6 Astra",
+          "tier": "advanced",
+          "parameters": {
+            "reasoning_effort": "low",
+            "max_output_tokens": 8192
+          },
+          "reasoning_levels": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        },
+        "gpt-6-sol": {
+          "label": "GPT-6 Sol",
+          "tier": "previous",
+          "parameters": {
+            "reasoning_effort": "none"
+          },
+          "reasoning_levels": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        },
+        "gpt-5.6-luna": {
+          "label": "GPT-5.6 Luna",
+          "tier": "previous",
+          "parameters": {
+            "reasoning_effort": "none"
+          },
+          "reasoning_levels": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      }
+    },
+    "xai": {
+      "model": "grok-4.7",
+      "balance_hint": "owner_reported_low_not_verified",
+      "models": {
+        "grok-4.7": {
+          "label": "Grok 4.7",
+          "tier": "advanced",
+          "parameters": {
+            "reasoning_effort": "low",
+            "max_output_tokens": 8192
+          },
+          "reasoning_levels": [
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ]
+        },
+        "grok-4-1-fast-non-reasoning": {
+          "label": "Grok 4.1 Fast 非推理",
+          "tier": "economy",
+          "parameters": {},
+          "reasoning_levels": []
+        }
+      }
+    },
+    "local": {
+      "model": "qwen3-0.6b",
+      "endpoint": "http://127.0.0.1:18180/v1/chat/completions",
+      "models": {
+        "qwen3-0.6b": {
+          "label": "Qwen3 0.6B 本地 CPU",
+          "tier": "offline",
+          "parameters": {
+            "max_output_tokens": 256
+          },
+          "reasoning_levels": []
+        }
+      }
+    }
+  },
+  "catalog_checked_at": "2026-10-15"
+}

@@ -1,0 +1,28 @@
+flowchart TB
+    Owner["主人：目标与停止权"]
+    Core["持久任务核心：状态、预算、能力与版本"]
+    Model["本地模型：理解与简单规划"]
+    Executor["受控执行：工具与产物"]
+    Feedback["结果与失败证据"]
+    Improve["改进单：目标、验收、预算、允许改动范围"]
+    Coder["开发端口：外部 Codex 或本地编码模型"]
+    Build["隔离工作区：构建候选版本"]
+    Evaluate["独立评估：基线、回归、真实效果"]
+    Release["发布器：准入、灰度、回退"]
+    Stop["独立停止与恢复：始终服从 G0"]
+    Owner --> Core
+    Core <--> Model
+    Core --> Executor
+    Executor --> Feedback
+    Feedback --> Core
+    Feedback --> Improve
+    Improve --> Coder
+    Coder --> Build
+    Build --> Evaluate
+    Evaluate -->|"通过"| Release
+    Evaluate -->|"失败证据，限额重试"| Improve
+    Release -->|"切换获准包"| Core
+    Stop -.-> Core
+    Stop -.-> Build
+    Stop -.-> Release
+    Owner --> Stop

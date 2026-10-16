@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jarvis.local/contracts/action/1.0.0",
+  "title": "Jarvis action v1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "action_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$"
+    },
+    "intent_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$"
+    },
+    "task_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$"
+    },
+    "capability_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$"
+    },
+    "resource_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "host_instance_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$"
+    },
+    "host_epoch": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "owner_epoch": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "enforcement_policy_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "arguments_digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "idempotency_support": {
+      "enum": [
+        "receiver_verified",
+        "local_ledger",
+        "none"
+      ]
+    },
+    "status": {
+      "enum": [
+        "PREPARED",
+        "DISPATCHING",
+        "UNKNOWN",
+        "CONFIRMED",
+        "FAILED",
+        "CANCELLED"
+      ]
+    },
+    "attempt_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$"
+    },
+    "arguments": {
+      "type": "object",
+      "description": "Validate again against the referenced capability input_schema; this payload does not grant permission."
+    },
+    "receipt_ref": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "error": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "code": {
+              "type": "string",
+              "minLength": 1
+            },
+            "message": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "code",
+            "message"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "action_id",
+    "intent_id",
+    "task_id",
+    "capability_id",
+    "resource_id",
+    "host_instance_id",
+    "host_epoch",
+    "owner_epoch",
+    "enforcement_policy_version",
+    "arguments_digest",
+    "idempotency_support",
+    "status"
+  ]
+}

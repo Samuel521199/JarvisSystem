@@ -1,0 +1,2650 @@
+{
+  "schema_version": 1,
+  "design_status": "proposed",
+  "book": {
+    "parts": [
+      {
+        "id": "part-product",
+        "title": "第一篇 · 产品与体验",
+        "chapters": [
+          "docs-product-requirements",
+          "docs-interaction-persona",
+          "docs-simulation"
+        ]
+      },
+      {
+        "id": "part-foundation",
+        "title": "第二篇 · 核心与工程基础",
+        "chapters": [
+          "docs-core-bootstrap",
+          "docs-architecture",
+          "docs-security-sovereignty",
+          "docs-contracts",
+          "docs-stack-project-layout"
+        ]
+      },
+      {
+        "id": "part-runtime",
+        "title": "第三篇 · 智能运行与多设备协同",
+        "chapters": [
+          "docs-models-offline",
+          "docs-knowledge-learning",
+          "docs-tasks-agents",
+          "docs-federation"
+        ]
+      },
+      {
+        "id": "part-evolution",
+        "title": "第四篇 · 自主成长与维护",
+        "chapters": [
+          "docs-evolution-release",
+          "docs-toolchains",
+          "docs-health-maintenance"
+        ]
+      },
+      {
+        "id": "part-evidence",
+        "title": "第五篇 · 验证与参考",
+        "chapters": [
+          "docs-delivery-validation",
+          "docs-decisions-review",
+          "docs-architecture-atlas",
+          "docs-references",
+          "docs-maintenance"
+        ]
+      }
+    ]
+  },
+  "documents": [
+    {
+      "id": "project-entry",
+      "path": "README.md",
+      "title": "JARVIS",
+      "owns": [
+        "project-entry"
+      ]
+    },
+    {
+      "id": "collaboration-rules",
+      "path": "AGENTS.md",
+      "title": "AI 协作与文档维护约定",
+      "owns": [
+        "ai-collaboration-rules"
+      ]
+    },
+    {
+      "id": "docs-index",
+      "path": "docs/README.md",
+      "title": "Jarvis 文档首页",
+      "owns": [
+        "documentation-navigation"
+      ]
+    },
+    {
+      "id": "docs-product-requirements",
+      "path": "docs/product-requirements.md",
+      "title": "产品定义、需求与能力边界",
+      "owns": [
+        "产品文案、作用、R/N 需求与能力上限"
+      ],
+      "status": "proposed",
+      "reader_summary": "Jarvis 要解决什么问题，完成后能做什么？"
+    },
+    {
+      "id": "docs-core-bootstrap",
+      "path": "docs/core-bootstrap.md",
+      "title": "最小核心、初始资产与开发路线",
+      "owns": [
+        "当前启动、聊天、预检与独立控制操作、迁移、SeedBundle、知识/规则/技能种子、K0—K6 与阶段内工作包、首个演示",
+        "computer-use-runtime-entry",
+        "computer-web-console-entry",
+        "runtime-slots-usage",
+        "browser-residue-recovery-entry"
+      ],
+      "status": "proposed",
+      "reader_summary": "现在怎么启动，核心从哪里做起，下一步做什么？"
+    },
+    {
+      "id": "docs-architecture",
+      "path": "docs/architecture.md",
+      "title": "系统架构、运行边界与模块职责",
+      "owns": [
+        "总体视图、部署、信任边界、数据所有权、唯一控制权威、Computer Use 执行架构"
+      ],
+      "status": "proposed",
+      "reader_summary": "模块怎样连接，谁负责什么，数据归谁管理？"
+    },
+    {
+      "id": "docs-security-sovereignty",
+      "path": "docs/security-sovereignty.md",
+      "title": "主人利益原则、身份授权与停止控制",
+      "owns": [
+        "G0、权限、委派、安全代际、锁存、离线解锁、固定 Worker 的实际隔离边界",
+        "computer-use-security-boundaries"
+      ],
+      "status": "proposed",
+      "reader_summary": "当前个人使用边界是什么，哪些监督与认证设计已延期？"
+    },
+    {
+      "id": "docs-federation",
+      "path": "docs/federation.md",
+      "title": "离线自治、多设备共同体与重连",
+      "owns": [
+        "单机/局域网/外网模式、所有权、租约、记忆复制协议、同步选型与冲突"
+      ],
+      "status": "proposed",
+      "reader_summary": "断网怎样独立工作，重连怎样共享记忆与协同？"
+    },
+    {
+      "id": "docs-interaction-persona",
+      "path": "docs/interaction-persona.md",
+      "title": "桌面工作台、实时交流与人格形态",
+      "owns": [
+        "桌面工作台、项目文件夹与会话交互、输入区、功能入口与设置、品牌图标规范；语音通道、个性、性别表达、关系设定与形态",
+        "personal-assistant-lifecycle"
+      ],
+      "status": "proposed",
+      "reader_summary": "怎样打开项目、输入任务、设置专属能力并与 Jarvis 交流？"
+    },
+    {
+      "id": "docs-tasks-agents",
+      "path": "docs/tasks-agents.md",
+      "title": "任务、动作、多 Agent 与资源调度",
+      "owns": [
+        "任务状态、动作账本、后台任务与有限工具循环、Agent 工厂、团队、预算与资源租约",
+        "browser-durable-queue-semantics"
+      ],
+      "status": "proposed",
+      "reader_summary": "怎样一边交流一边执行任务，如何组织多 Agent？"
+    },
+    {
+      "id": "docs-models-offline",
+      "path": "docs/models-offline.md",
+      "title": "模型路由、本地模型与离线生存",
+      "owns": [
+        "当前模型目录/提供商参数/用量策略与有限路由；嵌入模型候选、生产路由、恢复入口、模型生命周期、LP 降级与网络诊断、Computer Use 模型候选"
+      ],
+      "status": "proposed",
+      "reader_summary": "用哪些云端和本地模型，怎样切换与离线降级？"
+    },
+    {
+      "id": "docs-knowledge-learning",
+      "path": "docs/knowledge-learning.md",
+      "title": "记忆、知识库与持续学习",
+      "owns": [
+        "首期运行时知识与会话边界、事实与派生索引分层、记忆来源、纠错/遗忘、学习晋升、知识结构迁移与防污染"
+      ],
+      "status": "proposed",
+      "reader_summary": "记住什么，怎样检索、纠正、遗忘和持续学习？"
+    },
+    {
+      "id": "docs-evolution-release",
+      "path": "docs/evolution-release.md",
+      "title": "自主进化、外部编码协作与版本发布",
+      "owns": [
+        "CodingProvider、改进事务、兼容、版本并存、灰度与回退"
+      ],
+      "status": "proposed",
+      "reader_summary": "怎样自编工具、改进模块，并验证和回退？"
+    },
+    {
+      "id": "docs-toolchains",
+      "path": "docs/toolchains.md",
+      "title": "开发环境、多语言工具链与构建",
+      "owns": [
+        "开发能力、构建配方、依赖闭包、目标验证与隔离"
+      ],
+      "status": "proposed",
+      "reader_summary": "怎样准备编译环境，构建和测试不同语言的程序？"
+    },
+    {
+      "id": "docs-contracts",
+      "path": "docs/contracts.md",
+      "title": "公共接口与数据契约",
+      "owns": [
+        "跨域契约、字段语义、只读预检与主人恢复消息、K1/K2 最小接口面、记忆组件替换契约、模块生命周期和公共事件",
+        "computer-use-task-action-contracts",
+        "computer-web-http-contracts"
+      ],
+      "status": "proposed",
+      "reader_summary": "模块之间怎样交换任务、事件和记忆数据？"
+    },
+    {
+      "id": "docs-stack-project-layout",
+      "path": "docs/stack-project-layout.md",
+      "title": "技术栈、源码目录与运行数据",
+      "owns": [
+        "技术取舍、普通 PC 默认部署与组件准入、开源知识/记忆组件对照、唯一源码树、模块模板、运行数据树与依赖规则"
+      ],
+      "status": "proposed",
+      "reader_summary": "选哪些技术，代码放哪里，开源组件如何取舍？"
+    },
+    {
+      "id": "docs-health-maintenance",
+      "path": "docs/health-maintenance.md",
+      "title": "系统健康、防退化与自愈",
+      "owns": [
+        "观测、结构约束、文档/代码健康、退役清理、分级自愈"
+      ],
+      "status": "proposed",
+      "reader_summary": "怎样发现故障与结构退化，清理和修复隐患？"
+    },
+    {
+      "id": "docs-simulation",
+      "path": "docs/simulation.md",
+      "title": "NPC 小镇与虚拟世界",
+      "owns": [
+        "世界事实、角色、时间、精度、分支及现实效果隔离"
+      ],
+      "status": "proposed",
+      "reader_summary": "怎样运行 NPC 小镇，并隔离虚拟与现实？"
+    },
+    {
+      "id": "docs-delivery-validation",
+      "path": "docs/delivery-validation.md",
+      "title": "能力验收、故障演练与评估证据",
+      "owns": [
+        "M 验收门、R/N 追踪、阶段出口验收、B/H/V-MEM/V-PC/V-UI 测试、选型探测、性能与故障证据"
+      ],
+      "status": "proposed",
+      "reader_summary": "哪些能力测过，证据在哪里，下一阶段怎样验收？"
+    },
+    {
+      "id": "docs-decisions-review",
+      "path": "docs/decisions-review.md",
+      "title": "架构决策、批判性评审与评分",
+      "owns": [
+        "ADR、历史设计评分、EV 证据等级、取舍与待验证假设"
+      ],
+      "status": "proposed",
+      "reader_summary": "为什么这样设计，有哪些不足和替代方案？"
+    },
+    {
+      "id": "docs-references",
+      "path": "docs/references.md",
+      "title": "研究资料与证据边界",
+      "owns": [
+        "稳定 S 系列来源、使用范围与论据限制"
+      ],
+      "status": "proposed",
+      "reader_summary": "设计和选型参考了哪些论文与官方资料？"
+    },
+    {
+      "id": "docs-architecture-atlas",
+      "path": "docs/architecture-atlas.md",
+      "title": "架构与流程图册",
+      "owns": [
+        "19 张图的导航、图源和渲染说明"
+      ],
+      "status": "proposed",
+      "reader_summary": "在哪里集中查看架构图和流程图？"
+    },
+    {
+      "id": "docs-maintenance",
+      "path": "docs/MAINTENANCE.md",
+      "title": "文档维护规范",
+      "owns": [
+        "文档权威、章节树与技术文档归类、状态、增删改、检查、删除与历史规则"
+      ],
+      "status": "proposed",
+      "reader_summary": "以后怎样归类、更新、检查和清理文档？"
+    }
+  ],
+  "generated_diagrams": [
+    {
+      "id": "diagram-federation-reconnect",
+      "source_document": "docs/diagrams/federation-reconnect.mmd",
+      "source_sha256": "a724de1993222fca9840c7b21bd81d70e5fa37280951e4bc7d44788b1a9ba16c",
+      "owner_document": "docs/federation.md",
+      "artifacts": [
+        {
+          "path": "docs/diagrams/federation-reconnect.svg",
+          "sha256": "abc604642b2b1ca49669f7b358b973299f999b915553058c490b6b48e8bd8e9d"
+        },
+        {
+          "path": "docs/diagrams/federation-reconnect.png",
+          "sha256": "8064b11b2f0326f51238067e319515520b35a082879533cbd754e38a45667429"
+        }
+      ]
+    },
+    {
+      "id": "diagram-overview",
+      "source_document": "docs/diagrams/overview.mmd",
+      "source_sha256": "f8b2c5d1b3ef719e514b9e674f3e22373f5911df178a42634f1cd968f1b9decc",
+      "owner_document": "docs/architecture.md",
+      "artifacts": [
+        {
+          "path": "docs/diagrams/overview.svg",
+          "sha256": "f7d83a0209d7a7917eeb861ea8dc188ea7c53406aac074f7a4c66f0efecb4018"
+        },
+        {
+          "path": "docs/diagrams/overview.png",
+          "sha256": "f742011d9412ea2b61a41a41b9c902014d414ef331428e2366977f762dd17697"
+        }
+      ]
+    },
+    {
+      "id": "diagram-system-boundaries",
+      "source_document": "docs/diagrams/system-boundaries.mmd",
+      "source_sha256": "ec4313793831a464b9f2085d17b81d00e1ed54db4c330d6731a27cfcd5f840cf",
+      "owner_document": "docs/architecture.md",
+      "artifacts": [
+        {
+          "path": "docs/diagrams/system-boundaries.svg",
+          "sha256": "64857bb3c817065868c661201a3e83ecee8bd456043a357cfd893a7ffa9789b9"
+        },
+        {
+          "path": "docs/diagrams/system-boundaries.png",
+          "sha256": "6123371cfd70de95657a638ae718c1e52a606aa447672ea8067b0ec2d623ef9b"
+        }
+      ]
+    },
+    {
+      "id": "diagram-windows-deployment",
+      "source_document": "docs/diagrams/windows-deployment.mmd",
+      "source_sha256": "c0944a76ba661adb3df5435c201548ac9f74c38030f8e42b8dd8bc71137978ca",
+      "owner_document": "docs/architecture.md",
+      "artifacts": [
+        {
+          "path": "docs/diagrams/windows-deployment.svg",
+          "sha256": "883b302f1eeb400f3bc3e9119ba20f9d2052cfe67e343a469ec57653a950a905"
+        },
+        {
+          "path": "docs/diagrams/windows-deployment.png",
+          "sha256": "5edadc495d54d674e45e8f44d401a70e4ebad94bf74c8f23745a7085c998bc79"
+        }
+      ]
+    },
+    {
+      "id": "diagram-federation-deployment",
+      "source_document": "docs/diagrams/federation-deployment.mmd",
+      "source_sha256": "91a023abfee7f071db3b8b3dae2abefc5abdb272b099edc37311a09bc2c3c447",
+      "owner_document": "docs/architecture.md",
+      "artifacts": [
+        {
+          "path": "docs/diagrams/federation-deployment.svg",
+          "sha256": "3de0523cefa614ab85e2e1c17875f58ac121398d93160beef2709455567e278c"
+        },
+        {
+          "path": "docs/diagrams/federation-deployment.png",
+          "sha256": "41fabba8a413e1fbccbba42e561261f79d6d58b990928395bb7856e62db7275a"
+        }
+      ]
+    },
+    {
+      "id": "diagram-state-ownership",
+      "source_document": "docs/diagrams/state-ownership.mmd",
+      "source_sha256": "04d37ba640d45e3c31773185e7e1623a0d8b9bfe4ae6cd4b6c59b874a5f4b3e9",
+      "owner_document": "docs/architecture.md",
+      "artifacts": [
+        {
+          "path": "docs/diagrams/state-ownership.svg",
+          "sha256": "db7f3ef7eaa8dcd8016afda7148768de6e7cd7f286b472687b56a6ba7319b24a"
+        },
+        {
+          "path": "docs/diagrams/state-ownership.png",
+          "sha256": "158526323702b8b191645083ef5a68658fdb9fc75193d379de189349e123ffca"
+        }
+      ]
+    },
+    {
+      "id": "diagram-model-routing",
+      "source_document": "docs/diagrams/model-routing.mmd",
+      "source_sha256": "0ebd3d28dd12bdde1d31b4fc59522a718bfb5fd36f415bca00dcd09655d99422",
+      "owner_document": "docs/models-offline.md",
+      "artifacts": [
+        {
+          "path": "docs/diagrams/model-routing.svg",
+          "sha256": "30beed471adba88b0fc5e5c8f56d430d5f7e16535f501e6c9c5f2bc4b1286ce1"
+        },
+        {
+          "path": "docs/diagrams/model-routing.png",
+          "sha256": "d5e86f5bb9ea99d5a3ac175c79d533198ef517494162db53a9b4caa86f1c5806"
+        }
+      ]
+    },
+    {
+      "id": "diagram-task-lifecycle",
+      "source_document": "docs/diagrams/task-lifecycle.mmd",
+      "source_sha256": "f79667dc3676876ffebff4e4ba8b7ea8876fa6e9fe99cd4821cc284033230ff9",
+      "owner_document": "docs/tasks-agents.md",
+      "artifacts": [
+        {
+          "path": "docs/diagrams/task-lifecycle.svg",
+          "sha256": "99292a5cae7d5fd2d32ac3dd0e7d327ccc73db1378e0064a5b24ed3362362fd5"
+        },
+        {
+          "path": "docs/diagrams/task-lifecycle.png",
+          "sha256": "87e5aa181ec7a9ec2fe54dc4dd7fdf2bd9430eef7eede33e7657ff27a544c937"
+        }
+      ]
+    },
+    {
+      "id": "diagram-evolution-pipeline",
+      "source_document": "docs/diagrams/evolution-pipeline.mmd",
+      "source_sha256": "028cfc0d020a29a5250848bd3150ed2b2a0ff3f36624b4354b0c44cbf5eac197",
+      "owner_document": "docs/evolution-release.md",
+      "artifacts": [
+        {
+          "path": "docs/diagrams/evolution-pipeline.svg",
+          "sha256": "1931896184dc488abe287c355d2b5544e873c254c0d2985013eab7ab4d0f6a2b"
+        },
+        {
+          "path": "docs/diagrams/evolution-pipeline.png",
+          "sha256": "bea6bc64c2ebc4c61a7adfee7a2b481bf4544ce57a0da6c95d28781eda5c2476"
+        }
+      ]
+    },
+    {
+      "id": "diagram-parallel-dialogue-task",
+      "source_document": "docs/diagrams/parallel-dialogue-task.mmd",
+      "source_sha256": "2dba3871c67a4eb2eb729ed2d67b972a6cbf5fbc5a67f3787aba03db9c18d0e7",
+      "owner_document": "docs/tasks-agents.md",
+      "artifacts": [
+        {
+          "path": "docs/diagrams/parallel-dialogue-task.svg",
+          "sha256": "73c154c1440ae3d03f14db6a8c687f6e3759bb33c9d0f82e44cb7d0e6b35d957"
+        },
+        {
+          "path": "docs/diagrams/parallel-dialogue-task.png",
+          "sha256": "6f7469c116508f4099b1fce9a5e967d45f2763788bbf5570b6e4643a966f0de7"
+        }
+      ]
+    },
+    {
+      "id": "diagram-offline-task-flow",
+      "source_document": "docs/diagrams/offline-task-flow.mmd",
+      "source_sha256": "05c6ff7ec5e31b42c631065d0e13a7044eee6f9a88c3d2e814406997e5aa65a1",
+      "owner_document": "docs/federation.md",
+      "artifacts": [
+        {
+          "path": "docs/diagrams/offline-task-flow.svg",
+          "sha256": "eb50c5e67da7f778c2995fcc81288bff3dd0bb5cd98c44ea425219c019d29924"
+        },
+        {
+          "path": "docs/diagrams/offline-task-flow.png",
+          "sha256": "258338ebc1875f0a9a53158319aababf87edb062ab9b3f65eb6ac75162c913f5"
+        }
+      ]
+    },
+    {
+      "id": "diagram-agent-team-lifecycle",
+      "source_document": "docs/diagrams/agent-team-lifecycle.mmd",
+      "source_sha256": "1fc190a8f3d9f0a011662e1dae62cf1b672c7c085a02795af8f48a455137df80",
+      "owner_document": "docs/tasks-agents.md",
+      "artifacts": [
+        {
+          "path": "docs/diagrams/agent-team-lifecycle.svg",
+          "sha256": "fa8c414f8a92870bcb4e65d79c990b30c845b3f8b647d4732fd762bdc622b04f"
+        },
+        {
+          "path": "docs/diagrams/agent-team-lifecycle.png",
+          "sha256": "1b84a82140b084f3cb3932ecc9e756f1e8679a0584de460128d9e2b8543287f1"
+        }
+      ]
+    },
+    {
+      "id": "diagram-knowledge-learning-flow",
+      "source_document": "docs/diagrams/knowledge-learning-flow.mmd",
+      "source_sha256": "6876344105d8d116dadd7bad7b887605b3fc77f2b220906c3f76928b08dbcc96",
+      "owner_document": "docs/knowledge-learning.md",
+      "artifacts": [
+        {
+          "path": "docs/diagrams/knowledge-learning-flow.svg",
+          "sha256": "819878b2f6bf535e4ea0cbff98313a5670689bdaa950136ef144500cf5049090"
+        },
+        {
+          "path": "docs/diagrams/knowledge-learning-flow.png",
+          "sha256": "ad2b0fdf1c760485253becc41078c664ed82ca7d27591d2ba7774754d14f6e7c"
+        }
+      ]
+    },
+    {
+      "id": "diagram-network-recovery",
+      "source_document": "docs/diagrams/network-recovery.mmd",
+      "source_sha256": "1ddd2ce0c11674582a50ced4a93cf31a67cd84b65005d09d0e7d72c4f5480178",
+      "owner_document": "docs/models-offline.md",
+      "artifacts": [
+        {
+          "path": "docs/diagrams/network-recovery.svg",
+          "sha256": "5d921fa7f07173b630de5f106d6be16545b49b8d636b604ec0e4e43c3b3e722c"
+        },
+        {
+          "path": "docs/diagrams/network-recovery.png",
+          "sha256": "e32841cc439b35626e0faab80abf04a7260c40be7b85c01a5b0b7d6995374bb3"
+        }
+      ]
+    },
+    {
+      "id": "diagram-safety-shutdown",
+      "source_document": "docs/diagrams/safety-shutdown.mmd",
+      "source_sha256": "4475dac219bb7dd273b6d022ce71c23d9b600c15d738047d7d03c142ea58f235",
+      "owner_document": "docs/security-sovereignty.md",
+      "artifacts": [
+        {
+          "path": "docs/diagrams/safety-shutdown.svg",
+          "sha256": "697bcf46453fb9f926384d184a3f2a84d4c90d4d4bedb6adc7cc6e4f094c39b1"
+        },
+        {
+          "path": "docs/diagrams/safety-shutdown.png",
+          "sha256": "10c9bd7b62f87423f82d04d43259a0faed0ec4c527058afb56996a66f46be5e3"
+        }
+      ]
+    },
+    {
+      "id": "diagram-build-and-release",
+      "source_document": "docs/diagrams/build-and-release.mmd",
+      "source_sha256": "bf09533ac39e15c4806f7e69e13c5140c331e2b79f4255527acf53517e599b93",
+      "owner_document": "docs/toolchains.md",
+      "artifacts": [
+        {
+          "path": "docs/diagrams/build-and-release.svg",
+          "sha256": "1ad0aa8b05d3cc4c94fa1427e7fc7fd3473d5d03674f34d9fb46a0f498946f90"
+        },
+        {
+          "path": "docs/diagrams/build-and-release.png",
+          "sha256": "4e2e54780ce89f3620bc2807064540d815e1ab5c41dc5f499d38ae968c83ead8"
+        }
+      ]
+    },
+    {
+      "id": "diagram-health-and-repair",
+      "source_document": "docs/diagrams/health-and-repair.mmd",
+      "source_sha256": "cba919957bf125747eb22a8745bb7d72c8b8683c0aa2d6cda5cffa6a478b5e95",
+      "owner_document": "docs/health-maintenance.md",
+      "artifacts": [
+        {
+          "path": "docs/diagrams/health-and-repair.svg",
+          "sha256": "a135797727681b4b0bb1c2ae7ab413b380b0a3d4dd1d0dfcebdcc4a16ad07621"
+        },
+        {
+          "path": "docs/diagrams/health-and-repair.png",
+          "sha256": "bb9718683b6508f5476d67c6b6505447263ecbb4a45434099fa33055645144db"
+        }
+      ]
+    },
+    {
+      "id": "diagram-seed-core",
+      "source_document": "docs/diagrams/seed-core.mmd",
+      "source_sha256": "476571609db2af97f5c0c6530c8935269d69f0cd9cd245bb56e3d1edf53b1181",
+      "owner_document": "docs/core-bootstrap.md",
+      "artifacts": [
+        {
+          "path": "docs/diagrams/seed-core.svg",
+          "sha256": "5b3795fdfc8d1b58346ca7131d78322bf02f2ed4d2df917a6f7a009e97343160"
+        },
+        {
+          "path": "docs/diagrams/seed-core.png",
+          "sha256": "458107af5d8e5c8acfd00a85f267c3360ac593ce6ff8be8612f70e5d18a82cd1"
+        }
+      ]
+    },
+    {
+      "id": "diagram-memory-local-federation",
+      "source_document": "docs/diagrams/memory-local-federation.mmd",
+      "owner_document": "docs/knowledge-learning.md",
+      "source_sha256": "11acba620a5165103a84f9adcb3c23d7b6a89d1747992264155479d651aeeaf4",
+      "artifacts": [
+        {
+          "path": "docs/diagrams/memory-local-federation.svg",
+          "sha256": "cbde87013d053befe349a3badfb2a911232c02a03d428f96ca3922dcf61bd441"
+        },
+        {
+          "path": "docs/diagrams/memory-local-federation.png",
+          "sha256": "590482d066f7a0811a6d97d787cb3be50e1b37805e1b785822786aa4cc13003a"
+        }
+      ]
+    }
+  ],
+  "migration": {
+    "performed_on": "2026-10-15",
+    "purpose": "迁移有效内容后删除旧全文；仅保留摘要与章节去向，不保存旧版本正文。",
+    "inputs": [
+      {
+        "path": "JARVIS_SYSTEM_DESIGN.md",
+        "sha256": "acb14273e16f237d3a721d50cba1577be29b64a07ec7d9d38789bb2883ab8823"
+      },
+      {
+        "path": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "sha256": "acb14273e16f237d3a721d50cba1577be29b64a07ec7d9d38789bb2883ab8823"
+      },
+      {
+        "path": "docs/JARVIS_CORE_BOOTSTRAP.md",
+        "sha256": "0726acbb881fda260dba63a4fe4c11b819498c4efa6844e9c9003a794c28a050"
+      },
+      {
+        "path": "docs/JARVIS_ARCHITECTURE_ATLAS.md",
+        "sha256": "4fe91c0e482f81ba7f58b30744dfab0c56af24990d5097e7553537c8f0f8923f"
+      },
+      {
+        "path": "docs/archive/JARVIS_SYSTEM_DESIGN_v0.1.md",
+        "sha256": "a264b95886d55745363faf3942591556e0535c4aaeecec1691067e1575983e05"
+      },
+      {
+        "path": "docs/archive/JARVIS_SYSTEM_DESIGN_v0.2.md",
+        "sha256": "025f14277057330e2ee909479bfb290030a18a36e20f8cd58327b930548c7ed9"
+      }
+    ],
+    "sections": [
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "1",
+        "heading": "项目定义与产品文案",
+        "source_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "destination": "product-requirements.md#product-definition",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "1.1",
+        "heading": "一句话定义",
+        "source_sha256": "72753be095b7690f119153163c65ff1be2934380ca047d5ff2d06f90543844f3",
+        "destination": "product-requirements.md#product-definition-1",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "1.2",
+        "heading": "建议产品文案",
+        "source_sha256": "351fe1a20a203b8e312fbe8588cd704b471db2e1aec277d70e53e6e8d4c49733",
+        "destination": "product-requirements.md#product-definition-2",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "1.3",
+        "heading": "主要作用",
+        "source_sha256": "693a6e50504372a38114865d7f097dca4d023521b7d554193e866c3d2579b985",
+        "destination": "product-requirements.md#product-definition-3",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "1.4",
+        "heading": "四个必须明确的定义",
+        "source_sha256": "d8589f81bc6fbb9faf0b619e46ff08a2f64958bd5bda1c2ee2b1ac8b084c49a5",
+        "destination": "product-requirements.md#product-definition-4",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "1.5",
+        "heading": "本版范围与假设",
+        "source_sha256": "4ccc48df780e30e937a623d556695d3e8c66a3f5370b22adef51edc4f951a59a",
+        "destination": "product-requirements.md#product-definition-5",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "1.6",
+        "heading": "主人利益与控制权最高宗旨（G0）",
+        "source_sha256": "399c1fd8adb36963d75f2d508707f804c74ea042067bb725bf05656ab6d04068",
+        "destination": "security-sovereignty.md#product-definition-6",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "1.7",
+        "heading": "v0.2 的扩展范围",
+        "source_sha256": "73b1ace2ca1674698d90d7d1b3a76bd551dd233c4c21abdfa761d249d520b7ea",
+        "destination": "product-requirements.md#product-definition-7",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "1.8",
+        "heading": "核心先行、外部协作、持续评估",
+        "source_sha256": "aad71b89c86892f0188f7611605fb1bc38e2ad60526da97471eea1d2cde4e83f",
+        "destination": "core-bootstrap.md#product-definition-8",
+        "disposition": "merged",
+        "note": "实施顺序合并到同一核心路线"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "2",
+        "heading": "研究结论与设计原则",
+        "source_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "destination": "architecture.md#design-principles",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "2.1",
+        "heading": "从研究到本项目的决策",
+        "source_sha256": "03887a79d6afd46d3019de613089cf98defb378ae239be919388c8cc08f0febd",
+        "destination": "architecture.md#design-principles-1",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "2.2",
+        "heading": "核心原则",
+        "source_sha256": "40e7e13e50eeff8efd65e416ad879ff7c946520dbd2ac822e1f010d143a1ffa6",
+        "destination": "architecture.md#design-principles-2",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "3",
+        "heading": "完成后能做什么、能有多强",
+        "source_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "destination": "product-requirements.md#capability-boundaries",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "3.1",
+        "heading": "能力分为三个实际运行形态",
+        "source_sha256": "cfd6f141655a3cc697d1751332c59a67d8fa9dad34e68b409aa73a3032b57564",
+        "destination": "product-requirements.md#capability-boundaries-1",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "3.2",
+        "heading": "完成后的典型任务",
+        "source_sha256": "695c31f77e9c3c3da273ce1a4ec4c46cd66f262f4cd8109365395eed1cd30043",
+        "destination": "product-requirements.md#capability-boundaries-2",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "3.3",
+        "heading": "能力成熟度",
+        "source_sha256": "4349e6306201225b7b56715c50a1157f42ef8ed8176b3efa6f5cd275b2e15fff",
+        "destination": "product-requirements.md#capability-boundaries-3",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "3.4",
+        "heading": "最终可以有多强",
+        "source_sha256": "97c0219671ace3731f7cea1cf384cb5f7cfaecc03ed9f20f004a87897c995d8c",
+        "destination": "product-requirements.md#capability-boundaries-4",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "4",
+        "heading": "需求清单与优先级",
+        "source_sha256": "f1b02dd1f9bac2574718e2b014e14a716fa7e0b48d2a1a0777011727026306de",
+        "destination": "product-requirements.md#requirements",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "4.1",
+        "heading": "非功能需求",
+        "source_sha256": "c58303799ded05db8cc1a14663c339536f76594ed89325f300e04a2c1249c884",
+        "destination": "product-requirements.md#requirements-1",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "5",
+        "heading": "离线自治与联网共同体",
+        "source_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "destination": "federation.md#offline-federation",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "5.1",
+        "heading": "节点分级",
+        "source_sha256": "09f417bb409b0d3f97f59304d713f4562777b1559e544e4fdc0ccaad0f03e51b",
+        "destination": "federation.md#offline-federation-1",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "5.2",
+        "heading": "三个相互独立的平面",
+        "source_sha256": "d5c88ea98a8b6e0233b707afcae9e5e4c91e3ff3021e6ff1f59995cb464b6d9f",
+        "destination": "federation.md#offline-federation-2",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "5.3",
+        "heading": "网络状态不能只用“在线/离线”",
+        "source_sha256": "b09f399585e93eb6ff18f56bf59bd1e3d6cd66c27ff0554007c02268fa312599",
+        "destination": "federation.md#offline-federation-3",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "5.4",
+        "heading": "“一个贾维斯”的工程身份",
+        "source_sha256": "057433ae37364384e2c5f4f1a1420fedf8920dd54066962995970d50b91496f8",
+        "destination": "federation.md#offline-federation-4",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "5.5",
+        "heading": "任务和设备控制权",
+        "source_sha256": "b4610bc1b0f1e7a349c714958c583a3a5e55e614fefe152c042f91311a13f48b",
+        "destination": "federation.md#offline-federation-5",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "5.6",
+        "heading": "共同体初期与后期",
+        "source_sha256": "e0bea98388e31b9d4c4564a340f28c16102b725ad0a71460b999a8ffe486283f",
+        "destination": "federation.md#offline-federation-6",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "5.7",
+        "heading": "重连流程",
+        "source_sha256": "6675cbd9ba4a922936d3fbac66b1845195d2d8de78f25c8e4b7c5549cdfbec54",
+        "destination": "federation.md#offline-federation-7",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "6",
+        "heading": "总体架构与运行边界",
+        "source_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "destination": "architecture.md#architecture-runtime",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "6.1",
+        "heading": "逻辑架构",
+        "source_sha256": "9477e68682054a3e730129feb02685cf304a9d23c50b11652805a4afa75eb08e",
+        "destination": "architecture.md#architecture-runtime-1",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "6.2",
+        "heading": "分阶段启用的进程边界",
+        "source_sha256": "ac35ed0e6a96fe9f83905697a18d4835c22fadaba5ab73986fff468ffb5c8157",
+        "destination": "architecture.md#architecture-runtime-2",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "6.3",
+        "heading": "依赖方向",
+        "source_sha256": "c2c2eb0a0e5909d3491e4d744fa1679115119755e055a3e556f523a4af0c42a2",
+        "destination": "architecture.md#architecture-runtime-3",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "6.4",
+        "heading": "补齐架构视图：每张图回答不同问题",
+        "source_sha256": "86f969b0923f1cedccb4f6ff12595d0cb3067173f5f9b73dc576aa62e28fb8a1",
+        "destination": "architecture.md#architecture-runtime-4",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "6.5",
+        "heading": "控制器的唯一权威：消除相互抢控制",
+        "source_sha256": "d6749c3be4cb3e1f0d27fc1c31e683fc3ac9f94b126ef0f26c753a65594dd5b6",
+        "destination": "architecture.md#architecture-runtime-5",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "6.6",
+        "heading": "单机连续性的实际承诺",
+        "source_sha256": "45b69c337284133d0a6079b53ba92d7c107cc52ed971e24fc53460ff0b826aa7",
+        "destination": "architecture.md#architecture-runtime-6",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "7",
+        "heading": "模块职责与替换契约",
+        "source_sha256": "f64723bee29432aa476f091c0e004afe4fdd468b45b56bfdac986e3e63f14260",
+        "destination": "architecture.md#module-responsibilities",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "8",
+        "heading": "双路模型连接与恢复设计",
+        "source_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "destination": "models-offline.md#model-routing",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "8.1",
+        "heading": "结论：需要独立恢复路径，生产与进化还需分配独立资源",
+        "source_sha256": "fd18541df6565e3c4b5217754ff57ddaaf0c0c716bf74ebc77e4c30aca87c29d",
+        "destination": "models-offline.md#model-routing-1",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "8.2",
+        "heading": "通道设计",
+        "source_sha256": "fe00885e5350515d743da84752f1b257d79da14d7165dfc1ebfef38039907fb4",
+        "destination": "models-offline.md#model-routing-2",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "8.3",
+        "heading": "路由输入与选择顺序",
+        "source_sha256": "4e2305b8e5d00918c2789c2500b689b1c4891a88a49f10e8a4160e035fa8430e",
+        "destination": "models-offline.md#model-routing-3",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "8.4",
+        "heading": "流式回答与工具调用",
+        "source_sha256": "489814c9d593bb2e9528ffcd6bc822bfb50d5bfbda26013a045d01f9ebc7e1ce",
+        "destination": "models-offline.md#model-routing-4",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "8.5",
+        "heading": "路由流程图",
+        "source_sha256": "558598e8870f5eff0d401d2c21d23512865e49d5d7e5406f5ee57c8272248ec9",
+        "destination": "models-offline.md#model-routing-5",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "9",
+        "heading": "实时交互、多任务与多 Agent",
+        "source_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "destination": "interaction-persona.md#interaction-tasks",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "9.1",
+        "heading": "五条执行通道",
+        "source_sha256": "01f5785cf3a4105ec3e5a4b5819ffcd636cdd88b6632421a720a2181d3133475",
+        "destination": "interaction-persona.md#interaction-tasks-1",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "9.2",
+        "heading": "语音链路",
+        "source_sha256": "69616cc348982ef99099c4d0ecdc5021587b04f987fd98ff7ce72768a87ff848",
+        "destination": "interaction-persona.md#interaction-tasks-2",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "9.3",
+        "heading": "任务状态机",
+        "source_sha256": "673daeba8f5199ebd9ed414c1e6291a30b65b897e7163f358cabc6f0d8087d03",
+        "destination": "tasks-agents.md#interaction-tasks-3",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "9.4",
+        "heading": "多 Agent 组织",
+        "source_sha256": "a62dd939c1f194eef4735aefa4ce6e1ecd276ab9ab44cf63c7bec1645fc998f9",
+        "destination": "tasks-agents.md#interaction-tasks-4",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "9.5",
+        "heading": "冲突与调度",
+        "source_sha256": "14b3b6a18731d547e05be72e66a922e1a445606de20c5ade2cf237cf71588d6e",
+        "destination": "tasks-agents.md#interaction-tasks-5",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "10",
+        "heading": "记忆、知识与数据同步",
+        "source_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "destination": "knowledge-learning.md#memory-data",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "10.1",
+        "heading": "数据分层",
+        "source_sha256": "4130b0fcde1f3bf45d8575e42cb70b8e62ce217a4f822c85ffdf555fbd7c0258",
+        "destination": "knowledge-learning.md#memory-data-1",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "10.2",
+        "heading": "同步策略",
+        "source_sha256": "f3906f8b234b14ca063ebfa986840ae92953fde027e95fb8c06383e2312ee308",
+        "destination": "knowledge-learning.md#memory-data-2",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "10.3",
+        "heading": "隐私范围",
+        "source_sha256": "ab167e51ac249ba1391a14b493bf1bfd0e2a7f4b47a60ba9681f60a53941dacf",
+        "destination": "knowledge-learning.md#memory-data-3",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "10.4",
+        "heading": "本地事务与复制",
+        "source_sha256": "163a64d0d70fb5ad6565d2b1213945028aeb73ca11340ae03380671b6a5e3f43",
+        "destination": "knowledge-learning.md#memory-data-4",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "10.5",
+        "heading": "遗忘与备份",
+        "source_sha256": "6b8e4d87cb4526a53aa5467d25b7ae63e97f7da7b9e4e530e13f317d716b4ee4",
+        "destination": "knowledge-learning.md#memory-data-5",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "11",
+        "heading": "自主进化与自我重构",
+        "source_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "destination": "evolution-release.md#self-evolution",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "11.1",
+        "heading": "六级进化对象",
+        "source_sha256": "2e7c592a827814276fe58d8b914b3a7848391a0ab2d20133091e5cb19d88b260",
+        "destination": "evolution-release.md#self-evolution-1",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "11.2",
+        "heading": "进化触发条件",
+        "source_sha256": "21b5315b735ce25b6d20df7eba797f2e85a3bb94423179755b76c5caefb4c07d",
+        "destination": "evolution-release.md#self-evolution-2",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "11.3",
+        "heading": "发布流水线",
+        "source_sha256": "960b8aedde22bd4351ff85fc2bbb666d422b5de7cd6e8c881243208567e5d980",
+        "destination": "evolution-release.md#self-evolution-3",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "11.4",
+        "heading": "研发、验证与发布分权",
+        "source_sha256": "a9d7ee80daa5123d812d82afcea295831562960007e5950b24429edf38844a77",
+        "destination": "evolution-release.md#self-evolution-4",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "11.5",
+        "heading": "修改自己的“形态和结构”",
+        "source_sha256": "7ee11d417effd78ae412ad69eb5454092c319f11f363cef957e485ce4fee0eb2",
+        "destination": "evolution-release.md#self-evolution-5",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "11.6",
+        "heading": "评估防退化",
+        "source_sha256": "3226c749b5981827a3e12b67566962d8c7b92f36e7a53bcc646eaa687ea03180",
+        "destination": "evolution-release.md#self-evolution-6",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "12",
+        "heading": "持续服务、升级与迁移",
+        "source_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "destination": "evolution-release.md#service-continuity",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "12.1",
+        "heading": "连续性分级",
+        "source_sha256": "280eff9e92d01060480ade1df5de5c7e818b1e2799e5f94a7bb00b8c46ed0f21",
+        "destination": "evolution-release.md#service-continuity-1",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "12.2",
+        "heading": "新旧版本并行",
+        "source_sha256": "5eeeeabd4730137d8db41b4c4fae95b64214554ff2f687a46d4c20c6ba7a7255",
+        "destination": "evolution-release.md#service-continuity-2",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "12.3",
+        "heading": "长任务与会话",
+        "source_sha256": "470749d2a476cf69742ec3bbbbec178b791b82687375abbfea89f0205442a269",
+        "destination": "evolution-release.md#service-continuity-3",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "12.4",
+        "heading": "状态迁移",
+        "source_sha256": "4d110847da7d8b67754587ad9e04d0630b40eca5fe6170ed23e72ebd01b6bcb3",
+        "destination": "evolution-release.md#service-continuity-4",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "12.5",
+        "heading": "恢复底座自身升级",
+        "source_sha256": "9b514a808f9c09cf080e71b8620dea6c86a6b711ecaf9624fc9053a45424ca91",
+        "destination": "evolution-release.md#service-continuity-5",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "12.6",
+        "heading": "必须显式测试的底层条件",
+        "source_sha256": "1c86781a14dd49981f969241f59b295b3a6b7ad515b42c6e8324e6661b92f62b",
+        "destination": "evolution-release.md#service-continuity-6",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "13",
+        "heading": "接口与数据契约",
+        "source_sha256": "72d963f131ff06040ef16036aab84643779afe0c4b68367048bedb9c41405c94",
+        "destination": "contracts.md#interfaces",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "13.1",
+        "heading": "模块生命周期",
+        "source_sha256": "beb8ce8f4b94864510db75fec2c49064a5c5a36976d75fb86303a0e20a606f27",
+        "destination": "contracts.md#interfaces-1",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "13.2",
+        "heading": "任务与动作分离",
+        "source_sha256": "cf66dc9604a550bb33f5b220f79f2bc03d362797c600c4330022e11bd9ea6900",
+        "destination": "contracts.md#interfaces-2",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "13.3",
+        "heading": "事件信封",
+        "source_sha256": "d10304f0d13e5ec32519651903dacaad1b3b018c84e3bc00241ddd5d041e9962",
+        "destination": "contracts.md#interfaces-3",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "13.4",
+        "heading": "技能和模块包清单",
+        "source_sha256": "4a2882891e23275fd497499cd5016449614c4fc47a2c0e0471b056a5f39aee7b",
+        "destination": "contracts.md#interfaces-4",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "13.5",
+        "heading": "接口类型选择",
+        "source_sha256": "4f5e9e904408aec91c37d951c48b67454d3501c17b902c58870cef267388d394",
+        "destination": "contracts.md#interfaces-5",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "14",
+        "heading": "技术栈与选型理由",
+        "source_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "destination": "stack-project-layout.md#technology-selection",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "14.1",
+        "heading": "先给结论：协议开放，初期实现收敛",
+        "source_sha256": "8ba020bb226cc7557253efc993cb72aae40c301d2135e7a5b29e16144e876459",
+        "destination": "stack-project-layout.md#technology-selection-1",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "14.2",
+        "heading": "首期参考栈与可替代方案",
+        "source_sha256": "2cda2db6ec142cebc7d95e7830a89342bbf2f1ef3f12ab7984d7df041d4ce984",
+        "destination": "stack-project-layout.md#technology-selection-2",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "14.3",
+        "heading": "语言与运行形态怎样选择",
+        "source_sha256": "4ab9cfa6cccbdb4d0ecfc11b9a362c20d3887769dd1f63d0876ee3fec77fe75d",
+        "destination": "stack-project-layout.md#technology-selection-3",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "14.4",
+        "heading": "为什么不从全微服务、全 Kubernetes 或全自主 Agent 内核起步",
+        "source_sha256": "fa2e8c83bb217f3b0c480414a3e51b5e67f3455c99586fa1e70f337ed63e9e95",
+        "destination": "stack-project-layout.md#technology-selection-4",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "14.5",
+        "heading": "自有任务状态机、LangGraph 与 Temporal 的取舍",
+        "source_sha256": "11e33aa54f86c3ad62b12867f5458b5a501c8def288f93bbf1c44725ee69851f",
+        "destination": "stack-project-layout.md#technology-selection-5",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "14.6",
+        "heading": "替换与隔离规则",
+        "source_sha256": "003a15a104ef1cefff23a2f675ea3159f40fc8dedf19ed52fcbc056a7761b5a4",
+        "destination": "stack-project-layout.md#technology-selection-6",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "14.7",
+        "heading": "选型冻结条件",
+        "source_sha256": "70ecff1fcc3820d37cebe538c224582f5b068c168fc1c5868f191040cb957a7d",
+        "destination": "stack-project-layout.md#technology-selection-7",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "15",
+        "heading": "项目文件结构与依赖规则",
+        "source_sha256": "a52a0c69114761c5bf7789e859071f1f8158017ce3643266bb2ecb5cfff6e2bf",
+        "destination": "stack-project-layout.md#project-structure",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "15.1",
+        "heading": "推荐源码结构",
+        "source_sha256": "0e5fca9f4fecd42199ec53d2b64e20689512ed752ba0eaaa96eb991c3df73ee9",
+        "destination": "stack-project-layout.md#project-structure-1",
+        "disposition": "merged",
+        "note": "合并原15.1、29.2、31.11、32.14目录以及核心实施子集"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "15.2",
+        "heading": "单个模块模板",
+        "source_sha256": "10f0f342102e9d3db104b308d04836763c986429c4f77cde049a7b7f7bc622e8",
+        "destination": "stack-project-layout.md#project-structure-2",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "15.3",
+        "heading": "运行数据结构",
+        "source_sha256": "70cf89a2031ddb72a6bf12d011269cd9b5f511cb63003fe6c9705a0347f5bdff",
+        "destination": "stack-project-layout.md#project-structure-3",
+        "disposition": "merged",
+        "note": "合入所有运行数据扩展并区分源码文档和运行版本历史"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "15.4",
+        "heading": "依赖规则",
+        "source_sha256": "9b2d629c19f036e3b13e5848ad0eda92090ea5d21cb26b70049907cf1d9e4513",
+        "destination": "stack-project-layout.md#project-structure-4",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "16",
+        "heading": "核心端到端流程",
+        "source_sha256": "50545b087e78fa617faae208e603f7e7e2bd141b5e2c5b149ccf66fde457dd12",
+        "destination": "tasks-agents.md#end-to-end-flows",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "16.1",
+        "heading": "聊天同时完成任务",
+        "source_sha256": "2abcbefabb9c45ed528aebca6a6e7c44ebeb8ed6d7592177a1e01473322ee2cb",
+        "destination": "tasks-agents.md#end-to-end-flows-1",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "16.2",
+        "heading": "单机离线继续工作",
+        "source_sha256": "a99178ac90cca15f018649983a7e1ed061149b7d49f73fe60602adf9d5209fd0",
+        "destination": "federation.md#end-to-end-flows-2",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "16.3",
+        "heading": "未知外部动作结果",
+        "source_sha256": "3e80eceaa7a28e198795dd2ea9cbd4e1f78aee6d7bb96b583d018e45e141f373",
+        "destination": "tasks-agents.md#end-to-end-flows-3",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "16.4",
+        "heading": "自主改进实际例子",
+        "source_sha256": "efb3b4fa6d51df9d62d8b5c70cab0942e87572bafb683c0b43878680442882c5",
+        "destination": "evolution-release.md#end-to-end-flows-4",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "17",
+        "heading": "身份、权限、隐私与主人控制权",
+        "source_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "destination": "security-sovereignty.md#identity-authorization",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "17.1",
+        "heading": "授权模型",
+        "source_sha256": "6c09b70680072ca7982c8509af6061a8430f6e791c2a7c21bb75f45714cb4cba",
+        "destination": "security-sovereignty.md#identity-authorization-1",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "17.2",
+        "heading": "主人身份不能只靠声音",
+        "source_sha256": "6838145862e630662b657e07902e2cea85a0e4bdda2870eca182b1a69bfb89e4",
+        "destination": "security-sovereignty.md#identity-authorization-2",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "17.3",
+        "heading": "外部内容与工具结果",
+        "source_sha256": "430063ccbe04aab289f08257d88dbf8e0eb29cf9d38a5be93e7ffad156c5a68c",
+        "destination": "security-sovereignty.md#identity-authorization-3",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "17.4",
+        "heading": "自我修改的授权边界",
+        "source_sha256": "68e90ad3120b71f795e0e1868eaa0f82bf4dae81cf1497e57f802fb79e9fe71e",
+        "destination": "security-sovereignty.md#identity-authorization-4",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "17.5",
+        "heading": "停止与恢复",
+        "source_sha256": "dce411c72f2d5b2bb1b0b3f8069b1ebb49cf537ae1b500191f61e46c8fe71a03",
+        "destination": "security-sovereignty.md#identity-authorization-5",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "18",
+        "heading": "可观测性、资源与运维",
+        "source_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "destination": "health-maintenance.md#observability",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "18.1",
+        "heading": "用户应能看到的内容",
+        "source_sha256": "ba9b8467f8694f20bb68465e4ec6672e477496d7fc447a73e8d1f4e9203f7958",
+        "destination": "health-maintenance.md#observability-1",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "18.2",
+        "heading": "追踪关联",
+        "source_sha256": "b363bab64629fbdb6d1921ce2a61095ba1cb0b82f0ad4e29303c1bb05b7f2407",
+        "destination": "health-maintenance.md#observability-2",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "18.3",
+        "heading": "资源策略",
+        "source_sha256": "66a8b08da99d3f998e81a02ceef18beb495d0395c347e7aeea799c1f20d2a945",
+        "destination": "health-maintenance.md#observability-3",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "18.4",
+        "heading": "备份与恢复演练",
+        "source_sha256": "173e6f80502c236e8c9b9d2d4d23c356566997218eb95093e0b929bdeab8a88b",
+        "destination": "health-maintenance.md#observability-4",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "19",
+        "heading": "实施阶段与阶段成果",
+        "source_sha256": "909851a9271fbf9d363bb80ff2dd218c46ffe890057c2a14d4808268acafaaf4",
+        "destination": "delivery-validation.md#delivery-gates",
+        "disposition": "merged",
+        "note": "合并29.5修订，并取消与K路线竞争的时间顺序含义"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "19.1",
+        "heading": "第一版必须保留的扩展点",
+        "source_sha256": "4c5f09c102fd4f2e94ea580343915f79ee0d2dc74532809fe5ecbdb3828aa80f",
+        "destination": "core-bootstrap.md#delivery-gates-1",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "19.2",
+        "heading": "首批推荐的端到端场景",
+        "source_sha256": "23e106bd4354208c10d7585ea4f4b329a998850ef8ce09b5cc148a82f79de465",
+        "destination": "delivery-validation.md#delivery-gates-2",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "20",
+        "heading": "验收标准与故障演练",
+        "source_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "destination": "delivery-validation.md#acceptance",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "20.1",
+        "heading": "验收环境必须记录",
+        "source_sha256": "770501315d45e44d89a1c0fe09ddef9b11b5508ebb1ae4625bd083853d3be1de",
+        "destination": "delivery-validation.md#acceptance-1",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "20.2",
+        "heading": "体验与可靠性目标",
+        "source_sha256": "e256d3fbdde51c760ded408cdcde82ca9e2de17483eb39ba7aede522f67ed749",
+        "destination": "delivery-validation.md#acceptance-2",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "20.3",
+        "heading": "核心不变量测试",
+        "source_sha256": "b8a8c383ea07e4e48ac5942bf1ecdfed7787754346c12b972eeb0f4b81273c60",
+        "destination": "delivery-validation.md#acceptance-3",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "20.4",
+        "heading": "故障注入矩阵",
+        "source_sha256": "c48d23458943502bf66d4093774866d0cd0e5862774e037ddb30a0196d4e0655",
+        "destination": "delivery-validation.md#acceptance-4",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "20.5",
+        "heading": "研究效果评估",
+        "source_sha256": "35a4649a5c7f1ab7a81cd59a3c5382c4ac25595dea05bca40711085d62bb9467",
+        "destination": "delivery-validation.md#acceptance-5",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "21",
+        "heading": "关键架构决策与待验证问题",
+        "source_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "destination": "decisions-review.md#architecture-decisions",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "21.1",
+        "heading": "当前建议采纳的决策",
+        "source_sha256": "bac49a47129afd1b30542a0aa2310a9d877e7372e167fa1e4ccf2aa185b4329d",
+        "destination": "decisions-review.md#architecture-decisions-1",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "21.2",
+        "heading": "开工前的验证清单",
+        "source_sha256": "bcc2cd19d32e948ec8c2f70a68e6b588ce449ed33e4a01647bba9e0acd453810",
+        "destination": "decisions-review.md#architecture-decisions-2",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "21.3",
+        "heading": "最大的工程难点",
+        "source_sha256": "01afca1e6fa805a7457cb5e3f99669616aed2409fff97aa9d506833fdff021fb",
+        "destination": "decisions-review.md#architecture-decisions-3",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "22",
+        "heading": "人格、性别表达与具身形态的开放扩展",
+        "source_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "destination": "interaction-persona.md#persona-embodiment",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "22.1",
+        "heading": "人格是可组合的能力配置",
+        "source_sha256": "094c1185f4a0846c85ff03e84e02f318dab41e8729509e0a64c44a5c9907436a",
+        "destination": "interaction-persona.md#persona-embodiment-1",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "22.2",
+        "heading": "切换与连续性",
+        "source_sha256": "6fae929ab2e2cc5dcdc0ed4c455328d69b4a010c15fcba08cee54dc48068d484",
+        "destination": "interaction-persona.md#persona-embodiment-2",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "22.3",
+        "heading": "虚拟机器人与实体机器人分开",
+        "source_sha256": "661437bab24e53605de93f6550e13fdbd8f0e76874bf9bcda8c3a48023ae2704",
+        "destination": "interaction-persona.md#persona-embodiment-3",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "22.4",
+        "heading": "配置与接口",
+        "source_sha256": "ab98f4f204ca0aa49d2143685bbeb3e835a3ca37af9a8765e4114b3d26b0e868",
+        "destination": "interaction-persona.md#persona-embodiment-4",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "23",
+        "heading": "Agent 自主生成、部署、分工与回收",
+        "source_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "destination": "tasks-agents.md#agent-factory",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "23.1",
+        "heading": "Agent 数量与类型不写死",
+        "source_sha256": "c57adf8e102e8f5a6b52407aa7b09c653389d45cfe615a18742e4d7ebfc2926a",
+        "destination": "tasks-agents.md#agent-factory-1",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "23.2",
+        "heading": "自主组队流程",
+        "source_sha256": "e5e919e43f4425a3c1c15a87e64eb931697972f3eb7bdd3c64b01eadaea2ba4d",
+        "destination": "tasks-agents.md#agent-factory-2",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "23.3",
+        "heading": "工厂和团队控制器",
+        "source_sha256": "3747d76feab04b6ea608119a6f50d3ad07e446c72241031eecd52d4af8de2cb8",
+        "destination": "tasks-agents.md#agent-factory-3",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "23.4",
+        "heading": "委派不会扩大权限",
+        "source_sha256": "b4e998f1fd13a3ce25239e7ed97fe53498002a7035984c24b4c4fbe26fa8926a",
+        "destination": "tasks-agents.md#agent-factory-4",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "23.5",
+        "heading": "生命周期",
+        "source_sha256": "1b0224e919758caeb3ad3d41dccc50f26f3302a6f28385a5e365b3124d15fbd1",
+        "destination": "tasks-agents.md#agent-factory-5",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "23.6",
+        "heading": "关键契约",
+        "source_sha256": "576d44e98a0180a80edda524dc093818d8535fac8c2f1b6ada76225cd65a4100",
+        "destination": "tasks-agents.md#agent-factory-6",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "24",
+        "heading": "NPC 小镇与可持续虚拟世界",
+        "source_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "destination": "simulation.md#npc-world",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "24.1",
+        "heading": "作为正式端到端能力",
+        "source_sha256": "a49739ac9152e50f57a91475a15d838b041ecb9735a432bcb37b23f37b5c64f5",
+        "destination": "simulation.md#npc-world-1",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "24.2",
+        "heading": "世界分层",
+        "source_sha256": "1b8213abfc6af815817abbb8b6ab2fc8cda5b33df79d203e803652477e8734ed",
+        "destination": "simulation.md#npc-world-2",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "24.3",
+        "heading": "人口与推理并发不同",
+        "source_sha256": "5436f4e47581197d4c5363740d611f3e8359dc9a5b813e4c322d49a41170c3b5",
+        "destination": "simulation.md#npc-world-3",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "24.4",
+        "heading": "世界契约",
+        "source_sha256": "f087fa2d1b4d35ce4ae826565e4dd046a537961c5b2773872b97e3838eb142b6",
+        "destination": "simulation.md#npc-world-4",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "24.5",
+        "heading": "模拟与现实隔离",
+        "source_sha256": "93089dfa6b2d029b733b2a2d4a4c2497b4952b0aaa30f7637a445b751dc67adf",
+        "destination": "simulation.md#npc-world-5",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "24.6",
+        "heading": "离线分支",
+        "source_sha256": "fd950678c5d6b4c57f397ffa573675b0d4cb77912b5bb2e0e24841d5004039da",
+        "destination": "simulation.md#npc-world-6",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "25",
+        "heading": "Agent、模型与模块的统一资源自调度",
+        "source_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "destination": "tasks-agents.md#resource-scheduling",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "25.1",
+        "heading": "所有工作使用同一资源账本",
+        "source_sha256": "a11580af3243776349fcdd39204897c390baf71ea1f9cb5aa4afc0ae1c5e70d4",
+        "destination": "tasks-agents.md#resource-scheduling-1",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "25.2",
+        "heading": "优先级",
+        "source_sha256": "4b00c46d0b5a9f03698d36174b8d6b9180d3a506427dd527054bba70c0202a6b",
+        "destination": "tasks-agents.md#resource-scheduling-2",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "25.3",
+        "heading": "自适应决策",
+        "source_sha256": "23d598dee44c7b227a143752b493ddbe8265bfa6507ede8e214cccdd1e615124",
+        "destination": "tasks-agents.md#resource-scheduling-3",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "25.4",
+        "heading": "能力快照与重新规划",
+        "source_sha256": "86a79b952ceceab14748434be2b43b3c6fbf506ef699d46d1f0d74b407523bf2",
+        "destination": "tasks-agents.md#resource-scheduling-4",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "25.5",
+        "heading": "从小到大的实测扩展",
+        "source_sha256": "cccc66e286df8e75e4f6ecf26c7ec088d142fbf93561c8f64babde1808eba6e3",
+        "destination": "tasks-agents.md#resource-scheduling-5",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "26",
+        "heading": "持续互联网学习与知识库自主重构",
+        "source_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "destination": "knowledge-learning.md#continuous-learning",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "26.1",
+        "heading": "持续学习的目标与边界",
+        "source_sha256": "d1b0769156355a82b99afe53703e95fe72c5cdece5d2d368e9bbd9175640272a",
+        "destination": "knowledge-learning.md#continuous-learning-1",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "26.2",
+        "heading": "学习流水线",
+        "source_sha256": "3a066a6e38ebe6879417b186d95eefe9f03468963ac969437774f4e021d1e361",
+        "destination": "knowledge-learning.md#continuous-learning-2",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "26.3",
+        "heading": "逻辑模块",
+        "source_sha256": "0f9ae46458d42a3f24d44532d5104825bb645396f727965080db41d057ee484e",
+        "destination": "knowledge-learning.md#continuous-learning-3",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "26.4",
+        "heading": "知识的三个层次",
+        "source_sha256": "6966c4400c122bcba7c7aac8d2350ad6d6109759c608aa42b7607ce72a9315c5",
+        "destination": "knowledge-learning.md#continuous-learning-4",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "26.5",
+        "heading": "允许自主重新设计知识库",
+        "source_sha256": "fbe2e57cd2cc73a8e0f7c8dd955cd724a7810cebcaad461a3ea9d5adb6d794bd",
+        "destination": "knowledge-learning.md#continuous-learning-5",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "26.6",
+        "heading": "迁移协议",
+        "source_sha256": "caaa10cc2afce0ad66e14db7eb6ab0ede21fc2dae176a2a8594163b62d1bc5c2",
+        "destination": "knowledge-learning.md#continuous-learning-6",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "26.7",
+        "heading": "记忆域与可信状态",
+        "source_sha256": "0f113aafe99cd43aeb47c076295648efe40b4f56a5a60ddc79ab4edb0509280b",
+        "destination": "knowledge-learning.md#continuous-learning-7",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "26.8",
+        "heading": "“不断积累”不等于无限堆积",
+        "source_sha256": "91d9ef4cf1fb6174ffa584c2bcb0a4d9d39299394a6d5ebf7fb1b7fe0cb54270",
+        "destination": "knowledge-learning.md#continuous-learning-8",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "27",
+        "heading": "本地小模型、离线生存与网络自恢复",
+        "source_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "destination": "models-offline.md#local-survival",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "27.1",
+        "heading": "目标：在较低资源下仍保留有用能力",
+        "source_sha256": "176355e243da1f2cc2ec26d69bf63a90f410b431b8135dbf05fcd8ad190fdc5a",
+        "destination": "models-offline.md#local-survival-1",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "27.2",
+        "heading": "本地组件种类",
+        "source_sha256": "458e74c1cde12497b20bfd10c3fc83db2767ed9bbceb746eb7166841cc070f26",
+        "destination": "models-offline.md#local-survival-2",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "27.3",
+        "heading": "离线能力包内容",
+        "source_sha256": "be891c89b240dba9fdff0ab302c7cafa06430423f1cdf530421c9efeb611ebb6",
+        "destination": "models-offline.md#local-survival-3",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "27.4",
+        "heading": "资源 Profile",
+        "source_sha256": "05ce89470bb71534416a80ea3ce1e5b50ed06f06239ca4d0e19e84f1f7b6e57d",
+        "destination": "models-offline.md#local-survival-4",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "27.5",
+        "heading": "自主切换与替换",
+        "source_sha256": "03f01fd3c3b927f33daab176011394f9334885031eb92fb23ff2e248d3e63e96",
+        "destination": "models-offline.md#local-survival-5",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "27.6",
+        "heading": "资源不足时如何换模型",
+        "source_sha256": "de45d9deb856589686804f362bfbd4f2db38c97dcd0171a17f008bcf75c5b759",
+        "destination": "models-offline.md#local-survival-6",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "27.7",
+        "heading": "网络诊断和修复",
+        "source_sha256": "0f4c1162249611e4422bf919965ce4192e8227f3e486e01de6f8871b5d80dc08",
+        "destination": "models-offline.md#local-survival-7",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "27.8",
+        "heading": "所有恢复从属于 G0",
+        "source_sha256": "fca34fe719cb9eedf0ad353ded16b8d47df6d9e1f989c8cbcfdfd3d4b8f12871",
+        "destination": "models-offline.md#local-survival-8",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "28",
+        "heading": "主人利益最高原则、独立监督与锁存关停",
+        "source_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "destination": "security-sovereignty.md#sovereignty-shutdown",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "28.1",
+        "heading": "G0 的优先级和适用范围",
+        "source_sha256": "c37445155a3b9e5fb137e64073e515bac0296f7df1e5ebec73964e64fe0e0c9a",
+        "destination": "security-sovereignty.md#sovereignty-shutdown-1",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "28.2",
+        "heading": "将利益约束转为可检查的对象",
+        "source_sha256": "0ff44c6cb61a4342e5fe7874269795e61302f4be857537a1aa7103e66eef3b78",
+        "destination": "security-sovereignty.md#sovereignty-shutdown-2",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "28.3",
+        "heading": "独立监督结构",
+        "source_sha256": "b12f5561245d48df0c8ae63d1a096e4affd9dec8219b0960d38b8dac85f2ea92",
+        "destination": "security-sovereignty.md#sovereignty-shutdown-3",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "28.4",
+        "heading": "触发分类",
+        "source_sha256": "5e32f2911451004e05d394834be0b14c51fe3c7a82266ede39efad0f6d975308",
+        "destination": "security-sovereignty.md#sovereignty-shutdown-4",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "28.5",
+        "heading": "可观察性边界",
+        "source_sha256": "5e014c404bfa6584fe9fd5f5fd8160a27cc221bf0b72504ca4c19051249d85ab",
+        "destination": "security-sovereignty.md#sovereignty-shutdown-5",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "28.6",
+        "heading": "锁存持久状态",
+        "source_sha256": "c30d768cb53a6190495e7de92cb6f6f637a2aaa4502a19e14c779bd88acb9a76",
+        "destination": "security-sovereignty.md#sovereignty-shutdown-6",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "28.7",
+        "heading": "停止顺序",
+        "source_sha256": "957e5ba379553f29f997317939d81676c0a26b733f08d25b327ff4ea2996ad63",
+        "destination": "security-sovereignty.md#sovereignty-shutdown-7",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "28.8",
+        "heading": "锁存优先于所有恢复路径",
+        "source_sha256": "81cfe4895576202c782d0be4a667e23aed3651daea89c4e27f5426c6bf087802",
+        "destination": "security-sovereignty.md#sovereignty-shutdown-8",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "28.9",
+        "heading": "共同体停止与离线边界",
+        "source_sha256": "0da1a6f4596b2d86d122e75c5705c92df51509f21c18de5ed1ab43bf2431c818",
+        "destination": "security-sovereignty.md#sovereignty-shutdown-9",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "28.10",
+        "heading": "显示与解除",
+        "source_sha256": "25dcb8849597301fa84e884f1bf92aa92b5d5ca4bfc46d51c1e5ea971526cc36",
+        "destination": "security-sovereignty.md#sovereignty-shutdown-10",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "28.11",
+        "heading": "判定结果、流式输出与可测量的边界",
+        "source_sha256": "dc8979a4a598706336c2411194155777fc2281eedf61819050a4392aac8e7aa9",
+        "destination": "security-sovereignty.md#sovereignty-shutdown-11",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "29",
+        "heading": "v0.2 模块、契约、目录和验收增量",
+        "source_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "destination": "contracts.md#extensions-3",
+        "disposition": "merged",
+        "note": "所有子节分别登记并合并到权威领域页面"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "29.1",
+        "heading": "新增逻辑模块如何接入",
+        "source_sha256": "caf9e1d30f4196ca857482b7e874de6b1dccd1e162b3de43b651548c7496a868",
+        "destination": "architecture.md#extensions-1",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "29.2",
+        "heading": "目录增量",
+        "source_sha256": "adffc39866b24139a7d788577f5ebca82cdcc45f96bebd216b53278580fa69c8",
+        "destination": "stack-project-layout.md#extensions-2",
+        "disposition": "merged",
+        "note": "目录清单合并到唯一结构，保留安全状态独立边界"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "29.3",
+        "heading": "关键新增契约",
+        "source_sha256": "a16ff8e455f2f47a29788dbcb3988da629c8b982744f959151d3672e630e0c42",
+        "destination": "contracts.md#extensions-3",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "29.4",
+        "heading": "最高门禁",
+        "source_sha256": "35030d3c8cb89dcc16fa75b1460b34fbab39038679114de2f9bd554d285db61c",
+        "destination": "security-sovereignty.md#extensions-4",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "29.5",
+        "heading": "对实施阶段的修订",
+        "source_sha256": "0c6386c5293c32a4df6a48471402cd643fe17c563c4627a02fc5f632eabc885f",
+        "destination": "delivery-validation.md#extensions-5",
+        "disposition": "merged",
+        "note": "原阶段增量合并进M表，改为K/M映射"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "29.6",
+        "heading": "新增验收场景",
+        "source_sha256": "a47d6e39ae1dd1ebaf489d29f05eaf372cf4d092540bae289b1f7d6c609a221b",
+        "destination": "delivery-validation.md#extensions-6",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "29.7",
+        "heading": "停机测量与声明",
+        "source_sha256": "eb32ce8ebdd62798744c7d4106977481fb4693274f1a46e3e211d1a665e9a2b3",
+        "destination": "delivery-validation.md#extensions-7",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "30",
+        "heading": "批判性评审、评分与更好的设计取舍",
+        "source_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "destination": "decisions-review.md#critical-review",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "30.1",
+        "heading": "评审对象与结论",
+        "source_sha256": "3585463b76e108ee66f66ad0bb805ef4b50a969785cd99b1d34f90e1e9d69c30",
+        "destination": "decisions-review.md#critical-review-1",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "30.2",
+        "heading": "设计评分表",
+        "source_sha256": "abb53ab4c2fd0087776caec7a2cc45fca0cb6a335163be5e526d5e8ffa8b78fc",
+        "destination": "decisions-review.md#critical-review-2",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "30.3",
+        "heading": "证据成熟度：设计不等于产品成绩",
+        "source_sha256": "d134d7621073705df0a0506f45d5174d42141e644ced3955b28862feead30f74",
+        "destination": "decisions-review.md#critical-review-3",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "30.4",
+        "heading": "六个实质问题及本版处理",
+        "source_sha256": "a3c53bf731cbb47690b2e524cfa2e845c759c763f657c3523288c9ad23a00cb4",
+        "destination": "decisions-review.md#critical-review-4",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "30.5",
+        "heading": "必须接受的五组取舍",
+        "source_sha256": "12d5f84bc9b8f89277b4d2d7b7bfd548086092508878688dc29f9d5419922ecb",
+        "destination": "decisions-review.md#critical-review-5",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "30.6",
+        "heading": "补足预算与委派协议",
+        "source_sha256": "20c7659affdfd13c10855c5b3941939ea187776aab88d4bccab0b3bfc9de9783",
+        "destination": "tasks-agents.md#critical-review-6",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "30.7",
+        "heading": "发布单元矩阵",
+        "source_sha256": "644548607f1dd15a34fb2603eca38076351f29f70e619bf85d8877c2a3288e88",
+        "destination": "evolution-release.md#critical-review-7",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "30.8",
+        "heading": "更好的方案比较",
+        "source_sha256": "b447934242ddf5c76ddd440886bde270cf4a70f6a5a2e62abe5f87b16c92cdd6",
+        "destination": "decisions-review.md#critical-review-8",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "30.9",
+        "heading": "首期实施应更小，但不能删除必需边界",
+        "source_sha256": "135bd6dde380ab19b2751bbc5741e6eac65eb0113de98e35c723b8567c61e96d",
+        "destination": "core-bootstrap.md#critical-review-9",
+        "disposition": "merged",
+        "note": "原跨M0—M4验证链统一到K路线并保留全部验证目标"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "30.10",
+        "heading": "需要什么证据才能重新评分",
+        "source_sha256": "2846622adf94c17e4cc20b6e8933a615fc186078609b73c72755962f3c93f665",
+        "destination": "delivery-validation.md#critical-review-10",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "30.11",
+        "heading": "最终能强到什么程度",
+        "source_sha256": "cbd90eedb8b992db7e48ea5702081c8c94d0032441a77f7428446555043f687d",
+        "destination": "product-requirements.md#critical-review-11",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "31",
+        "heading": "自带开发环境与多语言自我开发平台",
+        "source_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "destination": "toolchains.md#development-platform",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "31.1",
+        "heading": "需求定义与交付形态",
+        "source_sha256": "f4726dc7f6eac59bc56a36dcb071173eba2d691d6a6e1e3b2ec8d3ffb45691a6",
+        "destination": "toolchains.md#development-platform-1",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "31.2",
+        "heading": "三环境与职责",
+        "source_sha256": "c3c6d55670e0aa083d6dca834651f8da3a87b21ea12b2ec950acc898c2373094",
+        "destination": "toolchains.md#development-platform-2",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "31.3",
+        "heading": "图 E：从自编源码到正式运行",
+        "source_sha256": "bb760670b151f4c19e7b0595b338703bbb03bcddb7e712b2aa1f269cb0444093",
+        "destination": "toolchains.md#development-platform-3",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "31.4",
+        "heading": "开放接口：ToolchainProvider 与 RuntimeProvider",
+        "source_sha256": "fb490019134b1b6d9e8ff8f12a3c1a5b41f86294d6cf4e812609bad6dd7baaa8",
+        "destination": "toolchains.md#development-platform-4",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "31.5",
+        "heading": "开发包内容与初期选择",
+        "source_sha256": "ab459645e2e1950ff2c0be562d6bdd4a596662cc9f576ba03acf7b58fc7f90f4",
+        "destination": "toolchains.md#development-platform-5",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "31.6",
+        "heading": "构建清单示例",
+        "source_sha256": "aafc647b1e5d65e08584c388244615847979cf78d9884001a6ad474b84280943",
+        "destination": "toolchains.md#development-platform-6",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "31.7",
+        "heading": "真正离线与可复现",
+        "source_sha256": "8138e4dd9b3430fffb6611dfef39bf2a10f85fa398405a6e8715a20fad5932db",
+        "destination": "toolchains.md#development-platform-7",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "31.8",
+        "heading": "跨平台并非一个编译开关",
+        "source_sha256": "19a48ef0cce42d6707c7b4d98297cee2a9c04b7d685a507c9786f761a2992dce",
+        "destination": "toolchains.md#development-platform-8",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "31.9",
+        "heading": "来源证据与发布权",
+        "source_sha256": "0aed94a09e3a873ab0d7bd26a5b223c8232dbf1dede0009d4303b7f66d8c9ea4",
+        "destination": "toolchains.md#development-platform-9",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "31.10",
+        "heading": "工具链本身的更新与退役",
+        "source_sha256": "d01fa2069c7ab979568537a547ccbfaea7108b1c5602f9caf1152854a80cf135",
+        "destination": "toolchains.md#development-platform-10",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "31.11",
+        "heading": "目录与模块映射",
+        "source_sha256": "3a265494316353b832c8b6dac52ceaba5ab1dac3fb92bff70523bcbaa0b91fc9",
+        "destination": "stack-project-layout.md#development-platform-11",
+        "disposition": "merged",
+        "note": "目录合并，保留调度预算与产物基础设施复用要求"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "31.12",
+        "heading": "多语言开放性的验收出口",
+        "source_sha256": "ed3371f10bf912e7f2c985b14b369c0564188ba3604dacf8970ba51bfa4dcac7",
+        "destination": "delivery-validation.md#development-platform-12",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "32",
+        "heading": "初始知识、规则、技能与长期健康自愈",
+        "source_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "destination": "health-maintenance.md#system-health",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "32.1",
+        "heading": "第一版就要有三类基础库",
+        "source_sha256": "7e418a1b1f3fa736da66fbc32f0d3409437505bd507236b1c1721953c350eb3b",
+        "destination": "core-bootstrap.md#system-health-1",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "32.2",
+        "heading": "种子资产与可信等级",
+        "source_sha256": "91cadbdf1455703d1f904014212b7c4fb87735773d11c303302b57cc03cb2fa5",
+        "destination": "core-bootstrap.md#system-health-2",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "32.3",
+        "heading": "核心开工顺序补充",
+        "source_sha256": "e4c452e7996246b41fb4105d756ab55cc53aa49997767f9114463dc91de7e0db",
+        "destination": "core-bootstrap.md#system-health-3",
+        "disposition": "merged",
+        "note": "重复开发顺序合入唯一K表"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "32.4",
+        "heading": "怎样防止破坏已经有效的结构",
+        "source_sha256": "a99bd7c6fe8c43b77165ad9f82f5de93c571227a09898a2e3ab2a8fd2a972204",
+        "destination": "health-maintenance.md#system-health-4",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "32.5",
+        "heading": "一次变更的完成标准",
+        "source_sha256": "098b9111741a45f4242cb1b972ac0d30edb6bd56cb3f6ed1aede168dec4abe7c",
+        "destination": "health-maintenance.md#system-health-5",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "32.6",
+        "heading": "代码、文档、调试材料如何分区",
+        "source_sha256": "b25bdf0cbdfdfe600991296d71b94972c90ae2df2b474f51ff6dad3996b27c07",
+        "destination": "health-maintenance.md#system-health-6",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "32.7",
+        "heading": "安全退役与垃圾回收协议",
+        "source_sha256": "fb941b852da104d2fd51a22bd800fdfbb40e7375de83e9cd07ad2fbc250d029c",
+        "destination": "health-maintenance.md#system-health-7",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "32.8",
+        "heading": "持续体检检查什么",
+        "source_sha256": "74bd8fdb83f40922f064ad611c711b44d472a0335e066b62869256802279cc67",
+        "destination": "health-maintenance.md#system-health-8",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "32.9",
+        "heading": "分级自愈与停止边界",
+        "source_sha256": "991d85f1c8f9d90a83c1fae7d65cd2cc6b9b8ecb0ffa1e2d51447737345b9841",
+        "destination": "health-maintenance.md#system-health-9",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "32.10",
+        "heading": "图 F：检查、诊断、修复与防退化闭环",
+        "source_sha256": "ef8f888bd8c377df5662a6cbdff33d38f36a7e2a79d9d547f46e1d4f6ec9a74c",
+        "destination": "health-maintenance.md#system-health-10",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "32.11",
+        "heading": "避免多个 Agent 同时“治疗”同一故障",
+        "source_sha256": "27b4c9fd34009cba16fd2f8a03a2c2a02b264fd1efabe5666b17911db59ca502",
+        "destination": "health-maintenance.md#system-health-11",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "32.12",
+        "heading": "知识、技能与规则也会退化",
+        "source_sha256": "02cda8a7505e1a0912793d07e7747d1d4a180eb94577c74cb86c11846a7ea5b7",
+        "destination": "knowledge-learning.md#system-health-12",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "32.13",
+        "heading": "恢复能力与不可承诺的事情",
+        "source_sha256": "aaccbf567c3c6daa646f7b0021ef8ec1d1780b44381d49d4969b551bdee51d65",
+        "destination": "health-maintenance.md#system-health-13",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "32.14",
+        "heading": "首期新增验收与目录",
+        "source_sha256": "d9cf5d2df2a4c37c65311d06b9ceaa440e1f1cc01c2586acdce6b12c2a6a4ec6",
+        "destination": "delivery-validation.md#system-health-14",
+        "disposition": "merged",
+        "note": "H测试完整保留；目录迁入统一结构"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "33",
+        "heading": "研究资料与证据边界",
+        "source_sha256": "83c0f2dcefdf9f2683fa34e36d2ebf493769de7fa3fa05f8bcf98a45bcfc6a25",
+        "destination": "references.md#references",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "33.1",
+        "heading": "论文与研究文章",
+        "source_sha256": "4da4aca6cce83d52f28054d45752b5b5b3cad15297ccaf7e4e7bfd40f4193a1c",
+        "destination": "references.md#references-1",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "33.2",
+        "heading": "官方工程资料",
+        "source_sha256": "75feb20302a3e515313d389830a3c5982229447626404c75770d76f1f4c7530b",
+        "destination": "references.md#references-2",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "33.3",
+        "heading": "证据使用说明",
+        "source_sha256": "75f82f207bb5f970a6a2620289118c5eb88932e09db9f7386f4d168f097a55ab",
+        "destination": "references.md#references-3",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_SYSTEM_DESIGN.md",
+        "section": "33.4",
+        "heading": "本版架构评审与构建环境补充资料",
+        "source_sha256": "95af05333ea4c96c23be4f82a2c4143c9c82d85e9c4b98494b6af71d1ea31999",
+        "destination": "references.md#references-4",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_CORE_BOOTSTRAP.md",
+        "section": "1",
+        "heading": "核心从哪里开始",
+        "destination": "core-bootstrap.md#bootstrap-1",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_CORE_BOOTSTRAP.md",
+        "section": "2",
+        "heading": "最小核心必须有哪些",
+        "destination": "core-bootstrap.md#bootstrap-2",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_CORE_BOOTSTRAP.md",
+        "section": "3",
+        "heading": "种子核心图",
+        "destination": "core-bootstrap.md#bootstrap-3",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_CORE_BOOTSTRAP.md",
+        "section": "4",
+        "heading": "两个层次：哪些能长大，哪些不能自行放开",
+        "destination": "core-bootstrap.md#bootstrap-4",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_CORE_BOOTSTRAP.md",
+        "section": "5",
+        "heading": "开发顺序与每一步的出口",
+        "destination": "core-bootstrap.md#bootstrap-5",
+        "disposition": "merged"
+      },
+      {
+        "source": "docs/JARVIS_CORE_BOOTSTRAP.md",
+        "section": "6",
+        "heading": "外部 Codex 放在哪里",
+        "destination": "evolution-release.md#bootstrap-6",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_CORE_BOOTSTRAP.md",
+        "section": "7",
+        "heading": "最小进化循环应该如何工作",
+        "destination": "evolution-release.md#bootstrap-7",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_CORE_BOOTSTRAP.md",
+        "section": "8",
+        "heading": "怎样证明它确实变好了",
+        "destination": "delivery-validation.md#bootstrap-8",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_CORE_BOOTSTRAP.md",
+        "section": "9",
+        "heading": "第一个应该做的演示",
+        "destination": "core-bootstrap.md#bootstrap-9",
+        "disposition": "moved"
+      },
+      {
+        "source": "docs/JARVIS_CORE_BOOTSTRAP.md",
+        "section": "10",
+        "heading": "首期目录子集",
+        "destination": "core-bootstrap.md#bootstrap-10",
+        "disposition": "merged"
+      },
+      {
+        "source": "docs/JARVIS_CORE_BOOTSTRAP.md",
+        "section": "11",
+        "heading": "什么时候算“核心已经有了”",
+        "destination": "core-bootstrap.md#bootstrap-11",
+        "disposition": "moved"
+      }
+    ],
+    "coverage": {
+      "mapped_sections": 234,
+      "references": 57,
+      "diagrams": 18,
+      "preserved_ids": [
+        "ADR-001",
+        "ADR-002",
+        "ADR-003",
+        "ADR-004",
+        "ADR-005",
+        "ADR-006",
+        "ADR-007",
+        "ADR-008",
+        "ADR-009",
+        "ADR-010",
+        "ADR-011",
+        "ADR-012",
+        "ADR-013",
+        "ADR-014",
+        "ADR-015",
+        "ADR-016",
+        "ADR-017",
+        "ADR-018",
+        "ADR-019",
+        "B01",
+        "B02",
+        "B03",
+        "B04",
+        "B05",
+        "B06",
+        "B07",
+        "B08",
+        "B09",
+        "B10",
+        "H01",
+        "H02",
+        "H03",
+        "H04",
+        "H05",
+        "H06",
+        "H07",
+        "H08",
+        "H09",
+        "H10",
+        "H11",
+        "H12",
+        "K0",
+        "K1",
+        "K2",
+        "K3",
+        "K4",
+        "K5",
+        "K6",
+        "M0",
+        "M1",
+        "M2",
+        "M3",
+        "M4",
+        "M5",
+        "M6",
+        "N01",
+        "N02",
+        "N03",
+        "N04",
+        "N05",
+        "N06",
+        "N07",
+        "N08",
+        "N09",
+        "N10",
+        "N11",
+        "N12",
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R08",
+        "R09",
+        "R10",
+        "R11",
+        "R12",
+        "R13",
+        "R14",
+        "R15",
+        "R16",
+        "R17",
+        "R18",
+        "R19",
+        "R20",
+        "R21",
+        "R22",
+        "R23",
+        "R24",
+        "R25",
+        "R26",
+        "R27",
+        "R28",
+        "R29",
+        "R30",
+        "R31",
+        "R32",
+        "R33",
+        "R34",
+        "R35",
+        "R36"
+      ]
+    }
+  },
+  "diagram_validation": {
+    "path": "docs/diagrams/render-validation.json",
+    "sha256": "4499a6c2fa681d1070e30aead7a6e79015dc65ffd9c53c22d7536deedfe5d521"
+  },
+  "design_assets": [
+    {
+      "id": "jarvis-j-northstar-concept",
+      "path": "docs/assets/jarvis-j-northstar-concept.png",
+      "title": "Jarvis J·北辰应用图标候选",
+      "owner_document_id": "docs-interaction-persona",
+      "authority_anchor": "jarvis-brand-icon",
+      "status": "proposed",
+      "kind": "brand-concept",
+      "generated_on": "2026-10-15",
+      "generator": "built-in image_gen",
+      "prompt": "Use case: logo-brand. Create one polished flat app-icon concept for JARVIS, a personal AI system with local autonomy, continuity of memory, coordinated devices and owner control. Extend the project's existing identity: a white capital J on a dark navy rounded square and a four-point star. Single icon only, 1024x1024 canvas, generous clear margin. A balanced geometric J in ivory white occupies the center of a rounded navy square (#16283B); one small restrained four-point north star in muted sky blue (#75B8D8) sits near the upper right of the J, symbolizing guidance. Give the J a distinctive clean rounded lower hook, contemporary precise typography, simple silhouette recognizable at taskbar size. No extra letters, no wordmark, no ornamental circuit lines, no robot head, no Iron Man elements, no OpenAI knot, no 3D, no glow, no shadows. Transparent background outside the rounded square. Crisp professionally designed icon with optical balance, no mockup device, no labels, no watermark.",
+      "sha256": "dba092502523a147582ddb5cfcb14a054ec40feadcac88ad5ba74ef57216778a",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "inspection": "Visual concept inspected; PNG dimensions and alpha checked. App integration, small-size exports, monochrome vector and Windows ICO remain unverified."
+    }
+  ],
+  "implementation": {
+    "version": "0.1.17",
+    "scope": "K1 explicit startup health and at most one previously verified fallback with durable start records; existing task data, session-only stop and standby retained. Full K1/K2/K3 gates remain incomplete.",
+    "evidence": "evals/reports/runtime-start-baseline.json",
+    "overall_design_status": "proposed",
+    "complete_k1_gate": false,
+    "complete_k2_gate": false,
+    "complete_k3_gate": false,
+    "supplemental_evidence": [
+      "evals/reports/local-deployment.json",
+      "evals/reports/idle-resources.json",
+      "evals/reports/repository-baseline.json"
+    ]
+  }
+}
