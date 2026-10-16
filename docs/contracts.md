@@ -20,7 +20,8 @@
   - [7.2.7 0.1.11 项目与文本导出接口](#project-workspace-contract)
   - [7.2.8 0.1.21 聊天附件接口](#chat-attachments-contract)
   - [7.2.9 0.1.12 单次聊天取消接口](#chat-cancel-contract)
-  - [7.2.10 模型后台配置与统计接口（0.1.19）](#model-admin-contract)
+  - [7.2.10 设置总览资源快照接口（2026-10-16 增量）](#resource-usage-contract)
+  - [7.2.11 模型后台配置与统计接口（0.1.19）](#model-admin-contract)
 - [7.3 记忆组件的替换契约（proposed）](#memory-provider-contracts)
 - [7.4 接口与数据契约](#interfaces)
   - [7.4.1 模块生命周期](#interfaces-1)
@@ -202,6 +203,13 @@ HTTP 接入由 [server.py](../apps/web/server.py)校验本机 Host/Origin 和页
 返回 `CANCEL_REQUESTED` 仅证明服务收到信号，`FINISHED` 表示该请求处理已结束；两者都不能证明远端已撤销计费。取消先于聊天 POST 到达时保留取消标记，随后同 ID 不调用模型；重复聊天 ID 返回 409，不自动创建第二次生成。进程内最多保存 256 个控制句柄；未开始/已结束记录 10 分钟后可回收，正在处理的记录不淘汰。服务重启即失效，没有增加持久会话或另一套 Task 账本。
 
 传输层将事件交给 ChatService 与模型网关，取消后屏蔽回复；调用槽位要等真实处理线程退出才释放。前端用每次生成独立的 AbortController 和运行标识隔离迟到回调；停止等待不等于撤销已发送的文件写入。协议实现见 [server.py](../apps/web/server.py)，网关状态及认证/远端限制归[模型调用边界](models-offline.md#section-896f72aed9a9)。
+
+<a id="resource-usage-contract"></a>
+### 设置总览资源快照接口（2026-10-16 增量）
+
+`GET /api/resources` 为固定、只读的本机接口，无查询参数。遵循现有 Host/Origin 校验并要求页面 `X-Jarvis-Nonce`，不引入用户密码或额外登录。返回 `scope: "machine"`、UTC `sampled_at`、`refreshing`、`stale`、`age_seconds`、`cpu_percent`、`gpu_percent`、`memory` 与 `adapters`；未知值为 `null`，适配器未知时为空数组。`memory` 包含 `used_bytes/total_bytes/percent`；适配器记录包含 LUID `id`、`name`、`dedicated_total_bytes/shared_total_bytes`、可用时的 `dedicated_used_bytes/shared_used_bytes`。容量以字节传输，前端转换 GiB。此接口不返回进程清单、命令行、凭据或对话。
+
+调用立即返回已有缓存或初始未知值，并按需触发单次采样；`refreshing` 只表示采样在途，不是助手正在执行用户任务。`sampled_at` 为空或 `stale` 为真时界面不得展示缓存百分比为当前值。口径与缓存生命周期唯一规则见[整机资源统计](health-maintenance.md#machine-resource-usage)。
 
 <a id="model-admin-contract"></a>
 ### 模型后台配置与统计接口（0.1.19）

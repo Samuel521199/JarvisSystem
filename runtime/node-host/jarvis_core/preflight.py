@@ -141,7 +141,7 @@ def source_check(root):
                   "config/computer-use/demo-task.json", "apps/computer-use/demo.html"])
     paths.extend(f"adapters/computer-use/jarvis_computer/{name}.py"
                  for name in ("__init__", "protocol", "browser", "planner", "service", "web", "task_queue"))
-    paths.extend(["apps/web/attachments.css", "apps/web/attachments.js", "apps/web/theme.css", "apps/web/theme.js", "apps/web/workspace.css",
+    paths.extend(["apps/web/attachments.css", "apps/web/attachments.js", "apps/web/theme.css", "apps/web/theme.js", "apps/web/resources.js", "runtime/node-host/jarvis_core/resource_usage.py", "apps/web/workspace.css",
                   "apps/web/admin.html", "apps/web/admin.css", "apps/web/admin.js",
                   "contracts/schemas/model-admin.schema.json"])
     paths.extend(f"adapters/models/provider-native/jarvis_models/{name}.py"

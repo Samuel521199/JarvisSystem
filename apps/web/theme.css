@@ -2,7 +2,7 @@
 :root{
   color-scheme:light;
   --page:#ffffff;--surface:#ffffff;--paper:#f7f9fb;--sidebar:#f3f5f7;--soft:#f1f4f8;
-  --ink:#18283a;--muted:#5d6b7b;--subtle:#606e7c;--line:#d8e0e8;--strong-line:#a5b3c3;
+  --ink:#18283a;--muted:#5d6b7b;--subtle:#5b6977;--line:#d8e0e8;--strong-line:#a5b3c3;
   --hover:#e9edf1;--selected:#e6edf5;--blue:#315e91;--accent:#315e91;
   --accent-fill:#294e77;--accent-hover:#315273;--on-accent:#ffffff;--focus:#3c75ad;
   --green:#28654f;--success-bg:#eaf3ef;--success-line:#94b9aa;
@@ -10,7 +10,7 @@
   --error:#98412d;--error-bg:#fff1ec;--error-line:#d6a291;
   --chart:#4f78a4;--shadow:#10294324;--backdrop:#172a4266;
 }
-:root[data-theme=dark]{
+:root[data-theme=dark],:root[data-theme=forest],:root[data-theme=midnight]{
   color-scheme:dark;
   --page:#14181e;--surface:#1b222c;--paper:#11151b;--sidebar:#171e27;--soft:#222c38;
   --ink:#f1f5f9;--muted:#bac5d2;--subtle:#a1afc0;--line:#354250;--strong-line:#667a91;
@@ -24,13 +24,32 @@
 :root[data-theme=warm]{
   color-scheme:light;
   --page:#faf6ee;--surface:#fffaf2;--paper:#f3ede2;--sidebar:#f1eadd;--soft:#f1e9dc;
-  --ink:#332c25;--muted:#665c50;--subtle:#706456;--line:#d9cbbb;--strong-line:#a39786;
+  --ink:#332c25;--muted:#665c50;--subtle:#665c50;--line:#d9cbbb;--strong-line:#a39786;
   --hover:#eae0d0;--selected:#e6dac8;--blue:#65502f;--accent:#65502f;
   --accent-fill:#685333;--accent-hover:#514026;--on-accent:#fffaf2;--focus:#8c6735;
   --green:#315e46;--success-bg:#e8eddf;--success-line:#99b096;
   --amber:#79521b;--warning-bg:#f8eacf;--warning-line:#b99a64;
   --error:#943f2c;--error-bg:#fae9df;--error-line:#ca9e88;
   --chart:#947247;--shadow:#43331d24;--backdrop:#30271d66;
+}
+/* The additional dark palettes inherit all status colours from dark. */
+:root[data-theme=mist]{
+  --page:#edf4fa;--surface:#f8fcff;--paper:#e8f0f7;--sidebar:#e3edf6;--soft:#e5eef6;
+  --ink:#1c334a;--muted:#4c6378;--subtle:#4c6378;--line:#bdcfdf;--strong-line:#879fb5;
+  --hover:#dbe7f2;--selected:#d2e3f2;--blue:#285d88;--accent:#285d88;
+  --accent-fill:#285d88;--accent-hover:#204e74;--focus:#2c6fa6;--chart:#477eab;
+}
+:root[data-theme=forest]{
+  --page:#14231e;--surface:#1b2d26;--paper:#101c17;--sidebar:#16271f;--soft:#243b30;
+  --ink:#edf7f0;--muted:#b6ccbf;--subtle:#aac8b7;--line:#385647;--strong-line:#638a74;
+  --hover:#2d4739;--selected:#30533f;--blue:#a5dfbd;--accent:#a5dfbd;
+  --accent-fill:#a5dfbd;--accent-hover:#c7ecd5;--on-accent:#13291c;--focus:#93dcaf;--chart:#8ac8a3;
+}
+:root[data-theme=midnight]{
+  --page:#151b30;--surface:#1e2840;--paper:#101629;--sidebar:#182139;--soft:#283550;
+  --ink:#f0f3ff;--muted:#bfc8e2;--subtle:#aebbdc;--line:#3c4e72;--strong-line:#7589b3;
+  --hover:#303f60;--selected:#344972;--blue:#b6ccff;--accent:#b6ccff;
+  --accent-fill:#b6ccff;--accent-hover:#d1deff;--on-accent:#15233f;--focus:#acc6ff;--chart:#9bb5ee;
 }
 html{background:var(--page);scrollbar-color:var(--strong-line) var(--soft)}
 body{color:var(--ink)}

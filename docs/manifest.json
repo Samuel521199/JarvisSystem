@@ -213,7 +213,8 @@
         "computer-use-task-action-contracts",
         "computer-web-http-contracts",
         "model-admin-contract",
-        "chat-attachments-contract"
+        "chat-attachments-contract",
+        "resource-usage-contract"
       ],
       "status": "proposed",
       "reader_summary": "模块之间怎样交换任务、事件和记忆数据？"
@@ -233,7 +234,8 @@
       "path": "docs/health-maintenance.md",
       "title": "系统健康、防退化与自愈",
       "owns": [
-        "观测、结构约束、文档/代码健康、退役清理、分级自愈"
+        "观测、结构约束、文档/代码健康、退役清理、分级自愈",
+        "machine-resource-usage"
       ],
       "status": "proposed",
       "reader_summary": "怎样发现故障与结构退化，清理和修复隐患？"
@@ -257,7 +259,8 @@
         "model-admin-evidence",
         "appearance-evidence",
         "attachments-evidence",
-        "settings-navigation-evidence"
+        "settings-navigation-evidence",
+        "appearance-resource-evidence"
       ],
       "status": "proposed",
       "reader_summary": "哪些能力测过，证据在哪里，下一阶段怎样验收？"
@@ -2698,7 +2701,8 @@
       "evals/reports/tray-baseline.json",
       "evals/reports/model-admin-live-2026-10-16.json",
       "evals/reports/model-admin-baseline.json",
-      "evals/reports/appearance-baseline.json"
+      "evals/reports/appearance-baseline.json",
+      "evals/reports/appearance-resources.json"
     ]
   }
 }

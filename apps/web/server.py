@@ -16,7 +16,7 @@ import time
 from urllib.parse import urlsplit, parse_qs
 
 ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT / 'adapters/models/provider-native'))
+sys.path[:0] = [str(ROOT / 'adapters/models/provider-native'), str(ROOT / 'runtime/node-host')]
 from jarvis_models.attachments import (validate_message, validate_attachments, text_size,
     image_budget, MAX_CHAT_BODY, MAX_IMAGES_BYTES, MAX_ATTACHMENTS)
 INDEX_PATH = Path(__file__).with_name("index.html")
@@ -120,6 +120,9 @@ def validate_chat(payload):
     return message, provider, history, model, reasoning
 
 
+from jarvis_core.resource_usage import ResourceUsage
+
+
 class LocalChatServer(ThreadingHTTPServer):
     daemon_threads = True
     allow_reuse_address = not hasattr(socket, 'SO_EXCLUSIVEADDRUSE')
@@ -143,6 +146,8 @@ class LocalChatServer(ThreadingHTTPServer):
         self.slots = threading.BoundedSemaphore(2)
         self.chat_requests = ChatRequests()
         self.reply_timeout = reply_timeout
+        self.resource_usage = ResourceUsage()
+        self.resource_script = INDEX_PATH.with_name('resources.js').read_bytes()
         self.theme_style = INDEX_PATH.with_name('theme.css').read_bytes()
         self.theme_script = INDEX_PATH.with_name('theme.js').read_bytes()
         self.attachments_script = INDEX_PATH.with_name('attachments.js').read_bytes()
@@ -161,6 +166,7 @@ class LocalChatServer(ThreadingHTTPServer):
     def server_close(self):
         try:
             self.chat_requests.cancel_all()
+            self.resource_usage.close()
             if self.computer:self.computer.close()
         finally:
             super().server_close()
@@ -291,6 +297,14 @@ class ChatHandler(BaseHTTPRequestHandler):
             self._send(200, self.server.attachments_script, 'application/javascript; charset=utf-8')
         elif self.path in {"/settings", "/settings/", "/admin", "/admin/"}:
             self._send(200, self.server.admin_html, "text/html; charset=utf-8")
+        elif self.path == '/resources.js':
+            self._send(200, self.server.resource_script, 'application/javascript; charset=utf-8')
+        elif self.path == '/api/resources':
+            tokens = self.headers.get_all('X-Jarvis-Nonce', [])
+            if len(tokens) != 1 or not tokens[0].isascii() or not secrets.compare_digest(tokens[0], self.server.nonce):
+                self._error(403, 'request_token_invalid', '页面会话已失效，请刷新。')
+                return
+            self._send(200, self.server.resource_usage.snapshot())
         elif self.path == "/admin.js":
             self._send(200, self.server.admin_script, "application/javascript; charset=utf-8")
         elif self.path.startswith('/api/admin/'):

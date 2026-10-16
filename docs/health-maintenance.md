@@ -1,6 +1,6 @@
 # 系统健康、防退化与自愈
 
-> 状态：proposed（设计基线，尚未实现） · 更新：2026-10-15  
+> 状态：总体 proposed；局部 implemented/verified，范围与证据见正文 · 更新：2026-10-16
 > [文档入口](README.md) · [维护规则](MAINTENANCE.md) · [架构图册](architecture-atlas.md)
 
 <!-- book-nav:start -->
@@ -10,9 +10,10 @@
 
 - [15.1 可观测性、资源与运维](#observability)
   - [15.1.1 用户应能看到的内容](#observability-1)
-  - [15.1.2 追踪关联](#observability-2)
-  - [15.1.3 资源策略](#observability-3)
-  - [15.1.4 备份与恢复演练](#observability-4)
+  - [15.1.2 设置总览中的整机资源（2026-10-16 增量）](#machine-resource-usage)
+  - [15.1.3 追踪关联](#observability-2)
+  - [15.1.4 资源策略](#observability-3)
+  - [15.1.5 备份与恢复演练](#observability-4)
 - [15.2 长期健康与结构治理](#system-health)
   - [15.2.1 怎样防止破坏已经有效的结构](#system-health-4)
   - [15.2.2 一次变更的完成标准](#system-health-5)
@@ -42,6 +43,18 @@
 - 外部动作是已确认、失败，还是结果不确定。
 
 呈现关键状态和证据摘要，不要求展示内部模型推理全文。
+
+<a id="machine-resource-usage"></a>
+### 设置总览中的整机资源（2026-10-16 增量）
+
+本增量 implemented/verified 范围为 Windows 本机源码部署：设置总览顶部展示紧凑的 CPU、GPU、内存、显存四格。统计范围是**整台电脑**，包含其他程序；不代表 Jarvis 单进程消耗。数据来自本机系统接口，不调用模型、不上传硬件统计，不形成持久历史。
+
+- CPU：Windows PDH `Processor Information(_Total)` 的处理器时间比例；计数器不可用且逻辑处理器不超过 64 时回退 `GetSystemTimes` 时间差。数值随采样窗口变化，不承诺与任务管理器的频率加权数值一致。
+- 内存：`GlobalMemoryStatusEx` 的物理总量减可用量，显示比例与已用/总量，单位 GiB。
+- GPU：PDH `GPU Engine` 按同一物理引擎合并进程占用，再取最忙引擎；多卡取最忙值，不把不同引擎简单相加。该口径参考 [Microsoft GPU 指标说明](https://devblogs.microsoft.com/directx/gpus-in-the-task-manager/)。
+- 显存：PDH `GPU Adapter Memory` 用量与 DXGI 适配器容量按 LUID 匹配；显示专用已用/总量，另列共享内存已用。多卡专用容量相加，共享上限仅是各驱动报告值，不能视为额外物理内存。共享用量已经使用系统内存，不能再与内存格相加。悬停可查看容量说明；核显的专用保留区也不是独立显存芯片。容量接口见 [DXGI_ADAPTER_DESC1](https://learn.microsoft.com/en-us/windows/win32/api/dxgi/ns-dxgi-dxgi_adapter_desc1)。
+
+页面可见且停留总览时约每 3 秒请求；采样首次完成前短暂重试。服务器缓存 3 秒，同一实例最多一个采样线程，单次观察约 0.35 秒计数窗口，无常驻轮询线程。切换设置分页面、隐藏页签或离开页面即暂停前端轮询，在途采样可以收尾。后台慢采样不阻塞聊天 HTTP。数据缺失、驱动不支持或超过 15 秒未更新时显示“—/暂不可用”，不显示伪造的 0，也不把旧数据重新标为新值。暂未验证 Linux/macOS、全部显卡驱动或多卡实机；多引擎聚合有离线测试。接口见[资源快照契约](contracts.md#resource-usage-contract)，证据见[外观与资源验收](delivery-validation.md#appearance-resource-evidence)。
 
 <a id="observability-2"></a>
 ### 追踪关联

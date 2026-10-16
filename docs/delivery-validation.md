@@ -11,30 +11,31 @@
 - [16.1 已有版本的验证记录](#versioned-evidence)
   - [16.1.1 0.1.21 拖拽附件与图片输入](#attachments-evidence)
   - [16.1.2 统一设置入口（2026-10-16）](#settings-navigation-evidence)
-  - [16.1.3 0.1.20 页面配色与偏好记忆](#appearance-evidence)
-  - [16.1.4 0.1.19 模型配置、Key 版本与费用估算](#model-admin-evidence)
-  - [16.1.5 0.1.18 环境：Eachlabs Claude 独立小额探测](#eachlabs-claude-evidence)
-  - [16.1.6 0.1.18 Windows 托盘与含托盘的待命资源](#tray-evidence)
-  - [16.1.7 0.1.17 任务崩溃矩阵与程序出站阻断恢复](#task-fault-network-evidence)
-  - [16.1.8 0.1.17 本机部署、五分钟待命与代码仓库基线](#local-deployment-idle-evidence)
-  - [16.1.9 0.1.17 启动前健康检查与备用版本恢复](#runtime-start-evidence)
-  - [16.1.10 0.1.16 队列内存准入与短时竞争](#resource-admission-evidence)
-  - [16.1.11 0.1.15 浏览器回收、版本回退与前台响应](#runtime-continuity-evidence)
-  - [16.1.12 0.1.14 私人助手待命与会话停止](#personal-lifecycle-evidence)
-  - [16.1.13 0.1.13 K1 队列、登记回收与候选运行包](#k1-progress-evidence)
-  - [16.1.14 0.1.12 运行中的发送/停止按钮](#chat-stop-evidence)
-  - [16.1.15 0.1.11 项目文件夹与默认文本输出](#project-workspace-evidence)
-  - [16.1.16 0.1.10 浏览器持久后台队列](#computer-queue-evidence)
-  - [16.1.17 0.1.9 网页浏览器任务控制台](#computer-console-evidence)
-  - [16.1.18 0.1.8 独立浏览器 Computer Use](#computer-evidence)
-  - [16.1.19 0.1.7 K1/W3 固定元数据 Worker](#worker-evidence)
-  - [16.1.20 0.1.6 K1/W2 独立控制、签名恢复与默认实例迁移](#control-evidence)
-  - [16.1.21 0.1.5 K1/W1 只读运行预检](#preflight-evidence)
-  - [16.1.22 0.1.4 Google Pro 与轻量模型验证](#google-models-evidence)
-  - [16.1.23 0.1.3 统一模型菜单与推理级别历史验证](#web-workspace-evidence)
-  - [16.1.24 0.1.2 模型目录与迁移历史验证](#model-catalog-evidence)
-  - [16.1.25 0.1.1 聊天与模型路由历史验证](#chat-evidence)
-  - [16.1.26 K0 起步的历史验证记录](#k0-evidence)
+  - [16.1.3 配色卡片与整机资源栏（2026-10-16 增量）](#appearance-resource-evidence)
+  - [16.1.4 0.1.20 页面配色与偏好记忆](#appearance-evidence)
+  - [16.1.5 0.1.19 模型配置、Key 版本与费用估算](#model-admin-evidence)
+  - [16.1.6 0.1.18 环境：Eachlabs Claude 独立小额探测](#eachlabs-claude-evidence)
+  - [16.1.7 0.1.18 Windows 托盘与含托盘的待命资源](#tray-evidence)
+  - [16.1.8 0.1.17 任务崩溃矩阵与程序出站阻断恢复](#task-fault-network-evidence)
+  - [16.1.9 0.1.17 本机部署、五分钟待命与代码仓库基线](#local-deployment-idle-evidence)
+  - [16.1.10 0.1.17 启动前健康检查与备用版本恢复](#runtime-start-evidence)
+  - [16.1.11 0.1.16 队列内存准入与短时竞争](#resource-admission-evidence)
+  - [16.1.12 0.1.15 浏览器回收、版本回退与前台响应](#runtime-continuity-evidence)
+  - [16.1.13 0.1.14 私人助手待命与会话停止](#personal-lifecycle-evidence)
+  - [16.1.14 0.1.13 K1 队列、登记回收与候选运行包](#k1-progress-evidence)
+  - [16.1.15 0.1.12 运行中的发送/停止按钮](#chat-stop-evidence)
+  - [16.1.16 0.1.11 项目文件夹与默认文本输出](#project-workspace-evidence)
+  - [16.1.17 0.1.10 浏览器持久后台队列](#computer-queue-evidence)
+  - [16.1.18 0.1.9 网页浏览器任务控制台](#computer-console-evidence)
+  - [16.1.19 0.1.8 独立浏览器 Computer Use](#computer-evidence)
+  - [16.1.20 0.1.7 K1/W3 固定元数据 Worker](#worker-evidence)
+  - [16.1.21 0.1.6 K1/W2 独立控制、签名恢复与默认实例迁移](#control-evidence)
+  - [16.1.22 0.1.5 K1/W1 只读运行预检](#preflight-evidence)
+  - [16.1.23 0.1.4 Google Pro 与轻量模型验证](#google-models-evidence)
+  - [16.1.24 0.1.3 统一模型菜单与推理级别历史验证](#web-workspace-evidence)
+  - [16.1.25 0.1.2 模型目录与迁移历史验证](#model-catalog-evidence)
+  - [16.1.26 0.1.1 聊天与模型路由历史验证](#chat-evidence)
+  - [16.1.27 K0 起步的历史验证记录](#k0-evidence)
 - [16.2 下一轮 K1/K2 出口验收计划](#next-k1-acceptance)
   - [16.2.1 K1 出口：确定性控制与后台执行](#section-adaf0d5fff7c)
   - [16.2.2 K2 出口：自然语言、知识与技能闭环](#next-k2-acceptance)
@@ -76,6 +77,13 @@
 ### 统一设置入口（2026-10-16）
 
 [设置中心与扩展规则](interaction-persona.md#workbench-settings)已实现；源于 0.1.21 基线上的界面归并增量，并在当前 0.1.24 集成工作树验证。工作台侧栏不再展示供应商清单或后台任务表单；原模型、用量、外观和任务能力通过设置子页面进入。详细检查及限制见[设置导航记录](../evals/reports/settings-navigation.json)。这些证据只覆盖入口迁移与既有功能连接，不表示完整设置方案或 K1/K2/K3 已验收。
+
+<a id="appearance-resource-evidence"></a>
+### 配色卡片与整机资源栏（2026-10-16 增量）
+
+本轮基于已提交设置中心继续实现[直接点选配色](interaction-persona.md#workbench-appearance)与[整机资源栏](health-maintenance.md#machine-resource-usage)，没有改动 K0—K6 阶段出口。源码和测试为 [resource_usage.py](../runtime/node-host/jarvis_core/resource_usage.py)、[资源测试](../tests/test_resource_usage.py)、[前端行为测试](../tests/appearance_resources_ui.test.cjs)；[验收记录](../evals/reports/appearance-resources.json)列出实际检查、运行范围和未验证项。
+
+验证包括颜色选择/持久化/跨页签同步、键盘操作、系统主题与存储失败回退，资源未知/过期处理、页面可见性、在途旧响应丢弃，CPU 差值、GPU 引擎聚合、采样单并发和 HTTP 聊天独立性。浏览器实测 AMD Radeon 8060S 的 Windows 整机读数；离线模型替身只用于通道回归，不计为真实模型能力验证。未发起付费模型调用，未修改 Key 或账户配置。
 
 <a id="appearance-evidence"></a>
 ### 0.1.20 页面配色与偏好记忆

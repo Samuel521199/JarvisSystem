@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-16",
+  "change": "appearance cards and machine resources",
+  "status": "verified",
+  "basis_commit": "6b0aa9ff2b3dbfccc7134026504a5eea838cd68e",
+  "integrated_runtime": "0.1.26 source checkout (includes other ongoing increments)",
+  "checks": {
+    "python_resource_tests": 5,
+    "javascript_behavior_tests": 5,
+    "integrated_web_tests": 21,
+    "model_admin_tests": 12,
+    "browser": [
+      "six palette choices",
+      "mouse and keyboard selection",
+      "selection and dropdown stay in sync",
+      "cross-tab theme update without losing draft",
+      "reload preserves selection",
+      "real Windows AMD 8060S resource values",
+      "390 CSS pixel width: two columns, no page overflow",
+      "no browser console errors"
+    ],
+    "minimum_text_contrast_ratios": {
+      "light": 4.62,
+      "dark": 4.91,
+      "warm": 4.74,
+      "mist": 4.76,
+      "forest": 4.79,
+      "midnight": 4.67
+    },
+    "isolated_candidate_python_tests": 35,
+    "isolated_candidate_javascript_tests": 5
+  },
+  "source": "Windows PDH/GetSystemTimes/GlobalMemoryStatusEx/DXGI; whole machine, not Jarvis process",
+  "paid_model_calls": 0,
+  "limitations": [
+    "No Linux/macOS or other physical GPU/driver verification",
+    "GPU capacity and utilization sampling can differ from Task Manager window",
+    "No full K milestone acceptance; no release bundle repackaging"
+  ]
+}
