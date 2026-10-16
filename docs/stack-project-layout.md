@@ -1,6 +1,6 @@
 # 技术栈、源码目录与运行数据
 
-> 状态：完整目录与架构 proposed；0.1.18 当前实现与历史基线分开记录 · 更新：2026-10-16
+> 状态：完整目录与架构 proposed；0.1.19 当前实现与历史基线分开记录 · 更新：2026-10-16
 > [文档入口](README.md) · [维护规则](MAINTENANCE.md) · [架构图册](architecture-atlas.md)
 
 <!-- book-nav:start -->
@@ -198,7 +198,7 @@ K0—K1 在同一目标硬件上比较不超过两个底座候选，先验证确
 <a id="implemented-layout"></a>
 ### 当前实际落地范围（0.1.18）
 
-模型协议由 `jarvis_models/gateway.py` 实现；新增 `jarvis_models/catalog.py` 管理同提供商多模型及受限参数档案，目录数据只在 `config/model-profiles/providers.json` 维护。
+模型协议由 `jarvis_models/gateway.py` 实现；新增 `jarvis_models/catalog.py` 管理同提供商多模型及受限参数档案，初始目录来自 `config/model-profiles/providers.json`，后台建立后本机 `model-admin.db` 成为唯一有效配置，规则见[模型后台](models-offline.md#model-admin-config)。
 
 | 现有路径 | 内容与依赖边界 |
 |---|---|
@@ -227,6 +227,9 @@ K0—K1 在同一目标硬件上比较不超过两个底座候选，先验证确
 | `apps/tray/assets/`、`tools/export_tray_icons.ps1` | 从 TrayApplication.cs 的 DrawIcon 生成 ICO 与预览；完整运行包包含 C#、PowerShell、Python 和 ICO |
 | `tests/test_tray.py`、`tools/probe_tray_package.py`、`evals/reports/tray-baseline.json`、`evals/reports/tray-idle-resources.json` | 真实托盘进程/HTTP 状态/退出隔离、完整运行包与加入托盘后的待命资源证据；包探测结果保存在 tray-package.json |
 | `apps/web/workspace.js`、`apps/web/workspace.css` | 项目侧栏、页面会话/草稿、输出位置、保存操作与回执；不维护后台任务状态 |
+| `apps/web/admin.html`、`admin.css`、`admin.js` | 模型与费用的四页本机后台；复用 server.py 同源接纳，不创建第二个服务 |
+| `jarvis_models/registry.py`、`jarvis_models/billing.py` | 本机连接/Key 版本管理、价格快照与用量聚合；完整路径位于 adapters/models/provider-native/ |
+| `contracts/schemas/model-admin.schema.json`、`tests/test_model_admin.py`、`tools/serve_model_admin_fixture.py` | 配置命令契约、版本/计价/HTTP 回归与不使用真实凭据的合成界面验收 |
 | `runtime/node-host/jarvis_core/workspace.py` | 项目目录身份登记、明确文本导出、独占写入与摘要核验；标准库 SQLite/Tk，不新增第三方依赖 |
 | `tests/test_workspace.py`、`tools/probe_workspace_ui.py` | 临时目录/HTTP 故障回归与 Edge 端到端验证；合成模型响应，无付费调用 |
 | `adapters/computer-use/jarvis_computer/web.py` | 有界网页接纳层、任务查询与 PNG 校验，不增加持久调度队列 |
@@ -279,7 +282,7 @@ K0—K1 在同一目标硬件上比较不超过两个底座候选，先验证确
 | `%LOCALAPPDATA%\Jarvis\runtime` | 已安装运行槽位、选择记录和历史；不存业务账本，按核心章入口显式管理 |
 | `%USERPROFILE%\.jarvis\browser-staging` | 仅 Jarvis 创建的每任务浏览器 profile、下载暂存与登记；不等于用户浏览器目录 |
 | `%LOCALAPPDATA%\Jarvis\private` | DPAPI 凭据封装；[保护边界](security-sovereignty.md#prototype-security) |
-| `%LOCALAPPDATA%\Jarvis\data` | 业务 control.db、独立 safety/control.db 与 safety/pending、model-probes.db 调用历史、workspace.db 项目/导出回执、任务产物和 diagnostics；清空聊天不删除这些记录 |
+| `%LOCALAPPDATA%\Jarvis\data` | 业务 control.db、独立 safety/control.db 与 safety/pending、model-probes.db 调用及价格快照、model-admin.db 有效模型配置（不含明文凭据）、workspace.db 项目/导出回执、任务产物和 diagnostics；清空聊天不删除这些记录 |
 
 `.gitignore` 排除凭据、数据库、虚拟环境、模型、构建缓存及 `artifacts/releases/*.zip`；源码、文档、图源与生成图、测试和验证报告纳入 Git。主人指定的项目仓库及历史规则见[受控历史](MAINTENANCE.md#retirement-and-history)，忽略规则不是访问控制。本次未下载全套 C++/Rust 编译器，也没有宣称能断网重建所有依赖。未来按[工具链能力](toolchains.md#development-platform)补离线依赖闭包，不能把下载推理引擎等同于拥有自主编译平台。
 

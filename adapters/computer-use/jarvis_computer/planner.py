@@ -12,7 +12,10 @@ class ModelPlanner:
         self.provider = 'auto'
         self.last_metadata = {}
         if self.model:
-            matches = [item for item in self.chat.models()['models'] if item['model'] == self.model]
+            route, separator, mid = self.model.partition('::')
+            if separator:
+                self.model = mid
+            matches = [item for item in self.chat.models()['models'] if item['model'] == self.model and (not separator or item['provider'] == route)]
             if len(matches) != 1:
                 raise ComputerError('model_unavailable', 'Choose one registered model ID or auto')
             self.provider = matches[0]['provider']

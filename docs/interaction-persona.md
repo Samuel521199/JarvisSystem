@@ -18,7 +18,8 @@
   - [2.1.6 侧栏、搜索、会话与工作面板](#workspace-panels)
   - [2.1.7 Jarvis 专属体验与功能入口](#jarvis-distinctive-controls)
   - [2.1.8 设置中心与配置生效规则](#workbench-settings)
-  - [2.1.9 Jarvis 图标与品牌使用规范](#jarvis-brand-icon)
+  - [2.1.9 模型与费用后台布局（0.1.19）](#model-admin-experience)
+  - [2.1.10 Jarvis 图标与品牌使用规范](#jarvis-brand-icon)
 - [2.2 当前语音验证与主人识别](#speech-prototype)
 - [2.3 实时交互](#interaction-tasks)
   - [2.3.1 五条执行通道](#interaction-tasks-1)
@@ -35,7 +36,7 @@
 
 **新会话应当可以像 Codex 一样选择并打开本机文件夹，也可以先不选项目直接聊天。** 以用户提供的 Windows Codex 截图为布局参考，在现有网页上完善项目侧栏、中央会话、底部输入区和可展开工作面板。通用工作体验稳定后，再逐项接入 Jarvis 的长期记忆、离线自治、共同体和进化控制；阶段归属统一见[界面实施映射](core-bootstrap.md#workbench-stage-map)。
 
-本节是 **2026-10-15 的 proposed 产品设计**，不是已交付桌面软件。现有 0.1.18 网页已提供聊天及单次停止、模型/推理选择、目录与限定浏览器共用队列，以及[项目文件夹与文本保存子集](core-bootstrap.md#project-workspace-entry)；项目登记持久化，会话历史仍在页面内存。下述个人助手生命周期按 2026-10-16 用户要求 accepted；多标签文件工作台、实时语音与完整设置尚未实现。当前使用和运行证据分别见[原型入口](core-bootstrap.md#section-b3e262fa3ec1)与[分版本验收](delivery-validation.md#versioned-evidence)。
+本节是 **2026-10-15 的 proposed 产品设计**，不是已交付桌面软件。现有 0.1.19 网页已提供聊天及单次停止、模型/推理选择、目录与限定浏览器共用队列，以及[项目文件夹与文本保存子集](core-bootstrap.md#project-workspace-entry)；项目登记持久化，会话历史仍在页面内存。下述个人助手生命周期按 2026-10-16 用户要求 accepted；已增加[模型与费用后台](#model-admin-experience)；多标签文件工作台、实时语音与完整设置尚未实现。当前使用和运行证据分别见[原型入口](core-bootstrap.md#section-b3e262fa3ec1)与[分版本验收](delivery-validation.md#versioned-evidence)。
 
 <a id="personal-assistant-lifecycle"></a>
 ### 私人助手的常驻、待命与会话停止
@@ -213,6 +214,20 @@
 | 健康与关于 | 版本、服务/依赖诊断、日志导出、运行/待命状态、说明文档 | 模型不可用时仍有确定性入口；当前不要求恢复密钥或密码 |
 
 建议 Jarvis 初始快捷键：`Ctrl+N` 新会话、`Ctrl+O` 打开文件夹、`Ctrl+P` 搜索文件、`Ctrl+K` 命令菜单、`Ctrl+F` 当前内容查找、`Ctrl+,` 设置。普通网页可能被浏览器截获的组合必须提供等效按钮；快捷键只在适用焦点内生效。`Esc` 默认关闭菜单/抽屉，不把退出菜单误当成全局停止。
+
+<a id="model-admin-experience"></a>
+### 模型与费用后台布局（0.1.19）
+
+这是当前已实现的设置子集，入口是工作台侧栏“模型与费用”，独立标签页 `/admin`。采用原有浅色、深蓝 J 标记和蓝灰排版，左侧四项导航固定，右侧保留标题、刷新时间与主要操作。
+
+| 页面 | 主要内容 | 操作反馈 |
+|---|---|---|
+| 用量总览 | 分币种费用、调用数、Token、每日柱图、统计完整度，按接入方/模型/Key 的分布表 | 无数据不填示例；图表有每日数值表；待核对量与已估算量分开 |
+| 接入方与 Key | 官方/第三方卡片、实际接口、默认状态、Key 名称和尾号 | 模板新增；替换后保留旧版本；余额查询是按钮触发，不自动轮询 |
+| 模型与价格 | 线路筛选、模型搜索、ID、状态、输入/输出价、附加费和核对日 | 表单设置参数与缓存单价；错误留在弹窗；保存提示后续请求生效 |
+| 调用明细 | 时间、结果、线路、Key、输入/输出、费用与详情 | 与总览共用日期筛选；50 条分页导出；详情展示当时的价格快照 |
+
+管理弹窗支持键盘焦点与关闭，错误使用可访问提示；较窄窗口改为纵向卡片和可滚动表格。用户修改普通配置不需要恢复密钥或密码；不会把凭据放进聊天历史。计费与版本规则只在[模型章](models-offline.md#model-admin-config)定义，验证见[0.1.19 证据](delivery-validation.md#model-admin-evidence)。完整外观、人格、语音和记忆设置仍为 proposed。
 
 <a id="jarvis-brand-icon"></a>
 ### Jarvis 图标与品牌使用规范

@@ -1,6 +1,6 @@
 # 模型路由、本地模型与离线生存
 
-> 状态：完整路由 proposed；0.1.4 模型目录、推理级别、文字聊天与有限路由 implemented，实测按版本记录 · 更新：2026-10-15  
+> 状态：完整路由 proposed；0.1.19 模型后台、Key 管理与费用估算 implemented / verified，真实接口范围按版本记录 · 更新：2026-10-16
 > [文档入口](README.md) · [维护规则](MAINTENANCE.md) · [架构图册](architecture-atlas.md)
 
 <!-- book-nav:start -->
@@ -10,11 +10,12 @@
 
 - [9.1 当前凭据、模型与调用边界](#configured-models)
   - [9.1.1 2026-10-15 核验后的模型目录](#section-55d563b5f318)
-  - [9.1.2 Eachlabs Claude 独立调用核验（2026-10-16）](#eachlabs-claude-probe-config)
-  - [9.1.3 Google 当前主流与本项目选择（0.1.4，2026-10-15 核验）](#google-model-selection)
-  - [9.1.4 统一模型菜单与推理级别（0.1.3）](#reasoning-controls)
-  - [9.1.5 当前路由和单次资源边界](#section-896f72aed9a9)
-  - [9.1.6 本地小组件的当前选型](#section-4a9504a4187f)
+  - [9.1.2 模型配置后台与费用口径（0.1.19）](#model-admin-config)
+  - [9.1.3 Eachlabs Claude 独立调用核验（2026-10-16）](#eachlabs-claude-probe-config)
+  - [9.1.4 Google 当前主流与本项目选择（0.1.4，2026-10-15 核验）](#google-model-selection)
+  - [9.1.5 统一模型菜单与推理级别（0.1.3）](#reasoning-controls)
+  - [9.1.6 当前路由和单次资源边界](#section-896f72aed9a9)
+  - [9.1.7 本地小组件的当前选型](#section-4a9504a4187f)
 - [9.2 Computer Use：已验证的 DOM 规划与视觉候选](#computer-use-models)
 - [9.3 本地嵌入模型的候选与资源边界（proposed）](#embedding-candidates)
 - [9.4 双路模型连接与恢复设计](#model-routing)
@@ -37,16 +38,16 @@
 <a id="configured-models"></a>
 ## 当前凭据、模型与调用边界
 
-当前已有文本诊断与聊天适配；0.1.2 在 0.1.1 的有限路由上增加每家多个可选模型和独立参数档案，0.1.3 增加跨供应商统一选择与请求级推理调节，仍不是下文设计的完整自主生产路由。配置权威为 [providers.json](../config/model-profiles/providers.json)，提供商调用实现为 [gateway.py](../adapters/models/provider-native/jarvis_models/gateway.py)，会话层为 [ChatService](../runtime/node-host/jarvis_core/chat.py)。
+当前已有文本诊断与聊天适配；0.1.2 在 0.1.1 的有限路由上增加每家多个可选模型和独立参数档案，0.1.3 增加跨供应商统一选择与请求级推理调节，仍不是下文设计的完整自主生产路由。0.1.19 的配置与费用权威规则见[模型配置后台](#model-admin-config)，提供商调用实现为 [gateway.py](../adapters/models/provider-native/jarvis_models/gateway.py)，会话层为 [ChatService](../runtime/node-host/jarvis_core/chat.py)。
 
-按主人最新授权，`usage_policy=notify_on_provider_exhaustion`：**取消本地累计调用次数上限**，不再因过去调用了几次而阻断新请求。供应商明确返回额度耗尽时提示；现有调用历史和 UNKNOWN 记录继续保留，不通过删除账本恢复“额度”。没有查询任何账户余额，“Google 较多、OpenAI/xAI 较少”仍只是主人提供的信息。
+按主人最新授权，`usage_policy=notify_on_provider_exhaustion`：**取消本地累计调用次数上限**，不再因过去调用了几次而阻断新请求。供应商明确返回额度耗尽时提示；现有调用历史和 UNKNOWN 记录继续保留，不通过删除账本恢复“额度”。不自动查询账户余额；0.1.19 允许在后台显式查询 Eachlabs 账户余额，其余供应商额度仍以账户账单为准。
 
 额度通知依据供应商错误码，而不是累计调用数。明确的余额、账单或用量额度错误归为 `quota_exhausted`；仅有 HTTP 429 时归为 `rate_limited`，提示限流或配额受限，不能直接断言余额已耗尽。不同供应商的 429 也可能表示速率、项目配额或共享容量不足。[S71](references.md#s71)、[S72](references.md#s72)、[S73](references.md#s73)
 
 <a id="section-55d563b5f318"></a>
 ### 2026-10-15 核验后的模型目录
 
-[模型配置](../config/model-profiles/providers.json)是运行目录的唯一权威；[catalog.py](../adapters/models/provider-native/jarvis_models/catalog.py)负责校验与请求级选择。提供商的认证、区域和端点与模型档案分开；增加同协议模型通常只需新增配置和兼容验证。
+下表是[初始模型配置](../config/model-profiles/providers.json)的 17 个基础档案；启用后台后的有效配置位置见[配置后台规则](#model-admin-config)。[catalog.py](../adapters/models/provider-native/jarvis_models/catalog.py)负责校验与请求级选择。提供商的认证、区域和端点与模型档案分开；增加同协议模型通常只需新增配置和兼容验证。
 
 | 提供商 | 当前默认 | 可手动选择的其他模型 |
 |---|---|---|
@@ -64,14 +65,35 @@
 
 旧模型保留为手动兼容选择；历史测试和旧 UNKNOWN 记录继续保存于 [0.1.0 基线](delivery-validation.md#k0-evidence)及 [0.1.1 聊天基线](delivery-validation.md#chat-evidence)。后续新模型上线时：核对官方文档和区域 → 在配置中增加档案 → 检查接口参数 → 合成短调用与回归验证 → 选择默认值并登记证据。没有创建定时抓取、自动替换或后台付费探测。
 
+<a id="model-admin-config"></a>
+### 模型配置后台与费用口径（0.1.19）
+
+本节是接入配置、Key 版本、模型价格和用量归属的唯一规则页；界面入口见[后台使用](core-bootstrap.md#model-admin-entry)，交互见[后台布局](interaction-persona.md#model-admin-experience)，机器边界见[配置接口](contracts.md#model-admin-contract)，实现与实测见[验收](delivery-validation.md#model-admin-evidence)。
+
+**配置生效。** 首次建立后台时，以 `config/model-profiles/providers.json` 和 [registry.py](../adapters/models/provider-native/jarvis_models/registry.py) 的接入模板生成本机 `model-admin.db`。之后此数据库是唯一有效配置；种子 JSON 只用于新实例与模板，不覆盖已有本机编辑。CLI 聊天、网页聊天和浏览器任务共用 `effective_config`。运行中的请求保留启动时的配置副本；保存只改变后续请求。写入串行化并检查 revision，旧页面不能静默覆盖新配置。
+
+**连接与凭据。** connection ID 与协议 adapter 分开；同一家可以有多个连接，同一模型也可经多条线路调用。模板包括 OpenAI Responses、Google Vertex 服务账户、Google Gemini API Key、百炼区域、xAI、Anthropic Messages、Eachlabs 和 HTTPS Chat Completions 兼容中转。本地 Qwen 保持固定 loopback。官方端点固定，自定义中转保存 Base URL；更换站点另建连接并登记 Key，既有 Key 不随任意网址字段转移。不同百炼区域不沿用北京单价。新增线路不自动进入备用路由；当前首选可在接入设置中更改。
+
+每个 Key 版本有独立 ID、名称、尾号、创建时间和启用状态，完整凭据仅存现有 DPAPI 库。一个连接选择一个当前 Key，不自动轮询备用 Key。替换时新建版本并停用旧版本，旧用量仍归旧 ID；当前 Key 不允许直接停用，应先切换或替换。旧库通过显式 `Registry.import_legacy()` 一次登记，重复导入不复制版本；创建测试实例不读取真实凭据。保存失败不破坏原配置，凭据先写为不可变版本、再提交配置，异常至多留下未引用版本。管理接口和 CSV 不返回完整凭据，模型调用记录不存提示原文。
+
+**Claude。** Eachlabs 新增 `anthropic/claude-sonnet-5.5`（默认，均衡）、`anthropic/claude-opus-5.5`（复杂任务）、`anthropic/claude-haiku-5.5`（低成本）。基础 17 个档案加这 3 个后，初始后台共 20 个模型、6 条线路；实际启用列表随本机配置变化。默认 low，可选 low/medium/high，单次输出上限 8192，仍受现有请求时限约束。Anthropic 官方模板采用原生 `claude-…-5-5` ID；需另有官方 Key，不能把 Eachlabs Key 当作官方凭据。模型目录来源见 [S133](references.md#s133)—[S136](references.md#s136)，三个 Eachlabs 型号的真实文本调用已核验；官方新适配器仅有模拟协议验证。
+
+**用量与费用。** 每次尝试在现有 `model-probes.db` 保存连接/Key 身份、规范化 Token、请求时价格快照与估算结果。输入包含缓存读写；Anthropic 的输入字段不含缓存，先补齐再归一；Gemini 输出包含候选和 thoughts，OpenAI/兼容接口的 reasoning 已包含在输出，不再次相加。价格单位为每百万 Token，可分别配置输入、输出、缓存读、缓存写、USD/CNY、附加费百分比、输入档位上限、核对日、有效期和来源。
+
+估算公式为 `(普通输入×输入价 + 缓存读×读价 + 缓存写×写价 + 输出×输出价) / 1,000,000 × (1 + 附加费% / 100)`。金额用 Decimal 计算；每次调用保存结果，之后修改价格不倒改历史。用量缺失、缓存价格缺失、超档位、价格过期或历史无价格快照均显示待核对；已发送后停止/超时不能作为免费。未派发或本地模型标为无 API 费用，不代表本机电力免费。
+
+按北京时间 UTC+8 的请求创建日期聚合，可选今天、7/30/90 天或最长 366 天自选区间；同一筛选同时作用于每日、连接、模型、Key 和 50 条分页明细。USD 与 CNY 分开相加，不自动换汇。当前统计只覆盖本实例通过网关记录的调用尝试，**不是供应商结算账单**：套餐、赠额、信用返还、税费、其他应用调用与外部历史探测不自动合并。旧版本记录保留为历史未归属/待核对，不用今天的单价反算。
+
+初始价格按 2026-10-16 官方资料核对。[S138](references.md#s138)—[S142](references.md#s142) OpenAI 用 Standard 短上下文价；Gemini 4 Argon 使用未扣促销返还的 4/20 标价，3.8 Flash 限期价有效至 2026-12-31；百炼使用北京原价，缓存未核验则留空；Grok 4.1 Fast 价格未预填。Eachlabs 附加费初始为 5.5%，可按实际账户规则调整。Eachlabs 余额仅点按钮时查询，可能延迟且多个 Key 可共享同一账户余额，不能把余额相加或当作此实例的当日消耗。没有后台轮询、自动付费测试或新预算阻断。
+
 <a id="eachlabs-claude-probe-config"></a>
 ### Eachlabs Claude 独立调用核验（2026-10-16）
 
-本轮按主人小额测试授权直接验证 Eachlabs；这是 0.1.18 环境下的外部 API 探测，尚未加入上述 17 个 Jarvis 模型档案、网页菜单或自动路由。使用 `https://api.eachlabs.ai/v1/chat/completions` 和 Eachlabs 自己的 Bearer API Key；其他提供商凭据不参与。测试凭据仅留在本轮进程内存，不写入项目文件或替换已有凭据。[S135](references.md#s135)
+本轮按主人小额测试授权直接验证 Eachlabs；这是 0.1.18 环境下的历史外部 API 探测，当时尚未加入应用。0.1.19 的正式文本接入见[后台规则](#model-admin-config)与[新版本证据](delivery-validation.md#model-admin-evidence)。使用 `https://api.eachlabs.ai/v1/chat/completions` 和 Eachlabs 自己的 Bearer API Key；其他提供商凭据不参与。测试凭据仅留在本轮进程内存，不写入项目文件或替换已有凭据。[S135](references.md#s135)
 
 Anthropic 当前官方目录列出 Opus 5.5、Sonnet 5.5、Haiku 5.5 和 Fable 5.1。[S133](references.md#s133) **原生 API ID 与中转 ID 不同**：例如官方 `claude-opus-5-5`，本中转请求为 `anthropic/claude-opus-5.5`。Eachlabs 实际精选目录列出 Opus/Sonnet 5.5 并标记 OpenRouter 路由；Haiku 5.5、Fable 5.1 在实查的 OpenRouter 目录中，按中转文档允许使用未列入精选的已发布聊天模型 ID。[S134](references.md#s134)、[S136](references.md#s136)
 
-实测可用范围、过滤结果、费用与限制统一见[独立小额探测证据](delivery-validation.md#eachlabs-claude-evidence)。当前不将 Fable 的 HTTP 200 或执行账本 `success` 当作有可用回答；也不以返回型号名称证明真实上游权重身份。后续正式接入应复用现有目录、停止和用量机制，再验证过滤空回答、SSE 工具片段、未知计费结果及模型 ID 映射，不因本轮短请求成功就标为已集成。
+实测可用范围、过滤结果、费用与限制统一见[独立小额探测证据](delivery-validation.md#eachlabs-claude-evidence)。当前不将 Fable 的 HTTP 200 或执行账本 `success` 当作有可用回答；也不以返回型号名称证明真实上游权重身份。0.1.19 已复用目录、会话停止和用量机制接入三个成功型号的非流式文本；SSE 工具执行和 Fable 仍未接入，不由本轮探测推断。
 
 <a id="google-model-selection"></a>
 ### Google 当前主流与本项目选择（0.1.4，2026-10-15 核验）
@@ -126,7 +148,7 @@ Vertex 的 Gemini 2.5 Pro / Flash / Flash-Lite 计划于 **2026-10-20** 退役�
 - CLI 和浏览器仅在当前会话内存保存历史。ChatService 裁剪后最多保留并发送 20 条历史消息、合计最多 32 KiB UTF-8 的历史；按实际提供商输入上限进一步裁剪，并返回提示。清空会话不删除调用账本。切换提供商或使用 `auto`，会把当前输入和裁剪后历史发送给实际候选提供商。
 - 回答附带实际模型 ID、供应商实际返回的数值用量及额度通知；没有数据时不猜测 token、费用或账户余额。消息不会变成工具调用、程序执行或新的自主权限。
 
-Google JSON 是服务账户凭据，以 OAuth 换取短期令牌，并非普通 Gemini API key。四家凭据已由 Windows 当前用户 DPAPI 加密存储，源码只含模型、端点与调用策略。Google 原始附件保持原位，未复制到仓库。凭据位置与信任限制见[凭据与停止实现边界](security-sovereignty.md#prototype-security)。
+Google JSON 是服务账户凭据，以 OAuth 换取短期令牌，并非普通 Gemini API key。基础四家与后续登记凭据由 Windows 当前用户 DPAPI 加密存储，源码只含模型、端点与调用策略。Google 原始附件保持原位，未复制到仓库。凭据位置与信任限制见[凭据与停止实现边界](security-sovereignty.md#prototype-security)。
 
 派发先在核心短事务内检查停止并提交 `dispatch_admitted`，该提交是“已在途”的边界；停止先获得事务时拒绝接纳。已接纳请求可能在停止后完成网络发送、远端执行和计费，不能承诺撤回。0.1.12 的单次聊天取消沿用该已接纳边界：网页传入请求级取消事件，异步等待响应头或正文时检查取消并关闭/等待 HTTPX 传输清理；取消后不自动回退、不采用迟到输出。同步凭据/Google 认证阶段仍按原有超时退出，随后拒绝派发；不会通过提前释放槽位制造无限后台请求。未派发取消记为 CANCELLED，已派发且远端结果不明仍记 UNKNOWN，并附 `cancel_requested`；网页停止回复不证明供应商已经停止计算或免除计费。
 
@@ -157,7 +179,7 @@ Google JSON 是服务账户凭据，以 OAuth 换取短期令牌，并非普通 
 <a id="computer-use-models"></a>
 ## Computer Use：已验证的 DOM 规划与视觉候选
 
-当前 17 个档案提供文本接口，**0.1.8 已复用它们作为浏览器 DOM 规划入口，GPT-6 Luna 完成一次真实四步合成表单任务**。无需视觉模型即可操作有元素语义的网页；这不是截图定位或原生桌面控制。模型目录可选不代表全部通过浏览器规划验收。截图保留本地，文本和目标状态经既有网关外发，见[浏览器使用](core-bootstrap.md#runtime-computer)。
+基础 17 个档案提供文本接口，**0.1.8 已复用它们作为浏览器 DOM 规划入口，GPT-6 Luna 完成一次真实四步合成表单任务**。无需视觉模型即可操作有元素语义的网页；这不是截图定位或原生桌面控制。模型目录可选不代表全部通过浏览器规划验收。截图保留本地，文本和目标状态经既有网关外发，见[浏览器使用](core-bootstrap.md#runtime-computer)。
 
 本轮 Google `gemini-3.8-flash` 的首次规划请求等待超时，按 UNKNOWN 保留且没有自动重发；独立新任务改用 `gpt-6-luna`，四次调用均成功，共 2,820 输入 / 166 输出 token，任务约 23 秒。单一合成场景不能推断复杂网站成功率；[证据](delivery-validation.md#computer-evidence)记录两个结果。Google/百炼/XAI/本地模型仍可显式选择，能力验证与接口可调用分开。
 

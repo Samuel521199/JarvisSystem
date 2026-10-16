@@ -13,6 +13,7 @@ import socket
 import sys
 import threading
 import time
+from urllib.parse import urlsplit, parse_qs
 
 ROOT = Path(__file__).resolve().parents[2]
 INDEX_PATH = Path(__file__).with_name("index.html")
@@ -88,10 +89,10 @@ def validate_chat(payload):
     if not isinstance(message, str) or not message.strip() or len(message.encode("utf-8")) > MAX_MESSAGE_BYTES:
         raise ValueError("invalid message")
     provider = payload.get("provider", "auto")
-    if not isinstance(provider, str) or provider not in PROVIDERS:
+    if not isinstance(provider, str) or not re.fullmatch(r"[a-z][a-z0-9_-]{0,63}", provider):
         raise ValueError("invalid provider")
     model = payload.get("model")
-    if model is not None and (provider == "auto" or not isinstance(model, str) or not re.fullmatch(r"[a-zA-Z0-9._:-]{1,128}", model)):
+    if model is not None and (provider == "auto" or not isinstance(model, str) or not re.fullmatch(r"(?=.{1,128}$)[a-zA-Z0-9][a-zA-Z0-9._:-]*(?:/[a-zA-Z0-9][a-zA-Z0-9._:-]*)?", model)):
         raise ValueError("invalid model")
     reasoning = payload.get("reasoning")
     if reasoning is not None and (provider == "auto" or not isinstance(reasoning, str)
@@ -128,6 +129,7 @@ class LocalChatServer(ThreadingHTTPServer):
         self.chat = chat
         self.computer = computer
         self.workspace = workspace
+        self.admin = None
         self.version = version
         self.instance_id = secrets.token_hex(16)
         self.nonce = secrets.token_urlsafe(32)
@@ -138,6 +140,8 @@ class LocalChatServer(ThreadingHTTPServer):
         self.html = INDEX_PATH.read_bytes().replace(b"__JARVIS_WORKSPACE_STYLE__", INDEX_PATH.with_name('workspace.css').read_bytes()).replace(b"__JARVIS_NONCE__", self.nonce.encode("ascii")).replace(b'__JARVIS_VERSION__',version.encode('ascii'))
         self.computer_script = INDEX_PATH.with_name('computer.js').read_bytes()
         self.workspace_script = INDEX_PATH.with_name('workspace.js').read_bytes()
+        self.admin_html = INDEX_PATH.with_name('admin.html').read_bytes().replace(b'__JARVIS_ADMIN_STYLE__', INDEX_PATH.with_name('admin.css').read_bytes()).replace(b'__JARVIS_NONCE__', self.nonce.encode('ascii')).replace(b'__JARVIS_VERSION__', version.encode('ascii'))
+        self.admin_script = INDEX_PATH.with_name('admin.js').read_bytes()
         super().__init__(address, ChatHandler)
         port = self.server_address[1]
         self.allowed_hosts = {f"127.0.0.1:{port}", f"localhost:{port}"}
@@ -270,7 +274,27 @@ class ChatHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         if not self._boundary():
             return
-        if self.path == "/":
+        if self.path in {"/admin", "/admin/"}:
+            self._send(200, self.server.admin_html, "text/html; charset=utf-8")
+        elif self.path == "/admin.js":
+            self._send(200, self.server.admin_script, "application/javascript; charset=utf-8")
+        elif self.path.startswith('/api/admin/'):
+            if not self._admin_token():return
+            try:
+                parsed = urlsplit(self.path)
+                if parsed.path == '/api/admin/config' and not parsed.query:
+                    self._send(200, self.server.admin.snapshot())
+                elif parsed.path == '/api/admin/usage':
+                    from jarvis_models.billing import report
+                    query = parse_qs(parsed.query, keep_blank_values=True, strict_parsing=True)
+                    if set(query) - {'start', 'end', 'provider', 'model', 'key_id', 'offset'} or any(len(v)!=1 for v in query.values()):
+                        raise ValueError('统计筛选条件无效。')
+                    values = {k:v[0] for k,v in query.items()}
+                    if 'offset' in values:values['offset']=int(values['offset'])
+                    self._send(200, report(self.server.core.data_dir, **values))
+                else:self._error(404, 'not_found', '此入口不存在。')
+            except Exception as exc:self._admin_error(exc)
+        elif self.path == "/":
             self._send(200, self.server.html, "text/html; charset=utf-8")
         elif self.path == '/computer.js':
             self._send(200,self.server.computer_script,'application/javascript; charset=utf-8')
@@ -324,17 +348,19 @@ class ChatHandler(BaseHTTPRequestHandler):
         if not self._boundary(post=True):
             return
         computer_start=self.path in {'/api/computer/tasks','/api/tasks'}
+        admin_action=self.path in {'/api/admin/config','/api/admin/balance'}
         chat_cancel = self.path == '/api/chat/cancel'
         computer_queue=self.path in {'/api/computer/queue','/api/tasks/queue'}
         computer_cancel=re.fullmatch(r'/api/(?:computer/tasks|tasks)/(task_[a-f0-9]{32})/cancel',self.path)
         workspace_save = re.fullmatch(r'/api/workspace/outputs/([a-f0-9]{32})', self.path)
         workspace_action = self.path in {'/api/workspace/projects', '/api/workspace/pick-folder', '/api/workspace/outputs/prepare'} or workspace_save
-        if self.path != "/api/chat" and not chat_cancel and not computer_start and not computer_cancel and not computer_queue and not workspace_action:
+        if self.path != "/api/chat" and not chat_cancel and not computer_start and not computer_cancel and not computer_queue and not workspace_action and not admin_action:
             self._error(404, "not_found", "此入口不存在。")
             return
         if (self.path.startswith('/api/computer/') or self.path.startswith('/api/tasks')) and not self._computer_token():
             return
         if workspace_action and not self._workspace_token():return
+        if admin_action and not self._admin_token():return
         if not chat_cancel and not computer_cancel and not computer_queue and not self._guard():
             return
         lengths = self.headers.get_all("Content-Length", [])
@@ -358,12 +384,23 @@ class ChatHandler(BaseHTTPRequestHandler):
             payload=strict_json(body)
             if self.path=='/api/chat':
                 message, provider, history, model, reasoning = validate_chat(payload)
+                if provider != 'auto' and provider not in {p['provider'] for p in self.server.chat.models()['providers']}:
+                    raise ValueError('unknown_provider')
                 ids = self.headers.get_all('X-Jarvis-Request', [])
                 if len(ids) > 1 or (ids and not re.fullmatch(r'[a-f0-9]{32}', ids[0])):
                     raise ValueError('invalid request id')
                 request_id = ids[0] if ids else None
         except (ValueError, TypeError, UnicodeError, RecursionError, socket.timeout, OSError):
             self._error(400, "invalid_request", "消息或对话历史格式无效，或超过当前限制。")
+            return
+        if admin_action:
+            try:
+                if self.path.endswith('/balance'):
+                    if not isinstance(payload,dict) or set(payload)!={'connection'} or not isinstance(payload['connection'],str):raise ValueError('余额查询参数无效。')
+                    result=self.server.admin.balance(payload['connection'])
+                else:result=self.server.admin.mutate(payload)
+                self._send(200,result)
+            except Exception as exc:self._admin_error(exc)
             return
         if chat_cancel:
             if not isinstance(payload, dict) or set(payload) != {'request_id'} or not isinstance(payload['request_id'], str) or not re.fullmatch(r'[a-f0-9]{32}', payload['request_id']):
@@ -447,6 +484,23 @@ class ChatHandler(BaseHTTPRequestHandler):
         self._error(405, "method_not_allowed", "此方法不可用。")
 
 
+    def _admin_token(self):
+        if self.server.admin is None:
+            self._error(503, 'admin_unavailable', '配置后台未初始化。');return False
+        values=self.headers.get_all('X-Jarvis-Nonce',[])
+        if len(values)!=1 or not values[0].isascii() or not secrets.compare_digest(values[0],self.server.nonce):
+            self._error(403,'invalid_token','页面已失效，请刷新配置后台。');return False
+        return self._guard()
+
+    def _admin_error(self, exc):
+        # Only local validation messages are public; never reflect provider/vault errors.
+        if type(exc) is ValueError:
+            message=str(exc)
+            if not any('\u4e00'<=char<='\u9fff' for char in message):message='配置或筛选条件无效，请检查填写内容。'
+            self._error(400,'invalid_admin_request',message)
+        else:self._error(503,'admin_unavailable','暂时无法读取或保存配置，请检查本机数据与凭据存储。')
+
+
 def create_server(*, core=None, chat=None, data_dir=None, config_path=None, port=18181):
     if core is None or chat is None:
         sys.path.insert(0, str(ROOT / "runtime/node-host"))
@@ -463,6 +517,9 @@ def create_server(*, core=None, chat=None, data_dir=None, config_path=None, port
     # Bind first: a failed duplicate launch must not fence the live dispatcher.
     server = LocalChatServer(("127.0.0.1", port), core, chat, version=__version__, workspace=WorkspaceService(core))
     try:
+        if hasattr(chat, 'config_path'):
+            from jarvis_models.registry import Registry
+            server.admin = Registry(core.data_dir, chat.config_path)
         server.computer = ComputerWeb(core,chat)
     except BaseException:
         server.server_close()

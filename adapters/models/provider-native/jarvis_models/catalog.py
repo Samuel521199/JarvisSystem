@@ -3,8 +3,10 @@ from __future__ import annotations
 
 from copy import deepcopy
 import re
+from .billing import validate_price
 
-MODEL_ID = re.compile(r"[a-zA-Z0-9._:-]{1,128}")
+MODEL_ID = re.compile(r"(?=.{1,128}$)[a-zA-Z0-9][a-zA-Z0-9._:-]*(?:/[a-zA-Z0-9][a-zA-Z0-9._:-]*)?")
+CONNECTION_ID = re.compile(r"[a-z][a-z0-9_-]{0,63}")
 PARAMETERS = {
     "openai": {"reasoning_effort", "max_output_tokens"},
     "vertex": {"thinking_level", "max_output_tokens"},
@@ -12,6 +14,10 @@ PARAMETERS = {
     "xai": {"reasoning_effort", "max_output_tokens"},
     "local": {"max_output_tokens"},
 }
+PARAMETERS.update(eachlabs={"reasoning_effort", "max_output_tokens"},
+                  compatible={"reasoning_effort", "max_output_tokens"},
+                  anthropic={"reasoning_effort", "max_output_tokens"},
+                  gemini={"thinking_level", "max_output_tokens"})
 REASONING_PARAMETERS = {"openai": "reasoning_effort", "xai": "reasoning_effort",
                         "vertex": "thinking_level", "bailian": "enable_thinking"}
 REASONING_VALUES = {
@@ -20,6 +26,9 @@ REASONING_VALUES = {
     "vertex": {"minimal", "low", "medium", "high"},
     "bailian": {"off", "on"}, "local": set(),
 }
+REASONING_PARAMETERS.update(eachlabs="reasoning_effort", compatible="reasoning_effort", anthropic="reasoning_effort", gemini="thinking_level")
+REASONING_VALUES.update(eachlabs={"low", "medium", "high", "max"}, compatible={"none", "low", "medium", "high", "xhigh", "max"},
+                        anthropic={"low", "medium", "high", "max"}, gemini=REASONING_VALUES["vertex"])
 
 
 def reasoning_value(provider, parameters):
@@ -36,14 +45,18 @@ def profiles(settings):
 
 def validate_catalog(config):
     for provider, settings in config["providers"].items():
+        provider = settings.get("adapter", provider)
         entries = profiles(settings)
         if not isinstance(entries, dict) or not 1 <= len(entries) <= 64 or settings["model"] not in entries:
             raise ValueError("invalid_model_catalog")
         for model, entry in entries.items():
             if not isinstance(model, str) or not MODEL_ID.fullmatch(model) or not isinstance(entry, dict):
                 raise ValueError("invalid_model_profile")
-            if set(entry) - {"label", "tier", "parameters", "reasoning_levels"}:
+            if set(entry) - {"label", "tier", "parameters", "reasoning_levels", "price", "enabled"}:
                 raise ValueError("unsupported_model_profile_field")
+            if type(entry.get("enabled", True)) is not bool:
+                raise ValueError("invalid_model_enabled")
+            validate_price(entry.get("price"))
             for field in ("label", "tier"):
                 if field in entry and (not isinstance(entry[field], str) or not 1 <= len(entry[field]) <= 128):
                     raise ValueError("invalid_model_label")
@@ -76,8 +89,10 @@ def resolve_settings(config, provider, model=None):
     if not isinstance(chosen, str) or chosen not in profiles(settings):
         raise ValueError("model_not_registered_for_provider")
     entry = profiles(settings)[chosen]
+    if not settings.get("enabled", True) or not entry.get("enabled", True):
+        raise ValueError("model_or_connection_disabled")
     return {**{k: v for k, v in settings.items() if k != "models"},
-            **entry.get("parameters", {}), "model": chosen}
+            **entry.get("parameters", {}), "model": chosen, "price": entry.get("price")}
 
 
 def select_model(config, provider, model, reasoning=None):
@@ -89,18 +104,24 @@ def select_model(config, provider, model, reasoning=None):
         entry = profiles(selected["providers"][provider])[model]
         if not isinstance(reasoning, str) or reasoning not in entry.get("reasoning_levels", []):
             raise ValueError("unsupported_model_reasoning_level")
-        value = reasoning.upper() if provider == "vertex" else reasoning == "on" if provider == "bailian" else reasoning
-        entry.setdefault("parameters", {})[REASONING_PARAMETERS[provider]] = value
+        adapter = selected["providers"][provider].get("adapter", provider)
+        value = reasoning.upper() if adapter in {"vertex", "gemini"} else reasoning == "on" if adapter == "bailian" else reasoning
+        entry.setdefault("parameters", {})[REASONING_PARAMETERS[adapter]] = value
     return selected
 
 
 def public_models(config):
     result = []
     for provider, settings in config["providers"].items():
+        if not settings.get("enabled", True):
+            continue
         for model, entry in profiles(settings).items():
+            if not entry.get("enabled", True):
+                continue
             result.append({"provider": provider, "model": model, "label": entry.get("label", model),
+                           "provider_label": settings.get("label", provider), "adapter": settings.get("adapter", provider),
                            "tier": entry.get("tier", "configured"), "is_provider_default": model == settings["model"],
                            "parameters": dict(entry.get("parameters", {})),
                            "reasoning_levels": list(entry.get("reasoning_levels", [])),
-                           "reasoning_default": reasoning_value(provider, entry.get("parameters", {}))})
+                           "reasoning_default": reasoning_value(settings.get("adapter", provider), entry.get("parameters", {}))})
     return result

@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "version": "0.1.19",
+  "captured_at": "2026-10-16T05:31:17.107389+00:00",
+  "status": "passed_with_documented_limits",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.13.0",
+  "scope": "Local model/key administration, per-call frozen cost estimates, daily usage, and Eachlabs Claude text integration.",
+  "checks": [
+    {
+      "command": "python -m unittest discover -s tests -q",
+      "exit_code": 0,
+      "tests": 291,
+      "passed": 289,
+      "skipped": 2,
+      "duration_seconds": 169.753,
+      "note": "Working tree regression includes two concurrent brand tests, outside this feature. New model-admin tests: 12; no live paid calls in tests."
+    },
+    {
+      "command": "python tools/check_seed.py",
+      "exit_code": 0,
+      "checked_assets": 22,
+      "fixture_cases": 12
+    },
+    {
+      "command": "python tools/sync_doc_navigation.py --root .",
+      "exit_code": 0,
+      "result": "Navigation synchronized; chapter bodies preserved."
+    },
+    {
+      "command": "python tools/check_docs.py --root .",
+      "exit_code": 0,
+      "result": "OK documents=23 diagrams=19 artifacts=38 errors=0"
+    },
+    {
+      "command": "Isolated staged snapshot: test_model_admin.py, test_web.py and check_docs.py",
+      "exit_code": 0,
+      "tests": 30,
+      "passed": 30,
+      "note": "Verified the selected feature without concurrent brand edits; 12 administration tests and 18 existing web tests pass."
+    }
+  ],
+  "browser": {
+    "status": "passed",
+    "isolated_fixture": "tools/serve_model_admin_fixture.py",
+    "checks": [
+      "Overview and all four navigation sections",
+      "Add compatible relay and synthetic key; only masked credential returned",
+      "Edit Sonnet price; existing request detail keeps original price",
+      "Filter by route and inspect per-key history",
+      "Live configured routes, model list and daily usage render",
+      "Explicit Eachlabs balance read succeeds; account value excluded from public report",
+      "No browser script errors or warnings"
+    ],
+    "screenshot": "Local diagnostic only, excluded from Git."
+  },
+  "live_calls": {
+    "report": "evals/reports/model-admin-live-2026-10-16.json",
+    "count": 3,
+    "succeeded": 3,
+    "models": [
+      "anthropic/claude-haiku-5.5",
+      "anthropic/claude-sonnet-5.5",
+      "anthropic/claude-opus-5.5"
+    ],
+    "estimated_usd": 0.00077226,
+    "settled_invoice_verified": false,
+    "total_tokens": 156
+  },
+  "deployment": {
+    "method": "Existing source launcher and instance-scoped normal tray exit when idle",
+    "version": "0.1.19",
+    "web": "http://127.0.0.1:18181/",
+    "admin": "http://127.0.0.1:18181/admin",
+    "standalone_runtime_package_built": false
+  },
+  "limits": [
+    "Only Jarvis-recorded calls are aggregated; external applications are excluded.",
+    "Missing usage or frozen rates stay unpriced, including pre-upgrade records.",
+    "USD/CNY are separate; discounts, credits, taxes, refunds and invoice import are not implemented.",
+    "Native Anthropic and Gemini Developer adapters have mock protocol coverage only.",
+    "Arbitrary compatible relays need provider-specific model/parameter validation.",
+    "Full K1/K2/K3 acceptance remains incomplete."
+  ],
+  "source_hashes": {
+    "adapters/models/provider-native/jarvis_models/registry.py": "6453261f63f73184b1f60efbb3c902dd402ecc258693a94d3d425a05205de8d2",
+    "adapters/models/provider-native/jarvis_models/billing.py": "7fbec8ceab7c44677be3f9cfda2236774c321f908756afee43412ea4e8a7ea79",
+    "adapters/models/provider-native/jarvis_models/gateway.py": "abd4608ed5c2ae9813a31de4c4adb9f4cf51cfd9a513ec1febc1b90dda120c2d",
+    "apps/web/admin.html": "118cc3004b77126ebf4247e359de1c8649821de414bd4f4e3a2fa03ae15bf587",
+    "apps/web/admin.css": "a6cda61a279028364de23a343f3e85744fd60efd51ae020582cf808df9652762",
+    "apps/web/admin.js": "807f982eb5799018011ced73f62fdc196fff0368ceabc3b9771ec7bc1b795517",
+    "contracts/schemas/model-admin.schema.json": "88d36cc22badc13143bbfcd2c62f02aeb7e656d3c8adc7dd7e4820113f3b1474",
+    "tests/test_model_admin.py": "50f3f21cf408c8a671f2b92cacc683a01e57d2a44b7da7f9dffa451cd6683795"
+  }
+}

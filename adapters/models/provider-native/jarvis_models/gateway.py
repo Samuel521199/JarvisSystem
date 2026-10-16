@@ -16,7 +16,12 @@ import uuid
 import httpx
 
 from .vault import load, VaultError
-from .catalog import resolve_settings, validate_catalog
+from .catalog import resolve_settings, validate_catalog, PARAMETERS, MODEL_ID, CONNECTION_ID
+from .billing import clean_usage, estimate
+from urllib.parse import urlsplit
+
+BAILIAN_HOSTS = {"beijing": "dashscope.aliyuncs.com", "singapore": "dashscope-intl.aliyuncs.com",
+                "us": "dashscope-us.aliyuncs.com", "hongkong": "cn-hongkong.dashscope.aliyuncs.com"}
 
 
 class ModelError(RuntimeError):
@@ -58,6 +63,10 @@ class ProbeJournal:
 
 def read_config(path: Path) -> dict:
     config = json.loads(path.read_text(encoding="utf-8"))
+    return validate_config(config)
+
+
+def validate_config(config):
     if config.get("schema_version") != 1 or type(config.get("automatic_fallback")) is not bool:
         raise ModelError("unsupported_probe_config")
     if (type(config.get("max_prompt_bytes")) is not int or not 1 <= config["max_prompt_bytes"] <= 65536
@@ -67,23 +76,35 @@ def read_config(path: Path) -> dict:
         if type(config.get(key, ceiling)) is not int or not 1 <= config.get(key, ceiling) <= ceiling:
             raise ModelError("unsafe_local_limits")
     providers = config.get("providers")
-    if not isinstance(providers, dict) or config.get("default_provider") not in providers:
+    if not isinstance(providers, dict) or not 1 <= len(providers) <= 64 or config.get("default_provider") not in providers:
         raise ModelError("invalid_provider_config")
     order = config.get("fallback_order", [config["default_provider"]])
     if (not isinstance(order, list) or not order or any(not isinstance(p, str) or p not in providers for p in order)
             or len(order) != len(set(order))):
         raise ModelError("invalid_fallback_order")
     for provider, item in config["providers"].items():
-        if provider not in {"vertex", "bailian", "openai", "xai", "local"}:
+        if not isinstance(provider, str) or not CONNECTION_ID.fullmatch(provider) or not isinstance(item, dict):
             raise ModelError("unsupported_provider")
-        if not re.fullmatch(r"[a-zA-Z0-9._:-]{1,128}", item["model"]):
+        adapter = item.get("adapter", provider)
+        if adapter not in PARAMETERS or type(item.get("enabled", True)) is not bool:
+            raise ModelError("unsupported_adapter")
+        if not isinstance(item.get("model"), str) or not MODEL_ID.fullmatch(item["model"]):
             raise ModelError("invalid_model_identifier")
-        if provider == "bailian" and item.get("region") not in {"beijing", "singapore", "us", "hongkong"}:
+        if adapter == "compatible":
+            parsed = urlsplit(item.get("base_url", ""))
+            if (parsed.scheme != "https" or not parsed.hostname or parsed.username or parsed.password
+                    or parsed.query or parsed.fragment or len(item["base_url"]) > 500):
+                raise ModelError("invalid_compatible_endpoint")
+        if adapter == "bailian" and item.get("region") not in {"beijing", "singapore", "us", "hongkong"}:
             raise ModelError("invalid_bailian_region")
-        if provider == "vertex" and item.get("location") != "global":
+        if adapter == "vertex" and item.get("location") != "global":
             raise ModelError("unsupported_vertex_location")
-        if provider == "local" and item.get("endpoint") != "http://127.0.0.1:18180/v1/chat/completions":
+        if adapter == "local" and item.get("endpoint") != "http://127.0.0.1:18180/v1/chat/completions":
             raise ModelError("local_endpoint_must_be_fixed_loopback")
+        if not item.get("models", {}).get(item["model"], {}).get("enabled", True):
+            raise ModelError("default_model_disabled")
+    if not providers[config["default_provider"]].get("enabled", True):
+        raise ModelError("default_provider_disabled")
     try:
         validate_catalog(config)
     except (ValueError, KeyError, TypeError):
@@ -124,11 +145,28 @@ def build_request(provider: str, settings: dict, prompt: str, max_output: int, c
     if "models" in settings:
         settings = resolve_settings({"providers": {provider: settings}}, provider)
     model = settings["model"]
+    connection = provider
+    provider = settings.get("adapter", provider)
+    if provider != "local":
+        key_id = settings.get("credential_id")
+        if key_id:
+            stored = credentials.get("_managed", {}).get(key_id, {})
+            if stored.get("connection") != connection:
+                raise VaultError("credential_connection_mismatch")
+            credential = stored["credential"]
+        else:
+            credential = credentials.get(connection, {})
+        credentials = {provider: credential}
     messages = list(history or []) + [{"role": "user", "content": prompt}]
-    if provider == "vertex":
-        token, project = vertex_auth(credentials["vertex"]["service_account"])
-        url = f"https://aiplatform.googleapis.com/v1/projects/{project}/locations/global/publishers/google/models/{model}:generateContent"
-        return url, {"Authorization": "Bearer " + token}, {
+    if provider in {"vertex", "gemini"}:
+        if provider == "vertex":
+            token, project = vertex_auth(credentials["vertex"]["service_account"])
+            url = f"https://aiplatform.googleapis.com/v1/projects/{project}/locations/global/publishers/google/models/{model}:generateContent"
+            headers = {"Authorization": "Bearer " + token}
+        else:
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+            headers = {"x-goog-api-key": credentials[provider]["api_key"]}
+        return url, headers, {
             "contents": [{"role": "model" if m["role"] == "assistant" else "user",
                           "parts": [{"text": m["content"]}]} for m in messages],
             "generationConfig": {"maxOutputTokens": max_output,
@@ -141,28 +179,38 @@ def build_request(provider: str, settings: dict, prompt: str, max_output: int, c
         return settings["endpoint"], {}, {"model": model, "messages": messages,
             "max_tokens": max_output, "stream": False, "temperature": 0,
             "chat_template_kwargs": {"enable_thinking": False}}
+    if provider == "anthropic":
+        return "https://api.anthropic.com/v1/messages", {"x-api-key": credentials[provider]["api_key"], "anthropic-version": "2023-06-01"}, {
+            "model": model, "messages": messages, "max_tokens": max_output,
+            **({"thinking": {"type": "adaptive"}, "output_config": {"effort": settings["reasoning_effort"]}} if settings.get("reasoning_effort") else {})}
     if provider == "bailian":
-        host = {"beijing": "dashscope.aliyuncs.com", "singapore": "dashscope-intl.aliyuncs.com",
-                "us": "dashscope-us.aliyuncs.com", "hongkong": "cn-hongkong.dashscope.aliyuncs.com"}[settings["region"]]
+        host = BAILIAN_HOSTS[settings["region"]]
         url = f"https://{host}/compatible-mode/v1/chat/completions"
+    elif provider == "eachlabs":
+        url = "https://api.eachlabs.ai/v1/chat/completions"
+    elif provider == "compatible":
+        url = settings["base_url"].rstrip("/") + "/chat/completions"
     else:
         url = "https://api.x.ai/v1/chat/completions"
     body = {"model": model, "messages": messages, "max_tokens": max_output, "stream": False}
     if provider == "bailian":
         body["enable_thinking"] = settings.get("enable_thinking", False)
-    if provider == "xai" and "reasoning_effort" in settings:
+    if provider in {"xai", "eachlabs", "compatible"} and "reasoning_effort" in settings:
         body["reasoning_effort"] = settings["reasoning_effort"]
     return url, {"Authorization": "Bearer " + credentials[provider]["api_key"]}, body
 
 
 def extract(provider: str, response: dict) -> tuple[str, dict]:
-    if provider == "vertex":
+    if provider in {"vertex", "gemini"}:
         texts = [part["text"] for item in response.get("candidates", [])
                  for part in item.get("content", {}).get("parts", []) if isinstance(part.get("text"), str) and not part.get("thought")]
         usage = response.get("usageMetadata", {})
     elif provider == "openai":
         texts = [part["text"] for item in response.get("output", []) if item.get("type") == "message"
                  for part in item.get("content", []) if part.get("type") == "output_text" and isinstance(part.get("text"), str)]
+        usage = response.get("usage", {})
+    elif provider == "anthropic":
+        texts = [part["text"] for part in response.get("content", []) if part.get("type") == "text" and isinstance(part.get("text"), str)]
         usage = response.get("usage", {})
     else:
         texts = [choice["message"]["content"] for choice in response.get("choices", [])
@@ -174,8 +222,7 @@ def extract(provider: str, response: dict) -> tuple[str, dict]:
                "output_tokens", "num_sources_used", "cost_in_usd_ticks"}
     if not isinstance(usage, dict):
         usage = {}
-    return "\n".join(texts), {k: v for k, v in usage.items() if k in allowed and type(v) in (int, float)
-                              and math.isfinite(v) and v >= 0}
+    return "\n".join(texts), clean_usage(usage)
 
 
 def classify_http_error(status: int, body: bytes) -> tuple[str, str]:
@@ -289,8 +336,13 @@ def probe(config: dict, provider: str, prompt: str, data_dir: Path, guard, *, cl
 
     try:
         check_cancel()
-        credentials = {} if provider == "local" else credentials_loader()
-        max_output = config.get("local_max_output_tokens", 256) if provider == "local" else config["max_output_tokens"]
+        adapter = item.get("adapter", provider)
+        keys = item.get("keys", {})
+        selected_key = keys.get(item.get("credential_id"), {})
+        metadata["billing_identity"] = {"adapter": adapter, "label": item.get("label", provider),
+                                        "key_id": item.get("credential_id"), "key_label": selected_key.get("label", "历史未归属")}
+        credentials = {} if adapter == "local" else credentials_loader()
+        max_output = config.get("local_max_output_tokens", 256) if adapter == "local" else config["max_output_tokens"]
         max_output = item.get("max_output_tokens", max_output)
         url, headers, payload = build_request(provider, item, prompt, max_output, credentials, history=messages)
         # The same short core transaction serializes admission with stop. Once
@@ -303,7 +355,7 @@ def probe(config: dict, provider: str, prompt: str, data_dir: Path, guard, *, cl
             journal.finish(ident, "DISPATCHING", metadata)
             dispatched = True
         parsed = asyncio.run(receive(url, headers, payload))
-        response_text, usage = extract(provider, parsed)
+        response_text, usage = extract(adapter, parsed)
         metadata["usage"] = usage
         guard()
         check_cancel()
@@ -350,6 +402,7 @@ def probe(config: dict, provider: str, prompt: str, data_dir: Path, guard, *, cl
             metadata.update(error="authentication_parsing_or_core_guard_failed", error_category="response_invalid",
                             user_message="响应解析或控制检查失败，本次未采用模型输出。")
     finally:
+        metadata["billing"] = estimate(item.get("adapter", provider), metadata.get("usage", {}), item.get("price"), dispatched=dispatched)
         metadata["outcome_uncertain"] = status == "UNKNOWN"
         metadata["elapsed_seconds"] = round(time.monotonic() - started, 3)
         journal.finish(ident, status, metadata)

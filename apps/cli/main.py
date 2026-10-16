@@ -38,7 +38,7 @@ def parser():
         elif name in {"models", "chat"}:
             command.add_argument("--config", type=Path, help="Model routing configuration")
             if name == "chat":
-                command.add_argument("--provider", default="auto", choices=("auto", "vertex", "bailian", "openai", "xai", "local"))
+                command.add_argument("--provider", default="auto")
                 command.add_argument("--message", help="Send one message; omit to start an in-memory conversation")
                 command.add_argument("--model", help="Registered model ID for the explicitly selected provider")
     return result

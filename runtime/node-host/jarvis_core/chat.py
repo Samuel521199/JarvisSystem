@@ -20,6 +20,7 @@ if ADAPTER_PATH not in sys.path:
     sys.path.insert(0, ADAPTER_PATH)
 from jarvis_models import gateway
 from jarvis_models.catalog import public_models, select_model, reasoning_value, resolve_settings
+from jarvis_models.registry import effective_config
 
 PROVIDERS = ("vertex", "bailian", "openai", "xai", "local")
 MAX_HISTORY_MESSAGES = 20
@@ -32,6 +33,7 @@ RESULT_FIELDS = {"status", "text", "provider", "model", "usage", "error", "error
                  "outcome_uncertain", "dispatch_admitted", "request_id", "elapsed_seconds", "http_status",
                  "retry_after_seconds", "automatic_retry"}
 RESULT_FIELDS.add("cancel_requested")
+RESULT_FIELDS.update({"billing", "billing_identity"})
 
 
 def bounded_history(history, *, max_bytes=MAX_HISTORY_BYTES):
@@ -71,7 +73,7 @@ class ChatService:
 
     def models(self):
         """Configuration and historical counts only; never reads the credential vault."""
-        config = gateway.read_config(self.config_path)
+        config = effective_config(self.config_path, self.core.data_dir)
         counts, count_status, observations = {}, "available", {}
         path = Path(self.core.data_dir) / "model-probes.db"
         if path.exists():
@@ -90,10 +92,11 @@ class ChatService:
         return {"default_provider": config["default_provider"], "automatic_fallback": config["automatic_fallback"],
                 "fallback_order": list(config.get("fallback_order", [])),
                 "providers": [{"provider": provider, "model": settings["model"],
+                               "label": settings.get("label", provider), "adapter": settings.get("adapter", provider),
                                "is_default": provider == config["default_provider"],
                                "historical_requests": counts.get(provider, 0) if count_status == "available" else None,
                                "credential_status": "not_checked"}
-                              for provider, settings in config["providers"].items()],
+                              for provider, settings in config["providers"].items() if settings.get("enabled", True)],
                 "history_count_status": count_status, "balance_status": "not_queried",
                 "models": [{**entry, **observations.get((entry["provider"], entry["model"]), {"last_probe_status": "NOT_TESTED" if count_status == "available" else "UNAVAILABLE"})}
                            for entry in public_models(config)],
@@ -136,7 +139,7 @@ class ChatService:
         if blocked:
             return self._package(blocked, attempts, notice, info)
         try:
-            config = gateway.read_config(self.config_path)
+            config = effective_config(self.config_path, self.core.data_dir)
             if not isinstance(message, str) or not message.strip():
                 raise ValueError("请输入非空文本。")
             message_bytes = len(message.encode("utf-8"))
@@ -144,6 +147,8 @@ class ChatService:
                 raise ValueError("消息超过输入字节上限，请缩短内容。")
             if provider != "auto" and provider not in config["providers"]:
                 raise ValueError("未知模型提供商，请先查看 models。")
+            if provider != "auto" and not config["providers"][provider].get("enabled", True):
+                raise ValueError("该接入方已停用。")
             if model is not None or reasoning is not None:
                 if provider == "auto":
                     raise ValueError("指定模型时同时指定提供商。")
@@ -155,7 +160,7 @@ class ChatService:
                 candidates = [config["default_provider"]]
                 if config["automatic_fallback"]:
                     candidates.extend(config.get("fallback_order", []))
-                routes = list(dict.fromkeys(item for item in candidates if item in config["providers"] and item in PROVIDERS))
+                routes = list(dict.fromkeys(item for item in candidates if item in config["providers"] and config["providers"][item].get("enabled", True)))
             else:
                 routes = [provider]
             if not routes:
@@ -206,7 +211,7 @@ class ChatService:
                                        "模型请求结果无法确定，本轮不会自动重发。", selected, model, "UNKNOWN")
             if result["status"] != "SUCCEEDED":
                 result.pop("text", None)
-            result["reasoning"] = reasoning_value(selected, resolve_settings(config, selected))
+            result["reasoning"] = reasoning_value(config["providers"][selected].get("adapter", selected), resolve_settings(config, selected))
             if cancel_event is not None and cancel_event.is_set():
                 result = self._cancel_result(result)
             blocked = self._guard_error()

@@ -1,6 +1,6 @@
 # 能力验收、故障演练与评估证据
 
-> 状态：完整验收计划 proposed；当前 0.1.18 托盘与待命资源子集；历史 0.1.0—0.1.17 局部实测分开登记 · 更新：2026-10-16
+> 状态：完整验收计划 proposed；当前 0.1.19 模型配置、用量与费用估算子集；历史 0.1.0—0.1.18 局部实测分开登记 · 更新：2026-10-16
 > [文档入口](README.md) · [维护规则](MAINTENANCE.md) · [架构图册](architecture-atlas.md)
 
 <!-- book-nav:start -->
@@ -9,28 +9,29 @@
 ## 本章导航
 
 - [16.1 已有版本的验证记录](#versioned-evidence)
-  - [16.1.1 0.1.18 环境：Eachlabs Claude 独立小额探测](#eachlabs-claude-evidence)
-  - [16.1.2 0.1.18 Windows 托盘与含托盘的待命资源](#tray-evidence)
-  - [16.1.3 0.1.17 任务崩溃矩阵与程序出站阻断恢复](#task-fault-network-evidence)
-  - [16.1.4 0.1.17 本机部署、五分钟待命与代码仓库基线](#local-deployment-idle-evidence)
-  - [16.1.5 0.1.17 启动前健康检查与备用版本恢复](#runtime-start-evidence)
-  - [16.1.6 0.1.16 队列内存准入与短时竞争](#resource-admission-evidence)
-  - [16.1.7 0.1.15 浏览器回收、版本回退与前台响应](#runtime-continuity-evidence)
-  - [16.1.8 0.1.14 私人助手待命与会话停止](#personal-lifecycle-evidence)
-  - [16.1.9 0.1.13 K1 队列、登记回收与候选运行包](#k1-progress-evidence)
-  - [16.1.10 0.1.12 运行中的发送/停止按钮](#chat-stop-evidence)
-  - [16.1.11 0.1.11 项目文件夹与默认文本输出](#project-workspace-evidence)
-  - [16.1.12 0.1.10 浏览器持久后台队列](#computer-queue-evidence)
-  - [16.1.13 0.1.9 网页浏览器任务控制台](#computer-console-evidence)
-  - [16.1.14 0.1.8 独立浏览器 Computer Use](#computer-evidence)
-  - [16.1.15 0.1.7 K1/W3 固定元数据 Worker](#worker-evidence)
-  - [16.1.16 0.1.6 K1/W2 独立控制、签名恢复与默认实例迁移](#control-evidence)
-  - [16.1.17 0.1.5 K1/W1 只读运行预检](#preflight-evidence)
-  - [16.1.18 0.1.4 Google Pro 与轻量模型验证](#google-models-evidence)
-  - [16.1.19 0.1.3 统一模型菜单与推理级别历史验证](#web-workspace-evidence)
-  - [16.1.20 0.1.2 模型目录与迁移历史验证](#model-catalog-evidence)
-  - [16.1.21 0.1.1 聊天与模型路由历史验证](#chat-evidence)
-  - [16.1.22 K0 起步的历史验证记录](#k0-evidence)
+  - [16.1.1 0.1.19 模型配置、Key 版本与费用估算](#model-admin-evidence)
+  - [16.1.2 0.1.18 环境：Eachlabs Claude 独立小额探测](#eachlabs-claude-evidence)
+  - [16.1.3 0.1.18 Windows 托盘与含托盘的待命资源](#tray-evidence)
+  - [16.1.4 0.1.17 任务崩溃矩阵与程序出站阻断恢复](#task-fault-network-evidence)
+  - [16.1.5 0.1.17 本机部署、五分钟待命与代码仓库基线](#local-deployment-idle-evidence)
+  - [16.1.6 0.1.17 启动前健康检查与备用版本恢复](#runtime-start-evidence)
+  - [16.1.7 0.1.16 队列内存准入与短时竞争](#resource-admission-evidence)
+  - [16.1.8 0.1.15 浏览器回收、版本回退与前台响应](#runtime-continuity-evidence)
+  - [16.1.9 0.1.14 私人助手待命与会话停止](#personal-lifecycle-evidence)
+  - [16.1.10 0.1.13 K1 队列、登记回收与候选运行包](#k1-progress-evidence)
+  - [16.1.11 0.1.12 运行中的发送/停止按钮](#chat-stop-evidence)
+  - [16.1.12 0.1.11 项目文件夹与默认文本输出](#project-workspace-evidence)
+  - [16.1.13 0.1.10 浏览器持久后台队列](#computer-queue-evidence)
+  - [16.1.14 0.1.9 网页浏览器任务控制台](#computer-console-evidence)
+  - [16.1.15 0.1.8 独立浏览器 Computer Use](#computer-evidence)
+  - [16.1.16 0.1.7 K1/W3 固定元数据 Worker](#worker-evidence)
+  - [16.1.17 0.1.6 K1/W2 独立控制、签名恢复与默认实例迁移](#control-evidence)
+  - [16.1.18 0.1.5 K1/W1 只读运行预检](#preflight-evidence)
+  - [16.1.19 0.1.4 Google Pro 与轻量模型验证](#google-models-evidence)
+  - [16.1.20 0.1.3 统一模型菜单与推理级别历史验证](#web-workspace-evidence)
+  - [16.1.21 0.1.2 模型目录与迁移历史验证](#model-catalog-evidence)
+  - [16.1.22 0.1.1 聊天与模型路由历史验证](#chat-evidence)
+  - [16.1.23 K0 起步的历史验证记录](#k0-evidence)
 - [16.2 下一轮 K1/K2 出口验收计划](#next-k1-acceptance)
   - [16.2.1 K1 出口：确定性控制与后台执行](#section-adaf0d5fff7c)
   - [16.2.2 K2 出口：自然语言、知识与技能闭环](#next-k2-acceptance)
@@ -60,6 +61,25 @@
 
 <a id="versioned-evidence"></a>
 ## 已有版本的验证记录
+
+<a id="model-admin-evidence"></a>
+### 0.1.19 模型配置、Key 版本与费用估算
+
+2026-10-16 在本机源码部署中验证 `/admin` 配置后台。界面入口与操作见[起步章](core-bootstrap.md#model-admin-entry)，配置和计费规则见[模型章](models-offline.md#model-admin-config)，请求字段见[接口契约](contracts.md#model-admin-contract)。[汇总证据](../evals/reports/model-admin-baseline.json)记录测试、界面核对和范围；[真实短调用报告](../evals/reports/model-admin-live-2026-10-16.json)只保存合成文本、型号与计费快照，不含凭据或私人对话。
+
+| 验证对象 | 本轮结果与边界 |
+|---|---|
+| 接入方与凭据 | 多线路、Key 添加/替换/切换、旧版本停用；凭据写入失败和配置版本冲突保留原有效配置，返回值不含完整 Key。隔离测试不读取真实凭据库 |
+| 模型与价格 | 自定义模型 ID、启用/默认选择、推理与输出参数；官方线路与中转独立定价，百炼更换区域不会沿用北京单价。同名模型通过接入方限定，避免任务选错线路 |
+| 费用与用量 | 缓存与推理 Token 不重复累加；请求保存当时的 Key 和价格，更换配置不重算历史。测试覆盖缺失价格/用量、到期、超档位、已发送后取消、UTC+8 日期边界、美元/人民币分列、筛选和分页 |
+| 浏览器交互 | 隔离合成数据页面实际添加中转线路和测试 Key、编辑 Sonnet 输入价、筛选历史并打开详情；旧记录仍使用原单价。实际后台核对连接、模型列表和每日概览；浏览器未报告脚本错误 |
+| Claude 真实接口 | Eachlabs 下 Haiku 5.5、Sonnet 5.5、Opus 5.5 各成功一次；均返回 `JARVIS_CLAUDE_OK`，各 35 输入 / 17 输出 Token，合计估算 0.00077226 USD，含配置的 5.5% 附加费 |
+| 官方新增协议 | Anthropic Messages、Google AI Studio API Key 请求形状与响应解析通过隔离测试；没有对应官方账户的真实调用证据，不能写作已经实测可用 |
+| 服务生命周期 | 本机 0.1.19 工作台与托盘运行，后台配置不引入登录或全局停止；会话停止、待命与已有任务行为继续沿用现有实现 |
+
+本轮费用是 Jarvis 调用记录的估算，不是供应商结算账单。Eachlabs 余额是手动查询的账户快照；多个 Key 可能共用账户余额。旧记录缺少价格快照时标记待核对，不补成零费用；外部应用的调用不在统计内。账户优惠、赠金、返还、税费及动态价格同步尚未实现。新增第三方站点需要使用该站点实际支持的模型与参数；兼容模板不代表所有中转已验证。
+
+仅验证当前源码部署，未重新构建并验收 0.1.19 完整独立运行包；历史安装包的验证范围不变。完整 K1/K2/K3 出口仍未完成；本轮没有修改或重新验收基线架构图。
 
 <a id="eachlabs-claude-evidence"></a>
 ### 0.1.18 环境：Eachlabs Claude 独立小额探测

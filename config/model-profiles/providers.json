@@ -31,7 +31,19 @@
             "low",
             "medium",
             "high"
-          ]
+          ],
+          "price": {
+            "input": 0.75,
+            "output": 3.75,
+            "cache_read": 0.075,
+            "cache_write": null,
+            "max_input_tokens": 1000000,
+            "currency": "USD",
+            "fee_percent": 0,
+            "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+            "checked_at": "2026-10-16",
+            "valid_until": "2026-12-31"
+          }
         },
         "gemini-4-argon": {
           "label": "Gemini 4 Argon",
@@ -44,7 +56,18 @@
             "low",
             "medium",
             "high"
-          ]
+          ],
+          "price": {
+            "input": 4,
+            "output": 20,
+            "cache_read": 0.2,
+            "cache_write": null,
+            "max_input_tokens": 1000000,
+            "currency": "USD",
+            "fee_percent": 0,
+            "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+            "checked_at": "2026-10-16"
+          }
         },
         "gemini-3.1-pro-preview": {
           "label": "Gemini 3.1 Pro · Preview",
@@ -57,7 +80,18 @@
             "low",
             "medium",
             "high"
-          ]
+          ],
+          "price": {
+            "input": 2,
+            "output": 12,
+            "cache_read": 0.2,
+            "cache_write": null,
+            "max_input_tokens": 200000,
+            "currency": "USD",
+            "fee_percent": 0,
+            "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+            "checked_at": "2026-10-16"
+          }
         },
         "gemini-3.5-flash-lite": {
           "label": "Gemini 3.5 Flash-Lite",
@@ -71,7 +105,18 @@
             "low",
             "medium",
             "high"
-          ]
+          ],
+          "price": {
+            "input": 0.3,
+            "output": 2.5,
+            "cache_read": 0.03,
+            "cache_write": null,
+            "max_input_tokens": 1000000,
+            "currency": "USD",
+            "fee_percent": 0,
+            "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+            "checked_at": "2026-10-16"
+          }
         },
         "gemini-3.1-flash-lite": {
           "label": "Gemini 3.1 Flash-Lite",
@@ -84,7 +129,18 @@
             "low",
             "medium",
             "high"
-          ]
+          ],
+          "price": {
+            "input": 0.25,
+            "output": 1.5,
+            "cache_read": 0.025,
+            "cache_write": null,
+            "max_input_tokens": 1000000,
+            "currency": "USD",
+            "fee_percent": 0,
+            "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+            "checked_at": "2026-10-16"
+          }
         }
       }
     },
@@ -101,7 +157,18 @@
           "reasoning_levels": [
             "off",
             "on"
-          ]
+          ],
+          "price": {
+            "input": 0.8,
+            "output": 2.7,
+            "cache_read": null,
+            "cache_write": null,
+            "max_input_tokens": 1000000,
+            "currency": "CNY",
+            "fee_percent": 0,
+            "source": "https://help.aliyun.com/zh/model-studio/model-pricing",
+            "checked_at": "2026-10-16"
+          }
         },
         "qwen3.8-max": {
           "label": "Qwen3.8 Max",
@@ -112,7 +179,18 @@
           "reasoning_levels": [
             "off",
             "on"
-          ]
+          ],
+          "price": {
+            "input": 12,
+            "output": 36,
+            "cache_read": null,
+            "cache_write": null,
+            "max_input_tokens": 1000000,
+            "currency": "CNY",
+            "fee_percent": 0,
+            "source": "https://help.aliyun.com/zh/model-studio/model-pricing",
+            "checked_at": "2026-10-16"
+          }
         },
         "qwen3.7-plus": {
           "label": "Qwen3.7 Plus",
@@ -123,7 +201,18 @@
           "reasoning_levels": [
             "off",
             "on"
-          ]
+          ],
+          "price": {
+            "input": 2,
+            "output": 8,
+            "cache_read": null,
+            "cache_write": null,
+            "max_input_tokens": 256000,
+            "currency": "CNY",
+            "fee_percent": 0,
+            "source": "https://help.aliyun.com/zh/model-studio/model-pricing",
+            "checked_at": "2026-10-16"
+          }
         },
         "qwen-flash": {
           "label": "Qwen Flash",
@@ -134,7 +223,18 @@
           "reasoning_levels": [
             "off",
             "on"
-          ]
+          ],
+          "price": {
+            "input": 0.15,
+            "output": 1.5,
+            "cache_read": null,
+            "cache_write": null,
+            "max_input_tokens": 128000,
+            "currency": "CNY",
+            "fee_percent": 0,
+            "source": "https://help.aliyun.com/zh/model-studio/model-pricing",
+            "checked_at": "2026-10-16"
+          }
         }
       }
     },
@@ -155,7 +255,18 @@
             "high",
             "xhigh",
             "max"
-          ]
+          ],
+          "price": {
+            "input": 0.1,
+            "output": 0.5,
+            "cache_read": 0.01,
+            "cache_write": 0.125,
+            "max_input_tokens": 272000,
+            "currency": "USD",
+            "fee_percent": 0,
+            "source": "https://developers.openai.com/api/docs/pricing",
+            "checked_at": "2026-10-16"
+          }
         },
         "gpt-6.1-sol": {
           "label": "GPT-6.1 Sol",
@@ -170,7 +281,18 @@
             "high",
             "xhigh",
             "max"
-          ]
+          ],
+          "price": {
+            "input": 2,
+            "output": 10,
+            "cache_read": 0.1,
+            "cache_write": 2.5,
+            "max_input_tokens": 272000,
+            "currency": "USD",
+            "fee_percent": 0,
+            "source": "https://developers.openai.com/api/docs/pricing",
+            "checked_at": "2026-10-16"
+          }
         },
         "gpt-6-astra": {
           "label": "GPT-6 Astra",
@@ -185,7 +307,18 @@
             "high",
             "xhigh",
             "max"
-          ]
+          ],
+          "price": {
+            "input": 10,
+            "output": 50,
+            "cache_read": 1,
+            "cache_write": 12.5,
+            "max_input_tokens": 272000,
+            "currency": "USD",
+            "fee_percent": 0,
+            "source": "https://developers.openai.com/api/docs/pricing",
+            "checked_at": "2026-10-16"
+          }
         },
         "gpt-6-sol": {
           "label": "GPT-6 Sol",
@@ -200,7 +333,18 @@
             "high",
             "xhigh",
             "max"
-          ]
+          ],
+          "price": {
+            "input": 2,
+            "output": 10,
+            "cache_read": 0.2,
+            "cache_write": 2.5,
+            "max_input_tokens": 272000,
+            "currency": "USD",
+            "fee_percent": 0,
+            "source": "https://developers.openai.com/api/docs/pricing",
+            "checked_at": "2026-10-16"
+          }
         },
         "gpt-5.6-luna": {
           "label": "GPT-5.6 Luna",
@@ -215,7 +359,18 @@
             "high",
             "xhigh",
             "max"
-          ]
+          ],
+          "price": {
+            "input": 0.2,
+            "output": 1.2,
+            "cache_read": 0.02,
+            "cache_write": 0.25,
+            "max_input_tokens": 272000,
+            "currency": "USD",
+            "fee_percent": 0,
+            "source": "https://developers.openai.com/api/docs/pricing",
+            "checked_at": "2026-10-16"
+          }
         }
       }
     },
@@ -235,7 +390,18 @@
             "medium",
             "high",
             "xhigh"
-          ]
+          ],
+          "price": {
+            "input": 2,
+            "output": 6,
+            "cache_read": 0.5,
+            "cache_write": null,
+            "max_input_tokens": 199999,
+            "currency": "USD",
+            "fee_percent": 0,
+            "source": "https://docs.x.ai/developers/pricing",
+            "checked_at": "2026-10-16"
+          }
         },
         "grok-4-1-fast-non-reasoning": {
           "label": "Grok 4.1 Fast 非推理",

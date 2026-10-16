@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:jarvis:model-admin:1.0.0",
+  "title": "Local model administration command v1",
+  "type": "object",
+  "required": ["revision", "action"],
+  "properties": {
+    "revision": {"type": "integer", "minimum": 1},
+    "action": {"enum": ["add_connection", "connection", "add_key", "key", "model"]},
+    "connection": {"type": "string", "pattern": "^[a-z][a-z0-9_-]{0,63}$"},
+    "label": {"type": "string", "minLength": 1, "maxLength": 80},
+    "template": {"enum": ["vertex", "openai", "bailian", "xai", "eachlabs", "anthropic", "gemini", "compatible"]},
+    "base_url": {"type": "string", "maxLength": 500},
+    "region": {"enum": ["beijing", "singapore", "us", "hongkong"]},
+    "enabled": {"type": "boolean"},
+    "default": {"type": "boolean"},
+    "active": {"type": "boolean"},
+    "secret": {"type": "string", "minLength": 8, "maxLength": 20000},
+    "replace_key": {"type": "string", "pattern": "^key_[a-f0-9]{32}$"},
+    "key_id": {"type": "string", "pattern": "^key_[a-f0-9]{32}$"},
+    "model": {"type": "string", "minLength": 1, "maxLength": 128},
+    "max_output_tokens": {"type": "integer", "minimum": 1, "maximum": 32768},
+    "reasoning_levels": {"type": "array", "maxItems": 6, "uniqueItems": true, "items": {"enum": ["none", "minimal", "low", "medium", "high", "xhigh", "max", "off", "on"]}},
+    "reasoning_default": {"type": ["string", "null"], "maxLength": 16},
+    "price": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/price"}]}
+  },
+  "additionalProperties": false,
+  "allOf": [
+    {"if": {"properties": {"action": {"const": "add_connection"}}}, "then": {"required": ["template", "label"]}, "else": {"required": ["connection"]}},
+    {"if": {"properties": {"action": {"const": "add_key"}}}, "then": {"required": ["label", "secret"]}},
+    {"if": {"properties": {"action": {"const": "key"}}}, "then": {"required": ["key_id"]}},
+    {"if": {"properties": {"action": {"const": "model"}}}, "then": {"required": ["model"]}}
+  ],
+  "$defs": {
+    "rate": {"type": ["number", "null"], "minimum": 0, "maximum": 1000000},
+    "price": {
+      "type": "object", "required": ["currency"], "additionalProperties": false,
+      "properties": {
+        "currency": {"enum": ["USD", "CNY"]},
+        "input": {"$ref": "#/$defs/rate"}, "output": {"$ref": "#/$defs/rate"},
+        "cache_read": {"$ref": "#/$defs/rate"}, "cache_write": {"$ref": "#/$defs/rate"}, "fee_percent": {"$ref": "#/$defs/rate"},
+        "max_input_tokens": {"type": "integer", "minimum": 1, "maximum": 10000000},
+        "source": {"type": "string", "maxLength": 500},
+        "checked_at": {"type": "string", "maxLength": 10},
+        "valid_until": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"}
+      }
+    }
+  }
+}

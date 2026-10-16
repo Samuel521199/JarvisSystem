@@ -96,9 +96,9 @@
     try {
       const data=await (await request("/api/models")).json();
       const previous=el("task-model").value;el("task-model").replaceChildren();
-      const options=[...(data.models||[]),{model:"auto",label:"自动路由"}];
+      const options=[...(data.models||[]).map(m=>({...m,model:m.provider+"::"+m.model,label:(m.label||m.model)+" · "+(m.provider_label||m.provider)})),{model:"auto",label:"自动路由"}];
       for(const item of options){const option=document.createElement("option");option.value=item.model;option.textContent=item.label||item.model;el("task-model").append(option);}
-      const preferred=previous||"gpt-6-luna";
+      const preferred=previous||"openai::gpt-6-luna";
       if(options.some(item=>item.model===preferred))el("task-model").value=preferred;
     } catch(error){el("task-submit-note").textContent=error.message;}
     controls();

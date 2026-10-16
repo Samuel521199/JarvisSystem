@@ -19,6 +19,7 @@
   - [7.2.6 0.1.14 旧版停止状态兼容消息](#recovery-contract)
   - [7.2.7 0.1.11 项目与文本导出接口](#project-workspace-contract)
   - [7.2.8 0.1.12 单次聊天取消接口](#chat-cancel-contract)
+  - [7.2.9 模型后台配置与统计接口（0.1.19）](#model-admin-contract)
 - [7.3 记忆组件的替换契约（proposed）](#memory-provider-contracts)
 - [7.4 接口与数据契约](#interfaces)
   - [7.4.1 模块生命周期](#interfaces-1)
@@ -191,6 +192,20 @@ HTTP 接入由 [server.py](../apps/web/server.py)校验本机 Host/Origin 和页
 返回 `CANCEL_REQUESTED` 仅证明服务收到信号，`FINISHED` 表示该请求处理已结束；两者都不能证明远端已撤销计费。取消先于聊天 POST 到达时保留取消标记，随后同 ID 不调用模型；重复聊天 ID 返回 409，不自动创建第二次生成。进程内最多保存 256 个控制句柄；未开始/已结束记录 10 分钟后可回收，正在处理的记录不淘汰。服务重启即失效，没有增加持久会话或另一套 Task 账本。
 
 传输层将事件交给 ChatService 与模型网关，取消后屏蔽回复；调用槽位要等真实处理线程退出才释放。前端用每次生成独立的 AbortController 和运行标识隔离迟到回调；停止等待不等于撤销已发送的文件写入。协议实现见 [server.py](../apps/web/server.py)，网关状态及认证/远端限制归[模型调用边界](models-offline.md#section-896f72aed9a9)。
+
+<a id="model-admin-contract"></a>
+### 模型后台配置与统计接口（0.1.19）
+
+当前本机 HTTP 接口的配置请求机器定义为 [model-admin.schema.json](../contracts/schemas/model-admin.schema.json)，版本 `1.0.0`；[Registry](../adapters/models/provider-native/jarvis_models/registry.py) 强制 schema、按操作字段白名单、关联 ID 与有效模型档案验证。测试的正反请求见 [test_model_admin.py](../tests/test_model_admin.py)，不改变 K0 冻结契约。
+
+| 接口 | 作用与边界 |
+|---|---|
+| `GET /api/admin/config` | revision、连接、模型、价格和脱敏 Key 元数据；不解密后回传完整 Key |
+| `POST /api/admin/config` | 带 revision 的 `add_connection/connection/add_key/key/model` 命令；旧版本冲突不写入，凭据异常不覆盖原配置 |
+| `GET /api/admin/usage` | `start/end/provider/model/key_id/offset`；拒绝重复或未知查询字段，同一快照聚合与 50 条分页 |
+| `POST /api/admin/balance` | 只接受 connection；仅 Eachlabs 显式账户余额读取，无自动重试，不作每 Key 余额相加 |
+
+读写后台 API 都要求当前页面 nonce；写入另要求同源 Origin。复用 loopback Host 校验、严格 JSON、131072 字节边界和无请求内容日志，不增加登录密码。错误只回传本地可展示的校验文案，远端错误体与凭据不透出。浏览器任务支持 `connection::model` 明确选择同名模型的线路；原有唯一模型 ID 仍兼容。计费快照与未知结果的语义由[模型章](models-offline.md#model-admin-config)唯一维护。
 
 <a id="memory-provider-contracts"></a>
 ## 记忆组件的替换契约（proposed）

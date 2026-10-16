@@ -11,11 +11,12 @@ sys.path[:0] = [str(ROOT / "adapters/models/provider-native"), str(ROOT / "runti
 from jarvis_models.gateway import probe, read_config, ModelError, ProbeJournal
 from jarvis_models.vault import load, VaultError
 from jarvis_models.catalog import select_model
+from jarvis_models.registry import effective_config
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--provider", default="auto", choices=["auto", "vertex", "bailian", "openai", "xai", "local"])
+    parser.add_argument("--provider", default="auto")
     parser.add_argument("--prompt", default="仅回复：JARVIS_OK。不要调用工具。")
     parser.add_argument("--model", help="Registered model ID; requires an explicit provider")
     parser.add_argument("--data-dir", type=Path, default=Path(os.environ.get("LOCALAPPDATA", ".")) / "Jarvis/data")
@@ -23,7 +24,7 @@ def main():
     parser.add_argument("--status", action="store_true")
     args = parser.parse_args()
     try:
-        config = read_config(args.config)
+        config = effective_config(args.config, args.data_dir)
         if args.model:
             if args.provider == "auto":
                 raise ModelError("explicit_provider_required_for_model")

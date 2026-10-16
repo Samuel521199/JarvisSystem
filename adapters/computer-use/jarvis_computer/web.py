@@ -28,7 +28,7 @@ class ComputerWeb:
         if mode not in ('demo','scripted','custom'):
             raise ComputerError('invalid_request','请选择任务类型。')
         model=payload.get('model')
-        if not isinstance(model,str) or model not in {'auto',*(m['model'] for m in self.chat.models().get('models',[]))}:
+        if not isinstance(model,str) or model not in {'auto',*(m['model'] for m in self.chat.models().get('models',[])),*(m['provider']+'::'+m['model'] for m in self.chat.models().get('models',[]))}:
             raise ComputerError('invalid_request','请选择已注册模型。')
         if mode=='custom':
             task=validate_task(payload.get('task'))

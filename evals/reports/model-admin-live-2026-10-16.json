@@ -1,0 +1,121 @@
+{
+  "version": "0.1.19",
+  "date": "2026-10-16",
+  "scope": "Three bounded synthetic Eachlabs text calls through the Jarvis gateway; costs are local estimates, not settled invoices.",
+  "results": [
+    {
+      "provider": "eachlabs",
+      "model": "anthropic/claude-haiku-5.5",
+      "status": "SUCCEEDED",
+      "text": "JARVIS_CLAUDE_OK",
+      "usage": {
+        "prompt_tokens": 35,
+        "completion_tokens": 17,
+        "total_tokens": 52
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 1.266e-05,
+        "currency": "USD",
+        "tokens": {
+          "input": 35,
+          "output": 17,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 52,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.1,
+          "output": 0.5,
+          "cache_read": 0.01,
+          "cache_write": 0.125,
+          "currency": "USD",
+          "fee_percent": 5.5,
+          "checked_at": "2026-10-16",
+          "max_input_tokens": 100000,
+          "source": "https://docs.eachlabs.ai/llm-router/models"
+        },
+        "reason": "token_rates"
+      },
+      "elapsed_seconds": 3.499,
+      "error_category": null
+    },
+    {
+      "provider": "eachlabs",
+      "model": "anthropic/claude-sonnet-5.5",
+      "status": "SUCCEEDED",
+      "text": "JARVIS_CLAUDE_OK",
+      "usage": {
+        "prompt_tokens": 35,
+        "completion_tokens": 17,
+        "total_tokens": 52
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.0002532,
+        "currency": "USD",
+        "tokens": {
+          "input": 35,
+          "output": 17,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 52,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "currency": "USD",
+          "fee_percent": 5.5,
+          "checked_at": "2026-10-16",
+          "max_input_tokens": 1000000,
+          "source": "https://docs.eachlabs.ai/llm-router/models"
+        },
+        "reason": "token_rates"
+      },
+      "elapsed_seconds": 3.125,
+      "error_category": null
+    },
+    {
+      "provider": "eachlabs",
+      "model": "anthropic/claude-opus-5.5",
+      "status": "SUCCEEDED",
+      "text": "JARVIS_CLAUDE_OK",
+      "usage": {
+        "prompt_tokens": 35,
+        "completion_tokens": 17,
+        "total_tokens": 52
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.0005064,
+        "currency": "USD",
+        "tokens": {
+          "input": 35,
+          "output": 17,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 52,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 4,
+          "output": 20,
+          "cache_read": 0.2,
+          "cache_write": 5,
+          "currency": "USD",
+          "fee_percent": 5.5,
+          "checked_at": "2026-10-16",
+          "max_input_tokens": 1000000,
+          "source": "https://docs.eachlabs.ai/llm-router/models"
+        },
+        "reason": "token_rates"
+      },
+      "elapsed_seconds": 3.224,
+      "error_category": null
+    }
+  ]
+}

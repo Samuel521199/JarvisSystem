@@ -100,7 +100,8 @@
         "computer-web-console-entry",
         "runtime-slots-usage",
         "browser-residue-recovery-entry",
-        "windows-tray-entry"
+        "windows-tray-entry",
+        "model-admin-entry"
       ],
       "status": "proposed",
       "reader_summary": "现在怎么启动，核心从哪里做起，下一步做什么？"
@@ -142,7 +143,8 @@
       "title": "桌面工作台、实时交流与人格形态",
       "owns": [
         "桌面工作台、项目文件夹与会话交互、输入区、功能入口与设置、品牌图标规范；语音通道、个性、性别表达、关系设定与形态",
-        "personal-assistant-lifecycle"
+        "personal-assistant-lifecycle",
+        "model-admin-experience"
       ],
       "status": "proposed",
       "reader_summary": "怎样打开项目、输入任务、设置专属能力并与 Jarvis 交流？"
@@ -163,7 +165,8 @@
       "path": "docs/models-offline.md",
       "title": "模型路由、本地模型与离线生存",
       "owns": [
-        "当前模型目录/提供商参数/用量策略与有限路由；嵌入模型候选、生产路由、恢复入口、模型生命周期、LP 降级与网络诊断、Computer Use 模型候选"
+        "当前模型目录/提供商参数/用量策略与有限路由；嵌入模型候选、生产路由、恢复入口、模型生命周期、LP 降级与网络诊断、Computer Use 模型候选",
+        "model-admin-config"
       ],
       "status": "proposed",
       "reader_summary": "用哪些云端和本地模型，怎样切换与离线降级？"
@@ -205,7 +208,8 @@
       "owns": [
         "跨域契约、字段语义、只读预检与主人恢复消息、K1/K2 最小接口面、记忆组件替换契约、模块生命周期和公共事件",
         "computer-use-task-action-contracts",
-        "computer-web-http-contracts"
+        "computer-web-http-contracts",
+        "model-admin-contract"
       ],
       "status": "proposed",
       "reader_summary": "模块之间怎样交换任务、事件和记忆数据？"
@@ -245,7 +249,8 @@
       "path": "docs/delivery-validation.md",
       "title": "能力验收、故障演练与评估证据",
       "owns": [
-        "M 验收门、R/N 追踪、阶段出口验收、B/H/V-MEM/V-PC/V-UI 测试、选型探测、性能与故障证据"
+        "M 验收门、R/N 追踪、阶段出口验收、B/H/V-MEM/V-PC/V-UI 测试、选型探测、性能与故障证据",
+        "model-admin-evidence"
       ],
       "status": "proposed",
       "reader_summary": "哪些能力测过，证据在哪里，下一阶段怎样验收？"
@@ -265,7 +270,8 @@
       "path": "docs/references.md",
       "title": "研究资料与证据边界",
       "owns": [
-        "稳定 S 系列来源、使用范围与论据限制"
+        "稳定 S 系列来源、使用范围与论据限制",
+        "model-billing-sources"
       ],
       "status": "proposed",
       "reader_summary": "设计和选型参考了哪些论文与官方资料？"
@@ -2663,9 +2669,9 @@
     }
   ],
   "implementation": {
-    "version": "0.1.18",
-    "scope": "Windows notification-area icon, instance-bound live status and explicit app exit; existing session-only cancellation, standby, task and project persistence retained. Full K1/K2/K3 gates remain incomplete.",
-    "evidence": "evals/reports/tray-baseline.json",
+    "version": "0.1.19",
+    "scope": "Local connection/key administration, model prices, immutable per-call estimates, daily usage and Eachlabs Claude text integration; existing tray, standby and session cancellation retained. Full K1/K2/K3 gates remain incomplete.",
+    "evidence": "evals/reports/model-admin-baseline.json",
     "overall_design_status": "proposed",
     "complete_k1_gate": false,
     "complete_k2_gate": false,
@@ -2681,7 +2687,9 @@
       "evals/reports/tray-idle-resources.json",
       "evals/reports/tray-deployment.json",
       "evals/reports/tray-package.json",
-      "evals/reports/eachlabs-claude-smoke-2026-10-16.json"
+      "evals/reports/eachlabs-claude-smoke-2026-10-16.json",
+      "evals/reports/tray-baseline.json",
+      "evals/reports/model-admin-live-2026-10-16.json"
     ]
   }
 }

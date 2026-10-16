@@ -141,6 +141,10 @@ def source_check(root):
                   "config/computer-use/demo-task.json", "apps/computer-use/demo.html"])
     paths.extend(f"adapters/computer-use/jarvis_computer/{name}.py"
                  for name in ("__init__", "protocol", "browser", "planner", "service", "web", "task_queue"))
+    paths.extend(["apps/web/admin.html", "apps/web/admin.css", "apps/web/admin.js",
+                  "contracts/schemas/model-admin.schema.json"])
+    paths.extend(f"adapters/models/provider-native/jarvis_models/{name}.py"
+                 for name in ("gateway", "catalog", "registry", "billing", "vault"))
     hashes, errors = {}, {}
     for relative in paths:
         try:

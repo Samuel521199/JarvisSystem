@@ -21,7 +21,8 @@
 - [19.11 知识与记忆开源选型依据（2026-10-15 核验）](#memory-selection-sources)
 - [19.12 运行预检与控制实现的官方依据（2026-10-15 核验）](#preflight-sources)
 - [19.13 Eachlabs Claude 小额调用依据（2026-10-16 核验）](#eachlabs-claude-sources)
-- [19.14 Codex 工作台与交互参考（2026-10-15 核验）](#codex-workbench-sources)
+- [19.14 模型后台价格依据（2026-10-16 核验）](#model-billing-sources)
+- [19.15 Codex 工作台与交互参考（2026-10-15 核验）](#codex-workbench-sources)
 <!-- book-nav:end -->
 
 <a id="references"></a>
@@ -234,6 +235,17 @@ Local-first 和 CRDT 支持数据组织思路，不能证明共享记忆产生�
 | <a id="s135"></a>[S135](https://docs.eachlabs.ai/llm-router/quickstart) | Eachlabs Bearer Key、`https://api.eachlabs.ai/v1`、Chat Completions 和 SSE usage | 兼容协议不代表所有参数、工具和停止语义已通过 |
 | <a id="s136"></a>[S136](https://docs.eachlabs.ai/llm-router/model-catalog) | 精选目录及 canonical provider/target；[实际目录](https://api.eachlabs.ai/v1/llm-router/model-catalog) | 非精选 OpenRouter 模型按文档可请求；目录与返回型号不是上游权重证明 |
 | <a id="s137"></a>[S137](https://docs.eachlabs.ai/openapi_specs/models.json) | 聊天响应、按时间/模型查询 `/v2/executions`；[余额说明](https://docs.eachlabs.ai/llms.txt) | 余额可能延迟；执行 `success` 不等于返回了有效文本；本轮分别检查正文、结束原因、usage 与成本 |
+
+<a id="model-billing-sources"></a>
+## 模型后台价格依据（2026-10-16 核验）
+
+| 来源 | 使用范围 | 限制 |
+|---|---|---|
+| <a id="s138"></a>[S138](https://developers.openai.com/api/docs/pricing) | OpenAI Standard 输入、输出、缓存读写与 272K 档位 | 不套用 Codex 订阅积分或 Fast/Batch 价格 |
+| <a id="s139"></a>[S139](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing) | Google 全局文本调用、推理 Token、限期价格和返还说明 | Vertex 与 Developer API 分开；返还不作为即时扣款 |
+| <a id="s140"></a>[S140](https://help.aliyun.com/zh/model-studio/model-pricing) | 百炼北京文本原价和输入阶梯 | 缓存价格、地区与账户优惠需分别核对 |
+| <a id="s141"></a>[S141](https://docs.x.ai/developers/pricing) | Grok 4.7 短上下文输入、缓存和输出 | 其他型号没有借用此价格，区域加价不默认套用 |
+| <a id="s142"></a>[S142](https://platform.claude.com/docs/en/about-claude/pricing) | Claude 原生价格和缓存项 | Eachlabs 附加费与路由由 [S134](#s134) 及真实小额探测约束 |
 
 <a id="codex-workbench-sources"></a>
 ## Codex 工作台与交互参考（2026-10-15 核验）
