@@ -1,0 +1,332 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-10-16T04:32:51.466Z",
+  "application_version": "0.1.18",
+  "scope": "Standalone Eachlabs API smoke test; not integrated into Jarvis model gateway or UI",
+  "endpoint": "https://api.eachlabs.ai/v1/chat/completions",
+  "sources": [
+    {
+      "url": "https://platform.claude.com/docs/en/models/overview",
+      "purpose": "Current Anthropic model lineup and official native IDs"
+    },
+    {
+      "url": "https://docs.eachlabs.ai/llm-router/models",
+      "purpose": "Relay model IDs, token list prices, 5.5% platform fee"
+    },
+    {
+      "url": "https://api.eachlabs.ai/v1/llm-router/model-catalog",
+      "purpose": "Actual public featured model routes"
+    },
+    {
+      "url": "https://openrouter.ai/api/v1/models",
+      "purpose": "Actual upstream model IDs and token prices"
+    },
+    {
+      "url": "https://docs.eachlabs.ai/openapi_specs/models.json",
+      "purpose": "Chat, execution ledger, and API contract"
+    },
+    {
+      "url": "https://docs.eachlabs.ai/llms.txt",
+      "purpose": "Official balance endpoint and reconciliation caveats"
+    }
+  ],
+  "budget": {
+    "owner_ceiling_usd": 5,
+    "paid_requests": 4,
+    "client_retries": 0,
+    "client_model_fallback": false,
+    "settled_execution_cost_usd": 0.0041198805,
+    "observed_balance_decrease_usd": 0.00411988,
+    "ledger_entries": 4,
+    "ledger_vs_balance_difference_usd": 5e-10,
+    "final_account_balance_persisted": false
+  },
+  "results": [
+    {
+      "label": "opus_text_json_arithmetic_code",
+      "requested_model": "anthropic/claude-opus-5.5",
+      "max_tokens": 512,
+      "reasoning_effort": "low",
+      "estimated_ceiling_usd": 0.02808832,
+      "client_retries": 0,
+      "client_model_fallback": false,
+      "http_status": 200,
+      "elapsed_seconds": 5.302,
+      "reported_model": "anthropic/claude-opus-5.5",
+      "reported_provider": null,
+      "usage": {
+        "prompt_tokens": 102,
+        "completion_tokens": 103,
+        "total_tokens": 205
+      },
+      "finish_reason": "stop",
+      "content": "{\"sum\": 1147, \"empty\": 0, \"code\": \"def total(xs):\\n    return sum(xs)\", \"zh\": \"连接正常\"}",
+      "tool_calls": [],
+      "status": "response_received",
+      "checks": {
+        "json": true,
+        "arithmetic": true,
+        "empty_sum": true,
+        "chinese": true,
+        "code_matches": true,
+        "model_matches": true,
+        "python_ast_valid": true,
+        "five_function_cases": true
+      },
+      "passed": true,
+      "synthetic_request": {
+        "model": "anthropic/claude-opus-5.5",
+        "messages": [
+          {
+            "role": "user",
+            "content": "请只返回一个 JSON 对象，不加 Markdown：sum 填 37*31 的整数结果；empty 填 Python sum([]) 的结果；code 填一个两行 Python 函数 total(xs)，返回所有元素之和；zh 填“连接正常”。"
+          }
+        ],
+        "max_tokens": 512,
+        "reasoning_effort": "low",
+        "stream": false
+      },
+      "execution_ledger": {
+        "requested_model": "anthropic/claude-opus-5.5",
+        "status": "success",
+        "cost_usd": 0.00260374,
+        "run_time_seconds": 3.380879,
+        "created_at": "2026-10-16T04:29:56.378246Z",
+        "completed_at": "2026-10-16T04:29:59.759125Z"
+      },
+      "featured_catalog_entry": [
+        {
+          "id": "anthropic/claude-opus-5.5",
+          "canonical_provider": "openrouter",
+          "canonical_target_model": "anthropic/claude-opus-5.5",
+          "routing_policy": "explicit_route"
+        }
+      ],
+      "upstream_catalog_id": "anthropic/claude-opus-5.5"
+    },
+    {
+      "label": "sonnet_stream_function_call",
+      "requested_model": "anthropic/claude-sonnet-5.5",
+      "max_tokens": 512,
+      "reasoning_effort": "low",
+      "estimated_ceiling_usd": 0.01404416,
+      "client_retries": 0,
+      "client_model_fallback": false,
+      "tool_executed": false,
+      "http_status": 200,
+      "content_type": "text/event-stream",
+      "elapsed_seconds": 2.933,
+      "first_chunk_seconds": 2.284,
+      "network_chunks": 7,
+      "done_seen": true,
+      "event_count": 6,
+      "reported_models": [
+        "anthropic/claude-sonnet-5.5"
+      ],
+      "usage": {
+        "completion_tokens": 55,
+        "completion_tokens_details": {
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "reasoning_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_completions_cost": 0.00055,
+          "upstream_inference_cost": 0.001414,
+          "upstream_inference_prompt_cost": 0.000864
+        },
+        "is_byok": true,
+        "prompt_tokens": 432,
+        "prompt_tokens_details": {
+          "audio_tokens": 0,
+          "cache_write_tokens": 0,
+          "cached_tokens": 0,
+          "video_tokens": 0
+        },
+        "total_tokens": 487
+      },
+      "content": "",
+      "finish_reason": "tool_calls",
+      "tool_calls": [
+        {
+          "name": "get_workspace_status",
+          "arguments": "{\"project\": \"Jarvis\"}"
+        }
+      ],
+      "checks": {
+        "sse": true,
+        "done": true,
+        "model_matches": true,
+        "tool_call": true
+      },
+      "status": "response_received",
+      "passed": true,
+      "synthetic_request": {
+        "model": "anthropic/claude-sonnet-5.5",
+        "messages": [
+          {
+            "role": "user",
+            "content": "请调用 get_workspace_status 工具，project 参数为 Jarvis。等待工具结果，不要猜测状态。"
+          }
+        ],
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "get_workspace_status",
+              "description": "Read status of a synthetic test workspace; this is a test stub.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "project": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "project"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "max_tokens": 512,
+        "reasoning_effort": "low",
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        }
+      },
+      "execution_ledger": {
+        "requested_model": "anthropic/claude-sonnet-5.5",
+        "status": "success",
+        "cost_usd": 0.00149177,
+        "run_time_seconds": 1.291539,
+        "created_at": "2026-10-16T04:30:41.305794Z",
+        "completed_at": "2026-10-16T04:30:42.597333Z"
+      },
+      "featured_catalog_entry": [
+        {
+          "id": "anthropic/claude-sonnet-5.5",
+          "canonical_provider": "openrouter",
+          "canonical_target_model": "anthropic/claude-sonnet-5.5",
+          "routing_policy": "explicit_route"
+        }
+      ],
+      "upstream_catalog_id": "anthropic/claude-sonnet-5.5"
+    },
+    {
+      "label": "haiku_chinese_classification",
+      "requested_model": "anthropic/claude-haiku-5.5",
+      "max_tokens": 256,
+      "reasoning_effort": "low",
+      "estimated_ceiling_usd": 0.000567168,
+      "client_retries": 0,
+      "client_model_fallback": false,
+      "http_status": 200,
+      "elapsed_seconds": 2.45,
+      "reported_model": "anthropic/claude-haiku-5.5",
+      "reported_provider": null,
+      "usage": {
+        "prompt_tokens": 81,
+        "completion_tokens": 30,
+        "total_tokens": 111
+      },
+      "finish_reason": "stop",
+      "content": "{\"intent\":\"open_project\",\"project\":\"Jarvis\",\"needs_external_network\":false}",
+      "tool_calls": [],
+      "status": "response_received",
+      "checks": {
+        "json": true,
+        "intent": true,
+        "project": true,
+        "network": true,
+        "model_matches": true
+      },
+      "passed": true,
+      "synthetic_request": {
+        "model": "anthropic/claude-haiku-5.5",
+        "messages": [
+          {
+            "role": "user",
+            "content": "只返回 JSON，不加 Markdown。对“打开 Jarvis 项目文件夹”分类：intent 必须是 open_project；project 必须是 Jarvis；needs_external_network 必须为 false。"
+          }
+        ],
+        "max_tokens": 256,
+        "reasoning_effort": "low",
+        "stream": false
+      },
+      "execution_ledger": {
+        "requested_model": "anthropic/claude-haiku-5.5",
+        "status": "success",
+        "cost_usd": 2.4370499999999996e-05,
+        "run_time_seconds": 0.788193,
+        "created_at": "2026-10-16T04:30:55.877973Z",
+        "completed_at": "2026-10-16T04:30:56.666166Z"
+      },
+      "featured_catalog_entry": [],
+      "upstream_catalog_id": "anthropic/claude-haiku-5.5"
+    },
+    {
+      "label": "fable_dependency_reasoning",
+      "requested_model": "anthropic/claude-fable-5.1",
+      "max_tokens": 512,
+      "reasoning_effort": "low",
+      "estimated_ceiling_usd": 0.0702208,
+      "client_retries": 0,
+      "client_model_fallback": false,
+      "http_status": 200,
+      "elapsed_seconds": 3.366,
+      "reported_model": "anthropic/claude-fable-5.1",
+      "reported_provider": null,
+      "usage": null,
+      "finish_reason": "content_filter",
+      "content": "",
+      "tool_calls": [],
+      "status": "filtered_no_output",
+      "checks": {
+        "model_matches": true,
+        "nonempty_text": false,
+        "json": false,
+        "order": false,
+        "instruction": false
+      },
+      "passed": false,
+      "synthetic_request": {
+        "model": "anthropic/claude-fable-5.1",
+        "messages": [
+          {
+            "role": "user",
+            "content": "只返回 JSON。三个任务 A、B、C：C 必须在 A 前；B 必须在 C 前。order 填唯一合法顺序的数组。independent_stop 填 true，表示停止当前会话不应退出整个助手。"
+          }
+        ],
+        "max_tokens": 512,
+        "reasoning_effort": "low",
+        "stream": false
+      },
+      "execution_ledger": {
+        "requested_model": "anthropic/claude-fable-5.1",
+        "status": "success",
+        "cost_usd": 0,
+        "run_time_seconds": 1.565869999,
+        "created_at": "2026-10-16T04:31:08.42053Z",
+        "completed_at": "2026-10-16T04:31:09.9864Z"
+      },
+      "featured_catalog_entry": [],
+      "upstream_catalog_id": "anthropic/claude-fable-5.1"
+    }
+  ],
+  "limitations": [
+    "Three successful one-shot synthetic probes are not model-quality benchmarks or reliability measurements.",
+    "Returned model identifiers and public routing metadata do not independently attest to the actual upstream model weights.",
+    "Fable 5.1 returned HTTP 200 but finish_reason=content_filter, empty text and no usage: not usable in this test, no retry performed; execution ledger marks success with zero cost.",
+    "Tools were parsed only; no workspace tool, file write, or computer operation was executed by the model.",
+    "Image input, long context, multi-turn tool execution, cancellation and failure recovery were not tested.",
+    "No Eachlabs credential or default model was persisted or changed; no runtime integration or background probes were installed."
+  ],
+  "local_validation": {
+    "generated_code": "AST matched exact sum-only function before execution; five inputs passed",
+    "secret_scan": "no credential patterns or provided Eachlabs key in report"
+  }
+}

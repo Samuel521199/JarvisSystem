@@ -20,7 +20,8 @@
 - [19.10 0.1.4 Google Pro 与主流型号依据（2026-10-15 核验）](#google-catalog-sources)
 - [19.11 知识与记忆开源选型依据（2026-10-15 核验）](#memory-selection-sources)
 - [19.12 运行预检与控制实现的官方依据（2026-10-15 核验）](#preflight-sources)
-- [19.13 Codex 工作台与交互参考（2026-10-15 核验）](#codex-workbench-sources)
+- [19.13 Eachlabs Claude 小额调用依据（2026-10-16 核验）](#eachlabs-claude-sources)
+- [19.14 Codex 工作台与交互参考（2026-10-15 核验）](#codex-workbench-sources)
 <!-- book-nav:end -->
 
 <a id="references"></a>
@@ -222,6 +223,17 @@ Local-first 和 CRDT 支持数据组织思路，不能证明共享记忆产生�
 | <a id="s130"></a>[S130](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/start-process?view=powershell-5.1) | Start-Process 的 RunAs、WindowStyle 与参数传递 | 通过正常 UAC 提权固定防火墙脚本；不能根据桌面应用身份推定工具子进程已有管理员权限 |
 | <a id="s131"></a>[S131](https://learn.microsoft.com/en-us/dotnet/api/system.windows.forms.notifyicon) | Windows Forms NotifyIcon 的图标、悬浮文字、右键菜单、双击与释放 | 0.1.18 使用系统组件实现轻量托盘；图标所在的常显/隐藏区域由 Windows 设置决定，不等同于完整桌面壳 |
 | <a id="s132"></a>[S132](https://learn.microsoft.com/en-us/dotnet/api/system.threading.eventwaithandle.openexisting) | 打开已存在的命名事件 | 本实例桌面退出信号；命名对象不代表对同一 OS 用户代码的安全隔离，也不新增密码或恢复认证 |
+
+<a id="eachlabs-claude-sources"></a>
+## Eachlabs Claude 小额调用依据（2026-10-16 核验）
+
+| 来源 | 核验范围 | 使用限制 |
+|---|---|---|
+| <a id="s133"></a>[S133](https://platform.claude.com/docs/en/models/overview) | Anthropic 当前 Opus/Sonnet/Haiku 5.5、Fable 5.1 与原生模型 ID | 官方可用不等于中转或本账号已成功调用 |
+| <a id="s134"></a>[S134](https://docs.eachlabs.ai/llm-router/models) | Eachlabs 模型 ID、每百万 token 标价与 5.5% 平台费；结合[实际上游目录](https://openrouter.ai/api/v1/models) | 静态价格是估计依据，最终以逐笔结算为准 |
+| <a id="s135"></a>[S135](https://docs.eachlabs.ai/llm-router/quickstart) | Eachlabs Bearer Key、`https://api.eachlabs.ai/v1`、Chat Completions 和 SSE usage | 兼容协议不代表所有参数、工具和停止语义已通过 |
+| <a id="s136"></a>[S136](https://docs.eachlabs.ai/llm-router/model-catalog) | 精选目录及 canonical provider/target；[实际目录](https://api.eachlabs.ai/v1/llm-router/model-catalog) | 非精选 OpenRouter 模型按文档可请求；目录与返回型号不是上游权重证明 |
+| <a id="s137"></a>[S137](https://docs.eachlabs.ai/openapi_specs/models.json) | 聊天响应、按时间/模型查询 `/v2/executions`；[余额说明](https://docs.eachlabs.ai/llms.txt) | 余额可能延迟；执行 `success` 不等于返回了有效文本；本轮分别检查正文、结束原因、usage 与成本 |
 
 <a id="codex-workbench-sources"></a>
 ## Codex 工作台与交互参考（2026-10-15 核验）

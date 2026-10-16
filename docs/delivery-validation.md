@@ -9,27 +9,28 @@
 ## 本章导航
 
 - [16.1 已有版本的验证记录](#versioned-evidence)
-  - [16.1.1 0.1.18 Windows 托盘与含托盘的待命资源](#tray-evidence)
-  - [16.1.2 0.1.17 任务崩溃矩阵与程序出站阻断恢复](#task-fault-network-evidence)
-  - [16.1.3 0.1.17 本机部署、五分钟待命与代码仓库基线](#local-deployment-idle-evidence)
-  - [16.1.4 0.1.17 启动前健康检查与备用版本恢复](#runtime-start-evidence)
-  - [16.1.5 0.1.16 队列内存准入与短时竞争](#resource-admission-evidence)
-  - [16.1.6 0.1.15 浏览器回收、版本回退与前台响应](#runtime-continuity-evidence)
-  - [16.1.7 0.1.14 私人助手待命与会话停止](#personal-lifecycle-evidence)
-  - [16.1.8 0.1.13 K1 队列、登记回收与候选运行包](#k1-progress-evidence)
-  - [16.1.9 0.1.12 运行中的发送/停止按钮](#chat-stop-evidence)
-  - [16.1.10 0.1.11 项目文件夹与默认文本输出](#project-workspace-evidence)
-  - [16.1.11 0.1.10 浏览器持久后台队列](#computer-queue-evidence)
-  - [16.1.12 0.1.9 网页浏览器任务控制台](#computer-console-evidence)
-  - [16.1.13 0.1.8 独立浏览器 Computer Use](#computer-evidence)
-  - [16.1.14 0.1.7 K1/W3 固定元数据 Worker](#worker-evidence)
-  - [16.1.15 0.1.6 K1/W2 独立控制、签名恢复与默认实例迁移](#control-evidence)
-  - [16.1.16 0.1.5 K1/W1 只读运行预检](#preflight-evidence)
-  - [16.1.17 0.1.4 Google Pro 与轻量模型验证](#google-models-evidence)
-  - [16.1.18 0.1.3 统一模型菜单与推理级别历史验证](#web-workspace-evidence)
-  - [16.1.19 0.1.2 模型目录与迁移历史验证](#model-catalog-evidence)
-  - [16.1.20 0.1.1 聊天与模型路由历史验证](#chat-evidence)
-  - [16.1.21 K0 起步的历史验证记录](#k0-evidence)
+  - [16.1.1 0.1.18 环境：Eachlabs Claude 独立小额探测](#eachlabs-claude-evidence)
+  - [16.1.2 0.1.18 Windows 托盘与含托盘的待命资源](#tray-evidence)
+  - [16.1.3 0.1.17 任务崩溃矩阵与程序出站阻断恢复](#task-fault-network-evidence)
+  - [16.1.4 0.1.17 本机部署、五分钟待命与代码仓库基线](#local-deployment-idle-evidence)
+  - [16.1.5 0.1.17 启动前健康检查与备用版本恢复](#runtime-start-evidence)
+  - [16.1.6 0.1.16 队列内存准入与短时竞争](#resource-admission-evidence)
+  - [16.1.7 0.1.15 浏览器回收、版本回退与前台响应](#runtime-continuity-evidence)
+  - [16.1.8 0.1.14 私人助手待命与会话停止](#personal-lifecycle-evidence)
+  - [16.1.9 0.1.13 K1 队列、登记回收与候选运行包](#k1-progress-evidence)
+  - [16.1.10 0.1.12 运行中的发送/停止按钮](#chat-stop-evidence)
+  - [16.1.11 0.1.11 项目文件夹与默认文本输出](#project-workspace-evidence)
+  - [16.1.12 0.1.10 浏览器持久后台队列](#computer-queue-evidence)
+  - [16.1.13 0.1.9 网页浏览器任务控制台](#computer-console-evidence)
+  - [16.1.14 0.1.8 独立浏览器 Computer Use](#computer-evidence)
+  - [16.1.15 0.1.7 K1/W3 固定元数据 Worker](#worker-evidence)
+  - [16.1.16 0.1.6 K1/W2 独立控制、签名恢复与默认实例迁移](#control-evidence)
+  - [16.1.17 0.1.5 K1/W1 只读运行预检](#preflight-evidence)
+  - [16.1.18 0.1.4 Google Pro 与轻量模型验证](#google-models-evidence)
+  - [16.1.19 0.1.3 统一模型菜单与推理级别历史验证](#web-workspace-evidence)
+  - [16.1.20 0.1.2 模型目录与迁移历史验证](#model-catalog-evidence)
+  - [16.1.21 0.1.1 聊天与模型路由历史验证](#chat-evidence)
+  - [16.1.22 K0 起步的历史验证记录](#k0-evidence)
 - [16.2 下一轮 K1/K2 出口验收计划](#next-k1-acceptance)
   - [16.2.1 K1 出口：确定性控制与后台执行](#section-adaf0d5fff7c)
   - [16.2.2 K2 出口：自然语言、知识与技能闭环](#next-k2-acceptance)
@@ -59,6 +60,24 @@
 
 <a id="versioned-evidence"></a>
 ## 已有版本的验证记录
+
+<a id="eachlabs-claude-evidence"></a>
+### 0.1.18 环境：Eachlabs Claude 独立小额探测
+
+2026-10-16 按主人不超过 5–10 美元的要求，取 5 美元作为本轮上限，直接向 Eachlabs 发送 4 次独立合成短请求；未改应用代码、模型菜单或默认提供商。[脱敏报告](../evals/reports/eachlabs-claude-smoke-2026-10-16.json)保存无凭据请求、响应、检查和逐笔费用。接口与型号的权威说明见[模型章](models-offline.md#eachlabs-claude-probe-config)。
+
+| 中转请求型号 | 实测范围与结果 | 输入 / 输出 token | 本次耗时 | 结算美元 |
+|---|---|---|---|---|
+| `anthropic/claude-opus-5.5` | 中文、JSON、乘法与 Python 求和函数通过；生成函数先核对 AST 只含预期求和逻辑，再验证空列表、整数、正负抵消、浮点及生成器 5 例 | 102 / 103 | 5.302 秒 | 0.00260374 |
+| `anthropic/claude-sonnet-5.5` | SSE 完整到 `[DONE]`，6 个事件；正确返回 `get_workspace_status` 和 `project=Jarvis`，仅解析格式，未执行工具 | 432 / 55 | 2.933 秒；首网络片段 2.284 秒 | 0.00149177 |
+| `anthropic/claude-haiku-5.5` | 中文指令分类与 JSON 字段检查通过 | 81 / 30 | 2.450 秒 | 0.0000243705 |
+| `anthropic/claude-fable-5.1` | HTTP 200，但 `finish_reason=content_filter`、正文为空、usage 缺失；未通过可用性检查，未重试 | 未返回，不能填作 0 token | 3.366 秒 | 0 |
+
+3 个成功响应报告的型号均与请求一致。总计 **803 token** 仅包含三项返回 usage 的请求；4 笔执行记录费用合计 **0.0041198805 美元**，余额差为 0.00411988 美元，差异在余额返回精度内。即时余额读取曾尚未反映扣费，最终用本轮开始时间、路由 slug 和请求型号关联 4 笔记录，核对结算与余额变化；没有保存完整余额、API Key 或账户标识。LLM 专用价目页说明标价另加 5.5% 平台费，本轮三笔成功请求与该算法相符；不能把通用价格页的“无加价”文案替代 LLM 的具体账单。[S134](references.md#s134)、[S137](references.md#s137)
+
+各请求使用低推理级别，最大输出 512 token（Haiku 256），没有客户端自动重试或换模型回退。该限制与合成短输入用于控制本轮成本，不是平台级美元硬限额；没有创建持续探测。Fable 的执行账本同时标为 `success`、费用 0，不能覆盖其空回答事实，过滤来自哪一层仍未确认。
+
+这是一次连通、响应格式和小型函数验证，不是质量排行、长期可靠性、完整工具循环或 Jarvis UI 验收；未测图片、长上下文、多轮工具结果、取消和故障恢复。模型 ID、公开路由说明及账本只能支持中转所报告的目标，不能独立证明实际运行的上游权重。K1/K2/K3 状态不变。
 
 <a id="tray-evidence"></a>
 ### 0.1.18 Windows 托盘与含托盘的待命资源

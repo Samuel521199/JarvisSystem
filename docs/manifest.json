@@ -2680,7 +2680,8 @@
       "evals/reports/runtime-start-baseline.json",
       "evals/reports/tray-idle-resources.json",
       "evals/reports/tray-deployment.json",
-      "evals/reports/tray-package.json"
+      "evals/reports/tray-package.json",
+      "evals/reports/eachlabs-claude-smoke-2026-10-16.json"
     ]
   }
 }

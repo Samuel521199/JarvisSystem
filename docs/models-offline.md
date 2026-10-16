@@ -10,10 +10,11 @@
 
 - [9.1 当前凭据、模型与调用边界](#configured-models)
   - [9.1.1 2026-10-15 核验后的模型目录](#section-55d563b5f318)
-  - [9.1.2 Google 当前主流与本项目选择（0.1.4，2026-10-15 核验）](#google-model-selection)
-  - [9.1.3 统一模型菜单与推理级别（0.1.3）](#reasoning-controls)
-  - [9.1.4 当前路由和单次资源边界](#section-896f72aed9a9)
-  - [9.1.5 本地小组件的当前选型](#section-4a9504a4187f)
+  - [9.1.2 Eachlabs Claude 独立调用核验（2026-10-16）](#eachlabs-claude-probe-config)
+  - [9.1.3 Google 当前主流与本项目选择（0.1.4，2026-10-15 核验）](#google-model-selection)
+  - [9.1.4 统一模型菜单与推理级别（0.1.3）](#reasoning-controls)
+  - [9.1.5 当前路由和单次资源边界](#section-896f72aed9a9)
+  - [9.1.6 本地小组件的当前选型](#section-4a9504a4187f)
 - [9.2 Computer Use：已验证的 DOM 规划与视觉候选](#computer-use-models)
 - [9.3 本地嵌入模型的候选与资源边界（proposed）](#embedding-candidates)
 - [9.4 双路模型连接与恢复设计](#model-routing)
@@ -62,6 +63,15 @@
 `models` 返回各个模型的最近调用状态与时间，网页显示最近状态，`NOT_TESTED` 表示没有本地记录。这里是历史诊断，绝不等于实时健康保证。手动选模型只影响本次会话请求，不改磁盘默认值、不影响其他会话；未知 ID 或把模型配到错误的提供商会在发送前拒绝。运行时每轮读取当前配置，配置更新不要求重启模型进程；更换适配器代码仍需要重启网页服务，没有宣称代码热替换已经实现。
 
 旧模型保留为手动兼容选择；历史测试和旧 UNKNOWN 记录继续保存于 [0.1.0 基线](delivery-validation.md#k0-evidence)及 [0.1.1 聊天基线](delivery-validation.md#chat-evidence)。后续新模型上线时：核对官方文档和区域 → 在配置中增加档案 → 检查接口参数 → 合成短调用与回归验证 → 选择默认值并登记证据。没有创建定时抓取、自动替换或后台付费探测。
+
+<a id="eachlabs-claude-probe-config"></a>
+### Eachlabs Claude 独立调用核验（2026-10-16）
+
+本轮按主人小额测试授权直接验证 Eachlabs；这是 0.1.18 环境下的外部 API 探测，尚未加入上述 17 个 Jarvis 模型档案、网页菜单或自动路由。使用 `https://api.eachlabs.ai/v1/chat/completions` 和 Eachlabs 自己的 Bearer API Key；其他提供商凭据不参与。测试凭据仅留在本轮进程内存，不写入项目文件或替换已有凭据。[S135](references.md#s135)
+
+Anthropic 当前官方目录列出 Opus 5.5、Sonnet 5.5、Haiku 5.5 和 Fable 5.1。[S133](references.md#s133) **原生 API ID 与中转 ID 不同**：例如官方 `claude-opus-5-5`，本中转请求为 `anthropic/claude-opus-5.5`。Eachlabs 实际精选目录列出 Opus/Sonnet 5.5 并标记 OpenRouter 路由；Haiku 5.5、Fable 5.1 在实查的 OpenRouter 目录中，按中转文档允许使用未列入精选的已发布聊天模型 ID。[S134](references.md#s134)、[S136](references.md#s136)
+
+实测可用范围、过滤结果、费用与限制统一见[独立小额探测证据](delivery-validation.md#eachlabs-claude-evidence)。当前不将 Fable 的 HTTP 200 或执行账本 `success` 当作有可用回答；也不以返回型号名称证明真实上游权重身份。后续正式接入应复用现有目录、停止和用量机制，再验证过滤空回答、SSE 工具片段、未知计费结果及模型 ID 映射，不因本轮短请求成功就标为已集成。
 
 <a id="google-model-selection"></a>
 ### Google 当前主流与本项目选择（0.1.4，2026-10-15 核验）
