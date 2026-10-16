@@ -1,6 +1,6 @@
 # 最小核心、初始资产与开发路线
 
-> 状态：整体 proposed；0.1.19 增加模型配置与费用后台、Eachlabs Claude 文本接入，保留托盘与会话待命；完整 K1/K2/K3 未通过 · 更新：2026-10-16
+> 状态：整体 proposed；0.1.20 增加工作台与后台页面配色，保留模型与费用后台、Eachlabs Claude 文本接入，保留托盘与会话待命；完整 K1/K2/K3 未通过 · 更新：2026-10-16
 > [文档入口](README.md) · [维护规则](MAINTENANCE.md) · [架构图册](architecture-atlas.md)
 
 <!-- book-nav:start -->
@@ -51,7 +51,7 @@
 <a id="current-implementation"></a>
 ## 当前实现、启动与下一步
 
-2026-10-15 从 K0 开始实现 `jarvis-seed 0.1.0`，随后逐步增加文字聊天、模型目录、预检、独立控制、隔离 Worker 与浏览器适配器。当前 **0.1.19 新增模型配置与费用后台及 Eachlabs Claude 文本接入**，见[使用入口](#model-admin-entry)；0.1.18 已增加 Windows 托盘与明确退出入口；0.1.17 已增加启动前健康检查与备用版本恢复；0.1.16 已增加后台任务内存准入、等待提示和稳定恢复；0.1.15 已增加浏览器任务临时目录回收与本机运行版本管理；保留会话停止、助手待命、免恢复认证、共用后台队列和项目根目录保存。任务记录仍来自同一本机账本；[托盘验证](delivery-validation.md#tray-evidence)、[启动恢复证据](delivery-validation.md#runtime-start-evidence)、[故障与网络阻断实测](delivery-validation.md#task-fault-network-evidence)与[既有版本记录](delivery-validation.md#versioned-evidence)分开登记。已按主人指定地址建立 [Git 仓库](https://github.com/Samuel521199/JarvisSystem)。以下区分当前实现与验证，其余章节仍是完整设计。
+2026-10-15 从 K0 开始实现 `jarvis-seed 0.1.0`，随后逐步增加文字聊天、模型目录、预检、独立控制、隔离 Worker 与浏览器适配器。当前 **0.1.20 新增浅色、深色、暖纸和系统配色**，右上角“外观”切换后立即生效并保留草稿，见[配色规则](interaction-persona.md#workbench-appearance)；0.1.19 已增加模型配置与费用后台及 Eachlabs Claude 文本接入，见[使用入口](#model-admin-entry)；0.1.18 已增加 Windows 托盘与明确退出入口；0.1.17 已增加启动前健康检查与备用版本恢复；0.1.16 已增加后台任务内存准入、等待提示和稳定恢复；0.1.15 已增加浏览器任务临时目录回收与本机运行版本管理；保留会话停止、助手待命、免恢复认证、共用后台队列和项目根目录保存。任务记录仍来自同一本机账本；[托盘验证](delivery-validation.md#tray-evidence)、[启动恢复证据](delivery-validation.md#runtime-start-evidence)、[故障与网络阻断实测](delivery-validation.md#task-fault-network-evidence)与[既有版本记录](delivery-validation.md#versioned-evidence)分开登记。已按主人指定地址建立 [Git 仓库](https://github.com/Samuel521199/JarvisSystem)。以下区分当前实现与验证，其余章节仍是完整设计。
 
 | 部分 | 当前实现 | 未完成边界 |
 |---|---|---|

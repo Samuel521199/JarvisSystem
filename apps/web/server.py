@@ -136,11 +136,13 @@ class LocalChatServer(ThreadingHTTPServer):
         self.slots = threading.BoundedSemaphore(2)
         self.chat_requests = ChatRequests()
         self.reply_timeout = reply_timeout
+        self.theme_style = INDEX_PATH.with_name('theme.css').read_bytes()
+        self.theme_script = INDEX_PATH.with_name('theme.js').read_bytes()
         # One fixed static file; never derive filesystem paths from a request.
-        self.html = INDEX_PATH.read_bytes().replace(b"__JARVIS_WORKSPACE_STYLE__", INDEX_PATH.with_name('workspace.css').read_bytes()).replace(b"__JARVIS_NONCE__", self.nonce.encode("ascii")).replace(b'__JARVIS_VERSION__',version.encode('ascii'))
+        self.html = INDEX_PATH.read_bytes().replace(b"__JARVIS_WORKSPACE_STYLE__", INDEX_PATH.with_name('workspace.css').read_bytes()).replace(b"__JARVIS_NONCE__", self.nonce.encode("ascii")).replace(b'__JARVIS_VERSION__',version.encode('ascii')).replace(b'__JARVIS_THEME_STYLE__', self.theme_style)
         self.computer_script = INDEX_PATH.with_name('computer.js').read_bytes()
         self.workspace_script = INDEX_PATH.with_name('workspace.js').read_bytes()
-        self.admin_html = INDEX_PATH.with_name('admin.html').read_bytes().replace(b'__JARVIS_ADMIN_STYLE__', INDEX_PATH.with_name('admin.css').read_bytes()).replace(b'__JARVIS_NONCE__', self.nonce.encode('ascii')).replace(b'__JARVIS_VERSION__', version.encode('ascii'))
+        self.admin_html = INDEX_PATH.with_name('admin.html').read_bytes().replace(b'__JARVIS_ADMIN_STYLE__', INDEX_PATH.with_name('admin.css').read_bytes()).replace(b'__JARVIS_NONCE__', self.nonce.encode('ascii')).replace(b'__JARVIS_VERSION__', version.encode('ascii')).replace(b'__JARVIS_THEME_STYLE__', self.theme_style)
         self.admin_script = INDEX_PATH.with_name('admin.js').read_bytes()
         super().__init__(address, ChatHandler)
         port = self.server_address[1]
@@ -274,7 +276,9 @@ class ChatHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         if not self._boundary():
             return
-        if self.path in {"/admin", "/admin/"}:
+        if self.path == "/theme.js":
+            self._send(200, self.server.theme_script, "application/javascript; charset=utf-8")
+        elif self.path in {"/admin", "/admin/"}:
             self._send(200, self.server.admin_html, "text/html; charset=utf-8")
         elif self.path == "/admin.js":
             self._send(200, self.server.admin_script, "application/javascript; charset=utf-8")

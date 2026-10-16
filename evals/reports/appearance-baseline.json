@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "version": "0.1.20",
+  "captured_at": "2026-10-16T06:15:19.437322+00:00",
+  "status": "passed_with_documented_limits",
+  "checks": [
+    {
+      "command": "node --check apps/web/theme.js",
+      "exit_code": 0
+    },
+    {
+      "scope": "Isolated JavaScript runtime smoke",
+      "result": "passed",
+      "cases": [
+        "system light/dark change",
+        "manual mode overrides system",
+        "storage event synchronizes pages",
+        "invalid stored value defaults to system",
+        "blocked storage retains current-page theme",
+        "persisted mode applied before page mount"
+      ]
+    },
+    {
+      "command": "python -m unittest discover -s tests -p test_web.py -q",
+      "tests": 20,
+      "passed": 20,
+      "note": "Includes two existing uncommitted brand tests."
+    },
+    {
+      "command": "python -m unittest discover -s tests -p test_model_admin.py -q",
+      "tests": 12,
+      "passed": 12
+    },
+    {
+      "command": "python -m unittest discover -s tests -p test_preflight.py -q",
+      "tests": 13,
+      "passed": 13
+    },
+    {
+      "command": "python -m unittest discover -s tests -p test_runtime_start.py -q",
+      "tests": 10,
+      "passed": 10
+    },
+    {
+      "command": "python tools/sync_doc_navigation.py --root .",
+      "exit_code": 0,
+      "updated_navigation_files": 2
+    },
+    {
+      "command": "python tools/check_docs.py --root .",
+      "exit_code": 0,
+      "result": "OK documents=23 diagrams=19 artifacts=38 errors=0"
+    }
+  ],
+  "contrast": {
+    ":root": {
+      "checked_text_pairs": 20,
+      "minimum_ratio": 4.74
+    },
+    ":root[data-theme=dark]": {
+      "checked_text_pairs": 20,
+      "minimum_ratio": 6.33
+    },
+    ":root[data-theme=warm]": {
+      "checked_text_pairs": 20,
+      "minimum_ratio": 4.78
+    }
+  },
+  "browser": {
+    "scope": "Current desktop viewport on isolated local fixture, no model calls",
+    "checks": [
+      "Dark workbench and administration",
+      "Warm theme and shared preference",
+      "Refresh retains selected appearance",
+      "Changing theme preserves unsent draft",
+      "Dark dialog inputs, controls and statuses",
+      "Model menu and accessible appearance selector"
+    ],
+    "paid_requests": 0
+  },
+  "source_hashes": {
+    "apps/web/theme.css": "b9bb75e1c0474f77dc80aeffc16faead70a11854dbf1fad0b1ccaf1f1397dc60",
+    "apps/web/theme.js": "cb6b3e1d65ba3b91e801a4469fed0759ed45bed007d657eb745404e4cf41ce31",
+    "apps/web/admin.css": "4a8d0b501ce17ed313cf251fd76ad3f52f2c5cfe24c9c39931b232538f43739f",
+    "apps/web/workspace.css": "e85604cb8762a78e1023a2b588ebaa377c9c01aad007525888efad70e108e3e1"
+  },
+  "limits": [
+    "Windows system appearance itself was not changed; system-mode branches were simulated.",
+    "Brand showcase page has its own display style.",
+    "Preference is browser-origin scoped, not synced to other browsers or devices.",
+    "Full fault, hardware and standalone runtime package acceptance not rerun."
+  ],
+  "deployment": {
+    "version": "0.1.20",
+    "entry": "http://127.0.0.1:18181/",
+    "state": "standby",
+    "browser_verified": "Dark background rgb(20,24,30), light text rgb(241,245,249); no browser errors or warnings.",
+    "screenshot": "Local diagnostics only; excluded from Git."
+  }
+}

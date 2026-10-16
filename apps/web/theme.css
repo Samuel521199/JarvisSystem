@@ -1,0 +1,62 @@
+/* Shared semantic colours for the workbench and model administration. */
+:root{
+  color-scheme:light;
+  --page:#ffffff;--surface:#ffffff;--paper:#f7f9fb;--sidebar:#f3f5f7;--soft:#f1f4f8;
+  --ink:#18283a;--muted:#5d6b7b;--subtle:#606e7c;--line:#d8e0e8;--strong-line:#a5b3c3;
+  --hover:#e9edf1;--selected:#e6edf5;--blue:#315e91;--accent:#315e91;
+  --accent-fill:#294e77;--accent-hover:#315273;--on-accent:#ffffff;--focus:#3c75ad;
+  --green:#28654f;--success-bg:#eaf3ef;--success-line:#94b9aa;
+  --amber:#79521b;--warning-bg:#fff3dd;--warning-line:#c5a674;
+  --error:#98412d;--error-bg:#fff1ec;--error-line:#d6a291;
+  --chart:#4f78a4;--shadow:#10294324;--backdrop:#172a4266;
+}
+:root[data-theme=dark]{
+  color-scheme:dark;
+  --page:#14181e;--surface:#1b222c;--paper:#11151b;--sidebar:#171e27;--soft:#222c38;
+  --ink:#f1f5f9;--muted:#bac5d2;--subtle:#a1afc0;--line:#354250;--strong-line:#667a91;
+  --hover:#2b3848;--selected:#293e56;--blue:#abd1ff;--accent:#abd1ff;
+  --accent-fill:#a8cfff;--accent-hover:#c7e1ff;--on-accent:#111b29;--focus:#9dc9ff;
+  --green:#9ee0c4;--success-bg:#17372e;--success-line:#386953;
+  --amber:#f3ce8b;--warning-bg:#3a2e1c;--warning-line:#80663c;
+  --error:#ffb5a3;--error-bg:#3d2627;--error-line:#895454;
+  --chart:#94bce9;--shadow:#00000066;--backdrop:#00000099;
+}
+:root[data-theme=warm]{
+  color-scheme:light;
+  --page:#faf6ee;--surface:#fffaf2;--paper:#f3ede2;--sidebar:#f1eadd;--soft:#f1e9dc;
+  --ink:#332c25;--muted:#665c50;--subtle:#706456;--line:#d9cbbb;--strong-line:#a39786;
+  --hover:#eae0d0;--selected:#e6dac8;--blue:#65502f;--accent:#65502f;
+  --accent-fill:#685333;--accent-hover:#514026;--on-accent:#fffaf2;--focus:#8c6735;
+  --green:#315e46;--success-bg:#e8eddf;--success-line:#99b096;
+  --amber:#79521b;--warning-bg:#f8eacf;--warning-line:#b99a64;
+  --error:#943f2c;--error-bg:#fae9df;--error-line:#ca9e88;
+  --chart:#947247;--shadow:#43331d24;--backdrop:#30271d66;
+}
+html{background:var(--page);scrollbar-color:var(--strong-line) var(--soft)}
+body{color:var(--ink)}
+input,select,textarea,dialog{color:var(--ink);background-color:var(--surface)}
+input::placeholder,textarea::placeholder{color:var(--subtle);opacity:1}
+input[type=checkbox],input[type=radio]{accent-color:var(--accent-fill)}
+::selection{color:var(--ink);background:var(--selected)}
+dialog{background:var(--surface)}
+.jarvis-wordmark{color:var(--ink)}
+.jarvis-motion-toggle{color:var(--muted)}
+[data-appearance-control]{display:flex;align-items:center;flex-shrink:0;gap:5px}
+.appearance-control{display:flex;align-items:center;gap:7px;margin:0;color:var(--muted);font-size:11px;white-space:nowrap}
+.appearance-swatch{width:12px;height:12px;flex:none;border:1px solid var(--strong-line);border-radius:50%;background:linear-gradient(90deg,var(--page) 50%,var(--ink) 50%)}
+select.appearance-picker{margin:0;min-height:32px;max-width:114px;padding:5px 23px 5px 8px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--ink);font:inherit;font-size:11px;cursor:pointer}
+select.appearance-picker:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
+.appearance-storage-note{font-size:10px;color:var(--amber)}
+.appearance-announcement{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+/* SVG presentation colours also follow the active palette without rerendering. */
+.chart text{fill:var(--subtle)}
+.chart line{stroke:var(--line)}
+.chart rect{fill:var(--chart)}
+@media(max-width:700px){
+  .appearance-caption{display:none}
+  select.appearance-picker{max-width:100px;font-size:10px;padding-left:6px}
+  .connection{gap:5px}
+  .topbar{gap:8px}
+  .breadcrumb{gap:6px}
+  #chat-title{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+}

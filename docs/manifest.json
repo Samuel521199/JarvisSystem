@@ -144,7 +144,8 @@
       "owns": [
         "桌面工作台、项目文件夹与会话交互、输入区、功能入口与设置、品牌图标规范；语音通道、个性、性别表达、关系设定与形态",
         "personal-assistant-lifecycle",
-        "model-admin-experience"
+        "model-admin-experience",
+        "workbench-appearance"
       ],
       "status": "proposed",
       "reader_summary": "怎样打开项目、输入任务、设置专属能力并与 Jarvis 交流？"
@@ -250,7 +251,8 @@
       "title": "能力验收、故障演练与评估证据",
       "owns": [
         "M 验收门、R/N 追踪、阶段出口验收、B/H/V-MEM/V-PC/V-UI 测试、选型探测、性能与故障证据",
-        "model-admin-evidence"
+        "model-admin-evidence",
+        "appearance-evidence"
       ],
       "status": "proposed",
       "reader_summary": "哪些能力测过，证据在哪里，下一阶段怎样验收？"
@@ -2669,9 +2671,9 @@
     }
   ],
   "implementation": {
-    "version": "0.1.19",
-    "scope": "Local connection/key administration, model prices, immutable per-call estimates, daily usage and Eachlabs Claude text integration; existing tray, standby and session cancellation retained. Full K1/K2/K3 gates remain incomplete.",
-    "evidence": "evals/reports/model-admin-baseline.json",
+    "version": "0.1.20",
+    "scope": "Shared light/dark/warm/system appearance with browser preference persistence for the workbench and model administration; existing model billing, tray and session cancellation retained. Full K1/K2/K3 gates remain incomplete.",
+    "evidence": "evals/reports/appearance-baseline.json",
     "overall_design_status": "proposed",
     "complete_k1_gate": false,
     "complete_k2_gate": false,
@@ -2689,7 +2691,8 @@
       "evals/reports/tray-package.json",
       "evals/reports/eachlabs-claude-smoke-2026-10-16.json",
       "evals/reports/tray-baseline.json",
-      "evals/reports/model-admin-live-2026-10-16.json"
+      "evals/reports/model-admin-live-2026-10-16.json",
+      "evals/reports/model-admin-baseline.json"
     ]
   }
 }

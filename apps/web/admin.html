@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="zh-CN">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="jarvis-nonce" content="__JARVIS_NONCE__"><title>模型与费用 · Jarvis</title><style nonce="__JARVIS_NONCE__">__JARVIS_ADMIN_STYLE__</style></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="jarvis-nonce" content="__JARVIS_NONCE__"><title>模型与费用 · Jarvis</title><script src="/theme.js" nonce="__JARVIS_NONCE__"></script><style nonce="__JARVIS_NONCE__">__JARVIS_ADMIN_STYLE__
+__JARVIS_THEME_STYLE__</style></head>
 <body>
 <div class="shell">
 <aside class="sidebar"><a class="brand" href="/" aria-label="返回 Jarvis 工作台"><span class="mark">J</span><span><strong>Jarvis</strong><small>模型控制台</small></span></a>
@@ -10,7 +11,7 @@
 <button data-view="models"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5zm-9 9 9 5 9-5m-18 5 9 5 9-5"/></svg>模型与价格</button>
 <button data-view="calls"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5zm4 5h6m-6 4h6m-6 4h3"/></svg>调用明细</button></nav>
 <div class="sidebar-bottom"><div class="local-state"><i></i>本机管理 · 无需登录</div><a href="/">← 返回工作台</a><small>Jarvis __JARVIS_VERSION__</small></div></aside>
-<main><header class="topbar"><span>工作台 <span class="slash">/</span> 模型与费用</span><div><span id="updated" class="muted">正在读取…</span><button id="refresh" class="quiet">↻ 刷新</button></div></header>
+<main><header class="topbar"><span>工作台 <span class="slash">/</span> 模型与费用</span><div><div data-appearance-control></div><span id="updated" class="muted">正在读取…</span><button id="refresh" class="quiet">↻ 刷新</button></div></header>
 <div class="content"><div class="heading"><div><p class="eyebrow" id="eyebrow">USAGE OVERVIEW</p><h1 id="page-title">每一次调用，都有记录。</h1><p id="page-description">在一个地方查看模型、接入方和每天的 API 费用。</p></div><button id="primary-action" class="primary" hidden>添加接入方</button></div>
 <p id="notice" class="notice" role="status" hidden></p><p id="error" class="error" role="alert" hidden></p>
 <section id="filters" class="filters" aria-label="统计筛选"><label>时间范围<select id="range"><option value="1">今天</option><option value="7" selected>最近 7 天</option><option value="30">最近 30 天</option><option value="90">最近 90 天</option><option value="custom">自选日期</option></select></label><label id="start-wrap" hidden>开始日期<input id="start" type="date"></label><label id="end-wrap" hidden>结束日期<input id="end" type="date"></label><label>接入方<select id="route-filter"><option value="">全部接入方</option></select></label><label>模型<select id="model-filter"><option value="">全部模型</option></select></label><label>Key<select id="key-filter"><option value="">全部 Key</option></select></label><button id="apply-filter" class="secondary">查看</button><span class="filter-note">北京时间 UTC+8</span></section>
