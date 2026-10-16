@@ -218,6 +218,8 @@ Local-first 和 CRDT 支持数据组织思路，不能证明共享记忆产生�
 | <a id="s117"></a>[S117](https://github.com/QwenLM/open-computer-use/blob/main/README.md) | 开源 MCP 电脑操作服务与 Windows UI Automation 实现 | 可借鉴的适配器，不是 Jarvis 的权限边界或已安装功能 |
 | <a id="s118"></a>[S118](https://playwright.dev/python/docs/browsers) | Playwright 系统 Edge channel、浏览器 sandbox；[网络路由](https://playwright.dev/python/docs/network)、[Route API](https://playwright.dev/python/docs/api/class-route) 的重定向行为 | 本项目锁定 1.64.0；路由不是 OS 防火墙，重定向拒绝和生命周期仍须真实测试 |
 | <a id="s128"></a>[S128](https://learn.microsoft.com/en-us/windows/win32/api/sysinfoapi/ns-sysinfoapi-memorystatusex) | Windows 物理可用内存和当前进程提交余量；[读取 API](https://learn.microsoft.com/en-us/windows/win32/api/sysinfoapi/nf-sysinfoapi-globalmemorystatusex)、[进程计数](https://learn.microsoft.com/en-us/windows/win32/api/psapi/ns-psapi-process_memory_counters_ex) | 快照易变；不能视为实际预留、浏览器限额或其他进程峰值 |
+| <a id="s129"></a>[S129](https://learn.microsoft.com/en-us/powershell/module/netsecurity/new-netfirewallrule?view=windowsserver2022-ps) | Windows 防火墙 Program、Outbound、Block 与配置文件范围 | 本机探测只为临时包的 4 个可执行文件设规则，实测阻断并清理；不是整机断网或 Host 安全隔离 |
+| <a id="s130"></a>[S130](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/start-process?view=powershell-5.1) | Start-Process 的 RunAs、WindowStyle 与参数传递 | 通过正常 UAC 提权固定防火墙脚本；不能根据桌面应用身份推定工具子进程已有管理员权限 |
 
 <a id="codex-workbench-sources"></a>
 ## Codex 工作台与交互参考（2026-10-15 核验）

@@ -2644,7 +2644,10 @@
     "supplemental_evidence": [
       "evals/reports/local-deployment.json",
       "evals/reports/idle-resources.json",
-      "evals/reports/repository-baseline.json"
+      "evals/reports/repository-baseline.json",
+      "evals/reports/task-fault-matrix.json",
+      "evals/reports/network-recovery.json",
+      "evals/reports/k1-fault-network-baseline.json"
     ]
   }
 }

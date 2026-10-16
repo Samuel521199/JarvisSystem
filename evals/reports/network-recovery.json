@@ -1,0 +1,250 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-10-16T02:21:34.015923+00:00",
+  "status": "passed_with_documented_limits",
+  "scope": "Windows program-specific outbound block; host stays online",
+  "limits": [
+    "Not whole-machine disconnected boot, power-loss recovery, IPv6 coverage, schema downgrade or complete K1.",
+    "External check makes credential-free IPv4 TCP connections to www.microsoft.com:443; no application payload.",
+    "Firewall block does not isolate same-user code or localhost. Worker retains its separate LPAC boundary.",
+    "Rules cover only four temporary executable paths; helper removes them on stop/error or ten-minute timeout."
+  ],
+  "packages": [
+    {
+      "name": "jarvis-0.1.16-runtime.zip",
+      "version": "0.1.16",
+      "sha256": "273d13ec7ca208c5e95f2b68d8264c0ea4be92c61da34b3a8ff393a81f2e2cb6"
+    },
+    {
+      "name": "jarvis-0.1.17-runtime.zip",
+      "version": "0.1.17",
+      "sha256": "4874e74473ec57d29667532ece5020ce5280529299d5857d5200622b1522a0f3"
+    }
+  ],
+  "endpoint": {
+    "name": "www.microsoft.com",
+    "ipv4": "23.192.50.102",
+    "port": 443
+  },
+  "before_block": [
+    {
+      "connected": true
+    },
+    {
+      "connected": true
+    }
+  ],
+  "firewall": {
+    "status": "ready",
+    "administrator": true,
+    "rules": [
+      {
+        "name": "JarvisProbe-6816a05436f5459ebd63a1d3777e2c33-0",
+        "effective": true,
+        "program": "C:\\Users\\samuel\\AppData\\Local\\Temp\\jarvis-network-probe-msgj3l4b\\runtime\\slots\\release-273d13ec7ca208c5e95f2b68\\python\\python.exe"
+      },
+      {
+        "name": "JarvisProbe-6816a05436f5459ebd63a1d3777e2c33-1",
+        "effective": true,
+        "program": "C:\\Users\\samuel\\AppData\\Local\\Temp\\jarvis-network-probe-msgj3l4b\\runtime\\slots\\release-273d13ec7ca208c5e95f2b68\\source\\runtime-bundle\\worker-python-3.13.0-v1\\python.exe"
+      },
+      {
+        "name": "JarvisProbe-6816a05436f5459ebd63a1d3777e2c33-2",
+        "effective": true,
+        "program": "C:\\Users\\samuel\\AppData\\Local\\Temp\\jarvis-network-probe-msgj3l4b\\runtime\\slots\\release-4874e74473ec57d29667532e\\python\\python.exe"
+      },
+      {
+        "name": "JarvisProbe-6816a05436f5459ebd63a1d3777e2c33-3",
+        "effective": true,
+        "program": "C:\\Users\\samuel\\AppData\\Local\\Temp\\jarvis-network-probe-msgj3l4b\\runtime\\slots\\release-4874e74473ec57d29667532e\\source\\runtime-bundle\\worker-python-3.13.0-v1\\python.exe"
+      }
+    ]
+  },
+  "while_blocked": [
+    {
+      "connected": false,
+      "error": "PermissionError",
+      "winerror": 10013,
+      "errno": 13
+    },
+    {
+      "connected": false,
+      "error": "PermissionError",
+      "winerror": 10013,
+      "errno": 13
+    }
+  ],
+  "unblocked_control": {
+    "connected": true
+  },
+  "recovery": {
+    "healthy": {
+      "id": "start-d8e733cbecba43acbbf57af3e02bda74",
+      "created_at": "2026-10-16T02:22:03.429023+00:00",
+      "mode": "status",
+      "status": "exited",
+      "attempts": [
+        {
+          "id": "release-4874e74473ec57d29667532e",
+          "state": "verified",
+          "health": {
+            "version": "0.1.17",
+            "status": "passed",
+            "artifact_digest": "sha256:2aba68e31c1ccf2c347201bef4bc470c3543ac3564036014cc3b2360a24e713a",
+            "task_id": "task_306d378d6d0654a78803d40c85606b88",
+            "network": "Python audit hook denies connect/DNS",
+            "captured_at": "2026-10-16T02:22:06.550387+00:00"
+          }
+        }
+      ],
+      "selected": "release-4874e74473ec57d29667532e",
+      "fallback": false,
+      "selection_committed": true,
+      "data_format": {
+        "control_version": 2,
+        "node_id": "e9ba15ac-60b3-4aa4-95a1-eef58762b31c",
+        "safety_version": 1
+      },
+      "requested": "release-4874e74473ec57d29667532e",
+      "version": "0.1.17",
+      "exit_code": 0,
+      "finished_at": "2026-10-16T02:22:08.249371+00:00"
+    },
+    "invalid_configuration": {
+      "id": "start-cb6389d593d4427ba1846015c292981a",
+      "created_at": "2026-10-16T02:22:08.704935+00:00",
+      "mode": "status",
+      "status": "failed",
+      "attempts": [],
+      "selected": null,
+      "fallback": false,
+      "selection_committed": false,
+      "error": "ValueError",
+      "message": "Business configuration is missing or corrupt",
+      "finished_at": "2026-10-16T02:22:08.735794+00:00"
+    },
+    "fallback": {
+      "id": "start-dbbcd80982ec4f9fa2a852f6ad7b2eb1",
+      "created_at": "2026-10-16T02:22:09.193690+00:00",
+      "mode": "status",
+      "status": "exited",
+      "attempts": [
+        {
+          "id": "release-4874e74473ec57d29667532e",
+          "state": "failed",
+          "health": {
+            "status": "failed",
+            "error": "ValueError",
+            "message": "Installed release content changed: source/README.md",
+            "captured_at": "2026-10-16T02:22:09.876046+00:00"
+          }
+        },
+        {
+          "id": "release-273d13ec7ca208c5e95f2b68",
+          "state": "verified",
+          "health": {
+            "version": "0.1.16",
+            "status": "passed",
+            "artifact_digest": "sha256:2aba68e31c1ccf2c347201bef4bc470c3543ac3564036014cc3b2360a24e713a",
+            "task_id": "task_c1771ec267715ae4b58bf3a58ddce643",
+            "network": "Python audit hook denies connect/DNS",
+            "captured_at": "2026-10-16T02:22:13.068672+00:00"
+          }
+        }
+      ],
+      "selected": "release-273d13ec7ca208c5e95f2b68",
+      "fallback": true,
+      "selection_committed": true,
+      "data_format": {
+        "control_version": 2,
+        "node_id": "e9ba15ac-60b3-4aa4-95a1-eef58762b31c",
+        "safety_version": 1
+      },
+      "requested": "release-4874e74473ec57d29667532e",
+      "version": "0.1.16",
+      "exit_code": 0,
+      "finished_at": "2026-10-16T02:22:14.807718+00:00"
+    },
+    "both_corrupt": {
+      "id": "start-d4d52e055f0441bb9137d5b7de29359d",
+      "created_at": "2026-10-16T02:22:15.369291+00:00",
+      "mode": "status",
+      "status": "failed",
+      "attempts": [
+        {
+          "id": "release-273d13ec7ca208c5e95f2b68",
+          "state": "failed",
+          "health": {
+            "status": "failed",
+            "error": "ValueError",
+            "message": "Installed release content changed: source/README.md",
+            "captured_at": "2026-10-16T02:22:16.056979+00:00"
+          }
+        },
+        {
+          "id": "release-4874e74473ec57d29667532e",
+          "state": "failed",
+          "health": {
+            "error": "release_not_verified"
+          }
+        }
+      ],
+      "selected": null,
+      "fallback": false,
+      "selection_committed": false,
+      "data_format": {
+        "control_version": 2,
+        "node_id": "e9ba15ac-60b3-4aa4-95a1-eef58762b31c",
+        "safety_version": 1
+      },
+      "requested": "release-273d13ec7ca208c5e95f2b68",
+      "error": "ValueError",
+      "message": "Neither the selected release nor its verified fallback is usable; inspect runtime status",
+      "finished_at": "2026-10-16T02:22:16.066835+00:00"
+    },
+    "business_data_unchanged": true,
+    "tasks_preserved": 2,
+    "inventory_digest": "sha256:515a7249c03fd924d51a48a4bbd5f1c61d252e2c7ef36f7732b3699001d3184f",
+    "snapshot": {
+      "database_digests": {
+        "control.db": "b50c7bf3bef0b544ad297bf096af897c5b70f5eb087aabab8eb4bf32dab42d4d",
+        "safety/control.db": "d2fa7be92d326d0e3e0f4a099be322e7b9ec42e879c5998650a4565c5d1e872b"
+      },
+      "artifacts": {
+        "act_cf0b9531366c54bd84ad6f030851c801.json": "515a7249c03fd924d51a48a4bbd5f1c61d252e2c7ef36f7732b3699001d3184f"
+      }
+    }
+  },
+  "block_after_work": [
+    {
+      "connected": false,
+      "error": "PermissionError",
+      "winerror": 10013,
+      "errno": 13
+    },
+    {
+      "connected": false,
+      "error": "PermissionError",
+      "winerror": 10013,
+      "errno": 13
+    }
+  ],
+  "cleanup": {
+    "status": "removed",
+    "errors": [],
+    "remaining": []
+  },
+  "after_cleanup": [
+    {
+      "connected": true
+    },
+    {
+      "connected": true
+    }
+  ],
+  "source_sha256": {
+    "tools/probe_network_recovery.py": "5cfbf5a1cacf725750e2d94d5a54c5f639454a1592bd75d0858146f3125978ff",
+    "tools/network_probe_firewall.ps1": "cff15c388044c464c9ab5b089e1279d497a8c7d1ea63676c0e044eeb4105890d",
+    "tools/probe_task_faults.py": "99e6e0e2be5e4d821e22e1d318ab06bdf0c4ff3532978addba2e9eead1c03dbd"
+  }
+}

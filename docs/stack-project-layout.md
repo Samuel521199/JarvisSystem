@@ -234,6 +234,9 @@ K0—K1 在同一目标硬件上比较不超过两个底座候选，先验证确
 | `tools/check_seed.py`、`manage_models.py`、`model_probe.py`、`local_llm.py`、`speech_probe.py` | 校验、下载与受限诊断命令；没有注册后台服务 |
 | `tools/release_bundle.py`、`tools/probe_release_bundle.py`、`tests/test_release_bundle.py` | 固定运行依赖候选归档、新槽解压及同版本恢复探测；候选放 `artifacts/releases/`，不激活服务、不打包凭据/现用账本 |
 | `tests/test_runtime_start.py`、`tools/probe_runtime_start.py` | 启动前故障回退、两版本不可用、事务失败与数据保持验证；生产实现复用 releases.py |
+| `tools/probe_task_faults.py`、`tests/test_task_faults.py`、`evals/reports/task-fault-matrix.json` | 固定目录任务 7 个真实进程退出点、2 类产物损坏的临时实例探测与回归 |
+| `tools/probe_network_recovery.py`、`tools/network_probe_firewall.ps1`、`evals/reports/network-recovery.json` | 两个临时运行包的 Windows 程序出站阻断、启动恢复与规则清理；UAC 只用于防火墙辅助进程，不影响现用实例 |
+| `evals/reports/k1-fault-network-baseline.json` | 本轮故障/网络验收的回归、文档检查与源码摘要；保留既有版本报告 |
 | `runtime/node-host/jarvis_core/resources.py`、`config/resource-profile.json`、`tests/test_resources.py` | 后台队列物理/可提交内存准入、迟滞与冷却；不冒充 OS 硬资源预留 |
 | `runtime/node-host/jarvis_core/browser_recovery.py`、`tests/test_browser_recovery.py` | 浏览器使用锁、登记目录与退出后回收；真实崩溃测试复用 test_computer.py |
 | `runtime/node-host/jarvis_core/releases.py`、`tools/runtime_releases.py`、`tests/test_runtime_releases.py` | 本机运行包安装/健康检查/选择/回退/启动，私有 releases.db 与历史记录 |

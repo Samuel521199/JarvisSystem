@@ -19,6 +19,7 @@
     - [4.1.6.1 网页后台任务控制台（0.1.13）](#web-computer-console)
   - [4.1.7 运行包与本机版本选择（0.1.15）](#runtime-package)
     - [4.1.7.1 0.1.17 启动前检查与故障回退](#runtime-startup-recovery)
+    - [4.1.7.2 任务故障与程序网络阻断探测](#fault-network-probes)
   - [4.1.8 浏览器任务的临时目录回收（0.1.15）](#browser-residue-recovery)
   - [4.1.9 只读运行预检（0.1.5）](#runtime-preflight)
   - [4.1.10 下一步仍从 K1 出口推进](#section-d660c77ef363)
@@ -48,7 +49,7 @@
 <a id="current-implementation"></a>
 ## 当前实现、启动与下一步
 
-2026-10-15 从 K0 开始实现 `jarvis-seed 0.1.0`，随后逐步增加文字聊天、模型目录、预检、独立控制、隔离 Worker 与浏览器适配器。当前 **0.1.17 增加启动前健康检查与备用版本恢复**；0.1.16 已增加后台任务内存准入、等待提示和稳定恢复；0.1.15 已增加浏览器任务临时目录回收与本机运行版本管理；保留会话停止、助手待命、免恢复认证、共用后台队列和项目根目录保存。任务记录仍来自同一本机账本；[本轮证据](delivery-validation.md#runtime-start-evidence)与[既有版本记录](delivery-validation.md#versioned-evidence)分开登记。尚未建立 Git 历史。以下区分当前实现与验证，其余章节仍是完整设计。
+2026-10-15 从 K0 开始实现 `jarvis-seed 0.1.0`，随后逐步增加文字聊天、模型目录、预检、独立控制、隔离 Worker 与浏览器适配器。当前 **0.1.17 增加启动前健康检查与备用版本恢复**；0.1.16 已增加后台任务内存准入、等待提示和稳定恢复；0.1.15 已增加浏览器任务临时目录回收与本机运行版本管理；保留会话停止、助手待命、免恢复认证、共用后台队列和项目根目录保存。任务记录仍来自同一本机账本；[启动恢复证据](delivery-validation.md#runtime-start-evidence)、[故障与网络阻断实测](delivery-validation.md#task-fault-network-evidence)与[既有版本记录](delivery-validation.md#versioned-evidence)分开登记。已按主人指定地址建立 [Git 仓库](https://github.com/Samuel521199/JarvisSystem)。以下区分当前实现与验证，其余章节仍是完整设计。
 
 | 部分 | 当前实现 | 未完成边界 |
 |---|---|---|
@@ -260,6 +261,20 @@ $releaseId = $installed.id
 
 仍可使用 `run` 直接运行当前已验证版本，它不追加自动健康回退。两个入口都不终止现有服务；端口占用应先处理原实例，不能把新进程启动失败当作重放任务的理由。
 
+<a id="fault-network-probes"></a>
+#### 任务故障与程序网络阻断探测
+
+在 Windows 开发环境中运行以下命令。故障探测创建独立临时数据，以真实子进程退出覆盖固定目录任务的持久化边界；不会中断现用 Jarvis。
+
+```powershell
+& 'H:\JarvisData\envs\dev\Scripts\python.exe' tools/probe_task_faults.py
+& 'H:\JarvisData\envs\dev\Scripts\python.exe' tools/probe_network_recovery.py artifacts/releases/jarvis-0.1.16-runtime.zip artifacts/releases/jarvis-0.1.17-runtime.zip --elevate
+```
+
+网络探测需要两个已经准备好的不同版本完整包，包不随 Git 上传；按[运行包说明](#runtime-package)准备。`--elevate` 仅通过 Windows UAC 提权防火墙辅助进程；已在管理员终端时可省略。它核对 4 个临时可执行文件路径后设置出站阻断，结束/失败后移除自身规则，最长保留 10 分钟；不更改网卡和防火墙配置文件。当前用户对新建探测目录的结果文件保留访问权限。助手和电脑上的其他应用保持原网络状态。
+
+默认输出为 `evals/reports/task-fault-matrix.json` 与 `network-recovery.json`；需要保留前次结果时通过 `--output <路径>` 指定新位置。只有阻断前后正向连接、阻断期间拒绝及未阻断对照、恢复演练和规则清理全部成功，网络报告才能通过；失败时保留诊断，清理未经确认时保留临时目录。完整结果与未验证范围只在[验收记录](delivery-validation.md#task-fault-network-evidence)维护。
+
 <a id="browser-residue-recovery"></a>
 ### 浏览器任务的临时目录回收（0.1.15）
 
@@ -286,7 +301,7 @@ $releaseId = $installed.id
 <a id="section-d660c77ef363"></a>
 ### 下一步仍从 K1 出口推进
 
-0.1.17 已补充当前开发机的五分钟待命采样并完成实际网页更新，见[部署与资源证据](delivery-validation.md#local-deployment-idle-evidence)。接下来仍需选定运行包整机断网冷启动、目标普通 PC 的资源证据及故障矩阵汇总；不能将开发机一次五分钟结果扩展为完整 K1 或长期稳定性通过。
+0.1.17 已补充当前开发机的五分钟待命采样并完成实际网页更新，见[部署与资源证据](delivery-validation.md#local-deployment-idle-evidence)；固定目录任务的进程崩溃矩阵与运行包出站阻断恢复已获得[局部实测证据](delivery-validation.md#task-fault-network-evidence)。接下来仍需选定运行包整机断网冷启动、目标普通 PC 的资源证据及跨能力故障矩阵汇总；不能将程序禁网或开发机五分钟结果扩展为完整 K1 或长期稳定性通过。
 
 按当前个人使用范围，浏览器登记回收与显式运行版本回退已补齐；0.1.16 已增加[队列内存准入](tasks-agents.md#queue-resource-admission)和短时竞争验证，继续完成整机离线、普通 PC 长时资源与 K1 整体验收。固定目录、浏览器和版本管理仍是明确限定范围。密钥、密码、受保护监督部署和全局停止已由用户延期，不再作为个人功能开发的前置条件。K1 完整通过后，把已验证模型端口接入有限计划和技能调用；K3/K4 再引入外部 Codex、候选编程、固定构建、独立验收、灰度回退。当前没有自主下载或替换模型、自改源码、自动学习、后台 Agent 或硬件控制；这些能力需各自的权限和验收出口，不能由一次模型回答启用。
 

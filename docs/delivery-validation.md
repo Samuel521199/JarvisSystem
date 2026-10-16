@@ -9,25 +9,26 @@
 ## 本章导航
 
 - [16.1 已有版本的验证记录](#versioned-evidence)
-  - [16.1.1 0.1.17 本机部署、五分钟待命与代码仓库基线](#local-deployment-idle-evidence)
-  - [16.1.2 0.1.17 启动前健康检查与备用版本恢复](#runtime-start-evidence)
-  - [16.1.3 0.1.16 队列内存准入与短时竞争](#resource-admission-evidence)
-  - [16.1.4 0.1.15 浏览器回收、版本回退与前台响应](#runtime-continuity-evidence)
-  - [16.1.5 0.1.14 私人助手待命与会话停止](#personal-lifecycle-evidence)
-  - [16.1.6 0.1.13 K1 队列、登记回收与候选运行包](#k1-progress-evidence)
-  - [16.1.7 0.1.12 运行中的发送/停止按钮](#chat-stop-evidence)
-  - [16.1.8 0.1.11 项目文件夹与默认文本输出](#project-workspace-evidence)
-  - [16.1.9 0.1.10 浏览器持久后台队列](#computer-queue-evidence)
-  - [16.1.10 0.1.9 网页浏览器任务控制台](#computer-console-evidence)
-  - [16.1.11 0.1.8 独立浏览器 Computer Use](#computer-evidence)
-  - [16.1.12 0.1.7 K1/W3 固定元数据 Worker](#worker-evidence)
-  - [16.1.13 0.1.6 K1/W2 独立控制、签名恢复与默认实例迁移](#control-evidence)
-  - [16.1.14 0.1.5 K1/W1 只读运行预检](#preflight-evidence)
-  - [16.1.15 0.1.4 Google Pro 与轻量模型验证](#google-models-evidence)
-  - [16.1.16 0.1.3 统一模型菜单与推理级别历史验证](#web-workspace-evidence)
-  - [16.1.17 0.1.2 模型目录与迁移历史验证](#model-catalog-evidence)
-  - [16.1.18 0.1.1 聊天与模型路由历史验证](#chat-evidence)
-  - [16.1.19 K0 起步的历史验证记录](#k0-evidence)
+  - [16.1.1 0.1.17 任务崩溃矩阵与程序出站阻断恢复](#task-fault-network-evidence)
+  - [16.1.2 0.1.17 本机部署、五分钟待命与代码仓库基线](#local-deployment-idle-evidence)
+  - [16.1.3 0.1.17 启动前健康检查与备用版本恢复](#runtime-start-evidence)
+  - [16.1.4 0.1.16 队列内存准入与短时竞争](#resource-admission-evidence)
+  - [16.1.5 0.1.15 浏览器回收、版本回退与前台响应](#runtime-continuity-evidence)
+  - [16.1.6 0.1.14 私人助手待命与会话停止](#personal-lifecycle-evidence)
+  - [16.1.7 0.1.13 K1 队列、登记回收与候选运行包](#k1-progress-evidence)
+  - [16.1.8 0.1.12 运行中的发送/停止按钮](#chat-stop-evidence)
+  - [16.1.9 0.1.11 项目文件夹与默认文本输出](#project-workspace-evidence)
+  - [16.1.10 0.1.10 浏览器持久后台队列](#computer-queue-evidence)
+  - [16.1.11 0.1.9 网页浏览器任务控制台](#computer-console-evidence)
+  - [16.1.12 0.1.8 独立浏览器 Computer Use](#computer-evidence)
+  - [16.1.13 0.1.7 K1/W3 固定元数据 Worker](#worker-evidence)
+  - [16.1.14 0.1.6 K1/W2 独立控制、签名恢复与默认实例迁移](#control-evidence)
+  - [16.1.15 0.1.5 K1/W1 只读运行预检](#preflight-evidence)
+  - [16.1.16 0.1.4 Google Pro 与轻量模型验证](#google-models-evidence)
+  - [16.1.17 0.1.3 统一模型菜单与推理级别历史验证](#web-workspace-evidence)
+  - [16.1.18 0.1.2 模型目录与迁移历史验证](#model-catalog-evidence)
+  - [16.1.19 0.1.1 聊天与模型路由历史验证](#chat-evidence)
+  - [16.1.20 K0 起步的历史验证记录](#k0-evidence)
 - [16.2 下一轮 K1/K2 出口验收计划](#next-k1-acceptance)
   - [16.2.1 K1 出口：确定性控制与后台执行](#section-adaf0d5fff7c)
   - [16.2.2 K2 出口：自然语言、知识与技能闭环](#next-k2-acceptance)
@@ -57,6 +58,24 @@
 
 <a id="versioned-evidence"></a>
 ## 已有版本的验证记录
+
+<a id="task-fault-network-evidence"></a>
+### 0.1.17 任务崩溃矩阵与程序出站阻断恢复
+
+2026-10-16 补充 V-K1-05、V-K1-07 的实际执行证据，业务版本保持 0.1.17。所有故障注入只发生在新建的临时实例；没有改动现用项目、任务或模型凭据。完整 K1/K2/K3 仍未通过。
+
+| 验证范围 | 结果与证据 |
+|---|---|
+| 真实进程中断 | [task-fault-matrix.json](../evals/reports/task-fault-matrix.json)记录 7 个 `os._exit(91)` 故障点：受理提交前/后、派发提交后、产物写入一半、产物同步后、回执提交前/后。重启后分别恢复为不存在、PREPARED、UNKNOWN 或 CONFIRMED；显式重复同一请求不增加任务或重写已有效果 |
+| 产物损坏 | 同一报告记录已确认产物被修改、被删除的 2 个场景；重试均报告错误，保留回执，不暗中重建产物。新 [4 项测试](../tests/test_task_faults.py)持续覆盖上述边界 |
+| 操作系统出站阻断 | [network-recovery.json](../evals/reports/network-recovery.json)记录 0.1.16、0.1.17 完整运行包及 SHA-256；临时 Windows 防火墙规则覆盖这两个包的 Host 与 Worker 共 4 个可执行文件。两个 Host 在规则前可连接同一公网 IPv4:443，阻断期间均返回 Windows 10013；未阻断的开发 Python 同时仍可连接，排除单纯远端不可用 |
+| 阻断期间启动与恢复 | 随包 Python 初始化临时数据并完成真实 LPAC 目录任务；0.1.17 健康启动，坏配置被拒绝；新包损坏后回退至已验证的 0.1.16；两个包均不可用时保留失败记录。2 项任务、产物文件摘要和业务/控制库 SQL 内容保持一致，失败启动不提交版本选择 |
+| 清理与复核 | 工作完成后再次确认两个 Host 仍被阻断，再移除本次 4 条规则；规则残留为 0，两个 Host 恢复联网，成功探测目录自动移除。没有禁用网卡、修改防火墙配置文件或关闭现用助手 |
+| 回归 | [k1-fault-network-baseline.json](../evals/reports/k1-fault-network-baseline.json)保存本轮 272 项测试（270 通过、2 项因 Windows 符号链接权限跳过）、种子、文档检查及源码摘要；历史基线保持原样 |
+
+复现入口见[故障与网络探测操作](core-bootstrap.md#fault-network-probes)。防火墙参数与 UAC 启动依据 [S129](references.md#s129)、[S130](references.md#s130)。开发中曾遇到提权结果等待超时及提权文件的所有者权限问题；已增加启动错误回传，并只为新建探测目录显式保留当前用户的修改权限。最终通过报告对应修复后的源码摘要。两次失败尝试的目录 `%TEMP%\jarvis-network-probe-zgxl916f`、`%TEMP%\jarvis-network-probe-5amd9fx0` 仍保留；清理操作被自动审批策略拒绝。之后独立读取 ActiveStore 确认 `JarvisProbe-*` 规则数量为 0，这两份残留不属于成功运行的目录。
+
+**证据边界：**程序路径出站阻断只覆盖所列可执行文件；公网探测为不携带应用数据的 IPv4 TCP 连接，不覆盖 IPv6、代理/系统服务代发、localhost 或同用户隔离。启动演练使用 `status` 模式，不是网页服务可用性或整机拔网线后的冷启动。故障矩阵针对固定目录能力与真实 LPAC/SQLite/本机 NTFS，不能推导为物理断电、存储控制器故障、任意浏览器副作用或完整 K1 验收。普通 PC 的资源门和整机离线验收继续保留。
 
 <a id="local-deployment-idle-evidence"></a>
 ### 0.1.17 本机部署、五分钟待命与代码仓库基线
