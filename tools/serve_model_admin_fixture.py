@@ -45,6 +45,11 @@ def main():
         journal.finish(journal.reserve('eachlabs','anthropic/claude-sonnet-5.5','fixture unknown'),'UNKNOWN',{})
         spec=importlib.util.spec_from_file_location('admin_fixture_web',ROOT/'apps/web/server.py');web=importlib.util.module_from_spec(spec);spec.loader.exec_module(web)
         server=web.LocalChatServer(('127.0.0.1',args.port),core,OfflineChat(core),version='fixture')
+        from jarvis_core.workspace import WorkspaceService
+        sys.path.insert(0,str(ROOT/'adapters/computer-use'))
+        from jarvis_computer.web import ComputerWeb
+        server.workspace=WorkspaceService(core)
+        server.computer=ComputerWeb(core,server.chat)
         server.admin=registry
         server.admin_html=server.admin_html.replace('模型控制台'.encode(), '模型控制台 · 合成验收'.encode())
         # This fixture never contacts an account even if the balance button is clicked.

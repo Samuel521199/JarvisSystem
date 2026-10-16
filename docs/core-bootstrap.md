@@ -51,7 +51,7 @@
 <a id="current-implementation"></a>
 ## 当前实现、启动与下一步
 
-2026-10-15 从 K0 开始实现 `jarvis-seed 0.1.0`，随后逐步增加文字聊天、模型目录、预检、独立控制、隔离 Worker 与浏览器适配器。当前 **0.1.21 新增拖拽文件、图片粘贴与多模态聊天输入**，见[附件使用方法](interaction-persona.md#composer-attachments)；0.1.20 已增加浅色、深色、暖纸和系统配色，右上角“外观”切换后立即生效并保留草稿，见[配色规则](interaction-persona.md#workbench-appearance)；0.1.19 已增加模型配置与费用后台及 Eachlabs Claude 文本接入，见[使用入口](#model-admin-entry)；0.1.18 已增加 Windows 托盘与明确退出入口；0.1.17 已增加启动前健康检查与备用版本恢复；0.1.16 已增加后台任务内存准入、等待提示和稳定恢复；0.1.15 已增加浏览器任务临时目录回收与本机运行版本管理；保留会话停止、助手待命、免恢复认证、共用后台队列和项目根目录保存。任务记录仍来自同一本机账本；[托盘验证](delivery-validation.md#tray-evidence)、[启动恢复证据](delivery-validation.md#runtime-start-evidence)、[故障与网络阻断实测](delivery-validation.md#task-fault-network-evidence)与[既有版本记录](delivery-validation.md#versioned-evidence)分开登记。已按主人指定地址建立 [Git 仓库](https://github.com/Samuel521199/JarvisSystem)。以下区分当前实现与验证，其余章节仍是完整设计。
+2026-10-15 从 K0 开始实现 `jarvis-seed 0.1.0`，随后逐步增加文字聊天、模型目录、预检、独立控制、隔离 Worker 与浏览器适配器。当前 **0.1.21 新增拖拽文件、图片粘贴与多模态聊天输入**，见[附件使用方法](interaction-persona.md#composer-attachments)；0.1.20 已增加浅色、深色、暖纸和系统配色，在“设置 → 外观”切换后立即生效并保留草稿，见[配色规则](interaction-persona.md#workbench-appearance)；0.1.19 已增加模型配置与费用后台及 Eachlabs Claude 文本接入，见[使用入口](#model-admin-entry)；0.1.18 已增加 Windows 托盘与明确退出入口；0.1.17 已增加启动前健康检查与备用版本恢复；0.1.16 已增加后台任务内存准入、等待提示和稳定恢复；0.1.15 已增加浏览器任务临时目录回收与本机运行版本管理；保留会话停止、助手待命、免恢复认证、共用后台队列和项目根目录保存。任务记录仍来自同一本机账本；[托盘验证](delivery-validation.md#tray-evidence)、[启动恢复证据](delivery-validation.md#runtime-start-evidence)、[故障与网络阻断实测](delivery-validation.md#task-fault-network-evidence)与[既有版本记录](delivery-validation.md#versioned-evidence)分开登记。已按主人指定地址建立 [Git 仓库](https://github.com/Samuel521199/JarvisSystem)。以下区分当前实现与验证，其余章节仍是完整设计。
 
 | 部分 | 当前实现 | 未完成边界 |
 |---|---|---|
@@ -154,7 +154,7 @@ $py = 'H:\JarvisData\envs\dev\Scripts\python.exe'
 <a id="model-admin-entry"></a>
 ### 模型与费用后台（0.1.19）
 
-打开 [模型与费用](http://127.0.0.1:18181/admin)，或从工作台左侧点击同名入口，新标签页保留原会话草稿。后台无需登录密码；API 凭据仍是各模型服务自身所需，不是 Jarvis 恢复认证。
+点击工作台左栏底部“设置”，进入[设置中心](http://127.0.0.1:18181/settings)，再选择“接入方与 Key”“模型与价格”“用量总览”或“调用明细”。新标签页保留原会话草稿；旧 `/admin` 地址仍兼容。后台无需登录密码；API 凭据仍是各模型服务自身所需，不是 Jarvis 恢复认证。
 
 1. **接入方与 Key**：查看现有官方线路与 Eachlabs；添加、替换、切换 Key，或通过模板增加另一个账户/中转。Vertex 填服务账户 JSON，其他云端模板填 API Key。新增 Key 保存后只显示尾号，不自动花费测试。
 2. **模型与价格**：按线路添加模型 ID，设置默认模型、推理级别、输出上限、币种、四类 Token 单价与平台附加费。对未定价档案先填写真实价格；停用默认项前先选择另一个默认项。
@@ -242,7 +242,7 @@ $py = 'H:\JarvisData\envs\dev\Scripts\python.exe'
 <a id="web-computer-console"></a>
 #### 网页后台任务控制台（0.1.13）
 
-打开 `http://127.0.0.1:18181/`，点击左侧 **后台任务**。默认目录清单无需模型；浏览器模式的执行模型独立选择，默认 GPT-6 Luna，采用模型档案的默认推理配置，不改变聊天模型和推理级别。
+打开 `http://127.0.0.1:18181/`，点击左栏底部 **设置 → 后台任务**，或直接进入[任务设置页](http://127.0.0.1:18181/settings#tasks)。默认目录清单无需模型；浏览器模式的执行模型独立选择，默认 GPT-6 Luna，采用模型档案的默认推理配置，不改变聊天模型和推理级别。
 
 1. 选择“模型演示”并启动：模型决定内置合成表单的四步操作。也可选“固定动作测试”，只验证执行通路、不调用模型。
 2. 要操作自己的已授权网页，选择“自定义任务”，粘贴符合[浏览器契约](contracts.md#computer-contract)的 JSON；仍需明确 URL、目标和值，不接受任意命令或用户文件路径。

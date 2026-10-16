@@ -2,6 +2,7 @@
 // Independent view; task truth remains in the server ledger, never browser storage.
 (() => {
   const el = id => document.getElementById(id);
+  const NONCE=document.querySelector('meta[name="jarvis-nonce"]').content;
   const stateNames = {READY:"已接纳",RUNNING:"执行中",CANCELLING:"正在取消",SUCCEEDED:"已完成",FAILED:"失败",CANCELLED:"已取消",UNKNOWN:"结果待核对",PREPARED:"已准备",DISPATCHING:"执行中"};
   const actionNames = {fill:"填写",select:"选择",check:"勾选状态",click:"点击"};
   let selected=null, visible=false, timer=null, refreshingTasks=false, submitting=false, active=false, available=false, browserAvailable=false, queuePaused=false, queueWaiting=0, queueCapacity=20, queueOwned=false, queueChanging=false;
@@ -104,15 +105,11 @@
     controls();
   }
   function showTasks(show) {
-    visible=show;el("computer-panel").hidden=!show;el("chat-panel").hidden=show;
-    el("computer-nav").setAttribute("aria-current",show?"page":"false");el("current-chat").setAttribute("aria-current",show?"false":"page");
-    el("chat-title").textContent=show?"后台任务":"当前对话";closeSidebar();
+    visible=show;
     clearInterval(timer);timer=null;
     if(show){modelsForTasks();loadTasks();timer=setInterval(()=>{if(!document.hidden)loadTasks();},2000);}
   }
-  el("computer-nav").addEventListener("click",()=>showTasks(true));
-  el("current-chat").addEventListener("click",()=>showTasks(false));
-  el("clear").addEventListener("click",()=>{if(!busy)showTasks(false);});
+  document.addEventListener("jarvis:settings-view",event=>showTasks(event.detail==="tasks"));
   el("task-mode").addEventListener("change",()=>{pending=null;el("task-submit-note").textContent="";controls();});
   el("task-model").addEventListener("change",()=>{pending=null;});
   el("inventory-relative").addEventListener("input",()=>{pending=null;});

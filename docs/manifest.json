@@ -145,6 +145,7 @@
         "桌面工作台、项目文件夹与会话交互、输入区、功能入口与设置、品牌图标规范；语音通道、个性、性别表达、关系设定与形态",
         "personal-assistant-lifecycle",
         "model-admin-experience",
+        "workbench-settings",
         "workbench-appearance",
         "composer-attachments"
       ],
@@ -255,7 +256,8 @@
         "M 验收门、R/N 追踪、阶段出口验收、B/H/V-MEM/V-PC/V-UI 测试、选型探测、性能与故障证据",
         "model-admin-evidence",
         "appearance-evidence",
-        "attachments-evidence"
+        "attachments-evidence",
+        "settings-navigation-evidence"
       ],
       "status": "proposed",
       "reader_summary": "哪些能力测过，证据在哪里，下一阶段怎样验收？"

@@ -289,7 +289,7 @@ class ChatHandler(BaseHTTPRequestHandler):
             self._send(200, self.server.theme_script, "application/javascript; charset=utf-8")
         elif self.path == '/attachments.js':
             self._send(200, self.server.attachments_script, 'application/javascript; charset=utf-8')
-        elif self.path in {"/admin", "/admin/"}:
+        elif self.path in {"/settings", "/settings/", "/admin", "/admin/"}:
             self._send(200, self.server.admin_html, "text/html; charset=utf-8")
         elif self.path == "/admin.js":
             self._send(200, self.server.admin_script, "application/javascript; charset=utf-8")

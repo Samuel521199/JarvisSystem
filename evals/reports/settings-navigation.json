@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-16",
+  "feature": "unified-settings-navigation",
+  "status": "verified-with-limits",
+  "source_baseline": "0.1.21",
+  "integrated_worktree_version": "0.1.24",
+  "scope": "UI relocation; existing backend APIs and credential/billing semantics unchanged",
+  "ui_checks": [
+    "Sidebar has one Settings link and no provider list or task-management form",
+    "Settings opens a new tab; original unsent chat draft preserved",
+    "Direct settings hash routes and browser Back navigation work",
+    "Provider cards and model prices load through existing configuration API",
+    "Appearance light/dark selection synchronizes with original chat tab and preserves draft",
+    "Local inventory task created and completed from Settings using temporary ledger and repository sample files",
+    "Narrow settings and task views fit actual 467 CSS-pixel viewport; navigation scrolls inside its own row",
+    "No warning/error console messages in checked Settings views",
+    "Production /settings loaded on local 0.1.24 after explicit tray start"
+  ],
+  "tests": {
+    "shared_worktree_web_admin_workspace": {
+      "run": 48,
+      "passed": 47,
+      "skipped": 1
+    },
+    "settings_only_candidate_web_admin_workspace": {
+      "run": 45,
+      "passed": 44,
+      "skipped": 1
+    },
+    "documentation": "passed",
+    "javascript_syntax": "passed"
+  },
+  "paid_model_calls": 0,
+  "limitations": [
+    "No new cloud-provider validation or paid requests",
+    "No new credential edits or production task submissions",
+    "Other concurrent modules, conversation and brand changes are outside this settings-only commit",
+    "Not a complete implementation of all proposed settings"
+  ],
+  "screenshots": [
+    "artifacts/diagnostics/jarvis-settings-2026-10-16.jpg"
+  ]
+}

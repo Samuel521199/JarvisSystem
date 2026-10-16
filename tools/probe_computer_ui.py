@@ -34,8 +34,7 @@ def main():
                     page=browser.new_page(viewport={'width':1360,'height':950})
                     page.on('pageerror',lambda error:errors.append(str(error)))
                     page.on('console',lambda message:errors.append(message.text) if message.type=='error' else None)
-                    page.goto('http://127.0.0.1:'+str(server.server_address[1]))
-                    page.locator('#computer-nav').click()
+                    page.goto('http://127.0.0.1:'+str(server.server_address[1])+'/settings#tasks')
                     page.locator('#task-mode').select_option('scripted')
                     page.locator('#queue-toggle').click()
                     expect(page.locator('#queue-toggle')).to_have_text('继续队列')
@@ -49,8 +48,7 @@ def main():
                     server.shutdown();server.server_close();thread.join(5)
                     server=module.create_server(core=core,port=0)
                     thread=threading.Thread(target=server.serve_forever,kwargs={'poll_interval':.02},daemon=True);thread.start()
-                    page.goto('http://127.0.0.1:'+str(server.server_address[1]))
-                    page.locator('#computer-nav').click()
+                    page.goto('http://127.0.0.1:'+str(server.server_address[1])+'/settings#tasks')
                     expect(page.locator('.task-row')).to_have_count(3)
                     expect(page.locator('#queue-toggle')).to_have_text('继续队列')
                     assert server.computer.queue.snapshot()['waiting']==2
@@ -58,13 +56,17 @@ def main():
                     page.locator('#task-result').get_by_text('页面已满足任务的成功条件，结果截图已保存。',exact=True).wait_for(timeout=30000)
                     page.locator('#task-image').wait_for(state='visible')
                     assert page.locator('#task-steps li').count()==4
-                    page.locator('#current-chat').click()
-                    assert page.locator('#chat-panel').is_visible()
-                    page.locator('#message').fill('保留在页面中的草稿')
-                    page.locator('#computer-nav').click()
-                    page.locator('#current-chat').click()
-                    assert page.locator('#message').input_value()=='保留在页面中的草稿'
-                    page.reload();page.locator('#computer-nav').click()
+                    chat=browser.new_page()
+                    chat.goto('http://127.0.0.1:'+str(server.server_address[1]))
+                    chat.locator('#message').fill('保留在页面中的草稿')
+                    with chat.expect_popup() as settings_popup:
+                        chat.locator('#settings-link').click()
+                    settings=settings_popup.value
+                    settings.get_by_role('button',name='后台任务',exact=True).click()
+                    expect(settings.locator('#task-list')).to_be_visible()
+                    assert chat.locator('#message').input_value()=='保留在页面中的草稿'
+                    settings.close();chat.close()
+                    page.reload()
                     page.locator('#task-image').wait_for(state='visible')
                     assert page.locator('.task-row').count()==3
                     page.screenshot(path=str(output/'desktop.png'),full_page=True)
