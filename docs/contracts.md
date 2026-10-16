@@ -18,8 +18,9 @@
   - [7.2.5 0.1.15 本机运行版本与临时目录契约](#runtime-slots-contract)
   - [7.2.6 0.1.14 旧版停止状态兼容消息](#recovery-contract)
   - [7.2.7 0.1.11 项目与文本导出接口](#project-workspace-contract)
-  - [7.2.8 0.1.12 单次聊天取消接口](#chat-cancel-contract)
-  - [7.2.9 模型后台配置与统计接口（0.1.19）](#model-admin-contract)
+  - [7.2.8 0.1.21 聊天附件接口](#chat-attachments-contract)
+  - [7.2.9 0.1.12 单次聊天取消接口](#chat-cancel-contract)
+  - [7.2.10 模型后台配置与统计接口（0.1.19）](#model-admin-contract)
 - [7.3 记忆组件的替换契约（proposed）](#memory-provider-contracts)
 - [7.4 接口与数据契约](#interfaces)
   - [7.4.1 模块生命周期](#interfaces-1)
@@ -180,14 +181,23 @@ HTTP 接入由 [server.py](../apps/web/server.py)校验本机 Host/Origin 和页
 | `POST /api/workspace/outputs/<request_id>` | 严格 `{content}`；只保存非空、无 NUL、至多 1 MiB 的 UTF-8 文本。保存端不接受另一个路径 |
 | `GET /api/workspace/outputs` | 最近 50 项回执：请求/项目 ID、最终路径、状态、字节数、SHA-256、时间及错误分类；不返回内容 |
 
-全部项目 GET/POST 要求原有 Host/Origin 检查与页面 nonce，POST 额外要求同源 Origin 和严格 JSON。路径受[项目保存边界](security-sovereignty.md#project-workspace-boundary)约束；保存内容的 JSON 体上限为 6 MiB + 1 KiB，用于容纳转义，解码后文本仍限 1 MiB；普通聊天上限不变。
+全部项目 GET/POST 要求原有 Host/Origin 检查与页面 nonce，POST 额外要求同源 Origin 和严格 JSON。路径受[项目保存边界](security-sovereignty.md#project-workspace-boundary)约束；保存内容的 JSON 体上限为 6 MiB + 1 KiB，用于容纳转义，解码后文本仍限 1 MiB；聊天附件的独立上限见[附件契约](#chat-attachments-contract)。
 
 导出回执为 `PREPARED → WRITING → SAVED / FAILED / UNKNOWN`。写前持久化 WRITING，查询将未确认 WRITING 显示为 UNKNOWN，崩溃后不重放。成功时同步写入、校验实际文件大小和摘要后才返回 SAVED；数据库与用户目录不声称跨资源原子事务。原请求重送相同内容只验证原文件并返回原回执，改路径/项目/内容拒绝；失败或 UNKNOWN 需核对后明确另存，不自动换请求。准备阶段的路径错误不调用模型；模型失败只留下准备记录，不创建交付文件。该回执库属于界面项目/导出元数据，不承接后台执行或取代核心任务账本。
+
+<a id="chat-attachments-contract"></a>
+### 0.1.21 聊天附件接口
+
+`POST /api/chat` 保留 `message/provider/history/model/reasoning`，增加可选 `attachments` 数组；不传附件的旧客户端继续有效。`history` 的 user 消息可含同名数组，assistant 不可含附件。仅接受两种严格对象：文本 `{kind: "text", name, text}`；图片 `{kind: "image", name, media_type, data}`，data 为无前缀标准 Base64，仅允许 PNG/JPEG/WebP。name 是展示名，禁止路径分隔符和控制字符；不接受文件路径、远端 URL、工具角色或任意字段。服务端复查类型、编码、文件签名及大小，不能只依赖网页校验。
+
+聊天 JSON 体上限 12 MiB；其他控制接口保留原有 128 KiB。每条最多 8 个附件，文本单个最多 48 KiB UTF-8；正文加展开后的文本附件最多 64 KiB。传入历史最多 20 条、32 KiB 展开文本；整个请求（含历史）最多 8 张图片、8 MiB 原始图片字节，单张最多 4 MiB。核心再按所选模型预算裁剪旧轮次，不将图片 Base64 误算为文字 token，也不忽略附件正文的输入占用。
+
+原生网关按接入方转换为 Responses input_image、Gemini inlineData、Anthropic image/source 或兼容聊天 image_url 的 data URL。能力未知或纯文本模型拒绝图片请求，自动路由跳过不兼容候选。日志仅保留完整请求摘要与数字计费信息，不保存附件正文或图片。对话的内存保存和恢复行为归[输入交互](interaction-persona.md#composer-attachments)。
 
 <a id="chat-cancel-contract"></a>
 ### 0.1.12 单次聊天取消接口
 
-网页 `POST /api/chat` 保持原有纯文本 JSON，新增可选头 `X-Jarvis-Request`（32 位小写十六进制随机 ID）；旧客户端不传该头仍可聊天。`POST /api/chat/cancel` 严格接受 `{request_id}`，要求原 Host、Origin、nonce 校验；只设置该 ID 的取消信号，不能提交全局停止、恢复或浏览器任务参数。取消接口不依赖核心仍处于运行状态。
+0.1.12 的网页 `POST /api/chat` 采用文本 JSON（0.1.21 的扩展见[附件契约](#chat-attachments-contract)），新增可选头 `X-Jarvis-Request`（32 位小写十六进制随机 ID）；旧客户端不传该头仍可聊天。`POST /api/chat/cancel` 严格接受 `{request_id}`，要求原 Host、Origin、nonce 校验；只设置该 ID 的取消信号，不能提交全局停止、恢复或浏览器任务参数。取消接口不依赖核心仍处于运行状态。
 
 返回 `CANCEL_REQUESTED` 仅证明服务收到信号，`FINISHED` 表示该请求处理已结束；两者都不能证明远端已撤销计费。取消先于聊天 POST 到达时保留取消标记，随后同 ID 不调用模型；重复聊天 ID 返回 409，不自动创建第二次生成。进程内最多保存 256 个控制句柄；未开始/已结束记录 10 分钟后可回收，正在处理的记录不淘汰。服务重启即失效，没有增加持久会话或另一套 Task 账本。
 

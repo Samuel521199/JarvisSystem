@@ -141,7 +141,7 @@ def vertex_auth(info: dict) -> tuple[str, str]:
 
 
 def build_request(provider: str, settings: dict, prompt: str, max_output: int, credentials: dict,
-                  history=None) -> tuple[str, dict, dict]:
+                  history=None, attachments=None) -> tuple[str, dict, dict]:
     if "models" in settings:
         settings = resolve_settings({"providers": {provider: settings}}, provider)
     model = settings["model"]
@@ -157,7 +157,11 @@ def build_request(provider: str, settings: dict, prompt: str, max_output: int, c
         else:
             credential = credentials.get(connection, {})
         credentials = {provider: credential}
-    messages = list(history or []) + [{"role": "user", "content": prompt}]
+    from .attachments import validate_message, wire_messages, image_capable, image_budget
+    source = [validate_message(m) for m in list(history or []) + [{"role": "user", "content": prompt, "attachments": attachments}]]
+    if image_budget(source)[1] and not image_capable(provider, model):
+        raise ModelError('model_does_not_support_images')
+    messages = wire_messages(source, provider)
     if provider in {"vertex", "gemini"}:
         if provider == "vertex":
             token, project = vertex_auth(credentials["vertex"]["service_account"])
@@ -167,8 +171,7 @@ def build_request(provider: str, settings: dict, prompt: str, max_output: int, c
             url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
             headers = {"x-goog-api-key": credentials[provider]["api_key"]}
         return url, headers, {
-            "contents": [{"role": "model" if m["role"] == "assistant" else "user",
-                          "parts": [{"text": m["content"]}]} for m in messages],
+            "contents": messages,
             "generationConfig": {"maxOutputTokens": max_output,
                                  "thinkingConfig": {"thinkingLevel": settings.get("thinking_level", "MINIMAL")}}}
     if provider == "openai":
@@ -252,24 +255,31 @@ def classify_http_error(status: int, body: bytes) -> tuple[str, str]:
 
 def probe(config: dict, provider: str, prompt: str, data_dir: Path, guard, *, client=None,
           credentials_loader=load, admission_context=nullcontext, deadline_seconds=60.0, history=None,
-          cancel_event=None) -> dict:
+          cancel_event=None, attachments=None) -> dict:
     guard()
     if provider == "auto":
         provider = config["default_provider"]
     if provider not in config["providers"]:
         raise ModelError("unknown_provider")
+    from .attachments import validate_message, text_size, image_budget, MAX_IMAGES_BYTES, MAX_ATTACHMENTS
     messages = [] if history is None else history
-    if (not isinstance(messages, list) or len(messages) > 40 or any(not isinstance(m, dict)
-            or set(m) != {"role", "content"} or m["role"] not in {"user", "assistant"}
-            or not isinstance(m["content"], str) for m in messages)):
+    if not isinstance(messages, list) or len(messages) > 40:
         raise ModelError("invalid_chat_history")
+    try:
+        messages = [validate_message(m) for m in messages]
+        current = validate_message({'role': 'user', 'content': prompt, 'attachments': attachments})
+    except (ValueError, TypeError, UnicodeError) as exc:
+        raise ModelError('invalid_chat_history_or_attachments') from exc
+    images_size, images_count = image_budget(messages + [current])
+    if images_size > MAX_IMAGES_BYTES or images_count > MAX_ATTACHMENTS:
+        raise ModelError('attachment_budget_exceeded')
     max_input = config.get("local_max_prompt_bytes", 4096) if provider == "local" else config["max_prompt_bytes"]
     if (not isinstance(prompt, str) or not prompt.strip()
-            or len(prompt.encode("utf-8")) + sum(len(m["content"].encode("utf-8")) for m in messages) > max_input):
+            or text_size(current) + sum(text_size(m) for m in messages) > max_input):
         raise ModelError("invalid_or_oversized_prompt")
     item = resolve_settings(config, provider)
     journal = ProbeJournal(data_dir / "model-probes.db")
-    ident = journal.reserve(provider, item["model"], json.dumps(messages + [{"role": "user", "content": prompt}], ensure_ascii=False))
+    ident = journal.reserve(provider, item["model"], json.dumps(messages + [current], ensure_ascii=False))
     started = time.monotonic()
     metadata = {"provider": provider, "model": item["model"], "request_id": ident}
     response_text = ""
@@ -344,7 +354,7 @@ def probe(config: dict, provider: str, prompt: str, data_dir: Path, guard, *, cl
         credentials = {} if adapter == "local" else credentials_loader()
         max_output = config.get("local_max_output_tokens", 256) if adapter == "local" else config["max_output_tokens"]
         max_output = item.get("max_output_tokens", max_output)
-        url, headers, payload = build_request(provider, item, prompt, max_output, credentials, history=messages)
+        url, headers, payload = build_request(provider, item, prompt, max_output, credentials, history=messages, attachments=attachments)
         # The same short core transaction serializes admission with stop. Once
         # committed this is in-flight, even before socket transmission completes.
         # Never hold that transaction while waiting for a remote response.

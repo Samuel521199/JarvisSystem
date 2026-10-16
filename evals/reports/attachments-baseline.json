@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "version": "0.1.21",
+  "captured_at": "2026-10-16T07:46:41.073847+00:00",
+  "status": "passed_with_documented_limits",
+  "paid_model_calls": 0,
+  "checks": [
+    {
+      "command": "python -m unittest discover -s tests -p test_attachments.py -q",
+      "tests": 14,
+      "passed": 14
+    },
+    {
+      "command": "python -m unittest discover -s tests -p test_models.py -q",
+      "tests": 24,
+      "passed": 24
+    },
+    {
+      "command": "python -m unittest discover -s tests -p test_web.py -q",
+      "tests": 20,
+      "passed": 20,
+      "note": "Includes two concurrent brand tests."
+    },
+    {
+      "command": "python -m unittest discover -s tests -p test_chat.py -q",
+      "tests": 18,
+      "passed": 18
+    },
+    {
+      "command": "node tests/attachments_ui.test.cjs",
+      "result": "passed"
+    },
+    {
+      "command": "python -m unittest discover -s tests -q",
+      "tests": 311,
+      "passed": 309,
+      "skipped": 2,
+      "note": "Shared working tree; includes concurrent brand and assistant-readiness changes."
+    },
+    {
+      "command": "python tools/check_docs.py --root .",
+      "exit_code": 0
+    },
+    {
+      "scope": "Isolated attachment-only candidate based on ff003b7",
+      "tests": 97,
+      "passed": 97,
+      "commands": [
+        "test_attachments",
+        "test_chat",
+        "test_models",
+        "test_web",
+        "test_preflight",
+        "test_runtime_start"
+      ],
+      "node_event_tests": "passed",
+      "docs": "passed"
+    }
+  ],
+  "browser_verified": [
+    "multiple file selection and image thumbnail",
+    "clipboard PNG paste",
+    "attachment-only draft saved to original session",
+    "new session clears attachment list",
+    "HTTP fixture receives actual text and image",
+    "stop restores submitted attachments",
+    "failure restores submitted attachments",
+    "stop preserves newer draft and offers original attachments recovery",
+    "no browser console errors",
+    "live 0.1.21 attachment controls and thumbnails; no paid send"
+  ],
+  "not_verified": [
+    "native file manager drag into browser (event handler covered offline)",
+    "live cloud image inference for each model",
+    "PDF/Office/archive/audio/video parsing",
+    "cross-browser behavior",
+    "full K1/K2/K3 acceptance"
+  ],
+  "protocol_sources": [
+    "https://developers.openai.com/api/docs/guides/images-vision",
+    "https://ai.google.dev/api/generate-content",
+    "https://platform.claude.com/docs/en/build-with-claude/vision",
+    "https://www.eachlabs.ai/eachlabs-llm-router"
+  ],
+  "live": {
+    "url": "http://127.0.0.1:18181/",
+    "version": "0.1.21",
+    "state": "standby",
+    "script_matches_source": true,
+    "screenshot": "artifacts/diagnostics/jarvis-attachments-2026-10-16.jpg"
+  }
+}

@@ -4,6 +4,7 @@ from __future__ import annotations
 from copy import deepcopy
 import re
 from .billing import validate_price
+from .attachments import image_capable
 
 MODEL_ID = re.compile(r"(?=.{1,128}$)[a-zA-Z0-9][a-zA-Z0-9._:-]*(?:/[a-zA-Z0-9][a-zA-Z0-9._:-]*)?")
 CONNECTION_ID = re.compile(r"[a-z][a-z0-9_-]{0,63}")
@@ -120,6 +121,7 @@ def public_models(config):
                 continue
             result.append({"provider": provider, "model": model, "label": entry.get("label", model),
                            "provider_label": settings.get("label", provider), "adapter": settings.get("adapter", provider),
+                           "image_input": image_capable(settings.get("adapter", provider), model),
                            "tier": entry.get("tier", "configured"), "is_provider_default": model == settings["model"],
                            "parameters": dict(entry.get("parameters", {})),
                            "reasoning_levels": list(entry.get("reasoning_levels", [])),

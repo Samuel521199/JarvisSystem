@@ -26,7 +26,7 @@
 
 | 状态 | 当前情况 |
 |---|---|
-| **已有可运行原型 · 0.1.20** | 新增[页面配色](interaction-persona.md#workbench-appearance)，保留[模型与费用后台](core-bootstrap.md#model-admin-entry)、Eachlabs Claude、托盘、任务恢复、项目根目录和会话停止；验证见[分版本证据](delivery-validation.md#versioned-evidence)。 |
+| **已有可运行原型 · 0.1.21** | 新增[拖拽附件与图片输入](interaction-persona.md#composer-attachments)，保留[页面配色](interaction-persona.md#workbench-appearance)，保留[模型与费用后台](core-bootstrap.md#model-admin-entry)、Eachlabs Claude、托盘、任务恢复、项目根目录和会话停止；验证见[分版本证据](delivery-validation.md#versioned-evidence)。 |
 | **下一步重点** | 按私人使用范围完成任务可靠性、离线与资源验收，随后推进 K2 工具循环、K3 开发协作；认证和全局监督延期，不再要求登记密钥。阶段状态见[推进表](core-bootstrap.md#next-implementation)。 |
 | **仍属设计目标** | 长期记忆、多设备共同体、自主编程发布、完整语音交互和 NPC 世界等完整能力尚未实现。 |
 

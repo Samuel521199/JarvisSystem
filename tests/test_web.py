@@ -274,7 +274,8 @@ class WebTests(unittest.TestCase):
         self.assertEqual([], self.chat.calls)
 
     def test_body_size_and_content_type_are_bounded(self):
-        self.assertEqual(413, self.request("POST", "/api/chat", raw=b"x" * (web.MAX_BODY_BYTES + 1))[0])
+        self.assertEqual(413, self.request("POST", "/api/chat", raw=b'', headers={'Content-Length': str(web.MAX_CHAT_BODY + 1)})[0])
+        self.assertEqual(413, self.request("POST", "/api/chat/cancel", raw=b'x' * (web.MAX_BODY_BYTES + 1))[0])
         self.assertEqual(415, self.request("POST", "/api/chat", headers={"Content-Type": "text/plain"})[0])
         self.assertEqual(400, self.request("POST", "/api/chat", headers={"Transfer-Encoding": "chunked"})[0])
         self.assertEqual([], self.chat.calls)

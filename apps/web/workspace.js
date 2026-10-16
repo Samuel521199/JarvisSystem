@@ -42,8 +42,8 @@
     controls();
   }
   function snapshot(){
-    if(!history.length&&!el("message").value.trim()&&!el("messages").querySelector(".message"))return;
-    sessions.set(activeId,{project,nodes:Array.from(el("messages").childNodes),history:history.map(x=>({...x})),draft:el("message").value,title:el("session-title").textContent,mode:el("file-mode").checked,path:el("output-path").value});
+    if(!history.length&&!el("message").value.trim()&&!el("messages").querySelector(".message")&&!Attachments.hasDraft())return;
+    sessions.set(activeId,{project,nodes:Array.from(el("messages").childNodes),history:history.map(x=>({...x})),draft:el("message").value,attachments:Attachments.snapshot(),title:el("session-title").textContent,mode:el("file-mode").checked,path:el("output-path").value});
   }
   function locationForProject(){window.history.replaceState(null,"",project?"#project="+project.id:location.pathname);}
   function newSession(next=project){
@@ -55,7 +55,7 @@
   function restore(id){
     if(busy||operationBusy||id===activeId)return;
     snapshot();const s=sessions.get(id);if(!s)return;
-    activeId=id;project=s.project;history=s.history.map(x=>({...x}));el("messages").replaceChildren(...s.nodes);el("message").value=s.draft;el("session-title").textContent=s.title;el("file-mode").checked=s.mode;el("output-path").value=s.path;notify("");providerHint();locationForProject();render();el("current-chat").click();
+    activeId=id;project=s.project;history=s.history.map(x=>({...x}));el("messages").replaceChildren(...s.nodes);el("message").value=s.draft;Attachments.restore(s.attachments);el("session-title").textContent=s.title;el("file-mode").checked=s.mode;el("output-path").value=s.path;notify("");providerHint();locationForProject();render();el("current-chat").click();
   }
   async function refreshProjects(){const data=await api("/api/workspace/projects");projects=data.projects;render();}
   function openDialog(){if(busy||operationBusy)return;el("project-error").textContent="";el("folder-path").value=project?.path||"";el("project-dialog").showModal();el("folder-path").focus();}

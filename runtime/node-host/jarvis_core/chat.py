@@ -1,4 +1,4 @@
-"""Text-only chat with explicit routing and bounded, caller-owned conversation history.
+"""Chat with explicit attachments, routing and bounded caller-owned history.
 
 No workspace retrieval, tool execution or persistent conversation store is used.
 The 90-second routing budget is cooperative; provider authentication may add its
@@ -21,6 +21,8 @@ if ADAPTER_PATH not in sys.path:
 from jarvis_models import gateway
 from jarvis_models.catalog import public_models, select_model, reasoning_value, resolve_settings
 from jarvis_models.registry import effective_config
+from jarvis_models.attachments import (validate_message, validate_attachments, text_size,
+    image_budget, image_capable, MAX_IMAGES_BYTES, MAX_ATTACHMENTS)
 
 PROVIDERS = ("vertex", "bailian", "openai", "xai", "local")
 MAX_HISTORY_MESSAGES = 20
@@ -36,7 +38,7 @@ RESULT_FIELDS.add("cancel_requested")
 RESULT_FIELDS.update({"billing", "billing_identity"})
 
 
-def bounded_history(history, *, max_bytes=MAX_HISTORY_BYTES):
+def bounded_history(history, *, max_bytes=MAX_HISTORY_BYTES, max_image_bytes=MAX_IMAGES_BYTES, max_images=MAX_ATTACHMENTS):
     """Return recent complete context; never reinterpret a history role as tools/system."""
     if history is None:
         history = []
@@ -45,21 +47,19 @@ def bounded_history(history, *, max_bytes=MAX_HISTORY_BYTES):
     result = []
     total_input = 0
     for item in history:
-        if (not isinstance(item, dict) or set(item) != {"role", "content"}
-                or item["role"] not in {"user", "assistant"} or not isinstance(item["content"], str)):
-            raise ValueError("历史只接受 user/assistant 的纯文本消息。")
-        total_input += len(item["content"].encode("utf-8"))
+        item = validate_message(item)
+        total_input += text_size(item)
         if total_input > 262144:
             raise ValueError("传入历史过大，请清空或缩短会话。")
-        result.append({"role": item["role"], "content": item["content"]})
+        result.append(item)
     original = len(result)
     result = result[-MAX_HISTORY_MESSAGES:]
-    size = sum(len(item["content"].encode("utf-8")) for item in result)
-    while result and size > max(0, min(max_bytes, MAX_HISTORY_BYTES)):
-        size -= len(result.pop(0)["content"].encode("utf-8"))
+    size = sum(text_size(item) for item in result)
+    while result and (size > max(0, min(max_bytes, MAX_HISTORY_BYTES)) or image_budget(result)[0] > max_image_bytes or image_budget(result)[1] > max_images):
+        size -= text_size(result.pop(0))
     # Avoid leaving the assistant half of an older turn at the beginning.
     while result and result[0]["role"] == "assistant":
-        size -= len(result.pop(0)["content"].encode("utf-8"))
+        size -= text_size(result.pop(0))
     return result, {"input_messages": original, "kept_messages": len(result),
                     "dropped_messages": original - len(result), "truncated": original != len(result),
                     "kept_bytes": size, "max_messages": MAX_HISTORY_MESSAGES,
@@ -130,7 +130,7 @@ class ChatService:
                 "cancel_requested": True, "outcome_uncertain": uncertain,
                 "user_message": "已停止本次生成，后续输出不再采用；已接收的远端请求可能仍有用量。"}
 
-    def reply(self, message, provider="auto", history=None, model=None, reasoning=None, cancel_event=None):
+    def reply(self, message, provider="auto", history=None, model=None, reasoning=None, cancel_event=None, attachments=None):
         attempts, notice = [], []
         info = {"input_messages": 0, "kept_messages": 0, "dropped_messages": 0, "truncated": False}
         if cancel_event is not None and cancel_event.is_set():
@@ -142,7 +142,10 @@ class ChatService:
             config = effective_config(self.config_path, self.core.data_dir)
             if not isinstance(message, str) or not message.strip():
                 raise ValueError("请输入非空文本。")
-            message_bytes = len(message.encode("utf-8"))
+            attachments = validate_attachments(attachments)
+            current = {'role': 'user', 'content': message, 'attachments': attachments}
+            message_bytes = text_size(current)
+            current_image_bytes, current_images = image_budget([current])
             if message_bytes > min(config["max_prompt_bytes"], MAX_MESSAGE_BYTES):
                 raise ValueError("消息超过输入字节上限，请缩短内容。")
             if provider != "auto" and provider not in config["providers"]:
@@ -165,6 +168,14 @@ class ChatService:
                 routes = [provider]
             if not routes:
                 raise ValueError("没有可用的模型路由配置。")
+            if current_images or image_budget(base_history)[1]:
+                compatible_routes = [r for r in routes if image_capable(config['providers'][r].get('adapter', r), config['providers'][r]['model'])]
+                if not compatible_routes:
+                    return self._package(self._failure('invalid_request', 'image_model_required',
+                        '本轮或历史包含图片；请选择支持图片的模型，或新建会话后使用纯文本模型。'), attempts, notice, info)
+                if compatible_routes != routes:
+                    notice.append('本轮含图片，自动路由已跳过未接通图片输入的模型。')
+                routes = compatible_routes
         except (ValueError, OSError, KeyError, TypeError, gateway.ModelError):
             result = self._failure("invalid_request", "invalid_chat_input_or_configuration",
                                    "消息、历史、模型选择或配置无效；请检查长度与可用模型。")
@@ -188,7 +199,8 @@ class ChatService:
                 result = self._failure("invalid_request", "selected_model_input_limit",
                                        "当前消息超过所选模型的输入上限；未发送，请缩短消息或选择其他模型。", selected, model)
                 return self._package(result, attempts, notice, info)
-            selected_history, selected_info = bounded_history(base_history, max_bytes=limit - message_bytes)
+            selected_history, selected_info = bounded_history(base_history, max_bytes=limit - message_bytes,
+                max_image_bytes=MAX_IMAGES_BYTES-current_image_bytes, max_images=MAX_ATTACHMENTS-current_images)
             info = {**selected_info, "input_messages": base_info["input_messages"],
                     "dropped_messages": base_info["input_messages"] - len(selected_history),
                     "truncated": base_info["input_messages"] != len(selected_history)}
@@ -198,6 +210,7 @@ class ChatService:
                 response = gateway.probe(config, selected, message, Path(self.core.data_dir), self.core.assert_running,
                                          admission_context=self.core.effect_guard,
                                          deadline_seconds=min(ATTEMPT_DEADLINE_SECONDS, remaining), history=selected_history,
+                                         **({'attachments': attachments} if attachments else {}),
                                          **({"cancel_event": cancel_event} if cancel_event is not None else {}))
                 if not isinstance(response, dict) or response.get("status") not in {"SUCCEEDED", "FAILED", "UNKNOWN", "CANCELLED"}:
                     raise ValueError("Invalid gateway result")

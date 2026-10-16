@@ -16,6 +16,9 @@ import time
 from urllib.parse import urlsplit, parse_qs
 
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / 'adapters/models/provider-native'))
+from jarvis_models.attachments import (validate_message, validate_attachments, text_size,
+    image_budget, MAX_CHAT_BODY, MAX_IMAGES_BYTES, MAX_ATTACHMENTS)
 INDEX_PATH = Path(__file__).with_name("index.html")
 MAX_BODY_BYTES = 131072
 MAX_MESSAGE_BYTES = 65536
@@ -83,7 +86,7 @@ def strict_json(data):
 
 
 def validate_chat(payload):
-    if not isinstance(payload, dict) or set(payload) - {"message", "provider", "history", "model", "reasoning"}:
+    if not isinstance(payload, dict) or set(payload) - {"message", "provider", "history", "model", "reasoning", "attachments"}:
         raise ValueError("invalid request fields")
     message = payload.get("message")
     if not isinstance(message, str) or not message.strip() or len(message.encode("utf-8")) > MAX_MESSAGE_BYTES:
@@ -102,14 +105,18 @@ def validate_chat(payload):
     if not isinstance(history, list) or len(history) > 20:
         raise ValueError("invalid history")
     size = 0
+    attachments = validate_attachments(payload.get('attachments'))
+    current = {'content': message, 'attachments': attachments}
+    if text_size(current) > MAX_MESSAGE_BYTES:
+        raise ValueError('message and text attachments too large')
     for item in history:
-        if not isinstance(item, dict) or set(item) != {"role", "content"}:
-            raise ValueError("invalid history item")
-        if item["role"] not in {"user", "assistant"} or not isinstance(item["content"], str):
-            raise ValueError("invalid history role/content")
-        size += len(item["content"].encode("utf-8"))
+        item = validate_message(item)
+        size += text_size(item)
     if size > MAX_HISTORY_BYTES:
         raise ValueError("history too large")
+    image_bytes, image_count = image_budget(history + [current])
+    if image_bytes > MAX_IMAGES_BYTES or image_count > MAX_ATTACHMENTS:
+        raise ValueError('image budget exceeded')
     return message, provider, history, model, reasoning
 
 
@@ -138,9 +145,11 @@ class LocalChatServer(ThreadingHTTPServer):
         self.reply_timeout = reply_timeout
         self.theme_style = INDEX_PATH.with_name('theme.css').read_bytes()
         self.theme_script = INDEX_PATH.with_name('theme.js').read_bytes()
+        self.attachments_script = INDEX_PATH.with_name('attachments.js').read_bytes()
         # One fixed static file; never derive filesystem paths from a request.
         self.html = INDEX_PATH.read_bytes().replace(b"__JARVIS_WORKSPACE_STYLE__", INDEX_PATH.with_name('workspace.css').read_bytes()).replace(b"__JARVIS_NONCE__", self.nonce.encode("ascii")).replace(b'__JARVIS_VERSION__',version.encode('ascii')).replace(b'__JARVIS_THEME_STYLE__', self.theme_style)
         self.computer_script = INDEX_PATH.with_name('computer.js').read_bytes()
+        self.html = self.html.replace(b'__JARVIS_ATTACHMENTS_STYLE__', INDEX_PATH.with_name('attachments.css').read_bytes())
         self.workspace_script = INDEX_PATH.with_name('workspace.js').read_bytes()
         self.admin_html = INDEX_PATH.with_name('admin.html').read_bytes().replace(b'__JARVIS_ADMIN_STYLE__', INDEX_PATH.with_name('admin.css').read_bytes()).replace(b'__JARVIS_NONCE__', self.nonce.encode('ascii')).replace(b'__JARVIS_VERSION__', version.encode('ascii')).replace(b'__JARVIS_THEME_STYLE__', self.theme_style)
         self.admin_script = INDEX_PATH.with_name('admin.js').read_bytes()
@@ -278,6 +287,8 @@ class ChatHandler(BaseHTTPRequestHandler):
             return
         if self.path == "/theme.js":
             self._send(200, self.server.theme_script, "application/javascript; charset=utf-8")
+        elif self.path == '/attachments.js':
+            self._send(200, self.server.attachments_script, 'application/javascript; charset=utf-8')
         elif self.path in {"/admin", "/admin/"}:
             self._send(200, self.server.admin_html, "text/html; charset=utf-8")
         elif self.path == "/admin.js":
@@ -372,7 +383,7 @@ class ChatHandler(BaseHTTPRequestHandler):
             self._error(400, "invalid_request", "请求长度无效。")
             return
         size = int(lengths[0])
-        body_limit = 6 * 1024 * 1024 + 1024 if workspace_save else MAX_BODY_BYTES
+        body_limit = MAX_CHAT_BODY if self.path == '/api/chat' else 6 * 1024 * 1024 + 1024 if workspace_save else MAX_BODY_BYTES
         if not 0 < size <= body_limit:
             self._error(413, "request_too_large", "消息和历史合计过长，请清空部分对话后重试。")
             return
@@ -459,6 +470,8 @@ class ChatHandler(BaseHTTPRequestHandler):
                     selection["reasoning"] = reasoning
                 if cancel_event is not None:
                     selection['cancel_event'] = cancel_event
+                if payload.get('attachments'):
+                    selection['attachments'] = payload['attachments']
                 result = self.server.chat.reply(message, provider=provider, history=history, **selection)
                 if cancel_event is not None and cancel_event.is_set():
                     result = {'status': 'CANCELLED', 'cancel_requested': True,

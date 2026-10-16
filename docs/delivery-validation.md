@@ -1,6 +1,6 @@
 # 能力验收、故障演练与评估证据
 
-> 状态：完整验收计划 proposed；当前 0.1.20 页面配色子集；历史 0.1.0—0.1.19 局部实测分开登记 · 更新：2026-10-16
+> 状态：完整验收计划 proposed；当前 0.1.21 附件输入子集；历史 0.1.0—0.1.20 局部实测分开登记 · 更新：2026-10-16
 > [文档入口](README.md) · [维护规则](MAINTENANCE.md) · [架构图册](architecture-atlas.md)
 
 <!-- book-nav:start -->
@@ -9,30 +9,31 @@
 ## 本章导航
 
 - [16.1 已有版本的验证记录](#versioned-evidence)
-  - [16.1.1 0.1.20 页面配色与偏好记忆](#appearance-evidence)
-  - [16.1.2 0.1.19 模型配置、Key 版本与费用估算](#model-admin-evidence)
-  - [16.1.3 0.1.18 环境：Eachlabs Claude 独立小额探测](#eachlabs-claude-evidence)
-  - [16.1.4 0.1.18 Windows 托盘与含托盘的待命资源](#tray-evidence)
-  - [16.1.5 0.1.17 任务崩溃矩阵与程序出站阻断恢复](#task-fault-network-evidence)
-  - [16.1.6 0.1.17 本机部署、五分钟待命与代码仓库基线](#local-deployment-idle-evidence)
-  - [16.1.7 0.1.17 启动前健康检查与备用版本恢复](#runtime-start-evidence)
-  - [16.1.8 0.1.16 队列内存准入与短时竞争](#resource-admission-evidence)
-  - [16.1.9 0.1.15 浏览器回收、版本回退与前台响应](#runtime-continuity-evidence)
-  - [16.1.10 0.1.14 私人助手待命与会话停止](#personal-lifecycle-evidence)
-  - [16.1.11 0.1.13 K1 队列、登记回收与候选运行包](#k1-progress-evidence)
-  - [16.1.12 0.1.12 运行中的发送/停止按钮](#chat-stop-evidence)
-  - [16.1.13 0.1.11 项目文件夹与默认文本输出](#project-workspace-evidence)
-  - [16.1.14 0.1.10 浏览器持久后台队列](#computer-queue-evidence)
-  - [16.1.15 0.1.9 网页浏览器任务控制台](#computer-console-evidence)
-  - [16.1.16 0.1.8 独立浏览器 Computer Use](#computer-evidence)
-  - [16.1.17 0.1.7 K1/W3 固定元数据 Worker](#worker-evidence)
-  - [16.1.18 0.1.6 K1/W2 独立控制、签名恢复与默认实例迁移](#control-evidence)
-  - [16.1.19 0.1.5 K1/W1 只读运行预检](#preflight-evidence)
-  - [16.1.20 0.1.4 Google Pro 与轻量模型验证](#google-models-evidence)
-  - [16.1.21 0.1.3 统一模型菜单与推理级别历史验证](#web-workspace-evidence)
-  - [16.1.22 0.1.2 模型目录与迁移历史验证](#model-catalog-evidence)
-  - [16.1.23 0.1.1 聊天与模型路由历史验证](#chat-evidence)
-  - [16.1.24 K0 起步的历史验证记录](#k0-evidence)
+  - [16.1.1 0.1.21 拖拽附件与图片输入](#attachments-evidence)
+  - [16.1.2 0.1.20 页面配色与偏好记忆](#appearance-evidence)
+  - [16.1.3 0.1.19 模型配置、Key 版本与费用估算](#model-admin-evidence)
+  - [16.1.4 0.1.18 环境：Eachlabs Claude 独立小额探测](#eachlabs-claude-evidence)
+  - [16.1.5 0.1.18 Windows 托盘与含托盘的待命资源](#tray-evidence)
+  - [16.1.6 0.1.17 任务崩溃矩阵与程序出站阻断恢复](#task-fault-network-evidence)
+  - [16.1.7 0.1.17 本机部署、五分钟待命与代码仓库基线](#local-deployment-idle-evidence)
+  - [16.1.8 0.1.17 启动前健康检查与备用版本恢复](#runtime-start-evidence)
+  - [16.1.9 0.1.16 队列内存准入与短时竞争](#resource-admission-evidence)
+  - [16.1.10 0.1.15 浏览器回收、版本回退与前台响应](#runtime-continuity-evidence)
+  - [16.1.11 0.1.14 私人助手待命与会话停止](#personal-lifecycle-evidence)
+  - [16.1.12 0.1.13 K1 队列、登记回收与候选运行包](#k1-progress-evidence)
+  - [16.1.13 0.1.12 运行中的发送/停止按钮](#chat-stop-evidence)
+  - [16.1.14 0.1.11 项目文件夹与默认文本输出](#project-workspace-evidence)
+  - [16.1.15 0.1.10 浏览器持久后台队列](#computer-queue-evidence)
+  - [16.1.16 0.1.9 网页浏览器任务控制台](#computer-console-evidence)
+  - [16.1.17 0.1.8 独立浏览器 Computer Use](#computer-evidence)
+  - [16.1.18 0.1.7 K1/W3 固定元数据 Worker](#worker-evidence)
+  - [16.1.19 0.1.6 K1/W2 独立控制、签名恢复与默认实例迁移](#control-evidence)
+  - [16.1.20 0.1.5 K1/W1 只读运行预检](#preflight-evidence)
+  - [16.1.21 0.1.4 Google Pro 与轻量模型验证](#google-models-evidence)
+  - [16.1.22 0.1.3 统一模型菜单与推理级别历史验证](#web-workspace-evidence)
+  - [16.1.23 0.1.2 模型目录与迁移历史验证](#model-catalog-evidence)
+  - [16.1.24 0.1.1 聊天与模型路由历史验证](#chat-evidence)
+  - [16.1.25 K0 起步的历史验证记录](#k0-evidence)
 - [16.2 下一轮 K1/K2 出口验收计划](#next-k1-acceptance)
   - [16.2.1 K1 出口：确定性控制与后台执行](#section-adaf0d5fff7c)
   - [16.2.2 K2 出口：自然语言、知识与技能闭环](#next-k2-acceptance)
@@ -62,6 +63,13 @@
 
 <a id="versioned-evidence"></a>
 ## 已有版本的验证记录
+
+<a id="attachments-evidence"></a>
+### 0.1.21 拖拽附件与图片输入
+
+[输入区附件规则](interaction-persona.md#composer-attachments)与[传输契约](contracts.md#chat-attachments-contract)已实现，检查登记于[附件验收记录](../evals/reports/attachments-baseline.json)。使用合成文本、图片和不支持格式，在隔离页面核对文件选择、截图粘贴、附件显示、会话隔离、实际 POST 接收、停止恢复及失败反馈；拖拽事件、读取期间移除、数量上限与新草稿保留另用离线 JavaScript 事件测试覆盖。
+
+原生多模态请求结构使用离线模拟传输验证，核对文本正文与图片字节均进入请求、纯文本模型拒绝图片、回退不丢图、总量检查及日志不保存内容。本轮不产生付费模型调用；不声称已对所有云模型完成图片识别实测。操作系统文件管理器到浏览器的真实拖拽、PDF/Office 解析与跨浏览器兼容仍未验证，完整 K1/K2/K3 出口不变。
 
 <a id="appearance-evidence"></a>
 ### 0.1.20 页面配色与偏好记忆
