@@ -123,7 +123,7 @@ def summarize(samples, ready_seconds):
             'peak_working_bytes': max(sum(p['working_bytes'] for p in s['processes']) for s in samples)}
 
 
-def host(base):
+def host(base, with_tray=False):
     from jarvis_core.service import CoreService
     from server import create_server
     sample = base/'input'; sample.mkdir()
@@ -131,11 +131,19 @@ def host(base):
     server = create_server(core=core, port=0)
     thread = threading.Thread(target=server.serve_forever, kwargs={'poll_interval': .2}, daemon=True)
     thread.start()
+    tray = None
     try:
-        print(json.dumps({'pid': os.getpid(), 'port': server.server_address[1]}), flush=True)
+        if with_tray:
+            sys.path.insert(0, str(ROOT/'apps/tray'))
+            from companion import TrayCompanion
+            tray = TrayCompanion(server, core.data_dir)
+        print(json.dumps({'pid': os.getpid(), 'port': server.server_address[1], 'tray': with_tray}), flush=True)
         sys.stdin.readline()
     finally:
-        server.shutdown(); thread.join(timeout=5); server.server_close()
+        server.shutdown(); thread.join(timeout=5)
+        try: server.server_close()
+        finally:
+            if tray: tray.close()
 
 
 def main():
@@ -143,10 +151,11 @@ def main():
     parser.add_argument('--host', type=Path, help=argparse.SUPPRESS)
     parser.add_argument('--seconds', type=float, default=300)
     parser.add_argument('--interval', type=float, default=5)
+    parser.add_argument('--tray', action='store_true', help='Include the real Windows notification-area companion')
     parser.add_argument('--output', type=Path, default=ROOT/'evals/reports/idle-resources.json')
     args = parser.parse_args()
     if os.name != 'nt': parser.error('This probe requires Windows')
-    if args.host: host(args.host); return 0
+    if args.host: host(args.host, args.tray); return 0
     if not 1 <= args.seconds <= 3600 or not 0.1 <= args.interval <= 10:
         parser.error('seconds must be 1..3600; interval must be 0.1..10')
     reader = WindowsProcesses()
@@ -159,7 +168,9 @@ def main():
         with tempfile.TemporaryDirectory(prefix='jarvis-idle-probe-') as temporary:
             with tempfile.TemporaryFile() as stderr:
                 begin = time.monotonic()
-                child = subprocess.Popen([sys.executable, '-I', '-B', str(Path(__file__).resolve()), '--host', temporary],
+                command = [sys.executable, '-I', '-B', str(Path(__file__).resolve()), '--host', temporary]
+                if args.tray: command.append('--tray')
+                child = subprocess.Popen(command,
                     stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=stderr, text=True, encoding='utf-8',
                     creationflags=subprocess.CREATE_NO_WINDOW)
                 try:
@@ -198,6 +209,9 @@ def main():
         'tools/probe_idle_resources.py', 'apps/web/server.py', 'runtime/node-host/jarvis_core/resources.py',
         'runtime/node-host/jarvis_core/task_queue.py',
         'adapters/computer-use/jarvis_computer/task_queue.py')}
+    if args.tray:
+        report['source_sha256'].update({p: hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in (
+            'apps/tray/companion.py','apps/tray/tray.ps1','apps/tray/TrayApplication.cs')})
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
     print(json.dumps({'status': report['status'], 'summary': report.get('summary'), 'error': report.get('error'), 'report': str(args.output)}))

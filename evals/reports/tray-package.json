@@ -1,0 +1,36 @@
+{
+  "version": "0.1.18",
+  "captured_at": "2026-10-16T02:52:04.593171+00:00",
+  "package_sha256": "b737237dba5b4bdee7b40014778af04b0bd98fc77cd4db2a91656b05309bcf87",
+  "status": "passed",
+  "runtime_sources_match": true,
+  "status_response": {
+    "app": "Jarvis",
+    "version": "0.1.18",
+    "instance_id": "34ea6ec41b7ed11990de00e33a8699f2",
+    "web_online": true,
+    "core_ready": true,
+    "stopped": false,
+    "assistant_state": "standby",
+    "active_tasks": 0,
+    "text_only": false,
+    "chat_text_only": true,
+    "computer_tasks": true,
+    "max_parallel_requests": 2,
+    "active_chat_requests": 0
+  },
+  "tray": {
+    "instance_id": "34ea6ec41b7ed11990de00e33a8699f2",
+    "version": "0.1.18",
+    "state": "standby",
+    "label": "待命中",
+    "tray_pid": 43076,
+    "owner_pid": 41652,
+    "icon_visible": true,
+    "changed_at": "2026-10-16T02:52:09.5444283Z",
+    "url": "http://127.0.0.1:63696/"
+  },
+  "exit_code": 0,
+  "host_log": "Jarvis: http://127.0.0.1:63696 (projects, chat and browser tasks; Ctrl+C closes this web service)\n",
+  "limits": "Real bundled Python/Windows Forms on this development PC; no cloud requests, machine-wide offline, long-running watchdog or real user data."
+}

@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
+import os
 from pathlib import Path
 import queue
 import re
@@ -127,6 +128,8 @@ class LocalChatServer(ThreadingHTTPServer):
         self.chat = chat
         self.computer = computer
         self.workspace = workspace
+        self.version = version
+        self.instance_id = secrets.token_hex(16)
         self.nonce = secrets.token_urlsafe(32)
         self.slots = threading.BoundedSemaphore(2)
         self.chat_requests = ChatRequests()
@@ -297,11 +300,13 @@ class ChatHandler(BaseHTTPRequestHandler):
                 queue_state = self.server.computer.queue.snapshot() if self.server.computer else {"running": []}
                 active_tasks = len(queue_state["running"])
                 assistant_state = "working" if self.server.chat_requests.active or active_tasks else "standby"
-                self._send(200, {"web_online": True, "core_ready": True, "stopped": False,
+                self._send(200, {"app": "Jarvis", "version": self.server.version, "instance_id": self.server.instance_id,
+                                 "web_online": True, "core_ready": True, "stopped": False,
                                  "assistant_state": assistant_state, "active_tasks": active_tasks,
                                  "text_only": self.server.computer is None, "chat_text_only":True, "computer_tasks":self.server.computer is not None, "max_parallel_requests": 2, "active_chat_requests": self.server.chat_requests.active})
             except Exception:
-                self._send(200, {"web_online": True, "core_ready": False, "stopped": True,
+                self._send(200, {"app": "Jarvis", "version": self.server.version, "instance_id": self.server.instance_id,
+                                 "web_online": True, "core_ready": False, "stopped": True,
                                  "assistant_state": "needs_attention",
                                  "text_only": self.server.computer is None, "chat_text_only":True, "computer_tasks":self.server.computer is not None, "max_parallel_requests": 2,
                                  "user_message": "核心未就绪或已停止。"})
@@ -470,15 +475,23 @@ def main(argv=None):
     parser.add_argument("--data-dir", type=Path)
     parser.add_argument("--config", type=Path)
     parser.add_argument("--port", type=int, default=18181)
+    parser.add_argument("--no-tray", action="store_true", help="Run without the Windows notification-area icon")
     args = parser.parse_args(argv)
     server = create_server(data_dir=args.data_dir, config_path=args.config, port=args.port)
     print(f"Jarvis: http://127.0.0.1:{server.server_address[1]} (projects, chat and browser tasks; Ctrl+C closes this web service)", flush=True)
+    tray = None
     try:
+        if os.name == 'nt' and not args.no_tray:
+            sys.path.insert(0, str(ROOT/'apps/tray'))
+            from companion import TrayCompanion
+            tray = TrayCompanion(server, server.core.data_dir)
         server.serve_forever(poll_interval=0.2)
     except KeyboardInterrupt:
         pass
     finally:
-        server.server_close()
+        try: server.server_close()
+        finally:
+            if tray: tray.close()
     return 0
 
 

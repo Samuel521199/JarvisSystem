@@ -26,7 +26,7 @@
 
 | 状态 | 当前情况 |
 |---|---|
-| **已有可运行原型 · 0.1.17** | 当前网页服务可用，已补充[任务崩溃与程序禁网恢复实测](delivery-validation.md#task-fault-network-evidence)及[五分钟待命](delivery-validation.md#local-deployment-idle-evidence)；保留[启动前检查与故障回退](core-bootstrap.md#runtime-startup-recovery)、内存等待和会话停止。 |
+| **已有可运行原型 · 0.1.18** | 新增[Windows 右下角托盘](core-bootstrap.md#windows-tray-entry)，可查看状态、打开界面和退出当前助手；验证见[托盘与待命资源](delivery-validation.md#tray-evidence)。保留任务恢复、项目根目录和会话停止。 |
 | **下一步重点** | 按私人使用范围完成任务可靠性、离线与资源验收，随后推进 K2 工具循环、K3 开发协作；认证和全局监督延期，不再要求登记密钥。阶段状态见[推进表](core-bootstrap.md#next-implementation)。 |
 | **仍属设计目标** | 长期记忆、多设备共同体、自主编程发布、完整语音交互和 NPC 世界等完整能力尚未实现。 |
 

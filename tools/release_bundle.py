@@ -37,8 +37,9 @@ def archive_path(value):
 
 
 def source_files():
-    selected=['pyproject.toml','uv.lock','README.md','tools/release_bundle.py','tools/runtime_releases.py']
-    extensions={'.py','.json','.toml','.lock','.html','.css','.js','.md','.mmd','.txt','.ps1'}
+    selected=['pyproject.toml','uv.lock','README.md','tools/release_bundle.py','tools/runtime_releases.py',
+              'apps/tray/assets/jarvis.ico']
+    extensions={'.py','.json','.toml','.lock','.html','.css','.js','.md','.mmd','.txt','.ps1','.cs'}
     for folder in ('runtime','apps','adapters','config','contracts','seed','docs','tests/fixtures/workspace'):
         for path in (ROOT/folder).rglob('*'):
             if path.is_file() and path.suffix in extensions and '__pycache__' not in path.parts:

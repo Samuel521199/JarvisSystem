@@ -220,6 +220,8 @@ Local-first 和 CRDT 支持数据组织思路，不能证明共享记忆产生�
 | <a id="s128"></a>[S128](https://learn.microsoft.com/en-us/windows/win32/api/sysinfoapi/ns-sysinfoapi-memorystatusex) | Windows 物理可用内存和当前进程提交余量；[读取 API](https://learn.microsoft.com/en-us/windows/win32/api/sysinfoapi/nf-sysinfoapi-globalmemorystatusex)、[进程计数](https://learn.microsoft.com/en-us/windows/win32/api/psapi/ns-psapi-process_memory_counters_ex) | 快照易变；不能视为实际预留、浏览器限额或其他进程峰值 |
 | <a id="s129"></a>[S129](https://learn.microsoft.com/en-us/powershell/module/netsecurity/new-netfirewallrule?view=windowsserver2022-ps) | Windows 防火墙 Program、Outbound、Block 与配置文件范围 | 本机探测只为临时包的 4 个可执行文件设规则，实测阻断并清理；不是整机断网或 Host 安全隔离 |
 | <a id="s130"></a>[S130](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/start-process?view=powershell-5.1) | Start-Process 的 RunAs、WindowStyle 与参数传递 | 通过正常 UAC 提权固定防火墙脚本；不能根据桌面应用身份推定工具子进程已有管理员权限 |
+| <a id="s131"></a>[S131](https://learn.microsoft.com/en-us/dotnet/api/system.windows.forms.notifyicon) | Windows Forms NotifyIcon 的图标、悬浮文字、右键菜单、双击与释放 | 0.1.18 使用系统组件实现轻量托盘；图标所在的常显/隐藏区域由 Windows 设置决定，不等同于完整桌面壳 |
+| <a id="s132"></a>[S132](https://learn.microsoft.com/en-us/dotnet/api/system.threading.eventwaithandle.openexisting) | 打开已存在的命名事件 | 本实例桌面退出信号；命名对象不代表对同一 OS 用户代码的安全隔离，也不新增密码或恢复认证 |
 
 <a id="codex-workbench-sources"></a>
 ## Codex 工作台与交互参考（2026-10-15 核验）

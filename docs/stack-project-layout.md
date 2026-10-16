@@ -1,6 +1,6 @@
 # 技术栈、源码目录与运行数据
 
-> 状态：完整目录与架构 proposed；0.1.17 当前实现与历史基线分开记录 · 更新：2026-10-16  
+> 状态：完整目录与架构 proposed；0.1.18 当前实现与历史基线分开记录 · 更新：2026-10-16
 > [文档入口](README.md) · [维护规则](MAINTENANCE.md) · [架构图册](architecture-atlas.md)
 
 <!-- book-nav:start -->
@@ -22,7 +22,7 @@
   - [8.2.2 记忆框架：复用算法和接口，不交出数据所有权](#section-31d166a591e4)
   - [8.2.3 冻结选型的依据与成本](#section-9f65cb73fb32)
 - [8.3 项目文件结构与依赖规则](#project-structure)
-  - [8.3.1 当前实际落地范围（0.1.17）](#implemented-layout)
+  - [8.3.1 当前实际落地范围（0.1.18）](#implemented-layout)
   - [8.3.2 推荐源码结构](#project-structure-1)
   - [8.3.3 单个模块模板](#project-structure-2)
   - [8.3.4 运行数据结构](#project-structure-3)
@@ -82,6 +82,7 @@
 | 选择 | 适用范围 | 采用条件 |
 |---|---|---|
 | 现有本地网页＋本机服务 | 侧栏、项目/会话、输入区、任务、模型选择与文件/产物视图 | 首选；复用当前 ModelGateway、任务账本和安全入口；输入框切换模式不新增执行权威 |
+| 本机服务＋轻量 Windows 托盘 | 0.1.18 已实现通知区域状态、打开网页和明确退出当前实例 | 使用系统 Windows Forms/PowerShell，测量实际进程开销；不引入第二套前端或 Tauri 安装依赖，范围见[托盘使用](core-bootstrap.md#windows-tray-entry) |
 | 同一前端＋可选桌面壳 | 原生目录选择、托盘、窗口管理、快捷键和系统集成 | 有实际需求后评估 Tauri 等现有候选 [S20](references.md#s20)，记录安装与内存差值；壳不嵌入模型权重、不替代独立监督 |
 | 单独重写“Codex 克隆”再接后端 | 会形成两套界面和状态接入 | 当前不采用；可复用公开交互模式，源码和资产复用必须另核许可，不能推定 Codex 桌面壳公开 |
 
@@ -195,7 +196,7 @@ K0—K1 在同一目标硬件上比较不超过两个底座候选，先验证确
 本页是源码和运行数据目录的唯一权威；所有领域、工具链与健康维护目录已合并。完整树是实现的放置规范，当前已落地以下种子原型、聊天/模型选择、预检、独立控制、固定 Worker 及 网页浏览器队列及 0.1.11 项目文本保存子集，其余目录按阶段创建。
 
 <a id="implemented-layout"></a>
-### 当前实际落地范围（0.1.17）
+### 当前实际落地范围（0.1.18）
 
 模型协议由 `jarvis_models/gateway.py` 实现；新增 `jarvis_models/catalog.py` 管理同提供商多模型及受限参数档案，目录数据只在 `config/model-profiles/providers.json` 维护。
 
@@ -222,6 +223,9 @@ K0—K1 在同一目标硬件上比较不超过两个底座候选，先验证确
 | `runtime/node-host/jarvis_core/preflight.py`、`config/runtime-boundaries.json` | 只读诊断实现与当前角色/资源访问声明；声明不授予权限，也不是监督器部署证据 |
 | `tests/test_preflight.py`、`tests/fixtures/preflight/` | 诊断故障、只读性、版本与正反例测试；独立于 K0 冻结的 22 项资产 |
 | `apps/web/server.py`、`apps/web/index.html`、`apps/web/computer.js` | loopback 聊天与目录/浏览器后台任务面板；聊天 history 仅在页面内存，任务从主账本恢复 |
+| `apps/tray/companion.py`、`launch.py`、`tray.ps1`、`TrayApplication.cs` | Windows 托盘：Python 管理本实例命名事件，系统 Windows Forms 显示图标与菜单，异步读取本机状态；桌面退出不写全局锁存，不启动模型 |
+| `apps/tray/assets/`、`tools/export_tray_icons.ps1` | 从 TrayApplication.cs 的 DrawIcon 生成 ICO 与预览；完整运行包包含 C#、PowerShell、Python 和 ICO |
+| `tests/test_tray.py`、`tools/probe_tray_package.py`、`evals/reports/tray-baseline.json`、`evals/reports/tray-idle-resources.json` | 真实托盘进程/HTTP 状态/退出隔离、完整运行包与加入托盘后的待命资源证据；包探测结果保存在 tray-package.json |
 | `apps/web/workspace.js`、`apps/web/workspace.css` | 项目侧栏、页面会话/草稿、输出位置、保存操作与回执；不维护后台任务状态 |
 | `runtime/node-host/jarvis_core/workspace.py` | 项目目录身份登记、明确文本导出、独占写入与摘要核验；标准库 SQLite/Tk，不新增第三方依赖 |
 | `tests/test_workspace.py`、`tools/probe_workspace_ui.py` | 临时目录/HTTP 故障回归与 Edge 端到端验证；合成模型响应，无付费调用 |

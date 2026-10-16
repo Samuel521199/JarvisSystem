@@ -99,7 +99,8 @@
         "computer-use-runtime-entry",
         "computer-web-console-entry",
         "runtime-slots-usage",
-        "browser-residue-recovery-entry"
+        "browser-residue-recovery-entry",
+        "windows-tray-entry"
       ],
       "status": "proposed",
       "reader_summary": "现在怎么启动，核心从哪里做起，下一步做什么？"
@@ -2631,12 +2632,40 @@
       "height": 1254,
       "mode": "RGBA",
       "inspection": "Visual concept inspected; PNG dimensions and alpha checked. App integration, small-size exports, monochrome vector and Windows ICO remain unverified."
+    },
+    {
+      "id": "jarvis-tray-icon",
+      "path": "apps/tray/assets/jarvis.ico",
+      "title": "Jarvis 托盘多尺寸 ICO",
+      "owner_document_id": "docs-interaction-persona",
+      "authority_anchor": "jarvis-brand-icon",
+      "status": "verified",
+      "kind": "generated-tray-asset",
+      "generated_on": "2026-10-16",
+      "generator": "tools/export_tray_icons.ps1",
+      "source": "apps/tray/TrayApplication.cs#DrawIcon",
+      "sha256": "4c89fa7ecb20290dd39c02db499ed7c7b826fb73e7ce5c84ca629349eebe1f0b",
+      "inspection": "16/24/32/48/64 px and four status previews visually inspected; ICO contains seven sizes through 256 px. Full multi-display, high-contrast and monochrome validation remains open."
+    },
+    {
+      "id": "jarvis-tray-preview",
+      "path": "apps/tray/assets/preview.png",
+      "title": "Jarvis 托盘状态与小尺寸预览",
+      "owner_document_id": "docs-interaction-persona",
+      "authority_anchor": "jarvis-brand-icon",
+      "status": "verified",
+      "kind": "generated-tray-asset",
+      "generated_on": "2026-10-16",
+      "generator": "tools/export_tray_icons.ps1",
+      "source": "apps/tray/TrayApplication.cs#DrawIcon",
+      "sha256": "d05d1b6eead9730f236a939ae0f93c411411a0b116b2160c41f789eb7fdfc4b3",
+      "inspection": "16/24/32/48/64 px and four status previews visually inspected; ICO contains seven sizes through 256 px. Full multi-display, high-contrast and monochrome validation remains open."
     }
   ],
   "implementation": {
-    "version": "0.1.17",
-    "scope": "K1 explicit startup health and at most one previously verified fallback with durable start records; existing task data, session-only stop and standby retained. Full K1/K2/K3 gates remain incomplete.",
-    "evidence": "evals/reports/runtime-start-baseline.json",
+    "version": "0.1.18",
+    "scope": "Windows notification-area icon, instance-bound live status and explicit app exit; existing session-only cancellation, standby, task and project persistence retained. Full K1/K2/K3 gates remain incomplete.",
+    "evidence": "evals/reports/tray-baseline.json",
     "overall_design_status": "proposed",
     "complete_k1_gate": false,
     "complete_k2_gate": false,
@@ -2647,7 +2676,11 @@
       "evals/reports/repository-baseline.json",
       "evals/reports/task-fault-matrix.json",
       "evals/reports/network-recovery.json",
-      "evals/reports/k1-fault-network-baseline.json"
+      "evals/reports/k1-fault-network-baseline.json",
+      "evals/reports/runtime-start-baseline.json",
+      "evals/reports/tray-idle-resources.json",
+      "evals/reports/tray-deployment.json",
+      "evals/reports/tray-package.json"
     ]
   }
 }

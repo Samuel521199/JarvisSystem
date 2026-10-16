@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-10-16T02:47:09.691603+00:00",
+  "from_version": "0.1.17",
+  "version": "0.1.18",
+  "tables_before": {
+    "control.db/tasks": {
+      "count": 10,
+      "sha256": "960ac77a24cb0edcfa2a630617b80c61cbf92da480cc370ba2121fc76904195e"
+    },
+    "control.db/actions": {
+      "count": 10,
+      "sha256": "86caa08d61b6a8d91dc73c4874b27f31de173f38372cb1f7cd883e40bb4f32fc"
+    },
+    "control.db/artifacts": {
+      "count": 8,
+      "sha256": "2d805d7671f795c629fd0a438fe51699390e247eed83e9ddff895bb568649342"
+    },
+    "workspace.db/projects": {
+      "count": 1,
+      "sha256": "f49b2d7c91b4b889cf80687ef1365266de54208b0dd5e514a6e30d09d232c43d"
+    },
+    "workspace.db/outputs": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    }
+  },
+  "tables_after": {
+    "control.db/tasks": {
+      "count": 10,
+      "sha256": "960ac77a24cb0edcfa2a630617b80c61cbf92da480cc370ba2121fc76904195e"
+    },
+    "control.db/actions": {
+      "count": 10,
+      "sha256": "86caa08d61b6a8d91dc73c4874b27f31de173f38372cb1f7cd883e40bb4f32fc"
+    },
+    "control.db/artifacts": {
+      "count": 8,
+      "sha256": "2d805d7671f795c629fd0a438fe51699390e247eed83e9ddff895bb568649342"
+    },
+    "workspace.db/projects": {
+      "count": 1,
+      "sha256": "f49b2d7c91b4b889cf80687ef1365266de54208b0dd5e514a6e30d09d232c43d"
+    },
+    "workspace.db/outputs": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    }
+  },
+  "tables_unchanged": true,
+  "artifact_content_unchanged": true,
+  "artifact_files": 12,
+  "assistant_status": {
+    "app": "Jarvis",
+    "version": "0.1.18",
+    "instance_id": "488d1e7e5d4f0f59657cd79e5e3c54bb",
+    "web_online": true,
+    "core_ready": true,
+    "stopped": false,
+    "assistant_state": "standby",
+    "active_tasks": 0,
+    "text_only": false,
+    "chat_text_only": true,
+    "computer_tasks": true,
+    "max_parallel_requests": 2,
+    "active_chat_requests": 0
+  },
+  "tray": {
+    "instance_id": "488d1e7e5d4f0f59657cd79e5e3c54bb",
+    "version": "0.1.18",
+    "state": "standby",
+    "label": "待命中",
+    "tray_pid": 39060,
+    "owner_pid": 29860,
+    "icon_visible": true,
+    "changed_at": "2026-10-16T02:47:15.1478411Z",
+    "url": "http://127.0.0.1:18181/"
+  },
+  "status": "passed",
+  "limits": "Source deployment with existing Python/browser dependencies; no cloud call or user task submitted. NotifyIcon reports visible; Windows may place it in overflow. No autostart or service watchdog."
+}

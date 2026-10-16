@@ -163,6 +163,8 @@ HTTP 接入由 [server.py](../apps/web/server.py)校验本机 Host/Origin 和页
 
 `GET /api/status` 另提供 `assistant_state`：`standby` 为无活动待命、`working` 为有在途聊天或正在运行的后台任务、`needs_attention` 为核心当前不可用；`active_chat_requests` 与 `active_tasks` 是本机进程观察到的数量。等待队列不计入运行数。`POST /api/chat/cancel` 只取消给定 `request_id`，不提供全局停止 HTTP 接口；产品状态显示规则归[生命周期](interaction-persona.md#personal-assistant-lifecycle)。
 
+0.1.18 在健康和异常状态响应中均增加 `app="Jarvis"`、`version`、`instance_id`。实例标识是每次 Host 启动生成的 32 位小写十六进制随机值，用于托盘关联，不是密码、凭据或授权。托盘仅接受与启动参数一致的实例；不一致、超时或 HTTP 失败显示连接中断。桌面退出使用 `Local\Jarvis.Tray.<instance_id>.quit` 命名事件，关闭图标和就绪分别使用 `.close`、`.ready`；这些事件只在进程生命周期内存在，不写持久锁存，也不扩展网页可执行接口。
+
 <a id="project-workspace-contract"></a>
 ### 0.1.11 项目与文本导出接口
 

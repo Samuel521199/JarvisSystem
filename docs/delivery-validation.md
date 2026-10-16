@@ -1,6 +1,6 @@
 # 能力验收、故障演练与评估证据
 
-> 状态：完整验收计划 proposed；当前 0.1.17 启动前健康回退；历史 0.1.0—0.1.16 局部实测分开登记 · 更新：2026-10-16  
+> 状态：完整验收计划 proposed；当前 0.1.18 托盘与待命资源子集；历史 0.1.0—0.1.17 局部实测分开登记 · 更新：2026-10-16
 > [文档入口](README.md) · [维护规则](MAINTENANCE.md) · [架构图册](architecture-atlas.md)
 
 <!-- book-nav:start -->
@@ -9,26 +9,27 @@
 ## 本章导航
 
 - [16.1 已有版本的验证记录](#versioned-evidence)
-  - [16.1.1 0.1.17 任务崩溃矩阵与程序出站阻断恢复](#task-fault-network-evidence)
-  - [16.1.2 0.1.17 本机部署、五分钟待命与代码仓库基线](#local-deployment-idle-evidence)
-  - [16.1.3 0.1.17 启动前健康检查与备用版本恢复](#runtime-start-evidence)
-  - [16.1.4 0.1.16 队列内存准入与短时竞争](#resource-admission-evidence)
-  - [16.1.5 0.1.15 浏览器回收、版本回退与前台响应](#runtime-continuity-evidence)
-  - [16.1.6 0.1.14 私人助手待命与会话停止](#personal-lifecycle-evidence)
-  - [16.1.7 0.1.13 K1 队列、登记回收与候选运行包](#k1-progress-evidence)
-  - [16.1.8 0.1.12 运行中的发送/停止按钮](#chat-stop-evidence)
-  - [16.1.9 0.1.11 项目文件夹与默认文本输出](#project-workspace-evidence)
-  - [16.1.10 0.1.10 浏览器持久后台队列](#computer-queue-evidence)
-  - [16.1.11 0.1.9 网页浏览器任务控制台](#computer-console-evidence)
-  - [16.1.12 0.1.8 独立浏览器 Computer Use](#computer-evidence)
-  - [16.1.13 0.1.7 K1/W3 固定元数据 Worker](#worker-evidence)
-  - [16.1.14 0.1.6 K1/W2 独立控制、签名恢复与默认实例迁移](#control-evidence)
-  - [16.1.15 0.1.5 K1/W1 只读运行预检](#preflight-evidence)
-  - [16.1.16 0.1.4 Google Pro 与轻量模型验证](#google-models-evidence)
-  - [16.1.17 0.1.3 统一模型菜单与推理级别历史验证](#web-workspace-evidence)
-  - [16.1.18 0.1.2 模型目录与迁移历史验证](#model-catalog-evidence)
-  - [16.1.19 0.1.1 聊天与模型路由历史验证](#chat-evidence)
-  - [16.1.20 K0 起步的历史验证记录](#k0-evidence)
+  - [16.1.1 0.1.18 Windows 托盘与含托盘的待命资源](#tray-evidence)
+  - [16.1.2 0.1.17 任务崩溃矩阵与程序出站阻断恢复](#task-fault-network-evidence)
+  - [16.1.3 0.1.17 本机部署、五分钟待命与代码仓库基线](#local-deployment-idle-evidence)
+  - [16.1.4 0.1.17 启动前健康检查与备用版本恢复](#runtime-start-evidence)
+  - [16.1.5 0.1.16 队列内存准入与短时竞争](#resource-admission-evidence)
+  - [16.1.6 0.1.15 浏览器回收、版本回退与前台响应](#runtime-continuity-evidence)
+  - [16.1.7 0.1.14 私人助手待命与会话停止](#personal-lifecycle-evidence)
+  - [16.1.8 0.1.13 K1 队列、登记回收与候选运行包](#k1-progress-evidence)
+  - [16.1.9 0.1.12 运行中的发送/停止按钮](#chat-stop-evidence)
+  - [16.1.10 0.1.11 项目文件夹与默认文本输出](#project-workspace-evidence)
+  - [16.1.11 0.1.10 浏览器持久后台队列](#computer-queue-evidence)
+  - [16.1.12 0.1.9 网页浏览器任务控制台](#computer-console-evidence)
+  - [16.1.13 0.1.8 独立浏览器 Computer Use](#computer-evidence)
+  - [16.1.14 0.1.7 K1/W3 固定元数据 Worker](#worker-evidence)
+  - [16.1.15 0.1.6 K1/W2 独立控制、签名恢复与默认实例迁移](#control-evidence)
+  - [16.1.16 0.1.5 K1/W1 只读运行预检](#preflight-evidence)
+  - [16.1.17 0.1.4 Google Pro 与轻量模型验证](#google-models-evidence)
+  - [16.1.18 0.1.3 统一模型菜单与推理级别历史验证](#web-workspace-evidence)
+  - [16.1.19 0.1.2 模型目录与迁移历史验证](#model-catalog-evidence)
+  - [16.1.20 0.1.1 聊天与模型路由历史验证](#chat-evidence)
+  - [16.1.21 K0 起步的历史验证记录](#k0-evidence)
 - [16.2 下一轮 K1/K2 出口验收计划](#next-k1-acceptance)
   - [16.2.1 K1 出口：确定性控制与后台执行](#section-adaf0d5fff7c)
   - [16.2.2 K2 出口：自然语言、知识与技能闭环](#next-k2-acceptance)
@@ -58,6 +59,24 @@
 
 <a id="versioned-evidence"></a>
 ## 已有版本的验证记录
+
+<a id="tray-evidence"></a>
+### 0.1.18 Windows 托盘与含托盘的待命资源
+
+按 2026-10-16 用户要求，在 K1/W4 状态可见性中加入轻量托盘；没有将完整桌面壳或 K6 提前标为通过。[tray-baseline.json](../evals/reports/tray-baseline.json)保存本轮回归、候选包、文档与源码摘要。使用方式归[托盘入口](core-bootstrap.md#windows-tray-entry)，状态与退出语义归[个人生命周期](interaction-persona.md#personal-assistant-lifecycle)。
+
+| 范围 | 实测结果 |
+|---|---|
+| 5 项专项测试 | [test_tray.py](../tests/test_tray.py)启动真实 Windows Forms 托盘和本机 HTTP Host；真实聊天请求进入运行中、取消后回待命；核心未就绪、实例不匹配、连接中断均显示对应状态；恢复连接后回待命；桌面退出处理器发出本实例信号，只结束对应 Host；关闭托盘进程不停止 Host，不写全局锁存 |
+| 全量回归 | 277 项测试，275 通过、2 项 Windows 符号链接权限跳过；种子 22 项资产与 12 组夹具通过。最初“运行中”夹具仅登记请求、没有真正进入 HTTP 执行计数，测试失败；已改为真实 HTTP 提交/取消后通过，没有修改状态判断来绕过失败 |
+| 含托盘五分钟待命 | [tray-idle-resources.json](../evals/reports/tray-idle-resources.json)：连续 300.013 秒，全部被观察到的启动器、Host 与托盘子进程树稳定；私有提交峰值 106,192,896 字节（约 101.3 MiB），平均 CPU 为单个逻辑核心的 0.802%，启动至状态入口就绪 0.856 秒；沿用 V-PC-02 的 512 MiB、1%、5 秒门槛，没有放宽标准 |
+| 本机部署 | [tray-deployment.json](../evals/reports/tray-deployment.json)：默认 18181 从 0.1.17 更新为 0.1.18；确认空闲后仅退出旧服务。10 项任务、10 项动作、8 项产物回执、1 个项目、0 项导出与 12 个产物文件保持一致；托盘与 HTTP 的实例标识一致，图标报告 visible、状态待命；重复启动返回 already_running |
+| 完整包 | [probe_tray_package.py](../tools/probe_tray_package.py)用随包 Python 在独立临时端口启动真实网页与托盘，并通过本实例退出事件正常结束；包内运行代码、托盘源码和资源摘要与本轮工作树核对。0.1.17 → 0.1.18 启动恢复与损坏回退结果随主报告保存 |
+| 图标资产 | 从运行时 DrawIcon 生成 16/24/32/48/64/128/256px ICO；检查文件结构并目视检查 16–64px 及 4 种状态预览。品牌规则和预览见[图标规范](interaction-persona.md#jarvis-brand-icon)，系统 API 来源 [S131](references.md#s131)、[S132](references.md#s132) |
+
+可复现资源命令：`python tools/probe_idle_resources.py --tray --output evals/reports/tray-idle-resources.json`。它创建和关闭自己的临时实例，保留现用助手。与此前无托盘测量来自同一开发机的不同采样时段，不能将差值当成严格受控基准；本轮无模型、浏览器任务或付费调用。
+
+证据只覆盖当前 Windows 开发机与启动时系统小图标尺寸；未完成整机断网、4 CPU/8 GiB 目标设备、长期稳定性、多显示器 DPI/高对比/Explorer 重启验收。Windows 可把图标放在隐藏区域，未修改常显设置。桌面截图复核未完成：Clicky 未运行，启动脚本也未找到其工程；图标生成预览已目视检查，真实通知组件与中文状态通过本机进程回执及专项测试验证。异常退出时托盘仅提示断连，没有自动重启服务。完整 K1、K2、K3 和 V-UI-14 均保持未通过。
 
 <a id="task-fault-network-evidence"></a>
 ### 0.1.17 任务崩溃矩阵与程序出站阻断恢复

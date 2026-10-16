@@ -1,6 +1,6 @@
 # 最小核心、初始资产与开发路线
 
-> 状态：整体 proposed；0.1.17 增加启动前健康检查与一次备用版本回退，保留内存准入和会话待命；保留个人助手待命，完整 K1/K2/K3 未通过 · 更新：2026-10-16  
+> 状态：整体 proposed；0.1.18 增加 Windows 托盘状态与当前实例退出入口，保留内存准入、启动恢复和会话待命；完整 K1/K2/K3 未通过 · 更新：2026-10-16
 > [文档入口](README.md) · [维护规则](MAINTENANCE.md) · [架构图册](architecture-atlas.md)
 
 <!-- book-nav:start -->
@@ -10,6 +10,7 @@
 
 - [4.1 当前实现、启动与下一步](#current-implementation)
   - [4.1.1 在当前机器运行](#section-6a93004233bf)
+    - [4.1.1.1 Windows 托盘与无控制台启动（0.1.18）](#windows-tray-entry)
   - [4.1.2 文字聊天与本地网页](#section-b3e262fa3ec1)
   - [4.1.3 项目文件夹与文本文件保存（0.1.11）](#project-workspace-entry)
   - [4.1.4 本机状态与旧版兼容（0.1.14）](#runtime-control)
@@ -49,7 +50,7 @@
 <a id="current-implementation"></a>
 ## 当前实现、启动与下一步
 
-2026-10-15 从 K0 开始实现 `jarvis-seed 0.1.0`，随后逐步增加文字聊天、模型目录、预检、独立控制、隔离 Worker 与浏览器适配器。当前 **0.1.17 增加启动前健康检查与备用版本恢复**；0.1.16 已增加后台任务内存准入、等待提示和稳定恢复；0.1.15 已增加浏览器任务临时目录回收与本机运行版本管理；保留会话停止、助手待命、免恢复认证、共用后台队列和项目根目录保存。任务记录仍来自同一本机账本；[启动恢复证据](delivery-validation.md#runtime-start-evidence)、[故障与网络阻断实测](delivery-validation.md#task-fault-network-evidence)与[既有版本记录](delivery-validation.md#versioned-evidence)分开登记。已按主人指定地址建立 [Git 仓库](https://github.com/Samuel521199/JarvisSystem)。以下区分当前实现与验证，其余章节仍是完整设计。
+2026-10-15 从 K0 开始实现 `jarvis-seed 0.1.0`，随后逐步增加文字聊天、模型目录、预检、独立控制、隔离 Worker 与浏览器适配器。当前 **0.1.18 新增 Windows 托盘与明确退出入口**；0.1.17 已增加启动前健康检查与备用版本恢复；0.1.16 已增加后台任务内存准入、等待提示和稳定恢复；0.1.15 已增加浏览器任务临时目录回收与本机运行版本管理；保留会话停止、助手待命、免恢复认证、共用后台队列和项目根目录保存。任务记录仍来自同一本机账本；[托盘验证](delivery-validation.md#tray-evidence)、[启动恢复证据](delivery-validation.md#runtime-start-evidence)、[故障与网络阻断实测](delivery-validation.md#task-fault-network-evidence)与[既有版本记录](delivery-validation.md#versioned-evidence)分开登记。已按主人指定地址建立 [Git 仓库](https://github.com/Samuel521199/JarvisSystem)。以下区分当前实现与验证，其余章节仍是完整设计。
 
 | 部分 | 当前实现 | 未完成边界 |
 |---|---|---|
@@ -66,7 +67,7 @@
 <a id="section-6a93004233bf"></a>
 ### 在当前机器运行
 
-2026-10-16 已按本次更新授权将默认端口 18181 从 0.1.12 切换为 0.1.17，并刷新现有页面；界面显示“待命中”。沿用已有 Python 环境和数据目录，保留浏览器依赖；这是源码启动，不是运行槽位激活。原有任务、项目及产物核查见[部署与待命实测](delivery-validation.md#local-deployment-idle-evidence)。以后更改源码仍需显式重启后端，普通页面刷新不能替代；不要停止其他无关 Python 进程。
+2026-10-16 默认端口 18181 已更新至 0.1.18，Windows 托盘报告“待命中”；沿用原有 Python 环境和数据目录，保留浏览器依赖。原有任务、项目和产物核查见[本轮部署](delivery-validation.md#tray-evidence)，先前 0.1.12 → 0.1.17 记录见[历史部署](delivery-validation.md#local-deployment-idle-evidence)。这是源码启动，不是运行槽位激活；以后更改源码仍需显式重启后端，普通页面刷新不能替代。
 
 PowerShell 工作目录为 `H:\Jarvis`。当前已初始化默认数据；`init` 仅用于首次初始化，不能用来解除停止。所有路径和依赖归属见[实际落地范围](stack-project-layout.md#implemented-layout)。
 
@@ -88,6 +89,15 @@ $py = 'H:\JarvisData\envs\dev\Scripts\python.exe'
 & $py tools/prepare_worker.py
 .\jarvis.ps1 init
 ```
+
+<a id="windows-tray-entry"></a>
+#### Windows 托盘与无控制台启动（0.1.18）
+
+在仓库根目录执行 `.\jarvis.ps1 tray`，可在后台启动带托盘图标的助手；也可指定 `--port`、`--data-dir`、`--config`。同一端口已有新版 Jarvis 时返回 `already_running`，不会再启动一份或把传入配置应用到已有实例。直接运行 `apps/web/server.py` 的 Windows 入口也默认启用托盘；诊断或无交互桌面可用 `--no-tray`。
+
+图标在 Windows 右下角通知区域；系统可能将新图标放入 `^` 隐藏图标区，可由用户拖到常显位置。双击图标打开默认浏览器，右键菜单可查看当前状态、最近检查时间、刷新或退出。退出结束本实例的本机服务，已有账本与项目保留；有活动时提示确认。关闭浏览器页签继续待命，输入区停止仍只取消当前回复。完整状态与生命周期规则见[私人助手生命周期](interaction-persona.md#personal-assistant-lifecycle)。
+
+托盘依赖 Windows 自带的 Windows PowerShell 5.1、.NET Framework/Windows Forms；不增加 Python GUI 依赖或更改执行策略。助手与托盘通过本次启动专属命名事件交接退出，HTTP 只读状态含版本与实例标识；没有新增网页全局停止接口。诊断在数据目录的 `diagnostics/tray/`，只记录状态、版本和实例信息；`server.log` 与 `tray.log` 用于启动失败排查。托盘异常不会给其他进程发送终止命令，没有安装开机自启或服务看护。
 
 <a id="section-b3e262fa3ec1"></a>
 ### 文字聊天与本地网页
@@ -228,13 +238,13 @@ $py = 'H:\JarvisData\envs\dev\Scripts\python.exe'
 <a id="runtime-package"></a>
 ### 运行包与本机版本选择（0.1.15）
 
-[打包工具](../tools/release_bundle.py)收集固定源码、配置、文本说明、核心 Python 依赖及已校验 Worker Python，不包含凭据、现用账本、模型权重和可选浏览器/语音依赖。当前验证包为 `artifacts/releases/jarvis-0.1.17-runtime.zip`；[本轮证据](delivery-validation.md#runtime-start-evidence)记录摘要、文件数和真实回退结果。0.1.13/0.1.15/0.1.16 包保留为历史回退测试对象。
+[打包工具](../tools/release_bundle.py)收集固定源码、配置、文本说明、核心 Python 依赖及已校验 Worker Python，不包含凭据、现用账本、模型权重和可选浏览器/语音依赖。当前托盘候选包为 `artifacts/releases/jarvis-0.1.18-tray-runtime.zip`；[本轮证据](delivery-validation.md#tray-evidence)记录摘要、实际包启动和回退结果。0.1.13—0.1.17 包保留为历史回退测试对象。
 
 [版本入口](../tools/runtime_releases.py)提供安装、独立健康检查、选择、回退和启动。默认槽位目录为 `%LOCALAPPDATA%\Jarvis\runtime`，可用 `--root <完整路径>` 指定本机支持 ACL 的位置；每个运行包独占一个槽，业务数据始终放在独立的数据目录。安装不会启动服务或改变当前版本。
 
 ```powershell
 $py = 'H:\JarvisData\envs\dev\Scripts\python.exe'
-$installed = & $py tools/runtime_releases.py install artifacts/releases/jarvis-0.1.17-runtime.zip | ConvertFrom-Json
+$installed = & $py tools/runtime_releases.py install artifacts/releases/jarvis-0.1.18-tray-runtime.zip | ConvertFrom-Json
 $releaseId = $installed.id
 & $py tools/runtime_releases.py health $releaseId
 & $py tools/runtime_releases.py select $releaseId
@@ -427,7 +437,7 @@ K1 可以暂时用假模型/规则输入验证可靠性，但它还不能叫完�
 | K1/W1 运行边界与预检 | **0.1.5 已实现诊断增量**：本进程身份、路径/ACL 元数据、依赖/版本、端口、源码摘要与边界缺口；有效权限尚待真实 Worker 测试 | [当前使用](#runtime-preflight)、[本轮证据](delivery-validation.md#preflight-evidence)；完整 [V-K1-01](delivery-validation.md#v-k1-01) 仍待受保护部署后验收 |
 | K1/W2 会话取消与旧版兼容 | **0.1.14 当前个人范围**：停止本次回复、助手待命、另一会话/后台任务继续；无恢复密钥/密码，旧停止数据显式迁移并保留审计 | [实际使用](#runtime-control)、[当前证据](delivery-validation.md#personal-lifecycle-evidence)；V-K1-02 原全局监督项延期，[V-K1-03](delivery-validation.md#v-k1-03) 按最新范围验证 |
 | K1/W3 隔离执行器 | 原生 LPAC/Job、只读输入、有界管道、回复绑定、超限终止；0.1.13 增加登记元数据 Worker 崩溃回收；0.1.15 增加登记浏览器 profile 回收；受保护 Host 和通用工具范围延期/待实现 | [当前实现](#runtime-worker)、[新增验证](delivery-validation.md#k1-progress-evidence)；完整 [V-K1-04](delivery-validation.md#v-k1-04) 不因子集通过而关闭 |
-| K1/W4 后台队列与真实状态 | 0.1.13 共用持久 FIFO；0.1.16 增加内存准入、迟滞恢复与界面等待说明；完整 CPU/GPU/模型统一调度仍待实施 | W3；复用现有账本；[V-K1-05](delivery-validation.md#v-k1-05)、[V-K1-06](delivery-validation.md#v-k1-06) |
+| K1/W4 后台队列与真实状态 | 0.1.13 共用持久 FIFO；0.1.16 增加内存准入与等待；按用户要求在 0.1.18 提前加入轻量托盘，显示真实状态并提供明确退出；完整 CPU/GPU/模型统一调度仍待实施 | W3；复用现有账本；[V-K1-05](delivery-validation.md#v-k1-05)、[V-K1-06](delivery-validation.md#v-k1-06)、[托盘证据](delivery-validation.md#tray-evidence) |
 | K1/W5 可恢复运行包 | 0.1.15 安装、健康检查、事务化版本选择、显式启动与回退；已验证跨代码版本共用 v2 数据不丢任务；0.1.17 增加显式启动时一次健康回退；整机断网、数据库迁移和运行中故障恢复待验/待实现 | [候选包使用](#runtime-package)、[状态迁移](evolution-release.md#service-continuity-4)；[V-K1-07](delivery-validation.md#v-k1-07) 尚未完整通过 |
 | K1/W6 整体验收 | 交付本机权限证据、故障矩阵结果、恢复说明和一次可复现演示；界面显示真实执行阶段、产物与未知状态 | 前述工作包及既有核心回归通过；完成 [K1 出口](delivery-validation.md#next-k1-acceptance)才进入 K2 的真实工具循环 |
 
@@ -463,7 +473,7 @@ K2/W1 按[知识与记忆开源选型](stack-project-layout.md#memory-open-sourc
 | K2/W1—W3 | 新会话选文件夹、项目与会话、文件搜索和引用、保存会话、输入框、产物与任务详情；基础设置复用现有服务 | V-UI-01—10、13—16；完整能力依赖 K1/K2 出口，缺项记录为待验 |
 | K2/W4 | 离线能力与模型回退可见，故障后草稿/会话/任务各自恢复 | V-UI-11 及既有离线验收；不是只展示一个“离线”标签 |
 | K3—K5 | Git 工作树、终端/构建、候选差异、评估、发布与回退面板 | V-UI-09/12、原有构建/进化验收；非 Git 项目继续正常使用，不自动初始化 Git |
-| K6 按能力扩展 | 实时语音、人格形态、多设备、动态团队、NPC；必要时加入桌面壳和托盘 | V-UI-10/12/14 及各领域验收；只启用已实现和可配置的能力 |
+| K6 按能力扩展 | 实时语音、人格形态、多设备、动态团队、NPC；必要时加入完整桌面壳。轻量托盘已按用户要求纳入 K1/W4，不据此跳过后续门 | V-UI-10/12/14 及各领域验收；只启用已实现和可配置的能力 |
 
 通用工作台完成前可预留专属入口和数据展示位置，但不先堆满不可用开关。完整浏览器、多格式编辑和桌面集成按实际适配器增量加入；先沿用一套网页，桌面宿主取舍见[技术栈](stack-project-layout.md#workbench-host-choice)。0.1.11 已落地[项目文件夹与文本保存子集](#project-workspace-entry)，不新增自主执行权或替换运行图标；完整工作台按该表继续推进。
 
