@@ -69,6 +69,15 @@
 
 2026-10-16 默认端口 18181 已更新至 0.1.18，Windows 托盘报告“待命中”；沿用原有 Python 环境和数据目录，保留浏览器依赖。原有任务、项目和产物核查见[本轮部署](delivery-validation.md#tray-evidence)，先前 0.1.12 → 0.1.17 记录见[历史部署](delivery-validation.md#local-deployment-idle-evidence)。这是源码启动，不是运行槽位激活；以后更改源码仍需显式重启后端，普通页面刷新不能替代。
 
+**日常使用入口：[打开 Jarvis 工作台](http://127.0.0.1:18181/)。**
+
+| 本机端口 | 用途 | 使用方式 |
+|---|---|---|
+| `18181` | Jarvis 工作台：项目、聊天、文件保存、后台任务 | 在浏览器打开；服务未启动时，在仓库运行 `.\jarvis.ps1 tray`，随后双击托盘图标进入 |
+| `18180` | 可选的本地 Qwen 小模型推理接口 | 选择本地模型前按[本地模型启动](#section-b3e262fa3ec1)操作；云端聊天不需要它。它不是 Jarvis 工作台地址，未启动时连接被拒绝是预期状态 |
+
+如果 18181 也打不开，先执行 `.\jarvis.ps1 tray`：已有服务会返回 `already_running`；启动失败时检查[托盘诊断日志](#windows-tray-entry)。当前没有开机自启，电脑重启或明确退出助手后需再次启动。浏览器刷新会清空当前页面的对话与草稿，排障前先保存需要的回答。
+
 PowerShell 工作目录为 `H:\Jarvis`。当前已初始化默认数据；`init` 仅用于首次初始化，不能用来解除停止。所有路径和依赖归属见[实际落地范围](stack-project-layout.md#implemented-layout)。
 
 ```powershell
@@ -114,7 +123,7 @@ $py = 'H:\JarvisData\envs\dev\Scripts\python.exe'
 
 不传 `--message` 时进入交互模式：`/model <provider> [model-id]` 切换提供商与模型，`/models` 查看可选项，`/clear` 清空当前内存对话，`/exit` 退出聊天。支持 `auto / vertex / bailian / openai / xai / local`；输出显示实际提供商、模型、用量、切换尝试和额度提示。切换模型会把当前输入及保留的会话历史发给所选提供商；`auto` 也可能把这些内容发给其后续候选，UNKNOWN 不会触发盲目重发。
 
-本地模型服务按需在一个 PowerShell 窗口运行，网页服务在另一个窗口运行：
+日常优先使用上方的[托盘启动](#windows-tray-entry)。只有使用本地 Qwen 模型时才需额外启动推理服务；以下是前台调试方式，网页服务已运行时不必重复启动：
 
 ```powershell
 $py = 'H:\JarvisData\envs\dev\Scripts\python.exe'

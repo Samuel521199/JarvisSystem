@@ -6,6 +6,7 @@
 
 当前种子原型为 **0.1.18**：新增 Windows 托盘图标，显示待命、运行和异常状态，提供打开界面与退出当前助手入口；保留启动恢复、项目数据及会话停止。使用方法见[托盘入口](docs/core-bootstrap.md#windows-tray-entry)，证据见[本轮验证](docs/delivery-validation.md#tray-evidence)。完整设计仍为 `proposed`，K1/K2/K3 尚未整体通过；当前不要求恢复密钥或密码。
 
+- [打开本机工作台](http://127.0.0.1:18181/)：服务未启动时按[本机启动与端口说明](docs/core-bootstrap.md#section-6a93004233bf)操作。
 - [全书章节树与阅读导航](docs/README.md#book-tree)：按篇、章、节、小节组织全部当前主题及后续技术文档。
 - [当前实现、聊天入口与启动方法](docs/core-bootstrap.md#current-implementation)：从 K0 开始，K0—K6 是唯一实施顺序。
 - [模型选择、用量提示与路由边界](docs/models-offline.md#configured-models)：取消本地累计调用次数上限，保留单次资源限制；没有查询供应商余额。
