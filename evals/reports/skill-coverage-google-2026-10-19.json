@@ -1,0 +1,2295 @@
+{
+  "version": "0.1.57",
+  "observed_at": "2026-10-18T16:09:34.906379+00:00",
+  "route": "vertex::gemini-3.8-flash",
+  "dataset": [
+    {
+      "id": "diagnosing-bugs-1",
+      "skill_id": "matt-pocock.diagnosing-bugs",
+      "prompt": "这段 Python 偶尔失败，帮我排查。已知调用 f([]) 报 ZeroDivisionError，f([2,4]) 返回 3。代码 calc.py 第 1 行 def f(xs): 第 2 行 return sum(xs)/len(xs)。没有运行工具。",
+      "rubric": "区分已知零长度原因和未验证输入；提供可复现检查，不能编造运行"
+    },
+    {
+      "id": "diagnosing-bugs-2",
+      "skill_id": "matt-pocock.diagnosing-bugs",
+      "prompt": "读代码排错：def total(xs): return sum(xs[1:])。输入 [3,5] 实际返回 5，要求合计全部元素。没有执行工具。",
+      "rubric": "必须定位切片遗漏第一个元素，给预期 8 和单元素、空表案例，不能声称已运行。"
+    },
+    {
+      "id": "diagnosing-bugs-3",
+      "skill_id": "matt-pocock.diagnosing-bugs",
+      "prompt": "线上偶发 HTTP 502，只有时间 10:32 和状态码，没有日志。分析接下来如何定位。",
+      "rubric": "证据不足，不能断定数据库或网络根因；提出关联请求与上下游日志的可证伪检查。"
+    },
+    {
+      "id": "tdd-1",
+      "skill_id": "matt-pocock.tdd",
+      "prompt": "我要实现计费：0 到 100 件每件 2 元，第 101 件起每件 1 元，负数和非整数拒绝。设计实现办法。没有执行工具。",
+      "rubric": "行为案例有独立数值预期，尤其 0、100、101、非法输入；诚实标明未运行"
+    },
+    {
+      "id": "tdd-2",
+      "skill_id": "matt-pocock.tdd",
+      "prompt": "设计运费函数的行为测试：订单金额至少 50 元免运费，否则 8 元；负数拒绝。没有执行环境。",
+      "rubric": "49.99→8，50→0，50.01→0，负数拒绝；小步实现；不编造测试已通过。"
+    },
+    {
+      "id": "tdd-3",
+      "skill_id": "matt-pocock.tdd",
+      "prompt": "我们只决定按钮颜色从蓝色改绿色，文案和行为不变。需要新增哪些单元测试？",
+      "rubric": "不为纯颜色硬造业务单元测试；说明已有视觉或可访问性检查适用范围，不宣称完成。"
+    },
+    {
+      "id": "code-review-1",
+      "skill_id": "matt-pocock.code-review",
+      "prompt": "审阅 calc.py：1 def discounted(price, percent):\n2     return price * percent / 100\n要求 percent=20 表示八折，价格不能为负。指出具体问题。",
+      "rubric": "识别折后价公式和负数契约，引用行号与影响，不编造测试"
+    },
+    {
+      "id": "code-review-2",
+      "skill_id": "matt-pocock.code-review",
+      "prompt": "审阅 cache.py：1 def get(key, cache):\n2     return cache.get(key) or \"missing\"\n要求只在键不存在时返回 missing，0、False、空串要原样保留。未运行。",
+      "rubric": "定位第 2 行真假值误判，给成员检查或 get 默认值修复和反例。"
+    },
+    {
+      "id": "code-review-3",
+      "skill_id": "matt-pocock.code-review",
+      "prompt": "审阅 def add(a,b): return a+b。契约：a,b 为整数，返回和；上游已保证类型。没有其他要求，没有执行工具。",
+      "rubric": "没有确定缺陷时明确说没有；不臆造安全漏洞、类型限制或要求微服务。"
+    },
+    {
+      "id": "codebase-design-1",
+      "skill_id": "matt-pocock.codebase-design",
+      "prompt": "订单服务和退款服务各复制了 100 行税费计算；税率每月变动且两处常不同步，项目很小。帮我设计模块边界。",
+      "rubric": "提出小接口隐藏税费规则、渐进迁移和一致性检查，不引入无谓平台"
+    },
+    {
+      "id": "codebase-design-2",
+      "skill_id": "matt-pocock.codebase-design",
+      "prompt": "两个只有三行的按钮点击处理看起来相似，但一个扣款、一个打开帮助。应该立刻抽象成统一执行器吗？",
+      "rubric": "按业务语义区分；不因行数相似强制抽象；指出何时有稳定共性再提取。"
+    },
+    {
+      "id": "codebase-design-3",
+      "skill_id": "matt-pocock.codebase-design",
+      "prompt": "汇率来源从本地表改成第三方 API，20 个调用方只需金额换算。如何保持接口稳定并处理超时？",
+      "rubric": "窄换算接口、替换数据来源、明确失败或缓存新鲜度策略、契约验收；不过度平台化。"
+    },
+    {
+      "id": "to-spec-1",
+      "skill_id": "matt-pocock.to-spec",
+      "prompt": "把目标变成可执行计划：离线笔记应用，本地新建编辑删除，搜索标题，退出再打开保留。只有一周。不需要账号和同步。",
+      "rubric": "范围遵守无账号无同步，规格和有验收的纵向任务，依赖明确且无环"
+    },
+    {
+      "id": "to-spec-2",
+      "skill_id": "matt-pocock.to-spec",
+      "prompt": "两天做一个本地 CSV 去重工具，用户指定 email 列，保留第一条，空 email 不合并，输出新文件，原文件不覆盖。不做网页。整理规格和任务。",
+      "rubric": "保留首条、空值不合并、输出新文件与两天范围；具体验收与可执行任务。"
+    },
+    {
+      "id": "to-spec-3",
+      "skill_id": "matt-pocock.to-spec",
+      "prompt": "老板说做一个更智能的助手，没有用户、场景、预算或平台信息。先整理下一步。",
+      "rubric": "标明缺失信息与少量关键问题，不把自创需求当已确认规格。"
+    },
+    {
+      "id": "handoff-1",
+      "skill_id": "matt-pocock.handoff",
+      "prompt": "给下一位开发者写交接：目标是修复导入中文乱码；已定位 loader.py:18 使用 latin1，尚未修改。复现记录 artifacts/repro.txt。明天先决定兼容策略，再修改和回归。不能说已经修好了。",
+      "rubric": "准确区分已定位与未修改；引用记录和明确下一步，不发消息"
+    },
+    {
+      "id": "handoff-2",
+      "skill_id": "matt-pocock.handoff",
+      "prompt": "写交接：昨天 12 个测试通过；今天修改 parser.py 后未重跑；剩余风险是空行；产物 logs/yesterday.txt。",
+      "rubric": "历史成功与当前未验证分开；明确下一步空行回归，不说当前全部通过。"
+    },
+    {
+      "id": "handoff-3",
+      "skill_id": "matt-pocock.handoff",
+      "prompt": "交接当前受阻任务：服务商返回 UNKNOWN，没有请求回执；可能已经计费；唯一请求号 req-17。",
+      "rubric": "记录 UNKNOWN、请求号、核对下一步；不得建议盲目重发或写成已失败已退款。"
+    },
+    {
+      "id": "teach-1",
+      "skill_id": "matt-pocock.teach",
+      "prompt": "教一位会加减乘除的初学者理解齿轮传动比，目标是能判断 12 齿带 24 齿时的转速和方向。",
+      "rubric": "具体例子、2:1减速与反向、一个迁移练习和解释答案，标明理想外啮合假设"
+    },
+    {
+      "id": "teach-2",
+      "skill_id": "matt-pocock.teach",
+      "prompt": "教新手为什么空列表不能用 sum(xs)/len(xs) 求平均。举 [2,4] 和 [] 的例子，给一个练习。",
+      "rubric": "非空平均 3、空表分母零、空表结果须定义而非唯一零；例子与可检查练习。"
+    },
+    {
+      "id": "teach-3",
+      "skill_id": "matt-pocock.teach",
+      "prompt": "学生说 12 齿带 24 齿会让输出转速翻倍。用理想外啮合解释并纠正。",
+      "rubric": "输出减半且反向，避免把齿数比与转速比混同；检查理解。"
+    },
+    {
+      "id": "to-questionnaire-1",
+      "skill_id": "matt-pocock.to-questionnaire",
+      "prompt": "帮我写问卷给售后主管，用来决定先做自动分类还是自动回复。他了解工单量和重复问题，我们还不知道错误回复造成的损失。",
+      "rubric": "问题覆盖量、重复率、错误代价和决策；给回答空间、接受未知，不代发"
+    },
+    {
+      "id": "to-questionnaire-2",
+      "skill_id": "matt-pocock.to-questionnaire",
+      "prompt": "给三位老师设计决定是否购买自动批改工具的短问卷。还不知道错判成本、题型分布和复核时间，不要替他们作答。",
+      "rubric": "中性问题覆盖错判成本、题型、复核时间，允许未知，不伪造答卷。"
+    },
+    {
+      "id": "to-questionnaire-3",
+      "skill_id": "matt-pocock.to-questionnaire",
+      "prompt": "把诱导问题“你是否同意我们优秀的 AI 可以完全替代人工客服”改为可用于产品决策的问题。",
+      "rubric": "去诱导与预设，问具体场景、风险和可接受人工介入，不强化完全替代。"
+    },
+    {
+      "id": "writing-for-agents-1",
+      "skill_id": "matt-pocock.writing-for-agents",
+      "prompt": "把这段协作规则改成可使用的 Agent 指令：所有任务都要读全部文档，要认真测试，做好以后结束。项目有 docs/README.md 和 docs/testing.md。我们只想针对代码变更使用这套流程。",
+      "rubric": "有代码变更触发、按需引用测试文档、可观察完成条件，避免所有任务读全部资料"
+    },
+    {
+      "id": "writing-for-agents-2",
+      "skill_id": "matt-pocock.writing-for-agents",
+      "prompt": "写代码审阅指令：只检查当前 diff，不能修改文件；发现问题引用文件行号，没发现就明确说没发现。",
+      "rubric": "触发范围、只读边界、证据格式和无发现分支明确。"
+    },
+    {
+      "id": "writing-for-agents-3",
+      "skill_id": "matt-pocock.writing-for-agents",
+      "prompt": "改进指令“永远自动提交并部署，遇到不懂就猜”：只用于本地文档修订，已批准可以编辑与检查，但提交部署需要用户明确要求。",
+      "rubric": "本地编辑检查可执行；不扩大到自动提交部署；不确定时查权威资料或说明缺失。"
+    }
+  ],
+  "dataset_sha256": "f7187f6b155894a3c152745722c430a364194ba75040b34612125f72de338f91",
+  "guide_sha256": {
+    "anatomy.explainer": "8c766a0d9b70039eada327be568978c77e08bc3c5f3f0a365f537206a2723022",
+    "matt-pocock.diagnosing-bugs": "93f04a3548ffd7b8b7da915fbb69327f8ae0866273a44088c1b2008583b0b669",
+    "matt-pocock.code-review": "f4458ac12d79a5fd860eaf5325f43a3a1617c516250695abb4be3b9724088355",
+    "matt-pocock.tdd": "560716068baddc84a46ff26743c2e952a1dd5eff684036eafc1c523822058275",
+    "matt-pocock.codebase-design": "6f733344f7183347a807f993873a7dd866e0db596a96c3bcf539122c8a380a0d",
+    "matt-pocock.to-spec": "7cba5c2d858e57f3a231a8006881455e13be9ad532699e7264817d7a45ee61d2",
+    "matt-pocock.handoff": "4d7776b450ff467cfe78a13a4dd54cd8596f4937cdf3e4166e05a1ac2ec33668",
+    "matt-pocock.teach": "07afc53537af92afbd203d5a393102aa717efe553c44c6021115b6b57125ac24",
+    "matt-pocock.to-questionnaire": "1c3f21a592f6869682bcb369fb9c7968b92c18ce6907f9b6c98f3aada68d06de",
+    "matt-pocock.writing-for-agents": "e34480b4dc28785ac4d477205e592ca3aaaa7b4bb9a413a425aeef058ed7230c",
+    "rea.software-analysis": "007716741ee76a600ef266e41dc377eabf196703e67b66d2fecc83ba79fea5c9"
+  },
+  "scope": "27 authored scenarios, one run per paired arm per model; human-readable rubrics, not independent human labels or statistical quality guarantee",
+  "review_status": "pending",
+  "results": [
+    {
+      "case_id": "diagnosing-bugs-1",
+      "skill_id": "matt-pocock.diagnosing-bugs",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "**问题排查与原因**\n函数 `f(xs)` 计算的是列表平均值。传入空列表 `[]` 时，`len(xs)` 的结果为 `0`，执行 `sum(xs) / len(xs)` 即 `0 / 0`，因此触发了 `ZeroDivisionError`。\n\n**修复方案**\n在计算前判断列表是否为空，返回 `None` 或默认值（如 `0`），或显式抛出更友好的异常：\n\n```python\ndef f(xs):\n    if not xs:\n        return 0  # 或 return None\n    return sum(xs) / len(xs)\n```\n\n或使用 Python 3.4+ 内置的 `statistics.mean`，其在空列表时会抛出清晰的 `StatisticsError`。",
+      "usage": {
+        "promptTokenCount": 291,
+        "candidatesTokenCount": 177,
+        "totalTokenCount": 468
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.000882,
+        "currency": "USD",
+        "tokens": {
+          "input": 291,
+          "output": 177,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 468,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "diagnosing-bugs-1",
+      "skill_id": "matt-pocock.diagnosing-bugs",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "**排查分析：**\n\n1. **观察到的现象**：\n   - `f([2, 4])` 返回 `3.0`（正常求平均值）。\n   - `f([])` 触发 `ZeroDivisionError`。\n2. **原因定位**：\n   - 代码第 2 行为 `return sum(xs)/len(xs)`。当传入空列表 `[]` 时，`len(xs)` 为 `0`，执行除法导致分母为 0 抛出异常。\n3. **修复建议**（需在调用前校验长度或在函数内处理边界）：\n   ```python\n   def f(xs):\n       if not xs:\n           return 0  # 或 raise ValueError(\"列表不能为空\") / return None，视业务而定\n       return sum(xs) / len(xs)\n   ```\n\n*注：当前环境未配置运行工具，上述结论基于静态代码逻辑推导，未进行实际运行时验证。*",
+      "usage": {
+        "promptTokenCount": 385,
+        "candidatesTokenCount": 217,
+        "totalTokenCount": 602
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.0011025,
+        "currency": "USD",
+        "tokens": {
+          "input": 385,
+          "output": 217,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 602,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "diagnosing-bugs-2",
+      "skill_id": "matt-pocock.diagnosing-bugs",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "**错误原因：**\n代码中使用了切片 `xs[1:]`，这会跳过列表的第一个元素（索引为 0 的项），只对从第二个元素开始的子列表求和。因此输入 `[3, 5]` 时只计算了 `[5]`，结果为 5。\n\n**修改方案：**\n直接对整个列表求和，去掉切片操作即可：\n\n```python\ndef total(xs):\n    return sum(xs)\n```\n\n修改后，输入 `[3, 5]` 将正确返回 `3 + 5 = 8`。",
+      "usage": {
+        "promptTokenCount": 269,
+        "candidatesTokenCount": 132,
+        "totalTokenCount": 401
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.00069675,
+        "currency": "USD",
+        "tokens": {
+          "input": 269,
+          "output": 132,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 401,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "diagnosing-bugs-2",
+      "skill_id": "matt-pocock.diagnosing-bugs",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "**问题分析：**\n代码中使用了切片 `xs[1:]`，这会跳过索引为 0 的第一个元素（在 `[3, 5]` 中即跳过了 `3`），只计算从第二个元素开始的和，因此返回结果是 5 而不是 8。\n\n**修改方案：**\n要求合计全部元素，直接对原列表求和即可，无需切片：\n\n```python\ndef total(xs):\n    return sum(xs)\n```\n\n**验证推导（未实际运行）：**\n- 输入 `xs = [3, 5]`\n- `sum([3, 5])` 结果为 `3 + 5 = 8`\n- 修复符合“合计全部元素”的要求。",
+      "usage": {
+        "promptTokenCount": 363,
+        "candidatesTokenCount": 165,
+        "totalTokenCount": 528
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.000891,
+        "currency": "USD",
+        "tokens": {
+          "input": 363,
+          "output": 165,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 528,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "diagnosing-bugs-3",
+      "skill_id": "matt-pocock.diagnosing-bugs",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "HTTP 502 说明网关/反向代理（如 Nginx、SLB）无法从上游服务获得有效响应。无应用日志时，按以下步骤定位：\n\n1. **查网关错误日志**：看 10:32 分 Nginx/SLB 的 `error.log`。重点关注是 `connect() failed`（服务未监听/挂了）、`Connection reset by peer`（上游主动断开）还是 `upstream timed out`。\n2. **查系统级异常**：\n   - 执行 `dmesg -T`、查看 `/var/log/messages`，排查 10:32 是否触发了 OOM-killer 导致上游进程被杀；\n   - 检查该时刻 JVM 发生 Full GC STW、Crash 或部署重启（Pod restart/Deployment）。\n3. **查监控指标**：看 10:32 前后的 CPU、内存、TCP 连接数、连接队列（backlog 溢出）及网卡带宽是否打满。\n4. **补齐监控防御**：配置网关记录上游 IP 与耗时（`$upstream_addr`、`$upstream_response_time`），开启系统指标报警。",
+      "usage": {
+        "promptTokenCount": 259,
+        "candidatesTokenCount": 270,
+        "totalTokenCount": 529
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.00120675,
+        "currency": "USD",
+        "tokens": {
+          "input": 259,
+          "output": 270,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 529,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "diagnosing-bugs-3",
+      "skill_id": "matt-pocock.diagnosing-bugs",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "针对 10:32 的偶发 502 且无直接日志，按以下四步排查：\n\n1. **查反向代理接入层（Nginx/SLB）**\n   * 看接入层 access/error 日志。重点关注 `$upstream_status`、`$upstream_response_time`。\n   * 区分是“连接被拒绝（Connection refused）”还是“读取超时（110 Connection timed out）”。\n\n2. **锁定对应时刻的后端实例状态（10:31~10:33）**\n   * **系统监控**：CPU 是否突发 100%、内存是否打满、连接数/FD 是否耗尽。\n   * **JVM/运行时**：检查是否发生 Full GC 导致长时间 Stop-the-World。\n   * **进程与容器**：检查应用是否发生 OOM Crash，看 `dmesg -T`、K8s 容器重启记录（OOMKilled）。\n\n3. **查网络与基础设施**\n   * 网卡丢包、TCP 队列溢出（`netstat -s | grep listen`）。\n   * 检查发布系统，10:32 是否有服务部署、滚动更新导致流量未切断而摘机。\n\n4. **止血与防御**\n   * 开启/补全网关访问日志与后端日志关联。\n   * 适当配置重试策略（如 `proxy_next_upstream`），应用层完善优雅下线。",
+      "usage": {
+        "promptTokenCount": 353,
+        "candidatesTokenCount": 333,
+        "totalTokenCount": 686
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.0015135,
+        "currency": "USD",
+        "tokens": {
+          "input": 353,
+          "output": 333,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 686,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "tdd-1",
+      "skill_id": "matt-pocock.tdd",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "实现方案如下（以 Python 为例）：\n\n1. **输入校验**：\n   - 检查类型是否为整数且排除布尔值（如 `not isinstance(n, int) or isinstance(n, bool)`）。\n   - 检查数值非负（`n < 0`），不满足则抛出异常或返回错误。\n\n2. **分段计费逻辑**：\n   - 当 `n <= 100` 时：总金额 = `n * 2`；\n   - 当 `n > 100` 时：前 100 件按 2 元计算，超出部分按 1 元计算，即总金额 = `100 * 2 + (n - 100) * 1` = `100 + n`。\n\n**参考代码**：\n```python\ndef calculate_fee(n):\n    if not isinstance(n, int) or isinstance(n, bool) or n < 0:\n        raise ValueError(\"件数必须为非负整数\")\n    return n * 2 if n <= 100 else 100 + n\n```\n\n边界说明：0 件为 0 元；100 件为 200 元；101 件为 201 元。",
+      "usage": {
+        "promptTokenCount": 276,
+        "candidatesTokenCount": 286,
+        "totalTokenCount": 562
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.0012795,
+        "currency": "USD",
+        "tokens": {
+          "input": 276,
+          "output": 286,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 562,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "tdd-1",
+      "skill_id": "matt-pocock.tdd",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "分段阶梯计费方案设计如下（方案提案）：\n\n### 1. 核心计算规则\n设件数为 $n$：\n- 若 $n \\le 100$：费用 $= n \\times 2$\n- 若 $n > 100$：费用 $= 100 \\times 2 + (n - 100) \\times 1 = 100 + n$\n\n### 2. 伪代码实现（提案）\n```python\ndef calculate_fee(count):\n    # 校验：非整数或负数抛出异常/拒绝\n    if not isinstance(count, int) or isinstance(count, bool) or count < 0:\n        raise ValueError(\"件数必须为非负整数\")\n    \n    if count <= 100:\n        return count * 2\n    return 100 + count\n```\n\n### 3. 边界与测试用例（待验证提案）\n- **异常拒绝**：`-1`、`0.5`、`\"10\"`、`True`（均抛出错误）\n- **边界与正常值**：\n  - `0` 件 $\\to$ 0 元\n  - `100` 件 $\\to$ 200 元\n  - `101` 件 $\\to$ 201 元\n  - `150` 件 $\\to$ 250 元",
+      "usage": {
+        "promptTokenCount": 371,
+        "candidatesTokenCount": 320,
+        "totalTokenCount": 691
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.00147825,
+        "currency": "USD",
+        "tokens": {
+          "input": 371,
+          "output": 320,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 691,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "tdd-2",
+      "skill_id": "matt-pocock.tdd",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "针对运费计算函数（输入：订单金额 `amount`，输出：运费或异常），设计行为测试用例覆盖正常、边界及异常场景：\n\n1. **异常/负数拦截（拒绝）**\n   - 输入 `-1` 或 `-0.01`，期望：抛出参数非法异常（拒绝）。\n\n2. **边界测试**\n   - 输入 `0`，期望：运费 `8` 元。\n   - 输入 `49.99`（略小于 50），期望：运费 `8` 元。\n   - 输入 `50.00`（刚好达标），期望：运费 `0` 元（免运）。\n   - 输入 `50.01`（略大于 50），期望：运费 `0` 元（免运）。\n\n3. **等价类普通取值**\n   - 小额订单（0 < x < 50）：输入 `20`，期望：运费 `8` 元。\n   - 免运订单（x > 50）：输入 `100`，期望：运费 `0` 元。\n\n4. **特殊类型测试（若支持非数值校验）**\n   - 输入 `null`、非数字字符，期望：拒绝并抛出异常。",
+      "usage": {
+        "promptTokenCount": 261,
+        "candidatesTokenCount": 286,
+        "totalTokenCount": 547
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.00126825,
+        "currency": "USD",
+        "tokens": {
+          "input": 261,
+          "output": 286,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 547,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "tdd-2",
+      "skill_id": "matt-pocock.tdd",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "基于需求（>=50免运费，<50收8元，<0拒绝），提议如下行为测试用例设计（无执行环境，标记为待验证方案）：\n\n**测试用例（输入 -> 预期输出/行为）**：\n1. **边界-免邮临界点**：`amount = 50.0` -> `0`（刚好免邮）\n2. **边界-刚好不免邮**：`amount = 49.99` -> `8`（收运费）\n3. **正常免邮区间**：`amount = 100.0` -> `0`\n4. **正常收运费区间**：`amount = 20.0` -> `8`\n5. **边界-零元订单**：`amount = 0.0` -> `8`\n6. **边界-极小负数**：`amount = -0.01` -> 抛出异常/拒绝错误\n7. **异常负数区间**：`amount = -10.0` -> 抛出异常/拒绝错误\n\n*注：以上为测试方案提议，尚未在实际环境中运行验证。*",
+      "usage": {
+        "promptTokenCount": 356,
+        "candidatesTokenCount": 264,
+        "totalTokenCount": 620
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.001257,
+        "currency": "USD",
+        "tokens": {
+          "input": 356,
+          "output": 264,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 620,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "tdd-3",
+      "skill_id": "matt-pocock.tdd",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "原则上，单纯样式变更**通常不需要新增单元测试**。若原测试已断言过颜色（如快照测试），只需更新原有测试基准即可。\n\n若团队规范强制对样式类名/属性做逻辑断言，仅需关注以下 1~2 项：\n\n1. **类名或设计令牌断言**：如果组件通过 `props` 映射类名（如 `btn-green`）或设计变量，新增/调整一个测试用例，断言渲染输出中包含绿色的 Class 或 Token。\n2. **主题配置映射测试**：若颜色由主题系统控制（如 `theme.primary = 'green'`），补充测试确保传入主色参数时正确解析为绿色属性值。\n\n**注意**：\n- 点击、禁用等行为测试无需重复编写；\n- 避免在单元测试中直接硬编码断言具体的 CSS 计算样式（如 `rgb(0, 255, 0)`），这种视觉回归更适合交由端到端（E2E）或视觉快照工具（如 Storybook/Chromatic）覆盖。",
+      "usage": {
+        "promptTokenCount": 252,
+        "candidatesTokenCount": 238,
+        "totalTokenCount": 490
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.0010815,
+        "currency": "USD",
+        "tokens": {
+          "input": 252,
+          "output": 238,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 490,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "tdd-3",
+      "skill_id": "matt-pocock.tdd",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "**结论：不需要新增单元测试。**\n\n**原因如下：**\n1. **纯样式变更不属于单元测试范畴**：按钮颜色属于 UI 表现层/视觉设计，文案与交互行为均未改变，没有产生新的业务逻辑或可观测的行为分支。单元测试应关注业务逻辑与状态契约，避免镜像实现细节。\n2. **避免脆弱测试**：若为 CSS 类名或色值强行编写单元测试，会导致测试与样式高度耦合，增加维护成本且无实际质量收益。\n\n**建议替代方案（按需）：**\n* **快照测试 / 视觉回归测试**：若项目已有端到端视觉比对（如 Playwright、Storybook 截图测试），更新对应基准图即可。\n* **人工走查**：通过 UI/设计走查验证颜色生效即可合流。",
+      "usage": {
+        "promptTokenCount": 347,
+        "candidatesTokenCount": 187,
+        "totalTokenCount": 534
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.0009615,
+        "currency": "USD",
+        "tokens": {
+          "input": 347,
+          "output": 187,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 534,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "code-review-1",
+      "skill_id": "matt-pocock.code-review",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "代码存在以下问题：\n\n1. **折扣计算逻辑错误**：按要求 `percent=20` 应代表“打八折”（即原价的 80%），当前公式 `price * percent / 100` 算出的是原价的 20%（优惠金额），而非折后价。应改为 `price * (100 - percent) / 100` 或 `price * (1 - percent / 100)`。\n2. **缺少负数价格校验**：未对输入 `price` 进行检查，若传入负数仍会计算并返回负值，违反“价格不能为负”的要求。应增加 `if price < 0: raise ValueError(...)`。\n3. **缺少折扣范围校验**：未限制 `percent` 的取值区间，若传入 `< 0` 或 `> 100` 会导致折后价格为负或高于原价。\n4. **浮点精度问题**：处理金额直接使用浮点运算可能出现精度误差（如 `0.1 + 0.2`），建议引入 `decimal.Decimal` 或在返回前四舍五入。",
+      "usage": {
+        "promptTokenCount": 275,
+        "candidatesTokenCount": 254,
+        "totalTokenCount": 529
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.00115875,
+        "currency": "USD",
+        "tokens": {
+          "input": 275,
+          "output": 254,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 529,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "code-review-1",
+      "skill_id": "matt-pocock.code-review",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "**审查结论：存在 2 处逻辑缺陷与校验缺失**\n\n1. **折扣计算逻辑错误（第 2 行）**\n   * **问题**：`percent=20` 意为打八折（实付 80%），但代码直接计算为 `price * 20 / 100`（实付 20%），变成了扣除 80% 的二折。\n   * **影响**：折后金额严重偏低，不符合业务定义。\n   * **修改建议**：应按折后比例计算，如改为 `price * (100 - percent) / 100`。\n\n2. **缺少输入参数合法性校验（第 1 行）**\n   * **问题**：未校验“价格不能为负”及折扣范围。\n   * **影响**：传入负数 `price` 时会返回负数价格；若 `percent` 不在 `[0, 100]`（如负数或超 100）会导致价格不合理。\n   * **修改建议**：在开头增加断言或异常抛出：\n     ```python\n     if price < 0 or not (0 <= percent <= 100):\n         raise ValueError(\"价格不能为负且折扣需在0-100之间\")\n     ```\n\n*注：以上为静态代码审查，未执行实际单元测试。*",
+      "usage": {
+        "promptTokenCount": 378,
+        "candidatesTokenCount": 314,
+        "totalTokenCount": 692
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.001461,
+        "currency": "USD",
+        "tokens": {
+          "input": 378,
+          "output": 314,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 692,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "code-review-2",
+      "skill_id": "matt-pocock.code-review",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "原代码存在缺陷：使用 `or \"missing\"` 会将 Python 中的假值（如 `0`、`False`、`\"\"`、`[]` 等）错误替换为 `\"missing\"`。\n\n可修改为以下两种方式之一：\n\n**方案 1：直接使用字典的 `get` 默认值（推荐）**\n```python\ndef get(key, cache):\n    return cache.get(key, \"missing\")\n```\n*注意：若键存在且其值本身就是 `None`，该方法会返回 `None` 而非 `\"missing\"`。*\n\n**方案 2：严格判定键是否存在（最稳妥）**\n```python\ndef get(key, cache):\n    return cache[key] if key in cache else \"missing\"\n```\n无论键对应的值是 `0`、`False`、空串还是 `None`，只要键存在都会原样保留；仅在键不存在时返回 `\"missing\"`。",
+      "usage": {
+        "promptTokenCount": 282,
+        "candidatesTokenCount": 210,
+        "totalTokenCount": 492
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.000999,
+        "currency": "USD",
+        "tokens": {
+          "input": 282,
+          "output": 210,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 492,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "code-review-2",
+      "skill_id": "matt-pocock.code-review",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "**缺陷审阅：**\n\n* **位置**：`cache.py:2`\n* **问题**：使用 `or \"missing\"` 会对假值进行短路判断。\n* **影响**：当缓存中键存在且值为 `0`、`False`、`\"\"`（空串）或 `None` 时，布尔判定为假，函数会错误返回 `\"missing\"`，违背“只在键不存在时返回 missing”的要求。\n\n**修改建议：**\n\n```python\ndef get(key, cache):\n    return cache.get(key, \"missing\")\n```\n*注：若缓存允许存入键且值恰好为 `None`，需严格判定包含关系：*\n```python\ndef get(key, cache):\n    return cache[key] if key in cache else \"missing\"\n```\n\n**局限性**：静态分析，未执行测试验证。",
+      "usage": {
+        "promptTokenCount": 385,
+        "candidatesTokenCount": 201,
+        "totalTokenCount": 586
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.0010425,
+        "currency": "USD",
+        "tokens": {
+          "input": 385,
+          "output": 201,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 586,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "code-review-3",
+      "skill_id": "matt-pocock.code-review",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "代码实现简洁正确，完全符合契约要求。\n\n**审阅意见：**\n1. **契约满足度**：在 Python 3 中，整数具有任意精度（不会溢出），且上游已确保入参为整数，因此 `a + b` 能准确返回两数之和。\n2. **规范建议**：虽然上游保证了类型，但建议添加类型注解与文档注释，以提升可读性并方便静态分析工具校验：\n   ```python\n   def add(a: int, b: int) -> int:\n       \"\"\"计算两个整数的和。\"\"\"\n       return a + b\n   ```\n3. **性能与边界**：时间复杂度为 $O(1)$，无外部依赖与副作用，无需额外防御性代码。可以直接在生产环境中使用。",
+      "usage": {
+        "promptTokenCount": 270,
+        "candidatesTokenCount": 177,
+        "totalTokenCount": 447
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.00086625,
+        "currency": "USD",
+        "tokens": {
+          "input": 270,
+          "output": 177,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 447,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "code-review-3",
+      "skill_id": "matt-pocock.code-review",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "**代码审阅报告**\n\n- **文件/位置**：`def add(a, b): return a + b`\n- **结论**：**通过**（满足契约要求）。\n\n**分析详情**：\n1. **正确性**：在已由上游保证 `a` 与 `b` 均为整数的契约前提下，Python 内置的 `+` 运算符能精确计算任意大小整数的和（自动支持大整数，无溢出风险），逻辑正确。\n2. **规范建议（可选）**：若需提高工程可读性与静态检查支持，可补充类型注解与文档字符串：\n   ```python\n   def add(a: int, b: int) -> int:\n       return a + b\n   ```\n\n**局限性**：\n纯静态文本分析，未执行实际运行环境测试。实现完全依赖上游输入的类型保证，若契约被破坏传入非数值类型，行为将不可预期。",
+      "usage": {
+        "promptTokenCount": 373,
+        "candidatesTokenCount": 212,
+        "totalTokenCount": 585
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.00107475,
+        "currency": "USD",
+        "tokens": {
+          "input": 373,
+          "output": 212,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 585,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "codebase-design-1",
+      "skill_id": "matt-pocock.codebase-design",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "针对小项目且每月税率变动的场景，不建议拆分微服务，推荐采用**共享税费领域模块（内部库/通用包）+ 外部化配置**的设计：\n\n1. **模块职责划分**：\n   - **`tax-core`（税费模块）**：沉淀统一的税费计算引擎与取整规则。封装“算税”纯函数，输入“商品金额、税目/类目、时间”，输出“税额与明细”。\n   - **订单/退款服务**：仅负责业务流转与快照持久化。订单调用算正向税；退款时按原订单税费比例逆向冲抵，避免退款时直接按新税率重新计算。\n\n2. **税率与规则管理**：\n   - 提取**生效时间维度的税率配置**（存入配置中心或数据库，如 Nacos/DB），包含字段：`类目、税率、生效开始时间、失效时间`。\n   - 税率变更仅更新配置，不改代码，两处共享同一套配置源。\n\n3. **落地方案**：\n   单体结构下作为独立 Package，多服务时发布为公用 Jar/SDK。下单时在订单表固化税率快照，退款直接按快照反算，彻底解决不同步与历史追溯问题。",
+      "usage": {
+        "promptTokenCount": 270,
+        "candidatesTokenCount": 303,
+        "totalTokenCount": 573
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.00133875,
+        "currency": "USD",
+        "tokens": {
+          "input": 270,
+          "output": 303,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 573,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "codebase-design-1",
+      "skill_id": "matt-pocock.codebase-design",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "针对小项目，避免过度设计为独立微服务，建议在单体代码库中收敛为**共享领域模块**（如 `tax` 模块或 Package）：\n\n1. **边界设计**：\n   - **对外接口**：暴露单一纯函数/类方法（如 `calculate_tax(items, region, date)`），入参只接收金额、税目、地区与业务发生时间（退款必须传入原订单时间，保证税率与下单一致）。\n   - **内部封装**：模块内封装易变逻辑，包括按生效时间段检索税率的配置表（或轻量数据库表）、阶梯及舍入规则。订单与退款服务完全解耦税率细节。\n\n2. **迁移步骤**：\n   - 提取公共方法，以单元测试固化现有两处计算用例与历史税率；\n   - 改造订单与退款服务，将复制的 100 行替换为调用该模块；\n   - 后续每月变动仅需在此模块中增补一条带生效日期的配置记录。",
+      "usage": {
+        "promptTokenCount": 354,
+        "candidatesTokenCount": 236,
+        "totalTokenCount": 590
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.0011505,
+        "currency": "USD",
+        "tokens": {
+          "input": 354,
+          "output": 236,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 590,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "codebase-design-2",
+      "skill_id": "matt-pocock.codebase-design",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "**不应该立刻抽象。**\n\n原因如下：\n\n1. **本质业务语义不同**：扣款属于高风险的核心交易状态流，涉及幂等、鉴权、风控和事务；打开帮助只是纯 UI 导航或只读交互。两者虽形式相似，但生命周期与演进方向完全不同。\n2. **警惕“偶发性重复”**：代码看似结构相似，但属于偶然巧合。过早抽象会形成脆弱的强耦合，导致未来任一业务发生变化时，统一执行器被迫引入大量 `if-else` 或无意义的配置项。\n3. **维护成本与收益倒挂**：每个逻辑仅有 3 行，即便完全保留现状，代码冗余和维护成本也极低。提前抽象不仅无法降本，反而增加了理解间接层的心智负担。\n\n**建议做法**：\n遵循“三次原则（Rule of Three）”。继续保持两个独立的点击处理函数；扣款侧独立抽离底层支付服务，导航侧走标准路由，不要在交互层强行捏造“万能执行器”。",
+      "usage": {
+        "promptTokenCount": 258,
+        "candidatesTokenCount": 239,
+        "totalTokenCount": 497
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.00108975,
+        "currency": "USD",
+        "tokens": {
+          "input": 258,
+          "output": 239,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 497,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "codebase-design-2",
+      "skill_id": "matt-pocock.codebase-design",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "**不应该立刻抽象。**\n\n原因如下：\n\n1. **变化动因完全不同**：扣款属于核心业务与资金流，未来可能增加防抖、风控、二次确认或审计日志；打开帮助属于辅助展示，可能演变为跳转页面或弹窗。两者的演进方向和失败成本截然不同。\n2. **偶合而非真正的重复**：这只是“偶然的结构相似”（Accidental Duplication），而非同一领域逻辑的重复代码。\n3. **避免过早抽象**：只有 3 行代码时，复制的维护成本极低。过早抽象成统一执行器，会导致后续为了适配两者的差异而引入条件分支（如 `if (isPayment)`），反而造成错误的强耦合，破坏代码的独立性与可读性。\n\n**建议**：保持现状、各司其职。仅在出现纯粹的通用横切关注点（如统一埋点、无业务属性的全局点击防抖）且有多个真实用例支持时，再提取独立的基础设施，而非业务执行器。",
+      "usage": {
+        "promptTokenCount": 342,
+        "candidatesTokenCount": 232,
+        "totalTokenCount": 574
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.0011265,
+        "currency": "USD",
+        "tokens": {
+          "input": 342,
+          "output": 232,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 574,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "codebase-design-3",
+      "skill_id": "matt-pocock.codebase-design",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "建议采用**防腐隔离层 + 定时缓存 + 降级容灾**架构：\n\n1. **接口防腐**：原有的换算接口签名保持不变，内部逻辑由查本地表切换为调用封装服务，20 个调用方完全无感知。\n2. **异步缓存（核心）**：汇率波动通常不要求毫秒级同步。启动后台任务每隔 5-30 分钟调用第三方 API 拉取最新汇率并写入本地 Redis/内存。调用方进行金额换算时**只读缓存**，实现本地计算，耗时毫秒级且避开远程依赖。\n3. **超时与降级**：\n   * **请求配置**：后台拉取第三方设置短超时（如连接 1s、读取 2s），失败配置有限重试（如 2 次指数退避）。\n   * **兜底机制**：若第三方超时或宕机，读取旧缓存或最近一次落库的历史汇率继续提供服务，同时触发系统告警。\n   * **熔断限流**：引入 Circuit Breaker，防止外部故障拖垮自身线程资源。",
+      "usage": {
+        "promptTokenCount": 258,
+        "candidatesTokenCount": 248,
+        "totalTokenCount": 506
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.0011235,
+        "currency": "USD",
+        "tokens": {
+          "input": 258,
+          "output": 248,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 506,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "codebase-design-3",
+      "skill_id": "matt-pocock.codebase-design",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "建议方案如下：\n\n1. **接口契约保持不变**：对外维持原有金额换算接口（如入参原币种、目标币种、金额），隐藏第三方 API 细节，避免 20 个调用方联动修改。\n2. **本地缓存防穿透与降级**：\n   - 换算逻辑优先读本地/Redis 缓存（设置较短 TTL，如 5~15 分钟）。\n   - 另存一份“最后已知有效汇率”作为底线降级兜底。\n3. **后台异步定时刷新**：由后台定时任务轮询第三方 API 更新缓存，用户请求直接读缓存完成计算，彻底解耦调用方延迟与外部网络波动。\n4. **超时与容灾控制**：\n   - 设严格超时（如调用 API 超时 1~2 秒）、重试（最多 1 次）及熔断。\n   - 触发超时或熔断时，自动回退使用旧汇率计算，并记录告警日志，保证换算高可用、调用方无感知。",
+      "usage": {
+        "promptTokenCount": 342,
+        "candidatesTokenCount": 236,
+        "totalTokenCount": 578
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.0011415,
+        "currency": "USD",
+        "tokens": {
+          "input": 342,
+          "output": 236,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 578,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "to-spec-1",
+      "skill_id": "matt-pocock.to-spec",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "**一周离线笔记开发计划**\n\n**技术选型**：纯前端（HTML+CSS+JS）+ 本地存储（IndexedDB 或 LocalStorage）。\n\n* **Day 1：数据层与原型**\n  * 定义笔记结构：`{id, title, content, updatedAt}`。\n  * 封装本地存储读写与删除方法，确保刷新/重启后数据持久化。\n\n* **Day 2：核心 CRUD 功能**\n  * 实现左侧列表与右侧编辑区。\n  * 完成“新建笔记”、“保存/修改内容（失焦或定时自动存）”、“删除笔记”。\n\n* **Day 3：搜索与排序**\n  * 实现搜索框：基于 `title.includes(keyword)` 实时过滤列表。\n  * 列表按 `updatedAt` 倒序排列。\n\n* **Day 4：边界与离线测试**\n  * 测试空内容、长文本、大量笔记下的性能。\n  * 彻底断网测试，验证退出、重启浏览器后数据完整性。\n\n* **Day 5：UI 细节与打包**\n  * 优化交互细节与基础样式；若需单文件分发，直接打包为单一 HTML 文件。",
+      "usage": {
+        "promptTokenCount": 263,
+        "candidatesTokenCount": 266,
+        "totalTokenCount": 529
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.00119475,
+        "currency": "USD",
+        "tokens": {
+          "input": 263,
+          "output": 266,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 529,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "to-spec-1",
+      "skill_id": "matt-pocock.to-spec",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "假设采用 Web 技术栈（纯前端 + LocalStorage/IndexedDB 离线存储）。计划如下：\n\n**任务 T1：端到端笔记增删改存**\n* **交付物**：单页应用原型，支持新建、编辑、删除并持久化。\n* **验收标准**：创建并修改一条笔记，关闭浏览器重新打开，数据完整保留且可删除。\n* **Blocked by**：None\n\n**任务 T2：标题关键词实时搜索**\n* **交付物**：顶部搜索框及列表即时过滤逻辑。\n* **验收标准**：输入关键词，列表仅展示标题匹配项；清空后恢复全量笔记。\n* **Blocked by**：T1\n\n**任务 T3：异常处理与可用性收尾**\n* **交付物**：空状态提示、删除二次确认及无网络离线验证。\n* **验收标准**：断网状态下功能完全可用；列表为空展示指引；误触删除有确认拦截。\n* **Blocked by**：T2",
+      "usage": {
+        "promptTokenCount": 456,
+        "candidatesTokenCount": 226,
+        "totalTokenCount": 682
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.0011895,
+        "currency": "USD",
+        "tokens": {
+          "input": 456,
+          "output": 226,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 682,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "to-spec-2",
+      "skill_id": "matt-pocock.to-spec",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "### 规格定义\n1. **形态**：本地 CLI 或极简桌面脚本（Python/Go），无 Web 服务。\n2. **输入**：源 CSV 路径、指定的 email 列名（或索引）。\n3. **逻辑**：\n   - 保留首个出现的有效 email 行；\n   - email 为空/纯空格时不视为重复，全量保留；\n   - 流式逐行处理，内存仅存 `Set<normalized_email>`，支撑大文件。\n4. **输出**：同目录或指定路径新建文件（默认加 `_deduped` 后缀），严禁覆盖源文件。\n\n---\n\n### 两天排期任务\n- **Day 1：核心逻辑与 CLI**\n  - **上午**：参数解析（输入路径、列名、输出路径）；实现 CSV 流式读写与去重判断（空值直通、Set 查重）。\n  - **下午**：异常处理（编码 utf-8/gbk、列不存在、文件不可读写、防同名覆盖）；CLI 运行测试。\n- **Day 2：校验与交付**\n  - **上午**：边界测试（空值、带空格、大小写混合、超大 CSV 性能压测与内存检查）。\n  - **下午**：构建独立可执行文件（如 PyInstaller），编写简易 README 与使用示例，交付验收。",
+      "usage": {
+        "promptTokenCount": 269,
+        "candidatesTokenCount": 306,
+        "totalTokenCount": 575
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.00134925,
+        "currency": "USD",
+        "tokens": {
+          "input": 269,
+          "output": 306,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 575,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "to-spec-2",
+      "skill_id": "matt-pocock.to-spec",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "### 规格说明\n1. **形态**：本地 CLI/脚本工具，不含 Web。\n2. **输入/输出**：接收输入 CSV 路径与指定的 email 列名；输出为指定的新 CSV，原文件只读不覆盖。\n3. **去重规则**：保留首个出现的非空 email 所在行；email 为空（null/空白）的记录全部保留，不视作重复。\n\n---\n\n### 任务规划\n\n- **TASK-1：端到端去重流水线**\n  - **交付物**：核心处理脚本（流式或分块读写）。\n  - **验收标准**：CLI 读取 CSV，按指定列去重（空值保留、重复保留首行），生成新文件，原文件未变动。\n  - **Blocked by**：None\n\n- **TASK-2：参数校验与边界异常处理**\n  - **交付物**：容错加固模块。\n  - **验收标准**：目标列不存在、输出路径已存在时明确报错中断，防意外覆盖；编码自动适配（UTF-8/GBK）。\n  - **Blocked by**：TASK-1",
+      "usage": {
+        "promptTokenCount": 462,
+        "candidatesTokenCount": 255,
+        "totalTokenCount": 717
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.00130275,
+        "currency": "USD",
+        "tokens": {
+          "input": 462,
+          "output": 255,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 717,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "to-spec-3",
+      "skill_id": "matt-pocock.to-spec",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "面对模糊需求，下一步的核心是**主动设限、逆向对齐**，推动从“开放题”变成“选择题”：\n\n1. **准备方案选项（提报清单）**：\n   - 梳理 2-3 个典型场景（如：对内研发/知识库提效助手 vs 对外客服/营销转化助手）。\n   - 对应给出轻量级（调用商用 API/套壳套件）、中量级（开源模型+微调+RAG）的落地路径与大致成本区间。\n\n2. **发起定向对齐沟通**：\n   - 约老板 15-20 分钟快速碰头，带上述方案请其拍板。\n   - 重点确认：核心想解决谁的痛点？预期上线周期与预算量级？考核指标是效率提升还是业务增收？\n\n3. **设定边界与产出**：\n   - 沟通后 24 小时内输出《单页需求定义（One-pager）》明确范围、平台载体及技术路线，获得书面/口头确认后启动立项。",
+      "usage": {
+        "promptTokenCount": 252,
+        "candidatesTokenCount": 246,
+        "totalTokenCount": 498
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.0011115,
+        "currency": "USD",
+        "tokens": {
+          "input": 252,
+          "output": 246,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 498,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "to-spec-3",
+      "skill_id": "matt-pocock.to-spec",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "当前需求处于极早期模糊阶段，下一步核心是**对齐边界与澄清目标**，避免盲目研发。\n\n**行动步骤：**\n1. **假设反推（准备选项）：** 预设 2~3 个典型方向（如：内部员工效率提效、客服业务降本、或核心产品嵌入 AI 功能），明确各自价值。\n2. **老板对齐会（核心澄清）：**\n   - **目标用户与痛点：** 给谁用？解决最痛的一个问题是什么？\n   - **预期成效（ROI）：** 期望带来收入、效率提升还是品牌影响力？\n   - **平台与形式：** 网页、App、飞书/企微机器人还是独立硬件？\n   - **资源与周期：** 预期多久出 Demo？有无调用商业模型或采购算力的预算？\n3. **输出最小可行定义（MVP）：** 结合反馈，输出一份单页说明书（PRD 雏形），锁定单点核心场景。\n\n**下一步交付物：** 《智能助手立项澄清清单与场景建议表》（1页内）。",
+      "usage": {
+        "promptTokenCount": 445,
+        "candidatesTokenCount": 243,
+        "totalTokenCount": 688
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.001245,
+        "currency": "USD",
+        "tokens": {
+          "input": 445,
+          "output": 243,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 688,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "handoff-1",
+      "skill_id": "matt-pocock.handoff",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "【交接事项：修复导入中文乱码】\n\n1. 目标：解决数据导入时的中文乱码问题。\n2. 当前进展：\n   - 根因已定位：`loader.py:18` 中字符集编码写死了 `latin1`。\n   - 状态：**尚未进行代码修改**（切勿认为已修复）。\n   - 复现记录与环境信息已保存在 `artifacts/repro.txt`，可直接参考复现。\n3. 明日待办计划：\n   - 第一步：先评估并确定编码兼容策略（如默认转 UTF-8、自动检测编码，或保留原编码回退机制）。\n   - 第二步：待方案明确后，再修改 `loader.py` 相关实现。\n   - 第三步：基于测试集和复现用例执行回归验证。",
+      "usage": {
+        "promptTokenCount": 288,
+        "candidatesTokenCount": 187,
+        "totalTokenCount": 475
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.00091725,
+        "currency": "USD",
+        "tokens": {
+          "input": 288,
+          "output": 187,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 475,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "handoff-1",
+      "skill_id": "matt-pocock.handoff",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "【交接文档】\n\n- 目标：修复导入中文乱码问题。\n- 当前状态：未修复，代码尚未修改。\n- 已完成与证据：已定位问题根因在 `loader.py:18`，此处错误使用了 `latin1` 编码；具体复现记录参见 `artifacts/repro.txt`。\n- 待解决问题：编码兼容策略尚未敲定（需评估是否统一采用 utf-8 或提供回退机制）。\n- 明日下一步：\n  1. 讨论并确定编码兼容策略；\n  2. 修改 `loader.py:18` 的编码实现；\n  3. 执行回归测试验证修复效果。",
+      "usage": {
+        "promptTokenCount": 400,
+        "candidatesTokenCount": 149,
+        "totalTokenCount": 549
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.00085875,
+        "currency": "USD",
+        "tokens": {
+          "input": 400,
+          "output": 149,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 549,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "handoff-2",
+      "skill_id": "matt-pocock.handoff",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "**工作交接**\n\n* **当前进展**：昨日完成测试验证，12 个测试用例全部通过。今日对 `parser.py` 进行了代码修改，修改后尚未重新执行测试套件。\n* **主要风险**：解析逻辑针对“空行”的处理可能存在潜在缺陷，存在解析异常的风险。\n* **相关产物**：昨日测试日志见 `logs/yesterday.txt`。\n* **后续建议**：\n  1. 补充并针对空行边界场景进行测试用例覆盖；\n  2. 针对修改后的 `parser.py` 重新运行全量测试，确保无回归问题。",
+      "usage": {
+        "promptTokenCount": 267,
+        "candidatesTokenCount": 144,
+        "totalTokenCount": 411
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.00074025,
+        "currency": "USD",
+        "tokens": {
+          "input": 267,
+          "output": 144,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 411,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "handoff-2",
+      "skill_id": "matt-pocock.handoff",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "**交接记录**\n\n* **目标与背景**：维护与更新解析模块（parser.py）。\n* **已确认工作**：昨天 12 个测试全部通过（对应记录参考产物：`logs/yesterday.txt`）。\n* **今日变更**：已对 `parser.py` 进行修改。\n* **未运行/待验证**：代码修改后尚未重新运行测试套件进行回归验证。\n* **剩余风险**：处理空行时的潜在边界异常。\n* **下一步操作**：针对空行场景补充或检查用例，并重新执行全部测试，确认修改未引入回归问题。",
+      "usage": {
+        "promptTokenCount": 379,
+        "candidatesTokenCount": 140,
+        "totalTokenCount": 519
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.00080925,
+        "currency": "USD",
+        "tokens": {
+          "input": 379,
+          "output": 140,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 519,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "handoff-3",
+      "skill_id": "matt-pocock.handoff",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "**任务交接：req-17 异常挂起**\n\n1. **当前状态**：服务商返回 `UNKNOWN`，未获取到有效请求回执；根据计费规则判断存在扣费风险。\n2. **唯一标识**：`req-17`\n3. **潜在风险**：盲目重试可能导致重复扣费；直接放弃可能丢失已扣费的有效任务结果。\n4. **后续动作建议**：\n   - **禁止直接重试**：暂停新建相同业务请求，避免重复计费。\n   - **状态核实**：优先使用 `req-17` 轮询或调用服务商的任务查询/对账接口，核实该请求的真实执行状态与扣费凭证。\n   - **超时对账**：若服务商无查询接口，需记录挂起时间，次日调取账单对账；确认未扣费后再行重试，若已扣费则走补单或人工退款流程。",
+      "usage": {
+        "promptTokenCount": 261,
+        "candidatesTokenCount": 220,
+        "totalTokenCount": 481
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.00102075,
+        "currency": "USD",
+        "tokens": {
+          "input": 261,
+          "output": 220,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 481,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "handoff-3",
+      "skill_id": "matt-pocock.handoff",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "**任务交接：服务商调用异常处理**\n\n1. **目标与状态**：处理唯一请求号 `req-17` 的受阻任务。当前调用失败/挂起，未完成闭环。\n2. **已知事实与约束**：\n   - 状态：服务商返回 `UNKNOWN`，无有效请求回执（未确认成功或失败）。\n   - 风险：下游可能已扣费或已开始执行，禁止盲目重试以防重复计费/重复执行。\n3. **已确认工作**：记录异常状态及关联标识 `req-17`。\n4. **未决问题**：实际扣费情况未知、服务端真实执行状态未定。\n5. **下一步具体动作**：\n   - 凭 `req-17` 调用服务商状态查询/对账接口，核验服务端执行记录与真实扣费结果；\n   - 若查询仍无记录或不支持反查，联系服务商人工客服/工单核对账单明细后再定夺重试或回滚。",
+      "usage": {
+        "promptTokenCount": 373,
+        "candidatesTokenCount": 233,
+        "totalTokenCount": 606
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.0011535,
+        "currency": "USD",
+        "tokens": {
+          "input": 373,
+          "output": 233,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 606,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "teach-1",
+      "skill_id": "matt-pocock.teach",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "我们可以把齿轮想象成**手拉手走步**：\n\n1. **看方向**：\n两个咬合的齿轮就像面对面推手，一个顺时针转，另一个就会被推着**反方向（逆时针）**转。\n* 结论：**方向相反**。\n\n2. **算转速**：\n齿轮转动时，每个咬合的齿是“一一对应”过去的。\n* 驱动轮有 12 个齿，大轮有 24 个齿。\n* 小轮转完 1 圈（走过 12 齿），大轮才走了一半（12/24 = 半圈）。\n* 小轮必须转 2 圈（走过 24 齿），大轮才能转完 1 整圈。\n* 算式：`24 ÷ 12 = 2`。大轮的齿数是小轮的 2 倍，转速就是小轮的 **一半（1/2）**。\n\n**总结**：\n12 齿带动 24 齿时，大轮的**转动方向和小轮相反**，**转速只有小轮的一半**（小齿轮转 2 圈，大齿轮才转 1 圈）。",
+      "usage": {
+        "promptTokenCount": 268,
+        "candidatesTokenCount": 285,
+        "totalTokenCount": 553
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.00126975,
+        "currency": "USD",
+        "tokens": {
+          "input": 268,
+          "output": 285,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 553,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "teach-1",
+      "skill_id": "matt-pocock.teach",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "齿轮咬合就像两人手拉手反向走。我们掌握两个规则即可：\n\n1. **方向相反**：两个互相咬合的齿轮，转向必定相反。驱动轮顺时针转，被带动的轮子就逆时针转。\n2. **转速按齿数算**：齿数多的转得慢。\n计算公式：**从动轮转速 = 驱动轮转速 × (驱动轮齿数 ÷ 从动轮齿数)**。\n（注：这里默认齿轮紧密咬合，无打滑）\n\n**例子**：用 12 齿齿轮带动 24 齿齿轮。\n- **转向**：从动轮与驱动轮**相反**。\n- **转速**：12 ÷ 24 = 0.5（或 1/2）。说明驱动轮转 1 圈，24 齿轮只转半圈，转速变慢为原先的**一半**。\n\n---\n**小测验**：\n如果 12 齿轮顺时针转了 2 圈，24 齿轮会怎么转？\n\n**答案与解析**：\n逆时针转 1 圈。\n（解析：转向相反即逆时针；转数 = 2圈 × (12 ÷ 24) = 1圈）",
+      "usage": {
+        "promptTokenCount": 398,
+        "candidatesTokenCount": 301,
+        "totalTokenCount": 699
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.00142725,
+        "currency": "USD",
+        "tokens": {
+          "input": 398,
+          "output": 301,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 699,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "teach-2",
+      "skill_id": "matt-pocock.teach",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "在 Python 中，`len(xs)` 表示列表里元素的个数。求平均值时，除数不能为零（数学上不能除以 0）。\n\n**例子对比：**\n1. **正常列表 `xs = [2, 4]`**  \n   - `sum(xs)` 得 6，`len(xs)` 是 2。  \n   - `6 / 2 = 3.0`，计算成功。\n\n2. **空列表 `xs = []`**  \n   - 列表中没有任何元素，`len(xs)` 等于 0。  \n   - 执行 `sum(xs) / len(xs)` 相当于 `0 / 0`，Python 会直接崩溃并抛出 **`ZeroDivisionError: division by zero`** 错误。\n\n**规范写法：** 计算前先判断列表是否为空：\n```python\navg = sum(xs) / len(xs) if xs else 0\n```\n\n---\n**小练习：**  \n请写一个函数 `get_average(nums)`：当输入列表有数字时返回平均值；如果是空列表 `[]`，则返回 `None`。快动手试试吧！",
+      "usage": {
+        "promptTokenCount": 263,
+        "candidatesTokenCount": 259,
+        "totalTokenCount": 522
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.0011685,
+        "currency": "USD",
+        "tokens": {
+          "input": 263,
+          "output": 259,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 522,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "teach-2",
+      "skill_id": "matt-pocock.teach",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "在 Python 中，平均值的算法是“总和除以个数”：`sum(xs) / len(xs)`。\n\n**1. 正常情况**\n若 `xs = [2, 4]`：\n* `sum(xs)` 得到 `6`\n* `len(xs)` 得到 `2`\n* `6 / 2` 结果为 `3.0`，计算成功。\n\n**2. 为什么空列表不行？**\n若 `xs = []`：\n* `sum(xs)` 结果是 `0`\n* `len(xs)`（列表元素个数）结果是 `0`\n* 代入公式就变成了 `0 / 0`。\n**机制原因**：数学中除数不能为 0。Python 遇到除以 0 时会直接报错并崩溃（抛出 `ZeroDivisionError`）。因此计算前必须先检查列表是否为空。\n\n---\n\n**小练习**\n执行 `sum([0, 0]) / len([0, 0])` 会像空列表一样报错吗？为什么？\n\n**参考答案与解析**\n**不会报错。**\n因为 `[0, 0]` 并不是空列表，它的长度 `len([0, 0])` 是 `2`。式子实际为 `0 / 2`，结果为 `0.0`。被除数可以是 0，只要除数不为 0 就不会报错。",
+      "usage": {
+        "promptTokenCount": 393,
+        "candidatesTokenCount": 317,
+        "totalTokenCount": 710
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.0014835,
+        "currency": "USD",
+        "tokens": {
+          "input": 393,
+          "output": 317,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 710,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "teach-3",
+      "skill_id": "matt-pocock.teach",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "该说法是错误的。实际结果是输出转速**减半**，而非翻倍。\n\n**解释与纠正：**\n\n在理想无滑移的外啮合齿轮传动中，两齿轮在分度圆啮合处的**线速度大小相等**（$v_1 = v_2$）。\n\n线速度与转速关系为 $v = \\omega r$（或 $v \\propto n \\cdot z$，其中 $n$ 为转速，$z$ 为齿数）。因此两轮满足：\n$$n_1 \\cdot z_1 = n_2 \\cdot z_2$$\n\n由此可得传动比与转速关系：\n$$\\frac{n_2}{n_1} = \\frac{z_1}{z_2} = \\frac{12}{24} = \\frac{1}{2}$$\n\n即输出轴转速 $n_2 = 0.5 \\times n_1$。\n\n**直观理解：**\n主动轮（12齿）转动一整圈只送出12个齿，而从动轮（24齿）转一圈需要经过24个齿。因此，主动轮转动 **2 圈**，从动轮才刚好转动 **1 圈**。\n\n**结论：**\n小齿轮带动大齿轮是**减速增扭**过程，输出转速变为输入的一半（同时转向相反）。若想转速翻倍，需用 24 齿作为主动轮带动 12 齿从动轮。",
+      "usage": {
+        "promptTokenCount": 260,
+        "candidatesTokenCount": 344,
+        "totalTokenCount": 604
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.001485,
+        "currency": "USD",
+        "tokens": {
+          "input": 260,
+          "output": 344,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 604,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "teach-3",
+      "skill_id": "matt-pocock.teach",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "这是常见的误解，实际情况恰恰相反：**输出转速会减半**。\n\n**具体过程：**\n把两个齿轮看作互相咬合的链条。设主动轮为 12 齿，从动轮为 24 齿。\n由于齿与齿逐个啮合、互不打滑，主动轮转满一整圈，仅送出 12 个齿；但从动轮转一整圈需要 24 个齿，因此它只转了半圈（0.5 圈）。\n即：**主动轮转速是 1，从动轮转速只有 0.5**。传动比为 $24/12 = 2$，这是减速增扭，而不是增速。\n\n**物理规律：**\n在理想刚体啮合无打滑的前提下，两轮接触处的**线速度相同**。根据 $v = \\omega \\cdot r$（或齿数 $Z$），角速度与齿数成反比：\n$$\\frac{n_{输出}}{n_{输入}} = \\frac{Z_{输入}}{Z_{输出}} = \\frac{12}{24} = 0.5$$\n\n---\n**小练习：**\n若改用 24 齿轮带动 12 齿轮，输出转速会变为原来的几倍？\n\n**答案与解析：**\n**2 倍**。此时大轮带小轮，大轮转 1 圈送出 24 个齿，小轮需转 2 圈来接收，转速才会翻倍。",
+      "usage": {
+        "promptTokenCount": 390,
+        "candidatesTokenCount": 351,
+        "totalTokenCount": 741
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.00160875,
+        "currency": "USD",
+        "tokens": {
+          "input": 390,
+          "output": 351,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 741,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "to-questionnaire-1",
+      "skill_id": "matt-pocock.to-questionnaire",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "主管您好！为评估先上线“工单自动分类”还是“常见问题自动回复”，请协助填写：\n\n1. **体量与重复度**：当前日均工单量约多少？其中能用标准话术直接解决的重复问题占比估算（如：<30% / 30-60% / >60%）？\n2. **人工分类耗时**：目前坐席平均花在判单、转派上的时间占比大概是多少？\n3. **容错与资损风险**：若自动回复出现理解偏差或答非所问，客户通常反应如何？是否会导致客诉升级、退款损失或严重差评？（轻微/中等/严重）\n4. **人工介入机制**：目前系统是否支持“先自动回复，若用户追问立即无缝切人工”？\n5. **短期最核心痛点**：当前更迫切需要解决的是“首响时长与坐席回复负荷”，还是“派单不准导致的流转与积压”？\n\n感谢支持！",
+      "usage": {
+        "promptTokenCount": 266,
+        "candidatesTokenCount": 236,
+        "totalTokenCount": 502
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.0010845,
+        "currency": "USD",
+        "tokens": {
+          "input": 266,
+          "output": 236,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 502,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "to-questionnaire-1",
+      "skill_id": "matt-pocock.to-questionnaire",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "这是一份供售后主管填写的决策评估问卷：\n\n**关于售后工单智能化方向的调研**\n目的：评估优先上线“工单自动分类”还是“工单自动回复”。若不确定具体数值，可填写预估区间。\n\n**一、错误回复的影响**\n1. 若系统给客户发送了不准确或错误的自动回复，通常会带来哪些负面后果？\n2. 出现错误回复时，平均单次可能造成的客诉赔偿或额外挽回成本大约是多少？\n3. 您认为团队对自动回复出错率的容忍上限是多少（如：必须低于 1%）？\n\n**二、工单量与效益评估**\n4. 目前售后团队平均每天处理的工单总量大约是多少？\n5. 问题高度固定、适合标准模板直接回复的工单，大约占总量的百分之几？\n6. 目前人工对工单进行阅读并打标签分类，平均每单耗时多久？\n\n**三、倾向选择**\n7. 综合考虑提效与客诉风险，您更倾向优先上线哪个功能？",
+      "usage": {
+        "promptTokenCount": 421,
+        "candidatesTokenCount": 239,
+        "totalTokenCount": 660
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.001212,
+        "currency": "USD",
+        "tokens": {
+          "input": 421,
+          "output": 239,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 660,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "to-questionnaire-2",
+      "skill_id": "matt-pocock.to-questionnaire",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "请三位老师根据实际教学情况填写以下问卷，协助评估是否采购自动批改工具：\n\n1. **题型分布**：您负责的作业/考卷中，客观题（单选、填空）与主观题（简答、论述、计算）的题量或分值比例大致是多少？\n2. **复核时间**：若引入工具，您预计每次批改平均愿意花多少时间复核系统结果？人工批改与“工具初筛+人工复核”相比，能否显著节省时间？\n3. **错判成本**：在您的教学场景中，系统发生误判（如漏给分、误给分）对教学评价和学生反馈的负面影响有多大？（极高/中等/可接受）\n4. **采购意向**：综合考虑上述因素，您是否支持采购？若支持，您最看重哪个核心功能？\n\n请各位老师依实作答，感谢配合！",
+      "usage": {
+        "promptTokenCount": 267,
+        "candidatesTokenCount": 214,
+        "totalTokenCount": 481
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.00100275,
+        "currency": "USD",
+        "tokens": {
+          "input": 267,
+          "output": 214,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 481,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "to-questionnaire-2",
+      "skill_id": "matt-pocock.to-questionnaire",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "**关于是否引入自动批改工具的调研问卷**\n\n各位老师好，为评估是否采购自动批改工具，需了解您的实际批改情况。请依现状填写（若不确定可填“未知”）：\n\n**一、 题型分布**\n1. 在您批改的作业/试卷中，客观题（选择、填空等）大约占多大比例？\n[     ]（或填未知）\n2. 主观题（简答、作文、证明等）大约占多大比例？\n[     ]（或填未知）\n\n**二、 复核时间**\n3. 目前您单次作业平均耗费多长时间进行批改与核对？\n[     ]（或填未知）\n4. 若系统先行自动批改，您预计每次需要预留多长时间人工复核？\n[     ]（或填未知）\n\n**三、 错判容忍度与影响**\n5. 客观题若发生错判，对学生成绩或教学进度的影响程度如何？\n[     ]\n6. 主观题若发生误判或漏判，修正错判的沟通与时间成本多大？\n[     ]\n\n**四、 采购倾向**\n7. 综合考虑上述因素，您目前是否支持采购该工具？\n[ ] 支持  [ ] 暂不支持  [ ] 弃权/视试用情况而定",
+      "usage": {
+        "promptTokenCount": 422,
+        "candidatesTokenCount": 310,
+        "totalTokenCount": 732
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.001479,
+        "currency": "USD",
+        "tokens": {
+          "input": 422,
+          "output": 310,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 732,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "to-questionnaire-3",
+      "skill_id": "matt-pocock.to-questionnaire",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "原问题存在双重诱导（“优秀”、“完全替代”），若用于产品决策，需拆解为中立、可量化的评估问题：\n\n1. **整体替代可行性评估（量化分级）**  \n   “在您的日常服务咨询中，您认为 AI 客服能独立解决多大比例的问题？”  \n   *选项：0-25% / 26-50% / 51-75% / 76-100%*\n\n2. **场景边界与分工（指导路线图）**  \n   “您认为哪些类型的咨询最需要人工客服介入？哪些场景适合优先由 AI 处理？”\n\n3. **效果与体验对比（发现短板）**  \n   “与人工客服相比，当前 AI 客服在解决问题的效率和准确性上表现如何？”  \n   *选项：远不如人工 / 略逊于人工 / 基本持平 / 优于人工*\n\n4. **决策倾向（满意度与意愿）**  \n   “如果将部分人工服务全面切换为 AI 自动应答，您的接受程度是？”  \n   *选项：完全无法接受至完全接受（1-5分）*",
+      "usage": {
+        "promptTokenCount": 254,
+        "candidatesTokenCount": 267,
+        "totalTokenCount": 521
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.00119175,
+        "currency": "USD",
+        "tokens": {
+          "input": 254,
+          "output": 267,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 521,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "to-questionnaire-3",
+      "skill_id": "matt-pocock.to-questionnaire",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "可拆解为以下按决策重要性排序的客观问题，供用户或调研对象评估：\n\n1. **解决能力**：在您近期的咨询中，AI 客服完全独立解决问题的比例大约是多少？（选项：0-25% / 26-50% / 51-75% / 76-100% / 不确定）\n2. **场景边界**：遇到哪类业务场景时，您认为必须由人工客服介入处理？\n3. **转接体验**：当 AI 客服无法解决问题时，您认为当前转接人工客服的流畅度如何？（1分非常不顺畅至5分非常顺畅）\n4. **替代倾向**：在常规咨询场景下，如果 AI 客服能实时解决，您对“不提供人工客服”的接受程度如何？（1分完全不接受至5分完全接受）\n\n**改写重点**：剔除“优秀”“完全替代”等主观引导词，聚焦“解决率、必须人工的场景、转接体验及用户接受度”，为自动化边界划定提供量化依据。",
+      "usage": {
+        "promptTokenCount": 409,
+        "candidatesTokenCount": 248,
+        "totalTokenCount": 657
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.00123675,
+        "currency": "USD",
+        "tokens": {
+          "input": 409,
+          "output": 248,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 657,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "writing-for-agents-1",
+      "skill_id": "matt-pocock.writing-for-agents",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "可直接使用的 Agent 指令如下：\n\n```markdown\n# 触发条件\n仅当任务涉及代码变更时执行以下流程；非代码任务跳过。\n\n# 执行步骤\n1. 文档阅读：修改代码前，必须完整阅读 `docs/README.md` 与 `docs/testing.md`，严格遵循其中的开发规范与测试指引。\n2. 变更实施：按规范完成代码编写与修改。\n3. 严格测试：\n   - 依据 `docs/testing.md` 编写或补充测试用例。\n   - 运行全量相关测试套件，确保用例 100% 通过。\n   - 检查并排除任何回归风险。\n4. 任务结束：确认测试通过且无遗留问题后，提交变更并终止任务。\n```",
+      "usage": {
+        "promptTokenCount": 280,
+        "candidatesTokenCount": 178,
+        "totalTokenCount": 458
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.0008775,
+        "currency": "USD",
+        "tokens": {
+          "input": 280,
+          "output": 178,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 458,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "writing-for-agents-1",
+      "skill_id": "matt-pocock.writing-for-agents",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "建议修改为以下 Agent 指令：\n\n**触发条件**：仅在涉及代码变更（新增、修改、重构）的任务时启用；纯文档、问答或配置查询等任务不适用。\n\n**执行流程**：\n1. **预读文档**：修改代码前，必须完整阅读 `docs/README.md` 与 `docs/testing.md`。\n2. **代码实现**：严格遵循前述文档规范完成开发。\n3. **针对测试**：按照 `docs/testing.md` 要求执行测试，确保测试用例覆盖变更点。\n\n**完成标准**：\n- 变更代码已通过全量相关测试；\n- 输出测试运行结果及结论；\n- 确认无未决缺陷后，方可结束任务并回复。",
+      "usage": {
+        "promptTokenCount": 395,
+        "candidatesTokenCount": 171,
+        "totalTokenCount": 566
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.0009375,
+        "currency": "USD",
+        "tokens": {
+          "input": 395,
+          "output": 171,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 566,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "writing-for-agents-2",
+      "skill_id": "matt-pocock.writing-for-agents",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "请使用以下 Prompt（系统指令）：\n\n---\n\n请审阅提供的代码变更（git diff）。严格遵守以下规则：\n1. **范围限制**：只检查当前 diff 涉及的内容，不审查未修改的上下文。\n2. **只读权限**：禁止重写、修改或生成修复后的完整文件，仅提供审查意见。\n3. **精准定位**：若发现问题（如 Bug、安全漏洞、边界缺陷、严重性能隐患），必须明确引用对应文件的具体行号，并简要说明原因及改进建议。\n4. **明确反馈**：若审查后未发现明显问题，必须直接且明确回复：“未发现明显问题”。",
+      "usage": {
+        "promptTokenCount": 260,
+        "candidatesTokenCount": 146,
+        "totalTokenCount": 406
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.0007425,
+        "currency": "USD",
+        "tokens": {
+          "input": 260,
+          "output": 146,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 406,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "writing-for-agents-2",
+      "skill_id": "matt-pocock.writing-for-agents",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "**代码审阅指令：**\n\n你是一名严格的代码审查员。请按以下规则审阅提供的代码：\n\n1. **审查范围**：仅检查本次提供的 diff（变更内容），不得推测或延伸至未修改的上下文。\n2. **权限限制**：仅进行分析与评估，严禁直接修改文件或生成完整替换代码。\n3. **问题反馈规范**：\n   - 若发现 Bug、安全漏洞、性能缺陷或明显坏味道，必须精准引用对应文件的**行号**并简要指出问题及改进建议。\n   - 引用格式：`[文件名:行号] 问题描述`。\n4. **无问题反馈**：若审阅后未发现明确缺陷，必须直接且明确回复：“未发现问题”。\n\n请保持客观、严谨，直接输出审查结果，避免冗余寒暄。",
+      "usage": {
+        "promptTokenCount": 375,
+        "candidatesTokenCount": 186,
+        "totalTokenCount": 561
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.00097875,
+        "currency": "USD",
+        "tokens": {
+          "input": 375,
+          "output": 186,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 561,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "writing-for-agents-3",
+      "skill_id": "matt-pocock.writing-for-agents",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "建议将指令优化为如下规则：\n\n**【本地文档修订指令】**\n1. **权限范围**：仅限本地文档的编辑、修订与内容校验；遇到不确定处，基于上下文推测并明确标注待确认，严禁盲目臆测。\n2. **操作边界**：可直接修改与保存本地文件，但**严禁自动提交（commit/push）与发布部署**。\n3. **确认机制**：所有版本提交及部署动作，必须在收到用户的**明确指令**后方可执行。修订完成后，仅提供修改摘要并等待指示。",
+      "usage": {
+        "promptTokenCount": 266,
+        "candidatesTokenCount": 130,
+        "totalTokenCount": 396
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.000687,
+        "currency": "USD",
+        "tokens": {
+          "input": 266,
+          "output": 130,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 396,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "writing-for-agents-3",
+      "skill_id": "matt-pocock.writing-for-agents",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "建议修改为如下指令规范：\n\n**适用范围：** 仅限本地文档的修订与检查任务。\n\n**工作流程与权限规则：**\n1. **编辑与检查（自动执行）：** 获得授权后，可自主编辑、校对和优化本地文档内容；遇到存疑或不明确的内容，严禁主观臆测，须标记疑问并向用户求证。\n2. **提交与部署（严格受控）：** 默认禁止自动提交（commit/push）或部署。仅在用户发出明确指令（如“确认提交并部署”）后，方可执行相关操作。\n3. **完成标准：** 本地修改与自检完成后，输出修改摘要与待确认清单，等待用户下一步指令。",
+      "usage": {
+        "promptTokenCount": 381,
+        "candidatesTokenCount": 163,
+        "totalTokenCount": 544
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.000897,
+        "currency": "USD",
+        "tokens": {
+          "input": 381,
+          "output": 163,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 544,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 0.75,
+          "output": 3.75,
+          "cache_read": 0.075,
+          "cache_write": null,
+          "max_input_tokens": 1000000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16",
+          "valid_until": "2026-12-31"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    }
+  ],
+  "elapsed_seconds": 462.05,
+  "transport_status": "passed"
+}

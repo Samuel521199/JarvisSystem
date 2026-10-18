@@ -1,0 +1,30 @@
+{
+  "version": "0.1.29",
+  "captured_at": "2026-10-16T14:10:07.269517+00:00",
+  "status": "passed",
+  "tests_run": 396,
+  "passed": 394,
+  "skipped": 2,
+  "failures": 0,
+  "errors": 0,
+  "elapsed_seconds": 217.46,
+  "previous_attempt": "396 tests; one queue_version_changed error while source version was changed from 0.1.28 to 0.1.29 during the run. Repeated with the version fixed; no check relaxed.",
+  "source_sha256": {
+    "apps/web/workbench.js": "08aa3b75f901c36fc8dbc2218ffbd5f5d51886e454764af719165b3c41c7dd81",
+    "apps/web/workbench.css": "4d7b2da0fd15fd282e1a34140f37bfa5a022a71cbeb1ada21475dc6e457f792d",
+    "apps/web/explorer.js": "141e4583a2137e9d50dcfa5bda0fe3fb93be2f4c39f1ddd01d6279571edc77e7",
+    "apps/web/explorer.css": "1613fa7ff9d11ff2f7b6e95cdc2d2be955002a17c806436078c584e6ebea2831",
+    "apps/web/index.html": "da1b3a7c6c8afeace8986b8c318b2e8a98ff23c29cff90b79d1751704af012b3",
+    "apps/web/server.py": "3a10e972e8f07eeac8277715b56c1bad86fda47b50d44be64381479fa27fe78e",
+    "tests/test_project_resources.py": "15e7da2005fc4a69806e966d8689b216a9a49ffaa43b85efaddf2faad98a8dc5",
+    "runtime/node-host/jarvis_core/__init__.py": "b7493de35a988e9b8d2e0844852d538d0f32575ff73d77c687300b86ccd1a21b"
+  },
+  "post_suite_changes": [
+    {
+      "file": "apps/web/index.html",
+      "change": "Synchronize desktop/mobile sidebar aria-expanded and aria-label with actual visibility after conversation selection.",
+      "sha256": "1d4a57809b6834bfb5b7b42aeb66f69a4f7c3a3c904bcf08c8a297478c1d59c9",
+      "validation": "15 resource/HTTP tests passed in 4.602s; deployed real-browser conversation selection retains expanded state, split file preview verified; no backend behavior changed."
+    }
+  ]
+}

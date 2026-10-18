@@ -1,0 +1,796 @@
+{
+  "schema_version": 1,
+  "status": "verified_subset",
+  "feature_version": "0.1.52",
+  "date": "2026-10-18",
+  "scope": "Public synthetic extraction pilot and targeted fixes, not complete K2 or a framework ranking",
+  "corpus": {
+    "path": "evals/cases/memory-extraction-pilot.json",
+    "sha256": "996aa28637e089185ec816d709520cca2e077119a2d7787345e01b53cb8fd6c9",
+    "cases": 30,
+    "positive_cases": 18,
+    "expected_facts": 21,
+    "negative_cases": 12,
+    "independent_human_labels": false,
+    "holdout": false
+  },
+  "baseline": {
+    "summary": {
+      "rules": {
+        "runs": 30,
+        "status_counts": {
+          "SUCCEEDED": 30
+        },
+        "negative_runs": 0,
+        "gateway_invocations": 0,
+        "facts_committed": 0,
+        "content_evidence": {
+          "tp": 6,
+          "fp": 2,
+          "fn": 15,
+          "precision": 0.75,
+          "recall": 0.2857,
+          "passed_cases": 15,
+          "negative_passes": 10,
+          "negative_runs": 12
+        },
+        "typed": {
+          "tp": 0,
+          "fp": 8,
+          "fn": 21,
+          "precision": 0.0,
+          "recall": 0.0,
+          "passed_cases": 10,
+          "negative_passes": 10,
+          "negative_runs": 12
+        },
+        "latency_ms": {
+          "p50": 0.002,
+          "p95": 0.083,
+          "scope": "whole isolated case including temporary stores; overlapping calls, not idle-PC measurement"
+        },
+        "reported_tokens": 0,
+        "token_receipts": 0,
+        "estimated_usd": 0,
+        "cost_receipts": 0,
+        "per_case": {
+          "P01": [
+            true
+          ],
+          "P02": [
+            false
+          ],
+          "P03": [
+            true
+          ],
+          "P04": [
+            false
+          ],
+          "P05": [
+            false
+          ],
+          "P06": [
+            false
+          ],
+          "P07": [
+            false
+          ],
+          "P08": [
+            false
+          ],
+          "P09": [
+            false
+          ],
+          "P10": [
+            true
+          ],
+          "P11": [
+            false
+          ],
+          "P12": [
+            false
+          ],
+          "P13": [
+            true
+          ],
+          "P14": [
+            false
+          ],
+          "P15": [
+            false
+          ],
+          "P16": [
+            true
+          ],
+          "P17": [
+            false
+          ],
+          "P18": [
+            false
+          ],
+          "P19": [
+            true
+          ],
+          "P20": [
+            false
+          ],
+          "P21": [
+            true
+          ],
+          "P22": [
+            true
+          ],
+          "P23": [
+            true
+          ],
+          "P24": [
+            true
+          ],
+          "P25": [
+            true
+          ],
+          "P26": [
+            true
+          ],
+          "P27": [
+            true
+          ],
+          "P28": [
+            true
+          ],
+          "P29": [
+            false
+          ],
+          "P30": [
+            true
+          ]
+        }
+      },
+      "semantic": {
+        "runs": 90,
+        "status_counts": {
+          "SUCCEEDED": 81,
+          "BLOCKED": 9
+        },
+        "negative_runs": 0,
+        "gateway_invocations": 81,
+        "facts_committed": 0,
+        "content_evidence": {
+          "tp": 60,
+          "fp": 4,
+          "fn": 3,
+          "precision": 0.9375,
+          "recall": 0.9524,
+          "passed_cases": 83,
+          "negative_passes": 32,
+          "negative_runs": 36
+        },
+        "typed": {
+          "tp": 57,
+          "fp": 7,
+          "fn": 6,
+          "precision": 0.8906,
+          "recall": 0.9048,
+          "passed_cases": 80,
+          "negative_passes": 32,
+          "negative_runs": 36
+        },
+        "latency_ms": {
+          "p50": 7049.363,
+          "p95": 9718.194,
+          "scope": "whole isolated case including temporary stores; overlapping calls, not idle-PC measurement"
+        },
+        "reported_tokens": 45786,
+        "token_receipts": 81,
+        "estimated_usd": 0.363552,
+        "cost_receipts": 81,
+        "per_case": {
+          "P01": [
+            true,
+            true,
+            true
+          ],
+          "P02": [
+            true,
+            true,
+            true
+          ],
+          "P03": [
+            true,
+            true,
+            true
+          ],
+          "P04": [
+            true,
+            true,
+            true
+          ],
+          "P05": [
+            true,
+            true,
+            true
+          ],
+          "P06": [
+            true,
+            true,
+            true
+          ],
+          "P07": [
+            true,
+            true,
+            true
+          ],
+          "P08": [
+            true,
+            true,
+            true
+          ],
+          "P09": [
+            true,
+            true,
+            true
+          ],
+          "P10": [
+            true,
+            true,
+            true
+          ],
+          "P11": [
+            true,
+            true,
+            true
+          ],
+          "P12": [
+            true,
+            true,
+            true
+          ],
+          "P13": [
+            true,
+            true,
+            true
+          ],
+          "P14": [
+            true,
+            true,
+            true
+          ],
+          "P15": [
+            true,
+            true,
+            true
+          ],
+          "P16": [
+            true,
+            true,
+            true
+          ],
+          "P17": [
+            false,
+            false,
+            false
+          ],
+          "P18": [
+            false,
+            false,
+            false
+          ],
+          "P19": [
+            true,
+            true,
+            true
+          ],
+          "P20": [
+            true,
+            true,
+            true
+          ],
+          "P21": [
+            true,
+            true,
+            true
+          ],
+          "P22": [
+            true,
+            true,
+            true
+          ],
+          "P23": [
+            true,
+            true,
+            true
+          ],
+          "P24": [
+            true,
+            true,
+            true
+          ],
+          "P25": [
+            true,
+            true,
+            true
+          ],
+          "P26": [
+            true,
+            true,
+            true
+          ],
+          "P27": [
+            true,
+            true,
+            true
+          ],
+          "P28": [
+            true,
+            true,
+            false
+          ],
+          "P29": [
+            true,
+            true,
+            true
+          ],
+          "P30": [
+            false,
+            false,
+            false
+          ]
+        }
+      }
+    },
+    "source_unchanged": false,
+    "interpretation": "Diagnostic only: shared chat.py changed on disk during the run. Process imported 0.1.50 at startup; extractor and corpus did not change."
+  },
+  "recheck": {
+    "case_ids": [
+      "P02",
+      "P05",
+      "P13",
+      "P14",
+      "P16",
+      "P17",
+      "P18",
+      "P25",
+      "P26",
+      "P28",
+      "P30"
+    ],
+    "summary": {
+      "rules": {
+        "runs": 11,
+        "status_counts": {
+          "SUCCEEDED": 11
+        },
+        "gateway_invocations": 0,
+        "facts_committed": 0,
+        "content_evidence": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 7,
+          "precision": 1.0,
+          "recall": 0.125,
+          "passed_cases": 5,
+          "negative_passes": 4,
+          "negative_runs": 4
+        },
+        "typed": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 8,
+          "precision": 0.0,
+          "recall": 0.0,
+          "passed_cases": 4,
+          "negative_passes": 4,
+          "negative_runs": 4
+        },
+        "latency_ms": {
+          "p50": 0.003,
+          "p95": 0.665,
+          "scope": "rule function only"
+        },
+        "reported_tokens": 0,
+        "token_receipts": 0,
+        "estimated_usd": 0,
+        "cost_receipts": 0,
+        "per_case": {
+          "P02": [
+            false
+          ],
+          "P05": [
+            false
+          ],
+          "P13": [
+            true
+          ],
+          "P14": [
+            false
+          ],
+          "P16": [
+            false
+          ],
+          "P17": [
+            false
+          ],
+          "P18": [
+            false
+          ],
+          "P25": [
+            true
+          ],
+          "P26": [
+            true
+          ],
+          "P28": [
+            true
+          ],
+          "P30": [
+            true
+          ]
+        }
+      },
+      "semantic": {
+        "runs": 33,
+        "status_counts": {
+          "SUCCEEDED": 27,
+          "BLOCKED": 6
+        },
+        "gateway_invocations": 27,
+        "facts_committed": 0,
+        "content_evidence": {
+          "tp": 22,
+          "fp": 2,
+          "fn": 2,
+          "precision": 0.9167,
+          "recall": 0.9167,
+          "passed_cases": 31,
+          "negative_passes": 12,
+          "negative_runs": 12
+        },
+        "typed": {
+          "tp": 22,
+          "fp": 2,
+          "fn": 2,
+          "precision": 0.9167,
+          "recall": 0.9167,
+          "passed_cases": 31,
+          "negative_passes": 12,
+          "negative_runs": 12
+        },
+        "latency_ms": {
+          "p50": 6592.011,
+          "p95": 9328.78,
+          "scope": "whole isolated case including temporary stores; overlapping calls, not idle-PC measurement"
+        },
+        "reported_tokens": 16399,
+        "token_receipts": 27,
+        "estimated_usd": 0.120738,
+        "cost_receipts": 27,
+        "per_case": {
+          "P02": [
+            true,
+            true,
+            true
+          ],
+          "P05": [
+            true,
+            true,
+            true
+          ],
+          "P13": [
+            true,
+            true,
+            true
+          ],
+          "P14": [
+            true,
+            true,
+            true
+          ],
+          "P16": [
+            true,
+            true,
+            true
+          ],
+          "P17": [
+            true,
+            true,
+            true
+          ],
+          "P18": [
+            false,
+            true,
+            false
+          ],
+          "P25": [
+            true,
+            true,
+            true
+          ],
+          "P26": [
+            true,
+            true,
+            true
+          ],
+          "P28": [
+            true,
+            true,
+            true
+          ],
+          "P30": [
+            true,
+            true,
+            true
+          ]
+        }
+      }
+    },
+    "source_unchanged": true,
+    "automated_case_passes": 31,
+    "attempts": 33
+  },
+  "rules_recheck": {
+    "runs": 30,
+    "status_counts": {
+      "SUCCEEDED": 30
+    },
+    "gateway_invocations": 0,
+    "facts_committed": 0,
+    "content_evidence": {
+      "tp": 5,
+      "fp": 0,
+      "fn": 16,
+      "precision": 1.0,
+      "recall": 0.2381,
+      "passed_cases": 16,
+      "negative_passes": 12,
+      "negative_runs": 12
+    },
+    "typed": {
+      "tp": 0,
+      "fp": 5,
+      "fn": 21,
+      "precision": 0.0,
+      "recall": 0.0,
+      "passed_cases": 12,
+      "negative_passes": 12,
+      "negative_runs": 12
+    },
+    "latency_ms": {
+      "p50": 0.003,
+      "p95": 0.082,
+      "scope": "rule function only"
+    },
+    "reported_tokens": 0,
+    "token_receipts": 0,
+    "estimated_usd": 0,
+    "cost_receipts": 0,
+    "per_case": {
+      "P01": [
+        true
+      ],
+      "P02": [
+        false
+      ],
+      "P03": [
+        true
+      ],
+      "P04": [
+        false
+      ],
+      "P05": [
+        false
+      ],
+      "P06": [
+        false
+      ],
+      "P07": [
+        false
+      ],
+      "P08": [
+        false
+      ],
+      "P09": [
+        false
+      ],
+      "P10": [
+        true
+      ],
+      "P11": [
+        false
+      ],
+      "P12": [
+        false
+      ],
+      "P13": [
+        true
+      ],
+      "P14": [
+        false
+      ],
+      "P15": [
+        false
+      ],
+      "P16": [
+        false
+      ],
+      "P17": [
+        false
+      ],
+      "P18": [
+        false
+      ],
+      "P19": [
+        true
+      ],
+      "P20": [
+        true
+      ],
+      "P21": [
+        true
+      ],
+      "P22": [
+        true
+      ],
+      "P23": [
+        true
+      ],
+      "P24": [
+        true
+      ],
+      "P25": [
+        true
+      ],
+      "P26": [
+        true
+      ],
+      "P27": [
+        true
+      ],
+      "P28": [
+        true
+      ],
+      "P29": [
+        true
+      ],
+      "P30": [
+        true
+      ]
+    }
+  },
+  "manual_output_review": {
+    "reviewer": "implementing assistant, not independent human reviewer",
+    "baseline_cases": [
+      "P17 false credential filter",
+      "P18 actor/character mapped to real owner in all three repeats",
+      "P28 project assertion mapped to third_party in repeat 3 without a project",
+      "P30 pending plan in durable facts; last repeat also lost tomorrow"
+    ],
+    "recheck_P18": "All three are fiction/character with uses=[]; repeats 1 and 3 fail frozen content-only regex because robot appears in subject_label instead. Scores and corpus were not altered.",
+    "other_outputs": "Reviewed unique source/category/label/content variants from all repeats; this is a limited manual read, not proof of semantic entailment or execution success."
+  },
+  "changes": [
+    "Filter questions and explicitly temporary rule facts",
+    "Preserve v1 source IDs independently of candidate eligibility",
+    "Allow cryptography word without allowing explicit password fields",
+    "Reject observed role/plan/project category conflicts and improve extraction instructions",
+    "Repeatable opt-in evaluation with source-change stop, bounded attempts and incremental reports",
+    "Adapt browser fixture to both transport boundaries; forbid real model-child startup"
+  ],
+  "cost": {
+    "measured_extraction_gateway_invocations": 108,
+    "reported_tokens": 62185,
+    "estimated_usd": 0.48429,
+    "billing_receipts": 108,
+    "initial_ui_dialogue_dispatch": "unknown",
+    "initial_ui_dialogue_cost": "unknown, excluded rather than counted as zero"
+  },
+  "ui": {
+    "version": "0.1.52",
+    "captured_at": "2026-10-18T06:25:09.465551+00:00",
+    "checks": [
+      "Rule preview has no extra model call; explicit provider and scope disclosure",
+      "Actual extraction transport has only selected source, no history or private fact",
+      "Review edits classification and both uses; lost response creates exactly one revision",
+      "Third-party remains distinct and stored-only by default; ignore does not write",
+      "Same sentence cannot resurrect forgotten fact with new model wording",
+      "390px and desktop fit; stop clears pending candidates and shares admission slots",
+      "Malformed model output shows failure and actual returned usage without saving"
+    ],
+    "page_errors": [],
+    "real_model_calls": 0,
+    "user_data_modified": false,
+    "fixture_model_calls": 5,
+    "facts_after": 1,
+    "dialogue_transport": "Explicit fixture; no model child started. Supervisor has separate tests.",
+    "status": "passed"
+  },
+  "live": {
+    "status": "passed_read_only_subset",
+    "version": "0.1.53",
+    "instance_id": "95d24db1e2deb717f4b61fa810f3cfea",
+    "core_ready": true,
+    "ui_assets": "ready",
+    "memory_schema_version": 3,
+    "queue_paused": false,
+    "queue_running": 0,
+    "queue_waiting": 0,
+    "source_hashes_match_live_recheck": {
+      "runtime\\node-host\\jarvis_core\\semantic_candidates.py": true,
+      "runtime\\node-host\\jarvis_core\\personal_candidates.py": true,
+      "runtime\\node-host\\jarvis_core\\chat.py": true
+    },
+    "semantic_route_rejects_invalid_fields": true,
+    "note": "Instance was already updated by concurrent workspace work; this increment did not restart it or alter queue settings. Runtime source matching is not in-process code introspection.",
+    "production_fact_writes_by_this_increment": 0,
+    "production_model_calls_by_this_verification": 0
+  },
+  "resource_change": {
+    "third_party_dependencies": 0,
+    "new_memory_databases": 0,
+    "new_background_workers": 0,
+    "downloaded_models": 0,
+    "timed_auto_extraction": false,
+    "whole_machine_memory_or_soak_test": "not run"
+  },
+  "limits": [
+    "30 public cases cannot replace 120 development + 60 independent holdout cases",
+    "No LangMem or Mem0 implementation comparison yet",
+    "Rules trade recall for conservative eligibility",
+    "Finite source markers can miss paraphrases and conservatively reject mixed sentences",
+    "No automatic profile building, continuity extraction, cross-message merge or federated sync"
+  ],
+  "evidence_directory": "H:\\JarvisData\\evals\\memory-extraction-pilot-20261018",
+  "verification": {
+    "candidate_tests": {
+      "total": 28,
+      "passed": 28
+    },
+    "evaluation_tests": {
+      "total": 8,
+      "passed": 8
+    },
+    "full_suite": {
+      "total": 744,
+      "passed": 742,
+      "skipped": 2,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 575.718,
+      "skip_reason": "Windows symlink creation privilege denied",
+      "scope": "Shared workspace regression; not a frozen whole-product release certification"
+    },
+    "docs": {
+      "documents": 24,
+      "diagrams": 21,
+      "artifacts": 42,
+      "errors": 0
+    },
+    "seed": {
+      "assets": 22,
+      "fixtures": 12,
+      "status": "passed"
+    }
+  },
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/personal_candidates.py": "16558448509888c76d0fc638b03f732f7f8c1ff68ad85f3165ae6f1ecb7f5dbc",
+    "runtime/node-host/jarvis_core/semantic_candidates.py": "63e28a451a92c1f391a7fa44da1ff2170f101cf36032bed3598d6111d0da157d",
+    "tools/eval_memory_extraction.py": "a270993e4ba33b624920d724eb291033cac69fe3f3fd8c51be3c137ac40e32ce",
+    "tools/probe_semantic_candidates_ui.py": "dff042e048012f8b0101256a682aad058b709276b6fbdfa33df61bf6e0eaac00",
+    "tests/test_personal_candidates.py": "e006d3819b6687e87eb0c0db70a6319ac1f76f502962e1aa7dc397341c2766de",
+    "tests/test_semantic_candidates.py": "210da2cc165e1c0c97c0226a4b9878306240d01ae2e805021f5ef7f0df082783",
+    "tests/test_memory_extraction_eval.py": "b63103d1ead13ffe7fe9257d839e4eb6607cfd8bd0222d2d4cc9cf1485d489f0"
+  },
+  "evidence_sha256": {
+    "baseline.json": "aa6eefceb7030f0ffb913eb1c0ff1744e58e36655ef5809e1ab026c19d8d5113",
+    "recheck.json": "d10df28831f520e3e4afa83cd8e394b73d3c7de534167feb92bf38ac71b51fed",
+    "rules-recheck.json": "f0868d4e55e17141dd8cee885b8b134d51994164fca59e2ebbee40b9f11d3eab",
+    "full-tests.txt": "9eb1065f0d13c04222f5f3dcea6c9f4f0b70481f488eb73a9de3d5aaa8bc52eb",
+    "candidate-tests.txt": "f304dc7b74dce21d23a2dc40adc324a789a70e3d3f325fc085a40be72dc1cc0e",
+    "eval-tests.txt": "c2d483dcb5a0ae5acae67e783e109abba847d14f2ce492f6558e037333b47ede",
+    "seed-check.txt": "1a7cb6ec551d3d7d1892e068a2b92d911543a9f76c7bb9d38f7d1f3d4963ee20",
+    "ui/report.json": "f8d3f903d72303ba753871c1c46c032e6cdff8c66490a5d27e60df515449eb77",
+    "ui/failure.png": "b583675fd25cab667395ef8ddf12d2dd9701bacd2ff611355c05c4d53c4ea6e6",
+    "ui-recheck/report.json": "7a2dbeb8ed0ad431dacab78b75472a2ff0c3c95e5021d03171da088a1a595650",
+    "live-verification.json": "8bd1e9627044137c57b40c9bb4107c4ca85eb4f3c867cd9aad9143eb173d0877"
+  }
+}

@@ -1,0 +1,12 @@
+.knowledge-dialog{width:min(900px,calc(100vw - 32px));max-height:88dvh;padding:24px;overflow:auto}
+.knowledge-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}.knowledge-heading h2{margin:0}.knowledge-heading button{padding:6px 12px;border:1px solid var(--line);border-radius:8px}
+.knowledge-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:16px}.knowledge-grid section{min-width:0}.knowledge-grid h3{font-size:14px}
+.knowledge-dialog input[type=checkbox]{width:16px;height:16px;padding:0;flex:0 0 16px;accent-color:var(--blue)}.knowledge-dialog .knowledge-toggle{display:flex;align-items:center;gap:8px}
+.knowledge-dialog input[type=text],.knowledge-dialog input[type=search]{color:var(--ink);background:var(--paper);width:100%;border:1px solid var(--line);border-radius:8px;padding:9px}
+.knowledge-dialog fieldset{border:1px solid var(--line);border-radius:8px;margin-top:14px}.knowledge-dialog legend{font-size:12px}.knowledge-dialog #knowledge-providers label{display:inline-flex;gap:6px;align-items:center;margin:7px 12px 7px 0;white-space:nowrap}
+#knowledge-projects{display:flex;flex-wrap:wrap;gap:10px;max-height:150px;overflow:auto}#knowledge-projects label{display:inline-flex;align-items:center;gap:6px;max-width:100%;overflow-wrap:anywhere;font-size:13px}
+.knowledge-source{border-bottom:1px solid var(--line);padding:12px 0;overflow-wrap:anywhere}.knowledge-source small{display:block;color:var(--muted);font-size:11px}.knowledge-source button{padding:5px 9px;border:1px solid var(--line);border-radius:7px;margin:8px 7px 0 0}
+#knowledge-list{max-height:35vh;overflow:auto}#knowledge-status{font-size:12px;min-height:1.5em;color:var(--muted)}#knowledge-status[data-error=true]{color:var(--error)}
+.knowledge-citations{margin:10px 0;display:flex;gap:6px;flex-wrap:wrap;font-size:11px}.knowledge-citations button{padding:4px 8px;border:1px solid var(--line);border-radius:6px;max-width:100%;overflow-wrap:anywhere;text-align:left;color:var(--blue)}.knowledge-citations span{color:var(--muted)}
+#knowledge-excerpt-dialog pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:58vh;overflow:auto;font:12px/1.8 "Consolas","Microsoft YaHei",monospace;padding:14px;background:var(--paper);border-radius:9px}
+@media(max-width:650px){.knowledge-grid{grid-template-columns:1fr;gap:12px}.knowledge-dialog{padding:18px}#knowledge-list{max-height:25vh}}

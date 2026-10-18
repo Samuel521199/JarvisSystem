@@ -1,0 +1,40 @@
+{
+  "version": "0.1.25",
+  "captured_at": "2026-10-16T12:23:32.857512+00:00",
+  "status": "observed",
+  "fixture": {
+    "facts": 1000,
+    "body_characters": 200,
+    "scope": "global",
+    "providers": [],
+    "population_seconds": 36.544
+  },
+  "database_bytes": 2256896,
+  "timings": {
+    "literal_search": {
+      "samples": 30,
+      "median_ms": 15.321,
+      "p95_ms": 22.027
+    },
+    "local_context": {
+      "samples": 30,
+      "median_ms": 31.68,
+      "p95_ms": 37.525
+    },
+    "cloud_filter": {
+      "samples": 30,
+      "median_ms": 14.205,
+      "p95_ms": 18.943
+    }
+  },
+  "context_python_peak_allocated_bytes": 2695951,
+  "selected_facts": 8,
+  "context_bytes": 5935,
+  "added_dependencies": [],
+  "added_daemons": 0,
+  "limits": [
+    "Synthetic single-process warm-cache observation on the current PC; not a hardware-independent SLA.",
+    "tracemalloc measures Python allocations in one context call, not total process RSS or GPU memory.",
+    "No model, embedding, concurrent load, federation or worst-case 2048-character facts tested."
+  ]
+}

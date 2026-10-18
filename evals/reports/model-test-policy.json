@@ -1,0 +1,30 @@
+{
+  "version": "0.1.36",
+  "status": "passed",
+  "preferred_route": "vertex::gemini-3.1-pro-preview",
+  "regular_app_route_changed": false,
+  "provider_balance_queried": false,
+  "new_google_calls": 2,
+  "other_models_retested": false,
+  "checks": [
+    "three CLI parsers load",
+    "official configured default route",
+    "safe unique report filenames",
+    "cross-model repair rejected before dispatch",
+    "existing OpenAI evidence unchanged",
+    "Google Pro real task delivery confirmed",
+    "Google Flash real-host short text successful"
+  ],
+  "source_sha256": {
+    "config/eval-policy.json": "8aba91cb13da2ae97145d4347c07e83a0d65e9b18752537eda3ad323cef4dfdf",
+    "tools/eval_policy.py": "c1ea5c8019eac362d2b998c29dd13542cfb3e2efdbf681baf34101141f1ef704",
+    "tools/evaluate_skill_capabilities.py": "bcc17d1893fd78e81da1e984cf2597424b93e70e90d4c170e2a23f6c9fe9b8be",
+    "tools/probe_skill_hub_delivery.py": "37579bf43ca7a586fe6f1e7cd6b3e8fe115e9f1433a889cf6031e2fabcf6eeb2",
+    "tools/probe_skills_live.py": "4d50a882b7bc6de1f533270d7a74095ec1cc281b427cc4b463adc4ce93b0b31c"
+  },
+  "evidence": [
+    "evals/reports/skill-hub-delivery-vertex--gemini-3.1-pro-preview-4cadfd13.json",
+    "evals/reports/google-default-route-check.json"
+  ],
+  "authority": "docs/delivery-validation.md#model-test-selection"
+}

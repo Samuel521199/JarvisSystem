@@ -1,0 +1,60 @@
+{
+  "status": "SUCCEEDED",
+  "source_version": "0.1.45",
+  "data_dir": "C:\\Users\\samuel\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\Jarvis\\data",
+  "graceful_idle_reload": true,
+  "previous_instance": "06beabbe8814e351c8471aaf77fc3d41",
+  "current_instance": "51f5e9a5df7888b13715ea6d4deb6a57",
+  "served_readout_sha256": "935f7dd4f4c777943aa7d9aaf7745e716a032f0eadb707cd0da892b26c4bd560",
+  "embedded_readout_css_sha256": "d74bed0e05d1ec880e4c50a0bb90e30f032d07c97307da9113fe9077e5d448b7",
+  "nonce_protected": true,
+  "idempotent_start_and_next": true,
+  "old_stop_did_not_cancel_new_readout": true,
+  "clips": [
+    {
+      "index": 0,
+      "seconds": 1.68,
+      "sample_rate": 24000,
+      "channels": 1,
+      "sha256": "fe33d177e35b1e70353e1f2129afe2acd89a8378a6acbc44f7d0e77164595e83"
+    },
+    {
+      "index": 1,
+      "seconds": 1.12,
+      "sample_rate": 24000,
+      "channels": 1,
+      "sha256": "e08e9e53182eba2708c2daefc6318eeca5aa730352f9dce77f7082d2facf7ed8"
+    }
+  ],
+  "two_clip_generation_including_load_seconds": 9.104195399999753,
+  "primary": {
+    "state": "ready",
+    "owned": true,
+    "pid": 3396,
+    "memory": {
+      "working_set_bytes": 152518656,
+      "peak_working_set_bytes": 153387008,
+      "private_commit_bytes": 1853210624,
+      "peak_private_commit_bytes": 1859977216
+    },
+    "gpu_memory": {
+      "status": "measured",
+      "dedicated_bytes": 1742962688,
+      "shared_bytes": 29810688
+    },
+    "readout_active": false
+  },
+  "backups": {
+    "/api/speech/fast": "stopped",
+    "/api/speech": "stopped"
+  },
+  "cloud_calls": 0,
+  "prior_attempt": {
+    "status": "FAILED",
+    "phase": "model startup before worker log",
+    "explicit_reload_recovered": true,
+    "original_cause_unconfirmed": true,
+    "independent_reproduced_fix": "Bind URL-safe token using --token=value to accept leading hyphens without reducing randomness"
+  },
+  "limits": "Original data directory, local native synthesis; no physical speaker timing, microphone, STT or universal quality claim."
+}

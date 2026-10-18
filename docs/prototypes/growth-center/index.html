@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Jarvis · 成长中心设计预览</title>
+  <link rel="stylesheet" href="growth.css">
+  <script src="growth.js" defer></script>
+</head>
+<body data-mode="inspect">
+  <svg class="symbols" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs>
+    <symbol id="i-scan" viewBox="0 0 24 24"><path d="M8 3H4v4m12-4h4v4M4 17v4h4m12-4v4h-4M3 12h18M8 8h8v8H8z"/></symbol>
+    <symbol id="i-heal" viewBox="0 0 24 24"><path d="m12 2 8 4v6c0 5-8 10-8 10S4 17 4 12V6zm0 5v10m-5-5h10"/></symbol>
+    <symbol id="i-grow" viewBox="0 0 24 24"><path d="M12 22V12m0 4L5 9m7 3 7-7M4 4h5v5H4zm13-2h5v5h-5zM9 9h6v6H9z"/></symbol>
+    <symbol id="i-tune" viewBox="0 0 24 24"><path d="M4 7h7m4 0h5M4 17h3m4 0h9M11 4v6m-4 4v6"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+    <symbol id="i-device" viewBox="0 0 24 24"><path d="M7 2h10v20H7zM10 18h4"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+  </defs></svg>
+  <aside class="rail" aria-label="设计预览导航">
+    <div class="identity"><img src="../../../apps/web/brand/icon-64.png" width="40" height="40" alt="Jarvis J 标志"><div><strong>Jarvis</strong><span>PERSONAL INTELLIGENCE</span></div></div>
+    <div class="rail-caption">设置与能力</div>
+    <div class="rail-item muted">◈ <span>工作台</span></div>
+    <div class="rail-item muted">▧ <span>模块与升级</span></div>
+    <div class="rail-item active"><svg><use href="#i-grow"/></svg><span>成长中心</span><i></i></div>
+    <div class="rail-note"><span class="dot"></span> 与你一起，持续成长。<p>记住目标，理解变化，<br>让每次进步都有依据。</p></div>
+    <div class="preview-label">交互设计预览 <span>DESIGN / 01</span></div>
+  </aside>
+
+  <div class="workspace">
+    <header class="topbar"><span>设置 <b>/</b> 成长中心</span><div class="top-actions">
+      <span class="preview-tag">预览 · 不连接运行服务</span>
+      <button class="icon-button" id="open-device" aria-label="打开窄屏布局预览" title="窄屏布局预览"><svg><use href="#i-device"/></svg><span class="tooltip">窄屏布局预览</span></button>
+      <button class="icon-button" id="motion-toggle" aria-label="暂停装饰动画" title="暂停装饰动画" aria-pressed="false"><svg><use href="#i-pause"/></svg><span class="tooltip">暂停装饰动画</span></button>
+      <button class="icon-button" id="open-policy" aria-label="打开当前能力的策略设置" title="策略设置" aria-expanded="false" aria-controls="policy-drawer"><svg><use href="#i-tune"/></svg><span class="tooltip">策略设置</span></button>
+    </div></header>
+    <div class="main-grid">
+      <main id="main-content">
+        <div class="page-heading"><div><span class="eyebrow">GROWTH / CONTINUITY</span><h1>每一次变化，都有方向。</h1><p>感知自己的状态，恢复可靠的能力，向你的目标继续生长。</p></div><span class="quiet-mark">J / 01</span></div>
+        <div class="tabs" role="tablist" aria-label="成长能力">
+          <button role="tab" aria-selected="true" aria-controls="panel-inspect" id="tab-inspect" tabindex="0" data-tab="inspect"><svg><use href="#i-scan"/></svg><span>自检<small>INSPECT</small></span></button>
+          <button role="tab" aria-selected="false" aria-controls="panel-heal" id="tab-heal" tabindex="-1" data-tab="heal"><svg><use href="#i-heal"/></svg><span>自愈<small>HEAL</small></span></button>
+          <button role="tab" aria-selected="false" aria-controls="panel-evolve" id="tab-evolve" tabindex="-1" data-tab="evolve"><svg><use href="#i-grow"/></svg><span>进化<small>EVOLVE</small></span></button>
+        </div>
+        <section role="tabpanel" id="panel-inspect" aria-labelledby="tab-inspect" tabindex="0" class="capability-panel"></section>
+        <section role="tabpanel" id="panel-heal" aria-labelledby="tab-heal" tabindex="0" class="capability-panel" hidden></section>
+        <section role="tabpanel" id="panel-evolve" aria-labelledby="tab-evolve" tabindex="0" class="capability-panel" hidden></section>
+        <footer class="page-foot">所有状态和数值均为交互样例。不会执行检查、修改代码、调用模型或写入运行配置。</footer>
+      </main>
+      <aside id="policy-drawer" class="policy-drawer" aria-labelledby="policy-title" hidden>
+        <div class="resize-handle" role="separator" aria-orientation="vertical" aria-label="调整策略面板宽度" tabindex="0" aria-valuemin="320" aria-valuemax="520" aria-valuenow="400"></div>
+        <div class="drawer-heading"><div><span class="eyebrow">PURPOSE PROFILE</span><h2 id="policy-title">自检策略</h2></div><button id="close-policy" class="icon-button" aria-label="关闭策略设置" title="关闭策略设置"><svg><use href="#i-close"/></svg></button></div>
+        <div class="drawer-scroll">
+          <p class="drawer-intro">每种能力独立配置。此处仅保存到预览内存，刷新即还原。</p>
+          <div class="profile-status" id="profile-status" role="status"></div>
+          <fieldset><legend>何时工作</legend><label class="field">触发方式<select aria-label="触发方式" id="trigger-select"></select></label><label class="field" id="interval-field">兜底巡检<select aria-label="兜底巡检" id="interval-select"><option value="0">关闭周期项 · 保留事件触发</option><option value="5">5 分钟</option><option value="30">30 分钟 · 建议初值</option><option value="60">60 分钟</option><option value="360">6 小时</option></select></label><p class="field-note" id="trigger-note"></p></fieldset>
+          <fieldset><legend id="primary-heading">首选模型</legend><p class="field-note">示例目录；正式版以本机登记和能力验证为准。每条线路使用自己的档位。</p><div id="primary-route"></div></fieldset>
+          <fieldset><legend>备选顺序 <span id="backup-count"></span></legend><div id="backup-routes"></div><button class="subtle-button" id="add-backup">＋ 添加备选模型</button></fieldset>
+          <fieldset><legend>费用与范围</legend><label class="field">费用策略<select aria-label="费用策略" id="budget-mode"><option value="notify">达到预算时提醒</option><option value="stop">达到预算时停止新请求</option></select></label><label class="field">本用途每日预算提醒（元）<input aria-label="本用途每日预算提醒（元）" id="budget-value" type="number" min="0.1" max="100000" step="0.1"></label><p class="field-note">预览阈值，不代表真实费用上限。备选与重试共同记账；供应商余额未知时不显示为 0。</p></fieldset>
+          <fieldset><legend>试一试切换路径</legend><label class="field">模拟首选状态<select aria-label="模拟首选状态" id="failure-select"><option value="quota">明确额度耗尽 / 不可用</option><option value="unknown">请求已发出，结果 UNKNOWN</option><option value="all">全部线路不可用</option></select></label><button class="subtle-button" id="simulate-route">模拟路由 · 不调用模型</button><output id="route-result" class="route-result" aria-live="polite">先选择模型和档位，再查看不同故障的处理路径。</output></fieldset>
+        </div>
+        <div class="drawer-footer"><span id="dirty-status">无未保存更改</span><div><button class="subtle-button" id="revert-policy">还原更改</button><button class="primary-button" id="save-policy">保存预览设置</button></div></div>
+      </aside>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status" hidden></div>
+  <dialog id="device-dialog" aria-labelledby="device-title"><div class="device-heading"><div><strong id="device-title">窄屏布局预览</strong><small>390px · 独立演示状态</small></div><button class="icon-button" id="close-device" aria-label="关闭窄屏预览" title="关闭窄屏预览"><svg><use href="#i-close"/></svg></button></div><iframe id="device-frame" title="390 像素成长中心预览" src="about:blank"></iframe></dialog>
+</body>
+</html>

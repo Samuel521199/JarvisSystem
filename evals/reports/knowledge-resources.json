@@ -1,0 +1,28 @@
+{
+  "version": "0.1.26",
+  "captured_at": "2026-10-16T12:50:10.918475+00:00",
+  "status": "observed",
+  "fixture": {
+    "documents": 32,
+    "sections": 640,
+    "utf8_bytes": 708736
+  },
+  "registration_db_bytes": 20480,
+  "retrieval": {
+    "samples": 15,
+    "median_ms": 217.338,
+    "p95_ms": 249.558,
+    "read_bytes": 708736,
+    "matched_chunks": 640,
+    "selected_chunks": 5,
+    "context_bytes": 7019
+  },
+  "python_peak_allocated_bytes": 1200218,
+  "new_dependencies": [],
+  "new_background_services": 0,
+  "limits": [
+    "Warm-cache synthetic corpus on this PC, including current file reads and hashing. Not a hardware-independent SLA.",
+    "Python allocation peak is not process RSS; no model, GPU, concurrent retrieval or semantic-quality measurement.",
+    "Read/parse budgets are cooperative, not OS-enforced filesystem timeouts."
+  ]
+}

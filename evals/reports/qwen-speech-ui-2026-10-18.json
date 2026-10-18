@@ -1,0 +1,212 @@
+{
+  "status": "SUCCEEDED",
+  "source_version": "0.1.43",
+  "backend": "speech.cpp 0.8.10 / Qwen3-TTS 1.7B Q5_K / Vulkan0",
+  "startup_click_to_ready_seconds": 7.079335999995237,
+  "loaded": {
+    "id": "qwen-tts",
+    "installed": true,
+    "state": "ready",
+    "owned": true,
+    "pid": 27860,
+    "device": "Vulkan0",
+    "threads": 4,
+    "memory": {
+      "working_set_bytes": 1197187072,
+      "peak_working_set_bytes": 1197957120,
+      "private_commit_bytes": 1776848896,
+      "peak_private_commit_bytes": 1783582720
+    },
+    "load": {
+      "ready": true,
+      "pid": 22420,
+      "inference_pid": 27860,
+      "protocol": 3,
+      "device": "Vulkan0",
+      "load_seconds": 2.0704067000042414,
+      "uses": 0
+    },
+    "busy": false,
+    "job": {
+      "id": "2e895501271f42ff97b4c58e572708f9",
+      "action": "start",
+      "status": "SUCCEEDED",
+      "started_at": "2026-10-18T01:57:19.185148+00:00",
+      "finished_at": "2026-10-18T01:57:25.940688+00:00",
+      "result": {
+        "message": "Qwen 主力语音已加载，可选择音色与情绪；用完可独立停止。",
+        "load": {
+          "ready": true,
+          "pid": 22420,
+          "inference_pid": 27860,
+          "protocol": 3,
+          "device": "Vulkan0",
+          "load_seconds": 2.0704067000042414,
+          "uses": 0
+        }
+      }
+    },
+    "uses": 0,
+    "model_revision": "a72e6c6575d67652488cdffc1c863215a9899978",
+    "reference_default": null,
+    "configuration_notice": null,
+    "limits": {
+      "text_chars": 180,
+      "reference_seconds": 15,
+      "output_seconds": 20
+    },
+    "usage_role": "primary",
+    "auto_start": false,
+    "broker_pid": 22420,
+    "broker_memory": {
+      "working_set_bytes": 25501696,
+      "peak_working_set_bytes": 25522176,
+      "private_commit_bytes": 15347712,
+      "peak_private_commit_bytes": 15400960
+    },
+    "gpu_memory": {
+      "status": "measured",
+      "dedicated_bytes": 613507072,
+      "shared_bytes": 1082580992
+    },
+    "capabilities": {
+      "voices": {
+        "serena": "Serena · 温柔女声",
+        "vivian": "Vivian · 明亮女声",
+        "uncle_fu": "Uncle Fu · 成熟男声",
+        "dylan": "Dylan · 北京男声",
+        "eric": "Eric · 四川男声",
+        "ryan": "Ryan · 英语男声",
+        "aiden": "Aiden · 阳光男声",
+        "ono_anna": "Ono Anna · 日语女声",
+        "sohee": "Sohee · 韩语女声"
+      },
+      "emotions": {
+        "neutral": "自然",
+        "happy": "开心",
+        "sad": "悲伤",
+        "angry": "生气",
+        "soft": "温柔轻声",
+        "slow": "舒缓慢速",
+        "fast": "轻快快速"
+      },
+      "languages": {
+        "zh": "中文",
+        "en": "English",
+        "ja": "日本語",
+        "ko": "한국어",
+        "de": "Deutsch",
+        "fr": "Français",
+        "ru": "Русский",
+        "pt": "Português",
+        "es": "Español",
+        "it": "Italiano"
+      },
+      "cloning": false,
+      "delivery": "complete_wav"
+    }
+  },
+  "cases": [
+    {
+      "label": "happy",
+      "click_to_blob_seconds": 1.0779036000021733,
+      "result": {
+        "id": "a35deb160d4e4c2ab904c1764deef3a9",
+        "sample_rate_hz": 24000,
+        "audio_seconds": 2.56,
+        "elapsed_seconds": 0.7983430000022054,
+        "first_pcm_seconds": 0.0771697000018321,
+        "voice": "serena",
+        "emotion": "happy",
+        "language": "zh",
+        "audio_url": "/api/speech/primary/audio/a35deb160d4e4c2ab904c1764deef3a9"
+      },
+      "memory": {
+        "working_set_bytes": 1198174208,
+        "peak_working_set_bytes": 1199042560,
+        "private_commit_bytes": 1845096448,
+        "peak_private_commit_bytes": 1851854848
+      },
+      "gpu_memory": {
+        "status": "measured",
+        "dedicated_bytes": 666075136,
+        "shared_bytes": 1082580992
+      },
+      "artifact": "H:\\JarvisData\\research\\qwen-tts\\integration\\ui-happy.wav",
+      "sha256": "cb1960abd665ee77a59a612e539010bd3953616f0a8e453147d1a716070b9ef2"
+    },
+    {
+      "label": "sad",
+      "click_to_blob_seconds": 1.2495381999906385,
+      "result": {
+        "id": "dc5c65cfc405404e8ce19b73b9dcc665",
+        "sample_rate_hz": 24000,
+        "audio_seconds": 3.12,
+        "elapsed_seconds": 1.0150406000029761,
+        "first_pcm_seconds": 0.08273770000960212,
+        "voice": "serena",
+        "emotion": "sad",
+        "language": "zh",
+        "audio_url": "/api/speech/primary/audio/dc5c65cfc405404e8ce19b73b9dcc665"
+      },
+      "memory": {
+        "working_set_bytes": 1224589312,
+        "peak_working_set_bytes": 1225388032,
+        "private_commit_bytes": 1851445248,
+        "peak_private_commit_bytes": 1858150400
+      },
+      "gpu_memory": {
+        "status": "measured",
+        "dedicated_bytes": 668958720,
+        "shared_bytes": 1103552512
+      },
+      "artifact": "H:\\JarvisData\\research\\qwen-tts\\integration\\ui-sad.wav",
+      "sha256": "0d8acca7782ff6ca95a8194f095a7f7217ee2f45b5a99b7c02b7632165a54a1b"
+    },
+    {
+      "label": "vivian",
+      "click_to_blob_seconds": 1.3809242999996059,
+      "result": {
+        "id": "c88ae718a63c4c2ea6a8105c870832c1",
+        "sample_rate_hz": 24000,
+        "audio_seconds": 3.28,
+        "elapsed_seconds": 1.0133708999928785,
+        "first_pcm_seconds": 0.06191830000898335,
+        "voice": "vivian",
+        "emotion": "neutral",
+        "language": "zh",
+        "audio_url": "/api/speech/primary/audio/c88ae718a63c4c2ea6a8105c870832c1"
+      },
+      "memory": {
+        "working_set_bytes": 1224785920,
+        "peak_working_set_bytes": 1225670656,
+        "private_commit_bytes": 1851682816,
+        "peak_private_commit_bytes": 1858441216
+      },
+      "gpu_memory": {
+        "status": "measured",
+        "dedicated_bytes": 668958720,
+        "shared_bytes": 1103552512
+      },
+      "artifact": "H:\\JarvisData\\research\\qwen-tts\\integration\\ui-vivian.wav",
+      "sha256": "186772bfc7c10e862700910666cc1ff92b688c628b612cd8825c7ceba0dd4b87"
+    }
+  ],
+  "parallel_synthetic_chat_seconds": 0.025327800001832657,
+  "restart_and_inflight_stop": "verified; both owned native PIDs exited; no replay; backup models stayed stopped",
+  "browser_errors": [],
+  "user_listening_acceptance": "2026-10-18: 用户确认此前 Serena 开心/悲伤/生气样本自然、情绪明显，可以作为主力。",
+  "limits": "Complete WAV delivery; native first PCM is not speaker onset. Synthetic local chat proves lane independence, not cloud/LLM latency. Only finite voices and utterances tested.",
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/speech.py": "df339df40260e723f0402c51f1da34daf1cef6c6e34312d2f4a1099b7a019db9",
+    "runtime/node-host/jarvis_core/qwen_speech.py": "9a9b353ee3dcd7fb56a9aa9b40bb94d9ec0a2aa5168106bc0f51c385c6cbde11",
+    "runtime/node-host/jarvis_core/qwen_speech_contract.py": "0ce394720dbf7a6a95a435083d5c62d096eef711179cde0fff1a529928c39bc0",
+    "runtime/node-host/jarvis_core/qwen_protocol.py": "1fc1f03db68edc0935d82a2431644195c9c095f8829c6f246843b98f7b672a83",
+    "runtime/node-host/jarvis_core/gpu_memory.py": "71e8470d09f56be80ddfc06e0e7f15a1ea6c939c138526909e238ead21365d6c",
+    "adapters/speech/qwen/worker.py": "ce54860db82d8f6bf124e70bffb08bac0bab52cf24ca7da84a460c67c90b412c",
+    "config/model-profiles/qwen-tts.json": "3b37a09b834305d9b08fbdc5060111836780bea6f4d618c1b8e91323f5ae065e",
+    "apps/web/speech.js": "85827f925216391a5d02f5b9d25788eccaa8f600a9e989bc3de989e436c28101",
+    "apps/web/speech_routes.py": "6e4900d0af2a51ee0b2137443ae28b147ec75f4b6d199309dca564f59a2e6079",
+    "apps/web/admin.html": "cf08f24dc684f0eb916944a1c9ce3d7beceb4bc4fa794ed86a1bf30af881df44"
+  }
+}

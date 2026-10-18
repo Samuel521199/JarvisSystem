@@ -1,0 +1,65 @@
+{
+  "version": "0.1.37",
+  "feature": "evolution-v1",
+  "date": "2026-10-17",
+  "status": "passed",
+  "full_suite": {
+    "run": 521,
+    "passed": 519,
+    "skipped": 2,
+    "seconds": 230.232
+  },
+  "post_suite_checks": [
+    {
+      "modules": "tests.test_evolution tests.test_web",
+      "run": 48,
+      "passed": 48,
+      "seconds": 11.415
+    },
+    {
+      "modules": "tests.test_runtime_catalog tests.test_assistant_readiness",
+      "run": 11,
+      "passed": 11,
+      "seconds": 0.621
+    },
+    {
+      "modules": "tests.test_evolution",
+      "run": 28,
+      "passed": 28,
+      "seconds": 11.537,
+      "reason": "Repair confirmation and owner manual rollback override verified."
+    },
+    {
+      "modules": "tests.test_evolution.EvolutionTests.test_upgrade_preserves_old_contract_and_manual_rollback",
+      "run": 1,
+      "passed": 1,
+      "seconds": 0.621,
+      "reason": "Manual rollback and automatic maintenance pause committed in one SQLite transaction."
+    },
+    {
+      "modules": "tests.test_evolution tests.test_web",
+      "run": 50,
+      "passed": 50,
+      "seconds": 13.869,
+      "reason": "Final optional-module startup containment, atomic rollback override and all growth cases."
+    }
+  ],
+  "repaired_regression": "Added capability prose initially exceeded offline context budget; shortened prose, kept original limits; 11 final checks passed.",
+  "node_syntax": "passed",
+  "scope": "Protocol doubles are separate from actual LPAC tests and model-backed live report.",
+  "source_hashes": {
+    "runtime/node-host/jarvis_core/evolution/recipes.py": "11492699e4221f73630de61d092cdda2ad2b141a4ffbca3be20ae971c13c49c8",
+    "runtime/node-host/jarvis_core/evolution/runner.py": "c4e26f93a7eee48127307b52bbb84a32ecfac05ed87d64ddfb964cdc4a61a61d",
+    "runtime/node-host/jarvis_core/evolution/provider.py": "97c22aaed90eae9435c36f94e3d842e7c2090f27aeedd2b6248e3aec3aed52be",
+    "runtime/node-host/jarvis_core/evolution/store.py": "62969a0c503c6476a76493528e0b21c5016edecf9c73e21bc9907f2da4736bae",
+    "runtime/node-host/jarvis_core/evolution/__init__.py": "5b3e9dd8be5b53643223d3cf329620096742d3b586be0844a1eeed3ca75d537d",
+    "runtime/node-host/jarvis_core/evolution/manager.py": "8ffb35cb751e508460a1ec9bcd9210f0a66d5a4f669908c8a0c5c57c1c3c04f7",
+    "apps/web/evolution.js": "f5828417c7eb25ceda2993588e7ebb24eee07a9495daf89e0bc6b017cc5cd726",
+    "apps/web/evolution.css": "98c4845ef2e3989c0b427916d2aed7bc985489f569376681b41677595eecc16b",
+    "apps/web/evolution_routes.py": "d24026b35f8eed9bdd40c011f9485e3e7a91aa76db17d100bb15ccdaecbfd844",
+    "apps/web/server.py": "f089e174d42824ce79dcb70f25057684559820bbc5ca2012c7cf53012a4c6648",
+    "runtime/node-host/jarvis_core/assistant_context.py": "61b9f42a800ba132493404a1649b3861be5a13c5027330d00d86452ef8b4f854",
+    "runtime/node-host/jarvis_core/runtime_catalog.py": "f1a785210c257f821638aeef8e501c6bb7fe7f468080b05e34b38135af6f4d9e",
+    "tests/test_evolution.py": "828bf682d5de357c5f915c3d822ba682ec2a66a8106d2343cd984f530056ba73"
+  }
+}

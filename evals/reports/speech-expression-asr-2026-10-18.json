@@ -1,0 +1,69 @@
+{
+  "status": "COMPLETED",
+  "source_version": "0.1.43",
+  "model": "verified existing SenseVoiceSmall int8 / CPU 2 threads",
+  "cases": [
+    {
+      "label": "fixed",
+      "expected": "别担心，我在这里。你已经做得很好了！我们一起试试看。",
+      "transcript": "别担心，我在这里，你已经做的很好了，我们一起试试看。",
+      "character_edits": 1,
+      "reference_characters": 22,
+      "cer": 0.045454545454545456,
+      "decode_seconds": 0.08949760001269169,
+      "audio_sha256": "a04f76de3fab7dd82fe4f253a548e98e2d26afb7d628e918950ac0e13c910444"
+    },
+    {
+      "label": "direction",
+      "expected": "别担心，我在这里。你已经做得很好了！我们一起试试看。",
+      "transcript": "别担心，我在这里，你已经做的很好了，我们一起试试看。",
+      "character_edits": 1,
+      "reference_characters": 22,
+      "cer": 0.045454545454545456,
+      "decode_seconds": 0.08876250000321306,
+      "audio_sha256": "aa8b2ed18d2932e1ba433d1417f14a691fb8d7d31a2d9abe4df37f2b83517795"
+    },
+    {
+      "label": "layered",
+      "expected": "别担心，我在这里。你已经做得很好了！我们一起试试看。",
+      "transcript": "别担心我在这里已经做的很好了，我们一起试试看。",
+      "character_edits": 2,
+      "reference_characters": 22,
+      "cer": 0.09090909090909091,
+      "decode_seconds": 0.11199189999024384,
+      "audio_sha256": "34f4adc5e9cf6412fed9bcd68fe042079fbffae23d70edaddab448d7470c3bc4"
+    },
+    {
+      "label": "soft_slow",
+      "expected": "别担心，我在这里。",
+      "transcript": "别担心我在这里。",
+      "character_edits": 0,
+      "reference_characters": 7,
+      "cer": 0.0,
+      "decode_seconds": 0.04090409999480471,
+      "audio_sha256": "786433a5e22bdb85f8dbeed3e1eff4aab2035c4ae92f1905c16a5f6f47b45d09"
+    }
+  ],
+  "all_expected_characters_recovered": false,
+  "limits": "Automatic independent intelligibility check only; not subjective naturalness, emotion similarity or voice identity acceptance. No microphone, cloud, downloads or owner enrollment.",
+  "layered_segment_recheck": [
+    {
+      "segment": 0,
+      "expected": "别担心，我在这里。",
+      "transcript": "别担心，我在这里。",
+      "artifact": "H:\\JarvisData\\research\\qwen-tts\\expression-score\\layered-segment-0.wav"
+    },
+    {
+      "segment": 2,
+      "expected": "你已经做得很好了！",
+      "transcript": "已经做的很好了。",
+      "artifact": "H:\\JarvisData\\research\\qwen-tts\\expression-score\\layered-segment-2.wav"
+    },
+    {
+      "segment": 3,
+      "expected": "我们一起试试看。",
+      "transcript": "我们一起试试看。",
+      "artifact": "H:\\JarvisData\\research\\qwen-tts\\expression-score\\layered-segment-3.wav"
+    }
+  ]
+}

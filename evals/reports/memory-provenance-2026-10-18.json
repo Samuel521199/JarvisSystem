@@ -1,0 +1,130 @@
+{
+  "version": "0.1.44",
+  "date": "2026-10-18",
+  "status": "partial_verified",
+  "scope": "K2 confirmed fact source provenance; no claim of full K2 completion",
+  "unit_regression": {
+    "tests": 629,
+    "failures": 0,
+    "errors": 0,
+    "skipped": [
+      [
+        "test_symlink_is_rejected (test_core.CoreTests.test_symlink_is_rejected)",
+        "OS denied test symlink creation: [WinError 1314] 客户端没有所需的特权。: 'C:\\\\Users\\\\samuel\\\\AppData\\\\Local\\\\Temp\\\\jarvis-core-test-7t171lcw\\\\outside.txt' -> 'C:\\\\Users\\\\samuel\\\\AppData\\\\Local\\\\Temp\\\\jarvis-core-test-7t171lcw\\\\input\\\\linked.txt'"
+      ],
+      [
+        "test_linked_output_component_is_denied (test_workspace.WorkspaceTests.test_linked_output_component_is_denied)",
+        "OS does not grant symlink creation"
+      ]
+    ],
+    "elapsed_seconds": 280.122,
+    "successful": true
+  },
+  "final_related_regression": {
+    "modules": [
+      "test_memory_sources",
+      "test_memory",
+      "test_memory_view",
+      "test_personal_candidates",
+      "test_personal_core",
+      "test_modules"
+    ],
+    "tests": 72,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "elapsed_seconds": 19.659,
+    "successful": true
+  },
+  "regression_order_note": "629-test full suite preceded final different-source rebinding guard; final 72 related tests and UI cover the final change.",
+  "ui": {
+    "version": "0.1.44",
+    "captured_at": "2026-10-18T03:50:50.671011+00:00",
+    "checks": [
+      "Real UI confirms source-bound fact and displays verified original text",
+      "Changed source pauses model use while preserving visible fact",
+      "390px layout and source controls do not overflow",
+      "Independent confirmation survives lost response with exactly one revision",
+      "Default local-only route permissions preserved; source excerpt not added to model context",
+      "Real forget button removes fact; no automatic model calls for source operations"
+    ],
+    "page_errors": [],
+    "real_model_calls": 0,
+    "user_data_modified": false,
+    "fixture_model_calls": 2,
+    "status": "passed"
+  },
+  "frontend": {
+    "tests": 7,
+    "passed": 7,
+    "failed": 0
+  },
+  "external_evidence_root": "H:\\JarvisData\\evals\\memory-provenance-20261018",
+  "new_runtime_dependencies": [],
+  "real_model_calls_for_this_acceptance": 0,
+  "deployment": {
+    "status": "memory_verified_with_unrelated_ui_degradation",
+    "version": "0.1.44",
+    "url": "http://127.0.0.1:18181/",
+    "start_mode": "Host was stopped; started existing tray launcher without console",
+    "memory_schema_before": 1,
+    "memory_schema_after": 2,
+    "sqlite_backup": "H:\\JarvisData\\evals\\memory-provenance-20261018\\recovery\\memory-pre-0.1.44.sqlite",
+    "business_rows_preserved": true,
+    "task_states_and_pause_preserved": true,
+    "growth_settings_preserved": true,
+    "source_assets_verified": true,
+    "core_ready": true,
+    "ui_assets": {
+      "status": "degraded",
+      "unavailable": [
+        {
+          "asset": "readout.css",
+          "reason": "missing"
+        },
+        {
+          "asset": "readout.js",
+          "reason": "missing"
+        }
+      ]
+    },
+    "real_model_calls": 0,
+    "user_test_writes": 0,
+    "memory_integrity_check": "ok",
+    "note": "First deployment check stopped at missing readout assets; follow-up independently revalidated the original pre-start business snapshot without restarting or changing unrelated speech files."
+  },
+  "limitations": [
+    "Legacy source-less records cannot be retroactively assigned source suppression.",
+    "Same source means original rule candidate identity; arbitrary paraphrases/new conversations are not covered.",
+    "Continuity candidates retain previous exact-request protections.",
+    "Cross-database source checks are snapshots; already dispatched model requests cannot be revoked.",
+    "No new full-machine offline, long-term resource or multi-node acceptance."
+  ],
+  "checks": {
+    "docs": {
+      "documents": 24,
+      "diagrams": 20,
+      "artifacts": 40,
+      "errors": 0,
+      "note": "A concurrently added REA skill Markdown was registered and linked; final documentation check passed without relaxing checks."
+    },
+    "seed": {
+      "ok": true,
+      "assets": 22,
+      "fixtures": 12
+    }
+  },
+  "verified_source_sha256": {
+    "runtime/node-host/jarvis_core/memory.py": "6f3de0a9ad88382173b4f5012982d114122e026ea4f15df8a8840780a6bb1aef",
+    "runtime/node-host/jarvis_core/memory_sources.py": "58acc0452914b83ca8bac8c8241b2512c9893c494eeed4a0a4e0bbdbccb6bcb4",
+    "runtime/node-host/jarvis_core/personal_candidates.py": "441b53d75e43afb44c6d26f836c7f6716ccd15003b7170b99af2c720f9980cc4",
+    "runtime/node-host/jarvis_core/personal.py": "54756ed0cb97285ad7df0857f7d0d61d0edcb0af549558cb7ff988e8f9d71d1d",
+    "runtime/node-host/jarvis_core/modules.py": "8bcfe9cf9c8a6ff9e8254de585d01d9c21757c550de36a6d26e517dee5b8ed1e",
+    "contracts/schemas/memory-fact.schema.json": "266429b1566ec034031eee057ffdba76131d7f612a6b45e2a881de5a707e8f1e",
+    "apps/web/memory.js": "4f095760c6f8068730c035c5e87f30938f3f7b466cd83e73b1fbf40d115ff386",
+    "apps/web/memory.css": "2d8da7c0e29cac08f5535a5ce66ec84f09314ef5c86a1a8b54dd83e2b9bcbc1b",
+    "apps/web/personal_candidates.js": "e7ae554fa71cf96319f8e3c6d4e105259d211bf6210248c5196e5c69c94c23d4",
+    "tests/test_memory_sources.py": "76472407329e795f586697385b653d4b4b4ea655289926104554dede6e4fbc02",
+    "tools/probe_memory_sources.py": "0975ce4203f001f560c89d4b8be8c1b3f90f917b07d89331b24f9b819dd3bd5f"
+  }
+}

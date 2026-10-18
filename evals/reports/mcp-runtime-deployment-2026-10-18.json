@@ -1,0 +1,79 @@
+{
+  "status": "passed",
+  "version": "0.1.55",
+  "observed_at": "2026-10-18T12:56:39.784920+00:00",
+  "instance_id": "e1321ee8af435ca2155a04b0ee660ad8",
+  "conversation_id": "67d162ff7bd74f13988874ad8f1581fb",
+  "task_id": "task_85e516565d035ec992b0707956b328fd",
+  "report": {
+    "candidates": [],
+    "checks": {
+      "local_files_sent": false,
+      "model_calls": 0,
+      "remote_text_verified": false,
+      "target_code_executed": false,
+      "tool_calls": 1
+    },
+    "endpoint": "https://mcp.context7.com/mcp",
+    "kind": "jarvis.mcp-report",
+    "library": "/electron/electron",
+    "mcp_id": "context7",
+    "protocol_version": "2025-11-25",
+    "query": "Show ipcMain.handle and ipcRenderer.invoke request response examples.",
+    "selection": {
+      "policy": {
+        "mode": "auto",
+        "source": "package_default"
+      },
+      "registration_id": "d5cf835fb42548aaa017b16c13cf1fd7",
+      "revision": 1,
+      "selection": "explicit_documentation_task"
+    },
+    "text": "### Implement two-way IPC with ipcMain.handle and ipcRenderer.invoke\n\nSource: https://github.com/electron/electron/blob/main/docs/tutorial/ipc.md\n\nPair ipcRenderer.invoke in the preload script with ipcMain.handle in the main process to asynchronously return results to the renderer. Errors thrown through handle in the main process serialize only their message property to the renderer. Do not expose ipcRenderer.invoke directly across the context bridge to maintain security.\n\n```javascript\nconst { app, BrowserWindow, dialog, ipcMain } = require('electron')\n\nconst path = require('node:path')\n\n// ...\n\nasync function handleFileOpen() {\n  const { canceled, filePaths } = await dialog.showOpenDialog({})\n  if (!canceled) {\n    return filePaths[0]\n  }\n}\n\nfunction createWindow() {\n  const mainWindow = new BrowserWindow({\n    webPreferences: {\n      preload: path.join(__dirname, 'preload.js')\n    }\n  })\n  mainWindow.loadFile('index.html')\n}\n\napp.whenReady().then(() => {\n  ipcMain.handle('dialog:openFile', handleFileOpen)\n  createWindow()\n})\n// ...\n```\n\n```javascript\nconst { contextBridge, ipcRenderer } = require('electron')\n\ncontextBridge.exposeInMainWorld('electronAPI', {\n  openFile: () => ipcRenderer.invoke('dialog:openFile')\n})\n```\n\n```html\n<!DOCTYPE html>\n<html>\n  <head>\n    <meta charset=\"UTF-8\">\n    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->\n    <meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'self'; script-src 'self'\">\n    <title>Dialog</title>\n  </head>\n  <body>\n    <button type=\"button\" id=\"btn\">Open a File</button>\n    File path: <strong id=\"filePath\"></strong>\n    <script src='./renderer.js'></script>\n  </body>\n</html>\n```\n\n```javascript\nconst btn = document.getElementById('btn')\nconst filePathElement = document.getElementById('filePath')\n\nbtn.addEventListener('click', async () => {\n  const filePath = await window.electronAPI.openFile()\n  filePathElement.innerText = filePath\n})\n```\n\n--------------------------------\n\n### Handle invokable IPC with ipcMain.handle and ipcRenderer.invoke\n\nSource: https://github.com/electron/electron/blob/main/docs/api/ipc-main.md\n\nRegisters a handler in the main process that responds to ipcRenderer.invoke calls from the renderer process. When the handler returns a Promise, its resolved value is sent back as the reply. Errors thrown in the handler are serialized, providing only the message property to the renderer.\n\n```javascript\nipcMain.handle('my-invokable-ipc', async (event, ...args) => {\n  const result = await somePromise(...args)\n  return result\n})\n```\n\n```javascript\nasync () => {\n  const result = await ipcRenderer.invoke('my-invokable-ipc', arg1, arg2)\n  // ...\n}\n```\n\n--------------------------------\n\n### Send IPC messages from renderer to main process using ipcRenderer and ipcMain\n\nSource: https://github.com/electron/electron/blob/main/docs/tutorial/tutorial-3-preload.md\n\nExposes an IPC invoke wrapper in preload.js, listens for the channel in main.js using ipcMain.handle before creating the window, and invokes the exposed ping method from renderer.js. Wrap ipcRenderer.invoke calls instead of exposing the entire ipcRenderer module directly to prevent arbitrary IPC attacks.\n\n```javascript\nconst { contextBridge, ipcRenderer } = require('electron')\n\ncontextBridge.exposeInMainWorld('versions', {\n  node: () => process.versions.node,\n  chrome: () => process.versions.chrome,\n  electron: () => process.versions.electron,\n  ping: () => ipcRenderer.invoke('ping')\n  // we can also expose variables, not just functions\n})\n```\n\n```javascript\nconst { app, BrowserWindow, ipcMain } = require('electron/main')\n\nconst path = require('node:path')\n\nconst createWindow = () => {\n  const win = new BrowserWindow({\n    width: 800,\n    height: 600,\n    webPreferences: {\n      preload: path.join(__dirname, 'preload.js')\n    }\n  })\n  win.loadFile('index.html')\n}\napp.whenReady().then(() => {\n  ipcMain.handle('ping', () => 'pong')\n  createWindow()\n})\n```\n\n```javascript\nconst func = async () => {\n  const response = await window.versions.ping()\n  console.log(response) // prints out 'pong'\n}\n\nfunc()\n```\n\n--------------------------------\n\n### ipcRenderer.invoke(channel, ...args)\n\nSource: https://github.com/electron/electron/blob/main/docs/api/ipc-renderer.md\n\nSends a message to the main process asynchronously via a channel and resolves with the response.\n\n```APIDOC\n## ipcRenderer.invoke(channel, ...args)\n\n### Description\nSend a message to the main process via `channel` and expect a result asynchronously. Arguments are serialized using the Structured Clone Algorithm. The main process should listen for `channel` using `ipcMain.handle()`.\n\n### Parameters\n- **channel** (string) - Required - The channel name to send the message to.\n- **...args** (any[]) - Optional - Additional arguments to pass to the handler.\n\n### Returns\n- **Promise<any>** - Resolves with the response from the main process.\n\n### Example\n```js\n// Renderer process\nipcRenderer.invoke('some-name', someArgument).then((result) => {\n  // ...\n})\n\n// Main process\nipcMain.handle('some-name', async (event, someArgument) => {\n  const result = await doSomeWork(someArgument)\n  return result\n})\n```\n```\n\n--------------------------------\n\n### Send asynchronous message with ipcRenderer.invoke and handle with ipcMain.handle\n\nSource: https://github.com/electron/electron/blob/main/docs/api/ipc-renderer.md\n\nSends a message asynchronously over a channel from the renderer and resolves with the result from the main process handler. Arguments are serialized via Structured Clone Algorithm; unsupported types like DOM objects or functions will throw an error.\n\n```javascript\n// Renderer process\nipcRenderer.invoke('some-name', someArgument).then((result) => {\n  // ...\n})\n\n// Main process\nipcMain.handle('some-name', async (event, someArgument) => {\n  const result = await doSomeWork(someArgument)\n  return result\n})\n```",
+    "tool": "query-docs",
+    "trace": [
+      {
+        "id": 1,
+        "method": "initialize",
+        "status": "received"
+      },
+      {
+        "id": null,
+        "method": "notifications/initialized",
+        "status": "received"
+      },
+      {
+        "id": 2,
+        "method": "tools/list",
+        "status": "received"
+      },
+      {
+        "arguments_digest": "sha256:a90ec5b7599670087b467d205c4ba56faeba7a75f511b123efb0182f4f190fe2",
+        "id": 3,
+        "method": "tools/call",
+        "status": "received",
+        "tool": "query-docs"
+      }
+    ]
+  },
+  "model_calls": 0,
+  "tool_calls": 1,
+  "ui_assets": {
+    "status": "ready",
+    "unavailable": []
+  },
+  "service_restarted": false,
+  "initial_ui_attempt": {
+    "status": "failed",
+    "reason": "Probe omitted runtime/worker-host import path; API task had already succeeded",
+    "recovery": "Read the existing confirmed task; no repeated tool call"
+  },
+  "live_ui": {
+    "status": "passed",
+    "page_errors": [],
+    "screenshots": [
+      "artifacts/mcp-runtime/live-document-result.png",
+      "artifacts/mcp-runtime/live-settings.png"
+    ]
+  }
+}

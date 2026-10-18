@@ -1,0 +1,110 @@
+{
+  "version": "0.1.21",
+  "scope": "Distinct standby/thinking visuals, viewport assembly/disassembly, opt-in synthesized audio and workbench visual entry/leave. No native tray shutdown animation.",
+  "checked_at": "2026-10-16T07:57:35.852902+00:00",
+  "status": "verified_with_limits",
+  "automated": {
+    "web_tests": {
+      "command": "python -B -m unittest tests.test_web",
+      "passed": 20
+    },
+    "javascript_syntax": "node --check passed for logo.js, preview.js, sound.js and lifecycle.js",
+    "docs": {
+      "exit_code": 0,
+      "summary": "OK documents=23 diagrams=19 artifacts=38 errors=0",
+      "errors": []
+    },
+    "ico_sizes": [
+      16,
+      24,
+      32,
+      48,
+      64,
+      128,
+      256
+    ],
+    "png_exports": "Square RGBA; expected dimensions checked"
+  },
+  "browser": {
+    "engine": "Codex in-app Chromium",
+    "viewports": [
+      {
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "width": 390,
+        "height": 844
+      }
+    ],
+    "checks": [
+      "Standby: halo and stable meter pulse; scan opacity zero",
+      "Thinking: four animated regions, 2.4s scan, 1.8s pulse, staggered meter and PROCESSING label",
+      "Pause freezes scan pseudo-element, all four regions and meter; paused intro uses short static fallback",
+      "Nine-part modal fills 1280x720 and 390x844 viewport; controls remain inside viewport",
+      "Sound opt-in unlocks AudioContext and button reflects enabled state; no browser audio exceptions observed",
+      "Boot demo closes automatically and restores focus; exit demo skip removes modal",
+      "Workbench opens with boot sequence once per tab/instance; refreshing same instance does not repeat",
+      "Workbench leave completes into return screen; return restores unsent draft unchanged",
+      "New-session reconstruction keeps one surface and four processing segments per logo",
+      "Escape skips sequence and clears modal flag",
+      "390px workbench has no horizontal overflow",
+      "No console warning/error observed in preview or workbench",
+      "Eight served brand assets match current disk bytes",
+      "Approved master, core export, PNG icon and ICO hashes unchanged",
+      "Runtime remains standby with zero active model requests after visual leave test",
+      "Final preview meter bottom 570.89px remains above hint top 587.98px"
+    ],
+    "model_calls": 0
+  },
+  "motion_design": {
+    "continuous_javascript_loop": false,
+    "animated_properties": [
+      "transform",
+      "opacity"
+    ],
+    "pointer_updates": "event-driven; at most one queued requestAnimationFrame per interactive logo",
+    "reduced_motion_css": true,
+    "hidden_page_cleanup": true,
+    "out_of_view_pause": true,
+    "keyboard_response": true,
+    "touch_handlers": true,
+    "timers": "one bounded completion timer per cinematic sequence; cleared on skip/close",
+    "audio": "local Web Audio; opt-in, conservative gain and compressor, finite scheduled sources, cancellation generation guard"
+  },
+  "limits": [
+    "Native Windows desktop/tray shutdown sequence not implemented; direct tab closure cannot guarantee animation",
+    "Autoplay remains browser-restricted; fresh pages may require sound unlock",
+    "OS reduced-motion setting and physical touch input not exercised",
+    "Audio output scheduled and UI state verified; acoustic loudness and listening quality not independently measured",
+    "Cross-browser and high-contrast acceptance incomplete",
+    "GPU/frame-rate benchmarks not run",
+    "Existing notification-area icon unchanged",
+    "Raster source artwork; no SVG master"
+  ],
+  "assets": {
+    "apps/web/brand/core.png": "3d66ab1a1d125e12ef289eaca563e37bc12b762b0c9d135f5f5c42902f610e4a",
+    "apps/web/brand/icon-128.png": "68a055fcfaab0297777bb55da919199a5d17a16bcfe38e1929df3a9532b4598b",
+    "apps/web/brand/icon-16.png": "9ab5d2a504006eeb8e9bc86e883a9ca946cb6a0e66b3ad48644a002c85917018",
+    "apps/web/brand/icon-24.png": "311414092266b391254604b7647e16cde3c5e68c22d608caf172135d7f633868",
+    "apps/web/brand/icon-256.png": "727f3188b8121ece87fd31e7bc25bd68f8c1572c50c957f272bb429546a7e9d1",
+    "apps/web/brand/icon-32.png": "b872e00c64e1243850a38e70ea571f41ff56aecc7d4606e008ad0ae7c71c284c",
+    "apps/web/brand/icon-48.png": "057468f1be1e60f99461a88ef9638a02b37c87e54425ec509fa65ba2a7fbec2b",
+    "apps/web/brand/icon-64.png": "f7389d61e9dfab2ccf7e1655da12441b27b81a24fb8fb7339c7c46d7798e0850",
+    "apps/web/brand/icon.png": "727f3188b8121ece87fd31e7bc25bd68f8c1572c50c957f272bb429546a7e9d1",
+    "apps/web/brand/jarvis.ico": "d79518ab36edf9ff705ccf673cf0a526d10f91507ca38956f06e4763f3ed9845",
+    "apps/web/brand/lifecycle.css": "683792fb6830ed74cfed59b83366c75e7f011719ca310414d09c9b234b191bb8",
+    "apps/web/brand/lifecycle.js": "453394bcbbee8865d3664feba225d20c6073c3f0aeec16d285f83aaacd510813",
+    "apps/web/brand/logo.css": "f7d972efbdebf9ccf1151a56632f26b6af65db0122ea57c74d715b2c1f8f7d1a",
+    "apps/web/brand/logo.js": "f76202c5737ad262e7723af5c6526a8db1a0c8c5d74a57276ac8bf44a78c4bee",
+    "apps/web/brand/preview.css": "51f8ce20ace24fa534d2e0b9749be291571069121e5344a8142359ff20840956",
+    "apps/web/brand/preview.html": "35acc2a1d7aa8fdb0417a7681d00b8958f9a704d3317d1067cf1fcab252c015c",
+    "apps/web/brand/preview.js": "c007de010ecd0da1281429af794bc526367ae113e92d5647029c06b42388c577",
+    "apps/web/brand/sound.js": "d3d8ead110b147ea3364fc0aaa31fa1c8417175ca529617bbb4fd464dc7bc04c",
+    "apps/web/brand/source/core.png": "6d32a8e6350133facc7df5a771645c07ed92f39526c8b8b119faaf115fffaf0b"
+  }
+}

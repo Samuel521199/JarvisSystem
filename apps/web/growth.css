@@ -1,0 +1,6 @@
+.growth-dialog{width:min(800px,calc(100vw - 32px));max-height:88vh;overflow:auto}.growth-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}.growth-heading h2{margin:0}
+.growth-card{position:relative;display:grid;gap:12px;border:1px solid var(--line);border-radius:14px;padding:18px;margin:16px 0;overflow-wrap:anywhere}.growth-card p{margin:0}.growth-card small{color:var(--muted)}
+.growth-steps{display:flex;flex-wrap:wrap;gap:8px;font-size:12px;color:var(--muted)}.growth-steps span{padding:4px 9px;border-radius:20px;background:var(--surface)}.growth-steps .reached{color:var(--blue);border:1px solid var(--line)}
+.growth-card[data-active=true]{animation:growth-breathe 2.5s ease-in-out infinite}.growth-actions{display:flex;flex-wrap:wrap;gap:8px}.growth-dialog button,.growth-link{padding:7px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface)}.growth-link{margin-top:10px;font-size:12px}.growth-dialog pre{white-space:pre-wrap;max-height:240px;overflow:auto;font-size:12px}.growth-dialog a{color:var(--blue)}
+@keyframes growth-breathe{50%{box-shadow:0 0 16px color-mix(in srgb,var(--blue) 15%,transparent);border-color:var(--blue)}}
+@media(prefers-reduced-motion:reduce){.growth-card[data-active=true]{animation:none}}

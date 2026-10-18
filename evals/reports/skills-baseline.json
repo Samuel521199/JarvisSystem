@@ -1,0 +1,98 @@
+{
+  "version": "0.1.35",
+  "status": "passed",
+  "observed_at": "2026-10-16T18:59:15.526325+00:00",
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/skills.py": "c99ea46e41aa094c066b64a755f4b5fda77f3171db137231dff22c4b56db7f1b",
+    "runtime/node-host/jarvis_core/skill_tasks.py": "7e68dc172a79c081fe4e2f0d2dbac71d0763ba42d48a4caa9b628dd3ced0df99",
+    "runtime/node-host/jarvis_core/skill_renderer.py": "20fb0f6bf9be3ca63c6aabfa0254ec6d4b2b98f5222c030636ff591802e7ba81",
+    "runtime/node-host/jarvis_core/chat.py": "d2db7bc29cc5698ff8b359fb7f061ea1a56b0e5918c8b32f8cfdb5825297f898",
+    "runtime/node-host/jarvis_core/task_queue.py": "1352f998417cd9d858309b5af1c2e9f0265b71a3a74ecfe1a4492ee4763afe6a",
+    "runtime/node-host/jarvis_core/worker_recovery.py": "8f70b4ec46dc7a7bfa64f53166abf38fb252ab08a61f37b2c933bfa479e68a0b",
+    "apps/web/server.py": "7b5a350dce859c79bc021f0f9dbe75664da793002f4675209b54ee4de9d3f9ad",
+    "apps/web/skill_routes.py": "6d74c924e287dbec8d6bc2f652863700fa4fa7fe609c6015b7a006d9eb1df231",
+    "apps/web/skills.js": "9833895e2fefbc04d3853f8a05db20fd6768c0dff6481e134c1cceeccf929be2",
+    "config/skills/catalog.json": "68639219d7b5ec668782133047692fdac640fce5d023fd0db8adc9eb580283d5",
+    "config/skills/runtime.json": "6038de0fbaf2f1d9b5331a983159b4b1b04d1702ef359d337f726ae05919b470",
+    "contracts/schemas/native-skills.schema.json": "46d212fb8c071fee40c1e46f64c6c7cd95efec9e155402b9ad945f3a3c8622cb",
+    "contracts/schemas/skill-report.schema.json": "ed05afef80ad039e5324fc4c364855a598901366220efc9f721538492385ad45",
+    "adapters/skills/anatomy/render_worker.py": "19dd7f955e039ba94be66bfc0dd61b09662230f25cb20a4df28b2cabe1fc4ba1",
+    "adapters/skills/anatomy/lesson.js": "78640e67dee8963840bb57fb5b7b921b8d19268150c5ac27a3c1dc87c17ac156",
+    "adapters/skills/anatomy/iso-kit.mjs": "6d3ecc725d30c3b0346da309cf61dfa5a65017c23620bbd4093009d4fb104018",
+    "adapters/skills/anatomy/LICENSE.txt": "87c078ab9d90a3044f359e6b563d4e6afea7aa060897cf4f21618687b3856796",
+    "adapters/skills/matt-pocock/LICENSE.txt": "4981c5f6a90eb3a969dacabb9350f5a75695ff3910b39b6534952908dfdc5ff7",
+    "tests/test_skills.py": "35cb1648b0e3b1c16b450ea475a56a802742ed50495f12f1ba2aae521f2f81ec",
+    "tools/probe_skills_ui.py": "248d9bea506c8c6afb701e0706b434eb0a1ac1424cf2ebb4dba5ee0998223977",
+    "tools/probe_skills_live.py": "6c4cdb6b78f46007497adc9340e20ae4ffce3d58a38bb319362c939100982908",
+    "tools/release_bundle.py": "650a23962acd762528bf1de38ffcc16b610ecb05c0a0bea52b097c7ba71c6852"
+  },
+  "completed": {
+    "web_tests": 21,
+    "chat_tests": 19,
+    "modules_tests": 14,
+    "previous_regression": {
+      "run": 472,
+      "skipped": 2,
+      "status": "passed"
+    },
+    "final_regression": {
+      "run": 475,
+      "passed": 473,
+      "skipped": 2,
+      "status": "passed",
+      "seconds": 230.889,
+      "log": "artifacts/skills/regression-final.txt",
+      "scope": "Full regression before final license embedding; 18 targeted tests rerun after that last change."
+    },
+    "ui": "evals/reports/skills-ui.json",
+    "live": "evals/reports/skills-live.json",
+    "skills_tests": {
+      "run": 18,
+      "passed": 18,
+      "skipped": 0,
+      "status": "passed"
+    },
+    "docs": {
+      "status": "passed",
+      "documents": 23,
+      "diagrams": 19,
+      "artifacts": 38
+    },
+    "deployment": "evals/reports/skills-deployment.json",
+    "deployed_ui": "passed",
+    "whitespace_check": {
+      "status": "passed",
+      "command": "git -c core.whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol diff --check",
+      "note": "Default Git check treats the Windows CRLF endings as trailing whitespace; the follow-up preserves all actual whitespace checks and recognizes CR at EOL."
+    }
+  },
+  "limits": [
+    "Only four adapted guides and fixed gear renderer are executable.",
+    "No general code edit/test/repair loop, arbitrary JS, CAD or video.",
+    "Not all V-SKL/V-ANI gates have passed."
+  ],
+  "initial_regression_failures": [
+    "Native monitor row broke old positional assertions; fixed tests to identify the store row and verify the new native row.",
+    "The word animation contained the character used as a creation verb; tightened the creation-intent rule and added negative cases."
+  ],
+  "sources": {
+    "catalog": {
+      "anatomy": "e9488296a44211c42701ff71705b7901470ec78f",
+      "matt-pocock": "49dd158d1076134a641b33efb035946536778336"
+    },
+    "runtime_profile": {
+      "schema_version": 1,
+      "runtime_kind": "fixed-python-lpac",
+      "files": {
+        "adapters/skills/anatomy/render_worker.py": "sha256:19dd7f955e039ba94be66bfc0dd61b09662230f25cb20a4df28b2cabe1fc4ba1",
+        "adapters/skills/anatomy/lesson.js": "sha256:78640e67dee8963840bb57fb5b7b921b8d19268150c5ac27a3c1dc87c17ac156",
+        "adapters/skills/anatomy/iso-kit.mjs": "sha256:6d3ecc725d30c3b0346da309cf61dfa5a65017c23620bbd4093009d4fb104018",
+        "adapters/skills/anatomy/LICENSE.txt": "sha256:87c078ab9d90a3044f359e6b563d4e6afea7aa060897cf4f21618687b3856796"
+      }
+    }
+  },
+  "license_embedding": "Anatomy MIT copyright and permission notice included in delivered standalone HTML and repository source; Matt MIT notice retained with adapted guides.",
+  "live_probe_runs": 2,
+  "configured_model_calls_in_live_probes": 4,
+  "skips_not_treated_as_passes": true
+}

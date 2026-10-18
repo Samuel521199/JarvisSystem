@@ -1,0 +1,405 @@
+{
+  "status": "SUCCEEDED",
+  "backend": "official EmotiVoice CPU; native generator/forward; config-only BERT init followed by strict full state load",
+  "load_seconds": 2.4689999999973224,
+  "baseline_memory": {
+    "working_set_bytes": 421531648,
+    "peak_working_set_bytes": 424669184,
+    "private_commit_bytes": 1938694144,
+    "peak_private_commit_bytes": 1941893120
+  },
+  "load_phases": {
+    "style_checkpoint_loaded": {
+      "working_set_bytes": 2069970944,
+      "peak_working_set_bytes": 2069970944,
+      "private_commit_bytes": 4273192960,
+      "peak_private_commit_bytes": 4273192960
+    },
+    "generator_checkpoint_loaded": {
+      "working_set_bytes": 2100174848,
+      "peak_working_set_bytes": 2119507968,
+      "private_commit_bytes": 4169932800,
+      "peak_private_commit_bytes": 4273422336
+    }
+  },
+  "loaded_memory": {
+    "working_set_bytes": 2105589760,
+    "peak_working_set_bytes": 2119507968,
+    "private_commit_bytes": 4174159872,
+    "peak_private_commit_bytes": 4273422336
+  },
+  "speaker_count": 2014,
+  "threads": 4,
+  "cases": [
+    {
+      "name": "neutral",
+      "prompt": "普通",
+      "text": "你好，我是贾维斯，很高兴见到你。",
+      "speaker": "8051",
+      "seconds": 0.5940000000045984,
+      "cpu_seconds": 2.0625,
+      "audio_seconds": 3.36,
+      "rtf": 0.17678571428708287,
+      "memory": {
+        "working_set_bytes": 2188693504,
+        "peak_working_set_bytes": 2188693504,
+        "private_commit_bytes": 4272009216,
+        "peak_private_commit_bytes": 4273422336
+      },
+      "artifact": "H:\\JarvisData\\research\\emotivoice\\neutral.wav",
+      "sha256": "e23f408d431c55f03d5b48be1688f6655164a2e50807087a926ba215abc80d7d",
+      "sample_rate": 16000
+    },
+    {
+      "name": "happy",
+      "prompt": "开心",
+      "text": "你好，我是贾维斯，很高兴见到你。",
+      "speaker": "8051",
+      "seconds": 0.26599999999598367,
+      "cpu_seconds": 1.125,
+      "audio_seconds": 3.216,
+      "rtf": 0.08271144278482079,
+      "memory": {
+        "working_set_bytes": 2198917120,
+        "peak_working_set_bytes": 2198917120,
+        "private_commit_bytes": 4300992512,
+        "peak_private_commit_bytes": 4300992512
+      },
+      "artifact": "H:\\JarvisData\\research\\emotivoice\\happy.wav",
+      "sha256": "d674fa96129504a90d1d78daf5f4d59c248a3717237f4e893e4efaf53a13eb63",
+      "sample_rate": 16000
+    },
+    {
+      "name": "sad",
+      "prompt": "悲伤",
+      "text": "你好，我是贾维斯，很高兴见到你。",
+      "speaker": "8051",
+      "seconds": 0.3120000000053551,
+      "cpu_seconds": 1.25,
+      "audio_seconds": 3.68,
+      "rtf": 0.08478260869710737,
+      "memory": {
+        "working_set_bytes": 2211610624,
+        "peak_working_set_bytes": 2211610624,
+        "private_commit_bytes": 4329955328,
+        "peak_private_commit_bytes": 4329955328
+      },
+      "artifact": "H:\\JarvisData\\research\\emotivoice\\sad.wav",
+      "sha256": "8fdc292a356bf65f1cfde361243523277f62bb89cde14f833d7371deb5115ad5",
+      "sample_rate": 16000
+    },
+    {
+      "name": "angry",
+      "prompt": "生气",
+      "text": "你好，我是贾维斯，很高兴见到你。",
+      "speaker": "8051",
+      "seconds": 0.3280000000013388,
+      "cpu_seconds": 1.375,
+      "audio_seconds": 3.44,
+      "rtf": 0.0953488372096915,
+      "memory": {
+        "working_set_bytes": 1477353472,
+        "peak_working_set_bytes": 2215260160,
+        "private_commit_bytes": 3282567168,
+        "peak_private_commit_bytes": 4344307712
+      },
+      "artifact": "H:\\JarvisData\\research\\emotivoice\\angry.wav",
+      "sha256": "db9278231d66386dbd3d64c6517be739f4d3ee85303159f8073e8b45830b883e",
+      "sample_rate": 16000
+    },
+    {
+      "name": "soft",
+      "prompt": "温柔",
+      "text": "我在，有什么可以帮你？",
+      "speaker": "8051",
+      "seconds": 0.18699999999807915,
+      "cpu_seconds": 0.8125,
+      "audio_seconds": 1.952,
+      "rtf": 0.09579918032688481,
+      "memory": {
+        "working_set_bytes": 1487581184,
+        "peak_working_set_bytes": 2215260160,
+        "private_commit_bytes": 3312590848,
+        "peak_private_commit_bytes": 4344307712
+      },
+      "artifact": "H:\\JarvisData\\research\\emotivoice\\soft.wav",
+      "sha256": "064245638c56bf8a9a1fa19a0b8209bfd0f517b52e88c0fc86d8c617f515c5dc",
+      "sample_rate": 16000
+    },
+    {
+      "name": "reply",
+      "prompt": "普通",
+      "text": "我可以陪你聊天，也可以帮你处理事情。我们先从哪一件开始？",
+      "speaker": "8051",
+      "seconds": 0.40600000000267755,
+      "cpu_seconds": 1.671875,
+      "audio_seconds": 5.12,
+      "rtf": 0.07929687500052296,
+      "memory": {
+        "working_set_bytes": 1504858112,
+        "peak_working_set_bytes": 2215260160,
+        "private_commit_bytes": 3351126016,
+        "peak_private_commit_bytes": 4344307712
+      },
+      "artifact": "H:\\JarvisData\\research\\emotivoice\\reply.wav",
+      "sha256": "b3434a64277870df3ac36a2c0e57484a37a28214d01fc740591a76ddb477f9d4",
+      "sample_rate": 16000
+    },
+    {
+      "name": "male",
+      "prompt": "普通",
+      "text": "你好，我是贾维斯，很高兴见到你。",
+      "speaker": "9017",
+      "seconds": 0.3280000000013388,
+      "cpu_seconds": 1.28125,
+      "audio_seconds": 3.872,
+      "rtf": 0.08471074380199865,
+      "memory": {
+        "working_set_bytes": 1515180032,
+        "peak_working_set_bytes": 2215260160,
+        "private_commit_bytes": 3379130368,
+        "peak_private_commit_bytes": 4344307712
+      },
+      "artifact": "H:\\JarvisData\\research\\emotivoice\\male.wav",
+      "sha256": "ce5245cf7056e95dc9df7d2f3d2d8a0dc2a7076bc3dc4a41d7a5d73b2c2e3a8b",
+      "sample_rate": 16000
+    },
+    {
+      "name": "balanced-neutral",
+      "prompt": "普通",
+      "text": "今天下午我们会在这里见面。",
+      "speaker": "8051",
+      "seconds": 0.21899999999732245,
+      "cpu_seconds": 0.828125,
+      "audio_seconds": 2.272,
+      "rtf": 0.09639084506924404,
+      "memory": {
+        "working_set_bytes": 1524953088,
+        "peak_working_set_bytes": 2215260160,
+        "private_commit_bytes": 3408916480,
+        "peak_private_commit_bytes": 4344307712
+      },
+      "artifact": "H:\\JarvisData\\research\\emotivoice\\balanced-neutral.wav",
+      "sha256": "c17b9c03fe7c51c8ecd45cc89691f22653fbcbae583f01d63877d93e6da4994a",
+      "sample_rate": 16000
+    },
+    {
+      "name": "balanced-happy",
+      "prompt": "开心",
+      "text": "今天下午我们会在这里见面。",
+      "speaker": "8051",
+      "seconds": 0.17199999999866122,
+      "cpu_seconds": 0.703125,
+      "audio_seconds": 2.272,
+      "rtf": 0.07570422535152344,
+      "memory": {
+        "working_set_bytes": 1525395456,
+        "peak_working_set_bytes": 2215260160,
+        "private_commit_bytes": 3409772544,
+        "peak_private_commit_bytes": 4344307712
+      },
+      "artifact": "H:\\JarvisData\\research\\emotivoice\\balanced-happy.wav",
+      "sha256": "6c75388777f18d5b4a1753e4cf6adc29c5a061dd56c0949fa3ce0eb171edb335",
+      "sample_rate": 16000
+    },
+    {
+      "name": "balanced-sad",
+      "prompt": "悲伤",
+      "text": "今天下午我们会在这里见面。",
+      "speaker": "8051",
+      "seconds": 0.23400000000401633,
+      "cpu_seconds": 0.921875,
+      "audio_seconds": 2.48,
+      "rtf": 0.0943548387112969,
+      "memory": {
+        "working_set_bytes": 1535479808,
+        "peak_working_set_bytes": 2215260160,
+        "private_commit_bytes": 3438432256,
+        "peak_private_commit_bytes": 4344307712
+      },
+      "artifact": "H:\\JarvisData\\research\\emotivoice\\balanced-sad.wav",
+      "sha256": "badbfc2d055497f0522a26135fed69f8c36776e4c8b4475e39e39074f4fc1a28",
+      "sample_rate": 16000
+    },
+    {
+      "name": "balanced-angry",
+      "prompt": "生气",
+      "text": "今天下午我们会在这里见面。",
+      "speaker": "8051",
+      "seconds": 0.17199999999866122,
+      "cpu_seconds": 0.75,
+      "audio_seconds": 2.272,
+      "rtf": 0.07570422535152344,
+      "memory": {
+        "working_set_bytes": 1535229952,
+        "peak_working_set_bytes": 2215260160,
+        "private_commit_bytes": 3438174208,
+        "peak_private_commit_bytes": 4344307712
+      },
+      "artifact": "H:\\JarvisData\\research\\emotivoice\\balanced-angry.wav",
+      "sha256": "646ea3eb5c5b41b771c581b7efe070634a5a093e3c4d1c64685435b24df7f9d0",
+      "sample_rate": 16000
+    },
+    {
+      "name": "balanced-happy-en",
+      "prompt": "Happy",
+      "text": "今天下午我们会在这里见面。",
+      "speaker": "8051",
+      "seconds": 0.23399999999674037,
+      "cpu_seconds": 0.890625,
+      "audio_seconds": 2.32,
+      "rtf": 0.10086206896411223,
+      "memory": {
+        "working_set_bytes": 1545170944,
+        "peak_working_set_bytes": 2215260160,
+        "private_commit_bytes": 3467354112,
+        "peak_private_commit_bytes": 4344307712
+      },
+      "artifact": "H:\\JarvisData\\research\\emotivoice\\balanced-happy-en.wav",
+      "sha256": "fd51b11c8b34f41e01cd823970e44d3791dcdc7461ce5841403d3692717bf7f3",
+      "sample_rate": 16000
+    },
+    {
+      "name": "balanced-sad-en",
+      "prompt": "Sad",
+      "text": "今天下午我们会在这里见面。",
+      "speaker": "8051",
+      "seconds": 0.23500000000058208,
+      "cpu_seconds": 0.96875,
+      "audio_seconds": 2.336,
+      "rtf": 0.10059931506874234,
+      "memory": {
+        "working_set_bytes": 1554964480,
+        "peak_working_set_bytes": 2215260160,
+        "private_commit_bytes": 3496157184,
+        "peak_private_commit_bytes": 4344307712
+      },
+      "artifact": "H:\\JarvisData\\research\\emotivoice\\balanced-sad-en.wav",
+      "sha256": "095a361bc5f7bc94f27cd2ff65785361f978792ba955fb6c16fd127d8b82d053",
+      "sample_rate": 16000
+    },
+    {
+      "name": "balanced-angry-en",
+      "prompt": "Angry",
+      "text": "今天下午我们会在这里见面。",
+      "speaker": "8051",
+      "seconds": 0.23399999999674037,
+      "cpu_seconds": 0.921875,
+      "audio_seconds": 2.256,
+      "rtf": 0.10372340425387429,
+      "memory": {
+        "working_set_bytes": 1564278784,
+        "peak_working_set_bytes": 2215260160,
+        "private_commit_bytes": 3524837376,
+        "peak_private_commit_bytes": 4344307712
+      },
+      "artifact": "H:\\JarvisData\\research\\emotivoice\\balanced-angry-en.wav",
+      "sha256": "ef38f038528997108d00f8e22555ae290e58e633425a93c2fde46e23512c086b",
+      "sample_rate": 16000
+    }
+  ],
+  "paid_calls": 0,
+  "scope": "Isolated evaluation; no production routing, microphone, cloning or perceptual pass claim",
+  "peak_memory": {
+    "working_set_bytes": 1564540928,
+    "peak_working_set_bytes": 2215260160,
+    "private_commit_bytes": 3525103616,
+    "peak_private_commit_bytes": 4344307712
+  },
+  "asset_sha256": {
+    "H:\\JarvisData\\models\\tts\\emotivoice\\simbert\\config.json": "3f36da21f8125337672529c55384f0aedd07bedc8170a900564a9d0bf37946b5",
+    "H:\\JarvisData\\models\\tts\\emotivoice\\simbert\\vocab.txt": "5c3df66617c12834db122e678e6fe8ca267045f8007a34979310ce5eca2dc449",
+    "H:\\JarvisData\\models\\tts\\emotivoice\\g_00140000": "2dcb15a9ed634be57bcd9054cf29f02a9f27557919427c4d6d36e561ebd9d94f",
+    "H:\\JarvisData\\models\\tts\\emotivoice\\checkpoint_163431": "d51e39fb36c6ba784d8e3436e5b5057cf1867be24e0bdea42f5e7bf1a863e1b1"
+  },
+  "source_revision": "59f0f36de4db12825f4705dd4e0780d79dd6bb01",
+  "emotion_acceptance": "not_verified",
+  "naturalness_acceptance": "not_verified",
+  "asr_sanity_checks": [
+    {
+      "name": "neutral",
+      "expected": "你好，我是贾维斯，很高兴见到你。",
+      "recognized": "你好，我是贾维斯，很高兴见到你。",
+      "emotion": "<|HAPPY|>"
+    },
+    {
+      "name": "happy",
+      "expected": "你好，我是贾维斯，很高兴见到你。",
+      "recognized": "你好，我是贾维斯，很高兴见到你。",
+      "emotion": "<|HAPPY|>"
+    },
+    {
+      "name": "sad",
+      "expected": "你好，我是贾维斯，很高兴见到你。",
+      "recognized": "你好，我是贾维斯，很高兴见到你。",
+      "emotion": "<|NEUTRAL|>"
+    },
+    {
+      "name": "angry",
+      "expected": "你好，我是贾维斯，很高兴见到你。",
+      "recognized": "你好，我是贾维斯，很高兴见到你。",
+      "emotion": "<|HAPPY|>"
+    },
+    {
+      "name": "soft",
+      "expected": "我在，有什么可以帮你？",
+      "recognized": "我在有什么可以帮你？",
+      "emotion": "<|NEUTRAL|>"
+    },
+    {
+      "name": "reply",
+      "expected": "我可以陪你聊天，也可以帮你处理事情。我们先从哪一件开始？",
+      "recognized": "我可以陪你聊天，也可以帮你处理事情。我们先从哪一件开始。",
+      "emotion": "<|NEUTRAL|>"
+    },
+    {
+      "name": "male",
+      "expected": "你好，我是贾维斯，很高兴见到你。",
+      "recognized": "你好，我是贾维斯，很高兴见到你。",
+      "emotion": "<|HAPPY|>"
+    },
+    {
+      "name": "balanced-neutral",
+      "expected": "今天下午我们会在这里见面。",
+      "recognized": "今天下午我们会在这里见面。",
+      "emotion": "<|NEUTRAL|>"
+    },
+    {
+      "name": "balanced-happy",
+      "expected": "今天下午我们会在这里见面。",
+      "recognized": "今天下午我们会在这里见面。",
+      "emotion": "<|NEUTRAL|>"
+    },
+    {
+      "name": "balanced-sad",
+      "expected": "今天下午我们会在这里见面。",
+      "recognized": "今天下午我们会在这里见面。",
+      "emotion": "<|NEUTRAL|>"
+    },
+    {
+      "name": "balanced-angry",
+      "expected": "今天下午我们会在这里见面。",
+      "recognized": "今天下午我们会在这里见面。",
+      "emotion": "<|NEUTRAL|>"
+    },
+    {
+      "name": "balanced-happy-en",
+      "expected": "今天下午我们会在这里见面。",
+      "recognized": "今天下午我们会在这里见面。",
+      "emotion": "<|NEUTRAL|>"
+    },
+    {
+      "name": "balanced-sad-en",
+      "expected": "今天下午我们会在这里见面。",
+      "recognized": "今天下午我们会在这里见面。",
+      "emotion": "<|NEUTRAL|>"
+    },
+    {
+      "name": "balanced-angry-en",
+      "expected": "今天下午我们会在这里见面。",
+      "recognized": "今天下午我们会在这里见面。",
+      "emotion": "<|NEUTRAL|>"
+    }
+  ],
+  "gpu_model_allocation": "CPU-only; no model weights/compute assigned to a GPU; system-wide GPU usage not measured"
+}

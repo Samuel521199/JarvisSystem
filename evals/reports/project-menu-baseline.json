@@ -1,0 +1,33 @@
+{
+  "version": "0.1.34",
+  "date": "2026-10-17",
+  "status": "passed",
+  "tests_run": 457,
+  "passed": 455,
+  "skipped": 2,
+  "failures": 0,
+  "errors": 0,
+  "elapsed_seconds": 206.27,
+  "source_unchanged_during_run": true,
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/project_catalog.py": "8c8c5f4f697493f4d5463b0dc3a1c3f038c03b3fea4629af6f674e84caf5328a",
+    "apps/web/project_menu.js": "4f8569fda6ea4d3408fc424aad10c844c5074d67c998aa8e7d61f0cca4320856",
+    "apps/web/project_menu.css": "7926b7005a5d53e353eadc26add4384ce6925f80b89def8a87d4b99b10a6b409",
+    "apps/web/workspace.js": "843c7a270204f1496600f9d48e9c631e40fcabf448b9df47861a9b1a41e88d9f",
+    "apps/web/conversations.js": "8744db6e14559dcdbd075c5b1ff07f4afc5657c79a3a9c701d8d752ef30eb4cf",
+    "apps/web/server.py": "cd6c661ab8d5502ccc94d01634710c241fbcfac90698508c43f30092684594d9",
+    "apps/web/index.html": "15e709c6d3fb026e84a850758c7d58bd6bc6e03da38ce0c4e19e3a9858c32883",
+    "tests/test_project_catalog.py": "3bf3625bf2f0ea9f350dd358cdff57dd7b3b157fea3bae2d97d11efd17a2981e",
+    "tools/check_project_menu_dom.cjs": "8bb71e8dd95285a7d2e201bb52479839857eb35a05805f0650228bd3d6869c71",
+    "runtime/node-host/jarvis_core/__init__.py": "a8c274a3f5bcaae1034fc968bd62900a00e324df880969da268c3a35c83683ca"
+  },
+  "post_suite_changes": {
+    "scope": "JavaScript guards and focus only: abort archive after a previously failed autosave, preserve newest draft, return focus after menu actions; added DOM regression. Backend source unchanged.",
+    "validation": "57 relevant tests repeated: 56 passed, 1 existing environment skip; 10.459s. DOM test passed with the added failed-autosave case.",
+    "source_sha256": {
+      "apps/web/project_menu.js": "f5296b544b70bd423fd6264e184e6ffd2cebc95cfed17541273f274758a4b06f",
+      "apps/web/workspace.js": "f71250110933b8fbfd934d77ded9bf5639d0d994ade303f0887a8ea3341c0cf2",
+      "tools/check_project_menu_dom.cjs": "2c9e49e8c18df5ed20950fe0681278d8c36e6c1ae0a4a821596072b1798c7eab"
+    }
+  }
+}

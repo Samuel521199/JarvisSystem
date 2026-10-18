@@ -1,0 +1,166 @@
+{
+  "captured_at": "2026-10-18T16:20:10.298322+00:00",
+  "source_version_label": "0.1.57",
+  "release_state": "unreleased_memory_review_increment",
+  "production_reloaded": false,
+  "real_model_calls": 0,
+  "owner_data_modified": false,
+  "tests": [
+    {
+      "pattern": "test_memory*.py",
+      "exit_code": 0,
+      "count": 94,
+      "skipped": false,
+      "log": "H:\\JarvisData\\evals\\memory-review-20261019\\regression-0.log"
+    },
+    {
+      "pattern": "test_semantic_candidates.py",
+      "exit_code": 0,
+      "count": 17,
+      "skipped": false,
+      "log": "H:\\JarvisData\\evals\\memory-review-20261019\\regression-1.log"
+    },
+    {
+      "pattern": "test_personal_candidates.py",
+      "exit_code": 0,
+      "count": 11,
+      "skipped": false,
+      "log": "H:\\JarvisData\\evals\\memory-review-20261019\\regression-2.log"
+    },
+    {
+      "pattern": "test_mem0_shadow.py",
+      "exit_code": 0,
+      "count": 12,
+      "skipped": false,
+      "log": "H:\\JarvisData\\evals\\memory-review-20261019\\regression-3.log"
+    },
+    {
+      "pattern": "test_langmem_shadow.py",
+      "exit_code": 0,
+      "count": 12,
+      "skipped": false,
+      "log": "H:\\JarvisData\\evals\\memory-review-20261019\\regression-4.log"
+    }
+  ],
+  "total_tests": 146,
+  "status": "passed",
+  "ui": {
+    "regression-ui": {
+      "version": "0.1.57",
+      "captured_at": "2026-10-18T16:11:16.889749+00:00",
+      "checks": [
+        "Rule preview has no extra model call; explicit provider and scope disclosure",
+        "Actual extraction transport has only selected source, no history or private fact",
+        "Review edits classification and both uses; lost response creates exactly one revision",
+        "Third-party remains distinct and stored-only by default; ignore does not write",
+        "Memory correction rejects old preview with HTTP 409; edits stay visible, save is disabled, explicit regeneration restores it without automatic model use",
+        "Same sentence cannot resurrect forgotten fact with new model wording",
+        "390px and desktop fit; stop clears pending candidates and shares admission slots",
+        "Malformed model output shows failure and actual returned usage without saving"
+      ],
+      "page_errors": [],
+      "real_model_calls": 0,
+      "user_data_modified": false,
+      "fixture_model_calls": 6,
+      "facts_after": 1,
+      "dialogue_transport": "Explicit fixture; no model child started. Supervisor has separate tests.",
+      "status": "passed"
+    },
+    "review-ui-final": {
+      "version": "0.1.57",
+      "captured_at": "2026-10-18T16:14:46.933589+00:00",
+      "page_errors": [],
+      "real_model_calls": 0,
+      "user_data_modified": false,
+      "status": "passed",
+      "fixture_model_calls": 6,
+      "checks": [
+        "Explicit local review has zero model calls and no fact writes",
+        "Edited fields invalidate local review; stale target is never silently reused",
+        "Shows original/new text, relation and old permissions at desktop and 390px",
+        "Replacement response loss retries once: same ID, revision 2, old permissions and title preserved",
+        "Duplicate from a new message keeps original source/document/revision; no second fact",
+        "Ignore changed preference leaves stored fact unchanged"
+      ]
+    }
+  },
+  "resources": {
+    "version": "0.1.57",
+    "captured_at": "2026-10-18T16:15:14.900825+00:00",
+    "real_model_calls": 0,
+    "user_data_modified": false,
+    "rows": 1000,
+    "scope": "1000 independent classified facts, 1024 characters each; no archive reads, browser, GPU or overnight run",
+    "status": "passed",
+    "review_samples": 20,
+    "latency_ms": {
+      "min": 285.19430000051216,
+      "median": 298.24599999938073,
+      "p95": 321.78510000085225,
+      "max": 345.243699999628
+    },
+    "process_memory": {
+      "before_seed": {
+        "working_set_bytes": 40456192,
+        "peak_working_set_bytes": 40456192,
+        "private_commit_bytes": 28188672,
+        "peak_private_commit_bytes": 28188672
+      },
+      "after_seed": {
+        "working_set_bytes": 44392448,
+        "peak_working_set_bytes": 45211648,
+        "private_commit_bytes": 31944704,
+        "peak_private_commit_bytes": 32890880
+      },
+      "after_reviews": {
+        "working_set_bytes": 52625408,
+        "peak_working_set_bytes": 55250944,
+        "private_commit_bytes": 41111552,
+        "peak_private_commit_bytes": 43958272
+      }
+    },
+    "database_bytes": 8429568,
+    "new_worker_processes": 0
+  },
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/memory.py": "3df31ba61b06ed9a12333424a05ef602f204563b2481cdebd7a34bdc40fd850d",
+    "runtime/node-host/jarvis_core/semantic_candidates.py": "6228fc7c7dee71d9345cae712dcec4ecdbcbf9f13b1e635e503ada8c9230f50f",
+    "runtime/node-host/jarvis_core/memory_comparison.py": "4718395810dbb39adffed67393613fb78a2ed27573b95998ace590072cc0eefd",
+    "runtime/node-host/jarvis_core/memory_review.py": "68b1f89ab2001baaf7da29924ecb95647f35864b589be05befb6e391802e804f",
+    "apps/web/candidate_routes.py": "7996da20ba283e9ee82d5ad5f412168332769ed8279822cdd10f5d7f3fad04a8",
+    "apps/web/server.py": "201112bff842e3ffc95795227f4a7bf2c99609dc14e39d3a1bac542f383a9341",
+    "apps/web/personal_candidates.js": "7d4bff554c6c2168313620872ffc7f2b51e7e073b42d7f95c7471328f6aaaffc",
+    "apps/web/memory.css": "21f778a74aacac675e839c124036c2e69b8adc25db9c8827fec624cce810cc84",
+    "tests/test_memory_review.py": "67a2c2cbc98291d21bf03b1f381510e3f5563c72e4c8f67e45f1fd5ebd81599c",
+    "tools/probe_memory_review_ui.py": "46a88a4bd02113b44ba68c93046510fc5f58ad54773cad020450572bf04a0a0f",
+    "tools/probe_memory_review_resources.py": "34f9690be46287e38f6904c5dfa196720751c8b8bb7f92bb73872f6d3d2718f8",
+    "tools/probe_semantic_candidates_ui.py": "ee83f00253a007f5b986752287dc529a0920c820be83126fbf7fda1c11b40332"
+  },
+  "scope": [
+    "Local lexical hints and owner decisions, not general semantic contradiction inference",
+    "Existing rule-candidate flow unchanged",
+    "Shared checkout has concurrent skill changes; no skill acceptance claimed",
+    "No new production dependencies, services, model weights or schema migrations"
+  ],
+  "limits": [
+    "Independent held-out semantic quality not evaluated",
+    "No arbitrary new-source semantic erasure",
+    "No multi-node replication",
+    "No 8 GiB PC/overnight soak",
+    "Production deployment pending coordinated freeze"
+  ],
+  "validation": {
+    "javascript_syntax": "passed",
+    "docs_check": {
+      "documents": 24,
+      "diagrams": 21,
+      "artifacts": 42,
+      "errors": 0
+    },
+    "navigation_synchronized": true,
+    "visual_review": [
+      "review-ui-final/review-desktop.png",
+      "review-ui-final/review-mobile.png"
+    ]
+  }
+}

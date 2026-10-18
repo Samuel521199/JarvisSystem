@@ -1,0 +1,354 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-10-18",
+  "kind": "source_review_and_isolated_cli_probe",
+  "repository": {
+    "name": "morluto/rea",
+    "url": "https://github.com/morluto/rea",
+    "commit": "47d3c6b1a15c166091b47666c9cac6dbd882454c",
+    "stars_observed": 308807,
+    "forks_observed": 78157,
+    "archived": false,
+    "license": "MIT"
+  },
+  "sources": [
+    {
+      "path": "package.json",
+      "url": "https://github.com/morluto/rea/blob/47d3c6b1a15c166091b47666c9cac6dbd882454c/package.json",
+      "git_blob_bytes": 24696,
+      "git_blob_sha256": "6ce1579286d682c1c85b5d3a030a442c93a76fa21b92d3f42258b29be234714a",
+      "review_depth": "targeted_sections"
+    },
+    {
+      "path": "LICENSE",
+      "url": "https://github.com/morluto/rea/blob/47d3c6b1a15c166091b47666c9cac6dbd882454c/LICENSE",
+      "git_blob_bytes": 1064,
+      "git_blob_sha256": "798f9e4d18e49b30bf2f12696c8ced73dc4e1413da375a333d01281543a1ea8b",
+      "review_depth": "targeted_sections"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "url": "https://github.com/morluto/rea/blob/47d3c6b1a15c166091b47666c9cac6dbd882454c/THIRD_PARTY_NOTICES.md",
+      "git_blob_bytes": 24619,
+      "git_blob_sha256": "c7db9545d34eb4dac7c0e270cb1a639dfd156d4d462a41bcf65cde71369c222c",
+      "review_depth": "targeted_sections"
+    },
+    {
+      "path": "scripts/rea.mjs",
+      "url": "https://github.com/morluto/rea/blob/47d3c6b1a15c166091b47666c9cac6dbd882454c/scripts/rea.mjs",
+      "git_blob_bytes": 6110,
+      "git_blob_sha256": "ed06cee49505b95a3cc5fceb1b4b279167e26df86227c644bb366ffffdbaf738",
+      "review_depth": "targeted_sections"
+    },
+    {
+      "path": "src/cli.ts",
+      "url": "https://github.com/morluto/rea/blob/47d3c6b1a15c166091b47666c9cac6dbd882454c/src/cli.ts",
+      "git_blob_bytes": 7986,
+      "git_blob_sha256": "917273c45c1fdb63be90570b32d0e403e3530416a9d485035e3ec2e104dace49",
+      "review_depth": "targeted_sections"
+    },
+    {
+      "path": "src/main.ts",
+      "url": "https://github.com/morluto/rea/blob/47d3c6b1a15c166091b47666c9cac6dbd882454c/src/main.ts",
+      "git_blob_bytes": 4048,
+      "git_blob_sha256": "f772c2ad328505e886043c9b7796efd794bc152bfabebc7ab7e43c948c3f4c07",
+      "review_depth": "targeted_sections"
+    },
+    {
+      "path": "src/cli/javascriptApplicationAnalysis.ts",
+      "url": "https://github.com/morluto/rea/blob/47d3c6b1a15c166091b47666c9cac6dbd882454c/src/cli/javascriptApplicationAnalysis.ts",
+      "git_blob_bytes": 2185,
+      "git_blob_sha256": "20d95c3343db5fea7d274f89bbbef77988b9a42e4962103932893516107c099f",
+      "review_depth": "targeted_sections"
+    },
+    {
+      "path": "src/cli/applicationCommands.ts",
+      "url": "https://github.com/morluto/rea/blob/47d3c6b1a15c166091b47666c9cac6dbd882454c/src/cli/applicationCommands.ts",
+      "git_blob_bytes": 9257,
+      "git_blob_sha256": "0d7c7fa05b041b67c6d7518e4b228e7b3e85d901f077c072dd6b317a88effbee",
+      "review_depth": "targeted_sections"
+    },
+    {
+      "path": "src/application/javascript/JavaScriptApplicationService.ts",
+      "url": "https://github.com/morluto/rea/blob/47d3c6b1a15c166091b47666c9cac6dbd882454c/src/application/javascript/JavaScriptApplicationService.ts",
+      "git_blob_bytes": 7874,
+      "git_blob_sha256": "3490668c028812e55e4149460b55b7e81f320f32d31596f22ee9e63651d96941",
+      "review_depth": "targeted_sections"
+    },
+    {
+      "path": "src/application/SetupSkill.ts",
+      "url": "https://github.com/morluto/rea/blob/47d3c6b1a15c166091b47666c9cac6dbd882454c/src/application/SetupSkill.ts",
+      "git_blob_bytes": 20403,
+      "git_blob_sha256": "0d749b77d3804414a4e8f3269cd6f71bb137ab0b83437d17813f5860dc991ff7",
+      "review_depth": "targeted_sections"
+    },
+    {
+      "path": "src/domain/evidence.ts",
+      "url": "https://github.com/morluto/rea/blob/47d3c6b1a15c166091b47666c9cac6dbd882454c/src/domain/evidence.ts",
+      "git_blob_bytes": 15243,
+      "git_blob_sha256": "4a92eedd48d416e37f9eacfae8d1296cc8bdc1c5d4a63840ce7d097eb959fb42",
+      "review_depth": "targeted_sections"
+    },
+    {
+      "path": "src/domain/javascript/javascriptApplicationAnalysis.ts",
+      "url": "https://github.com/morluto/rea/blob/47d3c6b1a15c166091b47666c9cac6dbd882454c/src/domain/javascript/javascriptApplicationAnalysis.ts",
+      "git_blob_bytes": 7234,
+      "git_blob_sha256": "a387adf1aa58818ea1f95cb2aae66440d75880933e34f00a586a951c2a257c5b",
+      "review_depth": "targeted_sections"
+    },
+    {
+      "path": "src/composition/javascriptAnalysisWorkerProcess.ts",
+      "url": "https://github.com/morluto/rea/blob/47d3c6b1a15c166091b47666c9cac6dbd882454c/src/composition/javascriptAnalysisWorkerProcess.ts",
+      "git_blob_bytes": 3523,
+      "git_blob_sha256": "d7d3e32eaa7d22f38617088b2d120353665c2d8c6a52b455fedc96e01801f32e",
+      "review_depth": "targeted_sections"
+    },
+    {
+      "path": "src/server/registerElectronTools.ts",
+      "url": "https://github.com/morluto/rea/blob/47d3c6b1a15c166091b47666c9cac6dbd882454c/src/server/registerElectronTools.ts",
+      "git_blob_bytes": 7856,
+      "git_blob_sha256": "2e83a371ae723dba4ae1aa9ab980ff58f59c196d00d2859339881b7c261a3d0f",
+      "review_depth": "targeted_sections"
+    },
+    {
+      "path": "src/server/createServer.ts",
+      "url": "https://github.com/morluto/rea/blob/47d3c6b1a15c166091b47666c9cac6dbd882454c/src/server/createServer.ts",
+      "git_blob_bytes": 35810,
+      "git_blob_sha256": "4ea4ed0886f03d88019fe02430c1dadb8068decd191864c073a8e09c36968476",
+      "review_depth": "targeted_sections"
+    },
+    {
+      "path": "src/server/registerArtifactTools.ts",
+      "url": "https://github.com/morluto/rea/blob/47d3c6b1a15c166091b47666c9cac6dbd882454c/src/server/registerArtifactTools.ts",
+      "git_blob_bytes": 1983,
+      "git_blob_sha256": "12c21b06674f376bc995105f1592d4a398a05e6ed1ab2c3a964e0aacc0de8b18",
+      "review_depth": "targeted_sections"
+    },
+    {
+      "path": "docs/windows-ghidra-p0.md",
+      "url": "https://github.com/morluto/rea/blob/47d3c6b1a15c166091b47666c9cac6dbd882454c/docs/windows-ghidra-p0.md",
+      "git_blob_bytes": 15370,
+      "git_blob_sha256": "5c90bf05ba54fd4f3d73d3f5d96c5c17a11bda40acc8084f2b2f25cb2763a87a",
+      "review_depth": "targeted_sections"
+    },
+    {
+      "path": "docs/installation.md",
+      "url": "https://github.com/morluto/rea/blob/47d3c6b1a15c166091b47666c9cac6dbd882454c/docs/installation.md",
+      "git_blob_bytes": 73417,
+      "git_blob_sha256": "059aa702d38fd2b6a2857c99b56affeabe75d9bdfcf7dadef646d04102bd213b",
+      "review_depth": "targeted_sections"
+    },
+    {
+      "path": "docs/managed-code-analysis.md",
+      "url": "https://github.com/morluto/rea/blob/47d3c6b1a15c166091b47666c9cac6dbd882454c/docs/managed-code-analysis.md",
+      "git_blob_bytes": 34966,
+      "git_blob_sha256": "7df4b5ac015aaee4fdc590008065d5c093e4de632f92f6f50f3901a274e0cabb",
+      "review_depth": "targeted_sections"
+    },
+    {
+      "path": ".agents/skills/reverse-engineer-anything/SKILL.md",
+      "url": "https://github.com/morluto/rea/blob/47d3c6b1a15c166091b47666c9cac6dbd882454c/.agents/skills/reverse-engineer-anything/SKILL.md",
+      "git_blob_bytes": 23510,
+      "git_blob_sha256": "976e400f028618926c0b658ee50df79996f5f32402d33b49a23bfdbc232b45e6",
+      "review_depth": "targeted_sections"
+    },
+    {
+      "path": ".agents/skills/reverse-engineer-anything/references/javascript-applications.md",
+      "url": "https://github.com/morluto/rea/blob/47d3c6b1a15c166091b47666c9cac6dbd882454c/.agents/skills/reverse-engineer-anything/references/javascript-applications.md",
+      "git_blob_bytes": 11962,
+      "git_blob_sha256": "aaa78502a3e95268f6269e75f373908045291fedf6ddd106001555ed06bb2bf6",
+      "review_depth": "targeted_sections"
+    },
+    {
+      "path": ".agents/skills/reverse-engineer-anything/references/evidence-workflows.md",
+      "url": "https://github.com/morluto/rea/blob/47d3c6b1a15c166091b47666c9cac6dbd882454c/.agents/skills/reverse-engineer-anything/references/evidence-workflows.md",
+      "git_blob_bytes": 4363,
+      "git_blob_sha256": "2bdee98a843d018cf850c706111bb74c459ba8640da00799e9208122e4d5ab80",
+      "review_depth": "targeted_sections"
+    }
+  ],
+  "npm": {
+    "version": "6.5.0",
+    "git_head": null,
+    "engines": {
+      "node": "^22.19.0 || ^24.11.0 || >=26.0.0"
+    },
+    "dist": {
+      "shasum": "7ea5e6f669bc18c45dbf5dba653edaa1ada07ab3",
+      "tarball": "https://registry.npmjs.org/rea-agents/-/rea-agents-6.5.0.tgz",
+      "fileCount": 1650,
+      "integrity": "sha512-C6BG7LyrAdR74mSjertM6PrxJkcNZ2bfQNOJornPo9erDEp2tyPRVYPnV5Yodr+1RqewCQla68WulXlVnveD+A==",
+      "signatures": [
+        {
+          "sig": "MEUCIQC+WSbHb08wlVXazqgNweVmLfW4otVGrvD4SXy7vcyVkwIgNQpeLXLIZ0D71gfq52FmpjWdQiLfEF9qeRz41rP3WvE=",
+          "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+        },
+        {
+          "sig": "MEUCIQDI1k+WeOKKMl6Cr2Xqk3MOkEOaIiJw9BToWmv44nwrdgIgBTV01qfsprryFVlLqwkHtyUg4UNC7JL820baO0nh1/8=",
+          "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+        }
+      ],
+      "attestations": {
+        "url": "https://registry.npmjs.org/-/npm/v1/attestations/rea-agents@6.5.0",
+        "provenance": {
+          "predicateType": "https://slsa.dev/provenance/v1"
+        }
+      },
+      "unpackedSize": 25564765
+    },
+    "install_flags": [
+      "--ignore-scripts",
+      "--omit=dev",
+      "--omit=optional",
+      "--package-lock=false",
+      "--no-audit",
+      "--no-fund"
+    ],
+    "installed_packages_reported": 146,
+    "location": "temporary_review_directory",
+    "global_install": false,
+    "bundled_skill": {
+      "bytes": 22513,
+      "sha256": "3456aab99d48c3294726065c9d5bd586bc165f2849fd5a3d5080381630564715",
+      "reference_files": 6,
+      "identical_to_reviewed_main_skill": false
+    }
+  },
+  "local": {
+    "jarvis_source_version": "0.1.43",
+    "node": "v24.15.0",
+    "rea_java_javac_on_path": false,
+    "other_tool_install_locations_not_searched": true
+  },
+  "probe": {
+    "path": "artifacts/rea-review/probe.json",
+    "sha256": "0f517309755fb63931464bda3884321183a8d1b924e630a39a22356f6f738d32",
+    "checks": {
+      "positive_exit_and_evidence": true,
+      "context_bridge_found": true,
+      "ipc_pair_found": true,
+      "exact_ipc_channel_and_source": true,
+      "derived_static_result_with_limits": true,
+      "missing_target_is_error": true,
+      "inputs_unchanged": true
+    },
+    "passed": true,
+    "cases": [
+      {
+        "name": "javascript_directory",
+        "command": [
+          "D:\\soft\\node\\node.exe",
+          "C:\\Users\\samuel\\AppData\\Local\\Temp\\jarvis-rea-probe-20261018-f265c955\\node_modules\\rea-agents\\scripts\\rea.mjs",
+          "analyze-javascript-application",
+          "C:\\Users\\samuel\\AppData\\Local\\Temp\\jarvis-rea-fixture-8k66g0gc\\application",
+          "--max-heap-mb",
+          "256",
+          "--analysis-timeout-ms",
+          "15000",
+          "--json"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 1.348,
+        "stdout_bytes": 209386,
+        "stdout_sha256": "5d3bfe4ab3917a67ea1d9f7b9939aff9e7d57a87e8d78aa8fea058942e3690ca",
+        "stderr_sha256": "1bf27f1dc991d4e43f469f22ac62a011fac114f7f4dac396912e90c7168fa85f",
+        "top_level_keys": [
+          "evidence_id",
+          "subject",
+          "provider",
+          "analysis_profile",
+          "predicate_type",
+          "operation",
+          "parameters",
+          "raw_result",
+          "normalized_result",
+          "confidence",
+          "authority",
+          "environment",
+          "limitations",
+          "relationship_coverage",
+          "locations",
+          "evidence_links"
+        ]
+      },
+      {
+        "name": "missing_target",
+        "command": [
+          "D:\\soft\\node\\node.exe",
+          "C:\\Users\\samuel\\AppData\\Local\\Temp\\jarvis-rea-probe-20261018-f265c955\\node_modules\\rea-agents\\scripts\\rea.mjs",
+          "analyze-javascript-application",
+          "C:\\Users\\samuel\\AppData\\Local\\Temp\\jarvis-rea-fixture-8k66g0gc\\absent",
+          "--max-heap-mb",
+          "256",
+          "--analysis-timeout-ms",
+          "15000",
+          "--json"
+        ],
+        "exit_code": 1,
+        "elapsed_seconds": 0.716,
+        "stdout_bytes": 532,
+        "stdout_sha256": "14e50a8a7259f8cefda8ba87e61ee32cda03e08c1d8b9f278e04e35322f7f384",
+        "stderr_sha256": "edb7e69c29f6a3c490e86a9a6fb72284ea441c8683b8b8e195a39e6b2fda75fd",
+        "top_level_keys": [
+          "error",
+          "code",
+          "category",
+          "message",
+          "retryable",
+          "remediation",
+          "details"
+        ]
+      }
+    ]
+  },
+  "recommendation": {
+    "status": "proposed",
+    "skill_id": "rea.software-analysis",
+    "menu_entries": 1,
+    "preferred_transport": "pinned_on_demand_cli",
+    "later_transport": "mcp",
+    "initial_operation": "analyze-javascript-application",
+    "stage_refs": [
+      "K2/W1",
+      "K2/W2-W4",
+      "K3"
+    ],
+    "integration_implemented": false,
+    "active_skill_registered": false,
+    "mcp_registered": false
+  },
+  "not_verified": [
+    "asar",
+    "native_ghidra",
+    "managed_dotnet",
+    "browser_runtime",
+    "mcp_protocol",
+    "jarvis_task_loop",
+    "jarvis_sandbox",
+    "cancellation_process_tree",
+    "ordinary_pc_resources",
+    "reconstruction_correctness"
+  ],
+  "model_calls": 0,
+  "files": {
+    "tools/probe_rea_review.py": "ee5e09c7f2f8791bd49197d96f68e68d5a07c53fe2f5d2774fc496f716edc4ee",
+    "runtime/node-host/jarvis_core/skills.py": "560399995af51bab46197ba795caeb305b622a156fa7e3d96acc71544434119c",
+    "runtime/node-host/jarvis_core/mcp_catalog.py": "0d2c8ac718bd8275133cd75c7e9fc5c9d7d37cbcec9670a599598b6dcd6c1213",
+    "runtime/node-host/jarvis_core/evolution/runner.py": "c4e26f93a7eee48127307b52bbb84a32ecfac05ed87d64ddfb964cdc4a61a61d"
+  },
+  "validation": {
+    "source_blob_digests_rechecked": 22,
+    "local_file_digests_rechecked": 4,
+    "cli_cases": 2,
+    "fixture_checks": 7,
+    "fixture_checks_passed": true,
+    "doc_navigation": "synchronized",
+    "docs_check": {
+      "documents": 23,
+      "diagrams": 20,
+      "artifacts": 40,
+      "errors": 0
+    },
+    "initial_docs_failure": "Existing speech-expression-evidence anchor missing; became available during final checks without REA changes to speech content."
+  }
+}

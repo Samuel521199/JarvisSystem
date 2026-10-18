@@ -1,0 +1,68 @@
+{
+  "version": "0.1.25",
+  "captured_at": "2026-10-16T12:26:52.061276+00:00",
+  "status": "passed",
+  "regression": {
+    "command": "python -X utf8 -B -m unittest discover -s tests",
+    "tests": 354,
+    "passed": 352,
+    "skipped": 2,
+    "seconds": 197.483
+  },
+  "targeted": {
+    "memory_tests": 12,
+    "passed": 12,
+    "model_admin_compatibility_tests": 12,
+    "model_admin_passed": 12
+  },
+  "initial_regression": {
+    "errors": 1,
+    "cause": "Constructing a model planner without an initialized core attempted to construct MemoryStore eagerly.",
+    "resolution": "Lazy cached MemoryStore initialization; full regression then passed."
+  },
+  "browser_evidence": "evals/reports/memory-ui.json",
+  "resource_evidence": "evals/reports/memory-resources.json",
+  "deployment": {
+    "url": "http://127.0.0.1:18181/",
+    "previous_version": "0.1.24",
+    "version": "0.1.25",
+    "core_ready": true,
+    "task_ids_and_statuses_preserved": true,
+    "preserved_task_count": 10,
+    "archive_ids_and_revisions_preserved": true,
+    "preserved_archive_count": 0,
+    "queue_paused": true,
+    "active_chat_requests": 0,
+    "active_tasks": 0,
+    "memory_endpoint_available": true,
+    "memory_count_at_check": 0,
+    "served_memory_assets_match_source": true,
+    "source_restart": true,
+    "exit_method": "existing instance-specific tray event",
+    "created_test_facts_in_user_store": false
+  },
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/memory.py": "69d576341f046f2b87ca8b4296fd27adfe46e1d8fd8ddadf6a20372296d71543",
+    "runtime/node-host/jarvis_core/chat.py": "827243fd63a3dc99c00a9a945e3dde5fdb7c760473129bd280b5d2b817b7ad47",
+    "runtime/node-host/jarvis_core/context_assembly.py": "6ddcaa5a1be1c6e5bb2ba8fcb0eaae0b9d63a322a007b939c108160ad8ee66f9",
+    "runtime/node-host/jarvis_core/assistant_context.py": "5697d3787d50757b4f56ad245ecb5a4a495efd21caa93e1e0ed1e84eaaba0ca2",
+    "runtime/node-host/jarvis_core/conversations.py": "b51bf24819db808b1af3850b6cf9da0e3746b61e4e274981badbb7c0f367d292",
+    "apps/web/memory.js": "297ba585adf43334d57e7e76e352ed37322a2b2292f974a12cbb74055c73a67f",
+    "apps/web/memory.css": "1bfc2948cd42ee6b5201773554fa51181e383bc353e3574d31f75b7a753d56e3",
+    "apps/web/index.html": "7af9b6b98b6ce2c19586b2945c27bb1c406e64af757f6755858ed99d28e157ba",
+    "apps/web/conversations.js": "d7b6b893f2d5e5a91b8948dfca5583414587d0290e26d48da6fc4d1b75c7679e",
+    "apps/web/workspace.js": "82499bbf324999496a57d264a53e0746e05074ce7f292eb35feffa2e61995228",
+    "apps/web/server.py": "9b0f03a0d1a82b147143bdb7d895d496e21f2d2b1f6352ee0efa9dc1e6104ad4",
+    "contracts/schemas/memory-fact.schema.json": "ab612f81f984765ac3605a94cb5f07adca8cc745254e8cf6a7b11e877db15dfa",
+    "tests/test_memory.py": "42bafcbace49323c360e0d0b799b0b09a755cd415631893033ebaf78baf0965c",
+    "tools/probe_memory_ui.py": "a3f269d609ee461abe1d547ea9ab104668341094b57333da4b20c45bbd569813",
+    "tools/probe_memory_resources.py": "fb7ecf09b74de79038190c8acedf4d789f30a408e005384fd3848e54ad2e4679"
+  },
+  "limits": [
+    "Explicit owner facts only; no automatic extraction, project source compilation, embeddings, bitemporal history or federation.",
+    "Synthetic gateway in browser and unit tests; no real model recall-quality result or paid requests.",
+    "Memory provenance fences managed history, not manually copied or malicious same-user inputs.",
+    "Forgetting does not erase existing transcripts, exports, backups, provider copies or in-flight requests.",
+    "Source restart at idle, not arbitrary live module replacement."
+  ]
+}

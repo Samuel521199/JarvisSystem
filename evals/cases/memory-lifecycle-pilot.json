@@ -1,0 +1,1067 @@
+{
+  "schema": "memory-lifecycle-pilot-v1",
+  "authorship": "Public synthetic development scenarios authored in this collaboration; not an independent holdout.",
+  "evaluation": "Lifecycle correctness with fixed model responses; not semantic extraction accuracy.",
+  "limitations": [
+    "No live LLM quality, Mem0 SDK, semantic merge or automatic conflict resolution is evaluated.",
+    "After a forget, re-extracting a fresh semantically equivalent source is not globally suppressed; the barrier protects already-running extraction and pending semantic previews.",
+    "Rule-only previews retain existing same-source protections, not this signed semantic-preview revision barrier.",
+    "No cross-device, OS sandbox, full K2 or long-term resource acceptance."
+  ],
+  "cases": [
+    {
+      "id": "L01",
+      "title": "跨会话纠正偏好，旧快照失效并在重启后保持",
+      "steps": [
+        {
+          "op": "source",
+          "name": "s1",
+          "text": "我平时喜欢无糖茶。"
+        },
+        {
+          "op": "preview",
+          "name": "p1",
+          "source": "s1",
+          "candidates": [
+            {
+              "segment": 0,
+              "title": "饮品偏好",
+              "content": "主人平时喜欢无糖茶",
+              "category": "preference",
+              "subject_label": ""
+            }
+          ]
+        },
+        {
+          "op": "confirm",
+          "preview": "p1",
+          "name": "tea"
+        },
+        {
+          "op": "context",
+          "facts": [
+            "tea"
+          ],
+          "contains": [
+            "无糖茶"
+          ]
+        },
+        {
+          "op": "snapshot",
+          "name": "old"
+        },
+        {
+          "op": "correct",
+          "fact": "tea",
+          "content": "主人现在偏好温水"
+        },
+        {
+          "op": "context",
+          "facts": [],
+          "snapshot": "old"
+        },
+        {
+          "op": "context",
+          "facts": [
+            "tea"
+          ],
+          "contains": [
+            "温水"
+          ],
+          "excludes": [
+            "无糖茶"
+          ]
+        },
+        {
+          "op": "restart"
+        },
+        {
+          "op": "context",
+          "facts": [
+            "tea"
+          ],
+          "contains": [
+            "温水"
+          ],
+          "excludes": [
+            "无糖茶"
+          ]
+        },
+        {
+          "op": "state",
+          "facts": 1,
+          "review_revision": 1
+        }
+      ]
+    },
+    {
+      "id": "L02",
+      "title": "另一会话的待确认旧预览不能在遗忘后重新写入",
+      "steps": [
+        {
+          "op": "source",
+          "name": "s1",
+          "text": "我平时喜欢无糖茶。"
+        },
+        {
+          "op": "preview",
+          "name": "p1",
+          "source": "s1",
+          "candidates": [
+            {
+              "segment": 0,
+              "title": "饮品偏好",
+              "content": "主人平时喜欢无糖茶",
+              "category": "preference",
+              "subject_label": ""
+            }
+          ]
+        },
+        {
+          "op": "confirm",
+          "preview": "p1",
+          "name": "tea"
+        },
+        {
+          "op": "source",
+          "name": "s2",
+          "text": "我通常选择不加糖的茶。"
+        },
+        {
+          "op": "preview",
+          "name": "p2",
+          "source": "s2",
+          "candidates": [
+            {
+              "segment": 0,
+              "title": "日常选择",
+              "content": "主人通常选择不加糖的茶",
+              "category": "preference",
+              "subject_label": ""
+            }
+          ]
+        },
+        {
+          "op": "forget",
+          "fact": "tea"
+        },
+        {
+          "op": "confirm",
+          "preview": "p2",
+          "error": "candidate_review_changed"
+        },
+        {
+          "op": "confirm",
+          "preview": "p1",
+          "replayed": true
+        },
+        {
+          "op": "state",
+          "facts": 0,
+          "forgotten_body_cleared": true,
+          "review_revision": 1
+        },
+        {
+          "op": "context",
+          "facts": []
+        }
+      ]
+    },
+    {
+      "id": "L03",
+      "title": "另一会话的待确认旧预览不能在纠正后冲回旧偏好",
+      "steps": [
+        {
+          "op": "source",
+          "name": "s1",
+          "text": "我平时喜欢无糖茶。"
+        },
+        {
+          "op": "preview",
+          "name": "p1",
+          "source": "s1",
+          "candidates": [
+            {
+              "segment": 0,
+              "title": "饮品偏好",
+              "content": "主人平时喜欢无糖茶",
+              "category": "preference",
+              "subject_label": ""
+            }
+          ]
+        },
+        {
+          "op": "confirm",
+          "preview": "p1",
+          "name": "tea"
+        },
+        {
+          "op": "source",
+          "name": "s2",
+          "text": "喝饮料时我一般选无糖茶。"
+        },
+        {
+          "op": "preview",
+          "name": "p2",
+          "source": "s2",
+          "candidates": [
+            {
+              "segment": 0,
+              "title": "喝茶习惯",
+              "content": "主人一般选无糖茶",
+              "category": "preference",
+              "subject_label": ""
+            }
+          ]
+        },
+        {
+          "op": "correct",
+          "fact": "tea",
+          "content": "主人现在偏好温水"
+        },
+        {
+          "op": "confirm",
+          "preview": "p2",
+          "error": "candidate_review_changed"
+        },
+        {
+          "op": "context",
+          "facts": [
+            "tea"
+          ],
+          "contains": [
+            "温水"
+          ],
+          "excludes": [
+            "无糖茶"
+          ]
+        },
+        {
+          "op": "state",
+          "facts": 1
+        }
+      ]
+    },
+    {
+      "id": "L04",
+      "title": "提取调用尚在进行时遗忘，丢弃候选并保留调用回执",
+      "steps": [
+        {
+          "op": "source",
+          "name": "s1",
+          "text": "我平时喜欢无糖茶。"
+        },
+        {
+          "op": "preview",
+          "name": "p1",
+          "source": "s1",
+          "candidates": [
+            {
+              "segment": 0,
+              "title": "饮品偏好",
+              "content": "主人平时喜欢无糖茶",
+              "category": "preference",
+              "subject_label": ""
+            }
+          ]
+        },
+        {
+          "op": "confirm",
+          "preview": "p1",
+          "name": "tea"
+        },
+        {
+          "op": "source",
+          "name": "s2",
+          "text": "我通常选择不加糖的茶。"
+        },
+        {
+          "op": "preview",
+          "name": "p2",
+          "source": "s2",
+          "candidates": [
+            {
+              "segment": 0,
+              "title": "饮料习惯",
+              "content": "主人通常选择不加糖的茶",
+              "category": "preference",
+              "subject_label": ""
+            }
+          ],
+          "during": {
+            "op": "forget",
+            "fact": "tea"
+          },
+          "result_error": "candidate_review_changed"
+        },
+        {
+          "op": "state",
+          "facts": 0,
+          "forgotten_body_cleared": true
+        },
+        {
+          "op": "context",
+          "facts": []
+        }
+      ]
+    },
+    {
+      "id": "L05",
+      "title": "外发许可收回后，旧预览和旧外发快照均失效",
+      "steps": [
+        {
+          "op": "source",
+          "name": "s1",
+          "text": "我平时喜欢无糖茶。"
+        },
+        {
+          "op": "preview",
+          "name": "p1",
+          "source": "s1",
+          "candidates": [
+            {
+              "segment": 0,
+              "title": "饮品偏好",
+              "content": "主人平时喜欢无糖茶",
+              "category": "preference",
+              "subject_label": ""
+            }
+          ]
+        },
+        {
+          "op": "confirm",
+          "preview": "p1",
+          "name": "tea"
+        },
+        {
+          "op": "permit",
+          "fact": "tea",
+          "providers": [
+            "vertex"
+          ]
+        },
+        {
+          "op": "snapshot",
+          "name": "cloud",
+          "provider": "vertex"
+        },
+        {
+          "op": "context",
+          "facts": [
+            "tea"
+          ],
+          "provider": "vertex"
+        },
+        {
+          "op": "source",
+          "name": "s2",
+          "text": "我习惯早上散步。"
+        },
+        {
+          "op": "preview",
+          "name": "p2",
+          "source": "s2",
+          "candidates": [
+            {
+              "segment": 0,
+              "title": "散步习惯",
+              "content": "主人习惯早上散步",
+              "category": "preference",
+              "subject_label": ""
+            }
+          ]
+        },
+        {
+          "op": "permit",
+          "fact": "tea",
+          "providers": []
+        },
+        {
+          "op": "confirm",
+          "preview": "p2",
+          "error": "candidate_review_changed"
+        },
+        {
+          "op": "context",
+          "facts": [],
+          "provider": "vertex",
+          "snapshot": "cloud"
+        },
+        {
+          "op": "context",
+          "facts": [],
+          "provider": "vertex"
+        },
+        {
+          "op": "context",
+          "facts": [
+            "tea"
+          ]
+        },
+        {
+          "op": "state",
+          "facts": 1,
+          "review_revision": 2
+        }
+      ]
+    },
+    {
+      "id": "L06",
+      "title": "项目同名事实分别保存；个人、工作和项目边界不串用",
+      "steps": [
+        {
+          "op": "source",
+          "name": "s1",
+          "text": "我平时喜欢无糖茶。"
+        },
+        {
+          "op": "preview",
+          "name": "p1",
+          "source": "s1",
+          "candidates": [
+            {
+              "segment": 0,
+              "title": "饮品偏好",
+              "content": "主人平时喜欢无糖茶",
+              "category": "preference",
+              "subject_label": ""
+            }
+          ]
+        },
+        {
+          "op": "confirm",
+          "preview": "p1",
+          "name": "tea"
+        },
+        {
+          "op": "source",
+          "name": "a",
+          "text": "这个项目使用 Python。",
+          "project": "A"
+        },
+        {
+          "op": "preview",
+          "name": "pa",
+          "source": "a",
+          "candidates": [
+            {
+              "segment": 0,
+              "title": "开发语言",
+              "content": "项目 A 使用 Python",
+              "category": "project_fact",
+              "subject_label": ""
+            }
+          ]
+        },
+        {
+          "op": "confirm",
+          "preview": "pa",
+          "name": "a"
+        },
+        {
+          "op": "source",
+          "name": "b",
+          "text": "这个项目使用 Rust。",
+          "project": "B"
+        },
+        {
+          "op": "preview",
+          "name": "pb",
+          "source": "b",
+          "candidates": [
+            {
+              "segment": 0,
+              "title": "开发语言",
+              "content": "项目 B 使用 Rust",
+              "category": "project_fact",
+              "subject_label": ""
+            }
+          ]
+        },
+        {
+          "op": "confirm",
+          "preview": "pb",
+          "name": "b"
+        },
+        {
+          "op": "context",
+          "facts": [
+            "tea"
+          ]
+        },
+        {
+          "op": "context",
+          "facts": [
+            "a"
+          ],
+          "project": "A",
+          "purpose": "work_assist",
+          "excludes": [
+            "项目 B",
+            "无糖茶"
+          ]
+        },
+        {
+          "op": "context",
+          "facts": [
+            "b"
+          ],
+          "project": "B",
+          "purpose": "work_assist",
+          "excludes": [
+            "项目 A"
+          ]
+        },
+        {
+          "op": "classify",
+          "fact": "tea",
+          "patch": {
+            "uses": [
+              "personal_chat",
+              "work_assist"
+            ]
+          }
+        },
+        {
+          "op": "context",
+          "facts": [
+            "a",
+            "tea"
+          ],
+          "project": "A",
+          "purpose": "work_assist"
+        },
+        {
+          "op": "context",
+          "facts": [
+            "b",
+            "tea"
+          ],
+          "project": "B",
+          "purpose": "work_assist"
+        },
+        {
+          "op": "state",
+          "facts": 3
+        }
+      ]
+    },
+    {
+      "id": "L07",
+      "title": "客户和虚构角色与主人同名，也不自动纳入主人画像",
+      "steps": [
+        {
+          "op": "source",
+          "name": "s1",
+          "text": "我喜欢咖啡。客户小林喜欢茶。虚构角色小林是魔法师。"
+        },
+        {
+          "op": "preview",
+          "name": "p1",
+          "source": "s1",
+          "candidates": [
+            {
+              "segment": 0,
+              "title": "主人饮品",
+              "content": "主人喜欢咖啡",
+              "category": "preference",
+              "subject_label": ""
+            },
+            {
+              "segment": 1,
+              "title": "客户饮品",
+              "content": "客户小林喜欢茶",
+              "category": "third_party",
+              "subject_label": "小林"
+            },
+            {
+              "segment": 2,
+              "title": "角色职业",
+              "content": "小林是魔法师",
+              "category": "fiction",
+              "subject_label": "小林"
+            }
+          ]
+        },
+        {
+          "op": "confirm",
+          "preview": "p1",
+          "name": "owner"
+        },
+        {
+          "op": "confirm",
+          "preview": "p1",
+          "name": "customer",
+          "index": 1
+        },
+        {
+          "op": "confirm",
+          "preview": "p1",
+          "name": "npc",
+          "index": 2
+        },
+        {
+          "op": "context",
+          "facts": [
+            "owner"
+          ],
+          "excludes": [
+            "魔法师",
+            "客户小林"
+          ]
+        },
+        {
+          "op": "context",
+          "facts": [],
+          "purpose": "work_assist"
+        },
+        {
+          "op": "classify",
+          "fact": "customer",
+          "patch": {
+            "uses": [
+              "work_assist"
+            ]
+          }
+        },
+        {
+          "op": "context",
+          "facts": [
+            "customer"
+          ],
+          "purpose": "work_assist",
+          "excludes": [
+            "魔法师",
+            "主人喜欢咖啡"
+          ]
+        },
+        {
+          "op": "context",
+          "facts": [
+            "owner"
+          ]
+        },
+        {
+          "op": "state",
+          "facts": 3
+        }
+      ]
+    },
+    {
+      "id": "L08",
+      "title": "来源变化暂停使用；主人独立确认后不再依赖旧聊天",
+      "steps": [
+        {
+          "op": "source",
+          "name": "s1",
+          "text": "我平时喜欢无糖茶。"
+        },
+        {
+          "op": "preview",
+          "name": "p1",
+          "source": "s1",
+          "candidates": [
+            {
+              "segment": 0,
+              "title": "饮品偏好",
+              "content": "主人平时喜欢无糖茶",
+              "category": "preference",
+              "subject_label": ""
+            }
+          ]
+        },
+        {
+          "op": "confirm",
+          "preview": "p1",
+          "name": "tea"
+        },
+        {
+          "op": "edit_source",
+          "source": "s1",
+          "text": "这段原文已被修改。"
+        },
+        {
+          "op": "context",
+          "facts": []
+        },
+        {
+          "op": "reaffirm",
+          "fact": "tea"
+        },
+        {
+          "op": "context",
+          "facts": [
+            "tea"
+          ]
+        },
+        {
+          "op": "delete_source",
+          "source": "s1"
+        },
+        {
+          "op": "context",
+          "facts": [
+            "tea"
+          ]
+        },
+        {
+          "op": "restart"
+        },
+        {
+          "op": "context",
+          "facts": [
+            "tea"
+          ]
+        },
+        {
+          "op": "state",
+          "facts": 1
+        }
+      ]
+    },
+    {
+      "id": "L09",
+      "title": "遗忘后规则和语义同源重提取均被阻止；明确新指令可重新记住",
+      "steps": [
+        {
+          "op": "source",
+          "name": "s1",
+          "text": "我平时喜欢无糖茶。"
+        },
+        {
+          "op": "preview",
+          "name": "p1",
+          "source": "s1",
+          "candidates": [
+            {
+              "segment": 0,
+              "title": "饮品偏好",
+              "content": "主人平时喜欢无糖茶",
+              "category": "preference",
+              "subject_label": ""
+            }
+          ]
+        },
+        {
+          "op": "confirm",
+          "preview": "p1",
+          "name": "tea"
+        },
+        {
+          "op": "forget",
+          "fact": "tea"
+        },
+        {
+          "op": "preview",
+          "name": "p2",
+          "source": "s1",
+          "candidates": [
+            {
+              "segment": 0,
+              "title": "换个标题",
+              "content": "主人爱喝无糖茶",
+              "category": "preference",
+              "subject_label": ""
+            }
+          ]
+        },
+        {
+          "op": "confirm",
+          "preview": "p2",
+          "error": "candidate_suppressed"
+        },
+        {
+          "op": "rule_confirm",
+          "source": "s1",
+          "error": "candidate_suppressed"
+        },
+        {
+          "op": "remember",
+          "name": "new",
+          "title": "重新确认的饮品",
+          "content": "主人明确要求重新记住：无糖茶"
+        },
+        {
+          "op": "context",
+          "facts": [
+            "new"
+          ]
+        },
+        {
+          "op": "state",
+          "facts": 1,
+          "forgotten_body_cleared": true
+        }
+      ]
+    },
+    {
+      "id": "L10",
+      "title": "同批多个候选正常逐项保存，重试不重复写入",
+      "steps": [
+        {
+          "op": "source",
+          "name": "s1",
+          "text": "我喜欢无糖茶。我习惯早上散步。"
+        },
+        {
+          "op": "preview",
+          "name": "p1",
+          "source": "s1",
+          "candidates": [
+            {
+              "segment": 0,
+              "title": "饮品偏好",
+              "content": "主人平时喜欢无糖茶",
+              "category": "preference",
+              "subject_label": ""
+            },
+            {
+              "segment": 1,
+              "title": "散步习惯",
+              "content": "主人习惯早上散步",
+              "category": "preference",
+              "subject_label": ""
+            }
+          ]
+        },
+        {
+          "op": "confirm",
+          "preview": "p1",
+          "name": "tea"
+        },
+        {
+          "op": "confirm",
+          "preview": "p1",
+          "name": "walk",
+          "index": 1
+        },
+        {
+          "op": "confirm",
+          "preview": "p1",
+          "replayed": true
+        },
+        {
+          "op": "state",
+          "facts": 2,
+          "review_revision": 0
+        },
+        {
+          "op": "correct",
+          "fact": "tea",
+          "content": "主人现在偏好温水"
+        },
+        {
+          "op": "confirm",
+          "preview": "p1",
+          "replayed": true
+        },
+        {
+          "op": "context",
+          "facts": [
+            "tea",
+            "walk"
+          ],
+          "contains": [
+            "温水"
+          ],
+          "excludes": [
+            "无糖茶"
+          ]
+        },
+        {
+          "op": "state",
+          "facts": 2,
+          "review_revision": 1
+        }
+      ]
+    },
+    {
+      "id": "L11",
+      "title": "来源更改、服务重启使预览失效；已有事实保持可查看",
+      "steps": [
+        {
+          "op": "source",
+          "name": "s1",
+          "text": "我平时喜欢无糖茶。"
+        },
+        {
+          "op": "preview",
+          "name": "p1",
+          "source": "s1",
+          "candidates": [
+            {
+              "segment": 0,
+              "title": "饮品偏好",
+              "content": "主人平时喜欢无糖茶",
+              "category": "preference",
+              "subject_label": ""
+            }
+          ]
+        },
+        {
+          "op": "confirm",
+          "preview": "p1",
+          "name": "tea"
+        },
+        {
+          "op": "source",
+          "name": "s2",
+          "text": "我习惯早上散步。"
+        },
+        {
+          "op": "preview",
+          "name": "p2",
+          "source": "s2",
+          "candidates": [
+            {
+              "segment": 0,
+              "title": "散步习惯",
+              "content": "主人习惯早上散步",
+              "category": "preference",
+              "subject_label": ""
+            }
+          ]
+        },
+        {
+          "op": "edit_source",
+          "source": "s2",
+          "text": "我改为晚上散步。"
+        },
+        {
+          "op": "confirm",
+          "preview": "p2",
+          "error": "candidate_source_changed"
+        },
+        {
+          "op": "preview",
+          "name": "p3",
+          "source": "s2",
+          "candidates": [
+            {
+              "segment": 0,
+              "title": "散步习惯",
+              "content": "主人改为晚上散步",
+              "category": "preference",
+              "subject_label": ""
+            }
+          ]
+        },
+        {
+          "op": "restart"
+        },
+        {
+          "op": "confirm",
+          "preview": "p3",
+          "error": "candidate_preview_expired"
+        },
+        {
+          "op": "context",
+          "facts": [
+            "tea"
+          ]
+        },
+        {
+          "op": "state",
+          "facts": 1
+        }
+      ]
+    },
+    {
+      "id": "L12",
+      "title": "纠正后重新整理有效的新候选可继续保存",
+      "steps": [
+        {
+          "op": "source",
+          "name": "s1",
+          "text": "我平时喜欢无糖茶。"
+        },
+        {
+          "op": "preview",
+          "name": "p1",
+          "source": "s1",
+          "candidates": [
+            {
+              "segment": 0,
+              "title": "饮品偏好",
+              "content": "主人平时喜欢无糖茶",
+              "category": "preference",
+              "subject_label": ""
+            }
+          ]
+        },
+        {
+          "op": "confirm",
+          "preview": "p1",
+          "name": "tea"
+        },
+        {
+          "op": "source",
+          "name": "s2",
+          "text": "我习惯早上散步。"
+        },
+        {
+          "op": "preview",
+          "name": "stale",
+          "source": "s2",
+          "candidates": [
+            {
+              "segment": 0,
+              "title": "散步习惯",
+              "content": "主人习惯早上散步",
+              "category": "preference",
+              "subject_label": ""
+            }
+          ]
+        },
+        {
+          "op": "correct",
+          "fact": "tea",
+          "content": "主人现在偏好温水"
+        },
+        {
+          "op": "confirm",
+          "preview": "stale",
+          "error": "candidate_review_changed"
+        },
+        {
+          "op": "preview",
+          "name": "fresh",
+          "source": "s2",
+          "candidates": [
+            {
+              "segment": 0,
+              "title": "散步习惯",
+              "content": "主人习惯早上散步",
+              "category": "preference",
+              "subject_label": ""
+            }
+          ]
+        },
+        {
+          "op": "confirm",
+          "preview": "fresh",
+          "name": "walk"
+        },
+        {
+          "op": "context",
+          "facts": [
+            "tea",
+            "walk"
+          ],
+          "contains": [
+            "温水",
+            "早上散步"
+          ],
+          "excludes": [
+            "无糖茶"
+          ]
+        },
+        {
+          "op": "state",
+          "facts": 2,
+          "review_revision": 1
+        }
+      ]
+    }
+  ]
+}

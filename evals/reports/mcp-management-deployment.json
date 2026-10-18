@@ -1,0 +1,136 @@
+{
+  "version": "0.1.37",
+  "before_running": false,
+  "business_before": {
+    "control.db:tasks": {
+      "rows": 11,
+      "sha256": "899234025e85c484c93da005f98cdeb828099987ce7a0faf85c8f06be9ef58b3"
+    },
+    "control.db:actions": {
+      "rows": 11,
+      "sha256": "05441e51bb43573c815bf7fa6f74c20644b20c9a5501f43a2bc85ec840b377b9"
+    },
+    "control.db:artifacts": {
+      "rows": 9,
+      "sha256": "aa4263264fa7a091ca4259c3454dcdddbbe9813f43488f3c65fdaef039cbb056"
+    },
+    "conversations.db:conversations": {
+      "rows": 1,
+      "sha256": "ea82f9fad510343dd6171fc191a5a663d46baa01da93764dba71986c2c844063"
+    },
+    "workspace.db:projects": {
+      "rows": 1,
+      "sha256": "5d62d8dfacc71ef3d88139a118eaadfc3532201c9f47d56264802c8305a6e454"
+    },
+    "workspace.db:outputs": {
+      "rows": 1,
+      "sha256": "5189d1410a8692755fc2d4f8a75dbd85e017eee8aec00cdd633744bf9d284135"
+    },
+    "memory.db:facts": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "memory.db:receipts": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "project-sources.db:sources": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "extensions.db:entries": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "extensions.db:skill_policies": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "model-admin.db:settings": {
+      "rows": 1,
+      "sha256": "24d88d5f129d57abd414f7e9589c6cd6d9b73ea5c60e0ce90eac27fb15231210"
+    }
+  },
+  "status": "passed",
+  "paid_model_calls": 0,
+  "mcp_calls": 0,
+  "test_tasks_created": false,
+  "business_after": {
+    "control.db:tasks": {
+      "rows": 11,
+      "sha256": "899234025e85c484c93da005f98cdeb828099987ce7a0faf85c8f06be9ef58b3"
+    },
+    "control.db:actions": {
+      "rows": 11,
+      "sha256": "05441e51bb43573c815bf7fa6f74c20644b20c9a5501f43a2bc85ec840b377b9"
+    },
+    "control.db:artifacts": {
+      "rows": 9,
+      "sha256": "aa4263264fa7a091ca4259c3454dcdddbbe9813f43488f3c65fdaef039cbb056"
+    },
+    "conversations.db:conversations": {
+      "rows": 1,
+      "sha256": "ea82f9fad510343dd6171fc191a5a663d46baa01da93764dba71986c2c844063"
+    },
+    "workspace.db:projects": {
+      "rows": 1,
+      "sha256": "5d62d8dfacc71ef3d88139a118eaadfc3532201c9f47d56264802c8305a6e454"
+    },
+    "workspace.db:outputs": {
+      "rows": 1,
+      "sha256": "5189d1410a8692755fc2d4f8a75dbd85e017eee8aec00cdd633744bf9d284135"
+    },
+    "memory.db:facts": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "memory.db:receipts": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "project-sources.db:sources": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "extensions.db:entries": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "extensions.db:skill_policies": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "model-admin.db:settings": {
+      "rows": 1,
+      "sha256": "24d88d5f129d57abd414f7e9589c6cd6d9b73ea5c60e0ce90eac27fb15231210"
+    }
+  },
+  "business_rows_preserved": true,
+  "instance_id": "272770bbbe06c03801068bc5e680d265",
+  "mcp_entries": 10,
+  "callable": 0,
+  "queue_after": {
+    "paused": false,
+    "owned": true,
+    "waiting": 0,
+    "capacity": 20,
+    "running": [],
+    "positions": {},
+    "error": null,
+    "unreviewed_unknown": false,
+    "resources": {
+      "waiting": false,
+      "reason": null,
+      "sample": null
+    }
+  },
+  "deployed_ui": {
+    "browser": "Codex in-app browser",
+    "url": "http://127.0.0.1:18181/settings#mcp",
+    "version": "0.1.37",
+    "cards_observed": 10,
+    "configurations_observed": 0,
+    "callable_observed": 0,
+    "source_types_and_categories_visible": true
+  }
+}

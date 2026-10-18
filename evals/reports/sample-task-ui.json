@@ -1,0 +1,23 @@
+{
+  "version": "0.1.30",
+  "captured_at": "2026-10-16T14:46:21.660421+00:00",
+  "status": "passed",
+  "checks": [
+    "natural-language UI -> durable paused request -> restart -> explicit resume -> real LPAC Worker -> verified JSON/type totals",
+    "reload restores receipt, plan states and statistics without reissuing model or Worker",
+    "blocked planner leaves chat HTTP responsive; cancellation discards late plan and creates no second artifact",
+    "390px layout has no horizontal overflow; task text remains editable",
+    "module settings include the available sample-report workflow separately from unavailable extension execution"
+  ],
+  "page_errors": [],
+  "planner_calls": 2,
+  "paid_model_calls": 0,
+  "screenshots": [
+    "C:\\Users\\samuel\\AppData\\Local\\Jarvis\\data\\diagnostics\\sample-tasks\\desktop.png",
+    "C:\\Users\\samuel\\AppData\\Local\\Jarvis\\data\\diagnostics\\sample-tasks\\mobile.png"
+  ],
+  "limits": [
+    "Synthetic planner and chat; real browser UI, HTTP, ledger, restart, Worker and artifact.",
+    "Not a resource-stress SLA, generic chat tools or complete K1/K2 acceptance."
+  ]
+}

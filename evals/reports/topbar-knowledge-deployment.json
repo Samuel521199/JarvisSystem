@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-17",
+  "version": "0.1.33",
+  "status": "passed",
+  "url": "http://127.0.0.1:18181/",
+  "core_ready": true,
+  "source_restart": true,
+  "exit_method": "existing instance-specific tray event",
+  "task_ids_and_statuses_preserved": true,
+  "archive_ids_and_revisions_preserved": true,
+  "project_registrations_preserved": true,
+  "memory_and_source_and_extension_registrations_preserved": true,
+  "preserved_task_count": 10,
+  "preserved_archive_count": 1,
+  "local_model_previously_owned": true,
+  "local_runtime_restored": true,
+  "queue_paused": true,
+  "served_assets_match_source": true,
+  "paid_model_calls": 0,
+  "created_user_test_records": false,
+  "verification_note": "Restart helper completed all before/after data comparisons; first module snapshot was still empty so model restoration polling was resumed with readiness handling, without a second restart or duplicate start."
+}

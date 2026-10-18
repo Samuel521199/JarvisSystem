@@ -1,0 +1,209 @@
+# 软件结构与行为解析报告
+
+目标：app.asar
+任务：分析 ASAR 中指定通道的模块结构和 IPC 调用链
+解析器：REA 6.5.0 · JavaScript / Electron 静态解析
+证据编号：ev_1a58919348953147d3b3ef3f90047ae1caf6a22ce13357d895d69c98a2c34671
+输入版本：sha256:00cb5bf5ea7c0f0dbe2cf176ec7a6432c5ab3a5aba48557fee99330995205234
+
+ASAR 容器：app.asar
+原包摘要：sha256:4fc3a35707b5b40622807951ef143ddfe7ce3b3940945a33d4c7928161d71e22
+解析范围：从 ASAR 及所需 .unpacked 成员取得的文本快照；成员位置保存在输入清单。
+## 解析结果
+读取 3 个文件，2276 字节；排除 1 个条目。
+结构图：113 个节点、154 条关系。
+Electron 桥接 API：1；暴露成员：20。
+IPC 主进程处理器：20；发送操作：20；配对：20。
+
+## 本次关注：fixture:op1
+匹配方式：字面标识符检索；没有自动推断运行行为。
+相关节点 5 个、关键关系 3 条；下列展示 3 条。
+invokes：{"channel": "fixture:op1", "pairing_basis": "unique-exact-literal-channel", "handler_path": "main.js", "handler_operation": "handle"}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 4, "column": 11}, "end": {"line": 4, "column": 48}}}
+  证据：jag_edge_2f5ed6e42d94286c76a3fddd43249bbed9a87f94ad032a53f445f8be2a642e4f
+maps_to：{"path_id": "ea5b06160201e6997c2425a1f83ea998b607326203c3fa777f1623e3660aa3f8", "entry": "fixture.op1", "entry_path": ["fixture", "op1"], "channel": "fixture:op1", "resolution": "candidate", "conditions": []}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 4, "column": 4}, "end": {"line": 4, "column": 48}}}
+  证据：jag_edge_81b085ad53ee40660c2902ca1392a35634dd5ba50c30b9bcafbd44d9796d50dc
+invokes：{"side": "renderer", "operation": "invoke", "channel": "fixture:op1", "channel_expression": null, "resolution": "literal"}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 4, "column": 11}, "end": {"line": 4, "column": 48}}}
+  证据：jag_edge_d8891a9bceba80a190cdd91feaa90bed21ead5528aecd3ca97a52eb35efaf9c6
+更多匹配项可在证据浏览中按相同标识符筛选。
+
+## 应用组成
+javascript-module：main.js
+ipc-handler：fixture:op2
+ipc-handler：fixture:op7
+javascript-module：electron
+ipc-handler：fixture:op1
+ipc-handler：fixture:op12
+javascript-module：preload.js
+javascript-module：electron
+ipc-handler：fixture:op6
+context-bridge-api：fixture
+ipc-handler：fixture:op11
+package：jarvis-rea-effectiveness-fixture
+ipc-handler：fixture:op0
+ipc-handler：fixture:op3
+ipc-handler：fixture:op8
+javascript-module：electron
+ipc-handler：fixture:op17
+javascript-module：electron
+ipc-handler：fixture:op14
+ipc-handler：fixture:op9
+ipc-handler：fixture:op15
+ipc-handler：fixture:op5
+ipc-handler：fixture:op18
+ipc-handler：fixture:op10
+ipc-handler：fixture:op13
+electron-main：main.js
+ipc-handler：fixture:op19
+ipc-handler：fixture:op4
+ipc-handler：fixture:op16
+
+## 关键关系（完整图见证据 JSON）
+本报告展示 40 条关键关系，另有 27 条可在证据分页中读取。
+maps_to：{"path_id": "f7b4b2a6b29da9b5c03885cf082fcfb54cb1dbfac71ec440e1e2edebd11e7744", "entry": "fixture.op9", "entry_path": ["fixture", "op9"], "channel": "fixture:op9", "resolution": "candidate", "conditions": []}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 12, "column": 4}, "end": {"line": 12, "column": 48}}}
+  证据：jag_edge_00984c10eacc842a86ad46f6668c22d60a786b1551823f66226bf9020fa61452
+maps_to：{"path_id": "2f49033fe8c688cc030abb6204dd2f6d7fa58e4ffbceca09a9a143ef7592d62a", "entry": "fixture.op4", "entry_path": ["fixture", "op4"], "channel": "fixture:op4", "resolution": "candidate", "conditions": []}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 7, "column": 4}, "end": {"line": 7, "column": 48}}}
+  证据：jag_edge_0120805e382ae861754f5fe0ed25f8f1260f52b817896ca3474b0ee5c6625ff4
+invokes：{"side": "renderer", "operation": "invoke", "channel": "fixture:op14", "channel_expression": null, "resolution": "literal"}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 17, "column": 12}, "end": {"line": 17, "column": 50}}}
+  证据：jag_edge_013ab4dfbcab9ce934210fba458e9372cba34fd319685e7491dae4341c4ae1cb
+imports：{"module_link_kind": "require", "resolution_mode": "require", "specifier": "electron", "imported_name": "contextBridge", "imported_path": ["contextBridge"], "local_name": "contextBridge", "exported_name": null, "resolved_path": null, "resolution_status": "external", "target_file_kind": null, "target_json_status": null}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 1, "column": 6}, "end": {"line": 1, "column": 53}}}
+  证据：jag_edge_05e108e67704e431129c90a9b999860f5e32f2cb9f9a437310f7b0bbcb1953e8
+invokes：{"channel": "fixture:op6", "pairing_basis": "unique-exact-literal-channel", "handler_path": "main.js", "handler_operation": "handle"}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 9, "column": 11}, "end": {"line": 9, "column": 48}}}
+  证据：jag_edge_10324bee1de06c46df5c1e5e8cb13efc7ec0fc59ddd72e3fa3b6d614775049a8
+maps_to：{"path_id": "b540b0e5dc256d3c6e23c9bfd16931ce7f3d425009bef57e2096036f923e1786", "entry": "fixture.op13", "entry_path": ["fixture", "op13"], "channel": "fixture:op13", "resolution": "candidate", "conditions": []}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 16, "column": 5}, "end": {"line": 16, "column": 50}}}
+  证据：jag_edge_1416f63a02b19403340dbef82eba43a840abbc689cf224a10d74be06332d6fd9
+maps_to：{"path_id": "b24970e15313a0ae2eb7bf5c1962db0933270cdd5f53feb28ed2d13c6a2e0664", "entry": "fixture.op2", "entry_path": ["fixture", "op2"], "channel": "fixture:op2", "resolution": "candidate", "conditions": []}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 5, "column": 4}, "end": {"line": 5, "column": 48}}}
+  证据：jag_edge_154acac2489002994aab79a6820dc96517fdff5a5dc7feb4caad08d3813da721
+maps_to：{"path_id": "590c5336943390644b0972890a2a0711f69858b41deb9f6caa173ff0f39e742c", "entry": "fixture.op6", "entry_path": ["fixture", "op6"], "channel": "fixture:op6", "resolution": "candidate", "conditions": []}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 9, "column": 4}, "end": {"line": 9, "column": 48}}}
+  证据：jag_edge_23b914314a7c21e3fea88b89377fd7a540e08ce7ad834f400ab4dbb29965c863
+invokes：{"channel": "fixture:op18", "pairing_basis": "unique-exact-literal-channel", "handler_path": "main.js", "handler_operation": "handle"}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 21, "column": 12}, "end": {"line": 21, "column": 50}}}
+  证据：jag_edge_24b74da9a34537a69dff6aca1972ef20d45da83e3e336c2fa462aaef65cce2b3
+invokes：{"channel": "fixture:op17", "pairing_basis": "unique-exact-literal-channel", "handler_path": "main.js", "handler_operation": "handle"}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 20, "column": 12}, "end": {"line": 20, "column": 50}}}
+  证据：jag_edge_2954599146be545e948b41230673e9faa3634b44ad3a0eac5d8e042caf47d474
+imports：{"kind": "require", "specifier": "electron", "expression": null, "resolution_mode": "require", "resolved_path": null, "resolution_status": "external"}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 1, "column": 34}, "end": {"line": 1, "column": 53}}}
+  证据：jag_edge_2ed147cbd6a5102dfb3b9430c6466ac9cf9d86c9ecc61232460866b776681bab
+invokes：{"channel": "fixture:op1", "pairing_basis": "unique-exact-literal-channel", "handler_path": "main.js", "handler_operation": "handle"}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 4, "column": 11}, "end": {"line": 4, "column": 48}}}
+  证据：jag_edge_2f5ed6e42d94286c76a3fddd43249bbed9a87f94ad032a53f445f8be2a642e4f
+maps_to：{"path_id": "915954272ce72e469da852a703db7ed12e38d8f0769f01ee765171ede13953a4", "entry": "fixture.op10", "entry_path": ["fixture", "op10"], "channel": "fixture:op10", "resolution": "candidate", "conditions": []}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 13, "column": 5}, "end": {"line": 13, "column": 50}}}
+  证据：jag_edge_3148d9711a4a2c752f0d32015d87e0e8a14f920fe46f1172e65ac10f22becb6d
+invokes：{"channel": "fixture:op15", "pairing_basis": "unique-exact-literal-channel", "handler_path": "main.js", "handler_operation": "handle"}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 18, "column": 12}, "end": {"line": 18, "column": 50}}}
+  证据：jag_edge_3556077f4cfcdb212102a48e776dada432e9a36cfe9fde1926f7e508ea320d8c
+invokes：{"side": "renderer", "operation": "invoke", "channel": "fixture:op15", "channel_expression": null, "resolution": "literal"}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 18, "column": 12}, "end": {"line": 18, "column": 50}}}
+  证据：jag_edge_3e98aa988243d03aed7d11372f6295353d100c32ea7982f91966f74cc68a1b6f
+invokes：{"channel": "fixture:op13", "pairing_basis": "unique-exact-literal-channel", "handler_path": "main.js", "handler_operation": "handle"}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 16, "column": 12}, "end": {"line": 16, "column": 50}}}
+  证据：jag_edge_3ef40ea5bb9d14119a86f3853aa13fd357b3680519ed6cd6cec000ccd9570233
+maps_to：{"path_id": "ad766bee4a05719010981206a261dee3ad6d7cdbeaac034bac648e1604815308", "entry": "fixture.op7", "entry_path": ["fixture", "op7"], "channel": "fixture:op7", "resolution": "candidate", "conditions": []}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 10, "column": 4}, "end": {"line": 10, "column": 48}}}
+  证据：jag_edge_466347142ee22988d60da71c22868db6f540f434959e4db5ce880cbfaa8abbf2
+invokes：{"channel": "fixture:op16", "pairing_basis": "unique-exact-literal-channel", "handler_path": "main.js", "handler_operation": "handle"}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 19, "column": 12}, "end": {"line": 19, "column": 50}}}
+  证据：jag_edge_47360dc6fb306ee78da7f67725682e683d60165e67f1e6dd855b99e5024cd007
+invokes：{"side": "renderer", "operation": "invoke", "channel": "fixture:op2", "channel_expression": null, "resolution": "literal"}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 5, "column": 11}, "end": {"line": 5, "column": 48}}}
+  证据：jag_edge_4fdadf15e6ca16c22e7853bb78c9a05d6fdf3c2190faec99af7c0ba9fb4f88e7
+maps_to：{"path_id": "a40511d46eb3e7bfda07718dc7b7fba4bcdc3b419568f9766d9e7e550f845fde", "entry": "fixture.op3", "entry_path": ["fixture", "op3"], "channel": "fixture:op3", "resolution": "candidate", "conditions": []}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 6, "column": 4}, "end": {"line": 6, "column": 48}}}
+  证据：jag_edge_50ee008963f270bb4ffb6066a8ce987cdf28fb16108bc1ab0376200d31304af3
+imports：{"module_link_kind": "require", "resolution_mode": "require", "specifier": "electron", "imported_name": "ipcMain", "imported_path": ["ipcMain"], "local_name": "ipcMain", "exported_name": null, "resolved_path": null, "resolution_status": "external", "target_file_kind": null, "target_json_status": null}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "main.js", "start": {"line": 1, "column": 6}, "end": {"line": 1, "column": 35}}}
+  证据：jag_edge_510c7ec1261dc19c71d87309de92b8510b7eab4839ba7e05eb3b20bf6f2290cd
+invokes：{"side": "renderer", "operation": "invoke", "channel": "fixture:op0", "channel_expression": null, "resolution": "literal"}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 3, "column": 11}, "end": {"line": 3, "column": 48}}}
+  证据：jag_edge_518502c262a8f1a986ed3afce39067ce5e69f768f865ec7134ea70a45091788c
+maps_to：{"path_id": "945376b06a0b87d8e5f82a51a2ba6640be32cb5137bfcb2ffc40657fd287397f", "entry": "fixture.op8", "entry_path": ["fixture", "op8"], "channel": "fixture:op8", "resolution": "candidate", "conditions": []}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 11, "column": 4}, "end": {"line": 11, "column": 48}}}
+  证据：jag_edge_56912bb720b6eb494c3e10a46aa0fef6561f883bb7cb5cca93cd2011cc755725
+maps_to：{"path_id": "79438cb6ffc5a7c4ddafff3c03a2c6c1d9501831e8c943dc3f5ac4361bc0bd3a", "entry": "fixture.op11", "entry_path": ["fixture", "op11"], "channel": "fixture:op11", "resolution": "candidate", "conditions": []}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 14, "column": 5}, "end": {"line": 14, "column": 50}}}
+  证据：jag_edge_6563649581d654f60f06d9f763ed28732723cedb5387f7899b8335d6954323c8
+invokes：{"side": "renderer", "operation": "invoke", "channel": "fixture:op3", "channel_expression": null, "resolution": "literal"}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 6, "column": 11}, "end": {"line": 6, "column": 48}}}
+  证据：jag_edge_666cf4e622a99b7b4289d64afb07309e459fc14386fbe566cc4125cea1d593d6
+maps_to：{"path_id": "347dc5be5fdcc63a7c6510d8092ae02a342e946d1ae1f84209fc7b65f2d5525f", "entry": "fixture.op0", "entry_path": ["fixture", "op0"], "channel": "fixture:op0", "resolution": "candidate", "conditions": []}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 3, "column": 4}, "end": {"line": 3, "column": 48}}}
+  证据：jag_edge_713ca18f41228a818d5946d7a6a30810fa37ea0a6c47d9132b8f181bd7d517f7
+maps_to：{"path_id": "7f56a76fc0ccb67312983a243ac28c788edd7b6c141aace4c7076d79656fa0d7", "entry": "fixture.op17", "entry_path": ["fixture", "op17"], "channel": "fixture:op17", "resolution": "candidate", "conditions": []}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 20, "column": 5}, "end": {"line": 20, "column": 50}}}
+  证据：jag_edge_7c1e0314ed6932db01b1d533e435efa3b1f24ef3acf162f071ed4a88bf147a9e
+invokes：{"channel": "fixture:op14", "pairing_basis": "unique-exact-literal-channel", "handler_path": "main.js", "handler_operation": "handle"}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 17, "column": 12}, "end": {"line": 17, "column": 50}}}
+  证据：jag_edge_7c6f75ac770605ffb585156b9261f42aa4c8b254af1fde576a1dc7bd8ba1552c
+imports：{"module_link_kind": "require", "resolution_mode": "require", "specifier": "electron", "imported_name": "ipcRenderer", "imported_path": ["ipcRenderer"], "local_name": "ipcRenderer", "exported_name": null, "resolved_path": null, "resolution_status": "external", "target_file_kind": null, "target_json_status": null}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 1, "column": 6}, "end": {"line": 1, "column": 53}}}
+  证据：jag_edge_816a68afd176e034fcab56877dca91eb37e2500ab59bc44c4c4910ee22963250
+maps_to：{"path_id": "ea5b06160201e6997c2425a1f83ea998b607326203c3fa777f1623e3660aa3f8", "entry": "fixture.op1", "entry_path": ["fixture", "op1"], "channel": "fixture:op1", "resolution": "candidate", "conditions": []}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 4, "column": 4}, "end": {"line": 4, "column": 48}}}
+  证据：jag_edge_81b085ad53ee40660c2902ca1392a35634dd5ba50c30b9bcafbd44d9796d50dc
+invokes：{"channel": "fixture:op5", "pairing_basis": "unique-exact-literal-channel", "handler_path": "main.js", "handler_operation": "handle"}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 8, "column": 11}, "end": {"line": 8, "column": 48}}}
+  证据：jag_edge_82fe31274e498ac8e73b7bc90cf014ebf331324d0917a9581b4dfa8197241e80
+loads：{"declared_path": "main.js", "resolution_context": "package-entrypoint", "resolved_path": "main.js", "resolution_status": "resolved", "limitations": []}
+  来源：{"available": true, "value": {"kind": "artifact-path", "path": "package.json"}}
+  证据：jag_edge_8d17dde96024c7eb7c60881d403f07df074ab34d4b839ce88c9872c1731b44e1
+invokes：{"side": "renderer", "operation": "invoke", "channel": "fixture:op8", "channel_expression": null, "resolution": "literal"}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 11, "column": 11}, "end": {"line": 11, "column": 48}}}
+  证据：jag_edge_90c384b3f7760215c5d818e9e527156bfc81e6ace07c1a7f8d26bac988e8c2a6
+maps_to：{"declared_path": "main.js", "resolution_context": "package-entrypoint", "resolved_path": "main.js", "resolution_status": "resolved"}
+  来源：{"available": true, "value": {"kind": "artifact-path", "path": "package.json"}}
+  证据：jag_edge_9157bec721521ed5a79d9aedfa78201e5b65cd9b0935572db1b6c4ffab921054
+invokes：{"side": "renderer", "operation": "invoke", "channel": "fixture:op19", "channel_expression": null, "resolution": "literal"}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 22, "column": 12}, "end": {"line": 22, "column": 50}}}
+  证据：jag_edge_93536207b826cb6d792e30c72c4ae4770c49019f2df5ff627a7db7daf5e99733
+invokes：{"side": "renderer", "operation": "invoke", "channel": "fixture:op16", "channel_expression": null, "resolution": "literal"}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 19, "column": 12}, "end": {"line": 19, "column": 50}}}
+  证据：jag_edge_9b2d58116776bce1359c2cf1087a39b7bf03cf6cf6bfeb6ca45f18b3448078b5
+imports：{"kind": "require", "specifier": "electron", "expression": null, "resolution_mode": "require", "resolved_path": null, "resolution_status": "external"}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "main.js", "start": {"line": 1, "column": 16}, "end": {"line": 1, "column": 35}}}
+  证据：jag_edge_9d407d5ac4d169e8a587999af40ccb6c512f2b693f014e0750310f6c2a5cb055
+invokes：{"channel": "fixture:op19", "pairing_basis": "unique-exact-literal-channel", "handler_path": "main.js", "handler_operation": "handle"}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 22, "column": 12}, "end": {"line": 22, "column": 50}}}
+  证据：jag_edge_a21991952ec9b88d4442256feb1a35783cfdc5f9ec7803cd64b20e6061ef2771
+invokes：{"side": "renderer", "operation": "invoke", "channel": "fixture:op11", "channel_expression": null, "resolution": "literal"}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 14, "column": 12}, "end": {"line": 14, "column": 50}}}
+  证据：jag_edge_a57c8c37ed6b804549629099b7cb790d6a524df54fd5b6ca22a3f383ed7f0da8
+invokes：{"side": "renderer", "operation": "invoke", "channel": "fixture:op17", "channel_expression": null, "resolution": "literal"}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 20, "column": 12}, "end": {"line": 20, "column": 50}}}
+  证据：jag_edge_a8afd3e6649f55c6d4fce34be6edf0e51058de4fb99d9fcc9181dec6458cd544
+
+## 解释与边界
+这些关系来自语法和模块引用推导，表示可能的调用路径；没有运行目标软件，不能证明实际可达性或安全性。
+已验证的是解析、输入版本与产物交付；未执行软件功能测试。没有发现某项关系并不证明它不存在。
+客户端资料不能还原云端私有代码、模型权重或完整后端。动态字符串、混淆和未纳入文件可能使关系不完整。
+当前报告在本地生成，没有模型调用或云端上传。需要进一步解释时，可明确选择报告作为模型任务资料。
+
+## 排除范围
+secrets.json：排除目录或凭据名称
+
+## 解析器限制
+CommonJS and ESM binding relationships were recovered from inert syntax and resolved only within the inventoried artifact container.
+Electron API identity follows proven lexical module aliases and structurally verified module-namespace interop. Other reassignments, dynamic selections, and visibly overwritten namespace members are unresolved; missing findings do not establish absence. Arbitrary call side effects and runtime registration are not evaluated.
+Electron relationships are derived from inert syntax; runtime registration, reachability, defaults, and enforcement remain unproven.
+JavaScript and HTML were parsed as inert text; bundle bootstrap code was never executed.
+Static imports, entrypoints, workers, endpoints, and storage relationships do not prove runtime execution.
+Static paths and relationships may remain unresolved when expressions are dynamic or obfuscated.
+Webpack/Rspack factories were recovered from AST literals; REA did not invoke push handlers or bundle bootstrap code.
+CommonJS and ESM binding relationships were recovered from inert syntax and resolved only within the inventoried artifact container.
+Electron API identity follows proven lexical module aliases and structurally verified module-namespace interop. Other reassignments, dynamic selections, and visibly overwritten namespace members are unresolved; missing findings do not establish absence. Arbitrary call side effects and runtime registration are not evaluated.
+Electron relationships are derived from inert syntax; runtime registration, reachability, defaults, and enforcement remain unproven.
+JavaScript and HTML were parsed as inert text; bundle bootstrap code was never executed.
+Static imports, entrypoints, workers, endpoints, and storage relationships do not prove runtime execution.
+Static paths and relationships may remain unresolved when expressions are dynamic or obfuscated.
+Webpack/Rspack factories were recovered from AST literals; REA did not invoke push handlers or bundle bootstrap code.

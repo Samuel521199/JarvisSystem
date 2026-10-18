@@ -39,7 +39,10 @@ def archive_path(value):
 def source_files():
     selected=['pyproject.toml','uv.lock','README.md','tools/release_bundle.py','tools/runtime_releases.py',
               'apps/tray/assets/jarvis.ico']
-    extensions={'.py','.json','.toml','.lock','.html','.css','.js','.md','.mmd','.txt','.ps1','.cs'}
+    # Runtime brand exports only; high-resolution editable artwork is not needed.
+    selected.extend(path.relative_to(ROOT).as_posix() for path in (ROOT/'apps/web/brand').iterdir()
+                    if path.is_file() and path.suffix in {'.png', '.ico'})
+    extensions={'.py','.json','.toml','.lock','.html','.css','.js','.mjs','.md','.mmd','.txt','.ps1','.cs'}
     for folder in ('runtime','apps','adapters','config','contracts','seed','docs','tests/fixtures/workspace'):
         for path in (ROOT/folder).rglob('*'):
             if path.is_file() and path.suffix in extensions and '__pycache__' not in path.parts:
@@ -59,7 +62,7 @@ def dependencies():
         sys.path.insert(0,str(safe_path(wheels[0],directory=False)))
         from pip._vendor.packaging.requirements import Requirement
     project=tomllib.loads((ROOT/'pyproject.toml').read_text(encoding='utf-8'))['project']
-    pending=[Requirement(value) for value in project['dependencies']]
+    pending=[Requirement(value) for value in project['dependencies'] + project['optional-dependencies']['computer']]
     resolved={};files={};seen=set()
     while pending:
         request=pending.pop();key=(request.name,tuple(sorted(request.extras)))
@@ -110,7 +113,7 @@ def build(destination):
         add('python/'+relative,raw)
     if len(files)>MAX_FILES or sum(map(len,files.values()))>LIMIT:raise ValueError('Package exceeds bounds')
     manifest={'schema_version':1,'version':__version__,'python':sys.version.split()[0],
-              'scope':'Windows K1 CLI/recovery and core Python dependencies; optional browser/speech/models not bundled',
+              'scope':'Windows core and Playwright driver; installed Edge required for browser/skill verification; speech and model weights not bundled',
               'dependencies':versions,'worker':evidence,
               'files':{name:{'sha256':sha(raw),'size':len(raw)} for name,raw in sorted(files.items())}}
     # Exclusive destination creation; a failed/incomplete archive is not activated.

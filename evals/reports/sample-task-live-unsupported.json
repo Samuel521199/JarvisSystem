@@ -1,0 +1,45 @@
+{
+  "version": "0.1.30",
+  "captured_at": "2026-10-16T14:40:03.589602+00:00",
+  "live_model": true,
+  "scope": "temporary synthetic sample; existing FIFO/ledger and real fixed Worker",
+  "limits": [
+    "No user project or current task changed; no generic tool execution or full K1/K2 gate.",
+    "Crash checks are child process termination, not whole-machine power loss.",
+    "A small fixed task is not a general intelligence or model comparison benchmark."
+  ],
+  "task_status": "FAILED",
+  "action_status": "FAILED",
+  "elapsed_seconds": 7.686,
+  "report_verified": false,
+  "file_count": null,
+  "by_type": null,
+  "plan_states": [
+    "PLAN_REJECTED"
+  ],
+  "model_calls": [
+    {
+      "completion_reason": "complete",
+      "elapsed_seconds": 7.037,
+      "model": "gemini-3.8-flash",
+      "outcome_uncertain": false,
+      "output_incomplete": false,
+      "provider": "vertex",
+      "request_id": "7378d98983c246fa872ed7d3ccef68b2",
+      "status": "SUCCEEDED",
+      "usage": {
+        "candidatesTokenCount": 31,
+        "promptTokenCount": 397,
+        "thoughtsTokenCount": 106,
+        "totalTokenCount": 534
+      }
+    }
+  ],
+  "error": {
+    "code": "unsupported_task",
+    "message": "当前只支持列举指定样例目录、按类型统计并保存 JSON 报告；本次未执行文件任务。"
+  },
+  "real_worker_lpac": false,
+  "case": "unsupported",
+  "status": "passed"
+}

@@ -5,7 +5,7 @@
   const NONCE=document.querySelector('meta[name="jarvis-nonce"]').content;
   const stateNames = {READY:"已接纳",RUNNING:"执行中",CANCELLING:"正在取消",SUCCEEDED:"已完成",FAILED:"失败",CANCELLED:"已取消",UNKNOWN:"结果待核对",PREPARED:"已准备",DISPATCHING:"执行中"};
   const actionNames = {fill:"填写",select:"选择",check:"勾选状态",click:"点击"};
-  let selected=null, visible=false, timer=null, refreshingTasks=false, submitting=false, active=false, available=false, browserAvailable=false, queuePaused=false, queueWaiting=0, queueCapacity=20, queueOwned=false, queueChanging=false;
+  let selected=/^task_[a-f0-9]{32}$/.test(new URLSearchParams(location.search).get('task')||'')?new URLSearchParams(location.search).get('task'):null, visible=false, timer=null, refreshingTasks=false, submitting=false, active=false, available=false, browserAvailable=false, queuePaused=false, queueWaiting=0, queueCapacity=20, queueOwned=false, queueChanging=false;
   let imageURL=null, imageTask=null, pending=null, generation=0;
   async function request(path, payload) {
     const response=await fetch(path,{method:payload===undefined?"GET":"POST",cache:"no-store",credentials:"omit",
@@ -15,18 +15,20 @@
     return response;
   }
   function controls() {
-    const inventory=el("task-mode").value==="inventory",scripted=inventory||el("task-mode").value==="scripted";
+    const inventory=el("task-mode").value==="inventory",natural=el("task-mode").value==="natural",scripted=inventory||el("task-mode").value==="scripted";
     el("task-model").disabled=scripted||submitting||!el("task-model").value;
-    el("task-start").disabled=submitting||queueWaiting>=queueCapacity||!available||(!inventory&&!browserAvailable)||!queueOwned||(!scripted&&!el("task-model").value);
+    el("task-start").disabled=submitting||queueWaiting>=queueCapacity||!available||(!inventory&&!natural&&!browserAvailable)||!queueOwned||(!scripted&&!el("task-model").value);
     el("task-start").textContent=active||queuePaused||queueWaiting?"加入队列":"启动任务";
     el("queue-toggle").textContent=queuePaused?"继续队列":"暂停队列";
     el("queue-toggle").disabled=queueChanging||!queueOwned||!available;
     el("task-mode").disabled=submitting;
     el("task-json").disabled=submitting;
     el("task-custom").hidden=el("task-mode").value!=="custom";
-    el("inventory-options").hidden=!inventory;
+    el("inventory-options").hidden=!inventory&&!natural;
+    el("natural-options").hidden=!natural;
+    el("task-prompt").disabled=submitting;
     el("inventory-relative").disabled=submitting;
-    el("task-privacy").textContent=inventory?"仅列举初始化绑定目录的文件元数据，不读取文件正文、不调用模型。清单回执保存在本机运行数据区。":scripted?"固定动作仅检查浏览器通路，不调用模型，也不产生模型用量。":
+    el("task-privacy").textContent=natural?"任务要求和所选相对路径交给规划模型；文件名、文件正文、记忆和会话历史不会发送。规划通过后执行固定任务，结果保存在本机。自动路由可能切换供应商。":inventory?"仅列举初始化绑定目录的文件元数据，不读取文件正文、不调用模型。清单回执保存在本机运行数据区。":scripted?"固定动作仅检查浏览器通路，不调用模型，也不产生模型用量。":
       "页面文字和允许的输入值将发送至所选模型。自动路由可能使用其他供应商；截图只保存在本机。";
   }
   function clearImage() {
@@ -40,7 +42,7 @@
     el("task-detail").hidden=false;
     const status=data.task.status;
     el("task-detail-title").textContent=(stateNames[status]||status)+" · 执行详情";
-    el("task-result").textContent=status==="SUCCEEDED"?(data.kind==="inventory"?"目录清单已生成并核对回执。文件："+data.artifact_path:"页面已满足任务的成功条件，结果截图已保存。"):status==="UNKNOWN"?
+    el("task-result").textContent=status==="SUCCEEDED"?(["inventory","natural"].includes(data.kind)?(data.kind==="natural"?"统计报告已生成，数量、字节分组及产物摘要已核验。文件：":"目录清单已生成并核对回执。文件：")+data.artifact_path:"页面已满足任务的成功条件，结果截图已保存。"):status==="UNKNOWN"?
       "结果尚未确认，不会自动重试。请核对实际页面或业务结果，再决定是否新建任务。":status==="CANCELLED"?"任务已取消；已经发生的操作不会撤销。":data.cancel_requested?
       "已请求取消，正在等待执行器结束；已发生的操作无法撤销。":data.error?.message||"任务 "+id;
     el("task-cancel").hidden=!["READY","RUNNING"].includes(status);
@@ -48,13 +50,20 @@
     el("task-steps").replaceChildren();
     for(const step of data.steps) {
       const item=document.createElement("li"),note=document.createElement("small");
+      if(data.kind==="natural"){
+        const labels={MODEL_REQUESTED:"模型请求已记录",MODEL_UNRESOLVED:"规划结果未确认",MODEL_FAILED:"模型返回不可用",PLAN_REJECTED:"计划未通过校验",PLAN_VALIDATED:"计划已通过校验"};
+        item.textContent="规划 "+(step.ordinal+1)+" · "+(labels[step.state]||step.state);
+        const metadata=JSON.parse(step.model_json||"{}");note.textContent=[metadata.provider,metadata.model].filter(Boolean).join(" / ")+(metadata.usage?" · 用量 "+JSON.stringify(metadata.usage):"");
+        item.append(note);el("task-steps").append(item);continue;
+      }
       const state=step.state==="CONFIRMED"?"已执行":step.state==="IN_FLIGHT"?"执行结果待确认":"结果待核对";
       item.textContent=(actionNames[step.action.op]||step.action.op)+" · "+step.action.target+" · "+state;
       note.textContent=(step.model.model||"固定动作测试")+(step.model.usage?" · 用量 "+JSON.stringify(step.model.usage):"");
       item.append(note);el("task-steps").append(item);
     }
-    if(data.kind==="inventory"&&data.report){
+    if(["inventory","natural"].includes(data.kind)&&data.report){
       const summary=document.createElement("li");summary.textContent="共 "+data.report.total_files+" 个文件，"+data.report.total_bytes+" 字节";el("task-steps").append(summary);
+      for(const group of data.report.by_type||[]){const row=document.createElement("li");row.textContent=group.type+" · "+group.file_count+" 个文件 · "+group.total_bytes+" 字节";el("task-steps").append(row);}
       for(const file of data.report.files){const row=document.createElement("li");row.textContent=file.path+" · "+file.size_bytes+" 字节";el("task-steps").append(row);}
     }else if(!data.steps.length){const item=document.createElement("li");item.textContent=data.kind==="inventory"?"目录任务尚未产生已确认清单。":"尚无页面操作记录。";el("task-steps").append(item);}
     if(data.has_screenshot&&imageTask!==id) {
@@ -99,7 +108,7 @@
       const previous=el("task-model").value;el("task-model").replaceChildren();
       const options=[...(data.models||[]).map(m=>({...m,model:m.provider+"::"+m.model,label:(m.label||m.model)+" · "+(m.provider_label||m.provider)})),{model:"auto",label:"自动路由"}];
       for(const item of options){const option=document.createElement("option");option.value=item.model;option.textContent=item.label||item.model;el("task-model").append(option);}
-      const preferred=previous||"openai::gpt-6-luna";
+      const preferred=previous||"auto";
       if(options.some(item=>item.model===preferred))el("task-model").value=preferred;
     } catch(error){el("task-submit-note").textContent=error.message;}
     controls();
@@ -113,6 +122,7 @@
   el("task-mode").addEventListener("change",()=>{pending=null;el("task-submit-note").textContent="";controls();});
   el("task-model").addEventListener("change",()=>{pending=null;});
   el("inventory-relative").addEventListener("input",()=>{pending=null;});
+  el("task-prompt").addEventListener("input",()=>{pending=null;});
   el("task-json").addEventListener("input",()=>{pending=null;});
   el("task-refresh").addEventListener("click",()=>{modelsForTasks();loadTasks();});
   el("task-form").addEventListener("submit",async event=>{
@@ -120,6 +130,7 @@
     try {
       if(!pending){pending={request_id:"web-"+crypto.randomUUID().replaceAll("-",""),mode:el("task-mode").value,model:el("task-mode").value==="scripted"?"auto":el("task-model").value};
         if(pending.mode==="inventory"){delete pending.model;pending.relative_path=el("inventory-relative").value;}
+        if(pending.mode==="natural"){pending.prompt=el("task-prompt").value;pending.relative_path=el("inventory-relative").value;}
         if(pending.mode==="custom")pending.task=JSON.parse(el("task-json").value);}
       submitting=true;controls();el("task-submit-note").textContent="正在接纳任务…";
       const result=await (await request("/api/tasks",pending)).json();

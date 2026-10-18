@@ -1,0 +1,44 @@
+{
+  "status": "evaluation_only",
+  "backend": "speech.cpp v0.8.10 Windows Vulkan",
+  "catalog": "https://raw.githubusercontent.com/nyosegawa/speech.cpp/v0.8.10/tools/catalog/catalog.json",
+  "model": "Qwen3-TTS-12Hz-1.7B-CustomVoice Q5_K",
+  "assets": [
+    {
+      "local": "H:/JarvisData/components/qwen-tts/downloads/speech-0.8.10-windows-x64-vulkan.zip",
+      "url": "https://github.com/nyosegawa/speech.cpp/releases/download/v0.8.10/speech-0.8.10-windows-x64-vulkan.zip",
+      "size_bytes": 28886479,
+      "sha256": "2904dd54de7f18cf438338c28216ebffc205d29c6a2de3e645af40dd136b92f2"
+    },
+    {
+      "local": "H:/JarvisData/models/tts/qwen3-tts-1.7b/Qwen3-TTS-12Hz-1.7B-CustomVoice-Q5_K.gguf",
+      "url": "https://huggingface.co/sakasegawa/Qwen3-TTS-12Hz-1.7B-CustomVoice-GGUF/resolve/a72e6c6575d67652488cdffc1c863215a9899978/Qwen3-TTS-12Hz-1.7B-CustomVoice-Q5_K.gguf",
+      "size_bytes": 1569079808,
+      "sha256": "c75ace85fa79a897d2b0f6fa05aa9e5ffd6abb869e556f7cf66b35cf87ad12f1"
+    }
+  ],
+  "production_integrated": false,
+  "executable": "H:\\JarvisData\\components\\qwen-tts\\speech-0.8.10\\speech.exe",
+  "runtime_files": [
+    {
+      "path": "speech.dll",
+      "sha256": "b2fc6589721e863911a445f8e885ff5ce36bb23511e87da8a4f6eda37aa40548",
+      "size_bytes": 44722176
+    },
+    {
+      "path": "speech.exe",
+      "sha256": "8ff9bc3f27ce2901e1ab9d1c59463ec51125ad6b901e6a7061efccf0d75da512",
+      "size_bytes": 46200320
+    },
+    {
+      "path": "speech.h",
+      "sha256": "51f7574a4e934bc463c18ee5f899a324c9cc05a65cd4243d38bf3452aff79d48",
+      "size_bytes": 68853
+    },
+    {
+      "path": "speech.lib",
+      "sha256": "997d6c399c8541d41f1d2ef75b41befc3d88e5d4798bbd14ca2058e4fd878057",
+      "size_bytes": 30966
+    }
+  ]
+}

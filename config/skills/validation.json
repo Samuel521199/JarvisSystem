@@ -1,0 +1,274 @@
+{
+  "schema_version": 1,
+  "skills": {
+    "anatomy.explainer": {
+      "binding": "sha256:7ed4aa06edaf1c143a1cb7ee4d5c85db89299b5526dedc68db082471d5c379fc",
+      "version": "0.1.58",
+      "observed_at": "2026-10-18T16:34:43.250000+00:00",
+      "status": "passed",
+      "cases": 1,
+      "models": [],
+      "model_results": {},
+      "scope": "当前专项覆盖固定齿轮数值、LPAC、实际浏览器与产物摘要；不是自由机械CAD或视频验证。",
+      "reports": [
+        "evals/reports/skills-completion-baseline-2026-10-19.json"
+      ]
+    },
+    "matt-pocock.diagnosing-bugs": {
+      "binding": "sha256:febe5ccb898e4022f82ca693aadb60b5782ed07f7c49c80a9f21b46ba5885cef",
+      "version": "0.1.58",
+      "observed_at": "2026-10-18T16:34:43.250000+00:00",
+      "status": "passed",
+      "cases": 3,
+      "models": [
+        "openai::gpt-6.1-sol",
+        "vertex::gemini-3.8-flash"
+      ],
+      "model_results": {
+        "openai::gpt-6.1-sol": {
+          "pass": 3,
+          "partial": 0,
+          "fail": 0
+        },
+        "vertex::gemini-3.8-flash": {
+          "pass": 0,
+          "partial": 3,
+          "fail": 0
+        }
+      },
+      "scope": "每模型3个场景，另有无技能配对。Sol本批3项满足预声明要点；Google 0 项满足、3 项部分满足、0 项未满足。由本轮Agent审阅，无独立人工盲评；不代表普遍质量或当前可用余额。",
+      "reports": [
+        "evals/reports/skill-coverage-review-2026-10-19.json"
+      ]
+    },
+    "matt-pocock.code-review": {
+      "binding": "sha256:a7a416d6d16201ec48ce6f13b31d4e17f535e2527c07c1df05d8e86e066fe068",
+      "version": "0.1.58",
+      "observed_at": "2026-10-18T16:34:43.250000+00:00",
+      "status": "passed",
+      "cases": 3,
+      "models": [
+        "openai::gpt-6.1-sol",
+        "vertex::gemini-3.8-flash"
+      ],
+      "model_results": {
+        "openai::gpt-6.1-sol": {
+          "pass": 3,
+          "partial": 0,
+          "fail": 0
+        },
+        "vertex::gemini-3.8-flash": {
+          "pass": 1,
+          "partial": 1,
+          "fail": 1
+        }
+      },
+      "scope": "每模型3个场景，另有无技能配对。Sol本批3项满足预声明要点；Google 1 项满足、1 项部分满足、1 项未满足。由本轮Agent审阅，无独立人工盲评；不代表普遍质量或当前可用余额。",
+      "reports": [
+        "evals/reports/skill-coverage-review-2026-10-19.json"
+      ]
+    },
+    "matt-pocock.tdd": {
+      "binding": "sha256:9974439059f8991ead15862d0dcf480080833054f07390fdd1be26d59e4b41da",
+      "version": "0.1.58",
+      "observed_at": "2026-10-18T16:34:43.250000+00:00",
+      "status": "passed",
+      "cases": 3,
+      "models": [
+        "openai::gpt-6.1-sol",
+        "vertex::gemini-3.8-flash"
+      ],
+      "model_results": {
+        "openai::gpt-6.1-sol": {
+          "pass": 3,
+          "partial": 0,
+          "fail": 0
+        },
+        "vertex::gemini-3.8-flash": {
+          "pass": 0,
+          "partial": 3,
+          "fail": 0
+        }
+      },
+      "scope": "每模型3个场景，另有无技能配对。Sol本批3项满足预声明要点；Google 0 项满足、3 项部分满足、0 项未满足。由本轮Agent审阅，无独立人工盲评；不代表普遍质量或当前可用余额。",
+      "reports": [
+        "evals/reports/skill-coverage-review-2026-10-19.json"
+      ]
+    },
+    "matt-pocock.codebase-design": {
+      "binding": "sha256:d9f8124e84a9e93f147b68607523a39574346c3bc8c9b147162a473c41c0240d",
+      "version": "0.1.58",
+      "observed_at": "2026-10-18T16:34:43.250000+00:00",
+      "status": "passed",
+      "cases": 3,
+      "models": [
+        "openai::gpt-6.1-sol",
+        "vertex::gemini-3.8-flash"
+      ],
+      "model_results": {
+        "openai::gpt-6.1-sol": {
+          "pass": 3,
+          "partial": 0,
+          "fail": 0
+        },
+        "vertex::gemini-3.8-flash": {
+          "pass": 2,
+          "partial": 0,
+          "fail": 1
+        }
+      },
+      "scope": "每模型3个场景，另有无技能配对。Sol本批3项满足预声明要点；Google 2 项满足、0 项部分满足、1 项未满足。由本轮Agent审阅，无独立人工盲评；不代表普遍质量或当前可用余额。",
+      "reports": [
+        "evals/reports/skill-coverage-review-2026-10-19.json"
+      ]
+    },
+    "matt-pocock.to-spec": {
+      "binding": "sha256:db78cc107c3071ae31bca5b98f0d2e8311e6e2cebb650aaa4151ab53b734bac1",
+      "version": "0.1.58",
+      "observed_at": "2026-10-18T16:34:43.250000+00:00",
+      "status": "passed",
+      "cases": 3,
+      "models": [
+        "openai::gpt-6.1-sol",
+        "vertex::gemini-3.8-flash"
+      ],
+      "model_results": {
+        "openai::gpt-6.1-sol": {
+          "pass": 3,
+          "partial": 0,
+          "fail": 0
+        },
+        "vertex::gemini-3.8-flash": {
+          "pass": 1,
+          "partial": 2,
+          "fail": 0
+        }
+      },
+      "scope": "每模型3个场景，另有无技能配对。Sol本批3项满足预声明要点；Google 1 项满足、2 项部分满足、0 项未满足。由本轮Agent审阅，无独立人工盲评；不代表普遍质量或当前可用余额。",
+      "reports": [
+        "evals/reports/skill-coverage-review-2026-10-19.json"
+      ]
+    },
+    "matt-pocock.handoff": {
+      "binding": "sha256:be9ae93f533f84735a117e6f17100348cab316707ada9db1a3f9a7227e76df71",
+      "version": "0.1.58",
+      "observed_at": "2026-10-18T16:34:43.250000+00:00",
+      "status": "passed",
+      "cases": 3,
+      "models": [
+        "openai::gpt-6.1-sol",
+        "vertex::gemini-3.8-flash"
+      ],
+      "model_results": {
+        "openai::gpt-6.1-sol": {
+          "pass": 3,
+          "partial": 0,
+          "fail": 0
+        },
+        "vertex::gemini-3.8-flash": {
+          "pass": 2,
+          "partial": 1,
+          "fail": 0
+        }
+      },
+      "scope": "每模型3个场景，另有无技能配对。Sol本批3项满足预声明要点；Google 2 项满足、1 项部分满足、0 项未满足。由本轮Agent审阅，无独立人工盲评；不代表普遍质量或当前可用余额。",
+      "reports": [
+        "evals/reports/skill-coverage-review-2026-10-19.json"
+      ]
+    },
+    "matt-pocock.teach": {
+      "binding": "sha256:6598c70af2dcc6fc90afac0c3d2286d87134b20ca27f111c086168cfef1bc64a",
+      "version": "0.1.58",
+      "observed_at": "2026-10-18T16:34:43.250000+00:00",
+      "status": "passed",
+      "cases": 3,
+      "models": [
+        "openai::gpt-6.1-sol",
+        "vertex::gemini-3.8-flash"
+      ],
+      "model_results": {
+        "openai::gpt-6.1-sol": {
+          "pass": 3,
+          "partial": 0,
+          "fail": 0
+        },
+        "vertex::gemini-3.8-flash": {
+          "pass": 0,
+          "partial": 2,
+          "fail": 1
+        }
+      },
+      "scope": "每模型3个场景，另有无技能配对。Sol本批3项满足预声明要点；Google 0 项满足、2 项部分满足、1 项未满足。由本轮Agent审阅，无独立人工盲评；不代表普遍质量或当前可用余额。",
+      "reports": [
+        "evals/reports/skill-coverage-review-2026-10-19.json"
+      ]
+    },
+    "matt-pocock.to-questionnaire": {
+      "binding": "sha256:356e75f4c7e3a27740a1904118887ba039ac486408a4bf513083ea91afe5948d",
+      "version": "0.1.58",
+      "observed_at": "2026-10-18T16:34:43.250000+00:00",
+      "status": "passed",
+      "cases": 3,
+      "models": [
+        "openai::gpt-6.1-sol",
+        "vertex::gemini-3.8-flash"
+      ],
+      "model_results": {
+        "openai::gpt-6.1-sol": {
+          "pass": 3,
+          "partial": 0,
+          "fail": 0
+        },
+        "vertex::gemini-3.8-flash": {
+          "pass": 1,
+          "partial": 2,
+          "fail": 0
+        }
+      },
+      "scope": "每模型3个场景，另有无技能配对。Sol本批3项满足预声明要点；Google 1 项满足、2 项部分满足、0 项未满足。由本轮Agent审阅，无独立人工盲评；不代表普遍质量或当前可用余额。",
+      "reports": [
+        "evals/reports/skill-coverage-review-2026-10-19.json"
+      ]
+    },
+    "matt-pocock.writing-for-agents": {
+      "binding": "sha256:a7632435f560c0663a4f2e266304d3d828818c0295da9a113a67e89028375237",
+      "version": "0.1.58",
+      "observed_at": "2026-10-18T16:34:43.250000+00:00",
+      "status": "passed",
+      "cases": 3,
+      "models": [
+        "openai::gpt-6.1-sol",
+        "vertex::gemini-3.8-flash"
+      ],
+      "model_results": {
+        "openai::gpt-6.1-sol": {
+          "pass": 3,
+          "partial": 0,
+          "fail": 0
+        },
+        "vertex::gemini-3.8-flash": {
+          "pass": 1,
+          "partial": 2,
+          "fail": 0
+        }
+      },
+      "scope": "每模型3个场景，另有无技能配对。Sol本批3项满足预声明要点；Google 1 项满足、2 项部分满足、0 项未满足。由本轮Agent审阅，无独立人工盲评；不代表普遍质量或当前可用余额。",
+      "reports": [
+        "evals/reports/skill-coverage-review-2026-10-19.json"
+      ]
+    },
+    "rea.software-analysis": {
+      "binding": "sha256:2339a5853a41ca441062f71dd0d20886020ea649f077659f8de7d2fc06f867cd",
+      "version": "0.1.58",
+      "observed_at": "2026-10-18T16:34:43.250000+00:00",
+      "status": "passed",
+      "cases": 1,
+      "models": [],
+      "model_results": {},
+      "scope": "当前专项覆盖目录/ASAR、证据分页、关注项与中文引用边界。历史两应用32处理器证据仍仅代表限定范围，不代表整包或实际运行行为。",
+      "reports": [
+        "evals/reports/skills-completion-baseline-2026-10-19.json"
+      ]
+    }
+  }
+}

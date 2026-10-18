@@ -1,0 +1,285 @@
+{
+  "version": "0.1.40",
+  "captured_at": "2026-10-17T16:57:17.509136+00:00",
+  "status": "implemented_and_verified_subset",
+  "scope": "K2 explicit, sourced conversation checkpoints; selected cross-session continuation, no automatic task execution",
+  "python": {
+    "captured_at": "2026-10-17T16:54:15.539793+00:00",
+    "tests_run": 550,
+    "passed": 548,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 2,
+    "seconds": 240.767,
+    "source_changes_during_tests": []
+  },
+  "frontend": {
+    "tests": 7,
+    "passed": 7
+  },
+  "seed": {
+    "checked_assets": 22,
+    "fixture_cases": 12,
+    "ok": true
+  },
+  "browser": {
+    "version": "0.1.40",
+    "captured_at": "2026-10-17T16:53:58.731156+00:00",
+    "checks": [
+      "Source command archived before atomic checkpoint save; new chat resumes consented note; selection and dependency refs survive refresh",
+      "Update/complete/reopen work; revoked provider stops before model; forget removes derived context after refresh",
+      "Temporary writes refused; desktop and mobile panel fit; no background task or cloud calls used"
+    ],
+    "page_errors": [],
+    "synthetic_model_calls": 4,
+    "real_model_calls": 0
+  },
+  "personal_regression": {
+    "version": "0.1.40",
+    "captured_at": "2026-10-17T16:55:01.477316+00:00",
+    "checks": [
+      "Explicit memory/persona commands commit without models; archived control turns stay out of prompts after reload",
+      "New chat receives the persistent profile and explicitly allowed facts; local-only facts were not sent before consent",
+      "Correction/forget invalidate dependent turns; local memory query text never returns through archived history",
+      "Temporary chat refuses explicit memory writes without invoking a model",
+      "Commands remain usable without a model catalog; memory help fits desktop and 390px mobile"
+    ],
+    "page_errors": [],
+    "synthetic_model_calls": 4,
+    "real_model_calls": 0
+  },
+  "real_model": {
+    "successful_initial": {
+      "version": "0.1.40",
+      "captured_at": "2026-10-17T16:49:19.042952+00:00",
+      "route": "vertex::gemini-3.1-pro-preview",
+      "paid_calls": 2,
+      "passed": true,
+      "observations": [
+        {
+          "status": "SUCCEEDED",
+          "text": "{\"progress\":\"DESTINATION_SUZHOU_8427\",\"next\":\"COMPARE_HOTELS_8427\"}",
+          "error": null,
+          "usage": {
+            "promptTokenCount": 557,
+            "candidatesTokenCount": 28,
+            "totalTokenCount": 928,
+            "thoughtsTokenCount": 343
+          },
+          "continuity": {
+            "references": [
+              {
+                "id": "d63a8598e36048c087328884e8788d50",
+                "revision": 2
+              }
+            ],
+            "bytes": 635,
+            "omitted": 0,
+            "issues": [],
+            "dropped_history_messages": 0
+          },
+          "passed": true,
+          "seconds": 10.831
+        },
+        {
+          "status": "SUCCEEDED",
+          "text": "{\"progress\":null,\"next\":null}",
+          "error": null,
+          "usage": {
+            "promptTokenCount": 291,
+            "candidatesTokenCount": 9,
+            "totalTokenCount": 544,
+            "thoughtsTokenCount": 244
+          },
+          "continuity": {
+            "references": [],
+            "bytes": 0,
+            "omitted": 0,
+            "issues": [],
+            "dropped_history_messages": 2
+          },
+          "passed": true,
+          "seconds": 9.347
+        }
+      ],
+      "limits": [
+        "Synthetic explicit checkpoints, not general autobiographical recall or task execution.",
+        "No real user conversations sent."
+      ]
+    },
+    "final_schema_rechecks": [
+      {
+        "version": "0.1.40",
+        "captured_at": "2026-10-17T16:54:08.696424+00:00",
+        "route": "vertex::gemini-3.1-pro-preview",
+        "paid_calls": 1,
+        "passed": false,
+        "observations": [
+          {
+            "status": "FAILED",
+            "text": null,
+            "error": "vertex_authentication_failed",
+            "usage": null,
+            "continuity": {
+              "references": [
+                {
+                  "id": "ba8a167e620348499f4ca25ffe7e3eda",
+                  "revision": 2
+                }
+              ],
+              "bytes": 684,
+              "omitted": 0,
+              "issues": [],
+              "dropped_history_messages": 0
+            },
+            "passed": false,
+            "seconds": 17.783
+          }
+        ],
+        "limits": [
+          "Synthetic explicit checkpoints, not general autobiographical recall or task execution.",
+          "No real user conversations sent."
+        ]
+      },
+      {
+        "version": "0.1.40",
+        "captured_at": "2026-10-17T16:55:39.196400+00:00",
+        "route": "vertex::gemini-3.1-pro-preview",
+        "paid_calls": 1,
+        "passed": false,
+        "observations": [
+          {
+            "status": "FAILED",
+            "text": null,
+            "error": "connection_unavailable",
+            "usage": null,
+            "continuity": {
+              "references": [
+                {
+                  "id": "c69f8af55fb54793ab264f4a12ec1c9b",
+                  "revision": 2
+                }
+              ],
+              "bytes": 684,
+              "omitted": 0,
+              "issues": [],
+              "dropped_history_messages": 0
+            },
+            "passed": false,
+            "seconds": 13.002
+          }
+        ],
+        "limits": [
+          "Synthetic explicit checkpoints, not general autobiographical recall or task execution.",
+          "No real user conversations sent."
+        ]
+      }
+    ],
+    "model_request_attempts": 4,
+    "successful_model_responses": 2,
+    "note": "Raw external reports label attempted calls as paid_calls; this is not a billing count. Initial two responses succeeded before adding recorded_at metadata and stored-record validation. Final implementation passed full regression and real browser probes; two cloud rechecks failed authentication/connection, so final cloud availability remains unverified."
+  },
+  "deployment": {
+    "before": {
+      "app": "Jarvis",
+      "version": "0.1.39",
+      "instance_id": "bf000bcc226698b815064113f18f53c1",
+      "ui_assets": {
+        "status": "ready",
+        "unavailable": []
+      },
+      "web_online": true,
+      "core_ready": true,
+      "stopped": false,
+      "assistant_state": "standby",
+      "active_tasks": 0,
+      "text_only": false,
+      "chat_text_only": true,
+      "computer_tasks": true,
+      "max_parallel_requests": 2,
+      "active_chat_requests": 0
+    },
+    "after": {
+      "app": "Jarvis",
+      "version": "0.1.40",
+      "instance_id": "8796d508bc0e82977aeddd0af3d1f11c",
+      "ui_assets": {
+        "status": "ready",
+        "unavailable": []
+      },
+      "web_online": true,
+      "core_ready": true,
+      "stopped": false,
+      "assistant_state": "standby",
+      "active_tasks": 0,
+      "text_only": false,
+      "chat_text_only": true,
+      "computer_tasks": true,
+      "max_parallel_requests": 2,
+      "active_chat_requests": 0
+    },
+    "business_snapshot": {
+      "/api/memory": "83cbe167af1891697568597a28c0a26f08782944420cbed206c303580f14f0b3",
+      "/api/workspace/projects": "2785edb3b57fdaf4d1e2d8730e30905ce1f80abae47dc2f5258fe0d697a11542",
+      "/api/extensions": "2e9f102c0dcc528fa7293e8db1ff942937d50ad40ee0cc50eaabf0b82c65c65c",
+      "/api/workspace/organization": "d811b4e424c37590a4037c84cc41d384a72bab35b4cfc8bdd5e5025fc7c0b77a",
+      "/api/conversations": "6a3c219f7e342b76327267997bcba68c72e5de82f76e2cbc6211c34ef0661fce",
+      "tasks": "423e42d02ea0587dfbfe8d916057df0d8d11c0fb587bea61d330efcd856475bc",
+      "paused": true,
+      "/api/knowledge?project_id=68b7010022cd448fba8f2681a82f9216": "73608e3346e331760ac29f17144976922e84678fed8a2eb7cc66f6ef0e89a33c"
+    },
+    "date": "2026-10-18",
+    "status": "passed",
+    "version": "0.1.40",
+    "feature": "evolution-v1",
+    "user_data_snapshots_preserved": true,
+    "personal_stores_preserved": true,
+    "source_restart": "instance-specific tray event",
+    "local_model_previously_owned": false,
+    "source_assets_verified": true,
+    "generated_packages_and_policy_preserved": true,
+    "automatic_maintenance_enabled": true,
+    "url": "http://127.0.0.1:18181/settings#modules"
+  },
+  "external_evidence_directory": "H:\\JarvisData\\evals\\continuity-20261018",
+  "corrections": [
+    "Rejected first write initially left unreadable schema version 0; fixed by committing empty schema separately before atomic action and receipt.",
+    "Old memory UI probe matched two help summaries after tabs were added; scoped selector to facts, preserved all assertions and reran."
+  ],
+  "limits": [
+    "Explicit owner-entered notes only; no automatic episodic extraction, relevance ranking, reminders or task dispatch.",
+    "Exact project scope and per-provider permissions; no multi-device replication.",
+    "Request assembly is a snapshot, not cross-database linearizable revocation of already dispatched requests.",
+    "Manual copying of text creates new input; no semantic provenance tracking between independently entered facts and checkpoints.",
+    "No migration guarantee for older Host readers of new archive fields.",
+    "Two Windows symlink-permission tests skipped; whole-machine offline and long-running PC resource acceptance remain open."
+  ],
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/continuity.py": "bbf24675908be377a94bb07088b26b5d16b9a8caf1a3673c9b0fd2f4e6889402",
+    "runtime/node-host/jarvis_core/chat.py": "d683ffa039ed15dcca7adb06cd408456e9e3a4822f9f2227632ee5e0f59dde72",
+    "runtime/node-host/jarvis_core/memory.py": "a5d0dbb32fc5185b2c2af4ba2419eecce3f26243c4e1ef264bd8a691f8ba4eb8",
+    "runtime/node-host/jarvis_core/personal.py": "9734cca75a426515233bf12149f485fe744ea5c2689719092fd160e4e44ae332",
+    "runtime/node-host/jarvis_core/conversations.py": "95c407b68d8da513a24bb3980a49b71dd67f0206abf986afe11469cced262272",
+    "apps/web/index.html": "2c5f8c9a5365c662715298af89e7a2dec77deaa0298f718706a3f76aa4c03716",
+    "apps/web/continuity.js": "b10262a3ec90501f2a73fc443e80a0aa2f93fa70ecd57fed127d555d1a4d24c6",
+    "apps/web/continuity_routes.py": "4b4c437f62e63586d141b42b827ba714b2aaa286a48a7b8de14bf48639298207",
+    "apps/web/memory.js": "fb3a3a7fefa82a509fa1043d9449ba97cf564f5c696f4545bd75fc37b4e5e0fa",
+    "apps/web/workspace.js": "2041dba76d8998b577d7fcf3e2fef8cb032efc02590080b1a704f889aaca5312",
+    "apps/web/server.py": "8fc14409183edcc51e58220a208b0a595055426cbe55c1577baead0ac5db8cce",
+    "tests/test_continuity.py": "7f4588edcd8d4232eac013cb2b662657c5b7c657f140b7822ece46e5b0a2f34f",
+    "tools/probe_continuity_ui.py": "1f0ff6ad3d7dcf2b0202acdf8e2baf0c315185215bbabbd28b63ffa625566890",
+    "tools/probe_personal_core_ui.py": "9e4e067e5b1709bea42c0712ffccfb177baa8d52d5c1b29c77d9686d92998e3c"
+  },
+  "after_full_regression_changes": [
+    "Only tools/probe_personal_core_ui.py selector updated; rerun passed. Runtime code unchanged after full regression."
+  ],
+  "documentation": {
+    "command": "python tools/check_docs.py --root .",
+    "documents": 23,
+    "diagrams": 20,
+    "artifacts": 40,
+    "errors": 0,
+    "navigation_synced": true,
+    "diagram_sources_changed_this_increment": false
+  }
+}

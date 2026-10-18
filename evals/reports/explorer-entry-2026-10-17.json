@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-17",
+  "version": "0.1.37 integrated source",
+  "scope": "Restore a persistent project-file icon in the workbench topbar",
+  "status": "implemented; offline regression and initial-markup verified; browser interaction unverified",
+  "cause": "Explorer controls hid the icon whenever no current project was selected; its initial markup was also hidden and relocated by layout JavaScript",
+  "change": [
+    "Icon exists directly in the topbar HTML with SVG, tooltip and accessible name",
+    "No-project state keeps the icon visible; click opens the existing folder dialog",
+    "Selected project retains existing right-side tree/editor toggle and file buffers",
+    "Tooltip placement handles the left edge of the toolbar and narrow screens"
+  ],
+  "checks": {
+    "web_and_project_resource_regression": {
+      "run": 36,
+      "passed": 36
+    },
+    "initial_markup": "passed: unique, not hidden, inside topbar, outside sidebar",
+    "javascript_syntax": "workbench.js and explorer.js passed",
+    "browser_interaction": "not run: current-page browser acquisition rejected by URL policy",
+    "documentation": {
+      "errors": 0,
+      "navigation": "current"
+    }
+  },
+  "deployment": {
+    "port": 18181,
+    "version": "0.1.37",
+    "data_directory": "existing unchanged",
+    "reloaded_when_idle": true,
+    "pid": 48436,
+    "health": {
+      "core_ready": true,
+      "assistant_state": "standby",
+      "active_tasks": 0,
+      "active_chat_requests": 0
+    }
+  },
+  "paid_calls": 0,
+  "limitations": [
+    "No live screenshot or click verification due to browser policy rejection",
+    "Existing file-tree/editor and folder-picker regressions were exercised offline; no new model task"
+  ],
+  "source_sha256": {
+    "apps/web/index.html": "5d161824d82599424b7fbde65121a5f3bc11ee38eb08ee14e90d67d06001c188",
+    "apps/web/workbench.js": "bb21564c7424190d6aab6315714ab95ff262fa3b371fb3ab59b08ef17f07153b",
+    "apps/web/explorer.js": "9a953df56b64255e22f833cc84a94045c2788e078857915321f6d012edef1ffd",
+    "apps/web/workspace.css": "83a2b3a4f40c6ca70b22a17331ec06f9ca5c72580bb403c612b0575bd2475c42"
+  }
+}

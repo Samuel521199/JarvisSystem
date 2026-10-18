@@ -1,0 +1,114 @@
+{
+  "status": "SUCCEEDED",
+  "source_version": "0.1.42",
+  "backend": "native ZipVoice-Distill int8 CPU 4 threads / 4 steps",
+  "startup_click_to_ready_seconds": 8.962946400002693,
+  "loaded": {
+    "ready": true,
+    "pid": 47648,
+    "device": "cpu",
+    "load_seconds": 1.3538776999994298,
+    "memory": {
+      "working_set_bytes": 311291904,
+      "peak_working_set_bytes": 311291904,
+      "private_commit_bytes": 292560896,
+      "peak_private_commit_bytes": 292597760
+    },
+    "loaded_memory": {
+      "working_set_bytes": 309817344,
+      "peak_working_set_bytes": 309817344,
+      "private_commit_bytes": 292347904,
+      "peak_private_commit_bytes": 292597760
+    },
+    "uses": 0,
+    "text_frontend": "sherpa-zipvoice"
+  },
+  "cases": [
+    {
+      "label": "short",
+      "text": "我在，有什么可以帮你？",
+      "click_to_blob_seconds": 0.7522575000039069,
+      "result": {
+        "id": "e74b916c2ca748fbbda2c302fa5f993b",
+        "sample_rate_hz": 24000,
+        "audio_seconds": 1.6802083333333333,
+        "elapsed_seconds": 0.4595317999992403,
+        "cpu_seconds": 1.953125,
+        "memory": {
+          "working_set_bytes": 413519872,
+          "peak_working_set_bytes": 413519872,
+          "private_commit_bytes": 553459712,
+          "peak_private_commit_bytes": 553459712
+        },
+        "mode": "clone",
+        "emotion": "neutral",
+        "num_steps": 4,
+        "audio_url": "/api/speech/fast/audio/e74b916c2ca748fbbda2c302fa5f993b"
+      },
+      "artifact": "H:\\JarvisData\\research\\fast-tts\\ui-short.wav",
+      "sha256": "34d1b859b48ac32444f899190efe342e5c8ee037cfbbc1457aab785fed4b5e9e"
+    },
+    {
+      "label": "mixed",
+      "text": "今天下午三点提醒我开会。Hello, I am Jarvis.",
+      "click_to_blob_seconds": 1.1203468999956385,
+      "result": {
+        "id": "6a8b4e59bb4a415486b668a54061b608",
+        "sample_rate_hz": 24000,
+        "audio_seconds": 3.9695,
+        "elapsed_seconds": 0.8514585000011721,
+        "cpu_seconds": 3.515625,
+        "memory": {
+          "working_set_bytes": 527355904,
+          "peak_working_set_bytes": 529649664,
+          "private_commit_bytes": 722640896,
+          "peak_private_commit_bytes": 724156416
+        },
+        "mode": "clone",
+        "emotion": "neutral",
+        "num_steps": 4,
+        "audio_url": "/api/speech/fast/audio/6a8b4e59bb4a415486b668a54061b608"
+      },
+      "artifact": "H:\\JarvisData\\research\\fast-tts\\ui-mixed.wav",
+      "sha256": "d48d2c7a4d6593a50da81f5b00986a9aec020fbeb2779a265a50c0236829dc52"
+    },
+    {
+      "label": "sentences",
+      "text": "我可以陪你聊天。也可以帮你处理事情。我们先从哪一件开始？",
+      "click_to_blob_seconds": 1.110674100003962,
+      "result": {
+        "id": "563fd152a7884871aabcf3412b6d7ef1",
+        "sample_rate_hz": 24000,
+        "audio_seconds": 4.701416666666667,
+        "elapsed_seconds": 0.8508825000026263,
+        "cpu_seconds": 3.515625,
+        "memory": {
+          "working_set_bytes": 563195904,
+          "peak_working_set_bytes": 564670464,
+          "private_commit_bytes": 724303872,
+          "peak_private_commit_bytes": 725721088
+        },
+        "mode": "clone",
+        "emotion": "neutral",
+        "num_steps": 4,
+        "audio_url": "/api/speech/fast/audio/563fd152a7884871aabcf3412b6d7ef1"
+      },
+      "artifact": "H:\\JarvisData\\research\\fast-tts\\ui-sentences.wav",
+      "sha256": "a0218d811d468658f147b1b82ae2afdeb18e5a2cc39976de1d31bc29a8af30d1"
+    }
+  ],
+  "browser_errors": [],
+  "stopped": {
+    "owned": false,
+    "pid": null,
+    "state": "stopped"
+  },
+  "limits": "Click-to-blob includes UI polling/download, not actual speaker onset, microphone/LLM or full-duplex latency.",
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/speech.py": "86eaae57b00e40ff9b902b4844057c7b7ac90bc403bfa070b42b8620a3d4d280",
+    "runtime/node-host/jarvis_core/fast_speech.py": "73cd5185ff575038fa36d7a2067f97965a37f45f6187b6a1d63f63512de5bdf3",
+    "adapters/speech/zipvoice/worker.py": "57d7ab16eaba0502572d39889f4d0723213eeab2c8aa4a24b7344895160e5b96",
+    "config/model-profiles/zipvoice.json": "9ca5cffc74ed2f1a3ddb0a271fd073903f63f00b80b4d9eb0d938625fa64eb8b",
+    "apps/web/speech.js": "9e02090a2eaf015dc2fd8c70f64a6420fdfc5b366c67b650110e273699e27785"
+  }
+}

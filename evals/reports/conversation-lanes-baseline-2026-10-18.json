@@ -1,0 +1,76 @@
+{
+  "status": "SUCCEEDED",
+  "source_version": "0.1.54",
+  "tests": 208,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "modules": [
+    "test_dialogue_process",
+    "test_dialogue_recovery",
+    "test_dialogue_turns",
+    "test_conversations",
+    "test_web",
+    "test_chat",
+    "test_readout",
+    "test_resources",
+    "test_runtime_metrics",
+    "test_conversation_tasks",
+    "test_personal_core",
+    "test_continuity",
+    "test_semantic_candidates",
+    "test_sample_tasks",
+    "test_skills",
+    "test_rea_explanation"
+  ],
+  "previous_runs": [
+    {
+      "status": "FAILED",
+      "source_version": "0.1.54",
+      "tests": 208,
+      "failures": 0,
+      "errors": 1,
+      "skipped": 0,
+      "reason": "Runner lacked repository root on sys.path; release-package test import failed."
+    },
+    {
+      "status": "FAILED",
+      "source_version": "0.1.54",
+      "tests": 208,
+      "failures": 8,
+      "errors": 1,
+      "skipped": 0
+    }
+  ],
+  "failed_tests": [],
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/dialogue_process.py": "a953d94544890d7b3cb2dc26e1b17af9b4cdd34f75acb1373e4c257cb8cfe342",
+    "runtime/node-host/jarvis_core/dialogue_worker.py": "0a4141da07a71f46c9fec84ed00a16de5bc48f7aa70c57be7bb2abfc2cad9317",
+    "runtime/node-host/jarvis_core/turns.py": "dfc07e29a5a85d2178c29e37582fb3fe4a1ba09ddf88c2734f20be8326ca39ae",
+    "runtime/node-host/jarvis_core/chat.py": "4847deacd212a5be798fda435dced6b33c06a272eb07e9720192302f55b84ad8",
+    "runtime/node-host/jarvis_core/sample_tasks.py": "4c30305711532b5275b9307a7621eba92162b134c97167fe3eda9bc81010018d",
+    "runtime/node-host/jarvis_core/skill_tasks.py": "ed0917d682dd01f91761293d40351d2e5c1e793595146e41d1a1a3c0a03864e5",
+    "runtime/node-host/jarvis_core/rea_explanation.py": "b2d4e3125103a8f0e7409811f1e95be274bfa71c020200ef82e2f95a5619b556",
+    "apps/web/server.py": "d2c75c2ff1f472fea72d794834d8c9fa2c06155c00d770b6d31cecb65131cb9e",
+    "apps/web/resources.js": "586e03243199134cec0c4da7bedde691f904f73ca8e7aee09ea2dd0202c99e2b",
+    "adapters/computer-use/jarvis_computer/web.py": "1c538250b176f453091747f76dccc0eb00a3375dbd147f072dc5224b92c7ed53",
+    "tests/test_dialogue_process.py": "8b5281c7431a5eea6bd33be932283686fa053fef56ff63b2bffead9e5568e3c2",
+    "tests/dialogue_process_fixture.py": "dc94a26a2c8c690ab8df4a9fd9cb313e346576aa05dc8248600c333b8431259f",
+    "tools/check_conversation_lanes.py": "087beeca0a18637439b6432eae40a545ae221a42ed942d6e0c501f0a56d0d328",
+    "tests/test_semantic_candidates.py": "8ad0f9042d1edf20d47a272a43f04aba0b9ca06d8931611332311e43d6f9e04b",
+    "tests/test_skills.py": "b53fb453a46c2fa443516a306d1a2bc3843839ffaa1ab697b6e6f2c24f32a43d",
+    "tests/test_rea_explanation.py": "a83546ed255e29267d3a6c9c262be1a0a0483db8bf5fb395680ce1a6e5154e62",
+    "runtime/node-host/jarvis_core/task_queue.py": "dc16c596b712fe3825d4e9980d0c21a4b21d7e01993bb4d554758797482960c6",
+    "adapters/computer-use/jarvis_computer/task_queue.py": "a9b810ab0d616d44b2024b8fb290a7716540605892a5cbf7d9539215b5ceea72"
+  },
+  "elapsed_seconds": 385.796,
+  "source_hash_note": "This run collected hashes on completion. REA explanatory instructions changed in another authorized task while tests ran; that later change requires its own current-source regression. The runner now records before/after hashes and rejects source drift.",
+  "loaded_rea_explanation_sha256": "6a312f64e59e14bc4d4cd056be086bbb6ea8d9b905e072c7cc7f6636069032c4",
+  "cleanup_pending": {
+    "reason": "Automatic approval rejected both recursive and explicit per-file PowerShell cleanup with blocked by policy. No further deletion attempted.",
+    "owned_test_directories": [
+      "C:/Users/samuel/AppData/Local/Temp/tmp8fnl_3lr",
+      "C:/Users/samuel/AppData/Local/Temp/tmpr9znmau1"
+    ]
+  }
+}

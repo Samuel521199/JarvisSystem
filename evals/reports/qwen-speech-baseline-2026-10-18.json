@@ -1,0 +1,20 @@
+{
+  "status": "SUCCEEDED",
+  "source_version": "0.1.43",
+  "observed_at": "2026-10-18T01:59:04.763035+00:00",
+  "command": "python -m unittest test_qwen_speech test_speech test_modules test_web test_local_model",
+  "tests_run": 63,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "scope": "Targeted primary TTS contracts/lifecycle and existing speech, module, HTTP, owned local inference regressions; no cloud calls. Native/browser evidence is separate.",
+  "source_sha256": {
+    "tests/test_qwen_speech.py": "2b34765682d2d558037ffa17179748cedb613a5e20306920f5c7722ddfe511ea",
+    "tests/test_speech.py": "0a2df20783b04e926e81aba18d377972603acefd74bdbd5e5dfe2fb294d00e61",
+    "tests/test_modules.py": "41a41b36a9876eca8a2da4ba60d73330c4836ca1b27232f1226a3a26a25ee35a",
+    "tests/test_web.py": "ac903e30558c15ebe009076a822f10718cfe821147ff3995785d6414bd6417ba",
+    "tests/test_local_model.py": "378b5576f49b4ecb58be4a0db9e430583e4f040b269627da475e0a4cf0a72758",
+    "runtime/node-host/jarvis_core/speech.py": "df339df40260e723f0402c51f1da34daf1cef6c6e34312d2f4a1099b7a019db9",
+    "runtime/node-host/jarvis_core/qwen_speech.py": "9a9b353ee3dcd7fb56a9aa9b40bb94d9ec0a2aa5168106bc0f51c385c6cbde11"
+  }
+}

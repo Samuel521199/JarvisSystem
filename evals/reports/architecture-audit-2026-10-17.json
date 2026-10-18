@@ -1,0 +1,537 @@
+{
+  "schema_version": 1,
+  "version": "0.1.37",
+  "status": "audited_with_open_findings",
+  "captured_at": "2026-10-17T08:58:16.571487+00:00",
+  "source_kind": "working_tree_with_uncommitted_and_untracked_files",
+  "scope": "Code audit and local checks; recommendations not implemented; no runtime configuration changes.",
+  "source_sha256": {
+    "adapters/computer-use/jarvis_computer/__init__.py": "b763f32a58f21aa3f698ee8ac6e72f256d7231600f933be2b966255c9c11ef69",
+    "adapters/computer-use/jarvis_computer/browser.py": "0bd040e7a8619345c6154e33559702725741b2f5e8faa1289c82ebe60a22d0d8",
+    "adapters/computer-use/jarvis_computer/planner.py": "5507b08638c6881885395d5d86f8f5504f29ed9168f6b1f8477d67ba202f1e1c",
+    "adapters/computer-use/jarvis_computer/protocol.py": "c64bffdc5e6af6a94597b0cb22ff56f29848f380af27aec00ad441f8d1a70e1d",
+    "adapters/computer-use/jarvis_computer/service.py": "be91da545e816dbd280b21b6ab57b94694554241208d41da9c1fa704eae85f25",
+    "adapters/computer-use/jarvis_computer/task_queue.py": "7fc8b4a783c7af3a642807946e3d1a792c5cb9adc24e025840cbcea224eb67d0",
+    "adapters/computer-use/jarvis_computer/web.py": "fcee133eec88c7a41b163355a2edea54b9c4f1b1bd8a6e022174ea24ea6a8505",
+    "adapters/models/provider-native/jarvis_models/__init__.py": "540da8307103109969366729f5a547c81bc88b269a7f723a476c1a753c856d6f",
+    "adapters/models/provider-native/jarvis_models/attachments.py": "2a04a5007ae7b527b8b2269bde00289def5977026df9fec5ff72cf6440b3ce22",
+    "adapters/models/provider-native/jarvis_models/billing.py": "7fbec8ceab7c44677be3f9cfda2236774c321f908756afee43412ea4e8a7ea79",
+    "adapters/models/provider-native/jarvis_models/catalog.py": "5950ec73e70469439c6075212bd5eaa9e798e2336b823b82825f10138c0282b0",
+    "adapters/models/provider-native/jarvis_models/gateway.py": "2f22caa9e05ddee928d3b12416766552c40d8a4cdc5068590986214d15f06da1",
+    "adapters/models/provider-native/jarvis_models/registry.py": "6453261f63f73184b1f60efbb3c902dd402ecc258693a94d3d425a05205de8d2",
+    "adapters/models/provider-native/jarvis_models/vault.py": "3d61692b5301561b8d2be4f1f1f827c5330b1991af457b84cfd306b544989200",
+    "adapters/skills/anatomy/lesson.js": "78640e67dee8963840bb57fb5b7b921b8d19268150c5ac27a3c1dc87c17ac156",
+    "adapters/skills/anatomy/render_worker.py": "19dd7f955e039ba94be66bfc0dd61b09662230f25cb20a4df28b2cabe1fc4ba1",
+    "apps/cli/main.py": "95bbb00a264356e1c85a7cff4364fd5baf499f55f5c5df3277d019ed1d4bbef4",
+    "apps/computer-use/demo.html": "a2d36bdc8322cec042851f8afc2a57d4857eb4e7a60eb371803ca12b776a8973",
+    "apps/computer-use/main.py": "b09a9a13051652991b788e68032209bdc4b6b9f2e6c2dd63bb7468f0c91dc741",
+    "apps/tray/companion.py": "8624fafa8c89dab1284a78e007d90b9de5ae19207f9f3f6416c9a5b5da66e083",
+    "apps/tray/launch.py": "de9f923fea57666a4a16ed145158153ba3e5cfba35b4a8c356db203ed3f21e02",
+    "apps/web/admin.css": "d280ad9ee1c41473dea3fe87f4dda93005afd53141b18c6b883e178d3965ed91",
+    "apps/web/admin.html": "c7551cff2b0ef4b2eb1fc9e87ba7009ff1232e295d20b241bd80e29d538b0d8d",
+    "apps/web/admin.js": "395c19eff2965cb765432a872a3a9498aea907c47a9a9548364e1f25108a81b1",
+    "apps/web/attachments.css": "6615ea896fe697a09e929ca3c8458178b1b2103f408e14a45442177eb555a2a3",
+    "apps/web/attachments.js": "0c9424d4bdd4732edf4a2712b1fa475e3f7ab9342b75c113adc3c18d0ecccea3",
+    "apps/web/brand/lifecycle.css": "3c8d7e784eb102f2f14d8dc63804eb62e44e1685030a68126fa612a1483eb2b7",
+    "apps/web/brand/lifecycle.js": "453394bcbbee8865d3664feba225d20c6073c3f0aeec16d285f83aaacd510813",
+    "apps/web/brand/logo.css": "349f2bf7b40aaa9cf54b275947afc2682df71153fdca0a19380f933dd4226675",
+    "apps/web/brand/logo.js": "3e9eeb750d88106637ecfe659db05e4571e4795202bda9a5c0eaf66f69ac2486",
+    "apps/web/brand/preview.css": "51f8ce20ace24fa534d2e0b9749be291571069121e5344a8142359ff20840956",
+    "apps/web/brand/preview.html": "35acc2a1d7aa8fdb0417a7681d00b8958f9a704d3317d1067cf1fcab252c015c",
+    "apps/web/brand/preview.js": "c007de010ecd0da1281429af794bc526367ae113e92d5647029c06b42388c577",
+    "apps/web/brand/sound.js": "570aedd63cf5fb7fff439a098f3595bbc322b79a624dc2278ddf72a1dfce93f3",
+    "apps/web/computer.js": "1077d04743205e8fd2e5844851d1cc3e0ba182ca1b8608c837184d89bc305e0c",
+    "apps/web/context.css": "122ea231c87026eda3d1384c277c1f9626955653d1efd4f6e1e53abd103c5b6f",
+    "apps/web/context.js": "90cbf50e5410241e946d5d5aa8a7feb1dac4125bd8e8006abcc30449a822535a",
+    "apps/web/conversation_tasks.css": "5f6552d3d2f2bfa7699de084b0877b97868a8bc5f17e08c966f430fe26871fb3",
+    "apps/web/conversation_tasks.js": "33afd2c70793d393a7e6e3bedd8eef031b73024a802f13ab66a7e908cb389acd",
+    "apps/web/conversations.js": "8744db6e14559dcdbd075c5b1ff07f4afc5657c79a3a9c701d8d752ef30eb4cf",
+    "apps/web/evolution.css": "98c4845ef2e3989c0b427916d2aed7bc985489f569376681b41677595eecc16b",
+    "apps/web/evolution.js": "f5828417c7eb25ceda2993588e7ebb24eee07a9495daf89e0bc6b017cc5cd726",
+    "apps/web/evolution_routes.py": "d24026b35f8eed9bdd40c011f9485e3e7a91aa76db17d100bb15ccdaecbfd844",
+    "apps/web/explorer.css": "1613fa7ff9d11ff2f7b6e95cdc2d2be955002a17c806436078c584e6ebea2831",
+    "apps/web/explorer.js": "9a953df56b64255e22f833cc84a94045c2788e078857915321f6d012edef1ffd",
+    "apps/web/extensions.css": "444ac5abe99165446fa0efbe796c85a1fccaeed54a7daf0095ea786831a1b762",
+    "apps/web/extensions.js": "636cc5eca956872a49201652894dcce80ac5456bd83654d81f0b770df085594f",
+    "apps/web/index.html": "5d161824d82599424b7fbde65121a5f3bc11ee38eb08ee14e90d67d06001c188",
+    "apps/web/knowledge.css": "b9345e1e2ef008ab995eefbc002f277d296ad3a98db88c2c12a9c1478ec9d2b3",
+    "apps/web/knowledge.js": "eedf737d8f7205d6b178ebf3971c48c4f2199d6748c64f8210cb1ff32523e131",
+    "apps/web/mcp.css": "cd010bd65594cae3eb37a8635cd616725176121e6426b5cbaad54757787d5860",
+    "apps/web/mcp_manager.js": "a843bebe5363defcfd1790529f488c687d11c6640a9e9c07340af656ae1dc3f9",
+    "apps/web/memory.css": "1bfc2948cd42ee6b5201773554fa51181e383bc353e3574d31f75b7a753d56e3",
+    "apps/web/memory.js": "070c7215cb1d2ad50503c12685e09f16fe6818101a777433c6b4419287db3924",
+    "apps/web/modules.css": "272caf64eb90b3e63d1b4d1b62651bfe0978cc1ae488bfd3b22cd5a1c4be6c40",
+    "apps/web/modules.js": "cb445e4b19e65d2dfac449fb4c100073b9801e2044506326045a082722175dde",
+    "apps/web/project_menu.css": "23a03c138ecb8feb237a100880f91e145584f51ffbc8cc21f5a5a0053c7b62be",
+    "apps/web/project_menu.js": "f5296b544b70bd423fd6264e184e6ffd2cebc95cfed17541273f274758a4b06f",
+    "apps/web/resources.js": "55a0e0e5299c8f539d0e8551970b3ff7b01fa412e41417e812666f44b8c71e61",
+    "apps/web/server.py": "f089e174d42824ce79dcb70f25057684559820bbc5ca2012c7cf53012a4c6648",
+    "apps/web/skill_routes.py": "9b973aa3b2caefe0f6038fc43493daf66e819799ba4be332ea32567a0eba0062",
+    "apps/web/skills.css": "6a8525303ca4791469a9de5456360dba701ab2dd353e1436cc1a31b53014e098",
+    "apps/web/skills.js": "1ab6d3957324261f9d406cf576dbeb9deef23b80f5bd9ab690e15f3b64e9f197",
+    "apps/web/skills_manager.js": "c8744ae55a2d2d66311b88badc0022f13226fc788056f80a9e879224a9f30025",
+    "apps/web/theme.css": "8d11aed299c3f9c71e429bbf414793a4beec70bd09707c564477934bab1728ba",
+    "apps/web/theme.js": "689cfdfa7de8da5fb30450503840e1f21a5ab6f59f530c3c749375dec70011c2",
+    "apps/web/workbench.css": "4d7b2da0fd15fd282e1a34140f37bfa5a022a71cbeb1ada21475dc6e457f792d",
+    "apps/web/workbench.js": "bb21564c7424190d6aab6315714ab95ff262fa3b371fb3ab59b08ef17f07153b",
+    "apps/web/workspace.css": "83a2b3a4f40c6ca70b22a17331ec06f9ca5c72580bb403c612b0575bd2475c42",
+    "apps/web/workspace.js": "26fa2df9bd60d6ae9d5481f4c1bf5df29199fdf66a57e29fd29a11abce54365f",
+    "runtime/node-host/jarvis_core/__init__.py": "c87aad04d0728e15f6f56a4c05bf4d4b554b052acfeba15b4c858e6864b15fcf",
+    "runtime/node-host/jarvis_core/assistant_context.py": "61b9f42a800ba132493404a1649b3861be5a13c5027330d00d86452ef8b4f854",
+    "runtime/node-host/jarvis_core/browser_recovery.py": "c3923508c3daea35610beaee08de9f3531fe0330119a8609e07a234b03d18b58",
+    "runtime/node-host/jarvis_core/calculator.py": "a5f2ebcb5cbbc5146a5ded764495eff835ad7328e9666f1e953baa2b0632dc09",
+    "runtime/node-host/jarvis_core/chat.py": "aa428b37184b6bad1fd3c4b344b74401196fc17f7639ab271835cbdf3df04a2f",
+    "runtime/node-host/jarvis_core/context_assembly.py": "6ddcaa5a1be1c6e5bb2ba8fcb0eaae0b9d63a322a007b939c108160ad8ee66f9",
+    "runtime/node-host/jarvis_core/control.py": "67062072d97748fa83fad2d23637c231b542af4b16650568f17b6daec5e24389",
+    "runtime/node-host/jarvis_core/conversation_tasks.py": "ac2daa88b3450f13513770e2168a4241e1804141c395ff52cf8ab4a612e9a8f3",
+    "runtime/node-host/jarvis_core/conversations.py": "6438df04e92fac8902fd349c955dbcb9a9d919897945d27981dffe1fa4ba71d2",
+    "runtime/node-host/jarvis_core/evolution/__init__.py": "5b3e9dd8be5b53643223d3cf329620096742d3b586be0844a1eeed3ca75d537d",
+    "runtime/node-host/jarvis_core/evolution/manager.py": "8ffb35cb751e508460a1ec9bcd9210f0a66d5a4f669908c8a0c5c57c1c3c04f7",
+    "runtime/node-host/jarvis_core/evolution/provider.py": "97c22aaed90eae9435c36f94e3d842e7c2090f27aeedd2b6248e3aec3aed52be",
+    "runtime/node-host/jarvis_core/evolution/recipes.py": "11492699e4221f73630de61d092cdda2ad2b141a4ffbca3be20ae971c13c49c8",
+    "runtime/node-host/jarvis_core/evolution/runner.py": "c4e26f93a7eee48127307b52bbb84a32ecfac05ed87d64ddfb964cdc4a61a61d",
+    "runtime/node-host/jarvis_core/evolution/store.py": "62969a0c503c6476a76493528e0b21c5016edecf9c73e21bc9907f2da4736bae",
+    "runtime/node-host/jarvis_core/extensions.py": "ce6ea3a66ab9962e652226f5f3abd15d0cd5a8393749f4f8ef00db056bea4186",
+    "runtime/node-host/jarvis_core/knowledge.py": "6973e4f740e8858ab326cf6b2c8594138054a44fd7bb6ba4c76d5530ccf28838",
+    "runtime/node-host/jarvis_core/ledger.py": "e6b22280a808c6746775d28f0897c7900078864863f1d16f958e8c5b1ee6e8d1",
+    "runtime/node-host/jarvis_core/local_model.py": "f1231023e66ecb0350980f9f47fb155d79148e72cc17c0b2d4aac610b1bfe62d",
+    "runtime/node-host/jarvis_core/mcp_catalog.py": "0d2c8ac718bd8275133cd75c7e9fc5c9d7d37cbcec9670a599598b6dcd6c1213",
+    "runtime/node-host/jarvis_core/memory.py": "a89635a9664295242f843081572e05ec25929aa67ef85a6aaeafdb41c9c7d60e",
+    "runtime/node-host/jarvis_core/memory_view.py": "59966eed3a3ffe66f38c5b73c20922c0dbfac2e65b2ba072c31259722161c898",
+    "runtime/node-host/jarvis_core/modules.py": "3d3f396521111d298fd2d167ddb419d15efc0e6a3f0fe7923924f4cf98b83175",
+    "runtime/node-host/jarvis_core/policy.py": "1065143f3d1d6b0af63b002903241161b464199a3238755a9762b2a762d8106e",
+    "runtime/node-host/jarvis_core/preflight.py": "b91b9ea6562e286d74f63a2ef8865f1f2dcc4600f28dfdfe96005067302ccbb3",
+    "runtime/node-host/jarvis_core/process_usage.py": "5535a3303556a18d9219f615d58cd6d7fa620284ce2d728a03edeb5c4555fcf2",
+    "runtime/node-host/jarvis_core/project_catalog.py": "8c8c5f4f697493f4d5463b0dc3a1c3f038c03b3fea4629af6f674e84caf5328a",
+    "runtime/node-host/jarvis_core/project_files.py": "aa1e565ffd955db740db605a01acf5188a52809cb92d3e731b4a57e1cc3a5ff5",
+    "runtime/node-host/jarvis_core/releases.py": "5f120ff26e1a1a8ce79d27bda6f32db97d62559c6aa402990aa83cb1b6b5b40e",
+    "runtime/node-host/jarvis_core/resource_usage.py": "fd8d1422fdabd05ca4a86bfc3b755920dc33b2c10a8d2e625b91cd9f527d24a7",
+    "runtime/node-host/jarvis_core/resources.py": "b72fb4517a4aea93f1650c9433d0b9f893c328dad2e060fc135e4431403320b7",
+    "runtime/node-host/jarvis_core/runtime_catalog.py": "f1a785210c257f821638aeef8e501c6bb7fe7f468080b05e34b38135af6f4d9e",
+    "runtime/node-host/jarvis_core/runtime_metrics.py": "8f007a8ff2c50673de9fbfa9a9e65fa1db6e8750bfaa8c3946acfb71760bb6a4",
+    "runtime/node-host/jarvis_core/sample_tasks.py": "4a73154dff6fbb282da941bb3fd7f9fd464638d608b7b7d28f56559f8f305655",
+    "runtime/node-host/jarvis_core/service.py": "844fefcc5a498e954ffe0c13a02b827743ebef6b26b9dbfa8f0dc37ce8a9e6cf",
+    "runtime/node-host/jarvis_core/skill_renderer.py": "20fb0f6bf9be3ca63c6aabfa0254ec6d4b2b98f5222c030636ff591802e7ba81",
+    "runtime/node-host/jarvis_core/skill_tasks.py": "9fd7164d3e83543af19a800b2578bfa6f3f1a04f600bac68fad9d13d0ef03200",
+    "runtime/node-host/jarvis_core/skills.py": "560399995af51bab46197ba795caeb305b622a156fa7e3d96acc71544434119c",
+    "runtime/node-host/jarvis_core/task_queue.py": "1352f998417cd9d858309b5af1c2e9f0265b71a3a74ecfe1a4492ee4763afe6a",
+    "runtime/node-host/jarvis_core/worker.py": "9330cf53a54429a0108deeb5c06a24cfe9cea2daa987c1c7e23d6af8507ea5dd",
+    "runtime/node-host/jarvis_core/worker_recovery.py": "8f70b4ec46dc7a7bfa64f53166abf38fb252ab08a61f37b2c933bfa479e68a0b",
+    "runtime/node-host/jarvis_core/workspace.py": "436f3d59ce146bcd998790a0859e4d927ae6300b831ad5499aa245775707836e",
+    "runtime/recovery-cli/main.py": "8b6d698857c1194aa6dc7a3ee1c6ec20b3dad67072bcdf5b7f93fc4b00845710",
+    "runtime/sovereignty-supervisor/jarvis_safety/__init__.py": "93dac60d0585490eb7451c692b7d3aa1a88056d10b0c99570dae6bf5b61b686a",
+    "runtime/sovereignty-supervisor/jarvis_safety/store.py": "0c151bc124c5d720700738e263ae126df2a21c4338bd408d6c8edf918246b931",
+    "runtime/worker-host/jarvis_worker/__init__.py": "4b651d6ced11629e967682d8f43b2ec2005662feb033b0b36f4176ebfca8bb64",
+    "runtime/worker-host/jarvis_worker/windows.py": "14e9239ca70140b4d8e97559cefa1a1cd53269b2b59f0b4b087360f6de3f6df5",
+    "runtime/worker-host/worker.py": "8ffd5d7dec1ea14b6f74bf2b1eef9f066424f1d86c1074d779b5f894dcdabe13",
+    "config/computer-use/demo-task.json": "cd32f9c8f05b47def3450f6cce8ebf64be0ae64426d5431e9cc1932d94e41132",
+    "config/eval-policy.json": "8aba91cb13da2ae97145d4347c07e83a0d65e9b18752537eda3ad323cef4dfdf",
+    "config/mcp/catalog.json": "3cb66799be4d6e4d3fdff8dac1b0f75668537aac4a4ed61c43250d8ba2e67591",
+    "config/model-profiles/local-candidates.json": "8c453597ff55573955798f9be504ff479d356967ed5a4ce820178b761d4ed5df",
+    "config/model-profiles/providers.json": "b66e34e1b09f39c7390b10f38cbcd783981d5ad4f1b23965994b43477c046bd0",
+    "config/resource-profile.json": "f1de9640148d221200d72fcb8adae0886d48e4bcee5aeff72c45a3c6ab613934",
+    "config/runtime-boundaries.json": "e1d7b6d5f72cc2fa81c2d70a8fe586bb018494c8cd9464b07946e34ac7931982",
+    "config/skills/catalog.json": "96980fd1e225d3f03b00f36f253462af6035f10ebac60cd337f7032d650e613c",
+    "config/skills/runtime.json": "6038de0fbaf2f1d9b5331a983159b4b1b04d1702ef359d337f726ae05919b470",
+    "config/worker-profile.json": "10580123e6a84a0b68318a9732b396982978e68e75a25b792935e5c79283ec2b",
+    "contracts/schemas/action.schema.json": "e1b4b61aee7f78970fc88d2c343fe0f5e6b771706eff3b71e1b60d032ca40393",
+    "contracts/schemas/artifact.schema.json": "f097532556e7072e6d914fea345e7e7de77d949c443d1b5daacef7dbc4c10149",
+    "contracts/schemas/build-profile.schema.json": "4e169c2a0c420ce74e2878804bb9585fe2fb8ff527ce7ce68c97578a2d33798e",
+    "contracts/schemas/calculation.schema.json": "fe819d13eb54a196e120dabcc10d374789f3776e193da07ae201a31a0187ce1a",
+    "contracts/schemas/capability.schema.json": "8f60fa34be14175342c93a7707ea91a84afe38382ef98fa2456fe01ef6fb2c05",
+    "contracts/schemas/computer-action.schema.json": "7be78d0dc8fa3d2eb605fa424cf2707123c12b53d3d119e0c9b23fc915c8a93a",
+    "contracts/schemas/computer-task.schema.json": "0e0d0612a5d45457f5972826d26117c30f644fe24e13362f2f437babf5645b66",
+    "contracts/schemas/context-report.schema.json": "68e0cb45a07c6fa7edce182bb71d56ab777861dbd9d4df2274918b3b72b0ee90",
+    "contracts/schemas/mcp-catalog.schema.json": "092889d698cbf99096f672e8916ed68bbea0b693434f10149b087942bce5cbfe",
+    "contracts/schemas/memory-fact.schema.json": "320870fd22b42a3d62299fd26edf1de70d799c1ffdfbc3d92e21041fce1edc2c",
+    "contracts/schemas/model-admin.schema.json": "88d36cc22badc13143bbfcd2c62f02aeb7e656d3c8adc7dd7e4820113f3b1474",
+    "contracts/schemas/module.schema.json": "7d98541de6ade3ae6a3d6fa04a7e4ecfe281efe9a5b3419b4abd406c1fe27233",
+    "contracts/schemas/native-skills.schema.json": "2ceb647a55f925182041cd4c5fd58cf084c3bf4b6dc382f7c8f62383583fc8e8",
+    "contracts/schemas/preflight.schema.json": "f3f55ea39ce07acfc867fa15e7ecd00465e49773f95c30c133962273700be6ce",
+    "contracts/schemas/project-knowledge.schema.json": "2d545b8b887944f281249860f0abe4c391d1d7e1f55e37f356d0469aff39fd74",
+    "contracts/schemas/recovery.schema.json": "2e53bfd99933679d76c0146cc2f5745b9b13a221771b77e2e683386b3ccd86c1",
+    "contracts/schemas/sample-plan.schema.json": "c2c833261fbf9c66e57b9a395ed3cd495c475ca3f14b2da3184dd07227f3cecd",
+    "contracts/schemas/skill-report.schema.json": "1835ae883cae760ce1c8e045e6a5930e1c6ac65209a7726129bfe62f96a56f5c",
+    "contracts/schemas/task.schema.json": "227cbb75a62797a7310c622a63155bcb5e45495ffbc578cb76e11ccda81e35d2",
+    "seed/knowledge/bootstrap.json": "be89ee9b849ea35a774637ffdb9b8945195b03293c38a84a542a9b8fa9efe7e3",
+    "seed/rules/baseline.json": "00f2178f677ef3c2ed8b449cfe1ab20437bcecc1a000ed68f7bcd54c4c2a94aa",
+    "seed/skills/catalog.json": "f852b36838a2f1d36677305e1bfa52748c9d70cab9b9030fed8991da92d9a12d",
+    "seed/system-manifest/seed-bundle.json": "45a267b0ddf8068390049fd29b8e81ec0d2e466cc7780a2194285906d7c85bd7",
+    "tests/fixtures/contracts/action.invalid.json": "a7aff363f89503a9a7506356ed07207df3416b5657e0eb686e8633424c6ee323",
+    "tests/fixtures/contracts/action.valid.json": "4474dca86ef23d43fa0a1071b399e9af9f82db20bffeb6817ab867f746f3cb4b",
+    "tests/fixtures/contracts/artifact.invalid.json": "9f424ceb5011f1faaa030ceecefea174321d748323fb180271919fa9e5f1922c",
+    "tests/fixtures/contracts/artifact.valid.json": "95dfd2ac0f1419ba80b4c1bd16265cd70c55e829cb4cb7df337a5eeccd2f06c1",
+    "tests/fixtures/contracts/build-profile.invalid.json": "c7ed12d0e46d397384dd941de09dcf31cdcacd8b1e2f6e440c487caa8386e3a7",
+    "tests/fixtures/contracts/build-profile.valid.json": "44ee77da1505a6d20b35dc36677076f06ad7e05785fb2303347e598d5c70fca0",
+    "tests/fixtures/contracts/capability.invalid.json": "c37f2bf090f5dc3a5f4df3897478675a647664b7fb68819b8f53987c9604df65",
+    "tests/fixtures/contracts/capability.valid.json": "ae8c2fc5861d03f523957452a3cbc06846c6964e088101a3546662230b38766f",
+    "tests/fixtures/contracts/cases.json": "2f8167f5fba18a24078411c61b2f45c086dc76a4ae28adb61ede3f68cfe14a5e",
+    "tests/fixtures/contracts/module.invalid.json": "6003549dbdb51ce9a9d5ae484c4b35c549c0228236ba996e283af7fa5d8750d5",
+    "tests/fixtures/contracts/module.valid.json": "4014ba0c3d8237219b72a0fcb4e52d19fc3c47639e4d56ad7abe3819b3570758",
+    "tests/fixtures/contracts/task.invalid.json": "4ed36b65d978abb8c7acb6e67b353cc74c776274749298441aa73748a574d173",
+    "tests/fixtures/contracts/task.valid.json": "abb99190b9ae587bb9d9c7a8847f23e830e22e1b0745f5bbe6a59a77d70a7c76",
+    "tests/fixtures/preflight/invalid.json": "2a5c7f50c7d4cb51c8be2d51d4a5acb852eff0cfe0b3730f346aaab1d05309b8",
+    "tests/fixtures/preflight/valid.json": "2a3db04cd4a6c8c3029b7b2fefd289e2f658954917cab47b99346083e01030e7",
+    "tests/test_assistant_readiness.py": "38e9ee0860f5c8574cc20940c85534aed97e4c1c931fd8a36659985cb62e24c7",
+    "tests/test_attachments.py": "eb4cd94bb055c4cf1e184e50096a061c7076f9b8e095092539a0b96c6696359a",
+    "tests/test_browser_recovery.py": "9e49e546d6ac4e18694fb5e182977c154632ffc1b2185f26053f1a0f564a0395",
+    "tests/test_calculator.py": "7902da5e19a3ea7191f33f24a9fbfd6154dd80ab84c1c7873d75816c5d1d92f6",
+    "tests/test_chat.py": "c1d324ec97aa755654c3c7060ec80d06a9bd714528448b170cadc6a5ff83c9a5",
+    "tests/test_computer.py": "5626a4d7df1c1dbf7d147d9438e4e5af664c56b2a5c184f53df6a264b67611d7",
+    "tests/test_computer_queue.py": "c9c143307d32bfbedb240667627ea1fd717d1c6fe41dc110bdd42f9c880db92e",
+    "tests/test_computer_web.py": "3a85b4bf7a718138a5c2fadf0c1092bc0c637d9cac781cf0e8f86adb55da0cbc",
+    "tests/test_context_assembly.py": "6bc245cfa3706dc3d8cd313d46471f16135df9e9581add321f8d05f8bf89cc73",
+    "tests/test_control.py": "61588c9aed7b1ae9c1b3f6735eb67b03e650d588211fc17a75b4eaf510275986",
+    "tests/test_conversation_tasks.py": "d05ba089767533c7d0ac5897642287db97664a93229eac4a06064f1ce17e8939",
+    "tests/test_conversations.py": "bed11b21bad2e31fd33404f1c7bcc09ead0efa5ec312ce05e56ad6e45fa8674f",
+    "tests/test_core.py": "320f6d3e8fcdacc988fbc34c9302e4ff12a29e33a512db6982ef26e03883165a",
+    "tests/test_diagnostics.py": "6cc41aa7473c20b7e7c9a86672be9317b1843469abea462d66323cdce4540d5b",
+    "tests/test_doc_navigation.py": "4ae73687e8c1c875b657c51ba85e894e91ea7705974876abfc41d964d60d4bff",
+    "tests/test_evolution.py": "828bf682d5de357c5f915c3d822ba682ec2a66a8106d2343cd984f530056ba73",
+    "tests/test_idle_resources.py": "42dcf58b34c8562e02f256c8ade8d035437a15ed34514c62a7b0d1efe4b0213d",
+    "tests/test_knowledge.py": "079a8aa76f8a592c3b6de146957fbdf245f21e84d0a8a4090e4dd971e1fd273f",
+    "tests/test_local_model.py": "378b5576f49b4ecb58be4a0db9e430583e4f040b269627da475e0a4cf0a72758",
+    "tests/test_mcp_catalog.py": "fea629cfb22577b4f387f22cf7fd4e2713b3675c7a0373a4542b59674c5f417b",
+    "tests/test_memory.py": "42bafcbace49323c360e0d0b799b0b09a755cd415631893033ebaf78baf0965c",
+    "tests/test_memory_view.py": "293ef17c8042dbeef1ba34606af624eb9130e64b5e5ddfcec5912a835e6ba6ae",
+    "tests/test_model_admin.py": "50f3f21cf408c8a671f2b92cacc683a01e57d2a44b7da7f9dffa451cd6683795",
+    "tests/test_model_catalog.py": "d2d438cd7d1cd312b93da780ba5e55899a52fabc367741c1f0604b4aa04f57ae",
+    "tests/test_models.py": "4bad4a254fea15566aa6fa5587ebd5c20fcb5b421dd50ebb03935961a67e5e82",
+    "tests/test_modules.py": "ae9213c31554717a952e334d51f8aec8e19ea2d4fd7e914ac0971b7e878ac338",
+    "tests/test_preflight.py": "9b4b556df4187b29599b80f773934b0f200b86d002a02756710a2715494cc2c6",
+    "tests/test_project_catalog.py": "3bf3625bf2f0ea9f350dd358cdff57dd7b3b157fea3bae2d97d11efd17a2981e",
+    "tests/test_project_resources.py": "15e7da2005fc4a69806e966d8689b216a9a49ffaa43b85efaddf2faad98a8dc5",
+    "tests/test_release_bundle.py": "77b049cb8360094f49e5f85e042f8144603e16207f3cbacf646349dc5042399d",
+    "tests/test_resource_usage.py": "f567dc211e3024ae8acb1435a035983b7da1687180683b49f6a42fae7fdf50f9",
+    "tests/test_resources.py": "41104fe0eda5c0d35646f66385e2106657f1245e53e96ddc7359c07575be37ae",
+    "tests/test_runtime_catalog.py": "fcb8e2603e4c0959bcb6668cfec566561631fee43fd2903e5a730ec0a6cfbca4",
+    "tests/test_runtime_metrics.py": "d514bedf1b82ffaf43d1140049065ed13219a073c969f5e802ca623e170cb893",
+    "tests/test_runtime_releases.py": "8954e72a49f71e2e2087f6a3c4f86086cb140c5da47a9611fb7e364184082fed",
+    "tests/test_runtime_start.py": "16fbf0e35cc200f202dfddbcab47fa523fcc70866691e4bb4baea5f1b9e3ffb1",
+    "tests/test_sample_tasks.py": "f312b9a26ce55f46a39fbf75e921d01638f4d8eb9d9bca108744a624950bd105",
+    "tests/test_seed.py": "cff5748ace20be320c0fffa55bad4f38abb13637ed467bf5433bfc5f3e2a525c",
+    "tests/test_skills.py": "298d23dcb468abfb3427fceffad7727fe35602d62d33054c17390a2ed87b5eeb",
+    "tests/test_task_faults.py": "7989f334dc90623364998a8881cace1134f2fdc0d294f5500868485828e924fe",
+    "tests/test_task_queue.py": "5be3c73247919c4d927a98304741892d953375d5e0b7943f54da113c25120ecd",
+    "tests/test_tray.py": "61dac8b005cadb7b4500950f94b4ba69db2af18992abf5f195e588d6c3e97914",
+    "tests/test_web.py": "f5eefb4f9484ac4204805d19660463a0a7721d52ffb1fe9b765a97f1073b88de",
+    "tests/test_worker.py": "b77a7568087e346427f75b7611c5ffed251e3fca76fb9d7b5d3af43e4bc06d86",
+    "tests/test_worker_recovery.py": "536dd252a48e8f7867441be60f6d4de3e5dd3fcd744fc61967e97ced67807840",
+    "tests/test_workspace.py": "8c40a91013b78c66882e238a71a554afb53c0b7d036b3d212c95119fd3d1df90",
+    "pyproject.toml": "b41f4ababde5d5323f58959b088e9c553df9076a00fd2e3eda2663afd6ac93de",
+    "uv.lock": "20e5f9917521e4e7184003a9a9cba032058307e6eabfaa15f5e674eae62e4c94"
+  },
+  "source_snapshot_sha256": "d7c55e17df95d4aef0d8e8773388ba06e82dcb2ce94700ea73569d5f133b8870",
+  "inventory": {
+    "runtime_source_files": 118,
+    "runtime_physical_lines": 14607,
+    "test_modules": 46
+  },
+  "tests": {
+    "command": "python -X utf8 -B -m unittest discover -s tests -v",
+    "exit_code": 0,
+    "seconds": 222.698,
+    "captured_at": "2026-10-17T08:50:49.531236+00:00",
+    "log": "H:\\JarvisData\\evals\\architecture-audit-20261017\\unittest.txt",
+    "tail": [
+      "test_root_default_nested_and_explicit_absolute_paths (test_workspace.WorkspaceTests.test_root_default_nested_and_explicit_absolute_paths) ... ok",
+      "test_stop_after_prepare_prevents_write_and_preserves_control (test_workspace.WorkspaceTests.test_stop_after_prepare_prevents_write_and_preserves_control) ... ok",
+      "test_unknown_write_is_not_replayed (test_workspace.WorkspaceTests.test_unknown_write_is_not_replayed) ... ok",
+      "",
+      "----------------------------------------------------------------------",
+      "Ran 523 tests in 222.226s",
+      "",
+      "OK (skipped=2)"
+    ],
+    "total": 523,
+    "passed": 521,
+    "skipped": 2,
+    "failed": 0,
+    "unittest_seconds": 222.226,
+    "log_sha256": "67a7cf0acd5ae91712d7c8423381e5a8d2ff712ba7307888731bd1c2d592ca71",
+    "skipped_cases": [
+      "test_core.CoreTests.test_symlink_is_rejected",
+      "test_workspace.WorkspaceTests.test_linked_output_component_is_denied"
+    ],
+    "skip_reason": "Windows symlink creation privilege unavailable; skipped cases are not passes."
+  },
+  "static_dependencies": {
+    "scope": "AST static imports including function-local imports; no claim all are eager import failures",
+    "modules": 42,
+    "cycles": [
+      [
+        "jarvis_core.extensions",
+        "jarvis_core.mcp_catalog"
+      ],
+      [
+        "jarvis_core.knowledge",
+        "jarvis_core.memory",
+        "jarvis_core.memory_view"
+      ]
+    ],
+    "highest_fan_out": [
+      [
+        "jarvis_core.chat",
+        9
+      ],
+      [
+        "jarvis_core.skill_tasks",
+        8
+      ],
+      [
+        "jarvis_core.task_queue",
+        7
+      ],
+      [
+        "jarvis_core.evolution.manager",
+        7
+      ],
+      [
+        "jarvis_core.modules",
+        6
+      ],
+      [
+        "jarvis_core.extensions",
+        4
+      ]
+    ]
+  },
+  "fault_probes": [
+    {
+      "case": "baseline_http_host_constructs",
+      "result": "passed"
+    },
+    {
+      "case": "missing_evolution.css",
+      "result": "entire_host_startup_failed",
+      "fixture": "mock file read only; no production file changed"
+    },
+    {
+      "case": "missing_logo.js",
+      "result": "entire_host_startup_failed",
+      "fixture": "mock file read only; no production file changed"
+    }
+  ],
+  "fault_probe_reproduction": "Construct tests/test_web.py web.LocalChatServer with FakeCore/FakeChat on port 0. Baseline closes normally. Patch Path.read_bytes to raise FileNotFoundError only for evolution.css, then only for logo.js; both abort construction. No source files deleted.",
+  "live_observation": {
+    "18181": {
+      "reachable": true,
+      "title": "Jarvis · 本机工作台",
+      "status": {
+        "app": "Jarvis",
+        "version": "0.1.37",
+        "instance_id": "16a99cb06facdff81d2fddedbd33580e",
+        "web_online": true,
+        "core_ready": true,
+        "stopped": false,
+        "assistant_state": "standby",
+        "active_tasks": 0,
+        "text_only": false,
+        "chat_text_only": true,
+        "computer_tasks": true,
+        "max_parallel_requests": 2,
+        "active_chat_requests": 0
+      },
+      "resources": {
+        "scope": "machine",
+        "sampled_at": null,
+        "cpu_percent": null,
+        "memory": null,
+        "gpu_percent": null,
+        "adapters": [],
+        "refreshing": true,
+        "stale": true,
+        "age_seconds": null,
+        "runtime": {
+          "scope": "host_lifetime",
+          "started_at": "2026-10-17T08:11:41.214069+00:00",
+          "uptime_seconds": 2252.95,
+          "sample_capacity": 200,
+          "counters": {},
+          "overlap_seconds": 0.0,
+          "lanes": {
+            "chat": {
+              "active": 0,
+              "oldest_active_ms": 0,
+              "duration": {
+                "samples": 0,
+                "p50_ms": null,
+                "p95_ms": null,
+                "max_ms": null
+              },
+              "queue_wait": {
+                "samples": 0,
+                "p50_ms": null,
+                "p95_ms": null,
+                "max_ms": null
+              },
+              "outcomes": {}
+            },
+            "task": {
+              "active": 0,
+              "oldest_active_ms": 0,
+              "duration": {
+                "samples": 0,
+                "p50_ms": null,
+                "p95_ms": null,
+                "max_ms": null
+              },
+              "queue_wait": {
+                "samples": 0,
+                "p50_ms": null,
+                "p95_ms": null,
+                "max_ms": null
+              },
+              "outcomes": {}
+            }
+          },
+          "limits": {
+            "chat_slots": 2,
+            "task_slots": 1
+          },
+          "queue": {
+            "paused": true,
+            "owned": true,
+            "waiting": 0,
+            "capacity": 20,
+            "error": "restart_review",
+            "resources": {
+              "waiting": false,
+              "reason": null,
+              "sample": null
+            },
+            "running": 0,
+            "unreviewed_unknown": false
+          }
+        }
+      },
+      "evolution": {
+        "feature": "evolution-v1",
+        "busy": false,
+        "settings": {
+          "enabled": true,
+          "interval_seconds": 300,
+          "route": "vertex::gemini-3.1-pro-preview",
+          "target_revision": 2
+        },
+        "selection": {
+          "singleton": 1,
+          "active": "73080f48a7e3a1e89d8a6097303006154bc806db1b5e7f58803191274ef83a39",
+          "previous": null,
+          "generation": 1
+        },
+        "last_check": "2026-10-17T08:47:00.425842+00:00",
+        "monitor_error": null
+      }
+    },
+    "52528": {
+      "reachable": true,
+      "title": "Jarvis · 成长中心设计预览"
+    }
+  },
+  "resource_sample": {
+    "sampled_at": "2026-10-17T08:49:14.647189+00:00",
+    "stale": true,
+    "age_seconds": 25.7,
+    "processes": [
+      {
+        "name": "host",
+        "status": "available",
+        "cpu_percent": 1.83,
+        "working_set_bytes": 56680448,
+        "private_bytes": 40050688
+      }
+    ],
+    "memory": {
+      "used_bytes": 19888697344,
+      "total_bytes": 132766306304,
+      "percent": 15.0
+    },
+    "cpu_percent": 8.2
+  },
+  "scores": {
+    "method": "Engineering judgement, not measured intelligence or schedule progress. Full rationale in decisions-review.md.",
+    "dimensions": [
+      {
+        "id": "pc",
+        "weight_percent": 10,
+        "score_of_10": 8
+      },
+      {
+        "id": "modularity",
+        "weight_percent": 15,
+        "score_of_10": 6
+      },
+      {
+        "id": "models",
+        "weight_percent": 10,
+        "score_of_10": 7.5
+      },
+      {
+        "id": "tasks",
+        "weight_percent": 10,
+        "score_of_10": 6.5
+      },
+      {
+        "id": "memory",
+        "weight_percent": 10,
+        "score_of_10": 5.5
+      },
+      {
+        "id": "growth",
+        "weight_percent": 10,
+        "score_of_10": 5.5
+      },
+      {
+        "id": "reliability",
+        "weight_percent": 10,
+        "score_of_10": 6.5
+      },
+      {
+        "id": "current_boundary",
+        "weight_percent": 5,
+        "score_of_10": 6.5
+      },
+      {
+        "id": "ux",
+        "weight_percent": 5,
+        "score_of_10": 6
+      },
+      {
+        "id": "tests",
+        "weight_percent": 10,
+        "score_of_10": 7.5
+      },
+      {
+        "id": "docs",
+        "weight_percent": 5,
+        "score_of_10": 7
+      }
+    ],
+    "weighted_of_100": 65.75,
+    "vision_coverage_of_100": 27.25
+  },
+  "not_verified": [
+    "24-hour stability and whole process-tree footprint",
+    "8/16 GB target PC performance",
+    "all live provider availability/balances",
+    "loaded process bytes equal audited tree",
+    "whole-machine offline start",
+    "multi-node sync and reconciliation",
+    "general self-code changes and net benefit",
+    "universal owner-interest semantic guarantees"
+  ],
+  "new_paid_model_calls": 0,
+  "sources_reviewed": [
+    "https://www.sqlite.org/whentouse.html",
+    "https://docs.langchain.com/oss/python/langgraph/persistence",
+    "https://martinfowler.com/bliki/MonolithFirst.html",
+    "https://www.erlang.org/doc/system/sup_princ.html"
+  ],
+  "documentation_checks": {
+    "navigation": "Updated navigation in 0 files after synchronization",
+    "check_docs": "OK documents=23 diagrams=20 artifacts=40 errors=0",
+    "new_diagram": "pc-runtime-convergence; rendered from Mermaid and visually inspected; design only",
+    "audited_source_unchanged_after_docs": true
+  }
+}

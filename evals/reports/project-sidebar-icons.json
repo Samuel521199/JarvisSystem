@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-16",
+  "version": "0.1.27 integrated source",
+  "scope": "Project conversation hierarchy and icon-only top-right toolbar",
+  "status": "implemented and verified in isolated browser and live 0.1.27",
+  "automated": {
+    "web_and_conversation_tests": 31,
+    "result": "passed",
+    "javascript_syntax": "workspace.js, brand/sound.js and inline script passed"
+  },
+  "browser_checks": [
+    "Project folders contain their own archived conversations and selected current row exactly once",
+    "Restoring another conversation and returning preserves the unsent draft",
+    "Folder disclosure collapses/expands without creating a conversation; non-active folder collapse persists after reload",
+    "Project plus opens a blank chat under that project, expands the folder and keeps its root",
+    "Running current chat has a spinner and stop button; stopping returns to standby without stopping the assistant",
+    "Saved and temporary conversation management retain SVG icons and accessible state labels",
+    "Sound on/off updates tooltip and aria-pressed while preserving SVG",
+    "Leave and settings explanations visible on keyboard focus",
+    "At 390px, all seven icons stay in viewport and document scrollWidth equals innerWidth",
+    "Archived conversation reload restores messages and grouping"
+  ],
+  "paid_model_calls": 0,
+  "data": "Isolated temporary CoreService and synthetic replies; no production conversation writes",
+  "screenshots": [
+    "artifacts/diagnostics/project-tree-fixture-2026-10-16.png",
+    "artifacts/diagnostics/project-tree-icons-2026-10-16.png"
+  ],
+  "limitations": [
+    "Existing single active browser chat limit remains; no multi-session background generation added",
+    "Updated optional Playwright probe selectors but did not run those scripts in this turn; browser checks used CUA",
+    "No full K-stage re-acceptance or standalone release bundle rebuild"
+  ],
+  "live": {
+    "url": "http://127.0.0.1:18181/",
+    "version": "0.1.27",
+    "core_ready": true,
+    "state": "standby",
+    "idle_restart": true,
+    "data_directory_unchanged": true,
+    "checks": [
+      "Existing project root H:/Jarvis shown under folder heading with current chat nested",
+      "Standalone archived conversation remains accessible in its separate group",
+      "All seven top-right items are icon-only and settings is last",
+      "Live 390px leave tooltip and conversation menu remain inside viewport"
+    ]
+  },
+  "documentation_check": "23 documents, 19 diagrams, 38 artifacts, 0 errors; navigation current"
+}

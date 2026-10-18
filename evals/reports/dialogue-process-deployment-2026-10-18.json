@@ -1,0 +1,113 @@
+{
+  "status": "SUCCEEDED",
+  "source_version": "0.1.52",
+  "reload": {
+    "status": "SUCCEEDED",
+    "source_version": "0.1.52",
+    "data_dir": "C:\\Users\\samuel\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\Jarvis\\data",
+    "previous_version": "0.1.50",
+    "previous_instance": "ad9b13c23bc5b22b2f1ca2edfb6ba699",
+    "current_instance": "9aaf31db49e351de46bab6db3eb53fd9",
+    "idle_graceful_reload": true,
+    "served_sha256": {
+      "dialogue.js": "0f475c8691b403eb3aa705fbf5d50e3bffe1da244bb2f026e0dddeb54b45be68",
+      "resources.js": "3022c9799550f65a360fc3498a1b1033efe609cf8938bab1740f3b2700465033",
+      "workspace.js": "8f5a1bd76ba701c36eabae00758ada7181460715d68d6d2479635508287c4a57",
+      "conversation_tasks.js": "29ed0589b8b4133d5aee841e6ece26e26222a796a6305d8abae36e421c2f57e7"
+    },
+    "calculation": "84",
+    "personal_read_only": true,
+    "duplicate_did_not_repeat_calculation": true,
+    "cancel_before_submit": true,
+    "restart_fence": true,
+    "empty_restart_queue_reviewed_and_resumed": true,
+    "admission_ms": 33.414,
+    "backups": {
+      "/api/speech/fast": "stopped",
+      "/api/speech": "stopped"
+    },
+    "cloud_calls": 0,
+    "limits": "One local calculator and personal-settings query; no paid model, microphone, task replay, persistent dialogue recovery or physical voice timing."
+  },
+  "cloud_calls": 1,
+  "provider": "vertex",
+  "model": "gemini-3.8-flash",
+  "usage": {
+    "promptTokenCount": 209,
+    "candidatesTokenCount": 3,
+    "totalTokenCount": 212
+  },
+  "billing": {
+    "basis": "estimated",
+    "amount": 0.000168,
+    "currency": "USD",
+    "tokens": {
+      "input": 209,
+      "output": 3,
+      "cache_read": 0,
+      "cache_write": 0,
+      "total": 212,
+      "reasoning": 0
+    },
+    "price": {
+      "input": 0.75,
+      "output": 3.75,
+      "cache_read": 0.075,
+      "cache_write": null,
+      "max_input_tokens": 1000000,
+      "currency": "USD",
+      "fee_percent": 0,
+      "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+      "checked_at": "2026-10-16",
+      "valid_until": "2026-12-31"
+    },
+    "reason": "token_rates"
+  },
+  "reply_elapsed_seconds": 4.084,
+  "temporary": true,
+  "observed_process": {
+    "enabled": true,
+    "closed": false,
+    "capacity": 2,
+    "active": 1,
+    "memory_limit_bytes": 402653184,
+    "completed": 0,
+    "last": null,
+    "processes": [
+      {
+        "pid": 51832,
+        "seconds": 3.78,
+        "phase": "waiting",
+        "created": 134367782913809127,
+        "cpu_seconds": 0.75,
+        "working_set_bytes": 62832640,
+        "private_bytes": 46444544,
+        "status": "available"
+      }
+    ]
+  },
+  "idle_after": {
+    "enabled": true,
+    "closed": false,
+    "capacity": 2,
+    "active": 0,
+    "memory_limit_bytes": 402653184,
+    "completed": 1,
+    "last": {
+      "reason": "succeeded",
+      "seconds": 3.954
+    },
+    "processes": []
+  },
+  "text_length": 5,
+  "limits": "One real temporary text request, no task or personal write; cold-call overhead and provider latency are not separated.",
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/dialogue_process.py": "5aeae40ecab172040cd4ebcd1d489f8b9394402d4083d38ba37b01e3bb86f1a0",
+    "runtime/node-host/jarvis_core/dialogue_worker.py": "bcc35c4c25f6e7be9811a94aea555d86254eb2ab6f0e7c1b09f6e7ab205e5af9",
+    "runtime/node-host/jarvis_core/chat.py": "aad2e98cd72077f532fab61503070bbdb80f21d34d6976f609bcb2b27cb4c72f",
+    "runtime/node-host/jarvis_core/turns.py": "a4a71a82460f7cbc51f4bb32d49d8de2b8e35cabf2f20066b493cbcc93d1dcb5",
+    "apps/web/server.py": "9644494020e60179b6fffc99a62e75c848bae293bab930e36ccb6e09fc3ae195",
+    "apps/web/resources.js": "3022c9799550f65a360fc3498a1b1033efe609cf8938bab1740f3b2700465033",
+    "tools/probe_dialogue_process_deployment.py": "fb4e00d66f9c5267b58012d3b7b644dfe7b819470a680fbfe24e86e37e4eb300"
+  }
+}

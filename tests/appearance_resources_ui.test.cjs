@@ -61,26 +61,32 @@ test('cross-tab storage updates selection; blocked storage still allows switchin
 });
 
 function resources() {
-  const events={},windowEvents={},timers=new Map(),calls=[],home={hidden:true},doc={hidden:false};
-  const ids={'home-view':home,'resource-usage':{},'resource-updated':{}};
+  const events={},windowEvents={},timers=new Map(),calls=[],doc={hidden:false};
+  const view=id=>({id,hidden:true,children:[],append(node){this.children.push(node);},prepend(node){this.children.unshift(node);}});
+  const home=view('home-view'),modules=view('modules-view');
+  const ids={'home-view':home,'modules-view':modules,'resource-usage':{},'resource-updated':{}};
+  const createElement=tag=>({tag,values:{},setAttribute(name,value){this[name]=value;},
+    set innerHTML(html){for(const [,key] of html.matchAll(/data-runtime="([^"]+)"/g))this.values[key]={};},
+    querySelector(selector){return this.values[selector.match(/data-runtime="([^"]+)"/)[1]];},
+    querySelectorAll(){return Object.values(this.values);}});
   for(const name of ['cpu','gpu','memory','vram']) {
     const children={strong:{},small:{},progress:{}};
     ids[`resource-${name}`]={children,querySelector:s=>children[s]};
   }
   let id=0;
   vm.runInNewContext(source('resources.js'),{
-    document:Object.assign(doc,{getElementById:n=>ids[n],querySelector:()=>({content:'test-nonce'}),addEventListener:(n,f)=>events[n]=f}),
+    document:Object.assign(doc,{createElement,getElementById:n=>ids[n],querySelector:()=>({content:'test-nonce'}),addEventListener:(n,f)=>events[n]=f}),
     window:{addEventListener:(n,f)=>windowEvents[n]=f},AbortController,Date,
     setTimeout:(f,ms)=>{timers.set(++id,{f,ms});return id;},clearTimeout:i=>timers.delete(i),
     fetch:(url,options)=>new Promise((resolve,reject)=>calls.push({url,options,resolve,reject})),
   });
   const flush=()=>new Promise(resolve=>setImmediate(resolve));
   const finish=async(data,index=calls.length-1)=>{calls[index].resolve({ok:true,json:async()=>data});await flush();};
-  return {home,doc,ids,events,windowEvents,timers,calls,finish,flush};
+  return {home,modules,doc,ids,events,windowEvents,timers,calls,finish,flush};
 }
 const snapshot={sampled_at:'2026-10-16T12:00:00Z',stale:false,cpu_percent:0,gpu_percent:null,
   memory:{percent:25,used_bytes:1073741824,total_bytes:4294967296},adapters:[]};
-test('resource polling starts only on home and stops when hidden or navigating away',async()=>{
+test('resource polling starts on home and stops when hidden or navigating away',async()=>{
   const ui=resources();ui.windowEvents.pageshow();assert.equal(ui.calls.length,0);
   ui.home.hidden=false;ui.events['jarvis:settings-view']();assert.equal(ui.calls.length,1);
   await ui.finish(snapshot);
@@ -93,6 +99,19 @@ test('resource polling starts only on home and stops when hidden or navigating a
   ui.home.hidden=true;ui.events['jarvis:settings-view']();
   assert.equal(ui.calls[1].options.signal.aborted,true);
   await ui.finish(snapshot);
+  assert.equal(ui.timers.size,0);
+});
+test('modules view also owns a panel and polls only while visible',async()=>{
+  const ui=resources();
+  for(const parent of [ui.home,ui.modules]){
+    assert.equal(parent.children.length,1);
+    assert.equal(parent.children[0]['aria-label'],'并行运行与延迟');
+  }
+  ui.modules.hidden=false;ui.events['jarvis:settings-view']();
+  assert.equal(ui.calls.length,1);await ui.finish(snapshot);
+  for(const parent of [ui.home,ui.modules])assert.equal(parent.children[0].values.stamp.textContent,'暂不可用');
+  assert.equal(ui.timers.size,1);
+  ui.modules.hidden=true;ui.events['jarvis:settings-view']();
   assert.equal(ui.timers.size,0);
 });
 test('late responses cannot replace a newer sample; stale values are cleared',async()=>{

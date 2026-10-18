@@ -1,0 +1,90 @@
+{
+  "version": "0.1.37",
+  "captured_at": "2026-10-16T21:07:34.327492+00:00",
+  "status": "passed",
+  "unittest": {
+    "run": 494,
+    "passed": 492,
+    "skipped": 2,
+    "failures": 0,
+    "errors": 0,
+    "elapsed_seconds": 219.135
+  },
+  "initial_run": {
+    "run": 494,
+    "passed": 491,
+    "skipped": 2,
+    "failures": 0,
+    "errors": 1,
+    "elapsed_seconds": 225.264
+  },
+  "repair": "Native local-model environment fixture now atomically publishes complete JSON before the reader observes it; child-termination and secret-stripping assertions unchanged.",
+  "full_regression_source_sha256": {
+    "runtime/node-host/jarvis_core/modules.py": "c999b48ed975e203a7611b6cd730ea38863220d7b8e884947e6d49e5826001e6",
+    "apps/web/modules.js": "c5e5fa1ba9b7284fc6388f3a61d7a29735279b3e5829ade4c89b9c1f66972ab7",
+    "tests/test_modules.py": "a30198c73753be0bcf12a6dcddd459c0cea1ff43c03dd6f5dd5fbd662424b41c",
+    "tests/test_local_model.py": "8663efa565e29516dcc604e96f783e37aa23fe4cc2e72ffb7571713c38f18fc9",
+    "runtime/node-host/jarvis_core/calculator.py": "a5f2ebcb5cbbc5146a5ded764495eff835ad7328e9666f1e953baa2b0632dc09",
+    "runtime/node-host/jarvis_core/chat.py": "aa428b37184b6bad1fd3c4b344b74401196fc17f7639ab271835cbdf3df04a2f",
+    "apps/web/index.html": "5d161824d82599424b7fbde65121a5f3bc11ee38eb08ee14e90d67d06001c188",
+    "apps/web/server.py": "be2b4588035a9f874b5a80dfdc18cc9245cc49877c4a06761cc9c951687a7683",
+    "apps/web/context.js": "90cbf50e5410241e946d5d5aa8a7feb1dac4125bd8e8006abcc30449a822535a",
+    "runtime/node-host/jarvis_core/runtime_metrics.py": "8f007a8ff2c50673de9fbfa9a9e65fa1db6e8750bfaa8c3946acfb71760bb6a4",
+    "apps/web/resources.js": "55a0e0e5299c8f539d0e8551970b3ff7b01fa412e41417e812666f44b8c71e61"
+  },
+  "final_targeted_regression": {
+    "tests": 73,
+    "passed": 73,
+    "skipped": 0,
+    "failures": 0,
+    "errors": 0,
+    "elapsed_seconds": 21.777,
+    "command": "python -m unittest tests.test_calculator tests.test_modules tests.test_runtime_metrics tests.test_web tests.test_skills",
+    "reason": "Final module count_scope and display labels changed after full regression imported module code; final UI repeated as well."
+  },
+  "final_source_sha256": {
+    "runtime/node-host/jarvis_core/modules.py": "3d3f396521111d298fd2d167ddb419d15efc0e6a3f0fe7923924f4cf98b83175",
+    "apps/web/modules.js": "cb445e4b19e65d2dfac449fb4c100073b9801e2044506326045a082722175dde",
+    "tests/test_modules.py": "ae9213c31554717a952e334d51f8aec8e19ea2d4fd7e914ac0971b7e878ac338",
+    "tests/test_local_model.py": "378b5576f49b4ecb58be4a0db9e430583e4f040b269627da475e0a4cf0a72758",
+    "runtime/node-host/jarvis_core/calculator.py": "a5f2ebcb5cbbc5146a5ded764495eff835ad7328e9666f1e953baa2b0632dc09",
+    "runtime/node-host/jarvis_core/chat.py": "aa428b37184b6bad1fd3c4b344b74401196fc17f7639ab271835cbdf3df04a2f",
+    "apps/web/index.html": "5d161824d82599424b7fbde65121a5f3bc11ee38eb08ee14e90d67d06001c188",
+    "apps/web/server.py": "be2b4588035a9f874b5a80dfdc18cc9245cc49877c4a06761cc9c951687a7683",
+    "apps/web/context.js": "90cbf50e5410241e946d5d5aa8a7feb1dac4125bd8e8006abcc30449a822535a",
+    "runtime/node-host/jarvis_core/runtime_metrics.py": "8f007a8ff2c50673de9fbfa9a9e65fa1db6e8750bfaa8c3946acfb71760bb6a4",
+    "apps/web/resources.js": "55a0e0e5299c8f539d0e8551970b3ff7b01fa412e41417e812666f44b8c71e61",
+    "tools/probe_calculator_ui.py": "a3e630fdeb511dbc3bb6736cae32792ff8fbc7046f5e3df77ff4a1f0539786b8",
+    "tools/probe_parallel_runtime.py": "e530b6b904e4b42d473330d7816f2aa7446fd374c48ca934df0bc61f696a998e",
+    "tests/test_calculator.py": "7902da5e19a3ea7191f33f24a9fbfd6154dd80ab84c1c7873d75816c5d1d92f6",
+    "contracts/schemas/calculation.schema.json": "fe819d13eb54a196e120dabcc10d374789f3776e193da07ae201a31a0187ce1a",
+    "runtime/node-host/jarvis_core/__init__.py": "c87aad04d0728e15f6f56a4c05bf4d4b554b052acfeba15b4c858e6864b15fcf",
+    "pyproject.toml": "b41f4ababde5d5323f58959b088e9c553df9076a00fd2e3eda2663afd6ac93de",
+    "uv.lock": "20e5f9917521e4e7184003a9a9cba032058307e6eabfaa15f5e674eae62e4c94",
+    "docs/models-offline.md": "2c05f776777c989e5006dd1f67dfdbdec7c0a5998b07d3bc73677cce8ac1c525",
+    "docs/core-bootstrap.md": "226c15e713c3912ee5bbecc08377f38fd47850c24aa3499903357beea98fe876",
+    "docs/contracts.md": "a9af73bd15cda3ade3316956ec0f45dc062ba1cbe8f5783424fee4d24dd5f0fe",
+    "docs/delivery-validation.md": "e201fc2c501158ab83b19aeacb0d7ae4de6d2f383d5741e24895deb8fa91ff5a",
+    "docs/health-maintenance.md": "6db841916bbd3ed2ebd62e66ee61fa7a289e8bb89daa70f9f31a3bff489501a7",
+    "docs/manifest.json": "4e8343023cc591957c48a71ab09ff0979e7ba691bcdac842412cbdbd4de07df6"
+  },
+  "ui_evidence": "evals/reports/calculator-ui.json",
+  "deployment_evidence": "evals/reports/calculator-deployment.json",
+  "checks": {
+    "docs": "23 documents, 19 diagrams, 38 artifacts, 0 errors",
+    "seed": "22 assets, 12 fixtures, no errors",
+    "navigation": "current",
+    "whitespace": "passed"
+  },
+  "calls": {
+    "paid": 0,
+    "local_model": 0,
+    "calculator_ui_successes_per_final_probe": 46
+  },
+  "boundaries": [
+    "Original raw-model arithmetic failures retained.",
+    "No whole-machine offline or target-PC long-duration acceptance claim.",
+    "No new dependencies, model downloads, persistent databases or services.",
+    "Successful short requests do not prove universal intelligent task execution."
+  ]
+}

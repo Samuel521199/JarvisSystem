@@ -1,0 +1,386 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-10-17",
+  "servers": [
+    {
+      "id": "context7",
+      "name": "Context7 文档助手",
+      "category": "development",
+      "icon": "book",
+      "publisher": "Upstash",
+      "source_type": "vendor",
+      "source_url": "https://github.com/upstash/context7",
+      "summary": "查询开发库的版本文档与代码示例。",
+      "use_when": "编写或审阅依赖第三方库的代码，需要核对具体版本 API。",
+      "do_not_use_when": "普通聊天、项目内部事实；已有适用官方文档且无需更新。",
+      "requirements": [
+        "联网",
+        "较高额度建议配置 Context7 API Key",
+        "HTTP 运行适配器"
+      ],
+      "cost": "免费额度及更高用量方案，按服务当前规则。",
+      "skills": [
+        "matt-pocock.code-review",
+        "matt-pocock.codebase-design",
+        "matt-pocock.diagnosing-bugs"
+      ],
+      "alternative_group": "",
+      "template": {
+        "transport": "streamable-http",
+        "url": "https://mcp.context7.com/mcp"
+      },
+      "reviewed_at": "2026-10-17",
+      "source_revision": "e0041949fdb3b49b304d98715dde35be51b7c3d1",
+      "review_status": "source_reviewed"
+    },
+    {
+      "id": "github",
+      "name": "GitHub 仓库协作",
+      "category": "development",
+      "icon": "github",
+      "publisher": "GitHub",
+      "source_type": "vendor",
+      "source_url": "https://github.com/github/github-mcp-server",
+      "summary": "读取仓库、Issue、PR 和 CI 信息。",
+      "use_when": "需要 GitHub 上的远程源码、问题或审阅记录；仓库范围已明确。",
+      "do_not_use_when": "只有本机代码时优先本机文件；发评论、推送和合并须有对应任务授权。",
+      "requirements": [
+        "GitHub 账户与对应仓库权限",
+        "OAuth 或最小权限 PAT",
+        "凭据绑定与 HTTP 运行适配器"
+      ],
+      "cost": "遵循 GitHub 账户与 API 限额。",
+      "skills": [
+        "matt-pocock.code-review",
+        "matt-pocock.handoff",
+        "matt-pocock.to-spec"
+      ],
+      "alternative_group": "",
+      "template": {
+        "transport": "streamable-http",
+        "url": "https://api.githubcopilot.com/mcp/"
+      },
+      "reviewed_at": "2026-10-17",
+      "source_revision": "e3809fe91c7546633241006bf0b91f23b2595e28",
+      "review_status": "source_reviewed"
+    },
+    {
+      "id": "playwright",
+      "name": "Playwright 浏览器测试",
+      "category": "browser",
+      "icon": "browser",
+      "publisher": "Microsoft",
+      "source_type": "vendor",
+      "source_url": "https://github.com/microsoft/playwright-mcp",
+      "summary": "查看网页结构，操作浏览器并核对界面行为。",
+      "use_when": "需要真实网页交互、截图或界面回归；目标站点与操作范围明确。",
+      "do_not_use_when": "只查静态文档时优先检索；既有 Jarvis 浏览器适配器能完成时优先复用。",
+      "requirements": [
+        "Node.js 与兼容浏览器",
+        "独立浏览器配置与运行隔离",
+        "stdio 运行适配器"
+      ],
+      "cost": "本地运行本身通常无 API 费；目标服务另计。",
+      "skills": [
+        "matt-pocock.diagnosing-bugs",
+        "matt-pocock.tdd",
+        "matt-pocock.code-review"
+      ],
+      "alternative_group": "",
+      "template": {
+        "transport": "stdio",
+        "command": "npx",
+        "args": [
+          "-y",
+          "@playwright/mcp"
+        ]
+      },
+      "reviewed_at": "2026-10-17",
+      "source_revision": "b8b4183e099f136cbec0388a6088d4aa2f6b9685",
+      "review_status": "source_reviewed"
+    },
+    {
+      "id": "brave-search",
+      "name": "Brave 网页搜索",
+      "category": "research",
+      "icon": "search",
+      "publisher": "Brave",
+      "source_type": "vendor",
+      "source_url": "https://github.com/brave/brave-search-mcp-server",
+      "summary": "检索网页、新闻和相关在线来源。",
+      "use_when": "需要时效信息、来源链接或跨站搜索。",
+      "do_not_use_when": "纯创作、已给齐资料；与 Tavily 同类任务优先选一个。",
+      "requirements": [
+        "Brave Search API Key",
+        "Node.js",
+        "凭据绑定与 stdio 运行适配器"
+      ],
+      "cost": "使用 Brave Search API 额度与计费。",
+      "skills": [
+        "matt-pocock.to-spec",
+        "matt-pocock.teach"
+      ],
+      "alternative_group": "web-search",
+      "template": {
+        "transport": "stdio",
+        "command": "npx",
+        "args": [
+          "-y",
+          "@brave/brave-search-mcp-server",
+          "--transport",
+          "stdio"
+        ]
+      },
+      "reviewed_at": "2026-10-17",
+      "source_revision": "e4866a959a635038f8f889804aba6061ed214bf4",
+      "review_status": "source_reviewed"
+    },
+    {
+      "id": "tavily",
+      "name": "Tavily 研究检索",
+      "category": "research",
+      "icon": "compass",
+      "publisher": "Tavily",
+      "source_type": "vendor",
+      "source_url": "https://github.com/tavily-ai/tavily-mcp",
+      "summary": "为研究任务搜索并提取网页内容。",
+      "use_when": "需要带来源的研究、网页提取；已有 Tavily 账户与额度。",
+      "do_not_use_when": "本地资料已足够；与 Brave 重复搜索而无交叉核对需要。",
+      "requirements": [
+        "Tavily 账户与额度",
+        "OAuth 或 API Key",
+        "凭据绑定与 HTTP 运行适配器"
+      ],
+      "cost": "使用 Tavily 的服务额度与计费。",
+      "skills": [
+        "matt-pocock.to-spec",
+        "matt-pocock.teach"
+      ],
+      "alternative_group": "web-search",
+      "template": {
+        "transport": "streamable-http",
+        "url": "https://mcp.tavily.com/mcp"
+      },
+      "reviewed_at": "2026-10-17",
+      "source_revision": "688b0f78d518d507cb31b94d9cc0e44c6eadd7c0",
+      "review_status": "source_reviewed"
+    },
+    {
+      "id": "firecrawl",
+      "name": "Firecrawl 网页采集",
+      "category": "research",
+      "icon": "flame",
+      "publisher": "Firecrawl",
+      "source_type": "vendor",
+      "source_url": "https://github.com/firecrawl/firecrawl-mcp-server",
+      "summary": "把网页与网站资料提取成便于分析的内容。",
+      "use_when": "需提取多个页面、结构化网页资料或站点地图。",
+      "do_not_use_when": "单个可直接读取页面；登录后私人内容或采集范围未经明确授权。",
+      "requirements": [
+        "Firecrawl API Key 或自托管服务",
+        "Node.js",
+        "凭据绑定与 stdio 运行适配器"
+      ],
+      "cost": "云端抓取使用服务积分；自托管另有运行成本。",
+      "skills": [
+        "matt-pocock.to-spec",
+        "matt-pocock.teach"
+      ],
+      "alternative_group": "",
+      "template": {
+        "transport": "stdio",
+        "command": "npx",
+        "args": [
+          "-y",
+          "firecrawl-mcp"
+        ]
+      },
+      "reviewed_at": "2026-10-17",
+      "source_revision": "e895e942fe0e9c299d0331134393537e919f23f0",
+      "review_status": "source_reviewed"
+    },
+    {
+      "id": "markitdown",
+      "name": "MarkItDown 文件转换",
+      "category": "files",
+      "icon": "document",
+      "publisher": "Microsoft",
+      "source_type": "vendor",
+      "source_url": "https://github.com/microsoft/markitdown",
+      "summary": "将 PDF、Office 等资料转换为可检索文本。",
+      "use_when": "项目资料需要文字提取，并已指定输入文件范围。",
+      "do_not_use_when": "需要保留精确版式、编辑 Word/PPT 或高精度扫描 OCR 时需专门工具。",
+      "requirements": [
+        "Python 与 markitdown-mcp 及对应格式依赖",
+        "限定文件范围",
+        "stdio 运行适配器"
+      ],
+      "cost": "本地转换为主；可选外部识别服务另计。",
+      "skills": [
+        "matt-pocock.to-spec",
+        "matt-pocock.teach"
+      ],
+      "alternative_group": "",
+      "template": {
+        "transport": "stdio",
+        "command": "uvx",
+        "args": [
+          "markitdown-mcp"
+        ]
+      },
+      "reviewed_at": "2026-10-17",
+      "source_revision": "4cc9fa17653d695d64fb9eee5b33d4de55ff84e8",
+      "review_status": "source_reviewed"
+    },
+    {
+      "id": "filesystem",
+      "name": "Filesystem 文件工具",
+      "category": "files",
+      "icon": "folder",
+      "publisher": "MCP Reference",
+      "source_type": "reference",
+      "source_url": "https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem",
+      "summary": "在明确限定的目录内读取和管理文件。",
+      "use_when": "外部 MCP 客户端需要文件工具，且现有文件接口无法满足。",
+      "do_not_use_when": "Jarvis 已有项目文件读写时优先原接口；不授予整盘权限。",
+      "requirements": [
+        "Node.js",
+        "必须填写允许目录",
+        "文件范围绑定与 stdio 运行适配器"
+      ],
+      "cost": "本地运行；参考实现需按实际场景评估。",
+      "skills": [
+        "matt-pocock.code-review",
+        "matt-pocock.handoff"
+      ],
+      "alternative_group": "",
+      "template": {
+        "transport": "stdio",
+        "command": "npx",
+        "args": [
+          "-y",
+          "@modelcontextprotocol/server-filesystem"
+        ]
+      },
+      "reviewed_at": "2026-10-17",
+      "source_revision": "bbb701e7ac1e57f3edd1c2836b94c5457eaf7b9c",
+      "review_status": "source_reviewed"
+    },
+    {
+      "id": "git",
+      "name": "Git 本地版本工具",
+      "category": "development",
+      "icon": "branch",
+      "publisher": "MCP Reference",
+      "source_type": "reference",
+      "source_url": "https://github.com/modelcontextprotocol/servers/tree/main/src/git",
+      "summary": "查看本地仓库历史、差异与版本信息。",
+      "use_when": "需要通过 MCP 读取明确指定仓库的 Git 状态和差异。",
+      "do_not_use_when": "已有 Git CLI 可完成时优先复用；提交、切分支或重置需对应任务授权。",
+      "requirements": [
+        "Python、Git 与 mcp-server-git",
+        "必须指定仓库路径",
+        "stdio 运行适配器"
+      ],
+      "cost": "本地运行；参考实现需按实际场景评估。",
+      "skills": [
+        "matt-pocock.code-review",
+        "matt-pocock.handoff"
+      ],
+      "alternative_group": "",
+      "template": {
+        "transport": "stdio",
+        "command": "uvx",
+        "args": [
+          "mcp-server-git"
+        ]
+      },
+      "reviewed_at": "2026-10-17",
+      "source_revision": "bbb701e7ac1e57f3edd1c2836b94c5457eaf7b9c",
+      "review_status": "source_reviewed"
+    },
+    {
+      "id": "blender",
+      "name": "Blender 三维创作",
+      "category": "creative",
+      "icon": "cube",
+      "publisher": "ahujasid / 社区维护",
+      "source_type": "community",
+      "source_url": "https://github.com/ahujasid/mcp-for-blender",
+      "summary": "操作 Blender 场景，制作三维演示与拆解素材。",
+      "use_when": "需要 Blender 场景、机械展示、灯光或动画素材，并明确工程与输出要求。",
+      "do_not_use_when": "不能当作专业 CAD、公差或制造图验收；固定齿轮科普可先用现有 Anatomy。",
+      "requirements": [
+        "Blender 与配套插件",
+        "Python、uvx 与 mcp-for-blender",
+        "本机连接及脚本执行隔离验收"
+      ],
+      "cost": "本地 Blender；可选外部素材或生成服务另计。",
+      "skills": [
+        "anatomy.explainer",
+        "matt-pocock.teach"
+      ],
+      "alternative_group": "",
+      "template": {
+        "transport": "stdio",
+        "command": "uvx",
+        "args": [
+          "mcp-for-blender"
+        ]
+      },
+      "reviewed_at": "2026-10-17",
+      "source_revision": "7a0373ec9199183cb460068c4f96aed9c579fb4f",
+      "review_status": "source_reviewed"
+    }
+  ],
+  "combinations": [
+    {
+      "name": "编程审阅",
+      "servers": [
+        "github",
+        "context7"
+      ],
+      "skills": [
+        "代码审阅",
+        "故障诊断"
+      ],
+      "description": "GitHub 提供远程证据，Context7 核对库文档；本机差异优先原文件与 Git 接口。"
+    },
+    {
+      "name": "研究到方案",
+      "servers": [
+        "brave-search",
+        "tavily",
+        "firecrawl",
+        "markitdown"
+      ],
+      "skills": [
+        "需求到任务计划",
+        "概念讲解与练习"
+      ],
+      "description": "Brave / Tavily 按需二选一检索，再按资料类型选择网页采集或文件转换。"
+    },
+    {
+      "name": "三维科普素材",
+      "servers": [
+        "blender"
+      ],
+      "skills": [
+        "概念讲解与练习"
+      ],
+      "description": "讲解流程组织原理与分镜，Blender 接入验收后承担三维场景与素材制作。固定齿轮交互仍可直接用 Anatomy。"
+    }
+  ],
+  "excluded": [
+    {
+      "name": "旧 GitHub / Brave / SQLite 等示例",
+      "reason": "官方参考仓库标记归档；GitHub、Brave 改选维护方服务器。",
+      "source_url": "https://github.com/modelcontextprotocol/servers#archived"
+    },
+    {
+      "name": "Memory / Sequential Thinking / Time",
+      "reason": "暂不默认推荐：与既有记忆、模型推理或系统时间能力重叠，尚无明确新增收益。",
+      "source_url": "https://github.com/modelcontextprotocol/servers"
+    }
+  ]
+}

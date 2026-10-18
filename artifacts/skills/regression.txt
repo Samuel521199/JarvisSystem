@@ -1,0 +1,8 @@
+H:\Jarvis\tools\release_bundle.py:34: DeprecationWarning: pathlib.PurePath.is_reserved() is deprecated and scheduled for removal in Python 3.15. Use os.path.isreserved() to detect reserved paths on Windows.
+  if parts.is_absolute() or any(p in {'','.', '..'} or p.endswith((' ','.')) or PureWindowsPath(p).is_reserved() for p in value.split('/')):
+H:\Jarvis\tools\release_bundle.py:34: DeprecationWarning: pathlib.PurePath.is_reserved() is deprecated and scheduled for removal in Python 3.15. Use os.path.isreserved() to detect reserved paths on Windows.
+  if parts.is_absolute() or any(p in {'','.', '..'} or p.endswith((' ','.')) or PureWindowsPath(p).is_reserved() for p in value.split('/')):
+----------------------------------------------------------------------
+Ran 472 tests in 235.812s
+
+OK (skipped=2)

@@ -9,6 +9,7 @@ from pathlib import Path
 import threading
 import unittest
 import uuid
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 SPEC = importlib.util.spec_from_file_location("jarvis_web_server", ROOT / "apps/web/server.py")
@@ -42,7 +43,8 @@ class FakeChat:
                               for name in ("vertex", "bailian", "openai", "xai", "local")],
                 "balance_status": "not_queried"}
 
-    def reply(self, message, provider="auto", history=None, model=None, reasoning=None, cancel_event=None):
+    def reply(self, message, provider="auto", history=None, model=None, reasoning=None, cancel_event=None, context_note=None):
+        self.context_note = context_note
         self.cancel_event = cancel_event
         self.calls.append({"message": message, "provider": provider, "history": history,
                            **({"model": model} if model else {}), **({"reasoning": reasoning} if reasoning else {})})
@@ -55,6 +57,95 @@ class FakeChat:
 
 
 class WebTests(unittest.TestCase):
+    def test_optional_asset_faults_keep_http_chat_and_report_degradation(self):
+        original = Path.read_bytes
+        faults = {'evolution.css', 'logo.js', 'preview.html', 'memory.js', 'admin.html', 'dialogue.js'}
+        def read(path):
+            if path.name in faults:
+                raise FileNotFoundError('private-path-must-not-leak')
+            return original(path)
+        with patch.object(Path, 'read_bytes', read):
+            candidate = web.LocalChatServer(('127.0.0.1', 0), FakeCore(), FakeChat())
+        thread = threading.Thread(target=candidate.serve_forever, kwargs={'poll_interval': .01}, daemon=True)
+        thread.start()
+        original_server, original_host, original_origin = self.server, self.host, self.origin
+        self.server = candidate
+        self.host = '127.0.0.1:' + str(candidate.server_address[1]); self.origin = 'http://' + self.host
+        try:
+            status, _, body = self.request('GET', '/')
+            self.assertEqual(status, 200)
+            self.assertIn('部分界面资源不可用'.encode(), body)
+            self.assertNotIn(b'src="/brand/logo.js"', body)
+            self.assertNotIn(b'src="/memory.js"', body)
+            self.assertNotIn(b'src="/dialogue.js"', body)
+            self.assertNotIn(b'private-path', body)
+            state = json.loads(self.request('GET', '/api/status')[2])
+            self.assertTrue(state['core_ready'])
+            self.assertEqual(state['ui_assets']['status'], 'degraded')
+            self.assertEqual(len(state['ui_assets']['unavailable']), len(faults))
+            self.assertEqual(json.loads(self.request('POST', '/api/chat', {'message': 'hello'})[2])['status'], 'SUCCEEDED')
+            for route in ('/brand/logo.js', '/memory.js', '/dialogue.js'):
+                self.assertEqual(self.request('GET', route)[0], 503)
+            for route in ('/settings/', '/brand/'):
+                self.assertIn('返回聊天'.encode(), self.request('GET', route)[2])
+            self.assertEqual(self.request('GET', '/brand/../server.py')[0], 404)
+        finally:
+            candidate.shutdown(); candidate.server_close(); thread.join(2)
+            self.server, self.host, self.origin = original_server, original_host, original_origin
+
+    def test_core_assets_still_required_and_optional_empty_or_denied_is_visible(self):
+        original = Path.read_bytes
+        for name in ('index.html', 'attachments.js', 'theme.css', 'workspace.css', 'conversations.js', 'workspace.js'):
+            def read(path):
+                if path.name == name: raise FileNotFoundError('fixture')
+                return original(path)
+            with self.subTest(name=name), patch.object(Path, 'read_bytes', read):
+                with self.assertRaises(FileNotFoundError):
+                    web.LocalChatServer(('127.0.0.1', 0), FakeCore(), FakeChat())
+        for value, expected in ((b'', 'empty'), (PermissionError('private'), 'unreadable')):
+            def read(path):
+                if path.name == 'evolution.css':
+                    if isinstance(value, Exception): raise value
+                    return value
+                return original(path)
+            with self.subTest(reason=expected), patch.object(Path, 'read_bytes', read):
+                candidate = web.LocalChatServer(('127.0.0.1', 0), FakeCore(), FakeChat())
+            try:
+                self.assertEqual(candidate.ui_assets.failures, {'evolution.css': expected})
+            finally: candidate.server_close()
+
+    def test_brand_assets_are_bounded_and_preview_uses_nonce(self):
+        status, headers, body = self.request('GET', '/brand/')
+        self.assertEqual(status, 200)
+        self.assertNotIn(b'__JARVIS_', body)
+        self.assertIn(self.server.nonce.encode(), body)
+        self.assertIn("img-src 'self' blob:", headers['Content-Security-Policy'])
+        for path in ('/brand/icon.png', '/brand/core.png'):
+            status, headers, body = self.request('GET', path)
+            self.assertEqual((status, headers['Content-Type']), (200, 'image/png'))
+            self.assertTrue(body.startswith(b'\x89PNG\r\n\x1a\n'))
+        for path in ('/brand/source/core.png', '/brand/orbit.png', '/brand/robot.png', '/brand/blink.png', '/brand/../server.py', '/brand/%2e%2e/server.py',
+                     '/brand/icon.png?path=../../config', '/brand/missing.png'):
+            self.assertEqual(self.request('GET', path)[0], 404)
+        self.assertEqual(self.chat.calls, [])
+
+    def test_runtime_package_contains_served_brand_assets(self):
+        from tools.release_bundle import source_files
+        packaged = set(source_files())
+        for route in self.server.brand_assets:
+            self.assertIn('apps/web' + route, packaged)
+        self.assertFalse(any(path.startswith('apps/web/brand/source/') for path in packaged))
+
+    def test_context_note_boundary_and_served_module(self):
+        response=self.request('POST','/api/chat',{'message':'hello','context_note':'只用中文'})
+        self.assertEqual(response[0],200)
+        self.assertEqual(self.chat.context_note,'只用中文')
+        for note in ({'role':'system'},'汉'*3000):
+            self.assertEqual(self.request('POST','/api/chat',{'message':'hi','context_note':note})[0],400)
+        self.assertEqual(len(self.chat.calls),1)
+        self.assertEqual(self.request('GET','/context.js')[0],200)
+        self.assertEqual(self.request('GET','/context.js?path=../../config')[0],404)
+
     def test_cancel_before_chat_admission_and_duplicate_id(self):
         ident = uuid.uuid4().hex
         self.assertEqual(self.request('POST', '/api/chat/cancel', {'request_id':ident})[0],200)

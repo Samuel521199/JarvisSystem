@@ -1,0 +1,76 @@
+{
+  "version": "0.1.36",
+  "observed_at": "2026-10-16T20:01:36.538807+00:00",
+  "status": "passed",
+  "capabilities": 10,
+  "independent": 8,
+  "combined": 2,
+  "inventory": {
+    "original": 43,
+    "active": 10,
+    "merged": 6,
+    "internal": 4,
+    "removed_from_active_registration": 10,
+    "missing_execution_path": 13
+  },
+  "tests": {
+    "full_regression": {
+      "total": 477,
+      "passed": 475,
+      "skipped": 2,
+      "log": "artifacts/skills/regression-0.1.36.txt",
+      "scope": "Full regression before final guide-evidence guard and negative-routing additions"
+    },
+    "final_skills": {
+      "total": 21,
+      "passed": 21
+    },
+    "final_web": {
+      "total": 21,
+      "passed": 21
+    },
+    "ui": {
+      "groups": 5,
+      "passed": 5,
+      "page_errors": 0,
+      "evidence": "evals/reports/skills-ui.json"
+    }
+  },
+  "model_evaluation": {
+    "paired_calls": 18,
+    "repair_calls": 2,
+    "delivery_calls": 1,
+    "evidence": "evals/reports/skill-capabilities-live.json",
+    "delivery": "evals/reports/skill-hub-delivery.json",
+    "general_improvement_proven": false
+  },
+  "deployment": "evals/reports/skill-hub-deployment.json",
+  "limitations": [
+    "Host rule selection, not model-authored multi-skill plans",
+    "Read-only text workflows; no code-edit/test/repair executor",
+    "Fixed gear HTML only; no arbitrary CAD or video",
+    "One manually reviewed example per guide; model correctness is not guaranteed"
+  ],
+  "source_sha256": {
+    "config/skills/catalog.json": "96980fd1e225d3f03b00f36f253462af6035f10ebac60cd337f7032d650e613c",
+    "contracts/schemas/native-skills.schema.json": "2ceb647a55f925182041cd4c5fd58cf084c3bf4b6dc382f7c8f62383583fc8e8",
+    "contracts/schemas/skill-report.schema.json": "1835ae883cae760ce1c8e045e6a5930e1c6ac65209a7726129bfe62f96a56f5c",
+    "runtime/node-host/jarvis_core/skills.py": "560399995af51bab46197ba795caeb305b622a156fa7e3d96acc71544434119c",
+    "runtime/node-host/jarvis_core/skill_tasks.py": "9fd7164d3e83543af19a800b2578bfa6f3f1a04f600bac68fad9d13d0ef03200",
+    "runtime/node-host/jarvis_core/chat.py": "d2db7bc29cc5698ff8b359fb7f061ea1a56b0e5918c8b32f8cfdb5825297f898",
+    "runtime/node-host/jarvis_core/assistant_context.py": "3c36d3cb1c6bd8285ce66057aad1c45f799529cae9b954bbd14249c9cf3473f6",
+    "runtime/node-host/jarvis_core/modules.py": "92b8a2fac3333127583412455342d00bc17b636fa57e34dbe2fad42cb74c9b6b",
+    "apps/web/skills.js": "1ab6d3957324261f9d406cf576dbeb9deef23b80f5bd9ab690e15f3b64e9f197",
+    "apps/web/skills_manager.js": "c8744ae55a2d2d66311b88badc0022f13226fc788056f80a9e879224a9f30025",
+    "apps/web/skills.css": "6a8525303ca4791469a9de5456360dba701ab2dd353e1436cc1a31b53014e098",
+    "apps/web/server.py": "dbbed812ef2bbdd2aa17e6ea217ef88d3826fb9aad2ce137f9d3d6eaf9ed0c23",
+    "apps/web/skill_routes.py": "9b973aa3b2caefe0f6038fc43493daf66e819799ba4be332ea32567a0eba0062",
+    "apps/web/admin.html": "d4526e636361e865376e1172b289882ff063b252d7ddbdf1b64a787fc808ad90",
+    "apps/web/admin.js": "c483be4b2d9a9d2178d894b021ad1fdd9f87255375dcafe9f8a94b313e4dd030",
+    "apps/web/extensions.js": "76526c4d2d776807744c00bd3cb97c2b4e26a82464d0b3bb25f05d2f0631c9a7",
+    "tests/test_skills.py": "298d23dcb468abfb3427fceffad7727fe35602d62d33054c17390a2ed87b5eeb",
+    "tools/probe_skills_ui.py": "f92608385c1c0f3c5eed0304b1a68896759ea1564b496495b4f3ecb550f14111",
+    "tools/evaluate_skill_capabilities.py": "a076e4c059f541bc03bd65a9d1bf4dd38d40ca113cc76edb50157801bf3f65c4",
+    "tools/probe_skill_hub_delivery.py": "2ddf04f24e6147134775aaca4611e2a4f96766f8fbdf8f135f92e59d4f3b078a"
+  }
+}

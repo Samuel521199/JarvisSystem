@@ -1,0 +1,189 @@
+{
+  "feature": "evolution-v1",
+  "version": "0.1.37",
+  "date": "2026-10-17",
+  "status": "passed",
+  "fault": "replace one actually executed pure-tool result with wrong text in the test harness",
+  "user_runtime_modified": false,
+  "source_hashes": {
+    "runtime/node-host/jarvis_core/evolution/recipes.py": "11492699e4221f73630de61d092cdda2ad2b141a4ffbca3be20ae971c13c49c8",
+    "runtime/node-host/jarvis_core/evolution/runner.py": "c4e26f93a7eee48127307b52bbb84a32ecfac05ed87d64ddfb964cdc4a61a61d",
+    "runtime/node-host/jarvis_core/evolution/provider.py": "97c22aaed90eae9435c36f94e3d842e7c2090f27aeedd2b6248e3aec3aed52be",
+    "runtime/node-host/jarvis_core/evolution/store.py": "4b675e28d4435dd5614bbb633224e5ba8e28092de722594d2ebc27db5e60986c",
+    "runtime/node-host/jarvis_core/evolution/__init__.py": "5b3e9dd8be5b53643223d3cf329620096742d3b586be0844a1eeed3ca75d537d",
+    "runtime/node-host/jarvis_core/evolution/manager.py": "21b65908fb91a090ed378e80644f218ce7c9c198946e6c40147c1b9b46a3f5d1"
+  },
+  "job": {
+    "activation_confirmed": true,
+    "attempts": [
+      {
+        "attempt": 1,
+        "coding": {
+          "elapsed_seconds": 14.902,
+          "model": "gemini-3.1-pro-preview",
+          "outcome_uncertain": false,
+          "output_incomplete": false,
+          "provider": "vertex",
+          "request_id": "bde9f98b22c741a7b9e77749aa5b0f50",
+          "status": "SUCCEEDED",
+          "usage": {
+            "candidatesTokenCount": 477,
+            "promptTokenCount": 1053,
+            "thoughtsTokenCount": 606,
+            "totalTokenCount": 2136
+          }
+        },
+        "package": "1887f87c48b04d43b7f5f859f25334977f51d6a8d89352c73015bb44d3891a0b",
+        "validation": {
+          "acceptance_digest": "sha256:746b8cbbe856cdf938f3a53da532c65c5b2367fe5fe4f5fc8aeb958c35859bd2",
+          "cases": 12,
+          "failed_indices": [],
+          "isolation": {
+            "active_process_limit": 1,
+            "appcontainer": true,
+            "backend": "windows-lpac-job",
+            "capabilities": [
+              "registryRead"
+            ],
+            "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+            "cpu_seconds": 0.171875,
+            "cpu_time_limit_seconds": 3,
+            "elapsed_seconds": 0.3678,
+            "lpac": true,
+            "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+            "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+            "memory_limit_bytes": 201326592,
+            "package_sid": "S-1-15-2-902099545-2205846490-4133325776-865365733-918718607-181722228-3745170557",
+            "peak_process_memory_bytes": 12369920,
+            "pid": 10076,
+            "runtime_bytes": 22904399,
+            "wall_time_limit_seconds": 12
+          },
+          "passed": true
+        }
+      }
+    ],
+    "base": {
+      "active": "55c589c71d78e4c76e2a88e67768cdfad526a0c301c488c21e8a996e21846f6d",
+      "generation": 5,
+      "previous": null,
+      "singleton": 1
+    },
+    "created_at": "2026-10-16T21:36:50.601202+00:00",
+    "error": "evolution_execution_recovered",
+    "events": [
+      {
+        "at": "2026-10-16T21:36:50.641151+00:00",
+        "phase": "STARTED"
+      },
+      {
+        "at": "2026-10-16T21:36:51.614139+00:00",
+        "phase": "ROLLED_BACK"
+      },
+      {
+        "at": "2026-10-16T21:36:52.181520+00:00",
+        "phase": "GENERATING"
+      },
+      {
+        "at": "2026-10-16T21:37:07.288907+00:00",
+        "phase": "VALIDATING"
+      },
+      {
+        "at": "2026-10-16T21:37:07.827449+00:00",
+        "phase": "ACTIVATED"
+      },
+      {
+        "at": "2026-10-16T21:37:08.314799+00:00",
+        "phase": "OBSERVED"
+      },
+      {
+        "at": "2026-10-16T21:37:08.331050+00:00",
+        "phase": "STOPPED"
+      }
+    ],
+    "id": "8d84a01e5cab48b59ab1359f252af98d",
+    "published": "1887f87c48b04d43b7f5f859f25334977f51d6a8d89352c73015bb44d3891a0b",
+    "request": {
+      "action": "execute",
+      "input": {
+        "entries": [
+          {
+            "path": "fixture.txt",
+            "size": 3
+          }
+        ],
+        "format": "csv"
+      },
+      "request_id": "fault-0721f4bde56148f1b48e10222d08ddac"
+    },
+    "result": null,
+    "rollback": {
+      "automatic": true,
+      "from": "780f5c65b07ef20c0e5fd8184cf48c3938b080ddf5342290dbc00f5fafba3090",
+      "to": "55c589c71d78e4c76e2a88e67768cdfad526a0c301c488c21e8a996e21846f6d"
+    },
+    "status": "FAILED",
+    "target_revision": 2,
+    "updated_at": "2026-10-16T21:37:08.332425+00:00"
+  },
+  "restart_preserved_verified_repair": true,
+  "original_failed_result_withheld": true,
+  "followup": {
+    "attempts": [],
+    "created_at": "2026-10-16T21:37:08.450439+00:00",
+    "error": null,
+    "events": [
+      {
+        "at": "2026-10-16T21:37:08.489768+00:00",
+        "phase": "STARTED"
+      },
+      {
+        "at": "2026-10-16T21:37:08.959355+00:00",
+        "phase": "FINISHED"
+      }
+    ],
+    "id": "89bde3a0a8f34e52890ce32fb3078490",
+    "request": {
+      "action": "execute",
+      "input": {
+        "entries": [
+          {
+            "path": "fixture.txt",
+            "size": 3
+          }
+        ],
+        "format": "tsv"
+      },
+      "request_id": "recovered-8b6acce899ac4f389f714eb14addfedf"
+    },
+    "result": {
+      "isolation": {
+        "active_process_limit": 1,
+        "appcontainer": true,
+        "backend": "windows-lpac-job",
+        "capabilities": [
+          "registryRead"
+        ],
+        "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+        "cpu_seconds": 0.15625,
+        "cpu_time_limit_seconds": 3,
+        "elapsed_seconds": 0.3143,
+        "lpac": true,
+        "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+        "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+        "memory_limit_bytes": 201326592,
+        "package_sid": "S-1-15-2-3852406498-1239559160-2039923498-4012043047-2516250155-422762755-3750741865",
+        "peak_process_memory_bytes": 12947456,
+        "pid": 47096,
+        "runtime_bytes": 22904399,
+        "wall_time_limit_seconds": 12
+      },
+      "package": "1887f87c48b04d43b7f5f859f25334977f51d6a8d89352c73015bb44d3891a0b",
+      "result_digest": "sha256:6f170134cdbfad3f657bd0873839f0d1a57393c7b6566357ad266fa7b32062b5",
+      "text": "path\tsize\nfixture.txt\t3\n"
+    },
+    "status": "SUCCEEDED",
+    "updated_at": "2026-10-16T21:37:08.960644+00:00"
+  },
+  "paid_model_calls": 1
+}

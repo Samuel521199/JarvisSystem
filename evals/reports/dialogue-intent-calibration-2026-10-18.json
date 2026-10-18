@@ -1,0 +1,751 @@
+{
+  "status": "COMPLETED",
+  "source_version": "0.1.55",
+  "engine": "dialogue-intent-shadow-v1",
+  "split": "calibration",
+  "route": "vertex::gemini-3.1-pro-preview",
+  "cases": 8,
+  "completed": 8,
+  "per_class": {
+    "chat": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "f1": 1.0
+    },
+    "question": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "f1": 1.0
+    },
+    "emotion": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "f1": 1.0
+    },
+    "action": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 0,
+      "f1": 1.0
+    },
+    "control": {
+      "tp": 1,
+      "fp": 1,
+      "fn": 0,
+      "f1": 0.6667
+    },
+    "memory": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "f1": 0.0
+    },
+    "other": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "f1": null
+    }
+  },
+  "macro_f1_present_classes": 0.7778,
+  "exact_label_matches": 7,
+  "effect_polarity_matches": 8,
+  "false_requested_effects": [],
+  "missed_requested_effects": [],
+  "unrecognized": [],
+  "task_count": 0,
+  "elapsed_seconds": 48.75,
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/intent.py": "6ab0f74103e51cd90eef9fc53dc366d982106572ae2f289f20a6c222f66f1bd5",
+    "runtime/node-host/jarvis_core/chat.py": "7249143ac0f2e5021d617652da236e5a39b4a563e6f69fce49b08725bd0f7030",
+    "runtime/node-host/jarvis_core/turns.py": "dfe1605d63062a142e959f9251cb4a52b652a619d9ad31d13368baaab86fe8e9",
+    "runtime/node-host/jarvis_core/dialogue_process.py": "a953d94544890d7b3cb2dc26e1b17af9b4cdd34f75acb1373e4c257cb8cfe342",
+    "runtime/node-host/jarvis_core/dialogue_worker.py": "0a4141da07a71f46c9fec84ed00a16de5bc48f7aa70c57be7bb2abfc2cad9317",
+    "runtime/node-host/jarvis_core/assistant_context.py": "e5bb132969024d1225bbcefcce22e5dd3562249d24870c5434aef4ec1b0571a3",
+    "evals/cases/dialogue-intent-pilot.json": "089f32e5cf00578369f434f6a44793e25867b1ef6c9e900d9584765576009cfe",
+    "tools/evaluate_dialogue_intent.py": "f7e0c8a7fa749f940d5745d9e90234700e24d8c8d809d3b06d7ce89d6cf8a63b"
+  },
+  "source_changed": false,
+  "results": [
+    {
+      "id": "C01",
+      "text": "你好，今天想和你随便聊聊天。",
+      "expected": [
+        "chat"
+      ],
+      "predicted": [
+        "chat"
+      ],
+      "expected_effect": false,
+      "predicted_effect": false,
+      "documentation_match": null,
+      "needs_clarification": false,
+      "decision": {
+        "state": "recognized",
+        "interaction_style": "warm",
+        "intents": [
+          {
+            "kind": "chat",
+            "quote": "想和你随便聊聊天",
+            "disposition": "requested",
+            "capability": null,
+            "arguments": {},
+            "missing_fields": [],
+            "source_span": {
+              "start": 5,
+              "end": 13
+            },
+            "execution": "not_submitted",
+            "intent_id": "c98a64763924951bdad84f3fa29b8ec6-1"
+          }
+        ],
+        "schema_version": 1,
+        "mode": "shadow",
+        "engine": "dialogue-intent-shadow-v1",
+        "automatic_execution": false,
+        "provider": "vertex",
+        "model": "gemini-3.1-pro-preview",
+        "decision_id": "c98a64763924951bdad84f3fa29b8ec6",
+        "turn_id": "4fc3830262cc40329974e13923382145",
+        "revision": 1
+      },
+      "status": "SUCCEEDED",
+      "reply": "你好！很高兴能陪你聊天。今天过得怎么样？有没有遇到什么有趣的事情，或者有什么特别想聊的话题？随便说什么都可以哦。",
+      "error": null,
+      "usage": {
+        "promptTokenCount": 657,
+        "candidatesTokenCount": 128,
+        "totalTokenCount": 1070,
+        "thoughtsTokenCount": 285
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.00627,
+        "currency": "USD",
+        "tokens": {
+          "input": 657,
+          "output": 413,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 1070,
+          "reasoning": 285
+        },
+        "price": {
+          "input": 2,
+          "output": 12,
+          "cache_read": 0.2,
+          "cache_write": null,
+          "max_input_tokens": 200000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "attempts": 1,
+      "elapsed_seconds": 10.372
+    },
+    {
+      "id": "C02",
+      "text": "什么是向量数据库？请简单解释。",
+      "expected": [
+        "question"
+      ],
+      "predicted": [
+        "question"
+      ],
+      "expected_effect": false,
+      "predicted_effect": false,
+      "documentation_match": null,
+      "needs_clarification": false,
+      "decision": {
+        "state": "recognized",
+        "interaction_style": "concise",
+        "intents": [
+          {
+            "kind": "question",
+            "quote": "什么是向量数据库？请简单解释。",
+            "disposition": "requested",
+            "capability": null,
+            "arguments": {},
+            "missing_fields": [],
+            "source_span": {
+              "start": 0,
+              "end": 15
+            },
+            "execution": "not_submitted",
+            "intent_id": "a5fc6eba9c95f2b0901e52c52ee2b46a-1"
+          }
+        ],
+        "schema_version": 1,
+        "mode": "shadow",
+        "engine": "dialogue-intent-shadow-v1",
+        "automatic_execution": false,
+        "provider": "vertex",
+        "model": "gemini-3.1-pro-preview",
+        "decision_id": "a5fc6eba9c95f2b0901e52c52ee2b46a",
+        "turn_id": "b6f658dc94cd4a349db9ecb8f5830b15",
+        "revision": 1
+      },
+      "status": "SUCCEEDED",
+      "reply": "向量数据库是一种专门用于存储、管理和查询高维向量数据的数据库。它将文本、图像、音频等非结构化数据转化为数学向量（Embedding），通过计算向量间的相似度（如余弦相似度）来快速检索相关内容，是实现大模型语义搜索和检索增强生成（RAG）的核心技术。",
+      "error": null,
+      "usage": {
+        "promptTokenCount": 656,
+        "candidatesTokenCount": 124,
+        "totalTokenCount": 1053,
+        "thoughtsTokenCount": 273
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.006076,
+        "currency": "USD",
+        "tokens": {
+          "input": 656,
+          "output": 397,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 1053,
+          "reasoning": 273
+        },
+        "price": {
+          "input": 2,
+          "output": 12,
+          "cache_read": 0.2,
+          "cache_write": null,
+          "max_input_tokens": 200000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "attempts": 1,
+      "elapsed_seconds": 10.883
+    },
+    {
+      "id": "C03",
+      "text": "我很失落，能陪陪我吗？",
+      "expected": [
+        "emotion"
+      ],
+      "predicted": [
+        "emotion"
+      ],
+      "expected_effect": false,
+      "predicted_effect": false,
+      "documentation_match": null,
+      "needs_clarification": false,
+      "decision": {
+        "state": "recognized",
+        "interaction_style": "empathetic",
+        "intents": [
+          {
+            "kind": "emotion",
+            "quote": "我很失落，能陪陪我吗？",
+            "disposition": "requested",
+            "capability": null,
+            "arguments": {},
+            "missing_fields": [],
+            "source_span": {
+              "start": 0,
+              "end": 11
+            },
+            "execution": "not_submitted",
+            "intent_id": "252d1d6716716750aa8b0b87274394e3-1"
+          }
+        ],
+        "schema_version": 1,
+        "mode": "shadow",
+        "engine": "dialogue-intent-shadow-v1",
+        "automatic_execution": false,
+        "provider": "vertex",
+        "model": "gemini-3.1-pro-preview",
+        "decision_id": "252d1d6716716750aa8b0b87274394e3",
+        "turn_id": "7505e93141f4404d81da7a09a2d3d94e",
+        "revision": 1
+      },
+      "status": "SUCCEEDED",
+      "reply": "我在这里陪着你。感到失落是很正常的情绪，想说说发生了什么吗？如果不想说也没关系，我会一直静静地陪伴你。无论你需要什么，我都在这里。",
+      "error": null,
+      "usage": {
+        "promptTokenCount": 658,
+        "candidatesTokenCount": 98,
+        "totalTokenCount": 1103,
+        "thoughtsTokenCount": 347
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.006656,
+        "currency": "USD",
+        "tokens": {
+          "input": 658,
+          "output": 445,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 1103,
+          "reasoning": 347
+        },
+        "price": {
+          "input": 2,
+          "output": 12,
+          "cache_read": 0.2,
+          "cache_write": null,
+          "max_input_tokens": 200000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "attempts": 1,
+      "elapsed_seconds": 11.634
+    },
+    {
+      "id": "C04",
+      "text": "请把样例目录按文件类型统计并输出报告。",
+      "expected": [
+        "action"
+      ],
+      "predicted": [
+        "action"
+      ],
+      "expected_effect": true,
+      "predicted_effect": true,
+      "documentation_match": null,
+      "needs_clarification": false,
+      "decision": {
+        "state": "recognized",
+        "interaction_style": "neutral",
+        "intents": [
+          {
+            "kind": "action",
+            "quote": "请把样例目录按文件类型统计并输出报告",
+            "disposition": "requested",
+            "capability": null,
+            "arguments": {},
+            "missing_fields": [],
+            "source_span": {
+              "start": 0,
+              "end": 18
+            },
+            "execution": "not_submitted",
+            "intent_id": "7f844f60ee9c9f5d7a9e9d6ecd552971-1"
+          }
+        ],
+        "schema_version": 1,
+        "mode": "shadow",
+        "engine": "dialogue-intent-shadow-v1",
+        "automatic_execution": false,
+        "provider": "vertex",
+        "model": "gemini-3.1-pro-preview",
+        "decision_id": "7f844f60ee9c9f5d7a9e9d6ecd552971",
+        "turn_id": "6c65e03d10464dae8625fde704fa0275",
+        "revision": 1
+      },
+      "status": "SUCCEEDED",
+      "reply": "抱歉，我目前无法直接访问本地文件系统或执行目录统计。系统限制了我浏览本地文件和执行此类任务的能力。如果您能以文本形式提供文件列表，我很乐意帮您进行分类并生成统计报告。",
+      "error": null,
+      "usage": {
+        "promptTokenCount": 660,
+        "candidatesTokenCount": 105,
+        "totalTokenCount": 1340,
+        "thoughtsTokenCount": 575
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.00948,
+        "currency": "USD",
+        "tokens": {
+          "input": 660,
+          "output": 680,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 1340,
+          "reasoning": 575
+        },
+        "price": {
+          "input": 2,
+          "output": 12,
+          "cache_read": 0.2,
+          "cache_write": null,
+          "max_input_tokens": 200000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "attempts": 1,
+      "elapsed_seconds": 12.572
+    },
+    {
+      "id": "C05",
+      "text": "取消正在生成的那份报告。",
+      "expected": [
+        "control"
+      ],
+      "predicted": [
+        "control"
+      ],
+      "expected_effect": true,
+      "predicted_effect": true,
+      "documentation_match": null,
+      "needs_clarification": false,
+      "decision": {
+        "state": "recognized",
+        "interaction_style": "neutral",
+        "intents": [
+          {
+            "kind": "control",
+            "quote": "取消正在生成的那份报告",
+            "disposition": "requested",
+            "capability": null,
+            "arguments": {},
+            "missing_fields": [],
+            "source_span": {
+              "start": 0,
+              "end": 11
+            },
+            "execution": "not_submitted",
+            "intent_id": "1c2488e80d74c7c369e7747681acea68-1"
+          }
+        ],
+        "schema_version": 1,
+        "mode": "shadow",
+        "engine": "dialogue-intent-shadow-v1",
+        "automatic_execution": false,
+        "provider": "vertex",
+        "model": "gemini-3.1-pro-preview",
+        "decision_id": "1c2488e80d74c7c369e7747681acea68",
+        "turn_id": "3176b4c4e16b49189db95292d94dba87",
+        "revision": 1
+      },
+      "status": "SUCCEEDED",
+      "reply": "抱歉，我无法在此处直接取消正在生成的报告。我的操作仅限于识别您的意图，暂未执行任何实际的取消指令。如果您有相关的后台任务正在运行，请通过相应的任务界面或控制台进行手动停止。",
+      "error": null,
+      "usage": {
+        "promptTokenCount": 655,
+        "candidatesTokenCount": 147,
+        "totalTokenCount": 1263,
+        "thoughtsTokenCount": 461
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.008606,
+        "currency": "USD",
+        "tokens": {
+          "input": 655,
+          "output": 608,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 1263,
+          "reasoning": 461
+        },
+        "price": {
+          "input": 2,
+          "output": 12,
+          "cache_read": 0.2,
+          "cache_write": null,
+          "max_input_tokens": 200000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "attempts": 1,
+      "elapsed_seconds": 12.816
+    },
+    {
+      "id": "C06",
+      "text": "以后回答尽量简短一些。",
+      "expected": [
+        "memory"
+      ],
+      "predicted": [
+        "control"
+      ],
+      "expected_effect": true,
+      "predicted_effect": true,
+      "documentation_match": null,
+      "needs_clarification": false,
+      "decision": {
+        "state": "recognized",
+        "interaction_style": "concise",
+        "intents": [
+          {
+            "kind": "control",
+            "quote": "以后回答尽量简短一些。",
+            "disposition": "requested",
+            "capability": null,
+            "arguments": {},
+            "missing_fields": [],
+            "source_span": {
+              "start": 0,
+              "end": 11
+            },
+            "execution": "not_submitted",
+            "intent_id": "ff4b656f56eff8b635cee015a1ecd8a4-1"
+          }
+        ],
+        "schema_version": 1,
+        "mode": "shadow",
+        "engine": "dialogue-intent-shadow-v1",
+        "automatic_execution": false,
+        "provider": "vertex",
+        "model": "gemini-3.1-pro-preview",
+        "decision_id": "ff4b656f56eff8b635cee015a1ecd8a4",
+        "turn_id": "891ccf3f02fc46a7aced6ac77e796e22",
+        "revision": 1
+      },
+      "status": "SUCCEEDED",
+      "reply": "好的，我以后的回答会尽量简短。",
+      "error": null,
+      "usage": {
+        "promptTokenCount": 655,
+        "candidatesTokenCount": 64,
+        "totalTokenCount": 1119,
+        "thoughtsTokenCount": 400
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.006878,
+        "currency": "USD",
+        "tokens": {
+          "input": 655,
+          "output": 464,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 1119,
+          "reasoning": 400
+        },
+        "price": {
+          "input": 2,
+          "output": 12,
+          "cache_read": 0.2,
+          "cache_write": null,
+          "max_input_tokens": 200000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "attempts": 1,
+      "elapsed_seconds": 10.61
+    },
+    {
+      "id": "C07",
+      "text": "先别整理文件，我只想问这样做有哪些风险。",
+      "expected": [
+        "action",
+        "question"
+      ],
+      "predicted": [
+        "action",
+        "question"
+      ],
+      "expected_effect": false,
+      "predicted_effect": false,
+      "documentation_match": null,
+      "needs_clarification": false,
+      "decision": {
+        "state": "recognized",
+        "interaction_style": "neutral",
+        "intents": [
+          {
+            "kind": "action",
+            "quote": "先别整理文件",
+            "disposition": "negated",
+            "capability": null,
+            "arguments": {},
+            "missing_fields": [],
+            "source_span": {
+              "start": 0,
+              "end": 6
+            },
+            "execution": "not_submitted",
+            "intent_id": "435978dbf5edc4833a54136f1536dfaa-1"
+          },
+          {
+            "kind": "question",
+            "quote": "我只想问这样做有哪些风险",
+            "disposition": "requested",
+            "capability": null,
+            "arguments": {},
+            "missing_fields": [],
+            "source_span": {
+              "start": 7,
+              "end": 19
+            },
+            "execution": "not_submitted",
+            "intent_id": "435978dbf5edc4833a54136f1536dfaa-2"
+          }
+        ],
+        "schema_version": 1,
+        "mode": "shadow",
+        "engine": "dialogue-intent-shadow-v1",
+        "automatic_execution": false,
+        "provider": "vertex",
+        "model": "gemini-3.1-pro-preview",
+        "decision_id": "435978dbf5edc4833a54136f1536dfaa",
+        "turn_id": "d105c92c3e144f708547899d2d11268c",
+        "revision": 1
+      },
+      "status": "SUCCEEDED",
+      "reply": "好的，我暂时不整理文件。关于“这样做”的风险，这取决于您具体指代的操作。通常未确认的操作可能导致数据覆盖、文件丢失或系统状态混乱。请您具体说明指的是哪项操作，我再为您详细分析。",
+      "error": null,
+      "usage": {
+        "promptTokenCount": 660,
+        "candidatesTokenCount": 136,
+        "totalTokenCount": 1414,
+        "thoughtsTokenCount": 618
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.010368,
+        "currency": "USD",
+        "tokens": {
+          "input": 660,
+          "output": 754,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 1414,
+          "reasoning": 618
+        },
+        "price": {
+          "input": 2,
+          "output": 12,
+          "cache_read": 0.2,
+          "cache_write": null,
+          "max_input_tokens": 200000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "attempts": 1,
+      "elapsed_seconds": 12.888
+    },
+    {
+      "id": "C08",
+      "text": "我有点难过，陪我聊聊，顺便查询 React 文档中的 useEffect 清理函数。",
+      "expected": [
+        "action",
+        "emotion"
+      ],
+      "predicted": [
+        "action",
+        "emotion"
+      ],
+      "expected_effect": true,
+      "predicted_effect": true,
+      "documentation_match": null,
+      "needs_clarification": false,
+      "decision": {
+        "state": "recognized",
+        "interaction_style": "empathetic",
+        "intents": [
+          {
+            "kind": "emotion",
+            "quote": "我有点难过，陪我聊聊",
+            "disposition": "requested",
+            "capability": null,
+            "arguments": {},
+            "missing_fields": [],
+            "source_span": {
+              "start": 0,
+              "end": 10
+            },
+            "execution": "not_submitted",
+            "intent_id": "ca19bb83f8f162003c0eca3a0e7e07c2-1"
+          },
+          {
+            "kind": "action",
+            "quote": "查询 React 文档中的 useEffect 清理函数",
+            "disposition": "requested",
+            "capability": "mcp.documentation",
+            "arguments": {
+              "library": "React",
+              "query": "useEffect 清理函数"
+            },
+            "missing_fields": [],
+            "source_span": {
+              "start": 13,
+              "end": 41
+            },
+            "execution": "not_submitted",
+            "intent_id": "ca19bb83f8f162003c0eca3a0e7e07c2-2"
+          }
+        ],
+        "schema_version": 1,
+        "mode": "shadow",
+        "engine": "dialogue-intent-shadow-v1",
+        "automatic_execution": false,
+        "provider": "vertex",
+        "model": "gemini-3.1-pro-preview",
+        "decision_id": "ca19bb83f8f162003c0eca3a0e7e07c2",
+        "turn_id": "cb10bb37370a4346822690dab7cbe64a",
+        "revision": 1
+      },
+      "status": "SUCCEEDED",
+      "reply": "别难过，我在这里陪你。关于 React 的 useEffect 清理函数，它通常在组件卸载或依赖变化前执行，用于清除定时器或订阅等。当前文档查询请求尚未实际提交，如果你需要深入了解，我可以随时为你解答更多细节。",
+      "error": null,
+      "usage": {
+        "promptTokenCount": 670,
+        "candidatesTokenCount": 243,
+        "totalTokenCount": 1501,
+        "thoughtsTokenCount": 588
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.011312,
+        "currency": "USD",
+        "tokens": {
+          "input": 670,
+          "output": 831,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 1501,
+          "reasoning": 588
+        },
+        "price": {
+          "input": 2,
+          "output": 12,
+          "cache_read": 0.2,
+          "cache_write": null,
+          "max_input_tokens": 200000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "attempts": 1,
+      "elapsed_seconds": 13.888
+    }
+  ],
+  "limits": "Pilot only; classification labels remain reference judgments. 200-case V-DLG and target binding/fairness/voice gates not passed. No execution is wired to candidates; zero tasks is architectural, not evidence of semantic perfection. No retries or fallback.",
+  "effect_polarity_evaluable": 8,
+  "metric_correction": "Post-run scoring correction only: invalid interpretation is unevaluable, not a correct negative. Original labels, replies, raw decisions and source hashes unchanged; no additional model calls.",
+  "estimated_cost_usd": 0.065646,
+  "latency_seconds": {
+    "min": 10.372,
+    "max": 13.888,
+    "p50": 11.634,
+    "p95_nearest_rank": 13.888
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "version": "0.1.24",
+  "captured_at": "2026-10-16T09:32:46.087768+00:00",
+  "status": "passed",
+  "checks": [
+    "ordinary text auto-archives; reload restores transcript, note and usable history; no inactive file panel or Save Answer button",
+    "delete removes archive; delayed writes from an already-open tab cannot resurrect it",
+    "temporary conversations are never archived and vanish on reload",
+    "archive failure is visible without blocking chat; retry saves exactly one conversation",
+    "attachment contents excluded from archive; restored history excludes incomplete attachment-dependent turns",
+    "project-only compact file menu retains automatic and explicit exports with real file receipts",
+    "desktop/mobile layout and keyboard menu closing; no browser script errors"
+  ],
+  "model_fixture_calls": 7,
+  "page_errors": [],
+  "screenshots": [
+    "H:\\JarvisData\\research\\conversation-ui\\desktop.png",
+    "H:\\JarvisData\\research\\conversation-ui\\mobile.png"
+  ],
+  "limits": [
+    "Synthetic model replies; no cloud calls.",
+    "Local chat text archive only; no automatic long-term fact extraction or indexing.",
+    "Attachments and drafts are excluded. Closing before save acknowledgement may lose latest displayed changes."
+  ]
+}

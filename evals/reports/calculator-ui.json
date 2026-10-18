@@ -1,0 +1,30 @@
+{
+  "version": "0.1.37",
+  "captured_at": "2026-10-16T21:07:39.085204+00:00",
+  "status": "passed",
+  "checks": [
+    "40/40 original arithmetic requests return exact 42 through Host, with zero inference dispatches",
+    "Real UI formats results and builtin metadata, keeps existing chat history, and restores truthful local-source labels after archive reload",
+    "Explicit /计算 works when model catalog is unavailable; core remains connected and ordinary non-model-free requests stay disabled"
+  ],
+  "replayed_failure_case": {
+    "samples": 40,
+    "correct": 40,
+    "p50_http_ms": 36.881,
+    "max_http_ms": 61.428
+  },
+  "completed_calculations": 46,
+  "model_calls": 0,
+  "paid_calls": 0,
+  "page_errors": [],
+  "screenshots": [
+    "C:\\Users\\samuel\\AppData\\Local\\Jarvis\\data\\diagnostics\\calculator\\calculator-desktop.png",
+    "C:\\Users\\samuel\\AppData\\Local\\Jarvis\\data\\diagnostics\\calculator\\calculator-mobile.png",
+    "C:\\Users\\samuel\\AppData\\Local\\Jarvis\\data\\diagnostics\\calculator\\calculator-module.png"
+  ],
+  "limits": [
+    "Host arithmetic route success does not improve or certify raw model arithmetic.",
+    "Broken model catalog is injected at browser HTTP boundary; independent Python test forbids reading model configuration.",
+    "Temporary records only, no source/production changes or model download."
+  ]
+}

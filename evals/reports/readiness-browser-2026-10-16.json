@@ -1,0 +1,334 @@
+{
+  "scope": "real Edge and real Vertex planner; synthetic local form only; scripted=False",
+  "record": {
+    "task": {
+      "authorization_ref": "local:browser-task:0ca8507196dcb1cdac6583b267ffb12722058cef285dd34c2b53d2ffad07a021",
+      "budget": {
+        "max_attempts": 1,
+        "max_cost_units": 30,
+        "max_runtime_seconds": 300
+      },
+      "cancellation_ref": "cancel_9790973925795242a86809360f09ced2",
+      "checkpoint_schema": "task.checkpoint.v1",
+      "created_at": "2026-10-16T07:38:03.796962+00:00",
+      "goal_id": "goal_9790973925795242a86809360f09ced2",
+      "owner_epoch": 1,
+      "owner_node_id": "node_d096af37-8f53-4e6a-9328-c7eada255db1",
+      "parent_task_id": null,
+      "planning_policy_version": "1.0.0",
+      "required_capabilities": [
+        "browser.operate.v1",
+        "artifact.write.v1"
+      ],
+      "result_refs": [
+        "artifact_9790973925795242a86809360f09ced2"
+      ],
+      "schema_version": "1.0.0",
+      "scope": "local",
+      "skill_version": "1.0.0",
+      "status": "SUCCEEDED",
+      "task_id": "task_9790973925795242a86809360f09ced2",
+      "title": "Scoped browser operation",
+      "updated_at": "2026-10-16T07:38:32.127546+00:00",
+      "workflow_version": "1.0.0"
+    },
+    "action": {
+      "action_id": "act_9790973925795242a86809360f09ced2",
+      "arguments": {
+        "demo": true,
+        "model": "vertex::gemini-3.8-flash",
+        "scripted": false,
+        "task": {
+          "allowed_origins": [
+            "https://jarvis-demo.invalid"
+          ],
+          "goal": "把项目名称填写为 Jarvis Demo，类别选择 research，勾选启用，最后点击保存。",
+          "max_steps": 6,
+          "schema_version": 1,
+          "success": {
+            "role": "status",
+            "text": "已保存：Jarvis Demo / research / enabled"
+          },
+          "targets": [
+            {
+              "actions": [
+                "fill"
+              ],
+              "id": "project",
+              "name": "项目名称",
+              "role": "textbox",
+              "values": [
+                "Jarvis Demo"
+              ]
+            },
+            {
+              "actions": [
+                "select"
+              ],
+              "id": "category",
+              "name": "类别",
+              "role": "combobox",
+              "values": [
+                "research"
+              ]
+            },
+            {
+              "actions": [
+                "check"
+              ],
+              "id": "enabled",
+              "name": "启用",
+              "role": "checkbox",
+              "values": [
+                true
+              ]
+            },
+            {
+              "actions": [
+                "click"
+              ],
+              "id": "save",
+              "name": "保存",
+              "role": "button",
+              "values": []
+            }
+          ],
+          "timeout_seconds": 300,
+          "url": "https://jarvis-demo.invalid/"
+        }
+      },
+      "arguments_digest": "sha256:0ca8507196dcb1cdac6583b267ffb12722058cef285dd34c2b53d2ffad07a021",
+      "attempt_id": "attempt_1888e8e81df449cd9fac7bcbb343e95c",
+      "capability_id": "browser.operate.v1",
+      "enforcement_policy_version": "1.0.0",
+      "host_epoch": 1,
+      "host_instance_id": "host_e1c954c8a76245108b2ddf6039cbd8e6",
+      "idempotency_support": "none",
+      "intent_id": "intent_9790973925795242a86809360f09ced2",
+      "owner_epoch": 1,
+      "receipt_ref": "artifact_9790973925795242a86809360f09ced2",
+      "resource_id": "browser-task",
+      "schema_version": "1.0.0",
+      "status": "CONFIRMED",
+      "task_id": "task_9790973925795242a86809360f09ced2"
+    },
+    "artifact": {
+      "action_id": "act_9790973925795242a86809360f09ced2",
+      "artifact_id": "artifact_9790973925795242a86809360f09ced2",
+      "digest": "sha256:c81bfb66d2125b118f840738faa8c5b66dbc0598e44fef0ee0414fea5cfbb98f",
+      "media_type": "application/json",
+      "path": "act_9790973925795242a86809360f09ced2.json",
+      "schema_version": "1.0.0",
+      "size_bytes": 3162,
+      "task_id": "task_9790973925795242a86809360f09ced2"
+    },
+    "cancel_requested": false
+  },
+  "detail": {
+    "record": {
+      "task": {
+        "authorization_ref": "local:browser-task:0ca8507196dcb1cdac6583b267ffb12722058cef285dd34c2b53d2ffad07a021",
+        "budget": {
+          "max_attempts": 1,
+          "max_cost_units": 30,
+          "max_runtime_seconds": 300
+        },
+        "cancellation_ref": "cancel_9790973925795242a86809360f09ced2",
+        "checkpoint_schema": "task.checkpoint.v1",
+        "created_at": "2026-10-16T07:38:03.796962+00:00",
+        "goal_id": "goal_9790973925795242a86809360f09ced2",
+        "owner_epoch": 1,
+        "owner_node_id": "node_d096af37-8f53-4e6a-9328-c7eada255db1",
+        "parent_task_id": null,
+        "planning_policy_version": "1.0.0",
+        "required_capabilities": [
+          "browser.operate.v1",
+          "artifact.write.v1"
+        ],
+        "result_refs": [
+          "artifact_9790973925795242a86809360f09ced2"
+        ],
+        "schema_version": "1.0.0",
+        "scope": "local",
+        "skill_version": "1.0.0",
+        "status": "SUCCEEDED",
+        "task_id": "task_9790973925795242a86809360f09ced2",
+        "title": "Scoped browser operation",
+        "updated_at": "2026-10-16T07:38:32.127546+00:00",
+        "workflow_version": "1.0.0"
+      },
+      "action": {
+        "action_id": "act_9790973925795242a86809360f09ced2",
+        "arguments": {
+          "demo": true,
+          "model": "vertex::gemini-3.8-flash",
+          "scripted": false,
+          "task": {
+            "allowed_origins": [
+              "https://jarvis-demo.invalid"
+            ],
+            "goal": "把项目名称填写为 Jarvis Demo，类别选择 research，勾选启用，最后点击保存。",
+            "max_steps": 6,
+            "schema_version": 1,
+            "success": {
+              "role": "status",
+              "text": "已保存：Jarvis Demo / research / enabled"
+            },
+            "targets": [
+              {
+                "actions": [
+                  "fill"
+                ],
+                "id": "project",
+                "name": "项目名称",
+                "role": "textbox",
+                "values": [
+                  "Jarvis Demo"
+                ]
+              },
+              {
+                "actions": [
+                  "select"
+                ],
+                "id": "category",
+                "name": "类别",
+                "role": "combobox",
+                "values": [
+                  "research"
+                ]
+              },
+              {
+                "actions": [
+                  "check"
+                ],
+                "id": "enabled",
+                "name": "启用",
+                "role": "checkbox",
+                "values": [
+                  true
+                ]
+              },
+              {
+                "actions": [
+                  "click"
+                ],
+                "id": "save",
+                "name": "保存",
+                "role": "button",
+                "values": []
+              }
+            ],
+            "timeout_seconds": 300,
+            "url": "https://jarvis-demo.invalid/"
+          }
+        },
+        "arguments_digest": "sha256:0ca8507196dcb1cdac6583b267ffb12722058cef285dd34c2b53d2ffad07a021",
+        "attempt_id": "attempt_1888e8e81df449cd9fac7bcbb343e95c",
+        "capability_id": "browser.operate.v1",
+        "enforcement_policy_version": "1.0.0",
+        "host_epoch": 1,
+        "host_instance_id": "host_e1c954c8a76245108b2ddf6039cbd8e6",
+        "idempotency_support": "none",
+        "intent_id": "intent_9790973925795242a86809360f09ced2",
+        "owner_epoch": 1,
+        "receipt_ref": "artifact_9790973925795242a86809360f09ced2",
+        "resource_id": "browser-task",
+        "schema_version": "1.0.0",
+        "status": "CONFIRMED",
+        "task_id": "task_9790973925795242a86809360f09ced2"
+      },
+      "artifact": {
+        "action_id": "act_9790973925795242a86809360f09ced2",
+        "artifact_id": "artifact_9790973925795242a86809360f09ced2",
+        "digest": "sha256:c81bfb66d2125b118f840738faa8c5b66dbc0598e44fef0ee0414fea5cfbb98f",
+        "media_type": "application/json",
+        "path": "act_9790973925795242a86809360f09ced2.json",
+        "schema_version": "1.0.0",
+        "size_bytes": 3162,
+        "task_id": "task_9790973925795242a86809360f09ced2"
+      },
+      "cancel_requested": false
+    },
+    "steps": [
+      {
+        "ordinal": 0,
+        "state": "CONFIRMED",
+        "action_json": "{\"observation_id\":\"18459865c6964431bc80b3ebc6020d5a\",\"op\":\"fill\",\"target\":\"project\",\"value\":\"Jarvis Demo\"}",
+        "observation_digest": "df5e41ef3fd666687440f2b99521ed556821439a84fc6a7313888f2a8582c4df",
+        "model_json": "{\"completion_reason\":\"complete\",\"elapsed_seconds\":5.036,\"model\":\"gemini-3.8-flash\",\"notice\":[],\"output_incomplete\":false,\"provider\":\"vertex\",\"request_id\":\"8054186b408a43fe905f8c017e98d003\",\"status\":\"SUCCEEDED\",\"usage\":{\"candidatesTokenCount\":50,\"promptTokenCount\":963,\"totalTokenCount\":1013}}"
+      },
+      {
+        "ordinal": 1,
+        "state": "CONFIRMED",
+        "action_json": "{\"observation_id\":\"7530e3d5f4a541feb2f942ec1fd6e4d5\",\"op\":\"select\",\"target\":\"category\",\"value\":\"research\"}",
+        "observation_digest": "4b8ef29665c381df2334603469cd75eaee3c1932b55cf8040e659e73a260b3d9",
+        "model_json": "{\"completion_reason\":\"complete\",\"elapsed_seconds\":5.331,\"model\":\"gemini-3.8-flash\",\"notice\":[],\"output_incomplete\":false,\"provider\":\"vertex\",\"request_id\":\"c021d36e7e7d498e8d5c395bd7880cfe\",\"status\":\"SUCCEEDED\",\"usage\":{\"candidatesTokenCount\":46,\"promptTokenCount\":958,\"thoughtsTokenCount\":147,\"totalTokenCount\":1151}}"
+      },
+      {
+        "ordinal": 2,
+        "state": "CONFIRMED",
+        "action_json": "{\"observation_id\":\"d937a0fb3514480f910072964c979cf0\",\"op\":\"check\",\"target\":\"enabled\",\"value\":true}",
+        "observation_digest": "b185aef1ea3ebbd43fc5f71525d620615c799d6a66092be41fb63d1f1ab35373",
+        "model_json": "{\"completion_reason\":\"complete\",\"elapsed_seconds\":6.388,\"model\":\"gemini-3.8-flash\",\"notice\":[],\"output_incomplete\":false,\"provider\":\"vertex\",\"request_id\":\"93c4102b26b0498298fde85516ce4fa1\",\"status\":\"SUCCEEDED\",\"usage\":{\"candidatesTokenCount\":48,\"promptTokenCount\":955,\"thoughtsTokenCount\":262,\"totalTokenCount\":1265}}"
+      },
+      {
+        "ordinal": 3,
+        "state": "CONFIRMED",
+        "action_json": "{\"observation_id\":\"5fbed2bcfcbf43c2a64effcf27826fe4\",\"op\":\"click\",\"target\":\"save\",\"value\":null}",
+        "observation_digest": "0615ea65b2d4a8515c0715545e2192ccfe7f34b242a6961f7b7c2b5bb32040c8",
+        "model_json": "{\"completion_reason\":\"complete\",\"elapsed_seconds\":4.601,\"model\":\"gemini-3.8-flash\",\"notice\":[],\"output_incomplete\":false,\"provider\":\"vertex\",\"request_id\":\"c4834a499aed4d7c95ed3d339b2f8c3d\",\"status\":\"SUCCEEDED\",\"usage\":{\"candidatesTokenCount\":42,\"promptTokenCount\":951,\"totalTokenCount\":993}}"
+      }
+    ],
+    "report": {
+      "action_id": "act_9790973925795242a86809360f09ced2",
+      "blocked_requests": 0,
+      "budget_unit": "maximum model requests (at most five provider attempts per planning turn), not currency",
+      "kind": "jarvis.computer-use",
+      "observation_mode": "DOM; screenshots retained locally, not sent to the model",
+      "planner": "model",
+      "schema_version": 1,
+      "scope": "fresh browser context; fixed targets; no native desktop access",
+      "screenshot": {
+        "digest": "sha256:80c38aab579da73ed9de6afdf176cffdb3b11e095d21cf0a758634e0e8a43057",
+        "path": "act_9790973925795242a86809360f09ced2.png",
+        "size_bytes": 36050
+      },
+      "steps": [
+        {
+          "action_json": "{\"observation_id\":\"18459865c6964431bc80b3ebc6020d5a\",\"op\":\"fill\",\"target\":\"project\",\"value\":\"Jarvis Demo\"}",
+          "model_json": "{\"completion_reason\":\"complete\",\"elapsed_seconds\":5.036,\"model\":\"gemini-3.8-flash\",\"notice\":[],\"output_incomplete\":false,\"provider\":\"vertex\",\"request_id\":\"8054186b408a43fe905f8c017e98d003\",\"status\":\"SUCCEEDED\",\"usage\":{\"candidatesTokenCount\":50,\"promptTokenCount\":963,\"totalTokenCount\":1013}}",
+          "observation_digest": "df5e41ef3fd666687440f2b99521ed556821439a84fc6a7313888f2a8582c4df",
+          "ordinal": 0,
+          "state": "CONFIRMED"
+        },
+        {
+          "action_json": "{\"observation_id\":\"7530e3d5f4a541feb2f942ec1fd6e4d5\",\"op\":\"select\",\"target\":\"category\",\"value\":\"research\"}",
+          "model_json": "{\"completion_reason\":\"complete\",\"elapsed_seconds\":5.331,\"model\":\"gemini-3.8-flash\",\"notice\":[],\"output_incomplete\":false,\"provider\":\"vertex\",\"request_id\":\"c021d36e7e7d498e8d5c395bd7880cfe\",\"status\":\"SUCCEEDED\",\"usage\":{\"candidatesTokenCount\":46,\"promptTokenCount\":958,\"thoughtsTokenCount\":147,\"totalTokenCount\":1151}}",
+          "observation_digest": "4b8ef29665c381df2334603469cd75eaee3c1932b55cf8040e659e73a260b3d9",
+          "ordinal": 1,
+          "state": "CONFIRMED"
+        },
+        {
+          "action_json": "{\"observation_id\":\"d937a0fb3514480f910072964c979cf0\",\"op\":\"check\",\"target\":\"enabled\",\"value\":true}",
+          "model_json": "{\"completion_reason\":\"complete\",\"elapsed_seconds\":6.388,\"model\":\"gemini-3.8-flash\",\"notice\":[],\"output_incomplete\":false,\"provider\":\"vertex\",\"request_id\":\"93c4102b26b0498298fde85516ce4fa1\",\"status\":\"SUCCEEDED\",\"usage\":{\"candidatesTokenCount\":48,\"promptTokenCount\":955,\"thoughtsTokenCount\":262,\"totalTokenCount\":1265}}",
+          "observation_digest": "b185aef1ea3ebbd43fc5f71525d620615c799d6a66092be41fb63d1f1ab35373",
+          "ordinal": 2,
+          "state": "CONFIRMED"
+        },
+        {
+          "action_json": "{\"observation_id\":\"5fbed2bcfcbf43c2a64effcf27826fe4\",\"op\":\"click\",\"target\":\"save\",\"value\":null}",
+          "model_json": "{\"completion_reason\":\"complete\",\"elapsed_seconds\":4.601,\"model\":\"gemini-3.8-flash\",\"notice\":[],\"output_incomplete\":false,\"provider\":\"vertex\",\"request_id\":\"c4834a499aed4d7c95ed3d339b2f8c3d\",\"status\":\"SUCCEEDED\",\"usage\":{\"candidatesTokenCount\":42,\"promptTokenCount\":951,\"totalTokenCount\":993}}",
+          "observation_digest": "0615ea65b2d4a8515c0715545e2192ccfe7f34b242a6961f7b7c2b5bb32040c8",
+          "ordinal": 3,
+          "state": "CONFIRMED"
+        }
+      ],
+      "success": {
+        "role": "status",
+        "text": "已保存：Jarvis Demo / research / enabled"
+      },
+      "task_id": "task_9790973925795242a86809360f09ced2",
+      "verified": true
+    }
+  }
+}

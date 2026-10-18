@@ -1,0 +1,146 @@
+{
+  "status": "SUCCEEDED",
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/__init__.py": "697b0d54558325dd46835f739938dda4dd556aa49d5e0f98f4df40fd7fe41075",
+    "runtime/node-host/jarvis_core/intent.py": "0a8c0994ded78c4a85129ca8187b34b80c187911d88ca3b0da4bda73c7604c98",
+    "runtime/node-host/jarvis_core/chat.py": "c4bf9d9875b31091908415502ce7fef5e129a4656eddb14e56193791cb507a05",
+    "runtime/node-host/jarvis_core/turns.py": "dfe1605d63062a142e959f9251cb4a52b652a619d9ad31d13368baaab86fe8e9",
+    "runtime/node-host/jarvis_core/assistant_context.py": "e5bb132969024d1225bbcefcce22e5dd3562249d24870c5434aef4ec1b0571a3",
+    "runtime/node-host/jarvis_core/memory.py": "def528083be2775a2640a1ae4a1ee9f30fa10f0c2bc66d084a8c382570565af5",
+    "runtime/node-host/jarvis_core/semantic_candidates.py": "b8ff93b14c57771c8fe77eb7cd2b61309353da2107888786a7bffa704733450f",
+    "runtime/node-host/jarvis_core/mcp_candidates.py": "d456ba965d76d897f141007e0202a7f4aa3213ac6ec6651fd80558f0b0095120",
+    "runtime/node-host/jarvis_core/mcp_tasks.py": "ba38550eba48739abb87b5c5bb02ef17e77f235cf7537c23350943ba58327b94",
+    "apps/web/index.html": "a7bef9b4d6296a49eaa021728c8f5b35d0d25b433c8f66ad8c5fbec42da2c886",
+    "apps/web/dialogue.js": "89da5a7d326dc7d254ae6d71a4f3caf20e1a4cfa6a3b8fe6183840cf74dfad30",
+    "apps/web/conversation_tasks.js": "3539c7c08b918e46456168fc093939001bb5a86c47c9fee70565b15b133725e6",
+    "apps/web/personal_candidates.js": "656143561e2f51dc06e1d13f750cad30cd6c8b395a680fb31069d6c948906924",
+    "apps/web/server.py": "eb5fa4f741c1ae7b42a41528f3546cb0b798c4aefe794af92dc890f89c1b1483"
+  },
+  "reload": {
+    "status": "SUCCEEDED",
+    "source_version": "0.1.56",
+    "data_dir": "C:\\Users\\samuel\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\Jarvis\\data",
+    "previous_version": "0.1.55",
+    "previous_instance": "e1321ee8af435ca2155a04b0ee660ad8",
+    "current_instance": "d4f465e3990be0adb5361ffa9523507d",
+    "idle_graceful_reload": true,
+    "startup_from_absent": false,
+    "served_sha256": {
+      "dialogue.js": "89da5a7d326dc7d254ae6d71a4f3caf20e1a4cfa6a3b8fe6183840cf74dfad30",
+      "resources.js": "586e03243199134cec0c4da7bedde691f904f73ca8e7aee09ea2dd0202c99e2b",
+      "workspace.js": "8f5a1bd76ba701c36eabae00758ada7181460715d68d6d2479635508287c4a57",
+      "conversation_tasks.js": "3539c7c08b918e46456168fc093939001bb5a86c47c9fee70565b15b133725e6",
+      "mcp_manager.js": "0c74df31951193bbe830bdfe24a10eb90b9cb31bb604ce54109acc5fb1cd9702"
+    },
+    "calculation": "84",
+    "personal_read_only": true,
+    "duplicate_did_not_repeat_calculation": true,
+    "cancel_before_submit": true,
+    "restart_fence": true,
+    "instance_fence": true,
+    "empty_restart_queue_reviewed_and_resumed": true,
+    "admission_ms": 30.565,
+    "backups": {
+      "/api/speech/fast": "stopped",
+      "/api/speech": "stopped"
+    },
+    "cloud_calls": 0,
+    "limits": "One local calculator and personal-settings query; no paid model, microphone, task replay, persistent dialogue recovery or physical voice timing."
+  },
+  "probe_recovery": "Browser helper import and then nonce selector failed after successful reload, both before any live input/model call; fixed helper path and read existing page nonce binding, continued same instance without reloading.",
+  "test_conversation": "53cc7f82050f4b5b8e658051036e18c1",
+  "conversation_deleted": true,
+  "source_version": "0.1.56",
+  "reply_elapsed_seconds": 17.096,
+  "provider": "vertex",
+  "model": "gemini-3.8-flash",
+  "usage": {
+    "promptTokenCount": 697,
+    "candidatesTokenCount": 311,
+    "totalTokenCount": 1008
+  },
+  "billing": {
+    "basis": "estimated",
+    "amount": 0.001689,
+    "currency": "USD",
+    "tokens": {
+      "input": 697,
+      "output": 311,
+      "cache_read": 0,
+      "cache_write": 0,
+      "total": 1008,
+      "reasoning": 0
+    },
+    "price": {
+      "input": 0.75,
+      "output": 3.75,
+      "cache_read": 0.075,
+      "cache_write": null,
+      "max_input_tokens": 1000000,
+      "currency": "USD",
+      "fee_percent": 0,
+      "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+      "checked_at": "2026-10-16",
+      "valid_until": "2026-12-31"
+    },
+    "reason": "token_rates"
+  },
+  "model_attempts": 1,
+  "decision": {
+    "state": "recognized",
+    "interaction_style": "empathetic",
+    "intents": [
+      {
+        "kind": "emotion",
+        "quote": "我有点难过，陪我聊聊",
+        "disposition": "requested",
+        "capability": null,
+        "arguments": {},
+        "missing_fields": [],
+        "source_span": {
+          "start": 0,
+          "end": 10
+        },
+        "execution": "not_submitted",
+        "intent_id": "4affdb9a0142fa6c4810cc33fbfb57d3-1"
+      },
+      {
+        "kind": "action",
+        "quote": "查询 Electron 文档中的 ipcMain.handle 示例",
+        "disposition": "requested",
+        "capability": "mcp.documentation",
+        "arguments": {
+          "library": "Electron",
+          "query": "ipcMain.handle 示例"
+        },
+        "missing_fields": [],
+        "source_span": {
+          "start": 13,
+          "end": 47
+        },
+        "execution": "not_submitted",
+        "intent_id": "4affdb9a0142fa6c4810cc33fbfb57d3-2"
+      }
+    ],
+    "schema_version": 1,
+    "mode": "shadow",
+    "engine": "dialogue-intent-shadow-v1",
+    "automatic_execution": false,
+    "provider": "vertex",
+    "model": "gemini-3.8-flash",
+    "decision_id": "4affdb9a0142fa6c4810cc33fbfb57d3",
+    "turn_id": "2ae13a57ed154c35bfc1fd93eec82d44",
+    "revision": 1
+  },
+  "reply": "抱歉听到你心情不好，我就在这里，想聊聊发生了什么或者只是随便说说话都可以。关于 Electron 文档中的 ipcMain.handle，文档查询请求目前仅在识别阶段、尚未直接执行调取，不过我可以先为你提供常见的用法示例：\n\n```javascript\n// 主进程 (Main Process)\nconst { app, BrowserWindow, ipcMain } = require('electron');\n\nipcMain.handle('my-invokable-ipc', async (event, ...args) => {\n  const result = await someAsyncOperation(...args);\n  return result;\n});\n\n// 渲染进程 (Preload / Renderer 通过 contextBridge)\n// const result = await ipcRenderer.invoke('my-invokable-ipc', data);\n```\n\n如果你需要从官方文档源同步更新，可以通过专门的任务通道发起检索。现在感觉怎么样，想聊聊让你难过的事吗？",
+  "draft_library": "Electron",
+  "draft_query": "ipcMain.handle 示例",
+  "task_count": 0,
+  "mcp_calls": 0,
+  "automatic_execution": false,
+  "browser_errors": [],
+  "screenshot": "H:\\JarvisData\\diagnostics\\dialogue\\intent-live-draft.png",
+  "instance_id": "d4f465e3990be0adb5361ffa9523507d",
+  "source_changed": false,
+  "limits": "One actual default-route mixed request; no tool dispatch, no accuracy or latency population claim."
+}

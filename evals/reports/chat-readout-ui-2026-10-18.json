@@ -1,0 +1,81 @@
+{
+  "status": "SUCCEEDED",
+  "source_version": "0.1.45",
+  "first_click_to_native_media_play_seconds": 9.336,
+  "parallel_synthetic_chat_ms": 36.682200000086596,
+  "parallel_task": {
+    "task_id": "task_6f727736ac6d57eebd2e333f4ab52615",
+    "status": "SUCCEEDED",
+    "planner": "held synthetic plan",
+    "executor": "real fixed directory Worker"
+  },
+  "media_events": [
+    {
+      "type": "playing",
+      "time": 13489.799999999814
+    },
+    {
+      "type": "pause",
+      "time": 13519.299999999814
+    },
+    {
+      "type": "playing",
+      "time": 13541.200000000186
+    },
+    {
+      "type": "pause",
+      "time": 17815
+    },
+    {
+      "type": "ended",
+      "time": 17815
+    },
+    {
+      "type": "playing",
+      "time": 17855.799999999814
+    },
+    {
+      "type": "pause",
+      "time": 24555.5
+    },
+    {
+      "type": "ended",
+      "time": 24555.5
+    },
+    {
+      "type": "playing",
+      "time": 24607.899999999907
+    },
+    {
+      "type": "pause",
+      "time": 28195.799999999814
+    },
+    {
+      "type": "ended",
+      "time": 28195.799999999814
+    }
+  ],
+  "browser_errors": [],
+  "leading_hyphen_component_token_native_verified": true,
+  "rapid_restart_latest_wins": true,
+  "send_control_visible_at_1280x720": true,
+  "pause_resume": true,
+  "continuous_playback": true,
+  "conversation_switch_stops_old_reply": true,
+  "model_kept_warm_after_complete": 14396,
+  "backup_models_stayed_stopped": true,
+  "cloud_calls": 0,
+  "limits": "Native WAV generation and browser Audio events, not measured physical speaker onset. Synthetic chat/planner, real bounded task Worker. No microphone, full duplex or universal latency/quality claim.",
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/readout.py": "6333abb1e208f2fd768651df70345571ecb950fdcb603d0613c83456aefcb1c8",
+    "runtime/node-host/jarvis_core/readout_text.py": "181320c8e5f2226939d076bb2a2e2832405074dc50052b9e0432fb54e8b7b23d",
+    "runtime/node-host/jarvis_core/qwen_speech.py": "bde815326fc6d0756d63df40943ab4797fcdebeadb5703ba63953869da0e58d9",
+    "runtime/node-host/jarvis_core/speech.py": "29d33a35a35d505a64d1e9dded1fa5d7ef8ba1cec65a78bc2c2455a8f41750de",
+    "apps/web/readout.js": "935f7dd4f4c777943aa7d9aaf7745e716a032f0eadb707cd0da892b26c4bd560",
+    "apps/web/readout.css": "d74bed0e05d1ec880e4c50a0bb90e30f032d07c97307da9113fe9077e5d448b7",
+    "apps/web/index.html": "8d963d46b223d446940a679666a79857e26ba30b234fb403a3ac7a2d5b2a0e65",
+    "apps/web/speech_routes.py": "65ed5264a99632a034bdde498565c19fd40b1e604b6c5cafbd1e0d3d3a0b2045",
+    "apps/web/server.py": "4a0710827abe4cd05221f61aa309895e0488c4263235c2f263a053dd310e2b6f",
+    "tools/probe_chat_readout_ui.py": "074f050eb7481d34051e2e6f977cd780e8d10498378a1d5d21a15bceba55d4d5"
+  }
+}

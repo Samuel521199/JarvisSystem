@@ -1,0 +1,21 @@
+{
+  "status": "SUCCEEDED",
+  "source_version": "0.1.45",
+  "date": "2026-10-18",
+  "command": "python -m unittest test_readout test_speech_expression test_qwen_speech test_speech test_modules test_web test_local_model",
+  "tests_run": 88,
+  "failures": 0,
+  "errors": 0,
+  "seconds": 4.989,
+  "javascript_syntax": "node --check readout.js and speech.js passed",
+  "limits": "Targeted regression; native model/media/task evidence is separate. No full-stage or universal naturalness claim.",
+  "source_sha256": {
+    "tests/test_readout.py": "2867516a34d179b918df3a598f5731c6222af967aeecc0e24b9bf230109fb636",
+    "tests/test_speech.py": "f32d00f744fd1ec9eeb172155d6e0725fbe6b55926b3be20bf6a4c063263adb6",
+    "apps/web/readout.js": "935f7dd4f4c777943aa7d9aaf7745e716a032f0eadb707cd0da892b26c4bd560",
+    "runtime/node-host/jarvis_core/speech.py": "29d33a35a35d505a64d1e9dded1fa5d7ef8ba1cec65a78bc2c2455a8f41750de"
+  },
+  "regressions": [
+    "leading-hyphen random component token is parsed as one bound argument; no entropy reduction"
+  ]
+}

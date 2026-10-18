@@ -1,0 +1,754 @@
+{
+  "version": "0.1.54",
+  "observed_at": "2026-10-18T12:40:16.445661+00:00",
+  "scope": "two pinned public Electron main-process source directories; not installed binaries or whole-app accuracy",
+  "target_executed": false,
+  "cases": [
+    {
+      "repository": "webtorrent/webtorrent-desktop",
+      "commit": "6c91af345d4bd62603d7063ea02a50394d64af0d",
+      "source_url": "https://github.com/webtorrent/webtorrent-desktop/tree/6c91af345d4bd62603d7063ea02a50394d64af0d/src/main",
+      "archive_sha256": "c0bd692238bd75ee3ddaea29582838b35b10d015d1e08247528c362f5138a4cc",
+      "target": "src/main",
+      "input_files": 23,
+      "input_digest": "sha256:a763f24f623c9f39eb2fd112b6695b5a0772d13361aabe24ab072be4738da27d",
+      "evidence_digest": "sha256:deddb705b57f7de0f7b15f9bfee51f944166137573097e1543f8d7cf75595ad0",
+      "ground_truth_method": "literal ipcMain on/once/handle/handleOnce registrations independently counted in pinned files; source locations inspected",
+      "expected_handlers": [
+        [
+          "index.js",
+          125,
+          "once",
+          "stateSaved"
+        ],
+        [
+          "ipc.js",
+          24,
+          "once",
+          "ipcReady"
+        ],
+        [
+          "ipc.js",
+          29,
+          "once",
+          "ipcReadyWebTorrent"
+        ],
+        [
+          "ipc.js",
+          43,
+          "on",
+          "openTorrentFile"
+        ],
+        [
+          "ipc.js",
+          47,
+          "on",
+          "openFiles"
+        ],
+        [
+          "ipc.js",
+          56,
+          "on",
+          "setBadge"
+        ],
+        [
+          "ipc.js",
+          60,
+          "on",
+          "downloadFinished"
+        ],
+        [
+          "ipc.js",
+          69,
+          "on",
+          "onPlayerOpen"
+        ],
+        [
+          "ipc.js",
+          80,
+          "on",
+          "onPlayerUpdate"
+        ],
+        [
+          "ipc.js",
+          87,
+          "on",
+          "onPlayerClose"
+        ],
+        [
+          "ipc.js",
+          98,
+          "on",
+          "onPlayerPlay"
+        ],
+        [
+          "ipc.js",
+          106,
+          "on",
+          "onPlayerPause"
+        ],
+        [
+          "ipc.js",
+          118,
+          "on",
+          "startFolderWatcher"
+        ],
+        [
+          "ipc.js",
+          127,
+          "on",
+          "stopFolderWatcher"
+        ],
+        [
+          "ipc.js",
+          140,
+          "on",
+          "openPath"
+        ],
+        [
+          "ipc.js",
+          144,
+          "on",
+          "showItemInFolder"
+        ],
+        [
+          "ipc.js",
+          148,
+          "on",
+          "moveItemToTrash"
+        ],
+        [
+          "ipc.js",
+          157,
+          "on",
+          "setDefaultFileHandler"
+        ],
+        [
+          "ipc.js",
+          168,
+          "on",
+          "setStartup"
+        ],
+        [
+          "ipc.js",
+          181,
+          "on",
+          "setAspectRatio"
+        ],
+        [
+          "ipc.js",
+          182,
+          "on",
+          "setBounds"
+        ],
+        [
+          "ipc.js",
+          183,
+          "on",
+          "setProgress"
+        ],
+        [
+          "ipc.js",
+          184,
+          "on",
+          "setTitle"
+        ],
+        [
+          "ipc.js",
+          185,
+          "on",
+          "show"
+        ],
+        [
+          "ipc.js",
+          186,
+          "on",
+          "toggleFullScreen"
+        ],
+        [
+          "ipc.js",
+          187,
+          "on",
+          "setAllowNav"
+        ],
+        [
+          "ipc.js",
+          193,
+          "on",
+          "checkForExternalPlayer"
+        ],
+        [
+          "ipc.js",
+          201,
+          "on",
+          "openExternalPlayer"
+        ],
+        [
+          "ipc.js",
+          212,
+          "on",
+          "quitExternalPlayer"
+        ]
+      ],
+      "observed_handlers": [
+        [
+          "ipc.js",
+          201,
+          "on",
+          "openExternalPlayer"
+        ],
+        [
+          "ipc.js",
+          186,
+          "on",
+          "toggleFullScreen"
+        ],
+        [
+          "ipc.js",
+          184,
+          "on",
+          "setTitle"
+        ],
+        [
+          "ipc.js",
+          187,
+          "on",
+          "setAllowNav"
+        ],
+        [
+          "ipc.js",
+          118,
+          "on",
+          "startFolderWatcher"
+        ],
+        [
+          "ipc.js",
+          182,
+          "on",
+          "setBounds"
+        ],
+        [
+          "ipc.js",
+          127,
+          "on",
+          "stopFolderWatcher"
+        ],
+        [
+          "ipc.js",
+          185,
+          "on",
+          "show"
+        ],
+        [
+          "ipc.js",
+          29,
+          "once",
+          "ipcReadyWebTorrent"
+        ],
+        [
+          "ipc.js",
+          98,
+          "on",
+          "onPlayerPlay"
+        ],
+        [
+          "index.js",
+          125,
+          "once",
+          "stateSaved"
+        ],
+        [
+          "ipc.js",
+          60,
+          "on",
+          "downloadFinished"
+        ],
+        [
+          "ipc.js",
+          106,
+          "on",
+          "onPlayerPause"
+        ],
+        [
+          "ipc.js",
+          181,
+          "on",
+          "setAspectRatio"
+        ],
+        [
+          "ipc.js",
+          168,
+          "on",
+          "setStartup"
+        ],
+        [
+          "ipc.js",
+          43,
+          "on",
+          "openTorrentFile"
+        ],
+        [
+          "ipc.js",
+          80,
+          "on",
+          "onPlayerUpdate"
+        ],
+        [
+          "ipc.js",
+          69,
+          "on",
+          "onPlayerOpen"
+        ],
+        [
+          "ipc.js",
+          24,
+          "once",
+          "ipcReady"
+        ],
+        [
+          "ipc.js",
+          47,
+          "on",
+          "openFiles"
+        ],
+        [
+          "ipc.js",
+          87,
+          "on",
+          "onPlayerClose"
+        ],
+        [
+          "ipc.js",
+          140,
+          "on",
+          "openPath"
+        ],
+        [
+          "ipc.js",
+          148,
+          "on",
+          "moveItemToTrash"
+        ],
+        [
+          "ipc.js",
+          144,
+          "on",
+          "showItemInFolder"
+        ],
+        [
+          "ipc.js",
+          212,
+          "on",
+          "quitExternalPlayer"
+        ],
+        [
+          "ipc.js",
+          56,
+          "on",
+          "setBadge"
+        ],
+        [
+          "ipc.js",
+          157,
+          "on",
+          "setDefaultFileHandler"
+        ],
+        [
+          "ipc.js",
+          183,
+          "on",
+          "setProgress"
+        ],
+        [
+          "ipc.js",
+          193,
+          "on",
+          "checkForExternalPlayer"
+        ]
+      ],
+      "missing": [],
+      "unexpected": [],
+      "focus": "openFiles",
+      "before_focus_links": 0,
+      "after_focus_links": 1,
+      "source_page_matches": 1,
+      "explanation_sources": 1,
+      "limitations": [
+        "Only main-process files are in this successful scope; renderer-to-main pairing was not evaluated.",
+        "No runtime reachability, security, download behavior or private server reconstruction is proven.",
+        "Library dependencies, bundled aliases, extensionless ESM imports and dynamic dispatch may remain unresolved.",
+        "This handler-level count is not whole-application recall or general accuracy."
+      ],
+      "explanation": {
+        "status": "SUCCEEDED",
+        "findings": [
+          {
+            "kind": "inference",
+            "text": "静态证据显示在 `ipc.js` 的第 47 至 50 行，注册了一个用于处理 `openFiles` 频道的 IPC 处理器 (handler)。",
+            "refs": [
+              "E1"
+            ]
+          },
+          {
+            "kind": "inference",
+            "text": "基于静态语法推断，该注册关系仅表明对 `openFiles` 频道进行了监听配置，但这并不能证明该处理器在运行时的实际执行情况。",
+            "refs": [
+              "E1"
+            ]
+          }
+        ],
+        "unknowns": [
+          "当前证据仅包含静态 IPC 处理器注册关系，未提供 `openFiles` 处理器的具体函数体 (handler body)、内部业务逻辑以及它的返回值。",
+          "无法验证该静态注册关系在实际运行环境中是否会被真正调用执行。"
+        ],
+        "sources": [
+          {
+            "edge_id": "jag_edge_24433907633c874e4e05364b47211c77eddd3e91da6b753c9f4461562128a591",
+            "relation": "handles",
+            "properties": {
+              "channel": "openFiles",
+              "channel_expression": null,
+              "resolution": "literal"
+            },
+            "location": {
+              "available": true,
+              "value": {
+                "kind": "source-range",
+                "source": "ipc.js",
+                "start": {
+                  "line": 47,
+                  "column": 2
+                },
+                "end": {
+                  "line": 50,
+                  "column": 4
+                }
+              }
+            },
+            "evidence_state": "inferred",
+            "confidence": "high",
+            "limitations": [
+              "Static syntax does not prove that this relationship executes at runtime."
+            ],
+            "ref": "E1"
+          }
+        ],
+        "coverage": {
+          "selected_links": 1,
+          "available_links": 1,
+          "omitted_links": 0,
+          "input_files": 23,
+          "excluded_entries": 0
+        },
+        "packet_digest": "sha256:a2850828374600dcc0b16442301f74eaf76ec0d4b83c096c479941d4d35ea55d",
+        "packet_bytes": 775,
+        "input_digest": "sha256:a763f24f623c9f39eb2fd112b6695b5a0772d13361aabe24ab072be4738da27d",
+        "evidence_id": "ev_f21b1946ab0651159d926dc28b1de208c150240e970ec3fb97d4e3c862d54239",
+        "model": {
+          "provider": "vertex",
+          "model": "gemini-3.1-pro-preview",
+          "usage": {
+            "promptTokenCount": 513,
+            "candidatesTokenCount": 159,
+            "totalTokenCount": 1029,
+            "thoughtsTokenCount": 357
+          },
+          "billing": {
+            "basis": "estimated",
+            "amount": 0.007218,
+            "currency": "USD",
+            "tokens": {
+              "input": 513,
+              "output": 516,
+              "cache_read": 0,
+              "cache_write": 0,
+              "total": 1029,
+              "reasoning": 357
+            },
+            "price": {
+              "input": 2,
+              "output": 12,
+              "cache_read": 0.2,
+              "cache_write": null,
+              "max_input_tokens": 200000,
+              "currency": "USD",
+              "fee_percent": 0,
+              "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+              "checked_at": "2026-10-16"
+            },
+            "reason": "token_rates"
+          },
+          "request_id": "1c0376c9adb9487a9717300bb168d8bf",
+          "reasoning": "low"
+        },
+        "model_calls": 1,
+        "citations_verified": true,
+        "semantics_verified": false,
+        "classification_adjustments": [
+          {
+            "finding_index": 0,
+            "from": "observation",
+            "to": "inference",
+            "reason": "cited_relation_is_inferred"
+          }
+        ]
+      },
+      "raw_model_findings": [
+        {
+          "kind": "observation",
+          "text": "静态证据显示在 `ipc.js` 的第 47 至 50 行，注册了一个用于处理 `openFiles` 频道的 IPC 处理器 (handler)。",
+          "refs": [
+            "E1"
+          ]
+        },
+        {
+          "kind": "inference",
+          "text": "基于静态语法推断，该注册关系仅表明对 `openFiles` 频道进行了监听配置，但这并不能证明该处理器在运行时的实际执行情况。",
+          "refs": [
+            "E1"
+          ]
+        }
+      ],
+      "explanation_review": {
+        "status": "bounded_claims_supported_after_classification_normalization",
+        "method": "manual comparison with pinned source and supplied evidence; deterministic host normalization replayed over saved reply, no new model call",
+        "registration_location_correct": true,
+        "handler_body_not_invented": true,
+        "runtime_unverified_explicit": true,
+        "model_classification_needed_correction": true,
+        "review_scope": "two short registration explanations only; not general model correctness"
+      }
+    },
+    {
+      "repository": "agalwood/Motrix",
+      "commit": "7012040fec926e16fe8f6c403cf038527f5c18b9",
+      "source_url": "https://github.com/agalwood/Motrix/tree/7012040fec926e16fe8f6c403cf038527f5c18b9/src/main",
+      "archive_sha256": "d15ae99dcca0bbe6c17970e21a49414debbb0a10d6980b101de0cb5d4b23d04e",
+      "target": "src/main",
+      "input_files": 34,
+      "input_digest": "sha256:7843620be26a8074ac860d77fad7c771262a1987f078db475725155ade3af1ea",
+      "evidence_digest": "sha256:df48947b3cbd93c210e58bebffc5bac31d5bc3062179d84fd5b56ed0f041f618",
+      "ground_truth_method": "literal ipcMain on/once/handle/handleOnce registrations independently counted in pinned files; source locations inspected",
+      "expected_handlers": [
+        [
+          "Application.js",
+          1000,
+          "on",
+          "command"
+        ],
+        [
+          "Application.js",
+          1005,
+          "on",
+          "event"
+        ],
+        [
+          "Application.js",
+          1012,
+          "handle",
+          "get-app-config"
+        ]
+      ],
+      "observed_handlers": [
+        [
+          "Application.js",
+          1000,
+          "on",
+          "command"
+        ],
+        [
+          "Application.js",
+          1012,
+          "handle",
+          "get-app-config"
+        ],
+        [
+          "Application.js",
+          1005,
+          "on",
+          "event"
+        ]
+      ],
+      "missing": [],
+      "unexpected": [],
+      "focus": "get-app-config",
+      "before_focus_links": 0,
+      "after_focus_links": 1,
+      "source_page_matches": 1,
+      "explanation_sources": 1,
+      "limitations": [
+        "Only main-process files are in this successful scope; renderer-to-main pairing was not evaluated.",
+        "No runtime reachability, security, download behavior or private server reconstruction is proven.",
+        "Library dependencies, bundled aliases, extensionless ESM imports and dynamic dispatch may remain unresolved.",
+        "This handler-level count is not whole-application recall or general accuracy."
+      ],
+      "explanation": {
+        "status": "SUCCEEDED",
+        "findings": [
+          {
+            "kind": "inference",
+            "text": "静态分析显示，在 `Application.js` 文件（第1012行至1023行）中存在一个处理 `get-app-config` 频道的 IPC 处理程序注册。",
+            "refs": [
+              "E1"
+            ]
+          },
+          {
+            "kind": "inference",
+            "text": "基于此静态证据，系统推断 `get-app-config` 频道的请求被配置为由上述位置的代码处理。但这仅是静态 IPC 注册的描述，不保证在运行时一定会被执行。",
+            "refs": [
+              "E1"
+            ]
+          }
+        ],
+        "unknowns": [
+          "当前静态证据未包含该处理程序的具体实现细节（如处理程序的函数体代码）。",
+          "无法确定该处理程序在运行时会返回什么具体数据或执行哪些具体操作。",
+          "无法证明该处理程序在实际运行环境中是否一定会被调用执行。"
+        ],
+        "sources": [
+          {
+            "edge_id": "jag_edge_f5ea94b90ef068f6095f43414975c5f2e15c83010c2af2524e351de01ab1665a",
+            "relation": "handles",
+            "properties": {
+              "channel": "get-app-config",
+              "channel_expression": null,
+              "resolution": "literal"
+            },
+            "location": {
+              "available": true,
+              "value": {
+                "kind": "source-range",
+                "source": "Application.js",
+                "start": {
+                  "line": 1012,
+                  "column": 4
+                },
+                "end": {
+                  "line": 1023,
+                  "column": 6
+                }
+              }
+            },
+            "evidence_state": "inferred",
+            "confidence": "high",
+            "limitations": [
+              "Static syntax does not prove that this relationship executes at runtime."
+            ],
+            "ref": "E1"
+          }
+        ],
+        "coverage": {
+          "selected_links": 1,
+          "available_links": 1,
+          "omitted_links": 0,
+          "input_files": 34,
+          "excluded_entries": 0
+        },
+        "packet_digest": "sha256:868825a1d49fcab1a21ccf931d147ab8d3b17d2587a60917a95b968e5ce00723",
+        "packet_bytes": 802,
+        "input_digest": "sha256:7843620be26a8074ac860d77fad7c771262a1987f078db475725155ade3af1ea",
+        "evidence_id": "ev_56452b52e5914b4c99a7dfcfc31877e6b36c510088f8ea78c2efdaaeaa571ea4",
+        "model": {
+          "provider": "vertex",
+          "model": "gemini-3.1-pro-preview",
+          "usage": {
+            "promptTokenCount": 524,
+            "candidatesTokenCount": 249,
+            "totalTokenCount": 1064,
+            "thoughtsTokenCount": 291
+          },
+          "billing": {
+            "basis": "estimated",
+            "amount": 0.007528,
+            "currency": "USD",
+            "tokens": {
+              "input": 524,
+              "output": 540,
+              "cache_read": 0,
+              "cache_write": 0,
+              "total": 1064,
+              "reasoning": 291
+            },
+            "price": {
+              "input": 2,
+              "output": 12,
+              "cache_read": 0.2,
+              "cache_write": null,
+              "max_input_tokens": 200000,
+              "currency": "USD",
+              "fee_percent": 0,
+              "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+              "checked_at": "2026-10-16"
+            },
+            "reason": "token_rates"
+          },
+          "request_id": "9c5f0c29b637438086594dbcb5258587",
+          "reasoning": "low"
+        },
+        "model_calls": 1,
+        "citations_verified": true,
+        "semantics_verified": false,
+        "classification_adjustments": [
+          {
+            "finding_index": 0,
+            "from": "observation",
+            "to": "inference",
+            "reason": "cited_relation_is_inferred"
+          }
+        ]
+      },
+      "raw_model_findings": [
+        {
+          "kind": "observation",
+          "text": "静态分析显示，在 `Application.js` 文件（第1012行至1023行）中存在一个处理 `get-app-config` 频道的 IPC 处理程序注册。",
+          "refs": [
+            "E1"
+          ]
+        },
+        {
+          "kind": "inference",
+          "text": "基于此静态证据，系统推断 `get-app-config` 频道的请求被配置为由上述位置的代码处理。但这仅是静态 IPC 注册的描述，不保证在运行时一定会被执行。",
+          "refs": [
+            "E1"
+          ]
+        }
+      ],
+      "explanation_review": {
+        "status": "bounded_claims_supported_after_classification_normalization",
+        "method": "manual comparison with pinned source and supplied evidence; deterministic host normalization replayed over saved reply, no new model call",
+        "registration_location_correct": true,
+        "handler_body_not_invented": true,
+        "runtime_unverified_explicit": true,
+        "model_classification_needed_correction": true,
+        "review_scope": "two short registration explanations only; not general model correctness"
+      }
+    }
+  ],
+  "rejected_full_scopes": [
+    {
+      "repository": "webtorrent/webtorrent-desktop",
+      "commit": "6c91af345d4bd62603d7063ea02a50394d64af0d",
+      "target": "src",
+      "error": {
+        "code": "rea_output_limit",
+        "message": "解析证据超过本次预算，请选择更小的应用目录。未截断交付。"
+      },
+      "seconds": 22.44
+    },
+    {
+      "repository": "agalwood/Motrix",
+      "commit": "7012040fec926e16fe8f6c403cf038527f5c18b9",
+      "target": "src",
+      "error": {
+        "code": "rea_input_limit",
+        "message": "最多 128 个文本文件、单文件 16 MiB、合计 32 MiB；请缩小范围。"
+      },
+      "seconds": 9.12
+    }
+  ],
+  "model_calls": 2,
+  "handler_check_passed": true,
+  "focus_regression_passed": true,
+  "status": "bounded_scope_verified",
+  "estimated_model_cost_usd": 0.014746
+}

@@ -1,0 +1,111 @@
+/* Native capabilities only. Selection comes from the host; outputs need receipts. */
+(()=>{'use strict';
+const $=id=>document.getElementById(id),nonce=document.querySelector('meta[name="jarvis-nonce"]')?.content||NONCE;
+async function api(path,payload){
+ const response=await fetch(path,{method:payload===undefined?'GET':'POST',cache:'no-store',credentials:'omit',headers:{'X-Jarvis-Nonce':nonce,...(payload===undefined?{}:{'Content-Type':'application/json'})},body:payload===undefined?undefined:JSON.stringify(payload),signal:AbortSignal.timeout(15000)});
+ const data=await response.json();if(!response.ok){const e=new Error(data.user_message||'技能接口暂不可用。');e.status=response.status;throw e;}return data;
+}
+function el(tag,text,cls){const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;}
+function option(value,text){const o=el('option',text);o.value=value;return o;}
+const style=el('style');style.nonce=nonce;style.textContent='.native-skills{margin:14px 0;padding:16px;border:1px solid var(--line,#ccc);border-radius:12px}.native-skills article{padding:12px 0;border-bottom:1px solid var(--line,#ccc)}.native-skills select,.skill-controls select,.skill-controls textarea{max-width:100%;margin:4px}.native-skills small{display:block;overflow-wrap:anywhere}.skill-controls{display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:12px}.skill-controls textarea{width:100%;min-height:48px}.skill-preview{width:min(950px,94vw);background:var(--surface,#fff);color:var(--text,#222);border-radius:12px}.skill-preview iframe{width:100%;height:min(700px,78vh);border:0}.skill-preview::backdrop{background:#0008}';document.head.append(style);
+style.textContent+='.skill-controls input:not([type=checkbox]){border:1px solid var(--line,#dce1e8);border-radius:9px;padding:9px 12px;background:var(--surface,#fff);color:var(--ink,#18283a)}#skill-report-preview{padding:24px;border:1px solid var(--line,#dce1e8);max-height:92vh;color:var(--ink,#18283a)}#skill-report-preview>h2{font-size:20px;margin:0 0 14px}#skill-report-preview button{padding:7px 12px;border:1px solid var(--line,#dce1e8);border-radius:8px;background:var(--surface,#fff);color:inherit;cursor:pointer;margin:3px}#skill-report-preview button:disabled{opacity:.4;cursor:default}#skill-report-preview>pre{background:var(--bg,#f5f7fb);padding:16px;border-radius:10px;margin:16px 0}#rea-evidence-browser{border-top:1px solid var(--line,#dce1e8);padding-top:12px}#rea-evidence-browser h3{font-size:15px;margin:0 0 12px}#rea-evidence-browser input,#rea-evidence-browser select{padding:8px;border:1px solid var(--line,#dce1e8);border-radius:8px;background:var(--surface,#fff);color:inherit;margin:3px}#rea-evidence-browser p{font-size:12px;color:var(--muted,#64748b);line-height:1.7}';
+if($('skill-view'))return;
+if(!$('composer-mode'))return;
+const tools=el('div');tools.className='skill-controls';tools.id='skill-controls';
+const enabled=el('input');enabled.type='checkbox';enabled.checked=true;enabled.id='skill-enabled';const label=el('label','按需使用技能');label.htmlFor=enabled.id;
+const explicit=el('select');explicit.id='skill-explicit';explicit.setAttribute('aria-label','显式选择技能');explicit.append(option('','自动匹配'));
+let menu=[];api('/api/skills').then(d=>{menu=d.entries.filter(x=>x.presentation);for(const item of menu)explicit.append(option(item.id,item.name+(item.executable?'':' · 依赖未就绪')));}).catch(e=>{note.textContent=e.message;});
+const ratio=el('select');ratio.id='skill-ratio';ratio.setAttribute('aria-label','齿轮传动比');for(const n of [1,2,3])ratio.append(option(String(n),'齿数比 1:'+n));ratio.value='2';
+const paths=el('textarea');paths.id='skill-paths';paths.placeholder='参考文件（可选）：项目内相对路径，每行一个，最多 8 个；编程分析须选择源码。';paths.setAttribute('aria-label','明确选择的源码路径');
+const target=el('input');target.id='skill-target';target.placeholder='应用目录或 .asar 文件（项目内相对路径；留空为项目根目录）';target.setAttribute('aria-label','软件解析目标目录或 ASAR 文件');target.style.width='min(480px,100%)';
+const focus=el('input');focus.id='skill-focus';focus.placeholder='关注项（可选）：如 jarvis:sum、main.js';focus.setAttribute('aria-label','关注功能或通道标识符');focus.title='按通道名、文件名等字面标识符筛选证据；留空查看全貌。';focus.style.width='min(340px,100%)';
+const explain=el('input');explain.type='checkbox';explain.id='skill-explain';const explainLabel=el('label','生成中文解释');explainLabel.prepend(explain);explainLabel.title='只把所选证据摘要发送至明确选择的模型，最多一次调用；完整软件包不上传。';
+const codingSkills=['matt-pocock.diagnosing-bugs','matt-pocock.tdd','matt-pocock.codebase-design','matt-pocock.code-review'];
+const coding=el('input');coding.type='checkbox';coding.id='skill-coding';const codingLabel=el('label','修改副本并运行验收');codingLabel.prepend(coding);codingLabel.title='组合排错、行为测试、模块设计与审阅；最多两次模型调用。只接受单个 Python transform(data)→字符串，不修改原文件。';
+const cases=el('textarea');cases.id='skill-coding-cases';cases.setAttribute('aria-label','编程验收案例 JSON');cases.placeholder='填写 2—24 条验收案例，例如：[{"input":[2,4],"expected":"6"},{"input":[],"expected":"0"}]';
+const note=el('small');note.textContent='科普任务保存交互 HTML；其余技能保存文本报告，按任务需要读取所选参考文件。';tools.append(enabled,label,explicit,ratio,paths,target,focus,explainLabel,note);$('conversation-task-note').after(tools);
+function controls(){tools.hidden=$('composer-mode').value==='mcp';const task=$('composer-mode').value==='skill';ratio.hidden=!task||(explicit.value&&explicit.value!=='anatomy.explainer');paths.hidden=!task||['anatomy.explainer','rea.software-analysis'].includes(explicit.value);target.hidden=!task||!!explicit.value&&explicit.value!=='rea.software-analysis';focus.hidden=target.hidden;explainLabel.hidden=!task||explicit.value!=='rea.software-analysis';note.textContent=explicit.value==='rea.software-analysis'?(explain.checked?'解析仍在本地完成；将所选证据摘要发送至当前明确选择的模型，最多一次调用。完整软件包不上传。':'本地静态解析 · 支持目录与 ASAR · 可按标识符关注证据；不运行目标程序、不调用模型。'):'科普任务保存交互 HTML；编程技能使用所选参考文件。软件解析可填写应用目录或 ASAR 文件。';note.hidden=!task;explicit.disabled=!enabled.checked;}
+explain.onchange=controls;
+coding.onchange=()=>controls();tools.insertBefore(codingLabel,note);tools.insertBefore(cases,note);
+const baseControls=controls;controls=function(){baseControls();codingLabel.hidden=$('composer-mode').value!=='skill'||!codingSkills.includes(explicit.value);cases.hidden=codingLabel.hidden||!coding.checked;if(!cases.hidden)note.textContent='组合四项工程技能 · 一份 Python 副本 · transform(data) 返回字符串 · 案例冻结后最多两次生成与隔离验收。查看差异后可以应用或回退。';};
+$('composer-mode').addEventListener('change',controls);enabled.onchange=controls;explicit.onchange=controls;
+let submitting=false;const pending=new Map();
+const current=()=>window.Workspace?.currentConversation(),context=()=>({enabled:enabled.checked,project_id:window.Workspace?.currentProject()?.id||null,conversation_id:current()?.id||null,...(explicit.value?{explicit:explicit.value}:{})});
+function message(role,text,fields={}){const n=addMessage(role,text);n.dataset.taskControl='true';for(const [k,v] of Object.entries(fields))n.dataset[k]=v;return n;}
+async function handleSubmit(){
+ if(submitting)return true;
+ if($('composer-mode').value==='mcp'||/^\/文档(?:\s|$)/.test($('message').value.trim()))return false;
+ const original=$('message').value,prompt=original.replace(/^\/技能\s*/,''),forced=$('composer-mode').value==='skill'||/^\/技能(?:\s|$)/.test(original);
+ const reaIntent=/(分析|解析|拆解|逆向).{0,32}(electron|javascript|asar|应用目录|软件结构|软件包|客户端)|rea.{0,12}(分析|解析)/i.test(prompt);
+ if(!forced&&(!enabled.checked||(!reaIntent&&(!/(齿轮|机械|anatomy)/i.test(prompt)||!/(动画|拆解|交互|组装|可视化)/.test(prompt)))))return false;
+ submitting=true;
+ try{
+  const ctx=context(),decision=await api('/api/skills/select',{message:prompt,context:ctx,purpose:'task'}),selected=decision.selected[0];
+  if(!forced&&!['anatomy.explainer','rea.software-analysis'].includes(selected?.id))return false;
+  if(!forced&&selected?.id==='rea.software-analysis'){$('composer-mode').value='skill';explicit.value=selected.id;controls();throw new Error('已选择软件解析，请填写下方应用目录或 ASAR 文件后发送。留空表示当前项目根目录。');}
+  if(!selected)throw new Error(decision.excluded[0]?.reason||'目标未匹配到可用技能，请明确选择技能。');
+  if(!ctx.project_id||!ctx.conversation_id)throw new Error('请先选择项目文件夹，技能产物将保存在该项目。草稿保留。');
+  if(Attachments.hasDraft()||$('file-mode').checked)throw new Error('请移除附件并关闭回答文件输出；技能任务自行保存产物。');
+  const sourcePaths=['anatomy.explainer','rea.software-analysis'].includes(selected.id)?[]:paths.value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
+  if(['matt-pocock.diagnosing-bugs','matt-pocock.tdd','matt-pocock.code-review','matt-pocock.codebase-design'].includes(selected.id)&&!sourcePaths.length)throw new Error('请在技能任务中填写要读取的项目源码相对路径。草稿保留。');
+  const requested=prompt.match(/(?:传动比|减速比)\s*(\d+)\s*[:：]\s*1|齿数比\s*1\s*[:：]\s*(\d+)/);if(selected.id==='anatomy.explainer'&&requested){const n=Number(requested[1]||requested[2]);if(![1,2,3].includes(n))throw new Error('齿轮模板当前支持传动比 1:1、2:1、3:1。');ratio.value=String(n);}
+  const item=chosenModel(),id=ctx.conversation_id,old=pending.get(id),payload={mode:'skill',request_id:old?.payload.request_id||'web-'+crypto.randomUUID().replaceAll('-',''),prompt:prompt.trim(),project_id:ctx.project_id,skill_id:selected.id,paths:sourcePaths,...(selected.id==='rea.software-analysis'?{target_path:target.value.trim(),focus:focus.value.trim(),explain:explain.checked}:{}),ratio:Number(ratio.value),theme:document.documentElement.dataset.theme==='dark'?'dark':'light',model:item?item.provider+'::'+item.model:'auto'};
+  if(selected.id==='rea.software-analysis'&&explain.checked&&(!item||item.provider==='auto'))throw new Error('生成中文解释需要明确选择模型，例如官方 Google；草稿保留。');
+  if(coding.checked&&codingSkills.includes(selected.id)){if(!item||item.provider==='auto')throw new Error('编程执行需要明确选择模型。');if(sourcePaths.length!==1||!sourcePaths[0].endsWith('.py'))throw new Error('编程执行请选择一个 Python 文件。');let examples;try{examples=JSON.parse(cases.value);}catch{throw new Error('验收案例不是有效 JSON，草稿保留。');}payload.coding=true;payload.cases=examples;}
+  if(old&&JSON.stringify(payload)!==JSON.stringify(old.payload))throw new Error('此前提交结果尚未确认，请先核对原请求；草稿保留。');
+  let article=old?.article;if(!article){message('user',original);article=message('assistant','正在提交技能任务。',{taskRequestId:payload.request_id});pending.set(id,{payload,article});}
+  try{
+   const result=await api('/api/conversation-tasks/'+id,payload);pending.delete(id);notify('');article.dataset.taskRef=result.task_id;article.querySelector('.bubble').textContent='技能任务已受理：'+result.task_id+'。产物通过检查后在本会话任务中提供。';
+   if(current()?.id===id){if($('message').value===original)$('message').value='';window.Workspace?.remember();await window.ConversationTasks?.openTask(result.task_id);await window.ConversationTasks?.load(true);}
+  }catch(e){article.querySelector('.bubble').textContent='技能任务回执尚未确认，请按原请求编号核对。';if(e.status&&e.status<500){pending.delete(id);delete article.dataset.taskRequestId;article.querySelector('.bubble').textContent='技能任务未受理：'+e.message;}window.Workspace?.remember();throw e;}
+ }catch(e){notify(e.message);}finally{submitting=false;controls();}return true;
+}
+async function preview(task){const id=current()?.id,result=await api('/api/skills/preview',{conversation_id:id,task_id:task});if(current()?.id!==id)return;let dialog=$('skill-preview');if(!dialog){dialog=el('dialog');dialog.id='skill-preview';dialog.className='skill-preview';const close=el('button','关闭预览');close.type='button';close.onclick=()=>dialog.close();dialog.append(close);dialog.addEventListener('close',()=>dialog.querySelector('iframe')?.remove());document.body.append(dialog);}dialog.querySelector('iframe')?.remove();const frame=el('iframe');frame.title='已核验的机械科普交互页面';frame.setAttribute('sandbox','allow-scripts');frame.referrerPolicy='no-referrer';frame.src=result.url;dialog.append(frame);dialog.showModal();}
+async function download(task,report){const content=report.html||report.text;if(typeof content!=='string')throw new Error('没有可下载的已确认正文。');const blob=new Blob([content],{type:report.html?'text/html;charset=utf-8':'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),a=el('a');a.href=url;a.download=task+(report.html?'.html':'.txt');a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+async function evidence(task,report){if(!report.evidence&&!report.evidence_ref)throw new Error('没有已确认的解析证据。');const data=await api('/api/skills/evidence/'+current()?.id+'/'+task),blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json;charset=utf-8'}),url=URL.createObjectURL(blob),a=el('a');a.href=url;a.download=task+'-evidence.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function reportPreview(report,task){
+ const cid=current()?.id,dialog=el('section');dialog.id='skill-report-preview';dialog.className='skill-result-workspace';dialog.setAttribute('aria-label','软件解析结果');
+ const title=el('h2','软件结构与行为解析'),top=el('header'),close=el('button','×');close.setAttribute('aria-label','关闭软件解析结果');close.title='关闭软件解析结果';close.onclick=()=>window.ProjectExplorer.closeView('skill-report');top.append(title,close);dialog.append(top);
+ const nav=el('div'),panes={},buttons={};nav.className='skill-result-tabs';nav.setAttribute('role','tablist');nav.setAttribute('aria-label','解析结果视图');
+ function tab(id){for(const key of Object.keys(panes)){panes[key].hidden=key!==id;buttons[key].setAttribute('aria-selected',String(key===id));}}
+ for(const [id,label] of [['overview','概览'],['explanation','中文解释'],['sources','来源证据']]){const button=el('button',label),pane=el('section');button.id='rea-tab-'+id;button.setAttribute('role','tab');pane.id='rea-pane-'+id;pane.setAttribute('role','tabpanel');pane.setAttribute('aria-labelledby',button.id);button.setAttribute('aria-controls',pane.id);button.onclick=()=>tab(id);nav.append(button);panes[id]=pane;buttons[id]=button;}
+ nav.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;const list=[...nav.children],i=list.indexOf(e.target);if(i<0)return;e.preventDefault();const next=e.key==='Home'?0:e.key==='End'?list.length-1:(i+(e.key==='ArrowRight'?1:-1)+list.length)%list.length;list[next].click();list[next].focus();});
+ dialog.append(nav,...Object.values(panes));
+ const overview=panes.overview,analysis=report.analysis||{},manifest=report.input_manifest||{},explanation=report.explanation;
+ overview.append(el('p','静态解析已交付 · 未运行目标软件','result-status'));
+ const facts=el('dl');for(const [label,value] of [['目标',manifest.target_path||manifest.target||'项目内目标'],['输入格式',manifest.format||'directory'],['读取范围',(manifest.files?.length||0)+' 个文件 · '+(manifest.omitted?.length||0)+' 项排除'],['关注项',analysis.focus?.query||'全貌'],['模型调用',(explanation?.model_calls||0)+' 次']]){facts.append(el('dt',label),el('dd',String(value)));}overview.append(facts);
+ const full=el('details'),body=el('pre',report.text);full.append(el('summary','完整报告'),body);overview.append(full);const save=el('button','下载报告');save.onclick=()=>download(task,report).catch(e=>notify(e.message));overview.append(save);
+ const explanationPane=panes.explanation,sourcePreview=el('section');sourcePreview.id='rea-citation-source';sourcePreview.hidden=true;sourcePreview.setAttribute('aria-live','polite');panes.sources.append(sourcePreview);
+ if(explanation){explanationPane.append(el('p',explanation.model_calls?'引用编号已核对；模型解释尚未独立核实。':'当前范围没有可引用的关系，未调用模型。','result-status'));for(const finding of explanation.findings){const row=el('article');row.className='rea-finding';row.append(el('small',finding.kind==='observation'?'静态观察':'模型推断'),el('p',finding.text));for(const ref of finding.refs){const b=el('button',ref);b.title='查看 '+ref+' 的原始证据';b.onclick=()=>{const source=explanation.sources.find(s=>s.ref===ref);sourcePreview.replaceChildren(el('h3',ref+' · 引用来源'),el('pre',JSON.stringify(source,null,2)));sourcePreview.hidden=false;tab('sources');sourcePreview.scrollIntoView({block:'nearest'});};row.append(b);}explanationPane.append(row);}explanationPane.append(el('h3','尚不能确定'));for(const text of explanation.unknowns)explanationPane.append(el('p',text));const coverage=explanation.coverage;explanationPane.append(el('small','用于解释的关系 '+coverage.selected_links+' / '+coverage.available_links+'；省略 '+coverage.omitted_links+' 条。'+(explanation.model?'模型：'+explanation.model.provider+' / '+explanation.model.model:'')));}
+ else explanationPane.append(el('h3','本次为纯本地解析'),el('p','新建软件解析任务时，勾选“生成中文解释”并明确选择模型，即可生成带引用的解释。'));
+ if(task){
+  const cid=current()?.id,box=el('section'),heading=el('h3','浏览完整证据'),select=el('select'),status=el('p'),items=el('div'),previous=el('button','上一页'),next=el('button','下一页'),filter=el('input'),apply=el('button','筛选证据'),clear=el('button','显示全部');
+  filter.type='search';filter.setAttribute('aria-label','证据标识符筛选');filter.placeholder='通道名、文件名等标识符';filter.value=report.analysis?.focus?.query||'';filter.style.maxWidth='100%';
+  box.id='rea-evidence-browser';select.setAttribute('aria-label','证据类型');status.setAttribute('role','status');items.style.cssText='max-height:30vh;overflow:auto';
+  for(const [value,label] of [['links','调用与引用关系'],['components','全部结构节点'],['files','输入文件'],['omitted','排除范围']])select.append(option(value,label));
+  let offset=0,nextOffset=null,history=[],revision=0,query=filter.value;
+  async function load(){const request=++revision;previous.disabled=true;next.disabled=true;status.textContent='正在校验证据…';items.replaceChildren();try{
+   const data=await api('/api/skills/evidence/'+cid+'/'+task+'?'+new URLSearchParams({section:select.value,offset:String(offset),limit:'20',query}));if(request!==revision||!dialog.isConnected||current()?.id!==cid)return;
+   nextOffset=data.next_offset;status.textContent=(query?'匹配 '+data.total+' / '+data.total_before_filter:'共 '+data.total)+' 条 · 当前 '+(data.items.length?offset+1:0)+'—'+(offset+data.items.length)+'；'+data.coverage_note;
+   for(const row of data.items){const entry=el('pre',row.truncated?row.preview+'\n'+row.note:JSON.stringify(row.value,null,2));entry.style.cssText='white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;border-bottom:1px solid var(--line);padding:8px';items.append(entry);}
+   previous.disabled=!history.length;next.disabled=nextOffset===null;
+  }catch(e){if(request===revision)status.textContent=e.message;}}
+  select.onchange=()=>{offset=0;history=[];load();};previous.onclick=()=>{offset=history.pop()??0;load();};next.onclick=()=>{history.push(offset);offset=nextOffset;load();};
+  apply.onclick=()=>{query=filter.value.trim();offset=0;history=[];load();};clear.onclick=()=>{filter.value='';apply.click();};filter.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();apply.click();}};
+  const downloadEvidence=el('button','下载完整证据');downloadEvidence.onclick=()=>evidence(task,report).catch(e=>notify(e.message));box.append(heading,select,filter,apply,clear,previous,next,status,items,downloadEvidence);panes.sources.append(box);if(!window.ProjectExplorer.openView({id:'skill-report',title:'软件解析',element:dialog})){notify('请先选择任务所属项目。');return;}load();
+ }else window.ProjectExplorer.openView({id:'skill-report',title:'软件解析',element:dialog});tab('overview');
+}
+function codingPreview(report,task){
+ const cid=current()?.id,value=report.coding,section=el('section',undefined,'skill-result-workspace');section.id='coding-result';section.setAttribute('aria-label','编程副本与验收');
+ const head=el('header'),close=el('button','×');close.title='关闭编程结果';close.setAttribute('aria-label','关闭编程结果');close.onclick=()=>window.ProjectExplorer.closeView('coding-result');head.append(el('h2','编程副本与验收'),close);section.append(head);
+ section.append(el('p',value.passed?'提供的案例已通过 · 请核对差异后应用':'验收未通过 · 保留诊断与候选','result-status'),el('p','文件：'+value.original.path),el('p',value.limits));
+ const facts=el('dl');for(const [name,text] of [['组合指导','排错、行为测试、模块设计、代码审阅'],['原文件基线',value.baseline.passed?'案例已通过，无需生成修改':'案例未通过'],['模型调用',String(value.attempts.length)+' / 2'],['验收结果',value.validation.passed?'全部 '+value.validation.cases+' 条通过':'未通过'],['工作目录',value.work_directory]])facts.append(el('dt',name),el('dd',text));section.append(facts);
+ const diff=el('pre',value.diff||'没有源码差异');diff.className='coding-diff';section.append(el('h3','源码差异'),diff);
+ const details=el('details');details.append(el('summary','查看基线、每次修复和隔离执行证据'),el('pre',JSON.stringify({baseline:value.baseline,attempts:value.attempts,composition:value.composition},null,2)));section.append(details);
+ const actions=el('div'),status=el('p');status.setAttribute('role','status');const buttons=[];
+ for(const [action,label] of [['apply','应用到原文件'],['rollback','恢复本次原文件']]){const button=el('button',label);button.disabled=!value.passed||!value.diff;button.onclick=async()=>{buttons.forEach(b=>b.disabled=true);status.textContent='正在核对文件版本…';try{const result=await api('/api/skills/coding-'+action,{conversation_id:cid,task_id:task});status.textContent=['applied','already_applied'].includes(result.status)?'候选已应用到 '+value.original.path+'。':'原文件已恢复。';}catch(e){status.textContent=e.message;}finally{buttons.forEach(b=>b.disabled=!value.passed||!value.diff);}};buttons.push(button);actions.append(button);}
+ const save=el('button','下载候选源码');save.onclick=()=>{const url=URL.createObjectURL(new Blob([value.candidate],{type:'text/plain;charset=utf-8'})),a=el('a');a.href=url;a.download='candidate-'+value.original.path.split('/').pop();a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};actions.append(save);section.append(actions,status);
+ if(!window.ProjectExplorer.openView({id:'coding-result',title:'编程验收',element:section}))notify('请先选择任务所属项目。');
+}
+window.SkillWorkbench={context,handleSubmit,preview,download,evidence,reportPreview,codingPreview,controls};controls();
+})();

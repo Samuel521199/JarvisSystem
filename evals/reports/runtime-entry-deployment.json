@@ -1,0 +1,25 @@
+{
+  "version": "0.1.28",
+  "previous_version": "0.1.27",
+  "captured_at": "2026-10-16T13:56:15.364935+00:00",
+  "core_ready": true,
+  "source_restart": true,
+  "exit_method": "existing instance-specific tray quit event",
+  "business_rows_preserved": true,
+  "preserved_task_count": 10,
+  "preserved_conversation_count": 1,
+  "module_count": 17,
+  "seed_catalog_status": "ready",
+  "served_assets_match_source": {
+    "modules.js": true,
+    "workspace.js": true,
+    "explorer.js": false
+  },
+  "created_test_records_in_user_store": false,
+  "paid_model_calls": 0,
+  "limits": [
+    "No live hot swap; explicit source restart while idle.",
+    "Unrelated explorer.js changed after startup in the shared checkout; it was not reverted or reloaded repeatedly.",
+    "Store metadata health does not prove source contents or extension runtime available."
+  ]
+}

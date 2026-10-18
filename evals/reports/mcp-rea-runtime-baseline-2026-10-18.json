@@ -1,0 +1,102 @@
+{
+  "version": "0.1.54",
+  "observed_at": "2026-10-18T12:51:11.129372+00:00",
+  "status": "passed",
+  "tests": 84,
+  "model_calls": 0,
+  "real_mcp_calls": 0,
+  "results": [
+    {
+      "suite": "test_mcp_runtime.py",
+      "passed": true,
+      "tests": 13,
+      "seconds": 17.37,
+      "output": "test_cancellation_closes_async_request_and_sends_notification (test_mcp_runtime.ClientTests.test_cancellation_closes_async_request_and_sends_notification) ... ok\ntest_errors_limits_wrong_ids_and_reverse_requests (test_mcp_runtime.ClientTests.test_errors_limits_wrong_ids_and_reverse_requests) ... ok\ntest_exact_library_id_uses_query_docs (test_mcp_runtime.ClientTests.test_exact_library_id_uses_query_docs) ... ok\ntest_invalid_version_and_changed_schema_do_not_call_tool (test_mcp_runtime.ClientTests.test_invalid_version_and_changed_schema_do_not_call_tool) ... ok\ntest_json_and_sse_handshake_names_allowlist_and_no_remote_instructions (test_mcp_runtime.ClientTests.test_json_and_sse_handshake_names_allowlist_and_no_remote_instructions) ... ok\ntest_sse_chunks_and_notifications (test_mcp_runtime.ClientTests.test_sse_chunks_and_notifications) ... ok\ntest_cancel_before_dispatch_and_argument_boundary (test_mcp_runtime.TaskTests.test_cancel_before_dispatch_and_argument_boundary) ... ok\ntest_config_changed_after_queueing_blocks_network (test_mcp_runtime.TaskTests.test_config_changed_after_queueing_blocks_network) ... ok\ntest_confirmed_receipt_and_replay_never_calls_again (test_mcp_runtime.TaskTests.test_confirmed_receipt_and_replay_never_calls_again) ... ok\ntest_network_uncertainty_never_retries (test_mcp_runtime.TaskTests.test_network_uncertainty_never_retries) ... ok\ntest_policy_changes_during_call_prevent_receipt (test_mcp_runtime.TaskTests.test_policy_changes_during_call_prevent_receipt) ... ok\ntest_real_shared_queue_conversation_binding_and_artifact_digest (test_mcp_runtime.TaskTests.test_real_shared_queue_conversation_binding_and_artifact_digest) ... ok\ntest_unregistered_ambiguous_credentials_and_disabled_block (test_mcp_runtime.TaskTests.test_unregistered_ambiguous_credentials_and_disabled_block) ... ok\n\n----------------------------------------------------------------------\nRan 13 tests in 16.484s\n\nOK\n"
+    },
+    {
+      "suite": "test_mcp_catalog.py",
+      "passed": true,
+      "tests": 6,
+      "seconds": 6.73,
+      "output": "test_http_nonce_origin_and_conflict (test_mcp_catalog.McpHTTPTests.test_http_nonce_origin_and_conflict) ... ok\ntest_discovery_and_configuration_never_execute_or_claim_ready (test_mcp_catalog.McpTests.test_discovery_and_configuration_never_execute_or_claim_ready) ... ok\ntest_existing_custom_entries_and_multiple_connections_survive (test_mcp_catalog.McpTests.test_existing_custom_entries_and_multiple_connections_survive) ... ok\ntest_invalid_policy_affiliation_and_stopped_mutation (test_mcp_catalog.McpTests.test_invalid_policy_affiliation_and_stopped_mutation) ... ok\ntest_scopes_inheritance_and_stale_write_after_restore (test_mcp_catalog.McpTests.test_scopes_inheritance_and_stale_write_after_restore) ... ok\ntest_templates_and_skill_references_are_valid (test_mcp_catalog.McpTests.test_templates_and_skill_references_are_valid) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 6.077s\n\nOK\n"
+    },
+    {
+      "suite": "test_rea_projection.py",
+      "passed": true,
+      "tests": 3,
+      "seconds": 0.64,
+      "output": "test_handler_body_and_runtime_behavior_are_never_added_by_projection (test_rea_projection.ProjectionTests.test_handler_body_and_runtime_behavior_are_never_added_by_projection) ... ok\ntest_handler_registration_is_not_lost_behind_imports (test_rea_projection.ProjectionTests.test_handler_registration_is_not_lost_behind_imports) ... ok\ntest_inferred_relations_cannot_be_promoted_by_model (test_rea_projection.ProjectionTests.test_inferred_relations_cannot_be_promoted_by_model) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.002s\n\nOK\n"
+    },
+    {
+      "suite": "test_conversation_tasks.py",
+      "passed": true,
+      "tests": 11,
+      "seconds": 14.68,
+      "output": "test_optional_markers_roundtrip_and_invalid_links_rejected (test_conversation_tasks.ArchiveTaskLinkTests.test_optional_markers_roundtrip_and_invalid_links_rejected) ... ok\ntest_nonce_origin_and_strict_routes (test_conversation_tasks.ConversationTaskHTTPTests.test_nonce_origin_and_strict_routes) ... ok\ntest_scoped_lookup_cancel_and_duplicate_have_no_model_calls (test_conversation_tasks.ConversationTaskHTTPTests.test_scoped_lookup_cancel_and_duplicate_have_no_model_calls) ... ok\ntest_association_is_atomic_and_part_of_idempotence (test_conversation_tasks.ConversationTaskTests.test_association_is_atomic_and_part_of_idempotence) ... ok\ntest_cancel_after_stop_and_delete_archive_preserve_task_audit (test_conversation_tasks.ConversationTaskTests.test_cancel_after_stop_and_delete_archive_preserve_task_audit) ... ok\ntest_conversation_filter_precedes_recent_thirty_limit (test_conversation_tasks.ConversationTaskTests.test_conversation_filter_precedes_recent_thirty_limit) ... ok\ntest_cross_conversation_detail_lookup_cancel_and_artifact_rejected (test_conversation_tasks.ConversationTaskTests.test_cross_conversation_detail_lookup_cancel_and_artifact_rejected) ... ok\ntest_global_task_cannot_be_attached_after_acceptance (test_conversation_tasks.ConversationTaskTests.test_global_task_cannot_be_attached_after_acceptance) ... ok\ntest_real_report_download_is_exact_committed_bytes_and_damage_visible (test_conversation_tasks.ConversationTaskTests.test_real_report_download_is_exact_committed_bytes_and_damage_visible) ... ok\ntest_restart_restores_link_without_archive_or_model_call (test_conversation_tasks.ConversationTaskTests.test_restart_restores_link_without_archive_or_model_call) ... ok\ntest_unknown_fields_and_bad_identifiers_never_create_task (test_conversation_tasks.ConversationTaskTests.test_unknown_fields_and_bad_identifiers_never_create_task) ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 13.565s\n\nOK\n"
+    },
+    {
+      "suite": "test_computer_queue.py",
+      "passed": true,
+      "tests": 10,
+      "seconds": 8.31,
+      "output": "test_capacity_atomic_idempotency_and_changed_arguments (test_computer_queue.QueueTests.test_capacity_atomic_idempotency_and_changed_arguments) ... ok\ntest_fifo_and_cancel_queued_task_never_dispatches (test_computer_queue.QueueTests.test_fifo_and_cancel_queued_task_never_dispatches) ... ok\ntest_new_owner_fences_old_dispatcher_and_serializes_inflight (test_computer_queue.QueueTests.test_new_owner_fences_old_dispatcher_and_serializes_inflight) ... ok\ntest_old_host_unknown_after_resume_blocks_new_owner (test_computer_queue.QueueTests.test_old_host_unknown_after_resume_blocks_new_owner) ... ok\ntest_pause_race_checked_inside_dispatch_transaction (test_computer_queue.QueueTests.test_pause_race_checked_inside_dispatch_transaction) ... ok\ntest_process_crash_reconciles_inflight_and_preserves_waiting (test_computer_queue.QueueTests.test_process_crash_reconciles_inflight_and_preserves_waiting) ... ok\ntest_restart_keeps_prepared_paused_then_explicit_resume (test_computer_queue.QueueTests.test_restart_keeps_prepared_paused_then_explicit_resume) ... ok\ntest_stop_cannot_be_cleared_by_queue_resume (test_computer_queue.QueueTests.test_stop_cannot_be_cleared_by_queue_resume) ... ok\ntest_unknown_pauses_following_tasks_and_never_replays (test_computer_queue.QueueTests.test_unknown_pauses_following_tasks_and_never_replays) ... ok\ntest_version_and_content_bindings_must_still_match (test_computer_queue.QueueTests.test_version_and_content_bindings_must_still_match) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 7.641s\n\nOK\n"
+    },
+    {
+      "suite": "test_resources.py",
+      "passed": true,
+      "tests": 9,
+      "seconds": 2.76,
+      "output": "test_pressure_between_precheck_and_dispatch_keeps_prepared (test_resources.ResourceQueueTests.test_pressure_between_precheck_and_dispatch_keeps_prepared) ... ok\ntest_resource_recovery_never_overrides_manual_pause_or_restart (test_resources.ResourceQueueTests.test_resource_recovery_never_overrides_manual_pause_or_restart) ... ok\ntest_wait_cancel_and_fifo_resume_once (test_resources.ResourceQueueTests.test_wait_cancel_and_fifo_resume_once) ... ok\ntest_commit_shortage_and_probe_failure_wait_without_grant (test_resources.ResourceTests.test_commit_shortage_and_probe_failure_wait_without_grant) ... ok\ntest_hysteresis_requires_margin_and_stable_recovery (test_resources.ResourceTests.test_hysteresis_requires_margin_and_stable_recovery) ... ok\ntest_profile_rejects_invalid_thresholds_and_missing_capability (test_resources.ResourceTests.test_profile_rejects_invalid_thresholds_and_missing_capability) ... ok\ntest_readers_do_not_advance_recovery_and_idle_clears_wait (test_resources.ResourceTests.test_readers_do_not_advance_recovery_and_idle_clears_wait) ... ok\ntest_real_os_memory_counters (test_resources.ResourceTests.test_real_os_memory_counters) ... ok\ntest_chat_status_and_cancel_stay_available_during_resource_wait (test_resources.ResourceWebTests.test_chat_status_and_cancel_stay_available_during_resource_wait) ... ok\n\n----------------------------------------------------------------------\nRan 9 tests in 1.912s\n\nOK\n"
+    },
+    {
+      "suite": "test_rea_explanation.py",
+      "passed": true,
+      "tests": 11,
+      "seconds": 264.28,
+      "output": "test_cancel_no_retry (test_rea_explanation.ExplanationTasks.test_cancel_no_retry) ... ok\ntest_delivery_bound_citations_and_idempotence (test_rea_explanation.ExplanationTasks.test_delivery_bound_citations_and_idempotence) ... ok\ntest_invalid_citation_not_delivered (test_rea_explanation.ExplanationTasks.test_invalid_citation_not_delivered) ... ok\ntest_no_evidence_and_default_make_zero_calls (test_rea_explanation.ExplanationTasks.test_no_evidence_and_default_make_zero_calls) ... ok\ntest_policy_change_before_dispatch (test_rea_explanation.ExplanationTasks.test_policy_change_before_dispatch) ... ok\ntest_purpose_cannot_inherit_context_or_trigger_other_skills (test_rea_explanation.ExplanationTasks.test_purpose_cannot_inherit_context_or_trigger_other_skills) ... ok\ntest_reject_implicit_model (test_rea_explanation.ExplanationTasks.test_reject_implicit_model) ... ok\ntest_source_change_not_delivered (test_rea_explanation.ExplanationTasks.test_source_change_not_delivered) ... ok\ntest_unknown_no_retry (test_rea_explanation.ExplanationTasks.test_unknown_no_retry) ... ok\ntest_packet_bounds_and_focus (test_rea_explanation.ValidationTests.test_packet_bounds_and_focus) ... ok\ntest_validate_shape_refs_and_limits (test_rea_explanation.ValidationTests.test_validate_shape_refs_and_limits) ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 263.088s\n\nOK\n"
+    },
+    {
+      "suite": "test_rea_asar.py",
+      "passed": true,
+      "tests": 7,
+      "seconds": 43.35,
+      "output": "test_corruption_budget_and_hardlinks (test_rea_asar.AsarTests.test_corruption_budget_and_hardlinks) ... ok\ntest_invalid_headers_ranges_links_and_names (test_rea_asar.AsarTests.test_invalid_headers_ranges_links_and_names) ... ok\ntest_literal_focus_validation (test_rea_asar.AsarTests.test_literal_focus_validation) ... ok\ntest_no_match_and_filtered_pages (test_rea_asar.AsarTests.test_no_match_and_filtered_pages) ... ok\ntest_packed_delivery_and_focus (test_rea_asar.AsarTests.test_packed_delivery_and_focus) ... ok\ntest_unpacked_changes_cancel_and_recheck (test_rea_asar.AsarTests.test_unpacked_changes_cancel_and_recheck) ... ok\ntest_unpacked_member_delivery_and_missing_companion (test_rea_asar.AsarTests.test_unpacked_member_delivery_and_missing_companion) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 42.983s\n\nOK\n"
+    },
+    {
+      "suite": "test_rea.py",
+      "passed": true,
+      "tests": 14,
+      "seconds": 160.93,
+      "output": "test_rea_changed_source_no_delivery (test_rea.ReaTests.test_rea_changed_source_no_delivery) ... ok\ntest_rea_evidence_write_failure_is_not_confirmed (test_rea.ReaTests.test_rea_evidence_write_failure_is_not_confirmed) ... ok\ntest_rea_exclusions_and_empty (test_rea.ReaTests.test_rea_exclusions_and_empty) ... ok\ntest_rea_hardlink_and_budget (test_rea.ReaTests.test_rea_hardlink_and_budget) ... ok\ntest_rea_invalid_target (test_rea.ReaTests.test_rea_invalid_target) ... ok\ntest_rea_job_cancel_and_limits (test_rea.ReaTests.test_rea_job_cancel_and_limits) ... ok\ntest_rea_job_host_crash_kills_children (test_rea.ReaTests.test_rea_job_host_crash_kills_children) ... ok\ntest_rea_large_published_directory_delivery (test_rea.ReaTests.test_rea_large_published_directory_delivery) ... ok\ntest_rea_missing_runtime_and_invalid_evidence (test_rea.ReaTests.test_rea_missing_runtime_and_invalid_evidence) ... ok\ntest_rea_paging_legacy_and_bounds (test_rea.ReaTests.test_rea_paging_legacy_and_bounds) ... ok\ntest_rea_policy_applies_and_dispatch_cancel (test_rea.ReaTests.test_rea_policy_applies_and_dispatch_cancel) ... ok\ntest_rea_real_delivery (test_rea.ReaTests.test_rea_real_delivery) ... ok\ntest_rea_runtime_change_and_cancel (test_rea.ReaTests.test_rea_runtime_change_and_cancel) ... ok\ntest_rea_syntax_failure (test_rea.ReaTests.test_rea_syntax_failure) ... ok\n\n----------------------------------------------------------------------\nRan 14 tests in 160.409s\n\nOK\n"
+    }
+  ],
+  "source_digests": {
+    "runtime/node-host/jarvis_core/mcp_client.py": "e98d27521377d0739cbb66b0ec206fbab83cd825958dbfabf98c1709528bd723",
+    "runtime/node-host/jarvis_core/mcp_tasks.py": "bfb076b937ae1b5b5e8745a8ccf6a3bce12b6223851c3853e92f54d952deb07b",
+    "runtime/node-host/jarvis_core/mcp_catalog.py": "c3e67d64a47f05281d51580162044c4b20cfb796a2d035fd03eda9d5e51bab93",
+    "runtime/node-host/jarvis_core/rea.py": "e7b2982a5ba5a3093280e07edf25792a2d5462bbf5ac51d139d08b2eb74a2f8b",
+    "runtime/node-host/jarvis_core/rea_focus.py": "2b9a7e1e7f52e7bfb6f74ec46e45089b69f73b6535bd9d5d8193afa7eb1c5263",
+    "runtime/node-host/jarvis_core/rea_evidence.py": "32a85a1eeff2ee91d6d1f029bd30af842d856d23e1cd92342c9cd3e4221b62cb",
+    "runtime/node-host/jarvis_core/rea_explanation.py": "19a6ce9b6a81d045d3a31833266d1821ac0c41bc54f782c829d1ee3edf873135",
+    "runtime/node-host/jarvis_core/task_queue.py": "dc16c596b712fe3825d4e9980d0c21a4b21d7e01993bb4d554758797482960c6",
+    "runtime/node-host/jarvis_core/conversation_tasks.py": "632cda059a232cf093645e522c2e846db6c1b84750f9a6eca99f95ec95e07f08",
+    "adapters/computer-use/jarvis_computer/web.py": "1c538250b176f453091747f76dccc0eb00a3375dbd147f072dc5224b92c7ed53",
+    "adapters/computer-use/jarvis_computer/task_queue.py": "a9b810ab0d616d44b2024b8fb290a7716540605892a5cbf7d9539215b5ceea72",
+    "apps/web/conversation_tasks.js": "9f251fbb7d0726157fecb4898f985cd5d81da47eb6a1506d4e36f69bbaf5839d",
+    "apps/web/mcp_manager.js": "0c74df31951193bbe830bdfe24a10eb90b9cb31bb604ce54109acc5fb1cd9702",
+    "apps/web/skills.js": "ff25473ccd382fd4bf9a4a4ccc43bdb4d774359c0949bddbc395f564e8ebc562",
+    "config/resource-profile.json": "76eb0bd0cba486dfca8310ed2fcf528f9f871341b96caeecc5c8400528056c86"
+  },
+  "supplemental_checks": [
+    {
+      "suite": "test_modules.py",
+      "passed": true,
+      "tests": 14,
+      "reason": "correct stale module display text only; no health or scheduling logic change",
+      "source_sha256": "962682fe00a8fe5f02b504c25eee11bf19a7014a41e461489a2dcac9de2504b5"
+    }
+  ],
+  "total_including_supplemental": 98,
+  "release_version": "0.1.55",
+  "version_note": "The parent test runner started at 0.1.54; release metadata was advanced to 0.1.55 during the run. Functional source digests below are unchanged by that version-only increment."
+}

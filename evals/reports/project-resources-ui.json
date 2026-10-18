@@ -1,0 +1,27 @@
+{
+  "version": "0.1.27",
+  "captured_at": "2026-10-16T13:39:14.841858+00:00",
+  "status": "passed",
+  "checks": [
+    "Open folder automatically shows lazy file tree; code read/edit/save preserves UTF-8 BOM and CRLF; excluded paths hidden",
+    "External editor change yields conflict, preserves disk and draft, explicit reload uses current content",
+    "New script creation and portable engineering file round trip restore tabs, active file and excludes after page reload",
+    "Resource/chat switching preserves editor and conversation; file browsing makes zero model calls",
+    "MCP stdio/HTTP configuration add, format check and refresh persistence; uninstalled command is never executed or downloaded",
+    "Skill registration, literal source preview, change detection and remove preserve original folder; no instruction injection",
+    "Dark desktop and light narrow layout checked; zero page errors; only one synthetic chat call"
+  ],
+  "page_errors": [],
+  "model_calls": "one synthetic, zero paid",
+  "screenshots": [
+    "H:\\JarvisData\\research\\project-resources-ui\\explorer-dark.png",
+    "H:\\JarvisData\\research\\project-resources-ui\\mcp-dark.png",
+    "H:\\JarvisData\\research\\project-resources-ui\\explorer-mobile.png",
+    "H:\\JarvisData\\research\\project-resources-ui\\skills-mobile.png"
+  ],
+  "limits": [
+    "UTF-8 text editor, no language server/debugger/terminal or execution.",
+    "Single-root engineering file; no full VS Code workspace compatibility.",
+    "MCP/skills are registration only; no live MCP protocol or skill execution validated."
+  ]
+}

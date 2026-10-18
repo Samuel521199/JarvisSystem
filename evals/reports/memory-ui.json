@@ -1,0 +1,25 @@
+{
+  "version": "0.1.25",
+  "captured_at": "2026-10-16T12:17:43.115006+00:00",
+  "status": "passed",
+  "checks": [
+    "Explicit local-only memory is durable and not sent to cloud by default",
+    "Allowed provider gets memory; reply provenance survives conversation archive and refresh",
+    "Corrected facts replace old text and invalidate the old memory-dependent history turn",
+    "Stale edits show conflict without losing input; forget clears facts and fences derived history",
+    "Project facts enter only the matching project; leaving the project excludes them",
+    "Temporary chat reads no memory and cannot create facts through the panel",
+    "Desktop/mobile modal, escaped text and keyboard closing; no script errors"
+  ],
+  "fixture_calls": 7,
+  "page_errors": [],
+  "screenshots": [
+    "H:\\JarvisData\\research\\memory-ui\\desktop.png",
+    "H:\\JarvisData\\research\\memory-ui\\mobile.png"
+  ],
+  "limits": [
+    "Synthetic gateway; no real model quality or cloud calls tested.",
+    "Explicit owner facts only; no automatic extraction, embeddings or federation.",
+    "Forgetting does not erase prior transcript/exports/provider copies; already dispatched calls cannot be recalled."
+  ]
+}

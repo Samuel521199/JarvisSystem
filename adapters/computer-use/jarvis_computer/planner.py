@@ -30,10 +30,12 @@ class ModelPlanner:
                   '其他 value 必须原样选择该目标的允许值。不要生成代码、选择器、URL或新目标。\n'
                   + json.dumps({'goal':task['goal'],'success':task['success'],'observation':observation},ensure_ascii=False))
         reply = self.chat.reply(prompt, provider=self.provider, model=self.model)
-        self.last_metadata = {key:reply.get(key) for key in ('status','provider','model','request_id','usage','elapsed_seconds','notice')}
+        self.last_metadata = {key:reply.get(key) for key in ('status','provider','model','request_id','usage','elapsed_seconds','notice','output_incomplete','completion_reason')}
         if reply['status'] != 'SUCCEEDED':
             code = 'model_unknown' if reply['status'] == 'UNKNOWN' else 'model_failed'
             raise ComputerError(code, reply.get('user_message','Model did not return a usable action'))
+        if reply.get('output_incomplete'):
+            raise ComputerError('model_incomplete', 'Model output was incomplete; no browser action was adopted')
         return strict_json(reply['text'])
 
 

@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "version": "0.1.28",
+  "captured_at": "2026-10-16T13:51:55.213189+00:00",
+  "cases": [
+    {
+      "point": "before_accept_commit",
+      "exit_code": 91,
+      "recovered_action": "ABSENT",
+      "retry_action": "CONFIRMED",
+      "files_before_retry": {},
+      "files_after_retry": {
+        "act_e8843257cc1850f9929d0c697afd0481.json": {
+          "bytes": 142,
+          "sha256": "25bfb0151cbfe507b2391540f09b8245d00147d368802900b4ea2ec0779b7fe7"
+        }
+      },
+      "task_count": 1,
+      "status": "passed"
+    },
+    {
+      "point": "after_accept_commit",
+      "exit_code": 91,
+      "recovered_action": "PREPARED",
+      "retry_action": "CONFIRMED",
+      "files_before_retry": {},
+      "files_after_retry": {
+        "act_804b86aa640853babe6d3dbbfe7e5ced.json": {
+          "bytes": 142,
+          "sha256": "25bfb0151cbfe507b2391540f09b8245d00147d368802900b4ea2ec0779b7fe7"
+        }
+      },
+      "task_count": 1,
+      "status": "passed"
+    },
+    {
+      "point": "after_dispatch_commit",
+      "exit_code": 91,
+      "recovered_action": "UNKNOWN",
+      "retry_action": "UNKNOWN",
+      "files_before_retry": {},
+      "files_after_retry": {},
+      "task_count": 1,
+      "status": "passed"
+    },
+    {
+      "point": "partial_artifact",
+      "exit_code": 91,
+      "recovered_action": "UNKNOWN",
+      "retry_action": "UNKNOWN",
+      "files_before_retry": {
+        "act_c4ad812a5fca55f0a5003e45b9e5b6ee.json": {
+          "bytes": 71,
+          "sha256": "00e309d0b4199fd7203de350eb7fd50ce0bb9707402fb1b43f6f68fddf56757d"
+        }
+      },
+      "files_after_retry": {
+        "act_c4ad812a5fca55f0a5003e45b9e5b6ee.json": {
+          "bytes": 71,
+          "sha256": "00e309d0b4199fd7203de350eb7fd50ce0bb9707402fb1b43f6f68fddf56757d"
+        }
+      },
+      "task_count": 1,
+      "status": "passed"
+    },
+    {
+      "point": "after_artifact_sync",
+      "exit_code": 91,
+      "recovered_action": "UNKNOWN",
+      "retry_action": "UNKNOWN",
+      "files_before_retry": {
+        "act_8dc4e6895c5751bda7476ba5c3d2be53.json": {
+          "bytes": 142,
+          "sha256": "25bfb0151cbfe507b2391540f09b8245d00147d368802900b4ea2ec0779b7fe7"
+        }
+      },
+      "files_after_retry": {
+        "act_8dc4e6895c5751bda7476ba5c3d2be53.json": {
+          "bytes": 142,
+          "sha256": "25bfb0151cbfe507b2391540f09b8245d00147d368802900b4ea2ec0779b7fe7"
+        }
+      },
+      "task_count": 1,
+      "status": "passed"
+    },
+    {
+      "point": "before_receipt_commit",
+      "exit_code": 91,
+      "recovered_action": "UNKNOWN",
+      "retry_action": "UNKNOWN",
+      "files_before_retry": {
+        "act_b7fbde4060c25d4b8c4c4d4df11f1500.json": {
+          "bytes": 142,
+          "sha256": "25bfb0151cbfe507b2391540f09b8245d00147d368802900b4ea2ec0779b7fe7"
+        }
+      },
+      "files_after_retry": {
+        "act_b7fbde4060c25d4b8c4c4d4df11f1500.json": {
+          "bytes": 142,
+          "sha256": "25bfb0151cbfe507b2391540f09b8245d00147d368802900b4ea2ec0779b7fe7"
+        }
+      },
+      "task_count": 1,
+      "status": "passed"
+    },
+    {
+      "point": "after_receipt_commit",
+      "exit_code": 91,
+      "recovered_action": "CONFIRMED",
+      "retry_action": "CONFIRMED",
+      "files_before_retry": {
+        "act_4fba6f9c2782518b82578ee76897a7eb.json": {
+          "bytes": 142,
+          "sha256": "25bfb0151cbfe507b2391540f09b8245d00147d368802900b4ea2ec0779b7fe7"
+        }
+      },
+      "files_after_retry": {
+        "act_4fba6f9c2782518b82578ee76897a7eb.json": {
+          "bytes": 142,
+          "sha256": "25bfb0151cbfe507b2391540f09b8245d00147d368802900b4ea2ec0779b7fe7"
+        }
+      },
+      "task_count": 1,
+      "status": "passed"
+    }
+  ],
+  "status": "passed_with_documented_limits",
+  "limits": "Fixed inventory capability, real LPAC Worker and SQLite/NTFS behavior on this machine. Child-only fault hooks call os._exit; not power-loss, disk-controller failure, arbitrary browser effects, or complete K1 acceptance. No user data, credentials or default service changed.",
+  "corruption": [
+    {
+      "case": "changed",
+      "error": "artifact_unavailable",
+      "not_rebuilt": true,
+      "status": "passed"
+    },
+    {
+      "case": "missing",
+      "error": "path_missing",
+      "not_rebuilt": true,
+      "status": "passed"
+    }
+  ],
+  "source_sha256": {
+    "tools/probe_task_faults.py": "99e6e0e2be5e4d821e22e1d318ab06bdf0c4ff3532978addba2e9eead1c03dbd",
+    "runtime/node-host/jarvis_core/service.py": "6080e0f1c597b6e707e2e079ba9909597661f94230d0d487c826baf8d08f1308",
+    "runtime/node-host/jarvis_core/ledger.py": "cbf89031fe46f9ef161a1dedbce557bda3ef8349a8ffdf19a47ed8e32c3a61bc",
+    "runtime/node-host/jarvis_core/worker.py": "9330cf53a54429a0108deeb5c06a24cfe9cea2daa987c1c7e23d6af8507ea5dd"
+  }
+}

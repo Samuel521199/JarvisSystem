@@ -1,0 +1,70 @@
+{
+  "version": "0.1.33",
+  "captured_at": "2026-10-16T16:56:33.350233+00:00",
+  "status": "passed",
+  "unittest": {
+    "command": "python -m unittest discover -s tests -q",
+    "tests_run": 439,
+    "passed": 437,
+    "skipped": 2,
+    "failures": 0,
+    "errors": 0,
+    "elapsed_seconds": 197.811
+  },
+  "evidence": [
+    "evals/reports/memory-view-ui.json",
+    "evals/reports/memory-view-live.json",
+    "evals/reports/memory-view-deployment.json"
+  ],
+  "paid_model_calls_this_increment": 2,
+  "local_model_calls_this_increment": 2,
+  "new_dependencies": [],
+  "new_services": 0,
+  "new_downloads": 0,
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/memory.py": "a89635a9664295242f843081572e05ec25929aa67ef85a6aaeafdb41c9c7d60e",
+    "runtime/node-host/jarvis_core/knowledge.py": "6973e4f740e8858ab326cf6b2c8594138054a44fd7bb6ba4c76d5530ccf28838",
+    "runtime/node-host/jarvis_core/memory_view.py": "59966eed3a3ffe66f38c5b73c20922c0dbfac2e65b2ba072c31259722161c898",
+    "runtime/node-host/jarvis_core/chat.py": "6cc6897b8b6572113c2b88ff9e128d97c67e7d543f71a661d9640980ddb862b1",
+    "runtime/node-host/jarvis_core/modules.py": "07e2d8059eca6efeaafb85ff3fe066ca2dbde190463ffd28201e275b223d0201",
+    "apps/web/index.html": "3ef86cfd185dde99ed258377a9a2d98b9b37f60146cc69a54486dd9b317e0a44",
+    "apps/web/server.py": "34e3c4397bcaf894f0bb52ab733a921d6828ed9c85ecd1ae7e5937f4b58ceda6",
+    "apps/web/knowledge.js": "cf21e0f1ea38c5d277ab1c31bffed20753031d50abc741f63b647c3b51332256",
+    "apps/web/knowledge.css": "b9345e1e2ef008ab995eefbc002f277d296ad3a98db88c2c12a9c1478ec9d2b3",
+    "apps/web/memory.js": "070c7215cb1d2ad50503c12685e09f16fe6818101a777433c6b4419287db3924",
+    "apps/web/context.js": "9d6ace896377cb02df68f664320892302550fc3a118e9840cba23c2450f8c423",
+    "contracts/schemas/memory-fact.schema.json": "320870fd22b42a3d62299fd26edf1de70d799c1ffdfbc3d92e21041fce1edc2c",
+    "contracts/schemas/project-knowledge.schema.json": "2d545b8b887944f281249860f0abe4c391d1d7e1f55e37f356d0469aff39fd74",
+    "tests/test_memory_view.py": "293ef17c8042dbeef1ba34606af624eb9130e64b5e5ddfcec5912a835e6ba6ae",
+    "tools/probe_memory_view.py": "15cfad47fae6f1989572a85407bd8292aa082e78598f2d54676a5a61b5dfe5eb",
+    "runtime/node-host/jarvis_core/__init__.py": "ee671dbf3ecae6c4e4a8fa1a41ad4b24ee1ab858b677b8ce1e56e5ec5170eeb0",
+    "pyproject.toml": "7679b365f7772b3f1cd9170d05806fa0f58c00581c131887419a35410ec84534",
+    "uv.lock": "71f38e8ef54a84a71cd0abcbaf28814cadde38b94e7feb9b0ebb68e6ad09baa8"
+  },
+  "limits": [
+    "Scope is local owner-selected registered projects, not an independent multi-user security boundary.",
+    "Multi-store snapshot is non-atomic; no vector retrieval, automatic extraction or federation.",
+    "Local model returned correct fixture facts but omitted inline citation labels.",
+    "Full K gates remain false."
+  ],
+  "checks": {
+    "docs": {
+      "documents": 23,
+      "diagrams": 19,
+      "artifacts": 38,
+      "errors": 0
+    },
+    "seed": {
+      "assets": 22,
+      "fixtures": 12,
+      "passed": true
+    },
+    "navigation": "synchronized",
+    "whitespace": "passed",
+    "final_targeted_tests": {
+      "run": 24,
+      "passed": 24,
+      "elapsed_seconds": 9.147
+    }
+  }
+}

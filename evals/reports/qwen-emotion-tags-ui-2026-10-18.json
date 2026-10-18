@@ -1,0 +1,242 @@
+{
+  "status": "SUCCEEDED",
+  "source_version": "0.1.43",
+  "backend": "speech.cpp 0.8.10 / Qwen3-TTS 1.7B Q5_K / Vulkan0",
+  "startup_click_to_ready_seconds": 7.5774954999942565,
+  "loaded": {
+    "id": "qwen-tts",
+    "installed": true,
+    "state": "ready",
+    "owned": true,
+    "pid": 43344,
+    "device": "Vulkan0",
+    "threads": 4,
+    "memory": {
+      "working_set_bytes": 1700909056,
+      "peak_working_set_bytes": 1701715968,
+      "private_commit_bytes": 1777074176,
+      "peak_private_commit_bytes": 1783808000
+    },
+    "load": {
+      "ready": true,
+      "pid": 31324,
+      "inference_pid": 43344,
+      "protocol": 3,
+      "device": "Vulkan0",
+      "load_seconds": 2.036709599997266,
+      "uses": 0
+    },
+    "busy": false,
+    "job": {
+      "id": "4d838997826c4b67bd717e5de5edeb01",
+      "action": "start",
+      "status": "SUCCEEDED",
+      "started_at": "2026-10-18T02:05:21.520143+00:00",
+      "finished_at": "2026-10-18T02:05:28.504152+00:00",
+      "result": {
+        "message": "Qwen 主力语音已加载，可选择音色与情绪；用完可独立停止。",
+        "load": {
+          "ready": true,
+          "pid": 31324,
+          "inference_pid": 43344,
+          "protocol": 3,
+          "device": "Vulkan0",
+          "load_seconds": 2.036709599997266,
+          "uses": 0
+        }
+      }
+    },
+    "uses": 0,
+    "model_revision": "a72e6c6575d67652488cdffc1c863215a9899978",
+    "reference_default": null,
+    "configuration_notice": null,
+    "limits": {
+      "text_chars": 180,
+      "reference_seconds": 15,
+      "output_seconds": 20
+    },
+    "usage_role": "primary",
+    "auto_start": false,
+    "broker_pid": 31324,
+    "broker_memory": {
+      "working_set_bytes": 25448448,
+      "peak_working_set_bytes": 25468928,
+      "private_commit_bytes": 15241216,
+      "peak_private_commit_bytes": 15294464
+    },
+    "gpu_memory": {
+      "status": "measured",
+      "dedicated_bytes": 110190592,
+      "shared_bytes": 1585897472
+    },
+    "capabilities": {
+      "voices": {
+        "serena": "Serena · 温柔女声",
+        "vivian": "Vivian · 明亮女声",
+        "uncle_fu": "Uncle Fu · 成熟男声",
+        "dylan": "Dylan · 北京男声",
+        "eric": "Eric · 四川男声",
+        "ryan": "Ryan · 英语男声",
+        "aiden": "Aiden · 阳光男声",
+        "ono_anna": "Ono Anna · 日语女声",
+        "sohee": "Sohee · 韩语女声"
+      },
+      "emotions": {
+        "neutral": "自然",
+        "happy": "开心",
+        "sad": "悲伤",
+        "angry": "生气",
+        "soft": "温柔轻声",
+        "slow": "舒缓慢速",
+        "fast": "轻快快速"
+      },
+      "languages": {
+        "zh": "中文",
+        "en": "English",
+        "ja": "日本語",
+        "ko": "한국어",
+        "de": "Deutsch",
+        "fr": "Français",
+        "ru": "Русский",
+        "pt": "Português",
+        "es": "Español",
+        "it": "Italiano"
+      },
+      "emotion_tags": {
+        "neutral": "neutral",
+        "happy": "happy",
+        "sad": "sad",
+        "angry": "angry",
+        "soft": "soft",
+        "slow": "slow",
+        "fast": "fast",
+        "自然": "neutral",
+        "开心": "happy",
+        "悲伤": "sad",
+        "生气": "angry",
+        "温柔轻声": "soft",
+        "舒缓慢速": "slow",
+        "轻快快速": "fast",
+        "伤心": "sad",
+        "温柔": "soft",
+        "轻声": "soft",
+        "慢速": "slow",
+        "快速": "fast"
+      },
+      "emotion_tag_scope": "one_leading_tag_overrides_selector",
+      "cloning": false,
+      "delivery": "complete_wav"
+    }
+  },
+  "cases": [
+    {
+      "label": "happy",
+      "source_text": "[开心]今天下午我们会在这里见面。",
+      "selector": "angry",
+      "click_to_blob_seconds": 1.2365854999952717,
+      "result": {
+        "id": "9b3ceadb5cc94d799e0309a801188f66",
+        "sample_rate_hz": 24000,
+        "audio_seconds": 2.56,
+        "elapsed_seconds": 0.831267100002151,
+        "first_pcm_seconds": 0.07572680000157561,
+        "voice": "serena",
+        "emotion": "happy",
+        "language": "zh",
+        "audio_url": "/api/speech/primary/audio/9b3ceadb5cc94d799e0309a801188f66"
+      },
+      "memory": {
+        "working_set_bytes": 1701814272,
+        "peak_working_set_bytes": 1702690816,
+        "private_commit_bytes": 1845321728,
+        "peak_private_commit_bytes": 1852092416
+      },
+      "gpu_memory": {
+        "status": "measured",
+        "dedicated_bytes": 162758656,
+        "shared_bytes": 1585897472
+      },
+      "artifact": "H:\\JarvisData\\research\\qwen-tts\\emotion-tags\\ui-happy.wav",
+      "sha256": "cb1960abd665ee77a59a612e539010bd3953616f0a8e453147d1a716070b9ef2"
+    },
+    {
+      "label": "sad",
+      "source_text": "【悲伤】今天下午我们会在这里见面。",
+      "selector": "angry",
+      "click_to_blob_seconds": 1.240376900008414,
+      "result": {
+        "id": "c8713efa27ac47749345315e8b452aa1",
+        "sample_rate_hz": 24000,
+        "audio_seconds": 3.12,
+        "elapsed_seconds": 0.9685869000095408,
+        "first_pcm_seconds": 0.07896929999697022,
+        "voice": "serena",
+        "emotion": "sad",
+        "language": "zh",
+        "audio_url": "/api/speech/primary/audio/c8713efa27ac47749345315e8b452aa1"
+      },
+      "memory": {
+        "working_set_bytes": 1728872448,
+        "peak_working_set_bytes": 1729712128,
+        "private_commit_bytes": 1838972928,
+        "peak_private_commit_bytes": 1852092416
+      },
+      "gpu_memory": {
+        "status": "measured",
+        "dedicated_bytes": 165642240,
+        "shared_bytes": 1606868992
+      },
+      "artifact": "H:\\JarvisData\\research\\qwen-tts\\emotion-tags\\ui-sad.wav",
+      "sha256": "0d8acca7782ff6ca95a8194f095a7f7217ee2f45b5a99b7c02b7632165a54a1b"
+    },
+    {
+      "label": "vivian",
+      "source_text": "[neutral]今天下午我们会在这里见面。",
+      "selector": "angry",
+      "click_to_blob_seconds": 1.3773921000101836,
+      "result": {
+        "id": "2b2d03a5cd524c47ab5b377aa7ef2bf7",
+        "sample_rate_hz": 24000,
+        "audio_seconds": 3.28,
+        "elapsed_seconds": 1.1491174999973737,
+        "first_pcm_seconds": 0.06216820000554435,
+        "voice": "vivian",
+        "emotion": "neutral",
+        "language": "zh",
+        "audio_url": "/api/speech/primary/audio/2b2d03a5cd524c47ab5b377aa7ef2bf7"
+      },
+      "memory": {
+        "working_set_bytes": 1729040384,
+        "peak_working_set_bytes": 1729925120,
+        "private_commit_bytes": 1839140864,
+        "peak_private_commit_bytes": 1852092416
+      },
+      "gpu_memory": {
+        "status": "measured",
+        "dedicated_bytes": 165642240,
+        "shared_bytes": 1606868992
+      },
+      "artifact": "H:\\JarvisData\\research\\qwen-tts\\emotion-tags\\ui-vivian.wav",
+      "sha256": "186772bfc7c10e862700910666cc1ff92b688c628b612cd8825c7ceba0dd4b87"
+    }
+  ],
+  "parallel_synthetic_chat_seconds": 0.03361399999994319,
+  "restart_and_inflight_stop": "verified; both owned native PIDs exited; no replay; backup models stayed stopped",
+  "browser_errors": [],
+  "user_listening_acceptance": "2026-10-18: 用户确认此前 Serena 开心/悲伤/生气样本自然、情绪明显，可以作为主力。",
+  "limits": "Complete WAV delivery; native first PCM is not speaker onset. Synthetic local chat proves lane independence, not cloud/LLM latency. Only finite voices and utterances tested.",
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/speech.py": "df339df40260e723f0402c51f1da34daf1cef6c6e34312d2f4a1099b7a019db9",
+    "runtime/node-host/jarvis_core/qwen_speech.py": "d0b9fe4f82fa63efd116c0fa8c034f3ad53981d2043360faa5d31175b7e9b4dc",
+    "runtime/node-host/jarvis_core/qwen_speech_contract.py": "0336306b8550e96e92c292490acd5305a7f659de239e4aa27702f007e64d5f65",
+    "runtime/node-host/jarvis_core/qwen_protocol.py": "1fc1f03db68edc0935d82a2431644195c9c095f8829c6f246843b98f7b672a83",
+    "runtime/node-host/jarvis_core/gpu_memory.py": "71e8470d09f56be80ddfc06e0e7f15a1ea6c939c138526909e238ead21365d6c",
+    "adapters/speech/qwen/worker.py": "ce54860db82d8f6bf124e70bffb08bac0bab52cf24ca7da84a460c67c90b412c",
+    "config/model-profiles/qwen-tts.json": "3b37a09b834305d9b08fbdc5060111836780bea6f4d618c1b8e91323f5ae065e",
+    "apps/web/speech.js": "9480baffd94d730f4c05797ff1de1487200b10e7a8279877ef623e5730d670b3",
+    "apps/web/speech_routes.py": "6e4900d0af2a51ee0b2137443ae28b147ec75f4b6d199309dca564f59a2e6079",
+    "apps/web/admin.html": "ea45f509d6243d9bdeba519b31ac27291e5b80e541ee71d5dc5253b9864aa62b",
+    "tools/probe_qwen_speech_ui.py": "799771e1151a7a8c4fb953854708179f02a7d18c37bec8f970ae754551af4ca7"
+  },
+  "emotion_tag_mode": true
+}

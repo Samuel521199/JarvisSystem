@@ -1,0 +1,38 @@
+{
+  "version": "0.1.37",
+  "feature": "evolution-v1",
+  "date": "2026-10-17",
+  "status": "passed",
+  "browser": "Codex in-app browser via cua_repl",
+  "page": "http://127.0.0.1:18181/settings#modules",
+  "settings_saved_via_ui": true,
+  "detect_missing_and_generate_via_ui": true,
+  "actual_tool_invocation_via_ui": true,
+  "live_generation_model_calls": 1,
+  "active": {
+    "singleton": 1,
+    "active": "73080f48a7e3a1e89d8a6097303006154bc806db1b5e7f58803191274ef83a39",
+    "previous": null,
+    "generation": 1
+  },
+  "automatic_maintenance_enabled": true,
+  "target_revision": 2,
+  "route": "vertex::gemini-3.1-pro-preview",
+  "restart_preserved_package_and_policy": true,
+  "timer_dispatched_check": {
+    "id": "51ccf71e3cf349edb9dea02aa238b849",
+    "status": "SUCCEEDED",
+    "model_calls": 0,
+    "healthy": true
+  },
+  "actual_output": "| path | size |\n| --- | ---: |\n| a&#124;b.txt | 42 |\n| 中文说明.md | 128 |\n",
+  "browser_console_errors": 0,
+  "screenshot": "H:/JarvisData/evals/evolution-20261017-02/workbench.jpg",
+  "limitations": [
+    "One registered pure-data tool family",
+    "No general source-tree edits",
+    "No third-party component replacement",
+    "No external Codex CLI adapter",
+    "No long-duration PC envelope evidence"
+  ]
+}

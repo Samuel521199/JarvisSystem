@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "checks": [
+    "10 curated cards, search/categories, keyboard details, source and CAD boundaries",
+    "policy survives reload; template -> persisted registration -> grouped card -> explicit format-only check",
+    "custom entry rendered as text, removal affects registration only, mobile has no overflow",
+    "existing skill menu preserved; no JavaScript errors, model calls or ready-state inflation",
+    "candidate draft: source grounding, disabled/manual policy, existing/new drafts preserved, no dispatch until explicit send",
+    "no configured models: explicit composer and /文档 work, normal chat blocked; lookup -> explicit selection -> docs query -> safe text result -> persisted validation; two mock MCP calls, zero model calls"
+  ],
+  "page_errors": [],
+  "paid_model_calls": 0,
+  "mcp_calls": 2,
+  "scope": "isolated Edge + mocked MCP protocol; live server verified separately"
+}

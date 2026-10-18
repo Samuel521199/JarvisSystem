@@ -1,0 +1,44 @@
+{
+  "observed_at": "2026-10-16T20:06:27.901504+00:00",
+  "route": "vertex::gemini-3.8-flash",
+  "scope": "new standalone short text check, not a replay of prior UNKNOWN; real running host journal",
+  "requested_calls": 1,
+  "result": {
+    "status": "SUCCEEDED",
+    "provider": "vertex",
+    "model": "gemini-3.8-flash",
+    "text": "JARVIS_GOOGLE_OK",
+    "usage": {
+      "promptTokenCount": 232,
+      "candidatesTokenCount": 6,
+      "totalTokenCount": 238
+    },
+    "billing": {
+      "basis": "estimated",
+      "amount": 0.0001965,
+      "currency": "USD",
+      "tokens": {
+        "input": 232,
+        "output": 6,
+        "cache_read": 0,
+        "cache_write": 0,
+        "total": 238,
+        "reasoning": 0
+      },
+      "price": {
+        "input": 0.75,
+        "output": 3.75,
+        "cache_read": 0.075,
+        "cache_write": null,
+        "max_input_tokens": 1000000,
+        "currency": "USD",
+        "fee_percent": 0,
+        "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+        "checked_at": "2026-10-16",
+        "valid_until": "2026-12-31"
+      },
+      "reason": "token_rates"
+    },
+    "output_incomplete": false
+  }
+}

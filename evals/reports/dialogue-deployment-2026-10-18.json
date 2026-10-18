@@ -1,0 +1,28 @@
+{
+  "status": "SUCCEEDED",
+  "source_version": "0.1.48",
+  "data_dir": "C:\\Users\\samuel\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\Jarvis\\data",
+  "previous_version": "0.1.47",
+  "previous_instance": "09972cbbcbe5cdf025381ccc9befc17a",
+  "current_instance": "e31f6544f75f9ee4206819d7b6e4bce0",
+  "idle_graceful_reload": true,
+  "served_sha256": {
+    "dialogue.js": "99014ff8902b873339410666dc7330d3d9b2f9b5d72751c07fcc5c78e1dba974",
+    "resources.js": "cda5ee33909e2737700eaa1a9054704f8d9e68d00e0ae1f85a151be47c9ac294",
+    "workspace.js": "40999ce0cbb22981c1f167889e916119fec6552b3844458eb81a5199cddcca50",
+    "conversation_tasks.js": "8361f78b56e3969009531d7aaec6b6b79bf83bc9f2489be24de6e25f3b480cec"
+  },
+  "calculation": "84",
+  "personal_read_only": true,
+  "duplicate_did_not_repeat_calculation": true,
+  "cancel_before_submit": true,
+  "restart_fence": true,
+  "admission_ms": 48.851,
+  "backups": {
+    "/api/speech/fast": "stopped",
+    "/api/speech": "stopped"
+  },
+  "cloud_calls": 0,
+  "limits": "One local calculator and personal-settings query; no paid model, microphone, task replay, persistent dialogue recovery or physical voice timing.",
+  "empty_restart_queue_reviewed_and_resumed": true
+}

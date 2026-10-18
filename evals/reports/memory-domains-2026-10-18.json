@@ -1,0 +1,297 @@
+{
+  "version": "0.1.47",
+  "status": "verified_bounded_increment_and_live_migration",
+  "scope": "Owner-facing typed long-term facts, not full conversation or recipient isolation",
+  "resources": {
+    "before": {
+      "captured_at": "2026-10-18T05:13:53.839172+00:00",
+      "typed": false,
+      "facts": 1000,
+      "population_seconds": 21.799,
+      "database_bytes": 2285568,
+      "timings": {
+        "personal_chat": {
+          "p50_ms": 23.058,
+          "p95_ms": 24.139,
+          "samples": 30,
+          "available": 1000,
+          "context_bytes": 5891
+        },
+        "work_assist": {
+          "p50_ms": 22.474,
+          "p95_ms": 24.481,
+          "samples": 30,
+          "available": 1000,
+          "context_bytes": 5891
+        },
+        "disabled": {
+          "p50_ms": 0.026,
+          "p95_ms": 0.035,
+          "samples": 30,
+          "available": 0,
+          "context_bytes": 0
+        }
+      },
+      "python_context_peak_bytes": 3272788,
+      "process_before_reads": {
+        "working_set_bytes": 33374208,
+        "peak_working_set_bytes": 34172928,
+        "private_commit_bytes": 22691840,
+        "peak_private_commit_bytes": 23011328
+      },
+      "process_after_reads": {
+        "working_set_bytes": 38690816,
+        "peak_working_set_bytes": 40005632,
+        "private_commit_bytes": 27697152,
+        "peak_private_commit_bytes": 29982720
+      },
+      "added_dependencies": [],
+      "added_daemons": 0,
+      "model_calls": 0,
+      "limits": [
+        "Single-process warm synthetic reads on this PC, not an 8 GiB system acceptance or long soak.",
+        "Process totals include Python/core imports; tracemalloc is one-call Python allocation, not RSS.",
+        "No embeddings, source archives, worst-case bodies, concurrent UI/speech or federation."
+      ]
+    },
+    "after": {
+      "captured_at": "2026-10-18T05:17:07.682707+00:00",
+      "typed": true,
+      "facts": 1000,
+      "population_seconds": 22.92,
+      "database_bytes": 2277376,
+      "timings": {
+        "personal_chat": {
+          "p50_ms": 29.121,
+          "p95_ms": 31.023,
+          "samples": 30,
+          "available": 1000,
+          "context_bytes": 5313
+        },
+        "work_assist": {
+          "p50_ms": 19.902,
+          "p95_ms": 21.682,
+          "samples": 30,
+          "available": 500,
+          "context_bytes": 5313
+        },
+        "disabled": {
+          "p50_ms": 0.027,
+          "p95_ms": 0.036,
+          "samples": 30,
+          "available": 0,
+          "context_bytes": 0
+        }
+      },
+      "python_context_peak_bytes": 4552691,
+      "process_before_reads": {
+        "working_set_bytes": 31907840,
+        "peak_working_set_bytes": 33705984,
+        "private_commit_bytes": 20647936,
+        "peak_private_commit_bytes": 22585344
+      },
+      "process_after_reads": {
+        "working_set_bytes": 41353216,
+        "peak_working_set_bytes": 42389504,
+        "private_commit_bytes": 29569024,
+        "peak_private_commit_bytes": 30760960
+      },
+      "added_dependencies": [],
+      "added_daemons": 0,
+      "model_calls": 0,
+      "limits": [
+        "Single-process warm synthetic reads on this PC, not an 8 GiB system acceptance or long soak.",
+        "Process totals include Python/core imports; tracemalloc is one-call Python allocation, not RSS.",
+        "No embeddings, source archives, worst-case bodies, concurrent UI/speech or federation."
+      ]
+    }
+  },
+  "browser": {
+    "version": "0.1.48",
+    "captured_at": "2026-10-18T05:27:54.544435+00:00",
+    "checks": [
+      "Saved typed personal/shared facts through real UI and HTTP",
+      "Work request sends allowed shared fact, excludes private fact from actual provider input",
+      "Category filters preserve facts; 390px and desktop layout do not overflow",
+      "Lost response retry produces one policy revision and preserves expiry seconds",
+      "Restricted fact and dependent prior turn absent from next work provider input",
+      "Old host capability mismatch blocks new policy writes"
+    ],
+    "page_errors": [],
+    "real_model_calls": 0,
+    "user_data_modified": false,
+    "fixture_model_calls": 2,
+    "status": "passed"
+  },
+  "validation": {
+    "new_domain_tests": {
+      "run": 13,
+      "passed": 13
+    },
+    "frontend_tests": {
+      "run": 7,
+      "passed": 7
+    },
+    "seed": {
+      "assets": 22,
+      "fixtures": 12,
+      "errors": 0
+    },
+    "full_suite": {
+      "run": 688,
+      "passed": 686,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 2,
+      "skip_details": [
+        "test_symlink_is_rejected (test_core.CoreTests.test_symlink_is_rejected) ... skipped \"OS denied test symlink creation: [WinError 1314] 客户端没有所需的特权。: 'C:\\\\\\\\Users\\\\\\\\samuel\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\jarvis-core-test-amd9ldap\\\\\\\\outside.txt' -> 'C:\\\\\\\\Users\\\\\\\\samuel\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\jarvis-core-test-amd9ldap\\\\\\\\input\\\\\\\\linked.txt'\"",
+        "test_linked_output_component_is_denied (test_workspace.WorkspaceTests.test_linked_output_component_is_denied) ... skipped 'OS does not grant symlink creation'"
+      ],
+      "seconds": 374.626,
+      "status": "passed_recheck",
+      "log": "H:\\JarvisData\\evals\\memory-domains-20261018\\full-tests-recheck.txt"
+    },
+    "related_suite": {
+      "modules": [
+        "test_memory",
+        "test_memory_domains",
+        "test_memory_sources",
+        "test_memory_view",
+        "test_personal_core",
+        "test_personal_candidates",
+        "test_modules",
+        "test_chat",
+        "test_context_assembly",
+        "test_web"
+      ],
+      "tests": 137,
+      "failures": 0,
+      "errors": 0,
+      "skips": [],
+      "seconds": 28.465,
+      "passed": true
+    },
+    "docs": {
+      "documents": 24,
+      "diagrams": 21,
+      "artifacts": 42,
+      "errors": 0
+    },
+    "http_boundary_recheck": {
+      "test": "test_web.WebTests.test_body_size_and_content_type_are_bounded",
+      "repeats": 10,
+      "run": 10,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 0.589,
+      "passed": true,
+      "changed_timeout_or_checks": false
+    },
+    "initial_full_suite": {
+      "run": 676,
+      "failures": 0,
+      "errors": 1,
+      "skipped": 2,
+      "seconds": 421.862,
+      "status": "failed",
+      "error_test": "test_web.WebTests.test_body_size_and_content_type_are_bounded",
+      "error": "TimeoutError receiving HTTP status; not reproducible in 10 focused repeats",
+      "final_snapshot": false
+    }
+  },
+  "real_model_calls": 0,
+  "new_dependencies": [],
+  "new_background_services": [],
+  "not_implemented": [
+    "Automatic semantic extraction and framework A/B",
+    "Recipient-specific clean generation context",
+    "Raw transcript/attachment/continuity reclassification",
+    "Derived profile and multi-source dependency graph",
+    "Federation and NPC execution",
+    "8 GiB PC acceptance or long soak"
+  ],
+  "migration": {
+    "from": [
+      1,
+      2
+    ],
+    "to": 3,
+    "row_rewrites": false,
+    "new_tables": false,
+    "old_binary_rejects_new_version": true
+  },
+  "notes": [
+    "Initial new migration test used an unclosed SQLite fixture connection on Windows; fixed with closing and rerun. Runtime assertions passed before cleanup failure.",
+    "Post-classification metadata does not detach candidate provenance; source deletion still disqualifies it.",
+    "Unclassified old facts and new explicit chat/rule candidates preserve legacy project/provider behavior until manually classified.",
+    "Concurrent REA and dialogue work shares this checkout/version. Final 137 related tests and source UI regression ran after server changes; evidence here does not certify those separate features.",
+    "Shared checkout advanced to 0.1.48 during validation. The final UI test preserves second-resolution expiry on edits; runtime classification remains the 0.1.47 increment.",
+    "First whole-suite HTTP boundary timeout remains recorded; 10 focused repeats and the second 688-test full run passed without relaxing checks. No root cause is claimed."
+  ],
+  "external_evidence_directory": "H:\\JarvisData\\evals\\memory-domains-20261018",
+  "source_browser_regression": {
+    "version": "0.1.47",
+    "captured_at": "2026-10-18T05:22:55.153055+00:00",
+    "checks": [
+      "Real UI confirms source-bound fact and displays verified original text",
+      "Changed source pauses model use while preserving visible fact",
+      "390px layout and source controls do not overflow",
+      "Independent confirmation survives lost response with exactly one revision",
+      "Default local-only route permissions preserved; source excerpt not added to model context",
+      "Real forget button removes fact; no automatic model calls for source operations"
+    ],
+    "page_errors": [],
+    "real_model_calls": 0,
+    "user_data_modified": false,
+    "fixture_model_calls": 2,
+    "status": "passed"
+  },
+  "deployment": {
+    "status": "passed",
+    "version": "0.1.47",
+    "url": "http://127.0.0.1:18181/",
+    "deployment_mode": "Verified already-running shared 0.1.47 Host; this verifier did not restart, replay tasks or change queue settings",
+    "schema_before": 2,
+    "schema_after": 3,
+    "sqlite_backup": "H:\\JarvisData\\evals\\memory-domains-20261018\\recovery\\memory-pre-v3.sqlite",
+    "integrity_check": "ok",
+    "business_rows_preserved": true,
+    "task_queue_rows_preserved": true,
+    "growth_settings_preserved": true,
+    "source_assets_verified": true,
+    "core_ready": true,
+    "ui_assets": "ready",
+    "real_model_calls": 0,
+    "user_test_writes": 0,
+    "limit": "Live check is migration/compatibility/assets only; typed behavior was tested in disposable stores, not by adding user facts."
+  },
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/memory_policy.py": "86548663f469018ccf3201e6c730746b8be7302bb74d30d1dc283c16ae5e1feb",
+    "runtime/node-host/jarvis_core/memory.py": "2674104ee9273c8adbeaaac7b025e15fc3ea73e0d90f7515e8ae3564a5d759c2",
+    "runtime/node-host/jarvis_core/memory_view.py": "f7e4aab24001d80180819a33e73822fccb9e79a21149d4f8ced28dc1dc26cd8d",
+    "runtime/node-host/jarvis_core/modules.py": "26681ebb92225745d4e4f54e1a4b9e322617d878f9b1c4989c2beefe39f4f4a7",
+    "contracts/schemas/memory-fact.schema.json": "8ed2e7237424d62513c63e25aa984132ca296a9e138c61b474430f74021f2910",
+    "apps/web/memory.js": "87c030aadf0cc9d263667dcd1d52997b03672627a40b4beb0406524630f53436",
+    "apps/web/memory.css": "8710530178a7829bcc38103ac08bdfce46c4be1f70014cec6df3862d916b4a88",
+    "apps/web/index.html": "95370fd77e8e56cd8b63ec895f8c75f6aeb652aab69542e6f089d44ea1fda100",
+    "tests/test_memory_domains.py": "7ca396ae02fd89c8028b4c8d2039134078675870f1c015c06fcfd7558ace0b04",
+    "tests/test_memory_sources.py": "9a98fdfccc3b45b6bbcbaa9e62b536d9fd678b19266a147aed4b2f91b958dd19",
+    "tools/probe_memory_domains_ui.py": "58b1b47a7e334c173ba1ea5e20d2d160032f78bf482f7a75894f751d1f5f29be",
+    "tools/probe_memory_domains_resources.py": "3a2d69480456272eb681265d241386a0951c1709ccc9d3835da5394a13c21741"
+  },
+  "verified_workspace_version": "0.1.48",
+  "final_live_check": {
+    "version": "0.1.48",
+    "core_ready": true,
+    "ui_assets": "ready",
+    "schema": 3,
+    "capabilities": [
+      "fact_classification",
+      "owner_facing_purpose"
+    ],
+    "memory_js_matches": true,
+    "expiry_seconds_supported": true,
+    "real_model_calls": 0,
+    "test_facts_written": 0
+  }
+}

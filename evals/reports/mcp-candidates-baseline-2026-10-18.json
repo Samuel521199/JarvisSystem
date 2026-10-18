@@ -1,0 +1,82 @@
+{
+  "version": "0.1.55",
+  "observed_at": "2026-10-18T13:11:11.766964+00:00",
+  "status": "passed",
+  "tests": 52,
+  "model_calls": 0,
+  "real_mcp_calls": 0,
+  "results": [
+    {
+      "suite": "test_mcp_candidates.py",
+      "passed": true,
+      "tests": 12,
+      "seconds": 3.53,
+      "output": "test_auto_candidate_is_only_draft_no_network_models_or_task (test_mcp_candidates.CandidateTests.test_auto_candidate_is_only_draft_no_network_models_or_task) ... ok\ntest_bridge_rejects_hidden_execution_fields (test_mcp_candidates.CandidateTests.test_bridge_rejects_hidden_execution_fields) ... ok\ntest_conversation_override_and_inherit_use_saved_membership (test_mcp_candidates.CandidateTests.test_conversation_override_and_inherit_use_saved_membership) ... ok\ntest_http_nonce_origin_and_no_task (test_mcp_candidates.CandidateTests.test_http_nonce_origin_and_no_task) ... ok\ntest_library_id_and_version_are_not_invented_or_auto_resolved (test_mcp_candidates.CandidateTests.test_library_id_and_version_are_not_invented_or_auto_resolved) ... ok\ntest_manual_only_offers_explicit_draft_disabled_offers_none (test_mcp_candidates.CandidateTests.test_manual_only_offers_explicit_draft_disabled_offers_none) ... ok\ntest_membership_change_after_admission_stops_before_network (test_mcp_candidates.CandidateTests.test_membership_change_after_admission_stops_before_network) ... ok\ntest_missing_invented_partial_source_and_extra_parameters_rejected (test_mcp_candidates.CandidateTests.test_missing_invented_partial_source_and_extra_parameters_rejected) ... ok\ntest_policy_change_after_draft_does_not_authorize_submission (test_mcp_candidates.CandidateTests.test_policy_change_after_draft_does_not_authorize_submission) ... ok\ntest_project_disabled_applies_when_request_omits_project (test_mcp_candidates.CandidateTests.test_project_disabled_applies_when_request_omits_project) ... ok\ntest_unconfigured_and_ambiguous_connections_never_offer_draft (test_mcp_candidates.CandidateTests.test_unconfigured_and_ambiguous_connections_never_offer_draft) ... ok\ntest_wrong_project_and_deleted_conversation_rejected (test_mcp_candidates.CandidateTests.test_wrong_project_and_deleted_conversation_rejected) ... ok\n\n----------------------------------------------------------------------\nRan 12 tests in 3.203s\n\nOK\n"
+    },
+    {
+      "suite": "test_mcp_runtime.py",
+      "passed": true,
+      "tests": 13,
+      "seconds": 5.55,
+      "output": "test_cancellation_closes_async_request_and_sends_notification (test_mcp_runtime.ClientTests.test_cancellation_closes_async_request_and_sends_notification) ... ok\ntest_errors_limits_wrong_ids_and_reverse_requests (test_mcp_runtime.ClientTests.test_errors_limits_wrong_ids_and_reverse_requests) ... ok\ntest_exact_library_id_uses_query_docs (test_mcp_runtime.ClientTests.test_exact_library_id_uses_query_docs) ... ok\ntest_invalid_version_and_changed_schema_do_not_call_tool (test_mcp_runtime.ClientTests.test_invalid_version_and_changed_schema_do_not_call_tool) ... ok\ntest_json_and_sse_handshake_names_allowlist_and_no_remote_instructions (test_mcp_runtime.ClientTests.test_json_and_sse_handshake_names_allowlist_and_no_remote_instructions) ... ok\ntest_sse_chunks_and_notifications (test_mcp_runtime.ClientTests.test_sse_chunks_and_notifications) ... ok\ntest_cancel_before_dispatch_and_argument_boundary (test_mcp_runtime.TaskTests.test_cancel_before_dispatch_and_argument_boundary) ... ok\ntest_config_changed_after_queueing_blocks_network (test_mcp_runtime.TaskTests.test_config_changed_after_queueing_blocks_network) ... ok\ntest_confirmed_receipt_and_replay_never_calls_again (test_mcp_runtime.TaskTests.test_confirmed_receipt_and_replay_never_calls_again) ... ok\ntest_network_uncertainty_never_retries (test_mcp_runtime.TaskTests.test_network_uncertainty_never_retries) ... ok\ntest_policy_changes_during_call_prevent_receipt (test_mcp_runtime.TaskTests.test_policy_changes_during_call_prevent_receipt) ... ok\ntest_real_shared_queue_conversation_binding_and_artifact_digest (test_mcp_runtime.TaskTests.test_real_shared_queue_conversation_binding_and_artifact_digest) ... ok\ntest_unregistered_ambiguous_credentials_and_disabled_block (test_mcp_runtime.TaskTests.test_unregistered_ambiguous_credentials_and_disabled_block) ... ok\n\n----------------------------------------------------------------------\nRan 13 tests in 5.226s\n\nOK\n"
+    },
+    {
+      "suite": "test_mcp_catalog.py",
+      "passed": true,
+      "tests": 6,
+      "seconds": 2.08,
+      "output": "test_http_nonce_origin_and_conflict (test_mcp_catalog.McpHTTPTests.test_http_nonce_origin_and_conflict) ... ok\ntest_discovery_and_configuration_never_execute_or_claim_ready (test_mcp_catalog.McpTests.test_discovery_and_configuration_never_execute_or_claim_ready) ... ok\ntest_existing_custom_entries_and_multiple_connections_survive (test_mcp_catalog.McpTests.test_existing_custom_entries_and_multiple_connections_survive) ... ok\ntest_invalid_policy_affiliation_and_stopped_mutation (test_mcp_catalog.McpTests.test_invalid_policy_affiliation_and_stopped_mutation) ... ok\ntest_scopes_inheritance_and_stale_write_after_restore (test_mcp_catalog.McpTests.test_scopes_inheritance_and_stale_write_after_restore) ... ok\ntest_templates_and_skill_references_are_valid (test_mcp_catalog.McpTests.test_templates_and_skill_references_are_valid) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 1.847s\n\nOK\n"
+    },
+    {
+      "suite": "test_conversation_tasks.py",
+      "passed": true,
+      "tests": 11,
+      "seconds": 4.84,
+      "output": "test_optional_markers_roundtrip_and_invalid_links_rejected (test_conversation_tasks.ArchiveTaskLinkTests.test_optional_markers_roundtrip_and_invalid_links_rejected) ... ok\ntest_nonce_origin_and_strict_routes (test_conversation_tasks.ConversationTaskHTTPTests.test_nonce_origin_and_strict_routes) ... ok\ntest_scoped_lookup_cancel_and_duplicate_have_no_model_calls (test_conversation_tasks.ConversationTaskHTTPTests.test_scoped_lookup_cancel_and_duplicate_have_no_model_calls) ... ok\ntest_association_is_atomic_and_part_of_idempotence (test_conversation_tasks.ConversationTaskTests.test_association_is_atomic_and_part_of_idempotence) ... ok\ntest_cancel_after_stop_and_delete_archive_preserve_task_audit (test_conversation_tasks.ConversationTaskTests.test_cancel_after_stop_and_delete_archive_preserve_task_audit) ... ok\ntest_conversation_filter_precedes_recent_thirty_limit (test_conversation_tasks.ConversationTaskTests.test_conversation_filter_precedes_recent_thirty_limit) ... ok\ntest_cross_conversation_detail_lookup_cancel_and_artifact_rejected (test_conversation_tasks.ConversationTaskTests.test_cross_conversation_detail_lookup_cancel_and_artifact_rejected) ... ok\ntest_global_task_cannot_be_attached_after_acceptance (test_conversation_tasks.ConversationTaskTests.test_global_task_cannot_be_attached_after_acceptance) ... ok\ntest_real_report_download_is_exact_committed_bytes_and_damage_visible (test_conversation_tasks.ConversationTaskTests.test_real_report_download_is_exact_committed_bytes_and_damage_visible) ... ok\ntest_restart_restores_link_without_archive_or_model_call (test_conversation_tasks.ConversationTaskTests.test_restart_restores_link_without_archive_or_model_call) ... ok\ntest_unknown_fields_and_bad_identifiers_never_create_task (test_conversation_tasks.ConversationTaskTests.test_unknown_fields_and_bad_identifiers_never_create_task) ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 4.517s\n\nOK\n"
+    },
+    {
+      "suite": "test_computer_queue.py",
+      "passed": true,
+      "tests": 10,
+      "seconds": 3.51,
+      "output": "test_capacity_atomic_idempotency_and_changed_arguments (test_computer_queue.QueueTests.test_capacity_atomic_idempotency_and_changed_arguments) ... ok\ntest_fifo_and_cancel_queued_task_never_dispatches (test_computer_queue.QueueTests.test_fifo_and_cancel_queued_task_never_dispatches) ... ok\ntest_new_owner_fences_old_dispatcher_and_serializes_inflight (test_computer_queue.QueueTests.test_new_owner_fences_old_dispatcher_and_serializes_inflight) ... ok\ntest_old_host_unknown_after_resume_blocks_new_owner (test_computer_queue.QueueTests.test_old_host_unknown_after_resume_blocks_new_owner) ... ok\ntest_pause_race_checked_inside_dispatch_transaction (test_computer_queue.QueueTests.test_pause_race_checked_inside_dispatch_transaction) ... ok\ntest_process_crash_reconciles_inflight_and_preserves_waiting (test_computer_queue.QueueTests.test_process_crash_reconciles_inflight_and_preserves_waiting) ... ok\ntest_restart_keeps_prepared_paused_then_explicit_resume (test_computer_queue.QueueTests.test_restart_keeps_prepared_paused_then_explicit_resume) ... ok\ntest_stop_cannot_be_cleared_by_queue_resume (test_computer_queue.QueueTests.test_stop_cannot_be_cleared_by_queue_resume) ... ok\ntest_unknown_pauses_following_tasks_and_never_replays (test_computer_queue.QueueTests.test_unknown_pauses_following_tasks_and_never_replays) ... ok\ntest_version_and_content_bindings_must_still_match (test_computer_queue.QueueTests.test_version_and_content_bindings_must_still_match) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 3.247s\n\nOK\n"
+    }
+  ],
+  "source_digests": {
+    "runtime/node-host/jarvis_core/mcp_client.py": "e98d27521377d0739cbb66b0ec206fbab83cd825958dbfabf98c1709528bd723",
+    "runtime/node-host/jarvis_core/mcp_tasks.py": "ba38550eba48739abb87b5c5bb02ef17e77f235cf7537c23350943ba58327b94",
+    "runtime/node-host/jarvis_core/mcp_catalog.py": "c3e67d64a47f05281d51580162044c4b20cfb796a2d035fd03eda9d5e51bab93",
+    "runtime/node-host/jarvis_core/rea.py": "e7b2982a5ba5a3093280e07edf25792a2d5462bbf5ac51d139d08b2eb74a2f8b",
+    "runtime/node-host/jarvis_core/rea_focus.py": "2b9a7e1e7f52e7bfb6f74ec46e45089b69f73b6535bd9d5d8193afa7eb1c5263",
+    "runtime/node-host/jarvis_core/rea_evidence.py": "32a85a1eeff2ee91d6d1f029bd30af842d856d23e1cd92342c9cd3e4221b62cb",
+    "runtime/node-host/jarvis_core/rea_explanation.py": "19a6ce9b6a81d045d3a31833266d1821ac0c41bc54f782c829d1ee3edf873135",
+    "runtime/node-host/jarvis_core/task_queue.py": "dc16c596b712fe3825d4e9980d0c21a4b21d7e01993bb4d554758797482960c6",
+    "runtime/node-host/jarvis_core/conversation_tasks.py": "5db9d50c987804c9bd58faf744d367b7160906a639d5b1306b902a466b97c050",
+    "adapters/computer-use/jarvis_computer/web.py": "1c538250b176f453091747f76dccc0eb00a3375dbd147f072dc5224b92c7ed53",
+    "adapters/computer-use/jarvis_computer/task_queue.py": "a9b810ab0d616d44b2024b8fb290a7716540605892a5cbf7d9539215b5ceea72",
+    "apps/web/conversation_tasks.js": "3539c7c08b918e46456168fc093939001bb5a86c47c9fee70565b15b133725e6",
+    "apps/web/mcp_manager.js": "0c74df31951193bbe830bdfe24a10eb90b9cb31bb604ce54109acc5fb1cd9702",
+    "apps/web/skills.js": "ff25473ccd382fd4bf9a4a4ccc43bdb4d774359c0949bddbc395f564e8ebc562",
+    "config/resource-profile.json": "76eb0bd0cba486dfca8310ed2fcf528f9f871341b96caeecc5c8400528056c86",
+    "runtime/node-host/jarvis_core/mcp_candidates.py": "d456ba965d76d897f141007e0202a7f4aa3213ac6ec6651fd80558f0b0095120",
+    "apps/web/server.py": "eb5fa4f741c1ae7b42a41528f3546cb0b798c4aefe794af92dc890f89c1b1483",
+    "apps/web/index.html": "a7bef9b4d6296a49eaa021728c8f5b35d0d25b433c8f66ad8c5fbec42da2c886"
+  },
+  "deployed_candidate_check": {
+    "status": "passed",
+    "version": "0.1.56",
+    "instance_id": "d4f465e3990be0adb5361ffa9523507d",
+    "observed_at": "2026-10-18T13:21:21.634911+00:00",
+    "conversation_id": "67d162ff7bd74f13988874ad8f1581fb",
+    "checks": [
+      "actual deployed endpoint accepts grounded draft",
+      "invented library rejected",
+      "automatic_execution remains false",
+      "existing task IDs unchanged"
+    ],
+    "model_calls": 0,
+    "mcp_calls": 0,
+    "task_count_before": 1,
+    "task_count_after": 1
+  }
+}

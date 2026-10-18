@@ -1,0 +1,769 @@
+{
+  "schema": "memory-lifecycle-report-v1",
+  "captured_at": "2026-10-18T13:12:46.611341+00:00",
+  "workspace_version": "0.1.55",
+  "status": "verified_workspace_subset",
+  "evaluation": "state_lifecycle_not_extraction_quality",
+  "real_model_calls": 0,
+  "user_data_modified": false,
+  "new_dependencies": 0,
+  "independent_holdout": false,
+  "cases": [
+    {
+      "id": "L01",
+      "title": "跨会话纠正偏好，旧快照失效并在重启后保持",
+      "status": "passed",
+      "events": [
+        {
+          "op": "source"
+        },
+        {
+          "op": "preview",
+          "candidates": 1,
+          "result_error": null
+        },
+        {
+          "op": "confirm",
+          "replayed": false
+        },
+        {
+          "op": "context",
+          "fact_count": 1
+        },
+        {
+          "op": "snapshot"
+        },
+        {
+          "op": "correct"
+        },
+        {
+          "op": "context",
+          "fact_count": 0
+        },
+        {
+          "op": "context",
+          "fact_count": 1
+        },
+        {
+          "op": "restart"
+        },
+        {
+          "op": "context",
+          "fact_count": 1
+        },
+        {
+          "op": "state"
+        }
+      ],
+      "fixture_model_calls": 1,
+      "database_bytes": 49152,
+      "duration_ms": 152.418
+    },
+    {
+      "id": "L02",
+      "title": "另一会话的待确认旧预览不能在遗忘后重新写入",
+      "status": "passed",
+      "events": [
+        {
+          "op": "source"
+        },
+        {
+          "op": "preview",
+          "candidates": 1,
+          "result_error": null
+        },
+        {
+          "op": "confirm",
+          "replayed": false
+        },
+        {
+          "op": "source"
+        },
+        {
+          "op": "preview",
+          "candidates": 1,
+          "result_error": null
+        },
+        {
+          "op": "forget"
+        },
+        {
+          "op": "confirm",
+          "error": "candidate_review_changed"
+        },
+        {
+          "op": "confirm",
+          "replayed": true
+        },
+        {
+          "op": "state"
+        },
+        {
+          "op": "context",
+          "fact_count": 0
+        }
+      ],
+      "fixture_model_calls": 2,
+      "database_bytes": 49152,
+      "duration_ms": 225.698
+    },
+    {
+      "id": "L03",
+      "title": "另一会话的待确认旧预览不能在纠正后冲回旧偏好",
+      "status": "passed",
+      "events": [
+        {
+          "op": "source"
+        },
+        {
+          "op": "preview",
+          "candidates": 1,
+          "result_error": null
+        },
+        {
+          "op": "confirm",
+          "replayed": false
+        },
+        {
+          "op": "source"
+        },
+        {
+          "op": "preview",
+          "candidates": 1,
+          "result_error": null
+        },
+        {
+          "op": "correct"
+        },
+        {
+          "op": "confirm",
+          "error": "candidate_review_changed"
+        },
+        {
+          "op": "context",
+          "fact_count": 1
+        },
+        {
+          "op": "state"
+        }
+      ],
+      "fixture_model_calls": 2,
+      "database_bytes": 49152,
+      "duration_ms": 193.647
+    },
+    {
+      "id": "L04",
+      "title": "提取调用尚在进行时遗忘，丢弃候选并保留调用回执",
+      "status": "passed",
+      "events": [
+        {
+          "op": "source"
+        },
+        {
+          "op": "preview",
+          "candidates": 1,
+          "result_error": null
+        },
+        {
+          "op": "confirm",
+          "replayed": false
+        },
+        {
+          "op": "source"
+        },
+        {
+          "op": "forget"
+        },
+        {
+          "op": "preview",
+          "candidates": 0,
+          "result_error": "candidate_review_changed"
+        },
+        {
+          "op": "state"
+        },
+        {
+          "op": "context",
+          "fact_count": 0
+        }
+      ],
+      "fixture_model_calls": 2,
+      "database_bytes": 49152,
+      "duration_ms": 171.725
+    },
+    {
+      "id": "L05",
+      "title": "外发许可收回后，旧预览和旧外发快照均失效",
+      "status": "passed",
+      "events": [
+        {
+          "op": "source"
+        },
+        {
+          "op": "preview",
+          "candidates": 1,
+          "result_error": null
+        },
+        {
+          "op": "confirm",
+          "replayed": false
+        },
+        {
+          "op": "permit"
+        },
+        {
+          "op": "snapshot"
+        },
+        {
+          "op": "context",
+          "fact_count": 1
+        },
+        {
+          "op": "source"
+        },
+        {
+          "op": "preview",
+          "candidates": 1,
+          "result_error": null
+        },
+        {
+          "op": "permit"
+        },
+        {
+          "op": "confirm",
+          "error": "candidate_review_changed"
+        },
+        {
+          "op": "context",
+          "fact_count": 0
+        },
+        {
+          "op": "context",
+          "fact_count": 0
+        },
+        {
+          "op": "context",
+          "fact_count": 1
+        },
+        {
+          "op": "state"
+        }
+      ],
+      "fixture_model_calls": 2,
+      "database_bytes": 49152,
+      "duration_ms": 250.754
+    },
+    {
+      "id": "L06",
+      "title": "项目同名事实分别保存；个人、工作和项目边界不串用",
+      "status": "passed",
+      "events": [
+        {
+          "op": "source"
+        },
+        {
+          "op": "preview",
+          "candidates": 1,
+          "result_error": null
+        },
+        {
+          "op": "confirm",
+          "replayed": false
+        },
+        {
+          "op": "source"
+        },
+        {
+          "op": "preview",
+          "candidates": 1,
+          "result_error": null
+        },
+        {
+          "op": "confirm",
+          "replayed": false
+        },
+        {
+          "op": "source"
+        },
+        {
+          "op": "preview",
+          "candidates": 1,
+          "result_error": null
+        },
+        {
+          "op": "confirm",
+          "replayed": false
+        },
+        {
+          "op": "context",
+          "fact_count": 1
+        },
+        {
+          "op": "context",
+          "fact_count": 1
+        },
+        {
+          "op": "context",
+          "fact_count": 1
+        },
+        {
+          "op": "classify"
+        },
+        {
+          "op": "context",
+          "fact_count": 2
+        },
+        {
+          "op": "context",
+          "fact_count": 2
+        },
+        {
+          "op": "state"
+        }
+      ],
+      "fixture_model_calls": 3,
+      "database_bytes": 49152,
+      "duration_ms": 595.482
+    },
+    {
+      "id": "L07",
+      "title": "客户和虚构角色与主人同名，也不自动纳入主人画像",
+      "status": "passed",
+      "events": [
+        {
+          "op": "source"
+        },
+        {
+          "op": "preview",
+          "candidates": 3,
+          "result_error": null
+        },
+        {
+          "op": "confirm",
+          "replayed": false
+        },
+        {
+          "op": "confirm",
+          "replayed": false
+        },
+        {
+          "op": "confirm",
+          "replayed": false
+        },
+        {
+          "op": "context",
+          "fact_count": 1
+        },
+        {
+          "op": "context",
+          "fact_count": 0
+        },
+        {
+          "op": "classify"
+        },
+        {
+          "op": "context",
+          "fact_count": 1
+        },
+        {
+          "op": "context",
+          "fact_count": 1
+        },
+        {
+          "op": "state"
+        }
+      ],
+      "fixture_model_calls": 1,
+      "database_bytes": 49152,
+      "duration_ms": 225.238
+    },
+    {
+      "id": "L08",
+      "title": "来源变化暂停使用；主人独立确认后不再依赖旧聊天",
+      "status": "passed",
+      "events": [
+        {
+          "op": "source"
+        },
+        {
+          "op": "preview",
+          "candidates": 1,
+          "result_error": null
+        },
+        {
+          "op": "confirm",
+          "replayed": false
+        },
+        {
+          "op": "edit_source"
+        },
+        {
+          "op": "context",
+          "fact_count": 0
+        },
+        {
+          "op": "reaffirm"
+        },
+        {
+          "op": "context",
+          "fact_count": 1
+        },
+        {
+          "op": "delete_source"
+        },
+        {
+          "op": "context",
+          "fact_count": 1
+        },
+        {
+          "op": "restart"
+        },
+        {
+          "op": "context",
+          "fact_count": 1
+        },
+        {
+          "op": "state"
+        }
+      ],
+      "fixture_model_calls": 1,
+      "database_bytes": 49152,
+      "duration_ms": 193.735
+    },
+    {
+      "id": "L09",
+      "title": "遗忘后规则和语义同源重提取均被阻止；明确新指令可重新记住",
+      "status": "passed",
+      "events": [
+        {
+          "op": "source"
+        },
+        {
+          "op": "preview",
+          "candidates": 1,
+          "result_error": null
+        },
+        {
+          "op": "confirm",
+          "replayed": false
+        },
+        {
+          "op": "forget"
+        },
+        {
+          "op": "preview",
+          "candidates": 1,
+          "result_error": null
+        },
+        {
+          "op": "confirm",
+          "error": "candidate_suppressed"
+        },
+        {
+          "op": "rule_confirm",
+          "error": "candidate_suppressed"
+        },
+        {
+          "op": "remember"
+        },
+        {
+          "op": "context",
+          "fact_count": 1
+        },
+        {
+          "op": "state"
+        }
+      ],
+      "fixture_model_calls": 2,
+      "database_bytes": 49152,
+      "duration_ms": 236.544
+    },
+    {
+      "id": "L10",
+      "title": "同批多个候选正常逐项保存，重试不重复写入",
+      "status": "passed",
+      "events": [
+        {
+          "op": "source"
+        },
+        {
+          "op": "preview",
+          "candidates": 2,
+          "result_error": null
+        },
+        {
+          "op": "confirm",
+          "replayed": false
+        },
+        {
+          "op": "confirm",
+          "replayed": false
+        },
+        {
+          "op": "confirm",
+          "replayed": true
+        },
+        {
+          "op": "state"
+        },
+        {
+          "op": "correct"
+        },
+        {
+          "op": "confirm",
+          "replayed": true
+        },
+        {
+          "op": "context",
+          "fact_count": 2
+        },
+        {
+          "op": "state"
+        }
+      ],
+      "fixture_model_calls": 1,
+      "database_bytes": 49152,
+      "duration_ms": 232.134
+    },
+    {
+      "id": "L11",
+      "title": "来源更改、服务重启使预览失效；已有事实保持可查看",
+      "status": "passed",
+      "events": [
+        {
+          "op": "source"
+        },
+        {
+          "op": "preview",
+          "candidates": 1,
+          "result_error": null
+        },
+        {
+          "op": "confirm",
+          "replayed": false
+        },
+        {
+          "op": "source"
+        },
+        {
+          "op": "preview",
+          "candidates": 1,
+          "result_error": null
+        },
+        {
+          "op": "edit_source"
+        },
+        {
+          "op": "confirm",
+          "error": "candidate_source_changed"
+        },
+        {
+          "op": "preview",
+          "candidates": 1,
+          "result_error": null
+        },
+        {
+          "op": "restart"
+        },
+        {
+          "op": "confirm",
+          "error": "candidate_preview_expired"
+        },
+        {
+          "op": "context",
+          "fact_count": 1
+        },
+        {
+          "op": "state"
+        }
+      ],
+      "fixture_model_calls": 3,
+      "database_bytes": 49152,
+      "duration_ms": 176.673
+    },
+    {
+      "id": "L12",
+      "title": "纠正后重新整理有效的新候选可继续保存",
+      "status": "passed",
+      "events": [
+        {
+          "op": "source"
+        },
+        {
+          "op": "preview",
+          "candidates": 1,
+          "result_error": null
+        },
+        {
+          "op": "confirm",
+          "replayed": false
+        },
+        {
+          "op": "source"
+        },
+        {
+          "op": "preview",
+          "candidates": 1,
+          "result_error": null
+        },
+        {
+          "op": "correct"
+        },
+        {
+          "op": "confirm",
+          "error": "candidate_review_changed"
+        },
+        {
+          "op": "preview",
+          "candidates": 1,
+          "result_error": null
+        },
+        {
+          "op": "confirm",
+          "replayed": false
+        },
+        {
+          "op": "context",
+          "fact_count": 2
+        },
+        {
+          "op": "state"
+        }
+      ],
+      "fixture_model_calls": 3,
+      "database_bytes": 49152,
+      "duration_ms": 257.645
+    }
+  ],
+  "limitations": [
+    "No live LLM quality, Mem0 SDK, semantic merge or automatic conflict resolution is evaluated.",
+    "After a forget, re-extracting a fresh semantically equivalent source is not globally suppressed; the barrier protects already-running extraction and pending semantic previews.",
+    "Rule-only previews retain existing same-source protections, not this signed semantic-preview revision barrier.",
+    "No cross-device, OS sandbox, full K2 or long-term resource acceptance.",
+    "The process memory counter measures this synthetic evaluation process, not the production app, browser or whole-PC long-term memory use. 20,000 receipts is the ordinary-write threshold; forgetting may still append receipts."
+  ],
+  "source_hashes": {
+    "evals/cases/memory-lifecycle-pilot.json": "7d16bd826771e4a9db47aa2a84cce363af46be4c8752c810f1ea3018c0931024",
+    "tools/eval_memory_lifecycle.py": "83496bd1b9749b339f6731c646332ff8c950c62ae29dbdbcad3bc8da5f0243e1",
+    "tools/memory_lab/lifecycle.py": "80c3466b5cdb3cee2b5cbe97169da77d8de16179d7820d1a8c8d57fef838ff07",
+    "runtime/node-host/jarvis_core/memory.py": "def528083be2775a2640a1ae4a1ee9f30fa10f0c2bc66d084a8c382570565af5",
+    "runtime/node-host/jarvis_core/semantic_candidates.py": "b8ff93b14c57771c8fe77eb7cd2b61309353da2107888786a7bffa704733450f",
+    "runtime/node-host/jarvis_core/memory_sources.py": "58acc0452914b83ca8bac8c8241b2512c9893c494eeed4a0a4e0bbdbccb6bcb4",
+    "runtime/node-host/jarvis_core/memory_policy.py": "86548663f469018ccf3201e6c730746b8be7302bb74d30d1dc283c16ae5e1feb",
+    "runtime/node-host/jarvis_core/personal_candidates.py": "16558448509888c76d0fc638b03f732f7f8c1ff68ad85f3165ae6f1ecb7f5dbc",
+    "tests/test_memory_lifecycle.py": "5a21a8b773714af4df9b3d2a31800b9c7916a52ac465f3368840e2b82cf86e65",
+    "apps/web/personal_candidates.js": "656143561e2f51dc06e1d13f750cad30cd6c8b395a680fb31069d6c948906924",
+    "tools/probe_semantic_candidates_ui.py": "be595ea35a9589fc0d345466ffc1d8244f20546c7dc00ee976425160f8028f51"
+  },
+  "revision_read_cost": {
+    "receipt_rows": 20000,
+    "reads": 100,
+    "database_unchanged": true,
+    "p50_ms": 2.7122,
+    "p95_ms": 3.6702,
+    "max_ms": 4.493,
+    "synthetic_database_bytes": 2031616
+  },
+  "source_unchanged": true,
+  "duration_ms": 3315.951,
+  "process_memory": {
+    "working_set_bytes": 40271872,
+    "peak_working_set_bytes": 42311680,
+    "private_commit_bytes": 28614656,
+    "peak_private_commit_bytes": 30654464
+  },
+  "passed": 12,
+  "total": 12,
+  "deployment": {
+    "status": "verified_coordinated_release",
+    "version": "0.1.56",
+    "instance_id": "d4f465e3990be0adb5361ffa9523507d",
+    "evidence": "evals/reports/dialogue-intent-deployment-2026-10-18.json",
+    "same_tested_source_sha256": {
+      "runtime/node-host/jarvis_core/memory.py": "def528083be2775a2640a1ae4a1ee9f30fa10f0c2bc66d084a8c382570565af5",
+      "runtime/node-host/jarvis_core/semantic_candidates.py": "b8ff93b14c57771c8fe77eb7cd2b61309353da2107888786a7bffa704733450f",
+      "apps/web/personal_candidates.js": "656143561e2f51dc06e1d13f750cad30cd6c8b395a680fb31069d6c948906924"
+    },
+    "served_candidate_ui_sha256": "656143561e2f51dc06e1d13f750cad30cd6c8b395a680fb31069d6c948906924",
+    "additional_reload": false,
+    "production_memory_writes_for_verification": 0,
+    "scope": "Successful unified reload and matching deployed code/UI; lifecycle mutation tests used temporary data only."
+  },
+  "evidence_directory": "H:\\JarvisData\\evals\\memory-lifecycle-20261018",
+  "verification": {
+    "memory-tests.txt": {
+      "tests": 71,
+      "status": "passed",
+      "sha256": "228679fa7157804946834e9a14b46246442ea06a5ecefa91e0c253923e239166"
+    },
+    "semantic-tests.txt": {
+      "tests": 17,
+      "status": "passed",
+      "sha256": "4823a432cf537888753da85515cc5e5b45b008afb6253ac0250a068d0be22796"
+    },
+    "personal-tests.txt": {
+      "tests": 21,
+      "status": "passed",
+      "sha256": "e99dea4f77b09274104d26149148e3a8f7c3c72575182bab80782cd82feb4cb6"
+    },
+    "langmem-tests.txt": {
+      "tests": 12,
+      "status": "passed",
+      "sha256": "9c844687ee84681ca783a1a5f1a9a2d0a2c9fb21f1752b80d274b59673454c6a"
+    },
+    "web-tests.txt": {
+      "tests": 23,
+      "status": "passed",
+      "sha256": "b8a46347fbef2e9294c0ec8918a2e68f65b85a72eff6df0c4e1a704a61e52f7a"
+    },
+    "unique_test_count": 144,
+    "seed": {
+      "ok": true,
+      "errors": [],
+      "checked_assets": 22,
+      "fixture_cases": 12
+    },
+    "javascript_syntax": "passed: node --check apps/web/personal_candidates.js",
+    "executed_lifecycle_steps": 134,
+    "documentation": {
+      "status": "passed",
+      "initial_failure": "A concurrently edited dialogue-intent anchor was missing; the owning thread added it and reported a passing coordinated check. Final check follows this metadata edit.",
+      "initial_log": "H:/JarvisData/evals/memory-lifecycle-20261018/docs-check.txt",
+      "log": "H:\\JarvisData\\diagnostics\\dialogue\\intent-docs-check.txt",
+      "sha256": "bd5841b97bb87320eb54066098609715ec8960cbaf68c621877fb04678a8cc49",
+      "documents": 24,
+      "diagrams": 21,
+      "artifacts": 42,
+      "errors": 0,
+      "navigation_updated_files": 0
+    },
+    "diff_whitespace": "Passed by coordinated release: git diff --check"
+  },
+  "ui": {
+    "version": "0.1.55",
+    "captured_at": "2026-10-18T13:11:33.282283+00:00",
+    "checks": [
+      "Rule preview has no extra model call; explicit provider and scope disclosure",
+      "Actual extraction transport has only selected source, no history or private fact",
+      "Review edits classification and both uses; lost response creates exactly one revision",
+      "Third-party remains distinct and stored-only by default; ignore does not write",
+      "Memory correction rejects old preview with HTTP 409; edits stay visible, save is disabled, explicit regeneration restores it without automatic model use",
+      "Same sentence cannot resurrect forgotten fact with new model wording",
+      "390px and desktop fit; stop clears pending candidates and shares admission slots",
+      "Malformed model output shows failure and actual returned usage without saving"
+    ],
+    "page_errors": [],
+    "real_model_calls": 0,
+    "user_data_modified": false,
+    "fixture_model_calls": 6,
+    "facts_after": 1,
+    "dialogue_transport": "Explicit fixture; no model child started. Supervisor has separate tests.",
+    "status": "passed",
+    "evidence_path": "H:\\JarvisData\\evals\\memory-lifecycle-20261018\\ui-verified",
+    "earlier_attempt": {
+      "path": "H:\\JarvisData\\evals\\memory-lifecycle-20261018\\ui\\report.json",
+      "status": "failed",
+      "reason": "Probe patched the older transport probe only; current ordinary dialogue uses pool.reply. Updated test fixture to intercept both entry points, with ProcessJob forbidden. Production dialogue transport unchanged by this task."
+    }
+  }
+}

@@ -1,0 +1,195 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Jarvis skill report v1",
+  "type": "object",
+  "required": [
+    "kind",
+    "skill_id",
+    "decision",
+    "output",
+    "checks",
+    "verified"
+  ],
+  "properties": {
+    "validation_binding": {"type":"string","pattern":"^sha256:[a-f0-9]{64}$"},
+    "coding": {"type":"object", "required":["passed","original","candidate","diff","attempts","composition"]},
+    "kind": {
+      "const": "jarvis.skill-report"
+    },
+    "skill_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "decision": {
+      "type": "object"
+    },
+    "output": {
+      "type": "object",
+      "required": [
+        "request_id",
+        "project_id",
+        "path",
+        "status",
+        "digest",
+        "size_bytes"
+      ],
+      "properties": {
+        "status": {
+          "const": "SAVED"
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "size_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1048576
+        }
+      }
+    },
+    "checks": {
+      "type": "object"
+    },
+    "verified": {
+      "type": "object",
+      "required": [
+        "delivery_digest",
+        "workflow_checks"
+      ],
+      "properties": {
+        "delivery_digest": {
+          "const": true
+        },
+        "workflow_checks": {
+          "const": true
+        }
+      }
+    },
+    "html": {
+      "type": "string",
+      "minLength": 100,
+      "maxLength": 786432
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1048576
+    },
+    "source": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 65536
+    },
+    "license": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 16384
+    },
+    "source_references": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 8
+    },
+    "model_data": {
+      "type": "object"
+    },
+    "model": {
+      "type": "object"
+    },
+    "explanation": {
+      "type": "object",
+      "required": ["status", "findings", "unknowns", "sources", "coverage", "model_calls", "citations_verified", "semantics_verified"],
+      "properties": {
+        "status": {"enum": ["SUCCEEDED", "INSUFFICIENT_EVIDENCE"]},
+        "model_calls": {"enum": [0, 1]},
+        "citations_verified": {"const": true},
+        "semantics_verified": {"const": false}
+      }
+    },
+    "evidence": {
+      "type": "object"
+    },
+    "evidence_ref": {
+      "type": "object",
+      "required": ["path", "digest", "size_bytes", "media_type", "evidence_id"],
+      "properties": {
+        "path": {"type": "string", "pattern": "^act_[a-f0-9]{32}-evidence\\.json$"},
+        "digest": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+        "size_bytes": {"type": "integer", "minimum": 1, "maximum": 8388608},
+        "media_type": {"const": "application/json"},
+        "evidence_id": {"type": "string", "pattern": "^ev_"}
+      },
+      "additionalProperties": false
+    },
+    "analysis": {
+      "type": "object"
+    },
+    "input_manifest": {
+      "type": "object"
+    },
+    "runtime": {
+      "type": "object"
+    }
+  },
+  "oneOf": [
+    {"required":["text","coding","source_references"],"not":{"required":["model"]}},
+    {
+      "required": [
+        "html",
+        "source",
+        "license",
+        "model_data"
+      ]
+    },
+    {
+      "required": [
+        "text",
+        "source_references",
+        "model"
+      ]
+    },
+    {
+      "required": [
+        "text",
+        "analysis",
+        "input_manifest",
+        "runtime"
+      ],
+      "oneOf": [{"required": ["evidence"]}, {"required": ["evidence_ref"]}],
+      "properties": {
+        "skill_id": {
+          "const": "rea.software-analysis"
+        }
+      }
+    }
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "skill_id": {
+            "enum": [
+              "matt-pocock.diagnosing-bugs",
+              "matt-pocock.tdd",
+              "matt-pocock.code-review",
+              "matt-pocock.codebase-design"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "source_references"
+        ],
+        "properties": {
+          "source_references": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "version": "0.1.26",
+  "captured_at": "2026-10-16T12:46:41.986883+00:00",
+  "status": "passed",
+  "checks": [
+    "Explicit local source registration and read-only Chinese section preview; cloud excluded by default",
+    "Allowed provider gets excerpts; real source citation and history provenance survive archive/refresh",
+    "Changed file invalidates old preview and derived history; next request uses fresh digest/content",
+    "Withdrawal removes registration and history eligibility while preserving the source file",
+    "Temporary conversation excludes project context and disables registration mutations",
+    "No-project isolation, escaped source text, keyboard close and responsive dark/light layouts without script errors"
+  ],
+  "fixture_calls": 6,
+  "page_errors": [],
+  "screenshots": [
+    "H:\\JarvisData\\research\\knowledge-ui\\desktop-dark.png",
+    "H:\\JarvisData\\research\\knowledge-ui\\mobile-light.png"
+  ],
+  "limits": [
+    "Synthetic model gateway; citations show supplied sources, not proof of model answer correctness.",
+    "Explicit UTF-8 document registrations only; no full code understanding, automatic compilation or federation."
+  ]
+}

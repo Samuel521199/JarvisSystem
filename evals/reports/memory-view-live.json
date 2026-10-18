@@ -1,0 +1,102 @@
+{
+  "version": "0.1.33",
+  "captured_at": "2026-10-16T16:53:11.879480+00:00",
+  "status": "passed",
+  "observations": [
+    {
+      "provider": "vertex",
+      "model": "gemini-3.8-flash",
+      "status": "SUCCEEDED",
+      "expected_facts_present": true,
+      "inline_project_citations_present": true,
+      "text": "* **项目甲登录方案代号**：AlphaGate [P1]\n* **项目乙登录方案代号**：BlueDoor [P2]\n* **项目乙负责人**：小林",
+      "error": null,
+      "usage": {
+        "promptTokenCount": 870,
+        "candidatesTokenCount": 43,
+        "totalTokenCount": 913
+      },
+      "view": {
+        "schema_version": 1,
+        "provider": "vertex",
+        "memory_project_ids": [
+          "d48c3e77bfb441339216f174c57bb8a2",
+          "377d83c3dc3240138c22a9b978f8fcdb"
+        ],
+        "knowledge_project_ids": [
+          "d48c3e77bfb441339216f174c57bb8a2",
+          "377d83c3dc3240138c22a9b978f8fcdb"
+        ],
+        "bytes": 1541,
+        "max_bytes": 64442,
+        "coverage": [
+          {
+            "project_id": "d48c3e77bfb441339216f174c57bb8a2",
+            "citations": 1,
+            "status": "matched"
+          },
+          {
+            "project_id": "377d83c3dc3240138c22a9b978f8fcdb",
+            "citations": 1,
+            "status": "matched"
+          }
+        ],
+        "retrieval": "lexical",
+        "snapshot_atomic": false
+      },
+      "citations": 2,
+      "memory_references": 2
+    },
+    {
+      "provider": "local",
+      "model": "qwen3-0.6b",
+      "status": "SUCCEEDED",
+      "expected_facts_present": true,
+      "inline_project_citations_present": false,
+      "text": "- 项目甲的登录方案代号是 AlphaGate。\n- 项目乙的登录方案代号是 BlueDoor。\n- 乙项目负责人是 小林。",
+      "error": null,
+      "usage": {
+        "completion_tokens": 37,
+        "prompt_tokens": 855,
+        "total_tokens": 892,
+        "cached_tokens": 220
+      },
+      "view": {
+        "schema_version": 1,
+        "provider": "local",
+        "memory_project_ids": [
+          "d48c3e77bfb441339216f174c57bb8a2",
+          "377d83c3dc3240138c22a9b978f8fcdb"
+        ],
+        "knowledge_project_ids": [
+          "d48c3e77bfb441339216f174c57bb8a2",
+          "377d83c3dc3240138c22a9b978f8fcdb"
+        ],
+        "bytes": 1541,
+        "max_bytes": 3009,
+        "coverage": [
+          {
+            "project_id": "d48c3e77bfb441339216f174c57bb8a2",
+            "citations": 1,
+            "status": "matched"
+          },
+          {
+            "project_id": "377d83c3dc3240138c22a9b978f8fcdb",
+            "citations": 1,
+            "status": "matched"
+          }
+        ],
+        "retrieval": "lexical",
+        "snapshot_atomic": false
+      },
+      "citations": 2,
+      "memory_references": 2
+    }
+  ],
+  "paid_calls": 1,
+  "local_calls": 1,
+  "limits": [
+    "Two fixed synthetic questions, not a general intelligence benchmark.",
+    "Local service must already be running; probe does not take ownership."
+  ]
+}

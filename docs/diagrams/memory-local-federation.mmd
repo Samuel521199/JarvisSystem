@@ -2,12 +2,14 @@ flowchart TB
   subgraph A["完整节点 A · 离线可用"]
     direction TB
     AIN["获准文档 / 会话 / 工具回执"]
-    ARAW["本地原件 + 来源摘要"]
-    AFACT["MemoryStore · SQLite<br/>事实修订 / 事件 / outbox + inbox"]
+    ARAW["本地原件 + 来源版本<br/>会话 / 项目文档 / 实际回执"]
+    AFACT["MemoryStore · SQLite<br/>个人 / 项目 / 模拟分域事实<br/>修订 / 事件 / outbox + inbox"]
     AIDX["可重建索引<br/>词项 + 可选向量 / 关系"]
-    AQ["本地查询<br/>权限 / 域 / 时间 / 删除过滤"]
+    AVIEW["本轮记忆视图<br/>背景 + 允许的项目集合<br/>现实 / 模拟域 / 目的地"]
+    AQ["检索结果 + 当前事实复核<br/>范围 / 修订 / 时间 / 删除<br/>分节读取 → 对话上下文"]
     AIN --> ARAW -->|"带来源候选，经规则应用"| AFACT
     AFACT -->|"异步构建，标出水位"| AIDX
+    AVIEW -->|"先限候选范围，再排序"| AIDX
     AIDX --> AQ
     AFACT -->|"有效事实复核"| AQ
   end
@@ -15,11 +17,13 @@ flowchart TB
     direction TB
     BIN["本机经历 + 已复制资料"]
     BRAW["本地原件 + 来源摘要"]
-    BFACT["MemoryStore · SQLite<br/>事实修订 / 事件 / outbox + inbox"]
+    BFACT["MemoryStore · SQLite<br/>获准资料子集 / 本机经历<br/>修订 / 事件 / outbox + inbox"]
     BIDX["可重建索引<br/>可采用不同嵌入模型"]
-    BQ["本地查询<br/>权限 / 域 / 时间 / 删除过滤"]
+    BVIEW["本轮记忆视图<br/>主人背景 / 当前任务<br/>允许的项目 / 域 / 目的地"]
+    BQ["检索结果 + 当前事实复核<br/>带来源 / 冲突 / 缺失说明<br/>离线仍可使用本地资料"]
     BIN --> BRAW -->|"带来源候选，经规则应用"| BFACT
     BFACT -->|"异步构建，标出水位"| BIDX
+    BVIEW -->|"先限候选范围，再排序"| BIDX
     BIDX --> BQ
     BFACT -->|"有效事实复核"| BQ
   end
@@ -29,11 +33,11 @@ flowchart TB
   REMOTE["可选稳定主机检索服务<br/>只持有获准索引与引用"]
   AQ -. "在线可补充；离线仍查本地" .-> REMOTE
   BQ -. "在线可补充；离线仍查本地" .-> REMOTE
-  NOTE["不共享活跃 DB/WAL，不混合不同向量空间<br/>同步事实不重放动作；冲突与缺失明确展示<br/>完整节点离线能力取决于已准备资料与模型"]
+  NOTE["统一身份与目标，知识最终收敛<br/>动作由任务账本协调，不重放<br/>禁止共享活跃 DB/WAL<br/>离线使用已准备资料与模型"]
   SYNC --- NOTE
   classDef store fill:#e8f2ff,stroke:#446c9b,color:#152d47;
   classDef derived fill:#edf7ed,stroke:#60885c,color:#244323;
   classDef protocol fill:#fff1db,stroke:#af8549,color:#513b20;
   class ARAW,AFACT,BRAW,BFACT store;
-  class AIDX,BIDX,REMOTE derived;
+  class AIDX,BIDX,REMOTE,AVIEW,BVIEW derived;
   class SYNC,NOTE protocol;

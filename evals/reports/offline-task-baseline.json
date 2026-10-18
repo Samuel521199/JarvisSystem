@@ -1,0 +1,60 @@
+{
+  "version": "0.1.32",
+  "captured_at": "2026-10-16T15:55:35.233239+00:00",
+  "status": "passed",
+  "unit_tests": {
+    "total": 429,
+    "passed": 427,
+    "skipped": 2,
+    "errors": 0,
+    "failures": 0,
+    "seconds": 256.266
+  },
+  "limits": [
+    "Complete K1/K2/K3 gates remain incomplete.",
+    "Real model, UI and process lifetime evidence recorded separately."
+  ],
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/local_model.py": "f1231023e66ecb0350980f9f47fb155d79148e72cc17c0b2d4aac610b1bfe62d",
+    "runtime/node-host/jarvis_core/modules.py": "f94df042f3e5708e270f6df27628f174eb746c6928596b4471e5e88dbb7b7d5e",
+    "runtime/node-host/jarvis_core/sample_tasks.py": "4a73154dff6fbb282da941bb3fd7f9fd464638d608b7b7d28f56559f8f305655",
+    "runtime/node-host/jarvis_core/chat.py": "7447cd0e5fce11def574a7ae4c883bfdaf002e6d7e78b69fe6491b391cfaa090",
+    "adapters/models/provider-native/jarvis_models/gateway.py": "2f22caa9e05ddee928d3b12416766552c40d8a4cdc5068590986214d15f06da1",
+    "apps/web/modules.js": "c5e5fa1ba9b7284fc6388f3a61d7a29735279b3e5829ade4c89b9c1f66972ab7",
+    "tools/local_llm.py": "c63f9a364be8430a2ac23e453506aa7117f7d8d8b6b6c2bb148c3bd24557d315",
+    "tests/test_local_model.py": "66dfe7d2b0e7d24f148c0333e2d6b3bfc87d61b37a75e5dbf6cf74b3ea170954",
+    "tests/test_chat.py": "c1d324ec97aa755654c3c7060ec80d06a9bd714528448b170cadc6a5ff83c9a5",
+    "tests/test_models.py": "4bad4a254fea15566aa6fa5587ebd5c20fcb5b421dd50ebb03935961a67e5e82",
+    "tools/probe_offline_tasks.py": "9ac3401baeba81fd2a27d0574959b66304393b3ae24e4e1c5cece35727ee032b",
+    "tools/probe_local_model_ui.py": "f661a0e59284aced0603470c67e0384f046ac9b7083eb2a575318f9e2a7e00b0"
+  },
+  "paid_model_calls_this_increment": 1,
+  "new_model_downloads": 0,
+  "new_third_party_dependencies": 0,
+  "new_always_on_services": 0,
+  "local_evidence": "evals/reports/offline-task-live.json",
+  "browser_evidence": "evals/reports/local-model-ui.json",
+  "cloud_regression_evidence": "evals/reports/offline-task-cloud-regression.json",
+  "docs_check": {
+    "documents": 23,
+    "diagrams": 19,
+    "artifacts": 38,
+    "errors": 0
+  },
+  "seed_check": {
+    "ok": true,
+    "checked_assets": 22,
+    "fixture_cases": 12
+  },
+  "whitespace_check": "passed with repository CRLF convention",
+  "deployment_evidence": "evals/reports/offline-task-deployment.json",
+  "temporary_probe_cleanup": {
+    "status": "blocked_by_automatic_approval_review",
+    "reason": "blocked by policy; no more specific reason returned",
+    "retained_paths": [
+      "C:/Users/samuel/AppData/Local/Temp/jarvis-offline-tasks-t0x6i60b",
+      "C:/Users/samuel/AppData/Local/Temp/jarvis-offline-tasks-msq61dbe"
+    ],
+    "scope": "Synthetic early failed-run SQLite data only; inference processes reclaimed; new successful probe cleans its own temporary directory."
+  }
+}

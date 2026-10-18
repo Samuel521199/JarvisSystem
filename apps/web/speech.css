@@ -1,0 +1,7 @@
+.local-speech h2{font-size:16px;margin:0 0 12px}
+.local-speech form label{display:block;max-width:none;margin:14px 0}
+.local-speech textarea,.local-speech input,.local-speech select{display:block;width:100%;margin-top:7px}
+.speech-options{display:flex;gap:18px;flex-wrap:wrap}.speech-options label{flex:1;min-width:180px}
+.local-speech audio{width:100%;max-width:620px;margin-top:8px}
+.local-speech a{color:var(--blue);cursor:pointer}.local-speech [role=status]{overflow-wrap:anywhere}
+.local-speech details{margin:14px 0}.local-speech summary{cursor:pointer}

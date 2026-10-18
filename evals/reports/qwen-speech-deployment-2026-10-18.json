@@ -1,0 +1,250 @@
+{
+  "status": "SUCCEEDED",
+  "source_version": "0.1.43",
+  "observed_at": "2026-10-18T01:59:56.277215+00:00",
+  "data_directory": "C:/Users/samuel/AppData/Local/Packages/OpenAI.Codex_2p2nqsd0c76g0/LocalCache/Local/Jarvis/data",
+  "before_instance": "0ad85a74beefbd6d66dbb629e36485b8",
+  "after_instance": "8ca0e08e4891eb6e3cbdc58219ad8319",
+  "reload": "Idle checked; existing tray event gracefully exited original instance; existing launcher reused existing data; not hot replacement.",
+  "primary": {
+    "id": "qwen-tts",
+    "installed": true,
+    "state": "ready",
+    "owned": true,
+    "pid": 23232,
+    "device": "Vulkan0",
+    "threads": 4,
+    "memory": {
+      "working_set_bytes": 1198182400,
+      "peak_working_set_bytes": 1199038464,
+      "private_commit_bytes": 1845243904,
+      "peak_private_commit_bytes": 1852014592
+    },
+    "load": {
+      "ready": true,
+      "pid": 43604,
+      "inference_pid": 23232,
+      "protocol": 3,
+      "device": "Vulkan0",
+      "load_seconds": 2.080935699996189,
+      "uses": 0
+    },
+    "busy": false,
+    "job": {
+      "id": "f604f259b2144411a622e8d9e1bd8d29",
+      "action": "synthesize",
+      "status": "SUCCEEDED",
+      "started_at": "2026-10-18T01:59:54.162312+00:00",
+      "finished_at": "2026-10-18T01:59:54.925757+00:00",
+      "result": {
+        "id": "f604f259b2144411a622e8d9e1bd8d29",
+        "sample_rate_hz": 24000,
+        "audio_seconds": 1.92,
+        "elapsed_seconds": 0.6243742000078782,
+        "first_pcm_seconds": 0.07696599999326281,
+        "voice": "serena",
+        "emotion": "happy",
+        "language": "zh",
+        "audio_url": "/api/speech/primary/audio/f604f259b2144411a622e8d9e1bd8d29"
+      }
+    },
+    "uses": 1,
+    "model_revision": "a72e6c6575d67652488cdffc1c863215a9899978",
+    "reference_default": null,
+    "configuration_notice": null,
+    "limits": {
+      "text_chars": 180,
+      "reference_seconds": 15,
+      "output_seconds": 20
+    },
+    "usage_role": "primary",
+    "auto_start": false,
+    "broker_pid": 43604,
+    "broker_memory": {
+      "working_set_bytes": 25616384,
+      "peak_working_set_bytes": 25640960,
+      "private_commit_bytes": 15458304,
+      "peak_private_commit_bytes": 15511552
+    },
+    "gpu_memory": {
+      "status": "measured",
+      "dedicated_bytes": 666075136,
+      "shared_bytes": 1082580992
+    },
+    "capabilities": {
+      "voices": {
+        "serena": "Serena · 温柔女声",
+        "vivian": "Vivian · 明亮女声",
+        "uncle_fu": "Uncle Fu · 成熟男声",
+        "dylan": "Dylan · 北京男声",
+        "eric": "Eric · 四川男声",
+        "ryan": "Ryan · 英语男声",
+        "aiden": "Aiden · 阳光男声",
+        "ono_anna": "Ono Anna · 日语女声",
+        "sohee": "Sohee · 韩语女声"
+      },
+      "emotions": {
+        "neutral": "自然",
+        "happy": "开心",
+        "sad": "悲伤",
+        "angry": "生气",
+        "soft": "温柔轻声",
+        "slow": "舒缓慢速",
+        "fast": "轻快快速"
+      },
+      "languages": {
+        "zh": "中文",
+        "en": "English",
+        "ja": "日本語",
+        "ko": "한국어",
+        "de": "Deutsch",
+        "fr": "Français",
+        "ru": "Русский",
+        "pt": "Português",
+        "es": "Español",
+        "it": "Italiano"
+      },
+      "cloning": false,
+      "delivery": "complete_wav"
+    }
+  },
+  "backup": {
+    "/api/speech/fast": {
+      "id": "zipvoice",
+      "state": "stopped",
+      "owned": false,
+      "usage_role": "fallback",
+      "auto_start": false
+    },
+    "/api/speech": {
+      "id": "cosyvoice3",
+      "state": "stopped",
+      "owned": false,
+      "usage_role": null,
+      "auto_start": null
+    }
+  },
+  "module_count": 23,
+  "module_row": {
+    "id": "qwen-tts",
+    "name": "Qwen 主力语音",
+    "installed": true,
+    "health": "ready",
+    "enabled": true,
+    "activity": "running",
+    "active": 0,
+    "recent_uses": 1,
+    "last_used": null,
+    "version": "Qwen3-TTS 1.7B Q5_K / Vulkan0",
+    "message": "主力语音；9 种预设音色与情绪指令。手动加载，可独立停止；内存和 GPU 分项见主力面板。",
+    "update_mode": "external",
+    "count_scope": "host_lifetime",
+    "runtime": {
+      "id": "qwen-tts",
+      "installed": true,
+      "state": "ready",
+      "owned": true,
+      "pid": 23232,
+      "device": "Vulkan0",
+      "threads": 4,
+      "memory": {
+        "working_set_bytes": 1198182400,
+        "peak_working_set_bytes": 1199038464,
+        "private_commit_bytes": 1832706048,
+        "peak_private_commit_bytes": 1852014592
+      },
+      "load": {
+        "ready": true,
+        "pid": 43604,
+        "inference_pid": 23232,
+        "protocol": 3,
+        "device": "Vulkan0",
+        "load_seconds": 2.080935699996189,
+        "uses": 0
+      },
+      "busy": false,
+      "job": {
+        "id": "f604f259b2144411a622e8d9e1bd8d29",
+        "action": "synthesize",
+        "status": "SUCCEEDED",
+        "started_at": "2026-10-18T01:59:54.162312+00:00",
+        "finished_at": "2026-10-18T01:59:54.925757+00:00",
+        "result": {
+          "id": "f604f259b2144411a622e8d9e1bd8d29",
+          "sample_rate_hz": 24000,
+          "audio_seconds": 1.92,
+          "elapsed_seconds": 0.6243742000078782,
+          "first_pcm_seconds": 0.07696599999326281,
+          "voice": "serena",
+          "emotion": "happy",
+          "language": "zh",
+          "audio_url": "/api/speech/primary/audio/f604f259b2144411a622e8d9e1bd8d29"
+        }
+      },
+      "uses": 1,
+      "model_revision": "a72e6c6575d67652488cdffc1c863215a9899978",
+      "reference_default": null,
+      "configuration_notice": null,
+      "limits": {
+        "text_chars": 180,
+        "reference_seconds": 15,
+        "output_seconds": 20
+      },
+      "usage_role": "primary",
+      "auto_start": false,
+      "broker_pid": 43604,
+      "broker_memory": {
+        "working_set_bytes": 25616384,
+        "peak_working_set_bytes": 25640960,
+        "private_commit_bytes": 15458304,
+        "peak_private_commit_bytes": 15511552
+      },
+      "gpu_memory": {
+        "status": "measured",
+        "dedicated_bytes": 666075136,
+        "shared_bytes": 1082580992
+      },
+      "capabilities": {
+        "voices": {
+          "serena": "Serena · 温柔女声",
+          "vivian": "Vivian · 明亮女声",
+          "uncle_fu": "Uncle Fu · 成熟男声",
+          "dylan": "Dylan · 北京男声",
+          "eric": "Eric · 四川男声",
+          "ryan": "Ryan · 英语男声",
+          "aiden": "Aiden · 阳光男声",
+          "ono_anna": "Ono Anna · 日语女声",
+          "sohee": "Sohee · 韩语女声"
+        },
+        "emotions": {
+          "neutral": "自然",
+          "happy": "开心",
+          "sad": "悲伤",
+          "angry": "生气",
+          "soft": "温柔轻声",
+          "slow": "舒缓慢速",
+          "fast": "轻快快速"
+        },
+        "languages": {
+          "zh": "中文",
+          "en": "English",
+          "ja": "日本語",
+          "ko": "한국어",
+          "de": "Deutsch",
+          "fr": "Français",
+          "ru": "Русский",
+          "pt": "Português",
+          "es": "Español",
+          "it": "Italiano"
+        },
+        "cloning": false,
+        "delivery": "complete_wav"
+      }
+    }
+  },
+  "audio_size_bytes": 92204,
+  "audio_sha256": "94f18c411e9bfb9447249ea287e7d4ee653d544d11b1cc662cf7e1274746a39f",
+  "served_speech_script_sha256": "85827f925216391a5d02f5b9d25788eccaa8f600a9e989bc3de989e436c28101",
+  "cloud_calls": 0,
+  "limits": "File TTS only. Primary explicitly loaded for verification and left warm; no boot autoload. No microphone, speaker onset or live LLM voice chat tested."
+}

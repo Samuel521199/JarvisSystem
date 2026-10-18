@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JARVIS · 机甲星核标识</title>
+<link rel="icon" href="jarvis.ico">
+<link data-brand-css rel="stylesheet" href="logo.css">
+<link data-lifecycle-css rel="stylesheet" href="lifecycle.css">
+<link data-preview-css rel="stylesheet" href="preview.css">
+</head>
+<body>
+<main class="identity">
+  <header class="identity-header"><a href="/" class="wordmark">JARVIS<span>PERSONAL INTELLIGENCE</span></a><span class="edition">BRAND SYSTEM <b>04 / LIVING INTELLIGENCE</b></span></header>
+  <section class="intro"><div><p class="eyebrow">JARVIS · 你的智能伙伴</p><h1>以锋芒，回应每个想法。</h1></div><p class="intro-note">机甲轮廓 · 几何 J · 指引之星<br>靠近有回应，离开仍在场。</p></section>
+  <section class="design-grid" aria-label="Jarvis 两种标识">
+    <article class="icon-card">
+      <div class="card-label"><span>01 / APP ICON</span><span>静态标识</span></div>
+      <div class="icon-stage"><img src="icon.png" alt="Jarvis 机甲星核图标：冰蓝机甲面罩轮廓、几何 J 与四角星" width="256" height="256"></div>
+      <div class="size-strip" aria-label="小尺寸图标预览"><div><img src="icon-16.png" width="16" height="16" alt="16 像素"><span>16</span></div><div><img src="icon-24.png" width="24" height="24" alt="24 像素"><span>24</span></div><div><img src="icon-32.png" width="32" height="32" alt="32 像素"><span>32</span></div><div><img src="icon-48.png" width="48" height="48" alt="48 像素"><span>48</span></div><div><img src="icon-64.png" width="64" height="64" alt="64 像素"><span>64 PX</span></div></div>
+      <footer class="asset-footer"><span>随时找到你的伙伴</span><div><a href="icon.png" download="jarvis-mech.png">PNG ↓</a><a href="jarvis.ico" download="jarvis-mech.ico">ICO ↓</a></div></footer>
+    </article>
+    <article class="motion-card">
+      <div class="card-label"><span>02 / LIVING LOGO</span><span class="preview-tag">动效预览</span></div>
+      <div class="motion-stage"><div class="axis-label axis-left">J / 01</div><jarvis-logo interactive role="img" aria-label="Jarvis 机甲星核，移动鼠标或键盘聚焦可预览光效" aria-describedby="motion-hint" data-state="idle"></jarvis-logo><div class="axis-label axis-right">INTELLIGENCE</div></div>
+      <p class="motion-hint" id="motion-hint"><span class="pointer-hint">移入感应 · 移动探索 · 移开归位</span><span class="touch-hint">轻触感应 · 松开归位</span></p><div class="motion-caption"><p class="brand-state-readout" id="preview-readout">待命 / STANDBY</p><div class="jarvis-wordmark">JARVIS</div><p id="preview-status" role="status">我在，随时出发。</p></div>
+      <div class="motion-controls" aria-label="切换动效预览"><div class="state-buttons"><button type="button" data-preview-state="idle" aria-pressed="true">待命</button><button type="button" data-preview-state="thinking" aria-pressed="false">思考</button><button type="button" data-preview-state="sleep" aria-pressed="false">休眠</button></div><button type="button" data-brand-motion aria-pressed="false">暂停动效</button></div>
+    </article>
+  </section>
+  <div class="brand-sequence-controls" aria-label="全屏与声音演示"><button type="button" data-brand-sequence="boot">全屏启动演示</button><button type="button" data-brand-sequence="exit">全屏退出演示</button><button type="button" data-brand-sound aria-pressed="false">音效：关</button></div>
+  <footer class="identity-footer"><span><i></i> 一个标识，连接你的智能世界。</span><span>本页仅演示视觉状态，不启动任务或麦克风。</span></footer>
+</main>
+<script nonce="__JARVIS_NONCE__" src="logo.js"></script>
+<script nonce="__JARVIS_NONCE__" src="sound.js"></script>
+<script nonce="__JARVIS_NONCE__" src="lifecycle.js"></script>
+<script nonce="__JARVIS_NONCE__" src="preview.js"></script>
+</body></html>

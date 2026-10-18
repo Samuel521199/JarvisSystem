@@ -1,0 +1,42 @@
+{
+  "status": "SUCCEEDED",
+  "source_version": "0.1.52",
+  "tests": 162,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "modules": [
+    "test_dialogue_process",
+    "test_dialogue_recovery",
+    "test_dialogue_turns",
+    "test_conversations",
+    "test_web",
+    "test_chat",
+    "test_readout",
+    "test_resources",
+    "test_runtime_metrics",
+    "test_conversation_tasks",
+    "test_personal_core",
+    "test_continuity",
+    "test_semantic_candidates"
+  ],
+  "network": "Mocked transport in this regression run. A separate earlier smoke call reached Vertex successfully.",
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/dialogue_process.py": "5aeae40ecab172040cd4ebcd1d489f8b9394402d4083d38ba37b01e3bb86f1a0",
+    "runtime/node-host/jarvis_core/dialogue_worker.py": "bcc35c4c25f6e7be9811a94aea555d86254eb2ab6f0e7c1b09f6e7ab205e5af9",
+    "runtime/node-host/jarvis_core/chat.py": "aad2e98cd72077f532fab61503070bbdb80f21d34d6976f609bcb2b27cb4c72f",
+    "runtime/node-host/jarvis_core/turns.py": "a4a71a82460f7cbc51f4bb32d49d8de2b8e35cabf2f20066b493cbcc93d1dcb5",
+    "apps/web/server.py": "9644494020e60179b6fffc99a62e75c848bae293bab930e36ccb6e09fc3ae195",
+    "apps/web/resources.js": "3022c9799550f65a360fc3498a1b1033efe609cf8938bab1740f3b2700465033",
+    "tests/test_dialogue_process.py": "f242230e7aa00f3294a3c990fa5e993226edb0e00ae71d34ccc3ad7f4368addc",
+    "tests/dialogue_process_fixture.py": "aeb540d03bea2d23e28a157bacf560edbe2870fab66aa2d70de79e1f330cf4ae",
+    "runtime/node-host/jarvis_core/personal_candidates.py": "16558448509888c76d0fc638b03f732f7f8c1ff68ad85f3165ae6f1ecb7f5dbc",
+    "runtime/node-host/jarvis_core/semantic_candidates.py": "63e28a451a92c1f391a7fa44da1ff2170f101cf36032bed3598d6111d0da157d",
+    "tests/test_semantic_candidates.py": "210da2cc165e1c0c97c0226a4b9878306240d01ae2e805021f5ef7f0df082783"
+  },
+  "earlier_run": {
+    "tests": 160,
+    "errors": 3,
+    "cause": "Memory candidate tests and implementation were being updated concurrently; rerun required after changes settled."
+  }
+}

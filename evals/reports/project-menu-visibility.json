@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-17",
+  "version": "0.1.34 UI correction",
+  "ui_revision": "project-menu-visible-v2",
+  "trigger": "Owner reported all project menu features absent even after page refresh.",
+  "finding": "The default desktop project-more button was opacity:0; this is a verified discoverability defect, not proof of the entire user-side cause.",
+  "changes": [
+    "Project more button always visible with border and surface background",
+    "Project heading context menu opens the same actions",
+    "Non-visible page revision marker for served-resource verification"
+  ],
+  "dom": {
+    "status": "passed",
+    "checks": [
+      "always-visible more button CSS and all eight menu entries enabled",
+      "project row context menu",
+      "menu/details",
+      "edit/alias/description",
+      "pin and unpin",
+      "section menu and move to ungrouped",
+      "archive by project",
+      "restore archived chat",
+      "copy and reveal root",
+      "remove active project and recover without lost active control",
+      "stored chat bodies preserved",
+      "previous autosave failure prevents archive and retains newest draft"
+    ],
+    "notice_count": 5,
+    "method": "LinkeDOM and API doubles; no browser rendering or physical interaction"
+  },
+  "tests": {
+    "run": 57,
+    "passed": 56,
+    "skipped": 1,
+    "elapsed_seconds": 10.702
+  },
+  "browser": "Local browser use is disabled in Work settings; no live visual or mouse verification performed.",
+  "source_sha256": {
+    "apps/web/project_menu.css": "23a03c138ecb8feb237a100880f91e145584f51ffbc8cc21f5a5a0053c7b62be",
+    "apps/web/workspace.js": "26fa2df9bd60d6ae9d5481f4c1bf5df29199fdf66a57e29fd29a11abce54365f",
+    "apps/web/index.html": "9803109af9773d1ab895465ac7993615b346967ca084c88b64bee1ad9e275628",
+    "tools/check_project_menu_dom.cjs": "4c5fc4c1c898bf40901ec490cae62d7439399ef793ee0a430dca4a87596dd41d"
+  },
+  "paid_model_calls": 0
+}

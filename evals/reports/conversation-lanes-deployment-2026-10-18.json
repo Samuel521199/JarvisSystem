@@ -1,0 +1,131 @@
+{
+  "status": "SUCCEEDED",
+  "source_version": "0.1.55",
+  "reload": {
+    "status": "SUCCEEDED",
+    "source_version": "0.1.55",
+    "data_dir": "C:\\Users\\samuel\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\Jarvis\\data",
+    "previous_version": null,
+    "previous_instance": null,
+    "current_instance": "e1321ee8af435ca2155a04b0ee660ad8",
+    "idle_graceful_reload": false,
+    "startup_from_absent": true,
+    "served_sha256": {
+      "dialogue.js": "0f475c8691b403eb3aa705fbf5d50e3bffe1da244bb2f026e0dddeb54b45be68",
+      "resources.js": "586e03243199134cec0c4da7bedde691f904f73ca8e7aee09ea2dd0202c99e2b",
+      "workspace.js": "8f5a1bd76ba701c36eabae00758ada7181460715d68d6d2479635508287c4a57",
+      "conversation_tasks.js": "9f251fbb7d0726157fecb4898f985cd5d81da47eb6a1506d4e36f69bbaf5839d",
+      "mcp_manager.js": "0c74df31951193bbe830bdfe24a10eb90b9cb31bb604ce54109acc5fb1cd9702"
+    },
+    "calculation": "84",
+    "personal_read_only": true,
+    "duplicate_did_not_repeat_calculation": true,
+    "cancel_before_submit": true,
+    "restart_fence": null,
+    "instance_fence": true,
+    "empty_restart_queue_reviewed_and_resumed": true,
+    "admission_ms": 47.659,
+    "backups": {
+      "/api/speech/fast": "stopped",
+      "/api/speech": "stopped"
+    },
+    "cloud_calls": 0,
+    "limits": "One local calculator and personal-settings query; no paid model, microphone, task replay, persistent dialogue recovery or physical voice timing."
+  },
+  "cloud_calls": 1,
+  "provider": "vertex",
+  "model": "gemini-3.8-flash",
+  "usage": {
+    "promptTokenCount": 209,
+    "candidatesTokenCount": 3,
+    "totalTokenCount": 212
+  },
+  "billing": {
+    "basis": "estimated",
+    "amount": 0.000168,
+    "currency": "USD",
+    "tokens": {
+      "input": 209,
+      "output": 3,
+      "cache_read": 0,
+      "cache_write": 0,
+      "total": 212,
+      "reasoning": 0
+    },
+    "price": {
+      "input": 0.75,
+      "output": 3.75,
+      "cache_read": 0.075,
+      "cache_write": null,
+      "max_input_tokens": 1000000,
+      "currency": "USD",
+      "fee_percent": 0,
+      "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+      "checked_at": "2026-10-16",
+      "valid_until": "2026-12-31"
+    },
+    "reason": "token_rates"
+  },
+  "reply_elapsed_seconds": 10.302,
+  "temporary": true,
+  "observed_process": {
+    "enabled": true,
+    "closed": false,
+    "capacity": 2,
+    "active": 1,
+    "memory_limit_bytes": 402653184,
+    "completed": 0,
+    "last": null,
+    "processes": [
+      {
+        "pid": 7300,
+        "seconds": 10.03,
+        "phase": "model",
+        "created": 134368016395755539,
+        "cpu_seconds": 1.40625,
+        "working_set_bytes": 55742464,
+        "private_bytes": 38518784,
+        "status": "available"
+      }
+    ]
+  },
+  "idle_after": {
+    "enabled": true,
+    "closed": false,
+    "capacity": 2,
+    "active": 0,
+    "memory_limit_bytes": 402653184,
+    "completed": 1,
+    "last": {
+      "reason": "succeeded",
+      "seconds": 10.066
+    },
+    "processes": []
+  },
+  "background_idle": {
+    "enabled": true,
+    "closed": false,
+    "capacity": 1,
+    "active": 0,
+    "memory_limit_bytes": 402653184,
+    "completed": 0,
+    "last": null,
+    "processes": []
+  },
+  "text_length": 5,
+  "limits": "One real temporary text request, no task or personal write; cold-call overhead and provider latency are not separated.",
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/dialogue_process.py": "a953d94544890d7b3cb2dc26e1b17af9b4cdd34f75acb1373e4c257cb8cfe342",
+    "runtime/node-host/jarvis_core/dialogue_worker.py": "0a4141da07a71f46c9fec84ed00a16de5bc48f7aa70c57be7bb2abfc2cad9317",
+    "runtime/node-host/jarvis_core/chat.py": "4847deacd212a5be798fda435dced6b33c06a272eb07e9720192302f55b84ad8",
+    "runtime/node-host/jarvis_core/turns.py": "dfc07e29a5a85d2178c29e37582fb3fe4a1ba09ddf88c2734f20be8326ca39ae",
+    "apps/web/server.py": "d2c75c2ff1f472fea72d794834d8c9fa2c06155c00d770b6d31cecb65131cb9e",
+    "runtime/node-host/jarvis_core/sample_tasks.py": "4c30305711532b5275b9307a7621eba92162b134c97167fe3eda9bc81010018d",
+    "runtime/node-host/jarvis_core/skill_tasks.py": "ed0917d682dd01f91761293d40351d2e5c1e793595146e41d1a1a3c0a03864e5",
+    "runtime/node-host/jarvis_core/rea_explanation.py": "19a6ce9b6a81d045d3a31833266d1821ac0c41bc54f782c829d1ee3edf873135",
+    "adapters/computer-use/jarvis_computer/web.py": "1c538250b176f453091747f76dccc0eb00a3375dbd147f072dc5224b92c7ed53",
+    "apps/web/resources.js": "586e03243199134cec0c4da7bedde691f904f73ca8e7aee09ea2dd0202c99e2b",
+    "tools/probe_dialogue_process_deployment.py": "7253b866ea78f67f9a2a46b1c2ad56af59e9c498160454262741c988c805aba0",
+    "tools/probe_dialogue_deployment.py": "e9a0b4d362af05ff42d97217bf8a914a798fcad30534aa2bfa9ce72ecf7219cf"
+  }
+}

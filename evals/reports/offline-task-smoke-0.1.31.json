@@ -1,0 +1,71 @@
+{
+  "action_status": "CONFIRMED",
+  "error": null,
+  "report": {
+    "by_type": [
+      {
+        "file_count": 1,
+        "total_bytes": 3,
+        "type": ".txt"
+      }
+    ],
+    "files": [
+      {
+        "path": "a.txt",
+        "size_bytes": 3,
+        "type": ".txt"
+      }
+    ],
+    "kind": "jarvis.sample-report",
+    "model": {
+      "completion_reason": "complete",
+      "elapsed_seconds": 1.697,
+      "model": "qwen3-0.6b",
+      "outcome_uncertain": false,
+      "output_incomplete": false,
+      "provider": "local",
+      "request_id": "e8c5adb54c9d41dd9d3e717b3ee24858",
+      "status": "SUCCEEDED",
+      "usage": {
+        "cached_tokens": 0,
+        "completion_tokens": 39,
+        "prompt_tokens": 392,
+        "total_tokens": 431
+      }
+    },
+    "plan": {
+      "kind": "inventory_report",
+      "schema_version": 1,
+      "steps": [
+        {
+          "arguments": {
+            "relative_path": "."
+          },
+          "skill": "sample_metadata_read"
+        },
+        {
+          "arguments": {
+            "format": "json"
+          },
+          "skill": "artifact_output"
+        }
+      ]
+    },
+    "relative_path": ".",
+    "schema_version": "1.0.0",
+    "scope": "sample-input",
+    "total_bytes": 3,
+    "total_files": 1,
+    "verified": true
+  },
+  "steps": [
+    {
+      "ordinal": 0,
+      "state": "PLAN_VALIDATED",
+      "plan_json": "{\"kind\":\"inventory_report\",\"schema_version\":1,\"steps\":[{\"arguments\":{\"relative_path\":\".\"},\"skill\":\"sample_metadata_read\"},{\"arguments\":{\"format\":\"json\"},\"skill\":\"artifact_output\"}]}",
+      "model_json": "{\"completion_reason\":\"complete\",\"elapsed_seconds\":1.697,\"model\":\"qwen3-0.6b\",\"outcome_uncertain\":false,\"output_incomplete\":false,\"provider\":\"local\",\"request_id\":\"e8c5adb54c9d41dd9d3e717b3ee24858\",\"status\":\"SUCCEEDED\",\"usage\":{\"cached_tokens\":0,\"completion_tokens\":39,\"prompt_tokens\":392,\"total_tokens\":431}}",
+      "created_at": "2026-10-16T15:32:56.439052+00:00"
+    }
+  ],
+  "elapsed_seconds": 2.5120323999999528
+}

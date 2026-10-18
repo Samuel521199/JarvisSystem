@@ -1,0 +1,36 @@
+{
+  "status": "SUCCEEDED",
+  "source_version": "0.1.48",
+  "test_modules": [
+    "test_dialogue_turns",
+    "test_web",
+    "test_chat",
+    "test_readout",
+    "test_resources",
+    "test_runtime_metrics",
+    "test_conversation_tasks",
+    "test_personal_core",
+    "test_continuity"
+  ],
+  "tests": 114,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "seconds": 18.777,
+  "cloud_calls": 0,
+  "limits": "Synthetic providers and fault injection; no semantic-intent accuracy or microphone verification.",
+  "prior_attempt": "104 tests passed; one loader error from incorrect module name test_personal. Corrected to test_personal_core, no validation requirements removed.",
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/turns.py": "18ed060642938df71811185fc64cde20d774eddaf036eee15c19bb7523286fa4",
+    "apps/web/server.py": "09aafda88e4486119c13ac9a471bada1dd46dd3f434d9d1382ac08a17e1d0b6f",
+    "apps/web/dialogue_routes.py": "b4e063b176af7379bed409c15213b8931c551e5ed6e8a9efc448aa35695e3951",
+    "tests/test_dialogue_turns.py": "fe95e24539cb560138145c945a39a9047886ee1eb5575b6df1fcb54e6ed99d57",
+    "tests/test_web.py": "79b12f88fc2d4f7ddc24bf6ca34d105e7590621af17aa1cb430ce8cb0e239476"
+  },
+  "final_optional_asset_regression": {
+    "tests": 34,
+    "seconds": 2.029,
+    "status": "SUCCEEDED",
+    "covers": "Missing dialogue.js strips new script; old synchronous chat remains available; UI reports degraded assets."
+  }
+}

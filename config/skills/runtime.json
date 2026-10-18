@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "runtime_kind": "fixed-python-lpac",
+  "files": {
+    "adapters/skills/anatomy/render_worker.py": "sha256:19dd7f955e039ba94be66bfc0dd61b09662230f25cb20a4df28b2cabe1fc4ba1",
+    "adapters/skills/anatomy/lesson.js": "sha256:78640e67dee8963840bb57fb5b7b921b8d19268150c5ac27a3c1dc87c17ac156",
+    "adapters/skills/anatomy/iso-kit.mjs": "sha256:6d3ecc725d30c3b0346da309cf61dfa5a65017c23620bbd4093009d4fb104018",
+    "adapters/skills/anatomy/LICENSE.txt": "sha256:87c078ab9d90a3044f359e6b563d4e6afea7aa060897cf4f21618687b3856796"
+  }
+}

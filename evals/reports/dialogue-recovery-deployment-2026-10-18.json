@@ -1,0 +1,67 @@
+{
+  "status": "SUCCEEDED",
+  "source_version": "0.1.49",
+  "first_reload": {
+    "status": "SUCCEEDED",
+    "source_version": "0.1.49",
+    "data_dir": "C:\\Users\\samuel\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\Jarvis\\data",
+    "previous_version": "0.1.48",
+    "previous_instance": "e31f6544f75f9ee4206819d7b6e4bce0",
+    "current_instance": "172148c890b631d92b21da45139c919a",
+    "idle_graceful_reload": true,
+    "served_sha256": {
+      "dialogue.js": "0f475c8691b403eb3aa705fbf5d50e3bffe1da244bb2f026e0dddeb54b45be68",
+      "resources.js": "37c5503fdbca36c89e0427769afe0fc007efe41a0d5a4bda551db717e4f4d0f0",
+      "workspace.js": "8f5a1bd76ba701c36eabae00758ada7181460715d68d6d2479635508287c4a57",
+      "conversation_tasks.js": "8361f78b56e3969009531d7aaec6b6b79bf83bc9f2489be24de6e25f3b480cec"
+    },
+    "calculation": "84",
+    "personal_read_only": true,
+    "duplicate_did_not_repeat_calculation": true,
+    "cancel_before_submit": true,
+    "restart_fence": true,
+    "empty_restart_queue_reviewed_and_resumed": true,
+    "admission_ms": 46.01,
+    "backups": {
+      "/api/speech/fast": "stopped",
+      "/api/speech": "stopped"
+    },
+    "cloud_calls": 0,
+    "limits": "One local calculator and personal-settings query; no paid model, microphone, task replay, persistent dialogue recovery or physical voice timing."
+  },
+  "second_reload": {
+    "status": "SUCCEEDED",
+    "source_version": "0.1.49",
+    "data_dir": "C:\\Users\\samuel\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\Jarvis\\data",
+    "previous_version": "0.1.49",
+    "previous_instance": "172148c890b631d92b21da45139c919a",
+    "current_instance": "221779bfc1b2ec358985bc8a12b2dca0",
+    "idle_graceful_reload": true,
+    "served_sha256": {
+      "dialogue.js": "0f475c8691b403eb3aa705fbf5d50e3bffe1da244bb2f026e0dddeb54b45be68",
+      "resources.js": "37c5503fdbca36c89e0427769afe0fc007efe41a0d5a4bda551db717e4f4d0f0",
+      "workspace.js": "8f5a1bd76ba701c36eabae00758ada7181460715d68d6d2479635508287c4a57",
+      "conversation_tasks.js": "8361f78b56e3969009531d7aaec6b6b79bf83bc9f2489be24de6e25f3b480cec"
+    },
+    "calculation": "84",
+    "personal_read_only": true,
+    "duplicate_did_not_repeat_calculation": true,
+    "cancel_before_submit": true,
+    "restart_fence": true,
+    "empty_restart_queue_reviewed_and_resumed": true,
+    "admission_ms": 18.226,
+    "backups": {
+      "/api/speech/fast": "stopped",
+      "/api/speech": "stopped"
+    },
+    "cloud_calls": 0,
+    "limits": "One local calculator and personal-settings query; no paid model, microphone, task replay, persistent dialogue recovery or physical voice timing."
+  },
+  "persistent_reply_survived_restart": true,
+  "same_id_not_reexecuted": true,
+  "deleted_only_self_created_conversation": "4e8e59b1cb684fff94fc8943316144d8",
+  "deleted_reply_unavailable": true,
+  "recovery_state": "enabled",
+  "cloud_calls": 0,
+  "limits": "Original local data directory. Only self-created calculator/archive test record; no cloud calls, microphone or independent Dialogue process."
+}

@@ -1,0 +1,24 @@
+{
+  "version": "0.1.23",
+  "captured_at": "2026-10-16T08:55:10.165835+00:00",
+  "status": "passed",
+  "checks": [
+    "real HTTP and ChatService send the note as user input and report context",
+    "new session has no old note; switching back restores its own note",
+    "edited note replaces the previous note on the next request",
+    "switching to local route retains note; explicit clear stops resending it",
+    "UTF-8 note overflow stops before the model gateway",
+    "desktop and 390px layout inspected; no horizontal overflow",
+    "page reload clears ephemeral note; no browser persistence"
+  ],
+  "gateway_calls": 5,
+  "page_errors": [],
+  "screenshots": [
+    "H:\\JarvisData\\research\\context-ui\\desktop.png",
+    "H:\\JarvisData\\research\\context-ui\\mobile.png"
+  ],
+  "limits": [
+    "Gateway replies are synthetic. No real model obedience/quality or cloud cost was measured.",
+    "No automatic summarization, persistent memory, or autonomous tool execution is claimed."
+  ]
+}

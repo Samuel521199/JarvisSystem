@@ -1,0 +1,52 @@
+flowchart TB
+  UI["个人会话 / 托盘<br/>项目与工作面板按需展开"]
+  subgraph HOST["目标 Host（proposed）"]
+    API["薄 API 与组合入口"]
+    CHAT["个人助手核心<br/>交流 / 意图 / 上下文编排"]
+    PERSONA["持续身份与人格配置<br/>换模型仍保持连续"]
+    ATTENTION["注意力与约定<br/>按主人偏好跟进 / 安静待命"]
+    TASK["唯一任务受理与动作账本<br/>规划与 Agent 是逻辑角色"]
+    GROW["自检 / 自愈 / 进化<br/>独立策略，共用执行底座"]
+    ROUTE["按用途路由与统一用量预算<br/>复用 ModelGateway"]
+    CAP["能力目录 + 资源准入<br/>固定版本 / 取消 / 回执"]
+    RELEASE["候选验收与发布控制<br/>通过后激活能力包"]
+    CONTEXT["个人偏好 / 共同经历<br/>可选项目资料 / 来源与范围"]
+    API --> CHAT
+    CHAT -->|需要行动时| TASK
+    TASK -->|真实进度与结果| CHAT
+    API --> GROW
+    CHAT --> ROUTE
+    TASK --> ROUTE
+    GROW --> ROUTE
+    CHAT --> CONTEXT
+    CHAT <--> PERSONA
+    CHAT <--> ATTENTION
+    ATTENTION -->|获准工作意图| TASK
+    CHAT -->|使用反馈| GROW
+    GROW -->|提交研发工作| TASK
+    TASK --> CAP
+    GROW --> RELEASE
+    RELEASE -->|更新可用版本| CAP
+  end
+  UI --> API
+  WORK["按需独立进程<br/>LPAC / 浏览器<br/>后续：MCP 执行器"]
+  MODELS["云模型 / 按需本地推理"]
+  DB[("本地 SQLite 与文件<br/>单一写入职责 / 可重建索引")]
+  SYNC["后续：配对同步适配器<br/>领域事件，不共享 DB 文件"]
+  CAP --> WORK
+  WORK -->|核验结果| TASK
+  ROUTE --> MODELS
+  TASK --> DB
+  RELEASE --> DB
+  CONTEXT --> DB
+  PERSONA --> DB
+  ATTENTION --> DB
+  DB -.->|各领域导出 / 接收接口| SYNC
+  classDef control fill:#e9f1fc,stroke:#537aac,color:#18324f;
+  classDef optional fill:#f4efff,stroke:#9070bf,color:#403154;
+  classDef external fill:#eaf6f2,stroke:#579982,color:#244d40;
+  class API,TASK,GROW,ROUTE,CAP,RELEASE control;
+  classDef personal fill:#e5f5f9,stroke:#21869b,color:#123f4a,stroke-width:2px;
+  class CHAT,PERSONA,ATTENTION,CONTEXT personal;
+  class SYNC optional;
+  class UI,WORK,MODELS,DB external;

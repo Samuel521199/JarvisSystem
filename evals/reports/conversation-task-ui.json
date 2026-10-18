@@ -1,0 +1,24 @@
+{
+  "version": "0.1.31",
+  "captured_at": "2026-10-16T15:23:17.261062+00:00",
+  "status": "passed",
+  "checks": [
+    "chat /任务 -> one persisted conversation-bound task -> real LPAC statistics -> exact JSON download",
+    "conversation switch isolates task list; reload restores links; control messages excluded from model history; status query uses no model",
+    "blocked planning permits chat; /取消 cancels only the bound task and discards late result",
+    "accepted POST with lost response is recovered by original request ID; no duplicate task or restored retry draft",
+    "390px no horizontal overflow; temporary chat clearly distinguishes persistent task audit"
+  ],
+  "page_errors": [],
+  "planner_calls": 2,
+  "chat_calls": 3,
+  "paid_model_calls": 0,
+  "screenshots": [
+    "C:\\Users\\samuel\\AppData\\Local\\Jarvis\\data\\diagnostics\\conversation-tasks\\desktop.png",
+    "C:\\Users\\samuel\\AppData\\Local\\Jarvis\\data\\diagnostics\\conversation-tasks\\mobile.png"
+  ],
+  "limits": [
+    "Real UI/HTTP/archive/queue/Worker/artifact paths; all model replies synthetic.",
+    "Fixed sample reports only; no arbitrary chat-selected tools, MCP runtime or offline model quality claim."
+  ]
+}

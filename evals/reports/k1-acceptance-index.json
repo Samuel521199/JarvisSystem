@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "version": "0.1.28",
+  "captured_at": "2026-10-16T13:54:31.021871+00:00",
+  "status": "partial",
+  "complete_k1_gate": false,
+  "criteria_authority": "docs/delivery-validation.md#next-k1-acceptance",
+  "criteria": [
+    {
+      "id": "V-K1-01",
+      "state": "partial",
+      "evidence": [
+        {
+          "path": "evals/reports/k1-preflight-baseline.json",
+          "version": "0.1.5",
+          "status": "passed_with_documented_limits",
+          "sha256": "ee080931fb494147becb6813ac6215d6cee95764898fd4dbd020f993a1528005"
+        }
+      ],
+      "remaining_scope": "历史预检子集；需补当前目标部署的依赖/权限/端口/版本故障覆盖。"
+    },
+    {
+      "id": "V-K1-02",
+      "state": "deferred",
+      "evidence": [],
+      "remaining_scope": "高级认证和全局监督按当前个人使用范围延期，不记通过、不阻塞个人功能增量。"
+    },
+    {
+      "id": "V-K1-03",
+      "state": "partial",
+      "evidence": [
+        {
+          "path": "evals/reports/personal-lifecycle-baseline.json",
+          "version": "0.1.14",
+          "status": "passed_with_documented_limits",
+          "sha256": "f6711ef3a6de4d0efe772f365a073535f4c770378639c788babcefd8599d76df"
+        },
+        {
+          "path": "evals/reports/runtime-entry-baseline.json",
+          "version": "0.1.28",
+          "status": "passed",
+          "sha256": "b332ebddcf3e26c3a4121aa4bac6ff9626464b4f9b3b65f1ed2757fdba9a543e"
+        }
+      ],
+      "remaining_scope": "个人生命周期和旧数据兼容有历史实测及当前回归；不计为身份认证验收。"
+    },
+    {
+      "id": "V-K1-04",
+      "state": "partial",
+      "evidence": [
+        {
+          "path": "evals/reports/k1-worker-baseline.json",
+          "version": "0.1.7",
+          "status": "passed_with_documented_limits",
+          "sha256": "fcc4e71dae246f40f2df0020eaf444df9575dc7726cd6ad2feab1fec6846a537"
+        },
+        {
+          "path": "evals/reports/runtime-entry-task-faults.json",
+          "version": "0.1.28",
+          "status": "passed_with_documented_limits",
+          "sha256": "e1a50d69ed8791510de7c1605fdde63f6a223b2bb4cf5db8754009cf778000dd"
+        }
+      ],
+      "remaining_scope": "固定 LPAC Worker 已有证据；受保护 Host 延期，通用工具隔离未实现。"
+    },
+    {
+      "id": "V-K1-05",
+      "state": "partial",
+      "evidence": [
+        {
+          "path": "evals/reports/runtime-entry-task-faults.json",
+          "version": "0.1.28",
+          "status": "passed_with_documented_limits",
+          "sha256": "e1a50d69ed8791510de7c1605fdde63f6a223b2bb4cf5db8754009cf778000dd"
+        }
+      ],
+      "remaining_scope": "0.1.28 固定目录任务七个崩溃点及两类产物损坏通过；不扩展到任意浏览器效果或整机断电。"
+    },
+    {
+      "id": "V-K1-06",
+      "state": "partial",
+      "evidence": [
+        {
+          "path": "evals/reports/computer-queue-baseline.json",
+          "version": "0.1.10",
+          "status": "passed_with_documented_limits",
+          "sha256": "3022f50694975bd014839fbb55715628f27efcb04cdc92711b09445e3eeca691"
+        },
+        {
+          "path": "evals/reports/runtime-entry-ui.json",
+          "version": "0.1.28",
+          "status": "passed",
+          "sha256": "1bfc601452f8725cdfd409916d285c8ddaaf00822aac143348176a702004736d"
+        },
+        {
+          "path": "evals/reports/runtime-entry-baseline.json",
+          "version": "0.1.28",
+          "status": "passed",
+          "sha256": "b332ebddcf3e26c3a4121aa4bac6ff9626464b4f9b3b65f1ed2757fdba9a543e"
+        }
+      ],
+      "remaining_scope": "队列、取消及维护期间聊天有子集证据；需补当前版本竞争负载下的时延/资源出口。"
+    },
+    {
+      "id": "V-K1-07",
+      "state": "partial",
+      "evidence": [
+        {
+          "path": "evals/reports/runtime-start-baseline.json",
+          "version": "0.1.17",
+          "status": "passed_with_documented_limits",
+          "sha256": "2452ad6370fec416a4c6b8f017518e07ec072fbaa467cd26344ba3ad6959fdf2"
+        },
+        {
+          "path": "evals/reports/k1-fault-network-baseline.json",
+          "version": "0.1.17",
+          "status": "passed_with_documented_limits",
+          "sha256": "ffdce7b45581026d795536fe7bdd41d45465af3aa7f62e5ef69508e4458eed45"
+        }
+      ],
+      "remaining_scope": "历史包启动/回退和按进程断网有子集证据；0.1.28 整机断网冷启动、新包迁移/恢复待验证。"
+    }
+  ],
+  "limits": [
+    "This is an evidence index, not a second roadmap or a new acceptance standard.",
+    "Historical versioned evidence remains historical; full current-source regression is not whole-machine acceptance."
+  ]
+}

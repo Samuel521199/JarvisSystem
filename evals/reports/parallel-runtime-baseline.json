@@ -1,0 +1,80 @@
+{
+  "version": "0.1.34",
+  "captured_at": "2026-10-16T17:28:48.483712+00:00",
+  "initial_regression": {
+    "run": 445,
+    "passed": 443,
+    "skipped": 2,
+    "failures": 0,
+    "errors": 0,
+    "elapsed_seconds": 200.334,
+    "skip_reasons": [
+      "OS denied test symlink creation: [WinError 1314] 客户端没有所需的特权。: 'C:\\\\Users\\\\samuel\\\\AppData\\\\Local\\\\Temp\\\\jarvis-core-test-1_51jm00\\\\outside.txt' -> 'C:\\\\Users\\\\samuel\\\\AppData\\\\Local\\\\Temp\\\\jarvis-core-test-1_51jm00\\\\input\\\\linked.txt'",
+      "OS does not grant symlink creation"
+    ]
+  },
+  "unittest": {
+    "run": 446,
+    "passed": 444,
+    "skipped": 2,
+    "failures": 0,
+    "errors": 0,
+    "elapsed_seconds": 201.422,
+    "skip_reasons": [
+      "OS denied test symlink creation: [WinError 1314] 客户端没有所需的特权。: 'C:\\\\Users\\\\samuel\\\\AppData\\\\Local\\\\Temp\\\\jarvis-core-test-8zbfms7f\\\\outside.txt' -> 'C:\\\\Users\\\\samuel\\\\AppData\\\\Local\\\\Temp\\\\jarvis-core-test-8zbfms7f\\\\input\\\\linked.txt'",
+      "OS does not grant symlink creation"
+    ]
+  },
+  "status": "passed",
+  "additional_fix": "Optional project-menu asset startup fallback and regression test after initial full run.",
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/runtime_metrics.py": "3b16ac12b5f866aac2fa9f20945368a82c391254296c755d71237be2743193e4",
+    "runtime/node-host/jarvis_core/process_usage.py": "5535a3303556a18d9219f615d58cd6d7fa620284ce2d728a03edeb5c4555fcf2",
+    "runtime/node-host/jarvis_core/task_queue.py": "94ef91562e6dca48f44c70acf7710e41f6e46a3411da866bde1d4d59a80d4192",
+    "runtime/node-host/jarvis_core/__init__.py": "a8c274a3f5bcaae1034fc968bd62900a00e324df880969da268c3a35c83683ca",
+    "adapters/computer-use/jarvis_computer/task_queue.py": "36848210710cc7acc08167bf01bc004bca03ee3c2f7f938087b3c7f082e1f5b8",
+    "adapters/computer-use/jarvis_computer/web.py": "54eec191db2550826b70ab66f58e01777b6b686a906ca9ed36c112648978fb41",
+    "apps/web/server.py": "cd6c661ab8d5502ccc94d01634710c241fbcfac90698508c43f30092684594d9",
+    "apps/web/resources.js": "4e7b27de52bb8183fc56a53ee1139db093d45df90a373ccfbcda2f1b99de2b06",
+    "apps/web/admin.css": "d280ad9ee1c41473dea3fe87f4dda93005afd53141b18c6b883e178d3965ed91",
+    "tests/test_runtime_metrics.py": "d514bedf1b82ffaf43d1140049065ed13219a073c969f5e802ca623e170cb893",
+    "tools/probe_parallel_runtime.py": "2136aa58c85613744d7142b5f544774cee4725236ed6d87c75d70019acdf4ee9",
+    "pyproject.toml": "7e8481900bd769633489f1c2c7363b045cbb35ea513e94a181528b2c5cc60cf9",
+    "uv.lock": "0b1d9b7152d1c176efbcd2ec0b6db457b5897d78ac92dee60ab218c1b007580e"
+  },
+  "source_capture": "After final checks; shared workspace also contains separate UI work.",
+  "evidence": [
+    "evals/reports/parallel-runtime-probe.json",
+    "evals/reports/parallel-runtime-live-initial.json",
+    "evals/reports/parallel-runtime-deployment.json"
+  ],
+  "checks": {
+    "docs": {
+      "documents": 23,
+      "diagrams": 19,
+      "artifacts": 38,
+      "errors": 0
+    },
+    "seed": {
+      "assets": 22,
+      "fixtures": 12,
+      "passed": true
+    },
+    "navigation": "synchronized",
+    "whitespace": "passed",
+    "post_startup_repair_targeted": {
+      "run": 33,
+      "passed": 33
+    }
+  },
+  "paid_model_calls": 0,
+  "local_model_calls_this_increment": 89,
+  "new_downloads": 0,
+  "new_dependencies": [],
+  "new_services": 0,
+  "limits": [
+    "Engineering tests and execution/latency passed; local arithmetic answer correctness remains failed (40/40 final answers incorrect).",
+    "Only development PC warm short workloads; ordinary-PC long-run, whole-machine offline and complete K gates remain unverified.",
+    "Process UI observes Host and owned local model only, excludes transient Worker/browser/tray trees."
+  ]
+}

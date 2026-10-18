@@ -1,0 +1,9 @@
+{
+  "version": "0.1.57",
+  "observed_at": "2026-10-18T16:18:24.920710+00:00",
+  "live_models": true,
+  "results": [],
+  "status": "failed",
+  "error": "Locator expected to contain text '编程副本通过所提供案例'\nActual value: 修复求和，所有列表元素都参与计算；空表返回字符串0。失败task_3900f5534cc05f24b2edf0b948e9cc45编码模型未返回完整候选，没有切换供应商或重试请求。查看详情后台记录 ↗ \nCall log:\n  - Expect \"to_contain_text\" locator(\"#conversation-task-list\") with timeout 170000ms\n  - waiting for locator(\"#conversation-task-list\")\n    5 × locator resolved to <div id=\"conversation-task-list\">…</div>\n      - unexpected value \"本会话暂无已查询到的任务。切换“执行任务”后输入要求，或使用 /任务。\"\n    8 × locator resolved to <div id=\"conversation-task-list\">…</div>\n      - unexpected value \"修复求和，所有列表元素都参与计算；空表返回字符串0。已受理task_3900f5534cc05f24b2edf0b948e9cc45 · 排队第 1 位当前状态：执行中查看详情取消任务后台记录 ↗\"\n    326 × locator resolved to <div id=\"conversation-task-list\">…</div>\n        - unexpected value \"修复求和，所有列表元素都参与计算；空表返回字符串0。失败task_3900f5534cc05f24b2edf0b948e9cc45编码模型未返回完整候选，没有切换供应商或重试请求。查看详情后台记录 ↗\"\n\nAria snapshot:\n- article:\n  - strong: 修复求和，所有列表元素都参与计算；空表返回字符串0。\n  - text: 失败 task_3900f5534cc05f24b2edf0b948e9cc45\n  - paragraph: 编码模型未返回完整候选，没有切换供应商或重试请求。\n  - button \"查看详情\"\n  - link \"后台记录 ↗\":\n    - /url: /settings?task=task_3900f5534cc05f24b2edf0b948e9cc45#tasks",
+  "page_errors": []
+}

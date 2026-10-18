@@ -7,6 +7,7 @@ import asyncio
 import threading
 import time
 from contextlib import contextmanager
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "adapters/models/provider-native"))
@@ -16,6 +17,18 @@ from jarvis_models.vault import load, save, VaultError
 
 
 class ModelTests(unittest.TestCase):
+    def test_local_response_schema_is_bounded_and_not_sent_to_cloud(self):
+        schema={'oneOf':[{'const':{'kind':'report'}},{'const':{'kind':'unsupported'}}]}
+        def handler(request):
+            body=json.loads(request.content)
+            self.assertEqual(body['response_format'],{'type':'json_object','schema':schema})
+            return httpx.Response(200,json={'choices':[{'message':{'content':'{"kind":"report"}'},'finish_reason':'stop'}]})
+        result=probe(self.config,'local','test',self.data,lambda:None,response_schema=schema,
+            client=self.client(handler),credentials_loader=lambda:self.fail('vault accessed'))
+        self.assertEqual(result['status'],'SUCCEEDED')
+        for provider,value in [('vertex',schema),('local',[]),('local',{'value':'x'*8193})]:
+            with self.assertRaises(ModelError):probe(self.config,provider,'test',self.data,lambda:None,response_schema=value)
+
     def test_cancel_before_dispatch_never_calls_transport(self):
         cancel=threading.Event();cancel.set()
         result=probe(self.config,'local','test',self.data,lambda:None,
@@ -262,6 +275,28 @@ class ModelTests(unittest.TestCase):
         self.assertEqual(result["status"], "UNKNOWN")
         self.assertTrue(cancelled)
         self.assertTrue(result["outcome_uncertain"])
+        self.assertEqual(result['transport_type'], 'TimeoutError')
+        self.assertEqual(result['response_deadline_seconds'], .02)
+
+    def test_owned_transport_uses_caller_response_budget(self):
+        original = httpx.AsyncClient
+        seen = []
+        def factory(**kwargs):
+            seen.append(kwargs['timeout'])
+            kwargs['transport'] = httpx.MockTransport(lambda _: httpx.Response(200, json={
+                'choices': [{'message': {'content': 'OK'}}]}))
+            return original(**kwargs)
+        with patch('jarvis_models.gateway.httpx.AsyncClient', factory):
+            result = probe(self.config, 'local', 'test', self.data, lambda: None, deadline_seconds=90)
+        self.assertEqual(result['status'], 'SUCCEEDED')
+        self.assertEqual(len(seen), 1)
+        self.assertEqual((seen[0].read, seen[0].connect, seen[0].write), (90, 10, 45))
+
+    def test_invalid_deadline_never_dispatches(self):
+        for value in (0, -1, float('inf'), float('nan'), True, '90'):
+            with self.subTest(value=value), self.assertRaises(ModelError):
+                probe(self.config, 'local', 'test', self.data, lambda: None,
+                      deadline_seconds=value, credentials_loader=lambda: self.fail('credential accessed'))
 
     def test_malformed_dispatched_response_is_unknown(self):
         result = probe(self.config, "local", "test", self.data, lambda: None,

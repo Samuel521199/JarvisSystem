@@ -1,0 +1,83 @@
+{
+  "version": "0.1.37",
+  "status": "passed",
+  "suites": [
+    {
+      "suite": "test_mcp_catalog.py",
+      "run": 6,
+      "passed": 6,
+      "skipped": 0,
+      "successful": true
+    },
+    {
+      "suite": "test_project_resources.py",
+      "run": 15,
+      "passed": 15,
+      "skipped": 0,
+      "successful": true
+    },
+    {
+      "suite": "test_web.py",
+      "run": 21,
+      "passed": 21,
+      "skipped": 0,
+      "successful": true
+    },
+    {
+      "suite": "test_skills.py",
+      "run": 21,
+      "passed": 21,
+      "skipped": 0,
+      "successful": true
+    }
+  ],
+  "source_sha256": {
+    "config/mcp/catalog.json": "3cb66799be4d6e4d3fdff8dac1b0f75668537aac4a4ed61c43250d8ba2e67591",
+    "contracts/schemas/mcp-catalog.schema.json": "092889d698cbf99096f672e8916ed68bbea0b693434f10149b087942bce5cbfe",
+    "runtime/node-host/jarvis_core/mcp_catalog.py": "0d2c8ac718bd8275133cd75c7e9fc5c9d7d37cbcec9670a599598b6dcd6c1213",
+    "runtime/node-host/jarvis_core/extensions.py": "ce6ea3a66ab9962e652226f5f3abd15d0cd5a8393749f4f8ef00db056bea4186",
+    "apps/web/mcp_manager.js": "a843bebe5363defcfd1790529f488c687d11c6640a9e9c07340af656ae1dc3f9",
+    "apps/web/mcp.css": "cd010bd65594cae3eb37a8635cd616725176121e6426b5cbaad54757787d5860",
+    "apps/web/extensions.js": "636cc5eca956872a49201652894dcce80ac5456bd83654d81f0b770df085594f",
+    "apps/web/server.py": "78b4288894cfec3846f2cfc575c2081f4c43ac823d874bbe0ac98c5a408e642b",
+    "apps/web/admin.html": "f741ff3fa950279dd6511e5ca2fa44d1b78f346dbe8e1dcf08e50eab20776135",
+    "apps/web/admin.js": "395c19eff2965cb765432a872a3a9498aea907c47a9a9548364e1f25108a81b1",
+    "tests/test_mcp_catalog.py": "fea629cfb22577b4f387f22cf7fd4e2713b3675c7a0373a4542b59674c5f417b",
+    "tools/probe_mcp_ui.py": "3165944e59f021da338a5db1175e2982c61210bae4766944053f4768cd79f01e"
+  },
+  "ui_evidence": "evals/reports/mcp-ui.json",
+  "paid_model_calls": 0,
+  "mcp_calls": 0,
+  "scope": "management, configuration and policy only; not server execution",
+  "final_source_sha256": {
+    "config/mcp/catalog.json": "3cb66799be4d6e4d3fdff8dac1b0f75668537aac4a4ed61c43250d8ba2e67591",
+    "contracts/schemas/mcp-catalog.schema.json": "092889d698cbf99096f672e8916ed68bbea0b693434f10149b087942bce5cbfe",
+    "runtime/node-host/jarvis_core/mcp_catalog.py": "0d2c8ac718bd8275133cd75c7e9fc5c9d7d37cbcec9670a599598b6dcd6c1213",
+    "runtime/node-host/jarvis_core/extensions.py": "ce6ea3a66ab9962e652226f5f3abd15d0cd5a8393749f4f8ef00db056bea4186",
+    "apps/web/mcp_manager.js": "a843bebe5363defcfd1790529f488c687d11c6640a9e9c07340af656ae1dc3f9",
+    "apps/web/mcp.css": "cd010bd65594cae3eb37a8635cd616725176121e6426b5cbaad54757787d5860",
+    "apps/web/extensions.js": "636cc5eca956872a49201652894dcce80ac5456bd83654d81f0b770df085594f",
+    "apps/web/server.py": "ba8ce9c667a9155df9aa75057bec649172425b18f4e89c529f9deedbdd04e18b",
+    "apps/web/admin.html": "01021bb976aaa07e4bd42bc3be99d0da070dfe91cd8857e5159fd164168a2923",
+    "apps/web/admin.js": "395c19eff2965cb765432a872a3a9498aea907c47a9a9548364e1f25108a81b1",
+    "tests/test_mcp_catalog.py": "fea629cfb22577b4f387f22cf7fd4e2713b3675c7a0373a4542b59674c5f417b",
+    "tools/probe_mcp_ui.py": "3165944e59f021da338a5db1175e2982c61210bae4766944053f4768cd79f01e"
+  },
+  "post_regression_changes": [
+    {
+      "path": "apps/web/server.py",
+      "scope": "settings overview card wording only; deployed page checked"
+    },
+    {
+      "path": "apps/web/admin.html",
+      "scope": "settings overview card wording only; deployed page checked"
+    }
+  ],
+  "documentation_check": {
+    "documents": 23,
+    "diagrams": 19,
+    "artifacts": 38,
+    "errors": 0
+  },
+  "diff_whitespace_check": "passed"
+}

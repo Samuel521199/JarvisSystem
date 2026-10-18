@@ -1,0 +1,257 @@
+{
+  "status": "evaluation_only",
+  "source_revision": "59f0f36de4db12825f4705dd4e0780d79dd6bb01",
+  "weight_revision": "7e370ae7d146d1c96c8a177e536598d0714a02d9",
+  "bert_revision": "8096d1f9a7f7c2d9dbd7974511c4bc4a1755932b",
+  "source_files": [
+    {
+      "path": "LICENSE",
+      "size_bytes": 14337,
+      "sha256": "df0cd5dada5267fd2d1040f21263d9b0eb87ec030e47e66b93d4c80bee40a902"
+    },
+    {
+      "path": "cn2an/an2cn.py",
+      "size_bytes": 8368,
+      "sha256": "dd077469159369bd3a39dc35e2d573c7f8b38db8d0b68154013465f19a63a02f"
+    },
+    {
+      "path": "cn2an/conf.py",
+      "size_bytes": 2051,
+      "sha256": "6642f5cb99f69fb94ad90ad649f06132a14010f40b5a3652939b1990375592a0"
+    },
+    {
+      "path": "config/joint/config.py",
+      "size_bytes": 3613,
+      "sha256": "bd8bb8e9622d050ff326e7f509dde8e23b0f1f9b44ae95955490c365d5cf62fd"
+    },
+    {
+      "path": "config/joint/config.yaml",
+      "size_bytes": 3031,
+      "sha256": "ddb911723e63c7a89114e6e6fb35679f7c0e6ddeceb3b013af8ad220ce0aaac2"
+    },
+    {
+      "path": "data/inference/text",
+      "size_bytes": 8166,
+      "sha256": "eb84df6fb2f9014d61040217a3af39138c35efcdaf82d2f230233cadde84e3f8"
+    },
+    {
+      "path": "data/youdao/text/README.md",
+      "size_bytes": 59037,
+      "sha256": "20aba3e7e5fd977100f2246fc8e0e89ce89ceaf95a9fb7bc308eb34757829c7b"
+    },
+    {
+      "path": "data/youdao/text/emotion",
+      "size_bytes": 48,
+      "sha256": "2d602a8551df66d513bd1dd4ff0dbe0b80a8d00a9f1e83a594eea0fdba80ee87"
+    },
+    {
+      "path": "data/youdao/text/energy",
+      "size_bytes": 38,
+      "sha256": "4df6f80bb71641de995c0af3095afce71666f21fa54659418253a96a9b94cf63"
+    },
+    {
+      "path": "data/youdao/text/pitch",
+      "size_bytes": 38,
+      "sha256": "ba3402f69cbd242b1b57e9fc49f5c8c3b2ffa1cba58101833ece71166de89a83"
+    },
+    {
+      "path": "data/youdao/text/speaker2",
+      "size_bytes": 9714,
+      "sha256": "fabcda3089216f017fa76ad39929f1733445800f2658698d7ed6d0b7a59f29b2"
+    },
+    {
+      "path": "data/youdao/text/speed",
+      "size_bytes": 38,
+      "sha256": "812ea3d3c4730a04c4b41186493b04ad462846786efb3781019fa43fe8361944"
+    },
+    {
+      "path": "data/youdao/text/tokenlist",
+      "size_bytes": 2819,
+      "sha256": "d7d68a2f794b4d7563e6e6159e8c6a8c506a584590b8c1c757370c346a435244"
+    },
+    {
+      "path": "frontend.py",
+      "size_bytes": 3080,
+      "sha256": "564018b4f41b50fe8d99e01125f9c82de5ec746ca342974ea2864f6cdf94487a"
+    },
+    {
+      "path": "frontend_cn.py",
+      "size_bytes": 4277,
+      "sha256": "9ae2bfff209474d36631c53cfca609798349520da2d83016f00f720a81bf45bb"
+    },
+    {
+      "path": "frontend_en.py",
+      "size_bytes": 2864,
+      "sha256": "093b95769dd03152a2cb01ce735cb8e09d910650909bb12dfa6b4f430e4d90a8"
+    },
+    {
+      "path": "inference_am_vocoder_joint.py",
+      "size_bytes": 6161,
+      "sha256": "ce923bc45fd325c71a75712146d00e2e74d4bfc366be5814eeeeac0e264f75a9"
+    },
+    {
+      "path": "lexicon/librispeech-lexicon.txt",
+      "size_bytes": 5627653,
+      "sha256": "d722bc29908cd338ae738edd70f61826a6fca29aaa704a9493f0006773f79d71"
+    },
+    {
+      "path": "models/hifigan/dataset.py",
+      "size_bytes": 3797,
+      "sha256": "d3b6af75436025dcf7bb8b49605c506b1075d6bd814d3b36b15f278597529243"
+    },
+    {
+      "path": "models/hifigan/env.py",
+      "size_bytes": 445,
+      "sha256": "b681cab5d1b9a10e78cd81f9a421d6616647532f0abf3f2a25c3af6b6741b8c5"
+    },
+    {
+      "path": "models/hifigan/get_random_segments.py",
+      "size_bytes": 908,
+      "sha256": "a5e296a5640b74af9ee6e8623ea10c2e9a8513b0d659cf770590d4301f4a2364"
+    },
+    {
+      "path": "models/hifigan/get_vocoder.py",
+      "size_bytes": 1926,
+      "sha256": "88e5daf2cf534353e7f9fc206681617603be5ba80bab67bab7f61ac9d25e2b52"
+    },
+    {
+      "path": "models/hifigan/models.py",
+      "size_bytes": 10774,
+      "sha256": "9dd9b22cccd154251bdef5448894c62b975239a9dbde4352a2c66f7485fde87a"
+    },
+    {
+      "path": "models/hifigan/pretrained_discriminator.py",
+      "size_bytes": 1485,
+      "sha256": "20f81f339e62ff77afc2426cb071c30ea21e026d3b519becaf205810bc3271d2"
+    },
+    {
+      "path": "models/prompt_tts_modified/audio_processing.py",
+      "size_bytes": 1566,
+      "sha256": "e8b00c3db8b71be163d5e8f31919e4d88d5422a870a8e4d7e42bfdf2e4a35480"
+    },
+    {
+      "path": "models/prompt_tts_modified/feats.py",
+      "size_bytes": 14140,
+      "sha256": "d14bece127d955c874c150c12e52593407b78de414b1a3f995d872a0a80a5819"
+    },
+    {
+      "path": "models/prompt_tts_modified/jets.py",
+      "size_bytes": 2717,
+      "sha256": "46f15d80133c3498c7455df473209709923e4d33001169938160687197944e8e"
+    },
+    {
+      "path": "models/prompt_tts_modified/loss.py",
+      "size_bytes": 6292,
+      "sha256": "9d91e2a2bda43eaf77ea3064f129ae0ad39d8c12b87e1c5bf0448b5ff09f80f3"
+    },
+    {
+      "path": "models/prompt_tts_modified/model_open_source.py",
+      "size_bytes": 9346,
+      "sha256": "783ad7c473bac9bdfc67efb3ace68922e2409ab749846257fb7884755ebe0c24"
+    },
+    {
+      "path": "models/prompt_tts_modified/modules/alignment.py",
+      "size_bytes": 6670,
+      "sha256": "50d3f1ae98ce44c88f931264e7feb8929b9efc29c6314f68608ca96074c4a50d"
+    },
+    {
+      "path": "models/prompt_tts_modified/modules/encoder.py",
+      "size_bytes": 10312,
+      "sha256": "3b0dc255af8bc030a35ba36e97dd8079f27f3483bb3f39f000a0e507d8739e9d"
+    },
+    {
+      "path": "models/prompt_tts_modified/modules/initialize.py",
+      "size_bytes": 1796,
+      "sha256": "d877eb2dee96903c3ac22d207962487708fa22c96edadc71ce8710d50dd4c282"
+    },
+    {
+      "path": "models/prompt_tts_modified/modules/variance.py",
+      "size_bytes": 3665,
+      "sha256": "d480e3ad5c9aab20daee7ef442e2cddbc8852efe6aab8d352d6dabcc789c6124"
+    },
+    {
+      "path": "models/prompt_tts_modified/prompt_dataset.py",
+      "size_bytes": 11689,
+      "sha256": "42ca83fe0a85cdd64c98da8a83e259a007122a3d11cd800a7512e500c7abebe0"
+    },
+    {
+      "path": "models/prompt_tts_modified/scheduler.py",
+      "size_bytes": 977,
+      "sha256": "52ae45b1b2a4e839a166e86ca7e6984efa6d2a3b4ac4df6f60a910432cda1cb9"
+    },
+    {
+      "path": "models/prompt_tts_modified/simbert.py",
+      "size_bytes": 3940,
+      "sha256": "180a9760fe34f29d58fbe6a80e7a244a4cf037b5d81ffe008c95420919824002"
+    },
+    {
+      "path": "models/prompt_tts_modified/stft.py",
+      "size_bytes": 4397,
+      "sha256": "76e26330e8899945ea9dd986d40d2c336fbc4bacac606401bfbbc9b10d0b79a6"
+    },
+    {
+      "path": "models/prompt_tts_modified/style_encoder.py",
+      "size_bytes": 5693,
+      "sha256": "742637696245c6103290d6750966bbf95ce43a41ced0d18e69d2ef733eac8671"
+    },
+    {
+      "path": "models/prompt_tts_modified/tacotron_stft.py",
+      "size_bytes": 2920,
+      "sha256": "54f4ae150da3584028bdbcd8aa2679536d8b803b6869ce8e0d7788a02402538e"
+    },
+    {
+      "path": "text/__init__.py",
+      "size_bytes": 2284,
+      "sha256": "39c94c5f040826070f5752f61289c3ec5d9e2f3e4c2b8c46625179600e28b3db"
+    },
+    {
+      "path": "text/cleaners.py",
+      "size_bytes": 2524,
+      "sha256": "5df1ac621aec9ea3c9816b4f5b4b0cab44fce5d8693433b0503cd7acfe82b810"
+    },
+    {
+      "path": "text/cmudict.py",
+      "size_bytes": 2450,
+      "sha256": "59ed6878458967f5c775d113a103c2f47c5fe7cfdf98d15a2166a1d1a3547e12"
+    },
+    {
+      "path": "text/numbers.py",
+      "size_bytes": 2324,
+      "sha256": "5b510f709d40a6497b8218e69fac212b77d886e4d2fbf2d04a7112b2720fe003"
+    },
+    {
+      "path": "text/symbols.py",
+      "size_bytes": 793,
+      "sha256": "9de667700eaa354eae65fdf10eafe9f5c803dd3d5abb482cbc738c57b50dbaac"
+    }
+  ],
+  "assets": [
+    {
+      "local": "H:\\JarvisData\\models\\tts\\emotivoice\\simbert\\config.json",
+      "url": "https://huggingface.co/WangZeJun/simbert-base-chinese/resolve/8096d1f9a7f7c2d9dbd7974511c4bc4a1755932b/config.json",
+      "size_bytes": 520,
+      "sha256": "3f36da21f8125337672529c55384f0aedd07bedc8170a900564a9d0bf37946b5"
+    },
+    {
+      "local": "H:\\JarvisData\\models\\tts\\emotivoice\\simbert\\vocab.txt",
+      "url": "https://huggingface.co/WangZeJun/simbert-base-chinese/resolve/8096d1f9a7f7c2d9dbd7974511c4bc4a1755932b/vocab.txt",
+      "size_bytes": 64947,
+      "sha256": "5c3df66617c12834db122e678e6fe8ca267045f8007a34979310ce5eca2dc449"
+    },
+    {
+      "local": "H:\\JarvisData\\models\\tts\\emotivoice\\g_00140000",
+      "url": "https://modelscope.cn/api/v1/models/syq163/outputs/repo?Revision=7e370ae7d146d1c96c8a177e536598d0714a02d9&FilePath=prompt_tts_open_source_joint%2Fckpt%2Fg_00140000",
+      "size_bytes": 213240309,
+      "sha256": "2dcb15a9ed634be57bcd9054cf29f02a9f27557919427c4d6d36e561ebd9d94f"
+    },
+    {
+      "local": "H:\\JarvisData\\models\\tts\\emotivoice\\checkpoint_163431",
+      "url": "https://modelscope.cn/api/v1/models/syq163/outputs/repo?Revision=7e370ae7d146d1c96c8a177e536598d0714a02d9&FilePath=style_encoder%2Fckpt%2Fcheckpoint_163431",
+      "size_bytes": 1159371361,
+      "sha256": "d51e39fb36c6ba784d8e3436e5b5057cf1867be24e0bdea42f5e7bf1a863e1b1"
+    }
+  ],
+  "production_integrated": false,
+  "python": "H:/JarvisData/envs/cosyvoice3/Scripts/python.exe",
+  "dependency_overlay": "H:\\JarvisData\\components\\emotivoice\\probe-packages"
+}

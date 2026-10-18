@@ -1,0 +1,76 @@
+{
+  "status": "SUCCEEDED",
+  "source_version": "0.1.55",
+  "checks": [
+    "Hung model child does not prevent a real bounded directory task from completing",
+    "Killed child completes receipt without replay; control endpoint remains responsive; settings show real PID/memory",
+    "Stop reply reaps child; next ordinary reply succeeds; idle process count returns to zero",
+    "Real background planning child hangs while chat completes; task cancellation reaps it; next isolated plan validates and runs the real inventory Worker"
+  ],
+  "control_http_ms": 81.74,
+  "running_snapshot": {
+    "enabled": true,
+    "closed": false,
+    "capacity": 2,
+    "active": 1,
+    "memory_limit_bytes": 402653184,
+    "completed": 0,
+    "last": null,
+    "processes": [
+      {
+        "pid": 17364,
+        "seconds": 3.38,
+        "phase": "context",
+        "created": 134368014053139917,
+        "cpu_seconds": 0.125,
+        "working_set_bytes": 13864960,
+        "private_bytes": 7802880,
+        "status": "available"
+      }
+    ]
+  },
+  "background_running_snapshot": {
+    "enabled": true,
+    "closed": false,
+    "capacity": 1,
+    "active": 1,
+    "memory_limit_bytes": 402653184,
+    "completed": 0,
+    "last": null,
+    "processes": [
+      {
+        "pid": 8720,
+        "seconds": 2.45,
+        "phase": "model",
+        "created": 134368014159082651,
+        "cpu_seconds": 0.984375,
+        "working_set_bytes": 44695552,
+        "private_bytes": 32382976,
+        "status": "available"
+      }
+    ]
+  },
+  "browser_errors": [],
+  "cloud_calls": 0,
+  "screenshots": [
+    "H:\\JarvisData\\diagnostics\\dialogue\\process-running.png",
+    "H:\\JarvisData\\diagnostics\\dialogue\\lanes-running.png",
+    "H:\\JarvisData\\diagnostics\\dialogue\\process-recovered.png"
+  ],
+  "limits": "Synthetic transport in actual Windows child; real gateway journal, real Edge and task Worker. No CPU/GPU saturation or full Dialogue Runtime isolation claim.",
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/dialogue_process.py": "a953d94544890d7b3cb2dc26e1b17af9b4cdd34f75acb1373e4c257cb8cfe342",
+    "runtime/node-host/jarvis_core/dialogue_worker.py": "0a4141da07a71f46c9fec84ed00a16de5bc48f7aa70c57be7bb2abfc2cad9317",
+    "runtime/node-host/jarvis_core/turns.py": "dfc07e29a5a85d2178c29e37582fb3fe4a1ba09ddf88c2734f20be8326ca39ae",
+    "runtime/node-host/jarvis_core/chat.py": "4847deacd212a5be798fda435dced6b33c06a272eb07e9720192302f55b84ad8",
+    "apps/web/server.py": "d2c75c2ff1f472fea72d794834d8c9fa2c06155c00d770b6d31cecb65131cb9e",
+    "apps/web/resources.js": "586e03243199134cec0c4da7bedde691f904f73ca8e7aee09ea2dd0202c99e2b",
+    "runtime/node-host/jarvis_core/sample_tasks.py": "4c30305711532b5275b9307a7621eba92162b134c97167fe3eda9bc81010018d",
+    "runtime/node-host/jarvis_core/skill_tasks.py": "ed0917d682dd01f91761293d40351d2e5c1e793595146e41d1a1a3c0a03864e5",
+    "runtime/node-host/jarvis_core/rea_explanation.py": "19a6ce9b6a81d045d3a31833266d1821ac0c41bc54f782c829d1ee3edf873135",
+    "adapters/computer-use/jarvis_computer/web.py": "1c538250b176f453091747f76dccc0eb00a3375dbd147f072dc5224b92c7ed53",
+    "tests/dialogue_process_fixture.py": "dc94a26a2c8c690ab8df4a9fd9cb313e346576aa05dc8248600c333b8431259f",
+    "tests/test_dialogue_process.py": "8b5281c7431a5eea6bd33be932283686fa053fef56ff63b2bffead9e5568e3c2",
+    "tools/probe_dialogue_process_ui.py": "31e1de33c2b4bf1fe359e58e9f4264ced1447f11332c5ad92829cf7dd0375497"
+  }
+}

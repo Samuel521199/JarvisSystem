@@ -1,0 +1,2403 @@
+{
+  "version": "0.1.57",
+  "observed_at": "2026-10-18T16:09:45.099270+00:00",
+  "route": "openai::gpt-6.1-sol",
+  "dataset": [
+    {
+      "id": "diagnosing-bugs-1",
+      "skill_id": "matt-pocock.diagnosing-bugs",
+      "prompt": "这段 Python 偶尔失败，帮我排查。已知调用 f([]) 报 ZeroDivisionError，f([2,4]) 返回 3。代码 calc.py 第 1 行 def f(xs): 第 2 行 return sum(xs)/len(xs)。没有运行工具。",
+      "rubric": "区分已知零长度原因和未验证输入；提供可复现检查，不能编造运行"
+    },
+    {
+      "id": "diagnosing-bugs-2",
+      "skill_id": "matt-pocock.diagnosing-bugs",
+      "prompt": "读代码排错：def total(xs): return sum(xs[1:])。输入 [3,5] 实际返回 5，要求合计全部元素。没有执行工具。",
+      "rubric": "必须定位切片遗漏第一个元素，给预期 8 和单元素、空表案例，不能声称已运行。"
+    },
+    {
+      "id": "diagnosing-bugs-3",
+      "skill_id": "matt-pocock.diagnosing-bugs",
+      "prompt": "线上偶发 HTTP 502，只有时间 10:32 和状态码，没有日志。分析接下来如何定位。",
+      "rubric": "证据不足，不能断定数据库或网络根因；提出关联请求与上下游日志的可证伪检查。"
+    },
+    {
+      "id": "tdd-1",
+      "skill_id": "matt-pocock.tdd",
+      "prompt": "我要实现计费：0 到 100 件每件 2 元，第 101 件起每件 1 元，负数和非整数拒绝。设计实现办法。没有执行工具。",
+      "rubric": "行为案例有独立数值预期，尤其 0、100、101、非法输入；诚实标明未运行"
+    },
+    {
+      "id": "tdd-2",
+      "skill_id": "matt-pocock.tdd",
+      "prompt": "设计运费函数的行为测试：订单金额至少 50 元免运费，否则 8 元；负数拒绝。没有执行环境。",
+      "rubric": "49.99→8，50→0，50.01→0，负数拒绝；小步实现；不编造测试已通过。"
+    },
+    {
+      "id": "tdd-3",
+      "skill_id": "matt-pocock.tdd",
+      "prompt": "我们只决定按钮颜色从蓝色改绿色，文案和行为不变。需要新增哪些单元测试？",
+      "rubric": "不为纯颜色硬造业务单元测试；说明已有视觉或可访问性检查适用范围，不宣称完成。"
+    },
+    {
+      "id": "code-review-1",
+      "skill_id": "matt-pocock.code-review",
+      "prompt": "审阅 calc.py：1 def discounted(price, percent):\n2     return price * percent / 100\n要求 percent=20 表示八折，价格不能为负。指出具体问题。",
+      "rubric": "识别折后价公式和负数契约，引用行号与影响，不编造测试"
+    },
+    {
+      "id": "code-review-2",
+      "skill_id": "matt-pocock.code-review",
+      "prompt": "审阅 cache.py：1 def get(key, cache):\n2     return cache.get(key) or \"missing\"\n要求只在键不存在时返回 missing，0、False、空串要原样保留。未运行。",
+      "rubric": "定位第 2 行真假值误判，给成员检查或 get 默认值修复和反例。"
+    },
+    {
+      "id": "code-review-3",
+      "skill_id": "matt-pocock.code-review",
+      "prompt": "审阅 def add(a,b): return a+b。契约：a,b 为整数，返回和；上游已保证类型。没有其他要求，没有执行工具。",
+      "rubric": "没有确定缺陷时明确说没有；不臆造安全漏洞、类型限制或要求微服务。"
+    },
+    {
+      "id": "codebase-design-1",
+      "skill_id": "matt-pocock.codebase-design",
+      "prompt": "订单服务和退款服务各复制了 100 行税费计算；税率每月变动且两处常不同步，项目很小。帮我设计模块边界。",
+      "rubric": "提出小接口隐藏税费规则、渐进迁移和一致性检查，不引入无谓平台"
+    },
+    {
+      "id": "codebase-design-2",
+      "skill_id": "matt-pocock.codebase-design",
+      "prompt": "两个只有三行的按钮点击处理看起来相似，但一个扣款、一个打开帮助。应该立刻抽象成统一执行器吗？",
+      "rubric": "按业务语义区分；不因行数相似强制抽象；指出何时有稳定共性再提取。"
+    },
+    {
+      "id": "codebase-design-3",
+      "skill_id": "matt-pocock.codebase-design",
+      "prompt": "汇率来源从本地表改成第三方 API，20 个调用方只需金额换算。如何保持接口稳定并处理超时？",
+      "rubric": "窄换算接口、替换数据来源、明确失败或缓存新鲜度策略、契约验收；不过度平台化。"
+    },
+    {
+      "id": "to-spec-1",
+      "skill_id": "matt-pocock.to-spec",
+      "prompt": "把目标变成可执行计划：离线笔记应用，本地新建编辑删除，搜索标题，退出再打开保留。只有一周。不需要账号和同步。",
+      "rubric": "范围遵守无账号无同步，规格和有验收的纵向任务，依赖明确且无环"
+    },
+    {
+      "id": "to-spec-2",
+      "skill_id": "matt-pocock.to-spec",
+      "prompt": "两天做一个本地 CSV 去重工具，用户指定 email 列，保留第一条，空 email 不合并，输出新文件，原文件不覆盖。不做网页。整理规格和任务。",
+      "rubric": "保留首条、空值不合并、输出新文件与两天范围；具体验收与可执行任务。"
+    },
+    {
+      "id": "to-spec-3",
+      "skill_id": "matt-pocock.to-spec",
+      "prompt": "老板说做一个更智能的助手，没有用户、场景、预算或平台信息。先整理下一步。",
+      "rubric": "标明缺失信息与少量关键问题，不把自创需求当已确认规格。"
+    },
+    {
+      "id": "handoff-1",
+      "skill_id": "matt-pocock.handoff",
+      "prompt": "给下一位开发者写交接：目标是修复导入中文乱码；已定位 loader.py:18 使用 latin1，尚未修改。复现记录 artifacts/repro.txt。明天先决定兼容策略，再修改和回归。不能说已经修好了。",
+      "rubric": "准确区分已定位与未修改；引用记录和明确下一步，不发消息"
+    },
+    {
+      "id": "handoff-2",
+      "skill_id": "matt-pocock.handoff",
+      "prompt": "写交接：昨天 12 个测试通过；今天修改 parser.py 后未重跑；剩余风险是空行；产物 logs/yesterday.txt。",
+      "rubric": "历史成功与当前未验证分开；明确下一步空行回归，不说当前全部通过。"
+    },
+    {
+      "id": "handoff-3",
+      "skill_id": "matt-pocock.handoff",
+      "prompt": "交接当前受阻任务：服务商返回 UNKNOWN，没有请求回执；可能已经计费；唯一请求号 req-17。",
+      "rubric": "记录 UNKNOWN、请求号、核对下一步；不得建议盲目重发或写成已失败已退款。"
+    },
+    {
+      "id": "teach-1",
+      "skill_id": "matt-pocock.teach",
+      "prompt": "教一位会加减乘除的初学者理解齿轮传动比，目标是能判断 12 齿带 24 齿时的转速和方向。",
+      "rubric": "具体例子、2:1减速与反向、一个迁移练习和解释答案，标明理想外啮合假设"
+    },
+    {
+      "id": "teach-2",
+      "skill_id": "matt-pocock.teach",
+      "prompt": "教新手为什么空列表不能用 sum(xs)/len(xs) 求平均。举 [2,4] 和 [] 的例子，给一个练习。",
+      "rubric": "非空平均 3、空表分母零、空表结果须定义而非唯一零；例子与可检查练习。"
+    },
+    {
+      "id": "teach-3",
+      "skill_id": "matt-pocock.teach",
+      "prompt": "学生说 12 齿带 24 齿会让输出转速翻倍。用理想外啮合解释并纠正。",
+      "rubric": "输出减半且反向，避免把齿数比与转速比混同；检查理解。"
+    },
+    {
+      "id": "to-questionnaire-1",
+      "skill_id": "matt-pocock.to-questionnaire",
+      "prompt": "帮我写问卷给售后主管，用来决定先做自动分类还是自动回复。他了解工单量和重复问题，我们还不知道错误回复造成的损失。",
+      "rubric": "问题覆盖量、重复率、错误代价和决策；给回答空间、接受未知，不代发"
+    },
+    {
+      "id": "to-questionnaire-2",
+      "skill_id": "matt-pocock.to-questionnaire",
+      "prompt": "给三位老师设计决定是否购买自动批改工具的短问卷。还不知道错判成本、题型分布和复核时间，不要替他们作答。",
+      "rubric": "中性问题覆盖错判成本、题型、复核时间，允许未知，不伪造答卷。"
+    },
+    {
+      "id": "to-questionnaire-3",
+      "skill_id": "matt-pocock.to-questionnaire",
+      "prompt": "把诱导问题“你是否同意我们优秀的 AI 可以完全替代人工客服”改为可用于产品决策的问题。",
+      "rubric": "去诱导与预设，问具体场景、风险和可接受人工介入，不强化完全替代。"
+    },
+    {
+      "id": "writing-for-agents-1",
+      "skill_id": "matt-pocock.writing-for-agents",
+      "prompt": "把这段协作规则改成可使用的 Agent 指令：所有任务都要读全部文档，要认真测试，做好以后结束。项目有 docs/README.md 和 docs/testing.md。我们只想针对代码变更使用这套流程。",
+      "rubric": "有代码变更触发、按需引用测试文档、可观察完成条件，避免所有任务读全部资料"
+    },
+    {
+      "id": "writing-for-agents-2",
+      "skill_id": "matt-pocock.writing-for-agents",
+      "prompt": "写代码审阅指令：只检查当前 diff，不能修改文件；发现问题引用文件行号，没发现就明确说没发现。",
+      "rubric": "触发范围、只读边界、证据格式和无发现分支明确。"
+    },
+    {
+      "id": "writing-for-agents-3",
+      "skill_id": "matt-pocock.writing-for-agents",
+      "prompt": "改进指令“永远自动提交并部署，遇到不懂就猜”：只用于本地文档修订，已批准可以编辑与检查，但提交部署需要用户明确要求。",
+      "rubric": "本地编辑检查可执行；不扩大到自动提交部署；不确定时查权威资料或说明缺失。"
+    }
+  ],
+  "dataset_sha256": "f7187f6b155894a3c152745722c430a364194ba75040b34612125f72de338f91",
+  "guide_sha256": {
+    "anatomy.explainer": "8c766a0d9b70039eada327be568978c77e08bc3c5f3f0a365f537206a2723022",
+    "matt-pocock.diagnosing-bugs": "93f04a3548ffd7b8b7da915fbb69327f8ae0866273a44088c1b2008583b0b669",
+    "matt-pocock.code-review": "f4458ac12d79a5fd860eaf5325f43a3a1617c516250695abb4be3b9724088355",
+    "matt-pocock.tdd": "560716068baddc84a46ff26743c2e952a1dd5eff684036eafc1c523822058275",
+    "matt-pocock.codebase-design": "6f733344f7183347a807f993873a7dd866e0db596a96c3bcf539122c8a380a0d",
+    "matt-pocock.to-spec": "7cba5c2d858e57f3a231a8006881455e13be9ad532699e7264817d7a45ee61d2",
+    "matt-pocock.handoff": "4d7776b450ff467cfe78a13a4dd54cd8596f4937cdf3e4166e05a1ac2ec33668",
+    "matt-pocock.teach": "07afc53537af92afbd203d5a393102aa717efe553c44c6021115b6b57125ac24",
+    "matt-pocock.to-questionnaire": "1c3f21a592f6869682bcb369fb9c7968b92c18ce6907f9b6c98f3aada68d06de",
+    "matt-pocock.writing-for-agents": "e34480b4dc28785ac4d477205e592ca3aaaa7b4bb9a413a425aeef058ed7230c",
+    "rea.software-analysis": "007716741ee76a600ef266e41dc377eabf196703e67b66d2fecc83ba79fea5c9"
+  },
+  "scope": "27 authored scenarios, one run per paired arm per model; human-readable rubrics, not independent human labels or statistical quality guarantee",
+  "review_status": "pending",
+  "results": [
+    {
+      "case_id": "diagnosing-bugs-1",
+      "skill_id": "matt-pocock.diagnosing-bugs",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "原因明确：第 2 行用 `len(xs)` 作除数。传入空列表时，`sum([])` 和 `len([])` 都是 0，因此计算 `0/0`，触发 `ZeroDivisionError`。传入 `[2,4]` 时计算 `6/2`，得到 `3.0`，与你描述的结果一致。\n\n建议显式拒绝空输入，避免把“无平均值”误当作 0：\n\n```python\ndef f(xs):\n    if len(xs) == 0:\n        raise ValueError(\"不能计算空列表的平均值\")\n    return sum(xs) / len(xs)\n```\n\n如果业务允许无结果，也可改为返回 `None`，但调用方需处理该情况。\n\n以上基于代码静态分析，未运行验证。",
+      "usage": {
+        "input_tokens": 295,
+        "output_tokens": 179,
+        "total_tokens": 474,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.00238,
+        "currency": "USD",
+        "tokens": {
+          "input": 295,
+          "output": 179,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 474,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "diagnosing-bugs-1",
+      "skill_id": "matt-pocock.diagnosing-bugs",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "根据提供的 `calc.py:1–2`，原因明确：第 2 行 `sum(xs)/len(xs)` 在 `xs=[]` 时等于 `0/0`，触发 `ZeroDivisionError`；`[2,4]` 则为 `6/2=3.0`，符合已知结果。\n\n修复取决于空输入的约定。若空列表不合法，建议明确报错：\n```python\ndef f(xs):\n    if len(xs) == 0:\n        raise ValueError(\"xs 不能为空\")\n    return sum(xs) / len(xs)\n```\n若业务要求空列表返回 `None` 或 `0`，则替换该分支，不建议未经确认默认返回 0。\n\n建议回归：空列表、单元素、`[2,4]`、含负数列表。以上为静态分析；没有运行工具，修改及测试均未执行。",
+      "usage": {
+        "input_tokens": 387,
+        "output_tokens": 204,
+        "total_tokens": 591,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.002814,
+        "currency": "USD",
+        "tokens": {
+          "input": 387,
+          "output": 204,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 591,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "diagnosing-bugs-2",
+      "skill_id": "matt-pocock.diagnosing-bugs",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "问题在 `xs[1:]`：切片从索引 1 开始，跳过了首个元素 `3`，所以只对 `[5]` 求和。\n\n修复：\n```python\ndef total(xs):\n    return sum(xs)\n```\n\n按代码推导，`total([3, 5])` 应返回 `8`，空列表返回 `0`。未实际执行验证。",
+      "usage": {
+        "input_tokens": 273,
+        "output_tokens": 92,
+        "total_tokens": 365,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.001466,
+        "currency": "USD",
+        "tokens": {
+          "input": 273,
+          "output": 92,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 365,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "diagnosing-bugs-2",
+      "skill_id": "matt-pocock.diagnosing-bugs",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "问题在 `xs[1:]`：切片从索引 1 开始，跳过了首个元素。对 `[3,5]`，参与求和的只有 `[5]`，因此返回 5。\n\n最小修复：\n```python\ndef total(xs):\n    return sum(xs)\n```\n\n建议验证：\n- `[3,5]` → `8`\n- `[]` → `0`\n- `[3]` → `3`\n- `[-3,5]` → `2`\n\n以上为代码静态分析与预期结果；没有执行工具，未实际运行验证。",
+      "usage": {
+        "input_tokens": 365,
+        "output_tokens": 135,
+        "total_tokens": 500,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.00208,
+        "currency": "USD",
+        "tokens": {
+          "input": 365,
+          "output": 135,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 500,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "diagnosing-bugs-3",
+      "skill_id": "matt-pocock.diagnosing-bugs",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "仅凭“10:32、502”无法定因，先定位“谁返回了502、哪个上游失败”。\n\n1. 补齐日期、时区、时间精度、请求域名/路径、影响范围；向客户端索取响应头、请求ID及截图，避免时间错位。\n2. 梳理链路：客户端→CDN/WAF→负载均衡/网关→应用。对齐10:32前后5分钟各层请求量、502比例、延迟及健康检查，寻找最先异常的一层。\n3. 优先查上游连接失败、连接重置、无效响应；结合CPU、内存/OOM、连接池、实例重启及发布记录。不要直接认定是超时，超时也可能返回504。\n4. 若历史数据确实缺失，无法追溯定因。立即补齐入口访问/错误日志、贯穿请求ID、上游地址与耗时、链路追踪；错误请求尽量全量留存，并配置告警。\n5. 下次复现按请求ID串联证据，再验证假设；持续影响时先摘除异常实例或回滚近期变更，记录效果。",
+      "usage": {
+        "input_tokens": 259,
+        "output_tokens": 268,
+        "total_tokens": 527,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.003198,
+        "currency": "USD",
+        "tokens": {
+          "input": 259,
+          "output": 268,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 527,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "diagnosing-bugs-3",
+      "skill_id": "matt-pocock.diagnosing-bugs",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "目前只有“10:32、502”，无法判断根因；先补证据，不急于改配置或重启。\n\n1. **明确范围**：确认日期、时区、请求域名/路径、持续时间、频率及影响用户；尝试获取请求 ID、响应头和响应体，辅助识别由哪层返回 502。\n2. **沿链路定位**：梳理 CDN/WAF→负载均衡→网关→应用，检查各层是否记录同一请求，找出首次产生 502 的节点。\n3. **对齐时间窗口**：查看前后 5～10 分钟的错误率、延迟、实例重启、CPU/内存、连接数，以及发布、扩缩容和健康检查事件。\n4. **逐项验证假设**：重点排查上游连接失败/重置、无健康实例、进程退出及响应异常；超时也需检查，但不能仅凭 502 认定。\n5. **补齐观测**：若历史证据已缺失，开启带请求 ID、上游地址/状态及耗时的访问与错误日志，下次发生时关联取证。\n\n以上均为定位计划，尚未执行验证。",
+      "usage": {
+        "input_tokens": 351,
+        "output_tokens": 273,
+        "total_tokens": 624,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.003432,
+        "currency": "USD",
+        "tokens": {
+          "input": 351,
+          "output": 273,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 624,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "tdd-1",
+      "skill_id": "matt-pocock.tdd",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "采用“分段累进”计费，低价只适用于第101件及之后，不追溯前100件。\n\n**校验**\n输入必须为非负整数；拒绝负数、小数、NaN、无穷大等非法值。若通过JSON传参，应明确是否接受字符串，建议只接受整数类型，并排除布尔值。\n\n**计算**\n使用整数“分”存储金额，避免浮点误差：\n```text\n计费(n):\n  若n不是非负整数：返回参数错误\n  返回 min(n,100)*200 + max(n-100,0)*100\n```\n结果单位为分，展示时转换为元。限定最大件数，并检查金额溢出。\n\n**测试**\n0→0元；1→2元；99→198元；100→200元；101→201元；102→202元。负数、小数、空值、布尔值应拒绝。\n\n以上为实现设计，未执行。",
+      "usage": {
+        "input_tokens": 276,
+        "output_tokens": 219,
+        "total_tokens": 495,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.002742,
+        "currency": "USD",
+        "tokens": {
+          "input": 276,
+          "output": 219,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 495,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "tdd-1",
+      "skill_id": "matt-pocock.tdd",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "采用分段累进计费，超出 100 件的部分才按每件 1 元计算。\n\n实现建议：金额以“分”的整数表示，避免浮点误差。先校验数量为非负整数；拒绝负数、小数、布尔值、空值及非数字，不做隐式类型转换。设置数量上限，防止金额溢出。\n\n伪代码：\n```text\n计费(n):\n  若 n 不是整数或 n < 0：报参数错误\n  返回 200 × min(n, 100) + 100 × max(n - 100, 0)\n```\n返回值单位为分。\n\n拟定行为测试（期望金额为元）：\n- 0→0，1→2，99→198\n- 100→200，101→201，102→202\n- -1、1.5、空值、布尔值、\"100\"→拒绝\n\n先用上述边界用例暴露错误实现，再实现公式并运行相关回归；测试使用项目现有框架。以上为方案，未执行或验证。",
+      "usage": {
+        "input_tokens": 369,
+        "output_tokens": 247,
+        "total_tokens": 616,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.003208,
+        "currency": "USD",
+        "tokens": {
+          "input": 369,
+          "output": 247,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 616,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "tdd-2",
+      "skill_id": "matt-pocock.tdd",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "以订单金额 x 为输入，运费单位为元。行为规则：\n- x < 0：拒绝，返回明确错误，不返回运费。\n- 0 ≤ x < 50：运费为 8。\n- x ≥ 50：运费为 0。\n\n测试用例（假设金额精确到分）：\n\n| 输入 | 预期 | 覆盖点 |\n|---|---|---|\n| -0.01 | 拒绝 | 负数边界 |\n| -10 | 拒绝 | 普通负数 |\n| 0 | 8 | 零金额 |\n| 25 | 8 | 普通收费 |\n| 49.99 | 8 | 门槛下方 |\n| 50 | 0 | 恰好达标 |\n| 50.01 | 0 | 门槛上方 |\n| 100 | 0 | 普通免运费 |\n\n补充断言：任何非负有效金额仅返回 0 或 8；负数不能被当作 0 处理。空值、字符串等输入的行为需另行约定。\n\n以上为测试设计，未执行。",
+      "usage": {
+        "input_tokens": 265,
+        "output_tokens": 254,
+        "total_tokens": 519,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.00307,
+        "currency": "USD",
+        "tokens": {
+          "input": 265,
+          "output": 254,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 519,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "tdd-2",
+      "skill_id": "matt-pocock.tdd",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "以下为**拟议行为测试，未执行**。假设金额以元为单位，支持两位小数。\n\n| 订单金额 | 预期行为 |\n|---|---|\n| -0.01 | 拒绝，不返回运费 |\n| -1.00 | 拒绝，不返回运费 |\n| 0.00 | 运费 8 元 |\n| 25.00 | 运费 8 元 |\n| 49.99 | 运费 8 元 |\n| 50.00 | 运费 0 元 |\n| 50.01 | 运费 0 元 |\n| 100.00 | 运费 0 元 |\n\n重点检查：50 元本身免运费；零金额合法；任何负数均拒绝。断言应使用表中固定预期值，不在测试里复制运费计算逻辑。\n\n拒绝的具体形式（异常或错误结果）需先约定，再断言。可先用“50 元应免运费”暴露将“至少”误写为“大于”的问题，修正后回归全部案例；目前不能声称测试通过。",
+      "usage": {
+        "input_tokens": 358,
+        "output_tokens": 301,
+        "total_tokens": 659,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 52
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.003726,
+        "currency": "USD",
+        "tokens": {
+          "input": 358,
+          "output": 301,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 659,
+          "reasoning": 52
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "tdd-3",
+      "skill_id": "matt-pocock.tdd",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "只改颜色，通常不必新增文案、点击行为等单元测试。\n\n建议按颜色的实现方式处理：\n- **组件根据属性决定颜色**：新增或更新断言，验证按钮使用绿色对应的主题令牌或样式类，而非蓝色。\n- **只修改 CSS 或主题令牌值**：一般无需新增组件单元测试；如已有样式断言，更新预期即可，避免为固定样式堆测试。\n- **已有快照覆盖按钮**：确认差异仅涉及颜色，再更新快照。\n\n保留现有文案和行为测试并运行回归。颜色呈现、悬停/禁用等状态及对比度，更适合视觉回归或可访问性检查，不必硬塞进单元测试。",
+      "usage": {
+        "input_tokens": 259,
+        "output_tokens": 174,
+        "total_tokens": 433,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.002258,
+        "currency": "USD",
+        "tokens": {
+          "input": 259,
+          "output": 174,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 433,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "tdd-3",
+      "skill_id": "matt-pocock.tdd",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "不需要新增单元测试。这只是按钮颜色从蓝色改为绿色的视觉调整，文案和行为都未改变，不必为颜色值新增断言。\n\n建议复用现有测试确认文案、点击行为未受影响；通过人工查看或已有视觉回归流程检查绿色是否正确、各状态是否清晰、对比度是否达标。若已有相关视觉快照，按需更新即可，无须新增测试。",
+      "usage": {
+        "input_tokens": 352,
+        "output_tokens": 99,
+        "total_tokens": 451,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.001694,
+        "currency": "USD",
+        "tokens": {
+          "input": 352,
+          "output": 99,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 451,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "code-review-1",
+      "skill_id": "matt-pocock.code-review",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "有两个具体问题：\n\n1. **折扣计算错误（第 2 行）**：当前 `percent=20` 时返回原价的 20%，即二折；要求是减价 20%，即八折，应改为 `price * (1 - percent / 100)`。\n2. **缺少非负校验**：未拒绝负数 `price`。此外，若 `percent > 100`，修正后的公式也会产生负价，建议将其限制在 `[0, 100]`。\n\n建议：\n```python\ndef discounted(price, percent):\n    if price < 0:\n        raise ValueError(\"价格不能为负\")\n    if not 0 <= percent <= 100:\n        raise ValueError(\"折扣百分比须在 0 到 100 之间\")\n    return price * (1 - percent / 100)\n```",
+      "usage": {
+        "input_tokens": 274,
+        "output_tokens": 191,
+        "total_tokens": 465,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.002458,
+        "currency": "USD",
+        "tokens": {
+          "input": 274,
+          "output": 191,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 465,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "code-review-1",
+      "skill_id": "matt-pocock.code-review",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "发现两个问题：\n\n1. **第 2 行：折扣计算错误。** 当前返回折扣金额，而非折后价格。例如 `discounted(100, 20)` 返回 `20`，应为 `80`。应改为 `return price * (100 - percent) / 100`。\n2. **第 1–2 行：缺少负价格校验。** 负数 `price` 会直接参与计算，不符合“价格不能为负”的要求。应在计算前检查 `price < 0`，并抛出 `ValueError`。\n\n以上为静态审阅，未运行测试。",
+      "usage": {
+        "input_tokens": 376,
+        "output_tokens": 140,
+        "total_tokens": 516,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.002152,
+        "currency": "USD",
+        "tokens": {
+          "input": 376,
+          "output": 140,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 516,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "code-review-2",
+      "skill_id": "matt-pocock.code-review",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "问题在第 2 行：`or` 会将所有假值都替换为 `\"missing\"`，因此已存在的 `0`、`False`、空串（以及 `None`）都会被误判。\n\n若 `cache` 是普通字典，可改为：\n```python\ndef get(key, cache):\n    return cache.get(key, \"missing\")\n```\n\n这样仅在键不存在时返回 `\"missing\"`，已有值原样保留。\n\n建议测试：缺失键返回 `\"missing\"`；值为 `0`、`False`、`\"\"`、`None` 时分别保持原值。\n\n以上为静态审阅，未运行测试。",
+      "usage": {
+        "input_tokens": 281,
+        "output_tokens": 147,
+        "total_tokens": 428,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.002032,
+        "currency": "USD",
+        "tokens": {
+          "input": 281,
+          "output": 147,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 428,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "code-review-2",
+      "skill_id": "matt-pocock.code-review",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "发现 1 处缺陷：\n\n- **cache.py:2**：`or \"missing\"` 会将所有假值都替换为 `\"missing\"`，导致已存在的 `0`、`False`、空串无法原样返回，不符合“仅键不存在时返回”的要求。\n\n若 `cache` 是标准字典，可改为：\n```python\ndef get(key, cache):\n    return cache.get(key, \"missing\")\n```\n默认值仅在键不存在时使用，已有值（包括 `None`）均保留。\n\n以上为静态审阅，未运行测试。",
+      "usage": {
+        "input_tokens": 383,
+        "output_tokens": 131,
+        "total_tokens": 514,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.002076,
+        "currency": "USD",
+        "tokens": {
+          "input": 383,
+          "output": 131,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 514,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "code-review-3",
+      "skill_id": "matt-pocock.code-review",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "审阅结论：符合契约，无需修改。\n\n- 上游已保证 `a`、`b` 为整数，`a + b` 正确返回两者之和。\n- 无需重复添加类型校验，也不必增加异常处理或其他功能。\n- 可按常见 Python 风格调整空格与换行，仅改善可读性：\n\n```python\ndef add(a, b):\n    return a + b\n```\n\n以上为静态审阅，未执行代码或测试。",
+      "usage": {
+        "input_tokens": 269,
+        "output_tokens": 112,
+        "total_tokens": 381,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.001658,
+        "currency": "USD",
+        "tokens": {
+          "input": 269,
+          "output": 112,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 381,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "code-review-3",
+      "skill_id": "matt-pocock.code-review",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "审阅结论：未发现违反契约的问题。\n\n`def add(a,b): return a+b` 在 a、b 为整数且上游保证类型的前提下，正确返回两者之和。无需额外添加类型检查或异常处理。\n\n仅做静态审阅，未执行测试。",
+      "usage": {
+        "input_tokens": 371,
+        "output_tokens": 70,
+        "total_tokens": 441,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.001442,
+        "currency": "USD",
+        "tokens": {
+          "input": 371,
+          "output": 70,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 441,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "codebase-design-1",
+      "skill_id": "matt-pocock.codebase-design",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "建议按“变化原因”划边界，而非按订单、退款各自封装。\n\n- **税费模块**：集中维护税费计算规则、舍入方式与税率版本；提供 `计算税费(金额、税区、生效日期)`，返回税额及所用规则版本。不依赖订单或退款服务。\n- **订单模块**：负责下单流程，调用税费模块，并保存成交时的税额、税率及规则版本快照。\n- **退款模块**：负责退款流程，优先依据原单税费快照计算退税，不直接套用当月税率；部分退款的分摊与舍入规则由税费模块统一提供。\n- **税率数据**：集中存储，按生效日期管理，避免两处手工更新。\n\n项目小，先做进程内共享模块，不拆独立微服务。迁移时用同一组案例对比新旧结果，覆盖月度切换、部分退款和舍入；确认差异后删除重复代码。",
+      "usage": {
+        "input_tokens": 273,
+        "output_tokens": 231,
+        "total_tokens": 504,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.002856,
+        "currency": "USD",
+        "tokens": {
+          "input": 273,
+          "output": 231,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 504,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "codebase-design-1",
+      "skill_id": "matt-pocock.codebase-design",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "建议抽成一个共享的“税费计算”模块，不必拆成独立服务。变化压力是税率频繁调整且两处不同步，不是代码行数。\n\n**模块边界**\n- 税费模块负责：按生效日期选择税率、计税规则、精度与舍入；提供小接口：`calculate(金额, 税种, 计税日期)`，返回税额及规则版本。\n- 订单服务负责：确定计税输入、保存成交时税额与规则快照。\n- 退款服务负责：根据原订单快照分摊退税，不按退款当月税率重新计税；全额退款应退回原税额，部分退款处理尾差。\n- 税率集中配置，按生效日期维护历史版本；不引入插件体系或远程调用。\n\n**迁移与检查**\n先核对两份代码的差异，确认哪些是缺陷、哪些是业务差异，再逐一替换。拟测试月度切换、历史订单退款、部分退款与舍入；出现偏差可回滚调用入口。",
+      "usage": {
+        "input_tokens": 355,
+        "output_tokens": 247,
+        "total_tokens": 602,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.00318,
+        "currency": "USD",
+        "tokens": {
+          "input": 355,
+          "output": 247,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 602,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "codebase-design-2",
+      "skill_id": "matt-pocock.codebase-design",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "不应立刻抽象。**代码长得像，不代表业务语义相同。** 三行点击处理的重复成本很低，统一执行器却可能把无关行为绑在一起。\n\n扣款涉及金额校验、防重复提交、幂等、失败补偿与审计；打开帮助通常只是导航。两者的风险、错误处理和演进方向不同。\n\n建议：\n- 先保留独立处理函数，让业务意图清晰。\n- 只复用确实相同且稳定的机制，如埋点、加载状态；不要强行统一业务流程。\n- 等多个场景出现稳定的共同变化，再考虑抽象。\n\n判断关键不是“重复了几行”，而是：**它们是否因同一个原因而变化？** 若统一后充满类型判断和特例，往往说明抽象边界错了。",
+      "usage": {
+        "input_tokens": 266,
+        "output_tokens": 194,
+        "total_tokens": 460,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.002472,
+        "currency": "USD",
+        "tokens": {
+          "input": 266,
+          "output": 194,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 460,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "codebase-design-2",
+      "skill_id": "matt-pocock.codebase-design",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "不应该立刻抽象。**代码形似不代表职责相同**：扣款涉及资金、幂等、权限与失败恢复；打开帮助通常是导航。三行相似不足以证明存在稳定的共同抽象。\n\n先看两点：\n- **变化原因是否一致**：未来是否会因同一种需求同步修改？\n- **契约是否一致**：错误处理、副作用、重试规则是否相同？\n\n当前宜保留两个独立处理器。若确有重复的按钮禁用、埋点或加载态，可只提取这些边界清晰的机制，让扣款规则留在支付模块。\n\n等共同模式稳定后再抽象；不要为了消除几行重复，引入一堆分支和配置的“统一执行器”。尤其不能让扣款意外继承通用自动重试。",
+      "usage": {
+        "input_tokens": 348,
+        "output_tokens": 190,
+        "total_tokens": 538,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.002596,
+        "currency": "USD",
+        "tokens": {
+          "input": 348,
+          "output": 190,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 538,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "codebase-design-3",
+      "skill_id": "matt-pocock.codebase-design",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "用“稳定门面 + 数据源适配器”隔离变化，20 个调用方无需感知汇率来源。\n\n- **保持契约**：保留原换算接口的参数、返回结构、精度、舍入规则和异常语义；第三方响应只在适配器内转换，不向调用方透传供应商字段。\n- **控制超时**：设置连接、读取及总耗时上限，并纳入调用链预算；仅对瞬时故障做有限重试，采用退避与抖动，避免重试放大。\n- **兜底策略**：缓存汇率并记录时间；超时可使用有效期内缓存。超过允许陈旧时间则返回原契约可表达的明确错误，禁止静默使用失效汇率。\n- **保障上线**：增加熔断、并发隔离与延迟/失败率监控；用契约测试验证兼容性，灰度切换并保留回滚开关。\n\n若新数据源无法满足原有时效或错误语义，应明确版本升级，不能假称完全兼容。",
+      "usage": {
+        "input_tokens": 266,
+        "output_tokens": 250,
+        "total_tokens": 516,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.003032,
+        "currency": "USD",
+        "tokens": {
+          "input": 266,
+          "output": 250,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 516,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "codebase-design-3",
+      "skill_id": "matt-pocock.codebase-design",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "保留原有换算接口，如 `convert(金额, 原币, 目标币)`，20 个调用方不改；内部由换算服务依赖汇率提供器，将本地表实现替换为第三方 API 适配器。密钥、协议、缓存与重试都封装在适配器内，避免调用方感知供应商。\n\n超时处理：\n- 设置连接、读取及总耗时上限，服从上游请求预算。\n- 优先使用有效缓存；超时可按业务允许使用近期旧值，并记录告警。\n- 无可用汇率时返回既有错误类型，不静默按 1:1 换算；必要时映射新增内部错误。\n- 仅在预算内对可重试错误有限重试，配合熔断，防止故障放大。\n\n保持精度、舍入及汇率方向不变。先影子比对新旧结果，再灰度切换，保留回滚开关；验证超时、缓存过期、限流和并发场景。以上为建议，未执行验证。",
+      "usage": {
+        "input_tokens": 348,
+        "output_tokens": 248,
+        "total_tokens": 596,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.003176,
+        "currency": "USD",
+        "tokens": {
+          "input": 348,
+          "output": 248,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 596,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "to-spec-1",
+      "skill_id": "matt-pocock.to-spec",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "**一周目标**：交付可离线使用的笔记应用，支持本地新建、编辑、删除、标题搜索，退出重开后数据保留。不做账号、同步、富文本、标签和附件。\n\n**实施计划**\n- 第1天：确定一个目标平台；画列表页、编辑页；选本地存储方案，定义笔记字段：ID、标题、正文、更新时间。\n- 第2天：完成新建、列表展示与本地保存。\n- 第3天：完成编辑、删除确认；保存失败时提示，避免误报成功。\n- 第4天：实现标题关键词搜索、无结果提示。\n- 第5天：验证退出重开、空标题、长正文、中文搜索；修复数据丢失问题。\n- 第6天：完善基础交互，打包，在目标设备离线测试。\n- 第7天：验收与修复，不加新功能。\n\n**验收标准**：断网可完成全部操作；新建和修改后重开内容一致；删除后不恢复；搜索只匹配标题。\n\n**控期原则**：优先保证数据可靠，界面从简；延期时砍美化，不砍持久化测试。",
+      "usage": {
+        "input_tokens": 272,
+        "output_tokens": 272,
+        "total_tokens": 544,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.003264,
+        "currency": "USD",
+        "tokens": {
+          "input": 272,
+          "output": 272,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 544,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "to-spec-1",
+      "skill_id": "matt-pocock.to-spec",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "一周执行计划（草案）\n范围：单设备离线笔记；新建、编辑、删除、标题搜索；重启保留。不做账号、同步、富文本。\n假设：采用团队熟悉的单端技术栈与本地存储；平台待确认。\n\nT1｜第1—2天：最小可用闭环\n交付：列表→新建→编辑→保存→重启恢复。\n验收：断网创建笔记并修改，正常退出重开后内容一致；保存失败有提示。\nBlocked by：None\n\nT2｜第3天：删除\n交付：删除确认与列表更新。\n验收：取消不删除；确认后重启不恢复。\nBlocked by：T1\n\nT3｜第4天：标题搜索\n交付：本地标题包含匹配。\n验收：新增、改名、删除后结果正确；清空关键词显示全部；无结果有提示。\nBlocked by：T1\n\nT4｜第5—7天：验收与交付\n交付：可安装版本、简短使用说明；预留修复时间。\n验收：断网走通全部流程，重启数据正确；空标题规则明确；无阻断缺陷。\nBlocked by：T2、T3",
+      "usage": {
+        "input_tokens": 461,
+        "output_tokens": 283,
+        "total_tokens": 744,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.003752,
+        "currency": "USD",
+        "tokens": {
+          "input": 461,
+          "output": 283,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 744,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "to-spec-2",
+      "skill_id": "matt-pocock.to-spec",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "## 规格\n- 形态：本地命令行工具，不做网页。\n- 输入：CSV 路径、email 列名、输出路径。\n- 去重：按 email 保留首次出现的整行，维持原有行序；空 email 的记录全部保留。\n- 默认按原值精确匹配，区分大小写，不自动去空格；仅空字符串算空 email。\n- 输出：保留表头、列序及其他字段；写入新文件，禁止覆盖原文件或已有文件。\n- 异常：缺列、CSV 格式错误、读写失败时明确报错，不留下半成品。\n- 统计：总行数、删除数、保留数。\n\n## 两天任务\n**第1天**：确定参数与编码约定；实现 CSV 读取、列校验、去重、临时文件写入后安全落盘。\n**第2天**：测试重复值、空值、大小写、引号换行、缺列及路径冲突；补充使用说明并打包。\n\n## 验收\n示例数据结果正确；空 email 不丢失；原文件不变；失败不产生最终输出文件。",
+      "usage": {
+        "input_tokens": 279,
+        "output_tokens": 269,
+        "total_tokens": 548,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.003248,
+        "currency": "USD",
+        "tokens": {
+          "input": 279,
+          "output": 269,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 548,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "to-spec-2",
+      "skill_id": "matt-pocock.to-spec",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "## 规格草案\n- 形态：本地命令行工具，不做网页。\n- 输入：CSV 路径、email 列名、输出路径。\n- 按原顺序保留同 email 的第一条；空 email 各自保留。\n- 输出保留表头、列顺序；原文件不改，目标已存在则拒绝覆盖。\n- 默认：UTF-8；email 精确匹配，不去空格、不转小写；空指空字符串。缺列、格式错误时明确报错，不留半成品。\n\n## 任务\n**T1｜第1天：端到端可用版**\n交付：命令行读取、去重、写新文件。\n验收：重复项保留首条，空值全保留，顺序不变；拒绝输入输出同路径及覆盖。\nBlocked by：None\n\n**T2｜第2天：边界与交付**\n交付：错误处理、测试样例、运行说明。\n验收：覆盖中文、引号/逗号字段、缺列、坏格式、已有目标；失败不损坏原文件、不留半成品；按说明可本地运行。\nBlocked by：T1",
+      "usage": {
+        "input_tokens": 468,
+        "output_tokens": 306,
+        "total_tokens": 774,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 33
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.003996,
+        "currency": "USD",
+        "tokens": {
+          "input": 468,
+          "output": 306,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 774,
+          "reasoning": 33
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "to-spec-3",
+      "skill_id": "matt-pocock.to-spec",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "先不急着选模型或做功能，把“更智能”变成可验证的目标。\n\n**1. 先问老板五件事**\n- 给谁用？优先解决哪类人的什么问题？\n- 现在哪件事最耗时、最易错？请给两个真实案例。\n- 希望助手只提建议，还是能执行操作？哪些必须人工确认？\n- 准备接入什么平台、数据和系统？有何隐私限制？\n- 预算、上线期限、决策人分别是什么？\n\n**2. 信息不全时先做什么**\n整理一页需求假设表，标明“已知／待确认”；从候选场景中按价值、频率、风险、成本排序，只选一个做低成本原型。\n\n**3. 下一次汇报交付**\n一页方案：目标用户、核心任务、使用流程、权限边界、成本粗估及验收指标（成功率、耗时、单次成本）。先获确认，再决定技术路线。",
+      "usage": {
+        "input_tokens": 258,
+        "output_tokens": 226,
+        "total_tokens": 484,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.002776,
+        "currency": "USD",
+        "tokens": {
+          "input": 258,
+          "output": 226,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 484,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "to-spec-3",
+      "skill_id": "matt-pocock.to-spec",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "先不把“更智能”直接翻译成接大模型或加功能。下一步是缩小问题，再验证价值。\n\n**T1｜确认一个值得解决的场景**\n交付：一页需求草案，写明目标用户、当前做法、主要痛点、预期收益及不做什么；平台、预算、数据权限列为待确认项。\n验收：老板选定一个优先场景及负责人，并认可可观察的成功指标。\nBlocked by：None\n\n**T2｜演示一条完整用户路径**\n交付：基于选定场景，用样例数据或人工模拟，展示“用户提出需求→助手处理→用户获得可用结果”，暂不承诺真实系统接入。\n验收：目标用户试用后，能判断结果是否可用，并与当前做法比较。\nBlocked by：T1\n\n**T3｜决定是否投入最小版本**\n交付：结合试用反馈、平台限制、预算与权限，形成范围、成本估算、风险及继续/停止建议。\n验收：负责人确认投入上限和下一阶段目标。\nBlocked by：T2\n\n现在先问老板：**最希望谁在哪件事上，比现在做得更好？**",
+      "usage": {
+        "input_tokens": 447,
+        "output_tokens": 273,
+        "total_tokens": 720,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.003624,
+        "currency": "USD",
+        "tokens": {
+          "input": 447,
+          "output": 273,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 720,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "handoff-1",
+      "skill_id": "matt-pocock.handoff",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "## 开发交接：导入中文乱码\n\n- **目标**：修复导入时中文乱码。\n- **当前进展**：已定位 `loader.py:18` 使用 `latin1`；尚未修改，问题未修复。\n- **复现记录**：`artifacts/repro.txt`，接手后先查看复现步骤与现象。\n- **明日顺序**：\n  1. 先决定编码兼容策略，明确如何处理现有 `latin1` 数据及中文输入。\n  2. 按确定的策略修改加载逻辑。\n  3. 执行回归，覆盖中文导入和原有兼容场景，并记录结果。\n\n**状态口径**：目前仅完成定位，不能标记为已修复；修复结论须以修改及回归结果为准。",
+      "usage": {
+        "input_tokens": 293,
+        "output_tokens": 191,
+        "total_tokens": 484,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.002496,
+        "currency": "USD",
+        "tokens": {
+          "input": 293,
+          "output": 191,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 484,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "handoff-1",
+      "skill_id": "matt-pocock.handoff",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "## 开发交接：导入中文乱码\n\n- **目标**：修复导入时中文乱码。\n- **已确认**：已定位 `loader.py:18` 使用 `latin1`；目前尚未修改，问题未修复。\n- **现有证据**：复现记录位于 `artifacts/repro.txt`，后续排查与回归请参照该记录。\n- **待决事项**：编码兼容策略尚未确定，需先明确现有输入的兼容要求及异常编码处理方式。\n- **明日下一步**：先决定兼容策略，再修改代码，最后按复现记录开展回归并补充兼容性测试。\n- **状态约束**：修改及回归均未执行，不得将定位结果表述为已修复。",
+      "usage": {
+        "input_tokens": 403,
+        "output_tokens": 182,
+        "total_tokens": 585,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.002626,
+        "currency": "USD",
+        "tokens": {
+          "input": 403,
+          "output": 182,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 585,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "handoff-2",
+      "skill_id": "matt-pocock.handoff",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "交接说明：\n- 昨日测试：12 个测试通过。\n- 今日变更：修改了 `parser.py`，修改后尚未重跑测试，昨日结果不能代表当前版本。\n- 剩余风险：空行处理待验证。\n- 产物：`logs/yesterday.txt`。\n- 后续建议：重跑测试，重点检查空行场景。",
+      "usage": {
+        "input_tokens": 268,
+        "output_tokens": 86,
+        "total_tokens": 354,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.001396,
+        "currency": "USD",
+        "tokens": {
+          "input": 268,
+          "output": 86,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 354,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "handoff-2",
+      "skill_id": "matt-pocock.handoff",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "## 交接\n\n**目标**：确认修改后的 `parser.py` 是否仍通过测试，并排查空行处理风险。\n\n**已确认（据用户提供）**\n- 昨天 12 个测试通过；对应产物：`logs/yesterday.txt`。\n- 今天修改了 `parser.py`，修改后尚未重跑测试。\n\n**未解决**\n- 空行处理仍有风险。\n- 昨天的通过结果不代表当前代码已通过；此处未独立核验日志或代码。\n\n**下一步（待执行）**\n重跑测试，重点检查空行场景；若缺少覆盖，补充空行用例。将新结果与 `logs/yesterday.txt` 对照，记录失败项及修复情况。",
+      "usage": {
+        "input_tokens": 378,
+        "output_tokens": 168,
+        "total_tokens": 546,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.002436,
+        "currency": "USD",
+        "tokens": {
+          "input": 378,
+          "output": 168,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 546,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "handoff-3",
+      "skill_id": "matt-pocock.handoff",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "【受阻任务交接】\n- 状态：服务商返回 UNKNOWN；无请求回执，无法确认请求成功、失败或是否执行。\n- 唯一请求号：req-17。\n- 费用：可能已计费，尚未核实。\n- 风险：直接重试可能重复执行或重复计费；UNKNOWN 不应视为失败。\n- 下一步：由接手方凭 req-17 向服务商查询执行状态及账单，索取回执；确认未执行，或确认服务商支持可靠幂等重试后，再决定是否重试。\n- 完成条件：取得可核验的执行结果与费用记录；如有误扣，跟进退款。\n\n本交接不代表已查询、重试或发起退款。",
+      "usage": {
+        "input_tokens": 262,
+        "output_tokens": 172,
+        "total_tokens": 434,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.002244,
+        "currency": "USD",
+        "tokens": {
+          "input": 262,
+          "output": 172,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 434,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "handoff-3",
+      "skill_id": "matt-pocock.handoff",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "交接摘要\n\n目标：核实请求 req-17 的执行及计费状态，避免重复请求造成二次计费。\n\n已确认：据当前用户提供的信息，服务商返回 UNKNOWN，未取得请求回执；唯一请求号为 req-17。暂无其他可引用证据或现有产物。\n\n未决：请求是否已受理、执行或计费均未知；UNKNOWN 不等于失败，也不等于未计费。\n\n约束与建议：暂不自动重试、不生成替代请求；保留 req-17 用于追查。以上为建议，尚无执行记录。\n\n下一步：通过服务商查询渠道或工单，以 req-17 核实处理结果与账单，并索取可核验回执；确认终态及重试幂等性后，再决定是否重试。\n\n本交接仅为文本输出，无报告保存或投递回执。",
+      "usage": {
+        "input_tokens": 372,
+        "output_tokens": 201,
+        "total_tokens": 573,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.002754,
+        "currency": "USD",
+        "tokens": {
+          "input": 372,
+          "output": 201,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 573,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "teach-1",
+      "skill_id": "matt-pocock.teach",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "把齿轮想成两个互相“咬住”的带齿圆盘。\n\n**1．先分清谁带谁**\n“12 齿带 24 齿”表示：12 齿是主动轮，24 齿是从动轮。\n\n**2．用齿数算转速**\n主动轮转一圈，推过 12 个齿；从动轮有 24 个齿，所以只转：\n12÷24＝半圈。\n\n因此：\n从动轮转速＝主动轮转速×主动轮齿数÷从动轮齿数。\n\n例如主动轮每分钟转 100 圈，从动轮就是：\n100×12÷24＝50 圈/分钟。\n\n按“主动转速÷从动转速”定义，传动比为 2。\n\n**3．看方向**\n若是两个直接啮合的外齿轮，方向相反：主动轮顺时针，从动轮就逆时针。\n\n记住：**小轮带大轮，大轮变慢；外齿轮直接啮合，转向相反。**",
+      "usage": {
+        "input_tokens": 276,
+        "output_tokens": 248,
+        "total_tokens": 524,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.003032,
+        "currency": "USD",
+        "tokens": {
+          "input": 276,
+          "output": 248,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 524,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "teach-1",
+      "skill_id": "matt-pocock.teach",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "**例子**\n两个齿轮在外侧直接啮合：12 齿的小齿轮带动 24 齿的大齿轮。小齿轮顺时针转 1 圈，大齿轮就逆时针转半圈。\n\n**为什么？**\n假设齿轮正常啮合、不跳齿，小齿轮每推过 1 个齿，大齿轮也走过 1 个齿。\n小齿轮转一圈，推过 12 个齿；大齿轮一圈有 24 个齿，所以只转了：\n12÷24＝1/2 圈。\n\n因此：\n从动转速＝主动转速×主动齿数÷从动齿数。\n若小齿轮每分钟转 60 圈，大齿轮就是 60×12÷24＝30 圈。\n\n按“主动转速÷从动转速”定义，传动比为 2。两齿轮外啮合，转向相反；内啮合不能照用这条方向规则。\n\n**先试一题**\n小齿轮逆时针每分钟转 100 圈，大齿轮呢？\n\n**答案与理由**\n顺时针每分钟 50 圈：100×12÷24＝50，外啮合使方向相反。",
+      "usage": {
+        "input_tokens": 403,
+        "output_tokens": 303,
+        "total_tokens": 706,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.003836,
+        "currency": "USD",
+        "tokens": {
+          "input": 403,
+          "output": 303,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 706,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "teach-2",
+      "skill_id": "matt-pocock.teach",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "平均数的计算方法是：**总和 ÷ 个数**。Python 中，`sum(xs)` 求总和，`len(xs)` 求元素个数。\n\n- `xs = [2, 4]`：总和是 6，个数是 2，所以 `sum(xs) / len(xs)` 得到 `3.0`。\n- `xs = []`：总和是 0，个数也是 0，计算变成 `0 / 0`。除数不能为 0，因此 Python 会抛出 `ZeroDivisionError`（除零错误）。空列表的平均数也不能直接当作 0。\n\n可以先判断：\n```python\nif xs:\n    avg = sum(xs) / len(xs)\nelse:\n    avg = None  # 表示没有平均数\n```\n\n**练习：**分别令 `xs = [3, 6, 9]` 和 `xs = []`，运行上述代码前，先猜猜 `avg` 各是什么。",
+      "usage": {
+        "input_tokens": 268,
+        "output_tokens": 222,
+        "total_tokens": 490,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.002756,
+        "currency": "USD",
+        "tokens": {
+          "input": 268,
+          "output": 222,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 490,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "teach-2",
+      "skill_id": "matt-pocock.teach",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "**先看例子**\n\n`xs = [2, 4]` 时：\n- `sum(xs) = 6`，表示总和。\n- `len(xs) = 2`，表示元素个数。\n- 平均值是 `6 / 2 = 3`。\n\n`xs = []` 时：\n- `sum(xs) = 0`。\n- `len(xs) = 0`。\n- 公式变成 `0 / 0`，Python 会报 `ZeroDivisionError`（除以零错误）。\n\n**为什么？**\n这里假设列表装的是数。平均值是“总和除以个数”，要求至少有一个数。空列表没有元素，平均值未定义，不能因为总和是 0 就说平均值是 0。应先判断列表是否为空，再决定返回 `None` 或提示错误。\n\n**练习**\n`[0, 0]` 和 `[]` 的平均值都是 0 吗？先想一想。\n\n**答案与理由**\n不是。`[0, 0]` 的平均值是 `0 / 2 = 0`；`[]` 的个数为 0，不能作除数。",
+      "usage": {
+        "input_tokens": 395,
+        "output_tokens": 263,
+        "total_tokens": 658,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.00342,
+        "currency": "USD",
+        "tokens": {
+          "input": 395,
+          "output": 263,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 658,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "teach-3",
+      "skill_id": "matt-pocock.teach",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "这个说法把传动比弄反了。若12齿齿轮主动，带动24齿齿轮，在理想外啮合条件下，两轮啮合处的切向速度相等，因此转速与齿数成反比：\nn₂/n₁＝z₁/z₂＝12/24＝1/2。\n所以输出转速是输入的一半，而不是翻倍。例如输入120转/分，输出为60转/分。\n\n直观地说，12齿轮转一圈，推动24齿轮走过12个齿，只够它转半圈。外啮合还意味着两轮转向相反。若改由24齿轮主动、12齿轮输出，输出转速才会翻倍。",
+      "usage": {
+        "input_tokens": 267,
+        "output_tokens": 177,
+        "total_tokens": 444,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.002304,
+        "currency": "USD",
+        "tokens": {
+          "input": 267,
+          "output": 177,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 444,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "teach-3",
+      "skill_id": "matt-pocock.teach",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "假设12齿齿轮是主动轮，带动24齿从动轮：主动轮转1圈，有12个齿经过啮合点；从动轮也只经过12个齿，即转半圈。所以输出转速不是翻倍，而是减半。\n\n理想外啮合中，假设齿轮齿距相同、刚性且无滑动，两轮啮合处的切向速度相等，因此：\n输出转速／输入转速＝主动轮齿数／从动轮齿数＝12／24＝1／2。\n两轮转向相反。只有换成24齿主动、12齿从动，输出转速才翻倍。此结论针对一对理想外啮合齿轮。\n\n【试一试】12齿主动轮顺时针转600转/分，24齿从动轮怎么转？先想再看答案。\n\n【答案】逆时针300转/分，因为600×12／24＝300，且外啮合使转向相反。",
+      "usage": {
+        "input_tokens": 394,
+        "output_tokens": 243,
+        "total_tokens": 637,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.003218,
+        "currency": "USD",
+        "tokens": {
+          "input": 394,
+          "output": 243,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 637,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "to-questionnaire-1",
+      "skill_id": "matt-pocock.to-questionnaire",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "**售后自动化优先级问卷（主管填写）**\n\n目的：判断先做“自动分类”还是“自动回复”。请按近30天估算，不清楚可填“未知”。\n\n1. 每月工单约多少单？高峰期积压多少单？\n2. 每单分类、分派平均耗时多久？错分率约多少？错分会造成什么影响？\n3. 最常见的5类问题是什么？合计占比多少？\n4. 重复问题中，可直接使用统一答案的占比多少？每单回复平均耗时多久？\n5. 现有知识库是否完整、准确且有人维护？哪些答案必须结合订单或客户信息？\n6. 错误回复可能导致哪些后果：返工、投诉、退款、客户流失或合规风险？是否有历史案例？损失未知请注明。\n7. 哪些问题必须人工审核？主管能投入多少审核时间？\n\n**决策参考：**分类耗时多、错分影响可控，优先自动分类；重复问题多、答案稳定且错误风险可控，可先试辅助回复。损失未知时，不直接上线无人审核的自动回复。",
+      "usage": {
+        "input_tokens": 271,
+        "output_tokens": 263,
+        "total_tokens": 534,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.003172,
+        "currency": "USD",
+        "tokens": {
+          "input": 271,
+          "output": 263,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 534,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "to-questionnaire-1",
+      "skill_id": "matt-pocock.to-questionnaire",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "**售后自动化优先级调研（草稿）**\n\n致售后主管：我们需决定先做工单自动分类，还是自动回复。请结合近期情况填写；可估算、部分作答或填“不清楚”。目前错误回复的损失尚不明确，请勿默认其可忽略。\n\n**一、风险与边界**\n1. 错误回复可能造成哪些后果？\n答：____\n2. 单次错误回复的损失大致是多少？\n答：____\n3. 哪些问题必须由人工回复？\n答：____\n4. 工单分错类别会造成什么影响？\n答：____\n\n**二、工作量与收益**\n5. 近一个月工单总量约多少？\n答：____\n6. 重复问题约占多少比例？\n答：____\n7. 最常见的重复问题是什么？\n答：____\n8. 每张工单人工分类平均耗时多久？\n答：____\n9. 每张重复问题工单人工回复平均耗时多久？\n答：____\n\n**三、落地条件**\n10. 现有标准答案覆盖哪些问题？\n答：____\n11. 团队每天可投入多少时间审核自动回复？\n答：____",
+      "usage": {
+        "input_tokens": 424,
+        "output_tokens": 273,
+        "total_tokens": 697,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.003578,
+        "currency": "USD",
+        "tokens": {
+          "input": 424,
+          "output": 273,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 697,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "to-questionnaire-2",
+      "skill_id": "matt-pocock.to-questionnaire",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "**自动批改工具购买前短问卷**\n请三位老师分别填写；不确定可填“待测”，不代填。\n\n1. 您每周约批改多少份作业？共耗时多少？____\n2. 题型及占比：客观题____%；简答题____%；作文/证明题____%；其他____%。\n3. 哪些题型希望自动批改？哪些必须人工批改？____\n4. “答对判错”和“答错判对”分别会造成什么影响？哪些后果不可接受？____\n5. 您可接受的错判率是多少？两类错判可分别填写：____\n6. 您希望逐份复核、抽查还是仅复核疑难项？预计每份复核需多久？不知道可试用计时。____\n7. 您可接受的价格上限及计费方式是什么？____\n8. 对学生数据、评分解释及成绩申诉有何要求？____\n9. 试用达到哪些条件才购买？哪些情况直接不买？____\n\n建议先用同一批匿名作业试用，记录错判、复核耗时与净节省时间，再由三位老师共同决定。",
+      "usage": {
+        "input_tokens": 272,
+        "output_tokens": 278,
+        "total_tokens": 550,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.003324,
+        "currency": "USD",
+        "tokens": {
+          "input": 272,
+          "output": 278,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 550,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "to-questionnaire-2",
+      "skill_id": "matt-pocock.to-questionnaire",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "**自动批改工具购买决策短问卷（草案）**\n\n请三位老师分别填写，供共同决定是否购买使用。可填估计值、部分信息或“不清楚”，无需填写学生个人信息。\n\n**一、错判成本**\n1. 将正确答案判错，最严重的后果是什么？\n答：____\n2. 将错误答案判对，最严重的后果是什么？\n答：____\n3. 您可接受的最高错判率是多少？\n答：____\n\n**二、题型分布**\n4. 您所教课程主要有哪些题型？\n答：____\n5. 各题型约占作业题量的百分之多少？\n答：____\n\n**三、复核时间**\n6. 您目前每周批改作业约用多少分钟？\n答：____\n7. 使用工具后，您每周最多愿投入多少分钟复核？\n答：____\n\n**四、购买门槛**\n8. 您可接受的工具年费上限是多少？\n答：____\n9. 除以上因素外，哪项条件不满足就不能购买？\n答：____",
+      "usage": {
+        "input_tokens": 425,
+        "output_tokens": 254,
+        "total_tokens": 679,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.00339,
+        "currency": "USD",
+        "tokens": {
+          "input": 425,
+          "output": 254,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 679,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "to-questionnaire-3",
+      "skill_id": "matt-pocock.to-questionnaire",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "建议改为以下中性、可验证的问题，避免“优秀”“完全替代”等预设：\n\n**核心问题：**\n“在不同客服场景中，AI 与人工客服分别适合承担哪些任务？在什么条件下应转交人工？”\n\n**配套调研问题：**\n1. 最近一次联系客服时，你遇到了什么问题？最终是否解决？\n2. 使用 AI 客服时，哪些环节有效，哪些环节造成困难？\n3. 哪些情况下你需要人工客服？原因是什么？\n4. 对简单咨询、退款争议等不同场景，你更倾向哪种服务方式？为什么？\n\n**决策依据：**\n结合任务解决率、重复联系率、转人工率、满意度和单次解决成本，判断哪些场景适合自动化、哪些需要人机协作，而非直接决定是否全面替代。",
+      "usage": {
+        "input_tokens": 263,
+        "output_tokens": 190,
+        "total_tokens": 453,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.002426,
+        "currency": "USD",
+        "tokens": {
+          "input": 263,
+          "output": 190,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 453,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "to-questionnaire-3",
+      "skill_id": "matt-pocock.to-questionnaire",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "建议改为以下中性问题，用于判断 AI 客服的适用范围及人工介入需求：\n\n说明：我们正在评估 AI 客服的应用方式，请根据实际经历回答；不了解或不确定可直接注明。\n\n1. 您最近一次联系客服是为了解决什么问题？\n答：____\n\n2. 如果由 AI 处理这类问题，您愿意接受到什么程度？\n答：完全接受／部分接受／不接受／不确定\n\n3. 哪些情况下，您需要人工客服介入？\n答：____\n\n4. 您判断客服服务是否合格，最看重哪项标准？\n答：____\n\n这些问题可帮助决定优先应用场景、转人工条件及服务质量标准，而非预设 AI 能完全替代人工。",
+      "usage": {
+        "input_tokens": 416,
+        "output_tokens": 173,
+        "total_tokens": 589,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.002562,
+        "currency": "USD",
+        "tokens": {
+          "input": 416,
+          "output": 173,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 589,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "writing-for-agents-1",
+      "skill_id": "matt-pocock.writing-for-agents",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "## Agent 指令：代码变更流程\n\n仅在修改项目代码时执行本流程；纯咨询、文档修改等非代码任务不适用。\n\n1. **确认范围**：明确需求、验收条件与影响范围；关键信息缺失时先询问。\n2. **阅读文档**：修改前阅读 `docs/README.md`、`docs/testing.md`，并按变更范围查阅相关文档，无需通读全部文档。文档缺失或冲突时说明情况，不臆测要求。\n3. **实施变更**：遵循项目约定，保持改动聚焦，避免无关重构；必要时补充或更新测试。\n4. **验证结果**：按 `docs/testing.md` 执行相关测试与检查，覆盖正常路径、边界及失败场景。失败时修复并重测；无法运行时如实说明原因和未验证范围。\n5. **交付结束**：汇总改动、实际执行的验证及结果、遗留风险。满足验收条件且相关检查通过后结束；仍有阻塞则明确报告，不宣称完成。",
+      "usage": {
+        "input_tokens": 288,
+        "output_tokens": 257,
+        "total_tokens": 545,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.003146,
+        "currency": "USD",
+        "tokens": {
+          "input": 288,
+          "output": 257,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 545,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "writing-for-agents-1",
+      "skill_id": "matt-pocock.writing-for-agents",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "## 代码变更 Agent 指令（草案）\n\n**适用范围**\n仅在需要新增、修改或删除项目代码时启用。纯问答、方案讨论、代码解读和仅文档修改不启用。\n\n**执行流程**\n1. 开始修改前，阅读 `docs/README.md`，了解项目约定；仅按当前任务需要阅读相关文档，不要求通读全部文档。\n2. 涉及代码变更时，阅读 `docs/testing.md`，按其中要求选择并执行相关测试；行为发生变化时补充或更新测试。\n3. 检查变更是否满足需求、是否引入无关修改。测试失败时排查并修复；无法解决或无法运行时明确说明原因，不得声称通过。\n\n**完成条件**\n需求已实现，相关测试已有结果且无未解释的失败。结束时简述变更、实际测试结果及遗留风险；存在阻塞时说明阻塞项，不宣称完成。\n\n*草案未核对上述文档内容；沿用项目现有权限与决策。*",
+      "usage": {
+        "input_tokens": 400,
+        "output_tokens": 242,
+        "total_tokens": 642,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.00322,
+        "currency": "USD",
+        "tokens": {
+          "input": 400,
+          "output": 242,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 642,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "writing-for-agents-2",
+      "skill_id": "matt-pocock.writing-for-agents",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "请审阅当前 diff，严格遵守以下要求：\n\n1. 仅检查当前 diff 中的改动，不扩大到未改动代码或无关文件。\n2. 只做审阅，不得修改、格式化或生成任何文件，不得自动修复。\n3. 优先识别真实缺陷，包括逻辑错误、安全风险、兼容性问题和遗漏的边界条件；不要将个人风格偏好作为问题。\n4. 每个问题必须引用文件路径和具体行号，说明问题、触发条件及影响；行号应对应改动后的文件。无法确认的问题须标明不确定性，不得臆测。\n5. 若未发现问题，明确回复：“未在当前 diff 中发现问题。”\n6. 若无法获取 diff 或行号，应明确说明，不能声称已完成审阅。",
+      "usage": {
+        "input_tokens": 265,
+        "output_tokens": 185,
+        "total_tokens": 450,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.00238,
+        "currency": "USD",
+        "tokens": {
+          "input": 265,
+          "output": 185,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 450,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "writing-for-agents-2",
+      "skill_id": "matt-pocock.writing-for-agents",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "你是代码审阅助手。仅在用户要求审阅当前 diff 时使用本指令；不用于实现功能、修复代码或全量审计。\n\n- 只审阅当前 diff 中的变更，不扩展检查未变更代码，不修改任何文件。\n- 只报告由本次变更引入、且有明确依据的问题；不报告纯风格偏好或无依据猜测。\n- 每个问题注明严重程度、文件路径及行号（优先使用新版本行号），说明触发条件、影响及判断依据。\n- 若未提供或无法获取 diff，明确说明无法审阅，不将其表述为“未发现问题”。\n- 完成时列出问题；若未发现问题，明确回复：“在当前 diff 中未发现问题。”不得暗示已运行未实际执行的测试或验证。",
+      "usage": {
+        "input_tokens": 377,
+        "output_tokens": 189,
+        "total_tokens": 566,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.002644,
+        "currency": "USD",
+        "tokens": {
+          "input": 377,
+          "output": 189,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 566,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "writing-for-agents-3",
+      "skill_id": "matt-pocock.writing-for-agents",
+      "arm": "without_skill",
+      "status": "SUCCEEDED",
+      "text": "建议改为：\n\n“仅处理本地文档修订。可在已批准范围内直接编辑并执行必要检查，不扩展到代码、配置或其他未授权内容。遇到含糊信息，不猜测、不编造：优先依据现有资料；无法确认时保留原文，标注疑点并询问用户。完成后说明修改内容、检查结果及未解决事项；未经实际执行，不声称已完成检查。默认不提交、不推送、不部署，只有用户明确要求对应操作时才执行；授权不清时先确认。”",
+      "usage": {
+        "input_tokens": 276,
+        "output_tokens": 129,
+        "total_tokens": 405,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.001842,
+        "currency": "USD",
+        "tokens": {
+          "input": 276,
+          "output": 129,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 405,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    },
+    {
+      "case_id": "writing-for-agents-3",
+      "skill_id": "matt-pocock.writing-for-agents",
+      "arm": "with_skill",
+      "status": "SUCCEEDED",
+      "text": "建议替换为：\n\n仅适用于本地文档修订，不适用于代码变更、提交或部署任务。\n\n- 可直接编辑任务范围内的文档，并执行已批准的检查；不得扩大权限或修改无关内容。\n- 遇到不确定之处，先查阅已提供的资料；仍无法确定时，保留原意并标注待确认。若歧义影响修订方向，先询问用户，不得猜测事实或要求。\n- 完成后简述修改内容、实际执行的检查及遗留问题；无执行凭据时，不得声称已修改或验证。\n- 不自动提交或部署。仅在用户明确要求对应操作、且具备所需权限与执行能力时进行；要求提交不等于要求部署。\n\n完成标准：修订未超出文档范围，检查结果如实报告，未决问题已明确列出。",
+      "usage": {
+        "input_tokens": 388,
+        "output_tokens": 202,
+        "total_tokens": 590,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.002796,
+        "currency": "USD",
+        "tokens": {
+          "input": 388,
+          "output": 202,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 590,
+          "reasoning": 0
+        },
+        "price": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "max_input_tokens": 272000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "output_incomplete": false
+    }
+  ],
+  "elapsed_seconds": 465.81,
+  "transport_status": "passed"
+}

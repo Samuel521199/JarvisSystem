@@ -1,0 +1,24 @@
+{
+  "version": "0.1.28",
+  "captured_at": "2026-10-16T13:51:44.285070+00:00",
+  "status": "passed",
+  "checks": [
+    "17 observations; explicit memory metadata, lazy stores, registration/execution and filters distinguished",
+    "seed version/source and search visible; planned build not executable; no private fact body in snapshot",
+    "import actual ZIP through UI; unverified version cannot be selected",
+    "blocked synthetic health job leaves real HTTP chat responsive; verified slot selection persisted",
+    "navigation stops module polling; archive draft survives navigation and refresh",
+    "390px layout has no horizontal page overflow"
+  ],
+  "page_errors": [],
+  "screenshots": [
+    "C:\\Users\\samuel\\AppData\\Local\\Jarvis\\data\\diagnostics\\runtime-entry\\desktop.png",
+    "C:\\Users\\samuel\\AppData\\Local\\Jarvis\\data\\diagnostics\\runtime-entry\\mobile.png",
+    "C:\\Users\\samuel\\AppData\\Local\\Jarvis\\data\\diagnostics\\runtime-entry\\catalog-desktop.png",
+    "C:\\Users\\samuel\\AppData\\Local\\Jarvis\\data\\diagnostics\\runtime-entry\\memory-card.png"
+  ],
+  "limits": [
+    "Candidate health subprocess and chat model are synthetic; real ZIP/SQLite/HTTP/browser paths exercised.",
+    "No live runtime switch, cloud model call, full load benchmark or OS sandbox claim."
+  ]
+}

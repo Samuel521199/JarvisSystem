@@ -1,0 +1,13 @@
+{
+  "date": "2026-10-17",
+  "status": "passed",
+  "version": "0.1.37",
+  "feature": "evolution-v1",
+  "user_data_snapshots_preserved": true,
+  "source_restart": "instance-specific tray event",
+  "local_model_previously_owned": false,
+  "source_assets_verified": true,
+  "generated_packages_and_policy_preserved": true,
+  "automatic_maintenance_enabled": true,
+  "url": "http://127.0.0.1:18181/settings#modules"
+}

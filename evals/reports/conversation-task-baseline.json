@@ -1,0 +1,57 @@
+{
+  "version": "0.1.31",
+  "captured_at": "2026-10-16T15:22:50.746050+00:00",
+  "status": "passed",
+  "unit_tests": {
+    "total": 417,
+    "passed": 415,
+    "skipped": 2,
+    "seconds": 292.631,
+    "exit_code": 0
+  },
+  "post_review_targeted_tests": {
+    "total": 11,
+    "passed": 11,
+    "seconds": 9.382,
+    "scope": "test_conversation_tasks.py including active queue capacity respected during history-window test"
+  },
+  "paid_model_calls_this_increment": 0,
+  "new_third_party_dependencies": 0,
+  "new_background_services": 0,
+  "new_databases": 0,
+  "browser_evidence": "evals/reports/conversation-task-ui.json",
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/conversation_tasks.py": "20a3821e7aebd9b41139fb30dae46edba6a1aa52cca4aeef825481a2a63f4229",
+    "runtime/node-host/jarvis_core/conversations.py": "6438df04e92fac8902fd349c955dbcb9a9d919897945d27981dffe1fa4ba71d2",
+    "runtime/node-host/jarvis_core/sample_tasks.py": "0b8b55a1680c5151ff0f55b397cabc9db88dd1fe5a760aa5b603107a6c5ca2f4",
+    "runtime/node-host/jarvis_core/task_queue.py": "f8f8e6866ce6d5804d79c6303613ba5b01c076beacc437b628bdc046d549ac3d",
+    "adapters/computer-use/jarvis_computer/web.py": "11271357e7d9526dbb1803c37e931c1a95a6e24ef357bcb54f7e140a2852fa78",
+    "apps/web/server.py": "85f092908d89714eab600a294b430a06660f27b6111cd19a3db37eeaf7784f4c",
+    "apps/web/index.html": "6825fa4acf4ed32965667eaa41781684e58fd0b55920c835b10ce2edd9f5a673",
+    "apps/web/conversations.js": "5e4880ba0baab2e47717a22da50a77c22ebae7651faa8fc776aa84bbcfae77d6",
+    "apps/web/workspace.js": "3babd100eda9c5e7c9c24eaff3e30d184568fc59aee2259e8bcdba56becc5fa2",
+    "apps/web/conversation_tasks.js": "3b6591ca4bfd2b5612903d5bfa043a6347e40a0cd4bb32b4b237e6323adfcba2",
+    "apps/web/conversation_tasks.css": "5f6552d3d2f2bfa7699de084b0877b97868a8bc5f17e08c966f430fe26871fb3",
+    "apps/web/computer.js": "1077d04743205e8fd2e5844851d1cc3e0ba182ca1b8608c837184d89bc305e0c",
+    "tests/test_conversation_tasks.py": "d05ba089767533c7d0ac5897642287db97664a93229eac4a06064f1ce17e8939",
+    "tools/probe_conversation_tasks_ui.py": "1cf8f8fdebe6182a1f0aa20320bd724bceb4f17b4d0eec27a9f836db0ef518ba"
+  },
+  "limits": [
+    "Full K1/K2/K3 gates remain incomplete.",
+    "Fixed sample report workflow only; no automatic generic model tools, extension execution or offline quality claim.",
+    "Functional overlap verified with synthetic planning; latency and load thresholds not benchmarked."
+  ],
+  "docs_check": {
+    "documents": 23,
+    "diagrams": 19,
+    "artifacts": 38,
+    "errors": 0
+  },
+  "seed_check": {
+    "ok": true,
+    "checked_assets": 22,
+    "fixture_cases": 12
+  },
+  "whitespace_check": "passed (repository CRLF convention)",
+  "deployment_evidence": "evals/reports/conversation-task-deployment.json"
+}

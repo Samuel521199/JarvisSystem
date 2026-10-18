@@ -1,0 +1,794 @@
+{
+  "schema_version": 1,
+  "observed_date": "2026-10-18",
+  "kind": "read-only upstream source review",
+  "runtime_installed": false,
+  "runtime_tests_run": false,
+  "model_calls": 0,
+  "scope": "Sources and dependency declarations only; no quality, Windows compatibility, RSS, installed-size or federation claims verified. HEAD means observed snapshot, not audited release.",
+  "projects": [
+    {
+      "repo": "MemPalace/mempalace",
+      "url": "https://github.com/MemPalace/mempalace",
+      "files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/MemPalace/mempalace/blob/74df9fabab2db96e53400465a23f475665f8871a/README.md",
+          "sha256": "d5b2fb46adbb20d7d170ad2d8a4b8821baec4bc3702b618b5e6e4447818d178d",
+          "bytes": 16988
+        },
+        {
+          "path": "pyproject.toml",
+          "url": "https://github.com/MemPalace/mempalace/blob/74df9fabab2db96e53400465a23f475665f8871a/pyproject.toml",
+          "sha256": "c09eb99b9a6a61ff3bd7994600bf1aaf728bc3f642711f9ef70da8c29f1e9ce9",
+          "bytes": 12714
+        },
+        {
+          "path": "requirements.txt",
+          "status": 404
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://github.com/MemPalace/mempalace/blob/74df9fabab2db96e53400465a23f475665f8871a/LICENSE",
+          "sha256": "81dc6cc278d80f0f1b028ecd86af30d61e441b9ae53d9d9a2ed19389ba657a5d",
+          "bytes": 1079
+        },
+        {
+          "path": "mempalace/backends/base.py",
+          "url": "https://github.com/MemPalace/mempalace/blob/74df9fabab2db96e53400465a23f475665f8871a/mempalace/backends/base.py",
+          "sha256": "8225c2feb8b3d27beb62d4f9c5b75f0cd6bd20ca41bb90c1aae54f876e1b5352",
+          "bytes": 39702
+        },
+        {
+          "path": "mempalace/embeddings.py",
+          "error": "HTTPError:HTTP Error 404: Not Found"
+        }
+      ],
+      "commit": "74df9fabab2db96e53400465a23f475665f8871a",
+      "commit_date": "2026-10-18T00:45:39Z",
+      "dependency_declarations": {
+        "python": ">=3.9",
+        "base_count": 7,
+        "base": [
+          "chromadb>=1.5.4,<2",
+          "pyyaml>=6.0,<7",
+          "tomli>=2.0.0; python_version < '3.11'",
+          "huggingface_hub>=0.20",
+          "tokenizers>=0.15",
+          "numpy>=1.24",
+          "python-dateutil>=2.8"
+        ],
+        "optional_groups": [
+          "dev",
+          "spellcheck",
+          "milvus",
+          "pgvector",
+          "gpu",
+          "dml",
+          "coreml",
+          "embeddinggemma2",
+          "multimodal",
+          "multilingual",
+          "extract"
+        ],
+        "not_installed_closure": true
+      }
+    },
+    {
+      "repo": "langchain-ai/langmem",
+      "url": "https://github.com/langchain-ai/langmem",
+      "files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/langchain-ai/langmem/blob/48e3c11f5bb527282c7d5339c6a87a0b35abccfc/README.md",
+          "sha256": "e1edd000d263bfea842c34273add82421340c2caf2d7b87edd285daf02156ca3",
+          "bytes": 5205
+        },
+        {
+          "path": "pyproject.toml",
+          "url": "https://github.com/langchain-ai/langmem/blob/48e3c11f5bb527282c7d5339c6a87a0b35abccfc/pyproject.toml",
+          "sha256": "6a964d268d23b8860c848b7b23f2dc6998204eaa0eb28cfe2d404359eb51611a",
+          "bytes": 2056
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://github.com/langchain-ai/langmem/blob/48e3c11f5bb527282c7d5339c6a87a0b35abccfc/LICENSE",
+          "sha256": "98af1351ea856e008c835bc89a312905960a318072f950732bf346c741027c7d",
+          "bytes": 1066
+        },
+        {
+          "path": "docs/docs/concepts/conceptual_guide.md",
+          "url": "https://github.com/langchain-ai/langmem/blob/48e3c11f5bb527282c7d5339c6a87a0b35abccfc/docs/docs/concepts/conceptual_guide.md",
+          "sha256": "49c925c64937d3952ce2b0c4f761c255c485c84cac8d2c695ae0ab4427d81288",
+          "bytes": 20660
+        },
+        {
+          "path": "src/langmem/knowledge/extraction.py",
+          "url": "https://github.com/langchain-ai/langmem/blob/48e3c11f5bb527282c7d5339c6a87a0b35abccfc/src/langmem/knowledge/extraction.py",
+          "sha256": "165d4c019f55a365dba5a551e1af0c0313a2f4bab292e47493acc6f1cd62c13e",
+          "bytes": 81775
+        }
+      ],
+      "commit": "48e3c11f5bb527282c7d5339c6a87a0b35abccfc",
+      "commit_date": "2026-10-02T19:35:19Z",
+      "dependency_declarations": {
+        "python": ">=3.10",
+        "base_count": 8,
+        "base": [
+          "langchain>=0.3.15",
+          "langchain-core>=0.3.46",
+          "langchain-openai>=0.3.1",
+          "trustcall>=0.0.39",
+          "langgraph>=0.6.0,<2",
+          "langchain-anthropic>=0.3.3",
+          "langsmith>=0.3.8",
+          "langgraph-checkpoint>=2.0.12"
+        ],
+        "optional_groups": [],
+        "not_installed_closure": true
+      }
+    },
+    {
+      "repo": "zjunlp/LightMem",
+      "url": "https://github.com/zjunlp/LightMem",
+      "files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/zjunlp/LightMem/blob/8449d574df6bae1bdf3314a1564da65e2f37e046/README.md",
+          "sha256": "5c70a2078e9cb0de3565508d341683b096434759c2191a0117163af3fd5553e9",
+          "bytes": 41058
+        },
+        {
+          "path": "pyproject.toml",
+          "url": "https://github.com/zjunlp/LightMem/blob/8449d574df6bae1bdf3314a1564da65e2f37e046/pyproject.toml",
+          "sha256": "632334023335283070abb2eebfc5bece3eea11387724eaccb7aeda40732b97bb",
+          "bytes": 2698
+        },
+        {
+          "path": "requirements.txt",
+          "status": 404
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://github.com/zjunlp/LightMem/blob/8449d574df6bae1bdf3314a1564da65e2f37e046/LICENSE",
+          "sha256": "5ec1877dbe08c6d6ee2213e44a64bc011bd21819b50b4172e3bca4acab4bf4e8",
+          "bytes": 1063
+        }
+      ],
+      "commit": "8449d574df6bae1bdf3314a1564da65e2f37e046",
+      "commit_date": "2026-09-05T08:32:46Z",
+      "dependency_declarations": {
+        "python": ">=3.10,<3.12",
+        "base_count": 58,
+        "base": [
+          "torch==2.8.0",
+          "transformers==4.57.0",
+          "sentence-transformers==5.1.1",
+          "accelerate==1.10.1",
+          "openai==2.3.0",
+          "tiktoken==0.12.0",
+          "llmlingua==0.2.2",
+          "qdrant-client==1.15.1",
+          "pydantic==2.12.0",
+          "pydantic_core==2.41.1",
+          "numpy==2.2.6",
+          "scipy==1.15.3",
+          "scikit-learn==1.7.2",
+          "nltk==3.9.2",
+          "tokenizers==0.22.1",
+          "huggingface-hub==0.35.3",
+          "safetensors==0.6.2",
+          "tqdm==4.67.1",
+          "PyYAML==6.0.3",
+          "requests==2.32.5",
+          "filelock==3.20.0",
+          "regex==2025.9.18",
+          "packaging==25.0",
+          "httpx==0.28.1",
+          "httpcore==1.0.9",
+          "h11==0.16.0",
+          "h2==4.3.0",
+          "anyio==4.11.0",
+          "certifi==2025.10.5",
+          "charset-normalizer==3.4.3",
+          "idna==3.10",
+          "click==8.3.0",
+          "joblib==1.5.2",
+          "Jinja2==3.1.6",
+          "MarkupSafe==3.0.3",
+          "pillow==11.3.0",
+          "protobuf==6.32.1",
+          "psutil==7.1.0",
+          "fsspec==2025.9.0",
+          "grpcio==1.75.1",
+          "portalocker==3.2.0",
+          "annotated-types==0.7.0",
+          "typing_extensions==4.15.0",
+          "typing-inspection==0.4.2",
+          "networkx==3.4.2",
+          "sympy==1.14.0",
+          "mpmath==1.3.0",
+          "distro==1.9.0",
+          "hf-xet==1.1.10",
+          "hpack==4.1.0",
+          "hyperframe==6.1.0",
+          "jiter==0.11.0",
+          "sniffio==1.3.1",
+          "threadpoolctl==3.6.0",
+          "urllib3==2.5.0",
+          "httpx==0.28.1",
+          "pysocks==1.7.1",
+          "rank-bm25>=0.2.2"
+        ],
+        "optional_groups": [
+          "llms",
+          "mcp",
+          "fluxmem",
+          "dev"
+        ],
+        "not_installed_closure": true
+      }
+    },
+    {
+      "repo": "agiresearch/A-mem",
+      "url": "https://github.com/agiresearch/A-mem",
+      "files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/agiresearch/A-mem/blob/ceffb860f0712bbae97b184d440df62bc910ca8d/README.md",
+          "sha256": "6f7185bb241d8ed5f7c0b8c4716b4f5e5cf1e9a3c630c3a1a92e54c3f5fb88b0",
+          "bytes": 6390
+        },
+        {
+          "path": "pyproject.toml",
+          "url": "https://github.com/agiresearch/A-mem/blob/ceffb860f0712bbae97b184d440df62bc910ca8d/pyproject.toml",
+          "sha256": "d0cb38f6860dfa50cdc0141896bc6115501bd181fd6c122910cdf0fb07db9dc5",
+          "bytes": 1184
+        },
+        {
+          "path": "requirements.txt",
+          "url": "https://github.com/agiresearch/A-mem/blob/ceffb860f0712bbae97b184d440df62bc910ca8d/requirements.txt",
+          "sha256": "d01b0399ebf1903f2b88d92f238eb229cebe1ddc434ba2c65c4e716642f636ec",
+          "bytes": 175
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://github.com/agiresearch/A-mem/blob/ceffb860f0712bbae97b184d440df62bc910ca8d/LICENSE",
+          "sha256": "c8a51c83455b8afc3a11b085ce57c7b9b34c6725d6b2329ce3dd9a273f0add6d",
+          "bytes": 1068
+        }
+      ],
+      "commit": "ceffb860f0712bbae97b184d440df62bc910ca8d",
+      "commit_date": "2025-12-12T21:15:29Z",
+      "dependency_declarations": {
+        "python": ">=3.8",
+        "base_count": 9,
+        "base": [
+          "sentence-transformers>=2.2.2",
+          "chromadb>=0.4.22",
+          "rank_bm25>=0.2.2",
+          "nltk>=3.8.1",
+          "litellm>=1.16.11",
+          "numpy>=1.24.3",
+          "scikit-learn>=1.3.2",
+          "openai>=1.3.7",
+          "pre-commit>=3.4.0"
+        ],
+        "optional_groups": [
+          "dev"
+        ],
+        "not_installed_closure": true
+      }
+    },
+    {
+      "repo": "EverMind-AI/EverOS",
+      "url": "https://github.com/EverMind-AI/EverOS",
+      "files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/EverMind-AI/EverOS/blob/736b82103557cc7d5886ae86c4fd0161e69983cd/README.md",
+          "sha256": "dc8baf171b61ca6dc7c3679a4bb7d0284bcd7d3fb5e2896d35fc6475404ae335",
+          "bytes": 28262
+        },
+        {
+          "path": "pyproject.toml",
+          "url": "https://github.com/EverMind-AI/EverOS/blob/736b82103557cc7d5886ae86c4fd0161e69983cd/pyproject.toml",
+          "sha256": "d18f018ee852c5b6eaa52122ac78f71f670d0ab04a6934238c45a0e0851e6640",
+          "bytes": 15883
+        },
+        {
+          "path": "package.json",
+          "status": 404
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://github.com/EverMind-AI/EverOS/blob/736b82103557cc7d5886ae86c4fd0161e69983cd/LICENSE",
+          "sha256": "748007f17980117469390a385c37423c4bea2b0627cb6be00be315f9e64fc020",
+          "bytes": 11341
+        },
+        {
+          "path": "docs/how-memory-works.md",
+          "url": "https://github.com/EverMind-AI/EverOS/blob/736b82103557cc7d5886ae86c4fd0161e69983cd/docs/how-memory-works.md",
+          "sha256": "9b777d1bcc491b63512b8ca1767acbd6c35a58a47ae6ded6efc15465c33a3a27",
+          "bytes": 16964
+        }
+      ],
+      "commit": "736b82103557cc7d5886ae86c4fd0161e69983cd",
+      "commit_date": "2026-10-16T08:47:26Z",
+      "dependency_declarations": {
+        "python": ">=3.12",
+        "base_count": 32,
+        "base": [
+          "pydantic>=2.7.1",
+          "pydantic-settings>=2.0.0",
+          "lancedb>=0.34.0,<0.35.0",
+          "pyarrow>=25.0.1",
+          "aiosqlite>=0.20.0",
+          "sqlmodel>=0.0.22",
+          "alembic>=1.13.0",
+          "greenlet>=3.0",
+          "openai>=1.0.0,<3",
+          "PyYAML>=6.0",
+          "watchdog>=4.0.0",
+          "fastapi>=0.104.0",
+          "python-multipart>=0.0.7",
+          "uvicorn[standard]>=0.24.0",
+          "structlog>=24.0.0",
+          "prometheus-client>=0.20.0",
+          "typer>=0.12.0",
+          "click>=8.1",
+          "textual>=8.2.7",
+          "jieba>=0.42.1,<1.0",
+          "apscheduler>=3.10.4,<4.0",
+          "portalocker>=2.8.2",
+          "msvc-runtime>=14.44; sys_platform == 'win32'",
+          "watchfiles>=0.21.0",
+          "anyio>=4.0",
+          "everalgo-user-memory==0.4.0",
+          "everalgo-agent-memory==0.4.0",
+          "everalgo-rank==0.4.1",
+          "everalgo-knowledge==0.1.1",
+          "everalgo-boundary==0.2.1",
+          "everalgo-core==0.3.0",
+          "everalgo-clustering==0.2.1"
+        ],
+        "optional_groups": [
+          "multimodal",
+          "otel",
+          "milvus"
+        ],
+        "not_installed_closure": true
+      }
+    },
+    {
+      "repo": "mem0ai/mem0",
+      "url": "https://github.com/mem0ai/mem0",
+      "files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/mem0ai/mem0/blob/0724291bd864cf807e88ee8981c8226644e8fb42/README.md",
+          "sha256": "f72db3426438dbdf6879a2b50583fbee8e7e2dde5d01308c6295bcd09fd3db86",
+          "bytes": 12306
+        },
+        {
+          "path": "pyproject.toml",
+          "url": "https://github.com/mem0ai/mem0/blob/0724291bd864cf807e88ee8981c8226644e8fb42/pyproject.toml",
+          "sha256": "d4bc078a05cc7b9d677bbf4d0b262cfc532495b5aadeded053ac84fd90b6e974",
+          "bytes": 3394
+        },
+        {
+          "path": "mem0/memory/main.py",
+          "url": "https://github.com/mem0ai/mem0/blob/0724291bd864cf807e88ee8981c8226644e8fb42/mem0/memory/main.py",
+          "sha256": "f329ca4a17af1fbefb32ac10d4cc7ae7ddbdb7435a87eb74c30915cff98b8b7c",
+          "bytes": 169881
+        },
+        {
+          "path": "mem0/telemetry.py",
+          "status": 404
+        }
+      ],
+      "commit": "0724291bd864cf807e88ee8981c8226644e8fb42",
+      "commit_date": "2026-10-14T15:39:50Z",
+      "dependency_declarations": {
+        "python": ">=3.10,<4.0",
+        "base_count": 8,
+        "base": [
+          "qdrant-client>=1.12.0",
+          "pydantic>=2.7.3",
+          "openai>=1.90.0",
+          "httpx>=0.28.0",
+          "posthog>=7.14.0",
+          "pytz>=2024.1",
+          "sqlalchemy>=2.0.31",
+          "protobuf>=5.29.6,<7.0.0"
+        ],
+        "optional_groups": [
+          "nlp",
+          "vector-stores",
+          "llms",
+          "extras",
+          "test",
+          "dev"
+        ],
+        "not_installed_closure": true
+      }
+    },
+    {
+      "repo": "langchain-ai/openwiki",
+      "url": "https://github.com/langchain-ai/openwiki",
+      "files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/langchain-ai/openwiki/blob/6c14bff27830034bfd70c15bde46825d7686ec60/README.md",
+          "sha256": "ceb3bb19fc5ee5623722e69ad79e26fd809ba0217d1079d62b99101cf215f355",
+          "bytes": 49423
+        },
+        {
+          "path": "package.json",
+          "url": "https://github.com/langchain-ai/openwiki/blob/6c14bff27830034bfd70c15bde46825d7686ec60/package.json",
+          "sha256": "4a96f1c53a796317127606cb382a1aaaf8d8f1c4cda78fd9eb1bfa564df4cb6c",
+          "bytes": 4151
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://github.com/langchain-ai/openwiki/blob/6c14bff27830034bfd70c15bde46825d7686ec60/LICENSE",
+          "sha256": "1126322e2cc8d165adc4c792eeb195717de2bcc7b39be1ce77959d78e87ef685",
+          "bytes": 1056
+        },
+        {
+          "path": "src/claims/types.ts",
+          "error": "HTTPError:HTTP Error 404: Not Found"
+        },
+        {
+          "path": "src/retrieval/wiki.ts",
+          "url": "https://github.com/langchain-ai/openwiki/blob/6c14bff27830034bfd70c15bde46825d7686ec60/src/retrieval/wiki.ts",
+          "sha256": "cf61519c47616bd528bea382c75eab3199810dba46a36feac99b45d1230d01cf",
+          "bytes": 31924
+        }
+      ],
+      "commit": "6c14bff27830034bfd70c15bde46825d7686ec60",
+      "commit_date": "2026-10-17T17:36:48Z"
+    },
+    {
+      "repo": "MemTensor/MemOS",
+      "url": "https://github.com/MemTensor/MemOS",
+      "files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/MemTensor/MemOS/blob/a7367d07e55db61099f7b4e2c1108bc5831a24f3/README.md",
+          "sha256": "9c2ec97ba97e5371088e041d04085f70195b4626a9dcb517194f90b9495b30dc",
+          "bytes": 17535
+        },
+        {
+          "path": "pyproject.toml",
+          "url": "https://github.com/MemTensor/MemOS/blob/a7367d07e55db61099f7b4e2c1108bc5831a24f3/pyproject.toml",
+          "sha256": "e0e931fe30f7e300ab149ff78492f123459834d6c58d0de9c6ced517310ef3a5",
+          "bytes": 8164
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://github.com/MemTensor/MemOS/blob/a7367d07e55db61099f7b4e2c1108bc5831a24f3/LICENSE",
+          "sha256": "154f9be8df2d55ceddcd4646c8d8d4206d48867ae1da2b81ce2ab86b51a5f075",
+          "bytes": 11358
+        }
+      ],
+      "commit": "a7367d07e55db61099f7b4e2c1108bc5831a24f3",
+      "commit_date": "2026-09-22T01:51:03Z",
+      "dependency_declarations": {
+        "python": ">=3.10",
+        "base_count": 13,
+        "base": [
+          "openai (>=1.77.0,<2.0.0)",
+          "ollama (>=0.5.0,<0.5.1)",
+          "transformers (>=4.51.3,<5.0.0)",
+          "tenacity (>=9.1.2,<10.0.0)",
+          "fastapi[all] (>=0.115.12,<0.116.0)",
+          "sqlalchemy (>=2.0.41,<3.0.0)",
+          "pymysql (>=1.1.0,<2.0.0)",
+          "scikit-learn (>=1.7.0,<2.0.0)",
+          "fastmcp (>=2.10.5,<3.0.0)",
+          "python-dateutil (>=2.9.0.post0,<3.0.0)",
+          "prometheus-client (>=0.23.1,<0.24.0)",
+          "concurrent-log-handler (>=0.9.28,<1.0.0)",
+          "cachetools (>=6.0.0)"
+        ],
+        "optional_groups": [
+          "tree-mem",
+          "mem-scheduler",
+          "mem-user",
+          "mem-reader",
+          "pref-mem",
+          "skill-mem",
+          "tavily",
+          "all"
+        ],
+        "not_installed_closure": true
+      }
+    },
+    {
+      "repo": "volcengine/OpenViking",
+      "url": "https://github.com/volcengine/OpenViking",
+      "files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/volcengine/OpenViking/blob/8d28ffcdbb646a2f8cc1d8176d37d3c0185bc596/README.md",
+          "sha256": "cf4f7139c240f47eb21b6f01350e2870f3078566a38c50de92bc4b78d5933abf",
+          "bytes": 26880
+        },
+        {
+          "path": "pyproject.toml",
+          "url": "https://github.com/volcengine/OpenViking/blob/8d28ffcdbb646a2f8cc1d8176d37d3c0185bc596/pyproject.toml",
+          "sha256": "099e1bf9acbd1e4e91219092f5ddbfbe66576c4db2896aa54034f5fca2139639",
+          "bytes": 8391
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://github.com/volcengine/OpenViking/blob/8d28ffcdbb646a2f8cc1d8176d37d3c0185bc596/LICENSE",
+          "sha256": "1bd87fa6d9a5c79daf0c2af042b6725c9773bf095cc3d1bdf3656e66d1c3e5b1",
+          "bytes": 34568
+        }
+      ],
+      "commit": "8d28ffcdbb646a2f8cc1d8176d37d3c0185bc596",
+      "commit_date": "2026-10-16T16:25:24Z",
+      "dependency_declarations": {
+        "python": ">=3.10",
+        "base_count": 59,
+        "base": [
+          "aiohttp>=3.13.3",
+          "async-timeout>=5.0.1",
+          "orjson>=3.11.7",
+          "packaging>=24.0",
+          "openviking-sdk>=0.1.15",
+          "pydantic>=2.0.0",
+          "typing-extensions>=4.5.0",
+          "pyyaml>=6.0",
+          "httpx>=0.25.0",
+          "pdfplumber>=0.10.0",
+          "scrapy>=2.11.0",
+          "trafilatura>=1.12.0",
+          "feedparser>=6.0.0",
+          "defusedxml>=0.7.1",
+          "cairosvg>=2.9.1",
+          "openai>=1.0.0",
+          "requests>=2.33.0",
+          "charset-normalizer>=3.4,<4",
+          "firecrawl-anydoc>=0.2.4,<0.3",
+          "json-repair>=0.25.0",
+          "apscheduler>=3.11.0",
+          "volcengine>=1.0.216",
+          "volcengine-python-sdk[ark]>=5.0.3",
+          "fastapi>=0.128.0",
+          "uvicorn>=0.39.0",
+          "xxhash>=3.0.0",
+          "rapidfuzz>=3.14,<4",
+          "jinja2>=3.1.6",
+          "tabulate>=0.9.0",
+          "urllib3>=2.7.0",
+          "protobuf>=6.33.5",
+          "pdfminer-six>=20251230",
+          "typer>=0.12.0",
+          "litellm>=1.83.7,<1.91.2",
+          "python-multipart>=0.0.31",
+          "tree-sitter==0.25.2",
+          "tree-sitter-python==0.25.0",
+          "tree-sitter-javascript==0.25.0",
+          "tree-sitter-typescript==0.23.2",
+          "tree-sitter-java==0.23.5",
+          "tree-sitter-cpp==0.23.4",
+          "tree-sitter-rust==0.24.0",
+          "tree-sitter-go==0.25.0",
+          "tree-sitter-c-sharp==0.23.1",
+          "tree-sitter-php==0.24.1",
+          "tree-sitter-lua==0.5.0",
+          "opentelemetry-api>=1.14",
+          "opentelemetry-sdk>=1.14",
+          "opentelemetry-exporter-otlp-proto-grpc>=1.14",
+          "opentelemetry-exporter-otlp-proto-http>=1.14",
+          "opentelemetry-instrumentation-asyncio>=0.61b0",
+          "loguru>=0.7.3",
+          "cryptography>=48.0.1",
+          "argon2-cffi>=23.0.0",
+          "lark-oapi>=1.5.3",
+          "mcp>=1.27,<2",
+          "pathspec>=1.1.1",
+          "grep-ast==0.9.0",
+          "tree-sitter-language-pack==1.13.3"
+        ],
+        "optional_groups": [
+          "expiry",
+          "gateway-fast",
+          "mysql",
+          "redis-mysql",
+          "test",
+          "auth",
+          "dev",
+          "doc",
+          "eval",
+          "gemini",
+          "gemini-async",
+          "ocr",
+          "build",
+          "bot",
+          "benchmark",
+          "local-embed",
+          "opengauss"
+        ],
+        "not_installed_closure": true
+      }
+    },
+    {
+      "repo": "vectorize-io/hindsight",
+      "url": "https://github.com/vectorize-io/hindsight",
+      "files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/vectorize-io/hindsight/blob/5331da2f4db369528bb122075341a7de9c3df6df/README.md",
+          "sha256": "a3e2745dedec4f9e0d4452857ef054699e60414740f5d8f12d41bd42711d476a",
+          "bytes": 24997
+        },
+        {
+          "path": "hindsight-api-slim/pyproject.toml",
+          "url": "https://github.com/vectorize-io/hindsight/blob/5331da2f4db369528bb122075341a7de9c3df6df/hindsight-api-slim/pyproject.toml",
+          "sha256": "bf8d2f7312ecce09b3bce67006980cb6275b81acb36460170102d44d4fec7063",
+          "bytes": 17718
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://github.com/vectorize-io/hindsight/blob/5331da2f4db369528bb122075341a7de9c3df6df/LICENSE",
+          "sha256": "01fde0bedf83bdc185065d7af524a61690efe576a67f922eaff3a1280c17b63a",
+          "bytes": 1075
+        }
+      ],
+      "commit": "5331da2f4db369528bb122075341a7de9c3df6df",
+      "commit_date": "2026-10-16T19:58:40Z"
+    },
+    {
+      "repo": "getzep/graphiti",
+      "url": "https://github.com/getzep/graphiti",
+      "files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/getzep/graphiti/blob/417c3a125ae3ac53c19b8e53fffaccf3e665a88e/README.md",
+          "sha256": "e0beb0d34b53e25e72c22d68bd951c34a1dfdc1b4454fd821ecc29f3552708de",
+          "bytes": 33169
+        },
+        {
+          "path": "pyproject.toml",
+          "url": "https://github.com/getzep/graphiti/blob/417c3a125ae3ac53c19b8e53fffaccf3e665a88e/pyproject.toml",
+          "sha256": "6125ce74f424c800b0f752e1039b9d490f9de446ee2a69576a76b1c2c65ef22c",
+          "bytes": 2783
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://github.com/getzep/graphiti/blob/417c3a125ae3ac53c19b8e53fffaccf3e665a88e/LICENSE",
+          "sha256": "2825300b20d7b951209835a4a331f29e24725a39d65168e4b831df53aa372650",
+          "bytes": 11325
+        }
+      ],
+      "commit": "417c3a125ae3ac53c19b8e53fffaccf3e665a88e",
+      "commit_date": "2026-10-17T22:49:19Z",
+      "dependency_declarations": {
+        "python": ">=3.10,<4",
+        "base_count": 7,
+        "base": [
+          "pydantic>=2.11.5",
+          "neo4j>=5.26.0",
+          "openai>=1.91.0",
+          "tenacity>=9.0.0",
+          "numpy>=1.0.0",
+          "python-dotenv>=1.0.1",
+          "posthog>=3.0.0"
+        ],
+        "optional_groups": [
+          "anthropic",
+          "groq",
+          "google-genai",
+          "kuzu",
+          "falkordb",
+          "falkordblite",
+          "voyageai",
+          "gliner2",
+          "neo4j-opensearch",
+          "sentence-transformers",
+          "neptune",
+          "tracing",
+          "dev"
+        ],
+        "not_installed_closure": true
+      }
+    }
+  ],
+  "gist_error": "HTTP Error 502: Bad Gateway",
+  "primary_pages": [
+    {
+      "url": "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f",
+      "method": "web-open; concept document, no pinned local digest",
+      "scope": "LLM Wiki pattern, not a packaged implementation"
+    },
+    {
+      "url": "https://langchain-ai.github.io/langmem/",
+      "method": "web-open",
+      "scope": "Public functional API and storage integration"
+    },
+    {
+      "url": "https://arxiv.org/abs/2510.18866",
+      "method": "web-search abstract",
+      "scope": "LightMem paper, no experiment reproduced"
+    },
+    {
+      "url": "https://arxiv.org/abs/2502.12110",
+      "method": "official repository paper reference",
+      "scope": "A-MEM paper reference"
+    },
+    {
+      "url": "https://arxiv.org/abs/2601.01885",
+      "method": "web-search abstract",
+      "scope": "AgeMem research-policy distinction only"
+    }
+  ],
+  "verified_downloads": 39,
+  "decision_status": "proposed; implementation and comparative benchmark not performed",
+  "application_baseline": "Existing 0.1.43 memory/candidate semantics; unrelated newer components are not assessed by this review.",
+  "unverified": [
+    "Candidate extraction or recall quality on Jarvis Chinese data",
+    "Installed transitive dependencies and model downloads",
+    "Windows install, startup, peak RSS/private bytes and long-run behavior",
+    "Multi-node identity, merge, deletion and task ownership",
+    "Full compliance or security audit of any framework"
+  ],
+  "decision_followup": {
+    "date": "2026-10-18",
+    "status": "proposed_architecture_recommendation_not_empirical_winner",
+    "decision": "Keep Jarvis memory semantics and SQLite authority; compare minimal structured extraction, LangMem functional extraction and isolated Mem0 against the existing rule baseline. Adopt only components with demonstrated value.",
+    "docs": "docs/stack-project-layout.md#memory-recommended-plan",
+    "primary_pages_rechecked": [
+      "https://langchain-ai.github.io/langmem/guides/extract_semantic_memories/",
+      "https://docs.mem0.ai/open-source/python-quickstart",
+      "https://github.com/langchain-ai/openwiki",
+      "https://github.com/MemPalace/mempalace",
+      "https://github.com/EverMind-AI/EverOS",
+      "https://github.com/zjunlp/LightMem",
+      "https://alexgarcia.xyz/sqlite-vec/",
+      "https://sqlite.org/fts5.html",
+      "https://github.com/vectorize-io/hindsight",
+      "https://github.com/getzep/graphiti"
+    ],
+    "comparison_sample_plan": {
+      "development": 120,
+      "held_out": 60,
+      "generative_repeats": 3,
+      "status": "proposed_not_generated_or_run"
+    },
+    "new_candidate_installations": 0,
+    "new_paid_model_calls": 0,
+    "runtime_changes": false
+  },
+  "scope_followup": {
+    "date": "2026-10-18",
+    "status": "proposed_design_only",
+    "authority": "docs/knowledge-learning.md#memory-scope-model",
+    "decision": "Unified interfaces, typed facts partitioned by subject/domain/purpose, controlled references or reviewed promotion, recipient-specific views and dependency invalidation. Sensitive domains may use physical isolation.",
+    "primary_pages": [
+      "https://docs.langchain.com/oss/python/concepts/memory",
+      "https://langchain-ai.github.io/langmem/guides/manage_user_profile/",
+      "https://docs.mem0.ai/open-source/features/metadata-filtering"
+    ],
+    "diagram": "docs/diagrams/personal-work-memory.mmd",
+    "diagram_sha256": "14c2042d9715afd7d9ac2aec1ac038d40ce88b120122f417b9ce8112e8a22941",
+    "domain_scenarios": "docs/delivery-validation.md#memory-domain-validation",
+    "runtime_changes": false,
+    "model_calls": 0,
+    "new_dependencies": [],
+    "new_runtime_tests_run": false,
+    "validation": {
+      "docs": {
+        "documents": 24,
+        "diagrams": 21,
+        "artifacts": 42,
+        "errors": 0
+      },
+      "diagram_render": "21 parsed and rendered; new diagram visually reviewed; existing diagram assets unchanged",
+      "implementation_status": "proposed; no runtime test or isolation claim"
+    }
+  }
+}

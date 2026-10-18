@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-10-18T04:47:31.258158+00:00",
+  "status": "REVIEWED_DESIGN_NOT_IMPLEMENTED",
+  "scope": "Conversation, task and voice separation: current source inspection and existing bounded tests; no real microphone or new intent classifier tested",
+  "runtime": {
+    "app": "Jarvis",
+    "version": "0.1.45",
+    "core_ready": true,
+    "active_tasks": 0,
+    "active_chat_requests": 0
+  },
+  "tests": {
+    "modules": [
+      "test_readout",
+      "test_resources",
+      "test_runtime_metrics",
+      "test_conversation_tasks",
+      "test_web"
+    ],
+    "run": 61,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "elapsed_seconds": 6.709,
+    "log": ".............................................................\n----------------------------------------------------------------------\nRan 61 tests in 6.650s\n\nOK\n"
+  },
+  "source_sha256": {
+    "apps/web/server.py": "4a0710827abe4cd05221f61aa309895e0488c4263235c2f263a053dd310e2b6f",
+    "apps/web/index.html": "8d963d46b223d446940a679666a79857e26ba30b234fb403a3ac7a2d5b2a0e65",
+    "apps/web/conversation_tasks.js": "aecce60287152f56b25e13a89cbedf9dd0d5d71f863ee01f12b519c2f709de65",
+    "runtime/node-host/jarvis_core/chat.py": "43730b7a119d9451c09672288f236d69397371c2476e5a9b4b23347091fd6352",
+    "runtime/node-host/jarvis_core/resources.py": "b72fb4517a4aea93f1650c9433d0b9f893c328dad2e060fc135e4431403320b7",
+    "runtime/node-host/jarvis_core/task_queue.py": "1352f998417cd9d858309b5af1c2e9f0265b71a3a74ecfe1a4492ee4763afe6a",
+    "runtime/node-host/jarvis_core/readout.py": "6333abb1e208f2fd768651df70345571ecb950fdcb603d0613c83456aefcb1c8",
+    "apps/web/readout.js": "935f7dd4f4c777943aa7d9aaf7745e716a032f0eadb707cd0da892b26c4bd560",
+    "config/resource-profile.json": "42d39baca1a19a4adf8880436f1cd31360cc5e1e83d09c5521ab8d7eacce54fe"
+  },
+  "findings": {
+    "text_chat": true,
+    "explicit_local_reply_readout": true,
+    "microphone_web_entry": false,
+    "general_automatic_multi_intent_routing": false,
+    "browser_send_global_busy_gate": true,
+    "http_chat_slots": 2,
+    "background_task_slots": 1,
+    "memory_admission_reserve_mib": 1024,
+    "unified_cpu_gpu_provider_reservations": false,
+    "text_reply_streaming": false
+  },
+  "historical_audio_evidence": {
+    "path": "evals/reports/chat-readout-ui-2026-10-18.json",
+    "cold_click_to_native_audio_seconds": 9.336,
+    "retested_in_this_review": false
+  },
+  "limits": [
+    "Existing tests include synthetic models and fake speech workers; not real model intent accuracy or microphone/room-audio quality.",
+    "No new runtime implementation, dependency install, model request or deployment performed.",
+    "No 8 GiB machine or long-running load validation in this review."
+  ],
+  "followup_validation": {
+    "checked_at": "2026-10-18T04:56:43.602683+00:00",
+    "source_version": "0.1.46",
+    "runtime_version": "0.1.46",
+    "changed_review_files": [
+      "apps/web/conversation_tasks.js"
+    ],
+    "change_note": "Shared worktree changed concurrently: conversation task evidence_ref presentation. Routing and global send gate remain as audited; no edits made to that runtime file in this task.",
+    "tests_run": 61,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "elapsed_seconds": 10.218,
+    "log": ".............................................................\n----------------------------------------------------------------------\nRan 61 tests in 9.935s\n\nOK\n",
+    "javascript_syntax_exit_code": 0,
+    "source_sha256": {
+      "apps/web/server.py": "4a0710827abe4cd05221f61aa309895e0488c4263235c2f263a053dd310e2b6f",
+      "apps/web/index.html": "8d963d46b223d446940a679666a79857e26ba30b234fb403a3ac7a2d5b2a0e65",
+      "apps/web/conversation_tasks.js": "fa1e54beecda04583c9b66f0633a1f1c0307702959443123bb1bb8c97336c1b2",
+      "runtime/node-host/jarvis_core/chat.py": "43730b7a119d9451c09672288f236d69397371c2476e5a9b4b23347091fd6352",
+      "runtime/node-host/jarvis_core/resources.py": "b72fb4517a4aea93f1650c9433d0b9f893c328dad2e060fc135e4431403320b7",
+      "runtime/node-host/jarvis_core/task_queue.py": "1352f998417cd9d858309b5af1c2e9f0265b71a3a74ecfe1a4492ee4763afe6a",
+      "runtime/node-host/jarvis_core/readout.py": "6333abb1e208f2fd768651df70345571ecb950fdcb603d0613c83456aefcb1c8",
+      "apps/web/readout.js": "935f7dd4f4c777943aa7d9aaf7745e716a032f0eadb707cd0da892b26c4bd560",
+      "config/resource-profile.json": "42d39baca1a19a4adf8880436f1cd31360cc5e1e83d09c5521ab8d7eacce54fe"
+    }
+  },
+  "documentation_review": {
+    "navigation": "synchronized",
+    "diagram_sources_changed": [
+      "docs/diagrams/parallel-dialogue-task.mmd"
+    ],
+    "visual_review": [
+      "docs/diagrams/parallel-dialogue-task.png",
+      "docs/diagrams/model-routing.png",
+      "docs/diagrams/agent-team-lifecycle.png"
+    ],
+    "note": "Renderer regenerated all diagrams. Two unchanged-source PNGs also refreshed; reviewed before hashes updated."
+  }
+}

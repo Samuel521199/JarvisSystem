@@ -4,6 +4,7 @@ The legacy computer_queue table names are retained to preserve existing tasks.
 Task/action states remain solely in the ledger; this module only owns scheduling.
 """
 import os
+from datetime import datetime, timezone
 import threading
 import uuid
 
@@ -16,12 +17,17 @@ ROOT = policy.REPOSITORY_ROOT
 class TaskQueue:
     capacity = 20  # Waiting tasks; the one executing task has its own slot.
 
-    def __init__(self, core, executor=None, *, error_type=CoreError, resources=None):
+    def __init__(self, core, executor=None, *, error_type=CoreError, resources=None, sample_executor=None, skill_executor=None, mcp_executor=None, metrics=None):
         self.core, self.executor = core, executor
+        self.sample_executor = sample_executor
+        self.skill_executor = skill_executor
+        self.mcp_executor = mcp_executor
         self.error_type = error_type
         self.owner = uuid.uuid4().hex
         self.wake, self.closing = threading.Event(), threading.Event()
         self.active_id = None
+        self.metrics = metrics
+        self.metric_token = None
         self.resources = resources if resources is not None else ResourceAdmission()
         core._recover()
         # Each cleanup backend only touches its registered, inactive stages.
@@ -38,6 +44,12 @@ class TaskQueue:
                     if exc.code != 'recovery_busy': raise
                     self.recovery['deferred'] = 'another_recovery_owner'
             from .browser_recovery import recover as recover_browser
+            skill_parent = workspace() / 'skill-staging'
+            if skill_parent.exists():
+                try:
+                    self.skill_recovery = recover(skill_parent)
+                except CoreError as exc:
+                    if exc.code != 'recovery_busy': raise
             browser_parent = workspace() / 'browser-staging'
             if browser_parent.exists():
                 try:
@@ -126,15 +138,89 @@ class TaskQueue:
         self.wake.set()
         return {'task_id':record['task']['task_id'], 'request_id':request_id}
 
+    def sample_digest(self):
+        from .sample_tasks import SOURCE_PATHS
+        return digest(policy.canonical_json({'inventory': self.inventory_digest(),
+            'workflow': {p: digest((ROOT/p).read_bytes()) for p in SOURCE_PATHS},
+            'seed': digest((ROOT/'seed/system-manifest/seed-bundle.json').read_bytes())}).encode())
+
+    def enqueue_sample(self, *, request_id, prompt, model='auto', relative_path='.', conversation_id=None):
+        from .sample_tasks import CAPABILITY, TIMEOUT_SECONDS, validate_request
+        if self.sample_executor is None: raise self.error_type('executor_unavailable', '固定报告执行器尚未接入。')
+        control = self.core.assert_running()
+        args = validate_request(prompt, model, relative_path, control['config'], conversation_id=conversation_id)
+        binding = self.sample_digest()
+        def register(db, record):
+            self._owned(db)
+            if self.core.ledger._admit(db)['security_epoch'] != control['security_epoch']:
+                raise CoreError('stale_authorization', 'Safety generation changed during queue admission')
+            task_id = record['task']['task_id']
+            if record['action']['status'] != 'PREPARED': return
+            if db.execute('SELECT 1 FROM computer_queue WHERE task_id=?', (task_id,)).fetchone(): return
+            if len(self._pending(db)) >= self.capacity:
+                raise self.error_type('queue_full', '等待队列已满（20 个），请先完成或取消部分任务。')
+            db.execute('INSERT INTO computer_queue(task_id,version,demo_digest) VALUES(?,?,?)', (task_id, __version__, binding))
+        record = self.core.ledger.prepare(request_id, args, capability=CAPABILITY,
+                  runtime_seconds=TIMEOUT_SECONDS, model_requests=10, _on_prepared=register)
+        self.wake.set()
+        return {'task_id': record['task']['task_id'], 'request_id': request_id}
+
     def snapshot(self):
         with self.core.ledger.connection() as db:
             state = db.execute('SELECT * FROM computer_queue_control WHERE singleton=1').fetchone()
             pending = self._pending(db)
             running = db.execute("SELECT a.task_id FROM actions a WHERE json_extract(a.document,'$.status')='DISPATCHING'").fetchall()
+            unreviewed = self._unreviewed(db)
         return {'paused':bool(state['paused']), 'owned':state['owner']==self.owner and not self.closing.is_set(),
                 'waiting':len(pending), 'capacity':self.capacity, 'running':[r['task_id'] for r in running],
                 'positions':{r['task_id']:i+1 for i,r in enumerate(pending)}, 'error':state['error'],
+                'unreviewed_unknown':unreviewed,
                 'resources':self.resources.snapshot()}
+
+    def enqueue_skill(self, *, request_id, payload):
+        from .skill_tasks import CAPABILITY, TIMEOUT_SECONDS
+        if self.skill_executor is None:
+            raise CoreError('executor_unavailable', '技能执行器尚未接入。')
+        control = self.core.assert_running()
+        service = self.skill_executor()
+        args = service.admit(payload)
+        binding = service.binding()
+        def register(db, record):
+            self._owned(db)
+            if self.core.ledger._admit(db)['security_epoch'] != control['security_epoch']:
+                raise CoreError('stale_authorization', '技能任务受理期间状态代际已变化。')
+            if record['action']['status'] != 'PREPARED': return
+            if db.execute('SELECT 1 FROM computer_queue WHERE task_id=?', (record['task']['task_id'],)).fetchone(): return
+            if len(self._pending(db)) >= self.capacity:
+                raise CoreError('queue_full', '等待队列已满。')
+            db.execute('INSERT INTO computer_queue(task_id,version,demo_digest) VALUES(?,?,?)', (record['task']['task_id'], __version__, binding))
+        selected = service.selection(args)['selected'][0]['id']
+        record = self.core.ledger.prepare(request_id, args, capability=CAPABILITY, runtime_seconds=240 if args.get('coding') else TIMEOUT_SECONDS,
+                                          model_requests=2 if args.get('coding') else 0 if selected=='anatomy.explainer' or selected=='rea.software-analysis' and not args.get('explain') else 1, _on_prepared=register)
+        self.wake.set()
+        return {'task_id': record['task']['task_id'], 'request_id': request_id}
+
+    def enqueue_mcp(self, *, request_id, payload, automatic=None):
+        from .mcp_tasks import CAPABILITY, TIMEOUT_SECONDS
+        if self.mcp_executor is None:
+            raise CoreError('executor_unavailable', 'MCP 文档执行器尚未接入。')
+        control = self.core.assert_running()
+        service = self.mcp_executor()
+        args = service.admit(payload, automatic=automatic)
+        binding = service.binding_for(args)
+        def register(db, record):
+            self._owned(db)
+            if self.core.ledger._admit(db)['security_epoch'] != control['security_epoch']:
+                raise CoreError('stale_authorization', 'MCP 任务受理期间状态代际已变化。')
+            if record['action']['status'] != 'PREPARED': return
+            if db.execute('SELECT 1 FROM computer_queue WHERE task_id=?', (record['task']['task_id'],)).fetchone(): return
+            if len(self._pending(db)) >= self.capacity:
+                raise CoreError('queue_full', '等待队列已满。')
+            db.execute('INSERT INTO computer_queue(task_id,version,demo_digest) VALUES(?,?,?)', (record['task']['task_id'], __version__, binding))
+        record = self.core.ledger.prepare(request_id, args, capability=CAPABILITY, runtime_seconds=TIMEOUT_SECONDS,
+                                          model_requests=0, _on_prepared=register)
+        self.wake.set()
+        return {'task_id': record['task']['task_id'], 'request_id': request_id}
 
     def set_paused(self, paused):
         if type(paused) is not bool:
@@ -156,6 +242,21 @@ class TaskQueue:
     def _validate_binding(self, row):
         if row['version'] != __version__:
             raise self.error_type('queue_version_changed', '队列中有旧版本任务，请核对并取消后按当前版本重新提交。')
+        if row['capability'] == 'sample.report.v1':
+            if row['demo_digest'] != self.sample_digest():
+                raise self.error_type('queue_content_changed', '报告规划/执行器或种子清单已改变，请核对并取消旧任务后重新提交。')
+            return None
+        if row['capability'] == 'skill.report.v1':
+            from .skill_tasks import SkillTaskService
+            if row['demo_digest'] != SkillTaskService.binding():
+                raise CoreError('queue_content_changed', '技能目录或执行器已变化，请核对旧任务。')
+            return None
+        if row['capability'] == 'mcp.documentation.v1':
+            from .mcp_tasks import McpTaskService
+            args = self.core.ledger.record(task_id=row['task_id'])['action']['arguments']
+            if row['demo_digest'] != McpTaskService(self.core).binding_for(args):
+                raise CoreError('queue_content_changed', 'MCP 执行器、连接或策略已变化，请核对旧任务。')
+            return None
         if row['capability'] == 'filesystem.read_sample.v1':
             if row['demo_digest'] != self.inventory_digest():
                 raise self.error_type('queue_content_changed', '目录执行器或配置已改变，请取消旧任务后重新提交。')
@@ -180,6 +281,15 @@ class TaskQueue:
         if not self.resources.check(pending[0]['capability']):
             raise self.error_type('resource_wait', '可用内存不足或尚未稳定，后台任务继续等待。')
         self.active_id = record['task']['task_id']
+        if self.metrics is not None:
+            # Queue age includes explicit pauses and service downtime; do not
+            # call it pure scheduler latency. Wall-clock changes are clamped.
+            try:
+                created = datetime.fromisoformat(record['task']['created_at'])
+                wait = max(0,(datetime.now(timezone.utc)-created).total_seconds()*1000)
+            except (KeyError,ValueError,TypeError):
+                wait = None
+            self.metric_token = self.metrics.begin('task',queue_wait_ms=round(wait,2) if wait is not None else None)
 
     def _pause_on_error(self, code):
         with self.core.ledger.transaction() as db:
@@ -194,6 +304,7 @@ class TaskQueue:
             self.wake.clear()
             retry = False
             delay = .25
+            outcome = 'UNKNOWN'
             try:
                 with self.core.ledger.connection() as db:
                     state = self._owned(db)
@@ -209,6 +320,15 @@ class TaskQueue:
                     args = record['action']['arguments']
                     if row['capability'] == 'filesystem.read_sample.v1':
                         result = self.core.run(record['action']['action_id'], _before_dispatch=self._admission)
+                    elif row['capability'] == 'sample.report.v1':
+                        if self.sample_executor is None: raise self.error_type('executor_unavailable', '报告执行器尚未接入。')
+                        result = self.sample_executor().run(record['action']['action_id'], _before_dispatch=self._admission)
+                    elif row['capability'] == 'skill.report.v1':
+                        if self.skill_executor is None: raise CoreError('executor_unavailable', '技能执行器尚未接入。')
+                        result = self.skill_executor().run(record['action']['action_id'], _before_dispatch=self._admission)
+                    elif row['capability'] == 'mcp.documentation.v1':
+                        if self.mcp_executor is None: raise CoreError('executor_unavailable', 'MCP 执行器尚未接入。')
+                        result = self.mcp_executor().run(record['action']['action_id'], _before_dispatch=self._admission)
                     else:
                         if self.executor is None:
                             raise self.error_type('executor_unavailable', '浏览器执行器尚未安装。')
@@ -216,6 +336,7 @@ class TaskQueue:
                                       scripted=args['scripted'], demo_html=html, _before_dispatch=self._admission)
                     if result['action']['status']=='UNKNOWN':
                         self._pause_on_error('result_unknown')
+                    outcome = result['action']['status']
                 else:
                     self.resources.idle()
             except Exception as exc:
@@ -228,6 +349,9 @@ class TaskQueue:
                         self._pause_on_error(code)
                     except (CoreError, OSError):pass
             finally:
+                if self.metric_token is not None:
+                    self.metrics.finish(self.metric_token,outcome)
+                    self.metric_token = None
                 self.active_id = None
             if not self.closing.is_set():
                 self.wake.wait(delay if retry else None)

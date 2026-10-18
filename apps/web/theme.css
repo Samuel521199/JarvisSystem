@@ -79,3 +79,7 @@ select.appearance-picker:focus-visible{outline:2px solid var(--focus);outline-of
   .breadcrumb{gap:6px}
   #chat-title{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 }
+
+/* Quiet runtime version, shared by workbench and settings. */
+.app-version{position:fixed;right:12px;bottom:5px;font-size:10px;line-height:14px;font-variant-numeric:tabular-nums;color:var(--subtle);pointer-events:none;white-space:nowrap}
+.workspace{padding-bottom:19px}.shell>main{padding-bottom:19px}

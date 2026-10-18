@@ -1,0 +1,25 @@
+{
+  "version": "0.1.32",
+  "captured_at": "2026-10-16T15:55:28.034335+00:00",
+  "status": "passed",
+  "checks": [
+    "opening settings does not load weights; explicit start hashes pinned files and creates owned CPU service",
+    "ordinary chat task command -> real local plan -> real LPAC Worker -> verified two-file/five-byte report",
+    "real local chat works; explicit stop reclaims owned model while core and web remain available"
+  ],
+  "page_errors": [],
+  "model_observations": {
+    "arithmetic_response": "2 + 3 = 5",
+    "requested_number_only_followed": false
+  },
+  "paid_model_calls": 0,
+  "screenshots": [
+    "C:\\Users\\samuel\\AppData\\Local\\Jarvis\\data\\diagnostics\\local-model\\runtime-card.png",
+    "C:\\Users\\samuel\\AppData\\Local\\Jarvis\\data\\diagnostics\\local-model\\offline-report.png",
+    "C:\\Users\\samuel\\AppData\\Local\\Jarvis\\data\\diagnostics\\local-model\\runtime-mobile.png"
+  ],
+  "limits": [
+    "Loopback local-only profile; no whole-machine network disconnection or OS inference sandbox.",
+    "Fixed two-file report and one arithmetic chat do not establish broad local-model quality."
+  ]
+}

@@ -1,0 +1,143 @@
+{
+  "status": "SUCCEEDED",
+  "source_version": "0.1.43",
+  "observed_at": "2026-10-18T02:06:29.322274+00:00",
+  "before_instance": "8ca0e08e4891eb6e3cbdc58219ad8319",
+  "after_instance": "f80d0e387f7a0624368cfa3c7465878c",
+  "reload": "Idle host and speech lanes checked; graceful existing tray event; existing original-data launcher; source reload, not hot replacement.",
+  "source_text": "[开心] 今天见到你真好！",
+  "selector": "sad",
+  "effective_emotion": "happy",
+  "primary": {
+    "id": "qwen-tts",
+    "installed": true,
+    "state": "ready",
+    "owned": true,
+    "pid": 44164,
+    "device": "Vulkan0",
+    "threads": 4,
+    "memory": {
+      "working_set_bytes": 1200189440,
+      "peak_working_set_bytes": 1201086464,
+      "private_commit_bytes": 1846845440,
+      "peak_private_commit_bytes": 1853603840
+    },
+    "load": {
+      "ready": true,
+      "pid": 29960,
+      "inference_pid": 44164,
+      "protocol": 3,
+      "device": "Vulkan0",
+      "load_seconds": 2.0710668999963673,
+      "uses": 0
+    },
+    "busy": false,
+    "job": {
+      "id": "ecf753a050564a31ae5b008c2f58cef5",
+      "action": "synthesize",
+      "status": "SUCCEEDED",
+      "started_at": "2026-10-18T02:06:28.484935+00:00",
+      "finished_at": "2026-10-18T02:06:29.166269+00:00",
+      "result": {
+        "id": "ecf753a050564a31ae5b008c2f58cef5",
+        "sample_rate_hz": 24000,
+        "audio_seconds": 1.68,
+        "elapsed_seconds": 0.5461241000011796,
+        "first_pcm_seconds": 0.07477729998936411,
+        "voice": "serena",
+        "emotion": "happy",
+        "language": "zh",
+        "audio_url": "/api/speech/primary/audio/ecf753a050564a31ae5b008c2f58cef5"
+      }
+    },
+    "uses": 1,
+    "model_revision": "a72e6c6575d67652488cdffc1c863215a9899978",
+    "reference_default": null,
+    "configuration_notice": null,
+    "limits": {
+      "text_chars": 180,
+      "reference_seconds": 15,
+      "output_seconds": 20
+    },
+    "usage_role": "primary",
+    "auto_start": false,
+    "broker_pid": 29960,
+    "broker_memory": {
+      "working_set_bytes": 25427968,
+      "peak_working_set_bytes": 25452544,
+      "private_commit_bytes": 15208448,
+      "peak_private_commit_bytes": 15261696
+    },
+    "gpu_memory": {
+      "status": "measured",
+      "dedicated_bytes": 666075136,
+      "shared_bytes": 1082580992
+    },
+    "capabilities": {
+      "voices": {
+        "serena": "Serena · 温柔女声",
+        "vivian": "Vivian · 明亮女声",
+        "uncle_fu": "Uncle Fu · 成熟男声",
+        "dylan": "Dylan · 北京男声",
+        "eric": "Eric · 四川男声",
+        "ryan": "Ryan · 英语男声",
+        "aiden": "Aiden · 阳光男声",
+        "ono_anna": "Ono Anna · 日语女声",
+        "sohee": "Sohee · 韩语女声"
+      },
+      "emotions": {
+        "neutral": "自然",
+        "happy": "开心",
+        "sad": "悲伤",
+        "angry": "生气",
+        "soft": "温柔轻声",
+        "slow": "舒缓慢速",
+        "fast": "轻快快速"
+      },
+      "languages": {
+        "zh": "中文",
+        "en": "English",
+        "ja": "日本語",
+        "ko": "한국어",
+        "de": "Deutsch",
+        "fr": "Français",
+        "ru": "Русский",
+        "pt": "Português",
+        "es": "Español",
+        "it": "Italiano"
+      },
+      "emotion_tags": {
+        "neutral": "neutral",
+        "happy": "happy",
+        "sad": "sad",
+        "angry": "angry",
+        "soft": "soft",
+        "slow": "slow",
+        "fast": "fast",
+        "自然": "neutral",
+        "开心": "happy",
+        "悲伤": "sad",
+        "生气": "angry",
+        "温柔轻声": "soft",
+        "舒缓慢速": "slow",
+        "轻快快速": "fast",
+        "伤心": "sad",
+        "温柔": "soft",
+        "轻声": "soft",
+        "慢速": "slow",
+        "快速": "fast"
+      },
+      "emotion_tag_scope": "one_leading_tag_overrides_selector",
+      "cloning": false,
+      "delivery": "complete_wav"
+    }
+  },
+  "submit_to_file_seconds": 0.7165458999952534,
+  "audio_size_bytes": 80684,
+  "audio_sha256": "561f9fab5b903603d67059f001c4ef64958f144feba7351dee7ce62c0b8d7a17",
+  "invalid_tags_returned_400_without_stopping_worker": true,
+  "backups_stopped": true,
+  "cloud_calls": 0,
+  "served_speech_js_sha256": "9480baffd94d730f4c05797ff1de1487200b10e7a8279877ef623e5730d670b3",
+  "limits": "One leading application tag only; no mid-sentence changes, arbitrary natural-language control field, laugh/cry effects or new model. Primary left warm; no boot autoload."
+}

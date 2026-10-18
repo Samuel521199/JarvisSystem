@@ -1,0 +1,65 @@
+{
+  "version": "0.1.26",
+  "captured_at": "2026-10-16T12:53:02.757817+00:00",
+  "status": "passed",
+  "regression": {
+    "command": "python -X utf8 -B -m unittest discover -s tests",
+    "tests": 367,
+    "passed": 365,
+    "skipped": 2,
+    "seconds": 190.803
+  },
+  "targeted": {
+    "knowledge_tests": 13,
+    "passed": 13,
+    "memory_regression_tests": 12,
+    "memory_passed": 12
+  },
+  "browser_evidence": "evals/reports/knowledge-ui.json",
+  "resource_evidence": "evals/reports/knowledge-resources.json",
+  "deployment": {
+    "url": "http://127.0.0.1:18181/",
+    "previous_version": "0.1.25",
+    "version": "0.1.26",
+    "core_ready": true,
+    "task_ids_and_statuses_preserved": true,
+    "preserved_task_count": 10,
+    "archive_ids_and_revisions_preserved": true,
+    "preserved_archive_count": 0,
+    "queue_paused": true,
+    "active_chat_requests": 0,
+    "active_tasks": 0,
+    "knowledge_endpoint_available": true,
+    "memory_endpoint_available": true,
+    "global_memory_preserved": true,
+    "memory_count_at_check": 0,
+    "served_knowledge_assets_match_source": true,
+    "source_restart": true,
+    "exit_method": "existing instance-specific tray event",
+    "created_test_facts_in_user_store": false
+  },
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/knowledge.py": "058678414e143b45ac4d64a3562f6e030aaca6717ea29e4894dfdf9a86e42558",
+    "runtime/node-host/jarvis_core/chat.py": "5a266cc8db2e030dc2a3665fa779c5e42ba3aa6649ec8e41694781a0b081743c",
+    "runtime/node-host/jarvis_core/assistant_context.py": "2dc0bb41f4b70c919164c63193426fa00433ece969df5a323b27801c4b6195f4",
+    "runtime/node-host/jarvis_core/conversations.py": "9ac5be7fedcc264a145e8e677c214e9d3b4735a0ef366914e4f0fbcfe7a17cdf",
+    "apps/web/knowledge.js": "8f37ec3739574a573fb334ec4dde13386a25d9bcf6f49ec4eecede5c11abeb9e",
+    "apps/web/knowledge.css": "dabac8499f17be5556bfd2581a4b192d32ef93f4d976f1bfa8d295c7efbac28d",
+    "apps/web/index.html": "706a121ad8da715bc767bfaab920040b7266a18d7cd95fd2599750bc1e86f212",
+    "apps/web/server.py": "035869d5a59351fd5ae020590b50690f653861330c4592e84cd534f8b19e610d",
+    "apps/web/conversations.js": "ad0d7c563880b175b330e2464efb6c5bae6e837a18dbfe016e6dd98a990ec957",
+    "apps/web/workspace.js": "84ba75b3e3ddf0a6c8797b7690ffeba35fb74a6457ae6794428c609fd30080c2",
+    "contracts/schemas/project-knowledge.schema.json": "5909eb0dca2609b6ff14244440ecb28fcaad196a422567fdce0efb5b79bf718d",
+    "tests/test_knowledge.py": "079a8aa76f8a592c3b6de146957fbdf245f21e84d0a8a4090e4dd971e1fd273f",
+    "tools/probe_knowledge_ui.py": "16355b01507c5445f916b9f71228ec499c78d9d523fd05ed396401044574d15f",
+    "tools/probe_knowledge_resources.py": "dc538dc33ef181867aad703d200d0dac242c976ca1bcd73eccd18fbc8eb77301"
+  },
+  "limits": [
+    "Explicit registered project text only; no code semantics, automatic knowledge compilation, memory extraction or federation.",
+    "Lexical retrieval with Chinese bigrams; not a measured semantic recall or real model answer quality benchmark.",
+    "Supplied source citations prove input provenance, not answer correctness.",
+    "Cooperative read/parse budgets and same-user checks, not an OS-enforced sandbox or hard I/O timeout.",
+    "Content changes are detected on the next query; already dispatched requests, existing chats/exports/backups/provider copies are not recalled.",
+    "Idle source restart, not arbitrary hot module replacement."
+  ]
+}

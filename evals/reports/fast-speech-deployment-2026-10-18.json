@@ -1,0 +1,47 @@
+{
+  "status": "SUCCEEDED",
+  "source_version": "0.1.42",
+  "instance_id": "c8947fae272fc77fc16c135e710b0393",
+  "data_dir": "C:/Users/samuel/AppData/Local/Packages/OpenAI.Codex_2p2nqsd0c76g0/LocalCache/Local/Jarvis/data",
+  "startup_wall_seconds": 8.418394699998316,
+  "request_to_download_seconds": 0.7652101999992738,
+  "fast": {
+    "installed": true,
+    "state": "ready",
+    "owned": true,
+    "memory": {
+      "working_set_bytes": 413405184,
+      "peak_working_set_bytes": 413528064,
+      "private_commit_bytes": 553250816,
+      "peak_private_commit_bytes": 553390080
+    },
+    "result": {
+      "id": "e6a503d41fe54bbf9e089b1da40fa307",
+      "sample_rate_hz": 24000,
+      "audio_seconds": 1.8648333333333333,
+      "elapsed_seconds": 0.4641185000000405,
+      "cpu_seconds": 2.0,
+      "memory": {
+        "working_set_bytes": 413528064,
+        "peak_working_set_bytes": 413528064,
+        "private_commit_bytes": 553390080,
+        "peak_private_commit_bytes": 553390080
+      },
+      "mode": "clone",
+      "emotion": "neutral",
+      "num_steps": 4,
+      "audio_url": "/api/speech/fast/audio/e6a503d41fe54bbf9e089b1da40fa307"
+    }
+  },
+  "cosy": {
+    "state": "stopped",
+    "owned": false
+  },
+  "audio_sha256": "fa28874032cb00b846b404e4823cb673539391baa10a634778918e717dabd8af",
+  "ui_assets_sha256": "9e02090a2eaf015dc2fd8c70f64a6420fdfc5b366c67b650110e273699e27785",
+  "paid_calls": 0,
+  "limits": "Original data reused; idle-host graceful reload, not zero-interruption upgrade. Fast worker left ready for immediate use; no microphone or automatic narration.",
+  "module_count": 22,
+  "module_state_verified": true,
+  "visible_browser_verified": true
+}

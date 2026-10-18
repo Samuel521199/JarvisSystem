@@ -1,0 +1,51 @@
+{
+  "version": "0.1.28",
+  "captured_at": "2026-10-16T13:51:48.124594+00:00",
+  "status": "passed",
+  "unit_tests": {
+    "command": "python -X utf8 -B -m unittest discover -s tests",
+    "total": 395,
+    "skipped": 2,
+    "seconds": 179.994,
+    "exit_code": 0,
+    "passed": 393
+  },
+  "targeted_tests": {
+    "catalog_modules_readiness": 25,
+    "chat_context_memory_knowledge_resources": 67
+  },
+  "browser_evidence": "evals/reports/runtime-entry-ui.json",
+  "limits": [
+    "No complete K1/K2 gate; no whole-machine offline cold start or general intelligence benchmark.",
+    "MCP/skills registration remains separate from unavailable extension execution.",
+    "Seed hashes require a trusted host; this is not a signature or OS protection proof.",
+    "Store checks inspect bounded metadata, not every source or full database integrity."
+  ],
+  "seed_check": {
+    "ok": true,
+    "checked_assets": 22,
+    "fixture_cases": 12
+  },
+  "docs_check": {
+    "documents": 23,
+    "diagrams": 19,
+    "artifacts": 38,
+    "errors": 0
+  },
+  "fault_evidence": "evals/reports/runtime-entry-task-faults.json",
+  "deployment_evidence": "evals/reports/runtime-entry-deployment.json",
+  "new_third_party_dependencies": 0,
+  "new_background_services": 0,
+  "final_scope_digests_captured_at": "2026-10-16T13:58:23.300782+00:00",
+  "final_scope_sha256": {
+    "runtime/node-host/jarvis_core/runtime_catalog.py": "663e85f5b23ec0b98367e0fef2052769a18678e76318f948dde6c46e6d0c0110",
+    "runtime/node-host/jarvis_core/modules.py": "e5e0788e321932ddf74dea5e892ad675c37ada37a11f05da00bed059d4ccbe95",
+    "runtime/node-host/jarvis_core/assistant_context.py": "9df8c4df872fd2980ca851bffb1880d0990ff97503e1b417ff0132ff1bd37bbc",
+    "runtime/node-host/jarvis_core/chat.py": "5c5d61fdce43e07a70a4fb4d2bc56279f4bc32b7107fcd3eb291e2883e81ec33",
+    "apps/web/modules.js": "187ae2103b57975a92c3e4e5edcabac253a0401f0e4db736be3cab04574c8c1b",
+    "apps/web/modules.css": "272caf64eb90b3e63d1b4d1b62651bfe0978cc1ae488bfd3b22cd5a1c4be6c40",
+    "tests/test_modules.py": "2846f993b6a1d53e036bf30cdb6c2d9517d18df464e16bd50c076f25a552236a",
+    "tests/test_runtime_catalog.py": "fcb8e2603e4c0959bcb6668cfec566561631fee43fd2903e5a730ec0a6cfbca4",
+    "tools/probe_modules_ui.py": "755f74305dc5453a889c598b1c25a903f099ffbc214cb7e984cf17e105f7e99a"
+  }
+}

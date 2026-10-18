@@ -1,0 +1,171 @@
+{
+  "version": "0.1.39",
+  "captured_at": "2026-10-17T16:09:56.469409+00:00",
+  "status": "implemented_and_verified_subset",
+  "scope": "K2 explicit personal commands, current fact continuity, bounded persistent expression profile",
+  "python": {
+    "captured_at": "2026-10-17T16:08:36.798324+00:00",
+    "tests_run": 537,
+    "passed": 535,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 2,
+    "seconds": 229.414,
+    "source_changes_during_tests": []
+  },
+  "frontend": {
+    "tests": 7,
+    "passed": 7,
+    "command": "node --test tests/*.test.cjs"
+  },
+  "seed": {
+    "ok": true,
+    "checked_assets": 22,
+    "fixture_cases": 12
+  },
+  "browser": {
+    "version": "0.1.39",
+    "captured_at": "2026-10-17T16:04:37.561641+00:00",
+    "checks": [
+      "Explicit memory/persona commands commit without models; archived control turns stay out of prompts after reload",
+      "New chat receives the persistent profile and explicitly allowed facts; local-only facts were not sent before consent",
+      "Correction/forget invalidate dependent turns; local memory query text never returns through archived history",
+      "Temporary chat refuses explicit memory writes without invoking a model",
+      "Commands remain usable without a model catalog; memory help fits desktop and 390px mobile"
+    ],
+    "page_errors": [],
+    "synthetic_model_calls": 4,
+    "real_model_calls": 0
+  },
+  "live": {
+    "version": "0.1.39",
+    "captured_at": "2026-10-17T16:05:57.064146+00:00",
+    "route": "vertex::gemini-3.1-pro-preview",
+    "paid_calls": 2,
+    "passed": true,
+    "observations": [
+      {
+        "status": "SUCCEEDED",
+        "text": "{\"drink\":\"CURRENT_COFFEE_7319\"}",
+        "error": null,
+        "usage": {
+          "promptTokenCount": 413,
+          "candidatesTokenCount": 13,
+          "totalTokenCount": 706,
+          "thoughtsTokenCount": 280
+        },
+        "persona": {
+          "applied": true,
+          "revision": 2,
+          "style": "温暖",
+          "relationship": "伙伴"
+        },
+        "memory": {
+          "enabled": true,
+          "provider": "vertex",
+          "references": [
+            {
+              "id": "54b3885c728d4cfa8862c73065180ddf",
+              "revision": 3
+            }
+          ],
+          "available": 1,
+          "omitted": 0,
+          "bytes": 321,
+          "dropped_history_messages": 0
+        },
+        "passed": true,
+        "seconds": 9.392
+      },
+      {
+        "status": "SUCCEEDED",
+        "text": "{\"drink\":null}",
+        "error": null,
+        "usage": {
+          "promptTokenCount": 297,
+          "candidatesTokenCount": 5,
+          "totalTokenCount": 527,
+          "thoughtsTokenCount": 225
+        },
+        "persona": {
+          "applied": true,
+          "revision": 2,
+          "style": "温暖",
+          "relationship": "伙伴"
+        },
+        "memory": {
+          "enabled": true,
+          "provider": "vertex",
+          "references": [],
+          "available": 0,
+          "omitted": 0,
+          "bytes": 0,
+          "dropped_history_messages": 0
+        },
+        "passed": true,
+        "seconds": 8.196
+      }
+    ],
+    "limits": [
+      "Synthetic fixed facts, not a general intelligence or persona quality benchmark.",
+      "The command path itself makes zero model calls."
+    ]
+  },
+  "external_evidence_root": "H:\\JarvisData\\evals\\personal-core-20261017",
+  "evidence_files": {
+    "python": "H:\\JarvisData\\evals\\personal-core-20261017\\full-suite\\unittest.json",
+    "source_hashes": "H:\\JarvisData\\evals\\personal-core-20261017\\full-suite\\source-before.json",
+    "browser": "H:\\JarvisData\\evals\\personal-core-20261017\\ui-final\\report.json",
+    "live": "H:\\JarvisData\\evals\\personal-core-20261017\\live\\report.json",
+    "deployment": "H:/JarvisData/evals/personal-core-20261017/deployment.json"
+  },
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/personal.py": "7df155a31910fb04da245e878963d9a21066a1d6fc43cd8a6e2925c61a94d952",
+    "runtime/node-host/jarvis_core/persona.py": "70ccec9f51ae2ea283093c610f7225b62832c95161ec60887f8be31e41c4ef40",
+    "runtime/node-host/jarvis_core/memory.py": "710fd45caa18b83cb5fd42e886abc47ddcf6742c883b2e4754d48feac170c6b9",
+    "runtime/node-host/jarvis_core/chat.py": "8aa660c5de18a16938f71fbfb5d8f41a6b763b3c8db49d78559c2d48c99ca6e1",
+    "runtime/node-host/jarvis_core/assistant_context.py": "88d0203e0ed8e8470b3fc51280c3a55daa98da84b02567828128a1b5c4f50bbc",
+    "runtime/node-host/jarvis_core/conversations.py": "b563fd33e7be95d28dc77f9c461e8bed672ae9c168c990f4e0013e9c99548d2f",
+    "apps/web/server.py": "17b797f155f38b971238b2e376cefd505dcfa642e52f6233b4f18cf51814fa97",
+    "apps/web/index.html": "8ce62bdd91b6befdfe8a1bb1b6e93b5d9412d02071676271acc59c9a85e501df",
+    "apps/web/memory.js": "8e17d18a4089e7ea8d7263ab75242bf7b4d5d99257fb97a52a4db295bdef0c08",
+    "apps/web/conversations.js": "6695b5d2c47cceae8cae97c42846fb74fcd7cdd38d4314a9390f02a0e92970f9",
+    "apps/web/workspace.js": "043c46ac990eb5a137c0e30ba2d726b19539ae737f55d6ad6d121ef511e78021",
+    "tests/test_personal_core.py": "01de9e0bed888ba16e0ec865c36caea0b4ee7ff3840674550df4993369455024",
+    "tools/probe_personal_core_ui.py": "64fcd4b721cf1178642951110421251c100009dba64541c88645099a849c27d5"
+  },
+  "deployment": {
+    "status": "passed",
+    "version": "0.1.39",
+    "user_data_snapshots_preserved": true,
+    "source_restart": "instance-specific tray event",
+    "local_model_previously_owned": false,
+    "source_assets_verified": true,
+    "generated_packages_and_policy_preserved": true,
+    "automatic_maintenance_enabled": true,
+    "before_version": "0.1.38",
+    "instance_id": "bf000bcc226698b815064113f18f53c1",
+    "url": "http://127.0.0.1:18181/",
+    "personal_query_verified": true
+  },
+  "limits": [
+    "Fixed explicit syntax, not general memory extraction.",
+    "Facts and expression carry across sessions; episodic conversation recall is not implemented.",
+    "Only style and assistant/companion presentation, not full personality/embodiment.",
+    "No new dependencies, model downloads, background services or scheduled tasks.",
+    "Historical chat text, exports and previously sent provider data are not erased by forget.",
+    "Full K1/K2 and whole-PC offline/long-run performance remain unverified."
+  ],
+  "documentation": {
+    "navigation_synced": true,
+    "check_docs": "passed",
+    "documents": 23,
+    "diagrams": 20,
+    "artifacts": 40
+  },
+  "initial_failures": [
+    "Targeted pass 1: offline prompt budget exceeded and cancellation fixture null event; fixed and full suite passed.",
+    "Browser probes: startup animation intercepted input; wait_for_function violated CSP; final locator waits passed without weakening CSP.",
+    "Documentation H5 heading rejected; changed to sibling H4 and regenerated navigation."
+  ]
+}

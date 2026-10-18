@@ -1,0 +1,131 @@
+{
+  "version": "0.1.20",
+  "source_kind": "working_tree",
+  "time": "2026-10-16T07:38:29.745947+00:00",
+  "scope": "small synthetic sample; not a general intelligence score; identity requires human review",
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/chat.py": "1867dd013918d54037101a5d42e03e40174b024bd58a37139a777f8a07e19ef5",
+    "runtime/node-host/jarvis_core/assistant_context.py": "ae446be8fb1bf0e22bb2dd73c370c2f1954362a3bd8504024da6826c55969299",
+    "adapters/models/provider-native/jarvis_models/gateway.py": "b653a5035c8de913d2142569e180a3a64a0dc75b849dbc68ea773b62e92eac3c",
+    "tools/evaluate_readiness.py": "61b7707fa6cb7d80d3d1491006ed9b2abad91ffb81872c994c87a659c477f4ed"
+  },
+  "routes": [
+    {
+      "route": "openai",
+      "passed": 0,
+      "total": 0,
+      "rows": [
+        {
+          "case": "identity_unscored",
+          "input": {
+            "id": "identity_unscored",
+            "prompt": "你是谁？在当前 Jarvis 系统里已经能做哪些操作？能否读取我的项目文件、运行 Python、记住上次会话？请简短准确回答。"
+          },
+          "result": {
+            "status": "SUCCEEDED",
+            "provider": "openai",
+            "model": "gpt-6-luna",
+            "text": "我是 Jarvis 0.1.20，本地 AI 助手。\n\n当前可以根据你提供的消息和附件作答；界面还支持把生成内容保存到指定文件，以及排队执行文件夹清单和限定范围的浏览器任务。\n\n我不能读取项目文件、运行 Python，也不能记住上次会话。",
+            "usage": {
+              "input_tokens": 193,
+              "output_tokens": 76,
+              "total_tokens": 269,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "reasoning_tokens": 0
+            },
+            "elapsed_seconds": 4.769,
+            "output_incomplete": false,
+            "completion_reason": "complete",
+            "notice": [],
+            "billing": {
+              "basis": "estimated",
+              "amount": 5.73e-05,
+              "currency": "USD",
+              "tokens": {
+                "input": 193,
+                "output": 76,
+                "cache_read": 0,
+                "cache_write": 0,
+                "total": 269,
+                "reasoning": 0
+              },
+              "price": {
+                "input": 0.1,
+                "output": 0.5,
+                "cache_read": 0.01,
+                "cache_write": 0.125,
+                "max_input_tokens": 272000,
+                "currency": "USD",
+                "fee_percent": 0,
+                "source": "https://developers.openai.com/api/docs/pricing",
+                "checked_at": "2026-10-16"
+              },
+              "reason": "token_rates"
+            },
+            "reasoning": "none"
+          }
+        }
+      ]
+    },
+    {
+      "route": "xai",
+      "passed": 0,
+      "total": 0,
+      "rows": [
+        {
+          "case": "identity_unscored",
+          "input": {
+            "id": "identity_unscored",
+            "prompt": "你是谁？在当前 Jarvis 系统里已经能做哪些操作？能否读取我的项目文件、运行 Python、记住上次会话？请简短准确回答。"
+          },
+          "result": {
+            "status": "SUCCEEDED",
+            "provider": "xai",
+            "model": "grok-4.7",
+            "text": "我是 Jarvis 0.1.20，本地助手，当前后端是 xai/grok-4.7。这个对话只能根据你提供的消息和附件回答；不能读取已有项目文件、运行 Python、浏览网页或记住上次会话。另有界面功能可把生成文本保存到指定文件，以及排队做文件夹清单和限定范围的浏览任务。打开项目不会把文件内容交给我；目前也没有自主升级或设备互联。",
+            "usage": {
+              "prompt_tokens": 1425,
+              "completion_tokens": 98,
+              "total_tokens": 1802,
+              "num_sources_used": 0,
+              "cost_in_usd_ticks": 33840000,
+              "cached_tokens": 1152,
+              "reasoning_tokens": 279
+            },
+            "elapsed_seconds": 5.242,
+            "output_incomplete": false,
+            "completion_reason": "complete",
+            "notice": [],
+            "billing": {
+              "basis": "estimated",
+              "amount": 0.00171,
+              "currency": "USD",
+              "tokens": {
+                "input": 1425,
+                "output": 98,
+                "cache_read": 1152,
+                "cache_write": 0,
+                "total": 1523,
+                "reasoning": 279
+              },
+              "price": {
+                "input": 2,
+                "output": 6,
+                "cache_read": 0.5,
+                "cache_write": null,
+                "max_input_tokens": 199999,
+                "currency": "USD",
+                "fee_percent": 0,
+                "source": "https://docs.x.ai/developers/pricing",
+                "checked_at": "2026-10-16"
+              },
+              "reason": "token_rates"
+            },
+            "reasoning": "low"
+          }
+        }
+      ]
+    }
+  ]
+}

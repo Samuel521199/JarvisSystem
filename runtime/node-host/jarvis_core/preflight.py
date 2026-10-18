@@ -135,14 +135,14 @@ def source_check(root):
              "runtime/sovereignty-supervisor/jarvis_safety/store.py", "runtime/recovery-cli/main.py",
              "config/worker-profile.json", "runtime/worker-host/worker.py", "runtime/worker-host/jarvis_worker/windows.py"]
     paths.extend(f"runtime/node-host/jarvis_core/{name}.py"
-                 for name in ("__init__", "policy", "ledger", "service", "chat", "preflight", "control", "worker", "task_queue", "worker_recovery"))
+                 for name in ("__init__", "policy", "ledger", "service", "chat", "modules", "preflight", "control", "worker", "task_queue", "worker_recovery"))
     paths.extend(["apps/computer-use/main.py", "jarvis-computer.ps1", "apps/web/server.py", "apps/web/index.html", "apps/web/computer.js",
                   "contracts/schemas/computer-task.schema.json", "contracts/schemas/computer-action.schema.json",
                   "config/computer-use/demo-task.json", "apps/computer-use/demo.html"])
     paths.extend(f"adapters/computer-use/jarvis_computer/{name}.py"
                  for name in ("__init__", "protocol", "browser", "planner", "service", "web", "task_queue"))
     paths.extend(["apps/web/attachments.css", "apps/web/attachments.js", "apps/web/theme.css", "apps/web/theme.js", "apps/web/resources.js", "runtime/node-host/jarvis_core/resource_usage.py", "apps/web/workspace.css",
-                  "apps/web/admin.html", "apps/web/admin.css", "apps/web/admin.js",
+                  "apps/web/admin.html", "apps/web/admin.css", "apps/web/admin.js", "apps/web/modules.css", "apps/web/modules.js",
                   "contracts/schemas/model-admin.schema.json"])
     paths.extend(f"adapters/models/provider-native/jarvis_models/{name}.py"
                  for name in ("gateway", "catalog", "registry", "billing", "vault", "attachments"))

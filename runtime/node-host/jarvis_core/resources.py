@@ -9,7 +9,7 @@ import time
 from .policy import CoreError, REPOSITORY_ROOT
 
 MIB = 1024 * 1024
-CAPABILITIES = {'filesystem.read_sample.v1', 'browser.operate.v1'}
+CAPABILITIES = {'filesystem.read_sample.v1', 'browser.operate.v1', 'sample.report.v1', 'skill.report.v1', 'mcp.documentation.v1'}
 
 
 def memory_snapshot():

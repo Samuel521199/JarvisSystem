@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jarvis.local/schemas/calculation.schema.json",
+  "title": "Deterministic calculator receipt v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "engine",
+    "expression",
+    "exact",
+    "value",
+    "decimal_places",
+    "rounding",
+    "operations",
+    "model_used",
+    "digest"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "engine": {
+      "const": "exact-rational-v1"
+    },
+    "expression": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "exact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "numerator",
+        "denominator"
+      ],
+      "properties": {
+        "numerator": {
+          "type": "string",
+          "maxLength": 1235,
+          "pattern": "^-?[0-9]+$"
+        },
+        "denominator": {
+          "type": "string",
+          "maxLength": 1234,
+          "pattern": "^[1-9][0-9]*$"
+        }
+      }
+    },
+    "value": {
+      "type": "string",
+      "maxLength": 512,
+      "minLength": 1
+    },
+    "decimal_places": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 12
+        }
+      ]
+    },
+    "rounding": {
+      "enum": [
+        null,
+        "half_up"
+      ]
+    },
+    "operations": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 64
+    },
+    "model_used": {
+      "const": false
+    },
+    "digest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

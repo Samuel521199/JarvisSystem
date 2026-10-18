@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-17",
+  "feature": "growth-center-design-v1",
+  "status": "preview_verified",
+  "runtime_rollout": "not_started",
+  "scope": "Interactive design prototype only; no operational API, model requests or persistent runtime settings.",
+  "browser": "Codex in-app Chromium browser",
+  "desktop_viewport": "1265x713 screenshot",
+  "checks": [
+    "Three independent tabs and purpose-specific content",
+    "Native model effort options; fixed mode disables effort selector",
+    "Separate saved preview profiles and unsaved drafts per tab",
+    "Backup add/reorder and shared explanation of effective settings",
+    "Simulated definite quota failure chooses configured backup with its own effort",
+    "Simulated UNKNOWN does not retry; all-unavailable retains existing capability",
+    "Keyboard Home/tab navigation and keyboard drawer width adjustment 400 to 420px",
+    "390px same-origin iframe layout and full-width narrow settings view",
+    "Inspection/healing/evolution staged demonstrations and explicit cancellation",
+    "Pause animation then switch tabs: content remains visible, opacity 1, transition animation none",
+    "Manual inspection policy shows no automatic periodic inspection",
+    "Console error log empty after interaction checks"
+  ],
+  "not_verified": [
+    "New backend inspection/healing/evolution separation, routing and migration",
+    "Real failover calls or provider balances",
+    "24-hour PC performance and long-term reliability",
+    "OS reduced-motion preference and background-page energy measured behavior",
+    "Other browsers and physical mobile devices"
+  ],
+  "source_sha256": {
+    "docs/prototypes/growth-center/index.html": "bdffe96bb37a4302c2b7b9ec0b2ccb76667bdb0033b5b759b773b583ea36ec27",
+    "docs/prototypes/growth-center/growth.css": "dbd2c7a476c2628f09e0b224a82ccba6ad0f5deaaf556ffc63fd9dfed8b1a66c",
+    "docs/prototypes/growth-center/growth.js": "0f8b62299f87c7bbec103a5b2a3183b9a8a662a6b1be2dd25073f17538a6a03b"
+  },
+  "screenshots_directory": "H:/JarvisData/evals/growth-center-design-20261017"
+}

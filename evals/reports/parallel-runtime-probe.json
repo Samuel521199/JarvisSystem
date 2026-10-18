@@ -1,0 +1,603 @@
+{
+  "version": "0.1.34",
+  "captured_at": "2026-10-16T17:14:08.698615+00:00",
+  "status": "partial",
+  "ui_and_pressure": {
+    "status": "passed",
+    "checks": [
+      "Actual settings modules UI shows simultaneous chat/task and native Host memory; mobile fits; leaving observed settings view stops resource polling",
+      "Canceling one of two chats leaves the other chat and background plan alive; real LPAC Worker completes a verified two-file/five-byte report once",
+      "Injected low-memory admission holds PREPARED without planning; chat works; hysteresis resumes once; canceled waiting task never plans"
+    ],
+    "page_errors": [],
+    "control_api_ms": {
+      "samples": 20,
+      "p50": 6.07,
+      "max": 29.76
+    },
+    "cancel_chat_http_ms": 2.07,
+    "metrics": {
+      "scope": "host_lifetime",
+      "started_at": "2026-10-16T17:15:26.461179+00:00",
+      "uptime_seconds": 13.08,
+      "sample_capacity": 200,
+      "counters": {
+        "chat_started": 3,
+        "task_started": 2,
+        "chat_finished": 3,
+        "task_finished": 2
+      },
+      "overlap_seconds": 7.115,
+      "lanes": {
+        "chat": {
+          "active": 0,
+          "oldest_active_ms": 0,
+          "duration": {
+            "samples": 3,
+            "p50_ms": 7167.76,
+            "p95_ms": 7181.76,
+            "max_ms": 7181.76
+          },
+          "queue_wait": {
+            "samples": 0,
+            "p50_ms": null,
+            "p95_ms": null,
+            "max_ms": null
+          },
+          "outcomes": {
+            "CANCELLED": 1,
+            "SUCCEEDED": 2
+          }
+        },
+        "task": {
+          "active": 0,
+          "oldest_active_ms": 0,
+          "duration": {
+            "samples": 2,
+            "p50_ms": 704.27,
+            "p95_ms": 7790.31,
+            "max_ms": 7790.31
+          },
+          "queue_wait": {
+            "samples": 2,
+            "p50_ms": 40.98,
+            "p95_ms": 4189.18,
+            "max_ms": 4189.18
+          },
+          "outcomes": {
+            "CONFIRMED": 2
+          }
+        }
+      }
+    },
+    "screenshots": [
+      "C:\\Users\\samuel\\AppData\\Local\\Jarvis\\data\\diagnostics\\parallel-runtime\\parallel-desktop.png",
+      "C:\\Users\\samuel\\AppData\\Local\\Jarvis\\data\\diagnostics\\parallel-runtime\\parallel-mobile.png"
+    ],
+    "limits": [
+      "Planning and chat are controlled fixtures; native Worker and UI/HTTP are real.",
+      "Low memory is injected, not an actual OOM test.",
+      "Control API short warm sample is not a universal latency SLA."
+    ]
+  },
+  "crash_recovery": [
+    {
+      "point": "prepared",
+      "exit_code": 91,
+      "recovered_action": "PREPARED",
+      "no_automatic_replay": true,
+      "metrics_reset": true,
+      "chat_active_at_crash": 1,
+      "task_active_at_crash": 0
+    },
+    {
+      "point": "planning",
+      "exit_code": 91,
+      "recovered_action": "UNKNOWN",
+      "no_automatic_replay": true,
+      "metrics_reset": true,
+      "chat_active_at_crash": 1,
+      "task_active_at_crash": 1
+    },
+    {
+      "point": "artifact",
+      "exit_code": 91,
+      "recovered_action": "UNKNOWN",
+      "no_automatic_replay": true,
+      "metrics_reset": true,
+      "chat_active_at_crash": 1,
+      "task_active_at_crash": 1
+    },
+    {
+      "point": "committed",
+      "exit_code": 91,
+      "recovered_action": "CONFIRMED",
+      "no_automatic_replay": true,
+      "metrics_reset": true,
+      "chat_active_at_crash": 1,
+      "task_active_at_crash": 1
+    }
+  ],
+  "live_local": {
+    "status": "partial",
+    "latency_and_execution_passed": true,
+    "answer_correctness_passed": false,
+    "answers": [
+      {
+        "mode": "serial",
+        "text": "27",
+        "correct": false
+      },
+      {
+        "mode": "serial",
+        "text": "27",
+        "correct": false
+      },
+      {
+        "mode": "serial",
+        "text": "27",
+        "correct": false
+      },
+      {
+        "mode": "serial",
+        "text": "27",
+        "correct": false
+      },
+      {
+        "mode": "serial",
+        "text": "27",
+        "correct": false
+      },
+      {
+        "mode": "serial",
+        "text": "27",
+        "correct": false
+      },
+      {
+        "mode": "serial",
+        "text": "27",
+        "correct": false
+      },
+      {
+        "mode": "serial",
+        "text": "27",
+        "correct": false
+      },
+      {
+        "mode": "serial",
+        "text": "27",
+        "correct": false
+      },
+      {
+        "mode": "serial",
+        "text": "27",
+        "correct": false
+      },
+      {
+        "mode": "serial",
+        "text": "27",
+        "correct": false
+      },
+      {
+        "mode": "serial",
+        "text": "27",
+        "correct": false
+      },
+      {
+        "mode": "serial",
+        "text": "27",
+        "correct": false
+      },
+      {
+        "mode": "serial",
+        "text": "27",
+        "correct": false
+      },
+      {
+        "mode": "serial",
+        "text": "27",
+        "correct": false
+      },
+      {
+        "mode": "serial",
+        "text": "27",
+        "correct": false
+      },
+      {
+        "mode": "serial",
+        "text": "27",
+        "correct": false
+      },
+      {
+        "mode": "serial",
+        "text": "27",
+        "correct": false
+      },
+      {
+        "mode": "serial",
+        "text": "27",
+        "correct": false
+      },
+      {
+        "mode": "serial",
+        "text": "27",
+        "correct": false
+      },
+      {
+        "mode": "parallel",
+        "text": "27",
+        "correct": false
+      },
+      {
+        "mode": "parallel",
+        "text": "27",
+        "correct": false
+      },
+      {
+        "mode": "parallel",
+        "text": "27",
+        "correct": false
+      },
+      {
+        "mode": "parallel",
+        "text": "27",
+        "correct": false
+      },
+      {
+        "mode": "parallel",
+        "text": "27",
+        "correct": false
+      },
+      {
+        "mode": "parallel",
+        "text": "27",
+        "correct": false
+      },
+      {
+        "mode": "parallel",
+        "text": "27",
+        "correct": false
+      },
+      {
+        "mode": "parallel",
+        "text": "27",
+        "correct": false
+      },
+      {
+        "mode": "parallel",
+        "text": "27",
+        "correct": false
+      },
+      {
+        "mode": "parallel",
+        "text": "27",
+        "correct": false
+      },
+      {
+        "mode": "parallel",
+        "text": "27",
+        "correct": false
+      },
+      {
+        "mode": "parallel",
+        "text": "27",
+        "correct": false
+      },
+      {
+        "mode": "parallel",
+        "text": "27",
+        "correct": false
+      },
+      {
+        "mode": "parallel",
+        "text": "27",
+        "correct": false
+      },
+      {
+        "mode": "parallel",
+        "text": "27",
+        "correct": false
+      },
+      {
+        "mode": "parallel",
+        "text": "27",
+        "correct": false
+      },
+      {
+        "mode": "parallel",
+        "text": "27",
+        "correct": false
+      },
+      {
+        "mode": "parallel",
+        "text": "27",
+        "correct": false
+      },
+      {
+        "mode": "parallel",
+        "text": "27",
+        "correct": false
+      },
+      {
+        "mode": "parallel",
+        "text": "27",
+        "correct": false
+      }
+    ],
+    "provider": "local",
+    "model": "qwen3-0.6b",
+    "serial_chat_ms": [
+      322.68,
+      268.12,
+      264.16,
+      263.77,
+      266.48,
+      272.11,
+      251.16,
+      272.14,
+      265.74,
+      280.86,
+      264.96,
+      263.64,
+      258.7,
+      304.6,
+      292.8,
+      276.98,
+      268.4,
+      289.68,
+      274.71,
+      278.99
+    ],
+    "parallel_chat_ms": [
+      339.8,
+      310.74,
+      325.67,
+      348.87,
+      298.79,
+      366.37,
+      453.99,
+      326.01,
+      317.32,
+      296.29,
+      309.94,
+      355.53,
+      297.03,
+      324.14,
+      312.24,
+      366.33,
+      404.31,
+      362.6,
+      327.6,
+      332.01
+    ],
+    "median_ratio": 1.209,
+    "rounds_per_mode": 20,
+    "environment": {
+      "logical_cpus": 32,
+      "physical_memory_bytes": 132766306304,
+      "inference_threads": 4,
+      "context_tokens": 2048,
+      "inference_slots": 1,
+      "cache": "repeated prompt and warm engine"
+    },
+    "observations": [
+      {
+        "chat_ms": 339.8,
+        "report_verified": true,
+        "file_count": 2,
+        "plan_attempts": 1
+      },
+      {
+        "chat_ms": 310.74,
+        "report_verified": true,
+        "file_count": 2,
+        "plan_attempts": 1
+      },
+      {
+        "chat_ms": 325.67,
+        "report_verified": true,
+        "file_count": 2,
+        "plan_attempts": 1
+      },
+      {
+        "chat_ms": 348.87,
+        "report_verified": true,
+        "file_count": 2,
+        "plan_attempts": 1
+      },
+      {
+        "chat_ms": 298.79,
+        "report_verified": true,
+        "file_count": 2,
+        "plan_attempts": 1
+      },
+      {
+        "chat_ms": 366.37,
+        "report_verified": true,
+        "file_count": 2,
+        "plan_attempts": 1
+      },
+      {
+        "chat_ms": 453.99,
+        "report_verified": true,
+        "file_count": 2,
+        "plan_attempts": 1
+      },
+      {
+        "chat_ms": 326.01,
+        "report_verified": true,
+        "file_count": 2,
+        "plan_attempts": 1
+      },
+      {
+        "chat_ms": 317.32,
+        "report_verified": true,
+        "file_count": 2,
+        "plan_attempts": 1
+      },
+      {
+        "chat_ms": 296.29,
+        "report_verified": true,
+        "file_count": 2,
+        "plan_attempts": 1
+      },
+      {
+        "chat_ms": 309.94,
+        "report_verified": true,
+        "file_count": 2,
+        "plan_attempts": 1
+      },
+      {
+        "chat_ms": 355.53,
+        "report_verified": true,
+        "file_count": 2,
+        "plan_attempts": 1
+      },
+      {
+        "chat_ms": 297.03,
+        "report_verified": true,
+        "file_count": 2,
+        "plan_attempts": 1
+      },
+      {
+        "chat_ms": 324.14,
+        "report_verified": true,
+        "file_count": 2,
+        "plan_attempts": 1
+      },
+      {
+        "chat_ms": 312.24,
+        "report_verified": true,
+        "file_count": 2,
+        "plan_attempts": 1
+      },
+      {
+        "chat_ms": 366.33,
+        "report_verified": true,
+        "file_count": 2,
+        "plan_attempts": 1
+      },
+      {
+        "chat_ms": 404.31,
+        "report_verified": true,
+        "file_count": 2,
+        "plan_attempts": 1
+      },
+      {
+        "chat_ms": 362.6,
+        "report_verified": true,
+        "file_count": 2,
+        "plan_attempts": 1
+      },
+      {
+        "chat_ms": 327.6,
+        "report_verified": true,
+        "file_count": 2,
+        "plan_attempts": 1
+      },
+      {
+        "chat_ms": 332.01,
+        "report_verified": true,
+        "file_count": 2,
+        "plan_attempts": 1
+      }
+    ],
+    "metrics": {
+      "scope": "host_lifetime",
+      "started_at": "2026-10-16T17:17:40.701506+00:00",
+      "uptime_seconds": 46.29,
+      "sample_capacity": 200,
+      "counters": {
+        "chat_started": 40,
+        "chat_finished": 40,
+        "task_started": 20,
+        "task_finished": 20
+      },
+      "overlap_seconds": 6.333,
+      "lanes": {
+        "chat": {
+          "active": 0,
+          "oldest_active_ms": 0,
+          "duration": {
+            "samples": 40,
+            "p50_ms": 278.31,
+            "p95_ms": 352.15,
+            "max_ms": 420.44
+          },
+          "queue_wait": {
+            "samples": 0,
+            "p50_ms": null,
+            "p95_ms": null,
+            "max_ms": null
+          },
+          "outcomes": {
+            "SUCCEEDED": 40
+          }
+        },
+        "task": {
+          "active": 0,
+          "oldest_active_ms": 0,
+          "duration": {
+            "samples": 20,
+            "p50_ms": 1911.36,
+            "p95_ms": 2083.57,
+            "max_ms": 2124.43
+          },
+          "queue_wait": {
+            "samples": 20,
+            "p50_ms": 36.53,
+            "p95_ms": 41.3,
+            "max_ms": 43.86
+          },
+          "outcomes": {
+            "CONFIRMED": 20
+          }
+        }
+      }
+    },
+    "local_model_calls": 60,
+    "paid_model_calls": 0,
+    "resources": {
+      "samples": 432,
+      "elapsed_seconds": 46.195,
+      "process_peaks": {
+        "temporary_host": {
+          "working_set_bytes": 71860224,
+          "private_bytes": 53833728,
+          "average_cpu_one_core_percent": 96.77
+        },
+        "external_shared_local_model": {
+          "working_set_bytes": 1030975488,
+          "private_bytes": 464818176,
+          "average_cpu_one_core_percent": 237.92
+        }
+      },
+      "minimum_machine_available_bytes": 104703807488,
+      "control_api_during_model_calls": {
+        "samples": 227,
+        "p50_ms": 6.9,
+        "max_ms": 32.59
+      }
+    },
+    "limits": [
+      "20 baseline and 20 overlap rounds on the development PC, not target hardware certification.",
+      "Uses already-running shared single-slot CPU model; no service ownership change.",
+      "Task planning may queue behind chat at inference server; no new priority scheduler added.",
+      "Resource samples cover temporary Host and shared engine, excluding transient Worker/browser children; CPU here is one-core units, unlike normalized UI."
+    ],
+    "latency_comparison": {
+      "serial": {
+        "samples": 20,
+        "p50_ms": 268.4,
+        "p95_ms": 304.6,
+        "max_ms": 322.68
+      },
+      "parallel": {
+        "samples": 20,
+        "p50_ms": 326.01,
+        "p95_ms": 404.31,
+        "max_ms": 453.99
+      }
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "status": "SUCCEEDED",
+  "source_version": "0.1.43",
+  "instance_id": "0ad85a74beefbd6d66dbb629e36485b8",
+  "zipvoice": {
+    "id": "zipvoice",
+    "installed": true,
+    "state": "stopped",
+    "owned": false,
+    "pid": null,
+    "device": "cpu",
+    "threads": 4,
+    "memory": null,
+    "load": null,
+    "busy": false,
+    "job": null,
+    "uses": 0,
+    "model_revision": "77219c8b40f4ee8d73a7f902305ff6c1128ef9b54461c41b4ca6ed890b6c2803",
+    "reference_default": "发布方演示参考声音",
+    "configuration_notice": null,
+    "limits": {
+      "text_chars": 180,
+      "reference_seconds": 15,
+      "output_seconds": 60
+    },
+    "usage_role": "fallback",
+    "auto_start": false
+  },
+  "cosyvoice": {
+    "state": "stopped",
+    "owned": false
+  },
+  "visible_browser_verified": true,
+  "original_data_reused": true,
+  "graceful_idle_host_reload": true,
+  "paid_calls": 0
+}

@@ -1,0 +1,9 @@
+{
+  "version": "0.1.57",
+  "observed_at": "2026-10-18T16:21:10.292531+00:00",
+  "live_models": true,
+  "results": [],
+  "status": "failed",
+  "error": "Locator expected to contain text '编程副本通过所提供案例'\nActual value: 修复求和，所有列表元素都参与计算；空表返回字符串0。已完成task_c0b4f42cba3d5e22832d23359afd2f7a本机产物：C:\\Users\\samuel\\AppData\\Local\\Temp\\jarvis-coding-ui-mwdvts7a\\project\\技能产物-c0b4f42cba3d.txt编程验收未通过；交付时原文件未修改。查看详情后台记录 ↗查看差异与验收下载产物 \nCall log:\n  - Expect \"to_contain_text\" locator(\"#conversation-task-list\") with timeout 170000ms\n  - waiting for locator(\"#conversation-task-list\")\n    5 × locator resolved to <div id=\"conversation-task-list\">…</div>\n      - unexpected value \"本会话暂无已查询到的任务。切换“执行任务”后输入要求，或使用 /任务。\"\n    8 × locator resolved to <div id=\"conversation-task-list\">…</div>\n      - unexpected value \"修复求和，所有列表元素都参与计算；空表返回字符串0。已受理task_c0b4f42cba3d5e22832d23359afd2f7a · 排队第 1 位当前状态：已受理查看详情取消任务后台记录 ↗\"\n    40 × locator resolved to <div id=\"conversation-task-list\">…</div>\n       - unexpected value \"修复求和，所有列表元素都参与计算；空表返回字符串0。执行中task_c0b4f42cba3d5e22832d23359afd2f7a当前状态：执行中查看详情取消任务后台记录 ↗\"\n    285 × locator resolved to <div id=\"conversation-task-list\">…</div>\n        - unexpected value \"修复求和，所有列表元素都参与计算；空表返回字符串0。已完成task_c0b4f42cba3d5e22832d23359afd2f7a本机产物：C:\\Users\\samuel\\AppData\\Local\\Temp\\jarvis-coding-ui-mwdvts7a\\project\\技能产物-c0b4f42cba3d.txt编程验收未通过；交付时原文件未修改。查看详情后台记录 ↗查看差异与验收下载产物\"\n\nAria snapshot:\n- article:\n  - strong: 修复求和，所有列表元素都参与计算；空表返回字符串0。\n  - text: 已完成 task_c0b4f42cba3d5e22832d23359afd2f7a 本机产物：C:\\Users\\samuel\\AppData\\Local\\Temp\\jarvis-coding-ui-mwdvts7a\\project\\技能产物-c0b4f42cba3d.txt\n  - paragraph: 编程验收未通过；交付时原文件未修改。\n  - button \"查看详情\"\n  - link \"后台记录 ↗\":\n    - /url: /settings?task=task_c0b4f42cba3d5e22832d23359afd2f7a#tasks\n  - button \"查看差异与验收\"\n  - button \"下载产物\"",
+  "page_errors": []
+}

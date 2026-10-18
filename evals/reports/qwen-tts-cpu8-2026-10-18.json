@@ -1,0 +1,2115 @@
+{
+  "status": "SUCCEEDED",
+  "model": "Qwen3-TTS-12Hz-1.7B-CustomVoice Q5_K",
+  "backend": "speech.cpp v0.8.10 Windows Vulkan",
+  "device": "cpu",
+  "threads": 8,
+  "cases": [
+    {
+      "name": "neutral",
+      "text": "今天下午我们会在这里见面。",
+      "instructions": "用平静自然的语气说话。",
+      "first_pcm_seconds": 0.16969190000236267,
+      "first_200ms_pcm_seconds": 0.3688609000018914,
+      "elapsed_seconds": 2.2314646000013454,
+      "audio_seconds": 2.56,
+      "rtf": 0.8716658593755255,
+      "chunk_times": [
+        0.16969539999990957,
+        0.23826499999995576,
+        0.36885470000561327,
+        0.619642700003169,
+        0.8716131000037421,
+        1.1248846000016783,
+        1.392078800003219,
+        1.6611604999998235,
+        1.936411800001224,
+        2.2064402000032715
+      ],
+      "memory": {
+        "working_set_bytes": 1712992256,
+        "peak_working_set_bytes": 1714028544,
+        "private_commit_bytes": 1709801472,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      },
+      "artifact": "H:\\JarvisData\\research\\qwen-tts\\cpu8-neutral.wav",
+      "sha256": "901d0db73321fbd877906a659bba6bf6b58b437e97fce0f0117d510bbe5230a2"
+    },
+    {
+      "name": "happy",
+      "text": "今天下午我们会在这里见面。",
+      "instructions": "用非常开心、兴奋的语气说话。",
+      "first_pcm_seconds": 0.19150310000259196,
+      "first_200ms_pcm_seconds": 0.4147850000008475,
+      "elapsed_seconds": 1.9152222000047914,
+      "audio_seconds": 2.0,
+      "rtf": 0.9576111000023957,
+      "chunk_times": [
+        0.19150520000403048,
+        0.27136980000068434,
+        0.41477730000042357,
+        0.6916978000008385,
+        0.9625257000006968,
+        1.235081500002707,
+        1.527373600001738,
+        1.8102152999999817,
+        1.9152042000059737
+      ],
+      "memory": {
+        "working_set_bytes": 1713385472,
+        "peak_working_set_bytes": 1714421760,
+        "private_commit_bytes": 1710333952,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      },
+      "artifact": "H:\\JarvisData\\research\\qwen-tts\\cpu8-happy.wav",
+      "sha256": "a3081d0376d99122072196bec6131c837fa381650aea3a8076d0d6642b1dcd6e"
+    },
+    {
+      "name": "sad",
+      "text": "今天下午我们会在这里见面。",
+      "instructions": "用明显悲伤、低落的语气说话。",
+      "first_pcm_seconds": 0.19037820000085048,
+      "first_200ms_pcm_seconds": 0.40692159999889554,
+      "elapsed_seconds": 2.4578111000009812,
+      "audio_seconds": 2.72,
+      "rtf": 0.9036070220591842,
+      "chunk_times": [
+        0.19037899999966612,
+        0.26712480000423966,
+        0.4069152000010945,
+        0.6830304000031902,
+        0.9532001999978092,
+        1.2190946000046097,
+        1.4893777000033879,
+        1.7642425000012736,
+        2.030937100003939,
+        2.296839700000419,
+        2.4577986000003875
+      ],
+      "memory": {
+        "working_set_bytes": 1713725440,
+        "peak_working_set_bytes": 1714774016,
+        "private_commit_bytes": 1710714880,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      },
+      "artifact": "H:\\JarvisData\\research\\qwen-tts\\cpu8-sad.wav",
+      "sha256": "409e60bda1c18277a27e07ae0a2de38cd6596180823e6b708598f80e8d11d92d"
+    },
+    {
+      "name": "angry",
+      "text": "今天下午我们会在这里见面。",
+      "instructions": "用明显生气、愤怒的语气说话。",
+      "first_pcm_seconds": 0.1801664000013261,
+      "first_200ms_pcm_seconds": 0.39660600000206614,
+      "elapsed_seconds": 1.8756062999964342,
+      "audio_seconds": 2.0,
+      "rtf": 0.9378031499982171,
+      "chunk_times": [
+        0.18016720000014175,
+        0.2618767000021762,
+        0.3965998999992735,
+        0.6783141999985673,
+        0.9497297999987495,
+        1.2236304999969434,
+        1.499568500003079,
+        1.7767565999965882,
+        1.875594999997702
+      ],
+      "memory": {
+        "working_set_bytes": 1713987584,
+        "peak_working_set_bytes": 1715036160,
+        "private_commit_bytes": 1710714880,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      },
+      "artifact": "H:\\JarvisData\\research\\qwen-tts\\cpu8-angry.wav",
+      "sha256": "78cec7a18113ba6fd8fe99c9eb306ab35f581d54239db6aa87ae085fc7d2904a"
+    },
+    {
+      "name": "soft",
+      "text": "我在，有什么可以帮你？",
+      "instructions": "轻声、温柔地说话。",
+      "first_pcm_seconds": 0.180014100005792,
+      "first_200ms_pcm_seconds": 0.3953920000058133,
+      "elapsed_seconds": 2.6207819000046584,
+      "audio_seconds": 2.88,
+      "rtf": 0.9099937152793953,
+      "chunk_times": [
+        0.18001500000536907,
+        0.25306170000112616,
+        0.39538680000259774,
+        0.6649312000008649,
+        0.9309430000066641,
+        1.2226505000071484,
+        1.4907840000014403,
+        1.7620369000069331,
+        2.037217100005364,
+        2.305859500003862,
+        2.5963153000047896
+      ],
+      "memory": {
+        "working_set_bytes": 1714085888,
+        "peak_working_set_bytes": 1715134464,
+        "private_commit_bytes": 1710714880,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      },
+      "artifact": "H:\\JarvisData\\research\\qwen-tts\\cpu8-soft.wav",
+      "sha256": "5a6e3cfc34834a92e54d80e8e5aac50936f74fd7080e8b02b36b2e1c42959713"
+    },
+    {
+      "name": "mixed",
+      "text": "你好，我是贾维斯。Hello, how can I help you today?",
+      "instructions": "自然地说话。",
+      "first_pcm_seconds": 0.24409969999396708,
+      "first_200ms_pcm_seconds": 0.46033750000060536,
+      "elapsed_seconds": 3.5777464999991935,
+      "audio_seconds": 3.84,
+      "rtf": 0.9317048177081233,
+      "chunk_times": [
+        0.2441012999988743,
+        0.31961239999509417,
+        0.460331899994344,
+        0.7406000999981188,
+        1.01376569999411,
+        1.2985206999946968,
+        1.5827011999936076,
+        1.8494375999944168,
+        2.1257786999995005,
+        2.400857399996312,
+        2.6819095999962883,
+        2.960191099999065,
+        3.2434106999935466,
+        3.5578095999953803
+      ],
+      "memory": {
+        "working_set_bytes": 1716277248,
+        "peak_working_set_bytes": 1717092352,
+        "private_commit_bytes": 1711403008,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      },
+      "artifact": "H:\\JarvisData\\research\\qwen-tts\\cpu8-mixed.wav",
+      "sha256": "57013a03da736424a598a354bd59a05c1cd319e26508b2d9f983ce6a60f10482"
+    }
+  ],
+  "paid_calls": 0,
+  "limits": "Native worker first PCM; not browser/speaker or complete conversation. WDDM allocation samples are not physical pools to add to process RAM.",
+  "ready": {
+    "type": "ready",
+    "protocol": 3,
+    "version": "0.8.10",
+    "defaults": {
+      "voice": "serena",
+      "language": "zh",
+      "max_seconds": 12,
+      "seed": 42
+    },
+    "model": {
+      "name": "Qwen3-TTS-12Hz-1.7B-CustomVoice",
+      "organization": "Qwen",
+      "basename": "Qwen3-TTS-12Hz",
+      "size_label": "1.7B",
+      "finetune": "CustomVoice",
+      "license": "Apache-2.0",
+      "source": {
+        "repository": "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice",
+        "revision": "0c0e3051f131929182e2c023b9537f8b1c68adfe"
+      },
+      "weight_type": "Q5_K",
+      "architecture": "qwen3-tts",
+      "layout": 1,
+      "task": "synthesis",
+      "sample_rate": 24000,
+      "incremental": true,
+      "languages": [
+        "de",
+        "en",
+        "es",
+        "fr",
+        "it",
+        "ja",
+        "ko",
+        "pt",
+        "ru",
+        "zh"
+      ],
+      "voices": [
+        {
+          "name": "aiden",
+          "language": "en",
+          "gender": "male",
+          "description": "Sunny American male voice with a clear midrange."
+        },
+        {
+          "name": "dylan",
+          "language": "zh",
+          "gender": "male",
+          "description": "Youthful Beijing male voice with a clear, natural timbre."
+        },
+        {
+          "name": "eric",
+          "language": "zh",
+          "gender": "male",
+          "description": "Lively Chengdu male voice with a slightly husky brightness."
+        },
+        {
+          "name": "ono_anna",
+          "language": "ja",
+          "gender": "female",
+          "description": "Playful Japanese female voice with a light, nimble timbre."
+        },
+        {
+          "name": "ryan",
+          "language": "en",
+          "gender": "male",
+          "description": "Dynamic male voice with strong rhythmic drive."
+        },
+        {
+          "name": "serena",
+          "language": "zh",
+          "gender": "female",
+          "description": "Warm, gentle young female voice."
+        },
+        {
+          "name": "sohee",
+          "language": "ko",
+          "gender": "female",
+          "description": "Warm Korean female voice with rich emotion."
+        },
+        {
+          "name": "uncle_fu",
+          "language": "zh",
+          "gender": "male",
+          "description": "Seasoned male voice with a low, mellow timbre."
+        },
+        {
+          "name": "vivian",
+          "language": "zh",
+          "gender": "female",
+          "description": "Bright, slightly edgy young female voice."
+        }
+      ],
+      "voice_files": false,
+      "voice_recordings": false,
+      "max_text_tokens": 24565,
+      "options": [
+        {
+          "name": "voice",
+          "type": "string",
+          "required": true,
+          "steers": true,
+          "choices": [
+            "aiden",
+            "dylan",
+            "eric",
+            "ono_anna",
+            "ryan",
+            "serena",
+            "sohee",
+            "uncle_fu",
+            "vivian"
+          ]
+        },
+        {
+          "name": "language",
+          "type": "string",
+          "required": false,
+          "steers": true,
+          "default": "auto",
+          "choices": [
+            "de",
+            "en",
+            "es",
+            "fr",
+            "it",
+            "ja",
+            "ko",
+            "pt",
+            "ru",
+            "zh"
+          ]
+        },
+        {
+          "name": "seed",
+          "type": "int",
+          "required": false,
+          "steers": true,
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        {
+          "name": "max_seconds",
+          "type": "float",
+          "required": false,
+          "steers": true,
+          "exclusive_minimum": 0,
+          "maximum": 655.36
+        },
+        {
+          "name": "do_sample",
+          "type": "bool",
+          "required": false,
+          "steers": true,
+          "default": true
+        },
+        {
+          "name": "top_k",
+          "type": "int",
+          "required": false,
+          "steers": true,
+          "default": 50,
+          "minimum": 0,
+          "maximum": 2147483647
+        },
+        {
+          "name": "top_p",
+          "type": "float",
+          "required": false,
+          "steers": true,
+          "default": 1,
+          "minimum": 0,
+          "maximum": 1
+        },
+        {
+          "name": "temperature",
+          "type": "float",
+          "required": false,
+          "steers": true,
+          "default": 0.9,
+          "exclusive_minimum": 0
+        },
+        {
+          "name": "repetition_penalty",
+          "type": "float",
+          "required": false,
+          "steers": true,
+          "default": 1.05,
+          "exclusive_minimum": 0
+        },
+        {
+          "name": "code_predictor_do_sample",
+          "type": "bool",
+          "required": false,
+          "steers": true,
+          "default": true
+        },
+        {
+          "name": "code_predictor_top_k",
+          "type": "int",
+          "required": false,
+          "steers": true,
+          "default": 50,
+          "minimum": 0,
+          "maximum": 2147483647
+        },
+        {
+          "name": "code_predictor_top_p",
+          "type": "float",
+          "required": false,
+          "steers": true,
+          "default": 1,
+          "minimum": 0,
+          "maximum": 1
+        },
+        {
+          "name": "code_predictor_temperature",
+          "type": "float",
+          "required": false,
+          "steers": true,
+          "default": 0.9,
+          "exclusive_minimum": 0
+        },
+        {
+          "name": "instructions",
+          "type": "string",
+          "required": false,
+          "steers": true,
+          "default": ""
+        }
+      ],
+      "file_bytes": 1569079808,
+      "weight_bytes": 1563720132,
+      "device": "CPU",
+      "threads": 8
+    }
+  },
+  "startup_seconds": 3.672318799995992,
+  "loaded_memory": {
+    "working_set_bytes": 1709408256,
+    "peak_working_set_bytes": 1710325760,
+    "private_commit_bytes": 1701752832,
+    "peak_private_commit_bytes": 1708675072
+  },
+  "loaded_gpu": {
+    "status": "measured",
+    "dedicated_bytes": 4608000,
+    "shared_bytes": 659456
+  },
+  "final_memory": {
+    "working_set_bytes": 1716277248,
+    "peak_working_set_bytes": 1717092352,
+    "private_commit_bytes": 1711403008,
+    "peak_private_commit_bytes": 1724215296
+  },
+  "final_gpu": {
+    "status": "measured",
+    "dedicated_bytes": 4608000,
+    "shared_bytes": 659456
+  },
+  "resource_samples": [
+    {
+      "seconds": 0.2924894999960088,
+      "memory": {
+        "working_set_bytes": 229187584,
+        "peak_working_set_bytes": 229187584,
+        "private_commit_bytes": 1630646272,
+        "peak_private_commit_bytes": 1630654464
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 0.45059789999504574,
+      "memory": {
+        "working_set_bytes": 921174016,
+        "peak_working_set_bytes": 921174016,
+        "private_commit_bytes": 1630646272,
+        "peak_private_commit_bytes": 1630654464
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 0.601686800000607,
+      "memory": {
+        "working_set_bytes": 1615917056,
+        "peak_working_set_bytes": 1615917056,
+        "private_commit_bytes": 1630646272,
+        "peak_private_commit_bytes": 1630654464
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 0.7575362999996287,
+      "memory": {
+        "working_set_bytes": 1678467072,
+        "peak_working_set_bytes": 1678467072,
+        "private_commit_bytes": 1675108352,
+        "peak_private_commit_bytes": 1675116544
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 0.9083394999979646,
+      "memory": {
+        "working_set_bytes": 1688084480,
+        "peak_working_set_bytes": 1688272896,
+        "private_commit_bytes": 1684897792,
+        "peak_private_commit_bytes": 1688256512
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 1.0687915999951656,
+      "memory": {
+        "working_set_bytes": 1693044736,
+        "peak_working_set_bytes": 1693044736,
+        "private_commit_bytes": 1699389440,
+        "peak_private_commit_bytes": 1700110336
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 1.224482799996622,
+      "memory": {
+        "working_set_bytes": 1700302848,
+        "peak_working_set_bytes": 1700491264,
+        "private_commit_bytes": 1699389440,
+        "peak_private_commit_bytes": 1702744064
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 1.3839298999955645,
+      "memory": {
+        "working_set_bytes": 1700630528,
+        "peak_working_set_bytes": 1700630528,
+        "private_commit_bytes": 1702735872,
+        "peak_private_commit_bytes": 1702744064
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 1.5353963000015938,
+      "memory": {
+        "working_set_bytes": 1702326272,
+        "peak_working_set_bytes": 1702326272,
+        "private_commit_bytes": 1699389440,
+        "peak_private_commit_bytes": 1702744064
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 1.6908813999980339,
+      "memory": {
+        "working_set_bytes": 1707589632,
+        "peak_working_set_bytes": 1708441600,
+        "private_commit_bytes": 1701941248,
+        "peak_private_commit_bytes": 1708654592
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 1.8501448999959393,
+      "memory": {
+        "working_set_bytes": 1708425216,
+        "peak_working_set_bytes": 1708441600,
+        "private_commit_bytes": 1708650496,
+        "peak_private_commit_bytes": 1708658688
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 2.001753500000632,
+      "memory": {
+        "working_set_bytes": 1708273664,
+        "peak_working_set_bytes": 1708441600,
+        "private_commit_bytes": 1705299968,
+        "peak_private_commit_bytes": 1708658688
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 2.1579117000001133,
+      "memory": {
+        "working_set_bytes": 1708253184,
+        "peak_working_set_bytes": 1708457984,
+        "private_commit_bytes": 1705299968,
+        "peak_private_commit_bytes": 1708658688
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 2.316929100001289,
+      "memory": {
+        "working_set_bytes": 1708457984,
+        "peak_working_set_bytes": 1708457984,
+        "private_commit_bytes": 1708650496,
+        "peak_private_commit_bytes": 1708658688
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 2.468473399996583,
+      "memory": {
+        "working_set_bytes": 1707634688,
+        "peak_working_set_bytes": 1708457984,
+        "private_commit_bytes": 1705062400,
+        "peak_private_commit_bytes": 1708658688
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 2.6238834999967366,
+      "memory": {
+        "working_set_bytes": 1708453888,
+        "peak_working_set_bytes": 1708457984,
+        "private_commit_bytes": 1708654592,
+        "peak_private_commit_bytes": 1708662784
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 2.7784030999973766,
+      "memory": {
+        "working_set_bytes": 1707614208,
+        "peak_working_set_bytes": 1708457984,
+        "private_commit_bytes": 1701953536,
+        "peak_private_commit_bytes": 1708662784
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 2.9393175000004703,
+      "memory": {
+        "working_set_bytes": 1708306432,
+        "peak_working_set_bytes": 1708486656,
+        "private_commit_bytes": 1705312256,
+        "peak_private_commit_bytes": 1708670976
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 3.0909834999984014,
+      "memory": {
+        "working_set_bytes": 1708474368,
+        "peak_working_set_bytes": 1708486656,
+        "private_commit_bytes": 1708662784,
+        "peak_private_commit_bytes": 1708670976
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 3.249717699996836,
+      "memory": {
+        "working_set_bytes": 1707618304,
+        "peak_working_set_bytes": 1708486656,
+        "private_commit_bytes": 1701957632,
+        "peak_private_commit_bytes": 1708670976
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 3.4112432999972953,
+      "memory": {
+        "working_set_bytes": 1709674496,
+        "peak_working_set_bytes": 1709674496,
+        "private_commit_bytes": 1705308160,
+        "peak_private_commit_bytes": 1708670976
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 3.572715000002063,
+      "memory": {
+        "working_set_bytes": 1710325760,
+        "peak_working_set_bytes": 1710325760,
+        "private_commit_bytes": 1708666880,
+        "peak_private_commit_bytes": 1708675072
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 3.724830400002247,
+      "memory": {
+        "working_set_bytes": 1703337984,
+        "peak_working_set_bytes": 1710325760,
+        "private_commit_bytes": 1713315840,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 3.8785692999954335,
+      "memory": {
+        "working_set_bytes": 1710100480,
+        "peak_working_set_bytes": 1710833664,
+        "private_commit_bytes": 1709961216,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 4.0335613999995985,
+      "memory": {
+        "working_set_bytes": 1711071232,
+        "peak_working_set_bytes": 1711071232,
+        "private_commit_bytes": 1716666368,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 4.191144299998996,
+      "memory": {
+        "working_set_bytes": 1710444544,
+        "peak_working_set_bytes": 1711108096,
+        "private_commit_bytes": 1709961216,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 4.350997100002132,
+      "memory": {
+        "working_set_bytes": 1711091712,
+        "peak_working_set_bytes": 1711308800,
+        "private_commit_bytes": 1713065984,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 4.516571599997405,
+      "memory": {
+        "working_set_bytes": 1711550464,
+        "peak_working_set_bytes": 1711550464,
+        "private_commit_bytes": 1716666368,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 4.678904599997622,
+      "memory": {
+        "working_set_bytes": 1711517696,
+        "peak_working_set_bytes": 1711550464,
+        "private_commit_bytes": 1713315840,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 4.830113700001675,
+      "memory": {
+        "working_set_bytes": 1710903296,
+        "peak_working_set_bytes": 1711771648,
+        "private_commit_bytes": 1709961216,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 4.983889099996304,
+      "memory": {
+        "working_set_bytes": 1712013312,
+        "peak_working_set_bytes": 1712013312,
+        "private_commit_bytes": 1716666368,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 5.135334200000216,
+      "memory": {
+        "working_set_bytes": 1711255552,
+        "peak_working_set_bytes": 1712013312,
+        "private_commit_bytes": 1709969408,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 5.291111400001682,
+      "memory": {
+        "working_set_bytes": 1714012160,
+        "peak_working_set_bytes": 1714012160,
+        "private_commit_bytes": 1716748288,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 5.451623399996606,
+      "memory": {
+        "working_set_bytes": 1713135616,
+        "peak_working_set_bytes": 1714012160,
+        "private_commit_bytes": 1710043136,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 5.607458099999349,
+      "memory": {
+        "working_set_bytes": 1713987584,
+        "peak_working_set_bytes": 1714012160,
+        "private_commit_bytes": 1716748288,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 5.763127400001395,
+      "memory": {
+        "working_set_bytes": 1713135616,
+        "peak_working_set_bytes": 1714012160,
+        "private_commit_bytes": 1710043136,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 5.914122000001953,
+      "memory": {
+        "working_set_bytes": 1713131520,
+        "peak_working_set_bytes": 1714028544,
+        "private_commit_bytes": 1710039040,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 6.0688244999983,
+      "memory": {
+        "working_set_bytes": 1713426432,
+        "peak_working_set_bytes": 1714065408,
+        "private_commit_bytes": 1710575616,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 6.224824600001739,
+      "memory": {
+        "working_set_bytes": 1713426432,
+        "peak_working_set_bytes": 1714319360,
+        "private_commit_bytes": 1710575616,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 6.37996320000093,
+      "memory": {
+        "working_set_bytes": 1714159616,
+        "peak_working_set_bytes": 1714380800,
+        "private_commit_bytes": 1713930240,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 6.550918199995067,
+      "memory": {
+        "working_set_bytes": 1714335744,
+        "peak_working_set_bytes": 1714380800,
+        "private_commit_bytes": 1717280768,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 6.702002599995467,
+      "memory": {
+        "working_set_bytes": 1714184192,
+        "peak_working_set_bytes": 1714384896,
+        "private_commit_bytes": 1713930240,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 6.857859299998381,
+      "memory": {
+        "working_set_bytes": 1714405376,
+        "peak_working_set_bytes": 1714405376,
+        "private_commit_bytes": 1717280768,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 7.016410799995356,
+      "memory": {
+        "working_set_bytes": 1714196480,
+        "peak_working_set_bytes": 1714405376,
+        "private_commit_bytes": 1713930240,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 7.185164599999553,
+      "memory": {
+        "working_set_bytes": 1713524736,
+        "peak_working_set_bytes": 1714405376,
+        "private_commit_bytes": 1710575616,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 7.346786499998416,
+      "memory": {
+        "working_set_bytes": 1714405376,
+        "peak_working_set_bytes": 1714405376,
+        "private_commit_bytes": 1717280768,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 7.507004599996435,
+      "memory": {
+        "working_set_bytes": 1713385472,
+        "peak_working_set_bytes": 1714405376,
+        "private_commit_bytes": 1710333952,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 7.663131699999212,
+      "memory": {
+        "working_set_bytes": 1714380800,
+        "peak_working_set_bytes": 1714405376,
+        "private_commit_bytes": 1717280768,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 7.813951899996027,
+      "memory": {
+        "working_set_bytes": 1714421760,
+        "peak_working_set_bytes": 1714421760,
+        "private_commit_bytes": 1717280768,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 7.968801800001529,
+      "memory": {
+        "working_set_bytes": 1713717248,
+        "peak_working_set_bytes": 1714421760,
+        "private_commit_bytes": 1710936064,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 8.125017599995772,
+      "memory": {
+        "working_set_bytes": 1713717248,
+        "peak_working_set_bytes": 1714593792,
+        "private_commit_bytes": 1710936064,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 8.28400479999982,
+      "memory": {
+        "working_set_bytes": 1714442240,
+        "peak_working_set_bytes": 1714597888,
+        "private_commit_bytes": 1714286592,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 8.439809499999683,
+      "memory": {
+        "working_set_bytes": 1714614272,
+        "peak_working_set_bytes": 1714614272,
+        "private_commit_bytes": 1717641216,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 8.591226700002153,
+      "memory": {
+        "working_set_bytes": 1713856512,
+        "peak_working_set_bytes": 1714671616,
+        "private_commit_bytes": 1710936064,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 8.749522300000535,
+      "memory": {
+        "working_set_bytes": 1714712576,
+        "peak_working_set_bytes": 1714712576,
+        "private_commit_bytes": 1717641216,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 8.902197299998079,
+      "memory": {
+        "working_set_bytes": 1713856512,
+        "peak_working_set_bytes": 1714712576,
+        "private_commit_bytes": 1710936064,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 9.058099000001675,
+      "memory": {
+        "working_set_bytes": 1714491392,
+        "peak_working_set_bytes": 1714712576,
+        "private_commit_bytes": 1714290688,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 9.21074779999617,
+      "memory": {
+        "working_set_bytes": 1713868800,
+        "peak_working_set_bytes": 1714712576,
+        "private_commit_bytes": 1710956544,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 9.363267699998687,
+      "memory": {
+        "working_set_bytes": 1713754112,
+        "peak_working_set_bytes": 1714712576,
+        "private_commit_bytes": 1714069504,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 9.517824999995355,
+      "memory": {
+        "working_set_bytes": 1714745344,
+        "peak_working_set_bytes": 1714745344,
+        "private_commit_bytes": 1717661696,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 9.668758300002082,
+      "memory": {
+        "working_set_bytes": 1713868800,
+        "peak_working_set_bytes": 1714745344,
+        "private_commit_bytes": 1710956544,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 9.824564499998814,
+      "memory": {
+        "working_set_bytes": 1714745344,
+        "peak_working_set_bytes": 1714745344,
+        "private_commit_bytes": 1717661696,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 9.983617899997625,
+      "memory": {
+        "working_set_bytes": 1714360320,
+        "peak_working_set_bytes": 1714745344,
+        "private_commit_bytes": 1714077696,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 10.151200000000244,
+      "memory": {
+        "working_set_bytes": 1713868800,
+        "peak_working_set_bytes": 1714745344,
+        "private_commit_bytes": 1710956544,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 10.302096999999776,
+      "memory": {
+        "working_set_bytes": 1714790400,
+        "peak_working_set_bytes": 1714790400,
+        "private_commit_bytes": 1714302976,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 10.457973500000662,
+      "memory": {
+        "working_set_bytes": 1714999296,
+        "peak_working_set_bytes": 1714999296,
+        "private_commit_bytes": 1717661696,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 10.624552699999185,
+      "memory": {
+        "working_set_bytes": 1714130944,
+        "peak_working_set_bytes": 1714999296,
+        "private_commit_bytes": 1710956544,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 10.785841299999447,
+      "memory": {
+        "working_set_bytes": 1714806784,
+        "peak_working_set_bytes": 1714999296,
+        "private_commit_bytes": 1714307072,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 10.951597999999649,
+      "memory": {
+        "working_set_bytes": 1714974720,
+        "peak_working_set_bytes": 1714999296,
+        "private_commit_bytes": 1717661696,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 11.102648200001568,
+      "memory": {
+        "working_set_bytes": 1714130944,
+        "peak_working_set_bytes": 1714999296,
+        "private_commit_bytes": 1710956544,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 11.258102599997073,
+      "memory": {
+        "working_set_bytes": 1714819072,
+        "peak_working_set_bytes": 1714999296,
+        "private_commit_bytes": 1714311168,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 11.409110599997803,
+      "memory": {
+        "working_set_bytes": 1714130944,
+        "peak_working_set_bytes": 1714999296,
+        "private_commit_bytes": 1710956544,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 11.563322900001367,
+      "memory": {
+        "working_set_bytes": 1714036736,
+        "peak_working_set_bytes": 1714999296,
+        "private_commit_bytes": 1710825472,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 11.716825399998925,
+      "memory": {
+        "working_set_bytes": 1715011584,
+        "peak_working_set_bytes": 1715011584,
+        "private_commit_bytes": 1717661696,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 11.868999999998778,
+      "memory": {
+        "working_set_bytes": 1714130944,
+        "peak_working_set_bytes": 1715011584,
+        "private_commit_bytes": 1710956544,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 12.024491399999533,
+      "memory": {
+        "working_set_bytes": 1714966528,
+        "peak_working_set_bytes": 1715011584,
+        "private_commit_bytes": 1717661696,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 12.184735299997556,
+      "memory": {
+        "working_set_bytes": 1714810880,
+        "peak_working_set_bytes": 1715036160,
+        "private_commit_bytes": 1714311168,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 12.340631899998698,
+      "memory": {
+        "working_set_bytes": 1715105792,
+        "peak_working_set_bytes": 1715105792,
+        "private_commit_bytes": 1717661696,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 12.496698800001468,
+      "memory": {
+        "working_set_bytes": 1714229248,
+        "peak_working_set_bytes": 1715109888,
+        "private_commit_bytes": 1710956544,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 12.651906899998721,
+      "memory": {
+        "working_set_bytes": 1714229248,
+        "peak_working_set_bytes": 1715109888,
+        "private_commit_bytes": 1710956544,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 12.803063399995153,
+      "memory": {
+        "working_set_bytes": 1715109888,
+        "peak_working_set_bytes": 1715109888,
+        "private_commit_bytes": 1717661696,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 12.9582201000012,
+      "memory": {
+        "working_set_bytes": 1714229248,
+        "peak_working_set_bytes": 1715109888,
+        "private_commit_bytes": 1710956544,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 13.118108199996641,
+      "memory": {
+        "working_set_bytes": 1714868224,
+        "peak_working_set_bytes": 1715109888,
+        "private_commit_bytes": 1714311168,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 13.269205799995689,
+      "memory": {
+        "working_set_bytes": 1714229248,
+        "peak_working_set_bytes": 1715109888,
+        "private_commit_bytes": 1710956544,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 13.424823399996967,
+      "memory": {
+        "working_set_bytes": 1714917376,
+        "peak_working_set_bytes": 1715134464,
+        "private_commit_bytes": 1714311168,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 13.584917000000132,
+      "memory": {
+        "working_set_bytes": 1715105792,
+        "peak_working_set_bytes": 1715134464,
+        "private_commit_bytes": 1717661696,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 13.735866800001531,
+      "memory": {
+        "working_set_bytes": 1714229248,
+        "peak_working_set_bytes": 1715134464,
+        "private_commit_bytes": 1710956544,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 13.892307399997662,
+      "memory": {
+        "working_set_bytes": 1715085312,
+        "peak_working_set_bytes": 1715134464,
+        "private_commit_bytes": 1717661696,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 14.050925299998198,
+      "memory": {
+        "working_set_bytes": 1714917376,
+        "peak_working_set_bytes": 1715134464,
+        "private_commit_bytes": 1714311168,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 14.206763999995019,
+      "memory": {
+        "working_set_bytes": 1715081216,
+        "peak_working_set_bytes": 1715134464,
+        "private_commit_bytes": 1717661696,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 14.358353800002078,
+      "memory": {
+        "working_set_bytes": 1714917376,
+        "peak_working_set_bytes": 1715134464,
+        "private_commit_bytes": 1714311168,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 14.518017099995632,
+      "memory": {
+        "working_set_bytes": 1714229248,
+        "peak_working_set_bytes": 1715134464,
+        "private_commit_bytes": 1710956544,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 14.669092299998738,
+      "memory": {
+        "working_set_bytes": 1714085888,
+        "peak_working_set_bytes": 1715134464,
+        "private_commit_bytes": 1710714880,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 14.824952199996915,
+      "memory": {
+        "working_set_bytes": 1715089408,
+        "peak_working_set_bytes": 1715134464,
+        "private_commit_bytes": 1714999296,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 14.98491059999651,
+      "memory": {
+        "working_set_bytes": 1714470912,
+        "peak_working_set_bytes": 1715134464,
+        "private_commit_bytes": 1711644672,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 15.135939300002065,
+      "memory": {
+        "working_set_bytes": 1715109888,
+        "peak_working_set_bytes": 1715322880,
+        "private_commit_bytes": 1714999296,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 15.291774699995585,
+      "memory": {
+        "working_set_bytes": 1714462720,
+        "peak_working_set_bytes": 1715363840,
+        "private_commit_bytes": 1711611904,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 15.446460400002252,
+      "memory": {
+        "working_set_bytes": 1715363840,
+        "peak_working_set_bytes": 1715363840,
+        "private_commit_bytes": 1718349824,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 15.606961199999205,
+      "memory": {
+        "working_set_bytes": 1715265536,
+        "peak_working_set_bytes": 1715453952,
+        "private_commit_bytes": 1714999296,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 15.75833469999634,
+      "memory": {
+        "working_set_bytes": 1715490816,
+        "peak_working_set_bytes": 1715490816,
+        "private_commit_bytes": 1718349824,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 15.909674099995755,
+      "memory": {
+        "working_set_bytes": 1714585600,
+        "peak_working_set_bytes": 1715490816,
+        "private_commit_bytes": 1711644672,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 16.06355629999598,
+      "memory": {
+        "working_set_bytes": 1715449856,
+        "peak_working_set_bytes": 1715490816,
+        "private_commit_bytes": 1718349824,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 16.219903199998953,
+      "memory": {
+        "working_set_bytes": 1715269632,
+        "peak_working_set_bytes": 1715490816,
+        "private_commit_bytes": 1714999296,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 16.38510149999638,
+      "memory": {
+        "working_set_bytes": 1715433472,
+        "peak_working_set_bytes": 1715490816,
+        "private_commit_bytes": 1718349824,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 16.535949899996922,
+      "memory": {
+        "working_set_bytes": 1714442240,
+        "peak_working_set_bytes": 1715490816,
+        "private_commit_bytes": 1711403008,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 16.691717399997287,
+      "memory": {
+        "working_set_bytes": 1714585600,
+        "peak_working_set_bytes": 1715490816,
+        "private_commit_bytes": 1711644672,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 16.848536199999216,
+      "memory": {
+        "working_set_bytes": 1715449856,
+        "peak_working_set_bytes": 1715490816,
+        "private_commit_bytes": 1718349824,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 17.012964499997906,
+      "memory": {
+        "working_set_bytes": 1714585600,
+        "peak_working_set_bytes": 1715490816,
+        "private_commit_bytes": 1711644672,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 17.1695464000004,
+      "memory": {
+        "working_set_bytes": 1715421184,
+        "peak_working_set_bytes": 1715490816,
+        "private_commit_bytes": 1718349824,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 17.325313699999242,
+      "memory": {
+        "working_set_bytes": 1714585600,
+        "peak_working_set_bytes": 1715490816,
+        "private_commit_bytes": 1711644672,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 17.48378049999883,
+      "memory": {
+        "working_set_bytes": 1715437568,
+        "peak_working_set_bytes": 1715490816,
+        "private_commit_bytes": 1718349824,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 17.635929999996733,
+      "memory": {
+        "working_set_bytes": 1715228672,
+        "peak_working_set_bytes": 1715490816,
+        "private_commit_bytes": 1714999296,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 17.792118799996388,
+      "memory": {
+        "working_set_bytes": 1714569216,
+        "peak_working_set_bytes": 1715490816,
+        "private_commit_bytes": 1711628288,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 17.95728969999618,
+      "memory": {
+        "working_set_bytes": 1715449856,
+        "peak_working_set_bytes": 1715490816,
+        "private_commit_bytes": 1718349824,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 18.118163799998,
+      "memory": {
+        "working_set_bytes": 1714585600,
+        "peak_working_set_bytes": 1715490816,
+        "private_commit_bytes": 1711644672,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    },
+    {
+      "seconds": 18.28175879999617,
+      "memory": {
+        "working_set_bytes": 1715441664,
+        "peak_working_set_bytes": 1715490816,
+        "private_commit_bytes": 1718349824,
+        "peak_private_commit_bytes": 1724215296
+      },
+      "gpu": {
+        "status": "measured",
+        "dedicated_bytes": 4608000,
+        "shared_bytes": 659456
+      }
+    }
+  ],
+  "source_sha256": "1721577dd4ed7c51f79c895cec21abc2e5ece7c8b4d5ae71c1f58ce20f755deb",
+  "profile_sha256": "155aed6f6206dc3e866098e9d8eca7d53559a7ec2bac8681b89302febc2e10f4"
+}

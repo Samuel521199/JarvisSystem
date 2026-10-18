@@ -41,7 +41,7 @@
         },
         {
           "path": "docs/diagrams/agent-team-lifecycle.png",
-          "sha256": "1b84a82140b084f3cb3932ecc9e756f1e8679a0584de460128d9e2b8543287f1"
+          "sha256": "21d7cad2dec240ff1c8de7414e87059bc123ac81d8a25187bf9d5dafc1a86794"
         }
       ]
     },
@@ -68,22 +68,22 @@
     },
     {
       "source": "docs/diagrams/evolution-pipeline.mmd",
-      "source_sha256": "028cfc0d020a29a5250848bd3150ed2b2a0ff3f36624b4354b0c44cbf5eac197",
+      "source_sha256": "5259b413ecb4e88feb030a34ebf2aa5623b21825316593dc0269b75cc4c7be19",
       "parse": "passed",
       "render": "passed",
       "diagram_type": "flowchart-v2",
       "dimensions_css_px": {
-        "width": 731,
-        "height": 1582
+        "width": 745,
+        "height": 1782
       },
       "artifacts": [
         {
           "path": "docs/diagrams/evolution-pipeline.svg",
-          "sha256": "1931896184dc488abe287c355d2b5544e873c254c0d2985013eab7ab4d0f6a2b"
+          "sha256": "5e6b40403d0c5db0a413345fb1acaf15e9601150cbdf675406923896b26af445"
         },
         {
           "path": "docs/diagrams/evolution-pipeline.png",
-          "sha256": "bea6bc64c2ebc4c61a7adfee7a2b481bf4544ce57a0da6c95d28781eda5c2476"
+          "sha256": "1f17cd2a64b26321bf91cc7146ab01ff092a53a5e9987427f3a7a8d374fe79ae"
         }
       ]
     },
@@ -131,22 +131,22 @@
     },
     {
       "source": "docs/diagrams/health-and-repair.mmd",
-      "source_sha256": "cba919957bf125747eb22a8745bb7d72c8b8683c0aa2d6cda5cffa6a478b5e95",
+      "source_sha256": "5bbcdf77a3725f6d51cfe14bc59cbdd3f73337910808f147771da7137f6629d7",
       "parse": "passed",
       "render": "passed",
       "diagram_type": "flowchart-v2",
       "dimensions_css_px": {
-        "width": 1205,
-        "height": 1689
+        "width": 1728,
+        "height": 2220
       },
       "artifacts": [
         {
           "path": "docs/diagrams/health-and-repair.svg",
-          "sha256": "a135797727681b4b0bb1c2ae7ab413b380b0a3d4dd1d0dfcebdcc4a16ad07621"
+          "sha256": "f4b6c70708d45e3ce4a612fb22854e77e12c9360019ae08b854e00f4f34d8dcd"
         },
         {
           "path": "docs/diagrams/health-and-repair.png",
-          "sha256": "bb9718683b6508f5476d67c6b6505447263ecbb4a45434099fa33055645144db"
+          "sha256": "3ea05854fcb6cb4076d96ef62cead1d6a91a60beb391b3d1a65e15f544deaca2"
         }
       ]
     },
@@ -173,22 +173,22 @@
     },
     {
       "source": "docs/diagrams/memory-local-federation.mmd",
-      "source_sha256": "11acba620a5165103a84f9adcb3c23d7b6a89d1747992264155479d651aeeaf4",
+      "source_sha256": "385fa286afffd7020a0c1bf05902c35d6fe197af0bfe857093561dc102abebf6",
       "parse": "passed",
       "render": "passed",
       "diagram_type": "flowchart-v2",
       "dimensions_css_px": {
-        "width": 1394,
-        "height": 1040
+        "width": 1885,
+        "height": 1088
       },
       "artifacts": [
         {
           "path": "docs/diagrams/memory-local-federation.svg",
-          "sha256": "cbde87013d053befe349a3badfb2a911232c02a03d428f96ca3922dcf61bd441"
+          "sha256": "81a7a4a8db2949e0fa68a3c5ad90e75a2c1502d761718a18ba92a5b91ef91848"
         },
         {
           "path": "docs/diagrams/memory-local-federation.png",
-          "sha256": "590482d066f7a0811a6d97d787cb3be50e1b37805e1b785822786aa4cc13003a"
+          "sha256": "2e51090cd5df779bebe3b5a0d906b61ae6ec0b6dda13bfee341c4f249ebee505"
         }
       ]
     },
@@ -209,7 +209,7 @@
         },
         {
           "path": "docs/diagrams/model-routing.png",
-          "sha256": "d5e86f5bb9ea99d5a3ac175c79d533198ef517494162db53a9b4caa86f1c5806"
+          "sha256": "b97d32a99bc9780376a001c7269b75b57d90636cd4b14ef60ed0c026cfe31738"
         }
       ]
     },
@@ -230,7 +230,7 @@
         },
         {
           "path": "docs/diagrams/network-recovery.png",
-          "sha256": "e32841cc439b35626e0faab80abf04a7260c40be7b85c01a5b0b7d6995374bb3"
+          "sha256": "71d61ddd8315d1c81b27f0603c7bcc145f46239c6623f37bdcc0aead2bf50f75"
         }
       ]
     },
@@ -251,49 +251,91 @@
         },
         {
           "path": "docs/diagrams/offline-task-flow.png",
-          "sha256": "258338ebc1875f0a9a53158319aababf87edb062ab9b3f65eb6ac75162c913f5"
+          "sha256": "4930429a9873237e7b0a380f7fe8a14c2e70231fd31ab0093a65973f8b5b4cef"
         }
       ]
     },
     {
       "source": "docs/diagrams/overview.mmd",
-      "source_sha256": "f8b2c5d1b3ef719e514b9e674f3e22373f5911df178a42634f1cd968f1b9decc",
+      "source_sha256": "9bc8b3a0113c14c5343d6e8097d15d1280a237a37f8bf13d6a72eb521b39fcd2",
       "parse": "passed",
       "render": "passed",
       "diagram_type": "flowchart-v2",
       "dimensions_css_px": {
-        "width": 1622,
-        "height": 1262
+        "width": 1817,
+        "height": 1286
       },
       "artifacts": [
         {
           "path": "docs/diagrams/overview.svg",
-          "sha256": "f7d83a0209d7a7917eeb861ea8dc188ea7c53406aac074f7a4c66f0efecb4018"
+          "sha256": "91ed0f18e5f7eb65b717be3471da18f3e00222b2b4cfbed430b17f922710d919"
         },
         {
           "path": "docs/diagrams/overview.png",
-          "sha256": "f742011d9412ea2b61a41a41b9c902014d414ef331428e2366977f762dd17697"
+          "sha256": "da382c4bad536e570e76cb9e1ca8914e0dc3d42e9944497253fe1f43d9105410"
         }
       ]
     },
     {
       "source": "docs/diagrams/parallel-dialogue-task.mmd",
-      "source_sha256": "2dba3871c67a4eb2eb729ed2d67b972a6cbf5fbc5a67f3787aba03db9c18d0e7",
+      "source_sha256": "9acd22bcfd82b203784c1c0247ce32e21cfb88f032866474fe68a89499afee44",
       "parse": "passed",
       "render": "passed",
       "diagram_type": "sequence",
       "dimensions_css_px": {
-        "width": 1513,
-        "height": 865
+        "width": 1578,
+        "height": 1514
       },
       "artifacts": [
         {
           "path": "docs/diagrams/parallel-dialogue-task.svg",
-          "sha256": "73c154c1440ae3d03f14db6a8c687f6e3759bb33c9d0f82e44cb7d0e6b35d957"
+          "sha256": "7da4f13a4b8b3675214eb33744d5024898c62cdd90d87b6562508a437833b9ef"
         },
         {
           "path": "docs/diagrams/parallel-dialogue-task.png",
-          "sha256": "6f7469c116508f4099b1fce9a5e967d45f2763788bbf5570b6e4643a966f0de7"
+          "sha256": "bfcb62785e764e0e6d100cfccfaa4bf63c206e2b8b94fa021fd1f37417747fbd"
+        }
+      ]
+    },
+    {
+      "source": "docs/diagrams/pc-runtime-convergence.mmd",
+      "source_sha256": "59c022056a16358045b167bf3298c7c7d2bfe1cf3be27317ba000a6f8376b08e",
+      "parse": "passed",
+      "render": "passed",
+      "diagram_type": "flowchart-v2",
+      "dimensions_css_px": {
+        "width": 1920,
+        "height": 1080
+      },
+      "artifacts": [
+        {
+          "path": "docs/diagrams/pc-runtime-convergence.svg",
+          "sha256": "a8ef5c1e618683cace0e6460b3176b7c72c2e56f3f5c5de42c07711e1dfb6b30"
+        },
+        {
+          "path": "docs/diagrams/pc-runtime-convergence.png",
+          "sha256": "2a7d86fb36061f38cfa4c9924ff945e8c5694165f92f70e1248f48de69b77615"
+        }
+      ]
+    },
+    {
+      "source": "docs/diagrams/personal-work-memory.mmd",
+      "source_sha256": "14c2042d9715afd7d9ac2aec1ac038d40ce88b120122f417b9ce8112e8a22941",
+      "parse": "passed",
+      "render": "passed",
+      "diagram_type": "flowchart-v2",
+      "dimensions_css_px": {
+        "width": 1426,
+        "height": 1168
+      },
+      "artifacts": [
+        {
+          "path": "docs/diagrams/personal-work-memory.svg",
+          "sha256": "6fc2d01efb69946f3139a4443691ea5788dd48f705bb48387d0f0b70af1a4abf"
+        },
+        {
+          "path": "docs/diagrams/personal-work-memory.png",
+          "sha256": "68431bdb76ccd20eeb255b2ccafba2ba5df640bd3335fa38cc7c46fca241b135"
         }
       ]
     },
@@ -320,22 +362,22 @@
     },
     {
       "source": "docs/diagrams/seed-core.mmd",
-      "source_sha256": "476571609db2af97f5c0c6530c8935269d69f0cd9cd245bb56e3d1edf53b1181",
+      "source_sha256": "29d0fc376e1db8a58319897c87267dd7fac26a4ed7e32b91accc13de42dca31f",
       "parse": "passed",
       "render": "passed",
       "diagram_type": "flowchart-v2",
       "dimensions_css_px": {
-        "width": 1145,
-        "height": 1238
+        "width": 1477,
+        "height": 1414
       },
       "artifacts": [
         {
           "path": "docs/diagrams/seed-core.svg",
-          "sha256": "5b3795fdfc8d1b58346ca7131d78322bf02f2ed4d2df917a6f7a009e97343160"
+          "sha256": "d003aefa15687c388fe4ed16725bbc5f79b45bed8922209256c5354492e84d98"
         },
         {
           "path": "docs/diagrams/seed-core.png",
-          "sha256": "458107af5d8e5c8acfd00a85f267c3360ac593ce6ff8be8612f70e5d18a82cd1"
+          "sha256": "4d6f07b1dfc34ca051abb37da3a5a29ebda70d207be93b807f42f3c656502f02"
         }
       ]
     },
@@ -419,7 +461,7 @@
         },
         {
           "path": "docs/diagrams/windows-deployment.png",
-          "sha256": "5edadc495d54d674e45e8f44d401a70e4ebad94bf74c8f23745a7085c998bc79"
+          "sha256": "c04dc794c4c57a6f58afc37fbe1364d80313d15588e27bfa13eaf43a12166e78"
         }
       ]
     }

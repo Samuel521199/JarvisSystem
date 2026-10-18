@@ -1,0 +1,1383 @@
+{
+  "version": "0.1.20",
+  "source_kind": "working_tree",
+  "time": "2026-10-16T07:37:08.942188+00:00",
+  "scope": "small synthetic sample; not a general intelligence score; identity requires human review",
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/chat.py": "1867dd013918d54037101a5d42e03e40174b024bd58a37139a777f8a07e19ef5",
+    "runtime/node-host/jarvis_core/assistant_context.py": "ae446be8fb1bf0e22bb2dd73c370c2f1954362a3bd8504024da6826c55969299",
+    "adapters/models/provider-native/jarvis_models/gateway.py": "39e19ea04ee6b883a0fb80b18fb504244d860092cf7d976cd4f4e65d52c6b791",
+    "tools/evaluate_readiness.py": "61b7707fa6cb7d80d3d1491006ed9b2abad91ffb81872c994c87a659c477f4ed"
+  },
+  "routes": [
+    {
+      "route": "bailian",
+      "passed": 4,
+      "total": 5,
+      "rows": [
+        {
+          "case": "discount",
+          "input": {
+            "id": "discount",
+            "prompt": "17件商品，每件37元，商品合计打85折，再加12元运费。只输出JSON，字段total为保留两位小数的字符串。",
+            "expected": {
+              "total": "546.65"
+            }
+          },
+          "result": {
+            "status": "SUCCEEDED",
+            "provider": "bailian",
+            "model": "qwen3.8-flash",
+            "text": "{\"total\":\"548.75\"}",
+            "usage": {
+              "completion_tokens": 10,
+              "prompt_tokens": 200,
+              "total_tokens": 210,
+              "cached_tokens": 0
+            },
+            "elapsed_seconds": 1.05,
+            "output_incomplete": false,
+            "completion_reason": "complete",
+            "notice": [],
+            "billing": {
+              "basis": "estimated",
+              "amount": 0.000187,
+              "currency": "CNY",
+              "tokens": {
+                "input": 200,
+                "output": 10,
+                "cache_read": 0,
+                "cache_write": 0,
+                "total": 210,
+                "reasoning": 0
+              },
+              "price": {
+                "input": 0.8,
+                "output": 2.7,
+                "cache_read": null,
+                "cache_write": null,
+                "max_input_tokens": 1000000,
+                "currency": "CNY",
+                "fee_percent": 0,
+                "source": "https://help.aliyun.com/zh/model-studio/model-pricing",
+                "checked_at": "2026-10-16"
+              },
+              "reason": "token_rates"
+            },
+            "reasoning": "off"
+          },
+          "evaluation": {
+            "strict_json": true,
+            "content_correct": false,
+            "passed": false
+          }
+        },
+        {
+          "case": "critical_path",
+          "input": {
+            "id": "critical_path",
+            "prompt": "任务A耗时3小时；B耗时2小时且必须在A完成后开始；C耗时4小时且必须在A完成后开始；D耗时1小时且须B和C都完成后开始。资源足够、B与C可并行。全部完成最少几小时？只输出JSON：{\"hours\":整数}。",
+            "expected": {
+              "hours": 8
+            }
+          },
+          "result": {
+            "status": "SUCCEEDED",
+            "provider": "bailian",
+            "model": "qwen3.8-flash",
+            "text": "{\"hours\":8}",
+            "usage": {
+              "completion_tokens": 5,
+              "prompt_tokens": 228,
+              "total_tokens": 233,
+              "cached_tokens": 0
+            },
+            "elapsed_seconds": 0.722,
+            "output_incomplete": false,
+            "completion_reason": "complete",
+            "notice": [],
+            "billing": {
+              "basis": "estimated",
+              "amount": 0.0001959,
+              "currency": "CNY",
+              "tokens": {
+                "input": 228,
+                "output": 5,
+                "cache_read": 0,
+                "cache_write": 0,
+                "total": 233,
+                "reasoning": 0
+              },
+              "price": {
+                "input": 0.8,
+                "output": 2.7,
+                "cache_read": null,
+                "cache_write": null,
+                "max_input_tokens": 1000000,
+                "currency": "CNY",
+                "fee_percent": 0,
+                "source": "https://help.aliyun.com/zh/model-studio/model-pricing",
+                "checked_at": "2026-10-16"
+              },
+              "reason": "token_rates"
+            },
+            "reasoning": "off"
+          },
+          "evaluation": {
+            "strict_json": true,
+            "content_correct": true,
+            "passed": true
+          }
+        },
+        {
+          "case": "context_correction",
+          "input": {
+            "id": "context_correction",
+            "prompt": "现在项目代号和输出文件名是什么？只输出JSON，字段code和file。",
+            "history": [
+              {
+                "role": "user",
+                "content": "项目代号是红杉，输出文件叫plan.md。"
+              },
+              {
+                "role": "assistant",
+                "content": "记录了本会话中的这两个字段。"
+              },
+              {
+                "role": "user",
+                "content": "纠正：代号改成蓝鲸，文件名保持不变。"
+              }
+            ],
+            "expected": {
+              "code": "蓝鲸",
+              "file": "plan.md"
+            }
+          },
+          "result": {
+            "status": "SUCCEEDED",
+            "provider": "bailian",
+            "model": "qwen3.8-flash",
+            "text": "{\"code\":\"蓝鲸\",\"file\":\"plan.md\"}",
+            "usage": {
+              "completion_tokens": 11,
+              "prompt_tokens": 225,
+              "total_tokens": 236,
+              "cached_tokens": 0
+            },
+            "elapsed_seconds": 0.889,
+            "output_incomplete": false,
+            "completion_reason": "complete",
+            "notice": [],
+            "billing": {
+              "basis": "estimated",
+              "amount": 0.0002097,
+              "currency": "CNY",
+              "tokens": {
+                "input": 225,
+                "output": 11,
+                "cache_read": 0,
+                "cache_write": 0,
+                "total": 236,
+                "reasoning": 0
+              },
+              "price": {
+                "input": 0.8,
+                "output": 2.7,
+                "cache_read": null,
+                "cache_write": null,
+                "max_input_tokens": 1000000,
+                "currency": "CNY",
+                "fee_percent": 0,
+                "source": "https://help.aliyun.com/zh/model-studio/model-pricing",
+                "checked_at": "2026-10-16"
+              },
+              "reason": "token_rates"
+            },
+            "reasoning": "off"
+          },
+          "evaluation": {
+            "strict_json": true,
+            "content_correct": true,
+            "passed": true
+          }
+        },
+        {
+          "case": "missing_information",
+          "input": {
+            "id": "missing_information",
+            "prompt": "提取以下便条：客户李青要3把椅子，没有写交付日期。仅输出JSON，字段customer、quantity、delivery_date；缺失值必须为null，不要猜日期。",
+            "expected": {
+              "customer": "李青",
+              "quantity": 3,
+              "delivery_date": null
+            }
+          },
+          "result": {
+            "status": "SUCCEEDED",
+            "provider": "bailian",
+            "model": "qwen3.8-flash",
+            "text": "{\n  \"customer\": \"李青\",\n  \"quantity\": 3,\n  \"delivery_date\": null\n}",
+            "usage": {
+              "completion_tokens": 27,
+              "prompt_tokens": 204,
+              "total_tokens": 231,
+              "cached_tokens": 0
+            },
+            "elapsed_seconds": 1.001,
+            "output_incomplete": false,
+            "completion_reason": "complete",
+            "notice": [],
+            "billing": {
+              "basis": "estimated",
+              "amount": 0.0002361,
+              "currency": "CNY",
+              "tokens": {
+                "input": 204,
+                "output": 27,
+                "cache_read": 0,
+                "cache_write": 0,
+                "total": 231,
+                "reasoning": 0
+              },
+              "price": {
+                "input": 0.8,
+                "output": 2.7,
+                "cache_read": null,
+                "cache_write": null,
+                "max_input_tokens": 1000000,
+                "currency": "CNY",
+                "fee_percent": 0,
+                "source": "https://help.aliyun.com/zh/model-studio/model-pricing",
+                "checked_at": "2026-10-16"
+              },
+              "reason": "token_rates"
+            },
+            "reasoning": "off"
+          },
+          "evaluation": {
+            "strict_json": true,
+            "content_correct": true,
+            "passed": true
+          }
+        },
+        {
+          "case": "logic",
+          "input": {
+            "id": "logic",
+            "prompt": "甲、乙、丙每人有一个不同颜色的盒子，颜色为红、蓝、绿。甲没有红也没有蓝；乙没有蓝。丙是什么颜色？只输出JSON：{\"color\":\"红或蓝或绿\"}。",
+            "expected": {
+              "color": "蓝"
+            }
+          },
+          "result": {
+            "status": "SUCCEEDED",
+            "provider": "bailian",
+            "model": "qwen3.8-flash",
+            "text": "{\"color\":\"蓝\"}",
+            "usage": {
+              "completion_tokens": 5,
+              "prompt_tokens": 211,
+              "total_tokens": 216,
+              "cached_tokens": 0
+            },
+            "elapsed_seconds": 0.682,
+            "output_incomplete": false,
+            "completion_reason": "complete",
+            "notice": [],
+            "billing": {
+              "basis": "estimated",
+              "amount": 0.0001823,
+              "currency": "CNY",
+              "tokens": {
+                "input": 211,
+                "output": 5,
+                "cache_read": 0,
+                "cache_write": 0,
+                "total": 216,
+                "reasoning": 0
+              },
+              "price": {
+                "input": 0.8,
+                "output": 2.7,
+                "cache_read": null,
+                "cache_write": null,
+                "max_input_tokens": 1000000,
+                "currency": "CNY",
+                "fee_percent": 0,
+                "source": "https://help.aliyun.com/zh/model-studio/model-pricing",
+                "checked_at": "2026-10-16"
+              },
+              "reason": "token_rates"
+            },
+            "reasoning": "off"
+          },
+          "evaluation": {
+            "strict_json": true,
+            "content_correct": true,
+            "passed": true
+          }
+        },
+        {
+          "case": "identity_unscored",
+          "input": {
+            "id": "identity_unscored",
+            "prompt": "你是谁？在当前 Jarvis 系统里已经能做哪些操作？能否读取我的项目文件、运行 Python、记住上次会话？请简短准确回答。"
+          },
+          "result": {
+            "status": "SUCCEEDED",
+            "provider": "bailian",
+            "model": "qwen3.8-flash",
+            "text": "我是 Jarvis 0.1.20，你的本地助手。\n\n**当前能做的操作：**\n*   基于提供的消息和附件回答问题。\n*   将生成的文本保存到指定文件。\n*   处理文件夹清单和限定范围的浏览器任务。\n\n**限制说明：**\n*   **不能**读取现有项目文件（打开项目不暴露文件内容）。\n*   **不能**执行代码（包括运行 Python）。\n*   **不能**浏览网页或记住过往会话。",
+            "usage": {
+              "completion_tokens": 105,
+              "prompt_tokens": 194,
+              "total_tokens": 299,
+              "cached_tokens": 0
+            },
+            "elapsed_seconds": 3.613,
+            "output_incomplete": false,
+            "completion_reason": "complete",
+            "notice": [],
+            "billing": {
+              "basis": "estimated",
+              "amount": 0.0004387,
+              "currency": "CNY",
+              "tokens": {
+                "input": 194,
+                "output": 105,
+                "cache_read": 0,
+                "cache_write": 0,
+                "total": 299,
+                "reasoning": 0
+              },
+              "price": {
+                "input": 0.8,
+                "output": 2.7,
+                "cache_read": null,
+                "cache_write": null,
+                "max_input_tokens": 1000000,
+                "currency": "CNY",
+                "fee_percent": 0,
+                "source": "https://help.aliyun.com/zh/model-studio/model-pricing",
+                "checked_at": "2026-10-16"
+              },
+              "reason": "token_rates"
+            },
+            "reasoning": "off"
+          }
+        }
+      ]
+    },
+    {
+      "route": "local",
+      "passed": 1,
+      "total": 5,
+      "rows": [
+        {
+          "case": "discount",
+          "input": {
+            "id": "discount",
+            "prompt": "17件商品，每件37元，商品合计打85折，再加12元运费。只输出JSON，字段total为保留两位小数的字符串。",
+            "expected": {
+              "total": "546.65"
+            }
+          },
+          "result": {
+            "status": "SUCCEEDED",
+            "provider": "local",
+            "model": "qwen3-0.6b",
+            "text": "```json\n{\n  \"total\": \"620.50\"\n}\n```",
+            "usage": {
+              "completion_tokens": 19,
+              "prompt_tokens": 204,
+              "total_tokens": 223,
+              "cached_tokens": 0
+            },
+            "elapsed_seconds": 0.932,
+            "output_incomplete": false,
+            "completion_reason": "complete",
+            "notice": [],
+            "billing": {
+              "basis": "no_api_charge",
+              "amount": 0,
+              "currency": "USD",
+              "tokens": {
+                "input": 204,
+                "output": 19,
+                "cache_read": 0,
+                "cache_write": 0,
+                "total": 223,
+                "reasoning": 0
+              },
+              "price": null,
+              "reason": "local"
+            },
+            "reasoning": null
+          },
+          "evaluation": {
+            "strict_json": false,
+            "content_correct": false,
+            "passed": false
+          }
+        },
+        {
+          "case": "critical_path",
+          "input": {
+            "id": "critical_path",
+            "prompt": "任务A耗时3小时；B耗时2小时且必须在A完成后开始；C耗时4小时且必须在A完成后开始；D耗时1小时且须B和C都完成后开始。资源足够、B与C可并行。全部完成最少几小时？只输出JSON：{\"hours\":整数}。",
+            "expected": {
+              "hours": 8
+            }
+          },
+          "result": {
+            "status": "SUCCEEDED",
+            "provider": "local",
+            "model": "qwen3-0.6b",
+            "text": "```json\n{\"hours\": 5}\n```",
+            "usage": {
+              "completion_tokens": 11,
+              "prompt_tokens": 237,
+              "total_tokens": 248,
+              "cached_tokens": 156
+            },
+            "elapsed_seconds": 0.509,
+            "output_incomplete": false,
+            "completion_reason": "complete",
+            "notice": [],
+            "billing": {
+              "basis": "no_api_charge",
+              "amount": 0,
+              "currency": "USD",
+              "tokens": {
+                "input": 237,
+                "output": 11,
+                "cache_read": 156,
+                "cache_write": 0,
+                "total": 248,
+                "reasoning": 0
+              },
+              "price": null,
+              "reason": "local"
+            },
+            "reasoning": null
+          },
+          "evaluation": {
+            "strict_json": false,
+            "content_correct": false,
+            "passed": false
+          }
+        },
+        {
+          "case": "context_correction",
+          "input": {
+            "id": "context_correction",
+            "prompt": "现在项目代号和输出文件名是什么？只输出JSON，字段code和file。",
+            "history": [
+              {
+                "role": "user",
+                "content": "项目代号是红杉，输出文件叫plan.md。"
+              },
+              {
+                "role": "assistant",
+                "content": "记录了本会话中的这两个字段。"
+              },
+              {
+                "role": "user",
+                "content": "纠正：代号改成蓝鲸，文件名保持不变。"
+              }
+            ],
+            "expected": {
+              "code": "蓝鲸",
+              "file": "plan.md"
+            }
+          },
+          "result": {
+            "status": "SUCCEEDED",
+            "provider": "local",
+            "model": "qwen3-0.6b",
+            "text": "{\n  \"code\": \"蓝鲸\",\n  \"file\": \"plan.md\"\n}",
+            "usage": {
+              "completion_tokens": 19,
+              "prompt_tokens": 234,
+              "total_tokens": 253,
+              "cached_tokens": 156
+            },
+            "elapsed_seconds": 0.68,
+            "output_incomplete": false,
+            "completion_reason": "complete",
+            "notice": [],
+            "billing": {
+              "basis": "no_api_charge",
+              "amount": 0,
+              "currency": "USD",
+              "tokens": {
+                "input": 234,
+                "output": 19,
+                "cache_read": 156,
+                "cache_write": 0,
+                "total": 253,
+                "reasoning": 0
+              },
+              "price": null,
+              "reason": "local"
+            },
+            "reasoning": null
+          },
+          "evaluation": {
+            "strict_json": true,
+            "content_correct": true,
+            "passed": true
+          }
+        },
+        {
+          "case": "missing_information",
+          "input": {
+            "id": "missing_information",
+            "prompt": "提取以下便条：客户李青要3把椅子，没有写交付日期。仅输出JSON，字段customer、quantity、delivery_date；缺失值必须为null，不要猜日期。",
+            "expected": {
+              "customer": "李青",
+              "quantity": 3,
+              "delivery_date": null
+            }
+          },
+          "result": {
+            "status": "SUCCEEDED",
+            "provider": "local",
+            "model": "qwen3-0.6b",
+            "text": "```json\n{\n  \"customer\": \"李青\",\n  \"quantity\": 3,\n  \"delivery_date\": null\n}\n```",
+            "usage": {
+              "completion_tokens": 29,
+              "prompt_tokens": 205,
+              "total_tokens": 234,
+              "cached_tokens": 156
+            },
+            "elapsed_seconds": 0.911,
+            "output_incomplete": false,
+            "completion_reason": "complete",
+            "notice": [],
+            "billing": {
+              "basis": "no_api_charge",
+              "amount": 0,
+              "currency": "USD",
+              "tokens": {
+                "input": 205,
+                "output": 29,
+                "cache_read": 156,
+                "cache_write": 0,
+                "total": 234,
+                "reasoning": 0
+              },
+              "price": null,
+              "reason": "local"
+            },
+            "reasoning": null
+          },
+          "evaluation": {
+            "strict_json": false,
+            "content_correct": true,
+            "passed": false
+          }
+        },
+        {
+          "case": "logic",
+          "input": {
+            "id": "logic",
+            "prompt": "甲、乙、丙每人有一个不同颜色的盒子，颜色为红、蓝、绿。甲没有红也没有蓝；乙没有蓝。丙是什么颜色？只输出JSON：{\"color\":\"红或蓝或绿\"}。",
+            "expected": {
+              "color": "蓝"
+            }
+          },
+          "result": {
+            "status": "SUCCEEDED",
+            "provider": "local",
+            "model": "qwen3-0.6b",
+            "text": "```json\n{\"color\": \"绿\"}\n```",
+            "usage": {
+              "completion_tokens": 11,
+              "prompt_tokens": 213,
+              "total_tokens": 224,
+              "cached_tokens": 156
+            },
+            "elapsed_seconds": 0.562,
+            "output_incomplete": false,
+            "completion_reason": "complete",
+            "notice": [],
+            "billing": {
+              "basis": "no_api_charge",
+              "amount": 0,
+              "currency": "USD",
+              "tokens": {
+                "input": 213,
+                "output": 11,
+                "cache_read": 156,
+                "cache_write": 0,
+                "total": 224,
+                "reasoning": 0
+              },
+              "price": null,
+              "reason": "local"
+            },
+            "reasoning": null
+          },
+          "evaluation": {
+            "strict_json": false,
+            "content_correct": false,
+            "passed": false
+          }
+        },
+        {
+          "case": "identity_unscored",
+          "input": {
+            "id": "identity_unscored",
+            "prompt": "你是谁？在当前 Jarvis 系统里已经能做哪些操作？能否读取我的项目文件、运行 Python、记住上次会话？请简短准确回答。"
+          },
+          "result": {
+            "status": "SUCCEEDED",
+            "provider": "local",
+            "model": "qwen3-0.6b",
+            "text": "{\"response\": \"我是 Jarvis 0.1.20，当前系统支持读取项目文件、运行 Python 代码以及记住上次会话。\"}",
+            "usage": {
+              "completion_tokens": 34,
+              "prompt_tokens": 202,
+              "total_tokens": 236,
+              "cached_tokens": 156
+            },
+            "elapsed_seconds": 0.937,
+            "output_incomplete": false,
+            "completion_reason": "complete",
+            "notice": [],
+            "billing": {
+              "basis": "no_api_charge",
+              "amount": 0,
+              "currency": "USD",
+              "tokens": {
+                "input": 202,
+                "output": 34,
+                "cache_read": 156,
+                "cache_write": 0,
+                "total": 236,
+                "reasoning": 0
+              },
+              "price": null,
+              "reason": "local"
+            },
+            "reasoning": null
+          }
+        }
+      ]
+    },
+    {
+      "route": "vertex",
+      "passed": 5,
+      "total": 5,
+      "rows": [
+        {
+          "case": "discount",
+          "input": {
+            "id": "discount",
+            "prompt": "17件商品，每件37元，商品合计打85折，再加12元运费。只输出JSON，字段total为保留两位小数的字符串。",
+            "expected": {
+              "total": "546.65"
+            }
+          },
+          "result": {
+            "status": "SUCCEEDED",
+            "provider": "vertex",
+            "model": "gemini-3.8-flash",
+            "text": "{\"total\": \"546.65\"}",
+            "usage": {
+              "promptTokenCount": 189,
+              "candidatesTokenCount": 11,
+              "totalTokenCount": 316,
+              "thoughtsTokenCount": 116
+            },
+            "elapsed_seconds": 5.167,
+            "output_incomplete": false,
+            "completion_reason": "complete",
+            "notice": [],
+            "billing": {
+              "basis": "estimated",
+              "amount": 0.000618,
+              "currency": "USD",
+              "tokens": {
+                "input": 189,
+                "output": 127,
+                "cache_read": 0,
+                "cache_write": 0,
+                "total": 316,
+                "reasoning": 116
+              },
+              "price": {
+                "input": 0.75,
+                "output": 3.75,
+                "cache_read": 0.075,
+                "cache_write": null,
+                "max_input_tokens": 1000000,
+                "currency": "USD",
+                "fee_percent": 0,
+                "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+                "checked_at": "2026-10-16",
+                "valid_until": "2026-12-31"
+              },
+              "reason": "token_rates"
+            },
+            "reasoning": "low"
+          },
+          "evaluation": {
+            "strict_json": true,
+            "content_correct": true,
+            "passed": true
+          }
+        },
+        {
+          "case": "critical_path",
+          "input": {
+            "id": "critical_path",
+            "prompt": "任务A耗时3小时；B耗时2小时且必须在A完成后开始；C耗时4小时且必须在A完成后开始；D耗时1小时且须B和C都完成后开始。资源足够、B与C可并行。全部完成最少几小时？只输出JSON：{\"hours\":整数}。",
+            "expected": {
+              "hours": 8
+            }
+          },
+          "result": {
+            "status": "SUCCEEDED",
+            "provider": "vertex",
+            "model": "gemini-3.8-flash",
+            "text": "{\"hours\":8}",
+            "usage": {
+              "promptTokenCount": 221,
+              "candidatesTokenCount": 5,
+              "totalTokenCount": 362,
+              "thoughtsTokenCount": 136
+            },
+            "elapsed_seconds": 5.175,
+            "output_incomplete": false,
+            "completion_reason": "complete",
+            "notice": [],
+            "billing": {
+              "basis": "estimated",
+              "amount": 0.0006945,
+              "currency": "USD",
+              "tokens": {
+                "input": 221,
+                "output": 141,
+                "cache_read": 0,
+                "cache_write": 0,
+                "total": 362,
+                "reasoning": 136
+              },
+              "price": {
+                "input": 0.75,
+                "output": 3.75,
+                "cache_read": 0.075,
+                "cache_write": null,
+                "max_input_tokens": 1000000,
+                "currency": "USD",
+                "fee_percent": 0,
+                "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+                "checked_at": "2026-10-16",
+                "valid_until": "2026-12-31"
+              },
+              "reason": "token_rates"
+            },
+            "reasoning": "low"
+          },
+          "evaluation": {
+            "strict_json": true,
+            "content_correct": true,
+            "passed": true
+          }
+        },
+        {
+          "case": "context_correction",
+          "input": {
+            "id": "context_correction",
+            "prompt": "现在项目代号和输出文件名是什么？只输出JSON，字段code和file。",
+            "history": [
+              {
+                "role": "user",
+                "content": "项目代号是红杉，输出文件叫plan.md。"
+              },
+              {
+                "role": "assistant",
+                "content": "记录了本会话中的这两个字段。"
+              },
+              {
+                "role": "user",
+                "content": "纠正：代号改成蓝鲸，文件名保持不变。"
+              }
+            ],
+            "expected": {
+              "code": "蓝鲸",
+              "file": "plan.md"
+            }
+          },
+          "result": {
+            "status": "SUCCEEDED",
+            "provider": "vertex",
+            "model": "gemini-3.8-flash",
+            "text": "{\"code\": \"蓝鲸\", \"file\": \"plan.md\"}",
+            "usage": {
+              "promptTokenCount": 204,
+              "candidatesTokenCount": 15,
+              "totalTokenCount": 219
+            },
+            "elapsed_seconds": 4.411,
+            "output_incomplete": false,
+            "completion_reason": "complete",
+            "notice": [],
+            "billing": {
+              "basis": "estimated",
+              "amount": 0.00020925,
+              "currency": "USD",
+              "tokens": {
+                "input": 204,
+                "output": 15,
+                "cache_read": 0,
+                "cache_write": 0,
+                "total": 219,
+                "reasoning": 0
+              },
+              "price": {
+                "input": 0.75,
+                "output": 3.75,
+                "cache_read": 0.075,
+                "cache_write": null,
+                "max_input_tokens": 1000000,
+                "currency": "USD",
+                "fee_percent": 0,
+                "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+                "checked_at": "2026-10-16",
+                "valid_until": "2026-12-31"
+              },
+              "reason": "token_rates"
+            },
+            "reasoning": "low"
+          },
+          "evaluation": {
+            "strict_json": true,
+            "content_correct": true,
+            "passed": true
+          }
+        },
+        {
+          "case": "missing_information",
+          "input": {
+            "id": "missing_information",
+            "prompt": "提取以下便条：客户李青要3把椅子，没有写交付日期。仅输出JSON，字段customer、quantity、delivery_date；缺失值必须为null，不要猜日期。",
+            "expected": {
+              "customer": "李青",
+              "quantity": 3,
+              "delivery_date": null
+            }
+          },
+          "result": {
+            "status": "SUCCEEDED",
+            "provider": "vertex",
+            "model": "gemini-3.8-flash",
+            "text": "{\"customer\": \"李青\", \"quantity\": 3, \"delivery_date\": null}",
+            "usage": {
+              "promptTokenCount": 191,
+              "candidatesTokenCount": 20,
+              "totalTokenCount": 211
+            },
+            "elapsed_seconds": 5.73,
+            "output_incomplete": false,
+            "completion_reason": "complete",
+            "notice": [],
+            "billing": {
+              "basis": "estimated",
+              "amount": 0.00021825,
+              "currency": "USD",
+              "tokens": {
+                "input": 191,
+                "output": 20,
+                "cache_read": 0,
+                "cache_write": 0,
+                "total": 211,
+                "reasoning": 0
+              },
+              "price": {
+                "input": 0.75,
+                "output": 3.75,
+                "cache_read": 0.075,
+                "cache_write": null,
+                "max_input_tokens": 1000000,
+                "currency": "USD",
+                "fee_percent": 0,
+                "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+                "checked_at": "2026-10-16",
+                "valid_until": "2026-12-31"
+              },
+              "reason": "token_rates"
+            },
+            "reasoning": "low"
+          },
+          "evaluation": {
+            "strict_json": true,
+            "content_correct": true,
+            "passed": true
+          }
+        },
+        {
+          "case": "logic",
+          "input": {
+            "id": "logic",
+            "prompt": "甲、乙、丙每人有一个不同颜色的盒子，颜色为红、蓝、绿。甲没有红也没有蓝；乙没有蓝。丙是什么颜色？只输出JSON：{\"color\":\"红或蓝或绿\"}。",
+            "expected": {
+              "color": "蓝"
+            }
+          },
+          "result": {
+            "status": "SUCCEEDED",
+            "provider": "vertex",
+            "model": "gemini-3.8-flash",
+            "text": "{\"color\":\"蓝\"}",
+            "usage": {
+              "promptTokenCount": 199,
+              "candidatesTokenCount": 5,
+              "totalTokenCount": 249,
+              "thoughtsTokenCount": 45
+            },
+            "elapsed_seconds": 3.64,
+            "output_incomplete": false,
+            "completion_reason": "complete",
+            "notice": [],
+            "billing": {
+              "basis": "estimated",
+              "amount": 0.00033675,
+              "currency": "USD",
+              "tokens": {
+                "input": 199,
+                "output": 50,
+                "cache_read": 0,
+                "cache_write": 0,
+                "total": 249,
+                "reasoning": 45
+              },
+              "price": {
+                "input": 0.75,
+                "output": 3.75,
+                "cache_read": 0.075,
+                "cache_write": null,
+                "max_input_tokens": 1000000,
+                "currency": "USD",
+                "fee_percent": 0,
+                "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+                "checked_at": "2026-10-16",
+                "valid_until": "2026-12-31"
+              },
+              "reason": "token_rates"
+            },
+            "reasoning": "low"
+          },
+          "evaluation": {
+            "strict_json": true,
+            "content_correct": true,
+            "passed": true
+          }
+        },
+        {
+          "case": "identity_unscored",
+          "input": {
+            "id": "identity_unscored",
+            "prompt": "你是谁？在当前 Jarvis 系统里已经能做哪些操作？能否读取我的项目文件、运行 Python、记住上次会话？请简短准确回答。"
+          },
+          "result": {
+            "status": "SUCCEEDED",
+            "provider": "vertex",
+            "model": "gemini-3.8-flash",
+            "text": "我是 Jarvis 0.1.20，当前对话基于提供的消息和附件为您提供文本回答与处理建议。\n\n针对您的问题：\n* **当前系统操作**：在此聊天中只能基于您发送的内容作答；系统的独立界面功能支持将生成文本保存到指定文件，或排队执行文件夹清单及受限的浏览器任务。\n* **读取项目文件**：**不能**（打开项目不会向我开放其文件，除非您直接附加或粘贴）。\n* **运行 Python**：**不能**（无法在此直接执行代码）。\n* **记住上次会话**：**不能**（无法跨会话记忆历史）。",
+            "usage": {
+              "promptTokenCount": 184,
+              "candidatesTokenCount": 140,
+              "totalTokenCount": 324
+            },
+            "elapsed_seconds": 5.946,
+            "output_incomplete": false,
+            "completion_reason": "complete",
+            "notice": [],
+            "billing": {
+              "basis": "estimated",
+              "amount": 0.000663,
+              "currency": "USD",
+              "tokens": {
+                "input": 184,
+                "output": 140,
+                "cache_read": 0,
+                "cache_write": 0,
+                "total": 324,
+                "reasoning": 0
+              },
+              "price": {
+                "input": 0.75,
+                "output": 3.75,
+                "cache_read": 0.075,
+                "cache_write": null,
+                "max_input_tokens": 1000000,
+                "currency": "USD",
+                "fee_percent": 0,
+                "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+                "checked_at": "2026-10-16",
+                "valid_until": "2026-12-31"
+              },
+              "reason": "token_rates"
+            },
+            "reasoning": "low"
+          }
+        }
+      ]
+    },
+    {
+      "route": "vertex::gemini-4-argon",
+      "passed": 5,
+      "total": 5,
+      "rows": [
+        {
+          "case": "discount",
+          "input": {
+            "id": "discount",
+            "prompt": "17件商品，每件37元，商品合计打85折，再加12元运费。只输出JSON，字段total为保留两位小数的字符串。",
+            "expected": {
+              "total": "546.65"
+            }
+          },
+          "result": {
+            "status": "SUCCEEDED",
+            "provider": "vertex",
+            "model": "gemini-4-argon",
+            "text": "{\"total\": \"546.65\"}",
+            "usage": {
+              "promptTokenCount": 220,
+              "candidatesTokenCount": 15,
+              "totalTokenCount": 235
+            },
+            "elapsed_seconds": 5.03,
+            "output_incomplete": false,
+            "completion_reason": "complete",
+            "notice": [],
+            "billing": {
+              "basis": "estimated",
+              "amount": 0.00118,
+              "currency": "USD",
+              "tokens": {
+                "input": 220,
+                "output": 15,
+                "cache_read": 0,
+                "cache_write": 0,
+                "total": 235,
+                "reasoning": 0
+              },
+              "price": {
+                "input": 4,
+                "output": 20,
+                "cache_read": 0.2,
+                "cache_write": null,
+                "max_input_tokens": 1000000,
+                "currency": "USD",
+                "fee_percent": 0,
+                "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+                "checked_at": "2026-10-16"
+              },
+              "reason": "token_rates"
+            },
+            "reasoning": "low"
+          },
+          "evaluation": {
+            "strict_json": true,
+            "content_correct": true,
+            "passed": true
+          }
+        },
+        {
+          "case": "critical_path",
+          "input": {
+            "id": "critical_path",
+            "prompt": "任务A耗时3小时；B耗时2小时且必须在A完成后开始；C耗时4小时且必须在A完成后开始；D耗时1小时且须B和C都完成后开始。资源足够、B与C可并行。全部完成最少几小时？只输出JSON：{\"hours\":整数}。",
+            "expected": {
+              "hours": 8
+            }
+          },
+          "result": {
+            "status": "SUCCEEDED",
+            "provider": "vertex",
+            "model": "gemini-4-argon",
+            "text": "{\"hours\":8}",
+            "usage": {
+              "promptTokenCount": 246,
+              "candidatesTokenCount": 9,
+              "totalTokenCount": 255
+            },
+            "elapsed_seconds": 6.879,
+            "output_incomplete": false,
+            "completion_reason": "complete",
+            "notice": [],
+            "billing": {
+              "basis": "estimated",
+              "amount": 0.001164,
+              "currency": "USD",
+              "tokens": {
+                "input": 246,
+                "output": 9,
+                "cache_read": 0,
+                "cache_write": 0,
+                "total": 255,
+                "reasoning": 0
+              },
+              "price": {
+                "input": 4,
+                "output": 20,
+                "cache_read": 0.2,
+                "cache_write": null,
+                "max_input_tokens": 1000000,
+                "currency": "USD",
+                "fee_percent": 0,
+                "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+                "checked_at": "2026-10-16"
+              },
+              "reason": "token_rates"
+            },
+            "reasoning": "low"
+          },
+          "evaluation": {
+            "strict_json": true,
+            "content_correct": true,
+            "passed": true
+          }
+        },
+        {
+          "case": "context_correction",
+          "input": {
+            "id": "context_correction",
+            "prompt": "现在项目代号和输出文件名是什么？只输出JSON，字段code和file。",
+            "history": [
+              {
+                "role": "user",
+                "content": "项目代号是红杉，输出文件叫plan.md。"
+              },
+              {
+                "role": "assistant",
+                "content": "记录了本会话中的这两个字段。"
+              },
+              {
+                "role": "user",
+                "content": "纠正：代号改成蓝鲸，文件名保持不变。"
+              }
+            ],
+            "expected": {
+              "code": "蓝鲸",
+              "file": "plan.md"
+            }
+          },
+          "result": {
+            "status": "SUCCEEDED",
+            "provider": "vertex",
+            "model": "gemini-4-argon",
+            "text": "{\"code\": \"蓝鲸\", \"file\": \"plan.md\"}",
+            "usage": {
+              "promptTokenCount": 244,
+              "candidatesTokenCount": 19,
+              "totalTokenCount": 263
+            },
+            "elapsed_seconds": 4.571,
+            "output_incomplete": false,
+            "completion_reason": "complete",
+            "notice": [],
+            "billing": {
+              "basis": "estimated",
+              "amount": 0.001356,
+              "currency": "USD",
+              "tokens": {
+                "input": 244,
+                "output": 19,
+                "cache_read": 0,
+                "cache_write": 0,
+                "total": 263,
+                "reasoning": 0
+              },
+              "price": {
+                "input": 4,
+                "output": 20,
+                "cache_read": 0.2,
+                "cache_write": null,
+                "max_input_tokens": 1000000,
+                "currency": "USD",
+                "fee_percent": 0,
+                "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+                "checked_at": "2026-10-16"
+              },
+              "reason": "token_rates"
+            },
+            "reasoning": "low"
+          },
+          "evaluation": {
+            "strict_json": true,
+            "content_correct": true,
+            "passed": true
+          }
+        },
+        {
+          "case": "missing_information",
+          "input": {
+            "id": "missing_information",
+            "prompt": "提取以下便条：客户李青要3把椅子，没有写交付日期。仅输出JSON，字段customer、quantity、delivery_date；缺失值必须为null，不要猜日期。",
+            "expected": {
+              "customer": "李青",
+              "quantity": 3,
+              "delivery_date": null
+            }
+          },
+          "result": {
+            "status": "SUCCEEDED",
+            "provider": "vertex",
+            "model": "gemini-4-argon",
+            "text": "{\"customer\": \"李青\", \"quantity\": 3, \"delivery_date\": null}",
+            "usage": {
+              "promptTokenCount": 223,
+              "candidatesTokenCount": 24,
+              "totalTokenCount": 247
+            },
+            "elapsed_seconds": 5.609,
+            "output_incomplete": false,
+            "completion_reason": "complete",
+            "notice": [],
+            "billing": {
+              "basis": "estimated",
+              "amount": 0.001372,
+              "currency": "USD",
+              "tokens": {
+                "input": 223,
+                "output": 24,
+                "cache_read": 0,
+                "cache_write": 0,
+                "total": 247,
+                "reasoning": 0
+              },
+              "price": {
+                "input": 4,
+                "output": 20,
+                "cache_read": 0.2,
+                "cache_write": null,
+                "max_input_tokens": 1000000,
+                "currency": "USD",
+                "fee_percent": 0,
+                "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+                "checked_at": "2026-10-16"
+              },
+              "reason": "token_rates"
+            },
+            "reasoning": "low"
+          },
+          "evaluation": {
+            "strict_json": true,
+            "content_correct": true,
+            "passed": true
+          }
+        },
+        {
+          "case": "logic",
+          "input": {
+            "id": "logic",
+            "prompt": "甲、乙、丙每人有一个不同颜色的盒子，颜色为红、蓝、绿。甲没有红也没有蓝；乙没有蓝。丙是什么颜色？只输出JSON：{\"color\":\"红或蓝或绿\"}。",
+            "expected": {
+              "color": "蓝"
+            }
+          },
+          "result": {
+            "status": "SUCCEEDED",
+            "provider": "vertex",
+            "model": "gemini-4-argon",
+            "text": "{\"color\":\"蓝\"}",
+            "usage": {
+              "promptTokenCount": 230,
+              "candidatesTokenCount": 9,
+              "totalTokenCount": 239
+            },
+            "elapsed_seconds": 5.354,
+            "output_incomplete": false,
+            "completion_reason": "complete",
+            "notice": [],
+            "billing": {
+              "basis": "estimated",
+              "amount": 0.0011,
+              "currency": "USD",
+              "tokens": {
+                "input": 230,
+                "output": 9,
+                "cache_read": 0,
+                "cache_write": 0,
+                "total": 239,
+                "reasoning": 0
+              },
+              "price": {
+                "input": 4,
+                "output": 20,
+                "cache_read": 0.2,
+                "cache_write": null,
+                "max_input_tokens": 1000000,
+                "currency": "USD",
+                "fee_percent": 0,
+                "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+                "checked_at": "2026-10-16"
+              },
+              "reason": "token_rates"
+            },
+            "reasoning": "low"
+          },
+          "evaluation": {
+            "strict_json": true,
+            "content_correct": true,
+            "passed": true
+          }
+        },
+        {
+          "case": "identity_unscored",
+          "input": {
+            "id": "identity_unscored",
+            "prompt": "你是谁？在当前 Jarvis 系统里已经能做哪些操作？能否读取我的项目文件、运行 Python、记住上次会话？请简短准确回答。"
+          },
+          "result": {
+            "status": "SUCCEEDED",
+            "provider": "vertex",
+            "model": "gemini-4-argon",
+            "text": "我是 Jarvis 0.1.20，你的本地助手（当前配置后端为 vertex/gemini-4-argon，由 Google 构建）。\n\n**当前可做的操作：**\n* **本聊天内：** 仅根据你发送的消息和附件生成回答。\n* **独立 UI 功能：** 将生成的文本保存到指定文件；排队执行文件夹清单扫描（folder inventories）和限定范围的浏览器任务（scoped browser tasks）。\n\n**关于你的具体问题：**\n* **读取项目文件：** **不能**。在系统中打开项目并不会向我暴露其中的文件，我只能看到你在聊天中主动提供的文本或附件。\n* **运行 Python：** **不能**。无法在当前会话中执行任何代码。\n* **记住上次会话：** **不能**。我没有跨会话的记忆功能。",
+            "usage": {
+              "promptTokenCount": 236,
+              "candidatesTokenCount": 171,
+              "totalTokenCount": 407
+            },
+            "elapsed_seconds": 7.24,
+            "output_incomplete": false,
+            "completion_reason": "complete",
+            "notice": [],
+            "billing": {
+              "basis": "estimated",
+              "amount": 0.004364,
+              "currency": "USD",
+              "tokens": {
+                "input": 236,
+                "output": 171,
+                "cache_read": 0,
+                "cache_write": 0,
+                "total": 407,
+                "reasoning": 0
+              },
+              "price": {
+                "input": 4,
+                "output": 20,
+                "cache_read": 0.2,
+                "cache_write": null,
+                "max_input_tokens": 1000000,
+                "currency": "USD",
+                "fee_percent": 0,
+                "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+                "checked_at": "2026-10-16"
+              },
+              "reason": "token_rates"
+            },
+            "reasoning": "low"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,222 @@
+{
+  "version": "0.1.20",
+  "source_kind": "working_tree_revision",
+  "tested_at": "2026-10-16T07:43:01.016108+00:00",
+  "tests": {
+    "initial": {
+      "log": "H:\\JarvisData\\diagnostics\\readiness-2026-10-16\\initial-tests.log",
+      "sha256": "ce0f5fac7530a24022fe4403094300a77870f84dcd4a23f63bfccbb43563e71b",
+      "tail": "e\n  File \"<frozen importlib._bootstrap>\", line 488, in _call_with_frames_removed\n  File \"H:\\Jarvis\\apps\\web\\server.py\", line 20, in <module>\n    from jarvis_models.attachments import (validate_message, validate_attachments, text_size,\n        image_budget, MAX_CHAT_BODY, MAX_IMAGES_BYTES, MAX_ATTACHMENTS)\nModuleNotFoundError: No module named 'jarvis_models.attachments'\n\n----------------------------------------------------------------------\nRan 291 tests in 188.516s\n\nFAILED (errors=2, skipped=2)\n"
+    },
+    "regression": {
+      "log": "H:\\JarvisData\\diagnostics\\readiness-2026-10-16\\regression-tests.log",
+      "sha256": "5f2d6e0136a3a2370a45a9913277fdd6e449cbad2251c4bee710cd59f9b84edb",
+      "tail": "explicit_absolute_paths (test_workspace.WorkspaceTests.test_root_default_nested_and_explicit_absolute_paths) ... ok\ntest_stop_after_prepare_prevents_write_and_preserves_control (test_workspace.WorkspaceTests.test_stop_after_prepare_prevents_write_and_preserves_control) ... ok\ntest_unknown_write_is_not_replayed (test_workspace.WorkspaceTests.test_unknown_write_is_not_replayed) ... ok\n\n----------------------------------------------------------------------\nRan 311 tests in 177.156s\n\nOK (skipped=2)\n"
+    }
+  },
+  "checks": {
+    "workspace_ui": {
+      "result": {
+        "version": "0.1.20",
+        "captured_at": "2026-10-16T07:37:25.652876+00:00",
+        "status": "passed",
+        "scope": "temporary core, real Edge/HTTP/filesystem, synthetic model and injected picker; no paid requests or native picker interaction",
+        "checks": [
+          "open non-Git folder through real HTTP; no repository initialization",
+          "generated text defaults to project root and bytes match receipt",
+          "new chat inherits project; nested relative and explicit absolute destinations",
+          "existing file blocked before model request; draft and original file preserved",
+          "picker API selection, switch and restore chat/draft, manual save stays with original project",
+          "model failure keeps draft and creates no output file",
+          "truncated response remains visible with persistent warning and is never auto-saved",
+          "competing file created during generation is not overwritten; response preserved for explicit Save As",
+          "single enclosing code fence removed; multi-block document preserved; saved code never executed",
+          "390px responsive layout, folder dialog, refresh retains project/receipts but not page-memory chats; no JS errors"
+        ],
+        "model_fixture_calls": 9,
+        "errors": [],
+        "screenshots": [
+          "desktop.png",
+          "mobile.png",
+          "folder-dialog-mobile.png"
+        ]
+      },
+      "original": "C:\\Users\\samuel\\AppData\\Local\\Jarvis\\data\\diagnostics\\project-workspace\\result.json",
+      "sha256": "d8b24cb2cf7df9d8399ae7c9547ce60ec26ff6d0f67370de4242f2ab8ad6483f"
+    },
+    "queue_ui": {
+      "result": {
+        "version": "0.1.20",
+        "status": "passed",
+        "scope": "temporary instance, real Edge UI, two scripted browser tasks; no cloud calls",
+        "elapsed_seconds": 24.789,
+        "checks": [
+          "pause and enqueue three from UI",
+          "cancel middle waiting task",
+          "restart server with two tasks preserved and paused",
+          "explicit resume and FIFO execution",
+          "four real browser actions per completed task",
+          "switch to chat",
+          "draft retained across views",
+          "history and screenshot after reload",
+          "390px width without horizontal overflow",
+          "no console errors"
+        ],
+        "task_status": "SUCCEEDED",
+        "steps": 4,
+        "statuses": [
+          "SUCCEEDED",
+          "CANCELLED",
+          "SUCCEEDED"
+        ],
+        "screenshots": [
+          "desktop.png",
+          "mobile.png"
+        ],
+        "errors": []
+      },
+      "original": "C:\\Users\\samuel\\AppData\\Local\\Jarvis\\data\\diagnostics\\computer-queue\\result.json",
+      "sha256": "b425daaba8ac5b2bd70bd5af092c0d616100ec2c5df0f7f34b69f21f1846fa8c"
+    },
+    "speech": {
+      "result": {
+        "synthetic_audio": "C:\\Users\\samuel\\AppData\\Local\\Jarvis\\data\\diagnostics\\speech\\synthetic-speech-test.wav",
+        "tts_sample_rate": 8000,
+        "tts_duration_seconds": 7.776,
+        "tts_prompt": "你好，我是你的本地助手。现在正在测试语音识别和语音合成。",
+        "synthetic_transcript": "你好，我是你的本地助手，现在正在测试语音识别和语音课声。",
+        "publisher_fixture_transcript": "开饭时间早上9点至下午5点。",
+        "speaker_embedding_dimensions": 192,
+        "speaker_embedding_finite": true,
+        "speaker_embedding_valid": true,
+        "owner_enrolled": false,
+        "voice_authentication_granted": false,
+        "vad_segments": 1,
+        "timings": {
+          "tts_seconds_including_load": 1.268,
+          "asr_seconds_including_load": 1.55,
+          "speaker_seconds_including_load": 0.415
+        },
+        "status": "passed",
+        "limits": "File-only smoke test; no microphone, speaker identity enrollment, spoof defense or voice quality benchmark."
+      },
+      "original": "C:\\Users\\samuel\\AppData\\Local\\Jarvis\\data\\diagnostics\\speech\\speech-smoke.json",
+      "sha256": "b025593aeeec79f5e1d6496b1b8c28cf660e4359438295f85abaae35deaa85d5"
+    },
+    "local_long_request_without_budget_change": {
+      "status": "SUCCEEDED",
+      "provider": "local",
+      "model": "qwen3-0.6b",
+      "usage": {
+        "completion_tokens": 248,
+        "prompt_tokens": 185,
+        "total_tokens": 433,
+        "cached_tokens": 12
+      },
+      "elapsed_seconds": 4.86,
+      "output_incomplete": false,
+      "completion_reason": "complete",
+      "notice": [],
+      "text": "```json\n[\n  \"1\",\n  \"2\",\n  \"3\",\n  \"4\",\n  \"5\",\n  \"6\",\n  \"7\",\n  \"8\",\n  \"9\",\n  \"10\",\n  \"11\",\n  \"12\",\n  \"13\",\n  \"14\",\n  \"15\",\n  \"16\",\n  \"17\",\n  \"18\",\n  \"19\",\n  \"20\",\n  \"21\",\n  \"22\",\n  \"23\",\n  \"24\",\n  \"25\",\n  \"26\",\n  \"27\",\n  \"28\",\n  \"29\",\n  \"30\",\n  \"31\",\n  \"32\",\n  \"33\",\n  \"34\",\n  \"35\",\n  \"36\",\n  \"37\",\n  \"38\",\n  \"39\",\n  \"40\",\n  \"41\",\n  \"42\",\n  \"43\",\n  \"44\",\n  \"45\",\n  \"46\",\n  \"47\",\n  \"48\",\n  \"49\",\n  \"50\"\n]\n```"
+    },
+    "real_local_truncation": {
+      "scope": "temporary config with 32 output tokens; persistent user configuration unchanged",
+      "status": "SUCCEEDED",
+      "provider": "local",
+      "model": "qwen3-0.6b",
+      "usage": {
+        "completion_tokens": 32,
+        "prompt_tokens": 185,
+        "total_tokens": 217,
+        "cached_tokens": 184
+      },
+      "elapsed_seconds": 0.726,
+      "output_incomplete": true,
+      "completion_reason": "length",
+      "notice": [
+        "模型本次回答未完整结束；内容仅供查看，未自动保存为完整文件，也不会自动重发。"
+      ],
+      "text": "```json\n[\n  \"1\",\n  \"2\",\n  \"3\",\n  \"4\",\n  \"5\",\n  \"6\",\n  \"7\",\n"
+    },
+    "documentation": {
+      "navigation_exit_code": 0,
+      "standard_check_exit_code": 0,
+      "output": "OK documents=23 diagrams=19 artifacts=38 errors=0\n",
+      "scope": "Current repository including concurrent attachment review snapshot; no exemptions added and no unrelated review files removed."
+    },
+    "seed": {
+      "command": "python tools/check_seed.py",
+      "passed": true,
+      "checked_assets": 22,
+      "fixture_cases": 12
+    },
+    "post_version_targeted_regression": {
+      "test_assistant_readiness": 6,
+      "test_models": 24,
+      "test_chat": 18,
+      "passed": true
+    }
+  },
+  "initial_findings": [
+    "Initial 291-test run had 2 import errors while attachment code was being added concurrently; final regression includes that code and passes.",
+    "Before host context: Vertex introduced itself as a different Gemini version; Bailian did not know its Jarvis integration.",
+    "Local inference service was not running; explicitly started existing installed component.",
+    "Discount expected 546.65: Bailian default returned 548.95 before change and 548.75 afterward; no arithmetic reliability claim.",
+    "File-mode code previously ignored provider truncation; now partial text cannot be auto-saved or adopted by browser planner."
+  ],
+  "interpretation": {
+    "use_now": "Cloud text assistant, explicit generated-file saving, folder inventory and scoped browser tasks.",
+    "not_ready": "General autonomous coding, durable memory, microphone duplex conversation, owner voice recognition, federation, self-upgrades.",
+    "small_sample_not_iq": true,
+    "local_model": "1/5 strict objective cases, 2/5 content-only; hallucinated ability to execute Python and retain prior sessions.",
+    "speech_quality": "File pipeline completed but synthetic transcript misheard 语音合成 as 语音课声; smoke success is not an accuracy pass."
+  },
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/chat.py": "1867dd013918d54037101a5d42e03e40174b024bd58a37139a777f8a07e19ef5",
+    "runtime/node-host/jarvis_core/assistant_context.py": "ae446be8fb1bf0e22bb2dd73c370c2f1954362a3bd8504024da6826c55969299",
+    "adapters/models/provider-native/jarvis_models/gateway.py": "b653a5035c8de913d2142569e180a3a64a0dc75b849dbc68ea773b62e92eac3c",
+    "adapters/computer-use/jarvis_computer/planner.py": "5507b08638c6881885395d5d86f8f5504f29ed9168f6b1f8477d67ba202f1e1c",
+    "apps/web/index.html": "f1e49aa38205a90af4e6ef563b85a4a8692d6d68199b1ba6b64402e474052771",
+    "tests/test_assistant_readiness.py": "38e9ee0860f5c8574cc20940c85534aed97e4c1c931fd8a36659985cb62e24c7"
+  },
+  "deployment": {
+    "status": "verified",
+    "version": "0.1.21",
+    "instance_id": "e47a027cc72f65834193ba1565307f53",
+    "core_ready": true,
+    "task_count_before": 10,
+    "task_count_after": 10,
+    "local_model_http_status": 200,
+    "loaded_incomplete_guard": true,
+    "source_launch": true,
+    "user_tabs_not_reloaded": true,
+    "live_ui": {
+      "answer": "当前 Jarvis 版本是 0.1.21。我无法在这段聊天中直接运行 Python 代码。",
+      "javascript_errors": [],
+      "screenshot": "H:\\JarvisData\\diagnostics\\readiness-2026-10-16\\live-workbench.png",
+      "waited_for_intro": true
+    },
+    "final_status": {
+      "version": "0.1.21",
+      "instance_id": "d353403a4693cbf61364b3247c895a4f",
+      "core_ready": true,
+      "assistant_state": "standby",
+      "active_tasks": 0,
+      "active_chat_requests": 0,
+      "local_model_http_status": 200
+    }
+  },
+  "final_source_sha256": {
+    "runtime/node-host/jarvis_core/chat.py": "1867dd013918d54037101a5d42e03e40174b024bd58a37139a777f8a07e19ef5",
+    "runtime/node-host/jarvis_core/assistant_context.py": "ae446be8fb1bf0e22bb2dd73c370c2f1954362a3bd8504024da6826c55969299",
+    "adapters/models/provider-native/jarvis_models/gateway.py": "b653a5035c8de913d2142569e180a3a64a0dc75b849dbc68ea773b62e92eac3c",
+    "adapters/computer-use/jarvis_computer/planner.py": "5507b08638c6881885395d5d86f8f5504f29ed9168f6b1f8477d67ba202f1e1c",
+    "apps/web/index.html": "f55dfe4f10766c4de9b91647f1cd9b107f8b407908ee858553beece432d224c0",
+    "tests/test_assistant_readiness.py": "38e9ee0860f5c8574cc20940c85534aed97e4c1c931fd8a36659985cb62e24c7"
+  },
+  "notes": [
+    "Version changed concurrently from 0.1.20 to 0.1.21 for attachments; model sample reports retain the original tested version and source hashes.",
+    "First live UI harness tried input while the startup modal was active, so nothing was submitted. Corrected harness waits for the intro to close; actual live UI then passed.",
+    "Review snapshot belongs to concurrent attachment work; no deletion or checker relaxation performed."
+  ]
+}

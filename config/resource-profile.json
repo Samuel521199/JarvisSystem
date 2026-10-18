@@ -6,6 +6,9 @@
   "retry_seconds": 2,
   "task_memory_mib": {
     "filesystem.read_sample.v1": 256,
-    "browser.operate.v1": 1024
+    "browser.operate.v1": 1024,
+    "sample.report.v1": 256,
+    "skill.report.v1": 1024,
+    "mcp.documentation.v1": 128
   }
 }

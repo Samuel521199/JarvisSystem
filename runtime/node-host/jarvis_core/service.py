@@ -106,10 +106,17 @@ class CoreService:
             raise CoreError("artifact_unavailable", "Artifact digest no longer matches its committed receipt")
 
     def run(self, action_id, *, _before_dispatch=None):
+        return self._run_inventory_action(action_id, _before_dispatch=_before_dispatch)
+
+    def _run_inventory_action(self, action_id, *, capability='filesystem.read_sample.v1',
+                              prepare=None, render=None, timeout_seconds=policy.MAX_SECONDS,
+                              _before_dispatch=None):
+        # Host-owned callbacks bind one fixed workflow; never accept callables
+        # or executors from a plan, HTTP payload, skill file or extension.
         with self.ledger.worker_lock():
             self.ledger.recover_orphans()
             record = self.ledger.record(action_id)
-            if record['action']['capability_id'] != 'filesystem.read_sample.v1':
+            if record['action']['capability_id'] != capability:
                 raise CoreError('wrong_executor', 'This action requires its registered executor')
             if record["action"]["status"] in TERMINAL_ACTIONS:
                 if record["action"]["status"] == "CONFIRMED":
@@ -122,17 +129,22 @@ class CoreService:
             task_id = record["task"]["task_id"]
             write_attempted = False
             try:
-                deadline = time.monotonic() + policy.MAX_SECONDS
+                deadline = time.monotonic() + timeout_seconds
                 def checkpoint():
+                    self.assert_running()
                     self.ledger.assert_admitted(task_id)
                     if time.monotonic() > deadline:
                         raise CoreError('limit_exceeded', 'Task wall-time budget exceeded')
                 config = self.ledger.assert_admitted(task_id)["config"]
-                inventory = policy.collect_inventory(config, record["action"]["arguments"], checkpoint)
+                args = prepare(record, checkpoint) if prepare else record["action"]["arguments"]
+                checkpoint()
+                inventory = policy.collect_inventory(config, args, checkpoint)
                 inventory, self.last_worker_evidence = worker.compute_inventory(
                     inventory, record=record, node_id=config['node_id'], host_id=self.host_instance_id,
                     epoch=self._security_epoch, checkpoint=checkpoint)
-                output = (canonical_json(inventory) + "\n").encode("utf-8")
+                checkpoint()
+                result = render(inventory) if render else inventory
+                output = (canonical_json(result) + "\n").encode("utf-8")
                 if len(output) > policy.MAX_OUTPUT_BYTES:
                     raise CoreError("limit_exceeded", "Inventory output size limit exceeded")
                 filename = action_id + ".json"
@@ -155,7 +167,7 @@ class CoreService:
                     self.ledger.complete(connection, action_id, artifact)
             except (CoreError, OSError) as exc:
                 code = exc.code if isinstance(exc, CoreError) else "filesystem_error"
-                state = "UNKNOWN" if write_attempted else ("CANCELLED" if code in {"stopped", "cancelled"} else "FAILED")
+                state = "UNKNOWN" if write_attempted or code == 'model_unknown' else ("CANCELLED" if code in {"stopped", "cancelled"} else "FAILED")
                 self.ledger.finish_without_receipt(action_id, state, {"code": code, "message": str(exc)})
             return self.ledger.record(action_id)
 

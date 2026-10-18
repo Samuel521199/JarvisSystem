@@ -1,0 +1,81 @@
+{
+  "version": "0.1.47",
+  "observed_at": "2026-10-18T05:21:30.254993+00:00",
+  "status": "passed",
+  "results": [
+    {
+      "suite": "test_rea_asar.py",
+      "passed": true,
+      "tests": 7,
+      "seconds": 31.53,
+      "output": "test_corruption_budget_and_hardlinks (test_rea_asar.AsarTests.test_corruption_budget_and_hardlinks) ... ok\ntest_invalid_headers_ranges_links_and_names (test_rea_asar.AsarTests.test_invalid_headers_ranges_links_and_names) ... ok\ntest_literal_focus_validation (test_rea_asar.AsarTests.test_literal_focus_validation) ... ok\ntest_no_match_and_filtered_pages (test_rea_asar.AsarTests.test_no_match_and_filtered_pages) ... ok\ntest_packed_delivery_and_focus (test_rea_asar.AsarTests.test_packed_delivery_and_focus) ... ok\ntest_unpacked_changes_cancel_and_recheck (test_rea_asar.AsarTests.test_unpacked_changes_cancel_and_recheck) ... ok\ntest_unpacked_member_delivery_and_missing_companion (test_rea_asar.AsarTests.test_unpacked_member_delivery_and_missing_companion) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 31.241s\n\nOK\n"
+    },
+    {
+      "suite": "test_rea.py",
+      "passed": true,
+      "tests": 14,
+      "seconds": 64.023,
+      "output": "test_rea_changed_source_no_delivery (test_rea.ReaTests.test_rea_changed_source_no_delivery) ... ok\ntest_rea_evidence_write_failure_is_not_confirmed (test_rea.ReaTests.test_rea_evidence_write_failure_is_not_confirmed) ... ok\ntest_rea_exclusions_and_empty (test_rea.ReaTests.test_rea_exclusions_and_empty) ... ok\ntest_rea_hardlink_and_budget (test_rea.ReaTests.test_rea_hardlink_and_budget) ... ok\ntest_rea_invalid_target (test_rea.ReaTests.test_rea_invalid_target) ... ok\ntest_rea_job_cancel_and_limits (test_rea.ReaTests.test_rea_job_cancel_and_limits) ... ok\ntest_rea_job_host_crash_kills_children (test_rea.ReaTests.test_rea_job_host_crash_kills_children) ... ok\ntest_rea_large_published_directory_delivery (test_rea.ReaTests.test_rea_large_published_directory_delivery) ... ok\ntest_rea_missing_runtime_and_invalid_evidence (test_rea.ReaTests.test_rea_missing_runtime_and_invalid_evidence) ... ok\ntest_rea_paging_legacy_and_bounds (test_rea.ReaTests.test_rea_paging_legacy_and_bounds) ... ok\ntest_rea_policy_applies_and_dispatch_cancel (test_rea.ReaTests.test_rea_policy_applies_and_dispatch_cancel) ... ok\ntest_rea_real_delivery (test_rea.ReaTests.test_rea_real_delivery) ... ok\ntest_rea_runtime_change_and_cancel (test_rea.ReaTests.test_rea_runtime_change_and_cancel) ... ok\ntest_rea_syntax_failure (test_rea.ReaTests.test_rea_syntax_failure) ... ok\n\n----------------------------------------------------------------------\nRan 14 tests in 63.775s\n\nOK\n"
+    },
+    {
+      "suite": "test_skills.py",
+      "passed": true,
+      "tests": 21,
+      "seconds": 18.599,
+      "output": "test_all_four_guides_reach_chat_under_instruction_limit (test_skills.PolicyTests.test_all_four_guides_reach_chat_under_instruction_limit) ... ok\ntest_capability_inventory_and_new_intents (test_skills.PolicyTests.test_capability_inventory_and_new_intents) ... ok\ntest_catalog_complete_unique_examples (test_skills.PolicyTests.test_catalog_complete_unique_examples) ... ok\ntest_changed_guide_needs_new_behavior_evidence (test_skills.PolicyTests.test_changed_guide_needs_new_behavior_evidence) ... ok\ntest_conservative_selection (test_skills.PolicyTests.test_conservative_selection) ... ok\ntest_digest_guidance_and_audit (test_skills.PolicyTests.test_digest_guidance_and_audit) ... ok\ntest_invalid_context_and_browser_readiness (test_skills.PolicyTests.test_invalid_context_and_browser_readiness) ... ok\ntest_revision_restore_and_unadmitted (test_skills.PolicyTests.test_revision_restore_and_unadmitted) ... ok\ntest_scopes_disable_manual_turn (test_skills.PolicyTests.test_scopes_disable_manual_turn) ... ok\ntest_browser_error_no_delivery (test_skills.TaskTests.test_browser_error_no_delivery) ... ok\ntest_cancel_model (test_skills.TaskTests.test_cancel_model) ... ok\ntest_changed_source (test_skills.TaskTests.test_changed_source) ... ok\ntest_idempotence_and_existing_output (test_skills.TaskTests.test_idempotence_and_existing_output) ... ok\ntest_invalid_sources (test_skills.TaskTests.test_invalid_sources) ... ok\ntest_missing_runtime_and_ratio_mismatch (test_skills.TaskTests.test_missing_runtime_and_ratio_mismatch) ... ok\ntest_new_text_workflow_without_source_and_policy_gates (test_skills.TaskTests.test_new_text_workflow_without_source_and_policy_gates) ... ok\ntest_policy_change (test_skills.TaskTests.test_policy_change) ... ok\ntest_real_anatomy (test_skills.TaskTests.test_real_anatomy) ... ok\ntest_report_delivery_and_source_binding (test_skills.TaskTests.test_report_delivery_and_source_binding) ... ok\ntest_source_is_attachment_and_cannot_disable_guidance (test_skills.TaskTests.test_source_is_attachment_and_cannot_disable_guidance) ... ok\ntest_unknown_model_no_replay (test_skills.TaskTests.test_unknown_model_no_replay) ... ok\n\n----------------------------------------------------------------------\nRan 21 tests in 18.325s\n\nOK\n"
+    },
+    {
+      "suite": "test_project_resources.py",
+      "passed": true,
+      "tests": 15,
+      "seconds": 4.915,
+      "output": "test_nonce_origin_crud_conflict_and_no_execution (test_project_resources.ResourceHTTPTests.test_nonce_origin_crud_conflict_and_no_execution) ... ok\ntest_reconnect_markup_keeps_origin_boundary_and_stale_writes_rejected (test_project_resources.ResourceHTTPTests.test_reconnect_markup_keeps_origin_boundary_and_stale_writes_rejected) ... ok\ntest_edit_preserves_bom_crlf_and_detects_external_change (test_project_resources.ResourceTests.test_edit_preserves_bom_crlf_and_detects_external_change) ... ok\ntest_extension_fields_and_endpoints (test_project_resources.ResourceTests.test_extension_fields_and_endpoints) ... ok\ntest_failed_replace_keeps_original_and_removes_staging (test_project_resources.ResourceTests.test_failed_replace_keeps_original_and_removes_staging) ... ok\ntest_file_type_size_encoding_and_traversal (test_project_resources.ResourceTests.test_file_type_size_encoding_and_traversal) ... ok\ntest_hardlink_and_replaced_root_rejected (test_project_resources.ResourceTests.test_hardlink_and_replaced_root_rejected) ... ok\ntest_invalid_workspace_does_not_register_folder (test_project_resources.ResourceTests.test_invalid_workspace_does_not_register_folder) ... ok\ntest_lazy_tree_filters_links_dependencies_and_exclusions (test_project_resources.ResourceTests.test_lazy_tree_filters_links_dependencies_and_exclusions) ... ok\ntest_mcp_registration_restart_retry_and_revision (test_project_resources.ResourceTests.test_mcp_registration_restart_retry_and_revision) ... ok\ntest_new_file_is_exclusive_and_empty_files_are_supported (test_project_resources.ResourceTests.test_new_file_is_exclusive_and_empty_files_are_supported) ... ok\ntest_skill_preview_changes_and_remove_keeps_source (test_project_resources.ResourceTests.test_skill_preview_changes_and_remove_keeps_source) ... ok\ntest_stop_blocks_mutations (test_project_resources.ResourceTests.test_stop_blocks_mutations) ... ok\ntest_tree_limit_and_missing_directory (test_project_resources.ResourceTests.test_tree_limit_and_missing_directory) ... ok\ntest_workspace_portability_no_commands_and_conflict (test_project_resources.ResourceTests.test_workspace_portability_no_commands_and_conflict) ... ok\n\n----------------------------------------------------------------------\nRan 15 tests in 4.652s\n\nOK\n"
+    },
+    {
+      "suite": "test_conversation_tasks.py",
+      "passed": true,
+      "tests": 11,
+      "seconds": 5.317,
+      "output": "test_optional_markers_roundtrip_and_invalid_links_rejected (test_conversation_tasks.ArchiveTaskLinkTests.test_optional_markers_roundtrip_and_invalid_links_rejected) ... ok\ntest_nonce_origin_and_strict_routes (test_conversation_tasks.ConversationTaskHTTPTests.test_nonce_origin_and_strict_routes) ... ok\ntest_scoped_lookup_cancel_and_duplicate_have_no_model_calls (test_conversation_tasks.ConversationTaskHTTPTests.test_scoped_lookup_cancel_and_duplicate_have_no_model_calls) ... ok\ntest_association_is_atomic_and_part_of_idempotence (test_conversation_tasks.ConversationTaskTests.test_association_is_atomic_and_part_of_idempotence) ... ok\ntest_cancel_after_stop_and_delete_archive_preserve_task_audit (test_conversation_tasks.ConversationTaskTests.test_cancel_after_stop_and_delete_archive_preserve_task_audit) ... ok\ntest_conversation_filter_precedes_recent_thirty_limit (test_conversation_tasks.ConversationTaskTests.test_conversation_filter_precedes_recent_thirty_limit) ... ok\ntest_cross_conversation_detail_lookup_cancel_and_artifact_rejected (test_conversation_tasks.ConversationTaskTests.test_cross_conversation_detail_lookup_cancel_and_artifact_rejected) ... ok\ntest_global_task_cannot_be_attached_after_acceptance (test_conversation_tasks.ConversationTaskTests.test_global_task_cannot_be_attached_after_acceptance) ... ok\ntest_real_report_download_is_exact_committed_bytes_and_damage_visible (test_conversation_tasks.ConversationTaskTests.test_real_report_download_is_exact_committed_bytes_and_damage_visible) ... ok\ntest_restart_restores_link_without_archive_or_model_call (test_conversation_tasks.ConversationTaskTests.test_restart_restores_link_without_archive_or_model_call) ... ok\ntest_unknown_fields_and_bad_identifiers_never_create_task (test_conversation_tasks.ConversationTaskTests.test_unknown_fields_and_bad_identifiers_never_create_task) ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 4.895s\n\nOK\n"
+    }
+  ],
+  "tests": 68,
+  "model_calls": 0,
+  "target_executed": false,
+  "source_digests": {
+    "runtime/node-host/jarvis_core/rea.py": "sha256:6e107e6c965612c6f32dc190b99cfcaa7fea98f04bc1e2131608a1cea2e30687",
+    "runtime/node-host/jarvis_core/rea_asar.py": "sha256:f0e19530fabc3e59134a4f27626ceec19bfbe2ae21de575e14092963a02abed1",
+    "runtime/node-host/jarvis_core/rea_focus.py": "sha256:a084b9c867bed8a08d1791b7e783a2f66387579b132282532f5deaf8e7c4f35a",
+    "runtime/node-host/jarvis_core/rea_evidence.py": "sha256:2c948918bdc58603c2e8b2013fe198afd754fe5bd514936fb731d7277d765432",
+    "runtime/node-host/jarvis_core/rea_process.py": "sha256:79e0137d0b863be352f5d85d6736d624df4927449968284e492a877fc50b6c83",
+    "runtime/node-host/jarvis_core/skill_tasks.py": "sha256:303df511b9565b3dd598801d94d8f1c1ea9ddeae020afde53aac60b89befa317",
+    "apps/web/skills.js": "sha256:8a6c3c8b52d94d43a052ee848859a1153b124fb31fa614340ab3c8eca3a9a049",
+    "config/skills/catalog.json": "sha256:f1274993403406410869a49c3d32d9898af0d3bd126475e0171ebcd2779ad499",
+    "adapters/skills/rea/SKILL.md": "sha256:ca21f68243239c8d639a79d66c3b1d12d6c7af3685053b751b6601a724c91dd3"
+  },
+  "scope": "Self-owned official @electron/asar 4.2.0 packed/unpacked fixtures; bounded malformed inputs. No general real-world accuracy claim.",
+  "final_revalidation": {
+    "observed_at": "2026-10-18T05:24:09.276102+00:00",
+    "scope": "After bounded automatic query control-character check and report style update",
+    "asar_tests": 7,
+    "result": "passed",
+    "seconds": 37.058,
+    "ui_checks": 4,
+    "page_errors": 0,
+    "ui_evidence": "evals/reports/rea-asar-focus-ui-2026-10-18.json",
+    "skill_format": "passed",
+    "docs": "24 documents / 21 diagrams / 42 artifacts / 0 errors",
+    "whitespace": "passed",
+    "source_digests": {
+      "runtime/node-host/jarvis_core/rea.py": "sha256:6e107e6c965612c6f32dc190b99cfcaa7fea98f04bc1e2131608a1cea2e30687",
+      "runtime/node-host/jarvis_core/rea_asar.py": "sha256:f0e19530fabc3e59134a4f27626ceec19bfbe2ae21de575e14092963a02abed1",
+      "runtime/node-host/jarvis_core/rea_focus.py": "sha256:a084b9c867bed8a08d1791b7e783a2f66387579b132282532f5deaf8e7c4f35a",
+      "runtime/node-host/jarvis_core/rea_evidence.py": "sha256:2c948918bdc58603c2e8b2013fe198afd754fe5bd514936fb731d7277d765432",
+      "runtime/node-host/jarvis_core/rea_process.py": "sha256:79e0137d0b863be352f5d85d6736d624df4927449968284e492a877fc50b6c83",
+      "runtime/node-host/jarvis_core/skill_tasks.py": "sha256:303df511b9565b3dd598801d94d8f1c1ea9ddeae020afde53aac60b89befa317",
+      "apps/web/skills.js": "sha256:8a6c3c8b52d94d43a052ee848859a1153b124fb31fa614340ab3c8eca3a9a049",
+      "config/skills/catalog.json": "sha256:f1274993403406410869a49c3d32d9898af0d3bd126475e0171ebcd2779ad499",
+      "adapters/skills/rea/SKILL.md": "sha256:ca21f68243239c8d639a79d66c3b1d12d6c7af3685053b751b6601a724c91dd3"
+    }
+  }
+}

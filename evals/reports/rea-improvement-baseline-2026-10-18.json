@@ -1,0 +1,63 @@
+{
+  "version": "0.1.46",
+  "observed_at": "2026-10-18T04:58:18.948884+00:00",
+  "status": "passed",
+  "tests": [
+    {
+      "suite": "test_rea.py",
+      "passed": 14,
+      "seconds": 112.041
+    },
+    {
+      "suite": "test_skills.py",
+      "passed": 21,
+      "seconds": 30.921
+    },
+    {
+      "suite": "test_project_resources.py",
+      "passed": 15,
+      "seconds": 3.708
+    },
+    {
+      "suite": "test_conversation_tasks.py",
+      "passed": 11,
+      "seconds": 5.238
+    }
+  ],
+  "total_passed": 61,
+  "comparison": "evals/reports/rea-improvement-comparison-2026-10-18.json",
+  "ui": "evals/reports/rea-improvement-ui-2026-10-18.json",
+  "deployment": "evals/reports/rea-improvement-deployment-2026-10-18.json",
+  "skill_validation": "passed",
+  "model_calls": 0,
+  "target_executed": false,
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/rea.py": "3bd55bab6f12c607097584c388d63c397cfcc24c0e53af312d2844be26762be3",
+    "runtime/node-host/jarvis_core/rea_process.py": "79e0137d0b863be352f5d85d6736d624df4927449968284e492a877fc50b6c83",
+    "runtime/node-host/jarvis_core/rea_evidence.py": "841325a572f5159686a12126c705260b6d1e811db7b03eb1548003c1edcb3ec8",
+    "runtime/node-host/jarvis_core/skill_tasks.py": "4e18eb90507613cef7f7c692971fd9b9dff8dae51d1a25dc3199781377db2676",
+    "runtime/node-host/jarvis_core/project_files.py": "fc7b372c091f5f53e8d99b45b86cfe6556205ebf1bff318a2f49cce6b5809f11",
+    "runtime/node-host/jarvis_core/conversation_tasks.py": "5d128e403706141a175636dd8555c8d803d1dac7b0a4233ba2b7a428acfbac64",
+    "apps/web/skill_routes.py": "38280c396d5a86cf4a61f2e0c7298e7121e6930bb956e0757ca260aed6c05e6d",
+    "apps/web/skills.js": "e3970c9d3b93273af1d5af38b293e57170cf2e77101a7596247f1403d6d18204",
+    "apps/web/conversation_tasks.js": "fa1e54beecda04583c9b66f0633a1f1c0307702959443123bb1bb8c97336c1b2",
+    "contracts/schemas/skill-report.schema.json": "194c21d59851d72ed053a3f07a6541aed8df27d16fdd1b686f85140c291b7ffc",
+    "config/skills/catalog.json": "e3af54fcf0945cf7023e1d04be83a254e41672a910aba05426fb058a6bab41d9",
+    "adapters/skills/rea/SKILL.md": "9631f015be12cf13143e1e971059fa83244de99515568a13fa364548824566a1",
+    "tests/test_rea.py": "f5774400a15b907c9d26cf40d4e030e8144b0dbd398f620b1195efecac5bff24",
+    "tools/probe_rea_ui.py": "37f9bf82b889268775471b6cfabc762098ac896a4960b5b3c14b9896a09a6042",
+    "tools/evaluate_rea_improvement.py": "6fa713f1e7f095ce7ba1bf202c6a2d0e6591be2658673d637b146cf79388f131",
+    "tools/probe_rea_improvement_deployment.py": "3865430560731135b65a3f6d6ac056ee0c3af0efb1e0f0a9c6e714a1716a4180"
+  },
+  "issues_and_repairs": [
+    "Initial UI probe looked for a non-active meta element and timed out; corrected the probe to use its own server nonce and reran all UI checks.",
+    "Deployment first detected an existing empty restart_review pause and made no changes; checked that it was automatic with no waiting/running/unknown work, then reloaded normally.",
+    "Launcher stdout decoding emitted a console warning while the actual reload and task succeeded; added explicit Python UTF-8 mode and validated the read-only launcher check."
+  ],
+  "limits": [
+    "Self-owned synthetic JavaScript/Electron fixtures only; no general real-software quality claim.",
+    "ASAR, runtime tracing, model explanation and independent reimplementation remain unimplemented.",
+    "No speedup claim; single-run timings vary with host load.",
+    "Host-crash temporary directory recovery remains unimplemented."
+  ]
+}

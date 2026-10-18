@@ -1,0 +1,61 @@
+{
+  "version": "0.1.58",
+  "observed_at": "2026-10-18T16:34:43.250000+00:00",
+  "status": "local_verified_pending_deployment",
+  "engineering_tests": {
+    "count": 248,
+    "seconds": 347.991,
+    "status": "passed",
+    "log_path": "H:\\JarvisData\\diagnostics\\skills\\combined-final-20261019.txt",
+    "sha256": "b69d267a5aea0232f93f4be63aa905c085b8ab7453c7933608e402f55e69dc03"
+  },
+  "quality": {
+    "google": {
+      "without_skill": {
+        "pass": 6,
+        "partial": 17,
+        "fail": 4
+      },
+      "with_skill": {
+        "pass": 8,
+        "partial": 16,
+        "fail": 3
+      }
+    },
+    "sol": {
+      "without_skill": {
+        "pass": 18,
+        "partial": 9,
+        "fail": 0
+      },
+      "with_skill": {
+        "pass": 27,
+        "partial": 0,
+        "fail": 0
+      }
+    }
+  },
+  "quality_method": "Agent read all 108 complete outputs against 27 prewritten rubrics; not independent human adjudication, not blinded, one sample per arm; counts describe these samples only. No model self-rating or keyword correctness proxy.",
+  "coding_live_report": "evals/reports/coding-workflow-live-r5-2026-10-19.json",
+  "failures_preserved": [
+    "evals/reports/coding-workflow-live-2026-10-19.json",
+    "evals/reports/coding-workflow-live-r2-2026-10-19.json",
+    "evals/reports/coding-workflow-live-r3-2026-10-19.json",
+    "evals/reports/coding-workflow-live-r4-2026-10-19.json"
+  ],
+  "failure_notes": "Initial UI handler hid cases; then missing guard return prevented dispatch; Google formatting failed bounded validation; a probe selector reused a prior task. Fixed without loosening code/test contracts. Final live probe checks distinct task IDs and exact model identity. Invalid/unfinished debug results are not counted as successful deliveries; remote charges for an unfinished debug task are not inferred.",
+  "scope": "Single-file data transformations only. Nine guidance skills retained; comparative evidence is case-level and model-dependent. Low-memory injection and bounded local soak are separate from physical low-end and multi-day acceptance.",
+  "bindings": {
+    "anatomy.explainer": "sha256:7ed4aa06edaf1c143a1cb7ee4d5c85db89299b5526dedc68db082471d5c379fc",
+    "matt-pocock.diagnosing-bugs": "sha256:febe5ccb898e4022f82ca693aadb60b5782ed07f7c49c80a9f21b46ba5885cef",
+    "matt-pocock.code-review": "sha256:a7a416d6d16201ec48ce6f13b31d4e17f535e2527c07c1df05d8e86e066fe068",
+    "matt-pocock.tdd": "sha256:9974439059f8991ead15862d0dcf480080833054f07390fdd1be26d59e4b41da",
+    "matt-pocock.codebase-design": "sha256:d9f8124e84a9e93f147b68607523a39574346c3bc8c9b147162a473c41c0240d",
+    "matt-pocock.to-spec": "sha256:db78cc107c3071ae31bca5b98f0d2e8311e6e2cebb650aaa4151ab53b734bac1",
+    "matt-pocock.handoff": "sha256:be9ae93f533f84735a117e6f17100348cab316707ada9db1a3f9a7227e76df71",
+    "matt-pocock.teach": "sha256:6598c70af2dcc6fc90afac0c3d2286d87134b20ca27f111c086168cfef1bc64a",
+    "matt-pocock.to-questionnaire": "sha256:356e75f4c7e3a27740a1904118887ba039ac486408a4bf513083ea91afe5948d",
+    "matt-pocock.writing-for-agents": "sha256:a7632435f560c0663a4f2e266304d3d828818c0295da9a113a67e89028375237",
+    "rea.software-analysis": "sha256:2339a5853a41ca441062f71dd0d20886020ea649f077659f8de7d2fc06f867cd"
+  }
+}

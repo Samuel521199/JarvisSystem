@@ -1,0 +1,60 @@
+{
+  "version": "0.1.30",
+  "captured_at": "2026-10-16T14:40:20.235806+00:00",
+  "status": "passed",
+  "unit_tests": {
+    "total": 406,
+    "skipped": 2,
+    "exit_code": 0,
+    "seconds": 289.741,
+    "passed": 404
+  },
+  "limits": [
+    "Full K1 and K2 gates remain incomplete.",
+    "Real model and crash probes are separately recorded; generic MCP/skill execution remains unavailable."
+  ],
+  "post_review_targeted_tests": {
+    "total": 11,
+    "passed": 11,
+    "scope": "tests/test_sample_tasks.py after prompt and timeout handling corrections"
+  },
+  "seed_check": {
+    "ok": true,
+    "checked_assets": 22,
+    "fixture_cases": 12
+  },
+  "docs_check": {
+    "documents": 23,
+    "diagrams": 19,
+    "artifacts": 38,
+    "errors": 0
+  },
+  "real_model_calls_this_increment": 5,
+  "live_evidence": [
+    "evals/reports/sample-task-live-initial.json",
+    "evals/reports/sample-task-live.json",
+    "evals/reports/sample-task-live-unsupported.json"
+  ],
+  "fault_evidence": "evals/reports/sample-task-faults.json",
+  "browser_evidence": "evals/reports/sample-task-ui.json",
+  "deployment_evidence": "evals/reports/sample-task-deployment.json",
+  "new_third_party_dependencies": 0,
+  "new_background_services": 0,
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/sample_tasks.py": "9a96ff955c1f81c56ee11d26f860a1ba6201a460a40f15c78ea18fde406bc890",
+    "runtime/node-host/jarvis_core/service.py": "844fefcc5a498e954ffe0c13a02b827743ebef6b26b9dbfa8f0dc37ce8a9e6cf",
+    "runtime/node-host/jarvis_core/ledger.py": "df032b88829c8a5b3240270a04c5ded6aa3a9eea8ac52dac4b998c98b8ae58a4",
+    "runtime/node-host/jarvis_core/task_queue.py": "7e60d98664c1b712d1f15bf227d299b560b799d8ad3042d3f34aaa5aa4d2d79a",
+    "runtime/node-host/jarvis_core/resources.py": "023191cd453323b562dff2accc6ba9d2c69fbb90ab4d9703e4416226087f84f7",
+    "runtime/node-host/jarvis_core/chat.py": "0c2fc9e3f81929c4a61b67864a4d405096887a443e03163c6e0626e650fc152c",
+    "runtime/node-host/jarvis_core/modules.py": "fa95445d3d7663f5c466c61c2098a56d86a29efb84ebf2acf9f4de8081457c61",
+    "adapters/computer-use/jarvis_computer/web.py": "bc5e9438303cf288263038a53bf4c747d5d67f0de153462ca0dacd64773bf643",
+    "adapters/computer-use/jarvis_computer/task_queue.py": "83f65e5fb1dfeb23c78144a386470bc7890f7b5b951b0456088be4479da39fcc",
+    "apps/web/computer.js": "d2d0a5dfb6dbcee60e64dddb32e8627ad893d554537b58e098ab0fb7f7452be2",
+    "apps/web/admin.html": "4a01c1f4b1739636d436789b847f9dd6a4d2e47a8b52be7ea16f3ee0f30e6cd4",
+    "config/resource-profile.json": "b4b047c46103c7fe0912e1fd1618c5d40bec6ab90ba4ca4078f102399a73565a",
+    "contracts/schemas/sample-plan.schema.json": "c2c833261fbf9c66e57b9a395ed3cd495c475ca3f14b2da3184dd07227f3cecd",
+    "tests/test_sample_tasks.py": "f312b9a26ce55f46a39fbf75e921d01638f4d8eb9d9bca108744a624950bd105"
+  },
+  "post_review_ui": "Default auto route and available module card verified by latest sample-task-ui.json"
+}

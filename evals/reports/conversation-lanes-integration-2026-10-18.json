@@ -1,0 +1,34 @@
+{
+  "status": "SUCCEEDED",
+  "source_version": "0.1.55",
+  "tests": 22,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "elapsed_seconds": 19.926,
+  "modules": [
+    "test_dialogue_process",
+    "test_rea_explanation.ValidationTests",
+    "test_rea_explanation.ExplanationTasks.test_purpose_cannot_inherit_context_or_trigger_other_skills",
+    "test_web.WebTests.test_runtime_package_contains_served_brand_assets",
+    "test_resources.ResourceWebTests",
+    "test_runtime_metrics.RuntimeHttpTests"
+  ],
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/__init__.py": "7261aface34bd99e098a42049bb68d72e41135878100f6d1cc0b0dbdec84816c",
+    "runtime/node-host/jarvis_core/dialogue_process.py": "a953d94544890d7b3cb2dc26e1b17af9b4cdd34f75acb1373e4c257cb8cfe342",
+    "runtime/node-host/jarvis_core/dialogue_worker.py": "0a4141da07a71f46c9fec84ed00a16de5bc48f7aa70c57be7bb2abfc2cad9317",
+    "runtime/node-host/jarvis_core/turns.py": "dfc07e29a5a85d2178c29e37582fb3fe4a1ba09ddf88c2734f20be8326ca39ae",
+    "runtime/node-host/jarvis_core/chat.py": "4847deacd212a5be798fda435dced6b33c06a272eb07e9720192302f55b84ad8",
+    "runtime/node-host/jarvis_core/sample_tasks.py": "4c30305711532b5275b9307a7621eba92162b134c97167fe3eda9bc81010018d",
+    "runtime/node-host/jarvis_core/skill_tasks.py": "ed0917d682dd01f91761293d40351d2e5c1e793595146e41d1a1a3c0a03864e5",
+    "runtime/node-host/jarvis_core/rea_explanation.py": "19a6ce9b6a81d045d3a31833266d1821ac0c41bc54f782c829d1ee3edf873135",
+    "runtime/node-host/jarvis_core/task_queue.py": "dc16c596b712fe3825d4e9980d0c21a4b21d7e01993bb4d554758797482960c6",
+    "adapters/computer-use/jarvis_computer/web.py": "1c538250b176f453091747f76dccc0eb00a3375dbd147f072dc5224b92c7ed53",
+    "adapters/computer-use/jarvis_computer/task_queue.py": "a9b810ab0d616d44b2024b8fb290a7716540605892a5cbf7d9539215b5ceea72",
+    "apps/web/server.py": "d2c75c2ff1f472fea72d794834d8c9fa2c06155c00d770b6d31cecb65131cb9e",
+    "apps/web/resources.js": "586e03243199134cec0c4da7bedde691f904f73ca8e7aee09ea2dd0202c99e2b"
+  },
+  "source_changes_during_run": [],
+  "limits": "Post-merge process/protocol and lightweight HTTP/REA checks. Full parser and MCP regressions are recorded in their owning task reports; this does not repeat that suite."
+}

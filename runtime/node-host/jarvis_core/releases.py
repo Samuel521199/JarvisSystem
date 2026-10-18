@@ -23,7 +23,7 @@ from .worker_recovery import locked
 SPEC = importlib.util.spec_from_file_location('jarvis_release_bundle', policy.REPOSITORY_ROOT/'tools/release_bundle.py')
 bundle = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(bundle)
-START_DATA_VERSIONS = frozenset({'0.1.13','0.1.14','0.1.15','0.1.16','0.1.17','0.1.18','0.1.19','0.1.20','0.1.21'})
+START_DATA_VERSIONS = frozenset({'0.1.13','0.1.14','0.1.15','0.1.16','0.1.17','0.1.18','0.1.19','0.1.20','0.1.21','0.1.22'})
 
 HEALTH_SCRIPT = r'''
 import sys,json

@@ -1,0 +1,67 @@
+{
+  "version": "0.1.24",
+  "captured_at": "2026-10-16T09:34:27.057646+00:00",
+  "status": "passed",
+  "regression": {
+    "command": "python -X utf8 -B -m unittest discover -s tests",
+    "tests": 342,
+    "passed": 340,
+    "skipped": 2,
+    "seconds": 177.378
+  },
+  "targeted": {
+    "suites": [
+      "tests.test_conversations",
+      "tests.test_web",
+      "tests.test_workspace"
+    ],
+    "tests": 46,
+    "passed": 45,
+    "skipped": 1
+  },
+  "browser_evidence": "evals/reports/conversation-ui.json",
+  "workspace_browser": {
+    "status": "passed",
+    "fixture_model_calls": 9,
+    "checks": [
+      "default, relative and explicit absolute export paths",
+      "no overwrite; failure, incomplete replies and Save As",
+      "project switching, draft isolation and file receipt persistence",
+      "mobile menus and layout; no script errors"
+    ]
+  },
+  "deployment": {
+    "url": "http://127.0.0.1:18181/",
+    "previous_version": "0.1.23",
+    "version": "0.1.24",
+    "core_ready": true,
+    "task_ids_and_statuses_preserved": true,
+    "preserved_task_count": 10,
+    "queue_paused": true,
+    "active_chat_requests": 0,
+    "active_tasks": 0,
+    "archive_endpoint_available": true,
+    "archive_count_at_check": 0,
+    "served_assets_match_source": true,
+    "source_restart": true
+  },
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/conversations.py": "2004c53970116609b7fcb382346268f752862f9fb78ca27b06825706429619c9",
+    "runtime/node-host/jarvis_core/assistant_context.py": "eed098d4d76180d836d61a3a508f5f15c2403ce8ee2e0454862891f214424872",
+    "apps/web/conversations.js": "266a6d3ef543985307d2eee808b95e94967a1641ecf63d1c1c04fdabac4f0743",
+    "apps/web/workspace.js": "281fec8815172cebeed243f9ea96461aab5192a6d6862ae219a460a4578dfcd2",
+    "apps/web/workspace.css": "627bf1cbcc9d50c665699df33b476253bd62d4132455aa2656e24054f9ccb0cc",
+    "apps/web/context.js": "432f4554347b12111e0c7331ec6dbc2b86bb276a2ff8c42db245b03f8f5e40d1",
+    "apps/web/index.html": "d2c1912eeebe9485ce5cdeaa414f8dcc44b5333b4521c9399b80660f29fd04b2",
+    "apps/web/server.py": "6618383b618c0c67a91dc70d6b6ce734c1393f309d031d0f5361f6d88c8a7083",
+    "tests/test_conversations.py": "bed11b21bad2e31fd33404f1c7bcc09ead0efa5ec312ce05e56ad6e45fa8674f",
+    "tools/probe_conversation_ui.py": "0d7ab8d0f2aa656333f5a5b405aef012277d4b602a595dc9955b094d8f9ed9c2",
+    "tools/probe_workspace_ui.py": "6a5c6dcb8dd30739545fea2e8419d19f9a7b1134871c2287c3c3efb28aba013d"
+  },
+  "limits": [
+    "Text conversation archive only; no long-term semantic memory curator or vector retrieval.",
+    "Browser tests use temporary data and synthetic model replies; no paid requests.",
+    "Old pre-0.1.24 page-memory chats are not retroactively archived.",
+    "Explicit idle source restart, not arbitrary hot module replacement."
+  ]
+}

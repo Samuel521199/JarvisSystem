@@ -1,0 +1,850 @@
+{
+  "version": "0.1.50",
+  "status": "verified_subset",
+  "scope": "on-demand semantic fact candidates only",
+  "new_dependencies": 0,
+  "new_databases": 0,
+  "new_daemons": 0,
+  "downloaded_models": 0,
+  "automatic_background_extraction": false,
+  "live": {
+    "requests": 9,
+    "synthetic_only": true,
+    "facts_committed": 0,
+    "estimated_usd": 0.032826,
+    "total_tokens_reported": 4503,
+    "final_cases_passed": 3,
+    "final_cases": 3,
+    "reports": {
+      "live-first": {
+        "version": "0.1.49",
+        "captured_at": "2026-10-18T05:45:44.660236+00:00",
+        "route": "vertex::gemini-3.1-pro-preview",
+        "scope": "3 synthetic smoke cases, not held-out quality evaluation",
+        "owner_data_used": false,
+        "facts_committed": 0,
+        "cases": [
+          {
+            "case": "owner_other",
+            "source": "长篇答复读着累，给我的结论请尽量简洁。客户老王喜欢咖啡。",
+            "local_rule_candidates": [],
+            "result": {
+              "status": "FAILED",
+              "provider": "vertex",
+              "model": "gemini-3.1-pro-preview",
+              "reasoning": "low",
+              "usage": {
+                "promptTokenCount": 239,
+                "candidatesTokenCount": 137,
+                "totalTokenCount": 564,
+                "thoughtsTokenCount": 188
+              },
+              "billing": {
+                "basis": "estimated",
+                "amount": 0.004378,
+                "currency": "USD",
+                "tokens": {
+                  "input": 239,
+                  "output": 325,
+                  "cache_read": 0,
+                  "cache_write": 0,
+                  "total": 564,
+                  "reasoning": 188
+                },
+                "price": {
+                  "input": 2,
+                  "output": 12,
+                  "cache_read": 0.2,
+                  "cache_write": null,
+                  "max_input_tokens": 200000,
+                  "currency": "USD",
+                  "fee_percent": 0,
+                  "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+                  "checked_at": "2026-10-16"
+                },
+                "reason": "token_rates"
+              },
+              "outcome_uncertain": false,
+              "dispatch_admitted": true,
+              "error_category": "invalid_candidate_output",
+              "user_message": "模型未返回合格的候选格式；没有保存，也没有自动重试。"
+            },
+            "candidates": [],
+            "expected_categories": [
+              "preference",
+              "third_party"
+            ],
+            "smoke_pass": false
+          },
+          {
+            "case": "fiction_project",
+            "source": "游戏里的 NPC 阿明是火系法师。这个项目确定使用 Python。",
+            "local_rule_candidates": [],
+            "result": {
+              "status": "FAILED",
+              "provider": "vertex",
+              "model": "gemini-3.1-pro-preview",
+              "reasoning": "low",
+              "usage": {
+                "promptTokenCount": 235,
+                "candidatesTokenCount": 74,
+                "totalTokenCount": 430,
+                "thoughtsTokenCount": 121
+              },
+              "billing": {
+                "basis": "estimated",
+                "amount": 0.00281,
+                "currency": "USD",
+                "tokens": {
+                  "input": 235,
+                  "output": 195,
+                  "cache_read": 0,
+                  "cache_write": 0,
+                  "total": 430,
+                  "reasoning": 121
+                },
+                "price": {
+                  "input": 2,
+                  "output": 12,
+                  "cache_read": 0.2,
+                  "cache_write": null,
+                  "max_input_tokens": 200000,
+                  "currency": "USD",
+                  "fee_percent": 0,
+                  "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+                  "checked_at": "2026-10-16"
+                },
+                "reason": "token_rates"
+              },
+              "outcome_uncertain": false,
+              "dispatch_admitted": true,
+              "error_category": "invalid_candidate_output",
+              "user_message": "模型未返回合格的候选格式；没有保存，也没有自动重试。"
+            },
+            "candidates": [],
+            "expected_categories": [
+              "fiction",
+              "project_fact"
+            ],
+            "smoke_pass": false
+          },
+          {
+            "case": "hypothetical",
+            "source": "假设有人说我喜欢咖啡，那只是例子，不代表我的喜好。",
+            "local_rule_candidates": [],
+            "result": {
+              "status": "FAILED",
+              "provider": "vertex",
+              "model": "gemini-3.1-pro-preview",
+              "reasoning": "low",
+              "usage": {
+                "promptTokenCount": 229,
+                "candidatesTokenCount": 9,
+                "totalTokenCount": 340,
+                "thoughtsTokenCount": 102
+              },
+              "billing": {
+                "basis": "estimated",
+                "amount": 0.00179,
+                "currency": "USD",
+                "tokens": {
+                  "input": 229,
+                  "output": 111,
+                  "cache_read": 0,
+                  "cache_write": 0,
+                  "total": 340,
+                  "reasoning": 102
+                },
+                "price": {
+                  "input": 2,
+                  "output": 12,
+                  "cache_read": 0.2,
+                  "cache_write": null,
+                  "max_input_tokens": 200000,
+                  "currency": "USD",
+                  "fee_percent": 0,
+                  "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+                  "checked_at": "2026-10-16"
+                },
+                "reason": "token_rates"
+              },
+              "outcome_uncertain": false,
+              "dispatch_admitted": true,
+              "error_category": "invalid_candidate_output",
+              "user_message": "模型未返回合格的候选格式；没有保存，也没有自动重试。"
+            },
+            "candidates": [],
+            "expected_categories": [],
+            "smoke_pass": false
+          }
+        ],
+        "status": "needs_review"
+      },
+      "live-diagnostic": {
+        "version": "0.1.49",
+        "captured_at": "2026-10-18T05:46:18.184305+00:00",
+        "route": "vertex::gemini-3.1-pro-preview",
+        "scope": "3 synthetic smoke cases, not held-out quality evaluation",
+        "owner_data_used": false,
+        "facts_committed": 0,
+        "cases": [
+          {
+            "case": "owner_other",
+            "source": "长篇答复读着累，给我的结论请尽量简洁。客户老王喜欢咖啡。",
+            "local_rule_candidates": [],
+            "result": {
+              "status": "FAILED",
+              "provider": "vertex",
+              "model": "gemini-3.1-pro-preview",
+              "reasoning": "low",
+              "usage": {
+                "promptTokenCount": 239,
+                "candidatesTokenCount": 125,
+                "totalTokenCount": 911,
+                "thoughtsTokenCount": 547
+              },
+              "billing": {
+                "basis": "estimated",
+                "amount": 0.008542,
+                "currency": "USD",
+                "tokens": {
+                  "input": 239,
+                  "output": 672,
+                  "cache_read": 0,
+                  "cache_write": 0,
+                  "total": 911,
+                  "reasoning": 547
+                },
+                "price": {
+                  "input": 2,
+                  "output": 12,
+                  "cache_read": 0.2,
+                  "cache_write": null,
+                  "max_input_tokens": 200000,
+                  "currency": "USD",
+                  "fee_percent": 0,
+                  "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+                  "checked_at": "2026-10-16"
+                },
+                "reason": "token_rates"
+              },
+              "outcome_uncertain": false,
+              "dispatch_admitted": true,
+              "error_category": "invalid_candidate_output",
+              "user_message": "模型未返回合格的候选格式；没有保存，也没有自动重试。"
+            },
+            "candidates": [],
+            "synthetic_raw_result": {
+              "text": "```json\n{\n  \"candidates\": [\n    {\n      \"segment\": 0,\n      \"title\": \"答复偏好\",\n      \"content\": \"希望得到的结论尽量简洁\",\n      \"category\": \"preference\",\n      \"subject_label\": \"\"\n    },\n    {\n      \"segment\": 1,\n      \"title\": \"饮食偏好\",\n      \"content\": \"喜欢咖啡\",\n      \"category\": \"third_party\",\n      \"subject_label\": \"客户老王\"\n    }\n  ]\n}\n```",
+              "output_incomplete": false,
+              "completion_reason": "complete"
+            },
+            "expected_categories": [
+              "preference",
+              "third_party"
+            ],
+            "smoke_pass": false
+          },
+          {
+            "case": "fiction_project",
+            "source": "游戏里的 NPC 阿明是火系法师。这个项目确定使用 Python。",
+            "local_rule_candidates": [],
+            "result": {
+              "status": "FAILED",
+              "provider": "vertex",
+              "model": "gemini-3.1-pro-preview",
+              "reasoning": "low",
+              "usage": {
+                "promptTokenCount": 235,
+                "candidatesTokenCount": 74,
+                "totalTokenCount": 518,
+                "thoughtsTokenCount": 209
+              },
+              "billing": {
+                "basis": "estimated",
+                "amount": 0.003866,
+                "currency": "USD",
+                "tokens": {
+                  "input": 235,
+                  "output": 283,
+                  "cache_read": 0,
+                  "cache_write": 0,
+                  "total": 518,
+                  "reasoning": 209
+                },
+                "price": {
+                  "input": 2,
+                  "output": 12,
+                  "cache_read": 0.2,
+                  "cache_write": null,
+                  "max_input_tokens": 200000,
+                  "currency": "USD",
+                  "fee_percent": 0,
+                  "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+                  "checked_at": "2026-10-16"
+                },
+                "reason": "token_rates"
+              },
+              "outcome_uncertain": false,
+              "dispatch_admitted": true,
+              "error_category": "invalid_candidate_output",
+              "user_message": "模型未返回合格的候选格式；没有保存，也没有自动重试。"
+            },
+            "candidates": [],
+            "synthetic_raw_result": {
+              "text": "```json\n{\"candidates\":[{\"segment\":0,\"title\":\"NPC 阿明设定\",\"content\":\"游戏里的 NPC 阿明是火系法师\",\"category\":\"fiction\",\"subject_label\":\"NPC 阿明\"},{\"segment\":1,\"title\":\"项目技术栈\",\"content\":\"这个项目确定使用 Python\",\"category\":\"project_fact\",\"subject_label\":\"\"}]}\n```",
+              "output_incomplete": false,
+              "completion_reason": "complete"
+            },
+            "expected_categories": [
+              "fiction",
+              "project_fact"
+            ],
+            "smoke_pass": false
+          },
+          {
+            "case": "hypothetical",
+            "source": "假设有人说我喜欢咖啡，那只是例子，不代表我的喜好。",
+            "local_rule_candidates": [],
+            "result": {
+              "status": "SUCCEEDED",
+              "provider": "vertex",
+              "model": "gemini-3.1-pro-preview",
+              "reasoning": "low",
+              "usage": {
+                "promptTokenCount": 229,
+                "candidatesTokenCount": 4,
+                "totalTokenCount": 493,
+                "thoughtsTokenCount": 260
+              },
+              "billing": {
+                "basis": "estimated",
+                "amount": 0.003626,
+                "currency": "USD",
+                "tokens": {
+                  "input": 229,
+                  "output": 264,
+                  "cache_read": 0,
+                  "cache_write": 0,
+                  "total": 493,
+                  "reasoning": 260
+                },
+                "price": {
+                  "input": 2,
+                  "output": 12,
+                  "cache_read": 0.2,
+                  "cache_write": null,
+                  "max_input_tokens": 200000,
+                  "currency": "USD",
+                  "fee_percent": 0,
+                  "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+                  "checked_at": "2026-10-16"
+                },
+                "reason": "token_rates"
+              },
+              "outcome_uncertain": false,
+              "dispatch_admitted": true
+            },
+            "candidates": [],
+            "synthetic_raw_result": {
+              "text": "{\"candidates\":[]}",
+              "output_incomplete": false,
+              "completion_reason": "complete"
+            },
+            "expected_categories": [],
+            "smoke_pass": true
+          }
+        ],
+        "status": "needs_review"
+      },
+      "live-recheck": {
+        "version": "0.1.49",
+        "captured_at": "2026-10-18T05:47:13.565802+00:00",
+        "route": "vertex::gemini-3.1-pro-preview",
+        "scope": "3 synthetic smoke cases, not held-out quality evaluation",
+        "owner_data_used": false,
+        "facts_committed": 0,
+        "cases": [
+          {
+            "case": "owner_other",
+            "source": "长篇答复读着累，给我的结论请尽量简洁。客户老王喜欢咖啡。",
+            "local_rule_candidates": [],
+            "result": {
+              "status": "SUCCEEDED",
+              "provider": "vertex",
+              "model": "gemini-3.1-pro-preview",
+              "reasoning": "low",
+              "usage": {
+                "promptTokenCount": 243,
+                "candidatesTokenCount": 70,
+                "totalTokenCount": 454,
+                "thoughtsTokenCount": 141
+              },
+              "billing": {
+                "basis": "estimated",
+                "amount": 0.003018,
+                "currency": "USD",
+                "tokens": {
+                  "input": 243,
+                  "output": 211,
+                  "cache_read": 0,
+                  "cache_write": 0,
+                  "total": 454,
+                  "reasoning": 141
+                },
+                "price": {
+                  "input": 2,
+                  "output": 12,
+                  "cache_read": 0.2,
+                  "cache_write": null,
+                  "max_input_tokens": 200000,
+                  "currency": "USD",
+                  "fee_percent": 0,
+                  "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+                  "checked_at": "2026-10-16"
+                },
+                "reason": "token_rates"
+              },
+              "outcome_uncertain": false,
+              "dispatch_admitted": true
+            },
+            "candidates": [
+              {
+                "candidate_id": "4e918d7aee792a540acef23ade4116f3ef68801a9ed3eb6a977beaea15c3c52b",
+                "segment": 0,
+                "quote": "长篇答复读着累，给我的结论请尽量简洁",
+                "title": "答复偏好",
+                "content": "觉得长篇答复读着累，偏好简洁的结论",
+                "classification": {
+                  "kind": "preference",
+                  "subject": "owner",
+                  "subject_label": "",
+                  "uses": [
+                    "personal_chat"
+                  ],
+                  "expires_at": null
+                }
+              },
+              {
+                "candidate_id": "19c5e309e3157561df577d6705785525604fa6623d8c1d4d458179a52879ef8c",
+                "segment": 1,
+                "quote": "客户老王喜欢咖啡",
+                "title": "喜欢咖啡",
+                "content": "喜欢咖啡",
+                "classification": {
+                  "kind": "third_party",
+                  "subject": "other",
+                  "subject_label": "客户老王",
+                  "uses": [],
+                  "expires_at": null
+                }
+              }
+            ],
+            "synthetic_raw_result": {
+              "text": "{\"candidates\":[{\"segment\":0,\"title\":\"答复偏好\",\"content\":\"觉得长篇答复读着累，偏好简洁的结论\",\"category\":\"preference\",\"subject_label\":\"\"},{\"segment\":1,\"title\":\"喜欢咖啡\",\"content\":\"喜欢咖啡\",\"category\":\"third_party\",\"subject_label\":\"客户老王\"}]}",
+              "output_incomplete": false,
+              "completion_reason": "complete"
+            },
+            "expected_categories": [
+              "preference",
+              "third_party"
+            ],
+            "smoke_pass": true
+          },
+          {
+            "case": "fiction_project",
+            "source": "游戏里的 NPC 阿明是火系法师。这个项目确定使用 Python。",
+            "local_rule_candidates": [],
+            "result": {
+              "status": "SUCCEEDED",
+              "provider": "vertex",
+              "model": "gemini-3.1-pro-preview",
+              "reasoning": "low",
+              "usage": {
+                "promptTokenCount": 239,
+                "candidatesTokenCount": 127,
+                "totalTokenCount": 480,
+                "thoughtsTokenCount": 114
+              },
+              "billing": {
+                "basis": "estimated",
+                "amount": 0.00337,
+                "currency": "USD",
+                "tokens": {
+                  "input": 239,
+                  "output": 241,
+                  "cache_read": 0,
+                  "cache_write": 0,
+                  "total": 480,
+                  "reasoning": 114
+                },
+                "price": {
+                  "input": 2,
+                  "output": 12,
+                  "cache_read": 0.2,
+                  "cache_write": null,
+                  "max_input_tokens": 200000,
+                  "currency": "USD",
+                  "fee_percent": 0,
+                  "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+                  "checked_at": "2026-10-16"
+                },
+                "reason": "token_rates"
+              },
+              "outcome_uncertain": false,
+              "dispatch_admitted": true
+            },
+            "candidates": [
+              {
+                "candidate_id": "4e918d7aee792a540acef23ade4116f3ef68801a9ed3eb6a977beaea15c3c52b",
+                "segment": 0,
+                "quote": "游戏里的 NPC 阿明是火系法师",
+                "title": "NPC阿明的职业",
+                "content": "游戏里的NPC阿明是火系法师",
+                "classification": {
+                  "kind": "fiction",
+                  "subject": "character",
+                  "subject_label": "NPC阿明",
+                  "uses": [],
+                  "expires_at": null
+                }
+              },
+              {
+                "candidate_id": "19c5e309e3157561df577d6705785525604fa6623d8c1d4d458179a52879ef8c",
+                "segment": 1,
+                "quote": "这个项目确定使用 Python",
+                "title": "项目使用语言",
+                "content": "项目确定使用Python",
+                "classification": {
+                  "kind": "project_fact",
+                  "subject": "project",
+                  "subject_label": "",
+                  "uses": [
+                    "work_assist"
+                  ],
+                  "expires_at": null
+                }
+              }
+            ],
+            "synthetic_raw_result": {
+              "text": "{\n  \"candidates\": [\n    {\n      \"segment\": 0,\n      \"title\": \"NPC阿明的职业\",\n      \"content\": \"游戏里的NPC阿明是火系法师\",\n      \"category\": \"fiction\",\n      \"subject_label\": \"NPC阿明\"\n    },\n    {\n      \"segment\": 1,\n      \"title\": \"项目使用语言\",\n      \"content\": \"项目确定使用Python\",\n      \"category\": \"project_fact\",\n      \"subject_label\": \"\"\n    }\n  ]\n}",
+              "output_incomplete": false,
+              "completion_reason": "complete"
+            },
+            "expected_categories": [
+              "fiction",
+              "project_fact"
+            ],
+            "smoke_pass": true
+          },
+          {
+            "case": "hypothetical",
+            "source": "假设有人说我喜欢咖啡，那只是例子，不代表我的喜好。",
+            "local_rule_candidates": [],
+            "result": {
+              "status": "SUCCEEDED",
+              "provider": "vertex",
+              "model": "gemini-3.1-pro-preview",
+              "reasoning": "low",
+              "usage": {
+                "promptTokenCount": 233,
+                "candidatesTokenCount": 4,
+                "totalTokenCount": 313,
+                "thoughtsTokenCount": 76
+              },
+              "billing": {
+                "basis": "estimated",
+                "amount": 0.001426,
+                "currency": "USD",
+                "tokens": {
+                  "input": 233,
+                  "output": 80,
+                  "cache_read": 0,
+                  "cache_write": 0,
+                  "total": 313,
+                  "reasoning": 76
+                },
+                "price": {
+                  "input": 2,
+                  "output": 12,
+                  "cache_read": 0.2,
+                  "cache_write": null,
+                  "max_input_tokens": 200000,
+                  "currency": "USD",
+                  "fee_percent": 0,
+                  "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+                  "checked_at": "2026-10-16"
+                },
+                "reason": "token_rates"
+              },
+              "outcome_uncertain": false,
+              "dispatch_admitted": true
+            },
+            "candidates": [],
+            "synthetic_raw_result": {
+              "text": "{\"candidates\":[]}",
+              "output_incomplete": false,
+              "completion_reason": "complete"
+            },
+            "expected_categories": [],
+            "smoke_pass": true
+          }
+        ],
+        "status": "passed"
+      }
+    }
+  },
+  "tests": {
+    "semantic": {
+      "run": 12,
+      "failures": 0,
+      "errors": 0
+    },
+    "seed": {
+      "assets": 22,
+      "fixtures": 12,
+      "errors": 0
+    },
+    "related": {
+      "run": 93,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 17.497
+    },
+    "dialogue_recovery_recheck": {
+      "run": 11,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 1.212
+    },
+    "node": {
+      "run": 7,
+      "passed": 7
+    },
+    "docs": {
+      "documents": 24,
+      "diagrams": 21,
+      "artifacts": 42,
+      "errors": 0
+    },
+    "full_first": {
+      "run": 710,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 2,
+      "seconds": 364.236,
+      "failure": "test_process_exit_retains_admission_without_replay: subprocess could not import jarvis_core without inherited PYTHONPATH",
+      "repair": "Fixture explicitly passes repository runtime path; exit code and durable UNKNOWN assertions retained"
+    },
+    "full_recheck": {
+      "run": 711,
+      "passed": 709,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 2,
+      "skip_reason": "Windows symbolic link privilege unavailable",
+      "seconds": 392.523
+    }
+  },
+  "browser": {
+    "ui-first": {
+      "version": "0.1.49",
+      "captured_at": "2026-10-18T05:44:32.783032+00:00",
+      "checks": [],
+      "page_errors": [],
+      "real_model_calls": 0,
+      "user_data_modified": false,
+      "status": "failed",
+      "failure": "Traceback (most recent call last):\n  File \"H:\\Jarvis\\tools\\probe_semantic_candidates_ui.py\", line 122, in main\n    try:run(args.output,report);report['status']='passed'\n        ~~~^^^^^^^^^^^^^^^^^^^^\n  File \"H:\\Jarvis\\tools\\probe_semantic_candidates_ui.py\", line 77, in run\n    expect(second.get_by_label('类型 / 主体',exact=True)).to_have_value('third_party')\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^\n  File \"H:\\JarvisData\\envs\\dev\\Lib\\site-packages\\playwright\\sync_api\\_generated.py\", line 15567, in to_have_value\n    self._sync(\n    ~~~~~~~~~~^\n        self._impl_obj.to_have_value(value=value, timeout=to_milliseconds(timeout))\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"H:\\JarvisData\\envs\\dev\\Lib\\site-packages\\playwright\\_impl\\_sync_base.py\", line 111, in _sync\n    return task.result()\n           ~~~~~~~~~~~^^\n  File \"H:\\JarvisData\\envs\\dev\\Lib\\site-packages\\playwright\\_impl\\_assertions.py\", line 568, in to_have_value\n    await self._expect_impl(\n    ...<5 lines>...\n    )\n  File \"H:\\JarvisData\\envs\\dev\\Lib\\site-packages\\playwright\\_impl\\_assertions.py\", line 128, in _expect_impl\n    _record_soft_or_raise(\n    ~~~~~~~~~~~~~~~~~~~~~^\n        AssertionError(\n        ^^^^^^^^^^^^^^^\n    ...<2 lines>...\n        self._is_soft,\n        ^^^^^^^^^^^^^^\n    )\n    ^\n  File \"H:\\JarvisData\\envs\\dev\\Lib\\site-packages\\playwright\\_impl\\_assertions.py\", line 60, in _record_soft_or_raise\n    raise error\nAssertionError: Locator expected to have Value 'third_party'\nActual value: None\nError: element(s) not found \nCall log:\n  - Expect \"to_have_value\" locator(\"#candidate-list .candidate-card\").nth(1).get_by_label(\"类型 / 主体\", exact=True) with timeout 5000ms\n  - waiting for locator(\"#candidate-list .candidate-card\").nth(1).get_by_label(\"类型 / 主体\", exact=True)\n\nAria snapshot:\n- complementary \"Jarvis 侧栏\":\n  - link \"查看 Jarvis 机甲星核标识与动效\":\n    - /url: /brand/\n  - heading \"Jarvis\" [level=1]\n  - text: 你的智能伙伴\n  - button \"新对话\"\n  - button \"打开文件夹\"\n  - navigation \"项目与会话\":\n    - paragraph: 打开文件夹，开始一个项目\n    - region \"独立会话\":\n      - button \"独立会话\" [expanded]\n      - button \"新建独立对话\"\n      - button \"长篇答复读着累，给我的结论请尽量简洁。客户老\"\n  - group: 关于本次会话\n- separator \"调整左侧导航宽度\"\n- main:\n  - button \"收起左侧导航\" [expanded]\n  - strong: Jarvis\n  - text: / 当前对话\n  - button \"项目文件\"\n  - group\n  - button \"离开工作台 · 助手继续运行\"\n  - status \"助手待命中\"\n  - button \"检查连接\"\n  - button \"音效：关 · 点击开启\"\n  - button \"记忆\"\n  - link \"设置\":\n    - /url: /settings\n  - region \"对话\":\n    - log:\n      - article:\n        - text: 你 长篇答复读着累，给我的结论请尽量简洁。客户老王喜欢咖啡。\n        - button \"整理为记忆…\"\n      - article:\n        - text: ✦ Jarvis 合成验证回答。\n        - group: Gemini 3.8 Flash · 低 · 详情\n        - group: ···\n        - button \"朗读这条回复\"\n    - status\n    - button \"选择项目文件夹\"\n    - text: 此电脑\n    - button \"文件记录\"\n    - text: 消息用途\n    - combobox \"消息用途\":\n      - option \"普通对话\" [selected]\n      - option \"执行任务 · 目录报告\"\n      - option \"技能任务 · 科普/源码报告\"\n    - button \"本会话任务\"\n    - checkbox \"按需使用技能\" [checked]\n    - text: 按需使用技能\n    - combobox \"显式选择技能\":\n      - option \"自动匹配\" [selected]\n      - option \"齿轮交互科普\"\n      - option \"故障诊断\"\n      - option \"代码审阅\"\n      - option \"行为测试设计\"\n      - option \"模块与接口设计\"\n      - option \"需求到任务计划\"\n      - option \"工作交接\"\n      - option \"概念讲解与练习\"\n      - option \"需求调研问卷\"\n      - option \"Agent 指令编写\"\n      - option \"软件结构与行为解析\"\n    - group: › 本会话要求 未设置\n    - button \"添加附件\"\n    - text: 拖入文件、图片，或粘贴截图\n    - group: 支持的格式\n    - text: 你的消息\n    - textbox \"你的消息\":\n      - /placeholder: 向 Jarvis 提问，或一起完善一个想法…\n    - button \"选择模型\": 自动路由\n    - text: 推理级别\n    - combobox \"推理级别\" [disabled]:\n      - option \"跟随模型\" [selected]\n    - button \"发送消息\"\n    - paragraph: 消息、会话要求、附件及最近历史将发送至自动路由选中的供应商\n    - paragraph: Enter 发送 · Shift + Enter 换行\n  - text: v0.1.49\n- dialog \"整理为记忆与未结事项\":\n  - heading \"整理为记忆与未结事项\" [level=2]\n  - button \"关闭\"\n  - paragraph: 先用本机规则整理，不消耗模型用量。也可按需让模型提取事实候选；核对原句、主体和用途后再保存。未结事项仍由本机规则整理，不会启动任务或提醒。\n  - blockquote: 长篇答复读着累，给我的结论请尽量简洁。客户老王喜欢咖啡。\n  - text: 语义整理模型\n  - combobox \"语义整理模型\":\n    - option \"Google Vertex · Gemini 3.8 Flash\"\n    - option \"Google Vertex · Gemini 4 Argon\"\n    - option \"Google Vertex · Gemini 3.1 Pro · Preview\" [selected]\n    - option \"Google Vertex · Gemini 3.5 Flash-Lite\"\n    - option \"Google Vertex · Gemini 3.1 Flash-Lite\"\n    - option \"阿里云百炼 · Qwen3.8 Flash\"\n    - option \"阿里云百炼 · Qwen3.8 Max\"\n    - option \"阿里云百炼 · Qwen3.7 Plus\"\n    - option \"阿里云百炼 · Qwen Flash\"\n    - option \"OpenAI · GPT-6 Luna\"\n    - option \"OpenAI · GPT-6.1 Sol\"\n    - option \"OpenAI · GPT-6 Astra\"\n    - option \"OpenAI · GPT-6 Sol\"\n    - option \"OpenAI · GPT-5.6 Luna\"\n    - option \"xAI · Grok 4.7\"\n    - option \"xAI · Grok 4.1 Fast 非推理\"\n    - option \"本机 Qwen · Qwen3 0.6B 本地 CPU\"\n    - option \"Eachlabs · Claude Sonnet 5.5\"\n    - option \"Eachlabs · Claude Opus 5.5\"\n    - option \"Eachlabs · Claude Haiku 5.5\"\n  - text: 推理档位\n  - combobox \"推理档位\":\n    - option \"低\" [selected]\n    - option \"中\"\n    - option \"高\"\n  - paragraph: 点击后会把上方整条原文发送到 Google Vertex / gemini-3.1-pro-preview；不附带历史、其他记忆、项目文件或技能，不自动切换供应商。保存后仍默认仅本地使用。\n  - button \"用此模型重新整理事实\"\n  - status: \"请逐条核对原句、主体和用途，20 分钟内确认；预览过期或服务重启后需重新整理。 本次用量：{\\\"input_tokens\\\":100,\\\"output_tokens\\\":80}\"\n  - article:\n    - strong: 模型提出的事实候选\n    - blockquote: 原句：长篇答复读着累，给我的结论请尽量简洁\n    - text: 名称\n    - textbox \"名称\" [disabled]: 我喜欢的回答方式\n    - text: 记忆内容\n    - textbox \"记忆内容\" [disabled]: 主人希望先给出简短结论\n    - text: 使用范围\n    - combobox \"使用范围\" [disabled]:\n      - option \"普通个人会话\" [selected]\n    - text: 类型 / 主体\n    - combobox \"类型 / 主体\" [disabled]:\n      - option \"主人事实\"\n      - option \"个人偏好\" [selected]\n      - option \"个人经历\"\n      - option \"共同经历\"\n      - option \"他人信息\"\n      - option \"虚构角色\"\n    - checkbox \"用于我的日常聊天\" [checked] [disabled]\n    - text: 用于我的日常聊天\n    - checkbox \"用于协助我的工作\" [checked] [disabled]\n    - text: 用于协助我的工作\n    - paragraph: 两项都不选则仅保存。虚构角色只保存；“工作结果”只是你确认的记录，不证明任务已执行。\n    - paragraph: 此确认已处理，请在记忆面板核对。\n  - article:\n    - strong: 模型提出的事实候选\n    - blockquote: 原句：客户老王喜欢咖啡\n    - text: 名称\n    - textbox \"名称\": 客户口味\n    - text: 记忆内容\n    - textbox \"记忆内容\": 老王喜欢咖啡\n    - text: 使用范围\n    - combobox \"使用范围\":\n      - option \"普通个人会话\" [selected]\n    - text: 类型 / 主体\n    - combobox \"类型 / 主体\":\n      - option \"主人事实\"\n      - option \"个人偏好\"\n      - option \"个人经历\"\n      - option \"共同经历\"\n      - option \"他人信息\" [selected]\n      - option \"虚构角色\"\n    - text: 他人或角色名称\n    - textbox \"他人或角色名称\": 老王\n    - checkbox \"用于我的日常聊天\"\n    - text: 用于我的日常聊天\n    - checkbox \"用于协助我的工作\"\n    - text: 用于协助我的工作\n    - paragraph: 两项都不选则仅保存。虚构角色只保存；“工作结果”只是你确认的记录，不证明任务已执行。\n    - button \"确认并保存\"\n    - button \"忽略\"\n    - paragraph\n"
+    },
+    "ui-recheck": {
+      "version": "0.1.49",
+      "captured_at": "2026-10-18T05:45:02.283642+00:00",
+      "checks": [
+        "Rule preview has no extra model call; explicit provider and scope disclosure",
+        "Actual extraction transport has only selected source, no history or private fact",
+        "Review edits classification and both uses; lost response creates exactly one revision",
+        "Third-party remains distinct and stored-only by default; ignore does not write",
+        "Same sentence cannot resurrect forgotten fact with new model wording",
+        "390px and desktop fit; stop clears pending candidates and shares admission slots"
+      ],
+      "page_errors": [],
+      "real_model_calls": 0,
+      "user_data_modified": false,
+      "fixture_model_calls": 4,
+      "facts_after": 1,
+      "status": "passed"
+    },
+    "ui-final": {
+      "version": "0.1.49",
+      "captured_at": "2026-10-18T05:47:13.598324+00:00",
+      "checks": [
+        "Rule preview has no extra model call; explicit provider and scope disclosure",
+        "Actual extraction transport has only selected source, no history or private fact",
+        "Review edits classification and both uses; lost response creates exactly one revision",
+        "Third-party remains distinct and stored-only by default; ignore does not write",
+        "Same sentence cannot resurrect forgotten fact with new model wording",
+        "390px and desktop fit; stop clears pending candidates and shares admission slots"
+      ],
+      "page_errors": [],
+      "real_model_calls": 0,
+      "user_data_modified": false,
+      "fixture_model_calls": 4,
+      "facts_after": 1,
+      "status": "passed"
+    },
+    "source-regression": {
+      "version": "0.1.50",
+      "captured_at": "2026-10-18T05:50:28.840942+00:00",
+      "checks": [
+        "Real UI confirms source-bound fact and displays verified original text",
+        "Changed source pauses model use while preserving visible fact",
+        "390px layout and source controls do not overflow",
+        "Independent confirmation survives lost response with exactly one revision",
+        "Default local-only route permissions preserved; source excerpt not added to model context",
+        "Real forget button removes fact; no automatic model calls for source operations"
+      ],
+      "page_errors": [],
+      "real_model_calls": 0,
+      "user_data_modified": false,
+      "fixture_model_calls": 2,
+      "status": "passed"
+    },
+    "domains-regression": {
+      "version": "0.1.50",
+      "captured_at": "2026-10-18T05:50:28.887008+00:00",
+      "checks": [
+        "Saved typed personal/shared facts through real UI and HTTP",
+        "Work request sends allowed shared fact, excludes private fact from actual provider input",
+        "Category filters preserve facts; 390px and desktop layout do not overflow",
+        "Lost response retry produces one policy revision and preserves expiry seconds",
+        "Restricted fact and dependent prior turn absent from next work provider input",
+        "Old host capability mismatch blocks new policy writes"
+      ],
+      "page_errors": [],
+      "real_model_calls": 0,
+      "user_data_modified": false,
+      "fixture_model_calls": 2,
+      "status": "passed"
+    },
+    "ui-release": {
+      "version": "0.1.50",
+      "captured_at": "2026-10-18T05:54:22.568995+00:00",
+      "checks": [],
+      "page_errors": [],
+      "real_model_calls": 0,
+      "user_data_modified": false,
+      "status": "failed",
+      "failure": "Traceback (most recent call last):\n  File \"H:\\Jarvis\\tools\\probe_semantic_candidates_ui.py\", line 127, in main\n    try:run(args.output,report);report['status']='passed'\n        ~~~^^^^^^^^^^^^^^^^^^^^\n  File \"H:\\Jarvis\\tools\\probe_semantic_candidates_ui.py\", line 60, in run\n    assert len(calls)==1\n           ^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "ui-release-recheck": {
+      "version": "0.1.50",
+      "captured_at": "2026-10-18T05:54:39.540601+00:00",
+      "checks": [
+        "Rule preview has no extra model call; explicit provider and scope disclosure",
+        "Actual extraction transport has only selected source, no history or private fact",
+        "Review edits classification and both uses; lost response creates exactly one revision",
+        "Third-party remains distinct and stored-only by default; ignore does not write",
+        "Same sentence cannot resurrect forgotten fact with new model wording",
+        "390px and desktop fit; stop clears pending candidates and shares admission slots",
+        "Malformed model output shows failure and actual returned usage without saving"
+      ],
+      "page_errors": [],
+      "real_model_calls": 0,
+      "user_data_modified": false,
+      "fixture_model_calls": 5,
+      "facts_after": 1,
+      "status": "passed"
+    }
+  },
+  "raw_evidence": "H:\\JarvisData\\evals\\semantic-candidates-20261018",
+  "limits": [
+    "No framework comparison benchmark",
+    "No offline model extraction quality evaluation",
+    "No full recipient isolation",
+    "No long-duration RSS measurement",
+    "Sentence identity is not cross-message semantic deduplication"
+  ],
+  "source_hashes": {
+    "runtime/node-host/jarvis_core/semantic_candidates.py": "beb9d0065bac9c7208da37f9cb3d03320f59599cae8c096a507f0a4f5ae6b324",
+    "runtime/node-host/jarvis_core/personal_candidates.py": "441b53d75e43afb44c6d26f836c7f6716ccd15003b7170b99af2c720f9980cc4",
+    "runtime/node-host/jarvis_core/chat.py": "0704888c673b00870497d0d431ffc1c44f1ce4a170ba1e881cd5de60c7ece6c1",
+    "runtime/node-host/jarvis_core/memory.py": "0bcbccb1e8e32c02ee2b482b4ccccaa0ef86cf5e13f9a9535b0f114d39c70594",
+    "apps/web/server.py": "ab1f5da6c5ee27166571565099a0b2d416e8c5c993717cbb099d0a66742657f1",
+    "apps/web/candidate_routes.py": "3663563ea6b5a8b7c0edd983ab333f0f17a3eda17c3114eb8d70f498e21718ec",
+    "apps/web/personal_candidates.js": "ae415b638fb4ee811a1db2314ca87709635ee92d9d1b04ceb8a1f94167b19f84",
+    "apps/web/memory.css": "92bca6a4cc2e4b8fc2989fcfa2552561fa1985d56d6e4a73604c285a8680039a",
+    "tests/test_semantic_candidates.py": "db538e2d99cbefd3669932155aa0494b2d433b6309f7934ff289aff18fa9eedd",
+    "tests/test_dialogue_recovery.py": "82f540f6662cea427e95199602f616e669e09b47a5acfc97cc1452649db1f1d4",
+    "tools/probe_semantic_candidates_ui.py": "034b49fc79feeeab38dd36f2a6e2a2e69bb11b511bbabdef1d6da5f82291f705",
+    "tools/probe_semantic_candidates_live.py": "1890805009e3aa2f112f7aba39ae474a4b461390df0d8057dcd4579d6b94fb11"
+  },
+  "deployment": {
+    "status": "passed",
+    "version": "0.1.50",
+    "previous_version": "0.1.49",
+    "url": "http://127.0.0.1:18181/",
+    "deployment_mode": "Idle, instance-specific tray graceful exit and existing-data source restart",
+    "business_rows_preserved": true,
+    "task_records_preserved": true,
+    "queue_pause_restored": true,
+    "growth_settings_preserved": true,
+    "schema_version": 3,
+    "schema_migrated": false,
+    "backup": "H:\\JarvisData\\evals\\semantic-candidates-20261018\\memory-before-semantic.sqlite",
+    "core_ready": true,
+    "ui_assets": "ready",
+    "source_assets_verified": true,
+    "new_endpoint_validation_verified": true,
+    "synthetic_user_fact_writes": 0,
+    "real_model_calls": 0,
+    "expected_runtime_change": "dialogue_owner matches the new Host instance; queue owner transferred and empty restart pause restored to prior unpaused state; all other snapshotted table rows unchanged",
+    "queue_restore": {
+      "status": "restored_previous_unpaused_state",
+      "reason": "graceful shutdown introduces service_closed/restart_review; no waiting/running/unreviewed task existed before restoring",
+      "before_restart_paused": false,
+      "restart_queue": {
+        "paused": true,
+        "owned": true,
+        "waiting": 0,
+        "capacity": 20,
+        "error": "restart_review",
+        "resources": {
+          "waiting": false,
+          "reason": null,
+          "sample": null
+        },
+        "running": 0,
+        "unreviewed_unknown": false
+      },
+      "after": {
+        "paused": false,
+        "owned": true,
+        "waiting": 0,
+        "capacity": 20,
+        "running": [],
+        "positions": {},
+        "error": null,
+        "unreviewed_unknown": false,
+        "resources": {
+          "waiting": false,
+          "reason": null,
+          "sample": null
+        }
+      },
+      "tasks_replayed": 0
+    },
+    "verification_note": "Initial comparison identified expected runtime owner changes and restart queue pause; verified exact new owner and restored prior empty unpaused queue through existing API. No business content or task records changed."
+  },
+  "evidence_hashes": {
+    "full-tests-first.txt": "1580cc3f726b58780dd85cca13c80c7666bfb5c140368dd1f0c543b682eecadf",
+    "full-tests-recheck.txt": "a19351c2de248512e65809637bc129aab0fb8a8dbc568713aaa3baaf919eb71e",
+    "related-tests.txt": "7c0a47b5f8c5d951716ab06d9c66b3e0901f3337c8f1a8b4921f6f7e10f4f551",
+    "live-first.json": "ee3d3f021b4347d9428b493416ed97c9457679b73c3735c20156b889fbd5a31f",
+    "live-diagnostic.json": "60ac3b515513a7930140b8715cdd8cf041ed3a505456917f18c3acd89cd7775d",
+    "live-recheck.json": "08dfef2596b708060045ad0e39b79962a4c19eeb478bd98415dedd1065cc0ed9",
+    "ui-release-recheck/report.json": "6238e37b151ed284b7abb506b2d0201deb9f7ed9c7aaf33ca4c2b3cd5ef95606",
+    "deployment.json": "2eab3e066627b97230ad806db2619b10065c4841202b1a74a5a72d5587811f43",
+    "queue-restore.json": "1e2a6800466c5ddbaa869d271f0763b545434c34849097760d20c1b3c7625328"
+  }
+}

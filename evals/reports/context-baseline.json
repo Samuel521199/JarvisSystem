@@ -1,0 +1,71 @@
+{
+  "version": "0.1.23",
+  "captured_at": "2026-10-16T09:03:37.620181+00:00",
+  "status": "passed",
+  "regression": {
+    "command": "python -B -m unittest discover -s tests",
+    "tests": 332,
+    "passed": 330,
+    "skipped": 2,
+    "seconds": 172.259
+  },
+  "targeted": {
+    "suites": [
+      "tests.test_context_assembly",
+      "tests.test_chat",
+      "tests.test_web",
+      "tests.test_attachments",
+      "tests.test_assistant_readiness"
+    ],
+    "tests": 69,
+    "passed": 69
+  },
+  "browser_evidence": "evals/reports/context-ui.json",
+  "syntax_checks": {
+    "context_js": "passed",
+    "workspace_js": "passed",
+    "index_inline_scripts": "passed"
+  },
+  "deployment": {
+    "url": "http://127.0.0.1:18181/",
+    "previous_version": "0.1.22",
+    "current_version": "0.1.23",
+    "core_ready": true,
+    "preserved_task_count": 10,
+    "task_ids_and_statuses_preserved": true,
+    "queue_paused": true,
+    "queue_waiting": 0,
+    "active_chat_requests": 0,
+    "active_tasks": 0,
+    "maintenance_busy": false,
+    "context_asset_matches_source": true,
+    "source_restart": true
+  },
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/context_assembly.py": "7458a6e468a49e14da34e8ec022a3b3b4c2fc6b25e565d58e5f34b1531ba537e",
+    "runtime/node-host/jarvis_core/chat.py": "b6a47c998063229c723f148038b4819312d1e82781ae475bb4c18f1fc5bd656a",
+    "apps/web/server.py": "8b1833604be5166fed9bdc8ea7f37e0b0a08d4bf3661231b2d6ae85910e21843",
+    "apps/web/index.html": "6237744a21572627c32137f451f9bec68f459aee338b0ccb038327ca73a4bb37",
+    "apps/web/context.js": "40ea6df23758fedea1b9db5d43ff9d3de8932e301ee9ac9988cbc75775a26577",
+    "apps/web/context.css": "122ea231c87026eda3d1384c277c1f9626955653d1efd4f6e1e53abd103c5b6f",
+    "apps/web/workspace.js": "85baefa3393376bbd8cbb358d63e530aea365acb6bf96fc2544413404d758ab4",
+    "contracts/schemas/context-report.schema.json": "68e0cb45a07c6fa7edce182bb71d56ab777861dbd9d4df2274918b3b72b0ee90",
+    "tests/test_context_assembly.py": "6bc245cfa3706dc3d8cd313d46471f16135df9e9581add321f8d05f8bf89cc73",
+    "tests/test_web.py": "f5eefb4f9484ac4204805d19660463a0a7721d52ffb1fe9b765a97f1073b88de",
+    "tools/probe_context_ui.py": "e32b14b0fc00d054b2f7e674bc259d28f2daba3539b31b7f2e55c5853a6a0fe8"
+  },
+  "limits": [
+    "An idle explicit source restart was used; arbitrary hot module replacement is not established.",
+    "UI and context integration tests use a synthetic model gateway; no paid model call or model obedience claim.",
+    "No automatic summarization, persistent memory or autonomous tool loop was implemented."
+  ],
+  "documentation": {
+    "command": "python -B tools/check_docs.py --root .",
+    "documents": 23,
+    "diagrams": 19,
+    "artifacts": 38,
+    "errors": 0,
+    "navigation_sync": "0 files changed"
+  },
+  "whitespace_check": "Passed for this change scope; CRLF recognized as line endings. Unrelated changes excluded."
+}

@@ -1,30 +1,32 @@
 flowchart TB
-    Evidence["运行指标、任务结果、变更与知识证据"]
-    Check["健康检查：规则、基线与完整性"]
-    Latch{"G0 违规或失去可信控制？"}
-    Stop["独立锁存停止：仅保留固定安全功能"]
-    Classify["定位影响范围：生成 HealthReport"]
-    Known{"存在已验证的恢复配方？"}
-    Repair["普通故障：限额执行配方"]
-    Candidate["代码缺陷：隔离修复候选"]
-    Verify["独立验证：结构、回归、数据与恢复"]
-    Result{"满足准入与实际健康条件？"}
-    Adopt["逐步采用并观察"]
-    Fallback["兼容回退、降级或等待维护"]
-    Evidence --> Check
-    Check --> Latch
-    Latch -->|"是"| Stop
-    Latch -->|"否"| Classify
-    Classify -->|"需要处理"| Known
-    Classify -->|"正常或无需改动"| Observe["继续观察或等待"]
-    Observe --> Evidence
-    Known -->|"是"| Repair
-    Known -->|"无配方且不宜自动改代码"| Fallback
-    Known -->|"否且需要改代码"| Candidate
-    Repair --> Verify
-    Candidate --> Verify
-    Verify --> Result
-    Result -->|"是"| Adopt
-    Result -->|"否或超额"| Fallback
-    Adopt --> Evidence
-    Fallback --> Evidence
+    Events["变化事件、实际结果、分层到期计划"] --> Inspect
+    subgraph S1["自检：只观察和报告"]
+      Inspect["有界探针：摘要、契约、结果与资源"] --> Report["报告：范围、时间、覆盖、证据与未知"]
+      Report --> Classify{"故障、能力差距或正常？"}
+    end
+    Classify -->|"正常或证据不足"| Wait["记录、继续观察或等待证据"]
+    Classify -->|"既有能力退化"| Incident
+    Classify -->|"健康但缺少新能力"| Proposal
+    subgraph S2["自愈：恢复原契约"]
+      Incident["事件去重和责任租约"] --> HealGate{"自愈策略允许？"}
+      HealGate -->|"是"| Known{"有已验证配方？"}
+      Known -->|"有"| Recipe["确定性恢复"]
+      Known -->|"需编码"| Fix["固定原契约的修复候选"]
+    end
+    subgraph S3["进化：实现主人目标"]
+      Goal["主人目标与有证据的改进机会"] --> Proposal["能力提案：收益、范围、基线与验收"]
+      Proposal --> GrowGate{"进化策略允许？"}
+      GrowGate -->|"是"| Develop["独立候选研发"]
+    end
+    HealGate -->|"否"| Wait
+    GrowGate -->|"否"| Wait
+    Fix --> Pipeline["共用构建、独立验收与发布；同一对象串行提交"]
+    Develop --> Pipeline
+    Recipe --> Verify["原故障复测或新能力对比；实际观察"]
+    Pipeline --> Verify
+    Verify --> Outcome{"证据达标？"}
+    Outcome -->|"是"| Ledger["关闭故障或登记成长收益；保留恢复证据"]
+    Outcome -->|"否"| Fallback["兼容回退、降级或暂停该方向"]
+    Ledger -.-> Events
+    Fallback -.-> Events
+    Policy["全程遵守当前主人范围与安全主题页；控制完整性违规转独立停止路径"] -.-> Pipeline

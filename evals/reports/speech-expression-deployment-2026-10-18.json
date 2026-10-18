@@ -1,0 +1,324 @@
+{
+  "status": "SUCCEEDED",
+  "source_version": "0.1.43",
+  "observed_at": "2026-10-18T02:57:08.949057+00:00",
+  "before_instance": "f80d0e387f7a0624368cfa3c7465878c",
+  "after_instance": "b34491c958ef7ad1c72e2cf846e87dc5",
+  "reload": "Idle lanes checked; gracefully exited existing tray; existing original-data launcher; source reload, not hot replacement.",
+  "preview_before_model_load": {
+    "segments": [
+      {
+        "type": "speech",
+        "text": "别担心，我在这里。",
+        "emotion": "neutral",
+        "delivery": "soft",
+        "pace": "slow",
+        "expression": "温柔轻声 · 舒缓慢速"
+      },
+      {
+        "type": "pause",
+        "milliseconds": 350
+      },
+      {
+        "type": "speech",
+        "text": "你已经做得很好了！",
+        "emotion": "happy",
+        "delivery": "normal",
+        "pace": "normal",
+        "expression": "开心"
+      },
+      {
+        "type": "speech",
+        "text": "我们一起试试看。",
+        "emotion": "neutral",
+        "delivery": "normal",
+        "pace": "normal",
+        "expression": "自然"
+      }
+    ],
+    "speech_segments": 3,
+    "pause_ms": 350,
+    "warnings": [],
+    "voice": "serena",
+    "language": "zh",
+    "direction": ""
+  },
+  "cases": [
+    {
+      "label": "layered",
+      "text": "[轻声][慢速]别担心，我在这里。[停顿350ms][自然][开心]你已经做得很好了！[自然]我们一起试试看。",
+      "default_expression": "neutral",
+      "direction": "像朋友自然聊天，保持原来的音色，转折柔和，不要播音腔。",
+      "result": {
+        "id": "6ddb699a15a64e1ea33f2314fbaee2cc",
+        "sample_rate_hz": 24000,
+        "audio_seconds": 6.43,
+        "elapsed_seconds": 1.4616215999994893,
+        "first_pcm_seconds": 0.052038300011190586,
+        "voice": "serena",
+        "emotion": "neutral",
+        "language": "zh",
+        "expression": "温柔轻声 · 舒缓慢速 → 开心 → 表达提示",
+        "segments": [
+          {
+            "type": "speech",
+            "text": "别担心，我在这里。",
+            "emotion": "neutral",
+            "delivery": "soft",
+            "pace": "slow",
+            "expression": "温柔轻声 · 舒缓慢速",
+            "start_sample": 0,
+            "end_sample": 53760,
+            "start_seconds": 0.0,
+            "end_seconds": 2.24
+          },
+          {
+            "type": "pause",
+            "milliseconds": 350,
+            "start_sample": 53760,
+            "end_sample": 62160,
+            "start_seconds": 2.24,
+            "end_seconds": 2.59
+          },
+          {
+            "type": "speech",
+            "text": "你已经做得很好了！",
+            "emotion": "happy",
+            "delivery": "normal",
+            "pace": "normal",
+            "expression": "开心",
+            "start_sample": 62160,
+            "end_sample": 96720,
+            "start_seconds": 2.59,
+            "end_seconds": 4.03
+          },
+          {
+            "type": "speech",
+            "text": "我们一起试试看。",
+            "emotion": "neutral",
+            "delivery": "normal",
+            "pace": "normal",
+            "expression": "表达提示",
+            "start_sample": 96720,
+            "end_sample": 154320,
+            "start_seconds": 4.03,
+            "end_seconds": 6.43
+          }
+        ],
+        "speech_segments": 3,
+        "pause_ms": 350,
+        "warnings": [],
+        "direction": "像朋友自然聊天，保持原来的音色，转折柔和，不要播音腔。",
+        "join_method": "5ms_edge_fade_without_trimming",
+        "audio_url": "/api/speech/primary/audio/6ddb699a15a64e1ea33f2314fbaee2cc"
+      },
+      "submit_to_file_seconds": 1.713405500006047,
+      "audio_sha256": "e633521c8cd1eed6aab914d2aeaa586f5076782eb6fffb263231e744d7804c87"
+    },
+    {
+      "label": "preserved_user_draft",
+      "text": "【轻声】别担心，我在这里。",
+      "default_expression": "slow",
+      "direction": "",
+      "result": {
+        "id": "c7fafb3331bd495b8f73d5957e631ea1",
+        "sample_rate_hz": 24000,
+        "audio_seconds": 1.76,
+        "elapsed_seconds": 0.43808310000167694,
+        "first_pcm_seconds": 0.0479098000068916,
+        "voice": "serena",
+        "emotion": "neutral",
+        "language": "zh",
+        "expression": "温柔轻声 · 舒缓慢速",
+        "segments": [
+          {
+            "type": "speech",
+            "text": "别担心，我在这里。",
+            "emotion": "neutral",
+            "delivery": "soft",
+            "pace": "slow",
+            "expression": "温柔轻声 · 舒缓慢速",
+            "start_sample": 0,
+            "end_sample": 42240,
+            "start_seconds": 0.0,
+            "end_seconds": 1.76
+          }
+        ],
+        "speech_segments": 1,
+        "pause_ms": 0,
+        "warnings": [],
+        "direction": "",
+        "join_method": "single_utterance",
+        "audio_url": "/api/speech/primary/audio/c7fafb3331bd495b8f73d5957e631ea1"
+      },
+      "submit_to_file_seconds": 0.7008400999911828,
+      "audio_sha256": "786433a5e22bdb85f8dbeed3e1eff4aab2035c4ae92f1905c16a5f6f47b45d09"
+    }
+  ],
+  "primary": {
+    "id": "qwen-tts",
+    "installed": true,
+    "state": "ready",
+    "owned": true,
+    "pid": 47420,
+    "device": "Vulkan0",
+    "threads": 4,
+    "memory": {
+      "working_set_bytes": 1227374592,
+      "peak_working_set_bytes": 1228230656,
+      "private_commit_bytes": 1951105024,
+      "peak_private_commit_bytes": 1957867520
+    },
+    "load": {
+      "ready": true,
+      "pid": 45128,
+      "inference_pid": 47420,
+      "protocol": 3,
+      "device": "Vulkan0",
+      "load_seconds": 1.7026844000065466,
+      "uses": 0
+    },
+    "busy": false,
+    "job": {
+      "id": "c7fafb3331bd495b8f73d5957e631ea1",
+      "action": "synthesize",
+      "status": "SUCCEEDED",
+      "started_at": "2026-10-18T02:57:08.249218+00:00",
+      "finished_at": "2026-10-18T02:57:08.825860+00:00",
+      "result": {
+        "id": "c7fafb3331bd495b8f73d5957e631ea1",
+        "sample_rate_hz": 24000,
+        "audio_seconds": 1.76,
+        "elapsed_seconds": 0.43808310000167694,
+        "first_pcm_seconds": 0.0479098000068916,
+        "voice": "serena",
+        "emotion": "neutral",
+        "language": "zh",
+        "expression": "温柔轻声 · 舒缓慢速",
+        "segments": [
+          {
+            "type": "speech",
+            "text": "别担心，我在这里。",
+            "emotion": "neutral",
+            "delivery": "soft",
+            "pace": "slow",
+            "expression": "温柔轻声 · 舒缓慢速",
+            "start_sample": 0,
+            "end_sample": 42240,
+            "start_seconds": 0.0,
+            "end_seconds": 1.76
+          }
+        ],
+        "speech_segments": 1,
+        "pause_ms": 0,
+        "warnings": [],
+        "direction": "",
+        "join_method": "single_utterance",
+        "audio_url": "/api/speech/primary/audio/c7fafb3331bd495b8f73d5957e631ea1"
+      }
+    },
+    "uses": 2,
+    "model_revision": "a72e6c6575d67652488cdffc1c863215a9899978",
+    "reference_default": null,
+    "configuration_notice": null,
+    "limits": {
+      "text_chars": 180,
+      "reference_seconds": 15,
+      "output_seconds": 20
+    },
+    "usage_role": "primary",
+    "auto_start": false,
+    "broker_pid": 45128,
+    "broker_memory": {
+      "working_set_bytes": 25845760,
+      "peak_working_set_bytes": 26443776,
+      "private_commit_bytes": 15671296,
+      "peak_private_commit_bytes": 16158720
+    },
+    "gpu_memory": {
+      "status": "measured",
+      "dedicated_bytes": 672104448,
+      "shared_bytes": 1103716352
+    },
+    "capabilities": {
+      "voices": {
+        "serena": "Serena · 温柔女声",
+        "vivian": "Vivian · 明亮女声",
+        "uncle_fu": "Uncle Fu · 成熟男声",
+        "dylan": "Dylan · 北京男声",
+        "eric": "Eric · 四川男声",
+        "ryan": "Ryan · 英语男声",
+        "aiden": "Aiden · 阳光男声",
+        "ono_anna": "Ono Anna · 日语女声",
+        "sohee": "Sohee · 韩语女声"
+      },
+      "emotions": {
+        "neutral": "自然",
+        "happy": "开心",
+        "sad": "悲伤",
+        "angry": "生气",
+        "soft": "温柔轻声",
+        "slow": "舒缓慢速",
+        "fast": "轻快快速"
+      },
+      "languages": {
+        "zh": "中文",
+        "en": "English",
+        "ja": "日本語",
+        "ko": "한국어",
+        "de": "Deutsch",
+        "fr": "Français",
+        "ru": "Русский",
+        "pt": "Português",
+        "es": "Español",
+        "it": "Italiano"
+      },
+      "emotion_tags": {
+        "neutral": "neutral",
+        "happy": "happy",
+        "sad": "sad",
+        "angry": "angry",
+        "soft": "soft",
+        "slow": "slow",
+        "fast": "fast",
+        "自然": "neutral",
+        "开心": "happy",
+        "悲伤": "sad",
+        "生气": "angry",
+        "温柔轻声": "soft",
+        "舒缓慢速": "slow",
+        "轻快快速": "fast",
+        "伤心": "sad",
+        "温柔": "soft",
+        "轻声": "soft",
+        "慢速": "slow",
+        "快速": "fast",
+        "语速正常": "normal_pace",
+        "normal_pace": "normal_pace",
+        "正常语气": "normal_delivery",
+        "normal_delivery": "normal_delivery"
+      },
+      "emotion_tag_scope": "persistent_independent_dimensions",
+      "expression_limits": {
+        "speech_segments": 8,
+        "pause_ms": 3000,
+        "direction_chars": 120
+      },
+      "cloning": false,
+      "delivery": "complete_wav"
+    }
+  },
+  "backups_stopped": true,
+  "cloud_calls": 0,
+  "data_directory": "C:/Users/samuel/AppData/Local/Packages/OpenAI.Codex_2p2nqsd0c76g0/LocalCache/Local/Jarvis/data",
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/qwen_speech_contract.py": "58de540c781ede84f76dba887cc45fccc52dd6ae008a3ba47f6dc92672814f3a",
+    "runtime/node-host/jarvis_core/qwen_speech.py": "6945026725982afb5172f8f0c8558a8b36843b88698471f6b77e071ec2d8caf3",
+    "runtime/node-host/jarvis_core/speech_audio.py": "e45197ed56bc18b6d0d6d346b19892d7851b6c84d2a997eca49399b757108d58",
+    "adapters/speech/qwen/worker.py": "d183c7ae3a51ddda756341022b2898226a60fe910e4f772ea870e9b2939d4310",
+    "apps/web/speech.js": "e31befe65b0cf46c8a79e830826e023f107d4cbda16bb239f2332e591a3542e4",
+    "apps/web/admin.html": "2671a7421514296cdfc3675636984a2883b9aa841e0d3f35fbdfa7d36d753c07",
+    "apps/web/speech_routes.py": "3afe53038338ad4526213eca1bf57765e76c8a1a8464c7e234197303a8dce290"
+  },
+  "limits": "Explicitly loaded and left warm; no boot autoload. File TTS, no microphone or streaming playback. User preferred C transition clarity, not blanket intelligibility/identity/smoothness certification."
+}

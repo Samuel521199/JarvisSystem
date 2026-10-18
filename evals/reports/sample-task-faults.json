@@ -1,0 +1,38 @@
+{
+  "version": "0.1.30",
+  "captured_at": "2026-10-16T14:32:28.651978+00:00",
+  "live_model": false,
+  "scope": "temporary synthetic sample; existing FIFO/ledger and real fixed Worker",
+  "limits": [
+    "No user project or current task changed; no generic tool execution or full K1/K2 gate.",
+    "Crash checks are child process termination, not whole-machine power loss.",
+    "A small fixed task is not a general intelligence or model comparison benchmark."
+  ],
+  "status": "passed",
+  "cases": [
+    {
+      "point": "after_plan",
+      "exit_code": 91,
+      "recovered": "UNKNOWN",
+      "no_replay": true
+    },
+    {
+      "point": "after_artifact",
+      "exit_code": 91,
+      "recovered": "UNKNOWN",
+      "no_replay": true
+    },
+    {
+      "point": "before_receipt_commit",
+      "exit_code": 91,
+      "recovered": "UNKNOWN",
+      "no_replay": true
+    },
+    {
+      "point": "after_receipt_commit",
+      "exit_code": 91,
+      "recovered": "CONFIRMED",
+      "no_replay": true
+    }
+  ]
+}

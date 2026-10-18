@@ -1,0 +1,18 @@
+{
+  "status": "SUCCEEDED",
+  "version": "0.1.42",
+  "instance_id": "1b77a22c69a927997936d0feba388f94",
+  "url": "http://127.0.0.1:18181/settings#modules",
+  "core_ready": true,
+  "speech_installed": true,
+  "speech_state": "stopped",
+  "speech_owned": false,
+  "module_count": 21,
+  "served_script_sha256": "ba5b0fdba8c6c6ea92ecf9d56d3b51befa1ec031ae344850e50a7bb7db14f509",
+  "checks": [
+    "Previous instance was idle; graceful tray event exit, then existing launcher reused original data.",
+    "Settings panel, speech status endpoint and 21 module rows are live.",
+    "Speech weights stay unloaded after deployment; no API keys read or cloud speech calls."
+  ],
+  "native_inference_evidence": "evals/reports/cosyvoice3-native-2026-10-18.json"
+}

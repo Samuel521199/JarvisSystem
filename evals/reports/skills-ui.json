@@ -1,0 +1,52 @@
+{
+  "version": "0.1.45",
+  "status": "passed",
+  "observed_at": "2026-10-18T04:01:27.981487+00:00",
+  "checks": [
+    "natural gear intent -> shared FIFO -> real LPAC renderer -> independent kinematics/browser verification -> saved HTML -> sandbox preview -> exact download, no model call",
+    "explicit code-review + selected project source -> bounded model guidance -> source recheck -> delivered report; no code execution",
+    "11 complete capabilities, 3 bundles, component search, 6 engineering capabilities; details and scoped mode; mobile layout has no horizontal overflow",
+    "only complete capabilities visible; global disable persists after reload and prevents native dispatch",
+    "missing nonce, cross-conversation preview and modified delivered HTML are denied"
+  ],
+  "page_errors": [],
+  "evidence": {
+    "anatomy": {
+      "browser": {
+        "angle_and_ratio_checked": true,
+        "browser_version": "149.0.4022.69",
+        "explode_checked": true,
+        "external_requests": 0,
+        "page_errors": 0,
+        "parts_rendered": true,
+        "phone_width": 390,
+        "reduced_motion_checked": true
+      },
+      "engineering_verified": false,
+      "kinematics_checked": true,
+      "worker": {
+        "active_process_limit": 1,
+        "appcontainer": true,
+        "capabilities": [
+          "registryRead"
+        ],
+        "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+        "cpu_seconds": 0.171875,
+        "cpu_time_limit_seconds": 3,
+        "elapsed_seconds": 0.2927,
+        "lpac": true,
+        "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+        "memory_limit_bytes": 402653184,
+        "package_sid": "S-1-15-2-2043172399-293572592-2346571307-2191276291-2210164921-809110408-1949055577",
+        "peak_process_memory_bytes": 12881920,
+        "pid": 38012,
+        "wall_time_limit_seconds": 20
+      }
+    }
+  },
+  "screenshots": [
+    "artifacts/skills/skill-preview.png",
+    "artifacts/skills/skill-management.png"
+  ],
+  "synthetic_model": true
+}

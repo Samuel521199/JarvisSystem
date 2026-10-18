@@ -20,6 +20,20 @@ from jarvis_core.service import CoreService
 
 
 class ChatTests(unittest.TestCase):
+    def test_internal_planning_purpose_is_separate_and_cannot_inherit_context(self):
+        result=self.chat.reply('classify a synthetic task',provider='local',_purpose='sample_report')
+        self.assertEqual(result['status'],'SUCCEEDED')
+        self.assertIn('task intent classifier',self.provider.call_args.kwargs['instructions'])
+        self.assertNotIn('local chat archives',self.provider.call_args.kwargs['instructions'])
+        self.assertEqual(self.provider.call_args.kwargs['response_schema']['oneOf'][0]['const']['steps'][0]['arguments']['relative_path'],'.')
+        self.chat.reply('ordinary chat',provider='local')
+        self.assertNotIn('response_schema',self.provider.call_args.kwargs)
+        self.chat.reply('classify',provider='vertex',_purpose='sample_report')
+        self.assertNotIn('response_schema',self.provider.call_args.kwargs)
+        for kwargs in ({'_purpose':'shell'},{'_purpose':'sample_report','context_note':'private note'},
+                       {'_purpose':'sample_report','history':[{'role':'user','content':'old'}]}):
+            with self.assertRaises(ValueError):self.chat.reply('classify',**kwargs)
+
     def test_single_request_cancel_before_dispatch_and_during_fallback(self):
         cancel=threading.Event();cancel.set()
         self.assertEqual(self.chat.reply('test',cancel_event=cancel)['status'],'CANCELLED')

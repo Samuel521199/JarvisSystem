@@ -1,0 +1,1074 @@
+{
+  "version": "0.1.37",
+  "feature": "evolution-v1",
+  "route": "vertex::gemini-3.1-pro-preview",
+  "isolated_evaluation_data": "H:\\JarvisData\\evals\\evolution-20261017-02",
+  "steps": [
+    {
+      "action": "ensure",
+      "elapsed_seconds": 16.715,
+      "job": {
+        "activation_confirmed": true,
+        "attempts": [
+          {
+            "attempt": 1,
+            "coding": {
+              "elapsed_seconds": 15.295,
+              "model": "gemini-3.1-pro-preview",
+              "outcome_uncertain": false,
+              "output_incomplete": false,
+              "provider": "vertex",
+              "request_id": "75bdfd78b3804d5ba3932a684cbc9f8d",
+              "status": "SUCCEEDED",
+              "usage": {
+                "candidatesTokenCount": 484,
+                "promptTokenCount": 553,
+                "thoughtsTokenCount": 633,
+                "totalTokenCount": 1670
+              }
+            },
+            "package": "55c589c71d78e4c76e2a88e67768cdfad526a0c301c488c21e8a996e21846f6d",
+            "validation": {
+              "acceptance_digest": "sha256:b78fc5f43e7c1ded5c10e04da1775f809b1d23289bed5fa37df2f14eb66fed7d",
+              "cases": 8,
+              "failed_indices": [],
+              "isolation": {
+                "active_process_limit": 1,
+                "appcontainer": true,
+                "backend": "windows-lpac-job",
+                "capabilities": [
+                  "registryRead"
+                ],
+                "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+                "cpu_seconds": 0.140625,
+                "cpu_time_limit_seconds": 3,
+                "elapsed_seconds": 0.3537,
+                "lpac": true,
+                "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+                "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+                "memory_limit_bytes": 201326592,
+                "package_sid": "S-1-15-2-2198147007-1168810936-3208202468-3709249184-8975693-3168673310-2209150165",
+                "peak_process_memory_bytes": 12922880,
+                "pid": 31340,
+                "runtime_bytes": 22904399,
+                "wall_time_limit_seconds": 12
+              },
+              "passed": true
+            }
+          }
+        ],
+        "base": {
+          "active": null,
+          "generation": 0,
+          "previous": null,
+          "singleton": 1
+        },
+        "created_at": "2026-10-16T21:30:35.611276+00:00",
+        "error": null,
+        "events": [
+          {
+            "at": "2026-10-16T21:30:35.650018+00:00",
+            "phase": "STARTED"
+          },
+          {
+            "at": "2026-10-16T21:30:35.707742+00:00",
+            "phase": "GENERATING"
+          },
+          {
+            "at": "2026-10-16T21:30:51.170123+00:00",
+            "phase": "VALIDATING"
+          },
+          {
+            "at": "2026-10-16T21:30:51.702077+00:00",
+            "phase": "ACTIVATED"
+          },
+          {
+            "at": "2026-10-16T21:30:52.223855+00:00",
+            "phase": "FINISHED"
+          }
+        ],
+        "id": "dd444da4c49045e5959f69b66a62827c",
+        "published": "55c589c71d78e4c76e2a88e67768cdfad526a0c301c488c21e8a996e21846f6d",
+        "request": {
+          "action": "ensure",
+          "request_id": "probe-b2f19423eaa14bd2b246b798162864ab",
+          "target_revision": 1
+        },
+        "result": {
+          "changed": true,
+          "observation": {
+            "acceptance_digest": "sha256:b78fc5f43e7c1ded5c10e04da1775f809b1d23289bed5fa37df2f14eb66fed7d",
+            "cases": 8,
+            "failed_indices": [],
+            "isolation": {
+              "active_process_limit": 1,
+              "appcontainer": true,
+              "backend": "windows-lpac-job",
+              "capabilities": [
+                "registryRead"
+              ],
+              "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+              "cpu_seconds": 0.15625,
+              "cpu_time_limit_seconds": 3,
+              "elapsed_seconds": 0.3571,
+              "lpac": true,
+              "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+              "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+              "memory_limit_bytes": 201326592,
+              "package_sid": "S-1-15-2-3846633653-2026895845-1029472646-3128836268-2169862524-55246803-2674659996",
+              "peak_process_memory_bytes": 13058048,
+              "pid": 33660,
+              "runtime_bytes": 22904399,
+              "wall_time_limit_seconds": 12
+            },
+            "passed": true
+          },
+          "package": "55c589c71d78e4c76e2a88e67768cdfad526a0c301c488c21e8a996e21846f6d",
+          "revision": 1
+        },
+        "status": "SUCCEEDED",
+        "target_revision": 1,
+        "updated_at": "2026-10-16T21:30:52.225136+00:00"
+      }
+    },
+    {
+      "action": "execute",
+      "elapsed_seconds": 0.658,
+      "job": {
+        "attempts": [],
+        "created_at": "2026-10-16T21:30:52.328028+00:00",
+        "error": null,
+        "events": [
+          {
+            "at": "2026-10-16T21:30:52.365278+00:00",
+            "phase": "STARTED"
+          },
+          {
+            "at": "2026-10-16T21:30:52.828732+00:00",
+            "phase": "FINISHED"
+          }
+        ],
+        "id": "2b4615b4ace5416183a5e5ca3abb1375",
+        "request": {
+          "action": "execute",
+          "input": {
+            "entries": [
+              {
+                "path": "读我.md",
+                "size": 42
+              },
+              {
+                "path": "a,b.txt",
+                "size": 0
+              }
+            ],
+            "format": "csv"
+          },
+          "request_id": "probe-54a4c80dc77a4e3e9963439809bdc121"
+        },
+        "result": {
+          "isolation": {
+            "active_process_limit": 1,
+            "appcontainer": true,
+            "backend": "windows-lpac-job",
+            "capabilities": [
+              "registryRead"
+            ],
+            "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+            "cpu_seconds": 0.15625,
+            "cpu_time_limit_seconds": 3,
+            "elapsed_seconds": 0.3118,
+            "lpac": true,
+            "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+            "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+            "memory_limit_bytes": 201326592,
+            "package_sid": "S-1-15-2-2601183019-2173767720-2980491239-3771845808-1736531257-2451898359-1783272014",
+            "peak_process_memory_bytes": 12939264,
+            "pid": 45452,
+            "runtime_bytes": 22904399,
+            "wall_time_limit_seconds": 12
+          },
+          "package": "55c589c71d78e4c76e2a88e67768cdfad526a0c301c488c21e8a996e21846f6d",
+          "result_digest": "sha256:3f7de1dd6b6874ad2856017171017be7e7c421a0e2e99c4e353c0a2e0e64d1ee",
+          "text": "path,size\n\"a,b.txt\",0\n读我.md,42\n"
+        },
+        "status": "SUCCEEDED",
+        "updated_at": "2026-10-16T21:30:52.830453+00:00"
+      }
+    },
+    {
+      "action": "ensure",
+      "elapsed_seconds": 14.106,
+      "job": {
+        "activation_confirmed": true,
+        "attempts": [
+          {
+            "attempt": 1,
+            "coding": {
+              "elapsed_seconds": 12.147,
+              "model": "gemini-3.1-pro-preview",
+              "outcome_uncertain": false,
+              "output_incomplete": false,
+              "provider": "vertex",
+              "request_id": "9d02b0ac9d934f7db0c4280f3cff3853",
+              "status": "SUCCEEDED",
+              "usage": {
+                "candidatesTokenCount": 536,
+                "promptTokenCount": 1053,
+                "thoughtsTokenCount": 307,
+                "totalTokenCount": 1896
+              }
+            },
+            "package": "88a1fba6f5eef7828a9af9ddde1a47ccd6c3ffbb31e0a7561f14abbf702ca80d",
+            "validation": {
+              "acceptance_digest": "sha256:746b8cbbe856cdf938f3a53da532c65c5b2367fe5fe4f5fc8aeb958c35859bd2",
+              "cases": 12,
+              "failed_indices": [],
+              "isolation": {
+                "active_process_limit": 1,
+                "appcontainer": true,
+                "backend": "windows-lpac-job",
+                "capabilities": [
+                  "registryRead"
+                ],
+                "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+                "cpu_seconds": 0.171875,
+                "cpu_time_limit_seconds": 3,
+                "elapsed_seconds": 0.3652,
+                "lpac": true,
+                "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+                "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+                "memory_limit_bytes": 201326592,
+                "package_sid": "S-1-15-2-619702212-137593322-2166178456-2502793777-3945630333-2730317033-865594986",
+                "peak_process_memory_bytes": 13373440,
+                "pid": 45396,
+                "runtime_bytes": 22904399,
+                "wall_time_limit_seconds": 12
+              },
+              "passed": true
+            }
+          }
+        ],
+        "base": {
+          "active": "55c589c71d78e4c76e2a88e67768cdfad526a0c301c488c21e8a996e21846f6d",
+          "generation": 1,
+          "previous": null,
+          "singleton": 1
+        },
+        "created_at": "2026-10-16T21:30:52.986113+00:00",
+        "error": null,
+        "events": [
+          {
+            "at": "2026-10-16T21:30:53.022312+00:00",
+            "phase": "STARTED"
+          },
+          {
+            "at": "2026-10-16T21:30:53.554441+00:00",
+            "phase": "GENERATING"
+          },
+          {
+            "at": "2026-10-16T21:31:05.872425+00:00",
+            "phase": "VALIDATING"
+          },
+          {
+            "at": "2026-10-16T21:31:06.421231+00:00",
+            "phase": "ACTIVATED"
+          },
+          {
+            "at": "2026-10-16T21:31:06.945599+00:00",
+            "phase": "FINISHED"
+          }
+        ],
+        "id": "871d012d034c4e9d986d7c4463827d78",
+        "published": "88a1fba6f5eef7828a9af9ddde1a47ccd6c3ffbb31e0a7561f14abbf702ca80d",
+        "request": {
+          "action": "ensure",
+          "request_id": "probe-ca56963d2bc64ddb89ad4ac6b4101f0a",
+          "target_revision": 2
+        },
+        "result": {
+          "changed": true,
+          "observation": {
+            "acceptance_digest": "sha256:746b8cbbe856cdf938f3a53da532c65c5b2367fe5fe4f5fc8aeb958c35859bd2",
+            "cases": 12,
+            "failed_indices": [],
+            "isolation": {
+              "active_process_limit": 1,
+              "appcontainer": true,
+              "backend": "windows-lpac-job",
+              "capabilities": [
+                "registryRead"
+              ],
+              "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+              "cpu_seconds": 0.140625,
+              "cpu_time_limit_seconds": 3,
+              "elapsed_seconds": 0.3541,
+              "lpac": true,
+              "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+              "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+              "memory_limit_bytes": 201326592,
+              "package_sid": "S-1-15-2-2617665836-480245150-947000016-1408908791-2033210008-584192666-4196070985",
+              "peak_process_memory_bytes": 13422592,
+              "pid": 22988,
+              "runtime_bytes": 22904399,
+              "wall_time_limit_seconds": 12
+            },
+            "passed": true
+          },
+          "package": "88a1fba6f5eef7828a9af9ddde1a47ccd6c3ffbb31e0a7561f14abbf702ca80d",
+          "revision": 2
+        },
+        "status": "SUCCEEDED",
+        "target_revision": 2,
+        "updated_at": "2026-10-16T21:31:06.946886+00:00"
+      }
+    },
+    {
+      "action": "execute",
+      "elapsed_seconds": 0.559,
+      "job": {
+        "attempts": [],
+        "created_at": "2026-10-16T21:31:07.096957+00:00",
+        "error": null,
+        "events": [
+          {
+            "at": "2026-10-16T21:31:07.132637+00:00",
+            "phase": "STARTED"
+          },
+          {
+            "at": "2026-10-16T21:31:07.593272+00:00",
+            "phase": "FINISHED"
+          }
+        ],
+        "id": "13803aed62db47c9a2bb608461540ab7",
+        "request": {
+          "action": "execute",
+          "input": {
+            "entries": [
+              {
+                "path": "带\t制表符",
+                "size": 12
+              },
+              {
+                "path": "a",
+                "size": 1
+              }
+            ],
+            "format": "tsv"
+          },
+          "request_id": "probe-4f62fcf625b8432fb13a384bb8d1ed0f"
+        },
+        "result": {
+          "isolation": {
+            "active_process_limit": 1,
+            "appcontainer": true,
+            "backend": "windows-lpac-job",
+            "capabilities": [
+              "registryRead"
+            ],
+            "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+            "cpu_seconds": 0.140625,
+            "cpu_time_limit_seconds": 3,
+            "elapsed_seconds": 0.308,
+            "lpac": true,
+            "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+            "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+            "memory_limit_bytes": 201326592,
+            "package_sid": "S-1-15-2-3047681165-3959803866-3359490571-583508686-996914344-3311087915-698598793",
+            "peak_process_memory_bytes": 12783616,
+            "pid": 47096,
+            "runtime_bytes": 22904399,
+            "wall_time_limit_seconds": 12
+          },
+          "package": "88a1fba6f5eef7828a9af9ddde1a47ccd6c3ffbb31e0a7561f14abbf702ca80d",
+          "result_digest": "sha256:ba218d4df69dc747bdae1fef05ee4d2d5b618d09ad4a369b43f1161205fa4a31",
+          "text": "path\tsize\na\t1\n\"带\t制表符\"\t12\n"
+        },
+        "status": "SUCCEEDED",
+        "updated_at": "2026-10-16T21:31:07.594625+00:00"
+      }
+    },
+    {
+      "action": "check",
+      "elapsed_seconds": 16.808,
+      "job": {
+        "activation_confirmed": true,
+        "attempts": [
+          {
+            "attempt": 1,
+            "coding": {
+              "elapsed_seconds": 14.279,
+              "model": "gemini-3.1-pro-preview",
+              "outcome_uncertain": false,
+              "output_incomplete": false,
+              "provider": "vertex",
+              "request_id": "50ac32bd3c444920b84824863f916031",
+              "status": "SUCCEEDED",
+              "usage": {
+                "candidatesTokenCount": 469,
+                "promptTokenCount": 1053,
+                "thoughtsTokenCount": 559,
+                "totalTokenCount": 2081
+              }
+            },
+            "package": "780f5c65b07ef20c0e5fd8184cf48c3938b080ddf5342290dbc00f5fafba3090",
+            "validation": {
+              "acceptance_digest": "sha256:746b8cbbe856cdf938f3a53da532c65c5b2367fe5fe4f5fc8aeb958c35859bd2",
+              "cases": 12,
+              "failed_indices": [],
+              "isolation": {
+                "active_process_limit": 1,
+                "appcontainer": true,
+                "backend": "windows-lpac-job",
+                "capabilities": [
+                  "registryRead"
+                ],
+                "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+                "cpu_seconds": 0.15625,
+                "cpu_time_limit_seconds": 3,
+                "elapsed_seconds": 0.4072,
+                "lpac": true,
+                "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+                "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+                "memory_limit_bytes": 201326592,
+                "package_sid": "S-1-15-2-1208732590-782981597-1399728939-3650482940-1734259130-2635932148-119646335",
+                "peak_process_memory_bytes": 13246464,
+                "pid": 47040,
+                "runtime_bytes": 22904399,
+                "wall_time_limit_seconds": 12
+              },
+              "passed": true
+            }
+          }
+        ],
+        "base": {
+          "active": "55c589c71d78e4c76e2a88e67768cdfad526a0c301c488c21e8a996e21846f6d",
+          "generation": 3,
+          "previous": null,
+          "singleton": 1
+        },
+        "created_at": "2026-10-16T21:31:07.740169+00:00",
+        "error": null,
+        "events": [
+          {
+            "at": "2026-10-16T21:31:07.776755+00:00",
+            "phase": "STARTED"
+          },
+          {
+            "at": "2026-10-16T21:31:08.308058+00:00",
+            "phase": "ROLLED_BACK"
+          },
+          {
+            "at": "2026-10-16T21:31:08.314832+00:00",
+            "phase": "ISSUE_DETECTED"
+          },
+          {
+            "at": "2026-10-16T21:31:08.829620+00:00",
+            "phase": "GENERATING"
+          },
+          {
+            "at": "2026-10-16T21:31:23.285532+00:00",
+            "phase": "VALIDATING"
+          },
+          {
+            "at": "2026-10-16T21:31:23.874009+00:00",
+            "phase": "ACTIVATED"
+          },
+          {
+            "at": "2026-10-16T21:31:24.419375+00:00",
+            "phase": "FINISHED"
+          }
+        ],
+        "id": "7cb1626858f340f684fd62c93f4d6c10",
+        "issue": "evolution_package_changed",
+        "published": "780f5c65b07ef20c0e5fd8184cf48c3938b080ddf5342290dbc00f5fafba3090",
+        "request": {
+          "action": "check",
+          "request_id": "probe-97aa459cd59b4d8fbed4d0de72e4e883"
+        },
+        "result": {
+          "detected": "evolution_package_changed",
+          "healthy": true,
+          "repair": {
+            "changed": true,
+            "observation": {
+              "acceptance_digest": "sha256:746b8cbbe856cdf938f3a53da532c65c5b2367fe5fe4f5fc8aeb958c35859bd2",
+              "cases": 12,
+              "failed_indices": [],
+              "isolation": {
+                "active_process_limit": 1,
+                "appcontainer": true,
+                "backend": "windows-lpac-job",
+                "capabilities": [
+                  "registryRead"
+                ],
+                "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+                "cpu_seconds": 0.140625,
+                "cpu_time_limit_seconds": 3,
+                "elapsed_seconds": 0.3705,
+                "lpac": true,
+                "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+                "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+                "memory_limit_bytes": 201326592,
+                "package_sid": "S-1-15-2-875562225-3645197290-574769139-3574080931-2167998329-2813890140-3282827811",
+                "peak_process_memory_bytes": 12890112,
+                "pid": 16240,
+                "runtime_bytes": 22904399,
+                "wall_time_limit_seconds": 12
+              },
+              "passed": true
+            },
+            "package": "780f5c65b07ef20c0e5fd8184cf48c3938b080ddf5342290dbc00f5fafba3090",
+            "revision": 2
+          }
+        },
+        "rollback": {
+          "automatic": true,
+          "from": "88a1fba6f5eef7828a9af9ddde1a47ccd6c3ffbb31e0a7561f14abbf702ca80d",
+          "to": "55c589c71d78e4c76e2a88e67768cdfad526a0c301c488c21e8a996e21846f6d"
+        },
+        "status": "SUCCEEDED",
+        "target_revision": 2,
+        "updated_at": "2026-10-16T21:31:24.420772+00:00"
+      }
+    },
+    {
+      "action": "execute",
+      "elapsed_seconds": 0.657,
+      "job": {
+        "attempts": [],
+        "created_at": "2026-10-16T21:31:24.553645+00:00",
+        "error": null,
+        "events": [
+          {
+            "at": "2026-10-16T21:31:24.593599+00:00",
+            "phase": "STARTED"
+          },
+          {
+            "at": "2026-10-16T21:31:25.111964+00:00",
+            "phase": "FINISHED"
+          }
+        ],
+        "id": "6e4e9fb1375e4074b13966eb1357a8d6",
+        "request": {
+          "action": "execute",
+          "input": {
+            "entries": [
+              {
+                "path": "\n<,|\"a\"&\n你\n\"",
+                "size": 566411020873
+              },
+              {
+                "path": "|你><a\"\nb,a\n,",
+                "size": 842579074216
+              },
+              {
+                "path": "\t|bb\\b\"\",&,你",
+                "size": 132896572988
+              },
+              {
+                "path": "\"\n\\\t\\&b,你<,a",
+                "size": 407694396826
+              },
+              {
+                "path": "ba<\"\"a|\t你a\t|",
+                "size": 426616993456
+              },
+              {
+                "path": "<\\&你\\\\>>你,><",
+                "size": 416287000284
+              },
+              {
+                "path": "\\>,ba\\你>|a<<",
+                "size": 135095789300
+              },
+              {
+                "path": ",<>ba|<\\\t你>b",
+                "size": 473899580485
+              },
+              {
+                "path": "||&&|<b\t|\na&",
+                "size": 727245874820
+              },
+              {
+                "path": "b>a\\,<b|你\tb&",
+                "size": 453296508054
+              },
+              {
+                "path": "a\t\t\na你\taa&\n|",
+                "size": 648185801989
+              },
+              {
+                "path": ">,\"\"\\\t\",><你\"",
+                "size": 783358211109
+              },
+              {
+                "path": "b<&&\\\t\n\"<\\a<",
+                "size": 168490123025
+              },
+              {
+                "path": "\t你\"b>,>>,b你&",
+                "size": 165919607180
+              },
+              {
+                "path": "&>你\\你&\na\"b你a",
+                "size": 821925682819
+              },
+              {
+                "path": "a,\\\\>你&\na你<\t",
+                "size": 822295306731
+              },
+              {
+                "path": "aa|\\a\\\"b<<\"b",
+                "size": 989928649958
+              },
+              {
+                "path": "b|||\n|\\\tb&|,",
+                "size": 61372754339
+              },
+              {
+                "path": "\t\\b\"b\"b<,\"<|",
+                "size": 57382673166
+              },
+              {
+                "path": "\t,a>你a你你<\n\"\\",
+                "size": 827086084122
+              },
+              {
+                "path": ",\t\naa&\n<\"\",\n",
+                "size": 7539934125
+              },
+              {
+                "path": "<,b\"\t\n你\t\t,&|",
+                "size": 219199969830
+              },
+              {
+                "path": "\t\n\tb<|\na\"\na你",
+                "size": 501752935988
+              },
+              {
+                "path": "<<>,\n<你,a你&你",
+                "size": 620010285822
+              },
+              {
+                "path": "\"\\&b<|\"\n\"&\ta",
+                "size": 453922149656
+              },
+              {
+                "path": "\"\t<<a\t>&你|\"a",
+                "size": 990602953797
+              },
+              {
+                "path": "b\",你|>&,你|&>",
+                "size": 411579291569
+              },
+              {
+                "path": "你a,>|你\"你&|\n\\",
+                "size": 566336514667
+              },
+              {
+                "path": "\",\\\\\na,你>||\t",
+                "size": 305469672662
+              },
+              {
+                "path": "你<\\&&|,&&\">你",
+                "size": 235162961238
+              },
+              {
+                "path": "\t|>|\"\\\t\t>,><",
+                "size": 176153118904
+              },
+              {
+                "path": "\\\"a\t,\t><你\t\t\"",
+                "size": 232728914378
+              },
+              {
+                "path": "b,>&>你\"b\"|ba",
+                "size": 212954135388
+              },
+              {
+                "path": "\t&a>\\\t\"\nb>\"|",
+                "size": 33777677160
+              },
+              {
+                "path": "&\n\t\t<\t你\n\"b&&",
+                "size": 896644288244
+              },
+              {
+                "path": "\\\t|&\\a<|\n>\\\t",
+                "size": 207914729828
+              },
+              {
+                "path": "\"<\\>\\\",><\\b\n",
+                "size": 297998321381
+              },
+              {
+                "path": "&>,,&<b\n\"你>\t",
+                "size": 873844008932
+              },
+              {
+                "path": "\"你\t&\\&\\<\n<&,",
+                "size": 40359096891
+              },
+              {
+                "path": "\t<\"&>|,,\t>\"\t",
+                "size": 969522178910
+              },
+              {
+                "path": "你\n,|\n|,,\tb&,",
+                "size": 461741489523
+              },
+              {
+                "path": "你>&b,&\\>\nb<\"",
+                "size": 434258411118
+              },
+              {
+                "path": "\nb>&\nba,\\\ta\\",
+                "size": 537542745197
+              },
+              {
+                "path": ">\tb&\\>\n&|,\\\n",
+                "size": 472659706141
+              },
+              {
+                "path": "<\nb\n|<\"\nb,\t\t",
+                "size": 374575931147
+              },
+              {
+                "path": "|\",<\"\naa你\"&>",
+                "size": 316035658192
+              },
+              {
+                "path": "\n|\">,|&<&<&&",
+                "size": 801708099426
+              },
+              {
+                "path": "\n>\n你><\"<\nb&你",
+                "size": 677581570853
+              },
+              {
+                "path": "\t&<>\"<,&,|<>",
+                "size": 166595162432
+              },
+              {
+                "path": "\n&\\&&\t&\\b\n\"你",
+                "size": 830578634346
+              },
+              {
+                "path": "<|b&\\\\\"&|你\\&",
+                "size": 445243423518
+              },
+              {
+                "path": "\\,\"\t\\b\ta\\\n<\\",
+                "size": 69176367169
+              },
+              {
+                "path": "&\">\t|b>>\t&<|",
+                "size": 791997584604
+              },
+              {
+                "path": "&\t\"\t|||a|你\t\\",
+                "size": 418930050547
+              },
+              {
+                "path": "\\\"\t>b\n你<你>>&",
+                "size": 87290005381
+              },
+              {
+                "path": "\\b>>\\\t<\\a你\t&",
+                "size": 991574132582
+              },
+              {
+                "path": "&,你a<<<&baab",
+                "size": 715712727442
+              },
+              {
+                "path": "你\">|<&><\"<>\"",
+                "size": 886197303322
+              },
+              {
+                "path": "\">\\\"b\ta|b\t&<",
+                "size": 526159988824
+              },
+              {
+                "path": ",b<a\t你<\t\n\tb|",
+                "size": 742975229688
+              },
+              {
+                "path": ",\\b,&\t>你你a\\<",
+                "size": 303209582937
+              },
+              {
+                "path": "\",a||&\t你\\<aa",
+                "size": 710746364040
+              },
+              {
+                "path": "a&a\t你\"\"\"\">ab",
+                "size": 701651515660
+              },
+              {
+                "path": ",\\>a&\n>a你你\\\n",
+                "size": 825196466365
+              },
+              {
+                "path": "\t\nb\"\ta<b\"\"\t\t",
+                "size": 293127875664
+              },
+              {
+                "path": "a\">,&<&<<你&\"",
+                "size": 399443099510
+              },
+              {
+                "path": ">,b&&ab<\n,><",
+                "size": 379171896853
+              },
+              {
+                "path": "b&你|\\a<\t&>>你",
+                "size": 442331272120
+              },
+              {
+                "path": "|\nb,<\t\\&\n&\t<",
+                "size": 102020338092
+              },
+              {
+                "path": ",b\\,\"&\t>|\"你a",
+                "size": 634339510178
+              },
+              {
+                "path": "|a\\\\\n\t\\a>\"bb",
+                "size": 203586435396
+              },
+              {
+                "path": ">&>你\n,>你\t\t\n\"",
+                "size": 67293459866
+              },
+              {
+                "path": "<&,<<\"你,>b,<",
+                "size": 938277456558
+              },
+              {
+                "path": "<b|&&a,,,>>a",
+                "size": 539903772267
+              },
+              {
+                "path": ",,ab\tb\n\"\\>\t>",
+                "size": 925782653925
+              },
+              {
+                "path": "\"<,|,你<b>&\\,",
+                "size": 653153359886
+              },
+              {
+                "path": "\n\\\n\ta\"|ba\ta<",
+                "size": 498077325365
+              },
+              {
+                "path": ",ba\tb|\ta<\n,a",
+                "size": 24648316698
+              },
+              {
+                "path": "ab\\b\n\\a\\\\\na\\",
+                "size": 523614242490
+              },
+              {
+                "path": "<\n<a|\\a\"你|你b",
+                "size": 836313945881
+              },
+              {
+                "path": "\"\",你\n<|<你<>,",
+                "size": 784927801253
+              },
+              {
+                "path": "|你<<<&\\&<>\\\t",
+                "size": 63456618018
+              },
+              {
+                "path": "b>\n<<你b|>a\"&",
+                "size": 279007763378
+              },
+              {
+                "path": "&&<你b\"\t\t<|<b",
+                "size": 891958037050
+              },
+              {
+                "path": "\\>\n&你\n|b|>&\t",
+                "size": 912467514833
+              },
+              {
+                "path": "b>&ab\\\"\t<,\tb",
+                "size": 899527174577
+              },
+              {
+                "path": "\\|\"<<\\你>\t你,\t",
+                "size": 737980742604
+              },
+              {
+                "path": "a,\"\tb<,\t\t你|,",
+                "size": 734646739115
+              },
+              {
+                "path": "\\|a>,a你|你你你a",
+                "size": 934507649592
+              },
+              {
+                "path": "<a|你,\"\",>|a,",
+                "size": 459040992403
+              },
+              {
+                "path": "\\|\n&a\\b\"\t你你你",
+                "size": 251509607009
+              },
+              {
+                "path": "b,\n<a\"|aa\"\t|",
+                "size": 808384874634
+              },
+              {
+                "path": "&\\\"\\\\>\"|\"b你\\",
+                "size": 464427210044
+              },
+              {
+                "path": "b|\\\nb&>a你\n\\>",
+                "size": 972947769320
+              },
+              {
+                "path": "|\t,bb\\,|>\">b",
+                "size": 179988176626
+              },
+              {
+                "path": "&>\\\"a&a你<你,&",
+                "size": 901193503164
+              },
+              {
+                "path": ",b你\">\\a||a>你",
+                "size": 629965256822
+              },
+              {
+                "path": "|a>&b>,b&aa\\",
+                "size": 445013205272
+              },
+              {
+                "path": "&|&\\,你|\\\n<b&",
+                "size": 664382641996
+              },
+              {
+                "path": "\ta,><><|,<&|",
+                "size": 132486571664
+              }
+            ],
+            "format": "tsv"
+          },
+          "request_id": "probe-ab848ba866914c5bb00f37d65b896961"
+        },
+        "result": {
+          "isolation": {
+            "active_process_limit": 1,
+            "appcontainer": true,
+            "backend": "windows-lpac-job",
+            "capabilities": [
+              "registryRead"
+            ],
+            "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+            "cpu_seconds": 0.140625,
+            "cpu_time_limit_seconds": 3,
+            "elapsed_seconds": 0.3665,
+            "lpac": true,
+            "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+            "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+            "memory_limit_bytes": 201326592,
+            "package_sid": "S-1-15-2-1947070200-1811511302-4004440201-2686398474-183789510-3400055717-2723452357",
+            "peak_process_memory_bytes": 13217792,
+            "pid": 13700,
+            "runtime_bytes": 22904399,
+            "wall_time_limit_seconds": 12
+          },
+          "package": "780f5c65b07ef20c0e5fd8184cf48c3938b080ddf5342290dbc00f5fafba3090",
+          "result_digest": "sha256:bba13e4d21606b1dff88f73f55f4cf37575e641b0e907e4ea69b6840f6d77a83",
+          "text": "path\tsize\n\"\t\n\tb<|\na\"\"\na你\"\t501752935988\n\"\t\nb\"\"\ta<b\"\"\"\"\t\t\"\t293127875664\n\"\t&<>\"\"<,&,|<>\"\t166595162432\n\"\t&a>\\\t\"\"\nb>\"\"|\"\t33777677160\n\"\t,a>你a你你<\n\"\"\\\"\t827086084122\n\"\t<\"\"&>|,,\t>\"\"\t\"\t969522178910\n\"\t\\b\"\"b\"\"b<,\"\"<|\"\t57382673166\n\"\ta,><><|,<&|\"\t132486571664\n\"\t|>|\"\"\\\t\t>,><\"\t176153118904\n\"\t|bb\\b\"\"\"\",&,你\"\t132896572988\n\"\t你\"\"b>,>>,b你&\"\t165919607180\n\"\n&\\&&\t&\\b\n\"\"你\"\t830578634346\n\"\n<,|\"\"a\"\"&\n你\n\"\"\"\t566411020873\n\"\n>\n你><\"\"<\nb&你\"\t677581570853\n\"\n\\\n\ta\"\"|ba\ta<\"\t498077325365\n\"\nb>&\nba,\\\ta\\\"\t537542745197\n\"\n|\"\">,|&<&<&&\"\t801708099426\n\"\"\"\t<<a\t>&你|\"\"a\"\t990602953797\n\"\"\"\n\\\t\\&b,你<,a\"\t407694396826\n\"\"\"\"\",你\n<|<你<>,\"\t784927801253\n\"\"\",\\\\\na,你>||\t\"\t305469672662\n\"\"\",a||&\t你\\<aa\"\t710746364040\n\"\"\"<,|,你<b>&\\,\"\t653153359886\n\"\"\"<\\>\\\"\",><\\b\n\"\t297998321381\n\"\"\">\\\"\"b\ta|b\t&<\"\t526159988824\n\"\"\"\\&b<|\"\"\n\"\"&\ta\"\t453922149656\n\"\"\"你\t&\\&\\<\n<&,\"\t40359096891\n\"&\t\"\"\t|||a|你\t\\\"\t418930050547\n\"&\n\t\t<\t你\n\"\"b&&\"\t896644288244\n\"&\"\">\t|b>>\t&<|\"\t791997584604\n\"&&<你b\"\"\t\t<|<b\"\t891958037050\n&,你a<<<&baab\t715712727442\n\"&>,,&<b\n\"\"你>\t\"\t873844008932\n\"&>\\\"\"a&a你<你,&\"\t901193503164\n\"&>你\\你&\na\"\"b你a\"\t821925682819\n\"&\\\"\"\\\\>\"\"|\"\"b你\\\"\t464427210044\n\"&|&\\,你|\\\n<b&\"\t664382641996\n\",\t\naa&\n<\"\"\"\",\n\"\t7539934125\n\",,ab\tb\n\"\"\\>\t>\"\t925782653925\n\",<>ba|<\\\t你>b\"\t473899580485\n\",\\>a&\n>a你你\\\n\"\t825196466365\n\",\\b,&\t>你你a\\<\"\t303209582937\n\",b<a\t你<\t\n\tb|\"\t742975229688\n\",b\\,\"\"&\t>|\"\"你a\"\t634339510178\n\",ba\tb|\ta<\n,a\"\t24648316698\n\",b你\"\">\\a||a>你\"\t629965256822\n\"<\n<a|\\a\"\"你|你b\"\t836313945881\n\"<\nb\n|<\"\"\nb,\t\t\"\t374575931147\n\"<&,<<\"\"你,>b,<\"\t938277456558\n\"<,b\"\"\t\n你\t\t,&|\"\t219199969830\n\"<<>,\n<你,a你&你\"\t620010285822\n<\\&你\\\\>>你,><\t416287000284\n\"<a|你,\"\"\"\",>|a,\"\t459040992403\n<b|&&a,,,>>a\t539903772267\n\"<|b&\\\\\"\"&|你\\&\"\t445243423518\n\">\tb&\\>\n&|,\\\n\"\t472659706141\n\">&>你\n,>你\t\t\n\"\"\"\t67293459866\n\">,\"\"\"\"\\\t\"\",><你\"\"\"\t783358211109\n\">,b&&ab<\n,><\"\t379171896853\n\"\\\t|&\\a<|\n>\\\t\"\t207914729828\n\"\\\"\"\t>b\n你<你>>&\"\t87290005381\n\"\\\"\"a\t,\t><你\t\t\"\"\"\t232728914378\n\"\\,\"\"\t\\b\ta\\\n<\\\"\t69176367169\n\"\\>\n&你\n|b|>&\t\"\t912467514833\n\\>,ba\\你>|a<<\t135095789300\n\"\\b>>\\\t<\\a你\t&\"\t991574132582\n\"\\|\n&a\\b\"\"\t你你你\"\t251509607009\n\"\\|\"\"<<\\你>\t你,\t\"\t737980742604\n\\|a>,a你|你你你a\t934507649592\n\"a\t\t\na你\taa&\n|\"\t648185801989\n\"a\"\">,&<&<<你&\"\"\"\t399443099510\n\"a&a\t你\"\"\"\"\"\"\"\">ab\"\t701651515660\n\"a,\"\"\tb<,\t\t你|,\"\t734646739115\n\"a,\\\\>你&\na你<\t\"\t822295306731\n\"aa|\\a\\\"\"b<<\"\"b\"\t989928649958\n\"ab\\b\n\\a\\\\\na\\\"\t523614242490\n\"b\"\",你|>&,你|&>\"\t411579291569\n\"b&你|\\a<\t&>>你\"\t442331272120\n\"b,\n<a\"\"|aa\"\"\t|\"\t808384874634\n\"b,>&>你\"\"b\"\"|ba\"\t212954135388\n\"b<&&\\\t\n\"\"<\\a<\"\t168490123025\n\"b>\n<<你b|>a\"\"&\"\t279007763378\n\"b>&ab\\\"\"\t<,\tb\"\t899527174577\n\"b>a\\,<b|你\tb&\"\t453296508054\n\"ba<\"\"\"\"a|\t你a\t|\"\t426616993456\n\"b|\\\nb&>a你\n\\>\"\t972947769320\n\"b|||\n|\\\tb&|,\"\t61372754339\n\"|\t,bb\\,|>\"\">b\"\t179988176626\n\"|\nb,<\t\\&\n&\t<\"\t102020338092\n\"|\"\",<\"\"\naa你\"\"&>\"\t316035658192\n|a>&b>,b&aa\\\t445013205272\n\"|a\\\\\n\t\\a>\"\"bb\"\t203586435396\n\"||&&|<b\t|\na&\"\t727245874820\n\"|你<<<&\\&<>\\\t\"\t63456618018\n\"|你><a\"\"\nb,a\n,\"\t842579074216\n\"你\n,|\n|,,\tb&,\"\t461741489523\n\"你\"\">|<&><\"\"<>\"\"\"\t886197303322\n\"你<\\&&|,&&\"\">你\"\t235162961238\n\"你>&b,&\\>\nb<\"\"\"\t434258411118\n\"你a,>|你\"\"你&|\n\\\"\t566336514667\n"
+        },
+        "status": "SUCCEEDED",
+        "updated_at": "2026-10-16T21:31:25.113300+00:00"
+      }
+    },
+    {
+      "action": "check",
+      "elapsed_seconds": 0.658,
+      "job": {
+        "attempts": [],
+        "created_at": "2026-10-16T21:31:25.216248+00:00",
+        "error": null,
+        "events": [
+          {
+            "at": "2026-10-16T21:31:25.252262+00:00",
+            "phase": "STARTED"
+          },
+          {
+            "at": "2026-10-16T21:31:25.780006+00:00",
+            "phase": "FINISHED"
+          }
+        ],
+        "id": "42da4f04b3d343e3b33463ff1e518805",
+        "request": {
+          "action": "check",
+          "request_id": "probe-0af2fdcb66624757a6ea23c77e9be83f"
+        },
+        "result": {
+          "healthy": true,
+          "package": "780f5c65b07ef20c0e5fd8184cf48c3938b080ddf5342290dbc00f5fafba3090",
+          "validation": {
+            "acceptance_digest": "sha256:746b8cbbe856cdf938f3a53da532c65c5b2367fe5fe4f5fc8aeb958c35859bd2",
+            "cases": 12,
+            "failed_indices": [],
+            "isolation": {
+              "active_process_limit": 1,
+              "appcontainer": true,
+              "backend": "windows-lpac-job",
+              "capabilities": [
+                "registryRead"
+              ],
+              "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+              "cpu_seconds": 0.15625,
+              "cpu_time_limit_seconds": 3,
+              "elapsed_seconds": 0.3673,
+              "lpac": true,
+              "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+              "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+              "memory_limit_bytes": 201326592,
+              "package_sid": "S-1-15-2-1487279647-2927705689-1713680165-3737751961-1449254575-2775277053-4078267238",
+              "peak_process_memory_bytes": 12894208,
+              "pid": 9672,
+              "runtime_bytes": 22904399,
+              "wall_time_limit_seconds": 12
+            },
+            "passed": true
+          }
+        },
+        "status": "SUCCEEDED",
+        "updated_at": "2026-10-16T21:31:25.781421+00:00"
+      }
+    }
+  ],
+  "status": "passed",
+  "paid_model_calls": 3,
+  "autonomous_fault_detection": true,
+  "automatic_rollback": true,
+  "automatic_model_repair": true,
+  "published_package": "780f5c65b07ef20c0e5fd8184cf48c3938b080ddf5342290dbc00f5fafba3090",
+  "previous_package": "55c589c71d78e4c76e2a88e67768cdfad526a0c301c488c21e8a996e21846f6d",
+  "corruption_original_sha256": "437675282ef6ddfa84a6c9f11967c0e9436514345b5917ecfa36655afb11df45",
+  "source_hashes_before": {
+    "runtime/node-host/jarvis_core/evolution/recipes.py": "11492699e4221f73630de61d092cdda2ad2b141a4ffbca3be20ae971c13c49c8",
+    "runtime/node-host/jarvis_core/evolution/runner.py": "c4e26f93a7eee48127307b52bbb84a32ecfac05ed87d64ddfb964cdc4a61a61d",
+    "runtime/node-host/jarvis_core/evolution/provider.py": "97c22aaed90eae9435c36f94e3d842e7c2090f27aeedd2b6248e3aec3aed52be",
+    "runtime/node-host/jarvis_core/evolution/store.py": "4b675e28d4435dd5614bbb633224e5ba8e28092de722594d2ebc27db5e60986c",
+    "runtime/node-host/jarvis_core/evolution/__init__.py": "5b3e9dd8be5b53643223d3cf329620096742d3b586be0844a1eeed3ca75d537d",
+    "runtime/node-host/jarvis_core/evolution/manager.py": "daca0a777543e764a13ac0e857f11c27d3be0d9c4f57c5e34517b964cd988f90"
+  },
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/evolution/recipes.py": "11492699e4221f73630de61d092cdda2ad2b141a4ffbca3be20ae971c13c49c8",
+    "runtime/node-host/jarvis_core/evolution/runner.py": "c4e26f93a7eee48127307b52bbb84a32ecfac05ed87d64ddfb964cdc4a61a61d",
+    "runtime/node-host/jarvis_core/evolution/provider.py": "97c22aaed90eae9435c36f94e3d842e7c2090f27aeedd2b6248e3aec3aed52be",
+    "runtime/node-host/jarvis_core/evolution/store.py": "4b675e28d4435dd5614bbb633224e5ba8e28092de722594d2ebc27db5e60986c",
+    "runtime/node-host/jarvis_core/evolution/__init__.py": "5b3e9dd8be5b53643223d3cf329620096742d3b586be0844a1eeed3ca75d537d",
+    "runtime/node-host/jarvis_core/evolution/manager.py": "daca0a777543e764a13ac0e857f11c27d3be0d9c4f57c5e34517b964cd988f90"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "version": "0.1.33",
+  "captured_at": "2026-10-16T16:53:01.941753+00:00",
+  "status": "passed",
+  "checks": [
+    "UI project selection -> memory and both source excerpts in same chat; unselected project excluded; cross-project citation opens correct file",
+    "Archive keeps source project IDs; refresh resets scope and excludes derived history from broader view",
+    "Temporary chat excludes union; desktop/mobile fit; zero page errors",
+    "Union preview POST rejects missing nonce or origin"
+  ],
+  "fixture_model_calls": 3,
+  "page_errors": [],
+  "resources": {
+    "samples": 20,
+    "median_ms": 167.95,
+    "max_ms": 222.84,
+    "python_peak_bytes": 282153,
+    "read_bytes": 101,
+    "context_bytes": 1541,
+    "limits": "Small synthetic fixture and warm filesystem on this PC; Python allocation, not process RSS or an SLA."
+  },
+  "screenshots": [
+    "C:\\Users\\samuel\\AppData\\Local\\Jarvis\\data\\diagnostics\\memory-view\\union-desktop.png",
+    "C:\\Users\\samuel\\AppData\\Local\\Jarvis\\data\\diagnostics\\memory-view\\union-mobile.png"
+  ],
+  "limits": [
+    "UI model responses are synthetic; real model results recorded separately.",
+    "No new database, dependency, background service or model download."
+  ]
+}

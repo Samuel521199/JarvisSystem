@@ -1,0 +1,129 @@
+{
+  "version": "0.1.54",
+  "observed_at": "2026-10-18T12:39:41.721179+00:00",
+  "status": "passed",
+  "scope": "public Context7 read-only documentation via actual shared queue, handshake/list/call/receipt; availability at observed time only",
+  "model_calls": 0,
+  "records": [
+    {
+      "library": "Electron",
+      "task_id": "task_e1b5955945b4510195b5b0b4e37d3593",
+      "status": "CONFIRMED",
+      "error": null,
+      "report": {
+        "candidates": [
+          "/electron/electron",
+          "/websites/electronjs",
+          "/discord/electron",
+          "/electron/forge",
+          "/websites/electron-vite"
+        ],
+        "checks": {
+          "local_files_sent": false,
+          "model_calls": 0,
+          "remote_text_verified": false,
+          "target_code_executed": false,
+          "tool_calls": 1
+        },
+        "endpoint": "https://mcp.context7.com/mcp",
+        "kind": "jarvis.mcp-report",
+        "library": "Electron",
+        "mcp_id": "context7",
+        "protocol_version": "2025-11-25",
+        "query": "Show ipcMain.handle and ipcRenderer.invoke request response examples.",
+        "selection": {
+          "policy": {
+            "mode": "auto",
+            "source": "package_default"
+          },
+          "registration_id": "9dbc5ff9f8594a9aa8130564de3dadc7",
+          "revision": 1,
+          "selection": "explicit_documentation_task"
+        },
+        "text": "Available Libraries:\n\n- Title: Electron\n- Context7-compatible library ID: /electron/electron\n- Description: Electron is a framework for creating cross-platform desktop applications using web technologies like JavaScript, HTML, and CSS, built upon Node.js and Chromium.\n- Code Snippets: 5478\n- Source Reputation: High\n- Benchmark Score: 73.33\n----------\n- Title: Electron\n- Context7-compatible library ID: /websites/electronjs\n- Description: Electron is a framework for building cross-platform desktop applications using web technologies like JavaScript, HTML, and CSS, by embedding Chromium and Node.js.\n- Code Snippets: 3983\n- Source Reputation: High\n- Benchmark Score: 75.32\n----------\n- Title: Electron\n- Context7-compatible library ID: /discord/electron\n- Description: Electron is a cross-platform desktop application framework that lets you build desktop apps using JavaScript, HTML, and CSS, combining Chromium and Node.js.\n- Code Snippets: 3536\n- Source Reputation: High\n- Benchmark Score: 71.48\n----------\n- Title: Electron Forge\n- Context7-compatible library ID: /electron/forge\n- Description: Electron Forge is a complete tool for building modern Electron applications, unifying existing build tools and simplifying development from project creation to packaging.\n- Code Snippets: 626\n- Source Reputation: High\n- Benchmark Score: 76.08\n----------\n- Title: electron-vite\n- Context7-compatible library ID: /websites/electron-vite\n- Description: electron-vite is a next-generation Electron build tool based on Vite, offering fast performance, pre-configured Electron support, optimized asset handling, and hot module replacement for both renderer and main processes.\n- Code Snippets: 246\n- Source Reputation: High\n- Benchmark Score: 79.9",
+        "tool": "resolve-library-id",
+        "trace": [
+          {
+            "id": 1,
+            "method": "initialize",
+            "status": "received"
+          },
+          {
+            "id": null,
+            "method": "notifications/initialized",
+            "status": "received"
+          },
+          {
+            "id": 2,
+            "method": "tools/list",
+            "status": "received"
+          },
+          {
+            "arguments_digest": "sha256:52fb33f9a83943f860ea6321c76593bf41f2faeddf9920c5e9067262cd587194",
+            "id": 3,
+            "method": "tools/call",
+            "status": "received",
+            "tool": "resolve-library-id"
+          }
+        ]
+      }
+    },
+    {
+      "library": "/electron/electron",
+      "task_id": "task_3136e568792c515596b3f9094ce70a60",
+      "status": "CONFIRMED",
+      "error": null,
+      "report": {
+        "candidates": [],
+        "checks": {
+          "local_files_sent": false,
+          "model_calls": 0,
+          "remote_text_verified": false,
+          "target_code_executed": false,
+          "tool_calls": 1
+        },
+        "endpoint": "https://mcp.context7.com/mcp",
+        "kind": "jarvis.mcp-report",
+        "library": "/electron/electron",
+        "mcp_id": "context7",
+        "protocol_version": "2025-11-25",
+        "query": "Show ipcMain.handle and ipcRenderer.invoke request response examples.",
+        "selection": {
+          "policy": {
+            "mode": "auto",
+            "source": "package_default"
+          },
+          "registration_id": "9dbc5ff9f8594a9aa8130564de3dadc7",
+          "revision": 1,
+          "selection": "explicit_documentation_task"
+        },
+        "text": "### Implement two-way IPC with ipcMain.handle and ipcRenderer.invoke\n\nSource: https://github.com/electron/electron/blob/main/docs/tutorial/ipc.md\n\nPair ipcRenderer.invoke in the preload script with ipcMain.handle in the main process to asynchronously return results to the renderer. Errors thrown through handle in the main process serialize only their message property to the renderer. Do not expose ipcRenderer.invoke directly across the context bridge to maintain security.\n\n```javascript\nconst { app, BrowserWindow, dialog, ipcMain } = require('electron')\n\nconst path = require('node:path')\n\n// ...\n\nasync function handleFileOpen() {\n  const { canceled, filePaths } = await dialog.showOpenDialog({})\n  if (!canceled) {\n    return filePaths[0]\n  }\n}\n\nfunction createWindow() {\n  const mainWindow = new BrowserWindow({\n    webPreferences: {\n      preload: path.join(__dirname, 'preload.js')\n    }\n  })\n  mainWindow.loadFile('index.html')\n}\n\napp.whenReady().then(() => {\n  ipcMain.handle('dialog:openFile', handleFileOpen)\n  createWindow()\n})\n// ...\n```\n\n```javascript\nconst { contextBridge, ipcRenderer } = require('electron')\n\ncontextBridge.exposeInMainWorld('electronAPI', {\n  openFile: () => ipcRenderer.invoke('dialog:openFile')\n})\n```\n\n```html\n<!DOCTYPE html>\n<html>\n  <head>\n    <meta charset=\"UTF-8\">\n    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->\n    <meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'self'; script-src 'self'\">\n    <title>Dialog</title>\n  </head>\n  <body>\n    <button type=\"button\" id=\"btn\">Open a File</button>\n    File path: <strong id=\"filePath\"></strong>\n    <script src='./renderer.js'></script>\n  </body>\n</html>\n```\n\n```javascript\nconst btn = document.getElementById('btn')\nconst filePathElement = document.getElementById('filePath')\n\nbtn.addEventListener('click', async () => {\n  const filePath = await window.electronAPI.openFile()\n  filePathElement.innerText = filePath\n})\n```\n\n--------------------------------\n\n### Handle invokable IPC with ipcMain.handle and ipcRenderer.invoke\n\nSource: https://github.com/electron/electron/blob/main/docs/api/ipc-main.md\n\nRegisters a handler in the main process that responds to ipcRenderer.invoke calls from the renderer process. When the handler returns a Promise, its resolved value is sent back as the reply. Errors thrown in the handler are serialized, providing only the message property to the renderer.\n\n```javascript\nipcMain.handle('my-invokable-ipc', async (event, ...args) => {\n  const result = await somePromise(...args)\n  return result\n})\n```\n\n```javascript\nasync () => {\n  const result = await ipcRenderer.invoke('my-invokable-ipc', arg1, arg2)\n  // ...\n}\n```\n\n--------------------------------\n\n### Send IPC messages from renderer to main process using ipcRenderer and ipcMain\n\nSource: https://github.com/electron/electron/blob/main/docs/tutorial/tutorial-3-preload.md\n\nExposes an IPC invoke wrapper in preload.js, listens for the channel in main.js using ipcMain.handle before creating the window, and invokes the exposed ping method from renderer.js. Wrap ipcRenderer.invoke calls instead of exposing the entire ipcRenderer module directly to prevent arbitrary IPC attacks.\n\n```javascript\nconst { contextBridge, ipcRenderer } = require('electron')\n\ncontextBridge.exposeInMainWorld('versions', {\n  node: () => process.versions.node,\n  chrome: () => process.versions.chrome,\n  electron: () => process.versions.electron,\n  ping: () => ipcRenderer.invoke('ping')\n  // we can also expose variables, not just functions\n})\n```\n\n```javascript\nconst { app, BrowserWindow, ipcMain } = require('electron/main')\n\nconst path = require('node:path')\n\nconst createWindow = () => {\n  const win = new BrowserWindow({\n    width: 800,\n    height: 600,\n    webPreferences: {\n      preload: path.join(__dirname, 'preload.js')\n    }\n  })\n  win.loadFile('index.html')\n}\napp.whenReady().then(() => {\n  ipcMain.handle('ping', () => 'pong')\n  createWindow()\n})\n```\n\n```javascript\nconst func = async () => {\n  const response = await window.versions.ping()\n  console.log(response) // prints out 'pong'\n}\n\nfunc()\n```\n\n--------------------------------\n\n### dialog.showMessageBox via ipcMain.handle\n\nSource: https://github.com/electron/electron/blob/main/docs/fiddles/native-ui/dialogs/information-dialog/main.js\n\nMain process handler that opens a native message box dialog and returns the user's button selection to the renderer via the invoke/handle IPC pattern\n\n```javascript\nipcMain.handle('open-information-dialog', async () => {\n  const options = {\n    type: 'info',\n    title: 'Information',\n    message: \"This is an information dialog. Isn't it nice?\",\n    buttons: ['Yes', 'No']\n  }\n  return (await dialog.showMessageBox(options)).response\n})\n```\n\n--------------------------------\n\n### Secure IPC bridge via contextBridge\n\nSource: https://github.com/electron/electron/blob/main/docs/fiddles/native-ui/dialogs/information-dialog/preload.js\n\nPreload script that securely exposes a typed API surface to the renderer using contextBridge and ipcRenderer.invoke, preventing direct access to Node.js or Electron internals\n\n```javascript\nconst { contextBridge, ipcRenderer } = require('electron/renderer')\n\ncontextBridge.exposeInMainWorld('electronAPI', {\n  openInformationDialog: () => ipcRenderer.invoke('open-information-dialog')\n})\n```",
+        "tool": "query-docs",
+        "trace": [
+          {
+            "id": 1,
+            "method": "initialize",
+            "status": "received"
+          },
+          {
+            "id": null,
+            "method": "notifications/initialized",
+            "status": "received"
+          },
+          {
+            "id": 2,
+            "method": "tools/list",
+            "status": "received"
+          },
+          {
+            "arguments_digest": "sha256:a90ec5b7599670087b467d205c4ba56faeba7a75f511b123efb0182f4f190fe2",
+            "id": 3,
+            "method": "tools/call",
+            "status": "received",
+            "tool": "query-docs"
+          }
+        ]
+      }
+    }
+  ]
+}

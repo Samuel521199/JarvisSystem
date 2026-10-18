@@ -141,7 +141,7 @@ def vertex_auth(info: dict) -> tuple[str, str]:
 
 
 def build_request(provider: str, settings: dict, prompt: str, max_output: int, credentials: dict,
-                  history=None, attachments=None) -> tuple[str, dict, dict]:
+                  history=None, attachments=None, instructions="", response_schema=None) -> tuple[str, dict, dict]:
     if "models" in settings:
         settings = resolve_settings({"providers": {provider: settings}}, provider)
     model = settings["model"]
@@ -172,19 +172,23 @@ def build_request(provider: str, settings: dict, prompt: str, max_output: int, c
             headers = {"x-goog-api-key": credentials[provider]["api_key"]}
         return url, headers, {
             "contents": messages,
+            **({"systemInstruction": {"parts": [{"text": instructions}]}} if instructions else {}),
             "generationConfig": {"maxOutputTokens": max_output,
                                  "thinkingConfig": {"thinkingLevel": settings.get("thinking_level", "MINIMAL")}}}
     if provider == "openai":
         return "https://api.openai.com/v1/responses", {"Authorization": "Bearer " + credentials[provider]["api_key"]}, {
             "model": model, "input": messages, "max_output_tokens": max_output, "store": False,
+            **({"instructions": instructions} if instructions else {}),
             "reasoning": {"effort": settings.get("reasoning_effort", "none")}}
     if provider == "local":
-        return settings["endpoint"], {}, {"model": model, "messages": messages,
+        return settings["endpoint"], {}, {"model": model, "messages": ([{"role": "system", "content": instructions}] if instructions else []) + messages,
             "max_tokens": max_output, "stream": False, "temperature": 0,
+            **({'response_format':{'type':'json_object','schema':response_schema}} if response_schema is not None else {}),
             "chat_template_kwargs": {"enable_thinking": False}}
     if provider == "anthropic":
         return "https://api.anthropic.com/v1/messages", {"x-api-key": credentials[provider]["api_key"], "anthropic-version": "2023-06-01"}, {
             "model": model, "messages": messages, "max_tokens": max_output,
+            **({"system": instructions} if instructions else {}),
             **({"thinking": {"type": "adaptive"}, "output_config": {"effort": settings["reasoning_effort"]}} if settings.get("reasoning_effort") else {})}
     if provider == "bailian":
         host = BAILIAN_HOSTS[settings["region"]]
@@ -195,7 +199,7 @@ def build_request(provider: str, settings: dict, prompt: str, max_output: int, c
         url = settings["base_url"].rstrip("/") + "/chat/completions"
     else:
         url = "https://api.x.ai/v1/chat/completions"
-    body = {"model": model, "messages": messages, "max_tokens": max_output, "stream": False}
+    body = {"model": model, "messages": ([{"role": "system", "content": instructions}] if instructions else []) + messages, "max_tokens": max_output, "stream": False}
     if provider == "bailian":
         body["enable_thinking"] = settings.get("enable_thinking", False)
     if provider in {"xai", "eachlabs", "compatible"} and "reasoning_effort" in settings:
@@ -228,6 +232,35 @@ def extract(provider: str, response: dict) -> tuple[str, dict]:
     return "\n".join(texts), clean_usage(usage)
 
 
+def completion_metadata(provider: str, response: dict) -> dict:
+    """Normalize only known completion markers, never persist arbitrary provider text."""
+    if provider == "openai":
+        state = response.get("status")
+        detail = response.get("incomplete_details") or {}
+        reason = detail.get("reason") if isinstance(detail, dict) else None
+        if state in {"incomplete", "failed", "cancelled", "queued", "in_progress"}:
+            return {"output_incomplete": True, "completion_reason":
+                    "length" if reason == "max_output_tokens" else "provider_incomplete"}
+        reasons = [state] if state else []
+        complete = {"completed"}
+    elif provider in {"vertex", "gemini"}:
+        reasons = [c.get("finishReason") for c in response.get("candidates", []) if c.get("finishReason")]
+        if response.get("promptFeedback", {}).get("blockReason"):
+            return {"output_incomplete": True, "completion_reason": "provider_incomplete"}
+        complete = {"STOP"}
+    elif provider == "anthropic":
+        reasons = [response["stop_reason"]] if response.get("stop_reason") else []
+        complete = {"end_turn", "stop_sequence"}
+    else:
+        reasons = [c.get("finish_reason") for c in response.get("choices", []) if c.get("finish_reason")]
+        complete = {"stop"}
+    if any(r not in complete for r in reasons):
+        return {"output_incomplete": True, "completion_reason":
+                "length" if any(r in {"length", "MAX_TOKENS", "max_tokens"} for r in reasons) else "provider_incomplete"}
+    # Older compatible endpoints omit finish reasons. Do not fabricate a provider receipt.
+    return {"output_incomplete": False, "completion_reason": "complete" if reasons else "unspecified"}
+
+
 def classify_http_error(status: int, body: bytes) -> tuple[str, str]:
     """Inspect only bounded structured codes; never echo provider messages or headers."""
     try:
@@ -255,8 +288,11 @@ def classify_http_error(status: int, body: bytes) -> tuple[str, str]:
 
 def probe(config: dict, provider: str, prompt: str, data_dir: Path, guard, *, client=None,
           credentials_loader=load, admission_context=nullcontext, deadline_seconds=60.0, history=None,
-          cancel_event=None, attachments=None) -> dict:
+          cancel_event=None, attachments=None, instructions="", response_schema=None) -> dict:
     guard()
+    if (isinstance(deadline_seconds, bool) or not isinstance(deadline_seconds, (int, float))
+            or not math.isfinite(deadline_seconds) or deadline_seconds <= 0):
+        raise ModelError('invalid_request_deadline')
     if provider == "auto":
         provider = config["default_provider"]
     if provider not in config["providers"]:
@@ -274,14 +310,24 @@ def probe(config: dict, provider: str, prompt: str, data_dir: Path, guard, *, cl
     if images_size > MAX_IMAGES_BYTES or images_count > MAX_ATTACHMENTS:
         raise ModelError('attachment_budget_exceeded')
     max_input = config.get("local_max_prompt_bytes", 4096) if provider == "local" else config["max_prompt_bytes"]
+    if not isinstance(instructions, str) or len(instructions.encode("utf-8")) > 4096:
+        raise ModelError("invalid_host_instructions")
     if (not isinstance(prompt, str) or not prompt.strip()
-            or text_size(current) + sum(text_size(m) for m in messages) > max_input):
+            or len(instructions.encode("utf-8")) + text_size(current) + sum(text_size(m) for m in messages) > max_input):
         raise ModelError("invalid_or_oversized_prompt")
     item = resolve_settings(config, provider)
+    if response_schema is not None:
+        try:
+            if (item.get('adapter',provider)!='local' or not isinstance(response_schema,dict)
+                    or len(json.dumps(response_schema,allow_nan=False).encode('utf-8'))>8192):
+                raise ValueError('Invalid local schema')
+        except (ValueError,TypeError,RecursionError):raise ModelError('invalid_local_response_schema') from None
     journal = ProbeJournal(data_dir / "model-probes.db")
-    ident = journal.reserve(provider, item["model"], json.dumps(messages + [current], ensure_ascii=False))
+    ident = journal.reserve(provider, item["model"], json.dumps({"instructions": instructions, "messages": messages + [current],
+        **({'response_schema':response_schema} if response_schema is not None else {})}, ensure_ascii=False))
     started = time.monotonic()
-    metadata = {"provider": provider, "model": item["model"], "request_id": ident}
+    metadata = {"provider": provider, "model": item["model"], "request_id": ident,
+                "response_deadline_seconds": deadline_seconds}
     response_text = ""
     status = "FAILED"
     dispatched = False
@@ -324,7 +370,11 @@ def probe(config: dict, provider: str, prompt: str, data_dir: Path, guard, *, cl
         async def bounded_request():
             if client is not None:
                 return await request(client)
-            async with httpx.AsyncClient(timeout=httpx.Timeout(45, connect=10), follow_redirects=False,
+            # Non-streaming reasoning can legitimately take more than 45s before
+            # its first byte. The caller owns the response budget; wait_for below
+            # remains the hard bound even when response bytes trickle in.
+            async with httpx.AsyncClient(timeout=httpx.Timeout(deadline_seconds, connect=min(10, deadline_seconds),
+                                         write=min(45, deadline_seconds), pool=min(45, deadline_seconds)), follow_redirects=False,
                                          trust_env=provider != "local") as active_client:
                 return await request(active_client)
         async def cancellable_request():
@@ -354,7 +404,7 @@ def probe(config: dict, provider: str, prompt: str, data_dir: Path, guard, *, cl
         credentials = {} if adapter == "local" else credentials_loader()
         max_output = config.get("local_max_output_tokens", 256) if adapter == "local" else config["max_output_tokens"]
         max_output = item.get("max_output_tokens", max_output)
-        url, headers, payload = build_request(provider, item, prompt, max_output, credentials, history=messages, attachments=attachments)
+        url, headers, payload = build_request(provider, item, prompt, max_output, credentials, history=messages, attachments=attachments, instructions=instructions,response_schema=response_schema)
         # The same short core transaction serializes admission with stop. Once
         # committed this is in-flight, even before socket transmission completes.
         # Never hold that transaction while waiting for a remote response.
@@ -367,11 +417,17 @@ def probe(config: dict, provider: str, prompt: str, data_dir: Path, guard, *, cl
         parsed = asyncio.run(receive(url, headers, payload))
         response_text, usage = extract(adapter, parsed)
         metadata["usage"] = usage
+        metadata.update(completion_metadata(adapter, parsed))
         guard()
         check_cancel()
-        if not response_text.strip():
+        if not response_text.strip() and metadata["output_incomplete"]:
+            status = "FAILED"
+            metadata.update(error="output_incomplete", error_category="response_incomplete",
+                            user_message="供应商已结束请求，但未产生完整可用正文；本次仍可能计费，可调整输出长度或思考级别后重新发送。")
+        elif not response_text.strip():
             raise ModelError("empty_or_incomplete_response")
-        status = "SUCCEEDED"
+        else:
+            status = "SUCCEEDED"
     except RequestCancelled:
         status = "UNKNOWN" if dispatched and not rejected else "CANCELLED"
         metadata.update(error="request_cancelled", error_category="chat_cancelled", cancel_requested=True,
@@ -382,7 +438,8 @@ def probe(config: dict, provider: str, prompt: str, data_dir: Path, guard, *, cl
             metadata.update(error_body_incomplete=True, transport_type=type(exc).__name__)
         else:
             metadata.update(error="connection_unavailable", error_category="provider_unavailable",
-                            user_message="无法建立模型连接，请检查网络或本地模型服务。")
+                            user_message=("本地模型服务未能连接（127.0.0.1:18180）；请在本机启动 tools/local_llm.py serve 后重试，或切换云模型。"
+                                          if item.get("adapter", provider) == "local" else "无法建立模型连接，请检查网络或供应商服务。"))
     except (httpx.TransportError, TimeoutError) as exc:
         status = "FAILED" if rejected else "UNKNOWN"
         metadata["transport_type"] = type(exc).__name__

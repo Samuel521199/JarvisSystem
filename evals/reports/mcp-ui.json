@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "checks": [
+    "10 curated cards, search/categories, keyboard details, source and CAD boundaries",
+    "policy survives reload; template -> persisted registration -> grouped card -> explicit format-only check",
+    "custom entry rendered as text, removal affects registration only, mobile has no overflow",
+    "existing skill menu preserved; no JavaScript errors, model calls or ready-state inflation"
+  ],
+  "page_errors": [],
+  "paid_model_calls": 0,
+  "mcp_calls": 0,
+  "scope": "isolated real Edge management UI, not MCP protocol or tool usability"
+}

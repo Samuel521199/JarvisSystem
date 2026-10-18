@@ -1,0 +1,32 @@
+{
+  "status": "SUCCEEDED",
+  "source_version": "0.1.49",
+  "test_modules": [
+    "test_dialogue_recovery",
+    "test_dialogue_turns",
+    "test_conversations",
+    "test_web",
+    "test_chat",
+    "test_readout",
+    "test_resources",
+    "test_runtime_metrics",
+    "test_conversation_tasks",
+    "test_personal_core",
+    "test_continuity"
+  ],
+  "tests": 135,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "seconds": 16.589,
+  "cloud_calls": 0,
+  "limits": "Synthetic providers; includes a child process that exits after admission. No separate Dialogue worker, microphone or automatic intent accuracy claim.",
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/turns.py": "ace65e093f4e821097de6f2eb3d0921b92b937b8f82e1153a6369fc883609a0b",
+    "runtime/node-host/jarvis_core/dialogue_journal.py": "a583fe6120c1ba056d742f93a73d8335d87b665a0f9efb3c1f7ef7f80504b704",
+    "runtime/node-host/jarvis_core/conversations.py": "25554ec6ae1bcacc943a2c4813db10028aad3b36a165a641c1e5b688f6a595be",
+    "apps/web/server.py": "ab1f5da6c5ee27166571565099a0b2d416e8c5c993717cbb099d0a66742657f1",
+    "apps/web/dialogue_routes.py": "4b3e9a32701edff81c8036718af194aeabbd1a30e92b319d2be291a48b2a6903",
+    "tests/test_dialogue_recovery.py": "8449966794555e5c31358669f18bf3050ed0395341f111bbcf286680dde1efd0"
+  }
+}

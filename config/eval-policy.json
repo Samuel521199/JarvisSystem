@@ -1,0 +1,6 @@
+{
+  "schema_version": 1,
+  "preferred_live_route": "vertex::gemini-3.1-pro-preview",
+  "basis": "2026-10-17 用户要求常规验证优先使用官方 Google 额度；选择已有成功历史的本机档案，不改变聊天模型。",
+  "authority": "docs/delivery-validation.md#model-test-selection"
+}

@@ -1,0 +1,27 @@
+{
+  "version": "0.1.30",
+  "previous_version": "0.1.29",
+  "captured_at": "2026-10-16T14:43:39.164457+00:00",
+  "core_ready": true,
+  "source_restart": true,
+  "exit_method": "existing instance-specific tray quit event",
+  "business_rows_preserved": true,
+  "preserved_task_count": 10,
+  "preserved_conversation_count": 1,
+  "module_count": 18,
+  "sample_report_enabled": true,
+  "served_assets_match_source": {
+    "computer.js": true,
+    "modules.js": true,
+    "workspace.js": true,
+    "explorer.js": true,
+    "workbench.js": true
+  },
+  "created_test_records_in_user_store": false,
+  "limits": [
+    "Explicit source restart at idle, not live module hot swap.",
+    "Paid model tests ran in temporary instances; no task was added to user ledger."
+  ],
+  "final_source_refresh_at": "2026-10-16T14:47:23.145364+00:00",
+  "default_task_model": "auto"
+}

@@ -1,0 +1,102 @@
+{
+  "version": "0.1.34",
+  "previous_version": "0.1.33",
+  "captured_at": "2026-10-16T17:24:53.467129+00:00",
+  "status": "passed",
+  "core_ready": true,
+  "business_rows_preserved": true,
+  "business_rows": {
+    "control.db:tasks": {
+      "rows": 10,
+      "sha256": "bcffbdde3da9b7b4d892d2c628967c441e1f896a69446b2744583112147cda6a"
+    },
+    "control.db:actions": {
+      "rows": 10,
+      "sha256": "0c0c9711806118adaca39670cc4adaa2c40221aed9308bdf045fbb4a6e460b89"
+    },
+    "control.db:artifacts": {
+      "rows": 8,
+      "sha256": "362e516378f39463c06ecc88c31eb7e375131f5cdc4187c20c2cffd8e8f5813d"
+    },
+    "conversations.db:conversations": {
+      "rows": 1,
+      "sha256": "a0bcae9fbfa79d00eddf0b88981430974179a0fbcd54e99833eab668d307625f"
+    },
+    "workspace.db:projects": {
+      "rows": 1,
+      "sha256": "f49b2d7c91b4b889cf80687ef1365266de54208b0dd5e514a6e30d09d232c43d"
+    },
+    "workspace.db:outputs": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "memory.db:facts": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "memory.db:receipts": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "project-sources.db:sources": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "extensions.db:entries": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "model-admin.db:settings": {
+      "rows": 1,
+      "sha256": "bef89b9803b21b3598d2095a4d13ec33f03b50f80bc0c01ec455d11fd9baf9eb"
+    }
+  },
+  "module_count": 18,
+  "queue_paused": true,
+  "queue_auto_resumed": false,
+  "local_previously_owned": true,
+  "runtime_metrics_reset": true,
+  "process_observation": [
+    {
+      "name": "host",
+      "status": "available",
+      "cpu_percent": 2.09,
+      "working_set_bytes": 57733120,
+      "private_bytes": 41943040
+    },
+    {
+      "name": "local_model",
+      "status": "available",
+      "cpu_percent": 0.08,
+      "working_set_bytes": 945061888,
+      "private_bytes": 384217088
+    }
+  ],
+  "served_assets_match_source": {
+    "resources.js": true,
+    "modules.js": true,
+    "knowledge.js": true
+  },
+  "created_test_records_in_user_store": false,
+  "paid_model_calls": 0,
+  "startup_repair": {
+    "initial_launch": "failed",
+    "reason": "Missing optional project_menu.js/css references appeared in working tree",
+    "repair": "Fixed-name optional assets degrade to empty resources; mandatory resources remain required",
+    "optional_assets_present_at_finalization": {
+      "project_menu.js": true,
+      "project_menu.css": true
+    }
+  },
+  "limits": [
+    "Idle source restart via tray, not hot swap.",
+    "Project-menu asset files were absent at initial launch; later appeared in the shared workspace. That separate feature is outside this increment."
+  ],
+  "production_settings_ui": {
+    "checked": true,
+    "page_errors": [],
+    "screenshot": "C:\\Users\\samuel\\AppData\\Local\\Jarvis\\data\\diagnostics\\parallel-runtime\\deployed-monitor.png",
+    "host_and_owned_model_memory_visible": true,
+    "paused_queue_visible": true
+  }
+}

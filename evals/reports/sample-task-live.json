@@ -1,0 +1,51 @@
+{
+  "version": "0.1.30",
+  "captured_at": "2026-10-16T14:33:46.485408+00:00",
+  "live_model": true,
+  "scope": "temporary synthetic sample; existing FIFO/ledger and real fixed Worker",
+  "limits": [
+    "No user project or current task changed; no generic tool execution or full K1/K2 gate.",
+    "Crash checks are child process termination, not whole-machine power loss.",
+    "A small fixed task is not a general intelligence or model comparison benchmark."
+  ],
+  "task_status": "SUCCEEDED",
+  "action_status": "CONFIRMED",
+  "elapsed_seconds": 8.117,
+  "report_verified": true,
+  "file_count": 3,
+  "by_type": [
+    {
+      "file_count": 1,
+      "total_bytes": 30,
+      "type": ".py"
+    },
+    {
+      "file_count": 2,
+      "total_bytes": 5,
+      "type": ".txt"
+    }
+  ],
+  "plan_states": [
+    "PLAN_VALIDATED"
+  ],
+  "model_calls": [
+    {
+      "completion_reason": "complete",
+      "elapsed_seconds": 6.9,
+      "model": "gemini-3.8-flash",
+      "outcome_uncertain": false,
+      "output_incomplete": false,
+      "provider": "vertex",
+      "request_id": "bf7203411cc64628a9dbe1ac6c4601bd",
+      "status": "SUCCEEDED",
+      "usage": {
+        "candidatesTokenCount": 45,
+        "promptTokenCount": 395,
+        "totalTokenCount": 440
+      }
+    }
+  ],
+  "error": null,
+  "real_worker_lpac": true,
+  "status": "passed"
+}

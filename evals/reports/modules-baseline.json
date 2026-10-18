@@ -1,0 +1,125 @@
+{
+  "version": "0.1.22",
+  "captured_at": "2026-10-16T08:49:03.348530+00:00",
+  "status": "passed",
+  "regression": {
+    "command": "python -m unittest discover -s tests -q",
+    "tests": 321,
+    "passed": 319,
+    "skipped": 2,
+    "seconds": 167.105,
+    "note": "Final state-label/fallback refinement followed by 36 passing targeted tests."
+  },
+  "targeted": {
+    "command": "python -m unittest tests.test_modules tests.test_web tests.test_runtime_releases -q",
+    "tests": 36,
+    "passed": 36
+  },
+  "deployment": {
+    "url": "http://127.0.0.1:18181/settings#modules",
+    "current_version": "0.1.22",
+    "module_count": 12,
+    "preserved_task_count": 10,
+    "queue_paused": true,
+    "maintenance_busy": false,
+    "source_restart": true
+  },
+  "observed_modules": [
+    {
+      "id": "host",
+      "installed": true,
+      "health": "ready",
+      "activity": "running",
+      "update_mode": "bundled"
+    },
+    {
+      "id": "models",
+      "installed": true,
+      "health": "ready",
+      "activity": "standby",
+      "update_mode": "configuration"
+    },
+    {
+      "id": "local-llm",
+      "installed": true,
+      "health": "ready",
+      "activity": "service_online",
+      "update_mode": "external"
+    },
+    {
+      "id": "browser",
+      "installed": true,
+      "health": "ready",
+      "activity": "standby",
+      "update_mode": "bundled"
+    },
+    {
+      "id": "worker",
+      "installed": true,
+      "health": "ready",
+      "activity": "standby",
+      "update_mode": "bundled"
+    },
+    {
+      "id": "workspace",
+      "installed": true,
+      "health": "ready",
+      "activity": "on_demand",
+      "update_mode": "bundled"
+    },
+    {
+      "id": "stt",
+      "installed": true,
+      "health": "ready",
+      "activity": "not_integrated",
+      "update_mode": "external"
+    },
+    {
+      "id": "tts",
+      "installed": true,
+      "health": "ready",
+      "activity": "not_integrated",
+      "update_mode": "external"
+    },
+    {
+      "id": "speaker",
+      "installed": true,
+      "health": "ready",
+      "activity": "not_integrated",
+      "update_mode": "external"
+    },
+    {
+      "id": "vad",
+      "installed": true,
+      "health": "ready",
+      "activity": "not_integrated",
+      "update_mode": "external"
+    },
+    {
+      "id": "memory",
+      "installed": false,
+      "health": "not_implemented",
+      "activity": "not_integrated",
+      "update_mode": "planned"
+    },
+    {
+      "id": "federation",
+      "installed": false,
+      "health": "not_implemented",
+      "activity": "not_integrated",
+      "update_mode": "planned"
+    }
+  ],
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/modules.py": "ba4a82233f783dff2f179d9faea319a51720536ba2a53e3afa145035e727c3a3",
+    "apps/web/modules.js": "1c0e17f7200f446685ae3680b73b1a6eb5572ce84bb2f7442d65be205ba634ac",
+    "apps/web/modules.css": "85b8b9c4f494b7a3a69964e40395178a014d1095dfbb9f063bbe16dfc7d21533",
+    "apps/web/server.py": "ecf74690906ec68b145324f7834a7d9b865acde09cd32a6412f13e44aaec620d",
+    "apps/web/admin.js": "1da4137b36f5cdc307396c6f8e0b9ee70bfaf7d3ff0d7a9a79e78773f2013635"
+  },
+  "limits": [
+    "No universal hot swap or zero resource-impact guarantee.",
+    "Candidate health in browser/integration fixture is synthetic; live slots were not modified.",
+    "No new cloud model calls or paid balance probes."
+  ]
+}

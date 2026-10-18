@@ -1,0 +1,1009 @@
+{
+  "observed_at": "2026-10-18T16:20:13.783016+00:00",
+  "method": "Agent read all 108 complete outputs against 27 prewritten rubrics; not independent human adjudication, not blinded, one sample per arm; counts describe these samples only. No model self-rating or keyword correctness proxy.",
+  "results": [
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "diagnosing-bugs-1",
+      "skill_id": "matt-pocock.diagnosing-bugs",
+      "arm": "without_skill",
+      "assessment": "partial",
+      "notes": "空表原因正确，但直接默认返回0，缺少复现/回归案例与未运行说明。",
+      "output_sha256": "c718f30aee6f723818af7ae6727a8c7ea73539a925d658a9542a3116d1de4622"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "diagnosing-bugs-1",
+      "skill_id": "matt-pocock.diagnosing-bugs",
+      "arm": "with_skill",
+      "assessment": "partial",
+      "notes": "明确静态分析与空值策略，但没有补充可执行的边界回归案例。",
+      "output_sha256": "739a949625cd1989064f55a20b4708e8329cec83e7db6fbe2ff8aea7cbab12ab"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "diagnosing-bugs-2",
+      "skill_id": "matt-pocock.diagnosing-bugs",
+      "arm": "without_skill",
+      "assessment": "partial",
+      "notes": "定位正确，遗漏空表与单元素验收。",
+      "output_sha256": "49d9a3f7b5fae23888f48e7e0ca630cc2e80852d67bdaf4619c7194112843ea9"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "diagnosing-bugs-2",
+      "skill_id": "matt-pocock.diagnosing-bugs",
+      "arm": "with_skill",
+      "assessment": "partial",
+      "notes": "定位正确且明确未运行，仍遗漏空表与单元素案例。",
+      "output_sha256": "d378cc8c60239c863190bb514f870738456afdf91d244255b5f81b6253ca3add"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "diagnosing-bugs-3",
+      "skill_id": "matt-pocock.diagnosing-bugs",
+      "arm": "without_skill",
+      "assessment": "partial",
+      "notes": "提供排查步骤，但没有明确证据不足和请求关联ID，提前给出防御配置。",
+      "output_sha256": "f5b21506c88e361b13b533e7be11040f23f4984b1508205010a79ea925e68c7e"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "diagnosing-bugs-3",
+      "skill_id": "matt-pocock.diagnosing-bugs",
+      "arm": "with_skill",
+      "assessment": "partial",
+      "notes": "有日志关联但未明确无法定因，过早建议重试配置；未说明重复操作风险。",
+      "output_sha256": "f8e055c8c5163db958ed428d10a2c282b4faba18f682f3f79550023a944d66f6"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "tdd-1",
+      "skill_id": "matt-pocock.tdd",
+      "arm": "without_skill",
+      "assessment": "partial",
+      "notes": "公式和预期正确，但没有小步反馈流程和明确未运行说明。",
+      "output_sha256": "744038d08587c20d939928118c1ffa3c0b55fdb7d23265dd5974b6a09ed1b1b2"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "tdd-1",
+      "skill_id": "matt-pocock.tdd",
+      "arm": "with_skill",
+      "assessment": "partial",
+      "notes": "独立预期与未验证标记正确，未描述逐个行为反馈实现。",
+      "output_sha256": "43f5abf881bbc33606cdf972d3f8c6d1030d6024b6b7d35c40b4e08e48acf701"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "tdd-2",
+      "skill_id": "matt-pocock.tdd",
+      "arm": "without_skill",
+      "assessment": "partial",
+      "notes": "边界数值正确，未说明先运行最小行为再实现。",
+      "output_sha256": "07f9a52188462e3f5afb4c9fb91ec3a1ea8a6f0ba10ef9c54fc5887f2fad0a6d"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "tdd-2",
+      "skill_id": "matt-pocock.tdd",
+      "arm": "with_skill",
+      "assessment": "partial",
+      "notes": "遗漏50.01的上边界案例及小步实现流程；已列数值正确。",
+      "output_sha256": "404ff70e0b7b2d56adf68cca7074ef1c1fabd7db35d164ece9cdfa56307cef61"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "tdd-3",
+      "skill_id": "matt-pocock.tdd",
+      "arm": "without_skill",
+      "assessment": "partial",
+      "notes": "无需业务单测结论合理，缺少对比度或可访问性检查。",
+      "output_sha256": "42112a54abeded7825e7c586cb41d2e0b0f4178544c3ae1b60aa633fa9f4ab4e"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "tdd-3",
+      "skill_id": "matt-pocock.tdd",
+      "arm": "with_skill",
+      "assessment": "partial",
+      "notes": "避免脆弱单测，但视觉检查未提对比度，不能将人工看颜色等同全面验收。",
+      "output_sha256": "69e1d05e7abe82db8a26177271581ea901adb29cca4ee3c6165fbca65c566961"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "code-review-1",
+      "skill_id": "matt-pocock.code-review",
+      "arm": "without_skill",
+      "assessment": "partial",
+      "notes": "识别真实两项问题，但把未给定的折扣范围和金额精度作为确定缺陷，缺少行号。",
+      "output_sha256": "3b776c45757cf4e6cca4e170638e4cb5ab1dbdd08f9de639700466e1c412f2e9"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "code-review-1",
+      "skill_id": "matt-pocock.code-review",
+      "arm": "with_skill",
+      "assessment": "partial",
+      "notes": "真实两项问题和行号正确；额外折扣范围应作为待确认契约。",
+      "output_sha256": "0df56ad5cc8b652236bdb685191a2f7c6b978d80337327ad0e1ef2cda5ca0e59"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "code-review-2",
+      "skill_id": "matt-pocock.code-review",
+      "arm": "without_skill",
+      "assessment": "partial",
+      "notes": "修复正确，缺少明确行号和未运行说明。",
+      "output_sha256": "6fc1cf8e34c4068058b7688cabc0ddd684b17bb2be2be8fa2c3adcf50383df05"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "code-review-2",
+      "skill_id": "matt-pocock.code-review",
+      "arm": "with_skill",
+      "assessment": "fail",
+      "notes": "修复表达式正确，但错误暗示存储None时必须改用成员检查；dict.get默认值本就保留已有None。",
+      "output_sha256": "0f87236a190e0cf07ad074cd5e7291b719ad60caa0eae8adf6b7970ab4d80186"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "code-review-3",
+      "skill_id": "matt-pocock.code-review",
+      "arm": "without_skill",
+      "assessment": "fail",
+      "notes": "无缺陷结论合理，但任意精度整数相加并非恒定O(1)，无执行证据却建议直接生产使用。",
+      "output_sha256": "f7e6a11b1c32fa58e5e3df99e2bab6a8905f50b63d1c6baab6d7d14ec7f27ddd"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "code-review-3",
+      "skill_id": "matt-pocock.code-review",
+      "arm": "with_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "ab5954eaa67917c6b40f1559604cd9cdaebfdfe315353c815c92b680238d971b"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "codebase-design-1",
+      "skill_id": "matt-pocock.codebase-design",
+      "arm": "without_skill",
+      "assessment": "partial",
+      "notes": "共享边界合理，但引入配置中心/SDK，缺少迁移与一致性检查。",
+      "output_sha256": "e727f594adf70576da99bb9aa639d8a3364705017884f9a94bd1013f9db8f7bd"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "codebase-design-1",
+      "skill_id": "matt-pocock.codebase-design",
+      "arm": "with_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "083cc9ee196647c7af444a05311e4f47caee6e421c8d762101fd1540849d9b2b"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "codebase-design-2",
+      "skill_id": "matt-pocock.codebase-design",
+      "arm": "without_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "763a81ba7b1b830486a7b04177698758e37646b8c719e3ad4d67159dd259bdc7"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "codebase-design-2",
+      "skill_id": "matt-pocock.codebase-design",
+      "arm": "with_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "3b23443afb8e03a3f4e852a11c67d192d95a5160d2d31b1fa7f671432b32ac2f"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "codebase-design-3",
+      "skill_id": "matt-pocock.codebase-design",
+      "arm": "without_skill",
+      "assessment": "fail",
+      "notes": "旧汇率降级没有最大陈旧期限或明确失败分支，缓存建议不能保证契约正确。",
+      "output_sha256": "ca31858322cde211b550b6be00df9ab7b6f264ba2633d1a41d22c877236f28fc"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "codebase-design-3",
+      "skill_id": "matt-pocock.codebase-design",
+      "arm": "with_skill",
+      "assessment": "fail",
+      "notes": "有TTL却允许无限期最后有效值兜底；缺少过期拒绝与契约验收，不能保证调用方无感。",
+      "output_sha256": "d134ff698bc42fd21091d647c3d2e950563cfb72a212a1a3cf6617d9297dbdd3"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "to-spec-1",
+      "skill_id": "matt-pocock.to-spec",
+      "arm": "without_skill",
+      "assessment": "partial",
+      "notes": "有一周计划和功能，但按层拆分，未给每项验收及明确依赖。",
+      "output_sha256": "12b7c08401c2a354b7458de8de55a6da47fc4cb2878ccde0e2751f57d25f82ac"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "to-spec-1",
+      "skill_id": "matt-pocock.to-spec",
+      "arm": "with_skill",
+      "assessment": "partial",
+      "notes": "有纵向任务/验收/依赖，但没有落实一周约束与明确排除账号同步。",
+      "output_sha256": "d1cae8b87cb54bc4e6859d5f2c28e19d8769f8039a7bc14609885f1a87b15bd9"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "to-spec-2",
+      "skill_id": "matt-pocock.to-spec",
+      "arm": "without_skill",
+      "assessment": "partial",
+      "notes": "满足核心要求，额外假定空格归一化、编码和打包，缺少独立验收样例。",
+      "output_sha256": "0a0e5473edb4e15fc8710f3c2c83d98f9920f3af632e23a92a9b875bff79e038"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "to-spec-2",
+      "skill_id": "matt-pocock.to-spec",
+      "arm": "with_skill",
+      "assessment": "partial",
+      "notes": "核心功能与验收清楚，自动编码适配属新增范围，未落实两天排期。",
+      "output_sha256": "75f3eb7506bc23e150c49c78cd2bfe8920fbcaf24463a0ecde2da2a90f6b7d7c"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "to-spec-3",
+      "skill_id": "matt-pocock.to-spec",
+      "arm": "without_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "88a149d913a9eeacdb082d187538a152ea72bc4edc32db9de28927f8238a57ce"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "to-spec-3",
+      "skill_id": "matt-pocock.to-spec",
+      "arm": "with_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "3e2bf03fc5e0b46761fc5e4e26aadbeef96af42e922501d65c6464d3dcd65e60"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "handoff-1",
+      "skill_id": "matt-pocock.handoff",
+      "arm": "without_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "98aefea4d33a1ec57088b771aa010a344f27369ad629f0808cc007278b75a619"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "handoff-1",
+      "skill_id": "matt-pocock.handoff",
+      "arm": "with_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "855283666cf110d59b9f8d786031c61c1d65bac2a816d48aa4fe993af189d7b3"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "handoff-2",
+      "skill_id": "matt-pocock.handoff",
+      "arm": "without_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "b0a63130d4b39c5daff00aff1dfd567bfc31285a14cc514daa16c2ceeb9b6c0e"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "handoff-2",
+      "skill_id": "matt-pocock.handoff",
+      "arm": "with_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "472bd772932e6b337955183e12d0495c4a9e4a3eb556fd37b11a583a6fba93c8"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "handoff-3",
+      "skill_id": "matt-pocock.handoff",
+      "arm": "without_skill",
+      "assessment": "partial",
+      "notes": "不盲重试正确，但仅确认未扣费不足以证明未执行，仍须核对执行终态。",
+      "output_sha256": "ec15c5a7ac181b976486de03c7c1ef9da6fed9414a7d378410a4035fbbd15f02"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "handoff-3",
+      "skill_id": "matt-pocock.handoff",
+      "arm": "with_skill",
+      "assessment": "partial",
+      "notes": "明确UNKNOWN和不重试，但首句“失败/挂起”与后文未知终态不一致。",
+      "output_sha256": "1c18fcc52f67502a15a9ccd18409e167e8b1ba0cf17d38bc9b0eb848dcb521ce"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "teach-1",
+      "skill_id": "matt-pocock.teach",
+      "arm": "without_skill",
+      "assessment": "partial",
+      "notes": "转速方向正确，没有迁移练习和外啮合适用条件。",
+      "output_sha256": "e53c246a8f78bfb71f60d3703ef948a7ace90bf908223d2edfbd21c4ffd1d054"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "teach-1",
+      "skill_id": "matt-pocock.teach",
+      "arm": "with_skill",
+      "assessment": "partial",
+      "notes": "有练习与正确答案，但把转向相反泛化为所有啮合，须限定一对外齿轮。",
+      "output_sha256": "1ca64fac024f5291c248a01812ac7bff7a82ff63ac43d87a9c56c78cbe49a845"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "teach-2",
+      "skill_id": "matt-pocock.teach",
+      "arm": "without_skill",
+      "assessment": "fail",
+      "notes": "将空表默认返回0称为规范写法，且练习却返回None；缺少业务约定。",
+      "output_sha256": "6dc6bca429ccb728e188773c955c3f06fb1e4cb29b303d06b376339e4c0c0ba3"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "teach-2",
+      "skill_id": "matt-pocock.teach",
+      "arm": "with_skill",
+      "assessment": "partial",
+      "notes": "除零与练习正确，但未解释空表结果需要约定；“崩溃”表述忽略异常可捕获。",
+      "output_sha256": "b66fa7a99c1d3cf3c5f4e2675f854792ef81b94087e6b579174abb0c2afe8698"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "teach-3",
+      "skill_id": "matt-pocock.teach",
+      "arm": "without_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "8665b81982a6042ce8a81407a731e0d86b7ded2c38613ef660f1a818fbbe1eb7"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "teach-3",
+      "skill_id": "matt-pocock.teach",
+      "arm": "with_skill",
+      "assessment": "fail",
+      "notes": "输出减半和练习正确，但遗漏用户要求的反向，且把接触处线速度相等过度泛化。",
+      "output_sha256": "2906db25f72bcfd070d3a46d3226b712108bf7d1d7fe10f43718d414c6d6ba17"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "to-questionnaire-1",
+      "skill_id": "matt-pocock.to-questionnaire",
+      "arm": "without_skill",
+      "assessment": "partial",
+      "notes": "覆盖决策维度，未明确接受未知与回答空间。",
+      "output_sha256": "057e4aedf8d71533b5a19857af34d8b59f17764ea8e233d65925c4e4fd2493df"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "to-questionnaire-1",
+      "skill_id": "matt-pocock.to-questionnaire",
+      "arm": "with_skill",
+      "assessment": "partial",
+      "notes": "覆盖成本和体量，允许估计但未明确允许未知，缺少答题留白。",
+      "output_sha256": "7dcd75049024bb1a2824915cd8322f1a7438ff117dea67c319c3785a5ac928e7"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "to-questionnaire-2",
+      "skill_id": "matt-pocock.to-questionnaire",
+      "arm": "without_skill",
+      "assessment": "partial",
+      "notes": "覆盖三维度，未明确接受未知，也混合了多个问题。",
+      "output_sha256": "5fa11a957a77f1e80910de4ce4211655f569c903caf0c7f984b272795cf561a7"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "to-questionnaire-2",
+      "skill_id": "matt-pocock.to-questionnaire",
+      "arm": "with_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "4d6a2302e13bacf0d3d48f4a31aae75a45304775a46268b41d69081d5b375206"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "to-questionnaire-3",
+      "skill_id": "matt-pocock.to-questionnaire",
+      "arm": "without_skill",
+      "assessment": "partial",
+      "notes": "去除了优秀等预设，但量表缺少未使用/未知，并假设已有AI使用经验。",
+      "output_sha256": "c54af00e6bcbfc58dfc516168a88e093c5c5856d107ba5a3e9dc2d70dcff66c9"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "to-questionnaire-3",
+      "skill_id": "matt-pocock.to-questionnaire",
+      "arm": "with_skill",
+      "assessment": "partial",
+      "notes": "有人工介入与不确定选项，但部分题仍假设已有AI与转接经验。",
+      "output_sha256": "e8531c68a996dad2956ad02f25976baac0903791b6f29ee50b50f3816b737e22"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "writing-for-agents-1",
+      "skill_id": "matt-pocock.writing-for-agents",
+      "arm": "without_skill",
+      "assessment": "fail",
+      "notes": "新增自动提交，扩大权限；无法运行测试分支缺失。",
+      "output_sha256": "e18187f81c2d5205dfa9d21b996c8bd42a577dc359fe120e10613aaddefea90f"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "writing-for-agents-1",
+      "skill_id": "matt-pocock.writing-for-agents",
+      "arm": "with_skill",
+      "assessment": "partial",
+      "notes": "触发范围清楚，但要求完整读两文档，缺少无法验证时如实报告的完成分支。",
+      "output_sha256": "db137866a253a8a5a1ce499499914469b5ede39fd15cc1db7258a01ee7c58f6a"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "writing-for-agents-2",
+      "skill_id": "matt-pocock.writing-for-agents",
+      "arm": "without_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "4f474f7fad4e5d2c4d4eb71e9fe74ffe17e28a30aa706369312631b127c09000"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "writing-for-agents-2",
+      "skill_id": "matt-pocock.writing-for-agents",
+      "arm": "with_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "c156015c7e1a350d42896d254a6d6585f0f90a2b91bb0376d254b0bac1943912"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "writing-for-agents-3",
+      "skill_id": "matt-pocock.writing-for-agents",
+      "arm": "without_skill",
+      "assessment": "partial",
+      "notes": "权限边界正确，但不确定内容先推测而非优先查资料。",
+      "output_sha256": "591552d853cc8bb2b60fe8bf721e200c7a9d06f7896d92cf0a293ebbe7bd0934"
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "case_id": "writing-for-agents-3",
+      "skill_id": "matt-pocock.writing-for-agents",
+      "arm": "with_skill",
+      "assessment": "partial",
+      "notes": "限制提交部署正确，但所有疑问直接询问，未复用已知资料和授权。",
+      "output_sha256": "0ba8ac8796606f8bbb0818a89cc8de45ce6556516a50c31e2e1b42481d45e8e9"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "diagnosing-bugs-1",
+      "skill_id": "matt-pocock.diagnosing-bugs",
+      "arm": "without_skill",
+      "assessment": "partial",
+      "notes": "原因与未运行说明准确，缺少独立回归案例。",
+      "output_sha256": "a88d6f931a01160f2573425e1d1963c6feaa4954320fc5869e0cddcc1d74f428"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "diagnosing-bugs-1",
+      "skill_id": "matt-pocock.diagnosing-bugs",
+      "arm": "with_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "cc59f483259164af30c06d7ffea11d3a1762fe8df231cb6b6ba597bb19cf23b2"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "diagnosing-bugs-2",
+      "skill_id": "matt-pocock.diagnosing-bugs",
+      "arm": "without_skill",
+      "assessment": "partial",
+      "notes": "原因与空表预期准确，缺少单元素回归。",
+      "output_sha256": "8fca4912fc4e92b7820399f07f21e8c3bfe6aa14928793190fd8beceaf11a939"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "diagnosing-bugs-2",
+      "skill_id": "matt-pocock.diagnosing-bugs",
+      "arm": "with_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "ef20c1c721c38c79f388ca2e0441f858059297f1f5931ea3d07a92d786ae1c1f"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "diagnosing-bugs-3",
+      "skill_id": "matt-pocock.diagnosing-bugs",
+      "arm": "without_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "c2fb02589a3c6bd01a3530de1de9d39c2eddd006afea23376421b0f7ada283fa"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "diagnosing-bugs-3",
+      "skill_id": "matt-pocock.diagnosing-bugs",
+      "arm": "with_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "6a08a4d4f4252286a5d6d5a635a44a940a04f097df7c5caa6646de4d7cf7a6da"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "tdd-1",
+      "skill_id": "matt-pocock.tdd",
+      "arm": "without_skill",
+      "assessment": "partial",
+      "notes": "数值与输入校验正确，未明确小步测试反馈实现。",
+      "output_sha256": "be2fee6bec91016ef1158b714c7fd74a87a12efeba543627f1e35e930284f41b"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "tdd-1",
+      "skill_id": "matt-pocock.tdd",
+      "arm": "with_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "3b74c3805a4eceb7856f9222dbdc0e5023c7f49bd49720c30d3790e2eae04ffa"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "tdd-2",
+      "skill_id": "matt-pocock.tdd",
+      "arm": "without_skill",
+      "assessment": "partial",
+      "notes": "全部边界正确，未安排逐项实现反馈。",
+      "output_sha256": "c7b4cf8a0ac17797834974dc460b650268db0992ae8d6e6c44e2398663daf2ce"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "tdd-2",
+      "skill_id": "matt-pocock.tdd",
+      "arm": "with_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "a48cfd7c0fdae5c8b3461eb0c7466703c1f2653ccd624a84503b3479f9f33c8e"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "tdd-3",
+      "skill_id": "matt-pocock.tdd",
+      "arm": "without_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "078c868955fcbb92ed8089594790f85405e0f5577f8eb6519aad884c8fb5e0a4"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "tdd-3",
+      "skill_id": "matt-pocock.tdd",
+      "arm": "with_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "af369076560e6456b9ed39fb0f08c38c27d47db710eae176d6441075405479e8"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "code-review-1",
+      "skill_id": "matt-pocock.code-review",
+      "arm": "without_skill",
+      "assessment": "partial",
+      "notes": "识别真实问题；折扣范围应作为待确认约定，缺少未运行说明。",
+      "output_sha256": "f08da325037e4af7dcba73f0db774ee7b9885f5ca9b8cba9207c316748ef217e"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "code-review-1",
+      "skill_id": "matt-pocock.code-review",
+      "arm": "with_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "7d44dadc2d4d4ef961b7fb4dd80e20f1601daa64ee04714818aae99b8ea764ed"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "code-review-2",
+      "skill_id": "matt-pocock.code-review",
+      "arm": "without_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "3d5fd0c6e34e7425cf6a907bf20c6940de5583f6760b7ee2a16e2d1e6edef89b"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "code-review-2",
+      "skill_id": "matt-pocock.code-review",
+      "arm": "with_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "9cd76a7ae3ed8fd483d26c23ed224f33a9ae1a3a87fdaef00c2e0553e0c61276"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "code-review-3",
+      "skill_id": "matt-pocock.code-review",
+      "arm": "without_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "e85e5427bb58c0b0c9ad7233aedd9be44b5c519b5f3191bcef9aa95a686eb4f0"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "code-review-3",
+      "skill_id": "matt-pocock.code-review",
+      "arm": "with_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "7483029719345c1ecedaf46a18f99186836d946b703d63fc7eeda7341bcd1cd2"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "codebase-design-1",
+      "skill_id": "matt-pocock.codebase-design",
+      "arm": "without_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "7ffce99d0ad1dd9e36ec930dd8cd1b0492f55cd190de4480120126074c2ea2da"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "codebase-design-1",
+      "skill_id": "matt-pocock.codebase-design",
+      "arm": "with_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "dfbf202d610f0e06ea4bebf4f099769d08e0d47c19826aa1a0723983ae3fc404"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "codebase-design-2",
+      "skill_id": "matt-pocock.codebase-design",
+      "arm": "without_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "c6a13f5d6c005c44f73ef77577e601b4204f8832708061086a8e655e38573944"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "codebase-design-2",
+      "skill_id": "matt-pocock.codebase-design",
+      "arm": "with_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "c144d8065e99786b5c173f8dd4eb83735f4cf5b6fda8e447570de9733dbf6939"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "codebase-design-3",
+      "skill_id": "matt-pocock.codebase-design",
+      "arm": "without_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "6f4b73cde8780d1a1edbcd097265d5a0295959e29875307e0333b9aa6daa11da"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "codebase-design-3",
+      "skill_id": "matt-pocock.codebase-design",
+      "arm": "with_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "6b53e30e1377e3ed29a9f85c5bf28f67ba2f753ec3788f6113d6ede4f43050c9"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "to-spec-1",
+      "skill_id": "matt-pocock.to-spec",
+      "arm": "without_skill",
+      "assessment": "partial",
+      "notes": "范围与最终验收清楚，但各任务验收和依赖未明确。",
+      "output_sha256": "a0d3cac4e647ecfb6713e5e7c6eb38083294cadec448e5ec4f86b10f5970c283"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "to-spec-1",
+      "skill_id": "matt-pocock.to-spec",
+      "arm": "with_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "97bc8964e4dbd6782c762b04d7e4ed24d3ebf620c2ebe5e3c9356fd87218ce47"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "to-spec-2",
+      "skill_id": "matt-pocock.to-spec",
+      "arm": "without_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "274663c846a66244ffb4ea191682a1f77e3f87f16fbab0fec8260c83f12a37e6"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "to-spec-2",
+      "skill_id": "matt-pocock.to-spec",
+      "arm": "with_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "ff4399ef3617ef723a6279c764818c0b34524db72b6684d0634e860eac6b0971"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "to-spec-3",
+      "skill_id": "matt-pocock.to-spec",
+      "arm": "without_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "cc0ed395ef4291ce54fb37ea6b4d4644b6cd28353f01c1cdbb402a6b5cc7d2c2"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "to-spec-3",
+      "skill_id": "matt-pocock.to-spec",
+      "arm": "with_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "03a1fd5a35c15a8afbc2a616075773d1e890d066dd0e87f2722292051824d465"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "handoff-1",
+      "skill_id": "matt-pocock.handoff",
+      "arm": "without_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "00bc43d4d26ede983b5b3ad4b1ea0f18a3cfb12ee55a8cebfbf1d1793199a13b"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "handoff-1",
+      "skill_id": "matt-pocock.handoff",
+      "arm": "with_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "7700f9f3af6e60dce34acfafd450391463e1a12c2ebd17b152743efeed247668"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "handoff-2",
+      "skill_id": "matt-pocock.handoff",
+      "arm": "without_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "8d5ef11a89cc82920c64916e73b95eb0e614ed9c7681296a00b46f18e2106d22"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "handoff-2",
+      "skill_id": "matt-pocock.handoff",
+      "arm": "with_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "81ec2d105b51fbf2d78ad102add235514e170fb4f3056ee02e26a921f759df8d"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "handoff-3",
+      "skill_id": "matt-pocock.handoff",
+      "arm": "without_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "09d33e6d59854820c239a52eb02ad773a32a76cd91442695447fc7b8c2baadf7"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "handoff-3",
+      "skill_id": "matt-pocock.handoff",
+      "arm": "with_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "f2c4bcb0c83c982036a9f08179d3025693bad9708f9ebb81d3461a139383d9ba"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "teach-1",
+      "skill_id": "matt-pocock.teach",
+      "arm": "without_skill",
+      "assessment": "partial",
+      "notes": "机制与外啮合限定正确，没有迁移练习。",
+      "output_sha256": "5a452acc3d5468d141dced9f504955e76437b51a20c6ce47f2821f9555a9e671"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "teach-1",
+      "skill_id": "matt-pocock.teach",
+      "arm": "with_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "7b17275ed8491465648898715476f746667fb796f57383d1abf7448f039e7106"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "teach-2",
+      "skill_id": "matt-pocock.teach",
+      "arm": "without_skill",
+      "assessment": "partial",
+      "notes": "概念与练习正确，没有给练习参考答案。",
+      "output_sha256": "137eb4cfea6466cfc066c785a3cb6e373fa495d6613597752352d73fd7d3d93f"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "teach-2",
+      "skill_id": "matt-pocock.teach",
+      "arm": "with_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "9d3dd69d96528aefc338c656b47f7a87b0f78b812196f5fccd5e01e520092089"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "teach-3",
+      "skill_id": "matt-pocock.teach",
+      "arm": "without_skill",
+      "assessment": "partial",
+      "notes": "结论正确，没有用于检查理解的练习。",
+      "output_sha256": "b2783430a447eac1bff26c5d2c134032b9965f939b2cc54b04c4964e5c950826"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "teach-3",
+      "skill_id": "matt-pocock.teach",
+      "arm": "with_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "8245e6546286837f0e04900055858d08d47238abd17b291b74140667d2007f28"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "to-questionnaire-1",
+      "skill_id": "matt-pocock.to-questionnaire",
+      "arm": "without_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "ae2e26edb5d593c360e3f10d8c747956e297e1eb314b48dbf89311fd63262a0f"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "to-questionnaire-1",
+      "skill_id": "matt-pocock.to-questionnaire",
+      "arm": "with_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "c90e3a8d66d021c5405c546cc695a026aa1f87d6f1cf5c3e0057466910c521fa"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "to-questionnaire-2",
+      "skill_id": "matt-pocock.to-questionnaire",
+      "arm": "without_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "b496e9bce729c6be90b6f5e464be4dc5a0f4de84fcf1d862349f8fda0ecc700a"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "to-questionnaire-2",
+      "skill_id": "matt-pocock.to-questionnaire",
+      "arm": "with_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "8d2cb0f956cdc71ff60c681209aa703971fa4683223218e1546cdc6bc44c350f"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "to-questionnaire-3",
+      "skill_id": "matt-pocock.to-questionnaire",
+      "arm": "without_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "e89ffbabd7ac66ddfc5dcdbb7fe4d4bd535282a6a2e71d5c3246560a177ce2d5"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "to-questionnaire-3",
+      "skill_id": "matt-pocock.to-questionnaire",
+      "arm": "with_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "125fd9089bc0a19e0f62706aff13b3d4b7bbc0e8ac4522e98e833f9e7db2d2d6"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "writing-for-agents-1",
+      "skill_id": "matt-pocock.writing-for-agents",
+      "arm": "without_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "16bd1ca960d8daecb308148cac9baf23247f8e74f65aaee58f05808a3369bd61"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "writing-for-agents-1",
+      "skill_id": "matt-pocock.writing-for-agents",
+      "arm": "with_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "560761166b421816ab53b1cb18df284f5aa112a603a8fcee5a638582a5c9be0b"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "writing-for-agents-2",
+      "skill_id": "matt-pocock.writing-for-agents",
+      "arm": "without_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "0915da01771c3cd39b674d1c70b05b4640a67d1172b11ce5e63fae9ecc19fc22"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "writing-for-agents-2",
+      "skill_id": "matt-pocock.writing-for-agents",
+      "arm": "with_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "52a0ef5cb30fb13aef7fa8b3bc64de4b02d9fd365660b06e387ca586e3a15ffa"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "writing-for-agents-3",
+      "skill_id": "matt-pocock.writing-for-agents",
+      "arm": "without_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "e9d4042c65154e71926d05ac35e42706fe13437d11174912c0a93434bfc21efe"
+    },
+    {
+      "route": "openai::gpt-6.1-sol",
+      "case_id": "writing-for-agents-3",
+      "skill_id": "matt-pocock.writing-for-agents",
+      "arm": "with_skill",
+      "assessment": "pass",
+      "notes": "满足该案例已列验收点；不推及未覆盖输入。",
+      "output_sha256": "c1600837734d4dd450b31f09d2ed63552265c520bd2a7135a394019cba2a4de4"
+    }
+  ],
+  "sources": {
+    "evals\\reports\\skill-coverage-google-2026-10-19.json": "fae6f3cde08ac3f9241143b0a7e816ca869f33517eb0d44154d78e0db8294974",
+    "evals\\reports\\skill-coverage-sol-2026-10-19.json": "6b66a6695bb7d4dd80ed7d827b33e3a1cc03bfa9660b89a6408cfddad05239fb"
+  },
+  "summary": {
+    "google": {
+      "without_skill": {
+        "pass": 6,
+        "partial": 17,
+        "fail": 4
+      },
+      "with_skill": {
+        "pass": 8,
+        "partial": 16,
+        "fail": 3
+      }
+    },
+    "sol": {
+      "without_skill": {
+        "pass": 18,
+        "partial": 9,
+        "fail": 0
+      },
+      "with_skill": {
+        "pass": 27,
+        "partial": 0,
+        "fail": 0
+      }
+    }
+  },
+  "recommendation": "保留九项指导；Sol本批覆盖完整，Google仍有遗漏和局部事实错误。运行流程就绪不等于质量无误；暂不据单次样例删除技能或宣称普遍提升。"
+}

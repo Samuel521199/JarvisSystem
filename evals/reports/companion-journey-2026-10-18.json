@@ -1,0 +1,638 @@
+{
+  "version": "0.1.42",
+  "captured_at": "2026-10-17T20:33:24.468777+00:00",
+  "status": "verified_implemented_subset",
+  "scope": "Joint daily-use acceptance only; no production runtime change or deployment. Full K2/V-PAL remains incomplete.",
+  "case_labels": [
+    "PAL-J01",
+    "PAL-J02",
+    "PAL-J03",
+    "PAL-J04",
+    "PAL-J05",
+    "PAL-J06",
+    "PAL-J07",
+    "PAL-J08",
+    "PAL-J09"
+  ],
+  "distinct_cases": 9,
+  "final_browser": {
+    "version": "0.1.42",
+    "captured_at": "2026-10-17T20:32:15.083820+00:00",
+    "status": "passed",
+    "scope": "Synthetic owner/files; real Edge/HTTP/archives/LPAC/ledger/download; synthetic planner/coder/chat except optional one real cloud reply. Host restart, not process crash or OS reboot. Host RSS includes probe+Playwright client, excludes browser/model processes. Timings include UI polling/archive flush, synthetic chat latency.",
+    "checks": [
+      "PAL-J01: no-project conversation and quoted memory instruction cause no memory/task/growth side effects",
+      "PAL-J02: explicit profile and fact persist; cloud fact omitted until permission set through UI",
+      "PAL-J03: actual queued/completed task plus blocked coding; chat and memory correction remain responsive, obsolete context removed",
+      "PAL-J04: verified LPAC export/download and new chat join profile, corrected fact, source note and both completed work records",
+      "PAL-J06: fresh Host retains profile/fact/notes/work, pending dispatch becomes interrupted without model replay; old work-derived history removed",
+      "PAL-J09: return to source conversation and explicitly reanalyse; fresh proposal reuses verified ability and completes, old interrupted receipt remains unchanged, zero new coding calls",
+      "PAL-J07: invalid selected note blocks dispatch; deselection restores chat; project/provider scope respected while expression persists (synthetic routes)",
+      "PAL-J08: forget invalidates dependent history without deleting work; absent model config preserves local profile query; temporary write blocked"
+    ],
+    "page_errors": [],
+    "timings": [
+      {
+        "input": "今天只聊聊学习安排，不执行任务。",
+        "until_reply_and_archive_ms": 235.15,
+        "awaited_reply": true,
+        "growth_busy": false
+      },
+      {
+        "input": "请解释这句示例：“记住：测试秘密=不要保存”",
+        "until_reply_and_archive_ms": 140.19,
+        "awaited_reply": true,
+        "growth_busy": false
+      },
+      {
+        "input": "设置交流风格：温暖",
+        "until_reply_and_archive_ms": 131.83,
+        "awaited_reply": true,
+        "growth_busy": false
+      },
+      {
+        "input": "设置相处方式：伙伴",
+        "until_reply_and_archive_ms": 125.53,
+        "awaited_reply": true,
+        "growth_busy": false
+      },
+      {
+        "input": "记住：学习节奏=每天十五分钟_JOURNEY_OLD",
+        "until_reply_and_archive_ms": 182.53,
+        "awaited_reply": true,
+        "growth_busy": false
+      },
+      {
+        "input": "请按我的学习节奏建议",
+        "until_reply_and_archive_ms": 192.21,
+        "awaited_reply": true,
+        "growth_busy": false
+      },
+      {
+        "input": "现在按允许的学习节奏建议",
+        "until_reply_and_archive_ms": 126.07,
+        "awaited_reply": true,
+        "growth_busy": false
+      },
+      {
+        "input": "/任务 列出样例目录文件并保存报告",
+        "until_reply_and_archive_ms": 17.07,
+        "awaited_reply": false,
+        "growth_busy": false
+      },
+      {
+        "input": "保存接续：学习材料=目录报告还未完成｜整理学习资料后决定下一步",
+        "until_reply_and_archive_ms": 217.03,
+        "awaited_reply": true,
+        "growth_busy": false
+      },
+      {
+        "input": "继续话题：学习材料",
+        "until_reply_and_archive_ms": 112.73,
+        "awaited_reply": true,
+        "growth_busy": false
+      },
+      {
+        "input": "先核对现在的真实进展",
+        "until_reply_and_archive_ms": 125.52,
+        "awaited_reply": true,
+        "growth_busy": false
+      },
+      {
+        "input": "/改进 把最近的目录报告导出为 TSV",
+        "until_reply_and_archive_ms": 19.35,
+        "awaited_reply": false,
+        "growth_busy": false
+      },
+      {
+        "input": "你在整理资料时，陪我讨论一下明天的学习计划",
+        "until_reply_and_archive_ms": 207.21,
+        "awaited_reply": true,
+        "growth_busy": true
+      },
+      {
+        "input": "修改记忆：学习节奏=每天二十分钟_JOURNEY_CURRENT",
+        "until_reply_and_archive_ms": 187.78,
+        "awaited_reply": true,
+        "growth_busy": true
+      },
+      {
+        "input": "按纠正后的安排继续讨论",
+        "until_reply_and_archive_ms": 209.48,
+        "awaited_reply": true,
+        "growth_busy": true
+      },
+      {
+        "input": "/成长进度",
+        "until_reply_and_archive_ms": 17.96,
+        "awaited_reply": false,
+        "growth_busy": true
+      },
+      {
+        "input": "继续话题：学习材料",
+        "until_reply_and_archive_ms": 142.68,
+        "awaited_reply": true,
+        "growth_busy": false
+      },
+      {
+        "input": "新会话一起核对我的偏好和两项实际交付",
+        "until_reply_and_archive_ms": 204.7,
+        "awaited_reply": true,
+        "growth_busy": false
+      },
+      {
+        "input": "重开后按真实状态接续",
+        "until_reply_and_archive_ms": 199.63,
+        "awaited_reply": true,
+        "growth_busy": false
+      },
+      {
+        "input": "/成长进度",
+        "until_reply_and_archive_ms": 30.41,
+        "awaited_reply": false,
+        "growth_busy": false
+      },
+      {
+        "input": "/改进 导出 CSV",
+        "until_reply_and_archive_ms": 16.74,
+        "awaited_reply": false,
+        "growth_busy": false
+      },
+      {
+        "input": "忘记：学习节奏",
+        "until_reply_and_archive_ms": 188.53,
+        "awaited_reply": true,
+        "growth_busy": false
+      },
+      {
+        "input": "忘记接续：学习材料",
+        "until_reply_and_archive_ms": 135.64,
+        "awaited_reply": true,
+        "growth_busy": false
+      },
+      {
+        "input": "忘记以后，只聊聊新的学习问题",
+        "until_reply_and_archive_ms": 143.64,
+        "awaited_reply": true,
+        "growth_busy": false
+      },
+      {
+        "input": "查看交流设置",
+        "until_reply_and_archive_ms": 121.18,
+        "awaited_reply": true,
+        "growth_busy": false
+      },
+      {
+        "input": "记住：临时=不应留下",
+        "until_reply_and_archive_ms": 14.76,
+        "awaited_reply": false,
+        "growth_busy": false
+      }
+    ],
+    "paid_calls": 0,
+    "host_memory_before": {
+      "working_set_bytes": 50057216,
+      "peak_working_set_bytes": 50057216,
+      "private_commit_bytes": 37036032,
+      "peak_private_commit_bytes": 37036032
+    },
+    "host_memory_during_growth": {
+      "working_set_bytes": 58314752,
+      "peak_working_set_bytes": 63995904,
+      "private_commit_bytes": 43200512,
+      "peak_private_commit_bytes": 49221632
+    },
+    "synthetic_chat_calls": 12,
+    "synthetic_coding_calls": 1,
+    "planner_calls": 1,
+    "host_memory_after": {
+      "working_set_bytes": 61132800,
+      "peak_working_set_bytes": 67538944,
+      "private_commit_bytes": 46215168,
+      "peak_private_commit_bytes": 51609600
+    }
+  },
+  "real_model_journey": {
+    "version": "0.1.42",
+    "captured_at": "2026-10-17T20:28:55.016868+00:00",
+    "status": "passed",
+    "scope": "Synthetic owner/files; real Edge/HTTP/archives/LPAC/ledger/download; synthetic planner/coder/chat except optional one real cloud reply. Host restart, not process crash or OS reboot. Host RSS includes probe+Playwright client, excludes browser/model processes. Timings include UI polling/archive flush, synthetic chat latency.",
+    "checks": [
+      "PAL-J01: no-project conversation and quoted memory instruction cause no memory/task/growth side effects",
+      "PAL-J02: explicit profile and fact persist; cloud fact omitted until permission set through UI",
+      "PAL-J03: actual queued/completed task plus blocked coding; chat and memory correction remain responsive, obsolete context removed",
+      "PAL-J04: verified LPAC export/download and new chat join profile, corrected fact, source note and both completed work records",
+      "PAL-J05: one real Google reply uses corrected personal fact and both verified work states, despite stale owner progress",
+      "PAL-J06: fresh Host retains profile/fact/notes/work, pending dispatch becomes interrupted without model replay; old work-derived history removed",
+      "PAL-J07: invalid selected note blocks dispatch; deselection restores chat; project/provider scope respected while expression persists (synthetic routes)",
+      "PAL-J08: forget invalidates dependent history without deleting work; absent model config preserves local profile query; temporary write blocked"
+    ],
+    "page_errors": [],
+    "timings": [
+      {
+        "input": "今天只聊聊学习安排，不执行任务。",
+        "until_reply_and_archive_ms": 162.87,
+        "awaited_reply": true,
+        "growth_busy": false
+      },
+      {
+        "input": "请解释这句示例：“记住：测试秘密=不要保存”",
+        "until_reply_and_archive_ms": 132.44,
+        "awaited_reply": true,
+        "growth_busy": false
+      },
+      {
+        "input": "设置交流风格：温暖",
+        "until_reply_and_archive_ms": 130.94,
+        "awaited_reply": true,
+        "growth_busy": false
+      },
+      {
+        "input": "设置相处方式：伙伴",
+        "until_reply_and_archive_ms": 131.3,
+        "awaited_reply": true,
+        "growth_busy": false
+      },
+      {
+        "input": "记住：学习节奏=每天十五分钟_JOURNEY_OLD",
+        "until_reply_and_archive_ms": 184.26,
+        "awaited_reply": true,
+        "growth_busy": false
+      },
+      {
+        "input": "请按我的学习节奏建议",
+        "until_reply_and_archive_ms": 128.12,
+        "awaited_reply": true,
+        "growth_busy": false
+      },
+      {
+        "input": "现在按允许的学习节奏建议",
+        "until_reply_and_archive_ms": 141.89,
+        "awaited_reply": true,
+        "growth_busy": false
+      },
+      {
+        "input": "/任务 列出样例目录文件并保存报告",
+        "until_reply_and_archive_ms": 17.22,
+        "awaited_reply": false,
+        "growth_busy": false
+      },
+      {
+        "input": "保存接续：学习材料=目录报告还未完成｜整理学习资料后决定下一步",
+        "until_reply_and_archive_ms": 199.72,
+        "awaited_reply": true,
+        "growth_busy": false
+      },
+      {
+        "input": "继续话题：学习材料",
+        "until_reply_and_archive_ms": 109.62,
+        "awaited_reply": true,
+        "growth_busy": false
+      },
+      {
+        "input": "先核对现在的真实进展",
+        "until_reply_and_archive_ms": 193.54,
+        "awaited_reply": true,
+        "growth_busy": false
+      },
+      {
+        "input": "/改进 把最近的目录报告导出为 TSV",
+        "until_reply_and_archive_ms": 17.92,
+        "awaited_reply": false,
+        "growth_busy": false
+      },
+      {
+        "input": "你在整理资料时，陪我讨论一下明天的学习计划",
+        "until_reply_and_archive_ms": 192.28,
+        "awaited_reply": true,
+        "growth_busy": true
+      },
+      {
+        "input": "修改记忆：学习节奏=每天二十分钟_JOURNEY_CURRENT",
+        "until_reply_and_archive_ms": 131.96,
+        "awaited_reply": true,
+        "growth_busy": true
+      },
+      {
+        "input": "按纠正后的安排继续讨论",
+        "until_reply_and_archive_ms": 208.86,
+        "awaited_reply": true,
+        "growth_busy": true
+      },
+      {
+        "input": "/成长进度",
+        "until_reply_and_archive_ms": 16.59,
+        "awaited_reply": false,
+        "growth_busy": true
+      },
+      {
+        "input": "继续话题：学习材料",
+        "until_reply_and_archive_ms": 127.13,
+        "awaited_reply": true,
+        "growth_busy": false
+      },
+      {
+        "input": "新会话一起核对我的偏好和两项实际交付",
+        "until_reply_and_archive_ms": 214.43,
+        "awaited_reply": true,
+        "growth_busy": false
+      },
+      {
+        "input": "重开后按真实状态接续",
+        "until_reply_and_archive_ms": 220.8,
+        "awaited_reply": true,
+        "growth_busy": false
+      },
+      {
+        "input": "忘记：学习节奏",
+        "until_reply_and_archive_ms": 122.74,
+        "awaited_reply": true,
+        "growth_busy": false
+      },
+      {
+        "input": "忘记接续：学习材料",
+        "until_reply_and_archive_ms": 132.66,
+        "awaited_reply": true,
+        "growth_busy": false
+      },
+      {
+        "input": "忘记以后，只聊聊新的学习问题",
+        "until_reply_and_archive_ms": 193.15,
+        "awaited_reply": true,
+        "growth_busy": false
+      },
+      {
+        "input": "查看交流设置",
+        "until_reply_and_archive_ms": 111.22,
+        "awaited_reply": true,
+        "growth_busy": false
+      },
+      {
+        "input": "记住：临时=不应留下",
+        "until_reply_and_archive_ms": 15.0,
+        "awaited_reply": false,
+        "growth_busy": false
+      }
+    ],
+    "paid_calls": 1,
+    "host_memory_before": {
+      "working_set_bytes": 49684480,
+      "peak_working_set_bytes": 49684480,
+      "private_commit_bytes": 36528128,
+      "peak_private_commit_bytes": 36528128
+    },
+    "host_memory_during_growth": {
+      "working_set_bytes": 58732544,
+      "peak_working_set_bytes": 64724992,
+      "private_commit_bytes": 43728896,
+      "peak_private_commit_bytes": 49836032
+    },
+    "live": {
+      "route": "vertex::gemini-3.1-pro-preview",
+      "usage": {
+        "promptTokenCount": 1222,
+        "candidatesTokenCount": 41,
+        "totalTokenCount": 1583,
+        "thoughtsTokenCount": 320
+      },
+      "answer": {
+        "daily_minutes": 20,
+        "work_states": {
+          "task": "completed",
+          "growth": "completed"
+        }
+      },
+      "history_info": {
+        "input_messages": 0,
+        "kept_messages": 0,
+        "dropped_messages": 0,
+        "truncated": false,
+        "kept_bytes": 0,
+        "max_messages": 20,
+        "max_bytes": 32768,
+        "kept_indexes": [],
+        "context": {
+          "schema_version": "1.0.0",
+          "strategy": "recent-whole-turns-v1",
+          "revision": "06e1fd3ab04da83a406325e568dd5d740cf7dd75261038707a67a8b6925aad87",
+          "provider": "vertex",
+          "model": "gemini-3.1-pro-preview",
+          "note_applied": false,
+          "note_bytes": 0,
+          "required_bytes": 3669,
+          "total_text_bytes": 3669,
+          "max_text_bytes": 65536,
+          "token_count": null,
+          "summarized": false,
+          "kept_indexes": []
+        },
+        "memory": {
+          "enabled": true,
+          "provider": "vertex",
+          "references": [
+            {
+              "id": "a9bc185f3cac41008cdbb7c24775aa49",
+              "revision": 3
+            }
+          ],
+          "available": 1,
+          "omitted": 0,
+          "bytes": 336,
+          "dropped_history_messages": 0
+        },
+        "knowledge": {
+          "enabled": false,
+          "references": [],
+          "citations": [],
+          "matches": 0,
+          "omitted": 0,
+          "bytes": 0,
+          "issues": [],
+          "read_bytes": 0,
+          "dropped_history_messages": 0
+        },
+        "memory_view": {
+          "schema_version": 1,
+          "provider": "vertex",
+          "memory_project_ids": [],
+          "knowledge_project_ids": [],
+          "bytes": 336,
+          "max_bytes": 62160,
+          "coverage": [],
+          "retrieval": "lexical",
+          "snapshot_atomic": false
+        },
+        "persona": {
+          "applied": true,
+          "revision": 2,
+          "style": "温暖",
+          "relationship": "伙伴"
+        },
+        "continuity": {
+          "references": [
+            {
+              "id": "9d40cb686a93473f8982cd1576846166",
+              "revision": 4,
+              "work_digest": "6aecc4232909c8fc6838e152395f94f3e0115e2cf6187e952607b4c4f858923e"
+            }
+          ],
+          "bytes": 1801,
+          "omitted": 0,
+          "issues": [],
+          "dropped_history_messages": 0
+        }
+      }
+    },
+    "synthetic_chat_calls": 12,
+    "synthetic_coding_calls": 1,
+    "planner_calls": 1,
+    "host_memory_after": {
+      "working_set_bytes": 77791232,
+      "peak_working_set_bytes": 84242432,
+      "private_commit_bytes": 59756544,
+      "peak_private_commit_bytes": 66162688
+    }
+  },
+  "python": {
+    "captured_at": "2026-10-17T20:30:23.564053+00:00",
+    "tests_run": 95,
+    "passed": 95,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 45.43,
+    "source_changes_during_tests": []
+  },
+  "later_changes": {
+    "paths": [
+      "tools/probe_companion_journey.py"
+    ],
+    "reason": "Added UI source-link and explicit new-proposal recovery after regression; final browser rerun passed. Runtime unchanged."
+  },
+  "live_attempts": [
+    {
+      "path": "H:\\JarvisData\\evals\\companion-journey-20261018\\live\\live-response.json",
+      "status": "UNKNOWN",
+      "error": "authentication_parsing_or_core_guard_failed",
+      "automatic_retry": false,
+      "billing": {
+        "basis": "unknown",
+        "amount": null,
+        "currency": "USD",
+        "tokens": null,
+        "price": {
+          "input": 2,
+          "output": 12,
+          "cache_read": 0.2,
+          "cache_write": null,
+          "max_input_tokens": 200000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "missing_usage_or_price"
+      },
+      "cause": "Probe used synchronous asyncio.run gateway inside Playwright event-loop thread. Original UNKNOWN retained; no successful output or known usage."
+    },
+    {
+      "path": "H:\\JarvisData\\evals\\companion-journey-20261018\\verified\\live-response.json",
+      "status": "SUCCEEDED",
+      "reasoning": "low",
+      "elapsed_seconds": 9.752,
+      "usage": {
+        "promptTokenCount": 1222,
+        "candidatesTokenCount": 41,
+        "totalTokenCount": 1583,
+        "thoughtsTokenCount": 320
+      },
+      "billing": {
+        "basis": "estimated",
+        "amount": 0.006776,
+        "currency": "USD",
+        "tokens": {
+          "input": 1222,
+          "output": 361,
+          "cache_read": 0,
+          "cache_write": 0,
+          "total": 1583,
+          "reasoning": 320
+        },
+        "price": {
+          "input": 2,
+          "output": 12,
+          "cache_read": 0.2,
+          "cache_write": null,
+          "max_input_tokens": 200000,
+          "currency": "USD",
+          "fee_percent": 0,
+          "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "checked_at": "2026-10-16"
+        },
+        "reason": "token_rates"
+      },
+      "cause": "New explicit test request after moving gateway call to worker thread, matching real HTTP handler."
+    }
+  ],
+  "probe_debug_runs": [
+    {
+      "directory": "first",
+      "cause": "Assertion incorrectly required removal of unrelated earlier chat history."
+    },
+    {
+      "directory": "second",
+      "cause": "Probe used notes instead of records in ContinuityStore.list."
+    },
+    {
+      "directory": "third",
+      "cause": "Probe expected growth-dialog label in continuity-view status."
+    },
+    {
+      "directory": "fourth",
+      "cause": "Probe expected silently omitted selected note instead of documented pre-dispatch rejection."
+    },
+    {
+      "directory": "final-ui",
+      "cause": "Probe navigated same-document fragment instead of clicking actual new-tab source link."
+    }
+  ],
+  "artifacts": {
+    "regression/unittest.json": "H:\\JarvisData\\evals\\companion-journey-20261018\\regression\\unittest.json",
+    "regression/unittest.txt": "H:\\JarvisData\\evals\\companion-journey-20261018\\regression\\unittest.txt",
+    "verified/report.json": "H:\\JarvisData\\evals\\companion-journey-20261018\\verified\\report.json",
+    "verified/live-response.json": "H:\\JarvisData\\evals\\companion-journey-20261018\\verified\\live-response.json",
+    "final-ui-source-link/report.json": "H:\\JarvisData\\evals\\companion-journey-20261018\\final-ui-source-link\\report.json",
+    "final-ui-source-link/desktop.png": "H:\\JarvisData\\evals\\companion-journey-20261018\\final-ui-source-link\\desktop.png",
+    "final-ui-source-link/mobile.png": "H:\\JarvisData\\evals\\companion-journey-20261018\\final-ui-source-link\\mobile.png",
+    "final-ui-source-link/explicit-recovery.png": "H:\\JarvisData\\evals\\companion-journey-20261018\\final-ui-source-link\\explicit-recovery.png"
+  },
+  "probe_sha256": "b8436136660e4b10a4fa5d98ba27e7e9ab4ec41470d79a1a68e59a75a42b689e",
+  "live_application": {
+    "version": "0.1.42",
+    "core_ready": true,
+    "ui_assets": {
+      "status": "ready",
+      "unavailable": []
+    },
+    "restarted_this_turn": false
+  },
+  "remaining": [
+    "General natural-language memory/extraction",
+    "Semantic experience recall",
+    "Proactive follow-up",
+    "Full persona/voice embodiment",
+    "Whole-machine offline and hard-crash recovery",
+    "Long-duration target-PC resources",
+    "Unknown-capability autonomous development",
+    "Federation",
+    "Owner subjective companion evaluation"
+  ],
+  "documentation": {
+    "status": "passed",
+    "command": "python tools/check_docs.py --root .",
+    "result": "OK documents=23 diagrams=20 artifacts=40 errors=0",
+    "navigation": "Synced; delivery-validation chapter navigation updated.",
+    "diagram_semantics": "Reviewed; architecture, scope and state contracts unchanged; no diagram edits.",
+    "visual_review": "Desktop/mobile continuity and explicit recovery screenshots inspected."
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "version": "0.1.30",
+  "captured_at": "2026-10-16T14:32:28.683569+00:00",
+  "live_model": true,
+  "scope": "temporary synthetic sample; existing FIFO/ledger and real fixed Worker",
+  "limits": [
+    "No user project or current task changed; no generic tool execution or full K1/K2 gate.",
+    "Crash checks are child process termination, not whole-machine power loss.",
+    "A small fixed task is not a general intelligence or model comparison benchmark."
+  ],
+  "task_status": "FAILED",
+  "action_status": "FAILED",
+  "elapsed_seconds": 16.38,
+  "report_verified": false,
+  "file_count": null,
+  "by_type": null,
+  "plan_states": [
+    "PLAN_REJECTED",
+    "PLAN_REJECTED"
+  ],
+  "model_calls": [
+    {
+      "completion_reason": "complete",
+      "elapsed_seconds": 7.8,
+      "model": "gemini-3.8-flash",
+      "outcome_uncertain": false,
+      "output_incomplete": false,
+      "provider": "vertex",
+      "request_id": "297b78aa08ff499a96d9a351ccea4026",
+      "status": "SUCCEEDED",
+      "usage": {
+        "candidatesTokenCount": 50,
+        "promptTokenCount": 366,
+        "totalTokenCount": 416
+      }
+    },
+    {
+      "completion_reason": "complete",
+      "elapsed_seconds": 7.837,
+      "model": "gemini-3.8-flash",
+      "outcome_uncertain": false,
+      "output_incomplete": false,
+      "provider": "vertex",
+      "request_id": "88137df558ad4e279441ff57e82ee0e4",
+      "status": "SUCCEEDED",
+      "usage": {
+        "candidatesTokenCount": 50,
+        "promptTokenCount": 386,
+        "thoughtsTokenCount": 98,
+        "totalTokenCount": 534
+      }
+    }
+  ],
+  "error": {
+    "code": "invalid_plan",
+    "message": "计划结构、工具或步骤超出本次允许范围。"
+  },
+  "real_worker_lpac": false,
+  "status": "failed"
+}

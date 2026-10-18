@@ -1,0 +1,83 @@
+{
+  "reviewed_at": "2026-10-17",
+  "sources": {
+    "upstash/context7": {
+      "repository": "upstash/context7",
+      "archived": false,
+      "pushed_at": "2026-10-16T14:31:37Z",
+      "revision": "e0041949fdb3b49b304d98715dde35be51b7c3d1",
+      "license": "MIT",
+      "status": "source_reviewed"
+    },
+    "github/github-mcp-server": {
+      "repository": "github/github-mcp-server",
+      "archived": false,
+      "pushed_at": "2026-10-15T21:16:40Z",
+      "revision": "e3809fe91c7546633241006bf0b91f23b2595e28",
+      "license": "MIT",
+      "status": "source_reviewed"
+    },
+    "microsoft/playwright-mcp": {
+      "repository": "microsoft/playwright-mcp",
+      "archived": false,
+      "pushed_at": "2026-10-08T17:51:59Z",
+      "revision": "b8b4183e099f136cbec0388a6088d4aa2f6b9685",
+      "license": "Apache-2.0",
+      "status": "source_reviewed"
+    },
+    "brave/brave-search-mcp-server": {
+      "repository": "brave/brave-search-mcp-server",
+      "archived": false,
+      "pushed_at": "2026-10-14T08:20:11Z",
+      "revision": "e4866a959a635038f8f889804aba6061ed214bf4",
+      "license": "MIT",
+      "status": "source_reviewed"
+    },
+    "tavily-ai/tavily-mcp": {
+      "repository": "tavily-ai/tavily-mcp",
+      "archived": false,
+      "pushed_at": "2026-10-15T21:37:13Z",
+      "revision": "688b0f78d518d507cb31b94d9cc0e44c6eadd7c0",
+      "license": "MIT",
+      "status": "source_reviewed"
+    },
+    "firecrawl/firecrawl-mcp-server": {
+      "repository": "firecrawl/firecrawl-mcp-server",
+      "archived": false,
+      "pushed_at": "2026-10-16T12:02:26Z",
+      "revision": "e895e942fe0e9c299d0331134393537e919f23f0",
+      "license": "MIT",
+      "status": "source_reviewed"
+    },
+    "microsoft/markitdown": {
+      "repository": "microsoft/markitdown",
+      "archived": false,
+      "pushed_at": "2026-10-04T03:59:52Z",
+      "revision": "4cc9fa17653d695d64fb9eee5b33d4de55ff84e8",
+      "license": "MIT",
+      "status": "source_reviewed"
+    },
+    "modelcontextprotocol/servers": {
+      "repository": "modelcontextprotocol/servers",
+      "archived": false,
+      "pushed_at": "2026-10-13T05:54:47Z",
+      "revision": "bbb701e7ac1e57f3edd1c2836b94c5457eaf7b9c",
+      "license": "NOASSERTION",
+      "status": "source_reviewed"
+    },
+    "ahujasid/mcp-for-blender": {
+      "repository": "ahujasid/mcp-for-blender",
+      "archived": false,
+      "pushed_at": "2026-10-06T15:08:04Z",
+      "revision": "7a0373ec9199183cb460068c4f96aed9c579fb4f",
+      "license": "MIT",
+      "status": "source_reviewed"
+    }
+  },
+  "catalog_sha256": "3cb66799be4d6e4d3fdff8dac1b0f75668537aac4a4ed61c43250d8ba2e67591",
+  "server_count": 10,
+  "installed": false,
+  "protocol_tested": false,
+  "tool_call_tested": false,
+  "selection_basis": "维护方来源、具体用途、依赖与既有能力重叠；来源审阅不等于调用验证。"
+}

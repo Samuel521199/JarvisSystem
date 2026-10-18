@@ -122,6 +122,8 @@ def recover(parent, *, only=None):
                     # Validate the complete delete set first; never recurse into
                     # unknown content, links, directories or user-selected paths.
                     allowed = {'input.json','worker.py','.lease.json','.lease.lock','.lease.next'}
+                    if record.get('binding', {}).get('operation') == 'skill.render.v1':
+                        allowed |= {'lesson.js', 'iso-kit.mjs', 'LICENSE.txt'}
                     files = list(stage.iterdir())
                     for path in files:
                         if path.name not in allowed: raise ValueError('Unexpected stage content')

@@ -1,0 +1,814 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-10-16",
+  "method": "Static review of pinned official sources; no upstream code executed or candidate dependencies installed.",
+  "runtime_benchmarks_run": false,
+  "unmeasured": [
+    "transitive dependency closure",
+    "download and installed size",
+    "idle and peak memory",
+    "Windows installation success",
+    "Chinese retrieval quality",
+    "offline behavior",
+    "LLM cost",
+    "federation correctness"
+  ],
+  "repositories": [
+    {
+      "repo": "mem0ai/mem0",
+      "sha": "0724291bd864cf807e88ee8981c8226644e8fb42",
+      "commit_date": "2026-10-14T15:39:50Z",
+      "license_at_snapshot": "Apache-2.0",
+      "files": [
+        {
+          "path": "mem0/configs/base.py",
+          "url": "https://github.com/mem0ai/mem0/blob/0724291bd864cf807e88ee8981c8226644e8fb42/mem0/configs/base.py",
+          "sha256": "8bc0431f599c13ab2aff887e7b6eecc2688f8f4d070d76f029b3b55e37169b33",
+          "bytes": 3275
+        },
+        {
+          "path": "mem0/configs/embeddings/base.py",
+          "url": "https://github.com/mem0ai/mem0/blob/0724291bd864cf807e88ee8981c8226644e8fb42/mem0/configs/embeddings/base.py",
+          "sha256": "3c79daa02ecb4b6f33fe4ddca1ae1eea49ade1c3f538bc9bf46a501da0062dd8",
+          "bytes": 5192
+        },
+        {
+          "path": "mem0/configs/llms/base.py",
+          "url": "https://github.com/mem0ai/mem0/blob/0724291bd864cf807e88ee8981c8226644e8fb42/mem0/configs/llms/base.py",
+          "sha256": "3db97971a4f46b63115a51db27eff3c176ffd31e50b98e9f1c9ca0ddd6914a75",
+          "bytes": 3941
+        },
+        {
+          "path": "mem0/memory/main.py",
+          "url": "https://github.com/mem0ai/mem0/blob/0724291bd864cf807e88ee8981c8226644e8fb42/mem0/memory/main.py",
+          "sha256": "f329ca4a17af1fbefb32ac10d4cc7ae7ddbdb7435a87eb74c30915cff98b8b7c",
+          "bytes": 169881
+        },
+        {
+          "path": "mem0/memory/telemetry.py",
+          "url": "https://github.com/mem0ai/mem0/blob/0724291bd864cf807e88ee8981c8226644e8fb42/mem0/memory/telemetry.py",
+          "sha256": "89f36bd0b87059fa0710adcccfbd9639ab4d5c4a762d875a1caceaf688aca687",
+          "bytes": 9024
+        },
+        {
+          "path": "mem0/vector_stores/qdrant.py",
+          "url": "https://github.com/mem0ai/mem0/blob/0724291bd864cf807e88ee8981c8226644e8fb42/mem0/vector_stores/qdrant.py",
+          "sha256": "da570579d5cad69e6f123fdfe32b725235a25604e70047666bec763ba6e2bf43",
+          "bytes": 25105
+        },
+        {
+          "path": "pyproject.toml",
+          "url": "https://github.com/mem0ai/mem0/blob/0724291bd864cf807e88ee8981c8226644e8fb42/pyproject.toml",
+          "sha256": "d4bc078a05cc7b9d677bbf4d0b262cfc532495b5aadeded053ac84fd90b6e974",
+          "bytes": 3394,
+          "requires_python": ">=3.10,<4.0",
+          "direct_dependency_declaration_count": 8,
+          "dependencies": [
+            "qdrant-client>=1.12.0",
+            "pydantic>=2.7.3",
+            "openai>=1.90.0",
+            "httpx>=0.28.0",
+            "posthog>=7.14.0",
+            "pytz>=2024.1",
+            "sqlalchemy>=2.0.31",
+            "protobuf>=5.29.6,<7.0.0"
+          ],
+          "optional_dependencies": {
+            "nlp": [
+              "spacy>=3.7.0"
+            ],
+            "vector-stores": [
+              "vecs>=0.4.0",
+              "chromadb>=0.4.24",
+              "cassandra-driver>=3.29.0",
+              "weaviate-client>=4.15.4,<5.0.0",
+              "pinecone<=7.3.0",
+              "pinecone-text>=0.10.0",
+              "faiss-cpu>=1.7.4",
+              "upstash-vector>=0.6.0",
+              "azure-search-documents>=11.4.0b8",
+              "psycopg>=3.2.8",
+              "psycopg-pool>=3.2.6,<4.0.0",
+              "pymongo>=4.13.2",
+              "pymochow>=2.2.9",
+              "pymysql>=1.1.0",
+              "dbutils>=3.0.3",
+              "valkey>=6.0.0",
+              "databricks-sdk>=0.63.0",
+              "azure-identity>=1.24.0",
+              "redis>=5.0.0,<6.0.0",
+              "redisvl>=0.1.0,<1.0.0",
+              "elasticsearch>=8.0.0,<9.0.0",
+              "pymilvus>=2.4.0,<2.6.0",
+              "langchain-aws>=0.2.23,<0.3.0",
+              "oracledb>=2.2.0"
+            ],
+            "llms": [
+              "groq>=0.3.0",
+              "together>=0.2.10",
+              "litellm>=1.83.7,<1.98.0",
+              "openai>=1.90.0",
+              "ollama>=0.3.0",
+              "vertexai>=0.1.0",
+              "google-generativeai>=0.3.0",
+              "google-genai>=1.0.0"
+            ],
+            "extras": [
+              "boto3>=1.34.0",
+              "langchain>=0.3.30,<1.0.0",
+              "langchain-community>=0.3.27,<1.0.0",
+              "langchain-core>=0.3.85,<1.0.0",
+              "sentence-transformers>=5.2.0",
+              "transformers>=5.3.0",
+              "elasticsearch>=8.0.0,<9.0.0",
+              "opensearch-py>=2.0.0",
+              "fastembed>=0.3.1"
+            ],
+            "test": [
+              "pytest>=8.2.2",
+              "pytest-mock>=3.14.0",
+              "pytest-asyncio>=0.23.7"
+            ],
+            "dev": [
+              "ruff==0.16.0",
+              "isort>=5.13.2",
+              "pre-commit>=3.5.0"
+            ]
+          }
+        },
+        {
+          "path": "server/docker-compose.yaml",
+          "url": "https://github.com/mem0ai/mem0/blob/0724291bd864cf807e88ee8981c8226644e8fb42/server/docker-compose.yaml",
+          "sha256": "00faa4fed5f0931cad5ce19877d7b2bad0a60effa8c7a3edb8a2851f944a1fb0",
+          "bytes": 1949
+        }
+      ]
+    },
+    {
+      "repo": "getzep/graphiti",
+      "sha": "d50741d1bf463cbe3859eb73914cbff1b66839e6",
+      "commit_date": "2026-10-15T19:00:06Z",
+      "license_at_snapshot": "Apache-2.0",
+      "files": [
+        {
+          "path": "pyproject.toml",
+          "url": "https://github.com/getzep/graphiti/blob/d50741d1bf463cbe3859eb73914cbff1b66839e6/pyproject.toml",
+          "sha256": "6125ce74f424c800b0f752e1039b9d490f9de446ee2a69576a76b1c2c65ef22c",
+          "bytes": 2783,
+          "requires_python": ">=3.10,<4",
+          "direct_dependency_declaration_count": 7,
+          "dependencies": [
+            "pydantic>=2.11.5",
+            "neo4j>=5.26.0",
+            "openai>=1.91.0",
+            "tenacity>=9.0.0",
+            "numpy>=1.0.0",
+            "python-dotenv>=1.0.1",
+            "posthog>=3.0.0"
+          ],
+          "optional_dependencies": {
+            "anthropic": [
+              "anthropic>=0.49.0"
+            ],
+            "groq": [
+              "groq>=0.2.0"
+            ],
+            "google-genai": [
+              "google-genai>=1.62.0"
+            ],
+            "kuzu": [
+              "kuzu>=0.11.3"
+            ],
+            "falkordb": [
+              "falkordb>=1.1.2,<2.0.0"
+            ],
+            "falkordblite": [
+              "falkordblite>=0.5.0; python_version>='3.12'",
+              "redis<9; python_version>='3.12'"
+            ],
+            "voyageai": [
+              "voyageai>=0.2.3"
+            ],
+            "gliner2": [
+              "gliner2>=1.2.0; python_version>='3.11'"
+            ],
+            "neo4j-opensearch": [
+              "boto3>=1.39.16",
+              "opensearch-py>=3.0.0"
+            ],
+            "sentence-transformers": [
+              "sentence-transformers>=3.2.1"
+            ],
+            "neptune": [
+              "langchain-aws>=0.2.29",
+              "opensearch-py>=3.0.0",
+              "boto3>=1.39.16"
+            ],
+            "tracing": [
+              "opentelemetry-api>=1.20.0",
+              "opentelemetry-sdk>=1.20.0"
+            ],
+            "dev": [
+              "pyright>=1.1.404",
+              "groq>=0.2.0",
+              "anthropic>=0.49.0",
+              "google-genai>=1.8.0",
+              "falkordb>=1.1.2,<2.0.0",
+              "kuzu>=0.11.3",
+              "boto3>=1.39.16",
+              "opensearch-py>=3.0.0",
+              "langchain-aws>=0.2.29",
+              "ipykernel>=6.29.5",
+              "jupyterlab>=4.2.4",
+              "langgraph>=1.0.10",
+              "langchain-anthropic>=0.2.4",
+              "langsmith>=0.1.108",
+              "langchain-openai>=0.2.6",
+              "voyageai>=0.2.3",
+              "pytest>=8.3.3",
+              "pytest-asyncio>=0.24.0",
+              "pytest-xdist>=3.6.1",
+              "ruff>=0.7.1",
+              "opentelemetry-sdk>=1.20.0"
+            ]
+          }
+        },
+        {
+          "path": "README.md",
+          "url": "https://github.com/getzep/graphiti/blob/d50741d1bf463cbe3859eb73914cbff1b66839e6/README.md",
+          "sha256": "e0beb0d34b53e25e72c22d68bd951c34a1dfdc1b4454fd821ecc29f3552708de",
+          "bytes": 33169
+        }
+      ]
+    },
+    {
+      "repo": "MemTensor/MemOS",
+      "sha": "a7367d07e55db61099f7b4e2c1108bc5831a24f3",
+      "commit_date": "2026-09-22T01:51:03Z",
+      "license_at_snapshot": "Apache-2.0",
+      "files": [
+        {
+          "path": "apps/memos-local-plugin/package.json",
+          "url": "https://github.com/MemTensor/MemOS/blob/a7367d07e55db61099f7b4e2c1108bc5831a24f3/apps/memos-local-plugin/package.json",
+          "sha256": "ac4d7e8c8fc91c19a266485583a29a98d557e0f7631c78ae7d18659b872c1327",
+          "bytes": 4632,
+          "version": "2.0.16-beta.1",
+          "engines": {
+            "node": ">=20.0.0"
+          },
+          "direct_dependency_declaration_count": 8,
+          "dependencies": {
+            "@huggingface/transformers": "4.2.0",
+            "@preact/signals": "^2.9.0",
+            "@sinclair/typebox": "^0.34.48",
+            "better-sqlite3": "^12.10.0",
+            "preact": "^10.29.1",
+            "tsx": "^4.21.0",
+            "uuid": "^10.0.0",
+            "yaml": "^2.6.0"
+          }
+        },
+        {
+          "path": "apps/memos-local-plugin/README.md",
+          "url": "https://github.com/MemTensor/MemOS/blob/a7367d07e55db61099f7b4e2c1108bc5831a24f3/apps/memos-local-plugin/README.md",
+          "sha256": "3b20f23e17048fa432a941704f2493437121b9f43a674aae16f7323469f74371",
+          "bytes": 15196
+        }
+      ]
+    },
+    {
+      "repo": "vectorize-io/hindsight",
+      "sha": "3234aca57d93d4cac9743b96ef5f7a4677d4389a",
+      "commit_date": "2026-10-16T09:10:13Z",
+      "license_at_snapshot": "MIT",
+      "files": [
+        {
+          "path": "hindsight-api/pyproject.toml",
+          "url": "https://github.com/vectorize-io/hindsight/blob/3234aca57d93d4cac9743b96ef5f7a4677d4389a/hindsight-api/pyproject.toml",
+          "sha256": "317a3a085259dcc92fa927a6ad412d915e16d85663268e3dfd38838aaf6676b4",
+          "bytes": 619,
+          "requires_python": ">=3.11",
+          "direct_dependency_declaration_count": 1,
+          "dependencies": [
+            "hindsight-api-slim[all]==1.0.0"
+          ],
+          "optional_dependencies": {}
+        },
+        {
+          "path": "hindsight-api-slim/pyproject.toml",
+          "url": "https://github.com/vectorize-io/hindsight/blob/3234aca57d93d4cac9743b96ef5f7a4677d4389a/hindsight-api-slim/pyproject.toml",
+          "sha256": "05e4c9f1a54557e23f3b8d9b60ae5c2990f26cedad91372a5175cf2185945e65",
+          "bytes": 17213,
+          "requires_python": ">=3.11",
+          "direct_dependency_declaration_count": 53,
+          "dependencies": [
+            "asyncpg>=0.30.0",
+            "python-dotenv>=1.0.0",
+            "openai>=1.66.0",
+            "pydantic>=2.0.0",
+            "rich>=13.0.0",
+            "fastapi[standard]>=0.120.3",
+            "uvicorn>=0.38.0",
+            "wsproto>=1.0.0",
+            "sqlalchemy>=2.0.44,<2.1",
+            "alembic>=1.17.1",
+            "pgvector>=0.4.1",
+            "greenlet>=3.2.4,<3.4.0",
+            "psycopg2-binary>=2.9.11",
+            "toktok-rs>=0.1.3",
+            "httpx>=0.27.0",
+            "fastmcp>=3.2.0",
+            "python-dateutil>=2.8.0",
+            "opentelemetry-api>=1.44.0",
+            "opentelemetry-sdk>=1.44.0",
+            "opentelemetry-instrumentation-fastapi>=0.65b0",
+            "opentelemetry-exporter-prometheus>=0.65b0",
+            "opentelemetry-exporter-otlp-proto-http>=1.44.0",
+            "opentelemetry-semantic-conventions>=0.65b0",
+            "dateparser>=1.4.2",
+            "regex>=2026.9.3",
+            "google-genai>=1.72.0",
+            "google-auth>=2.0.0",
+            "anthropic>=0.40.0",
+            "typer>=0.9.0",
+            "cohere>=5.0.0",
+            "litellm>=1.95.1",
+            "markitdown[pdf,docx,pptx,xlsx,xls]>=0.1.4",
+            "obstore>=0.4.0",
+            "winloop>=0.1.0; sys_platform == 'win32'",
+            "uvloop>=0.22.1; sys_platform != 'win32'",
+            "pyasn1>=0.6.3",
+            "urllib3>=2.7.0",
+            "protobuf>=7.35.1",
+            "pillow>=12.3.0",
+            "cryptography>=50.0.0",
+            "filelock>=3.20.1",
+            "authlib>=1.6.9",
+            "pyjwt>=2.12.0",
+            "python-multipart>=0.0.22",
+            "aiohttp>=3.14.3",
+            "pygments>=2.20.0",
+            "claude-agent-sdk>=0.2.82",
+            "github-copilot-sdk>=1.0.11",
+            "boto3>=1.42.74",
+            "croniter>=2.0.0",
+            "json-repair>=0.63.2",
+            "orjson>=3.11.0",
+            "numpy>=1.26.0"
+          ],
+          "optional_dependencies": {
+            "local-ml": [
+              "sentence-transformers>=5.0.0",
+              "transformers>=5.5.0",
+              "tokenizers>=0.22.0,<=0.23.0",
+              "torch>=2.11.0",
+              "einops>=0.8.2",
+              "flashrank>=0.2.0",
+              "mlx>=0.31.0; sys_platform == 'darwin' and platform_machine == 'arm64'",
+              "mlx-lm>=0.31.1; sys_platform == 'darwin' and platform_machine == 'arm64'",
+              "safetensors>=0.6.2"
+            ],
+            "local-llm": [
+              "llama-cpp-python[server]>=0.3.0",
+              "huggingface-hub>=0.20.0"
+            ],
+            "local-onnx": [
+              "onnxruntime>=1.17.0",
+              "transformers>=5.5.0",
+              "tokenizers>=0.22.0,<=0.23.0",
+              "huggingface-hub>=0.20.0",
+              "numpy>=1.26.0"
+            ],
+            "embedded-db": [
+              "pg0-embedded>=0.15.2"
+            ],
+            "oracle": [
+              "oracledb>=2.5.0"
+            ],
+            "all": [
+              "hindsight-api-slim[local-ml,local-onnx,embedded-db]"
+            ],
+            "test": [
+              "pytest>=7.0.0",
+              "pytest-asyncio>=0.21.0",
+              "pytest-timeout>=2.4.0",
+              "pytest-xdist>=3.0.0",
+              "filelock>=3.20.1",
+              "testcontainers>=4.0.0"
+            ]
+          }
+        },
+        {
+          "path": "pyproject.toml",
+          "url": "https://github.com/vectorize-io/hindsight/blob/3234aca57d93d4cac9743b96ef5f7a4677d4389a/pyproject.toml",
+          "sha256": "4310866acf638e7e4917bf1a98a5593b3a3e60de30b0ca0bd23ff7174e25c71c",
+          "bytes": 427,
+          "requires_python": null,
+          "direct_dependency_declaration_count": 0,
+          "dependencies": [],
+          "optional_dependencies": {}
+        },
+        {
+          "path": "README.md",
+          "url": "https://github.com/vectorize-io/hindsight/blob/3234aca57d93d4cac9743b96ef5f7a4677d4389a/README.md",
+          "sha256": "a3e2745dedec4f9e0d4452857ef054699e60414740f5d8f12d41bd42711d476a",
+          "bytes": 24997
+        }
+      ]
+    },
+    {
+      "repo": "topoteretes/cognee",
+      "sha": "f154b32a9e544dac73e7ddf2010327cf9988edcd",
+      "commit_date": "2026-10-13T15:20:39Z",
+      "license_at_snapshot": "Apache-2.0",
+      "files": [
+        {
+          "path": "pyproject.toml",
+          "url": "https://github.com/topoteretes/cognee/blob/f154b32a9e544dac73e7ddf2010327cf9988edcd/pyproject.toml",
+          "sha256": "c7b9a1f3d9f85fc043cb9a25e09f83275109a750e441a8ecc09e29b80e4d25d7",
+          "bytes": 18027,
+          "requires_python": ">=3.10,<3.15",
+          "direct_dependency_declaration_count": 55,
+          "dependencies": [
+            "openai>=1.80.1",
+            "python-dotenv>=1.0.1,<2.0.0",
+            "pydantic>=2.10.5",
+            "pydantic-settings>=2.7.0,!=2.12.*,!=2.13.*,!=2.14.0,!=2.14.1,<3",
+            "typing_extensions>=4.12.2,<5.0.0",
+            "numpy>=1.26.4, <=4.0.0",
+            "sqlalchemy>=2.0.39,<3.0.0",
+            "aiosqlite>=0.20.0,<1.0.0",
+            "filelock>=3.12.0,<4.0.0",
+            "packaging>=24.0",
+            "huggingface-hub>=0.34,<1",
+            "tokenizers>=0.22,<=0.23.0",
+            "tiktoken>=0.8.0,<1.0.0",
+            "litellm>=1.83.7,<1.97.0",
+            "instructor>=1.9.1,<1.15.3",
+            "filetype>=1.2.0,<2.0.0",
+            "aiohttp>=3.13.5,<4.0.0",
+            "aiofiles>=23.2.1",
+            "cryptography>=43.0.0,<51",
+            "rdflib>=7.1.4,<7.2.0",
+            "pypdf>=6.6.2,<7.0.0",
+            "jinja2>=3.1.3,<4",
+            "lancedb>=0.39.0,<0.40.0",
+            "dateparser>=1.2,<2",
+            "nbformat>=5.7.0,<6.0.0",
+            "alembic>=1.13.3,<2",
+            "limits>=4.4.1,<6",
+            "fastapi>=0.116.2,<1.0.0",
+            "starlette>=0.48",
+            "python-multipart>=0.0.22,<1.0.0",
+            "fastapi-users[sqlalchemy]>=15.0.2",
+            "fastembed<=0.8.0",
+            "onnxruntime<=1.23.2 ; python_version < '3.14'",
+            "onnxruntime>=1.24.1 ; python_version >= '3.14'",
+            "structlog>=25.2.0,<26",
+            "pympler>=1.1,<2.0.0",
+            "pylance>=12.0.0,<12.1.0",
+            "ladybug>=0.17.0,<0.18 ; sys_platform == 'darwin' and ('Darwin Kernel Version 22.' in platform_version or 'Darwin Kernel Version 23.' in platform_version)",
+            "ladybug==0.19.0 ; sys_platform != 'darwin' or ('Darwin Kernel Version 22.' not in platform_version and 'Darwin Kernel Version 23.' not in platform_version)",
+            "python-magic-bin<0.5 ; platform_system == 'Windows'",
+            "networkx>=3.4.2,<4",
+            "uvicorn>=0.34.0,<1.0.0",
+            "gunicorn>=20.1.0,<24",
+            "websockets>=15.0.1,<16.0.0",
+            "tenacity>=9.0.0",
+            "fakeredis[lua]>=2.32.0",
+            "diskcache>=5.6.3",
+            "aiolimiter>=1.2.1",
+            "urllib3>=2.6.0",
+            "cbor2>=5.8.0",
+            "langdetect>=1.0.9",
+            "datamodel-code-generator>=0.54.0",
+            "enola-cli==0.4.26",
+            "dlt[sqlalchemy]>=1.9.0,<1.31",
+            "pandas>=2.2.2,<3.0.0"
+          ],
+          "optional_dependencies": {
+            "api": [],
+            "scraping": [
+              "tavily-python>=0.7.12",
+              "beautifulsoup4>=4.13.1",
+              "playwright>=1.9.0",
+              "lxml>=4.9.3,<5 ; python_version < '3.13'",
+              "lxml>=5,<6 ; python_version >= '3.13' and python_version < '3.14'",
+              "lxml>=6.0.1,<7 ; python_version >= '3.14'",
+              "protego>=0.1",
+              "APScheduler>=3.10.0,<=3.11.0"
+            ],
+            "fastembed": [],
+            "neo4j": [
+              "neo4j>=5.28.0,<6"
+            ],
+            "neptune": [
+              "langchain_aws>=0.2.22"
+            ],
+            "postgres": [
+              "psycopg2>=2.9.10,<3",
+              "pgvector>=0.3.5,<0.4",
+              "asyncpg>=0.30.0,<1.0.0"
+            ],
+            "postgres-binary": [
+              "psycopg2-binary>=2.9.10,<3.0.0",
+              "pgvector>=0.3.5,<0.4",
+              "asyncpg>=0.30.0,<1.0.0"
+            ],
+            "turso": [
+              "pyturso>=0.7.2,<0.8"
+            ],
+            "notebook": [
+              "notebook>=7.1.0,<8"
+            ],
+            "langchain": [
+              "langsmith>=0.2.3,<1.0.0",
+              "langchain_text_splitters>=0.3.2,<1.0.0",
+              "langchain-core>=1.2.5"
+            ],
+            "llama-index": [
+              "llama-index-core>=0.14.20,<0.15"
+            ],
+            "huggingface": [
+              "transformers>=4.46.3,<6"
+            ],
+            "ollama": [
+              "transformers>=4.46.3,<6"
+            ],
+            "mistral": [
+              "mistral-common>=1.5.2,<2",
+              "mistralai>=1.9.10,<2"
+            ],
+            "anthropic": [
+              "anthropic>=0.27"
+            ],
+            "azure": [
+              "azure-identity>=1.15.0,<2"
+            ],
+            "deepeval": [
+              "deepeval>=3.0.1,<4"
+            ],
+            "posthog": [
+              "posthog>=3.5.0,<4"
+            ],
+            "groq": [
+              "groq>=0.8.0,<1.0.0"
+            ],
+            "llama-cpp": [
+              "llama-cpp-python[server]>=0.3.0,<1.0.0"
+            ],
+            "docs": [
+              "lxml>=4.9.3,<5 ; python_version < '3.13'",
+              "lxml>=5,<6 ; python_version >= '3.13' and python_version < '3.14'",
+              "lxml>=6.0.1,<7 ; python_version >= '3.14'",
+              "unstructured[csv, doc, docx, epub, md, odt, org, ppt, pptx, rst, rtf, tsv, xlsx, pdf]>=0.18.1,<19",
+              "nltk>=3.9.3,<4"
+            ],
+            "codegraph": [],
+            "evals": [
+              "plotly>=6.0.0,<7",
+              "gdown>=5.2.0,<6",
+              "pandas>=2.2.2,<3.0.0",
+              "matplotlib>=3.8.3,<4",
+              "scikit-learn>=1.6.1,<2",
+              "locust>=2.0.0,<3"
+            ],
+            "aws": [
+              "s3fs[boto3]==2025.3.2"
+            ],
+            "dlt": [],
+            "gmail": [
+              "google-api-python-client>=2.100.0,<3",
+              "google-auth>=2.23.0,<3",
+              "google-auth-oauthlib>=1.1.0,<2"
+            ],
+            "google-drive": [
+              "google-api-python-client>=2.100.0,<3",
+              "google-auth>=2.23.0,<3",
+              "google-auth-oauthlib>=1.1.0,<2"
+            ],
+            "baml": [
+              "baml-py (==0.206.0)"
+            ],
+            "dev": [
+              "pytest>=7.4.0,<8",
+              "pytest-cov>=6.1.1,<7.0.0",
+              "pytest-asyncio>=0.21.1,<0.22",
+              "pytest-timeout>=2.3.1,<3",
+              "pytest-split>=0.11.0,<0.12",
+              "coverage>=7.3.2,<8",
+              "pre-commit>=4.0.1,<5",
+              "notebook>=7.1.0,<8",
+              "deptry>=0.20.0,<0.21",
+              "ruff>=0.9.2,<=0.16.6",
+              "tweepy>=4.14.0,<5.0.0",
+              "gitpython>=3.1.43,<4",
+              "mkdocs-material>=9.5.42,<10",
+              "mkdocs-minify-plugin>=0.8.0,<0.9",
+              "mkdocstrings[python]>=0.26.2,<0.27",
+              "ty>=0.0.31,<0.1.0"
+            ],
+            "debug": [
+              "debugpy>=1.8.9,<2.0.0"
+            ],
+            "redis": [
+              "redis>=5.0.3,<6.0.0"
+            ],
+            "tracing": [
+              "opentelemetry-api>=1.20.0,<2",
+              "opentelemetry-sdk>=1.20.0,<2",
+              "opentelemetry-exporter-otlp-proto-grpc>=1.20.0,<2",
+              "opentelemetry-exporter-otlp-proto-http>=1.20.0,<2"
+            ],
+            "docling": [
+              "docling-slim[convert-core,format-pdf,format-office,format-html,format-email,format-markdown,format-latex]>=2.115,<3"
+            ],
+            "docling-full": [
+              "docling>=2.115,<3",
+              "transformers>=4.55"
+            ],
+            "gliner": [
+              "gliner2[local]>=2.0.0,<3",
+              "torch>=2.1,<3",
+              "protobuf>=5.29.6",
+              "sentencepiece>=0.2.0",
+              "psutil>=5.9"
+            ],
+            "rapidocr": [
+              "rapidocr-onnxruntime>=1.3.0,<2"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "repo": "letta-ai/letta-code",
+      "sha": "1297870b0aa6662d6c70729d273f5073c1bcbdea",
+      "commit_date": "2026-10-16T05:24:29Z",
+      "license_at_snapshot": "Apache-2.0",
+      "files": [
+        {
+          "path": "package.json",
+          "url": "https://github.com/letta-ai/letta-code/blob/1297870b0aa6662d6c70729d273f5073c1bcbdea/package.json",
+          "sha256": "962891af61750b33d0e3a5b01350f576b61ac0fe870f28063a93b8ed088bf024",
+          "bytes": 9599,
+          "version": "0.34.15",
+          "engines": {
+            "bun": ">=1.3.2",
+            "node": ">=22.19.0"
+          },
+          "direct_dependency_declaration_count": 21,
+          "dependencies": {
+            "@earendil-works/pi-ai": "^0.99.1",
+            "@janhapke/sharp-electron": "0.35.3-electron.1",
+            "@letta-ai/letta-agent-sdk": "0.8.38",
+            "@letta-ai/letta-client": "^1.10.2",
+            "@letta-ai/trajectory": "0.2.0",
+            "@modelcontextprotocol/sdk": "1.30.0",
+            "@pierre/diffs": "1.2.2",
+            "@scarf/scarf": "^1.4.0",
+            "@shikijs/langs": "4.0.2",
+            "cron-parser": "^5.6.1",
+            "cross-spawn": "^7.0.6",
+            "glob": "^13.0.0",
+            "ink": "5.2.1",
+            "ink-link": "^4.1.0",
+            "node-pty": "^1.1.0",
+            "open": "^10.2.0",
+            "react": "18.2.0",
+            "sharp": "^0.34.5",
+            "shiki": "^4.0.2",
+            "strip-ansi": "^7.2.0",
+            "ws": "^8.19.0"
+          }
+        },
+        {
+          "path": "README.md",
+          "url": "https://github.com/letta-ai/letta-code/blob/1297870b0aa6662d6c70729d273f5073c1bcbdea/README.md",
+          "sha256": "61811b022086eeb9d0bdab91cce960f193e9b1bec544c36f64cf6a1f5eb9382c",
+          "bytes": 9696
+        }
+      ]
+    },
+    {
+      "repo": "langchain-ai/openwiki",
+      "sha": "7c469e59584bfac3f97f5c32a67604de46805999",
+      "commit_date": "2026-10-13T22:20:06Z",
+      "license_at_snapshot": "MIT",
+      "files": [
+        {
+          "path": "LICENSE",
+          "url": "https://github.com/langchain-ai/openwiki/blob/7c469e59584bfac3f97f5c32a67604de46805999/LICENSE",
+          "sha256": "1126322e2cc8d165adc4c792eeb195717de2bcc7b39be1ce77959d78e87ef685",
+          "bytes": 1056
+        },
+        {
+          "path": "package.json",
+          "url": "https://github.com/langchain-ai/openwiki/blob/7c469e59584bfac3f97f5c32a67604de46805999/package.json",
+          "sha256": "3e351ad7c3ed776baf54bf97e285e08bc7a59050d1f10174d26c53fa9dc59055",
+          "bytes": 3930,
+          "version": "0.7.2",
+          "engines": {
+            "node": ">=22.22.0"
+          },
+          "direct_dependency_declaration_count": 27,
+          "dependencies": {
+            "@anthropic-ai/vertex-sdk": "^0.19.6",
+            "@aws-sdk/client-bedrock-runtime": "^3.1120.0",
+            "@azure/identity": "^4.13.3",
+            "@langchain/anthropic": "^1.5.8",
+            "@langchain/aws": "^1.4.4",
+            "@langchain/core": "^1.2.9",
+            "@langchain/google": "^0.2.3",
+            "@langchain/langgraph-checkpoint-sqlite": "^1.0.4",
+            "@langchain/openai": "^1.5.11",
+            "@langchain/openrouter": "^0.4.10",
+            "@langchain/protocol": "^0.0.19",
+            "@langchain/tavily": "1.2.0",
+            "@modelcontextprotocol/sdk": "^1.31.0",
+            "ci-info": "^4.4.0",
+            "cron-parser": "5.10.1",
+            "cronstrue": "3.27.0",
+            "deepagents": "1.13.2",
+            "google-auth-library": "^11.0.2",
+            "ink": "^5.2.1",
+            "jsonc-parser": "^3.3.1",
+            "langchain": "^1.5.10",
+            "langsmith": "^0.10.5",
+            "marked": "^18.0.11",
+            "posthog-node": "^5.51.4",
+            "react": "^18.3.1",
+            "yaml": "^2.9.0",
+            "zod": "^4.4.3"
+          }
+        },
+        {
+          "path": "README.md",
+          "url": "https://github.com/langchain-ai/openwiki/blob/7c469e59584bfac3f97f5c32a67604de46805999/README.md",
+          "sha256": "ceb3bb19fc5ee5623722e69ad79e26fd809ba0217d1079d62b99101cf215f355",
+          "bytes": 49423
+        },
+        {
+          "path": "src/claims/brains/code/runtime.ts",
+          "url": "https://github.com/langchain-ai/openwiki/blob/7c469e59584bfac3f97f5c32a67604de46805999/src/claims/brains/code/runtime.ts",
+          "sha256": "a4ae182d30e5cebcf2dc623ec2ae31b830a9f28f914db39f821009b0597c4746",
+          "bytes": 5850
+        },
+        {
+          "path": "src/claims/brains/code/store.ts",
+          "url": "https://github.com/langchain-ai/openwiki/blob/7c469e59584bfac3f97f5c32a67604de46805999/src/claims/brains/code/store.ts",
+          "sha256": "087f6494b3ec6dc117d91806865888a0ebc0a213d247f8bf516b5b36588c5bf2",
+          "bytes": 20641
+        },
+        {
+          "path": "src/claims/core/mutations.ts",
+          "url": "https://github.com/langchain-ai/openwiki/blob/7c469e59584bfac3f97f5c32a67604de46805999/src/claims/core/mutations.ts",
+          "sha256": "a013074e32c3a0b976c55714f022f23ea21c92789ae536e1883cb5acd233ad65",
+          "bytes": 10112
+        },
+        {
+          "path": "src/claims/core/types.ts",
+          "url": "https://github.com/langchain-ai/openwiki/blob/7c469e59584bfac3f97f5c32a67604de46805999/src/claims/core/types.ts",
+          "sha256": "220789ffb91b36a6d7d6640384b82b79b8b712933ae1b124043ad11d7cb35e20",
+          "bytes": 3260
+        },
+        {
+          "path": "src/claims/evidence/repository/resolver.ts",
+          "url": "https://github.com/langchain-ai/openwiki/blob/7c469e59584bfac3f97f5c32a67604de46805999/src/claims/evidence/repository/resolver.ts",
+          "sha256": "6ba672749aa9745568c3f358fd94814a2de7d1506c2aa889a94e9f3fbe6d4f9f",
+          "bytes": 23622
+        },
+        {
+          "path": "src/integrations/core/retrieval-tools.ts",
+          "url": "https://github.com/langchain-ai/openwiki/blob/7c469e59584bfac3f97f5c32a67604de46805999/src/integrations/core/retrieval-tools.ts",
+          "sha256": "73dd31435ac92c424bacee4f0afa41fd70f1f52a01391de84969d2318f00d4d2",
+          "bytes": 8025
+        },
+        {
+          "path": "src/linking/wiki-workspaces.ts",
+          "url": "https://github.com/langchain-ai/openwiki/blob/7c469e59584bfac3f97f5c32a67604de46805999/src/linking/wiki-workspaces.ts",
+          "sha256": "9a723f197dc473fc5c9c3fd0d1de906eff8438d44ca4741cea906666f08da156",
+          "bytes": 48853
+        },
+        {
+          "path": "src/okf/generated-provenance.ts",
+          "url": "https://github.com/langchain-ai/openwiki/blob/7c469e59584bfac3f97f5c32a67604de46805999/src/okf/generated-provenance.ts",
+          "sha256": "8e4b18ba77b0936a5eef4fbf03f120b3dc9dbb338eec2c218f6478e8c8ef4b8a",
+          "bytes": 10073
+        },
+        {
+          "path": "src/retrieval/wiki.ts",
+          "url": "https://github.com/langchain-ai/openwiki/blob/7c469e59584bfac3f97f5c32a67604de46805999/src/retrieval/wiki.ts",
+          "sha256": "cf61519c47616bd528bea382c75eab3199810dba46a36feac99b45d1230d01cf",
+          "bytes": 31924
+        },
+        {
+          "path": "src/telemetry/index.ts",
+          "url": "https://github.com/langchain-ai/openwiki/blob/7c469e59584bfac3f97f5c32a67604de46805999/src/telemetry/index.ts",
+          "sha256": "64d92ad5a000d2224010e7f95e4de5509ab709a5c353d7a9d9620586b6a2f30a",
+          "bytes": 943
+        }
+      ]
+    }
+  ]
+}

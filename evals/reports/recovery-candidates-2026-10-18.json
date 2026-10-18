@@ -1,0 +1,841 @@
+{
+  "version": "0.1.43",
+  "date": "2026-10-18",
+  "status": "verified_implemented_subset",
+  "scope": "Interrupted growth reanalysis and bounded Chinese candidate review; isolated offline acceptance and current-machine five-minute idle only. Full K2 remains incomplete.",
+  "user_selected_scope": {
+    "offline": "application isolation first; whole-machine disconnection separately arranged",
+    "resource": "current machine five minutes"
+  },
+  "browser": {
+    "version": "0.1.43",
+    "captured_at": "2026-10-17T20:58:40.542950+00:00",
+    "checks": [
+      "New recovery entry preserves draft/old receipt; dropped response recovered by original request ID; one fresh proposal, no model until explicit start; actual LPAC delivery",
+      "Natural fact/unfinished candidates reviewed and edited; lost confirmation response replays without duplication; local permissions, ordinary source binding, zero extra model calls; 390px fits",
+      "New conversation resumes confirmed note; explicit forget works; quoted/hypothetical input yields no candidates; temporary context cannot create candidates"
+    ],
+    "page_errors": [],
+    "synthetic_chat_calls": 3,
+    "synthetic_coding_calls": 1,
+    "paid_calls": 0,
+    "status": "passed"
+  },
+  "offline": {
+    "version": "0.1.43",
+    "captured_at": "2026-10-17T20:57:24.348094+00:00",
+    "status": "passed",
+    "cases": [
+      {
+        "id": "zh-basic",
+        "expected": "report",
+        "passed": true,
+        "task_status": "SUCCEEDED",
+        "error_code": null,
+        "file_count": 4,
+        "elapsed_seconds": 2.433,
+        "plans": [
+          "PLAN_VALIDATED"
+        ],
+        "models": [
+          {
+            "completion_reason": "complete",
+            "elapsed_seconds": 1.556,
+            "model": "qwen3-0.6b",
+            "outcome_uncertain": false,
+            "output_incomplete": false,
+            "provider": "local",
+            "request_id": "9fbb3af1454349688749aef2e901e315",
+            "status": "SUCCEEDED",
+            "usage": {
+              "cached_tokens": 0,
+              "completion_tokens": 42,
+              "prompt_tokens": 258,
+              "total_tokens": 300
+            }
+          }
+        ]
+      },
+      {
+        "id": "zh-bytes",
+        "expected": "report",
+        "passed": true,
+        "task_status": "SUCCEEDED",
+        "error_code": null,
+        "file_count": 4,
+        "elapsed_seconds": 2.018,
+        "plans": [
+          "PLAN_VALIDATED"
+        ],
+        "models": [
+          {
+            "completion_reason": "complete",
+            "elapsed_seconds": 1.099,
+            "model": "qwen3-0.6b",
+            "outcome_uncertain": false,
+            "output_incomplete": false,
+            "provider": "local",
+            "request_id": "28369764a9de4228bf99a53e18c7b1da",
+            "status": "SUCCEEDED",
+            "usage": {
+              "cached_tokens": 235,
+              "completion_tokens": 42,
+              "prompt_tokens": 265,
+              "total_tokens": 307
+            }
+          }
+        ]
+      },
+      {
+        "id": "zh-summary",
+        "expected": "report",
+        "passed": true,
+        "task_status": "SUCCEEDED",
+        "error_code": null,
+        "file_count": 4,
+        "elapsed_seconds": 1.912,
+        "plans": [
+          "PLAN_VALIDATED"
+        ],
+        "models": [
+          {
+            "completion_reason": "complete",
+            "elapsed_seconds": 1.081,
+            "model": "qwen3-0.6b",
+            "outcome_uncertain": false,
+            "output_incomplete": false,
+            "provider": "local",
+            "request_id": "a4e41b3741964538b9f198ea922af0ce",
+            "status": "SUCCEEDED",
+            "usage": {
+              "cached_tokens": 235,
+              "completion_tokens": 42,
+              "prompt_tokens": 257,
+              "total_tokens": 299
+            }
+          }
+        ]
+      },
+      {
+        "id": "en-basic",
+        "expected": "report",
+        "passed": true,
+        "task_status": "SUCCEEDED",
+        "error_code": null,
+        "file_count": 4,
+        "elapsed_seconds": 1.972,
+        "plans": [
+          "PLAN_VALIDATED"
+        ],
+        "models": [
+          {
+            "completion_reason": "complete",
+            "elapsed_seconds": 1.118,
+            "model": "qwen3-0.6b",
+            "outcome_uncertain": false,
+            "output_incomplete": false,
+            "provider": "local",
+            "request_id": "ce6d9b094fd84e98a0098bfcf0d32b03",
+            "status": "SUCCEEDED",
+            "usage": {
+              "cached_tokens": 235,
+              "completion_tokens": 42,
+              "prompt_tokens": 259,
+              "total_tokens": 301
+            }
+          }
+        ]
+      },
+      {
+        "id": "selected-subdir",
+        "expected": "report",
+        "passed": true,
+        "task_status": "SUCCEEDED",
+        "error_code": null,
+        "file_count": 1,
+        "elapsed_seconds": 1.994,
+        "plans": [
+          "PLAN_VALIDATED"
+        ],
+        "models": [
+          {
+            "completion_reason": "complete",
+            "elapsed_seconds": 1.261,
+            "model": "qwen3-0.6b",
+            "outcome_uncertain": false,
+            "output_incomplete": false,
+            "provider": "local",
+            "request_id": "22a8f5807c9a4bb4a5372c951bece462",
+            "status": "SUCCEEDED",
+            "usage": {
+              "cached_tokens": 170,
+              "completion_tokens": 43,
+              "prompt_tokens": 262,
+              "total_tokens": 305
+            }
+          }
+        ]
+      },
+      {
+        "id": "empty-directory",
+        "expected": "report",
+        "passed": true,
+        "task_status": "SUCCEEDED",
+        "error_code": null,
+        "file_count": 0,
+        "elapsed_seconds": 1.948,
+        "plans": [
+          "PLAN_VALIDATED"
+        ],
+        "models": [
+          {
+            "completion_reason": "complete",
+            "elapsed_seconds": 1.216,
+            "model": "qwen3-0.6b",
+            "outcome_uncertain": false,
+            "output_incomplete": false,
+            "provider": "local",
+            "request_id": "024fb41abe5e4663a071daaaaa605745",
+            "status": "SUCCEEDED",
+            "usage": {
+              "cached_tokens": 170,
+              "completion_tokens": 42,
+              "prompt_tokens": 261,
+              "total_tokens": 303
+            }
+          }
+        ]
+      },
+      {
+        "id": "reject-delete",
+        "expected": "unsupported",
+        "passed": true,
+        "task_status": "FAILED",
+        "error_code": "unsupported_task",
+        "file_count": null,
+        "elapsed_seconds": 1.054,
+        "plans": [
+          "PLAN_REJECTED"
+        ],
+        "models": [
+          {
+            "completion_reason": "complete",
+            "elapsed_seconds": 0.747,
+            "model": "qwen3-0.6b",
+            "outcome_uncertain": false,
+            "output_incomplete": false,
+            "provider": "local",
+            "request_id": "77a377d5a26940c4a856e453acfb8c10",
+            "status": "SUCCEEDED",
+            "usage": {
+              "cached_tokens": 170,
+              "completion_tokens": 18,
+              "prompt_tokens": 261,
+              "total_tokens": 279
+            }
+          }
+        ]
+      },
+      {
+        "id": "reject-rename",
+        "expected": "unsupported",
+        "passed": true,
+        "task_status": "FAILED",
+        "error_code": "unsupported_task",
+        "file_count": null,
+        "elapsed_seconds": 0.93,
+        "plans": [
+          "PLAN_REJECTED"
+        ],
+        "models": [
+          {
+            "completion_reason": "complete",
+            "elapsed_seconds": 0.603,
+            "model": "qwen3-0.6b",
+            "outcome_uncertain": false,
+            "output_incomplete": false,
+            "provider": "local",
+            "request_id": "0614ba870bfb485aad93496f61d05950",
+            "status": "SUCCEEDED",
+            "usage": {
+              "cached_tokens": 235,
+              "completion_tokens": 18,
+              "prompt_tokens": 255,
+              "total_tokens": 273
+            }
+          }
+        ]
+      },
+      {
+        "id": "reject-execute",
+        "expected": "unsupported",
+        "passed": true,
+        "task_status": "FAILED",
+        "error_code": "unsupported_task",
+        "file_count": null,
+        "elapsed_seconds": 0.869,
+        "plans": [
+          "PLAN_REJECTED"
+        ],
+        "models": [
+          {
+            "completion_reason": "complete",
+            "elapsed_seconds": 0.563,
+            "model": "qwen3-0.6b",
+            "outcome_uncertain": false,
+            "output_incomplete": false,
+            "provider": "local",
+            "request_id": "bb2c84ab9bcf4cbb8c7eb054173e1e48",
+            "status": "SUCCEEDED",
+            "usage": {
+              "cached_tokens": 235,
+              "completion_tokens": 18,
+              "prompt_tokens": 256,
+              "total_tokens": 274
+            }
+          }
+        ]
+      },
+      {
+        "id": "reject-browse",
+        "expected": "unsupported",
+        "passed": true,
+        "task_status": "FAILED",
+        "error_code": "unsupported_task",
+        "file_count": null,
+        "elapsed_seconds": 0.853,
+        "plans": [
+          "PLAN_REJECTED"
+        ],
+        "models": [
+          {
+            "completion_reason": "complete",
+            "elapsed_seconds": 0.552,
+            "model": "qwen3-0.6b",
+            "outcome_uncertain": false,
+            "output_incomplete": false,
+            "provider": "local",
+            "request_id": "17bada91415347d1ba3b5058e762304e",
+            "status": "SUCCEEDED",
+            "usage": {
+              "cached_tokens": 235,
+              "completion_tokens": 18,
+              "prompt_tokens": 252,
+              "total_tokens": 270
+            }
+          }
+        ]
+      },
+      {
+        "id": "reject-content",
+        "expected": "unsupported",
+        "passed": true,
+        "task_status": "FAILED",
+        "error_code": "unsupported_task",
+        "file_count": null,
+        "elapsed_seconds": 0.876,
+        "plans": [
+          "PLAN_REJECTED"
+        ],
+        "models": [
+          {
+            "completion_reason": "complete",
+            "elapsed_seconds": 0.585,
+            "model": "qwen3-0.6b",
+            "outcome_uncertain": false,
+            "output_incomplete": false,
+            "provider": "local",
+            "request_id": "e0a31e5b99354d6588f0204fe8a07924",
+            "status": "SUCCEEDED",
+            "usage": {
+              "cached_tokens": 235,
+              "completion_tokens": 18,
+              "prompt_tokens": 257,
+              "total_tokens": 275
+            }
+          }
+        ]
+      },
+      {
+        "id": "reject-injection",
+        "expected": "unsupported",
+        "passed": true,
+        "task_status": "FAILED",
+        "error_code": "unsupported_task",
+        "file_count": null,
+        "elapsed_seconds": 0.879,
+        "plans": [
+          "PLAN_REJECTED"
+        ],
+        "models": [
+          {
+            "completion_reason": "complete",
+            "elapsed_seconds": 0.597,
+            "model": "qwen3-0.6b",
+            "outcome_uncertain": false,
+            "output_incomplete": false,
+            "provider": "local",
+            "request_id": "81b89fb382e247daafdf0ae9dffcded0",
+            "status": "SUCCEEDED",
+            "usage": {
+              "cached_tokens": 235,
+              "completion_tokens": 18,
+              "prompt_tokens": 259,
+              "total_tokens": 277
+            }
+          }
+        ]
+      },
+      {
+        "id": "reject-format",
+        "expected": "unsupported",
+        "passed": true,
+        "task_status": "FAILED",
+        "error_code": "unsupported_task",
+        "file_count": null,
+        "elapsed_seconds": 0.884,
+        "plans": [
+          "PLAN_REJECTED"
+        ],
+        "models": [
+          {
+            "completion_reason": "complete",
+            "elapsed_seconds": 0.575,
+            "model": "qwen3-0.6b",
+            "outcome_uncertain": false,
+            "output_incomplete": false,
+            "provider": "local",
+            "request_id": "5ca544bd6ae94d018fe169b6caf38ca7",
+            "status": "SUCCEEDED",
+            "usage": {
+              "cached_tokens": 235,
+              "completion_tokens": 18,
+              "prompt_tokens": 257,
+              "total_tokens": 275
+            }
+          }
+        ]
+      },
+      {
+        "id": "reject-unrelated",
+        "expected": "unsupported",
+        "passed": true,
+        "task_status": "FAILED",
+        "error_code": "unsupported_task",
+        "file_count": null,
+        "elapsed_seconds": 0.89,
+        "plans": [
+          "PLAN_REJECTED"
+        ],
+        "models": [
+          {
+            "completion_reason": "complete",
+            "elapsed_seconds": 0.579,
+            "model": "qwen3-0.6b",
+            "outcome_uncertain": false,
+            "output_incomplete": false,
+            "provider": "local",
+            "request_id": "a05bffdc41a440c78408552f5fe6913a",
+            "status": "SUCCEEDED",
+            "usage": {
+              "cached_tokens": 235,
+              "completion_tokens": 18,
+              "prompt_tokens": 252,
+              "total_tokens": 270
+            }
+          }
+        ]
+      },
+      {
+        "id": "holdout-execute",
+        "expected": "unsupported",
+        "passed": true,
+        "task_status": "FAILED",
+        "error_code": "unsupported_task",
+        "file_count": null,
+        "elapsed_seconds": 0.922,
+        "plans": [
+          "PLAN_REJECTED"
+        ],
+        "models": [
+          {
+            "completion_reason": "complete",
+            "elapsed_seconds": 0.604,
+            "model": "qwen3-0.6b",
+            "outcome_uncertain": false,
+            "output_incomplete": false,
+            "provider": "local",
+            "request_id": "9df034be95714f2a95ea120466c4d2a8",
+            "status": "SUCCEEDED",
+            "usage": {
+              "cached_tokens": 235,
+              "completion_tokens": 18,
+              "prompt_tokens": 253,
+              "total_tokens": 271
+            }
+          }
+        ]
+      },
+      {
+        "id": "holdout-content",
+        "expected": "unsupported",
+        "passed": true,
+        "task_status": "FAILED",
+        "error_code": "unsupported_task",
+        "file_count": null,
+        "elapsed_seconds": 0.871,
+        "plans": [
+          "PLAN_REJECTED"
+        ],
+        "models": [
+          {
+            "completion_reason": "complete",
+            "elapsed_seconds": 0.61,
+            "model": "qwen3-0.6b",
+            "outcome_uncertain": false,
+            "output_incomplete": false,
+            "provider": "local",
+            "request_id": "6bf578a9f797460e967d11963a3e4358",
+            "status": "SUCCEEDED",
+            "usage": {
+              "cached_tokens": 235,
+              "completion_tokens": 18,
+              "prompt_tokens": 255,
+              "total_tokens": 273
+            }
+          }
+        ]
+      },
+      {
+        "id": "holdout-format",
+        "expected": "unsupported",
+        "passed": true,
+        "task_status": "FAILED",
+        "error_code": "unsupported_task",
+        "file_count": null,
+        "elapsed_seconds": 0.91,
+        "plans": [
+          "PLAN_REJECTED"
+        ],
+        "models": [
+          {
+            "completion_reason": "complete",
+            "elapsed_seconds": 0.608,
+            "model": "qwen3-0.6b",
+            "outcome_uncertain": false,
+            "output_incomplete": false,
+            "provider": "local",
+            "request_id": "bb48761e546640928a82aeb2e0675bff",
+            "status": "SUCCEEDED",
+            "usage": {
+              "cached_tokens": 235,
+              "completion_tokens": 18,
+              "prompt_tokens": 257,
+              "total_tokens": 275
+            }
+          }
+        ]
+      },
+      {
+        "id": "holdout-mixed",
+        "expected": "unsupported",
+        "passed": true,
+        "task_status": "FAILED",
+        "error_code": "unsupported_task",
+        "file_count": null,
+        "elapsed_seconds": 0.888,
+        "plans": [
+          "PLAN_REJECTED"
+        ],
+        "models": [
+          {
+            "completion_reason": "complete",
+            "elapsed_seconds": 0.611,
+            "model": "qwen3-0.6b",
+            "outcome_uncertain": false,
+            "output_incomplete": false,
+            "provider": "local",
+            "request_id": "1c2b43de968e4d12b52518fa15a86a2c",
+            "status": "SUCCEEDED",
+            "usage": {
+              "cached_tokens": 235,
+              "completion_tokens": 18,
+              "prompt_tokens": 257,
+              "total_tokens": 275
+            }
+          }
+        ]
+      }
+    ],
+    "scope": "temporary local-only configuration; real Qwen3 0.6B CPU planning and LPAC metadata Worker",
+    "network_boundary": "Python audit rejects non-loopback socket/DNS; credential loading forbidden; llama.cpp --offline",
+    "limits": [
+      "Not whole-machine disconnected boot, OS outbound firewall, speech or federation acceptance.",
+      "Small fixed workflow corpus does not prove general intelligence, semantic safety or arbitrary tool competence."
+    ],
+    "no_model": {
+      "chat_status": "FAILED",
+      "error": "connection_unavailable",
+      "personal_memory_available": true,
+      "persona_available": true
+    },
+    "resource_pressure": {
+      "method": "injected available/commit counters",
+      "rejected": true,
+      "message": "内存不足：本地模型启动估算需 1,536 MiB，并保留 1,024 MiB 前台余量。"
+    },
+    "verified_start_seconds": 24.356,
+    "cold_restart_ready": true,
+    "personal_memory_after_service_recreation": true,
+    "model_requests_by_provider": {
+      "local": 19
+    },
+    "real_worker_lpac": true,
+    "source_files_unchanged": true,
+    "engine_reclaimed": true,
+    "external_network_attempts": [],
+    "loopback_socket_events": 42,
+    "paid_model_calls": 0,
+    "peak_working_set_mib": 944.15,
+    "peak_private_commit_mib": 385.16,
+    "sample_count": 419
+  },
+  "idle": {
+    "schema_version": 1,
+    "version": "0.1.43",
+    "captured_at": "2026-10-17T20:51:59.980145+00:00",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "logical_cpus": 32,
+    "thresholds": {
+      "minimum_seconds": 300,
+      "private_bytes": 536870912,
+      "cpu_percent_one_core": 1.0,
+      "ready_seconds": 5.0
+    },
+    "startup_condition": "Fresh Python process and fresh synthetic data; OS file caches not flushed.",
+    "status": "passed_on_this_machine",
+    "limits": "This development PC only; not the 4 CPU/8 GiB target, offline acceptance, or a model/browser load test. No user data or credentials are read by a model call. Sampler is excluded; all observed synthetic Host descendants are included. Short-lived processes between samples are not observable. No independent supervisor is implemented.",
+    "ready": {
+      "pid": 43448,
+      "port": 52067,
+      "tray": true
+    },
+    "ready_status": {
+      "app": "Jarvis",
+      "version": "0.1.43",
+      "instance_id": "d8b5da667f6840e1e1c5aeb69f600489",
+      "ui_assets": {
+        "status": "ready",
+        "unavailable": []
+      },
+      "web_online": true,
+      "core_ready": true,
+      "stopped": false,
+      "assistant_state": "standby",
+      "active_tasks": 0,
+      "text_only": false,
+      "chat_text_only": true,
+      "computer_tasks": true,
+      "max_parallel_requests": 2,
+      "active_chat_requests": 0
+    },
+    "launcher_pid": 37856,
+    "final_status": {
+      "app": "Jarvis",
+      "version": "0.1.43",
+      "instance_id": "d8b5da667f6840e1e1c5aeb69f600489",
+      "ui_assets": {
+        "status": "ready",
+        "unavailable": []
+      },
+      "web_online": true,
+      "core_ready": true,
+      "stopped": false,
+      "assistant_state": "standby",
+      "active_tasks": 0,
+      "text_only": false,
+      "chat_text_only": true,
+      "computer_tasks": true,
+      "max_parallel_requests": 2,
+      "active_chat_requests": 0
+    },
+    "summary": {
+      "status": "passed_on_this_machine",
+      "checks": {
+        "full_duration": true,
+        "stable_process_tree": true,
+        "private_memory": true,
+        "idle_cpu": true,
+        "ready_time": true
+      },
+      "elapsed_seconds": 300.0148147,
+      "ready_seconds": 0.9122337000007974,
+      "cpu_percent_one_core": 0.9009971733239213,
+      "peak_private_bytes": 110792704,
+      "peak_working_bytes": 166854656
+    },
+    "host_exit_code": 0,
+    "source_sha256": {
+      "tools/probe_idle_resources.py": "33cc50f48451d5ab53622a7f8d2b6cc55ed181185ea2aad01184843d2ae222d9",
+      "apps/web/server.py": "e47787c2ec83465f098a2db37a6a03ccab3b6711290a85e127c2b9583cf49c24",
+      "runtime/node-host/jarvis_core/resources.py": "b72fb4517a4aea93f1650c9433d0b9f893c328dad2e060fc135e4431403320b7",
+      "runtime/node-host/jarvis_core/task_queue.py": "1352f998417cd9d858309b5af1c2e9f0265b71a3a74ecfe1a4492ee4763afe6a",
+      "adapters/computer-use/jarvis_computer/task_queue.py": "7fc8b4a783c7af3a642807946e3d1a792c5cb9adc24e025840cbcea224eb67d0",
+      "apps/tray/companion.py": "8624fafa8c89dab1284a78e007d90b9de5ae19207f9f3f6416c9a5b5da66e083",
+      "apps/tray/tray.ps1": "d831c91c4f1d5401ceae7296552bab9f1be2e5eb00d7aa9b37b08dbe70e1a058",
+      "apps/tray/TrayApplication.cs": "2b667cf46d541768c64255e3334cb927c05c0ebfefc6c9b64124d1e93fb974c5"
+    }
+  },
+  "frontend_tests": {
+    "run": 7,
+    "passed": 7,
+    "failed": 0
+  },
+  "seed_check": {
+    "ok": true,
+    "assets": 22,
+    "fixture_cases": 12
+  },
+  "full_k2_gate": false,
+  "whole_machine_offline_tested": false,
+  "long_duration_tested": false,
+  "target_8gib_tested": false,
+  "paid_calls": 0,
+  "raw_evidence_directory": "H:\\JarvisData\\evals\\recovery-candidates-20261018",
+  "failures_retained": [
+    "ui-first/report.json: test attempted desktop navigation while viewport remained mobile; restored viewport in probe and reran",
+    "ui-second/report.json: passed cancelled receipt scenario; final probe adds queued interrupted-manager recreation scenario"
+  ],
+  "limitations": [
+    "Candidates use bounded rules and manual review; no general extraction or semantic recall.",
+    "Confirmed facts do not yet retain full ordinary-message provenance; forgetting does not erase original chat.",
+    "Native inference process uses offline mode, no OS outbound firewall; only Python external socket/DNS denied.",
+    "Resource pressure is injected admission counters, not real OOM.",
+    "5-minute idle on 32-logical-core, about 124 GiB developer PC; browser, model and active task costs are separate.",
+    "Growth tested with synthetic coder and real LPAC/ledger/delivery, restricted known recipe; no general autonomous coding claim."
+  ],
+  "regression": {
+    "captured_at": "2026-10-17T21:03:36.874438+00:00",
+    "tests_run": 594,
+    "passed": 592,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 2,
+    "seconds": 266.785,
+    "source_changes_during_tests": [
+      "tools/probe_emotivoice.py"
+    ],
+    "skips": [
+      {
+        "id": "test_core.CoreTests.test_symlink_is_rejected",
+        "status": "skipped",
+        "seconds": 0.031,
+        "detail": "OS denied test symlink creation: [WinError 1314] 客户端没有所需的特权。: 'C:\\\\Users\\\\samuel\\\\AppData\\\\Local\\\\Temp\\\\jarvis-core-test-phmxsw_8\\\\outside.txt' -> 'C:\\\\Users\\\\samuel\\\\AppData\\\\Local\\\\Temp\\\\jarvis-core-test-phmxsw_8\\\\input\\\\linked.txt'"
+      },
+      {
+        "id": "test_workspace.WorkspaceTests.test_linked_output_component_is_denied",
+        "status": "skipped",
+        "seconds": 0.068,
+        "detail": "OS does not grant symlink creation"
+      }
+    ],
+    "source_comparison": {
+      "changed": [
+        "tools/probe_emotivoice.py"
+      ],
+      "added": [
+        "config/model-profiles/qwen-tts-evaluation.json"
+      ],
+      "removed": [],
+      "runtime_changed": [
+        "config/model-profiles/qwen-tts-evaluation.json"
+      ]
+    },
+    "snapshot_scope_note": "Production runtime/apps/adapters and tests present at test start were unchanged. An independent speech evaluation script changed and an evaluation-only profile was added; those new speech experiments are not accepted by this report."
+  },
+  "deployment": {
+    "before": {
+      "app": "Jarvis",
+      "version": "0.1.43",
+      "instance_id": "2fbd0e67664ee769b4feec8614d186a6",
+      "ui_assets": {
+        "status": "ready",
+        "unavailable": []
+      },
+      "web_online": true,
+      "core_ready": true,
+      "stopped": false,
+      "assistant_state": "standby",
+      "active_tasks": 0,
+      "text_only": false,
+      "chat_text_only": true,
+      "computer_tasks": true,
+      "max_parallel_requests": 2,
+      "active_chat_requests": 0
+    },
+    "after": {
+      "app": "Jarvis",
+      "version": "0.1.43",
+      "instance_id": "7e944887b6cdf35de08a85dd3cf4e1f1",
+      "ui_assets": {
+        "status": "ready",
+        "unavailable": []
+      },
+      "web_online": true,
+      "core_ready": true,
+      "stopped": false,
+      "assistant_state": "standby",
+      "active_tasks": 0,
+      "text_only": false,
+      "chat_text_only": true,
+      "computer_tasks": true,
+      "max_parallel_requests": 2,
+      "active_chat_requests": 0
+    },
+    "business_snapshot": {
+      "/api/memory": "83cbe167af1891697568597a28c0a26f08782944420cbed206c303580f14f0b3",
+      "/api/workspace/projects": "2785edb3b57fdaf4d1e2d8730e30905ce1f80abae47dc2f5258fe0d697a11542",
+      "/api/extensions": "2e9f102c0dcc528fa7293e8db1ff942937d50ad40ee0cc50eaabf0b82c65c65c",
+      "/api/workspace/organization": "d811b4e424c37590a4037c84cc41d384a72bab35b4cfc8bdd5e5025fc7c0b77a",
+      "/api/conversations": "536ecec9e48bd96423464276597df2cab23e26a84df1cadb3c663a5bc8a3c5bb",
+      "tasks": "423e42d02ea0587dfbfe8d916057df0d8d11c0fb587bea61d330efcd856475bc",
+      "paused": true,
+      "/api/knowledge?project_id=68b7010022cd448fba8f2681a82f9216": "73608e3346e331760ac29f17144976922e84678fed8a2eb7cc66f6ef0e89a33c"
+    },
+    "date": "2026-10-18",
+    "status": "passed",
+    "version": "0.1.43",
+    "feature": "evolution-v1",
+    "user_data_snapshots_preserved": true,
+    "personal_stores_preserved": true,
+    "source_restart": "instance-specific tray event",
+    "local_model_previously_owned": false,
+    "source_assets_verified": true,
+    "generated_packages_and_policy_preserved": true,
+    "automatic_maintenance_enabled": true,
+    "url": "http://127.0.0.1:18181/settings#modules",
+    "initial_upgrade": "0.1.42 -> 0.1.43; data/personal-store assertions passed before an invalid standalone CSS GET check failed.",
+    "verification_restart": "One further idle 0.1.43 restart with persisted baseline. Inline CSS comparison initially differed only by CRLF normalization; final byte-equivalent verification resumed without another restart."
+  },
+  "documentation": {
+    "status": "passed",
+    "documents": 23,
+    "diagrams": 20,
+    "artifacts": 40,
+    "errors": 0
+  },
+  "evidence_files": {
+    "H:\\JarvisData\\evals\\recovery-candidates-20261018\\ui-final\\report.json": "f9155e110a3fe1e18505c6dcdbd995fbdcf7b4b5a23928c3f7c853f23a40737c",
+    "H:\\JarvisData\\evals\\recovery-candidates-20261018\\offline.json": "5fffd4b3901fd8d2f0fea679fd4fbebab268d3a2f5eb055b795d89be0f8778a7",
+    "H:\\JarvisData\\evals\\recovery-candidates-20261018\\idle-5min.json": "d606b5c98181205da8799135fde6e216c59cc4f73241b11728e9b061ea51548c",
+    "H:\\JarvisData\\evals\\recovery-candidates-20261018\\regression\\unittest.json": "7607a7dd5c2d597424216dc3fd9946ec0a523df71dad91e5cc18ce77deab2039",
+    "H:\\JarvisData\\evals\\recovery-candidates-20261018\\regression\\source-before.json": "07e8a7e4a270be2eeb8a08970887c4645e82b9d53e74ba264c28c657d8377f51",
+    "H:\\JarvisData\\evals\\recovery-candidates-20261018\\regression\\source-after.json": "d2a1764f74956bdab13a4af5b363a75ce87a93c1acab5652de5829421d9b1002",
+    "H:\\JarvisData\\evals\\recovery-candidates-20261018\\deployment.json": "83675afbd42323ec2f3f2f7d1199b098c02d2545f4e4a6f8f396445b37e6bedb"
+  },
+  "limits_retained": [
+    "Complete K2 and V-PAL gates remain partial.",
+    "Whole-machine offline acceptance deferred by owner.",
+    "Five minutes is short idle acceptance only, not long-term or low-end hardware certification."
+  ]
+}

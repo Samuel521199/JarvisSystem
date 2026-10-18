@@ -1,0 +1,259 @@
+{
+  "status": "SUCCEEDED",
+  "source_version": "0.1.43",
+  "backend": "Qwen3-TTS 1.7B Q5_K / speech.cpp 0.8.10 Vulkan0",
+  "cases": [
+    {
+      "label": "fixed",
+      "source_text": "别担心，我在这里。你已经做得很好了！我们一起试试看。",
+      "default_expression": "soft",
+      "direction": "",
+      "click_to_blob_seconds": 1.69209700000647,
+      "result": {
+        "id": "6563cc763a264384b1795a9332ce0a1c",
+        "sample_rate_hz": 24000,
+        "audio_seconds": 5.12,
+        "elapsed_seconds": 1.3760362999892095,
+        "first_pcm_seconds": 0.062346100006834604,
+        "voice": "serena",
+        "emotion": "neutral",
+        "language": "zh",
+        "expression": "温柔轻声",
+        "segments": [
+          {
+            "type": "speech",
+            "text": "别担心，我在这里。你已经做得很好了！我们一起试试看。",
+            "emotion": "neutral",
+            "delivery": "soft",
+            "pace": "normal",
+            "expression": "温柔轻声",
+            "start_sample": 0,
+            "end_sample": 122880,
+            "start_seconds": 0.0,
+            "end_seconds": 5.12
+          }
+        ],
+        "speech_segments": 1,
+        "pause_ms": 0,
+        "warnings": [],
+        "direction": "",
+        "join_method": "single_utterance",
+        "audio_url": "/api/speech/primary/audio/6563cc763a264384b1795a9332ce0a1c"
+      },
+      "memory": {
+        "working_set_bytes": 1702076416,
+        "peak_working_set_bytes": 1702985728,
+        "private_commit_bytes": 1832685568,
+        "peak_private_commit_bytes": 1851981824
+      },
+      "gpu_memory": {
+        "status": "measured",
+        "dedicated_bytes": 163807232,
+        "shared_bytes": 1585897472
+      },
+      "artifact": "H:\\JarvisData\\research\\qwen-tts\\expression-score\\fixed.wav",
+      "sha256": "a04f76de3fab7dd82fe4f253a548e98e2d26afb7d628e918950ac0e13c910444"
+    },
+    {
+      "label": "direction",
+      "source_text": "别担心，我在这里。你已经做得很好了！我们一起试试看。",
+      "default_expression": "neutral",
+      "direction": "像朋友聊天。开头轻声安慰，中间带着笑意真诚肯定，最后充满期待地鼓励。语气有自然起伏，保持同一音色。",
+      "click_to_blob_seconds": 1.8785443999950076,
+      "result": {
+        "id": "2803995435ce432f9d9fd235032594fc",
+        "sample_rate_hz": 24000,
+        "audio_seconds": 5.2,
+        "elapsed_seconds": 1.4938055999955395,
+        "first_pcm_seconds": 0.10600379999959841,
+        "voice": "serena",
+        "emotion": "neutral",
+        "language": "zh",
+        "expression": "自然",
+        "segments": [
+          {
+            "type": "speech",
+            "text": "别担心，我在这里。你已经做得很好了！我们一起试试看。",
+            "emotion": "neutral",
+            "delivery": "normal",
+            "pace": "normal",
+            "expression": "自然",
+            "start_sample": 0,
+            "end_sample": 124800,
+            "start_seconds": 0.0,
+            "end_seconds": 5.2
+          }
+        ],
+        "speech_segments": 1,
+        "pause_ms": 0,
+        "warnings": [],
+        "direction": "像朋友聊天。开头轻声安慰，中间带着笑意真诚肯定，最后充满期待地鼓励。语气有自然起伏，保持同一音色。",
+        "join_method": "single_utterance",
+        "audio_url": "/api/speech/primary/audio/2803995435ce432f9d9fd235032594fc"
+      },
+      "memory": {
+        "working_set_bytes": 1728622592,
+        "peak_working_set_bytes": 1729748992,
+        "private_commit_bytes": 1839493120,
+        "peak_private_commit_bytes": 1851981824
+      },
+      "gpu_memory": {
+        "status": "measured",
+        "dedicated_bytes": 168787968,
+        "shared_bytes": 1606950912
+      },
+      "artifact": "H:\\JarvisData\\research\\qwen-tts\\expression-score\\direction.wav",
+      "sha256": "aa8b2ed18d2932e1ba433d1417f14a691fb8d7d31a2d9abe4df37f2b83517795"
+    },
+    {
+      "label": "layered",
+      "source_text": "[轻声][慢速]别担心，我在这里。[停顿350ms][自然][开心]你已经做得很好了！[自然]我们一起试试看。",
+      "default_expression": "neutral",
+      "direction": "像朋友自然聊天，保持原来的音色，转折柔和，不要播音腔。",
+      "click_to_blob_seconds": 2.0111455000005662,
+      "result": {
+        "id": "7ad275fccaa94a5497e3724896b7228a",
+        "sample_rate_hz": 24000,
+        "audio_seconds": 6.59,
+        "elapsed_seconds": 1.7874890999955824,
+        "first_pcm_seconds": 0.05925109999952838,
+        "voice": "serena",
+        "emotion": "neutral",
+        "language": "zh",
+        "expression": "温柔轻声 · 舒缓慢速 → 开心 → 自然",
+        "segments": [
+          {
+            "type": "speech",
+            "text": "别担心，我在这里。",
+            "emotion": "neutral",
+            "delivery": "soft",
+            "pace": "slow",
+            "expression": "温柔轻声 · 舒缓慢速",
+            "start_sample": 0,
+            "end_sample": 57600,
+            "start_seconds": 0.0,
+            "end_seconds": 2.4
+          },
+          {
+            "type": "pause",
+            "milliseconds": 350,
+            "start_sample": 57600,
+            "end_sample": 66000,
+            "start_seconds": 2.4,
+            "end_seconds": 2.75
+          },
+          {
+            "type": "speech",
+            "text": "你已经做得很好了！",
+            "emotion": "happy",
+            "delivery": "normal",
+            "pace": "normal",
+            "expression": "开心",
+            "start_sample": 66000,
+            "end_sample": 100560,
+            "start_seconds": 2.75,
+            "end_seconds": 4.19
+          },
+          {
+            "type": "speech",
+            "text": "我们一起试试看。",
+            "emotion": "neutral",
+            "delivery": "normal",
+            "pace": "normal",
+            "expression": "自然",
+            "start_sample": 100560,
+            "end_sample": 158160,
+            "start_seconds": 4.19,
+            "end_seconds": 6.59
+          }
+        ],
+        "speech_segments": 3,
+        "pause_ms": 350,
+        "warnings": [],
+        "direction": "像朋友自然聊天，保持原来的音色，转折柔和，不要播音腔。",
+        "join_method": "5ms_edge_fade_without_trimming",
+        "audio_url": "/api/speech/primary/audio/7ad275fccaa94a5497e3724896b7228a"
+      },
+      "memory": {
+        "working_set_bytes": 1729937408,
+        "peak_working_set_bytes": 1730846720,
+        "private_commit_bytes": 1869946880,
+        "peak_private_commit_bytes": 1876701184
+      },
+      "gpu_memory": {
+        "status": "measured",
+        "dedicated_bytes": 130969600,
+        "shared_bytes": 1607032832
+      },
+      "artifact": "H:\\JarvisData\\research\\qwen-tts\\expression-score\\layered.wav",
+      "sha256": "34f4adc5e9cf6412fed9bcd68fe042079fbffae23d70edaddab448d7470c3bc4"
+    },
+    {
+      "label": "soft_slow",
+      "source_text": "【轻声】别担心，我在这里。",
+      "default_expression": "slow",
+      "direction": "",
+      "click_to_blob_seconds": 0.7030154999956721,
+      "result": {
+        "id": "a7a3a18c062842afa015e8e73b1932e4",
+        "sample_rate_hz": 24000,
+        "audio_seconds": 1.76,
+        "elapsed_seconds": 0.5084925999981351,
+        "first_pcm_seconds": 0.053377899996121414,
+        "voice": "serena",
+        "emotion": "neutral",
+        "language": "zh",
+        "expression": "温柔轻声 · 舒缓慢速",
+        "segments": [
+          {
+            "type": "speech",
+            "text": "别担心，我在这里。",
+            "emotion": "neutral",
+            "delivery": "soft",
+            "pace": "slow",
+            "expression": "温柔轻声 · 舒缓慢速",
+            "start_sample": 0,
+            "end_sample": 42240,
+            "start_seconds": 0.0,
+            "end_seconds": 1.76
+          }
+        ],
+        "speech_segments": 1,
+        "pause_ms": 0,
+        "warnings": [],
+        "direction": "",
+        "join_method": "single_utterance",
+        "audio_url": "/api/speech/primary/audio/a7a3a18c062842afa015e8e73b1932e4"
+      },
+      "memory": {
+        "working_set_bytes": 1729875968,
+        "peak_working_set_bytes": 1730846720,
+        "private_commit_bytes": 1935224832,
+        "peak_private_commit_bytes": 1943953408
+      },
+      "gpu_memory": {
+        "status": "measured",
+        "dedicated_bytes": 168787968,
+        "shared_bytes": 1607032832
+      },
+      "artifact": "H:\\JarvisData\\research\\qwen-tts\\expression-score\\soft_slow.wav",
+      "sha256": "786433a5e22bdb85f8dbeed3e1eff4aab2035c4ae92f1905c16a5f6f47b45d09"
+    }
+  ],
+  "preview_without_model": true,
+  "parallel_synthetic_chat_seconds": 0.02674420000403188,
+  "invalid_preview_does_not_stop_model": true,
+  "cancelled_owned_native_exited": true,
+  "browser_errors": [],
+  "limits": "A/B/C audio generated for listening, no subjective smoothness/identity acceptance yet. Same selected voice and seed, not an acoustic identity guarantee. Complete WAV, not streaming playback. No cloud calls.",
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/qwen_speech_contract.py": "b11ce612cfd72e946f44f0803053b20dc210eb077a1458c9982143fbd2fd27fe",
+    "runtime/node-host/jarvis_core/qwen_speech.py": "48686029397f915f5583dcab0786dad06c859436821109e8b349ad865c1c9f05",
+    "runtime/node-host/jarvis_core/speech_audio.py": "e45197ed56bc18b6d0d6d346b19892d7851b6c84d2a997eca49399b757108d58",
+    "adapters/speech/qwen/worker.py": "19e2f8991eb027c5a964a003c0f0bfa564f934e74e7368e41ad7ec84b20282cf",
+    "apps/web/admin.html": "55dfaacd85fa96f32bdb0b33fefe2fa2a5c9a8c182c66a112225120d85eb01e6",
+    "apps/web/speech.js": "494b3cc3036ebbeab17895ff30097c47c808218dc88f57c2c62139a25f970cf2",
+    "apps/web/speech_routes.py": "09f4605528387490d411d53135a1339a4dd79adcce091ce8e9cd50cfa9f6471f",
+    "tools/probe_speech_expression_ui.py": "e9e43dd0c34ffe025ed5df95aa9e5e9a5335c1d4764352cfe604ef9b1114a843"
+  }
+}

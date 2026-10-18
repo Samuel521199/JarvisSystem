@@ -1,0 +1,14 @@
+.session-context{margin:0 4px 9px;font-size:12px;color:var(--muted)}
+.session-context>summary{display:flex;align-items:center;gap:9px;width:fit-content;cursor:pointer;padding:4px 2px;list-style:none}
+.session-context>summary::before{content:"›";display:inline-block;transition:transform .15s}
+.session-context[open]>summary::before{transform:rotate(90deg)}
+.session-context>summary::-webkit-details-marker{display:none}
+#context-badge{font-size:10px;border:1px solid var(--line);border-radius:5px;padding:0 6px}
+.context-body{padding:9px 12px;background:var(--soft);border:1px solid var(--line);border-radius:10px;max-height:240px;overflow:auto}
+.context-body label{display:block;color:var(--ink);margin-bottom:6px}
+.context-body textarea{display:block;width:100%;min-height:64px;max-height:120px;resize:vertical;padding:7px 9px;border:1px solid var(--line);border-radius:7px;color:var(--ink);background:var(--surface);font-size:12px}
+.context-body p{font-size:11px;line-height:1.6;margin:6px 0 0;overflow-wrap:anywhere}
+.context-footer{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:4px}
+.context-footer button{border-radius:5px;padding:4px 6px;font-size:11px}
+.context-invalid{color:var(--error)}
+@media(prefers-reduced-motion:reduce){.session-context>summary::before{transition:none}}

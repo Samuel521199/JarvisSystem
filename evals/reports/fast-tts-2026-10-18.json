@@ -1,0 +1,932 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-18",
+  "status": "measured",
+  "assets": [
+    {
+      "id": "kokoro",
+      "path": "kokoro-int8-multi-lang-v1_1.tar.bz2",
+      "size_bytes": 147031220,
+      "sha256": "a1e94694776049035c4f2c6529f003aaece993c76aae9a78995831c3c4dcafc6",
+      "url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/kokoro-int8-multi-lang-v1_1.tar.bz2",
+      "extracted_files": 377,
+      "extracted_bytes": 215321602
+    },
+    {
+      "id": "zipvoice",
+      "path": "sherpa-onnx-zipvoice-distill-int8-zh-en-emilia.tar.bz2",
+      "size_bytes": 109162785,
+      "sha256": "77219c8b40f4ee8d73a7f902305ff6c1128ef9b54461c41b4ca6ed890b6c2803",
+      "url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/sherpa-onnx-zipvoice-distill-int8-zh-en-emilia.tar.bz2",
+      "extracted_files": 363,
+      "extracted_bytes": 150992715
+    },
+    {
+      "id": "vocos",
+      "path": "vocos_24khz.onnx",
+      "size_bytes": 54157409,
+      "sha256": "bcb3b970e384161c4d634f0bb9e999ff1c471b34c9bc0b1049a5014065ed3cc0",
+      "url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/vocoder-models/vocos_24khz.onnx"
+    }
+  ],
+  "results": [
+    {
+      "model": "kokoro",
+      "threads": 4,
+      "provider": "cpu",
+      "runtime": "1.13.8",
+      "python": "3.13.0",
+      "baseline_memory": {
+        "working_set_bytes": 39616512,
+        "peak_working_set_bytes": 39616512,
+        "private_commit_bytes": 128737280,
+        "peak_private_commit_bytes": 128737280
+      },
+      "load_seconds": 1.3481905000007828,
+      "loaded_memory": {
+        "working_set_bytes": 317059072,
+        "peak_working_set_bytes": 317059072,
+        "private_commit_bytes": 420323328,
+        "peak_private_commit_bytes": 420323328
+      },
+      "cases": [
+        {
+          "label": "first",
+          "text": "你好，我是贾维斯。",
+          "wall_seconds": 2.4363200000007055,
+          "cpu_seconds": 8.40625,
+          "audio_seconds": 2.693208333333333,
+          "rtf": 0.9046162414718649,
+          "callbacks": [
+            {
+              "seconds": 1.0097958999976981,
+              "samples": 23578,
+              "progress": 0.5
+            },
+            {
+              "seconds": 2.436287899996387,
+              "samples": 41059,
+              "progress": 1.0
+            }
+          ],
+          "memory": {
+            "working_set_bytes": 394727424,
+            "peak_working_set_bytes": 394919936,
+            "private_commit_bytes": 528371712,
+            "peak_private_commit_bytes": 528900096
+          },
+          "output": "H:\\JarvisData\\research\\fast-tts\\kokoro-4-first.wav",
+          "sha256": "0a3b9afd9d314bafb043f64eda51d9711ec6feb7e55ef711e36d94098390d28f"
+        },
+        {
+          "label": "warm",
+          "text": "你好，我是贾维斯。",
+          "wall_seconds": 2.571086700001615,
+          "cpu_seconds": 8.921875,
+          "audio_seconds": 2.6911666666666667,
+          "rtf": 0.9553799591261343,
+          "callbacks": [
+            {
+              "seconds": 1.058829000001424,
+              "samples": 23540,
+              "progress": 0.5
+            },
+            {
+              "seconds": 2.571051600003557,
+              "samples": 41048,
+              "progress": 1.0
+            }
+          ],
+          "memory": {
+            "working_set_bytes": 434782208,
+            "peak_working_set_bytes": 434782208,
+            "private_commit_bytes": 529940480,
+            "peak_private_commit_bytes": 529940480
+          },
+          "output": "H:\\JarvisData\\research\\fast-tts\\kokoro-4-warm.wav",
+          "sha256": "1e3572587f166d3a3626f76c747ac95dec9366e55236e7aec4222a25c0729597"
+        },
+        {
+          "label": "reply",
+          "text": "我在，有什么可以帮你？",
+          "wall_seconds": 2.7449185000004945,
+          "cpu_seconds": 9.328125,
+          "audio_seconds": 2.864,
+          "rtf": 0.9584212639666532,
+          "callbacks": [
+            {
+              "seconds": 1.0687340000004042,
+              "samples": 23490,
+              "progress": 0.5
+            },
+            {
+              "seconds": 2.744886000000406,
+              "samples": 45246,
+              "progress": 1.0
+            }
+          ],
+          "memory": {
+            "working_set_bytes": 435728384,
+            "peak_working_set_bytes": 435728384,
+            "private_commit_bytes": 530493440,
+            "peak_private_commit_bytes": 530493440
+          },
+          "output": "H:\\JarvisData\\research\\fast-tts\\kokoro-4-reply.wav",
+          "sha256": "11506dad84591e8e117198c580b02c6c148ed175f48c20486a2b4ab8bb3f8fdc"
+        },
+        {
+          "label": "mixed",
+          "text": "今天下午三点提醒我开会。Hello, I am Jarvis.",
+          "wall_seconds": 4.010166599997319,
+          "cpu_seconds": 12.5,
+          "audio_seconds": 4.731375,
+          "rtf": 0.8475689625103314,
+          "callbacks": [
+            {
+              "seconds": 2.2858376000003773,
+              "samples": 63924,
+              "progress": 0.5
+            },
+            {
+              "seconds": 4.010134800002561,
+              "samples": 49629,
+              "progress": 1.0
+            }
+          ],
+          "memory": {
+            "working_set_bytes": 439214080,
+            "peak_working_set_bytes": 439214080,
+            "private_commit_bytes": 533344256,
+            "peak_private_commit_bytes": 533344256
+          },
+          "output": "H:\\JarvisData\\research\\fast-tts\\kokoro-4-mixed.wav",
+          "sha256": "bd33f10c074ee83d641287c8de3bbf689d6a72e6ae58b61c35bdfcbdebe9cff8"
+        },
+        {
+          "label": "sentences",
+          "text": "我可以陪你聊天。也可以帮你处理事情。我们先从哪一件开始？",
+          "wall_seconds": 5.814586899999995,
+          "cpu_seconds": 18.3125,
+          "audio_seconds": 6.930375,
+          "rtf": 0.8390003282650643,
+          "callbacks": [
+            {
+              "seconds": 1.7541347000005771,
+              "samples": 52204,
+              "progress": 0.3333333432674408
+            },
+            {
+              "seconds": 3.7354625000007218,
+              "samples": 55718,
+              "progress": 0.6666666865348816
+            },
+            {
+              "seconds": 5.814553500000329,
+              "samples": 58407,
+              "progress": 1.0
+            }
+          ],
+          "memory": {
+            "working_set_bytes": 479256576,
+            "peak_working_set_bytes": 481906688,
+            "private_commit_bytes": 674422784,
+            "peak_private_commit_bytes": 677126144
+          },
+          "output": "H:\\JarvisData\\research\\fast-tts\\kokoro-4-sentences.wav",
+          "sha256": "0df3b1757d968997ecf1753da0ad8668d319ba8e274bd0cdef5f203cece4a8be"
+        }
+      ],
+      "peak_memory": {
+        "working_set_bytes": 479260672,
+        "peak_working_set_bytes": 481906688,
+        "private_commit_bytes": 674422784,
+        "peak_private_commit_bytes": 677126144
+      }
+    },
+    {
+      "model": "zipvoice",
+      "threads": 4,
+      "provider": "cpu",
+      "runtime": "1.13.8",
+      "python": "3.13.0",
+      "baseline_memory": {
+        "working_set_bytes": 39534592,
+        "peak_working_set_bytes": 39534592,
+        "private_commit_bytes": 128479232,
+        "peak_private_commit_bytes": 128479232
+      },
+      "load_seconds": 1.6712155999994138,
+      "loaded_memory": {
+        "working_set_bytes": 319410176,
+        "peak_working_set_bytes": 319410176,
+        "private_commit_bytes": 401227776,
+        "peak_private_commit_bytes": 401588224
+      },
+      "cases": [
+        {
+          "label": "first",
+          "text": "你好，我是贾维斯。",
+          "wall_seconds": 0.42897390000143787,
+          "cpu_seconds": 1.828125,
+          "audio_seconds": 1.26475,
+          "rtf": 0.3391768333674148,
+          "callbacks": [
+            {
+              "seconds": 0.42852960000163876,
+              "samples": 46080,
+              "progress": 1.0
+            }
+          ],
+          "memory": {
+            "working_set_bytes": 395476992,
+            "peak_working_set_bytes": 396402688,
+            "private_commit_bytes": 483074048,
+            "peak_private_commit_bytes": 484122624
+          },
+          "output": "H:\\JarvisData\\research\\fast-tts\\zipvoice-4-first.wav",
+          "sha256": "23a5611d795a3bd050c6158c0e1dbc6dc418fd517736918353e8cb20ae07c453"
+        },
+        {
+          "label": "warm",
+          "text": "你好，我是贾维斯。",
+          "wall_seconds": 0.45878719999745954,
+          "cpu_seconds": 2.109375,
+          "audio_seconds": 1.4514583333333333,
+          "rtf": 0.31608706186131846,
+          "callbacks": [
+            {
+              "seconds": 0.45836530000087805,
+              "samples": 46080,
+              "progress": 1.0
+            }
+          ],
+          "memory": {
+            "working_set_bytes": 399925248,
+            "peak_working_set_bytes": 399925248,
+            "private_commit_bytes": 488251392,
+            "peak_private_commit_bytes": 488312832
+          },
+          "output": "H:\\JarvisData\\research\\fast-tts\\zipvoice-4-warm.wav",
+          "sha256": "670f386bab4db97edbc1c69b0331f61e38f6238588f97469bf83187f3e059d74"
+        },
+        {
+          "label": "reply",
+          "text": "我在，有什么可以帮你？",
+          "wall_seconds": 0.5242045999984839,
+          "cpu_seconds": 2.359375,
+          "audio_seconds": 1.8645833333333333,
+          "rtf": 0.2811376625690193,
+          "callbacks": [
+            {
+              "seconds": 0.5237743000034243,
+              "samples": 57600,
+              "progress": 1.0
+            }
+          ],
+          "memory": {
+            "working_set_bytes": 436264960,
+            "peak_working_set_bytes": 436264960,
+            "private_commit_bytes": 557604864,
+            "peak_private_commit_bytes": 557629440
+          },
+          "output": "H:\\JarvisData\\research\\fast-tts\\zipvoice-4-reply.wav",
+          "sha256": "e203b254ee7f0b6145519f9b6b07f21e5eeb977e5c0ede9778bd560b1ed1b9b9"
+        },
+        {
+          "label": "mixed",
+          "text": "今天下午三点提醒我开会。Hello, I am Jarvis.",
+          "wall_seconds": 0.8726920999979484,
+          "cpu_seconds": 3.65625,
+          "audio_seconds": 4.643833333333333,
+          "rtf": 0.18792493988399275,
+          "callbacks": [
+            {
+              "seconds": 0.8721692999970401,
+              "samples": 141312,
+              "progress": 1.0
+            }
+          ],
+          "memory": {
+            "working_set_bytes": 532336640,
+            "peak_working_set_bytes": 532336640,
+            "private_commit_bytes": 726179840,
+            "peak_private_commit_bytes": 726179840
+          },
+          "output": "H:\\JarvisData\\research\\fast-tts\\zipvoice-4-mixed.wav",
+          "sha256": "3aa2cd8c456499f5b50eb59220d02d56305058a4a6780ce1151878100d3c2683"
+        },
+        {
+          "label": "sentences",
+          "text": "我可以陪你聊天。也可以帮你处理事情。我们先从哪一件开始？",
+          "wall_seconds": 0.9082321000023512,
+          "cpu_seconds": 3.828125,
+          "audio_seconds": 4.669375,
+          "rtf": 0.19450828001656567,
+          "callbacks": [
+            {
+              "seconds": 0.9076493999964441,
+              "samples": 152832,
+              "progress": 1.0
+            }
+          ],
+          "memory": {
+            "working_set_bytes": 563818496,
+            "peak_working_set_bytes": 566198272,
+            "private_commit_bytes": 726179840,
+            "peak_private_commit_bytes": 728698880
+          },
+          "output": "H:\\JarvisData\\research\\fast-tts\\zipvoice-4-sentences.wav",
+          "sha256": "908a0f14570ffc8ece43222240f174a24e4a1de4923842d38abcc1642786b8b6"
+        }
+      ],
+      "peak_memory": {
+        "working_set_bytes": 563822592,
+        "peak_working_set_bytes": 566198272,
+        "private_commit_bytes": 726179840,
+        "peak_private_commit_bytes": 728698880
+      }
+    }
+  ],
+  "reference": {
+    "path": "H:\\JarvisData\\research\\fast-tts\\reference.wav",
+    "sha256": "3c7fde5179ad8d84cf45afa9541b149ff689f867c586fe08c9dfce7368a7f1fb",
+    "text": "希望你以后能够做的比我还好呦。",
+    "source": "CosyVoice publisher fixture; not owner enrollment"
+  },
+  "limits": "File-only isolated CPU benchmark. Internal callback is not browser playback. No microphone, end-to-end chat, emotion, or clone-similarity acceptance.",
+  "asr_sanity_checks": [
+    {
+      "model": "kokoro",
+      "threads": 4,
+      "label": "first",
+      "expected": "你好，我是贾维斯。",
+      "recognized": "你好，我是贾维斯。",
+      "sha256": "0a3b9afd9d314bafb043f64eda51d9711ec6feb7e55ef711e36d94098390d28f"
+    },
+    {
+      "model": "kokoro",
+      "threads": 4,
+      "label": "warm",
+      "expected": "你好，我是贾维斯。",
+      "recognized": "你好，我是贾维斯。",
+      "sha256": "1e3572587f166d3a3626f76c747ac95dec9366e55236e7aec4222a25c0729597"
+    },
+    {
+      "model": "kokoro",
+      "threads": 4,
+      "label": "reply",
+      "expected": "我在，有什么可以帮你？",
+      "recognized": "我在有什么可以帮你。",
+      "sha256": "11506dad84591e8e117198c580b02c6c148ed175f48c20486a2b4ab8bb3f8fdc"
+    },
+    {
+      "model": "kokoro",
+      "threads": 4,
+      "label": "mixed",
+      "expected": "今天下午三点提醒我开会。Hello, I am Jarvis.",
+      "recognized": "今天下午3点提醒我开会，dot helloI am nervousvis.",
+      "sha256": "bd33f10c074ee83d641287c8de3bbf689d6a72e6ae58b61c35bdfcbdebe9cff8"
+    },
+    {
+      "model": "kokoro",
+      "threads": 4,
+      "label": "sentences",
+      "expected": "我可以陪你聊天。也可以帮你处理事情。我们先从哪一件开始？",
+      "recognized": "我可以陪你聊天，也可以帮你处理事情。我们先从大一键开始。",
+      "sha256": "0df3b1757d968997ecf1753da0ad8668d319ba8e274bd0cdef5f203cece4a8be"
+    },
+    {
+      "model": "zipvoice",
+      "threads": 4,
+      "label": "first",
+      "expected": "你好，我是贾维斯。",
+      "recognized": "你好，我是贾维斯。",
+      "sha256": "23a5611d795a3bd050c6158c0e1dbc6dc418fd517736918353e8cb20ae07c453"
+    },
+    {
+      "model": "zipvoice",
+      "threads": 4,
+      "label": "warm",
+      "expected": "你好，我是贾维斯。",
+      "recognized": "你好，我是贾维斯。",
+      "sha256": "670f386bab4db97edbc1c69b0331f61e38f6238588f97469bf83187f3e059d74"
+    },
+    {
+      "model": "zipvoice",
+      "threads": 4,
+      "label": "reply",
+      "expected": "我在，有什么可以帮你？",
+      "recognized": "我在有什么可以帮你？",
+      "sha256": "e203b254ee7f0b6145519f9b6b07f21e5eeb977e5c0ede9778bd560b1ed1b9b9"
+    },
+    {
+      "model": "zipvoice",
+      "threads": 4,
+      "label": "mixed",
+      "expected": "今天下午三点提醒我开会。Hello, I am Jarvis.",
+      "recognized": "今天下午3点提醒我开会。lo,I am jvis.",
+      "sha256": "3aa2cd8c456499f5b50eb59220d02d56305058a4a6780ce1151878100d3c2683"
+    },
+    {
+      "model": "zipvoice",
+      "threads": 4,
+      "label": "sentences",
+      "expected": "我可以陪你聊天。也可以帮你处理事情。我们先从哪一件开始？",
+      "recognized": "我可以陪你聊天，也可以帮你处理事情。我们先从哪一件开始？",
+      "sha256": "908a0f14570ffc8ece43222240f174a24e4a1de4923842d38abcc1642786b8b6"
+    }
+  ],
+  "thread_comparison": [
+    {
+      "model": "kokoro",
+      "threads": 2,
+      "provider": "cpu",
+      "runtime": "1.13.8",
+      "python": "3.13.0",
+      "baseline_memory": {
+        "working_set_bytes": 39473152,
+        "peak_working_set_bytes": 39473152,
+        "private_commit_bytes": 61333504,
+        "peak_private_commit_bytes": 61333504
+      },
+      "load_seconds": 1.3757803999978933,
+      "loaded_memory": {
+        "working_set_bytes": 316289024,
+        "peak_working_set_bytes": 316289024,
+        "private_commit_bytes": 352317440,
+        "peak_private_commit_bytes": 352317440
+      },
+      "cases": [
+        {
+          "label": "first",
+          "text": "你好，我是贾维斯。",
+          "wall_seconds": 2.7060258999990765,
+          "cpu_seconds": 4.875,
+          "audio_seconds": 2.6950833333333333,
+          "rtf": 1.0040601960356488,
+          "callbacks": [
+            {
+              "seconds": 1.114981099999568,
+              "samples": 23606,
+              "progress": 0.5
+            },
+            {
+              "seconds": 2.7059865000046557,
+              "samples": 41076,
+              "progress": 1.0
+            }
+          ],
+          "memory": {
+            "working_set_bytes": 393375744,
+            "peak_working_set_bytes": 393822208,
+            "private_commit_bytes": 460242944,
+            "peak_private_commit_bytes": 460771328
+          },
+          "output": "H:\\JarvisData\\research\\fast-tts\\kokoro-2-first.wav",
+          "sha256": "a05b2b16bc115ae32d8d60be941f128b6a11cd2ff8787c6a6b128d92913eb380"
+        },
+        {
+          "label": "warm",
+          "text": "你好，我是贾维斯。",
+          "wall_seconds": 2.730565199999546,
+          "cpu_seconds": 5.015625,
+          "audio_seconds": 2.691291666666667,
+          "rtf": 1.0145928194328793,
+          "callbacks": [
+            {
+              "seconds": 1.1218691999965813,
+              "samples": 23528,
+              "progress": 0.5
+            },
+            {
+              "seconds": 2.7305345999993733,
+              "samples": 41063,
+              "progress": 1.0
+            }
+          ],
+          "memory": {
+            "working_set_bytes": 433684480,
+            "peak_working_set_bytes": 433684480,
+            "private_commit_bytes": 461815808,
+            "peak_private_commit_bytes": 461815808
+          },
+          "output": "H:\\JarvisData\\research\\fast-tts\\kokoro-2-warm.wav",
+          "sha256": "65ce17c5b5aa18672ad2137b123e44f622d0a2030fe059120b7d8553b471c1aa"
+        },
+        {
+          "label": "reply",
+          "text": "我在，有什么可以帮你？",
+          "wall_seconds": 2.9074811000027694,
+          "cpu_seconds": 5.28125,
+          "audio_seconds": 2.85425,
+          "rtf": 1.018649767890959,
+          "callbacks": [
+            {
+              "seconds": 1.1239341999971657,
+              "samples": 23469,
+              "progress": 0.5
+            },
+            {
+              "seconds": 2.9074543000024278,
+              "samples": 45033,
+              "progress": 1.0
+            }
+          ],
+          "memory": {
+            "working_set_bytes": 434266112,
+            "peak_working_set_bytes": 434266112,
+            "private_commit_bytes": 461815808,
+            "peak_private_commit_bytes": 461815808
+          },
+          "output": "H:\\JarvisData\\research\\fast-tts\\kokoro-2-reply.wav",
+          "sha256": "e40c7b924796db8e8a74b7959332515399f6633d2a68f3d281a9bedf600a62fb"
+        },
+        {
+          "label": "mixed",
+          "text": "今天下午三点提醒我开会。Hello, I am Jarvis.",
+          "wall_seconds": 4.204993100000138,
+          "cpu_seconds": 7.234375,
+          "audio_seconds": 4.733041666666667,
+          "rtf": 0.8884335689699481,
+          "callbacks": [
+            {
+              "seconds": 2.323263999998744,
+              "samples": 63908,
+              "progress": 0.5
+            },
+            {
+              "seconds": 4.204963100004534,
+              "samples": 49685,
+              "progress": 1.0
+            }
+          ],
+          "memory": {
+            "working_set_bytes": 437747712,
+            "peak_working_set_bytes": 437747712,
+            "private_commit_bytes": 464662528,
+            "peak_private_commit_bytes": 464662528
+          },
+          "output": "H:\\JarvisData\\research\\fast-tts\\kokoro-2-mixed.wav",
+          "sha256": "84dd49d4074311f5edfc5551236a6361969a04fb60124657cd43ba60b17fda69"
+        },
+        {
+          "label": "sentences",
+          "text": "我可以陪你聊天。也可以帮你处理事情。我们先从哪一件开始？",
+          "wall_seconds": 5.902026800002204,
+          "cpu_seconds": 10.1875,
+          "audio_seconds": 6.92225,
+          "rtf": 0.8526168225652359,
+          "callbacks": [
+            {
+              "seconds": 1.7706487000032212,
+              "samples": 52013,
+              "progress": 0.3333333432674408
+            },
+            {
+              "seconds": 3.8047949000028893,
+              "samples": 55726,
+              "progress": 0.6666666865348816
+            },
+            {
+              "seconds": 5.901995500003977,
+              "samples": 58395,
+              "progress": 1.0
+            }
+          ],
+          "memory": {
+            "working_set_bytes": 478900224,
+            "peak_working_set_bytes": 481550336,
+            "private_commit_bytes": 606797824,
+            "peak_private_commit_bytes": 609517568
+          },
+          "output": "H:\\JarvisData\\research\\fast-tts\\kokoro-2-sentences.wav",
+          "sha256": "142e4ffdf936fa73905ef42a8fcc91a059cb2a077c70c87480c9f8fd0175c321"
+        }
+      ],
+      "peak_memory": {
+        "working_set_bytes": 478904320,
+        "peak_working_set_bytes": 481550336,
+        "private_commit_bytes": 606797824,
+        "peak_private_commit_bytes": 609517568
+      }
+    },
+    {
+      "model": "kokoro",
+      "threads": 8,
+      "provider": "cpu",
+      "runtime": "1.13.8",
+      "python": "3.13.0",
+      "baseline_memory": {
+        "working_set_bytes": 39706624,
+        "peak_working_set_bytes": 39706624,
+        "private_commit_bytes": 263196672,
+        "peak_private_commit_bytes": 263196672
+      },
+      "load_seconds": 1.8923205000028247,
+      "loaded_memory": {
+        "working_set_bytes": 318091264,
+        "peak_working_set_bytes": 318091264,
+        "private_commit_bytes": 556011520,
+        "peak_private_commit_bytes": 556011520
+      },
+      "cases": [
+        {
+          "label": "first",
+          "text": "你好，我是贾维斯。",
+          "wall_seconds": 2.7197250999961398,
+          "cpu_seconds": 17.96875,
+          "audio_seconds": 2.69425,
+          "rtf": 1.0094553586326955,
+          "callbacks": [
+            {
+              "seconds": 1.1558644999968237,
+              "samples": 23602,
+              "progress": 0.5
+            },
+            {
+              "seconds": 2.7196833999987575,
+              "samples": 41060,
+              "progress": 1.0
+            }
+          ],
+          "memory": {
+            "working_set_bytes": 396021760,
+            "peak_working_set_bytes": 396214272,
+            "private_commit_bytes": 664260608,
+            "peak_private_commit_bytes": 664788992
+          },
+          "output": "H:\\JarvisData\\research\\fast-tts\\kokoro-8-first.wav",
+          "sha256": "03bd50d6d5bf1e7e1b19ec57348ebf07098781644b31d761ef20d251221e2c0a"
+        },
+        {
+          "label": "warm",
+          "text": "你好，我是贾维斯。",
+          "wall_seconds": 2.7460823000001255,
+          "cpu_seconds": 18.84375,
+          "audio_seconds": 2.697208333333333,
+          "rtf": 1.0181202045325106,
+          "callbacks": [
+            {
+              "seconds": 1.161779000001843,
+              "samples": 23682,
+              "progress": 0.5
+            },
+            {
+              "seconds": 2.7460447999983444,
+              "samples": 41051,
+              "progress": 1.0
+            }
+          ],
+          "memory": {
+            "working_set_bytes": 436076544,
+            "peak_working_set_bytes": 436076544,
+            "private_commit_bytes": 665829376,
+            "peak_private_commit_bytes": 665829376
+          },
+          "output": "H:\\JarvisData\\research\\fast-tts\\kokoro-8-warm.wav",
+          "sha256": "07f2c924ec55939e224792cb3c74714a1cbfd9f8dea47e8f810bc39049d73c5f"
+        },
+        {
+          "label": "reply",
+          "text": "我在，有什么可以帮你？",
+          "wall_seconds": 2.985380999998597,
+          "cpu_seconds": 19.109375,
+          "audio_seconds": 2.879875,
+          "rtf": 1.0366356178648715,
+          "callbacks": [
+            {
+              "seconds": 1.1643487999972422,
+              "samples": 24085,
+              "progress": 0.5
+            },
+            {
+              "seconds": 2.9853516000002855,
+              "samples": 45032,
+              "progress": 1.0
+            }
+          ],
+          "memory": {
+            "working_set_bytes": 437874688,
+            "peak_working_set_bytes": 437874688,
+            "private_commit_bytes": 666382336,
+            "peak_private_commit_bytes": 666382336
+          },
+          "output": "H:\\JarvisData\\research\\fast-tts\\kokoro-8-reply.wav",
+          "sha256": "88e5d64cca5d7ee8ad8d4b34719580eeb141a50925aa235985a92d29dd7845d4"
+        },
+        {
+          "label": "mixed",
+          "text": "今天下午三点提醒我开会。Hello, I am Jarvis.",
+          "wall_seconds": 4.2201181999989785,
+          "cpu_seconds": 24.375,
+          "audio_seconds": 4.738041666666667,
+          "rtf": 0.890688283661283,
+          "callbacks": [
+            {
+              "seconds": 2.390461499999219,
+              "samples": 64112,
+              "progress": 0.5
+            },
+            {
+              "seconds": 4.220087699999567,
+              "samples": 49601,
+              "progress": 1.0
+            }
+          ],
+          "memory": {
+            "working_set_bytes": 441434112,
+            "peak_working_set_bytes": 441434112,
+            "private_commit_bytes": 670154752,
+            "peak_private_commit_bytes": 670154752
+          },
+          "output": "H:\\JarvisData\\research\\fast-tts\\kokoro-8-mixed.wav",
+          "sha256": "86a4df952df9f4227dc67d88ef0407a6f6f92ac47ee7556ec4f46229cdf7ef64"
+        },
+        {
+          "label": "sentences",
+          "text": "我可以陪你聊天。也可以帮你处理事情。我们先从哪一件开始？",
+          "wall_seconds": 6.031614500003343,
+          "cpu_seconds": 35.96875,
+          "audio_seconds": 6.924666666666667,
+          "rtf": 0.8710331905271025,
+          "callbacks": [
+            {
+              "seconds": 1.8277261999974144,
+              "samples": 52066,
+              "progress": 0.3333333432674408
+            },
+            {
+              "seconds": 3.9378919000009773,
+              "samples": 55711,
+              "progress": 0.6666666865348816
+            },
+            {
+              "seconds": 6.0315802000041,
+              "samples": 58415,
+              "progress": 1.0
+            }
+          ],
+          "memory": {
+            "working_set_bytes": 482488320,
+            "peak_working_set_bytes": 485138432,
+            "private_commit_bytes": 812281856,
+            "peak_private_commit_bytes": 814956544
+          },
+          "output": "H:\\JarvisData\\research\\fast-tts\\kokoro-8-sentences.wav",
+          "sha256": "df690edd8310942127ece07eaebf4069424751fa5eb8bfe18a68bd2553336096"
+        }
+      ],
+      "peak_memory": {
+        "working_set_bytes": 482492416,
+        "peak_working_set_bytes": 485138432,
+        "private_commit_bytes": 812281856,
+        "peak_private_commit_bytes": 814956544
+      }
+    },
+    {
+      "model": "zipvoice",
+      "threads": 8,
+      "provider": "cpu",
+      "runtime": "1.13.8",
+      "python": "3.13.0",
+      "baseline_memory": {
+        "working_set_bytes": 39915520,
+        "peak_working_set_bytes": 39915520,
+        "private_commit_bytes": 263540736,
+        "peak_private_commit_bytes": 263540736
+      },
+      "load_seconds": 1.5009890000001178,
+      "loaded_memory": {
+        "working_set_bytes": 322338816,
+        "peak_working_set_bytes": 322338816,
+        "private_commit_bytes": 538931200,
+        "peak_private_commit_bytes": 539312128
+      },
+      "cases": [
+        {
+          "label": "first",
+          "text": "你好，我是贾维斯。",
+          "wall_seconds": 0.43777330000011716,
+          "cpu_seconds": 3.703125,
+          "audio_seconds": 1.3105,
+          "rtf": 0.3340505913774263,
+          "callbacks": [
+            {
+              "seconds": 0.4372549000036088,
+              "samples": 46080,
+              "progress": 1.0
+            }
+          ],
+          "memory": {
+            "working_set_bytes": 399118336,
+            "peak_working_set_bytes": 400097280,
+            "private_commit_bytes": 621563904,
+            "peak_private_commit_bytes": 622612480
+          },
+          "output": "H:\\JarvisData\\research\\fast-tts\\zipvoice-8-first.wav",
+          "sha256": "0af48360f2a99c5fc76df9c928e6b7901ceb722ecc56264adfa84125abfdd4ef"
+        },
+        {
+          "label": "warm",
+          "text": "你好，我是贾维斯。",
+          "wall_seconds": 0.4828362999978708,
+          "cpu_seconds": 4.53125,
+          "audio_seconds": 1.33025,
+          "rtf": 0.36296658522673997,
+          "callbacks": [
+            {
+              "seconds": 0.482389199998579,
+              "samples": 46080,
+              "progress": 1.0
+            }
+          ],
+          "memory": {
+            "working_set_bytes": 403566592,
+            "peak_working_set_bytes": 403566592,
+            "private_commit_bytes": 626745344,
+            "peak_private_commit_bytes": 626810880
+          },
+          "output": "H:\\JarvisData\\research\\fast-tts\\zipvoice-8-warm.wav",
+          "sha256": "868476fc133a53bf49137792247159ccf465293983103b12793f18853dba01ea"
+        },
+        {
+          "label": "reply",
+          "text": "我在，有什么可以帮你？",
+          "wall_seconds": 0.494443700001284,
+          "cpu_seconds": 4.625,
+          "audio_seconds": 1.9157083333333333,
+          "rtf": 0.25809967592558924,
+          "callbacks": [
+            {
+              "seconds": 0.4940031000005547,
+              "samples": 57600,
+              "progress": 1.0
+            }
+          ],
+          "memory": {
+            "working_set_bytes": 440545280,
+            "peak_working_set_bytes": 440545280,
+            "private_commit_bytes": 696766464,
+            "peak_private_commit_bytes": 696827904
+          },
+          "output": "H:\\JarvisData\\research\\fast-tts\\zipvoice-8-reply.wav",
+          "sha256": "d05581c50a64726673ca0324d22e9bdd354c134cc3666e02aa5e209f20ebb012"
+        },
+        {
+          "label": "mixed",
+          "text": "今天下午三点提醒我开会。Hello, I am Jarvis.",
+          "wall_seconds": 0.8575983000046108,
+          "cpu_seconds": 7.5,
+          "audio_seconds": 3.8076666666666665,
+          "rtf": 0.2252293530608275,
+          "callbacks": [
+            {
+              "seconds": 0.8570437000016682,
+              "samples": 141312,
+              "progress": 1.0
+            }
+          ],
+          "memory": {
+            "working_set_bytes": 533868544,
+            "peak_working_set_bytes": 535707648,
+            "private_commit_bytes": 861933568,
+            "peak_private_commit_bytes": 864215040
+          },
+          "output": "H:\\JarvisData\\research\\fast-tts\\zipvoice-8-mixed.wav",
+          "sha256": "158f96379696b58f319e37b031f1787e6088a4aa789bee533c411102cd82d37d"
+        },
+        {
+          "label": "sentences",
+          "text": "我可以陪你聊天。也可以帮你处理事情。我们先从哪一件开始？",
+          "wall_seconds": 0.8742177000021911,
+          "cpu_seconds": 7.53125,
+          "audio_seconds": 4.434666666666667,
+          "rtf": 0.1971326743841381,
+          "callbacks": [
+            {
+              "seconds": 0.873582100000931,
+              "samples": 152832,
+              "progress": 1.0
+            }
+          ],
+          "memory": {
+            "working_set_bytes": 566820864,
+            "peak_working_set_bytes": 568659968,
+            "private_commit_bytes": 864272384,
+            "peak_private_commit_bytes": 865685504
+          },
+          "output": "H:\\JarvisData\\research\\fast-tts\\zipvoice-8-sentences.wav",
+          "sha256": "7d3b8cdd36168ba49c70f80b6f9496684d8c4aec54cd3af9bef391b557008747"
+        }
+      ],
+      "peak_memory": {
+        "working_set_bytes": 566870016,
+        "peak_working_set_bytes": 568659968,
+        "private_commit_bytes": 864272384,
+        "peak_private_commit_bytes": 865685504
+      }
+    }
+  ],
+  "reference_conversion_reproduced": true,
+  "paid_calls": 0
+}

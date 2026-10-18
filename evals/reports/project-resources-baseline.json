@@ -1,0 +1,56 @@
+{
+  "version": "0.1.27",
+  "captured_at": "2026-10-16T13:34:11.011651+00:00",
+  "status": "passed",
+  "unit_tests": {
+    "command": "python -X utf8 -B -m unittest discover -s tests",
+    "total": 386,
+    "passed": 384,
+    "skipped": 2,
+    "seconds": 184.69
+  },
+  "targeted_tests": {
+    "path": "tests/test_project_resources.py",
+    "total": 14,
+    "passed": 14
+  },
+  "browser_evidence": "evals/reports/project-resources-ui.json",
+  "new_third_party_dependencies": 0,
+  "new_background_services": 0,
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/project_files.py": "aa1e565ffd955db740db605a01acf5188a52809cb92d3e731b4a57e1cc3a5ff5",
+    "runtime/node-host/jarvis_core/extensions.py": "723d4c4f88ff3eb125be8aa00f4c42ab0f1f8e1b7ac5c3cbb378c2d7b18be56d",
+    "apps/web/explorer.js": "71b65c92aa9c979555e87ce7d6fcf000c7e80376f7d5d9c65e1c1f2279b67d41",
+    "apps/web/explorer.css": "43e7712e682a1e5c8d82fd73f79ad2714b1800f306e464a614e084dcd10dfba4",
+    "apps/web/extensions.js": "ca0d4e3fa8d83a6619094c98eb05609805d50b48d9ac2de8775ace576de72dd9",
+    "apps/web/extensions.css": "444ac5abe99165446fa0efbe796c85a1fccaeed54a7daf0095ea786831a1b762",
+    "apps/web/index.html": "50b90c94240066fe2fd23f522c23d040b290dd993cd82fe2119e23389b222382",
+    "apps/web/workspace.js": "7a64784179c10df4e28382e2eca94c3f196a40379c58d986a3989a21fb300d7a",
+    "apps/web/server.py": "e3c2e9b15d06e7455eb999c9b7b5706c67d00772d7386e5d969b442d2d480911",
+    "apps/web/admin.html": "65e34c537e0cbd3c71bed52d4ae3db537b7fe4d5fe24b4412e1c1ccfdc4c0e4c",
+    "apps/web/admin.js": "77838132785375476189709ac7f81ef22aeecd537246c968bb638174e8a32a63",
+    "tests/test_project_resources.py": "8efbf76a912567c2adceeb2eb6a8a1d9190c7d1d7bca6501b64c81030f938116",
+    "tools/probe_project_resources_ui.py": "89df832c3421741d99ed13065279c388815963cc2a0d5a7f27d927dc9ee4f06c",
+    "runtime/node-host/jarvis_core/assistant_context.py": "369251ff422f4b7cbfd9e150cf8e5ea275ca72f68b1ab559e122fefe0e565139",
+    "runtime/node-host/jarvis_core/modules.py": "43ff3485d846fd1598cb9393373434685c55df468c05da6827e28a07ab7f0626"
+  },
+  "limits": [
+    "Full regression has two environment-dependent skips; no paid model calls.",
+    "Lightweight manual UTF-8 editing, single-root engineering file; not full IDE.",
+    "MCP/skill registration only; no executable extension runtime.",
+    "No OS-atomic compare-and-swap against malicious same-user concurrent changes; no hard disk I/O deadline.",
+    "No complete credential content detection, gitignore parser, semantic code index or federation."
+  ],
+  "post_review_checks": {
+    "tests": 30,
+    "passed": 30,
+    "scope": "assistant readiness, module monitor and project resources; after capability text update"
+  },
+  "docs_check": {
+    "documents": 23,
+    "diagrams": 19,
+    "artifacts": 38,
+    "errors": 0
+  },
+  "integration_note": "The final Edge run passed against the concurrent sidebar update, including its archive data-state indicator; earlier full regression and subsequent 30-test backend checks retained above."
+}

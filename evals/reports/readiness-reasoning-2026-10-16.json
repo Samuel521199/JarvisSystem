@@ -1,0 +1,20 @@
+{
+  "scope": "single diagnostic comparison, same arithmetic case, no default changed",
+  "result": {
+    "status": "SUCCEEDED",
+    "provider": "bailian",
+    "model": "qwen3.8-flash",
+    "text": "{\"total\":\"546.65\"}",
+    "usage": {
+      "completion_tokens": 141,
+      "prompt_tokens": 236,
+      "total_tokens": 377,
+      "cached_tokens": 0,
+      "reasoning_tokens": 128
+    },
+    "reasoning": "on",
+    "elapsed_seconds": 2.205,
+    "output_incomplete": false,
+    "completion_reason": "complete"
+  }
+}

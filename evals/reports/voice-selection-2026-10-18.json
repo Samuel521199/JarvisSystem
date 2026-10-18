@@ -1,0 +1,563 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-10-17T16:54:14.862137+00:00",
+  "local_date": "2026-10-18",
+  "source_version": "0.1.40",
+  "status": "passed",
+  "scope": "Selection analysis and existing file-only component rerun, not microphone chat implementation.",
+  "connections": [
+    {
+      "connection": "vertex",
+      "adapter": "vertex",
+      "enabled": true,
+      "default_text_model": "gemini-3.8-flash",
+      "credential_present": true,
+      "credential_kind": "google_service_account",
+      "binding_matches": true,
+      "speech_access": "not_tested",
+      "balance": "not_queried",
+      "region": null
+    },
+    {
+      "connection": "bailian",
+      "adapter": "bailian",
+      "enabled": true,
+      "default_text_model": "qwen3.8-flash",
+      "credential_present": true,
+      "credential_kind": "api_key",
+      "binding_matches": true,
+      "speech_access": "not_tested",
+      "balance": "not_queried",
+      "region": "beijing"
+    },
+    {
+      "connection": "openai",
+      "adapter": "openai",
+      "enabled": true,
+      "default_text_model": "gpt-6-luna",
+      "credential_present": true,
+      "credential_kind": "api_key",
+      "binding_matches": true,
+      "speech_access": "not_tested",
+      "balance": "not_queried",
+      "region": null
+    },
+    {
+      "connection": "xai",
+      "adapter": "xai",
+      "enabled": true,
+      "default_text_model": "grok-4.7",
+      "credential_present": true,
+      "credential_kind": "api_key",
+      "binding_matches": true,
+      "speech_access": "not_tested",
+      "balance": "not_queried",
+      "region": null
+    },
+    {
+      "connection": "eachlabs",
+      "adapter": "eachlabs",
+      "enabled": true,
+      "default_text_model": "anthropic/claude-sonnet-5.5",
+      "credential_present": true,
+      "credential_kind": "api_key",
+      "binding_matches": true,
+      "speech_access": "not_tested",
+      "balance": "not_queried",
+      "region": null
+    }
+  ],
+  "local_components": [
+    {
+      "id": "sensevoice-int8",
+      "files": 4,
+      "bytes": 239728794,
+      "runtime": {
+        "provider": "sherpa-onnx",
+        "device": "cpu",
+        "threads": 2,
+        "sample_rate_hz": 16000,
+        "language": "zh",
+        "use_itn": true,
+        "max_segment_seconds": 15
+      }
+    },
+    {
+      "id": "vits-aishell3-low",
+      "files": 8,
+      "bytes": 32762508,
+      "runtime": {
+        "provider": "sherpa-onnx",
+        "device": "cpu",
+        "threads": 2,
+        "speaker_id": 0,
+        "model": "tts/vits-aishell3-low/model.onnx",
+        "lexicon": "tts/vits-aishell3-low/lexicon.txt",
+        "tokens": "tts/vits-aishell3-low/tokens.txt",
+        "rule_fsts": [
+          "tts/vits-aishell3-low/phone.fst",
+          "tts/vits-aishell3-low/date.fst",
+          "tts/vits-aishell3-low/number.fst"
+        ]
+      }
+    },
+    {
+      "id": "campplus-zh",
+      "files": 1,
+      "bytes": 28281138,
+      "runtime": {
+        "provider": "sherpa-onnx",
+        "device": "cpu",
+        "threads": 1,
+        "sample_rate_hz": 16000
+      }
+    },
+    {
+      "id": "silero-vad",
+      "files": 1,
+      "bytes": 1807522,
+      "runtime": {
+        "provider": "sherpa-onnx",
+        "device": "cpu",
+        "threads": 1,
+        "sample_rate_hz": 16000
+      }
+    }
+  ],
+  "local_voice_artifact_bytes": 302579962,
+  "dependencies": {
+    "sherpa-onnx": "1.13.8",
+    "sherpa-onnx-core": "1.13.8",
+    "numpy": "2.5.4",
+    "httpx": "0.28.1"
+  },
+  "local_smoke": {
+    "synthetic_audio": "C:\\Users\\samuel\\AppData\\Local\\Jarvis\\data\\diagnostics\\voice-selection-2026-10-18\\synthetic-speech-test.wav",
+    "tts_sample_rate": 8000,
+    "tts_duration_seconds": 8.202,
+    "tts_prompt": "你好，我是你的本地助手。现在正在测试语音识别和语音合成。",
+    "synthetic_transcript": "你好，我是你的咱地助手。现在正在测试语音识间和语音合成。",
+    "publisher_fixture_transcript": "开饭时间早上9点至下午5点。",
+    "speaker_embedding_dimensions": 192,
+    "speaker_embedding_finite": true,
+    "speaker_embedding_valid": true,
+    "owner_enrolled": false,
+    "voice_authentication_granted": false,
+    "vad_segments": 1,
+    "timings": {
+      "tts_seconds_including_load": 1.242,
+      "asr_seconds_including_load": 1.331,
+      "speaker_seconds_including_load": 0.373
+    },
+    "status": "passed",
+    "limits": "File-only smoke test; no microphone, speaker identity enrollment, spoof defense or voice quality benchmark."
+  },
+  "elapsed_seconds": 14.304,
+  "cpu_seconds": 6.641,
+  "sampled_process_peak": {
+    "working_set_bytes": 390660096,
+    "private_bytes": 1147187200,
+    "samples": 447
+  },
+  "synthetic_loopback_cer": {
+    "reference_characters": 25,
+    "edits": 2,
+    "cer": 0.08,
+    "scope": "One generated low-rate TTS recording; combined TTS/STT diagnostic, not a human speech accuracy benchmark."
+  },
+  "network_attempts": 0,
+  "paid_calls": 0,
+  "microphone_opened": false,
+  "owner_enrolled": false,
+  "source_sha256": {
+    "tools/speech_probe.py": "6f7e01bbc75edf46b49c4a80470dc74ace3f3ea1f301012d47ee9149a8b14946",
+    "config/model-profiles/local-candidates.json": "8c453597ff55573955798f9be504ff479d356967ed5a4ce820178b761d4ed5df"
+  },
+  "limits": [
+    "Models loaded sequentially; memory is this benchmark process sampled peak, not simultaneous voice pipeline peak.",
+    "No voice listening/MOS test, owner samples, speaker FAR/FRR, echo cancellation, interruption or actual cloud speech permission test.",
+    "Local model artifacts verified by existing pinned-hash check; no downloads or running service changes."
+  ],
+  "candidate_release_metadata": [
+    {
+      "name": "sherpa-onnx-zipvoice-distill-int8-zh-en-emilia.tar.bz2",
+      "download_bytes": 109162785,
+      "source": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/sherpa-onnx-zipvoice-distill-int8-zh-en-emilia.tar.bz2",
+      "release_tag": "tts-models",
+      "release_asset_digest": "sha256:77219c8b40f4ee8d73a7f902305ff6c1128ef9b54461c41b4ca6ed890b6c2803",
+      "updated_at": "2025-12-11T09:47:31Z",
+      "downloaded": false
+    },
+    {
+      "name": "vocos_24khz.onnx",
+      "download_bytes": 54157409,
+      "source": "https://github.com/k2-fsa/sherpa-onnx/releases/download/vocoder-models/vocos_24khz.onnx",
+      "release_tag": "vocoder-models",
+      "release_asset_digest": "sha256:bcb3b970e384161c4d634f0bb9e999ff1c471b34c9bc0b1049a5014065ed3cc0",
+      "updated_at": "2025-08-21T10:24:57Z",
+      "downloaded": false
+    },
+    {
+      "name": "sherpa-onnx-pyannote-segmentation-3-0.tar.bz2",
+      "download_bytes": 6958444,
+      "source": "https://github.com/k2-fsa/sherpa-onnx/releases/download/speaker-segmentation-models/sherpa-onnx-pyannote-segmentation-3-0.tar.bz2",
+      "release_tag": "speaker-segmentation-models",
+      "release_asset_digest": null,
+      "updated_at": "2024-10-08T12:54:10Z",
+      "downloaded": false
+    }
+  ],
+  "candidate_metadata_checked_at": "2026-10-17T16:58:47.471033+00:00",
+  "sherpa_candidate_apis_present": [
+    "OfflineTtsZipvoiceModelConfig",
+    "OfflineSpeakerDiarization",
+    "OfflineSpeakerSegmentationPyannoteModelConfig"
+  ],
+  "research": {
+    "date": "2026-10-18",
+    "scope": "Local-first low-resource selection; public provider documentation and prices, no cloud speech invocation or voice cloning.",
+    "sources": [
+      {
+        "id": "S189",
+        "url": "https://k2-fsa.github.io/sherpa/onnx/tts/zipvoice.html"
+      },
+      {
+        "id": "S190",
+        "url": "https://k2-fsa.github.io/sherpa/onnx/speaker-diarization/index.html"
+      },
+      {
+        "id": "S191",
+        "url": "https://github.com/QwenAudio/CosyVoice"
+      },
+      {
+        "id": "S192",
+        "url": "https://github.com/QwenLM/Qwen3-ASR"
+      },
+      {
+        "id": "S193",
+        "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/text-to-speech/overview"
+      },
+      {
+        "id": "S194",
+        "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-5-transcribe"
+      },
+      {
+        "id": "S195",
+        "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/live-api"
+      },
+      {
+        "id": "S196",
+        "url": "https://help.aliyun.com/zh/model-studio/cosyvoice-v3-5-flash"
+      },
+      {
+        "id": "S197",
+        "url": "https://help.aliyun.com/en/model-studio/asr-model"
+      },
+      {
+        "id": "S198",
+        "url": "https://help.aliyun.com/zh/model-studio/model-pricing"
+      },
+      {
+        "id": "S199",
+        "url": "https://help.aliyun.com/zh/model-studio/qwen-audio-3-1-tts-flash"
+      },
+      {
+        "id": "S200",
+        "url": "https://docs.x.ai/developers/model-capabilities/audio/voice"
+      },
+      {
+        "id": "S201",
+        "url": "https://docs.x.ai/developers/model-capabilities/audio/custom-voices"
+      },
+      {
+        "id": "S202",
+        "url": "https://developers.openai.com/api/docs/guides/audio"
+      },
+      {
+        "id": "S203",
+        "url": "https://developers.openai.com/api/docs/guides/custom-voices"
+      },
+      {
+        "id": "S204",
+        "url": "https://developers.openai.com/api/docs/guides/speech-to-text"
+      },
+      {
+        "id": "S205",
+        "url": "https://github.com/wenet-e2e/wesep"
+      },
+      {
+        "id": "S206",
+        "url": "https://huggingface.co/speechbrain/sepformer-whamr"
+      },
+      {
+        "id": "S207",
+        "url": "https://k2-fsa.github.io/sherpa/onnx/source-separation/index.html"
+      },
+      {
+        "id": "S208",
+        "url": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing?hl=en"
+      },
+      {
+        "id": "S209",
+        "url": "https://github.com/k2-fsa/sherpa-onnx/releases/tag/speaker-recongition-models"
+      },
+      {
+        "id": "S210",
+        "url": "https://huggingface.co/pyannote/speaker-diarization-community-1"
+      },
+      {
+        "id": "S211",
+        "url": "https://k2-fsa.github.io/sherpa/onnx/tts/pretrained_models/kokoro.html"
+      },
+      {
+        "id": "S212",
+        "url": "https://k2-fsa.github.io/sherpa/onnx/tts/pocket.html"
+      },
+      {
+        "id": "S213",
+        "url": "https://github.com/k2-fsa/ZipVoice"
+      },
+      {
+        "id": "S214",
+        "url": "https://github.com/QwenAudio/CosyVoice/blob/main/cosyvoice/cli/cosyvoice.py"
+      },
+      {
+        "id": "S215",
+        "url": "https://huggingface.co/FunAudioLLM/Fun-CosyVoice3-0.5B-2512/tree/29e01c4e8d000f4bcd70751be16fa94bf3d85a18"
+      }
+    ],
+    "authoritative_selection": "docs/models-offline.md#voice-model-selection"
+  },
+  "proposed_primary": {
+    "vad": "existing Silero ONNX",
+    "speaker_identity": "existing CAM++ with future enrollment/calibration",
+    "diarization": "sherpa pyannote segmentation 3.0 + embeddings/clustering, not installed",
+    "stt": "existing SenseVoiceSmall int8; enable/test language auto selection in future adapter",
+    "stt_quality_optional": "Qwen3-ASR-0.6B, not installed",
+    "tts_small_clone": "ZipVoice-Distill int8 + Vocos, not installed",
+    "tts_clone_emotion_optional": "Fun-CosyVoice3-0.5B-2512, not installed",
+    "cn_stt_fallback": "bailian qwen3-asr-flash",
+    "cn_tts_fallback": "bailian cosyvoice-v3.5-flash",
+    "overseas_stt_fallback": "xAI grok-voice-transcribe-2.0",
+    "overseas_tts_fallback": "Google gemini-3.8-flash-lite-tts preview"
+  },
+  "public_price_snapshot": {
+    "cn_stt_qwen3_asr_flash_beijing_cny_per_second": 0.00022,
+    "cn_tts_cosyvoice_v3_5_flash_beijing_cny_per_10000_characters": 0.8,
+    "xai_stt_usd_per_hour_batch": 0.1,
+    "xai_stt_usd_per_hour_streaming": 0.2,
+    "xai_tts_usd_per_million_characters": 15,
+    "google_3_8_flash_lite_tts_usd_per_million_tokens_through_2026_12_31": {
+      "text_input": 0.5,
+      "audio_output": 6
+    },
+    "google_3_8_flash_lite_tts_usd_per_million_tokens_from_2027_01_01": {
+      "text_input": 1,
+      "audio_output": 12
+    },
+    "limits": "Public list price only; no exchange-rate conversion, account balance, quota eligibility, clone creation costs or audio model availability confirmed."
+  },
+  "documentation_checks": {
+    "navigation_sync": "passed",
+    "check_docs": "passed: 23 documents, 20 diagrams, 40 artifacts, 0 errors",
+    "whitespace": "passed after removing two trailing spaces in current document headers",
+    "runtime_tests": "Existing local speech component rerun only; no voice web feature added and no cloud speech calls."
+  },
+  "documentation_sha256": {
+    "docs/models-offline.md": "1fad32726daecfa86a700559fbeb3cd76fd74d81a4af41481196a78e6279718d",
+    "docs/interaction-persona.md": "754b6c1836074c835741023def66f7b045b078333e20cdef978c4f8175c1f087",
+    "docs/delivery-validation.md": "423ee7cf5324ef137d8bde21b99dd2c11763a0d866fc501b39f74e85b1558d75",
+    "docs/references.md": "cb2923b078ba7738f1e5edb5461838c39f165d0dfb02cc80cb9d76bf9a6e2b3b"
+  },
+  "isolated_component_memory": {
+    "captured_at": "2026-10-17T17:09:37.063008+00:00",
+    "method": "Each component runs in its own short-lived child, CPU only, one short publisher/synthetic input, 5ms sampling; model files verified before sampling. Baseline includes Python, numpy and sherpa imports.",
+    "unit": "bytes",
+    "rows": [
+      {
+        "component": "silero-vad",
+        "provider": "cpu",
+        "baseline": {
+          "working_set_bytes": 42704896,
+          "private_bytes": 802746368
+        },
+        "sampled_peak": {
+          "working_set_bytes": 73437184,
+          "private_bytes": 825098240
+        },
+        "loaded_after_inference": {
+          "working_set_bytes": 73437184,
+          "private_bytes": 825098240
+        },
+        "increment_over_baseline": {
+          "working_set_bytes": 30732288,
+          "private_bytes": 22351872
+        },
+        "cold_load_and_inference_seconds": 0.64,
+        "result": {
+          "valid": true,
+          "segments": 1
+        },
+        "sherpa_version": "1.13.8"
+      },
+      {
+        "component": "campplus-zh",
+        "provider": "cpu",
+        "baseline": {
+          "working_set_bytes": 42876928,
+          "private_bytes": 803049472
+        },
+        "sampled_peak": {
+          "working_set_bytes": 124338176,
+          "private_bytes": 879452160
+        },
+        "loaded_after_inference": {
+          "working_set_bytes": 124338176,
+          "private_bytes": 879452160
+        },
+        "increment_over_baseline": {
+          "working_set_bytes": 81461248,
+          "private_bytes": 76402688
+        },
+        "cold_load_and_inference_seconds": 0.426,
+        "result": {
+          "valid": true,
+          "dimensions": 192
+        },
+        "sherpa_version": "1.13.8"
+      },
+      {
+        "component": "sensevoice-int8",
+        "provider": "cpu",
+        "baseline": {
+          "working_set_bytes": 43057152,
+          "private_bytes": 803266560
+        },
+        "sampled_peak": {
+          "working_set_bytes": 371621888,
+          "private_bytes": 1131335680
+        },
+        "loaded_after_inference": {
+          "working_set_bytes": 371621888,
+          "private_bytes": 1131335680
+        },
+        "increment_over_baseline": {
+          "working_set_bytes": 328564736,
+          "private_bytes": 328069120
+        },
+        "cold_load_and_inference_seconds": 0.996,
+        "result": {
+          "valid": true,
+          "input_seconds": 5.592
+        },
+        "sherpa_version": "1.13.8"
+      },
+      {
+        "component": "vits-aishell3-low",
+        "provider": "cpu",
+        "baseline": {
+          "working_set_bytes": 42893312,
+          "private_bytes": 803172352
+        },
+        "sampled_peak": {
+          "working_set_bytes": 156454912,
+          "private_bytes": 910987264
+        },
+        "loaded_after_inference": {
+          "working_set_bytes": 156454912,
+          "private_bytes": 910987264
+        },
+        "increment_over_baseline": {
+          "working_set_bytes": 113561600,
+          "private_bytes": 107814912
+        },
+        "cold_load_and_inference_seconds": 0.545,
+        "result": {
+          "valid": true,
+          "output_seconds": 2.709
+        },
+        "sherpa_version": "1.13.8"
+      }
+    ],
+    "limits": [
+      "Private commit and resident working set differ; neither is installed weight size.",
+      "Sampled peak is not a hard maximum; longer audio, concurrent turns and other runtimes were not measured.",
+      "Dedicated model GPU allocation is not used in these CPU configurations; total-machine graphics activity was not measured.",
+      "No microphone, speaker enrollment, personal audio, model downloads or cloud calls."
+    ],
+    "documentation": "docs/delivery-validation.md#voice-component-memory"
+  },
+  "resource_budget_addendum": {
+    "local_date": "2026-10-18",
+    "status": "proposed_engineering_reserve_not_measured",
+    "authority": "docs/models-offline.md#voice-resource-footprint",
+    "scope": "All previously listed local candidates; nine numeric initial deployment reserves and one explicitly unpinned research framework. Existing four installed components retain their independent measured evidence.",
+    "assumptions": "Single inference process, batch 1, ASR/diarization <=10 s, TTS reference/output about <=10 s each, separation 2-5 s. CPU FP32 for PyTorch and named ONNX variants; compatible GPU backends only. Excludes training, web/core services, chat LLM, other agents, long files and vLLM preallocation.",
+    "limits": [
+      "Planning ranges are not vendor requirements, guaranteed peaks, measured performance, implemented scheduler limits or a claim of local backend support.",
+      "GPU configurations still require host RAM; UMA GPU memory shares the physical RAM pool.",
+      "No new model downloads, candidate inference, cloud speech calls or microphone capture in this sizing addendum."
+    ],
+    "reviewed_model_metadata": {
+      "eres2net_base_asset": "3dspeaker_speech_eres2net_base_sv_zh-cn_3dspeaker_16k.onnx",
+      "eres2net_base_asset_bytes": 39593761,
+      "eres2net_metadata_source": "https://api.github.com/repos/k2-fsa/sherpa-onnx/releases/tags/speaker-recongition-models",
+      "pyannote_budget_example": "pyannote/speaker-diarization-community-1",
+      "wesep": "Research preview; official pretrained packages and local CLI are described as under validation in current maintainer README. No pinned deployable checkpoint or universal memory figure."
+    },
+    "checks": {
+      "navigation_sync": "passed: 0 files changed",
+      "check_docs": "passed: 23 documents, 20 diagrams, 40 artifacts, 0 errors",
+      "whitespace": "passed",
+      "runtime_tests": "Not rerun for sizing documentation; existing sampled CPU memory measurements retained without changes."
+    }
+  },
+  "tts_control_resource_clarification": {
+    "local_date": "2026-10-18",
+    "status": "source_review_and_static_metadata_only_not_runtime_verified",
+    "authority": "docs/models-offline.md#voice-resource-footprint",
+    "zipvoice_control": "Reference audio can be evaluated for style guidance; published Distill inference parameters do not establish arbitrary emotion-instruction control. This does not mean generated speech is emotionless.",
+    "cosyvoice_mode_reuse": "CosyVoice3 inherited inference_instruct2 combines instruction text and a reference voice through the same model object; cloning, cross-lingual and instruct paths reuse loaded LLM/flow/HiFT and frontend. No one-model-per-capability assumption.",
+    "cosyvoice_assets": {
+      "revision": "29e01c4e8d000f4bcd70751be16fa94bf3d85a18",
+      "metadata_source": "https://huggingface.co/api/models/FunAudioLLM/Fun-CosyVoice3-0.5B-2512/tree/29e01c4e8d000f4bcd70751be16fa94bf3d85a18?recursive=true&expand=false",
+      "files": [
+        {
+          "path": "campplus.onnx",
+          "bytes": 28303423
+        },
+        {
+          "path": "flow.pt",
+          "bytes": 1329116148
+        },
+        {
+          "path": "hift.pt",
+          "bytes": 83202622
+        },
+        {
+          "path": "llm.pt",
+          "bytes": 2024669519
+        },
+        {
+          "path": "speech_tokenizer_v3.onnx",
+          "bytes": 969451503
+        }
+      ],
+      "total_bytes": 4434743215
+    },
+    "memory_correction": "Prior 4-8 GiB CPU estimate is not a measured interval and its lower bound was optimistic. Plan 8 GiB for first short single-task CPU evaluation plus additional free capacity for cold-load/transient peaks. Actual RAM and upper bound remain unknown.",
+    "selection_condition": "If instruction-controlled emotion is mandatory, prioritize CosyVoice3 validation; retain ZipVoice as the lightweight fallback candidate.",
+    "limits": [
+      "Static file sizes are not runtime RAM, VRAM, or a strict memory lower bound.",
+      "Current native CPU path disables fp16 without CUDA.",
+      "No model weight downloads, model execution, paid calls, microphone capture, environment changes or service restarts in this clarification."
+    ],
+    "checks": {
+      "navigation_sync": "passed: 0 files changed",
+      "check_docs": "passed: 23 documents, 20 diagrams, 40 artifacts, 0 errors",
+      "whitespace": "passed",
+      "runtime_tests": "Not run; source and metadata clarification only."
+    }
+  },
+  "current_cosyvoice3_status_evidence": "evals/reports/cosyvoice3-native-2026-10-18.json"
+}

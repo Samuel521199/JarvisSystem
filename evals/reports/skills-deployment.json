@@ -1,0 +1,201 @@
+{
+  "version": "0.1.35",
+  "previous_version": "0.1.34",
+  "observed_at": "2026-10-16T18:58:13.205156+00:00",
+  "status": "passed",
+  "business_rows_before": {
+    "control.db:tasks": {
+      "rows": 10,
+      "sha256": "bcffbdde3da9b7b4d892d2c628967c441e1f896a69446b2744583112147cda6a"
+    },
+    "control.db:actions": {
+      "rows": 10,
+      "sha256": "0c0c9711806118adaca39670cc4adaa2c40221aed9308bdf045fbb4a6e460b89"
+    },
+    "control.db:artifacts": {
+      "rows": 8,
+      "sha256": "362e516378f39463c06ecc88c31eb7e375131f5cdc4187c20c2cffd8e8f5813d"
+    },
+    "conversations.db:conversations": {
+      "rows": 1,
+      "sha256": "a0bcae9fbfa79d00eddf0b88981430974179a0fbcd54e99833eab668d307625f"
+    },
+    "workspace.db:projects": {
+      "rows": 1,
+      "sha256": "f49b2d7c91b4b889cf80687ef1365266de54208b0dd5e514a6e30d09d232c43d"
+    },
+    "workspace.db:outputs": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "memory.db:facts": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "memory.db:receipts": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "project-sources.db:sources": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "extensions.db:entries": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "model-admin.db:settings": {
+      "rows": 1,
+      "sha256": "bef89b9803b21b3598d2095a4d13ec33f03b50f80bc0c01ec455d11fd9baf9eb"
+    }
+  },
+  "queue_before": {
+    "paused": true,
+    "owned": true,
+    "waiting": 0,
+    "capacity": 20,
+    "running": [],
+    "positions": {},
+    "error": "restart_review",
+    "unreviewed_unknown": false,
+    "resources": {
+      "waiting": false,
+      "reason": null,
+      "sample": null
+    }
+  },
+  "local_previously_owned": true,
+  "data_dir": "C:\\Users\\samuel\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\Jarvis\\data",
+  "previous_instance": "77ed0d13e8bf1cf63138f34879376646",
+  "business_rows_after_restart": {
+    "control.db:tasks": {
+      "rows": 10,
+      "sha256": "bcffbdde3da9b7b4d892d2c628967c441e1f896a69446b2744583112147cda6a"
+    },
+    "control.db:actions": {
+      "rows": 10,
+      "sha256": "0c0c9711806118adaca39670cc4adaa2c40221aed9308bdf045fbb4a6e460b89"
+    },
+    "control.db:artifacts": {
+      "rows": 8,
+      "sha256": "362e516378f39463c06ecc88c31eb7e375131f5cdc4187c20c2cffd8e8f5813d"
+    },
+    "conversations.db:conversations": {
+      "rows": 1,
+      "sha256": "a0bcae9fbfa79d00eddf0b88981430974179a0fbcd54e99833eab668d307625f"
+    },
+    "workspace.db:projects": {
+      "rows": 1,
+      "sha256": "f49b2d7c91b4b889cf80687ef1365266de54208b0dd5e514a6e30d09d232c43d"
+    },
+    "workspace.db:outputs": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "memory.db:facts": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "memory.db:receipts": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "project-sources.db:sources": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "extensions.db:entries": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "model-admin.db:settings": {
+      "rows": 1,
+      "sha256": "bef89b9803b21b3598d2095a4d13ec33f03b50f80bc0c01ec455d11fd9baf9eb"
+    }
+  },
+  "business_rows_preserved": true,
+  "local_model_restored": true,
+  "native_entries": 43,
+  "executable_entries": 5,
+  "instance_id": "7e8e5504935eeb12543d6c2904d855fe",
+  "task_id": "task_77d2dd27e4a25ee1becd3de977ddb083",
+  "conversation_id": "7df60db8b1c84b8a943081cf775433ca",
+  "output": {
+    "completed_at": "2026-10-16T18:58:13.083820+00:00",
+    "created_at": "2026-10-16T18:58:12.815562+00:00",
+    "digest": "sha256:9bf6d239763c89a7ce1e08d72ad49252236b5b173adfee8e9934aeddcdd1e010",
+    "error_category": null,
+    "path": "H:\\Jarvis\\artifacts\\skills\\deployed-gear-lesson.html",
+    "project_id": "68b7010022cd448fba8f2681a82f9216",
+    "request_id": "77d2dd27e4a25ee1becd3de977ddb083",
+    "size_bytes": 40839,
+    "status": "SAVED"
+  },
+  "checks": {
+    "browser": {
+      "angle_and_ratio_checked": true,
+      "browser_version": "149.0.4022.69",
+      "explode_checked": true,
+      "external_requests": 0,
+      "page_errors": 0,
+      "parts_rendered": true,
+      "phone_width": 390,
+      "reduced_motion_checked": true
+    },
+    "engineering_verified": false,
+    "kinematics_checked": true,
+    "worker": {
+      "active_process_limit": 1,
+      "appcontainer": true,
+      "capabilities": [
+        "registryRead"
+      ],
+      "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+      "cpu_seconds": 0.171875,
+      "cpu_time_limit_seconds": 3,
+      "elapsed_seconds": 0.3849,
+      "lpac": true,
+      "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+      "memory_limit_bytes": 402653184,
+      "package_sid": "S-1-15-2-399135935-4159946146-2638104607-661715180-821616370-3400020517-1038507458",
+      "peak_process_memory_bytes": 12865536,
+      "pid": 46628,
+      "wall_time_limit_seconds": 20
+    }
+  },
+  "queue_resumed_for_authorized_smoke": true,
+  "queue_after": {
+    "paused": false,
+    "owned": true,
+    "waiting": 0,
+    "capacity": 20,
+    "running": [],
+    "positions": {},
+    "error": null,
+    "unreviewed_unknown": false,
+    "resources": {
+      "waiting": false,
+      "reason": null,
+      "sample": {
+        "total_bytes": 132766306304,
+        "available_bytes": 103272787968,
+        "commit_available_bytes": 106128592896
+      },
+      "capability": "skill.report.v1",
+      "required_bytes": 1610612736,
+      "resume_threshold_bytes": 1610612736,
+      "foreground_reserve_bytes": 1073741824,
+      "checked_at": "2026-10-16T18:58:10.537786+00:00"
+    }
+  },
+  "created_test_records_in_user_store": true,
+  "paid_model_calls": 0,
+  "source_start": true,
+  "deployed_ui": {
+    "status": "passed",
+    "entries_visible": 43,
+    "page_errors": [],
+    "preview_interactive": true,
+    "screenshot": "artifacts/skills/deployed-preview.png"
+  }
+}

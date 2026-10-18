@@ -1,0 +1,9 @@
+{
+  "version": "0.1.57",
+  "observed_at": "2026-10-18T16:17:21.376821+00:00",
+  "live_models": true,
+  "results": [],
+  "status": "failed",
+  "error": "Locator.fill: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"#skill-coding-cases\")\n    - locator resolved to <textarea hidden=\"\" id=\"skill-coding-cases\" aria-label=\"编程验收案例 JSON\" placeholder=\"填写 2—24 条验收案例，例如：[{\"input\":[2,4],\"expected\":\"6\"},{\"input\":[],\"expected\":\"0\"}]\"></textarea>\n    - fill(\"[{\"input\": [2, 4], \"expected\": \"6\"}, {\"input\": [], \"expected\": \"0\"}, {\"input\": [-2, 3], \"expected\": \"1\"}]\")\n  - attempting fill action\n    2 × waiting for element to be visible, enabled and editable\n      - element is not visible\n    - retrying fill action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and editable\n      - element is not visible\n    - retrying fill action\n      - waiting 100ms\n    59 × waiting for element to be visible, enabled and editable\n       - element is not visible\n     - retrying fill action\n       - waiting 500ms\n",
+  "page_errors": []
+}

@@ -1,0 +1,27 @@
+{
+  "status": "SUCCEEDED",
+  "source_version": "0.1.43",
+  "observed_at": "2026-10-18T02:58:18.857034+00:00",
+  "command": "python -m unittest test_speech_expression test_qwen_speech test_speech test_modules test_web test_local_model",
+  "tests_run": 75,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "javascript_syntax": "node --check apps/web/speech.js: passed",
+  "scope": "Targeted regressions and bounded expression score tests; native/UI, ASR and deployment reports separate; no cloud calls.",
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/qwen_speech_contract.py": "58de540c781ede84f76dba887cc45fccc52dd6ae008a3ba47f6dc92672814f3a",
+    "runtime/node-host/jarvis_core/qwen_speech.py": "6945026725982afb5172f8f0c8558a8b36843b88698471f6b77e071ec2d8caf3",
+    "runtime/node-host/jarvis_core/speech_audio.py": "e45197ed56bc18b6d0d6d346b19892d7851b6c84d2a997eca49399b757108d58",
+    "adapters/speech/qwen/worker.py": "d183c7ae3a51ddda756341022b2898226a60fe910e4f772ea870e9b2939d4310",
+    "apps/web/speech_routes.py": "3afe53038338ad4526213eca1bf57765e76c8a1a8464c7e234197303a8dce290",
+    "apps/web/speech.js": "e31befe65b0cf46c8a79e830826e023f107d4cbda16bb239f2332e591a3542e4",
+    "apps/web/admin.html": "2671a7421514296cdfc3675636984a2883b9aa841e0d3f35fbdfa7d36d753c07",
+    "tests/test_speech_expression.py": "6da902c3697fef60c43f026636c545d31c3d5b14d16a98d1f5f02f1021d34c72",
+    "tests/test_qwen_speech.py": "9c97d3cbea27c19e2454e7808f0ab913b5d8e0c1bec7c4a887c47250ebd78a98",
+    "tests/test_speech.py": "de7a8dda83d6e98bc93c6f594e3ca9e58d0f5ac139fa53f7dc47e30aa815742a"
+  },
+  "user_preference": "C 分段标签：转折更明确",
+  "subjective_acceptance_scope": "Preference for initial C sample transitions only; not blanket smoothness, intelligibility or identity acceptance.",
+  "diagnostic_temp_cleanup": "automatic approval policy rejected deletion; directory retained"
+}

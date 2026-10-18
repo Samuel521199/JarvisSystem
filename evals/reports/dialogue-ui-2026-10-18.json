@@ -1,0 +1,32 @@
+{
+  "status": "SUCCEEDED",
+  "source_version": "0.1.49",
+  "checks": [
+    "Queued text uses prior completed reply; draft preserved; explicit task submission/query runs during reply; task control excluded from model history",
+    "Cancel fences late reply and waits for actual worker exit; background directory task completes independently",
+    "Lost POST response recovered through receipt GET; model called once",
+    "Four-message outbox bounded; overflow draft retained; mobile send visible; all queued inputs drained in order",
+    "Failed previous reply pauses outbox; explicit resume sends only the pending input",
+    "Settings module panel displays reply receipt cache and activity without exposing text"
+  ],
+  "enqueue_ui_ms": 31.09,
+  "browser_errors": [],
+  "cloud_calls": 0,
+  "screenshots": [
+    "H:\\JarvisData\\diagnostics\\dialogue\\parallel-desktop.png",
+    "H:\\JarvisData\\diagnostics\\dialogue\\parallel-mobile.png"
+  ],
+  "limits": "Synthetic held reply/planner; real Edge and bounded directory Worker. No microphone, semantic intent routing, process isolation, durable turn replay or CPU/GPU fairness claim.",
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/turns.py": "ace65e093f4e821097de6f2eb3d0921b92b937b8f82e1153a6369fc883609a0b",
+    "apps/web/dialogue_routes.py": "4b3e9a32701edff81c8036718af194aeabbd1a30e92b319d2be291a48b2a6903",
+    "apps/web/dialogue.js": "0f475c8691b403eb3aa705fbf5d50e3bffe1da244bb2f026e0dddeb54b45be68",
+    "apps/web/index.html": "92e763df5400b16876cf5539fa01a1de9cc3b25642e4db57ddab79d203c99c6b",
+    "apps/web/server.py": "ab1f5da6c5ee27166571565099a0b2d416e8c5c993717cbb099d0a66742657f1",
+    "apps/web/workspace.js": "8f5a1bd76ba701c36eabae00758ada7181460715d68d6d2479635508287c4a57",
+    "apps/web/workspace.css": "15d66d9dfa21005169faa7450f9276a844081b59f2ff2a0b415a0fa0236d9a98",
+    "apps/web/resources.js": "37c5503fdbca36c89e0427769afe0fc007efe41a0d5a4bda551db717e4f4d0f0",
+    "apps/web/conversation_tasks.js": "8361f78b56e3969009531d7aaec6b6b79bf83bc9f2489be24de6e25f3b480cec",
+    "tools/probe_dialogue_ui.py": "46c9390994d4bf7ac95388e2d5af68dd74a0a01be6b9b4a9a3d54f6e77d2959b"
+  }
+}

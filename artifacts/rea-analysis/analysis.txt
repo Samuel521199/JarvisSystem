@@ -1,0 +1,89 @@
+# 软件结构与行为解析报告
+
+目标：application
+任务：分析 Electron 应用目录的模块结构和 IPC 调用链
+解析器：REA 6.5.0 · JavaScript / Electron 静态解析
+证据编号：ev_222749c5403ff62474fbf167ed274b76d52ad749fb6d5f90d7b4432488f207b3
+输入版本：sha256:93698dfddaa98f9e78812f34634cf6aa8913a3ca22cc1bd448627eb834375bde
+
+## 解析结果
+读取 4 个文件，498 字节；排除 0 个条目。
+结构图：21 个节点、26 条关系。
+Electron 桥接 API：1；暴露成员：1。
+IPC 主进程处理器：1；发送操作：1；配对：1。
+
+## 应用组成
+electron-main：main.js
+javascript-module：main.js
+ipc-handler：jarvis:sum
+javascript-module：electron
+javascript-module：electron
+javascript-module：electron
+package：jarvis-owned-rea-fixture
+javascript-module：math.js
+context-bridge-api：jarvisFixture
+javascript-module：preload.js
+javascript-module：math.js:sum:return-shapes、math.js:sum
+javascript-module：electron
+
+## 关键关系（完整图见证据 JSON）
+maps_to：{"path_id": "e0d4e3dd28c9c9d9a018b52ce089228c9ff04a441d56d17257ffafbc4904350f", "entry": "jarvisFixture.sum", "entry_path": ["jarvisFixture", "sum"], "channel": "jarvis:sum", "resolution": "candidate", "conditions": []}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 2, "column": 55}, "end": {"line": 2, "column": 117}}}
+  证据：jag_edge_0650eaabfb849438240379f80d192091a96874dd5075e0e2e6caecb85e1f9af0
+invokes：{"channel": "jarvis:sum", "pairing_basis": "unique-exact-literal-channel", "handler_path": "main.js", "handler_operation": "handle"}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 2, "column": 72}, "end": {"line": 2, "column": 117}}}
+  证据：jag_edge_162f3bbd06cbb766ad4a12f46bbbfc9f9305937f0fc7ca2b2dcaee6463a967f0
+imports：{"module_link_kind": "require", "resolution_mode": "require", "specifier": "electron", "imported_name": "ipcRenderer", "imported_path": ["ipcRenderer"], "local_name": "ipcRenderer", "exported_name": null, "resolved_path": null, "resolution_status": "external", "target_file_kind": null, "target_json_status": null}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 1, "column": 6}, "end": {"line": 1, "column": 56}}}
+  证据：jag_edge_1e7a7636e52912ec5a7e952884ed806edf56f9d619016c29c9fe391e2e427d7d
+imports：{"kind": "require", "specifier": "electron", "expression": null, "resolution_mode": "require", "resolved_path": null, "resolution_status": "external"}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "main.js", "start": {"line": 1, "column": 18}, "end": {"line": 1, "column": 37}}}
+  证据：jag_edge_2468670b170696daee5ab8c82b8511d9047b419befe5167798ff722b111b6ba7
+imports：{"module_link_kind": "require", "resolution_mode": "require", "specifier": "electron", "imported_name": "ipcMain", "imported_path": ["ipcMain"], "local_name": "ipcMain", "exported_name": null, "resolved_path": null, "resolution_status": "external", "target_file_kind": null, "target_json_status": null}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "main.js", "start": {"line": 1, "column": 6}, "end": {"line": 1, "column": 37}}}
+  证据：jag_edge_3a9c20b5116dc6cd03745a0d8ab36b93e2539e467bc5f10afb542bd846106db2
+imports：{"kind": "require", "specifier": "electron", "expression": null, "resolution_mode": "require", "resolved_path": null, "resolution_status": "external"}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 1, "column": 37}, "end": {"line": 1, "column": 56}}}
+  证据：jag_edge_74171022450a200de521ac151076cfc96e62b5ed9d34684901ca1af19f31ff2d
+invokes：{"side": "renderer", "operation": "invoke", "channel": "jarvis:sum", "channel_expression": null, "resolution": "literal"}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 2, "column": 72}, "end": {"line": 2, "column": 117}}}
+  证据：jag_edge_a8fd59a2659d1355600e0a106995d2d635dab8bb15ff4e0614ec4dfd04379380
+imports：{"module_link_kind": "require", "resolution_mode": "require", "specifier": "./math", "imported_name": "sum", "imported_path": ["sum"], "local_name": "sum", "exported_name": null, "resolved_path": "math.js", "resolution_status": "resolved", "target_file_kind": "javascript", "target_json_status": null}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "main.js", "start": {"line": 2, "column": 6}, "end": {"line": 2, "column": 31}}}
+  证据：jag_edge_b700a3aa11907a0859fa2afd7509568eefce6f75af5104a5bc1473aca5941454
+imports：{"kind": "require", "specifier": "./math", "expression": null, "resolution_mode": "require", "resolved_path": "math.js", "resolution_status": "resolved"}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "main.js", "start": {"line": 2, "column": 14}, "end": {"line": 2, "column": 31}}}
+  证据：jag_edge_d1e135275adf9b18c87b4e204fc86cf901c4841d0156ab071738b68283e9a563
+loads：{"declared_path": "main.js", "resolution_context": "package-entrypoint", "resolved_path": "main.js", "resolution_status": "resolved", "limitations": []}
+  来源：{"available": true, "value": {"kind": "artifact-path", "path": "package.json"}}
+  证据：jag_edge_d802618532cfaae5bd9543ca8976db07a531c60500d505482ad7e057645925c2
+maps_to：{"declared_path": "main.js", "resolution_context": "package-entrypoint", "resolved_path": "main.js", "resolution_status": "resolved"}
+  来源：{"available": true, "value": {"kind": "artifact-path", "path": "package.json"}}
+  证据：jag_edge_f0ed1eddfe0298e66162670db957c2c3ad0a4e655471a4ae8809b7d3a930506d
+imports：{"module_link_kind": "require", "resolution_mode": "require", "specifier": "electron", "imported_name": "contextBridge", "imported_path": ["contextBridge"], "local_name": "contextBridge", "exported_name": null, "resolved_path": null, "resolution_status": "external", "target_file_kind": null, "target_json_status": null}
+  来源：{"available": true, "value": {"kind": "source-range", "source": "preload.js", "start": {"line": 1, "column": 6}, "end": {"line": 1, "column": 56}}}
+  证据：jag_edge_f80edb260e3c051776c7964b209db42ec1af5046622825c8a2ce759c68834560
+
+## 解释与边界
+这些关系来自语法和模块引用推导，表示可能的调用路径；没有运行目标软件，不能证明实际可达性或安全性。
+已验证的是解析、输入版本与产物交付；未执行软件功能测试。没有发现某项关系并不证明它不存在。
+客户端资料不能还原云端私有代码、模型权重或完整后端。动态字符串、混淆和未纳入文件可能使关系不完整。
+当前报告在本地生成，没有模型调用或云端上传。需要进一步解释时，可明确选择报告作为模型任务资料。
+
+## 排除范围
+
+## 解析器限制
+CommonJS and ESM binding relationships were recovered from inert syntax and resolved only within the inventoried artifact container.
+Electron API identity follows proven lexical module aliases and structurally verified module-namespace interop. Other reassignments, dynamic selections, and visibly overwritten namespace members are unresolved; missing findings do not establish absence. Arbitrary call side effects and runtime registration are not evaluated.
+Electron relationships are derived from inert syntax; runtime registration, reachability, defaults, and enforcement remain unproven.
+JavaScript and HTML were parsed as inert text; bundle bootstrap code was never executed.
+Static imports, entrypoints, workers, endpoints, and storage relationships do not prove runtime execution.
+Static paths and relationships may remain unresolved when expressions are dynamic or obfuscated.
+Webpack/Rspack factories were recovered from AST literals; REA did not invoke push handlers or bundle bootstrap code.
+CommonJS and ESM binding relationships were recovered from inert syntax and resolved only within the inventoried artifact container.
+Electron API identity follows proven lexical module aliases and structurally verified module-namespace interop. Other reassignments, dynamic selections, and visibly overwritten namespace members are unresolved; missing findings do not establish absence. Arbitrary call side effects and runtime registration are not evaluated.
+Electron relationships are derived from inert syntax; runtime registration, reachability, defaults, and enforcement remain unproven.
+JavaScript and HTML were parsed as inert text; bundle bootstrap code was never executed.
+Static imports, entrypoints, workers, endpoints, and storage relationships do not prove runtime execution.
+Static paths and relationships may remain unresolved when expressions are dynamic or obfuscated.
+Webpack/Rspack factories were recovered from AST literals; REA did not invoke push handlers or bundle bootstrap code.

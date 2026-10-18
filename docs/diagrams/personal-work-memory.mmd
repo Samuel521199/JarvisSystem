@@ -1,0 +1,44 @@
+flowchart TB
+  INPUT["主人交流 / 项目材料 / 工具回执 / 世界事件"]
+  RAW["原件与执行账本<br/>各保留权威，原件保存一次<br/>角色 / 主体 / 版本引用"]
+  CAND["按片段形成候选<br/>类别 / 条件 / 时间 / 来源<br/>规则核验或主人确认后生效"]
+  INPUT --> RAW --> CAND
+
+  subgraph STORE["统一记忆接口 · 按域管理"]
+    direction LR
+    PERSONAL["主人资料与经历<br/>画像由有效事实生成"]
+    PROJECT["项目事实与成果引用<br/>实际进度查询任务账本"]
+    COMMON["获准共用背景与经验<br/>保留适用条件及依赖"]
+    WORLD["人格配置与 NPC 记忆<br/>现实 / 世界 / 角色分开"]
+  end
+  CAND --> PERSONAL
+  CAND --> PROJECT
+  CAND --> WORLD
+  PERSONAL -->|"适用偏好的受控引用"| COMMON
+  PROJECT -->|"核对后晋升经验"| COMMON
+
+  VIEW["本次用途视图<br/>应用侧先过滤，再检索复核<br/>主体 / 项目 / 世界<br/>用途 / 消费者 / 目的地<br/>来源 / 修订 / 撤销 / 时间"]
+  PERSONAL --> VIEW
+  PROJECT --> VIEW
+  COMMON --> VIEW
+  WORLD --> VIEW
+
+  CHAT["私人交流<br/>相关背景与共同经历"]
+  WORK["向主人协助工作<br/>适用偏好 + 当前项目证据"]
+  OUTPUT["对他人 / 公开交付<br/>独立装配允许输出的材料<br/>不沿用私人历史和中间草稿"]
+  NPC["NPC 任务<br/>只读角色获准世界资料"]
+  VIEW --> CHAT
+  VIEW --> WORK
+  VIEW --> OUTPUT
+  VIEW --> NPC
+
+  NOTE["目标设计<br/>纠正或遗忘使相关视图失效<br/>再更新画像、缓存及索引<br/>处理、同步、输出分别判定<br/>记忆不授予行动权限"]
+  VIEW -.-> NOTE
+  classDef source fill:#e8f2ff,stroke:#446c9b,color:#152d47;
+  classDef domain fill:#edf7ed,stroke:#60885c,color:#244323;
+  classDef guard fill:#fff1db,stroke:#af8549,color:#513b20;
+  classDef result fill:#f1edff,stroke:#7c6aaf,color:#30254d;
+  class INPUT,RAW source;
+  class PERSONAL,PROJECT,COMMON,WORLD domain;
+  class CAND,VIEW,NOTE guard;
+  class CHAT,WORK,OUTPUT,NPC result;

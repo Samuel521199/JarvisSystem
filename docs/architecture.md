@@ -1,6 +1,6 @@
 # 系统架构、运行边界与模块职责
 
-> 状态：proposed（设计基线，尚未实现） · 更新：2026-10-15  
+> 状态：总体架构 proposed；局部运行实现及边界见正文 · 更新：2026-10-17
 > [文档入口](README.md) · [维护规则](MAINTENANCE.md) · [架构图册](architecture-atlas.md)
 
 <!-- book-nav:start -->
@@ -21,10 +21,19 @@
     - [5.2.4.3 图 C：断网单体与联网共同体部署](#section-ed95a7231c80)
     - [5.2.4.4 图 D：状态写入所有权与事务边界](#section-7ef56ffe6b47)
   - [5.2.5 Computer Use：独立浏览器模块与后续桌面扩展](#computer-use-design)
-  - [5.2.6 控制器的唯一权威：消除相互抢控制](#architecture-runtime-5)
-  - [5.2.7 单机连续性的实际承诺](#architecture-runtime-6)
+  - [5.2.6 项目资源与扩展接入的独立模块](#project-extension-modules)
+  - [5.2.7 控制器的唯一权威：消除相互抢控制](#architecture-runtime-5)
+  - [5.2.8 单机连续性的实际承诺](#architecture-runtime-6)
 - [5.3 模块职责与替换契约](#module-responsibilities)
 - [5.4 动态角色、资源、学习与监督模块](#extensions-1)
+- [5.5 已实现的成长模块边界](#evolution-runtime-modules)
+- [5.6 三能力分离后的模块协作](#growth-center-architecture)
+- [5.7 普通 PC 下一阶段：个人助手核心与按需扩展](#pc-runtime-convergence)
+  - [5.7.1 实际运行结构与目标边界](#current-runtime-topology)
+  - [5.7.2 对话、语音与工作分离的代码核对（2026-10-18）](#dialogue-separation)
+    - [5.7.2.1 当前具备什么，缺少什么](#dialogue-separation-audit)
+    - [5.7.2.2 改造选择：一个交流核心，多个独立执行通道](#dialogue-separation-design)
+  - [5.7.3 防止结构在自修改中退化](#runtime-boundary-fitness)
 <!-- book-nav:end -->
 
 <a id="design-principles"></a>
@@ -190,6 +199,33 @@ Jarvis 的通路是：观察指定应用/浏览器 → 模型提出结构化动�
 
 同一桌面会话只允许一个真实键鼠控制租约；多个 Agent 可以并行规划、调用独立 API 或使用各自浏览器上下文，不能同时抢同一个鼠标。用户接管输入时暂停自动操作，停止入口保持可用。截图和页面文字是观测资料，不能修改主人规则；外发截图按已有数据范围处理。完整桌面扩展仍归 K6/M2，早期实验只在独立测试页面/应用验收，不跳过 K1/K2 门。
 
+<a id="project-extension-modules"></a>
+### 项目资源与扩展接入的独立模块
+
+0.1.30 增加独立 [SampleTaskService](../runtime/node-host/jarvis_core/sample_tasks.py)，通过同一核心 FIFO 和账本组合模型规划、固定目录 Worker 与统计报告。规划器只返回有界候选；核心保留取消、身份代际、受限目录与产物提交的唯一执行边界。任务适配层只接纳参数、投影状态，不另起调度器。此组合工作流与用户登记的扩展执行分开；详细运行语义见[任务章](tasks-agents.md#sample-task-runtime)。
+
+0.1.27 已实现资源访问、文本编辑和扩展登记；后续运行适配器仍 proposed。保持接口独立、同一轻量宿主部署，不为模块化默认增加微服务、K8s、常驻 Node 或向量数据库。
+
+| 模块 | 当前权威与可替换边界 |
+|---|---|
+| ProjectCatalog / ProjectMenu | 2026-10-17 增量：独立 SQLite 项目显示档案、置顶/分区/软移除与聊天归档标记；借用 WorkspaceService 的根身份、ConversationStore 的有效聊天列表。系统资源管理器只打开登记根目录，不提供任意命令参数；详情归[组织契约](contracts.md#project-organization-contract) |
+| WorkspaceService | 项目目录身份、最近项目和文本导出回执；不管理编辑缓冲、MCP 进程或知识事实 |
+| WorkbenchLayout | 0.1.29 的浏览器布局控制器：宽度、面板显隐、焦点入口与布局偏好；不拥有聊天历史、文件正文、模型路由或任务生命周期。Explorer 通过 attach/show 接入，文件缓冲继续由 Explorer 管理 |
+| ProjectFiles / Explorer | 按需目录元数据、显式文本读写、摘要冲突和工程配置；编辑 UI 可以换成 CodeMirror/Monaco，目录/写入契约不随编辑器更换 |
+| KnowledgeStore | 既有按范围文档检索、来源摘要与引用链；浏览所有文件不等于将所有内容上传或写入长期记忆 |
+| ExtensionCatalog | MCP/技能配置、来源、修订和检查；无进程启动、网络握手、工具执行或技能注入职责 |
+| MCP transport adapter（待实现） | 按需 stdio 子进程或 Streamable HTTP 会话、协议协商、超时/取消/资源回收；只向能力注册模块提交工具描述，不授予执行权限 |
+| SkillManager（原生目录子集已实现，通用加载待实现） | 0.1.36 已实现原生目录、范围策略、宿主意图选择与限定报告/齿轮模板；用户登记的任意 SKILL.md 不因此获得执行能力。按[统一技能规则](tasks-agents.md#skill-selection-policy)筛选和解释选用/不用，技能文字不是高级别系统规则，附带代码仍经执行适配器 |
+| Capability registry / Action gateway（完整通路待实现） | 统一可用能力、任务作用域、调用证据与资源约束；模型只能提出调用，扩展不能另建无限权限的任务循环 |
+
+当前操作流程是“打开文件夹/工程 → 绑定项目身份 → 按需列举 → 读取文件摘要 → 编辑草稿 → 预期版本校验 → 保存回执”；知识检索走独立引用链。扩展流程先到“登记 → 格式/来源检查”，后续才连接“协商/发现 → 范围绑定 → 按需调用 → 结果记录 → 停用回收”。每一步有失败状态，登记成功不折算为运行成功。
+
+2026-10-17 已采纳 [Anatomy 科普能力](stack-project-layout.md#anatomy-integration-choice)与 [Matt Pocock 编程技能包](stack-project-layout.md#matt-pocock-skills-evaluation)的分阶段接入设计。0.1.36 已接入限定原生指南、项目文本报告和固定齿轮模板，使用 SkillTaskService / SkillRenderer 与现有 Task/Action；它们不等于任意 Anatomy 创作或通用仓库编码。后续绘图、编码执行器与产物预览分别适配，不另建模型、任务或发布权威。[实际范围](core-bootstrap.md#native-skills-entry)与[验证](delivery-validation.md#versioned-evidence)优先于早期“尚无适配器”的历史描述。
+
+后续升级只替换相应适配器和契约兼容实现；旧版本的在途任务由原适配器完成或明确取消后释放，不宣称当前任意代码热替换已经实现。扩展源与项目文件在不同设备可能缺失，共同体只同步经允许的描述和状态；不得因收到同步配置就自动安装代码或取得本机目录执行权。多设备一致性仍由[共同体章](federation.md#offline-federation)拥有。
+
+交互归[资源工作台](interaction-persona.md#project-resource-workbench)与[扩展设置](interaction-persona.md#extension-management-ui)，字段与配额归[契约章](contracts.md#project-resources-contract)，验证归[0.1.27 证据](delivery-validation.md#project-resources-evidence)。
+
 <a id="architecture-runtime-5"></a>
 ### 控制器的唯一权威：消除相互抢控制
 
@@ -263,6 +299,128 @@ Jarvis 的通路是：观察指定应用/浏览器 → 模型提出结构化动�
 | network-recovery | 平台适配器 + 诊断工作流 | 只做批准的检查和有限修复 |
 
 这些职责与基础模块共同部署，仍遵守[总体架构与运行边界](architecture.md#architecture-runtime)的少量故障域与[项目文件结构与依赖规则](stack-project-layout.md#project-structure)的模块化原则；不把每个逻辑名称都立即拆成独立服务。
+
+<a id="evolution-runtime-modules"></a>
+## 已实现的成长模块边界
+
+0.1.37 / evolution-v1 将成长协调、模型编码适配、独立契约与验收、Windows 隔离执行、包与改进账本拆为单独 Python 模块。完整职责表与事务流程只在[进化章](evolution-release.md#bounded-evolution-loop)维护，API 归[公共契约](contracts.md#evolution-runtime-contract)。
+
+成长数据由 EvolutionStore 独占维护，不复用对话数据库，也不直接修改已有 SkillManager 的用户策略。当前生成技能是独立可发布工具包，通过成长面板 / API 显式调用；MCP 登记、原生技能与扩展目录的运行边界保持原样。CodingProvider 使用已有模型配置与用量记账；候选 Worker 不继承编码器凭据。单维护通道与聊天请求槽分开，不引入容器平台、消息队列或常驻模型副本。
+
+成长模块初始化失败时，该模块报告不可用，Host 与聊天继续启动；不会切换到无隔离执行。受控配方是可扩展点，现阶段只接通文件清单导出。它承担 K3—K4 的有限垂直验证，不把模型生成权限扩展到 Host、根控制、验收器、任意项目或第三方工具链。总体架构图仍表示目标设计，不能以图上全链路已经存在推断这些部分都已实现。
+
+<a id="growth-center-architecture"></a>
+## 三能力分离后的模块协作
+
+**proposed。** 在现有成长包内分出逻辑模块，仍采用单机模块化宿主；三种能力不是三个常驻 Agent，也不要求三套服务、模型或数据库。完整职责定义归[成长中心](evolution-release.md#growth-governance)，检查计划归[自检调度](health-maintenance.md#inspection-scheduling)，模型策略归[用途路由](models-offline.md#growth-model-policy)。
+
+| 部件 | 唯一责任与协作 |
+|---|---|
+| ProbeScheduler / Inspector | 消费变化事件、缓存与到期计划，调用有界探针，写报告；不持有发布动作 |
+| IncidentCoordinator | 将观察去重为故障，保存影响范围、责任人与暂停状态；将获准故障交自愈 |
+| RecoveryController | 恢复原契约，优先已验证配方；需要编码时请求共享候选流水线 |
+| EvolutionPlanner | 从主人目标和证据形成能力提案；健康版本的能力差距不进入故障列表 |
+| PurposeRouter | 在自检/自愈/进化档案及其阶段中选择合格模型，复用 ModelGateway 的凭据、回执和连接事实 |
+| CandidatePipeline / ReleaseController | 继续拥有唯一构建、独立验收、发布和回退路径；绑定对象基线并串行提交 |
+| GrowthStore | 在原 EvolutionStore 的受控迁移上保存报告/故障/提案/尝试关联、设置代际、预算和恢复证据；不拥有项目或个人记忆 |
+
+第一步按可测试函数与类拆开现有 manager，不为了目录齐全预建空进程。观察、纯检查与模型编码的排队分离，修复和进化共用有界工作通道；事件持久化复用本机 SQLite，不新增 Redis、Kafka 或 K8s。模型服务按需使用，动画仅在客户端。权限和数据所有权依然沿用现有安全、任务与记忆模块，不能让成长控制器成为绕过各域 API 的超级入口。
+
+检查器自身失败应形成“观察不可用”，不能判定被观察对象损坏。成长初始化失败只停用成长模块；主路由不可用时确定性恢复仍可进行，独立恢复模型路径 R 仍按原计划验收，不能声称共用网关便能修好网关自身。未来多设备按对象发布租约与代际协调，不共享活跃 SQLite 文件；断网本机仅维护自己有权控制的对象。
+
+<a id="pc-runtime-convergence"></a>
+## 普通 PC 下一阶段：个人助手核心与按需扩展
+
+**产品定位 accepted，架构实现 proposed，2026-10-17。** 依照[个人助手核心](product-requirements.md#personal-companion-core)和 ADR-028，结构中心是能相处、行动和自主成长的持久个人助手。交流编排、个人状态与成长控制各有独立模块，共同构成产品核心；项目、设备和 Agent 按需要扩展。沿用 ADR-017/019/023/027 的轻量宿主与执行边界，不新增平行核心或开发时间线。代码差距见[当前审计](decisions-review.md#current-system-audit)，既有证据见[验证记录](delivery-validation.md#current-audit-evidence)。
+
+![个人助手核心与按需能力扩展目标](diagrams/pc-runtime-convergence.png)
+
+[矢量图](diagrams/pc-runtime-convergence.svg) · [唯一可编辑图源](diagrams/pc-runtime-convergence.mmd)
+
+<a id="current-runtime-topology"></a>
+### 实际运行结构与目标边界
+
+当前是本地网页/托盘加一个 Python ThreadingHTTPServer，CoreService、ChatService、任务队列、记忆/项目服务、ModuleMonitor 和 EvolutionManager 大多同进程。LPAC 工具、私有浏览器、本地推理是相应的独立执行进程。CPU 密集计算、原生崩溃、权限和依赖隔离应按这些真实边界讨论，不能把 Python 文件名当进程边界。
+
+聊天最多两个并发请求，普通后台队列一个执行槽；成长和模块维护另有线程。control.db 持有当前任务/动作/产物；会话、事实、项目资料登记、项目组织、扩展、模型用量和成长有各自存储。已有少量进程外执行和局部事务，尚无贯穿全部通道的资源租约、预算预留、领域事件同步及通用热替换。
+
+| 目标模块 | 从现有代码演进 | 对外职责 / 不拥有的权威 |
+|---|---|---|
+| Personal Assistant Core | 组合现有 ChatService、ContextAssembler、MemoryView；补持久 PersonaProfile 和日常意图/注意力策略 | 维护交流连续性，选择相关上下文，决定回应、提出建议或提交工作意图；不直接执行工具、修改数据库或自行授予权限 |
+| Identity / PersonaProfile | 在既有身份语义下新增最小资料接口，保留人格与表达版本 | 保存稳定助手标识及主人设定的表达/关系配置；模型和插件只读取适用视图，不拥有主体身份；完整跨节点身份协议仍按 K6 |
+| Attention / Commitments | 读取会话事件、主人设置与任务状态，补有界待办/提醒策略 | 管理何时回应、跟进或安静；约定有来源、状态和有效范围，实际执行仍查 Task Runtime；不另建常驻推理循环 |
+| RuntimeFacade / 薄 HTTP 路由 | 从 server.py 抽组合初始化、领域路由和可选资产加载 | 连接 UI 与领域 API；不直接写领域表或决定模型重试 |
+| CapabilityRegistry | 收敛 policy、队列、资源配置、原生技能和已验证成长包的能力描述 | 声明契约/版本/执行器/所需资源；登记不授予新权限，也不自动运行用户提供代码 |
+| Task Runtime 与 Admission | 沿用账本和队列；接收研发任务意图和跨通道资源/费用预留 | 唯一受理、取消、执行回执与恢复语义；前台/后台/维护可并行分级调度，不能变成一条堵塞聊天的总 FIFO |
+| PurposeRouter | 在既有 ModelGateway 上收敛聊天/规划/成长策略 | 同一模型目录、按用途档位/备选/用量；不替代 Task Runtime 决定外部动作重放 |
+| 自检 / 自愈 / 进化控制器 | 按[三能力协作](#growth-center-architecture)拆现有 manager | 分别产出检查报告、故障恢复计划、改进目标；共享执行和候选底座，不各建无限工具循环 |
+| CandidatePipeline / ReleaseController | 保留现有独立验收、不可变包与确认后激活 | 管理版本资格和实际选择；生成者不改验收，不让“修复完成”替代原任务结果 |
+| Memory / Knowledge Context | 沿用事实、归档、来源和 MemoryView，补个人经历的有界接续；抽出范围契约 | 主人通用偏好与个人经历先于可选项目上下文；事实纠正与项目来源各有写入者；索引为派生数据，角色/模型不得绕过资料范围 |
+| Optional Worker / Connector | LPAC、浏览器、本地推理继续按需；之后接 MCP/桌面执行器 | 接受经核验的能力调用、回传绑定结果；不自行调度别人的任务或修改 Host |
+| 后续 Sync Adapter | 依照共同体章，在各数据所有者接口接 outbox/inbox | 同步被允许的领域事件；数据合并不获得新执行权，不直接共享活跃 SQLite 文件 |
+
+默认仍是一个业务 Host、本地数据库和少量按需进程。不为画出的每个框启动服务；不将每个 Agent 与一个模型进程绑定。若将来某个模块确需独立重启/依赖隔离，先固定接口与版本，再移出 Host。
+
+Personal Assistant Core 是领域编排职责，不是把所有功能塞进新“大脑类”。一次普通交流经会话 → 适用人格与记忆 → 模型/确定性回应即可完成，不必穿过任务执行器；确有行动需求才提交工作意图，任务状态以账本为准。项目编辑器、设备连接器、Agent/NPC 和成长控制器通过能力接口服务该核心，可独立不可用。注意力策略由事件唤醒并受资源限制，空闲不持续调用模型；完整接口约束仍归[契约章](contracts.md#personal-assistant-contracts)。
+
+离线保留本机个人状态、已安装表达与能力，推理不足时明确降级；联网后由领域所有者同步获准身份/资料/事件，不将多个节点的全部 prompt 拼成“统一意识”。模型、人格呈现和设备可以换，真实记忆及既有承诺不能被它们重置。语义分别沿用[人格连续性](interaction-persona.md#persona-embodiment-2)、[记忆作用域](knowledge-learning.md#memory-scope-model)及[共同体](federation.md#offline-federation)。
+
+<a id="dialogue-separation"></a>
+### 对话、语音与工作分离的代码核对（2026-10-18）
+
+<a id="dialogue-separation-audit"></a>
+#### 当前具备什么，缺少什么
+
+开始核对时工作树与本机实例为 **0.1.45**，期间共享工作树及实例更新为 **0.1.46**；复查任务证据展示变动后再次通过 61 项既有测试，自动分流和全局发送门控的结论不变。该次复核只做分析与文档，不将其他进行中的实现记为其交付。[检查记录](../evals/reports/dialogue-separation-review-2026-10-18.json)分别保存初次及复查的源码摘要。结论：已有可用的文字会话、手动回复朗读、限定后台任务；**尚不具备完整的文字/语音统一对话与自主意图调度**。
+
+| 能力 | 当前证据 | 缺口与影响 |
+|---|---|---|
+| 文字聊天 | 0.1.48 增加 `DialogueTurns` 及异步回复回执；会话、个人上下文和限定接续保留 | 同一会话有序回复，页面可暂存后续文字；尚未语义合并补充、逐字流式或持久恢复轮次 |
+| 从聊天做事 | `conversation_tasks.js` 的任务模式、`/任务`、有限进度/取消；技能和成长另有入口 | 分散的前端拦截不是统一语义识别；普通自然语言不保证转成真实任务 |
+| 后台与聊天并行 | `LocalChatServer` 两个聊天槽，`TaskQueue` 独立线程与一个任务槽 | 有逻辑并行；缺少语音/CPU/GPU/供应商额度统一保留，不能保证各种负载下互不影响 |
+| 语音输出 | `ReadoutLane`、Qwen 主力、分段标签和连续 WAV 播放 | 用户点击后才朗读；历史真机冷启动首声约 9.34 秒，不等于实时语音对话 |
+| 语音输入与打断 | `speech_probe.py` 有文件级 STT/VAD/声纹探测 | 网页未接麦克风/STT/自动轮次/声学插话；声纹也未构成主人认证 |
+| 资源与恢复 | 内存准入/迟滞、限定取消和任务回执、资源面板 | 不是统一资源租约；单 Host 崩溃仍会影响多个内存中的通道 |
+
+**0.1.48 更新：**[运行证据](delivery-validation.md#dialogue-receipt-evidence)验证了回复受理/查询/取消分离，以及显式任务命令在回复期间运行。`turns.py` 拥有回复状态，不创建任务或新任务账本；0.1.49 的 `dialogue_journal.py` 在既有会话库中登记有限恢复结果，规则见[持久契约](contracts.md#dialogue-recovery-contract)；旧同步聊天与新回执共享两个推理槽，原任务队列不变。界面待发和推理执行有明确区别；缓存、范围、重启边界归[实际接口](contracts.md#dialogue-receipt-contract)，不把线程并行描述为完整 R07 隔离。
+
+聊天模型能给出安慰、讨论工作，不表示宿主已识别并持续管理这些意图。文字中说“我去做”不构成任务受理，音色有情绪也不构成情感理解准确率。源码与测试范围、历史模型/声音证据必须分开解释。
+
+<a id="dialogue-separation-design"></a>
+#### 改造选择：一个交流核心，多个独立执行通道
+
+**0.1.54 局部实现：**普通回复的上下文准备、路由及模型调用已一起移到按需子进程；目录规划、技能报告与 REA 解释另用一个后台模型槽。[实际边界](contracts.md#dialogue-process-contract)保留 Host 的个人事务、回执和任务执行权威；[验证](delivery-validation.md#conversation-lanes-evidence)覆盖上下文卡住、后台慢规划与继续聊天。维护、网页操作规划和全部 Host 故障隔离仍未完成，下表仍描述总体选择。
+
+**0.1.56 局部实现：**在现有一次回复调用中增加[有界意图影子协议](contracts.md#dialogue-intent-shadow-contract)，由宿主检查原文片段、候选字段并附在原回执中；没有独立常驻分类模型或第二条工作队列。Context7 候选可经真实能力检查准备草稿，尚不自动执行；模型格式/分类失效不重放输入。其余路线继续原聊天协议，完整自动工作分流仍未实现。
+
+**需求 accepted；完整协调器仍 proposed。** 在现有 Personal Assistant Core 内落实统一 Turn 受理和有界 Dialogue Coordinator：接收文字/最终转写，组装范围正确的上下文，产生回应和候选意图，交给现有数据所有者及 Task Runtime。它不能执行长工具循环，不能长期持有锁，也不能成为每个任务必须回调的单线程总调度器。意图语义归[任务章](tasks-agents.md#conversation-intent-routing)，字段归[契约章](contracts.md#dialogue-turn-contract)。
+
+| 方案 | 优点 | 本项目判断 |
+|---|---|---|
+| 同一个聊天循环同步调用所有工具 | 接线少，短演示容易 | 长规划、等待工具和语音会争占同一轮，难满足边做边聊 |
+| 每种意图一个常驻 Agent/模型，另建完整消息集群 | 独立伸缩空间大 | 普通 PC 的驻留、状态同步和排障成本高；“更多 Agent”不直接带来更好对话 |
+| 模块化 Host＋隔离资源池＋按需 Worker | 复用现有账本、语音和模型，逐步加隔离 | **推荐**；先验证同机边界，再按故障域移出进程，不整体重写 |
+
+共用人格、事实和会话身份，不共用一份无边界的历史提示词。前台关注交流和简短任务状态；后台拥有自己的目标、检查点、产物与取消范围。任务通过持久事件/投影回到界面，不能向当前模型历史灌入所有日志。语音输入/输出是适配层，替换 STT、TTS 或 LLM 不改变任务所有权。
+
+用版本契约隔开 `TurnIngress → IntentDecision → WorkAdmission`、`Dialogue → SpeechOutput`、`TaskEvent → Notification`。一个用户请求可产生零个或多个工作分支；任务控制器是执行账本的唯一写入权威，通知器只有读取和呈现权。控制路径绕过长计算与任务队列。通道、资源和公平性完整规则只在[资源调度](tasks-agents.md#conversation-resource-isolation)维护。
+
+本机仍保留一个业务 Host、SQLite 与少量按需的 STT/TTS/任务进程。不为每个模块新增服务，不引入 K8s、Redis 或第二个工作流账本。逻辑通道先解决阻塞依赖，独立进程解决崩溃/依赖隔离；二者不等价。当前 Host 故障的共同影响应保留为明确限制，后续通过现有恢复入口恢复，而不是承诺任何组件升级都绝不中断。
+
+这一渐进方案不删除 [R07 对话独立进程](product-requirements.md#r07)的最终要求：先收敛接口与有界通道，再将 Dialogue Worker 从 Host 中移出，保持同一协议和回执；Host 保留受理、事件与账本协调。完整 R07 验收需证明工作/维护进程故障时交流仍可用，单 Host 内的线程分离只算过渡子集。进程独立仍共享整机和入口，电源、内核或统一入口故障不可能靠增加线程消除。
+
+<a id="runtime-boundary-fitness"></a>
+### 防止结构在自修改中退化
+
+1. **依赖方向可检查。** 基础作用域/能力契约不导入 HTTP、UI 或领域编排；领域服务通过明确端口调用模型/执行器，不通过其他模块的私有 SQL 或全局 DOM 状态。
+2. **修改单元可识别。** 一个能力包绑定实现、输入输出 schema、资源估算、验证器、版本与来源；同一用户操作可沿 conversation/task/action/model-attempt/package 标识追溯，避免各页各自报告“成功”。
+3. **事务边界有理由。** 必须共同提交的任务、预算预留、动作意图和 outbox 在控制事务内；知识/会话/成长实验状态不强行合成一个巨型数据库。跨库操作采用可恢复记录与幂等对账，不能靠一次函数调用假装原子。
+4. **发布验证真实可替换性。** 旧任务固定旧实现；新任务才用新包；失败版本停止新受理并可退回。不对有状态 Host 和数据库迁移承诺无条件热切换。
+5. **退役服从引用关系。** 活动、回退、在途任务和证据引用必须保留；健康缓存可重建，历史候选按既有保留规则归档。细则仍归[维护章](health-maintenance.md)，此处不另定删除策略。
+6. **恢复独立性逐步实测。** 常用用途路由先统一；未来恢复通道只支持确定性诊断和已验证本地/备选连接，在主路由配置损坏时有独立最小材料。它不是再部署一套常驻大模型或赋予恢复器无限权限。
+7. **核心体验不随扩展退化。** 可选模块损坏不阻断个人交流；更新和换模型不重置人格资料、适用记忆或承诺；个人聊天不依赖项目目录。按[V-PAL](delivery-validation.md#personal-companion-validation)验证真实体验，不能只验证包加载成功。
+
+这些是后续架构约束，尚无新的自动依赖门禁或统一 Admission 实现。本轮保持生产代码和正在运行的策略不变；相关验证进入既有 K1/K2 与 V-GROW，不另开第二条开发路线。
 
 <!-- book-footer:start -->
 [返回全书目录](README.md#book-tree) · [上一章：最小核心、初始资产与开发路线](core-bootstrap.md) · [下一章：主人利益原则、身份授权与停止控制](security-sovereignty.md)

@@ -1,0 +1,69 @@
+{
+  "version": "0.1.45",
+  "observed_at": "2026-10-18T04:03:28.322023+00:00",
+  "status": "passed",
+  "commands": [
+    {
+      "command": "python -m unittest discover -s tests -p test_rea.py -v",
+      "tests": 11,
+      "elapsed_seconds": 29.959,
+      "status": "passed",
+      "cases": [
+        "test_rea_real_delivery",
+        "test_rea_invalid_target",
+        "test_rea_exclusions_and_empty",
+        "test_rea_hardlink_and_budget",
+        "test_rea_changed_source_no_delivery",
+        "test_rea_missing_runtime_and_invalid_evidence",
+        "test_rea_syntax_failure",
+        "test_rea_runtime_change_and_cancel",
+        "test_rea_job_host_crash_kills_children",
+        "test_rea_policy_applies_and_dispatch_cancel",
+        "test_rea_job_cancel_and_limits"
+      ]
+    },
+    {
+      "command": "python -m unittest discover -s tests -p test_skills.py -v",
+      "tests": 21,
+      "elapsed_seconds": 16.977,
+      "status": "passed"
+    },
+    {
+      "command": "python tools/probe_skills_ui.py",
+      "checks": 5,
+      "page_errors": 0,
+      "status": "passed"
+    }
+  ],
+  "model_calls": 0,
+  "repairs": [
+    "Initial per-file ledger cancellation checks delayed full bundle verification; batch 128 runtime members per checkpoint while retaining every file digest check.",
+    "Removed unavailable psutil test dependency in favor of native process exit checks."
+  ],
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/rea.py": "8355e6d0c7eec499ec199b5b788283ea9aa515a7b3f193a0371fa1f88f2e06ff",
+    "runtime/node-host/jarvis_core/rea_process.py": "eab7cc2f0a3c90a8021285c1ac615b57191cceaec5d971674ab7084f7e02d357",
+    "runtime/node-host/jarvis_core/skills.py": "bc656af0143eb71812bfffd8611f1154e680604213d6f0746d9485c4b12bd500",
+    "runtime/node-host/jarvis_core/skill_tasks.py": "b18a49bcff5cbf56a3c0eae239785ea642aa94dbc0f48158496de0ad3c69adc8",
+    "runtime/node-host/jarvis_core/conversation_tasks.py": "184cb3e03f35fcb7e67e45b6f958536ab5f480dc616c7542cf67427d9fd4b82c",
+    "apps/web/skills.js": "b1b00989c2c233a180f82f4a7f1379822088800859426d652a136a2aa8ca6438",
+    "apps/web/skills_manager.js": "5d07d3bc4e7722485bdffa635235059eb9feda338a1bcadbb4b79b3b83583b77",
+    "apps/web/conversation_tasks.js": "aecce60287152f56b25e13a89cbedf9dd0d5d71f863ee01f12b519c2f709de65",
+    "apps/web/skills.css": "e5dfc3c65fd0e70f7c987a0cb3d1adb3bb6cfa03018dc42d92b8043fa7a23f62",
+    "config/skills/catalog.json": "a6b7a77171d3012149327a5de079ecd363887136715081d9b66dfdf2ff9a6c77",
+    "config/skills/rea-runtime.json": "10014d793a34a2d88c5d6ceccb8b7e20e03e28e9d7f36992e289b74ae0e217a9",
+    "config/resource-profile.json": "42d39baca1a19a4adf8880436f1cd31360cc5e1e83d09c5521ab8d7eacce54fe",
+    "contracts/schemas/native-skills.schema.json": "9626e6e7118eab56e51bf3ae10a0f7474abc44d809f067d80b552f96a4903e55",
+    "contracts/schemas/skill-report.schema.json": "703603bef9a309a3d03cfd2f12ca523f1cc6f35d19f9e136191a954dec5e3c3b",
+    "adapters/skills/rea/SKILL.md": "2bcf92f101976e7d9deca4f53657b41687efd271a82f1e3d27eb40e22ef0d386",
+    "tests/test_rea.py": "0706bf84d7f442adb2324ed6419843e7308a95bbeb6eb5a7826599146dc8541d",
+    "tests/test_skills.py": "b3aa0db632ca56748b4234d485a91e0bc638f64e43e41cf3569fefd45ca67879"
+  },
+  "limitations": [
+    "Static JavaScript/Electron directory subset only.",
+    "No ASAR, binary/native, Android, runtime behavior or reconstruction acceptance.",
+    "Windows Job limits are not OS sandboxing.",
+    "Abnormal Host termination may leave input stage on disk; no dedicated stage recovery yet.",
+    "No large application or malicious parser corpus acceptance."
+  ]
+}

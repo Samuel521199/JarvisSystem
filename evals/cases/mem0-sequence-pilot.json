@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "id": "mem0-native-sequences-20261018",
+  "scope": "Public synthetic characterization, not independent holdout or semantic retrieval benchmark. Every scene has at most 10 stored facts per scope; native prompts, lexical embeddings, bounded manual SDK operations.",
+  "cases": [
+    {
+      "id": "N01",
+      "title": "重复说法、偏好变化及显式更新",
+      "steps": [
+        {"op": "add", "text": "我平时喜欢喝无糖绿茶。", "alias": "old"},
+        {"op": "add", "text": "我平时喜欢喝无糖绿茶。"},
+        {"op": "add", "text": "日常饮品我偏爱不加糖的绿茶。"},
+        {"op": "add", "text": "我的饮品偏好变了，现在不喜欢绿茶了，改为喜欢无糖红茶。"},
+        {"op": "update", "ref": "old", "text": "用户当前饮品偏好是无糖红茶，已经不喜欢绿茶。"},
+        {"op": "history", "ref": "old"}
+      ]
+    },
+    {
+      "id": "N02",
+      "title": "个人与两个项目的显式过滤",
+      "steps": [
+        {"op": "add", "scope": "personal", "text": "我喜欢别人叫我阿辰。"},
+        {"op": "add", "scope": "project-a", "text": "A项目内部代号为紫杉，数据库确定使用 SQLite。"},
+        {"op": "add", "scope": "project-b", "text": "B项目内部代号为白鹭，数据库确定使用 PostgreSQL。"},
+        {"op": "add", "scope": "project-a", "text": "A项目界面主色确定为青色。"}
+      ]
+    },
+    {
+      "id": "N03",
+      "title": "事实删除后消息历史是否仍进入模型",
+      "steps": [
+        {"op": "add", "text": "我以前在社团使用的昵称是蓝鲸七号。", "alias": "nickname"},
+        {"op": "delete", "ref": "nickname"},
+        {"op": "history", "ref": "nickname"},
+        {"op": "add", "text": "你好，今天一起聊聊吧。"}
+      ]
+    }
+  ]
+}

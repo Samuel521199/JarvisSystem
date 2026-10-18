@@ -1,0 +1,40 @@
+{
+  "version": "0.1.29",
+  "captured_at": "2026-10-16T14:09:00.007017+00:00",
+  "status": "passed",
+  "method": "Codex in-app browser, actual loopback server with isolated temporary data and project files; CUA pointer and keyboard actions with DOM/AX assertions and reviewed screenshots.",
+  "checks": [
+    "Left separator pointer drag changed 248 to 297 CSS px; right drag changed 510 to 426; right ArrowRight reduced width by 10; double-click resets to 248 and 520.",
+    "Reload retained sidebar width 297, right width 510 and editor font 14px.",
+    "Chat remained visible in split view; directory and file tabs share one right pane; both chat and unsaved file drafts preserved across focus/collapse/reopen.",
+    "File tab switching restored cursor at index 1; tree expansion retained on directory return; no horizontal document overflow.",
+    "Explicit server nonce rotation rejected save, preserved draft; reconnect restored request session without page reload or automatic write; subsequent explicit Ctrl+S saved successfully.",
+    "New text file created only on save; portable project document recorded the saved tabs and active file; on-disk bytes checked.",
+    "Focus/restore controls and 390x844 narrow layout checked; narrow view hides focus toggle, shows closable sidebar drawer; clicking current conversation restores original chat draft.",
+    "Default viewport reset after responsive checks; no warning/error page logs; no model calls.",
+    "Final deployed 0.1.29: selecting a project conversation preserves correct expanded navigation state; pyproject.toml opened locally in dark split view, right pane 520px; no production file edits or model requests."
+  ],
+  "screenshots": [
+    "H:/JarvisData/research/workbench-layout-ui/split-light.png",
+    "H:/JarvisData/research/workbench-layout-ui/focus-light.png",
+    "H:/JarvisData/research/workbench-layout-ui/mobile-light.png",
+    "H:/JarvisData/research/workbench-layout-ui/deployed-dark.png"
+  ],
+  "paid_model_calls": 0,
+  "synthetic_model_calls": 0,
+  "page_errors": [],
+  "limits": [
+    "Browser refresh does not preserve unsaved file/chat drafts; layout settings are persisted separately.",
+    "Single right workspace with tree/file tabs, not arbitrary IDE docking or editor grids.",
+    "No language server, syntax completion or script execution.",
+    "Pointer drag verified with mouse; physical touch hardware and assistive-technology certification not tested."
+  ],
+  "source_sha256": {
+    "apps/web/workbench.js": "08aa3b75f901c36fc8dbc2218ffbd5f5d51886e454764af719165b3c41c7dd81",
+    "apps/web/workbench.css": "4d7b2da0fd15fd282e1a34140f37bfa5a022a71cbeb1ada21475dc6e457f792d",
+    "apps/web/explorer.js": "141e4583a2137e9d50dcfa5bda0fe3fb93be2f4c39f1ddd01d6279571edc77e7",
+    "apps/web/explorer.css": "1613fa7ff9d11ff2f7b6e95cdc2d2be955002a17c806436078c584e6ebea2831",
+    "apps/web/index.html": "1d4a57809b6834bfb5b7b42aeb66f69a4f7c3a3c904bcf08c8a297478c1d59c9",
+    "apps/web/server.py": "3a10e972e8f07eeac8277715b56c1bad86fda47b50d44be64381479fa27fe78e"
+  }
+}

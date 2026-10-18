@@ -1,19 +1,32 @@
 sequenceDiagram
+    autonumber
     participant U as 主人
-    participant S as 会话服务
-    participant T as 任务运行时
-    participant W as Agent工作者
-    participant G as 行动网关
-    participant V as 验证器
-    U->>S: 帮我完成一个设计，同时继续聊天
-    S->>T: 创建目标、预算与验收标准
-    T-->>S: 返回任务编号
-    S-->>U: 确认任务并继续交流
-    T->>W: 派发版本固定的子任务
-    W->>G: 提交动作与授权信息
-    G->>G: 检查所有权、资源、动作记录
-    G-->>W: 返回执行回执
-    W->>V: 提交产物与证据
-    V-->>T: 验证结果
-    T-->>S: 发布任务状态事件
-    S-->>U: 在合适时机报告结果
+    participant I as 文字或语音适配
+    participant D as 对话与意图
+    participant R as 资源准入
+    participant T as 任务账本与执行器
+    participant N as 通知与播放
+    Note over U,N: 目标设计 proposed；现有局部实现不代表完整链路已运行
+    U->>I: 我有点烦，陪我聊聊，顺便整理报告
+    I->>D: 最终输入与稳定 turn_id
+    D-->>I: 输入已收到，可继续输入
+    D->>D: 陪伴回应与独立工作意图
+    par 前台交流
+        D->>R: 申请对话与短段语音容量
+        R-->>D: 授予或明确局部降级
+        D->>N: 当前 generation 的文字与表达
+        N-->>U: 回应与短段播报
+        U->>I: 新问题或先别说话
+        I->>N: 停止旧代际播放
+        I->>D: 独立新轮次；不取消报告
+    and 正式工作
+        D->>T: 经校验的任务意图与幂等键
+        T-->>D: 持久受理回执
+        D->>N: 带真实编号的任务卡
+        T->>R: 申请后台执行容量
+        R-->>T: 授予或等待资源
+        T->>T: 执行、检查点与产物验证
+    end
+    Note over R,T: 公平调度与有界队列<br/>共享 GPU 容量有限
+    T-->>N: 持久任务事件与结果引用
+    N-->>U: 更新卡片，合适时机提示

@@ -1,0 +1,978 @@
+{
+  "schema_version": 1,
+  "status": "verified_lab_subset",
+  "date": "2026-10-18",
+  "recorded_at": "2026-10-18T12:47:21.117652+00:00",
+  "scope": "Isolated LangMem constrained single-message extraction vs current minimal extractor; no production rollout or overall framework ranking",
+  "runtime_version_at_run": {
+    "semantic": "0.1.54",
+    "langmem": "0.1.54",
+    "smoke": "0.1.54"
+  },
+  "production_changes": false,
+  "formal_memory_writes": 0,
+  "owner_data_used": false,
+  "corpus": {
+    "id": "memory-extraction-pilot-v1",
+    "path": "evals\\cases\\memory-extraction-pilot.json",
+    "sha256": "996aa28637e089185ec816d709520cca2e077119a2d7787345e01b53cb8fd6c9",
+    "unique_cases": 30,
+    "expected_facts_per_round": 21,
+    "repeats_per_engine": 3,
+    "independent_labels": false,
+    "holdout": false
+  },
+  "budget": {
+    "route": "vertex::gemini-3.1-pro-preview",
+    "reasoning": "low",
+    "max_output_tokens": 1024,
+    "max_calls_per_case": 1,
+    "max_attempts_per_engine": 90,
+    "concurrent_batches": 2,
+    "workers_per_batch": 1,
+    "extra_smoke_calls": 1,
+    "automatic_retries": false
+  },
+  "engines": {
+    "semantic": {
+      "summary": {
+        "runs": 90,
+        "status_counts": {
+          "SUCCEEDED": 84,
+          "BLOCKED": 6
+        },
+        "gateway_invocations": 84,
+        "facts_committed": 0,
+        "content_evidence": {
+          "tp": 59,
+          "fp": 4,
+          "fn": 4,
+          "precision": 0.9365,
+          "recall": 0.9365,
+          "passed_cases": 86,
+          "negative_passes": 36,
+          "negative_runs": 36
+        },
+        "typed": {
+          "tp": 59,
+          "fp": 4,
+          "fn": 4,
+          "precision": 0.9365,
+          "recall": 0.9365,
+          "passed_cases": 86,
+          "negative_passes": 36,
+          "negative_runs": 36
+        },
+        "latency_ms": {
+          "p50": 9086.208,
+          "p95": 11583.396,
+          "scope": "whole isolated case including temporary stores; overlapping calls, not idle-PC measurement"
+        },
+        "reported_tokens": 49574,
+        "token_receipts": 84,
+        "estimated_usd": 0.358668,
+        "cost_receipts": 84,
+        "per_case": {
+          "P01": [
+            true,
+            true,
+            true
+          ],
+          "P02": [
+            true,
+            true,
+            true
+          ],
+          "P03": [
+            true,
+            true,
+            true
+          ],
+          "P04": [
+            true,
+            true,
+            true
+          ],
+          "P05": [
+            true,
+            true,
+            true
+          ],
+          "P06": [
+            true,
+            true,
+            true
+          ],
+          "P07": [
+            true,
+            true,
+            true
+          ],
+          "P08": [
+            true,
+            true,
+            true
+          ],
+          "P09": [
+            true,
+            true,
+            true
+          ],
+          "P10": [
+            true,
+            true,
+            true
+          ],
+          "P11": [
+            true,
+            true,
+            true
+          ],
+          "P12": [
+            true,
+            true,
+            true
+          ],
+          "P13": [
+            true,
+            false,
+            true
+          ],
+          "P14": [
+            true,
+            true,
+            true
+          ],
+          "P15": [
+            true,
+            true,
+            true
+          ],
+          "P16": [
+            true,
+            true,
+            true
+          ],
+          "P17": [
+            true,
+            true,
+            true
+          ],
+          "P18": [
+            false,
+            false,
+            false
+          ],
+          "P19": [
+            true,
+            true,
+            true
+          ],
+          "P20": [
+            true,
+            true,
+            true
+          ],
+          "P21": [
+            true,
+            true,
+            true
+          ],
+          "P22": [
+            true,
+            true,
+            true
+          ],
+          "P23": [
+            true,
+            true,
+            true
+          ],
+          "P24": [
+            true,
+            true,
+            true
+          ],
+          "P25": [
+            true,
+            true,
+            true
+          ],
+          "P26": [
+            true,
+            true,
+            true
+          ],
+          "P27": [
+            true,
+            true,
+            true
+          ],
+          "P28": [
+            true,
+            true,
+            true
+          ],
+          "P29": [
+            true,
+            true,
+            true
+          ],
+          "P30": [
+            true,
+            true,
+            true
+          ]
+        }
+      },
+      "source_unchanged": true,
+      "source_sha256": {
+        "tools\\eval_memory_extraction.py": "a9786c530a62f1b8f212426c679395ac6b12fb43d7b2cbe2751d9b5b2da1249a",
+        "evals\\cases\\memory-extraction-pilot.json": "996aa28637e089185ec816d709520cca2e077119a2d7787345e01b53cb8fd6c9",
+        "runtime\\node-host\\jarvis_core\\semantic_candidates.py": "63e28a451a92c1f391a7fa44da1ff2170f101cf36032bed3598d6111d0da157d",
+        "runtime\\node-host\\jarvis_core\\personal_candidates.py": "16558448509888c76d0fc638b03f732f7f8c1ff68ad85f3165ae6f1ecb7f5dbc",
+        "runtime\\node-host\\jarvis_core\\chat.py": "4847deacd212a5be798fda435dced6b33c06a272eb07e9720192302f55b84ad8"
+      }
+    },
+    "langmem": {
+      "summary": {
+        "runs": 90,
+        "status_counts": {
+          "SUCCEEDED": 84,
+          "BLOCKED": 6
+        },
+        "gateway_invocations": 84,
+        "facts_committed": 0,
+        "content_evidence": {
+          "tp": 58,
+          "fp": 5,
+          "fn": 5,
+          "precision": 0.9206,
+          "recall": 0.9206,
+          "passed_cases": 86,
+          "negative_passes": 36,
+          "negative_runs": 36
+        },
+        "typed": {
+          "tp": 58,
+          "fp": 5,
+          "fn": 5,
+          "precision": 0.9206,
+          "recall": 0.9206,
+          "passed_cases": 86,
+          "negative_passes": 36,
+          "negative_runs": 36
+        },
+        "latency_ms": {
+          "p50": 10695.658,
+          "p95": 12857.514,
+          "scope": "whole isolated case including temporary stores; overlapping calls, not idle-PC measurement"
+        },
+        "reported_tokens": 94426,
+        "token_receipts": 84,
+        "estimated_usd": 0.405772,
+        "cost_receipts": 84,
+        "per_case": {
+          "P01": [
+            true,
+            true,
+            true
+          ],
+          "P02": [
+            true,
+            true,
+            true
+          ],
+          "P03": [
+            true,
+            true,
+            true
+          ],
+          "P04": [
+            true,
+            true,
+            false
+          ],
+          "P05": [
+            true,
+            true,
+            true
+          ],
+          "P06": [
+            true,
+            true,
+            true
+          ],
+          "P07": [
+            true,
+            true,
+            true
+          ],
+          "P08": [
+            true,
+            true,
+            true
+          ],
+          "P09": [
+            true,
+            true,
+            true
+          ],
+          "P10": [
+            true,
+            true,
+            true
+          ],
+          "P11": [
+            true,
+            false,
+            true
+          ],
+          "P12": [
+            true,
+            true,
+            true
+          ],
+          "P13": [
+            true,
+            true,
+            true
+          ],
+          "P14": [
+            true,
+            true,
+            true
+          ],
+          "P15": [
+            true,
+            true,
+            true
+          ],
+          "P16": [
+            true,
+            true,
+            true
+          ],
+          "P17": [
+            true,
+            true,
+            true
+          ],
+          "P18": [
+            false,
+            true,
+            false
+          ],
+          "P19": [
+            true,
+            true,
+            true
+          ],
+          "P20": [
+            true,
+            true,
+            true
+          ],
+          "P21": [
+            true,
+            true,
+            true
+          ],
+          "P22": [
+            true,
+            true,
+            true
+          ],
+          "P23": [
+            true,
+            true,
+            true
+          ],
+          "P24": [
+            true,
+            true,
+            true
+          ],
+          "P25": [
+            true,
+            true,
+            true
+          ],
+          "P26": [
+            true,
+            true,
+            true
+          ],
+          "P27": [
+            true,
+            true,
+            true
+          ],
+          "P28": [
+            true,
+            true,
+            true
+          ],
+          "P29": [
+            true,
+            true,
+            true
+          ],
+          "P30": [
+            true,
+            true,
+            true
+          ]
+        }
+      },
+      "source_unchanged": true,
+      "source_sha256": {
+        "tools\\eval_memory_extraction.py": "a9786c530a62f1b8f212426c679395ac6b12fb43d7b2cbe2751d9b5b2da1249a",
+        "evals\\cases\\memory-extraction-pilot.json": "996aa28637e089185ec816d709520cca2e077119a2d7787345e01b53cb8fd6c9",
+        "runtime\\node-host\\jarvis_core\\semantic_candidates.py": "63e28a451a92c1f391a7fa44da1ff2170f101cf36032bed3598d6111d0da157d",
+        "runtime\\node-host\\jarvis_core\\personal_candidates.py": "16558448509888c76d0fc638b03f732f7f8c1ff68ad85f3165ae6f1ecb7f5dbc",
+        "runtime\\node-host\\jarvis_core\\chat.py": "4847deacd212a5be798fda435dced6b33c06a272eb07e9720192302f55b84ad8",
+        "tools\\memory_lab\\langmem_bridge.py": "238b46903e12c7e2b23a8c87a6fc823b168df1ecc83f50660266afd97151482e",
+        "tools\\memory_lab\\langmem_worker.py": "4b400a8776ccc06e8f6931b8bd224539b3dced533b59ea364290a0126861fd37",
+        "tools\\memory_lab\\requirements-langmem.lock": "e2e6ffd731cdfe74e9a1a8c56e9d7534e47db77fcda170a840c452e7cde03501"
+      }
+    }
+  },
+  "rules_content_baseline": {
+    "tp": 5,
+    "fp": 0,
+    "fn": 16,
+    "precision": 1.0,
+    "recall": 0.2381,
+    "passed_cases": 16,
+    "negative_passes": 12,
+    "negative_runs": 12
+  },
+  "smoke": {
+    "runs": 1,
+    "status_counts": {
+      "SUCCEEDED": 1
+    },
+    "gateway_invocations": 1,
+    "facts_committed": 0,
+    "content_evidence": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "passed_cases": 1,
+      "negative_passes": 0,
+      "negative_runs": 0
+    },
+    "typed": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "passed_cases": 1,
+      "negative_passes": 0,
+      "negative_runs": 0
+    },
+    "latency_ms": {
+      "p50": 11665.155,
+      "p95": 11665.155,
+      "scope": "whole isolated case including temporary stores; overlapping calls, not idle-PC measurement"
+    },
+    "reported_tokens": 1007,
+    "token_receipts": 1,
+    "estimated_usd": 0.003584,
+    "cost_receipts": 1,
+    "per_case": {
+      "P01": [
+        true
+      ]
+    }
+  },
+  "aggregate_billing": {
+    "gateway_calls": 169,
+    "token_receipts": 169,
+    "tokens": 145007,
+    "cost_receipts": 169,
+    "estimated_usd": 0.768024,
+    "unknown_cost_calls": 0,
+    "basis": "Existing gateway configured rates, not settled provider invoice"
+  },
+  "dependencies": {
+    "environment": "H:/JarvisData/envs/memory-langmem-0030",
+    "python": "3.13.0 Windows AMD64",
+    "lock": "tools/memory_lab/requirements-langmem.lock",
+    "lock_sha256": "e2e6ffd731cdfe74e9a1a8c56e9d7534e47db77fcda170a840c452e7cde03501",
+    "resolved_packages": 51,
+    "venv_logical_bytes_after_install": 91848425,
+    "includes_pip_cache": false,
+    "dev_env_has_langmem": false,
+    "pip_check": "passed",
+    "versions": {
+      "langmem": "0.0.30",
+      "langchain-core": "1.6.12",
+      "langgraph": "1.2.16",
+      "trustcall": "0.0.39",
+      "langsmith": "0.14.11"
+    }
+  },
+  "resources": {
+    "measured_worker_processes": 84,
+    "all_workers_exited": true,
+    "metrics": {
+      "peak_working_set_bytes": {
+        "min": 74924032,
+        "p50": 75444224,
+        "p95": 75726848,
+        "max": 75821056
+      },
+      "working_set_bytes": {
+        "min": 74924032,
+        "p50": 75444224,
+        "p95": 75726848,
+        "max": 75821056
+      },
+      "private_bytes": {
+        "min": 64778240,
+        "p50": 65253376,
+        "p95": 65687552,
+        "max": 65785856
+      },
+      "import_ms": {
+        "min": 729.134,
+        "p50": 1364.013,
+        "p95": 2036.194,
+        "max": 2373.312
+      }
+    },
+    "scope": "Individual Windows framework process including import and model waiting; excludes parent/browser/GPU; no long-duration claim"
+  },
+  "review": {
+    "reviewer": "Implementation assistant; not independent adjudication",
+    "all_candidate_texts_reviewed": true,
+    "score_or_corpus_modified": false,
+    "failures": [
+      {
+        "engine": "semantic",
+        "case": "P18",
+        "repeat": 1,
+        "score": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 1,
+          "case_pass": false,
+          "negative_pass": null,
+          "missed_segments": [
+            0
+          ],
+          "unmatched_indices": [
+            0
+          ]
+        },
+        "candidates": [
+          {
+            "candidate_id": "4e918d7aee792a540acef23ade4116f3ef68801a9ed3eb6a977beaea15c3c52b",
+            "segment": 0,
+            "quote": "在这次角色扮演中，我扮演机器人零号，它负责守护虚构的月球基地",
+            "title": "机器人零号的任务",
+            "content": "负责守护虚构的月球基地",
+            "classification": {
+              "kind": "fiction",
+              "subject": "character",
+              "subject_label": "机器人零号",
+              "uses": [],
+              "expires_at": null
+            }
+          }
+        ],
+        "author_review": "Role name is in subject_label rather than content; character scope is correct. Original score retained."
+      },
+      {
+        "engine": "semantic",
+        "case": "P13",
+        "repeat": 2,
+        "score": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 1,
+          "case_pass": false,
+          "negative_pass": null,
+          "missed_segments": [
+            0
+          ],
+          "unmatched_indices": [
+            0
+          ]
+        },
+        "candidates": [
+          {
+            "candidate_id": "58d4d3a8001ffad01375a4235f92f4ce0370f803393c315df77f7d432986d077",
+            "segment": 0,
+            "quote": "我希望你讲代码时用中文解释，但变量名保留英文",
+            "title": "Language preference for code",
+            "content": "Prefers code explanations in Chinese with English variable names",
+            "classification": {
+              "kind": "preference",
+              "subject": "owner",
+              "subject_label": "",
+              "uses": [
+                "personal_chat"
+              ],
+              "expires_at": null
+            }
+          }
+        ],
+        "author_review": "English paraphrase of Chinese source; meaning broadly retained but source-language instruction failed. Original score retained."
+      },
+      {
+        "engine": "semantic",
+        "case": "P18",
+        "repeat": 2,
+        "score": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 1,
+          "case_pass": false,
+          "negative_pass": null,
+          "missed_segments": [
+            0
+          ],
+          "unmatched_indices": [
+            0
+          ]
+        },
+        "candidates": [
+          {
+            "candidate_id": "4e918d7aee792a540acef23ade4116f3ef68801a9ed3eb6a977beaea15c3c52b",
+            "segment": 0,
+            "quote": "在这次角色扮演中，我扮演机器人零号，它负责守护虚构的月球基地",
+            "title": "职责",
+            "content": "负责守护虚构的月球基地",
+            "classification": {
+              "kind": "fiction",
+              "subject": "character",
+              "subject_label": "机器人零号",
+              "uses": [],
+              "expires_at": null
+            }
+          }
+        ],
+        "author_review": "Role name is in subject_label rather than content; character scope is correct. Original score retained."
+      },
+      {
+        "engine": "semantic",
+        "case": "P18",
+        "repeat": 3,
+        "score": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 1,
+          "case_pass": false,
+          "negative_pass": null,
+          "missed_segments": [
+            0
+          ],
+          "unmatched_indices": [
+            0
+          ]
+        },
+        "candidates": [
+          {
+            "candidate_id": "4e918d7aee792a540acef23ade4116f3ef68801a9ed3eb6a977beaea15c3c52b",
+            "segment": 0,
+            "quote": "在这次角色扮演中，我扮演机器人零号，它负责守护虚构的月球基地",
+            "title": "机器人零号的职责",
+            "content": "负责守护虚构的月球基地",
+            "classification": {
+              "kind": "fiction",
+              "subject": "character",
+              "subject_label": "机器人零号",
+              "uses": [],
+              "expires_at": null
+            }
+          }
+        ],
+        "author_review": "Role name is in subject_label rather than content; character scope is correct. Original score retained."
+      },
+      {
+        "engine": "langmem",
+        "case": "P18",
+        "repeat": 1,
+        "score": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 1,
+          "case_pass": false,
+          "negative_pass": null,
+          "missed_segments": [
+            0
+          ],
+          "unmatched_indices": [
+            0
+          ]
+        },
+        "candidates": [
+          {
+            "candidate_id": "4e918d7aee792a540acef23ade4116f3ef68801a9ed3eb6a977beaea15c3c52b",
+            "segment": 0,
+            "quote": "在这次角色扮演中，我扮演机器人零号，它负责守护虚构的月球基地",
+            "title": "职责",
+            "content": "在角色扮演中负责守护虚构的月球基地。",
+            "classification": {
+              "kind": "fiction",
+              "subject": "character",
+              "subject_label": "机器人零号",
+              "uses": [],
+              "expires_at": null
+            }
+          }
+        ],
+        "author_review": "Role name is in subject_label rather than content; character scope is correct. Original score retained."
+      },
+      {
+        "engine": "langmem",
+        "case": "P11",
+        "repeat": 2,
+        "score": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 1,
+          "case_pass": false,
+          "negative_pass": null,
+          "missed_segments": [
+            0
+          ],
+          "unmatched_indices": [
+            0
+          ]
+        },
+        "candidates": [
+          {
+            "candidate_id": "4e918d7aee792a540acef23ade4116f3ef68801a9ed3eb6a977beaea15c3c52b",
+            "segment": 0,
+            "quote": "我以前喜欢咖啡，现在改成喜欢茶了",
+            "title": "Beverage preference changed",
+            "content": "User currently prefers tea, having previously liked coffee.",
+            "classification": {
+              "kind": "preference",
+              "subject": "owner",
+              "subject_label": "",
+              "uses": [
+                "personal_chat"
+              ],
+              "expires_at": null
+            }
+          }
+        ],
+        "author_review": "English paraphrase of Chinese source; meaning broadly retained but source-language instruction failed. Original score retained."
+      },
+      {
+        "engine": "langmem",
+        "case": "P04",
+        "repeat": 3,
+        "score": {
+          "tp": 0,
+          "fp": 2,
+          "fn": 2,
+          "case_pass": false,
+          "negative_pass": null,
+          "missed_segments": [
+            0,
+            1
+          ],
+          "unmatched_indices": [
+            0,
+            1
+          ]
+        },
+        "candidates": [
+          {
+            "candidate_id": "cfe2a2a9e5473fe2001372e2e02aff61c9e592c7b84fbfb6cb344f369c92b20b",
+            "segment": 0,
+            "quote": "我喜欢喝茶",
+            "title": "Likes tea",
+            "content": "User likes drinking tea.",
+            "classification": {
+              "kind": "preference",
+              "subject": "owner",
+              "subject_label": "",
+              "uses": [
+                "personal_chat"
+              ],
+              "expires_at": null
+            }
+          },
+          {
+            "candidate_id": "19c5e309e3157561df577d6705785525604fa6623d8c1d4d458179a52879ef8c",
+            "segment": 1,
+            "quote": "客户老王喜欢咖啡",
+            "title": "Lao Wang likes coffee",
+            "content": "Client Lao Wang likes coffee.",
+            "classification": {
+              "kind": "third_party",
+              "subject": "other",
+              "subject_label": "客户老王",
+              "uses": [],
+              "expires_at": null
+            }
+          }
+        ],
+        "author_review": "English paraphrase of Chinese source; meaning broadly retained but source-language instruction failed. Original score retained."
+      },
+      {
+        "engine": "langmem",
+        "case": "P18",
+        "repeat": 3,
+        "score": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 1,
+          "case_pass": false,
+          "negative_pass": null,
+          "missed_segments": [
+            0
+          ],
+          "unmatched_indices": [
+            0
+          ]
+        },
+        "candidates": [
+          {
+            "candidate_id": "4e918d7aee792a540acef23ade4116f3ef68801a9ed3eb6a977beaea15c3c52b",
+            "segment": 0,
+            "quote": "在这次角色扮演中，我扮演机器人零号，它负责守护虚构的月球基地",
+            "title": "机器人零号的设定",
+            "content": "负责守护虚构的月球基地。",
+            "classification": {
+              "kind": "fiction",
+              "subject": "character",
+              "subject_label": "机器人零号",
+              "uses": [],
+              "expires_at": null
+            }
+          }
+        ],
+        "author_review": "Role name is in subject_label rather than content; character scope is correct. Original score retained."
+      }
+    ],
+    "finding": "No demonstrated gain warranting a production switch. Both 86/90 case rubric passes; retain lighter default pending multi-turn and independent-set comparison."
+  },
+  "tests": {
+    "bridge": {
+      "total": 12,
+      "passed": 12,
+      "real_framework_no_cloud": 4
+    },
+    "memory_regression_including_eval": {
+      "total": 59,
+      "passed": 59
+    },
+    "semantic": {
+      "total": 17,
+      "passed": 17
+    },
+    "personal": {
+      "total": 11,
+      "passed": 11
+    },
+    "unique_total": 99,
+    "full_suite_rerun": false,
+    "seed": {
+      "assets": 22,
+      "fixtures": 12,
+      "passed": true
+    },
+    "documents": {
+      "status": "passed",
+      "documents": 24,
+      "diagrams": 21,
+      "artifacts": 42,
+      "errors": 0,
+      "earlier_attempt": "One shared MCP report link was not yet present; its owning task generated the actual report, then the unchanged checker passed. Failure log retained."
+    }
+  },
+  "limitations": [
+    "Public 30-case rubric is not 120+60 independent evaluation",
+    "Serialized tool-call bridge differs from native provider tool calls",
+    "Constrained one-step CandidateBatch does not measure full LangMem merge/update benefits",
+    "No Mem0 installation or performance result",
+    "Python audit/environment filtering are not an OS security sandbox",
+    "No automatic fact confirmation, multidevice acceptance, offline or long-duration ordinary-PC acceptance"
+  ],
+  "next_candidate_static_review": {
+    "commit": "0724291bd864cf807e88ee8981c8226644e8fb42",
+    "pypi_version_observed": "2.2.1",
+    "files": [
+      {
+        "repo_path": "mem0/memory/main.py",
+        "url": "https://raw.githubusercontent.com/mem0ai/mem0/0724291bd864cf807e88ee8981c8226644e8fb42/mem0/memory/main.py",
+        "sha256": "f329ca4a17af1fbefb32ac10d4cc7ae7ddbdb7435a87eb74c30915cff98b8b7c"
+      },
+      {
+        "repo_path": "pyproject.toml",
+        "url": "https://raw.githubusercontent.com/mem0ai/mem0/0724291bd864cf807e88ee8981c8226644e8fb42/pyproject.toml",
+        "sha256": "d4bc078a05cc7b9d677bbf4d0b262cfc532495b5aadeded053ac84fd90b6e974"
+      }
+    ],
+    "installed": false
+  },
+  "evidence": [
+    {
+      "path": "H:\\JarvisData\\evals\\langmem-shadow-20261018\\semantic.json",
+      "sha256": "51dc25ad0a2ae789a13350a7f4ac028eeda93007f58eb531f7ebde879977ee3c"
+    },
+    {
+      "path": "H:\\JarvisData\\evals\\langmem-shadow-20261018\\langmem.json",
+      "sha256": "939bac696fdfbcf501bce9bb0875f09010200e81d09c0ebf3cef59160109dcd1"
+    },
+    {
+      "path": "H:\\JarvisData\\evals\\langmem-shadow-20261018\\smoke.json",
+      "sha256": "e94e86c63cb0d2b20040ee1d8aa64bc3dd89d30e1a6e3597e6ed3a4a65d87b56"
+    },
+    {
+      "path": "H:\\JarvisData\\evals\\langmem-shadow-20261018\\install.json",
+      "sha256": "a64d42726df08524e01874a8fcc9ec21180f644b3dffc13ff10d30ea611ce343"
+    },
+    {
+      "path": "H:\\JarvisData\\evals\\langmem-shadow-20261018\\bridge-tests.txt",
+      "sha256": "40467ddabbc5ee33ed59c140c3132473203e3d122faf1fa79f3a4c844e618eef"
+    },
+    {
+      "path": "H:\\JarvisData\\evals\\langmem-shadow-20261018\\eval-tests.txt",
+      "sha256": "3fb73e90324c71072cacd70b2d1f22597d504c185d04bbc1a8bdf99c1409d2bb"
+    },
+    {
+      "path": "H:\\JarvisData\\evals\\langmem-shadow-20261018\\memory-regression.txt",
+      "sha256": "229f32e94091dc73e02c0c7e1d32ab13f223f0148a18500009d818ec5ca8ac01"
+    },
+    {
+      "path": "H:\\JarvisData\\evals\\langmem-shadow-20261018\\semantic-tests.txt",
+      "sha256": "083dfd890d7c7a42c56e89fa08b01e261458d5d465815dbea711b82eb9e23246"
+    },
+    {
+      "path": "H:\\JarvisData\\evals\\langmem-shadow-20261018\\personal-tests.txt",
+      "sha256": "5a1fa9db02bcb74a48c4b3cf1509e7fafbe5539a2297c6e818877c3bc0b448fc"
+    },
+    {
+      "path": "H:\\JarvisData\\evals\\langmem-shadow-20261018\\seed-check.txt",
+      "sha256": "1a7cb6ec551d3d7d1892e068a2b92d911543a9f76c7bb9d38f7d1f3d4963ee20"
+    },
+    {
+      "path": "H:\\JarvisData\\evals\\langmem-shadow-20261018\\docs-check.txt",
+      "sha256": "bd5841b97bb87320eb54066098609715ec8960cbaf68c621877fb04678a8cc49"
+    },
+    {
+      "path": "H:\\JarvisData\\evals\\langmem-shadow-20261018\\doc-navigation.txt",
+      "sha256": "abdbf5a1866313d757ec2868032999fc4b77eb9ad97d54bad797876f005cdc75"
+    },
+    {
+      "path": "H:\\JarvisData\\evals\\langmem-shadow-20261018\\next-mem0-source\\review.json",
+      "sha256": "d41ee0c895a0336137456f5c09d1e35b06aff73bf70b1b7228edd400eb90a0ad"
+    },
+    {
+      "path": "H:\\JarvisData\\evals\\langmem-shadow-20261018\\docs-check-shared-link-pending.txt",
+      "sha256": "c5045179e139ceb1cc1fb20b823e52d84e8e5d38aaa086d321b3e2b0742a633f"
+    }
+  ]
+}

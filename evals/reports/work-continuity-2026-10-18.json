@@ -1,0 +1,213 @@
+{
+  "version": "0.1.42",
+  "captured_at": "2026-10-17T17:45:58.676517+00:00",
+  "status": "implemented_and_verified_subset",
+  "scope": "Explicit continuity links to original task/growth ledgers; fresh scoped status and artifact verification; no automatic execution.",
+  "python": {
+    "captured_at": "2026-10-17T17:43:32.402674+00:00",
+    "tests_run": 574,
+    "passed": 572,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 2,
+    "seconds": 342.552,
+    "source_changes_during_tests": []
+  },
+  "skips": [
+    {
+      "id": "test_core.CoreTests.test_symlink_is_rejected",
+      "reason": "OS denied test symlink creation: [WinError 1314] 客户端没有所需的特权。: 'C:\\\\Users\\\\samuel\\\\AppData\\\\Local\\\\Temp\\\\jarvis-core-test-87sx2_6p\\\\outside.txt' -> 'C:\\\\Users\\\\samuel\\\\AppData\\\\Local\\\\Temp\\\\jarvis-core-test-87sx2_6p\\\\input\\\\linked.txt'"
+    },
+    {
+      "id": "test_workspace.WorkspaceTests.test_linked_output_component_is_denied",
+      "reason": "OS does not grant symlink creation"
+    }
+  ],
+  "frontend": {
+    "tests": 7,
+    "passed": 7
+  },
+  "seed": {
+    "checked_assets": 22,
+    "fixture_cases": 12,
+    "ok": true
+  },
+  "browser": {
+    "version": "0.1.42",
+    "captured_at": "2026-10-17T17:44:00.993357+00:00",
+    "status": "passed",
+    "live_model": false,
+    "checks": [
+      "Real queued task linked through UI; fresh conversation sees pending then LPAC-completed; old pending answer is filtered without changing owner note",
+      "Reload keeps state fingerprints; explicit growth link shows pending then cancelled without execution; changed state invalidates prior derived turns",
+      "Explicit unlink clears work dependencies, not underlying ledgers; 1440/390px no overflow; no page errors or paid calls"
+    ],
+    "page_errors": [],
+    "synthetic_chat_calls": 6,
+    "paid_calls": 0,
+    "screenshots": [
+      "H:\\JarvisData\\evals\\work-continuity-20261018\\ui-final\\desktop.png",
+      "H:\\JarvisData\\evals\\work-continuity-20261018\\ui-final\\mobile.png"
+    ]
+  },
+  "legacy_continuity_browser": {
+    "version": "0.1.42",
+    "captured_at": "2026-10-17T17:41:38.192332+00:00",
+    "checks": [
+      "Source command archived before atomic checkpoint save; new chat resumes consented note; selection and dependency refs survive refresh",
+      "Update/complete/reopen work; revoked provider stops before model; pending list read locks stale buttons; forget removes derived context after refresh",
+      "Temporary writes refused; desktop and mobile panel fit; no background task or cloud calls used"
+    ],
+    "page_errors": [],
+    "synthetic_model_calls": 4,
+    "real_model_calls": 0
+  },
+  "live_model": {
+    "version": "0.1.42",
+    "captured_at": "2026-10-17T17:36:27.507480+00:00",
+    "status": "passed",
+    "live_model": true,
+    "route": "vertex::gemini-3.1-pro-preview",
+    "answer": [
+      {
+        "kind": "task",
+        "state": "completed"
+      },
+      {
+        "kind": "growth",
+        "state": "pending"
+      }
+    ],
+    "request_status": "SUCCEEDED",
+    "error": null,
+    "usage": {
+      "promptTokenCount": 1010,
+      "candidatesTokenCount": 47,
+      "totalTokenCount": 1299,
+      "thoughtsTokenCount": 242
+    },
+    "history_info": {
+      "input_messages": 0,
+      "kept_messages": 0,
+      "dropped_messages": 0,
+      "truncated": false,
+      "kept_bytes": 0,
+      "max_messages": 20,
+      "max_bytes": 32768,
+      "kept_indexes": [],
+      "context": {
+        "schema_version": "1.0.0",
+        "strategy": "recent-whole-turns-v1",
+        "revision": "64a92074cb1e1e0eca007253ce7ea38938aa6692980a50d80f177b7433ce6da6",
+        "provider": "vertex",
+        "model": "gemini-3.1-pro-preview",
+        "note_applied": false,
+        "note_bytes": 0,
+        "required_bytes": 3054,
+        "total_text_bytes": 3054,
+        "max_text_bytes": 65536,
+        "token_count": null,
+        "summarized": false,
+        "kept_indexes": []
+      },
+      "memory": {
+        "enabled": true,
+        "provider": "vertex",
+        "references": [],
+        "available": 0,
+        "omitted": 0,
+        "bytes": 0,
+        "dropped_history_messages": 0
+      },
+      "knowledge": {
+        "enabled": false,
+        "references": [],
+        "citations": [],
+        "matches": 0,
+        "omitted": 0,
+        "bytes": 0,
+        "issues": [],
+        "read_bytes": 0,
+        "dropped_history_messages": 0
+      },
+      "memory_view": {
+        "schema_version": 1,
+        "provider": "vertex",
+        "memory_project_ids": [],
+        "knowledge_project_ids": [],
+        "bytes": 0,
+        "max_bytes": 62439,
+        "coverage": [],
+        "retrieval": "lexical",
+        "snapshot_atomic": false
+      },
+      "persona": {
+        "applied": true,
+        "revision": 0,
+        "style": "自然",
+        "relationship": "助手"
+      },
+      "continuity": {
+        "references": [
+          {
+            "id": "7b5810e02a7a4746bf38d2ce7bf44902",
+            "revision": 3,
+            "work_digest": "3d1a44490c4c159b86663eaa2099064c27332cb2569cbd5d7bb79911926a9ccb"
+          }
+        ],
+        "bytes": 1695,
+        "omitted": 0,
+        "issues": [],
+        "dropped_history_messages": 0
+      }
+    },
+    "scope": "Synthetic files/owner note; real completed LPAC task and persistent proposed growth job; real chat model; no growth execution."
+  },
+  "deployment": {
+    "status": "passed",
+    "version": "0.1.42",
+    "user_data_snapshots_preserved": true,
+    "personal_stores_preserved": true,
+    "generated_packages_and_policy_preserved": true,
+    "automatic_maintenance_enabled": true,
+    "source_assets_verified": true,
+    "linked_work_route_verified": true
+  },
+  "changes_after_full_regression": {
+    "files": [
+      "tools/probe_work_continuity.py"
+    ],
+    "sha256": "64422ebbca099c742aaa2071b4f44323b0d8484d3b487a8bc75ab34d5cbfc40e",
+    "description": "Wait for asynchronous checkbox list before enumerating; scroll panel for screenshots. Runtime source unchanged; final UI run passed."
+  },
+  "initial_probe_failures": [
+    "UI first run did not wait for archive hydration after reload.",
+    "UI second run enumerated checkbox list before asynchronous fetch completed.",
+    "Live read-only route assertion initially expected error instead of actual error_category field; corrected assertion passed."
+  ],
+  "raw_directory": "H:\\JarvisData\\evals\\work-continuity-20261018",
+  "raw_files": [
+    "regression/source-before.json",
+    "regression/unittest.json",
+    "ui-final/report.json",
+    "legacy-continuity-ui/report.json",
+    "live/report.json",
+    "live/response.json",
+    "deployment.json"
+  ],
+  "limits": [
+    "Only explicit task/growth links within matching archived conversation/project scope; no automatic memory extraction or global work recall.",
+    "One real Vertex call validated completed/pending with synthetic owner data; failure/unknown/privacy/history tested with controlled fixtures.",
+    "Read-time observation is not a cross-database atomic snapshot; no assertion about already dispatched model requests being revoked.",
+    "Full K2/V-PAL, proactive reminders, federation, whole-machine offline and long-duration ordinary-PC overhead remain unverified."
+  ],
+  "documentation": {
+    "status": "passed",
+    "documents": 23,
+    "diagrams": 20,
+    "artifacts": 40,
+    "errors": 0,
+    "navigation_current": true,
+    "diagram_review": "Existing memory and evolution diagrams remain broader proposed designs; read-only ledger view stays within existing module boundaries. No diagram source or image changed in this increment."
+  }
+}

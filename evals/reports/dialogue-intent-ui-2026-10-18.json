@@ -1,0 +1,29 @@
+{
+  "status": "SUCCEEDED",
+  "source_version": "0.1.56",
+  "checks": [
+    "one actual supervised child returns natural text plus two grounded intents; no task created",
+    "intent button checks actual candidate endpoint; preserves new draft and fills explicit documentation draft without dispatch",
+    "invalid structured result is incomplete and cannot auto-save; following plain reply and saved intent summary survive refresh"
+  ],
+  "browser_errors": [],
+  "cloud_calls": 0,
+  "mcp_calls": 0,
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/intent.py": "0a8c0994ded78c4a85129ca8187b34b80c187911d88ca3b0da4bda73c7604c98",
+    "runtime/node-host/jarvis_core/chat.py": "c4bf9d9875b31091908415502ce7fef5e129a4656eddb14e56193791cb507a05",
+    "runtime/node-host/jarvis_core/turns.py": "dfe1605d63062a142e959f9251cb4a52b652a619d9ad31d13368baaab86fe8e9",
+    "runtime/node-host/jarvis_core/dialogue_worker.py": "0a4141da07a71f46c9fec84ed00a16de5bc48f7aa70c57be7bb2abfc2cad9317",
+    "runtime/node-host/jarvis_core/mcp_candidates.py": "d456ba965d76d897f141007e0202a7f4aa3213ac6ec6651fd80558f0b0095120",
+    "runtime/node-host/jarvis_core/conversation_tasks.py": "5db9d50c987804c9bd58faf744d367b7160906a639d5b1306b902a466b97c050",
+    "apps/web/index.html": "a7bef9b4d6296a49eaa021728c8f5b35d0d25b433c8f66ad8c5fbec42da2c886",
+    "apps/web/dialogue.js": "89da5a7d326dc7d254ae6d71a4f3caf20e1a4cfa6a3b8fe6183840cf74dfad30",
+    "apps/web/conversation_tasks.js": "3539c7c08b918e46456168fc093939001bb5a86c47c9fee70565b15b133725e6",
+    "apps/web/server.py": "eb5fa4f741c1ae7b42a41528f3546cb0b798c4aefe794af92dc890f89c1b1483",
+    "tests/dialogue_process_fixture.py": "609ab5bf033a511a8a4ba2578b5564c11bbfc710bfbcc95853e3888d53a3592b",
+    "tools/probe_dialogue_intent_ui.py": "90b31acce86ce3ad19e397d9742891f9eb73601f00aefa075c0ce44994f8dd3c"
+  },
+  "source_changed": false,
+  "screenshot": "H:\\JarvisData\\diagnostics\\dialogue\\intent-mixed-draft.png",
+  "limits": "Scripted model output verifies plumbing, not semantic accuracy; full semantic pilot recorded separately."
+}

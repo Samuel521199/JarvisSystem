@@ -1,0 +1,22 @@
+{
+  "version": "0.1.23",
+  "captured_at": "2026-10-16T09:08:04.816271+00:00",
+  "scope": "Sidebar mark integration on settings and workbench; approved artwork unchanged",
+  "status": "passed",
+  "checks": [
+    "Settings mark uses approved artwork; idle opacity changes; hover/leave and single keyboard link focus work",
+    "Pause and emulated reduced motion stop linked mark effects; switching settings preserves component; 390px no overflow",
+    "Workbench sidebar shares existing brand states; thinking/offline visual transitions exercised with explicit fixture state changes; brand link retained"
+  ],
+  "page_errors": [],
+  "screenshots": [
+    "C:\\Users\\samuel\\AppData\\Local\\Jarvis\\data\\diagnostics\\brand-sidebar\\settings-hover.png",
+    "C:\\Users\\samuel\\AppData\\Local\\Jarvis\\data\\diagnostics\\brand-sidebar\\settings-mobile.png",
+    "C:\\Users\\samuel\\AppData\\Local\\Jarvis\\data\\diagnostics\\brand-sidebar\\workbench.png"
+  ],
+  "limits": [
+    "Synthetic chat fixture; no paid model calls.",
+    "Reduced motion emulated in Edge; physical touch and GPU budget not benchmarked.",
+    "Settings mark is decorative idle motion, not a new background health poller."
+  ]
+}

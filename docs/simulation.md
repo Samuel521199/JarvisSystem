@@ -99,5 +99,5 @@ NPC 的记忆、故事冲突和角色关系不进入主人的真实经历。
 相互冲突的剧情不能简单用 CRDT 或“最新文本覆盖”拼成一条真实历史。重放可重建已记录事件；LLM 即使使用相同提示也不保证重新生成完全相同内容，因此回放保留已提交的模型产物和随机事件。
 
 <!-- book-footer:start -->
-[返回全书目录](README.md#book-tree) · [上一章：桌面工作台、实时交流与人格形态](interaction-persona.md) · [下一章：最小核心、初始资产与开发路线](core-bootstrap.md)
+[返回全书目录](README.md#book-tree) · [上一章：个人助手体验、工作台与人格形态](interaction-persona.md) · [下一章：最小核心、初始资产与开发路线](core-bootstrap.md)
 <!-- book-footer:end -->

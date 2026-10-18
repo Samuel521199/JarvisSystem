@@ -250,7 +250,7 @@ class Ledger:
     def prepare(self, request_key, arguments, *, capability="filesystem.read_sample.v1", runtime_seconds=policy.MAX_SECONDS, model_requests=0, _on_prepared=None):
         # Internal extension point: model output cannot select a capability or
         # enlarge a budget. Browser tasks enter only through their own validator.
-        if capability not in {"filesystem.read_sample.v1", "browser.operate.v1"}:
+        if capability not in {"filesystem.read_sample.v1", "browser.operate.v1", "sample.report.v1", "skill.report.v1", "mcp.documentation.v1"}:
             raise CoreError("invalid_capability", "Unsupported task executor")
         if not isinstance(request_key, str) or not 1 <= len(request_key) <= 128:
             raise CoreError("invalid_arguments", "request_id must contain 1 to 128 characters")
@@ -289,6 +289,22 @@ class Ledger:
                             required_capabilities=[capability,"artifact.write.v1"],
                             budget={"max_cost_units":model_requests,"max_runtime_seconds":runtime_seconds,"max_attempts":1})
                 action.update(capability_id=capability,resource_id="browser-task",idempotency_support="none")
+            elif capability == 'sample.report.v1':
+                task.update(title='Sample directory report',
+                            authorization_ref='local:init:sample-input',
+                            required_capabilities=['filesystem.read_sample.v1','artifact.write.v1'],
+                            budget={'max_cost_units':model_requests,'max_runtime_seconds':runtime_seconds,'max_attempts':1})
+                action.update(capability_id=capability, resource_id='sample-input')
+            elif capability == 'skill.report.v1':
+                task.update(title='Scoped skill workflow', authorization_ref='local:project-skill:'+arguments['project_id'],
+                            required_capabilities=[capability, 'artifact.write.v1'],
+                            budget={'max_cost_units': model_requests, 'max_runtime_seconds': runtime_seconds, 'max_attempts': 1})
+                action.update(capability_id=capability, resource_id='project-skill')
+            elif capability == 'mcp.documentation.v1':
+                task.update(title='Context7 documentation query', authorization_ref='local:mcp-task:'+arguments_digest[7:],
+                            required_capabilities=[capability, 'artifact.write.v1'],
+                            budget={'max_cost_units': 0, 'max_runtime_seconds': runtime_seconds, 'max_attempts': 1})
+                action.update(capability_id=capability, resource_id='context7', idempotency_support='local_ledger')
             connection.execute("INSERT INTO tasks(task_id,request_key,arguments_digest,document,security_epoch) VALUES (?,?,?,?,?)", (task_id, request_key, arguments_digest, canonical_json(task), control["security_epoch"]))
             connection.execute("INSERT INTO actions VALUES (?,?,?)", (action_id, task_id, canonical_json(action)))
             record = {"task": task, "action": action, "artifact": None, "cancel_requested": False}

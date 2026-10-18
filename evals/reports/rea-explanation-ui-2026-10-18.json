@@ -1,0 +1,1732 @@
+{
+  "version": "0.1.53",
+  "observed_at": "2026-10-18T06:30:35.405880+00:00",
+  "status": "passed",
+  "checks": [
+    "real ASAR -> shared FIFO -> pinned REA -> source recheck -> confirmed report, zero model calls",
+    "ASAR unpacked source and literal focus: 20 pairs, small receipt, verified separate evidence download and next/previous/file pages",
+    "evidence route rejects missing nonce, invalid page size and wrong conversation",
+    "explicit one-shot model, bounded cited explanation, citation jump, read-only workspace tabs and mobile layout",
+    "unified settings, named conversation selection, project inheritance, explicit override and restore, policy distinct from readiness",
+    "one combined REA card; icon, conditions, format boundaries, persistent disable and mobile layout",
+    "unsaved file draft survives result tabs; changing conversations closes the previous task result"
+  ],
+  "page_errors": [],
+  "model_calls": 0,
+  "synthetic_explanation_calls": 1,
+  "target": "self_owned_fixture",
+  "report": {
+    "analysis": {
+      "components": [
+        {
+          "kind": "javascript-module",
+          "labels": [
+            "main.js"
+          ]
+        },
+        {
+          "kind": "ipc-handler",
+          "labels": [
+            "fixture:op2"
+          ]
+        },
+        {
+          "kind": "ipc-handler",
+          "labels": [
+            "fixture:op7"
+          ]
+        },
+        {
+          "kind": "javascript-module",
+          "labels": [
+            "electron"
+          ]
+        },
+        {
+          "kind": "ipc-handler",
+          "labels": [
+            "fixture:op1"
+          ]
+        },
+        {
+          "kind": "ipc-handler",
+          "labels": [
+            "fixture:op12"
+          ]
+        },
+        {
+          "kind": "javascript-module",
+          "labels": [
+            "preload.js"
+          ]
+        },
+        {
+          "kind": "javascript-module",
+          "labels": [
+            "electron"
+          ]
+        },
+        {
+          "kind": "ipc-handler",
+          "labels": [
+            "fixture:op6"
+          ]
+        },
+        {
+          "kind": "context-bridge-api",
+          "labels": [
+            "fixture"
+          ]
+        },
+        {
+          "kind": "ipc-handler",
+          "labels": [
+            "fixture:op11"
+          ]
+        },
+        {
+          "kind": "package",
+          "labels": [
+            "jarvis-rea-effectiveness-fixture"
+          ]
+        },
+        {
+          "kind": "ipc-handler",
+          "labels": [
+            "fixture:op0"
+          ]
+        },
+        {
+          "kind": "ipc-handler",
+          "labels": [
+            "fixture:op3"
+          ]
+        },
+        {
+          "kind": "ipc-handler",
+          "labels": [
+            "fixture:op8"
+          ]
+        },
+        {
+          "kind": "javascript-module",
+          "labels": [
+            "electron"
+          ]
+        },
+        {
+          "kind": "ipc-handler",
+          "labels": [
+            "fixture:op17"
+          ]
+        },
+        {
+          "kind": "javascript-module",
+          "labels": [
+            "electron"
+          ]
+        },
+        {
+          "kind": "ipc-handler",
+          "labels": [
+            "fixture:op14"
+          ]
+        },
+        {
+          "kind": "ipc-handler",
+          "labels": [
+            "fixture:op9"
+          ]
+        },
+        {
+          "kind": "ipc-handler",
+          "labels": [
+            "fixture:op15"
+          ]
+        },
+        {
+          "kind": "ipc-handler",
+          "labels": [
+            "fixture:op5"
+          ]
+        },
+        {
+          "kind": "ipc-handler",
+          "labels": [
+            "fixture:op18"
+          ]
+        },
+        {
+          "kind": "ipc-handler",
+          "labels": [
+            "fixture:op10"
+          ]
+        },
+        {
+          "kind": "ipc-handler",
+          "labels": [
+            "fixture:op13"
+          ]
+        },
+        {
+          "kind": "electron-main",
+          "labels": [
+            "main.js"
+          ]
+        },
+        {
+          "kind": "ipc-handler",
+          "labels": [
+            "fixture:op19"
+          ]
+        },
+        {
+          "kind": "ipc-handler",
+          "labels": [
+            "fixture:op4"
+          ]
+        },
+        {
+          "kind": "ipc-handler",
+          "labels": [
+            "fixture:op16"
+          ]
+        }
+      ],
+      "components_omitted": 0,
+      "edge_count": 154,
+      "focus": {
+        "link_count": 3,
+        "links": [
+          {
+            "edge_id": "jag_edge_2f5ed6e42d94286c76a3fddd43249bbed9a87f94ad032a53f445f8be2a642e4f",
+            "location": {
+              "available": true,
+              "value": {
+                "end": {
+                  "column": 48,
+                  "line": 4
+                },
+                "kind": "source-range",
+                "source": "preload.js",
+                "start": {
+                  "column": 11,
+                  "line": 4
+                }
+              }
+            },
+            "properties": {
+              "channel": "fixture:op1",
+              "handler_operation": "handle",
+              "handler_path": "main.js",
+              "pairing_basis": "unique-exact-literal-channel"
+            },
+            "relation": "invokes"
+          },
+          {
+            "edge_id": "jag_edge_81b085ad53ee40660c2902ca1392a35634dd5ba50c30b9bcafbd44d9796d50dc",
+            "location": {
+              "available": true,
+              "value": {
+                "end": {
+                  "column": 48,
+                  "line": 4
+                },
+                "kind": "source-range",
+                "source": "preload.js",
+                "start": {
+                  "column": 4,
+                  "line": 4
+                }
+              }
+            },
+            "properties": {
+              "channel": "fixture:op1",
+              "conditions": [],
+              "entry": "fixture.op1",
+              "entry_path": [
+                "fixture",
+                "op1"
+              ],
+              "path_id": "ea5b06160201e6997c2425a1f83ea998b607326203c3fa777f1623e3660aa3f8",
+              "resolution": "candidate"
+            },
+            "relation": "maps_to"
+          },
+          {
+            "edge_id": "jag_edge_d8891a9bceba80a190cdd91feaa90bed21ead5528aecd3ca97a52eb35efaf9c6",
+            "location": {
+              "available": true,
+              "value": {
+                "end": {
+                  "column": 48,
+                  "line": 4
+                },
+                "kind": "source-range",
+                "source": "preload.js",
+                "start": {
+                  "column": 11,
+                  "line": 4
+                }
+              }
+            },
+            "properties": {
+              "channel": "fixture:op1",
+              "channel_expression": null,
+              "operation": "invoke",
+              "resolution": "literal",
+              "side": "renderer"
+            },
+            "relation": "invokes"
+          }
+        ],
+        "links_omitted": 0,
+        "matched": true,
+        "method": "literal_identifier_match",
+        "node_count": 5,
+        "nodes": [
+          {
+            "kind": "ipc-handler",
+            "labels": [
+              "fixture:op1"
+            ],
+            "node_id": "jag_node_234db9486f331333d18c4b0368da8ce354142610cdc29c02657ffcdbb4002fc2"
+          },
+          {
+            "kind": "javascript-expression",
+            "labels": [
+              "fixture.op1"
+            ],
+            "node_id": "jag_node_493736a30deb6f61b03b87382b7cf90740c66533ddcdc92700a9fc8ab39e64c8"
+          },
+          {
+            "kind": "javascript-expression",
+            "labels": [
+              "closure"
+            ],
+            "node_id": "jag_node_6d149fc56f2134a868d3c9662530c16fe46df3fd6c6eec0c3c160bac541f2fa4"
+          },
+          {
+            "kind": "ipc-channel",
+            "labels": [
+              "fixture:op1",
+              "fixture:op1"
+            ],
+            "node_id": "jag_node_db34d5dc9cb1abc59c97dc233ca53017e8d895ebdee28247319178212618c095"
+          },
+          {
+            "kind": "javascript-expression",
+            "labels": [
+              "electron.ipcRenderer.invoke"
+            ],
+            "node_id": "jag_node_e564c87149fc010525acbdc44fff8434b94e74744872f74c1155be7fafceae7f"
+          }
+        ],
+        "query": "fixture:op1",
+        "runtime_verified": false,
+        "source": "explicit"
+      },
+      "integrity_contradictions": [],
+      "key_links": [
+        {
+          "edge_id": "jag_edge_00984c10eacc842a86ad46f6668c22d60a786b1551823f66226bf9020fa61452",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 48,
+                "line": 12
+              },
+              "kind": "source-range",
+              "source": "preload.js",
+              "start": {
+                "column": 4,
+                "line": 12
+              }
+            }
+          },
+          "properties": {
+            "channel": "fixture:op9",
+            "conditions": [],
+            "entry": "fixture.op9",
+            "entry_path": [
+              "fixture",
+              "op9"
+            ],
+            "path_id": "f7b4b2a6b29da9b5c03885cf082fcfb54cb1dbfac71ec440e1e2edebd11e7744",
+            "resolution": "candidate"
+          },
+          "relation": "maps_to"
+        },
+        {
+          "edge_id": "jag_edge_0120805e382ae861754f5fe0ed25f8f1260f52b817896ca3474b0ee5c6625ff4",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 48,
+                "line": 7
+              },
+              "kind": "source-range",
+              "source": "preload.js",
+              "start": {
+                "column": 4,
+                "line": 7
+              }
+            }
+          },
+          "properties": {
+            "channel": "fixture:op4",
+            "conditions": [],
+            "entry": "fixture.op4",
+            "entry_path": [
+              "fixture",
+              "op4"
+            ],
+            "path_id": "2f49033fe8c688cc030abb6204dd2f6d7fa58e4ffbceca09a9a143ef7592d62a",
+            "resolution": "candidate"
+          },
+          "relation": "maps_to"
+        },
+        {
+          "edge_id": "jag_edge_013ab4dfbcab9ce934210fba458e9372cba34fd319685e7491dae4341c4ae1cb",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 50,
+                "line": 17
+              },
+              "kind": "source-range",
+              "source": "preload.js",
+              "start": {
+                "column": 12,
+                "line": 17
+              }
+            }
+          },
+          "properties": {
+            "channel": "fixture:op14",
+            "channel_expression": null,
+            "operation": "invoke",
+            "resolution": "literal",
+            "side": "renderer"
+          },
+          "relation": "invokes"
+        },
+        {
+          "edge_id": "jag_edge_05e108e67704e431129c90a9b999860f5e32f2cb9f9a437310f7b0bbcb1953e8",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 53,
+                "line": 1
+              },
+              "kind": "source-range",
+              "source": "preload.js",
+              "start": {
+                "column": 6,
+                "line": 1
+              }
+            }
+          },
+          "properties": {
+            "exported_name": null,
+            "imported_name": "contextBridge",
+            "imported_path": [
+              "contextBridge"
+            ],
+            "local_name": "contextBridge",
+            "module_link_kind": "require",
+            "resolution_mode": "require",
+            "resolution_status": "external",
+            "resolved_path": null,
+            "specifier": "electron",
+            "target_file_kind": null,
+            "target_json_status": null
+          },
+          "relation": "imports"
+        },
+        {
+          "edge_id": "jag_edge_10324bee1de06c46df5c1e5e8cb13efc7ec0fc59ddd72e3fa3b6d614775049a8",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 48,
+                "line": 9
+              },
+              "kind": "source-range",
+              "source": "preload.js",
+              "start": {
+                "column": 11,
+                "line": 9
+              }
+            }
+          },
+          "properties": {
+            "channel": "fixture:op6",
+            "handler_operation": "handle",
+            "handler_path": "main.js",
+            "pairing_basis": "unique-exact-literal-channel"
+          },
+          "relation": "invokes"
+        },
+        {
+          "edge_id": "jag_edge_1416f63a02b19403340dbef82eba43a840abbc689cf224a10d74be06332d6fd9",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 50,
+                "line": 16
+              },
+              "kind": "source-range",
+              "source": "preload.js",
+              "start": {
+                "column": 5,
+                "line": 16
+              }
+            }
+          },
+          "properties": {
+            "channel": "fixture:op13",
+            "conditions": [],
+            "entry": "fixture.op13",
+            "entry_path": [
+              "fixture",
+              "op13"
+            ],
+            "path_id": "b540b0e5dc256d3c6e23c9bfd16931ce7f3d425009bef57e2096036f923e1786",
+            "resolution": "candidate"
+          },
+          "relation": "maps_to"
+        },
+        {
+          "edge_id": "jag_edge_154acac2489002994aab79a6820dc96517fdff5a5dc7feb4caad08d3813da721",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 48,
+                "line": 5
+              },
+              "kind": "source-range",
+              "source": "preload.js",
+              "start": {
+                "column": 4,
+                "line": 5
+              }
+            }
+          },
+          "properties": {
+            "channel": "fixture:op2",
+            "conditions": [],
+            "entry": "fixture.op2",
+            "entry_path": [
+              "fixture",
+              "op2"
+            ],
+            "path_id": "b24970e15313a0ae2eb7bf5c1962db0933270cdd5f53feb28ed2d13c6a2e0664",
+            "resolution": "candidate"
+          },
+          "relation": "maps_to"
+        },
+        {
+          "edge_id": "jag_edge_23b914314a7c21e3fea88b89377fd7a540e08ce7ad834f400ab4dbb29965c863",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 48,
+                "line": 9
+              },
+              "kind": "source-range",
+              "source": "preload.js",
+              "start": {
+                "column": 4,
+                "line": 9
+              }
+            }
+          },
+          "properties": {
+            "channel": "fixture:op6",
+            "conditions": [],
+            "entry": "fixture.op6",
+            "entry_path": [
+              "fixture",
+              "op6"
+            ],
+            "path_id": "590c5336943390644b0972890a2a0711f69858b41deb9f6caa173ff0f39e742c",
+            "resolution": "candidate"
+          },
+          "relation": "maps_to"
+        },
+        {
+          "edge_id": "jag_edge_24b74da9a34537a69dff6aca1972ef20d45da83e3e336c2fa462aaef65cce2b3",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 50,
+                "line": 21
+              },
+              "kind": "source-range",
+              "source": "preload.js",
+              "start": {
+                "column": 12,
+                "line": 21
+              }
+            }
+          },
+          "properties": {
+            "channel": "fixture:op18",
+            "handler_operation": "handle",
+            "handler_path": "main.js",
+            "pairing_basis": "unique-exact-literal-channel"
+          },
+          "relation": "invokes"
+        },
+        {
+          "edge_id": "jag_edge_2954599146be545e948b41230673e9faa3634b44ad3a0eac5d8e042caf47d474",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 50,
+                "line": 20
+              },
+              "kind": "source-range",
+              "source": "preload.js",
+              "start": {
+                "column": 12,
+                "line": 20
+              }
+            }
+          },
+          "properties": {
+            "channel": "fixture:op17",
+            "handler_operation": "handle",
+            "handler_path": "main.js",
+            "pairing_basis": "unique-exact-literal-channel"
+          },
+          "relation": "invokes"
+        },
+        {
+          "edge_id": "jag_edge_2ed147cbd6a5102dfb3b9430c6466ac9cf9d86c9ecc61232460866b776681bab",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 53,
+                "line": 1
+              },
+              "kind": "source-range",
+              "source": "preload.js",
+              "start": {
+                "column": 34,
+                "line": 1
+              }
+            }
+          },
+          "properties": {
+            "expression": null,
+            "kind": "require",
+            "resolution_mode": "require",
+            "resolution_status": "external",
+            "resolved_path": null,
+            "specifier": "electron"
+          },
+          "relation": "imports"
+        },
+        {
+          "edge_id": "jag_edge_2f5ed6e42d94286c76a3fddd43249bbed9a87f94ad032a53f445f8be2a642e4f",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 48,
+                "line": 4
+              },
+              "kind": "source-range",
+              "source": "preload.js",
+              "start": {
+                "column": 11,
+                "line": 4
+              }
+            }
+          },
+          "properties": {
+            "channel": "fixture:op1",
+            "handler_operation": "handle",
+            "handler_path": "main.js",
+            "pairing_basis": "unique-exact-literal-channel"
+          },
+          "relation": "invokes"
+        },
+        {
+          "edge_id": "jag_edge_3148d9711a4a2c752f0d32015d87e0e8a14f920fe46f1172e65ac10f22becb6d",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 50,
+                "line": 13
+              },
+              "kind": "source-range",
+              "source": "preload.js",
+              "start": {
+                "column": 5,
+                "line": 13
+              }
+            }
+          },
+          "properties": {
+            "channel": "fixture:op10",
+            "conditions": [],
+            "entry": "fixture.op10",
+            "entry_path": [
+              "fixture",
+              "op10"
+            ],
+            "path_id": "915954272ce72e469da852a703db7ed12e38d8f0769f01ee765171ede13953a4",
+            "resolution": "candidate"
+          },
+          "relation": "maps_to"
+        },
+        {
+          "edge_id": "jag_edge_3556077f4cfcdb212102a48e776dada432e9a36cfe9fde1926f7e508ea320d8c",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 50,
+                "line": 18
+              },
+              "kind": "source-range",
+              "source": "preload.js",
+              "start": {
+                "column": 12,
+                "line": 18
+              }
+            }
+          },
+          "properties": {
+            "channel": "fixture:op15",
+            "handler_operation": "handle",
+            "handler_path": "main.js",
+            "pairing_basis": "unique-exact-literal-channel"
+          },
+          "relation": "invokes"
+        },
+        {
+          "edge_id": "jag_edge_3e98aa988243d03aed7d11372f6295353d100c32ea7982f91966f74cc68a1b6f",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 50,
+                "line": 18
+              },
+              "kind": "source-range",
+              "source": "preload.js",
+              "start": {
+                "column": 12,
+                "line": 18
+              }
+            }
+          },
+          "properties": {
+            "channel": "fixture:op15",
+            "channel_expression": null,
+            "operation": "invoke",
+            "resolution": "literal",
+            "side": "renderer"
+          },
+          "relation": "invokes"
+        },
+        {
+          "edge_id": "jag_edge_3ef40ea5bb9d14119a86f3853aa13fd357b3680519ed6cd6cec000ccd9570233",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 50,
+                "line": 16
+              },
+              "kind": "source-range",
+              "source": "preload.js",
+              "start": {
+                "column": 12,
+                "line": 16
+              }
+            }
+          },
+          "properties": {
+            "channel": "fixture:op13",
+            "handler_operation": "handle",
+            "handler_path": "main.js",
+            "pairing_basis": "unique-exact-literal-channel"
+          },
+          "relation": "invokes"
+        },
+        {
+          "edge_id": "jag_edge_466347142ee22988d60da71c22868db6f540f434959e4db5ce880cbfaa8abbf2",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 48,
+                "line": 10
+              },
+              "kind": "source-range",
+              "source": "preload.js",
+              "start": {
+                "column": 4,
+                "line": 10
+              }
+            }
+          },
+          "properties": {
+            "channel": "fixture:op7",
+            "conditions": [],
+            "entry": "fixture.op7",
+            "entry_path": [
+              "fixture",
+              "op7"
+            ],
+            "path_id": "ad766bee4a05719010981206a261dee3ad6d7cdbeaac034bac648e1604815308",
+            "resolution": "candidate"
+          },
+          "relation": "maps_to"
+        },
+        {
+          "edge_id": "jag_edge_47360dc6fb306ee78da7f67725682e683d60165e67f1e6dd855b99e5024cd007",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 50,
+                "line": 19
+              },
+              "kind": "source-range",
+              "source": "preload.js",
+              "start": {
+                "column": 12,
+                "line": 19
+              }
+            }
+          },
+          "properties": {
+            "channel": "fixture:op16",
+            "handler_operation": "handle",
+            "handler_path": "main.js",
+            "pairing_basis": "unique-exact-literal-channel"
+          },
+          "relation": "invokes"
+        },
+        {
+          "edge_id": "jag_edge_4fdadf15e6ca16c22e7853bb78c9a05d6fdf3c2190faec99af7c0ba9fb4f88e7",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 48,
+                "line": 5
+              },
+              "kind": "source-range",
+              "source": "preload.js",
+              "start": {
+                "column": 11,
+                "line": 5
+              }
+            }
+          },
+          "properties": {
+            "channel": "fixture:op2",
+            "channel_expression": null,
+            "operation": "invoke",
+            "resolution": "literal",
+            "side": "renderer"
+          },
+          "relation": "invokes"
+        },
+        {
+          "edge_id": "jag_edge_50ee008963f270bb4ffb6066a8ce987cdf28fb16108bc1ab0376200d31304af3",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 48,
+                "line": 6
+              },
+              "kind": "source-range",
+              "source": "preload.js",
+              "start": {
+                "column": 4,
+                "line": 6
+              }
+            }
+          },
+          "properties": {
+            "channel": "fixture:op3",
+            "conditions": [],
+            "entry": "fixture.op3",
+            "entry_path": [
+              "fixture",
+              "op3"
+            ],
+            "path_id": "a40511d46eb3e7bfda07718dc7b7fba4bcdc3b419568f9766d9e7e550f845fde",
+            "resolution": "candidate"
+          },
+          "relation": "maps_to"
+        },
+        {
+          "edge_id": "jag_edge_510c7ec1261dc19c71d87309de92b8510b7eab4839ba7e05eb3b20bf6f2290cd",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 35,
+                "line": 1
+              },
+              "kind": "source-range",
+              "source": "main.js",
+              "start": {
+                "column": 6,
+                "line": 1
+              }
+            }
+          },
+          "properties": {
+            "exported_name": null,
+            "imported_name": "ipcMain",
+            "imported_path": [
+              "ipcMain"
+            ],
+            "local_name": "ipcMain",
+            "module_link_kind": "require",
+            "resolution_mode": "require",
+            "resolution_status": "external",
+            "resolved_path": null,
+            "specifier": "electron",
+            "target_file_kind": null,
+            "target_json_status": null
+          },
+          "relation": "imports"
+        },
+        {
+          "edge_id": "jag_edge_518502c262a8f1a986ed3afce39067ce5e69f768f865ec7134ea70a45091788c",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 48,
+                "line": 3
+              },
+              "kind": "source-range",
+              "source": "preload.js",
+              "start": {
+                "column": 11,
+                "line": 3
+              }
+            }
+          },
+          "properties": {
+            "channel": "fixture:op0",
+            "channel_expression": null,
+            "operation": "invoke",
+            "resolution": "literal",
+            "side": "renderer"
+          },
+          "relation": "invokes"
+        },
+        {
+          "edge_id": "jag_edge_56912bb720b6eb494c3e10a46aa0fef6561f883bb7cb5cca93cd2011cc755725",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 48,
+                "line": 11
+              },
+              "kind": "source-range",
+              "source": "preload.js",
+              "start": {
+                "column": 4,
+                "line": 11
+              }
+            }
+          },
+          "properties": {
+            "channel": "fixture:op8",
+            "conditions": [],
+            "entry": "fixture.op8",
+            "entry_path": [
+              "fixture",
+              "op8"
+            ],
+            "path_id": "945376b06a0b87d8e5f82a51a2ba6640be32cb5137bfcb2ffc40657fd287397f",
+            "resolution": "candidate"
+          },
+          "relation": "maps_to"
+        },
+        {
+          "edge_id": "jag_edge_6563649581d654f60f06d9f763ed28732723cedb5387f7899b8335d6954323c8",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 50,
+                "line": 14
+              },
+              "kind": "source-range",
+              "source": "preload.js",
+              "start": {
+                "column": 5,
+                "line": 14
+              }
+            }
+          },
+          "properties": {
+            "channel": "fixture:op11",
+            "conditions": [],
+            "entry": "fixture.op11",
+            "entry_path": [
+              "fixture",
+              "op11"
+            ],
+            "path_id": "79438cb6ffc5a7c4ddafff3c03a2c6c1d9501831e8c943dc3f5ac4361bc0bd3a",
+            "resolution": "candidate"
+          },
+          "relation": "maps_to"
+        },
+        {
+          "edge_id": "jag_edge_666cf4e622a99b7b4289d64afb07309e459fc14386fbe566cc4125cea1d593d6",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 48,
+                "line": 6
+              },
+              "kind": "source-range",
+              "source": "preload.js",
+              "start": {
+                "column": 11,
+                "line": 6
+              }
+            }
+          },
+          "properties": {
+            "channel": "fixture:op3",
+            "channel_expression": null,
+            "operation": "invoke",
+            "resolution": "literal",
+            "side": "renderer"
+          },
+          "relation": "invokes"
+        },
+        {
+          "edge_id": "jag_edge_713ca18f41228a818d5946d7a6a30810fa37ea0a6c47d9132b8f181bd7d517f7",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 48,
+                "line": 3
+              },
+              "kind": "source-range",
+              "source": "preload.js",
+              "start": {
+                "column": 4,
+                "line": 3
+              }
+            }
+          },
+          "properties": {
+            "channel": "fixture:op0",
+            "conditions": [],
+            "entry": "fixture.op0",
+            "entry_path": [
+              "fixture",
+              "op0"
+            ],
+            "path_id": "347dc5be5fdcc63a7c6510d8092ae02a342e946d1ae1f84209fc7b65f2d5525f",
+            "resolution": "candidate"
+          },
+          "relation": "maps_to"
+        },
+        {
+          "edge_id": "jag_edge_7c1e0314ed6932db01b1d533e435efa3b1f24ef3acf162f071ed4a88bf147a9e",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 50,
+                "line": 20
+              },
+              "kind": "source-range",
+              "source": "preload.js",
+              "start": {
+                "column": 5,
+                "line": 20
+              }
+            }
+          },
+          "properties": {
+            "channel": "fixture:op17",
+            "conditions": [],
+            "entry": "fixture.op17",
+            "entry_path": [
+              "fixture",
+              "op17"
+            ],
+            "path_id": "7f56a76fc0ccb67312983a243ac28c788edd7b6c141aace4c7076d79656fa0d7",
+            "resolution": "candidate"
+          },
+          "relation": "maps_to"
+        },
+        {
+          "edge_id": "jag_edge_7c6f75ac770605ffb585156b9261f42aa4c8b254af1fde576a1dc7bd8ba1552c",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 50,
+                "line": 17
+              },
+              "kind": "source-range",
+              "source": "preload.js",
+              "start": {
+                "column": 12,
+                "line": 17
+              }
+            }
+          },
+          "properties": {
+            "channel": "fixture:op14",
+            "handler_operation": "handle",
+            "handler_path": "main.js",
+            "pairing_basis": "unique-exact-literal-channel"
+          },
+          "relation": "invokes"
+        },
+        {
+          "edge_id": "jag_edge_816a68afd176e034fcab56877dca91eb37e2500ab59bc44c4c4910ee22963250",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 53,
+                "line": 1
+              },
+              "kind": "source-range",
+              "source": "preload.js",
+              "start": {
+                "column": 6,
+                "line": 1
+              }
+            }
+          },
+          "properties": {
+            "exported_name": null,
+            "imported_name": "ipcRenderer",
+            "imported_path": [
+              "ipcRenderer"
+            ],
+            "local_name": "ipcRenderer",
+            "module_link_kind": "require",
+            "resolution_mode": "require",
+            "resolution_status": "external",
+            "resolved_path": null,
+            "specifier": "electron",
+            "target_file_kind": null,
+            "target_json_status": null
+          },
+          "relation": "imports"
+        },
+        {
+          "edge_id": "jag_edge_81b085ad53ee40660c2902ca1392a35634dd5ba50c30b9bcafbd44d9796d50dc",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 48,
+                "line": 4
+              },
+              "kind": "source-range",
+              "source": "preload.js",
+              "start": {
+                "column": 4,
+                "line": 4
+              }
+            }
+          },
+          "properties": {
+            "channel": "fixture:op1",
+            "conditions": [],
+            "entry": "fixture.op1",
+            "entry_path": [
+              "fixture",
+              "op1"
+            ],
+            "path_id": "ea5b06160201e6997c2425a1f83ea998b607326203c3fa777f1623e3660aa3f8",
+            "resolution": "candidate"
+          },
+          "relation": "maps_to"
+        },
+        {
+          "edge_id": "jag_edge_82fe31274e498ac8e73b7bc90cf014ebf331324d0917a9581b4dfa8197241e80",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 48,
+                "line": 8
+              },
+              "kind": "source-range",
+              "source": "preload.js",
+              "start": {
+                "column": 11,
+                "line": 8
+              }
+            }
+          },
+          "properties": {
+            "channel": "fixture:op5",
+            "handler_operation": "handle",
+            "handler_path": "main.js",
+            "pairing_basis": "unique-exact-literal-channel"
+          },
+          "relation": "invokes"
+        },
+        {
+          "edge_id": "jag_edge_8d17dde96024c7eb7c60881d403f07df074ab34d4b839ce88c9872c1731b44e1",
+          "location": {
+            "available": true,
+            "value": {
+              "kind": "artifact-path",
+              "path": "package.json"
+            }
+          },
+          "properties": {
+            "declared_path": "main.js",
+            "limitations": [],
+            "resolution_context": "package-entrypoint",
+            "resolution_status": "resolved",
+            "resolved_path": "main.js"
+          },
+          "relation": "loads"
+        },
+        {
+          "edge_id": "jag_edge_90c384b3f7760215c5d818e9e527156bfc81e6ace07c1a7f8d26bac988e8c2a6",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 48,
+                "line": 11
+              },
+              "kind": "source-range",
+              "source": "preload.js",
+              "start": {
+                "column": 11,
+                "line": 11
+              }
+            }
+          },
+          "properties": {
+            "channel": "fixture:op8",
+            "channel_expression": null,
+            "operation": "invoke",
+            "resolution": "literal",
+            "side": "renderer"
+          },
+          "relation": "invokes"
+        },
+        {
+          "edge_id": "jag_edge_9157bec721521ed5a79d9aedfa78201e5b65cd9b0935572db1b6c4ffab921054",
+          "location": {
+            "available": true,
+            "value": {
+              "kind": "artifact-path",
+              "path": "package.json"
+            }
+          },
+          "properties": {
+            "declared_path": "main.js",
+            "resolution_context": "package-entrypoint",
+            "resolution_status": "resolved",
+            "resolved_path": "main.js"
+          },
+          "relation": "maps_to"
+        },
+        {
+          "edge_id": "jag_edge_93536207b826cb6d792e30c72c4ae4770c49019f2df5ff627a7db7daf5e99733",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 50,
+                "line": 22
+              },
+              "kind": "source-range",
+              "source": "preload.js",
+              "start": {
+                "column": 12,
+                "line": 22
+              }
+            }
+          },
+          "properties": {
+            "channel": "fixture:op19",
+            "channel_expression": null,
+            "operation": "invoke",
+            "resolution": "literal",
+            "side": "renderer"
+          },
+          "relation": "invokes"
+        },
+        {
+          "edge_id": "jag_edge_9b2d58116776bce1359c2cf1087a39b7bf03cf6cf6bfeb6ca45f18b3448078b5",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 50,
+                "line": 19
+              },
+              "kind": "source-range",
+              "source": "preload.js",
+              "start": {
+                "column": 12,
+                "line": 19
+              }
+            }
+          },
+          "properties": {
+            "channel": "fixture:op16",
+            "channel_expression": null,
+            "operation": "invoke",
+            "resolution": "literal",
+            "side": "renderer"
+          },
+          "relation": "invokes"
+        },
+        {
+          "edge_id": "jag_edge_9d407d5ac4d169e8a587999af40ccb6c512f2b693f014e0750310f6c2a5cb055",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 35,
+                "line": 1
+              },
+              "kind": "source-range",
+              "source": "main.js",
+              "start": {
+                "column": 16,
+                "line": 1
+              }
+            }
+          },
+          "properties": {
+            "expression": null,
+            "kind": "require",
+            "resolution_mode": "require",
+            "resolution_status": "external",
+            "resolved_path": null,
+            "specifier": "electron"
+          },
+          "relation": "imports"
+        },
+        {
+          "edge_id": "jag_edge_a21991952ec9b88d4442256feb1a35783cfdc5f9ec7803cd64b20e6061ef2771",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 50,
+                "line": 22
+              },
+              "kind": "source-range",
+              "source": "preload.js",
+              "start": {
+                "column": 12,
+                "line": 22
+              }
+            }
+          },
+          "properties": {
+            "channel": "fixture:op19",
+            "handler_operation": "handle",
+            "handler_path": "main.js",
+            "pairing_basis": "unique-exact-literal-channel"
+          },
+          "relation": "invokes"
+        },
+        {
+          "edge_id": "jag_edge_a57c8c37ed6b804549629099b7cb790d6a524df54fd5b6ca22a3f383ed7f0da8",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 50,
+                "line": 14
+              },
+              "kind": "source-range",
+              "source": "preload.js",
+              "start": {
+                "column": 12,
+                "line": 14
+              }
+            }
+          },
+          "properties": {
+            "channel": "fixture:op11",
+            "channel_expression": null,
+            "operation": "invoke",
+            "resolution": "literal",
+            "side": "renderer"
+          },
+          "relation": "invokes"
+        },
+        {
+          "edge_id": "jag_edge_a8afd3e6649f55c6d4fce34be6edf0e51058de4fb99d9fcc9181dec6458cd544",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 50,
+                "line": 20
+              },
+              "kind": "source-range",
+              "source": "preload.js",
+              "start": {
+                "column": 12,
+                "line": 20
+              }
+            }
+          },
+          "properties": {
+            "channel": "fixture:op17",
+            "channel_expression": null,
+            "operation": "invoke",
+            "resolution": "literal",
+            "side": "renderer"
+          },
+          "relation": "invokes"
+        }
+      ],
+      "key_links_omitted": 27,
+      "limitations": [
+        "CommonJS and ESM binding relationships were recovered from inert syntax and resolved only within the inventoried artifact container.",
+        "Electron API identity follows proven lexical module aliases and structurally verified module-namespace interop. Other reassignments, dynamic selections, and visibly overwritten namespace members are unresolved; missing findings do not establish absence. Arbitrary call side effects and runtime registration are not evaluated.",
+        "Electron relationships are derived from inert syntax; runtime registration, reachability, defaults, and enforcement remain unproven.",
+        "JavaScript and HTML were parsed as inert text; bundle bootstrap code was never executed.",
+        "Static imports, entrypoints, workers, endpoints, and storage relationships do not prove runtime execution.",
+        "Static paths and relationships may remain unresolved when expressions are dynamic or obfuscated.",
+        "Webpack/Rspack factories were recovered from AST literals; REA did not invoke push handlers or bundle bootstrap code.",
+        "CommonJS and ESM binding relationships were recovered from inert syntax and resolved only within the inventoried artifact container.",
+        "Electron API identity follows proven lexical module aliases and structurally verified module-namespace interop. Other reassignments, dynamic selections, and visibly overwritten namespace members are unresolved; missing findings do not establish absence. Arbitrary call side effects and runtime registration are not evaluated.",
+        "Electron relationships are derived from inert syntax; runtime registration, reachability, defaults, and enforcement remain unproven.",
+        "JavaScript and HTML were parsed as inert text; bundle bootstrap code was never executed.",
+        "Static imports, entrypoints, workers, endpoints, and storage relationships do not prove runtime execution.",
+        "Static paths and relationships may remain unresolved when expressions are dynamic or obfuscated.",
+        "Webpack/Rspack factories were recovered from AST literals; REA did not invoke push handlers or bundle bootstrap code."
+      ],
+      "node_count": 113,
+      "statistics": {
+        "findings": 46,
+        "invalid_utf8_files": 0,
+        "modules": 0,
+        "nested_asar_containers": 0,
+        "parse_failures": 0,
+        "parsed_javascript_files": 2,
+        "relevant_files": 3,
+        "text_bytes_read": 2276,
+        "visited_ast_nodes": 532
+      },
+      "summary": {
+        "browser_windows": 0,
+        "context_bridge_apis": 1,
+        "explicit_web_preferences": 0,
+        "exposed_api_members": 20,
+        "ipc": {
+          "ambiguous_renderer_transmissions": 0,
+          "dynamic_channel_operations": 0,
+          "literal_channels": 20,
+          "main_handlers": 20,
+          "operations": 40,
+          "paired_renderer_transmissions": 20,
+          "renderer_listeners": 0,
+          "renderer_transmissions": 20,
+          "unpaired_literal_renderer_transmissions": 0
+        },
+        "native_addon_bindings": 0,
+        "preload_entrypoints": 0,
+        "resolved_native_addon_bindings": 0,
+        "resolved_utility_entrypoints": 0,
+        "sender_validation_observations": 0,
+        "utility_processes": 0
+      }
+    },
+    "checks": {
+      "evidence_validated": true,
+      "model_calls": 1,
+      "model_claims_verified": false,
+      "runtime_behavior_verified": false,
+      "runtime_rechecked": true,
+      "sources_rechecked": true,
+      "target_executed": false
+    },
+    "decision": {
+      "bundle_digest": "sha256:42756ea2d908fe9a2455e4ab1b384fec3e65f7c54654266f24236b1177318b06",
+      "direct": false,
+      "excluded": [],
+      "message_digest": "sha256:1453bfd5c73c96a7281550e2e5bed7fe51b94a3cb807b4f3269be73a0e4b47d4",
+      "purpose": "task",
+      "schema_version": 1,
+      "selected": [
+        {
+          "id": "rea.software-analysis",
+          "policy": {
+            "mode": "auto",
+            "revision": 0,
+            "source": "package_default"
+          },
+          "reason": "用户明确指定。",
+          "version": "1.3.0",
+          "workflow": "rea"
+        }
+      ]
+    },
+    "evidence_ref": {
+      "digest": "sha256:507e182a293a722567a87f045f98272463527705ba84cdcd46179ea59a770dcb",
+      "evidence_id": "ev_a4ae21ce39e8fbd9566e127dc99be5a427f5e14ff4b4fec8f496bf6e4e27e2bb",
+      "media_type": "application/json",
+      "path": "act_cd42f0267e9655cba6d3b0aa6ac92d68-evidence.json",
+      "size_bytes": 1526753
+    },
+    "explanation": {
+      "citations_verified": true,
+      "coverage": {
+        "available_links": 3,
+        "excluded_entries": 1,
+        "input_files": 3,
+        "omitted_links": 0,
+        "selected_links": 3
+      },
+      "evidence_id": "ev_a4ae21ce39e8fbd9566e127dc99be5a427f5e14ff4b4fec8f496bf6e4e27e2bb",
+      "findings": [
+        {
+          "kind": "observation",
+          "refs": [
+            "E1"
+          ],
+          "text": "静态证据包含通道关系。"
+        }
+      ],
+      "input_digest": "sha256:00cb5bf5ea7c0f0dbe2cf176ec7a6432c5ab3a5aba48557fee99330995205234",
+      "model": {
+        "model": "synthetic",
+        "provider": "test",
+        "usage": {
+          "input_tokens": 1
+        }
+      },
+      "model_calls": 1,
+      "packet_bytes": 1483,
+      "packet_digest": "sha256:611f768ca8c25ae2126fb7d51c9209ce0957854e021d5901fa86e0307e57b0b8",
+      "semantics_verified": false,
+      "sources": [
+        {
+          "edge_id": "jag_edge_2f5ed6e42d94286c76a3fddd43249bbed9a87f94ad032a53f445f8be2a642e4f",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 48,
+                "line": 4
+              },
+              "kind": "source-range",
+              "source": "preload.js",
+              "start": {
+                "column": 11,
+                "line": 4
+              }
+            }
+          },
+          "properties": {
+            "channel": "fixture:op1",
+            "handler_operation": "handle",
+            "handler_path": "main.js",
+            "pairing_basis": "unique-exact-literal-channel"
+          },
+          "ref": "E1",
+          "relation": "invokes"
+        },
+        {
+          "edge_id": "jag_edge_81b085ad53ee40660c2902ca1392a35634dd5ba50c30b9bcafbd44d9796d50dc",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 48,
+                "line": 4
+              },
+              "kind": "source-range",
+              "source": "preload.js",
+              "start": {
+                "column": 4,
+                "line": 4
+              }
+            }
+          },
+          "properties": {
+            "channel": "fixture:op1",
+            "conditions": [],
+            "entry": "fixture.op1",
+            "entry_path": [
+              "fixture",
+              "op1"
+            ],
+            "path_id": "ea5b06160201e6997c2425a1f83ea998b607326203c3fa777f1623e3660aa3f8",
+            "resolution": "candidate"
+          },
+          "ref": "E2",
+          "relation": "maps_to"
+        },
+        {
+          "edge_id": "jag_edge_d8891a9bceba80a190cdd91feaa90bed21ead5528aecd3ca97a52eb35efaf9c6",
+          "location": {
+            "available": true,
+            "value": {
+              "end": {
+                "column": 48,
+                "line": 4
+              },
+              "kind": "source-range",
+              "source": "preload.js",
+              "start": {
+                "column": 11,
+                "line": 4
+              }
+            }
+          },
+          "properties": {
+            "channel": "fixture:op1",
+            "channel_expression": null,
+            "operation": "invoke",
+            "resolution": "literal",
+            "side": "renderer"
+          },
+          "ref": "E3",
+          "relation": "invokes"
+        }
+      ],
+      "status": "SUCCEEDED",
+      "unknowns": [
+        "未运行目标软件，无法确认实际运行结果。"
+      ]
+    },
+    "input_manifest": {
+      "container": {
+        "bytes": 2192,
+        "digest": "sha256:4fc3a35707b5b40622807951ef143ddfe7ce3b3940945a33d4c7928161d71e22",
+        "path": "app.asar"
+      },
+      "digest": "sha256:00cb5bf5ea7c0f0dbe2cf176ec7a6432c5ab3a5aba48557fee99330995205234",
+      "files": [
+        {
+          "bytes": 1048,
+          "digest": "sha256:4d1ae18d081898ef960a04449548127b043d83253eaaaa52b6acdeb557c16461",
+          "origin": {
+            "byte_offset": 1024,
+            "container": "app.asar",
+            "declared_hash_checked": true,
+            "member": "main.js",
+            "unpacked": false
+          },
+          "path": "main.js"
+        },
+        {
+          "bytes": 83,
+          "digest": "sha256:a29ce499e5de18bf102e88de563f1405e867ce94f7fb7a4fd71ed1d538444758",
+          "origin": {
+            "byte_offset": 2072,
+            "container": "app.asar",
+            "declared_hash_checked": true,
+            "member": "package.json",
+            "unpacked": false
+          },
+          "path": "package.json"
+        },
+        {
+          "bytes": 1145,
+          "digest": "sha256:bd073ff76174cf7d19a31fbfe800a393b854cedb5d094ef3a837d4352f6e3a7f",
+          "origin": {
+            "byte_offset": null,
+            "container": "app.asar",
+            "declared_hash_checked": true,
+            "member": "preload.js",
+            "unpacked": true
+          },
+          "path": "preload.js"
+        }
+      ],
+      "format": "asar",
+      "omitted": [
+        {
+          "path": "secrets.json",
+          "reason": "排除目录或凭据名称"
+        }
+      ],
+      "parser_input_format": "directory",
+      "target_path": "app.asar",
+      "total_bytes": 2276
+    },
+    "kind": "jarvis.skill-report",
+    "output": {
+      "completed_at": "2026-10-18T06:30:28.714506+00:00",
+      "created_at": "2026-10-18T06:30:28.370034+00:00",
+      "digest": "sha256:85631baffb3eca480ec6d459dd17cf54ca00818de4b811092bd15495075de292",
+      "error_category": null,
+      "path": "C:\\Users\\samuel\\AppData\\Local\\Temp\\jarvis-rea-ui-j92zxgqw\\project\\技能产物-cd42f0267e96.txt",
+      "project_id": "da5591afdea3440dac2d6a12c6d9a0ed",
+      "request_id": "cd42f0267e9655cba6d3b0aa6ac92d68",
+      "size_bytes": 23716,
+      "status": "SAVED"
+    },
+    "runtime": {
+      "active_process_limit": 4,
+      "elapsed_seconds": 2.668,
+      "evidence_digest": "sha256:c07f30ee2cc277f77fbbb337bcf1fc421e5cec4d6b994285248428cec8b8d17e",
+      "evidence_output_limit_bytes": 8388608,
+      "job_cpu_limit_seconds": 45,
+      "job_memory_limit_bytes": 1073741824,
+      "kill_on_close": true,
+      "manifest_digest": "sha256:6c02d24e3f060b31acb35d5b31dd10f9b489e8a7c3d44591b257314bada8286b",
+      "os_sandbox": false,
+      "peak_job_memory_bytes": 461709312,
+      "pid": 45436,
+      "stdout_bytes": 1526753,
+      "stdout_digest": "sha256:c5ac3fa647943c5216f39f1cda875db825627e9adb9c8af89ff252195418fee8",
+      "version": "6.5.0",
+      "wall_limit_seconds": 60
+    },
+    "skill_id": "rea.software-analysis",
+    "text": "# 软件结构与行为解析报告\n\n目标：app.asar\n任务：解释 fixture:op1 的静态调用关系\n解析器：REA 6.5.0 · JavaScript / Electron 静态解析\n证据编号：ev_a4ae21ce39e8fbd9566e127dc99be5a427f5e14ff4b4fec8f496bf6e4e27e2bb\n输入版本：sha256:00cb5bf5ea7c0f0dbe2cf176ec7a6432c5ab3a5aba48557fee99330995205234\n\nASAR 容器：app.asar\n原包摘要：sha256:4fc3a35707b5b40622807951ef143ddfe7ce3b3940945a33d4c7928161d71e22\n解析范围：从 ASAR 及所需 .unpacked 成员取得的文本快照；成员位置保存在输入清单。\n## 解析结果\n读取 3 个文件，2276 字节；排除 1 个条目。\n结构图：113 个节点、154 条关系。\nElectron 桥接 API：1；暴露成员：20。\nIPC 主进程处理器：20；发送操作：20；配对：20。\n\n## 本次关注：fixture:op1\n匹配方式：字面标识符检索；没有自动推断运行行为。\n相关节点 5 个、关键关系 3 条；下列展示 3 条。\ninvokes：{\"channel\": \"fixture:op1\", \"pairing_basis\": \"unique-exact-literal-channel\", \"handler_path\": \"main.js\", \"handler_operation\": \"handle\"}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 4, \"column\": 11}, \"end\": {\"line\": 4, \"column\": 48}}}\n  证据：jag_edge_2f5ed6e42d94286c76a3fddd43249bbed9a87f94ad032a53f445f8be2a642e4f\nmaps_to：{\"path_id\": \"ea5b06160201e6997c2425a1f83ea998b607326203c3fa777f1623e3660aa3f8\", \"entry\": \"fixture.op1\", \"entry_path\": [\"fixture\", \"op1\"], \"channel\": \"fixture:op1\", \"resolution\": \"candidate\", \"conditions\": []}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 4, \"column\": 4}, \"end\": {\"line\": 4, \"column\": 48}}}\n  证据：jag_edge_81b085ad53ee40660c2902ca1392a35634dd5ba50c30b9bcafbd44d9796d50dc\ninvokes：{\"side\": \"renderer\", \"operation\": \"invoke\", \"channel\": \"fixture:op1\", \"channel_expression\": null, \"resolution\": \"literal\"}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 4, \"column\": 11}, \"end\": {\"line\": 4, \"column\": 48}}}\n  证据：jag_edge_d8891a9bceba80a190cdd91feaa90bed21ead5528aecd3ca97a52eb35efaf9c6\n更多匹配项可在证据浏览中按相同标识符筛选。\n\n## 应用组成\njavascript-module：main.js\nipc-handler：fixture:op2\nipc-handler：fixture:op7\njavascript-module：electron\nipc-handler：fixture:op1\nipc-handler：fixture:op12\njavascript-module：preload.js\njavascript-module：electron\nipc-handler：fixture:op6\ncontext-bridge-api：fixture\nipc-handler：fixture:op11\npackage：jarvis-rea-effectiveness-fixture\nipc-handler：fixture:op0\nipc-handler：fixture:op3\nipc-handler：fixture:op8\njavascript-module：electron\nipc-handler：fixture:op17\njavascript-module：electron\nipc-handler：fixture:op14\nipc-handler：fixture:op9\nipc-handler：fixture:op15\nipc-handler：fixture:op5\nipc-handler：fixture:op18\nipc-handler：fixture:op10\nipc-handler：fixture:op13\nelectron-main：main.js\nipc-handler：fixture:op19\nipc-handler：fixture:op4\nipc-handler：fixture:op16\n\n## 关键关系（完整图见证据 JSON）\n本报告展示 40 条关键关系，另有 27 条可在证据分页中读取。\nmaps_to：{\"path_id\": \"f7b4b2a6b29da9b5c03885cf082fcfb54cb1dbfac71ec440e1e2edebd11e7744\", \"entry\": \"fixture.op9\", \"entry_path\": [\"fixture\", \"op9\"], \"channel\": \"fixture:op9\", \"resolution\": \"candidate\", \"conditions\": []}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 12, \"column\": 4}, \"end\": {\"line\": 12, \"column\": 48}}}\n  证据：jag_edge_00984c10eacc842a86ad46f6668c22d60a786b1551823f66226bf9020fa61452\nmaps_to：{\"path_id\": \"2f49033fe8c688cc030abb6204dd2f6d7fa58e4ffbceca09a9a143ef7592d62a\", \"entry\": \"fixture.op4\", \"entry_path\": [\"fixture\", \"op4\"], \"channel\": \"fixture:op4\", \"resolution\": \"candidate\", \"conditions\": []}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 7, \"column\": 4}, \"end\": {\"line\": 7, \"column\": 48}}}\n  证据：jag_edge_0120805e382ae861754f5fe0ed25f8f1260f52b817896ca3474b0ee5c6625ff4\ninvokes：{\"side\": \"renderer\", \"operation\": \"invoke\", \"channel\": \"fixture:op14\", \"channel_expression\": null, \"resolution\": \"literal\"}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 17, \"column\": 12}, \"end\": {\"line\": 17, \"column\": 50}}}\n  证据：jag_edge_013ab4dfbcab9ce934210fba458e9372cba34fd319685e7491dae4341c4ae1cb\nimports：{\"module_link_kind\": \"require\", \"resolution_mode\": \"require\", \"specifier\": \"electron\", \"imported_name\": \"contextBridge\", \"imported_path\": [\"contextBridge\"], \"local_name\": \"contextBridge\", \"exported_name\": null, \"resolved_path\": null, \"resolution_status\": \"external\", \"target_file_kind\": null, \"target_json_status\": null}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 1, \"column\": 6}, \"end\": {\"line\": 1, \"column\": 53}}}\n  证据：jag_edge_05e108e67704e431129c90a9b999860f5e32f2cb9f9a437310f7b0bbcb1953e8\ninvokes：{\"channel\": \"fixture:op6\", \"pairing_basis\": \"unique-exact-literal-channel\", \"handler_path\": \"main.js\", \"handler_operation\": \"handle\"}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 9, \"column\": 11}, \"end\": {\"line\": 9, \"column\": 48}}}\n  证据：jag_edge_10324bee1de06c46df5c1e5e8cb13efc7ec0fc59ddd72e3fa3b6d614775049a8\nmaps_to：{\"path_id\": \"b540b0e5dc256d3c6e23c9bfd16931ce7f3d425009bef57e2096036f923e1786\", \"entry\": \"fixture.op13\", \"entry_path\": [\"fixture\", \"op13\"], \"channel\": \"fixture:op13\", \"resolution\": \"candidate\", \"conditions\": []}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 16, \"column\": 5}, \"end\": {\"line\": 16, \"column\": 50}}}\n  证据：jag_edge_1416f63a02b19403340dbef82eba43a840abbc689cf224a10d74be06332d6fd9\nmaps_to：{\"path_id\": \"b24970e15313a0ae2eb7bf5c1962db0933270cdd5f53feb28ed2d13c6a2e0664\", \"entry\": \"fixture.op2\", \"entry_path\": [\"fixture\", \"op2\"], \"channel\": \"fixture:op2\", \"resolution\": \"candidate\", \"conditions\": []}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 5, \"column\": 4}, \"end\": {\"line\": 5, \"column\": 48}}}\n  证据：jag_edge_154acac2489002994aab79a6820dc96517fdff5a5dc7feb4caad08d3813da721\nmaps_to：{\"path_id\": \"590c5336943390644b0972890a2a0711f69858b41deb9f6caa173ff0f39e742c\", \"entry\": \"fixture.op6\", \"entry_path\": [\"fixture\", \"op6\"], \"channel\": \"fixture:op6\", \"resolution\": \"candidate\", \"conditions\": []}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 9, \"column\": 4}, \"end\": {\"line\": 9, \"column\": 48}}}\n  证据：jag_edge_23b914314a7c21e3fea88b89377fd7a540e08ce7ad834f400ab4dbb29965c863\ninvokes：{\"channel\": \"fixture:op18\", \"pairing_basis\": \"unique-exact-literal-channel\", \"handler_path\": \"main.js\", \"handler_operation\": \"handle\"}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 21, \"column\": 12}, \"end\": {\"line\": 21, \"column\": 50}}}\n  证据：jag_edge_24b74da9a34537a69dff6aca1972ef20d45da83e3e336c2fa462aaef65cce2b3\ninvokes：{\"channel\": \"fixture:op17\", \"pairing_basis\": \"unique-exact-literal-channel\", \"handler_path\": \"main.js\", \"handler_operation\": \"handle\"}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 20, \"column\": 12}, \"end\": {\"line\": 20, \"column\": 50}}}\n  证据：jag_edge_2954599146be545e948b41230673e9faa3634b44ad3a0eac5d8e042caf47d474\nimports：{\"kind\": \"require\", \"specifier\": \"electron\", \"expression\": null, \"resolution_mode\": \"require\", \"resolved_path\": null, \"resolution_status\": \"external\"}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 1, \"column\": 34}, \"end\": {\"line\": 1, \"column\": 53}}}\n  证据：jag_edge_2ed147cbd6a5102dfb3b9430c6466ac9cf9d86c9ecc61232460866b776681bab\ninvokes：{\"channel\": \"fixture:op1\", \"pairing_basis\": \"unique-exact-literal-channel\", \"handler_path\": \"main.js\", \"handler_operation\": \"handle\"}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 4, \"column\": 11}, \"end\": {\"line\": 4, \"column\": 48}}}\n  证据：jag_edge_2f5ed6e42d94286c76a3fddd43249bbed9a87f94ad032a53f445f8be2a642e4f\nmaps_to：{\"path_id\": \"915954272ce72e469da852a703db7ed12e38d8f0769f01ee765171ede13953a4\", \"entry\": \"fixture.op10\", \"entry_path\": [\"fixture\", \"op10\"], \"channel\": \"fixture:op10\", \"resolution\": \"candidate\", \"conditions\": []}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 13, \"column\": 5}, \"end\": {\"line\": 13, \"column\": 50}}}\n  证据：jag_edge_3148d9711a4a2c752f0d32015d87e0e8a14f920fe46f1172e65ac10f22becb6d\ninvokes：{\"channel\": \"fixture:op15\", \"pairing_basis\": \"unique-exact-literal-channel\", \"handler_path\": \"main.js\", \"handler_operation\": \"handle\"}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 18, \"column\": 12}, \"end\": {\"line\": 18, \"column\": 50}}}\n  证据：jag_edge_3556077f4cfcdb212102a48e776dada432e9a36cfe9fde1926f7e508ea320d8c\ninvokes：{\"side\": \"renderer\", \"operation\": \"invoke\", \"channel\": \"fixture:op15\", \"channel_expression\": null, \"resolution\": \"literal\"}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 18, \"column\": 12}, \"end\": {\"line\": 18, \"column\": 50}}}\n  证据：jag_edge_3e98aa988243d03aed7d11372f6295353d100c32ea7982f91966f74cc68a1b6f\ninvokes：{\"channel\": \"fixture:op13\", \"pairing_basis\": \"unique-exact-literal-channel\", \"handler_path\": \"main.js\", \"handler_operation\": \"handle\"}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 16, \"column\": 12}, \"end\": {\"line\": 16, \"column\": 50}}}\n  证据：jag_edge_3ef40ea5bb9d14119a86f3853aa13fd357b3680519ed6cd6cec000ccd9570233\nmaps_to：{\"path_id\": \"ad766bee4a05719010981206a261dee3ad6d7cdbeaac034bac648e1604815308\", \"entry\": \"fixture.op7\", \"entry_path\": [\"fixture\", \"op7\"], \"channel\": \"fixture:op7\", \"resolution\": \"candidate\", \"conditions\": []}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 10, \"column\": 4}, \"end\": {\"line\": 10, \"column\": 48}}}\n  证据：jag_edge_466347142ee22988d60da71c22868db6f540f434959e4db5ce880cbfaa8abbf2\ninvokes：{\"channel\": \"fixture:op16\", \"pairing_basis\": \"unique-exact-literal-channel\", \"handler_path\": \"main.js\", \"handler_operation\": \"handle\"}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 19, \"column\": 12}, \"end\": {\"line\": 19, \"column\": 50}}}\n  证据：jag_edge_47360dc6fb306ee78da7f67725682e683d60165e67f1e6dd855b99e5024cd007\ninvokes：{\"side\": \"renderer\", \"operation\": \"invoke\", \"channel\": \"fixture:op2\", \"channel_expression\": null, \"resolution\": \"literal\"}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 5, \"column\": 11}, \"end\": {\"line\": 5, \"column\": 48}}}\n  证据：jag_edge_4fdadf15e6ca16c22e7853bb78c9a05d6fdf3c2190faec99af7c0ba9fb4f88e7\nmaps_to：{\"path_id\": \"a40511d46eb3e7bfda07718dc7b7fba4bcdc3b419568f9766d9e7e550f845fde\", \"entry\": \"fixture.op3\", \"entry_path\": [\"fixture\", \"op3\"], \"channel\": \"fixture:op3\", \"resolution\": \"candidate\", \"conditions\": []}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 6, \"column\": 4}, \"end\": {\"line\": 6, \"column\": 48}}}\n  证据：jag_edge_50ee008963f270bb4ffb6066a8ce987cdf28fb16108bc1ab0376200d31304af3\nimports：{\"module_link_kind\": \"require\", \"resolution_mode\": \"require\", \"specifier\": \"electron\", \"imported_name\": \"ipcMain\", \"imported_path\": [\"ipcMain\"], \"local_name\": \"ipcMain\", \"exported_name\": null, \"resolved_path\": null, \"resolution_status\": \"external\", \"target_file_kind\": null, \"target_json_status\": null}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"main.js\", \"start\": {\"line\": 1, \"column\": 6}, \"end\": {\"line\": 1, \"column\": 35}}}\n  证据：jag_edge_510c7ec1261dc19c71d87309de92b8510b7eab4839ba7e05eb3b20bf6f2290cd\ninvokes：{\"side\": \"renderer\", \"operation\": \"invoke\", \"channel\": \"fixture:op0\", \"channel_expression\": null, \"resolution\": \"literal\"}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 3, \"column\": 11}, \"end\": {\"line\": 3, \"column\": 48}}}\n  证据：jag_edge_518502c262a8f1a986ed3afce39067ce5e69f768f865ec7134ea70a45091788c\nmaps_to：{\"path_id\": \"945376b06a0b87d8e5f82a51a2ba6640be32cb5137bfcb2ffc40657fd287397f\", \"entry\": \"fixture.op8\", \"entry_path\": [\"fixture\", \"op8\"], \"channel\": \"fixture:op8\", \"resolution\": \"candidate\", \"conditions\": []}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 11, \"column\": 4}, \"end\": {\"line\": 11, \"column\": 48}}}\n  证据：jag_edge_56912bb720b6eb494c3e10a46aa0fef6561f883bb7cb5cca93cd2011cc755725\nmaps_to：{\"path_id\": \"79438cb6ffc5a7c4ddafff3c03a2c6c1d9501831e8c943dc3f5ac4361bc0bd3a\", \"entry\": \"fixture.op11\", \"entry_path\": [\"fixture\", \"op11\"], \"channel\": \"fixture:op11\", \"resolution\": \"candidate\", \"conditions\": []}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 14, \"column\": 5}, \"end\": {\"line\": 14, \"column\": 50}}}\n  证据：jag_edge_6563649581d654f60f06d9f763ed28732723cedb5387f7899b8335d6954323c8\ninvokes：{\"side\": \"renderer\", \"operation\": \"invoke\", \"channel\": \"fixture:op3\", \"channel_expression\": null, \"resolution\": \"literal\"}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 6, \"column\": 11}, \"end\": {\"line\": 6, \"column\": 48}}}\n  证据：jag_edge_666cf4e622a99b7b4289d64afb07309e459fc14386fbe566cc4125cea1d593d6\nmaps_to：{\"path_id\": \"347dc5be5fdcc63a7c6510d8092ae02a342e946d1ae1f84209fc7b65f2d5525f\", \"entry\": \"fixture.op0\", \"entry_path\": [\"fixture\", \"op0\"], \"channel\": \"fixture:op0\", \"resolution\": \"candidate\", \"conditions\": []}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 3, \"column\": 4}, \"end\": {\"line\": 3, \"column\": 48}}}\n  证据：jag_edge_713ca18f41228a818d5946d7a6a30810fa37ea0a6c47d9132b8f181bd7d517f7\nmaps_to：{\"path_id\": \"7f56a76fc0ccb67312983a243ac28c788edd7b6c141aace4c7076d79656fa0d7\", \"entry\": \"fixture.op17\", \"entry_path\": [\"fixture\", \"op17\"], \"channel\": \"fixture:op17\", \"resolution\": \"candidate\", \"conditions\": []}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 20, \"column\": 5}, \"end\": {\"line\": 20, \"column\": 50}}}\n  证据：jag_edge_7c1e0314ed6932db01b1d533e435efa3b1f24ef3acf162f071ed4a88bf147a9e\ninvokes：{\"channel\": \"fixture:op14\", \"pairing_basis\": \"unique-exact-literal-channel\", \"handler_path\": \"main.js\", \"handler_operation\": \"handle\"}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 17, \"column\": 12}, \"end\": {\"line\": 17, \"column\": 50}}}\n  证据：jag_edge_7c6f75ac770605ffb585156b9261f42aa4c8b254af1fde576a1dc7bd8ba1552c\nimports：{\"module_link_kind\": \"require\", \"resolution_mode\": \"require\", \"specifier\": \"electron\", \"imported_name\": \"ipcRenderer\", \"imported_path\": [\"ipcRenderer\"], \"local_name\": \"ipcRenderer\", \"exported_name\": null, \"resolved_path\": null, \"resolution_status\": \"external\", \"target_file_kind\": null, \"target_json_status\": null}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 1, \"column\": 6}, \"end\": {\"line\": 1, \"column\": 53}}}\n  证据：jag_edge_816a68afd176e034fcab56877dca91eb37e2500ab59bc44c4c4910ee22963250\nmaps_to：{\"path_id\": \"ea5b06160201e6997c2425a1f83ea998b607326203c3fa777f1623e3660aa3f8\", \"entry\": \"fixture.op1\", \"entry_path\": [\"fixture\", \"op1\"], \"channel\": \"fixture:op1\", \"resolution\": \"candidate\", \"conditions\": []}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 4, \"column\": 4}, \"end\": {\"line\": 4, \"column\": 48}}}\n  证据：jag_edge_81b085ad53ee40660c2902ca1392a35634dd5ba50c30b9bcafbd44d9796d50dc\ninvokes：{\"channel\": \"fixture:op5\", \"pairing_basis\": \"unique-exact-literal-channel\", \"handler_path\": \"main.js\", \"handler_operation\": \"handle\"}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 8, \"column\": 11}, \"end\": {\"line\": 8, \"column\": 48}}}\n  证据：jag_edge_82fe31274e498ac8e73b7bc90cf014ebf331324d0917a9581b4dfa8197241e80\nloads：{\"declared_path\": \"main.js\", \"resolution_context\": \"package-entrypoint\", \"resolved_path\": \"main.js\", \"resolution_status\": \"resolved\", \"limitations\": []}\n  来源：{\"available\": true, \"value\": {\"kind\": \"artifact-path\", \"path\": \"package.json\"}}\n  证据：jag_edge_8d17dde96024c7eb7c60881d403f07df074ab34d4b839ce88c9872c1731b44e1\ninvokes：{\"side\": \"renderer\", \"operation\": \"invoke\", \"channel\": \"fixture:op8\", \"channel_expression\": null, \"resolution\": \"literal\"}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 11, \"column\": 11}, \"end\": {\"line\": 11, \"column\": 48}}}\n  证据：jag_edge_90c384b3f7760215c5d818e9e527156bfc81e6ace07c1a7f8d26bac988e8c2a6\nmaps_to：{\"declared_path\": \"main.js\", \"resolution_context\": \"package-entrypoint\", \"resolved_path\": \"main.js\", \"resolution_status\": \"resolved\"}\n  来源：{\"available\": true, \"value\": {\"kind\": \"artifact-path\", \"path\": \"package.json\"}}\n  证据：jag_edge_9157bec721521ed5a79d9aedfa78201e5b65cd9b0935572db1b6c4ffab921054\ninvokes：{\"side\": \"renderer\", \"operation\": \"invoke\", \"channel\": \"fixture:op19\", \"channel_expression\": null, \"resolution\": \"literal\"}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 22, \"column\": 12}, \"end\": {\"line\": 22, \"column\": 50}}}\n  证据：jag_edge_93536207b826cb6d792e30c72c4ae4770c49019f2df5ff627a7db7daf5e99733\ninvokes：{\"side\": \"renderer\", \"operation\": \"invoke\", \"channel\": \"fixture:op16\", \"channel_expression\": null, \"resolution\": \"literal\"}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 19, \"column\": 12}, \"end\": {\"line\": 19, \"column\": 50}}}\n  证据：jag_edge_9b2d58116776bce1359c2cf1087a39b7bf03cf6cf6bfeb6ca45f18b3448078b5\nimports：{\"kind\": \"require\", \"specifier\": \"electron\", \"expression\": null, \"resolution_mode\": \"require\", \"resolved_path\": null, \"resolution_status\": \"external\"}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"main.js\", \"start\": {\"line\": 1, \"column\": 16}, \"end\": {\"line\": 1, \"column\": 35}}}\n  证据：jag_edge_9d407d5ac4d169e8a587999af40ccb6c512f2b693f014e0750310f6c2a5cb055\ninvokes：{\"channel\": \"fixture:op19\", \"pairing_basis\": \"unique-exact-literal-channel\", \"handler_path\": \"main.js\", \"handler_operation\": \"handle\"}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 22, \"column\": 12}, \"end\": {\"line\": 22, \"column\": 50}}}\n  证据：jag_edge_a21991952ec9b88d4442256feb1a35783cfdc5f9ec7803cd64b20e6061ef2771\ninvokes：{\"side\": \"renderer\", \"operation\": \"invoke\", \"channel\": \"fixture:op11\", \"channel_expression\": null, \"resolution\": \"literal\"}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 14, \"column\": 12}, \"end\": {\"line\": 14, \"column\": 50}}}\n  证据：jag_edge_a57c8c37ed6b804549629099b7cb790d6a524df54fd5b6ca22a3f383ed7f0da8\ninvokes：{\"side\": \"renderer\", \"operation\": \"invoke\", \"channel\": \"fixture:op17\", \"channel_expression\": null, \"resolution\": \"literal\"}\n  来源：{\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 20, \"column\": 12}, \"end\": {\"line\": 20, \"column\": 50}}}\n  证据：jag_edge_a8afd3e6649f55c6d4fce34be6edf0e51058de4fb99d9fcc9181dec6458cd544\n\n## 解释与边界\n这些关系来自语法和模块引用推导，表示可能的调用路径；没有运行目标软件，不能证明实际可达性或安全性。\n已验证的是解析、输入版本与产物交付；未执行软件功能测试。没有发现某项关系并不证明它不存在。\n客户端资料不能还原云端私有代码、模型权重或完整后端。动态字符串、混淆和未纳入文件可能使关系不完整。\n静态解析在本地完成；中文解释仅发送所选证据摘要，模型调用 1 次。\n\n## 排除范围\nsecrets.json：排除目录或凭据名称\n\n## 解析器限制\nCommonJS and ESM binding relationships were recovered from inert syntax and resolved only within the inventoried artifact container.\nElectron API identity follows proven lexical module aliases and structurally verified module-namespace interop. Other reassignments, dynamic selections, and visibly overwritten namespace members are unresolved; missing findings do not establish absence. Arbitrary call side effects and runtime registration are not evaluated.\nElectron relationships are derived from inert syntax; runtime registration, reachability, defaults, and enforcement remain unproven.\nJavaScript and HTML were parsed as inert text; bundle bootstrap code was never executed.\nStatic imports, entrypoints, workers, endpoints, and storage relationships do not prove runtime execution.\nStatic paths and relationships may remain unresolved when expressions are dynamic or obfuscated.\nWebpack/Rspack factories were recovered from AST literals; REA did not invoke push handlers or bundle bootstrap code.\nCommonJS and ESM binding relationships were recovered from inert syntax and resolved only within the inventoried artifact container.\nElectron API identity follows proven lexical module aliases and structurally verified module-namespace interop. Other reassignments, dynamic selections, and visibly overwritten namespace members are unresolved; missing findings do not establish absence. Arbitrary call side effects and runtime registration are not evaluated.\nElectron relationships are derived from inert syntax; runtime registration, reachability, defaults, and enforcement remain unproven.\nJavaScript and HTML were parsed as inert text; bundle bootstrap code was never executed.\nStatic imports, entrypoints, workers, endpoints, and storage relationships do not prove runtime execution.\nStatic paths and relationships may remain unresolved when expressions are dynamic or obfuscated.\nWebpack/Rspack factories were recovered from AST literals; REA did not invoke push handlers or bundle bootstrap code.\n## 中文解释\n来源引用已核对；模型解释未独立核实，没有运行目标。\n静态观察：静态证据包含通道关系。 [E1]\n\n### 未确定事项\n未运行目标软件，无法确认实际运行结果。\n\n### 引用来源\nE1 · invokes · jag_edge_2f5ed6e42d94286c76a3fddd43249bbed9a87f94ad032a53f445f8be2a642e4f · {\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 4, \"column\": 11}, \"end\": {\"line\": 4, \"column\": 48}}}\nE2 · maps_to · jag_edge_81b085ad53ee40660c2902ca1392a35634dd5ba50c30b9bcafbd44d9796d50dc · {\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 4, \"column\": 4}, \"end\": {\"line\": 4, \"column\": 48}}}\nE3 · invokes · jag_edge_d8891a9bceba80a190cdd91feaa90bed21ead5528aecd3ca97a52eb35efaf9c6 · {\"available\": true, \"value\": {\"kind\": \"source-range\", \"source\": \"preload.js\", \"start\": {\"line\": 4, \"column\": 11}, \"end\": {\"line\": 4, \"column\": 48}}}",
+    "verified": {
+      "delivery_digest": true,
+      "workflow_checks": true
+    }
+  },
+  "screenshots": [
+    "artifacts/rea-explanation/skills.png",
+    "artifacts/rea-explanation/skill-detail.png",
+    "artifacts/rea-explanation/report.png"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "version": "0.1.22",
+  "captured_at": "2026-10-16T08:48:24.922907+00:00",
+  "status": "passed",
+  "checks": [
+    "12 real observations; installed/enabled/busy/planned distinctions and filters",
+    "import actual ZIP through UI; unverified version cannot be selected",
+    "blocked synthetic health job leaves real HTTP chat responsive; verified slot selection persisted",
+    "navigation stops module polling; archive draft survives navigation and refresh",
+    "390px layout has no horizontal page overflow"
+  ],
+  "page_errors": [],
+  "screenshots": [
+    "C:\\Users\\samuel\\AppData\\Local\\Jarvis\\data\\diagnostics\\modules\\desktop.png",
+    "C:\\Users\\samuel\\AppData\\Local\\Jarvis\\data\\diagnostics\\modules\\mobile.png"
+  ],
+  "limits": [
+    "Candidate health subprocess and chat model are synthetic; real ZIP/SQLite/HTTP/browser paths exercised.",
+    "No live runtime switch, cloud model call, full load benchmark or OS sandbox claim."
+  ]
+}

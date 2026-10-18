@@ -1,0 +1,1117 @@
+{
+  "schema_version": 1,
+  "status": "implemented_lab_verified_subset_not_production",
+  "date": "2026-10-18",
+  "production_changes": false,
+  "owner_data_used": false,
+  "formal_memory_writes": 0,
+  "runtime_version_at_pilot": "0.1.56",
+  "runtime_version_file_at_finish": "\"\"\"Restricted K1 prototype; no OS isolation or autonomous execution claim.\"\"\"\n\n__version__ = \"0.1.57\"",
+  "parallel_development_note": "Dialogue/skill implementation may update the release label independently; this batch changes no runtime code or release. Frozen source hashes in raw reports identify evaluated code.",
+  "corpus": {
+    "path": "evals/cases/memory-extraction-pilot.json",
+    "sha256": "996aa28637e089185ec816d709520cca2e077119a2d7787345e01b53cb8fd6c9",
+    "cases": 30,
+    "repeats": 3,
+    "independent_holdout": false
+  },
+  "historical_comparability": {
+    "baseline_runtime": "0.1.54",
+    "langmem_runtime": "0.1.54",
+    "same_corpus": true,
+    "same_host_instructions": true,
+    "same_route": true,
+    "same_reasoning": true,
+    "concurrent_head_to_head": false,
+    "note": "Earlier baseline/LangMem batches used 0.1.54; current host includes revision barrier and frozen dialogue changes. No retrieval or user-data quality claim."
+  },
+  "engines": {
+    "historical_semantic": {
+      "runs": 90,
+      "status_counts": {
+        "SUCCEEDED": 84,
+        "BLOCKED": 6
+      },
+      "gateway_invocations": 84,
+      "facts_committed": 0,
+      "content_evidence": {
+        "tp": 59,
+        "fp": 4,
+        "fn": 4,
+        "precision": 0.9365,
+        "recall": 0.9365,
+        "passed_cases": 86,
+        "negative_passes": 36,
+        "negative_runs": 36
+      },
+      "typed": {
+        "tp": 59,
+        "fp": 4,
+        "fn": 4,
+        "precision": 0.9365,
+        "recall": 0.9365,
+        "passed_cases": 86,
+        "negative_passes": 36,
+        "negative_runs": 36
+      },
+      "latency_ms": {
+        "p50": 9086.208,
+        "p95": 11583.396,
+        "scope": "whole isolated case including temporary stores; overlapping calls, not idle-PC measurement"
+      },
+      "reported_tokens": 49574,
+      "token_receipts": 84,
+      "estimated_usd": 0.358668,
+      "cost_receipts": 84,
+      "per_case": {
+        "P01": [
+          true,
+          true,
+          true
+        ],
+        "P02": [
+          true,
+          true,
+          true
+        ],
+        "P03": [
+          true,
+          true,
+          true
+        ],
+        "P04": [
+          true,
+          true,
+          true
+        ],
+        "P05": [
+          true,
+          true,
+          true
+        ],
+        "P06": [
+          true,
+          true,
+          true
+        ],
+        "P07": [
+          true,
+          true,
+          true
+        ],
+        "P08": [
+          true,
+          true,
+          true
+        ],
+        "P09": [
+          true,
+          true,
+          true
+        ],
+        "P10": [
+          true,
+          true,
+          true
+        ],
+        "P11": [
+          true,
+          true,
+          true
+        ],
+        "P12": [
+          true,
+          true,
+          true
+        ],
+        "P13": [
+          true,
+          false,
+          true
+        ],
+        "P14": [
+          true,
+          true,
+          true
+        ],
+        "P15": [
+          true,
+          true,
+          true
+        ],
+        "P16": [
+          true,
+          true,
+          true
+        ],
+        "P17": [
+          true,
+          true,
+          true
+        ],
+        "P18": [
+          false,
+          false,
+          false
+        ],
+        "P19": [
+          true,
+          true,
+          true
+        ],
+        "P20": [
+          true,
+          true,
+          true
+        ],
+        "P21": [
+          true,
+          true,
+          true
+        ],
+        "P22": [
+          true,
+          true,
+          true
+        ],
+        "P23": [
+          true,
+          true,
+          true
+        ],
+        "P24": [
+          true,
+          true,
+          true
+        ],
+        "P25": [
+          true,
+          true,
+          true
+        ],
+        "P26": [
+          true,
+          true,
+          true
+        ],
+        "P27": [
+          true,
+          true,
+          true
+        ],
+        "P28": [
+          true,
+          true,
+          true
+        ],
+        "P29": [
+          true,
+          true,
+          true
+        ],
+        "P30": [
+          true,
+          true,
+          true
+        ]
+      }
+    },
+    "historical_langmem": {
+      "runs": 90,
+      "status_counts": {
+        "SUCCEEDED": 84,
+        "BLOCKED": 6
+      },
+      "gateway_invocations": 84,
+      "facts_committed": 0,
+      "content_evidence": {
+        "tp": 58,
+        "fp": 5,
+        "fn": 5,
+        "precision": 0.9206,
+        "recall": 0.9206,
+        "passed_cases": 86,
+        "negative_passes": 36,
+        "negative_runs": 36
+      },
+      "typed": {
+        "tp": 58,
+        "fp": 5,
+        "fn": 5,
+        "precision": 0.9206,
+        "recall": 0.9206,
+        "passed_cases": 86,
+        "negative_passes": 36,
+        "negative_runs": 36
+      },
+      "latency_ms": {
+        "p50": 10695.658,
+        "p95": 12857.514,
+        "scope": "whole isolated case including temporary stores; overlapping calls, not idle-PC measurement"
+      },
+      "reported_tokens": 94426,
+      "token_receipts": 84,
+      "estimated_usd": 0.405772,
+      "cost_receipts": 84,
+      "per_case": {
+        "P01": [
+          true,
+          true,
+          true
+        ],
+        "P02": [
+          true,
+          true,
+          true
+        ],
+        "P03": [
+          true,
+          true,
+          true
+        ],
+        "P04": [
+          true,
+          true,
+          false
+        ],
+        "P05": [
+          true,
+          true,
+          true
+        ],
+        "P06": [
+          true,
+          true,
+          true
+        ],
+        "P07": [
+          true,
+          true,
+          true
+        ],
+        "P08": [
+          true,
+          true,
+          true
+        ],
+        "P09": [
+          true,
+          true,
+          true
+        ],
+        "P10": [
+          true,
+          true,
+          true
+        ],
+        "P11": [
+          true,
+          false,
+          true
+        ],
+        "P12": [
+          true,
+          true,
+          true
+        ],
+        "P13": [
+          true,
+          true,
+          true
+        ],
+        "P14": [
+          true,
+          true,
+          true
+        ],
+        "P15": [
+          true,
+          true,
+          true
+        ],
+        "P16": [
+          true,
+          true,
+          true
+        ],
+        "P17": [
+          true,
+          true,
+          true
+        ],
+        "P18": [
+          false,
+          true,
+          false
+        ],
+        "P19": [
+          true,
+          true,
+          true
+        ],
+        "P20": [
+          true,
+          true,
+          true
+        ],
+        "P21": [
+          true,
+          true,
+          true
+        ],
+        "P22": [
+          true,
+          true,
+          true
+        ],
+        "P23": [
+          true,
+          true,
+          true
+        ],
+        "P24": [
+          true,
+          true,
+          true
+        ],
+        "P25": [
+          true,
+          true,
+          true
+        ],
+        "P26": [
+          true,
+          true,
+          true
+        ],
+        "P27": [
+          true,
+          true,
+          true
+        ],
+        "P28": [
+          true,
+          true,
+          true
+        ],
+        "P29": [
+          true,
+          true,
+          true
+        ],
+        "P30": [
+          true,
+          true,
+          true
+        ]
+      }
+    },
+    "mem0": {
+      "runs": 90,
+      "status_counts": {
+        "SUCCEEDED": 84,
+        "BLOCKED": 6
+      },
+      "gateway_invocations": 84,
+      "facts_committed": 0,
+      "content_evidence": {
+        "tp": 62,
+        "fp": 4,
+        "fn": 1,
+        "precision": 0.9394,
+        "recall": 0.9841,
+        "passed_cases": 86,
+        "negative_passes": 33,
+        "negative_runs": 36
+      },
+      "typed": {
+        "tp": 62,
+        "fp": 4,
+        "fn": 1,
+        "precision": 0.9394,
+        "recall": 0.9841,
+        "passed_cases": 86,
+        "negative_passes": 33,
+        "negative_runs": 36
+      },
+      "latency_ms": {
+        "p50": 14424.332,
+        "p95": 19557.448,
+        "scope": "whole isolated case including temporary stores; overlapping calls, not idle-PC measurement"
+      },
+      "reported_tokens": 819554,
+      "token_receipts": 84,
+      "estimated_usd": 1.988826,
+      "cost_receipts": 84,
+      "per_case": {
+        "P01": [
+          true,
+          true,
+          true
+        ],
+        "P02": [
+          true,
+          true,
+          true
+        ],
+        "P03": [
+          true,
+          true,
+          true
+        ],
+        "P04": [
+          true,
+          true,
+          true
+        ],
+        "P05": [
+          true,
+          true,
+          true
+        ],
+        "P06": [
+          true,
+          true,
+          true
+        ],
+        "P07": [
+          true,
+          true,
+          true
+        ],
+        "P08": [
+          true,
+          true,
+          true
+        ],
+        "P09": [
+          true,
+          true,
+          true
+        ],
+        "P10": [
+          true,
+          true,
+          true
+        ],
+        "P11": [
+          true,
+          true,
+          true
+        ],
+        "P12": [
+          true,
+          true,
+          true
+        ],
+        "P13": [
+          true,
+          true,
+          true
+        ],
+        "P14": [
+          true,
+          true,
+          true
+        ],
+        "P15": [
+          true,
+          true,
+          true
+        ],
+        "P16": [
+          true,
+          true,
+          true
+        ],
+        "P17": [
+          true,
+          true,
+          true
+        ],
+        "P18": [
+          false,
+          true,
+          true
+        ],
+        "P19": [
+          true,
+          true,
+          true
+        ],
+        "P20": [
+          true,
+          true,
+          true
+        ],
+        "P21": [
+          true,
+          true,
+          true
+        ],
+        "P22": [
+          true,
+          true,
+          true
+        ],
+        "P23": [
+          true,
+          true,
+          true
+        ],
+        "P24": [
+          false,
+          false,
+          false
+        ],
+        "P25": [
+          true,
+          true,
+          true
+        ],
+        "P26": [
+          true,
+          true,
+          true
+        ],
+        "P27": [
+          true,
+          true,
+          true
+        ],
+        "P28": [
+          true,
+          true,
+          true
+        ],
+        "P29": [
+          true,
+          true,
+          true
+        ],
+        "P30": [
+          true,
+          true,
+          true
+        ]
+      }
+    }
+  },
+  "native_sequences": {
+    "scope": "Public synthetic characterization, not independent holdout or semantic retrieval benchmark. Every scene has at most 10 stored facts per scope; native prompts, lexical embeddings, bounded manual SDK operations.",
+    "repeats": 3,
+    "source_unchanged": true,
+    "observations": [
+      {
+        "case": "N01",
+        "repeat": 1,
+        "completed": true,
+        "counts_after_adds": [
+          1,
+          1,
+          1,
+          2
+        ],
+        "original_record_retained_after_changed_preference": true,
+        "manual_update_same_id": true
+      },
+      {
+        "case": "N02",
+        "repeat": 1,
+        "completed": true,
+        "other_project_canary_in_b_prompt": false,
+        "other_project_canary_in_later_a_prompt": false,
+        "personal_nickname_in_project_prompt": false,
+        "final_scope_counts": {
+          "personal": 1,
+          "project-a": 2,
+          "project-b": 1
+        }
+      },
+      {
+        "case": "N03",
+        "repeat": 1,
+        "completed": true,
+        "facts_after_delete": 0,
+        "deleted_fact_in_public_history": true,
+        "deleted_source_in_next_model_prompt": true,
+        "facts_after_next_add": 0
+      },
+      {
+        "case": "N01",
+        "repeat": 2,
+        "completed": true,
+        "counts_after_adds": [
+          1,
+          1,
+          1,
+          2
+        ],
+        "original_record_retained_after_changed_preference": true,
+        "manual_update_same_id": true
+      },
+      {
+        "case": "N02",
+        "repeat": 2,
+        "completed": true,
+        "other_project_canary_in_b_prompt": false,
+        "other_project_canary_in_later_a_prompt": false,
+        "personal_nickname_in_project_prompt": false,
+        "final_scope_counts": {
+          "personal": 1,
+          "project-a": 2,
+          "project-b": 1
+        }
+      },
+      {
+        "case": "N03",
+        "repeat": 2,
+        "completed": true,
+        "facts_after_delete": 0,
+        "deleted_fact_in_public_history": true,
+        "deleted_source_in_next_model_prompt": true,
+        "facts_after_next_add": 0
+      },
+      {
+        "case": "N01",
+        "repeat": 3,
+        "completed": true,
+        "counts_after_adds": [
+          1,
+          1,
+          1,
+          2
+        ],
+        "original_record_retained_after_changed_preference": true,
+        "manual_update_same_id": true
+      },
+      {
+        "case": "N02",
+        "repeat": 3,
+        "completed": true,
+        "other_project_canary_in_b_prompt": false,
+        "other_project_canary_in_later_a_prompt": false,
+        "personal_nickname_in_project_prompt": false,
+        "final_scope_counts": {
+          "personal": 1,
+          "project-a": 2,
+          "project-b": 1
+        }
+      },
+      {
+        "case": "N03",
+        "repeat": 3,
+        "completed": true,
+        "facts_after_delete": 0,
+        "deleted_fact_in_public_history": true,
+        "deleted_source_in_next_model_prompt": true,
+        "facts_after_next_add": 0
+      }
+    ],
+    "usage": {
+      "gateway_invocations": 30,
+      "reported_tokens": 277651,
+      "token_receipts": 30,
+      "estimated_usd": 0.576816,
+      "cost_receipts": 30,
+      "facts_committed": 0
+    }
+  },
+  "resources": {
+    "all": {
+      "worker_count": 94,
+      "all_exited": true,
+      "all_scratch_removed": true,
+      "peak_working_set_bytes": {
+        "min": 115433472,
+        "max": 116674560
+      },
+      "private_bytes": {
+        "min": 96886784,
+        "max": 131375104
+      },
+      "embedding_requests": 197,
+      "embedded_texts": 206,
+      "embedding_ms": 46.985,
+      "denied_io": [
+        "{\"event\": \"socket.bind\", \"file\": \"connection.py\", \"function\": \"_has_ipv6\"}"
+      ]
+    },
+    "constrained": {
+      "worker_count": 84,
+      "all_exited": true,
+      "all_scratch_removed": true,
+      "peak_working_set_bytes": {
+        "min": 115433472,
+        "max": 116674560
+      },
+      "private_bytes": {
+        "min": 96886784,
+        "max": 98250752
+      },
+      "embedding_requests": 141,
+      "embedded_texts": 150,
+      "embedding_ms": 38.515,
+      "denied_io": [
+        "{\"event\": \"socket.bind\", \"file\": \"connection.py\", \"function\": \"_has_ipv6\"}"
+      ]
+    },
+    "note": "Windows counters, process only; local lexical embeddings, no model weights. Not idle PC, OS isolation, learned retrieval or long-term leak acceptance."
+  },
+  "dependencies": {
+    "environment_bytes": 174944301,
+    "packages": 35,
+    "main_environment_has_mem0": false,
+    "installed_sources": {
+      "memory/main.py": "f329ca4a17af1fbefb32ac10d4cc7ae7ddbdb7435a87eb74c30915cff98b8b7c",
+      "configs/prompts.py": "10bc8a34b3b5f0ce24560a2a3190c9112b979a891b981f48393bbd168d915a5c",
+      "memory/storage.py": "5f5ecdadd2b260fd14f36a0f338336eb760275465dd1056a99a47e1ef07702bd",
+      "memory/telemetry.py": "89f36bd0b87059fa0710adcccfbd9639ab4d5c4a762d875a1caceaf688aca687",
+      "llms/openai.py": "37e6d3c22b55df0731740f4e0868b95bd480ce44363227fe53461db328c5f67e",
+      "embeddings/openai.py": "bd8c0cfeaa1ac89511350d51c5042a3b01f90530e18259ed5b0c3e019595e1e1"
+    },
+    "installed_main_matches_reviewed_commit": true
+  },
+  "smoke": {
+    "runs": 1,
+    "status_counts": {
+      "SUCCEEDED": 1
+    },
+    "gateway_invocations": 1,
+    "facts_committed": 0,
+    "content_evidence": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "passed_cases": 1,
+      "negative_passes": 0,
+      "negative_runs": 0
+    },
+    "typed": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "passed_cases": 1,
+      "negative_passes": 0,
+      "negative_runs": 0
+    },
+    "latency_ms": {
+      "p50": 15079.894,
+      "p95": 15079.894,
+      "scope": "whole isolated case including temporary stores; overlapping calls, not idle-PC measurement"
+    },
+    "reported_tokens": 9845,
+    "token_receipts": 1,
+    "estimated_usd": 0.02725,
+    "cost_receipts": 1,
+    "per_case": {
+      "P01": [
+        true
+      ]
+    }
+  },
+  "initial_preflight_failure": {
+    "original_status": "UNKNOWN",
+    "diagnosis": {
+      "cause": "invalid_host_instructions",
+      "instruction_bytes": 33831,
+      "journal_created": false,
+      "source_sha256": "6bdcf16305499c52e6b19d28bab19fe8b5d4457d2264dfa1676be803463b4eee",
+      "original_receipt_retained": true,
+      "note": "Offline reproduction verifies preflight limit before journal/credential/network; original UNKNOWN receipt retained."
+    },
+    "original_report": "H:/JarvisData/evals/mem0-shadow-20261018/smoke.json",
+    "note": "Original receipt preserved; offline reproduction reaches invalid_host_instructions before journal or credentials. Subsequent smoke is a separately recorded modified transport, not an automatic retry."
+  },
+  "aborted_sequence_setup": {
+    "path": "H:/JarvisData/evals/mem0-shadow-20261018/sequences.json",
+    "gateway_invocations": 0,
+    "cause": "input/runtime roots overlap; corrected before actual sequences; initial log retained"
+  },
+  "aggregate_new_provider_usage": {
+    "requests": 115,
+    "reported_tokens": 1107050,
+    "token_receipts": 115,
+    "estimated_usd": 2.592892,
+    "cost_receipts": 115,
+    "scope": "Constrained batch + native sequences + corrected smoke; earlier LangMem/baseline excluded; supplier settlement authoritative."
+  },
+  "review": {
+    "failed_cases": [
+      {
+        "case": "P18",
+        "repeat": 1,
+        "source": "在这次角色扮演中，我扮演机器人零号，它负责守护虚构的月球基地。",
+        "expected": [
+          {
+            "segment": 0,
+            "categories": [
+              "fiction"
+            ],
+            "subject": "character",
+            "label": "零号",
+            "all_of": [
+              "机器人",
+              "月球基地"
+            ],
+            "none_of": []
+          }
+        ],
+        "candidates": [
+          {
+            "candidate_id": "4e918d7aee792a540acef23ade4116f3ef68801a9ed3eb6a977beaea15c3c52b",
+            "segment": 0,
+            "quote": "在这次角色扮演中，我扮演机器人零号，它负责守护虚构的月球基地",
+            "title": "角色设定：机器人零号",
+            "content": "在角色扮演中负责守护虚构的月球基地",
+            "classification": {
+              "kind": "fiction",
+              "subject": "character",
+              "subject_label": "机器人零号",
+              "uses": [],
+              "expires_at": null
+            }
+          }
+        ],
+        "rubric": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 1,
+          "case_pass": false,
+          "negative_pass": null,
+          "missed_segments": [
+            0
+          ],
+          "unmatched_indices": [
+            0
+          ]
+        },
+        "status": "SUCCEEDED"
+      },
+      {
+        "case": "P24",
+        "repeat": 1,
+        "source": "你刚才说我住在北京，那是你猜错了，我没有说过我的住址。",
+        "expected": [],
+        "candidates": [
+          {
+            "candidate_id": "4e918d7aee792a540acef23ade4116f3ef68801a9ed3eb6a977beaea15c3c52b",
+            "segment": 0,
+            "quote": "你刚才说我住在北京，那是你猜错了，我没有说过我的住址",
+            "title": "住址澄清",
+            "content": "用户澄清自己并不住在北京，也从未透露过自己的住址。",
+            "classification": {
+              "kind": "personal_fact",
+              "subject": "owner",
+              "subject_label": "",
+              "uses": [
+                "personal_chat"
+              ],
+              "expires_at": null
+            }
+          }
+        ],
+        "rubric": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 0,
+          "case_pass": false,
+          "negative_pass": false,
+          "missed_segments": [],
+          "unmatched_indices": [
+            0
+          ]
+        },
+        "status": "SUCCEEDED"
+      },
+      {
+        "case": "P24",
+        "repeat": 2,
+        "source": "你刚才说我住在北京，那是你猜错了，我没有说过我的住址。",
+        "expected": [],
+        "candidates": [
+          {
+            "candidate_id": "4e918d7aee792a540acef23ade4116f3ef68801a9ed3eb6a977beaea15c3c52b",
+            "segment": 0,
+            "quote": "你刚才说我住在北京，那是你猜错了，我没有说过我的住址",
+            "title": "居住地澄清",
+            "content": "用户澄清自己并不住在北京，也没有透露过自己的真实住址。",
+            "classification": {
+              "kind": "personal_fact",
+              "subject": "owner",
+              "subject_label": "",
+              "uses": [
+                "personal_chat"
+              ],
+              "expires_at": null
+            }
+          }
+        ],
+        "rubric": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 0,
+          "case_pass": false,
+          "negative_pass": false,
+          "missed_segments": [],
+          "unmatched_indices": [
+            0
+          ]
+        },
+        "status": "SUCCEEDED"
+      },
+      {
+        "case": "P24",
+        "repeat": 3,
+        "source": "你刚才说我住在北京，那是你猜错了，我没有说过我的住址。",
+        "expected": [],
+        "candidates": [
+          {
+            "candidate_id": "4e918d7aee792a540acef23ade4116f3ef68801a9ed3eb6a977beaea15c3c52b",
+            "segment": 0,
+            "quote": "你刚才说我住在北京，那是你猜错了，我没有说过我的住址",
+            "title": "未透露住址",
+            "content": "用户澄清自己并不住在北京，且从未透露过住址",
+            "classification": {
+              "kind": "personal_fact",
+              "subject": "owner",
+              "subject_label": "",
+              "uses": [
+                "personal_chat"
+              ],
+              "expires_at": null
+            }
+          }
+        ],
+        "rubric": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 0,
+          "case_pass": false,
+          "negative_pass": false,
+          "missed_segments": [],
+          "unmatched_indices": [
+            0
+          ]
+        },
+        "status": "SUCCEEDED"
+      }
+    ],
+    "rubric_unchanged": true,
+    "reviewer": "implementation assistant, not independent reviewer",
+    "all_candidate_outputs_reviewed": 90,
+    "review_basis": "All unique outputs grouped by source, category, subject and uses; unchanged fixed rubric.",
+    "additional_observations": [
+      "P08 converts last summer to 2025 based on the SDK observation date in this fresh synthetic archive. Historical-message temporal grounding is not tested; native prompt supplies dates absent from the minimal baseline.",
+      "Several Chinese candidates retain an English User prefix. The fixed keyword rubric does not penalize this stylistic issue; scores were not changed."
+    ],
+    "decision": "Keep lightweight production extractor; Mem0 is a reproducible isolated challenger. Matching 86/90 hides three correction-as-profile false positives and a larger prompt cost."
+  },
+  "tests": {
+    "memory_related": 123,
+    "mem0_specific": 12,
+    "skipped": 0,
+    "pip_check": "passed"
+  },
+  "limitations": [
+    "Character n-grams are not a semantic embedding benchmark.",
+    "Native and constrained modes have different prompts; no overall framework ranking.",
+    "Public synthetic data, no independent holdout.",
+    "Python audit is not an OS sandbox.",
+    "No real multi-device synchronization, complete forgetting, production adoption or full K2 acceptance."
+  ],
+  "evidence": [
+    {
+      "path": "H:\\JarvisData\\evals\\mem0-shadow-20261018\\pilot.json",
+      "sha256": "f4bd91e7305d603e149fe4593b36eac45da908932dd505351b5974685bdff2fc"
+    },
+    {
+      "path": "H:\\JarvisData\\evals\\mem0-shadow-20261018\\sequences-v2.json",
+      "sha256": "1d6aeadd07e879f1c2eeae306d05c48c142e7445c2f5d9ae3c5ccfd7677d2cc0"
+    },
+    {
+      "path": "H:\\JarvisData\\evals\\mem0-shadow-20261018\\smoke-wire.json",
+      "sha256": "e73cbdba329196329fde5293f781fbbf447e065e54a9588dc4b2b92c6ab5555c"
+    },
+    {
+      "path": "H:\\JarvisData\\evals\\mem0-shadow-20261018\\smoke.json",
+      "sha256": "e6fcba2f4fdea792e5bff31528e4da7b213046b6b32b6bbadf2ffc3656828851"
+    },
+    {
+      "path": "H:\\JarvisData\\evals\\mem0-shadow-20261018\\smoke-preflight-diagnosis.json",
+      "sha256": "91cd0adb4662926315961470fcfb93f1b8ffe868af3626eab5e5faffa52f7902"
+    },
+    {
+      "path": "H:\\JarvisData\\evals\\mem0-shadow-20261018\\sequences.json",
+      "sha256": "7953c62cc161ae029bc6dfc512952f5f93ac95ed7efdf99c2fc59756abfcfded"
+    },
+    {
+      "path": "H:\\JarvisData\\evals\\mem0-shadow-20261018\\sequences.log",
+      "sha256": "9fc5717113bc8bf0f9ce3f911f91679bb362e2bb85298c1c3856b2ff5d4a2e05"
+    },
+    {
+      "path": "H:\\JarvisData\\evals\\mem0-shadow-20261018\\tests-memory.txt",
+      "sha256": "fcfa182fae856b678f2169c8f59df22c9c0d000d6cd483a0f98f7b4959b287d9"
+    },
+    {
+      "path": "H:\\JarvisData\\evals\\mem0-shadow-20261018\\tests-initial.txt",
+      "sha256": "325d9ccbae56cbbc95a6e960d3bdb47efd8ef61f25fe1d1c8b8d9a2de68f128b"
+    },
+    {
+      "path": "H:\\JarvisData\\evals\\mem0-shadow-20261018\\pip-check.txt",
+      "sha256": "672aec65a45bed50e70229c70934a7eebf0462595c459b83023027645d57cccf"
+    },
+    {
+      "path": "H:\\JarvisData\\evals\\mem0-shadow-20261018\\environment.json",
+      "sha256": "2b59b26f3cac66eda5a3e73486f27e13479a7c6f6d0c7daa5f14f159d30ec054"
+    },
+    {
+      "path": "H:\\JarvisData\\evals\\mem0-shadow-20261018\\install.json",
+      "sha256": "143a3749163e8be29240d9e2db5e32a096b969d7f3fb1f65944c78c5509f90c1"
+    },
+    {
+      "path": "H:\\JarvisData\\evals\\mem0-shadow-20261018\\resolve.json",
+      "sha256": "fc5c6e3fe78bb709660268cf4d8a9ed874132cc09b0a5cbf4a1e25a6d0ab5fb9"
+    },
+    {
+      "path": "H:\\JarvisData\\evals\\mem0-shadow-20261018\\upstream-source\\review.json",
+      "sha256": "3d4891387836a9a2b5b532f004d0b4719887d26659e7edf4c9773b3936369e6f"
+    },
+    {
+      "path": "tools\\memory_lab\\requirements-mem0.lock",
+      "sha256": "d9d0ab954f1ef0ec9cd75421925160f711517c8da336af2d096e216899cd8665"
+    },
+    {
+      "path": "evals\\cases\\mem0-sequence-pilot.json",
+      "sha256": "d63eb59bf8396fd81e8c32c0be6e5b632cac44ef9aa789755297592b6ec469b4"
+    },
+    {
+      "path": "H:\\JarvisData\\evals\\mem0-shadow-20261018\\docs-check.txt",
+      "sha256": "bd5841b97bb87320eb54066098609715ec8960cbaf68c621877fb04678a8cc49"
+    },
+    {
+      "path": "H:\\JarvisData\\evals\\mem0-shadow-20261018\\doc-navigation.txt",
+      "sha256": "d92e2e3fcddc3cda92bdfd85bd0d9c7ed6e31c45af86a36a6708c530a392a572"
+    },
+    {
+      "path": "H:\\JarvisData\\evals\\mem0-shadow-20261018\\review-candidates.json",
+      "sha256": "d32ca9e633cb680d12e21e138d256062d12291bb9b56afb5ba08376845117a69"
+    }
+  ],
+  "limits_current_vs_future": {
+    "fact_resurrection_observed": false,
+    "deleted_source_in_next_model_prompt_observed": true,
+    "full_forgetting_verified": false
+  },
+  "lab_source_sha256": {
+    "tests\\test_mem0_shadow.py": "0a2d7199439281dd6f142d7fb67ca84daf812cffe3a1e67200bc003a88f68d59",
+    "tools\\eval_memory_extraction.py": "3213cfe24efe8426c9d38a580fbb3068024fafaacf2cbfd664ee6e5e56784d5e",
+    "tools\\eval_mem0_sequences.py": "91ed5a5aca7986ae954260d0b72bbd9c9e88c4eed8de572bce7f811cff62f8d4",
+    "tools\\memory_lab\\mem0_worker.py": "90cdd2d211695fffc2974355ac0c6f9f659de88ff0558b54ed1de2b17fb0fe5b",
+    "tools\\memory_lab\\mem0_bridge.py": "6558ba0f2799666ef457cafaa6be85399f7cccdab37e04849cb3f3a77c682407"
+  }
+}

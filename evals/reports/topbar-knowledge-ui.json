@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-17",
+  "version": "0.1.33 UI increment",
+  "status": "implemented; HTTP/structure and regression verified, visual interaction not run",
+  "tests": {
+    "command": "python -X utf8 -B -m unittest tests.test_web tests.test_knowledge tests.test_memory_view -q",
+    "run": 44,
+    "passed": 44,
+    "elapsed_seconds": 11.512
+  },
+  "checks": [
+    "Actual served HTML puts AI knowledge scope before memory in top-right tools, absent from sidebar; settings remains last.",
+    "Document icon uses existing toolbar component with aria-label, aria-describedby, role=tooltip and dialog relationship.",
+    "Knowledge module updates custom tooltip and accessible name with current query scope or temporary-chat status.",
+    "Existing CSS shows tooltips on hover and keyboard focus; project-file opener now uses the same tooltip component.",
+    "knowledge.js, workbench.js and rendered inline scripts pass Node syntax checks."
+  ],
+  "source_sha256": {
+    "apps/web/index.html": "376c8430659d642d78731dea326be192a9f83a10f5eddcbf57404af00a4404e0",
+    "apps/web/knowledge.js": "eedf737d8f7205d6b178ebf3971c48c4f2199d6748c64f8210cb1ff32523e131",
+    "apps/web/workbench.js": "de2f4ed8c8f19402a0619456694731203c2e7ed40193faddae96653ce7246018"
+  },
+  "deployment": "evals/reports/topbar-knowledge-deployment.json",
+  "limitations": [
+    "CUA returned Local browser use is disabled in Work settings. No browser interaction, screenshot or narrow-screen visual verification was performed in this increment.",
+    "Reuses previously verified tooltip/layout styling; that historical evidence is not a new hover verification."
+  ],
+  "paid_model_calls": 0
+}

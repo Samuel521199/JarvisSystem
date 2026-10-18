@@ -1,0 +1,305 @@
+{
+  "version": "0.1.41",
+  "captured_at": "2026-10-17T17:26:30.442931+00:00",
+  "status": "implemented_and_verified_subset",
+  "scope": "K2 conversation-bound known-recipe demand -> existing evolution lane -> verified actual report export",
+  "python": {
+    "captured_at": "2026-10-17T17:24:47.879852+00:00",
+    "tests_run": 562,
+    "passed": 560,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 2,
+    "seconds": 255.819,
+    "source_changes_during_tests": []
+  },
+  "skips": [
+    {
+      "id": "test_core.CoreTests.test_symlink_is_rejected",
+      "reason": "OS denied test symlink creation: [WinError 1314] 客户端没有所需的特权。: 'C:\\\\Users\\\\samuel\\\\AppData\\\\Local\\\\Temp\\\\jarvis-core-test-ffytj9yx\\\\outside.txt' -> 'C:\\\\Users\\\\samuel\\\\AppData\\\\Local\\\\Temp\\\\jarvis-core-test-ffytj9yx\\\\input\\\\linked.txt'"
+    },
+    {
+      "id": "test_workspace.WorkspaceTests.test_linked_output_component_is_denied",
+      "reason": "OS does not grant symlink creation"
+    }
+  ],
+  "frontend": {
+    "tests": 7,
+    "passed": 7,
+    "syntax_checked": [
+      "apps/web/growth.js",
+      "apps/web/continuity.js"
+    ]
+  },
+  "changes_after_python_regression": {
+    "files": [
+      "apps/web/continuity.js",
+      "tools/probe_continuity_ui.py"
+    ],
+    "reason": "Pending continuity list read left stale buttons clickable; lock until latest read completes. No Python runtime source changed.",
+    "verification": "Delayed GET browser regression and 7 frontend tests passed after correction."
+  },
+  "browser": {
+    "version": "0.1.41",
+    "captured_at": "2026-10-17T17:21:12.405660+00:00",
+    "status": "passed",
+    "checks": [
+      "Chat demand -> model-free proposal -> real LPAC evaluation/activation -> exact export of two source files; chat continues while generator waits",
+      "Reload restores source-bound receipt; CSV reuses v2 capability with no additional coding call; desktop/mobile no overflow",
+      "Lost preview response recovered by original request ID without another job; proposal cancelled without model; new conversation isolated; temporary chat blocked"
+    ],
+    "page_errors": [],
+    "coding_calls": 1,
+    "paid_calls": 0,
+    "screenshots": [
+      "H:\\JarvisData\\evals\\growth-demand-20261018\\ui\\desktop.png",
+      "H:\\JarvisData\\evals\\growth-demand-20261018\\ui\\mobile.png"
+    ],
+    "scope": "Real Edge/HTTP/archive/LPAC/ledger/download; source planner, chat and coding replies synthetic."
+  },
+  "continuity_regression": {
+    "version": "0.1.41",
+    "captured_at": "2026-10-17T17:25:39.576001+00:00",
+    "checks": [
+      "Source command archived before atomic checkpoint save; new chat resumes consented note; selection and dependency refs survive refresh",
+      "Update/complete/reopen work; revoked provider stops before model; pending list read locks stale buttons; forget removes derived context after refresh",
+      "Temporary writes refused; desktop and mobile panel fit; no background task or cloud calls used"
+    ],
+    "page_errors": [],
+    "synthetic_model_calls": 4,
+    "real_model_calls": 0
+  },
+  "live_model": {
+    "version": "0.1.41",
+    "captured_at": "2026-10-17T17:19:36.936273+00:00",
+    "status": "passed",
+    "live_coding_model": true,
+    "route": "vertex::gemini-3.1-pro-preview",
+    "coding_attempts": 1,
+    "jobs": [
+      {
+        "id": "50d15c3c665c426eadc44ac390f636f5",
+        "status": "SUCCEEDED",
+        "error": null,
+        "decision": "create",
+        "attempts": [
+          {
+            "attempt": 1,
+            "coding": {
+              "elapsed_seconds": 19.655,
+              "http_status": 200,
+              "model": "gemini-3.1-pro-preview",
+              "outcome_uncertain": false,
+              "output_incomplete": false,
+              "provider": "vertex",
+              "request_id": "5e9defe927264b8db9471d6b5d41e825",
+              "response_deadline_seconds": 90,
+              "status": "SUCCEEDED",
+              "usage": {
+                "candidatesTokenCount": 481,
+                "promptTokenCount": 631,
+                "thoughtsTokenCount": 868,
+                "totalTokenCount": 1980
+              }
+            },
+            "package": "2fcfd7d7c33de086463b09e19caeb7f3d84c5bac2063aa92bda9635dc74a324f",
+            "validation": {
+              "acceptance_digest": "sha256:746b8cbbe856cdf938f3a53da532c65c5b2367fe5fe4f5fc8aeb958c35859bd2",
+              "cases": 12,
+              "failed_indices": [],
+              "isolation": {
+                "active_process_limit": 1,
+                "appcontainer": true,
+                "backend": "windows-lpac-job",
+                "capabilities": [
+                  "registryRead"
+                ],
+                "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+                "cpu_seconds": 0.125,
+                "cpu_time_limit_seconds": 3,
+                "elapsed_seconds": 0.2499,
+                "lpac": true,
+                "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+                "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+                "memory_limit_bytes": 201326592,
+                "package_sid": "S-1-15-2-1717666935-506344671-3906313015-1948789547-555869800-3970667420-3291276578",
+                "peak_process_memory_bytes": 12619776,
+                "pid": 17544,
+                "runtime_bytes": 22904399,
+                "wall_time_limit_seconds": 12
+              },
+              "passed": true
+            }
+          }
+        ],
+        "result": {
+          "benefit": {
+            "entries": 2,
+            "format": "tsv",
+            "source_digest": "sha256:88b2f11ff2e50c9a8ddbbd5bc4e838b229dfcf5926c5c33b7253f002e608d3d1",
+            "verified_on_user_input": true
+          },
+          "growth": {
+            "changed": true,
+            "observation": {
+              "acceptance_digest": "sha256:746b8cbbe856cdf938f3a53da532c65c5b2367fe5fe4f5fc8aeb958c35859bd2",
+              "cases": 12,
+              "failed_indices": [],
+              "isolation": {
+                "active_process_limit": 1,
+                "appcontainer": true,
+                "backend": "windows-lpac-job",
+                "capabilities": [
+                  "registryRead"
+                ],
+                "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+                "cpu_seconds": 0.15625,
+                "cpu_time_limit_seconds": 3,
+                "elapsed_seconds": 0.2494,
+                "lpac": true,
+                "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+                "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+                "memory_limit_bytes": 201326592,
+                "package_sid": "S-1-15-2-1916807889-4157657916-2544062930-1199242400-3424962334-4254850032-4289977510",
+                "peak_process_memory_bytes": 13164544,
+                "pid": 16988,
+                "runtime_bytes": 22904399,
+                "wall_time_limit_seconds": 12
+              },
+              "passed": true
+            },
+            "package": "2fcfd7d7c33de086463b09e19caeb7f3d84c5bac2063aa92bda9635dc74a324f",
+            "revision": 2
+          },
+          "isolation": {
+            "active_process_limit": 1,
+            "appcontainer": true,
+            "backend": "windows-lpac-job",
+            "capabilities": [
+              "registryRead"
+            ],
+            "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+            "cpu_seconds": 0.140625,
+            "cpu_time_limit_seconds": 3,
+            "elapsed_seconds": 0.2277,
+            "lpac": true,
+            "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+            "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+            "memory_limit_bytes": 201326592,
+            "package_sid": "S-1-15-2-4229939769-4099441522-1955581235-2503124743-3535126662-4033434925-1286189199",
+            "peak_process_memory_bytes": 12718080,
+            "pid": 6584,
+            "runtime_bytes": 22904399,
+            "wall_time_limit_seconds": 12
+          },
+          "package": "2fcfd7d7c33de086463b09e19caeb7f3d84c5bac2063aa92bda9635dc74a324f",
+          "result_digest": "sha256:105f021128886535e44e7c5bf72981258adaad7db5bce16a12a6e1a9f68be2fa",
+          "text": "path\tsize\na.txt\t3\n中文.md\t1\n"
+        }
+      },
+      {
+        "id": "a4b8031434504a5093baec414038f401",
+        "status": "SUCCEEDED",
+        "error": null,
+        "decision": "reuse",
+        "attempts": [],
+        "result": {
+          "benefit": {
+            "entries": 2,
+            "format": "csv",
+            "source_digest": "sha256:88b2f11ff2e50c9a8ddbbd5bc4e838b229dfcf5926c5c33b7253f002e608d3d1",
+            "verified_on_user_input": true
+          },
+          "growth": {
+            "changed": false,
+            "package": "2fcfd7d7c33de086463b09e19caeb7f3d84c5bac2063aa92bda9635dc74a324f",
+            "revision": 2
+          },
+          "isolation": {
+            "active_process_limit": 1,
+            "appcontainer": true,
+            "backend": "windows-lpac-job",
+            "capabilities": [
+              "registryRead"
+            ],
+            "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+            "cpu_seconds": 0.140625,
+            "cpu_time_limit_seconds": 3,
+            "elapsed_seconds": 0.2348,
+            "lpac": true,
+            "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+            "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+            "memory_limit_bytes": 201326592,
+            "package_sid": "S-1-15-2-1554745549-4191622886-1895026143-4034193680-1116806128-3242115953-3079495701",
+            "peak_process_memory_bytes": 12742656,
+            "pid": 13504,
+            "runtime_bytes": 22904399,
+            "wall_time_limit_seconds": 12
+          },
+          "package": "2fcfd7d7c33de086463b09e19caeb7f3d84c5bac2063aa92bda9635dc74a324f",
+          "result_digest": "sha256:604eb3d17ea94e40e39e1cf9a09be819c6548abdcf7507bbe2e34143397eed57",
+          "text": "path,size\na.txt,3\n中文.md,1\n"
+        }
+      }
+    ],
+    "limits": [
+      "Source planner uses a fixture; source files and conversation are synthetic, isolated and temporary.",
+      "Actual LPAC and Host oracle verify generated code and real source input; existing production data/settings are untouched.",
+      "Known inventory-export recipe only; does not prove arbitrary novel skill or general self-modification."
+    ]
+  },
+  "deployment": {
+    "status": "passed",
+    "version": "0.1.41",
+    "user_data_snapshots_preserved": true,
+    "personal_stores_preserved": true,
+    "source_assets_verified": true,
+    "generated_packages_and_policy_preserved": true,
+    "automatic_maintenance_enabled": true
+  },
+  "seed": {
+    "checked_assets": 22,
+    "fixture_cases": 12,
+    "ok": true
+  },
+  "prior_attempts": [
+    {
+      "kind": "browser_probe",
+      "result": "fixture evidence key / mobile-hidden navigation / toast selector corrected; final complete probe passed"
+    },
+    {
+      "kind": "continuity_ui",
+      "result": "stale list refresh could reset pending forget confirmation; fixed UI and verified delayed response"
+    }
+  ],
+  "raw_directory": "H:\\JarvisData\\evals\\growth-demand-20261018",
+  "raw_files": [
+    "regression/unittest.json",
+    "regression/source-before.json",
+    "ui/report.json",
+    "live/report.json",
+    "continuity-regression-fixed/report.json",
+    "deployment.json",
+    "live/1-job.json",
+    "live/2-job.json"
+  ],
+  "limits": [
+    "Known inventory-export recipe; no unknown capability discovery, arbitrary self-modification or full K2/V-PAL-10 claim.",
+    "Live coding request used real Vertex; task planning and UI chat used fixtures with synthetic files.",
+    "Existing monitor setting retained; no new recurring maintenance or dependency installed.",
+    "Long-duration ordinary-PC overhead, whole-machine disconnection and multi-device synchronization remain unverified."
+  ],
+  "documentation": {
+    "status": "passed",
+    "documents": 23,
+    "diagrams": 20,
+    "artifacts": 40,
+    "errors": 0,
+    "navigation_updated": true,
+    "baseline_diagrams_semantic_check": "Existing evolution-pipeline remains the broader proposed target; new runtime section explicitly limits implemented subset. No diagram source or generated image changed in this increment."
+  },
+  "post_regression_files": {
+    "apps/web/continuity.js": "3bd3e457690021f43af769a0223af90fa0a452f9025a0e427287a1c6aaae939d",
+    "tools/probe_continuity_ui.py": "5be7aa77431568ad182bd05067310376b4f023c6268b0ce05535c8c0411f196f"
+  }
+}

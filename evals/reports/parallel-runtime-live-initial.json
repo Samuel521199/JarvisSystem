@@ -1,0 +1,14 @@
+{
+  "version": "0.1.33+development",
+  "status": "failed",
+  "check": "real local serial arithmetic correctness before parallel latency comparison",
+  "expected": "42",
+  "observed": "27",
+  "prompt": "17 加 25 等于多少？只回答计算结果。",
+  "notes": [
+    "Initial all-in-one probe aborted at its first live answer correctness assertion, after UI/pressure/four crash cases had completed but before report was persisted.",
+    "A separate one-call local diagnostic reproduced the answer 27. The ongoing probe retains correctness as an independent failed gate; latency transport success does not override it."
+  ],
+  "paid_calls": 0,
+  "local_calls": 2
+}

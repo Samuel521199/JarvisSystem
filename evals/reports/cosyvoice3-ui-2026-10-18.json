@@ -1,0 +1,9 @@
+{
+  "status": "SUCCEEDED",
+  "checks": [
+    "load, emotion selection, async synthesis, blob audio and WAV download",
+    "stop restores unloaded state; opening settings never loads a native model"
+  ],
+  "browser_errors": [],
+  "backend": "synthetic PCM only; native evidence separate"
+}

@@ -1,0 +1,187 @@
+{
+  "version": "0.1.37",
+  "captured_at": "2026-10-16T21:09:16.238788+00:00",
+  "status": "passed",
+  "before_running": true,
+  "business_before": {
+    "control.db:tasks": {
+      "rows": 11,
+      "sha256": "5f0cc5bb88f1f8092acf32234295d84b5adce7e2afe7174ad203eb7c8fe989b5"
+    },
+    "control.db:actions": {
+      "rows": 11,
+      "sha256": "716b8b7cd9a69b0a36dd87fb6e043e2d5d336c096cd6fca4bea44245b1f37b50"
+    },
+    "control.db:artifacts": {
+      "rows": 9,
+      "sha256": "84901125e59300737293d253fc81c48aa0fdd0ec54215d143b200b8e1372a9c2"
+    },
+    "control.db:computer_steps": {
+      "rows": 17,
+      "sha256": "0b6d269278ba4aa60912bc4edf2eeaf55eb569e0a795c91315c4868e14f494cb"
+    },
+    "conversations.db:conversations": {
+      "rows": 1,
+      "sha256": "a0bcae9fbfa79d00eddf0b88981430974179a0fbcd54e99833eab668d307625f"
+    },
+    "workspace.db:projects": {
+      "rows": 1,
+      "sha256": "c482b04dcb13a143d00cb382a4fa8bda715069da46ec34f26c9ccaaacac23f61"
+    },
+    "workspace.db:outputs": {
+      "rows": 1,
+      "sha256": "0a9ac6fcb6e0ab6d50baa8f5d67be684ed5b6c70e2a62249427507680caeb882"
+    },
+    "memory.db:facts": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "memory.db:receipts": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "project-sources.db:sources": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "extensions.db:entries": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "extensions.db:skill_policies": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "extensions.db:skill_decisions": {
+      "rows": 1,
+      "sha256": "6f31a2cc76999b320afad41289897fcbdfbeb531f3c77d33f0adc1dcbc247d87"
+    },
+    "extensions.db:mcp_policies": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "model-admin.db:settings": {
+      "rows": 1,
+      "sha256": "bef89b9803b21b3598d2095a4d13ec33f03b50f80bc0c01ec455d11fd9baf9eb"
+    }
+  },
+  "queue_before": {
+    "paused": true,
+    "waiting": 0,
+    "unreviewed_unknown": false
+  },
+  "local_model_before": {
+    "owned": false,
+    "state": "stopped"
+  },
+  "model_calls": 0,
+  "paid_model_calls": 0,
+  "test_tasks_created": false,
+  "test_conversations_created": false,
+  "deployment": "Idle source-instance normal restart; not live module hot swap.",
+  "business_after": {
+    "control.db:tasks": {
+      "rows": 11,
+      "sha256": "5f0cc5bb88f1f8092acf32234295d84b5adce7e2afe7174ad203eb7c8fe989b5"
+    },
+    "control.db:actions": {
+      "rows": 11,
+      "sha256": "716b8b7cd9a69b0a36dd87fb6e043e2d5d336c096cd6fca4bea44245b1f37b50"
+    },
+    "control.db:artifacts": {
+      "rows": 9,
+      "sha256": "84901125e59300737293d253fc81c48aa0fdd0ec54215d143b200b8e1372a9c2"
+    },
+    "control.db:computer_steps": {
+      "rows": 17,
+      "sha256": "0b6d269278ba4aa60912bc4edf2eeaf55eb569e0a795c91315c4868e14f494cb"
+    },
+    "conversations.db:conversations": {
+      "rows": 1,
+      "sha256": "a0bcae9fbfa79d00eddf0b88981430974179a0fbcd54e99833eab668d307625f"
+    },
+    "workspace.db:projects": {
+      "rows": 1,
+      "sha256": "c482b04dcb13a143d00cb382a4fa8bda715069da46ec34f26c9ccaaacac23f61"
+    },
+    "workspace.db:outputs": {
+      "rows": 1,
+      "sha256": "0a9ac6fcb6e0ab6d50baa8f5d67be684ed5b6c70e2a62249427507680caeb882"
+    },
+    "memory.db:facts": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "memory.db:receipts": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "project-sources.db:sources": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "extensions.db:entries": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "extensions.db:skill_policies": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "extensions.db:skill_decisions": {
+      "rows": 1,
+      "sha256": "6f31a2cc76999b320afad41289897fcbdfbeb531f3c77d33f0adc1dcbc247d87"
+    },
+    "extensions.db:mcp_policies": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "model-admin.db:settings": {
+      "rows": 1,
+      "sha256": "bef89b9803b21b3598d2095a4d13ec33f03b50f80bc0c01ec455d11fd9baf9eb"
+    }
+  },
+  "business_unchanged": true,
+  "core_ready": true,
+  "module_count": 20,
+  "served_assets_match": true,
+  "calculator": {
+    "id": "calculator",
+    "name": "本地精确计算",
+    "installed": true,
+    "health": "ready",
+    "enabled": true,
+    "activity": "on_demand",
+    "active": 0,
+    "recent_uses": 0,
+    "last_used": null,
+    "version": "exact-rational-v1",
+    "message": "完整算式按需计算，无模型或网络依赖；成功次数属于本次宿主启动，不含直接 CLI 调用。",
+    "update_mode": "bundled",
+    "count_scope": "host_lifetime"
+  },
+  "local_model_after": {
+    "owned": false,
+    "state": "stopped"
+  },
+  "queue_after": {
+    "paused": true,
+    "waiting": 0,
+    "unreviewed_unknown": false
+  },
+  "queue_state_restored": true,
+  "local_model_restored": false,
+  "readonly_ui": {
+    "captured_at": "2026-10-16T21:10:18.469720+00:00",
+    "status": "passed",
+    "page_errors": [],
+    "calculator_count": "0, host lifetime",
+    "native_skills": "10, catalog size",
+    "screenshots": [
+      "C:\\Users\\samuel\\AppData\\Local\\Jarvis\\data\\diagnostics\\calculator\\calculator-deployed-modules.png",
+      "C:\\Users\\samuel\\AppData\\Local\\Jarvis\\data\\diagnostics\\calculator\\calculator-deployed-card.png"
+    ],
+    "business_mutations": false,
+    "business_fingerprints_rechecked": true
+  }
+}

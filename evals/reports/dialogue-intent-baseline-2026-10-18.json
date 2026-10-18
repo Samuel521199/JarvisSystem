@@ -1,0 +1,41 @@
+{
+  "status": "SUCCEEDED",
+  "source_version": "0.1.56",
+  "tests": 111,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "failed_tests": [],
+  "elapsed_seconds": 21.438,
+  "modules": [
+    "test_intent",
+    "test_chat",
+    "test_dialogue_turns",
+    "test_dialogue_recovery",
+    "test_dialogue_process",
+    "test_web",
+    "test_conversation_tasks",
+    "test_mcp_candidates"
+  ],
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/__init__.py": "697b0d54558325dd46835f739938dda4dd556aa49d5e0f98f4df40fd7fe41075",
+    "runtime/node-host/jarvis_core/intent.py": "0a8c0994ded78c4a85129ca8187b34b80c187911d88ca3b0da4bda73c7604c98",
+    "runtime/node-host/jarvis_core/chat.py": "c4bf9d9875b31091908415502ce7fef5e129a4656eddb14e56193791cb507a05",
+    "runtime/node-host/jarvis_core/turns.py": "dfe1605d63062a142e959f9251cb4a52b652a619d9ad31d13368baaab86fe8e9",
+    "runtime/node-host/jarvis_core/dialogue_process.py": "a953d94544890d7b3cb2dc26e1b17af9b4cdd34f75acb1373e4c257cb8cfe342",
+    "runtime/node-host/jarvis_core/dialogue_worker.py": "0a4141da07a71f46c9fec84ed00a16de5bc48f7aa70c57be7bb2abfc2cad9317",
+    "runtime/node-host/jarvis_core/assistant_context.py": "e5bb132969024d1225bbcefcce22e5dd3562249d24870c5434aef4ec1b0571a3",
+    "runtime/node-host/jarvis_core/mcp_candidates.py": "d456ba965d76d897f141007e0202a7f4aa3213ac6ec6651fd80558f0b0095120",
+    "runtime/node-host/jarvis_core/conversation_tasks.py": "5db9d50c987804c9bd58faf744d367b7160906a639d5b1306b902a466b97c050",
+    "apps/web/dialogue.js": "89da5a7d326dc7d254ae6d71a4f3caf20e1a4cfa6a3b8fe6183840cf74dfad30",
+    "apps/web/index.html": "a7bef9b4d6296a49eaa021728c8f5b35d0d25b433c8f66ad8c5fbec42da2c886",
+    "apps/web/server.py": "eb5fa4f741c1ae7b42a41528f3546cb0b798c4aefe794af92dc890f89c1b1483",
+    "apps/web/conversation_tasks.js": "3539c7c08b918e46456168fc093939001bb5a86c47c9fee70565b15b133725e6",
+    "tests/test_intent.py": "b5b7e5f2fa9c469185e2180cfa57dd2dc91a6d47d6dd76d6d559508dd45ffda4",
+    "tests/dialogue_process_fixture.py": "609ab5bf033a511a8a4ba2578b5564c11bbfc710bfbcc95853e3888d53a3592b",
+    "tools/check_dialogue_intent.py": "dc6c481317be5137ad941d083ed5df8bc4f16391f93f347a4f9b02e306cf7713"
+  },
+  "source_changed": false,
+  "cloud_calls": 0,
+  "limits": "Mocks verify failure and authority boundaries, not semantic accuracy."
+}

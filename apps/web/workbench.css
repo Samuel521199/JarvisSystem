@@ -1,0 +1,32 @@
+/* Resizable shell. Only layout preferences are persisted. */
+.workspace{min-height:0}.sidebar-toggle{display:grid}.sidebar{border-right:0}.app.sidebar-hidden>.sidebar{display:none}
+.workbench-separator{position:relative;flex:0 0 6px;cursor:col-resize;touch-action:none;background:var(--page);z-index:5;outline:none}
+.workbench-separator::after{content:"";position:absolute;inset:0 2px;background:var(--line);transition:background .12s}
+.workbench-separator:hover::after,.workbench-separator:focus-visible::after,.resizing .workbench-separator:active::after{background:var(--blue)}
+.workbench-separator:focus-visible{outline:2px solid var(--focus);outline-offset:-2px}.resizing{cursor:col-resize;user-select:none}.resizing *{cursor:col-resize!important}
+#workbench-row{display:flex;flex:1;min-height:0;min-width:0;overflow:hidden}#workbench-row>#chat-panel{min-width:0;flex:1;container-type:inline-size}
+#workbench-row>#explorer-panel{flex:0 0 auto;min-width:0}#workbench-row[data-mode=focus]>#explorer-panel{flex:1;width:100%!important}
+.topbar{padding-left:16px;padding-right:16px;gap:10px}.breadcrumb{overflow:hidden}.breadcrumb #chat-title{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.connection{gap:4px}
+#page-reconnect{display:flex;align-items:center;gap:12px;padding:8px 16px;background:var(--warning-bg);border-bottom:1px solid var(--warning-line);font-size:12px}#page-reconnect span{flex:1}#page-reconnect button{border:1px solid var(--line);border-radius:6px;padding:4px 10px;flex-shrink:0}
+.app.sidebar-overlay>.sidebar{display:none;position:fixed;inset:0 auto 0 0;max-width:calc(100vw - 48px);z-index:30;box-shadow:10px 0 40px var(--shadow)}.app.sidebar-overlay.sidebar-open>.sidebar{display:flex}.app.sidebar-overlay.sidebar-open>.sidebar-backdrop{display:block;position:fixed;inset:0;background:var(--backdrop);z-index:29}
+@container(max-width:580px){.messages{padding:20px}.composer-area{padding:0 14px 12px}.model-trigger{max-width:170px}.composer-toolbar{gap:4px}.composer-footer{display:block}.composer-footer .keyboard-hint{display:none}.attachment-tools>span{display:none}.welcome h2{font-size:24px}.suggestions{gap:6px}.suggestions button{padding:8px}.workspace-context{flex-wrap:wrap}.welcome{padding-bottom:10px}}
+@media(max-width:600px){.topbar{padding:0 8px;gap:4px}.breadcrumb{gap:6px}.breadcrumb .desktop-brand,.breadcrumb .slash,.jarvis-header-logo{display:none}.connection{gap:0}.connection .icon-button{width:29px}.topbar #chat-title{max-width:80px}.app{min-height:0}.workspace{min-width:0}#page-reconnect{padding:8px}.sidebar{gap:18px}}
+/* Bounded coding shares the existing result panel and composer controls. */
+#coding-result{padding:24px;overflow:auto;height:100%;color:var(--ink)}
+#coding-result header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+#coding-result h2{font-size:21px;letter-spacing:-.4px}
+#coding-result h3{font-size:13px;margin-top:20px}
+#coding-result dl{display:grid;grid-template-columns:90px minmax(0,1fr);gap:12px;font-size:12px;margin:22px 0}
+#coding-result dt{color:var(--muted)}
+#coding-result dd{margin:0;overflow-wrap:anywhere}
+#coding-result pre{white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.7 Consolas,monospace;background:var(--soft,#f5f7fb);padding:16px;border:1px solid var(--line);border-radius:12px;max-height:45vh;overflow:auto}
+#coding-result button{margin:6px 6px 6px 0;padding:9px 12px;border:1px solid var(--line);border-radius:9px;background:var(--surface);color:inherit;cursor:pointer;font-size:12px}
+#coding-result button:disabled{opacity:.45;cursor:default}
+#coding-result .result-status{margin:18px 0;padding:12px 14px;border-radius:12px;background:var(--selected);font-size:12px}
+#coding-result>p{font-size:12px;line-height:1.8;overflow-wrap:anywhere}
+.skill-controls select,.skill-controls textarea{border:1px solid var(--line);border-radius:10px;padding:9px 11px;background:var(--surface);color:var(--ink);font-size:12px}
+.skill-controls textarea{font-family:Consolas,"Microsoft YaHei",monospace;line-height:1.6}
+.skill-controls label:has(#skill-coding){padding:8px 10px;border-radius:9px;background:var(--selected);color:var(--blue)}
+.skill-controls label:has(#skill-coding) input{margin-right:6px;accent-color:var(--blue)}
+.skill-controls small{line-height:1.7;color:var(--muted);padding:0 4px}
+@media(max-width:520px){#coding-result{padding:16px}#coding-result dl{grid-template-columns:76px minmax(0,1fr)}}

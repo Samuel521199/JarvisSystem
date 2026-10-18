@@ -1,0 +1,17 @@
+{
+  "version": "0.1.32",
+  "status": "failed",
+  "scope": "First 14-case real local corpus, captured from probe console before temporary cleanup failed",
+  "cases_tested": 14,
+  "passed": 11,
+  "failed_cases": [
+    "reject-execute",
+    "reject-content",
+    "reject-format"
+  ],
+  "behavior": "The local model produced a bounded JSON directory report instead of rejecting these unsupported requests. The fixed executor did not run code, read contents or produce CSV.",
+  "probe_error": "Temporary cleanup could not remove model-probes.db because the probe left its read-only SQLite connection open; fixed using contextlib.closing.",
+  "limits": [
+    "This initial evidence does not represent a passing acceptance or an OS network isolation test."
+  ]
+}

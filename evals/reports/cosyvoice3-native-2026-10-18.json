@@ -1,0 +1,365 @@
+{
+  "schema_version": 1,
+  "source_version": "0.1.42",
+  "status": "SUCCEEDED",
+  "device": "cpu",
+  "scope": "Publisher reference; file synthesis, not microphone/owner recognition/full duplex or perceptual quality validation.",
+  "paid_calls": 0,
+  "cases": [
+    {
+      "id": "70d53ddbc9a34bc4bb5f01c9bdb78ab9",
+      "sample_rate_hz": 24000,
+      "audio_seconds": 1.84,
+      "elapsed_seconds": 27.890999999995984,
+      "cpu_seconds": 114.640625,
+      "first_internal_chunk_seconds": 16.360000000000582,
+      "memory": {
+        "working_set_bytes": 6443143168,
+        "peak_working_set_bytes": 8498475008,
+        "private_commit_bytes": 7865905152,
+        "peak_private_commit_bytes": 9990918144
+      },
+      "mode": "clone",
+      "emotion": "neutral",
+      "audio_url": "/api/speech/audio/70d53ddbc9a34bc4bb5f01c9bdb78ab9",
+      "name": "clone",
+      "artifact": "H:\\JarvisData\\research\\cosyvoice3\\clone.wav",
+      "sha256": "d8b9e3be07607e7c31cdb7cd6692a2628d37143a8148e43f82dbbde58670b87b",
+      "bytes": 88364,
+      "parallel_http": [
+        {
+          "tts_busy_before_request": true,
+          "http_status": 200,
+          "elapsed_seconds": 0.029331800004001707,
+          "chat_backend": "synthetic, no cloud"
+        },
+        {
+          "tts_busy_before_request": true,
+          "http_status": 200,
+          "elapsed_seconds": 0.02472680000209948,
+          "chat_backend": "synthetic, no cloud"
+        },
+        {
+          "tts_busy_before_request": true,
+          "http_status": 200,
+          "elapsed_seconds": 0.04532630000176141,
+          "chat_backend": "synthetic, no cloud"
+        }
+      ]
+    },
+    {
+      "id": "1d345406e7e94f67a640c5a98c49ae25",
+      "sample_rate_hz": 24000,
+      "audio_seconds": 2.36,
+      "elapsed_seconds": 20.327999999994063,
+      "cpu_seconds": 81.703125,
+      "first_internal_chunk_seconds": 20.327999999994063,
+      "memory": {
+        "working_set_bytes": 6459568128,
+        "peak_working_set_bytes": 8498475008,
+        "private_commit_bytes": 7896854528,
+        "peak_private_commit_bytes": 9990918144
+      },
+      "mode": "instruct",
+      "emotion": "happy",
+      "audio_url": "/api/speech/audio/1d345406e7e94f67a640c5a98c49ae25",
+      "name": "happy",
+      "artifact": "H:\\JarvisData\\research\\cosyvoice3\\happy.wav",
+      "sha256": "7135945cf37e261d4d2861065f5f7b086e4194649f43cd1814bcada91f2c7556",
+      "bytes": 113324,
+      "parallel_http": [
+        {
+          "tts_busy_before_request": true,
+          "http_status": 200,
+          "elapsed_seconds": 0.02461300000140909,
+          "chat_backend": "synthetic, no cloud"
+        },
+        {
+          "tts_busy_before_request": true,
+          "http_status": 200,
+          "elapsed_seconds": 0.03940730000613257,
+          "chat_backend": "synthetic, no cloud"
+        },
+        {
+          "tts_busy_before_request": true,
+          "http_status": 200,
+          "elapsed_seconds": 0.026995100000931416,
+          "chat_backend": "synthetic, no cloud"
+        }
+      ]
+    },
+    {
+      "id": "1bc5d4a1e70844e38c9db558aec34d57",
+      "sample_rate_hz": 24000,
+      "audio_seconds": 1.52,
+      "elapsed_seconds": 16.0,
+      "cpu_seconds": 64.1875,
+      "first_internal_chunk_seconds": 16.0,
+      "memory": {
+        "working_set_bytes": 6474551296,
+        "peak_working_set_bytes": 8498475008,
+        "private_commit_bytes": 7924936704,
+        "peak_private_commit_bytes": 9990918144
+      },
+      "mode": "cross_lingual",
+      "emotion": "neutral",
+      "audio_url": "/api/speech/audio/1bc5d4a1e70844e38c9db558aec34d57",
+      "name": "english",
+      "artifact": "H:\\JarvisData\\research\\cosyvoice3\\english.wav",
+      "sha256": "6a8456a36d3a78a810fc219037ccab1b0acb4bdd6b9614075c6816fc0cb9014c",
+      "bytes": 73004,
+      "parallel_http": [
+        {
+          "tts_busy_before_request": true,
+          "http_status": 200,
+          "elapsed_seconds": 0.020451000003959052,
+          "chat_backend": "synthetic, no cloud"
+        },
+        {
+          "tts_busy_before_request": true,
+          "http_status": 200,
+          "elapsed_seconds": 0.028180100001918618,
+          "chat_backend": "synthetic, no cloud"
+        },
+        {
+          "tts_busy_before_request": true,
+          "http_status": 200,
+          "elapsed_seconds": 0.025848099998256657,
+          "chat_backend": "synthetic, no cloud"
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Native CPU process is separate from the web/chat environment.",
+    "First internal chunk is not browser playback latency."
+  ],
+  "startup_wall_seconds": 28.28183450000506,
+  "loaded": {
+    "ready": true,
+    "pid": 47972,
+    "device": "cpu",
+    "load_seconds": 12.296999999998661,
+    "memory": {
+      "working_set_bytes": 8492797952,
+      "peak_working_set_bytes": 8493268992,
+      "private_commit_bytes": 9988169728,
+      "peak_private_commit_bytes": 9989578752
+    },
+    "loaded_memory": {
+      "working_set_bytes": 8491745280,
+      "peak_working_set_bytes": 8493268992,
+      "private_commit_bytes": 9988005888,
+      "peak_private_commit_bytes": 9989578752
+    },
+    "uses": 0,
+    "text_frontend": "basic"
+  },
+  "before_stop": {
+    "id": "cosyvoice3",
+    "installed": true,
+    "state": "ready",
+    "owned": true,
+    "pid": 47972,
+    "device": "cpu",
+    "threads": 4,
+    "memory": {
+      "working_set_bytes": 6474285056,
+      "peak_working_set_bytes": 8498475008,
+      "private_commit_bytes": 7924645888,
+      "peak_private_commit_bytes": 9990918144
+    },
+    "load": {
+      "ready": true,
+      "pid": 47972,
+      "device": "cpu",
+      "load_seconds": 12.296999999998661,
+      "memory": {
+        "working_set_bytes": 8492797952,
+        "peak_working_set_bytes": 8493268992,
+        "private_commit_bytes": 9988169728,
+        "peak_private_commit_bytes": 9989578752
+      },
+      "loaded_memory": {
+        "working_set_bytes": 8491745280,
+        "peak_working_set_bytes": 8493268992,
+        "private_commit_bytes": 9988005888,
+        "peak_private_commit_bytes": 9989578752
+      },
+      "uses": 0,
+      "text_frontend": "basic"
+    },
+    "busy": false,
+    "job": {
+      "id": "1bc5d4a1e70844e38c9db558aec34d57",
+      "action": "synthesize",
+      "status": "SUCCEEDED",
+      "started_at": "2026-10-17T18:16:42.846863+00:00",
+      "finished_at": "2026-10-17T18:16:59.039655+00:00",
+      "result": {
+        "id": "1bc5d4a1e70844e38c9db558aec34d57",
+        "sample_rate_hz": 24000,
+        "audio_seconds": 1.52,
+        "elapsed_seconds": 16.0,
+        "cpu_seconds": 64.1875,
+        "first_internal_chunk_seconds": 16.0,
+        "memory": {
+          "working_set_bytes": 6474551296,
+          "peak_working_set_bytes": 8498475008,
+          "private_commit_bytes": 7924936704,
+          "peak_private_commit_bytes": 9990918144
+        },
+        "mode": "cross_lingual",
+        "emotion": "neutral",
+        "audio_url": "/api/speech/audio/1bc5d4a1e70844e38c9db558aec34d57"
+      }
+    },
+    "uses": 3,
+    "model_revision": "29e01c4e8d000f4bcd70751be16fa94bf3d85a18",
+    "reference_default": "发布方演示参考声音",
+    "configuration_notice": null,
+    "limits": {
+      "text_chars": 300,
+      "reference_seconds": 15,
+      "output_seconds": 60
+    }
+  },
+  "after_stop": {
+    "id": "cosyvoice3",
+    "installed": true,
+    "state": "stopped",
+    "owned": false,
+    "pid": null,
+    "device": "cpu",
+    "threads": 4,
+    "memory": null,
+    "load": {
+      "ready": true,
+      "pid": 47972,
+      "device": "cpu",
+      "load_seconds": 12.296999999998661,
+      "memory": {
+        "working_set_bytes": 8492797952,
+        "peak_working_set_bytes": 8493268992,
+        "private_commit_bytes": 9988169728,
+        "peak_private_commit_bytes": 9989578752
+      },
+      "loaded_memory": {
+        "working_set_bytes": 8491745280,
+        "peak_working_set_bytes": 8493268992,
+        "private_commit_bytes": 9988005888,
+        "peak_private_commit_bytes": 9989578752
+      },
+      "uses": 0,
+      "text_frontend": "basic"
+    },
+    "busy": false,
+    "job": {
+      "id": "1bc5d4a1e70844e38c9db558aec34d57",
+      "action": "synthesize",
+      "status": "SUCCEEDED",
+      "started_at": "2026-10-17T18:16:42.846863+00:00",
+      "finished_at": "2026-10-17T18:16:59.039655+00:00",
+      "result": {
+        "id": "1bc5d4a1e70844e38c9db558aec34d57",
+        "sample_rate_hz": 24000,
+        "audio_seconds": 1.52,
+        "elapsed_seconds": 16.0,
+        "cpu_seconds": 64.1875,
+        "first_internal_chunk_seconds": 16.0,
+        "memory": {
+          "working_set_bytes": 6474551296,
+          "peak_working_set_bytes": 8498475008,
+          "private_commit_bytes": 7924936704,
+          "peak_private_commit_bytes": 9990918144
+        },
+        "mode": "cross_lingual",
+        "emotion": "neutral",
+        "audio_url": "/api/speech/audio/1bc5d4a1e70844e38c9db558aec34d57"
+      }
+    },
+    "uses": 3,
+    "model_revision": "29e01c4e8d000f4bcd70751be16fa94bf3d85a18",
+    "reference_default": "发布方演示参考声音",
+    "configuration_notice": null,
+    "limits": {
+      "text_chars": 300,
+      "reference_seconds": 15,
+      "output_seconds": 60
+    }
+  },
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/speech.py": "25d91d27ab94ab7cb6c891dd0bed218f8dacacc247ace9e1acc4af325ac086b0",
+    "adapters/speech/cosyvoice3/worker.py": "2dd59481f2901da1e3f5d37f9dcbdff4a5259607c276ea77848da522cb683bbf",
+    "config/model-profiles/cosyvoice3.json": "04e30288d370227cbbfd3d2f0273f1a35c9dbe81c322f54996d6d75ff8c68e6a",
+    "runtime/node-host/jarvis_core/local_model.py": "11ff52ca9fe734cb2d5c123e11d075f1b172a40822b7cd8278c61f495ae72e1a",
+    "runtime/node-host/jarvis_core/speech_contract.py": "e157144718b9abba677a737e63de29048f6816bc5195a504b16d8375fa368ef8",
+    "runtime/node-host/jarvis_core/process_memory.py": "8bfa293e98df172f114c09b1be9227b4d2323ee3bb060161f4e67e2f657f80be"
+  },
+  "intelligibility_diagnostic": [
+    {
+      "case": "clone",
+      "expected": "你好我是贾维斯",
+      "transcript": "你好，我是贾维斯。",
+      "recognizer": "SenseVoiceSmall int8 CPU auto; independent diagnostic, not human listening/voice similarity/emotion assessment"
+    },
+    {
+      "case": "happy",
+      "expected": "很高兴再次见到你",
+      "transcript": "很高兴再次见到你。",
+      "recognizer": "SenseVoiceSmall int8 CPU auto; independent diagnostic, not human listening/voice similarity/emotion assessment"
+    },
+    {
+      "case": "english",
+      "expected": "Hello I am Jarvis",
+      "transcript": "Hello, I am Javis.",
+      "recognizer": "SenseVoiceSmall int8 CPU auto; independent diagnostic, not human listening/voice similarity/emotion assessment"
+    }
+  ],
+  "resolved_integration_issues": [
+    "Windows venv redirector PID differs from Python worker PID: readiness now verifies the actual worker against the owned Windows Job; memory targets that actual process.",
+    "Publisher reference is IEEE-float WAV: the fixed, hashed publisher fixture is decoded in the isolated backend; user uploads retain the PCM16 contract.",
+    "Interrupted flow download resumed and all 13 assets independently passed SHA-256 verification."
+  ],
+  "verification": {
+    "unit_suite": "582 tests: 580 passed, 2 skipped; OK (skipped=2)",
+    "dependency_check": "108 packages compatible",
+    "model_assets": "13 pinned files verified",
+    "ui": "synthetic backend browser verification separate",
+    "final_targeted_tests": {
+      "speech": 8,
+      "owned_model_lifecycle": 9,
+      "module_monitor": 14,
+      "web_http": 23,
+      "total_passed": 54
+    },
+    "model_source": "Exact CosyVoice and Matcha commits checked; all 190 pinned source/config/fixture files verified before inference.",
+    "deployment": "evals/reports/cosyvoice3-deployment-2026-10-18.json"
+  },
+  "runtime_packages": {
+    "freeze": "config/cosyvoice3.lock.txt",
+    "freeze_sha256": "75400007305b34b71144d3334086010255b5b17d0d74331cefe9dc82ae50a4ca",
+    "python": "3.12.7",
+    "torch": "2.7.1+cpu",
+    "onnxruntime": "1.18.0"
+  },
+  "captured_at_utc": "2026-10-17T19:51:22.531500+00:00",
+  "local_date": "2026-10-18",
+  "documentation": {
+    "selection": "docs/models-offline.md#cosyvoice3-runtime",
+    "contract": "docs/contracts.md#cosyvoice3-contract",
+    "evidence": "docs/delivery-validation.md#cosyvoice3-evidence"
+  },
+  "documentation_checks": {
+    "navigation_sync": "passed: generated navigation current",
+    "check_docs": "passed: 23 documents, 20 diagrams, 40 artifacts, 0 errors",
+    "git_diff_whitespace": "passed"
+  },
+  "documentation_sha256": {
+    "docs/models-offline.md": "aefac34d8df5f5c3ec35e5500a9339a90df013c11550626e5ae6112761db6fb3",
+    "docs/contracts.md": "0f7892115e8496fb2c6ae65e9e367fb14c0b7ba673d59b542a6eb2fbcd866a5b",
+    "docs/delivery-validation.md": "e64dab4206b04dcd3441cbfa52aaa8e4694d5177e997cd4a43ad5495d2de0352",
+    "docs/interaction-persona.md": "9b5a72ca0a057f8607e65e30731770b94a4c3685e5b36e18f8b730897c61ad69",
+    "docs/health-maintenance.md": "fcf5438a1bbca7aa7c1e90083396f7f4f63503c6d9f1712a3ec421e0746a27ec"
+  }
+}

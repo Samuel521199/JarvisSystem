@@ -1,0 +1,92 @@
+{
+  "version": "0.1.36",
+  "status": "passed",
+  "paid_model_calls": 1,
+  "isolated_data": true,
+  "delivery_bytes_match": true,
+  "report": {
+    "checks": {
+      "code_executed": false,
+      "model_claims_verified": false,
+      "sources_rechecked": true
+    },
+    "decision": {
+      "bundle_digest": "sha256:96980fd1e225d3f03b00f36f253462af6035f10ebac60cd337f7032d650e613c",
+      "direct": false,
+      "excluded": [],
+      "message_digest": "sha256:eb1adb701bf2aeb3bfcb50898b6b0660f319f4e62eed99d5be4ce3acb92bf4e1",
+      "purpose": "task",
+      "schema_version": 1,
+      "selected": [
+        {
+          "id": "matt-pocock.to-spec",
+          "policy": {
+            "mode": "auto",
+            "revision": 0,
+            "source": "package_default"
+          },
+          "reason": "用户明确指定。",
+          "version": "1.0.0",
+          "workflow": "guidance"
+        }
+      ]
+    },
+    "kind": "jarvis.skill-report",
+    "model": {
+      "billing": {
+        "amount": 0.005196,
+        "basis": "estimated",
+        "currency": "USD",
+        "price": {
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "checked_at": "2026-10-16",
+          "currency": "USD",
+          "fee_percent": 0,
+          "input": 2,
+          "max_input_tokens": 272000,
+          "output": 10,
+          "source": "https://developers.openai.com/api/docs/pricing"
+        },
+        "reason": "token_rates",
+        "tokens": {
+          "cache_read": 0,
+          "cache_write": 0,
+          "input": 528,
+          "output": 414,
+          "reasoning": 106,
+          "total": 942
+        }
+      },
+      "model": "gpt-6.1-sol",
+      "provider": "openai",
+      "request_id": "737fa288a5124864ba84d320fe50bca2",
+      "usage": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "input_tokens": 528,
+        "output_tokens": 414,
+        "reasoning_tokens": 106,
+        "total_tokens": 942
+      }
+    },
+    "output": {
+      "completed_at": "2026-10-16T19:59:48.556656+00:00",
+      "created_at": "2026-10-16T19:59:48.129874+00:00",
+      "digest": "sha256:be67219e3d62b3bdcb776818d8e51a90108c37fb88f6c6bd4e1a43422deeae09",
+      "error_category": null,
+      "path": "C:\\Users\\samuel\\AppData\\Local\\Temp\\jarvis-hub-delivery-grxtd1m5\\project\\技能产物-387cb1334190.txt",
+      "project_id": "8cc5994019654c22b93712050ebd5a00",
+      "request_id": "387cb13341905b618e63803af735a998",
+      "size_bytes": 1165,
+      "status": "SAVED"
+    },
+    "skill_id": "matt-pocock.to-spec",
+    "source_references": [],
+    "text": "# 项目技能分析报告\n\n## 规格\n- 目标：三天内交付离线备忘录，支持列表、新建、编辑、删除，重启后内容及变更仍保留。\n- 范围：仅本机存储；不做账号、同步。\n- 假设：采用现有运行平台与本地持久化方案；正文为纯文本。保存失败须提示，不能显示为已保存。\n\n## 任务\n**T1｜第1天：新建与持久化闭环**  \n交付：可打开列表、新建并保存备忘录。  \n验收：离线新建后可查看；关闭并重启应用，内容仍在。  \nBlocked by：None\n\n**T2｜第2天：编辑**  \n交付：打开已有备忘录、修改并保存。  \n验收：重新打开及重启后均显示最新内容；保存失败有提示。  \nBlocked by：T1\n\n**T3｜第3天：删除与交付检查**  \n交付：删除入口及完整流程检查清单。  \n验收：删除后列表移除，重启不恢复；按清单检查离线新建、编辑、删除及空列表。  \nBlocked by：T2\n\n说明：以上为规格与任务草案；未提供源码，无法引用文件及行号；未修改代码、执行命令或运行测试。\n\n---\n只读分析；未修改源码或运行测试。\n",
+    "verified": {
+      "delivery_digest": true,
+      "workflow_checks": true
+    }
+  }
+}

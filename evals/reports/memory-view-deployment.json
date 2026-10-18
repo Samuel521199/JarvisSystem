@@ -1,0 +1,74 @@
+{
+  "version": "0.1.33",
+  "previous_version": "0.1.32",
+  "captured_at": "2026-10-16T16:57:12.655978+00:00",
+  "status": "passed",
+  "core_ready": true,
+  "business_rows_preserved": true,
+  "business_rows": {
+    "control.db:tasks": {
+      "rows": 10,
+      "sha256": "bcffbdde3da9b7b4d892d2c628967c441e1f896a69446b2744583112147cda6a"
+    },
+    "control.db:actions": {
+      "rows": 10,
+      "sha256": "0c0c9711806118adaca39670cc4adaa2c40221aed9308bdf045fbb4a6e460b89"
+    },
+    "control.db:artifacts": {
+      "rows": 8,
+      "sha256": "362e516378f39463c06ecc88c31eb7e375131f5cdc4187c20c2cffd8e8f5813d"
+    },
+    "conversations.db:conversations": {
+      "rows": 1,
+      "sha256": "a0bcae9fbfa79d00eddf0b88981430974179a0fbcd54e99833eab668d307625f"
+    },
+    "workspace.db:projects": {
+      "rows": 1,
+      "sha256": "f49b2d7c91b4b889cf80687ef1365266de54208b0dd5e514a6e30d09d232c43d"
+    },
+    "workspace.db:outputs": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "memory.db:facts": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "memory.db:receipts": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "project-sources.db:sources": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "extensions.db:entries": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "model-admin.db:settings": {
+      "rows": 1,
+      "sha256": "bef89b9803b21b3598d2095a4d13ec33f03b50f80bc0c01ec455d11fd9baf9eb"
+    }
+  },
+  "module_count": 18,
+  "local_model_previously_owned": true,
+  "local_runtime": {
+    "owned": true,
+    "state": "running",
+    "pid": 45104
+  },
+  "task_state_preserved": true,
+  "served_assets_match_source": {
+    "knowledge.js": true,
+    "memory.js": true,
+    "context.js": true
+  },
+  "paid_model_calls": 0,
+  "created_user_test_records": false,
+  "limits": [
+    "Idle source restart using normal tray exit, not hot swap.",
+    "Local model restored only because the preceding Host owned it; queue and model defaults unchanged."
+  ],
+  "source_line_endings": "CRLF preserved"
+}

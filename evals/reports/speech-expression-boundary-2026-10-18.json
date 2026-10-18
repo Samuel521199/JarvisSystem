@@ -1,0 +1,19 @@
+{
+  "status": "COMPLETED",
+  "expected": "你已经做得很好了！",
+  "cases": [
+    {
+      "artifact": "H:\\JarvisData\\research\\qwen-tts\\expression-score\\boundary-recheck\\raw-happy.wav",
+      "sha256": "e1744f153d13074c12b40de320603481ce70f4393190c056651ecd59cb9538b4",
+      "transcript": "你已经做的很好了。"
+    },
+    {
+      "artifact": "H:\\JarvisData\\research\\qwen-tts\\expression-score\\boundary-recheck\\faded-happy.wav",
+      "sha256": "91493392f50ad2475e9101fe9f085968dc8b002a6397ca7fa714d25a18459675",
+      "transcript": "你已经做的很好了。"
+    }
+  ],
+  "only_first_last_5ms_changed": true,
+  "probe_notice": "Initial native diagnostic completed and preserved WAV; TempDirectory cleanup encountered a transient Windows worker.log lock after owned Job stop. ASR resumed from the preserved WAV without replaying inference.",
+  "limits": "Same text/instruction/voice/seed in a fresh owned instance. ASR cannot decide pronunciation or subjective smoothness, and a transcript difference is not proof of a missed spoken word."
+}

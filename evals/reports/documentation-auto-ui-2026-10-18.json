@@ -1,0 +1,30 @@
+{
+  "status": "SUCCEEDED",
+  "source_version": "0.1.57",
+  "checks": [
+    "one ordinary message creates one confirmed query-docs task; independent receipt excluded from model history",
+    "refresh retains original task link without replaying model or MCP",
+    "host rejects negated input even when synthetic model incorrectly marks requested",
+    "manual policy retains editable draft and never submits it"
+  ],
+  "browser_errors": [],
+  "cloud_calls": 0,
+  "mock_model_calls": 3,
+  "mock_mcp_calls": 1,
+  "screenshot": "H:\\JarvisData\\diagnostics\\dialogue\\documentation-auto.png",
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/__init__.py": "3cd6991f29e93c896f46d50b908608ad97e9bc45e78c8cdb163bb8615fb6e031",
+    "runtime/node-host/jarvis_core/intent.py": "bb6a7566628add8e2ba72b07838ee7e18dbc7a66a78a02b09ee3854ce1a64f55",
+    "runtime/node-host/jarvis_core/chat.py": "5b16a14adef6f9a73364bf62b7df01b74701745461c0f06ff48124a384776b5f",
+    "runtime/node-host/jarvis_core/turns.py": "9f73a359ba08af7fe276e4273cc1ba680a5bda5dfcd8e19d5f53261cad334a1f",
+    "runtime/node-host/jarvis_core/documentation_admission.py": "d3cf0fc6236ae04224bb58af56464204d3ce907becac1c4b9a18d34e5ca4ed24",
+    "runtime/node-host/jarvis_core/mcp_tasks.py": "77590035e1251732e28805b2a99d27358c8ef1a1959549fc87a6943142c44268",
+    "runtime/node-host/jarvis_core/task_queue.py": "be9e7d10904ac51a55e7141571471044cd56996cfdcf77798c38bea60e990395",
+    "apps/web/dialogue.js": "7c2d9a5b66e4a181f28781a8f035fb48f413e8707b16e46c779d6251d61ed085",
+    "apps/web/conversation_tasks.js": "7b8875291fdec6b7bbeeaed5962d3a406007b7d012822191fd857bbf154c9b36",
+    "apps/web/server.py": "f928a4aac1ffc71656b509580039e24351a2507df80251b487f1632dbffd29b6",
+    "tools/probe_documentation_auto_ui.py": "731f39f21170916a291220983d24b89f3b0576ee5c347889f55b62ecb264e2d7"
+  },
+  "source_changed": false,
+  "limits": "Synthetic replies verify host/UI behavior, not semantic accuracy. Separate real Google heldout and live deployment required."
+}

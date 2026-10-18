@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jarvis.local/contracts/sample-plan/1",
+  "title": "Bounded sample inventory report plan",
+  "oneOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "kind", "steps"],
+      "properties": {
+        "schema_version": {"const": 1},
+        "kind": {"const": "inventory_report"},
+        "steps": {
+          "type": "array", "minItems": 2, "maxItems": 2,
+          "prefixItems": [
+            {
+              "type": "object", "additionalProperties": false,
+              "required": ["skill", "arguments"],
+              "properties": {
+                "skill": {"const": "sample_metadata_read"},
+                "arguments": {
+                  "type": "object", "additionalProperties": false,
+                  "required": ["relative_path"],
+                  "properties": {"relative_path": {"type": "string", "minLength": 1, "maxLength": 256}}
+                }
+              }
+            },
+            {
+              "type": "object", "additionalProperties": false,
+              "required": ["skill", "arguments"],
+              "properties": {
+                "skill": {"const": "artifact_output"},
+                "arguments": {
+                  "type": "object", "additionalProperties": false,
+                  "required": ["format"], "properties": {"format": {"const": "json"}}
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "kind", "reason"],
+      "properties": {
+        "schema_version": {"const": 1}, "kind": {"const": "unsupported"},
+        "reason": {"type": "string", "minLength": 1, "maxLength": 300}
+      }
+    }
+  ]
+}

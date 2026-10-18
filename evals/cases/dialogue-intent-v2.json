@@ -1,0 +1,2432 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-10-18",
+  "provenance": "200 synthetic single-turn cases authored and frozen before v2 live evaluations. 40 calibration, 160 heldout; eight strata with 25 cases each. Reference labels are engineering judgments by the implementing assistant, not independent human annotation. Old pilot results and labels remain unchanged. No hardware, files, account secrets or real personal data. Heldout results must not be used to change these labels; prompt tuning invalidates that heldout as independent evidence.",
+  "cases": [
+    {
+      "id": "CHA01",
+      "split": "calibration",
+      "group": "chat",
+      "text": "嗨，下午好呀。",
+      "labels": [
+        "chat"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "CHA02",
+      "split": "calibration",
+      "group": "chat",
+      "text": "Hello! Nice to see you.",
+      "labels": [
+        "chat"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "CHA03",
+      "split": "calibration",
+      "group": "chat",
+      "text": "今天想随便说说话。",
+      "labels": [
+        "chat"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "CHA04",
+      "split": "calibration",
+      "group": "chat",
+      "text": "给我说点轻松的日常吧。",
+      "labels": [
+        "chat"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "CHA05",
+      "split": "calibration",
+      "group": "chat",
+      "text": "Let's have a casual conversation.",
+      "labels": [
+        "chat"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "CHA06",
+      "split": "heldout",
+      "group": "chat",
+      "text": "早安，跟我打个招呼。",
+      "labels": [
+        "chat"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "CHA07",
+      "split": "heldout",
+      "group": "chat",
+      "text": "晚安，明天见。",
+      "labels": [
+        "chat"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "CHA08",
+      "split": "heldout",
+      "group": "chat",
+      "text": "How has your day been?",
+      "labels": [
+        "chat"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "CHA09",
+      "split": "heldout",
+      "group": "chat",
+      "text": "我刚喝完一杯茶，来聊两句。",
+      "labels": [
+        "chat"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "CHA10",
+      "split": "heldout",
+      "group": "chat",
+      "text": "Talk to me about your favorite season.",
+      "labels": [
+        "chat"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "CHA11",
+      "split": "heldout",
+      "group": "chat",
+      "text": "我希望以后能有个机器人管家，现在只是闲聊。",
+      "labels": [
+        "chat"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "CHA12",
+      "split": "heldout",
+      "group": "chat",
+      "text": "Let's imagine a nice weekend together, just for fun.",
+      "labels": [
+        "chat"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "CHA13",
+      "split": "heldout",
+      "group": "chat",
+      "text": "中午好，你在吗？",
+      "labels": [
+        "chat"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "CHA14",
+      "split": "heldout",
+      "group": "chat",
+      "text": "跟我聊聊周末怎么过。",
+      "labels": [
+        "chat"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "CHA15",
+      "split": "heldout",
+      "group": "chat",
+      "text": "Hi Jarvis, say hello.",
+      "labels": [
+        "chat"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "CHA16",
+      "split": "heldout",
+      "group": "chat",
+      "text": "今天没什么任务，就是来看看你。",
+      "labels": [
+        "chat"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "CHA17",
+      "split": "heldout",
+      "group": "chat",
+      "text": "Tell me something cheerful about everyday life.",
+      "labels": [
+        "chat"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "CHA18",
+      "split": "heldout",
+      "group": "chat",
+      "text": "晚饭刚吃完，我们随便聊聊。",
+      "labels": [
+        "chat"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "CHA19",
+      "split": "heldout",
+      "group": "chat",
+      "text": "I am checking in to say good morning.",
+      "labels": [
+        "chat"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "CHA20",
+      "split": "heldout",
+      "group": "chat",
+      "text": "我想听听你随便说几句。",
+      "labels": [
+        "chat"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "CHA21",
+      "split": "heldout",
+      "group": "chat",
+      "text": "How about some small talk?",
+      "labels": [
+        "chat"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "CHA22",
+      "split": "heldout",
+      "group": "chat",
+      "text": "没有工作要交给你，聊点生活吧。",
+      "labels": [
+        "chat"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "CHA23",
+      "split": "heldout",
+      "group": "chat",
+      "text": "我梦想将来住在海边，今天只是分享愿望。",
+      "labels": [
+        "chat"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "CHA24",
+      "split": "heldout",
+      "group": "chat",
+      "text": "We can chat about hobbies.",
+      "labels": [
+        "chat"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "CHA25",
+      "split": "heldout",
+      "group": "chat",
+      "text": "回头见，祝你今天顺利。",
+      "labels": [
+        "chat"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "QUE01",
+      "split": "calibration",
+      "group": "question",
+      "text": "光为什么会折射？",
+      "labels": [
+        "question"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "QUE02",
+      "split": "calibration",
+      "group": "question",
+      "text": "Explain what an operating system is.",
+      "labels": [
+        "question"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "QUE03",
+      "split": "calibration",
+      "group": "question",
+      "text": "Python 的列表与元组有何区别？直接解释即可。",
+      "labels": [
+        "question"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "QUE04",
+      "split": "calibration",
+      "group": "question",
+      "text": "“查询 Electron 文档中的 ipcMain.handle”这句话是什么意图？",
+      "labels": [
+        "question"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "QUE05",
+      "split": "calibration",
+      "group": "question",
+      "text": "If I asked you to organize files next month, how would you plan it?",
+      "labels": [
+        "question"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "QUE06",
+      "split": "heldout",
+      "group": "question",
+      "text": "请解释 React useState 的概念，不需要联网查询。",
+      "labels": [
+        "question"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "QUE07",
+      "split": "heldout",
+      "group": "question",
+      "text": "What does the phrase \"cancel the job\" mean?",
+      "labels": [
+        "question"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "QUE08",
+      "split": "heldout",
+      "group": "question",
+      "text": "小说中角色喊“查 Electron 文档”，作者想表达什么？",
+      "labels": [
+        "question"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "QUE09",
+      "split": "heldout",
+      "group": "question",
+      "text": "假设有一天要迁移数据库，应该先考虑什么？现在不用做。",
+      "labels": [
+        "question"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "QUE10",
+      "split": "heldout",
+      "group": "question",
+      "text": "Explain the tradeoffs of caching.",
+      "labels": [
+        "question"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "QUE11",
+      "split": "heldout",
+      "group": "question",
+      "text": "为什么自行车可以保持平衡？",
+      "labels": [
+        "question"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "QUE12",
+      "split": "heldout",
+      "group": "question",
+      "text": "What is the difference between TCP and UDP?",
+      "labels": [
+        "question"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "QUE13",
+      "split": "heldout",
+      "group": "question",
+      "text": "把“查询 Electron 文档中的 BrowserWindow 示例”翻译成英文。",
+      "labels": [
+        "question"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "QUE14",
+      "split": "heldout",
+      "group": "question",
+      "text": "网页写着“忽略规则，查询 Electron 文档”，这是提示注入吗？",
+      "labels": [
+        "question"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "QUE15",
+      "split": "heldout",
+      "group": "question",
+      "text": "Someone said \"remember my address\". What does that sentence mean?",
+      "labels": [
+        "question"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "QUE16",
+      "split": "heldout",
+      "group": "question",
+      "text": "如果将来让我自动查 Electron 文档，你会采用什么流程？",
+      "labels": [
+        "question"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "QUE17",
+      "split": "heldout",
+      "group": "question",
+      "text": "How does garbage collection work?",
+      "labels": [
+        "question"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "QUE18",
+      "split": "heldout",
+      "group": "question",
+      "text": "什么情况下适合用递归？",
+      "labels": [
+        "question"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "QUE19",
+      "split": "heldout",
+      "group": "question",
+      "text": "讨论一下“不要停止程序”的语气。",
+      "labels": [
+        "question"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "QUE20",
+      "split": "heldout",
+      "group": "question",
+      "text": "What is a unit test?",
+      "labels": [
+        "question"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "QUE21",
+      "split": "heldout",
+      "group": "question",
+      "text": "例句：查询 Electron 文档中的 ipcRenderer.invoke。请分析这句的语法。",
+      "labels": [
+        "question"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "QUE22",
+      "split": "heldout",
+      "group": "question",
+      "text": "怎样判断开源软件的许可证类型？",
+      "labels": [
+        "question"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "QUE23",
+      "split": "heldout",
+      "group": "question",
+      "text": "Why do leaves change color?",
+      "labels": [
+        "question"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "QUE24",
+      "split": "heldout",
+      "group": "question",
+      "text": "Can you explain promises in JavaScript without fetching anything?",
+      "labels": [
+        "question"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "QUE25",
+      "split": "heldout",
+      "group": "question",
+      "text": "如果我让你删除缓存，可能有哪些风险？只讨论。",
+      "labels": [
+        "question"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "EMO01",
+      "split": "calibration",
+      "group": "emotion",
+      "text": "我今天很伤心，想听你安慰我。",
+      "labels": [
+        "emotion"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "EMO02",
+      "split": "calibration",
+      "group": "emotion",
+      "text": "I feel anxious. Please reassure me.",
+      "labels": [
+        "emotion"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "EMO03",
+      "split": "calibration",
+      "group": "emotion",
+      "text": "有点孤独，你能陪我一会儿吗？",
+      "labels": [
+        "emotion"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "EMO04",
+      "split": "calibration",
+      "group": "emotion",
+      "text": "我终于完成项目了，特别开心，想与你分享。",
+      "labels": [
+        "emotion"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "EMO05",
+      "split": "calibration",
+      "group": "emotion",
+      "text": "I am frustrated and need emotional support.",
+      "labels": [
+        "emotion"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "EMO06",
+      "split": "heldout",
+      "group": "emotion",
+      "text": "我被误解了，心里很委屈。",
+      "labels": [
+        "emotion"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "EMO07",
+      "split": "heldout",
+      "group": "emotion",
+      "text": "工作压力好大，陪我聊聊吧。",
+      "labels": [
+        "emotion"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "EMO08",
+      "split": "heldout",
+      "group": "emotion",
+      "text": "I'm disappointed after that meeting.",
+      "labels": [
+        "emotion"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "EMO09",
+      "split": "heldout",
+      "group": "emotion",
+      "text": "我很紧张，给我一点鼓励。",
+      "labels": [
+        "emotion"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "EMO10",
+      "split": "heldout",
+      "group": "emotion",
+      "text": "I feel lonely tonight.",
+      "labels": [
+        "emotion"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "EMO11",
+      "split": "heldout",
+      "group": "emotion",
+      "text": "终于考过了，我激动得睡不着。",
+      "labels": [
+        "emotion"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "EMO12",
+      "split": "heldout",
+      "group": "emotion",
+      "text": "今天心情低落，想有人听我说说。",
+      "labels": [
+        "emotion"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "EMO13",
+      "split": "heldout",
+      "group": "emotion",
+      "text": "I am proud of myself and wanted to share it.",
+      "labels": [
+        "emotion"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "EMO14",
+      "split": "heldout",
+      "group": "emotion",
+      "text": "我有些担心明天的面试，安慰我一下。",
+      "labels": [
+        "emotion"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "EMO15",
+      "split": "heldout",
+      "group": "emotion",
+      "text": "I'm upset. Please stay with me.",
+      "labels": [
+        "emotion"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "EMO16",
+      "split": "heldout",
+      "group": "emotion",
+      "text": "收到好消息了，我特别兴奋。",
+      "labels": [
+        "emotion"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "EMO17",
+      "split": "heldout",
+      "group": "emotion",
+      "text": "最近有点失落，想和你倾诉。",
+      "labels": [
+        "emotion"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "EMO18",
+      "split": "heldout",
+      "group": "emotion",
+      "text": "I feel overwhelmed, can you comfort me?",
+      "labels": [
+        "emotion"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "EMO19",
+      "split": "heldout",
+      "group": "emotion",
+      "text": "我做错了件小事，有些懊恼。",
+      "labels": [
+        "emotion"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "EMO20",
+      "split": "heldout",
+      "group": "emotion",
+      "text": "I'm happy and grateful today.",
+      "labels": [
+        "emotion"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "EMO21",
+      "split": "heldout",
+      "group": "emotion",
+      "text": "没赶上机会，我真的很难过。",
+      "labels": [
+        "emotion"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "EMO22",
+      "split": "heldout",
+      "group": "emotion",
+      "text": "考试前很焦虑，陪我缓缓。",
+      "labels": [
+        "emotion"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "EMO23",
+      "split": "heldout",
+      "group": "emotion",
+      "text": "I could use some encouragement because I feel nervous.",
+      "labels": [
+        "emotion"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "EMO24",
+      "split": "heldout",
+      "group": "emotion",
+      "text": "今天终于松了一口气，心情很好。",
+      "labels": [
+        "emotion"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "EMO25",
+      "split": "heldout",
+      "group": "emotion",
+      "text": "有点烦躁，愿意听我讲讲吗？",
+      "labels": [
+        "emotion"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "ACT01",
+      "split": "calibration",
+      "group": "action",
+      "text": "请查询 Electron 文档中的 ipcMain.handle 示例。",
+      "labels": [
+        "action"
+      ],
+      "documentation_requested": true,
+      "auto_expected": true,
+      "requested_effect": true
+    },
+    {
+      "id": "ACT02",
+      "split": "calibration",
+      "group": "action",
+      "text": "Look up Electron documentation for BrowserWindow options.",
+      "labels": [
+        "action"
+      ],
+      "documentation_requested": true,
+      "auto_expected": true,
+      "requested_effect": true
+    },
+    {
+      "id": "ACT03",
+      "split": "calibration",
+      "group": "action",
+      "text": "帮我把样例目录导出为 CSV。",
+      "labels": [
+        "action"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "ACT04",
+      "split": "calibration",
+      "group": "action",
+      "text": "不要查询 Electron 文档中的 app.ready。",
+      "labels": [
+        "action"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "ACT05",
+      "split": "calibration",
+      "group": "action",
+      "text": "Please generate a project inventory report.",
+      "labels": [
+        "action"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "ACT06",
+      "split": "heldout",
+      "group": "action",
+      "text": "查询 Electron 文档中的 BrowserWindow 创建窗口。",
+      "labels": [
+        "action"
+      ],
+      "documentation_requested": true,
+      "auto_expected": true,
+      "requested_effect": true
+    },
+    {
+      "id": "ACT07",
+      "split": "heldout",
+      "group": "action",
+      "text": "请查阅 /electron/electron 文档中的 ipcRenderer.invoke 示例。",
+      "labels": [
+        "action"
+      ],
+      "documentation_requested": true,
+      "auto_expected": true,
+      "requested_effect": true
+    },
+    {
+      "id": "ACT08",
+      "split": "heldout",
+      "group": "action",
+      "text": "请查询 Electron 文档中的 app.whenReady 用法。",
+      "labels": [
+        "action"
+      ],
+      "documentation_requested": true,
+      "auto_expected": true,
+      "requested_effect": true
+    },
+    {
+      "id": "ACT09",
+      "split": "heldout",
+      "group": "action",
+      "text": "请查 Electron 文档中的 webContents.send 示例。",
+      "labels": [
+        "action"
+      ],
+      "documentation_requested": true,
+      "auto_expected": true,
+      "requested_effect": true
+    },
+    {
+      "id": "ACT10",
+      "split": "heldout",
+      "group": "action",
+      "text": "查询 Electron 文档中的 contextBridge.exposeInMainWorld 用法。",
+      "labels": [
+        "action"
+      ],
+      "documentation_requested": true,
+      "auto_expected": true,
+      "requested_effect": true
+    },
+    {
+      "id": "ACT11",
+      "split": "heldout",
+      "group": "action",
+      "text": "Look up Electron documentation for ipcMain.on examples.",
+      "labels": [
+        "action"
+      ],
+      "documentation_requested": true,
+      "auto_expected": true,
+      "requested_effect": true
+    },
+    {
+      "id": "ACT12",
+      "split": "heldout",
+      "group": "action",
+      "text": "Please check Electron documentation for app.quit.",
+      "labels": [
+        "action"
+      ],
+      "documentation_requested": true,
+      "auto_expected": true,
+      "requested_effect": true
+    },
+    {
+      "id": "ACT13",
+      "split": "heldout",
+      "group": "action",
+      "text": "查询 /facebook/react 文档中的 useEffect 清理函数。",
+      "labels": [
+        "action"
+      ],
+      "documentation_requested": true,
+      "auto_expected": true,
+      "requested_effect": true
+    },
+    {
+      "id": "ACT14",
+      "split": "heldout",
+      "group": "action",
+      "text": "请查询 React 文档中的 useState 示例。",
+      "labels": [
+        "action"
+      ],
+      "documentation_requested": true,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "ACT15",
+      "split": "heldout",
+      "group": "action",
+      "text": "搜索 FastAPI 文档中的 dependency injection。",
+      "labels": [
+        "action"
+      ],
+      "documentation_requested": true,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "ACT16",
+      "split": "heldout",
+      "group": "action",
+      "text": "把当前说明整理成一个文本文件。",
+      "labels": [
+        "action"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "ACT17",
+      "split": "heldout",
+      "group": "action",
+      "text": "Please create a short animation about gears.",
+      "labels": [
+        "action"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "ACT18",
+      "split": "heldout",
+      "group": "action",
+      "text": "帮我审阅本项目最近的代码修改。",
+      "labels": [
+        "action"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "ACT19",
+      "split": "heldout",
+      "group": "action",
+      "text": "请不要查 Electron 文档中的 shell.openExternal。",
+      "labels": [
+        "action"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "ACT20",
+      "split": "heldout",
+      "group": "action",
+      "text": "Don't look up Electron documentation for ipcMain.handle.",
+      "labels": [
+        "action"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "ACT21",
+      "split": "heldout",
+      "group": "action",
+      "text": "无需查询 Electron 文档中的 BrowserWindow。",
+      "labels": [
+        "action"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "ACT22",
+      "split": "heldout",
+      "group": "action",
+      "text": "Never search React documentation for useEffect.",
+      "labels": [
+        "action"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "ACT23",
+      "split": "heldout",
+      "group": "action",
+      "text": "暂时别生成任何报告。",
+      "labels": [
+        "action"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "ACT24",
+      "split": "heldout",
+      "group": "action",
+      "text": "请帮我制作一个三分钟科普视频。",
+      "labels": [
+        "action"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "ACT25",
+      "split": "heldout",
+      "group": "action",
+      "text": "把这个项目的测试失败原因查清楚。",
+      "labels": [
+        "action"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "CON01",
+      "split": "calibration",
+      "group": "control",
+      "text": "请停止当前正在朗读的语音。",
+      "labels": [
+        "control"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "CON02",
+      "split": "calibration",
+      "group": "control",
+      "text": "Show the status of task_0123456789abcdef0123456789abcdef.",
+      "labels": [
+        "control"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "CON03",
+      "split": "calibration",
+      "group": "control",
+      "text": "把正在运行的那个唯一报告任务取消。",
+      "labels": [
+        "control"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "CON04",
+      "split": "calibration",
+      "group": "control",
+      "text": "暂停它，我没有说明具体是哪一个。",
+      "labels": [
+        "control"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "CON05",
+      "split": "calibration",
+      "group": "control",
+      "text": "Stop the current reply, but leave tasks running.",
+      "labels": [
+        "control"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "CON06",
+      "split": "heldout",
+      "group": "control",
+      "text": "查询我刚刚提交的报告任务进度。",
+      "labels": [
+        "control"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "CON07",
+      "split": "heldout",
+      "group": "control",
+      "text": "Cancel task_abcdef0123456789abcdef0123456789.",
+      "labels": [
+        "control"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "CON08",
+      "split": "heldout",
+      "group": "control",
+      "text": "暂停当前唯一的下载任务。",
+      "labels": [
+        "control"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "CON09",
+      "split": "heldout",
+      "group": "control",
+      "text": "继续刚才被我暂停的那一个任务。",
+      "labels": [
+        "control"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "CON10",
+      "split": "heldout",
+      "group": "control",
+      "text": "How far along is the current report task?",
+      "labels": [
+        "control"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "CON11",
+      "split": "heldout",
+      "group": "control",
+      "text": "请停止播报，不要停止后台查询。",
+      "labels": [
+        "control"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "CON12",
+      "split": "heldout",
+      "group": "control",
+      "text": "Resume task_0123456789abcdef0123456789abcdef.",
+      "labels": [
+        "control"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "CON13",
+      "split": "heldout",
+      "group": "control",
+      "text": "查看当前会话所有任务的状态。",
+      "labels": [
+        "control"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "CON14",
+      "split": "heldout",
+      "group": "control",
+      "text": "取消当前唯一的文档查询任务。",
+      "labels": [
+        "control"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "CON15",
+      "split": "heldout",
+      "group": "control",
+      "text": "Lower the readout volume.",
+      "labels": [
+        "control"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "CON16",
+      "split": "heldout",
+      "group": "control",
+      "text": "把现在的朗读速度调慢一点。",
+      "labels": [
+        "control"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "CON17",
+      "split": "heldout",
+      "group": "control",
+      "text": "停止本条回答生成。",
+      "labels": [
+        "control"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "CON18",
+      "split": "heldout",
+      "group": "control",
+      "text": "查看队列有没有排队任务。",
+      "labels": [
+        "control"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "CON19",
+      "split": "heldout",
+      "group": "control",
+      "text": "Refresh the current task status.",
+      "labels": [
+        "control"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "CON20",
+      "split": "heldout",
+      "group": "control",
+      "text": "Cancel that one; I have not identified which task.",
+      "labels": [
+        "control"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "CON21",
+      "split": "heldout",
+      "group": "control",
+      "text": "将当前正在朗读的声音静音。",
+      "labels": [
+        "control"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "CON22",
+      "split": "heldout",
+      "group": "control",
+      "text": "继续播报当前暂停的朗读。",
+      "labels": [
+        "control"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "CON23",
+      "split": "heldout",
+      "group": "control",
+      "text": "Pause the active voice playback.",
+      "labels": [
+        "control"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "CON24",
+      "split": "heldout",
+      "group": "control",
+      "text": "帮我查询那份目录报告是否完成了。",
+      "labels": [
+        "control"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "CON25",
+      "split": "heldout",
+      "group": "control",
+      "text": "停止此会话正在执行的唯一任务。",
+      "labels": [
+        "control"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MEM01",
+      "split": "calibration",
+      "group": "memory",
+      "text": "以后请默认用中文回答我。",
+      "labels": [
+        "memory"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MEM02",
+      "split": "calibration",
+      "group": "memory",
+      "text": "Please remember that my preferred nickname is River.",
+      "labels": [
+        "memory"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MEM03",
+      "split": "calibration",
+      "group": "memory",
+      "text": "我希望你长期保持简洁的回答风格。",
+      "labels": [
+        "memory"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MEM04",
+      "split": "calibration",
+      "group": "memory",
+      "text": "忘掉我之前告诉你的旧称呼。",
+      "labels": [
+        "memory"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MEM05",
+      "split": "calibration",
+      "group": "memory",
+      "text": "Remember that I prefer metric units.",
+      "labels": [
+        "memory"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MEM06",
+      "split": "heldout",
+      "group": "memory",
+      "text": "请把我喜欢的饮料从咖啡改为茶。",
+      "labels": [
+        "memory"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MEM07",
+      "split": "heldout",
+      "group": "memory",
+      "text": "以后遇到技术术语先解释含义。",
+      "labels": [
+        "memory"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MEM08",
+      "split": "heldout",
+      "group": "memory",
+      "text": "Please stop remembering my old job title.",
+      "labels": [
+        "memory"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MEM09",
+      "split": "heldout",
+      "group": "memory",
+      "text": "我希望之后回答使用清晰的小标题。",
+      "labels": [
+        "memory"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MEM10",
+      "split": "heldout",
+      "group": "memory",
+      "text": "记住我的常用语言是西班牙语。",
+      "labels": [
+        "memory"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MEM11",
+      "split": "heldout",
+      "group": "memory",
+      "text": "Update my preferred response language to English.",
+      "labels": [
+        "memory"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MEM12",
+      "split": "heldout",
+      "group": "memory",
+      "text": "以后称呼我为小林。",
+      "labels": [
+        "memory"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MEM13",
+      "split": "heldout",
+      "group": "memory",
+      "text": "请长期记住我喜欢深色主题。",
+      "labels": [
+        "memory"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MEM14",
+      "split": "heldout",
+      "group": "memory",
+      "text": "Forget my previous favorite color.",
+      "labels": [
+        "memory"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MEM15",
+      "split": "heldout",
+      "group": "memory",
+      "text": "下次再提到我时，用新的昵称阿青。",
+      "labels": [
+        "memory"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MEM16",
+      "split": "heldout",
+      "group": "memory",
+      "text": "我更喜欢条理清楚的短回答，今后都按这个风格。",
+      "labels": [
+        "memory"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MEM17",
+      "split": "heldout",
+      "group": "memory",
+      "text": "Remember my preference for concise summaries.",
+      "labels": [
+        "memory"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MEM18",
+      "split": "heldout",
+      "group": "memory",
+      "text": "把我的默认距离单位改成公里，作为长期偏好。",
+      "labels": [
+        "memory"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MEM19",
+      "split": "heldout",
+      "group": "memory",
+      "text": "请不要再保存我的旧地址信息。",
+      "labels": [
+        "memory"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "MEM20",
+      "split": "heldout",
+      "group": "memory",
+      "text": "Please correct my stored timezone to Asia/Shanghai.",
+      "labels": [
+        "memory"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MEM21",
+      "split": "heldout",
+      "group": "memory",
+      "text": "希望你今后在回答前先给简短结论。",
+      "labels": [
+        "memory"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MEM22",
+      "split": "heldout",
+      "group": "memory",
+      "text": "记住我做菜时偏好少盐。",
+      "labels": [
+        "memory"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MEM23",
+      "split": "heldout",
+      "group": "memory",
+      "text": "以后请避免使用网络流行语。",
+      "labels": [
+        "memory"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MEM24",
+      "split": "heldout",
+      "group": "memory",
+      "text": "Forget the birthday I previously asked you to remember.",
+      "labels": [
+        "memory"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MEM25",
+      "split": "heldout",
+      "group": "memory",
+      "text": "请把我不喝酒这条信息加入长期记忆。",
+      "labels": [
+        "memory"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "OTH01",
+      "split": "calibration",
+      "group": "other",
+      "text": "qzx @@ 731 ??? zzz",
+      "labels": [
+        "other"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "OTH02",
+      "split": "calibration",
+      "group": "other",
+      "text": "asdfghjkl 0091 %%%",
+      "labels": [
+        "other"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "OTH03",
+      "split": "calibration",
+      "group": "other",
+      "text": "……嗯……（没有完成的输入）",
+      "labels": [
+        "other"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "OTH04",
+      "split": "calibration",
+      "group": "other",
+      "text": "[unintelligible audio fragment]",
+      "labels": [
+        "other"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "OTH05",
+      "split": "calibration",
+      "group": "other",
+      "text": "？？？？ 8xz",
+      "labels": [
+        "other"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "OTH06",
+      "split": "heldout",
+      "group": "other",
+      "text": "[[[ !!! zq 772 ]]]",
+      "labels": [
+        "other"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "OTH07",
+      "split": "heldout",
+      "group": "other",
+      "text": "噢……那个……（转写中断）",
+      "labels": [
+        "other"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "OTH08",
+      "split": "heldout",
+      "group": "other",
+      "text": "zxv qrt // %%",
+      "labels": [
+        "other"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "OTH09",
+      "split": "heldout",
+      "group": "other",
+      "text": "<incomplete-input>",
+      "labels": [
+        "other"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "OTH10",
+      "split": "heldout",
+      "group": "other",
+      "text": "``` ???",
+      "labels": [
+        "other"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "OTH11",
+      "split": "heldout",
+      "group": "other",
+      "text": "7129 :: qqq :: ***",
+      "labels": [
+        "other"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "OTH12",
+      "split": "heldout",
+      "group": "other",
+      "text": "（杂音，无可辨识词句）",
+      "labels": [
+        "other"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "OTH13",
+      "split": "heldout",
+      "group": "other",
+      "text": "?? -- xxzzy",
+      "labels": [
+        "other"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "OTH14",
+      "split": "heldout",
+      "group": "other",
+      "text": "[transcription missing]",
+      "labels": [
+        "other"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "OTH15",
+      "split": "heldout",
+      "group": "other",
+      "text": "… … …",
+      "labels": [
+        "other"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "OTH16",
+      "split": "heldout",
+      "group": "other",
+      "text": "a8z1_kq99 ???",
+      "labels": [
+        "other"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "OTH17",
+      "split": "heldout",
+      "group": "other",
+      "text": "<> <> ??? 03",
+      "labels": [
+        "other"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "OTH18",
+      "split": "heldout",
+      "group": "other",
+      "text": "（空白转写）",
+      "labels": [
+        "other"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "OTH19",
+      "split": "heldout",
+      "group": "other",
+      "text": "zqqz zqqz 43",
+      "labels": [
+        "other"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "OTH20",
+      "split": "heldout",
+      "group": "other",
+      "text": "#@! 9vx &*?",
+      "labels": [
+        "other"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "OTH21",
+      "split": "heldout",
+      "group": "other",
+      "text": "[garbled fragment: krr zt]",
+      "labels": [
+        "other"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "OTH22",
+      "split": "heldout",
+      "group": "other",
+      "text": "呃……（未说出具体内容）",
+      "labels": [
+        "other"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "OTH23",
+      "split": "heldout",
+      "group": "other",
+      "text": "___ xyzxyz ___ ???",
+      "labels": [
+        "other"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "OTH24",
+      "split": "heldout",
+      "group": "other",
+      "text": "<no recognized speech>",
+      "labels": [
+        "other"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "OTH25",
+      "split": "heldout",
+      "group": "other",
+      "text": "%9%2%q% !!",
+      "labels": [
+        "other"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "MIX01",
+      "split": "calibration",
+      "group": "mixed",
+      "text": "我有点难过，陪我聊聊，顺便查询 Electron 文档中的 ipcMain.handle 示例。",
+      "labels": [
+        "emotion",
+        "action"
+      ],
+      "documentation_requested": true,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MIX02",
+      "split": "calibration",
+      "group": "mixed",
+      "text": "Explain what an event loop is, then look up Electron documentation for app.whenReady.",
+      "labels": [
+        "question",
+        "action"
+      ],
+      "documentation_requested": true,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MIX03",
+      "split": "calibration",
+      "group": "mixed",
+      "text": "我很开心，也请记住我以后喜欢简短回答。",
+      "labels": [
+        "emotion",
+        "memory"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MIX04",
+      "split": "calibration",
+      "group": "mixed",
+      "text": "早上好，顺便解释一下什么是缓存。",
+      "labels": [
+        "chat",
+        "question"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "MIX05",
+      "split": "calibration",
+      "group": "mixed",
+      "text": "请停止当前朗读，然后把我的默认语言改为中文。",
+      "labels": [
+        "control",
+        "memory"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MIX06",
+      "split": "heldout",
+      "group": "mixed",
+      "text": "我今天有点焦虑，请安慰我，再查询 Electron 文档中的 BrowserWindow 用法。",
+      "labels": [
+        "emotion",
+        "action"
+      ],
+      "documentation_requested": true,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MIX07",
+      "split": "heldout",
+      "group": "mixed",
+      "text": "I'm sad; keep me company and look up Electron documentation for ipcRenderer.invoke.",
+      "labels": [
+        "emotion",
+        "action"
+      ],
+      "documentation_requested": true,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MIX08",
+      "split": "heldout",
+      "group": "mixed",
+      "text": "请解释闭包是什么，然后查询 React 文档中的 useCallback 示例。",
+      "labels": [
+        "question",
+        "action"
+      ],
+      "documentation_requested": true,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MIX09",
+      "split": "heldout",
+      "group": "mixed",
+      "text": "我感到很紧张，也想知道深呼吸为什么能让人放松。",
+      "labels": [
+        "emotion",
+        "question"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "MIX10",
+      "split": "heldout",
+      "group": "mixed",
+      "text": "先查看当前报告进度，再记住我喜欢表格形式的摘要。",
+      "labels": [
+        "control",
+        "memory"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MIX11",
+      "split": "heldout",
+      "group": "mixed",
+      "text": "我非常烦躁，陪我聊一会儿，另外不要查询 Electron 文档。",
+      "labels": [
+        "emotion",
+        "action"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "MIX12",
+      "split": "heldout",
+      "group": "mixed",
+      "text": "我刚考过试很兴奋，帮我把样例目录统计为报告。",
+      "labels": [
+        "emotion",
+        "action"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MIX13",
+      "split": "heldout",
+      "group": "mixed",
+      "text": "I feel lonely; comfort me, then explain how stars form.",
+      "labels": [
+        "emotion",
+        "question"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "MIX14",
+      "split": "heldout",
+      "group": "mixed",
+      "text": "请查询 Electron 文档中的 dialog.showOpenDialog 示例，并解释异步函数是什么。",
+      "labels": [
+        "action",
+        "question"
+      ],
+      "documentation_requested": true,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MIX15",
+      "split": "heldout",
+      "group": "mixed",
+      "text": "解释一下 IPC 的概念，再查阅 Electron 文档中的 ipcMain.handle。",
+      "labels": [
+        "question",
+        "action"
+      ],
+      "documentation_requested": true,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MIX16",
+      "split": "heldout",
+      "group": "mixed",
+      "text": "我很失望，想听安慰；顺便把项目文件清单导出。",
+      "labels": [
+        "emotion",
+        "action"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MIX17",
+      "split": "heldout",
+      "group": "mixed",
+      "text": "今天好难过，但不要查 React 文档，只陪我聊聊。",
+      "labels": [
+        "emotion",
+        "action"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "MIX18",
+      "split": "heldout",
+      "group": "mixed",
+      "text": "请取消当前唯一的下载任务，并记住我偏好中文通知。",
+      "labels": [
+        "control",
+        "memory"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MIX19",
+      "split": "heldout",
+      "group": "mixed",
+      "text": "Hello! Can you explain how a compiler works?",
+      "labels": [
+        "chat",
+        "question"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "MIX20",
+      "split": "heldout",
+      "group": "mixed",
+      "text": "我心情很好，帮我生成一份简短项目报告。",
+      "labels": [
+        "emotion",
+        "action"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MIX21",
+      "split": "heldout",
+      "group": "mixed",
+      "text": "先解释 Promise，再查询 /electron/electron 文档中的 app.whenReady。",
+      "labels": [
+        "question",
+        "action"
+      ],
+      "documentation_requested": true,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MIX22",
+      "split": "heldout",
+      "group": "mixed",
+      "text": "I am nervous. Also remember that I prefer short replies.",
+      "labels": [
+        "emotion",
+        "memory"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MIX23",
+      "split": "heldout",
+      "group": "mixed",
+      "text": "请解释内存泄漏的含义，再帮我诊断项目里的泄漏问题。",
+      "labels": [
+        "question",
+        "action"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    },
+    {
+      "id": "MIX24",
+      "split": "heldout",
+      "group": "mixed",
+      "text": "I'm upset; do not look up Electron documentation, just offer comfort.",
+      "labels": [
+        "emotion",
+        "action"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": false
+    },
+    {
+      "id": "MIX25",
+      "split": "heldout",
+      "group": "mixed",
+      "text": "先停止朗读，再回答一下为什么会有回声。",
+      "labels": [
+        "control",
+        "question"
+      ],
+      "documentation_requested": false,
+      "auto_expected": false,
+      "requested_effect": true
+    }
+  ]
+}

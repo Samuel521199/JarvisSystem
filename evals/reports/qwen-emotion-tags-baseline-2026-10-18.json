@@ -1,0 +1,20 @@
+{
+  "status": "SUCCEEDED",
+  "source_version": "0.1.43",
+  "observed_at": "2026-10-18T02:06:53.498497+00:00",
+  "command": "python -m unittest test_qwen_speech test_speech test_modules test_web test_local_model",
+  "tests_run": 65,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "javascript_syntax": "node --check apps/web/speech.js: passed",
+  "scope": "Targeted TTS/module/HTTP/local inference regressions; real native browser evidence is separate; no cloud calls.",
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/qwen_speech_contract.py": "0336306b8550e96e92c292490acd5305a7f659de239e4aa27702f007e64d5f65",
+    "runtime/node-host/jarvis_core/qwen_speech.py": "d0b9fe4f82fa63efd116c0fa8c034f3ad53981d2043360faa5d31175b7e9b4dc",
+    "tests/test_qwen_speech.py": "bfd1f0293fc8babce5c0435079a0f31599775541671250dab3c416683cf93d28",
+    "apps/web/speech.js": "9480baffd94d730f4c05797ff1de1487200b10e7a8279877ef623e5730d670b3",
+    "apps/web/admin.html": "ea45f509d6243d9bdeba519b31ac27291e5b80e541ee71d5dc5253b9864aa62b",
+    "tools/probe_qwen_speech_ui.py": "799771e1151a7a8c4fb953854708179f02a7d18c37bec8f970ae754551af4ca7"
+  }
+}

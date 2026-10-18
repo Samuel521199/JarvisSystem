@@ -10,6 +10,7 @@
 
 ## 必须保持的结构
 
+- 工作台右上工具区的当前和新增入口统一遵守[顶栏图标规则](docs/interaction-persona.md#workbench-settings)：图标显示、悬停/键盘聚焦文字提示及无障碍名称；完整规则只维护在该权威节。
 - 每个概念、完整规则、流程、目录树或验收定义只有一个权威位置；其他页面采用摘要和链接。
 - 当前及后续技术文档遵守[章节树规范](docs/MAINTENANCE.md#book-organization)：按篇/章/节/小节归类；manifest 的 book.parts 管理唯一篇章归属，正文标题与稳定锚点管理小节。修改后运行 `python tools/sync_doc_navigation.py --root .` 同步全书目录、章内导航与前后章链接，再做标准检查，不手工改导航生成块。
 - K0—K6 是唯一实施顺序；M0—M6 是产品能力验收门，不再维护第二条开发时间线。

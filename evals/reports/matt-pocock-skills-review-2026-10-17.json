@@ -1,0 +1,512 @@
+{
+  "captured_at": "2026-10-17T01:46:18.450639+08:00",
+  "jarvis_version": "0.1.34",
+  "assessment_status": "proposed integration; verified static inspection only",
+  "upstream": {
+    "repository": "https://github.com/mattpocock/skills",
+    "commit": "49dd158d1076134a641b33efb035946536778336",
+    "plugin_version": "1.3.1",
+    "license": "MIT",
+    "skills_total": 38,
+    "plugin_skills": 27,
+    "groups": {
+      "deprecated": 0,
+      "engineering": 20,
+      "in-progress": 7,
+      "misc": 4,
+      "productivity": 7
+    },
+    "skill_file_bytes": 168114,
+    "skills": [
+      {
+        "path": "skills/engineering/ask-matt/SKILL.md",
+        "bytes": 12594,
+        "body_bytes": 12441,
+        "sha256": "9153a87908838ed24838c16da0eaeec46877f3ab701efdeefea7a5579a4a474d"
+      },
+      {
+        "path": "skills/engineering/code-review/SKILL.md",
+        "bytes": 6670,
+        "body_bytes": 6207,
+        "sha256": "9e6d1b00c31e10a002ac3e5fb49014c9589166f668c62996e80a36d23ca21e70"
+      },
+      {
+        "path": "skills/engineering/codebase-design/SKILL.md",
+        "bytes": 6446,
+        "body_bytes": 6135,
+        "sha256": "362b0bec828219d9f4b08ca7c466164e67253bdd817359258e60d2e9c5692a8f"
+      },
+      {
+        "path": "skills/engineering/diagnosing-bugs/SKILL.md",
+        "bytes": 8664,
+        "body_bytes": 8462,
+        "sha256": "aa87b0ac245c6d1b203c4678eb34dc101af02291448780c55c5e58ccc1619bd7"
+      },
+      {
+        "path": "skills/engineering/domain-modeling/SKILL.md",
+        "bytes": 3346,
+        "body_bytes": 3149,
+        "sha256": "b62d997256cc073e123d4303da8e9db00db0e28de9739660ca3e55ab76e09cdb"
+      },
+      {
+        "path": "skills/engineering/grill-with-docs/SKILL.md",
+        "bytes": 247,
+        "body_bytes": 64,
+        "sha256": "abc0fa7948db18b5fb0e1cc1c522ac5ff47d874e2da1e5df60619d79be11f38b"
+      },
+      {
+        "path": "skills/engineering/implement/SKILL.md",
+        "bytes": 622,
+        "body_bytes": 489,
+        "sha256": "83042ad79e3d7ce616124bf59a38a5ebe79417adb36bedfc4e6223aab783be8c"
+      },
+      {
+        "path": "skills/engineering/implement-spec/SKILL.md",
+        "bytes": 2780,
+        "body_bytes": 2645,
+        "sha256": "5bdaaf884b02b24db432241bcc32250bfee6149c45c743a2a1fef6b416837cfa"
+      },
+      {
+        "path": "skills/engineering/improve-codebase-architecture/SKILL.md",
+        "bytes": 6000,
+        "body_bytes": 5784,
+        "sha256": "f053ff6d7a70f10bd0104e368f7e664b23ea6378898e305bf027e8864757822f"
+      },
+      {
+        "path": "skills/engineering/pr/SKILL.md",
+        "bytes": 4169,
+        "body_bytes": 3917,
+        "sha256": "57658baca2e50e9cf98fdb6b74a51f2afd34b71019d516f7c5d45a51a28354b0"
+      },
+      {
+        "path": "skills/engineering/prototype/SKILL.md",
+        "bytes": 2931,
+        "body_bytes": 2712,
+        "sha256": "f74ae01f4fc454d3a4ef21271920f1706e626271e715dda0559e489f45c792c3"
+      },
+      {
+        "path": "skills/engineering/research/SKILL.md",
+        "bytes": 794,
+        "body_bytes": 517,
+        "sha256": "524b404b1ca373a8b00f63a64667ec4b0a61c3c9cf4e8f246e639be859bb6979"
+      },
+      {
+        "path": "skills/engineering/retro/SKILL.md",
+        "bytes": 4369,
+        "body_bytes": 4256,
+        "sha256": "42110f533f169026d037cf141b9f6c2752c6d914903be4758c38a68349e83e78"
+      },
+      {
+        "path": "skills/engineering/setup-matt-pocock-skills/SKILL.md",
+        "bytes": 6978,
+        "body_bytes": 6710,
+        "sha256": "5dcf60b4265d52423cd83b8f0aef466f93b624152bbb9d2450b41ed80f7d0e6d"
+      },
+      {
+        "path": "skills/engineering/tdd/SKILL.md",
+        "bytes": 3629,
+        "body_bytes": 3446,
+        "sha256": "969583080caf842ae86a53501a0091eced13fd89cad65d3aa75c09112318ff33"
+      },
+      {
+        "path": "skills/engineering/to-spec/SKILL.md",
+        "bytes": 3043,
+        "body_bytes": 2823,
+        "sha256": "c73a2250beac0479e384f5466e834bb54ce6e30b7f8705e9999ba840d9d59b36"
+      },
+      {
+        "path": "skills/engineering/to-tickets/SKILL.md",
+        "bytes": 5812,
+        "body_bytes": 5493,
+        "sha256": "b8eb6dca1085e85220b0f5990ed787ebf8a924844d090689f1073b06367e2f7a"
+      },
+      {
+        "path": "skills/engineering/triage/SKILL.md",
+        "bytes": 6558,
+        "body_bytes": 6354,
+        "sha256": "797f4371a4cea1b564ecfdc7a603089acf3c023454e47ccb0b3307c62de279f8"
+      },
+      {
+        "path": "skills/engineering/wayfinder/SKILL.md",
+        "bytes": 12380,
+        "body_bytes": 12112,
+        "sha256": "0efeec3d47d2fdd3d9b677f19ca7360a3e1e2034ff23bfee33765a74c5d27d22"
+      },
+      {
+        "path": "skills/engineering/wizard/SKILL.md",
+        "bytes": 4123,
+        "body_bytes": 3773,
+        "sha256": "dbefb750eae07d9f8b05ab1084f6acfdda2752df2a6b577c46a505e2bc790164"
+      },
+      {
+        "path": "skills/in-progress/chief-of-staff/SKILL.md",
+        "bytes": 2112,
+        "body_bytes": 1962,
+        "sha256": "001ffc84d809d3dc97751e58227f26c20806722f067abcee51ec640f7c97af24"
+      },
+      {
+        "path": "skills/in-progress/claude-handoff/SKILL.md",
+        "bytes": 1424,
+        "body_bytes": 1194,
+        "sha256": "24853e92b98dea61e5e6cdfeb929e47f98d61d9ccb21e8bb952f917d29980970"
+      },
+      {
+        "path": "skills/in-progress/loop-me/SKILL.md",
+        "bytes": 2522,
+        "body_bytes": 2310,
+        "sha256": "38ac316635d244abfdc1526edec49596f9284b36595f5a212fc5983894b6094a"
+      },
+      {
+        "path": "skills/in-progress/setup-ts-deep-modules/SKILL.md",
+        "bytes": 7546,
+        "body_bytes": 7278,
+        "sha256": "3709fc7d62ea75cd7da1d6f21e33d58d758766fb8f5247a859687d7ed63c213e"
+      },
+      {
+        "path": "skills/in-progress/writing-beats/SKILL.md",
+        "bytes": 4855,
+        "body_bytes": 4669,
+        "sha256": "b23f7851987dab7828c83d42df98090ccebff586b64908ce6a5e772440214621"
+      },
+      {
+        "path": "skills/in-progress/writing-fragments/SKILL.md",
+        "bytes": 3558,
+        "body_bytes": 3422,
+        "sha256": "3be6ffe9386ddd6de8b320c331295953995792fd65d0972aa2a28524ead73e90"
+      },
+      {
+        "path": "skills/in-progress/writing-shape/SKILL.md",
+        "bytes": 5922,
+        "body_bytes": 5768,
+        "sha256": "c13cbc364fbceefce654d9a4b0331113ff47efe90ce2523c2de23ecef63fefbd"
+      },
+      {
+        "path": "skills/misc/git-guardrails-claude-code/SKILL.md",
+        "bytes": 2313,
+        "body_bytes": 2013,
+        "sha256": "12d335b84bcf984b213b527014262233f27ffa1eb807db466832ff711b96f41f"
+      },
+      {
+        "path": "skills/misc/migrate-to-shoehorn/SKILL.md",
+        "bytes": 2795,
+        "body_bytes": 2577,
+        "sha256": "200c11163ecd56d908ec431154e4b452cd6afeb3de91e5b54434f543f0822201"
+      },
+      {
+        "path": "skills/misc/scaffold-exercises/SKILL.md",
+        "bytes": 3589,
+        "body_bytes": 3336,
+        "sha256": "de28db7a0954db55c11ba1e3cc0fd4c037bf0f5cb8313cb292e319bcce47f424"
+      },
+      {
+        "path": "skills/misc/setup-pre-commit/SKILL.md",
+        "bytes": 2258,
+        "body_bytes": 1973,
+        "sha256": "e069e6a23069ebdba946d4dea11e5d663c10640c6b14b55c4585c81b1a256ac9"
+      },
+      {
+        "path": "skills/productivity/grill-me/SKILL.md",
+        "bytes": 157,
+        "body_bytes": 36,
+        "sha256": "19e660207b447acf6ee0d600471c02e549c7aca8fb3ab38fdc2c7056aa442fc8"
+      },
+      {
+        "path": "skills/productivity/grilling/SKILL.md",
+        "bytes": 2049,
+        "body_bytes": 1858,
+        "sha256": "26d225ea8a36f4acacbe267e789cfb97d73964412f4243dd4b65b6cb806ddebc"
+      },
+      {
+        "path": "skills/productivity/handoff/SKILL.md",
+        "bytes": 940,
+        "body_bytes": 728,
+        "sha256": "739d8fbe3e6ed688581eb62b35f04834822eae47e57bc35a79c8d8dc9ac703d3"
+      },
+      {
+        "path": "skills/productivity/teach/SKILL.md",
+        "bytes": 9733,
+        "body_bytes": 9552,
+        "sha256": "d9480a846c88bb1151947eb484bab1a8c9a84af4d9ddf1ea0f6fb7fe639cf9b3"
+      },
+      {
+        "path": "skills/productivity/to-questionnaire/SKILL.md",
+        "bytes": 2904,
+        "body_bytes": 2738,
+        "sha256": "77825120815c21400f82e2794faf342d1d1a4ab1493be3fe061857885d26b768"
+      },
+      {
+        "path": "skills/productivity/wait-what/SKILL.md",
+        "bytes": 396,
+        "body_bytes": 273,
+        "sha256": "95393f96e730b20dabc6b425515cb6292d34bd9a91859a03c2c821e24d321112"
+      },
+      {
+        "path": "skills/productivity/writing-for-agents/SKILL.md",
+        "bytes": 10886,
+        "body_bytes": 10734,
+        "sha256": "1c0c4ebf2d221917591144f0ced4fe46dae13301cb3d6d93fc88ecf0dda6aed2"
+      }
+    ]
+  },
+  "runtime_observations": {
+    "web_ready": true,
+    "extension_entries": 0,
+    "skill_execution_available": false,
+    "codex_cli_launcher_found": true,
+    "local_model_list_endpoint_responded": true,
+    "local_model_id": "qwen3-0.6b",
+    "provider_count": 6,
+    "model_count": 20,
+    "last_record_counts": {
+      "SUCCEEDED": 17,
+      "UNKNOWN": 2,
+      "FAILED": 1
+    },
+    "default_provider": "vertex",
+    "fallback_order": [
+      "vertex",
+      "bailian",
+      "openai",
+      "xai",
+      "local"
+    ],
+    "models": [
+      {
+        "provider": "vertex",
+        "model": "gemini-3.8-flash",
+        "tier": "balanced",
+        "last_probe_status": "UNKNOWN",
+        "last_probe_at": "2026-10-16T13:29:18.018473+00:00",
+        "reasoning_default": "low"
+      },
+      {
+        "provider": "vertex",
+        "model": "gemini-4-argon",
+        "tier": "advanced",
+        "last_probe_status": "UNKNOWN",
+        "last_probe_at": "2026-10-15T14:49:27.505187+00:00",
+        "reasoning_default": "low"
+      },
+      {
+        "provider": "vertex",
+        "model": "gemini-3.1-pro-preview",
+        "tier": "advanced",
+        "last_probe_status": "SUCCEEDED",
+        "last_probe_at": "2026-10-15T06:18:19.294358+00:00",
+        "reasoning_default": "low"
+      },
+      {
+        "provider": "vertex",
+        "model": "gemini-3.5-flash-lite",
+        "tier": "economy",
+        "last_probe_status": "SUCCEEDED",
+        "last_probe_at": "2026-10-15T06:18:34.883238+00:00",
+        "reasoning_default": "minimal"
+      },
+      {
+        "provider": "vertex",
+        "model": "gemini-3.1-flash-lite",
+        "tier": "economy",
+        "last_probe_status": "SUCCEEDED",
+        "last_probe_at": "2026-10-14T23:03:34.555240+00:00",
+        "reasoning_default": "minimal"
+      },
+      {
+        "provider": "bailian",
+        "model": "qwen3.8-flash",
+        "tier": "economy",
+        "last_probe_status": "SUCCEEDED",
+        "last_probe_at": "2026-10-16T07:41:13.662311+00:00",
+        "reasoning_default": "off"
+      },
+      {
+        "provider": "bailian",
+        "model": "qwen3.8-max",
+        "tier": "advanced",
+        "last_probe_status": "SUCCEEDED",
+        "last_probe_at": "2026-10-15T04:21:46.873322+00:00",
+        "reasoning_default": "off"
+      },
+      {
+        "provider": "bailian",
+        "model": "qwen3.7-plus",
+        "tier": "balanced",
+        "last_probe_status": "SUCCEEDED",
+        "last_probe_at": "2026-10-15T03:57:47.772721+00:00",
+        "reasoning_default": "off"
+      },
+      {
+        "provider": "bailian",
+        "model": "qwen-flash",
+        "tier": "previous",
+        "last_probe_status": "SUCCEEDED",
+        "last_probe_at": "2026-10-14T22:55:55.149735+00:00",
+        "reasoning_default": "off"
+      },
+      {
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "tier": "economy",
+        "last_probe_status": "SUCCEEDED",
+        "last_probe_at": "2026-10-16T09:08:06.525058+00:00",
+        "reasoning_default": "none"
+      },
+      {
+        "provider": "openai",
+        "model": "gpt-6.1-sol",
+        "tier": "balanced",
+        "last_probe_status": "SUCCEEDED",
+        "last_probe_at": "2026-10-15T04:02:05.011509+00:00",
+        "reasoning_default": "low"
+      },
+      {
+        "provider": "openai",
+        "model": "gpt-6-astra",
+        "tier": "advanced",
+        "last_probe_status": "SUCCEEDED",
+        "last_probe_at": "2026-10-15T04:21:18.062179+00:00",
+        "reasoning_default": "low"
+      },
+      {
+        "provider": "openai",
+        "model": "gpt-6-sol",
+        "tier": "previous",
+        "last_probe_status": "SUCCEEDED",
+        "last_probe_at": "2026-10-15T03:57:46.409951+00:00",
+        "reasoning_default": "none"
+      },
+      {
+        "provider": "openai",
+        "model": "gpt-5.6-luna",
+        "tier": "previous",
+        "last_probe_status": "SUCCEEDED",
+        "last_probe_at": "2026-10-14T23:03:10.719792+00:00",
+        "reasoning_default": "none"
+      },
+      {
+        "provider": "xai",
+        "model": "grok-4.7",
+        "tier": "advanced",
+        "last_probe_status": "SUCCEEDED",
+        "last_probe_at": "2026-10-15T04:03:37.312209+00:00",
+        "reasoning_default": "low"
+      },
+      {
+        "provider": "xai",
+        "model": "grok-4-1-fast-non-reasoning",
+        "tier": "economy",
+        "last_probe_status": "SUCCEEDED",
+        "last_probe_at": "2026-10-14T22:55:55.165697+00:00",
+        "reasoning_default": null
+      },
+      {
+        "provider": "local",
+        "model": "qwen3-0.6b",
+        "tier": "offline",
+        "last_probe_status": "FAILED",
+        "last_probe_at": "2026-10-16T07:28:18.295656+00:00",
+        "reasoning_default": null
+      },
+      {
+        "provider": "eachlabs",
+        "model": "anthropic/claude-sonnet-5.5",
+        "tier": "balanced",
+        "last_probe_status": "SUCCEEDED",
+        "last_probe_at": "2026-10-16T05:17:21.115130+00:00",
+        "reasoning_default": "low"
+      },
+      {
+        "provider": "eachlabs",
+        "model": "anthropic/claude-opus-5.5",
+        "tier": "advanced",
+        "last_probe_status": "SUCCEEDED",
+        "last_probe_at": "2026-10-16T05:17:24.260509+00:00",
+        "reasoning_default": "low"
+      },
+      {
+        "provider": "eachlabs",
+        "model": "anthropic/claude-haiku-5.5",
+        "tier": "economy",
+        "last_probe_status": "SUCCEEDED",
+        "last_probe_at": "2026-10-16T05:17:17.595079+00:00",
+        "reasoning_default": "low"
+      }
+    ]
+  },
+  "constraints": {
+    "instructions_bytes": 4096,
+    "cloud_text_input_bytes": 65536,
+    "local_text_input_bytes": 4096,
+    "arbitrary_chat_tool_loop": false,
+    "jarvis_coding_provider_implementation": false
+  },
+  "recommendation": {
+    "first_wave": [
+      "diagnosing-bugs",
+      "tdd",
+      "codebase-design",
+      "code-review"
+    ],
+    "adapt": [
+      "to-spec",
+      "to-tickets",
+      "domain-modeling",
+      "grilling",
+      "implement"
+    ],
+    "defer": [
+      "implement-spec",
+      "research background subagent",
+      "misc",
+      "in-progress"
+    ],
+    "daily_model_candidates": [
+      "openai/gpt-6.1-sol",
+      "eachlabs/anthropic/claude-sonnet-5.5"
+    ],
+    "escalation_candidates": [
+      "openai/gpt-6-astra",
+      "eachlabs/anthropic/claude-opus-5.5"
+    ],
+    "quality_rankings": "not benchmarked"
+  },
+  "activity": {
+    "installed_skills": 0,
+    "executed_upstream_scripts": 0,
+    "model_inference_requests": 0,
+    "paid_calls": 0,
+    "test_suites_run": 0,
+    "production_restart": false,
+    "only_runtime_requests": "GET /api/status, /api/models, /api/extensions, localhost model list and HTML nonce retrieval"
+  },
+  "evidence_read": [
+    "evals/reports/readiness-live-2026-10-16.json",
+    "evals/reports/readiness-reasoning-2026-10-16.json",
+    "evals/reports/model-admin-live-2026-10-16.json",
+    "evals/reports/offline-task-live.json",
+    "evals/reports/parallel-runtime-probe.json"
+  ],
+  "limits": [
+    "Historical probe statuses do not prove current account availability or coding quality",
+    "Local model-list response is not successful inference",
+    "No end-to-end skill/coding loop benchmark performed",
+    "Haiku 5.5 historical success does not establish current catalog availability"
+  ],
+  "documentation_checks": {
+    "navigation": "synchronized",
+    "check_docs": {
+      "documents": 23,
+      "diagrams": 19,
+      "artifacts": 38,
+      "errors": 0
+    },
+    "application_tests": "not run; analysis/docs only"
+  },
+  "local_source_sha256": {
+    "runtime/node-host/jarvis_core/extensions.py": "723d4c4f88ff3eb125be8aa00f4c42ab0f1f8e1b7ac5c3cbb378c2d7b18be56d",
+    "runtime/node-host/jarvis_core/chat.py": "6cc6897b8b6572113c2b88ff9e128d97c67e7d543f71a661d9640980ddb862b1",
+    "runtime/node-host/jarvis_core/assistant_context.py": "9df8c4df872fd2980ca851bffb1880d0990ff97503e1b417ff0132ff1bd37bbc",
+    "runtime/node-host/jarvis_core/context_assembly.py": "6ddcaa5a1be1c6e5bb2ba8fcb0eaae0b9d63a322a007b939c108160ad8ee66f9",
+    "adapters/models/provider-native/jarvis_models/gateway.py": "2f22caa9e05ddee928d3b12416766552c40d8a4cdc5068590986214d15f06da1"
+  }
+}
