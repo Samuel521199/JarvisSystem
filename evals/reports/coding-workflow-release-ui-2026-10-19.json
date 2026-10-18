@@ -1,0 +1,203 @@
+{
+  "version": "0.1.58",
+  "observed_at": "2026-10-18T16:45:53.385838+00:00",
+  "live_models": false,
+  "results": [
+    {
+      "model": "Gemini 3.8 Flash",
+      "task_id": "task_377af7c2261950dbaa8b0168adc6ce73",
+      "report": {
+        "checks": {
+          "code_executed": true,
+          "isolated": true,
+          "model_calls": 1,
+          "original_modified": false,
+          "source_rechecked": true,
+          "test_cases_passed": true
+        },
+        "coding": {
+          "attempts": [
+            {
+              "model": {
+                "status": "SUCCEEDED"
+              },
+              "number": 1,
+              "validation": {
+                "cases": 3,
+                "failures": [],
+                "passed": true,
+                "worker": {
+                  "active_process_limit": 1,
+                  "appcontainer": true,
+                  "backend": "windows-lpac-job",
+                  "capabilities": [
+                    "registryRead"
+                  ],
+                  "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+                  "cpu_seconds": 0.140625,
+                  "cpu_time_limit_seconds": 3,
+                  "elapsed_seconds": 0.9666,
+                  "lpac": true,
+                  "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+                  "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+                  "memory_limit_bytes": 201326592,
+                  "package_sid": "S-1-15-2-1543894704-1448741690-1811781413-1717956852-4093442130-1044854335-3008424334",
+                  "peak_process_memory_bytes": 12787712,
+                  "pid": 3740,
+                  "runtime_bytes": 22904399,
+                  "wall_time_limit_seconds": 12
+                }
+              }
+            }
+          ],
+          "baseline": {
+            "cases": 3,
+            "failures": [
+              {
+                "actual": "4",
+                "case": 1,
+                "expected": "6"
+              },
+              {
+                "actual": "3",
+                "case": 3,
+                "expected": "1"
+              }
+            ],
+            "passed": false,
+            "worker": {
+              "active_process_limit": 1,
+              "appcontainer": true,
+              "backend": "windows-lpac-job",
+              "capabilities": [
+                "registryRead"
+              ],
+              "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+              "cpu_seconds": 0.15625,
+              "cpu_time_limit_seconds": 3,
+              "elapsed_seconds": 1.106,
+              "lpac": true,
+              "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+              "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+              "memory_limit_bytes": 201326592,
+              "package_sid": "S-1-15-2-2629808046-1784848375-2664480561-1392443687-740403290-3955660877-2754792699",
+              "peak_process_memory_bytes": 13676544,
+              "pid": 44428,
+              "runtime_bytes": 22904399,
+              "wall_time_limit_seconds": 12
+            }
+          },
+          "candidate": "def transform(data):\n    return str(sum(data))\n",
+          "candidate_digest": "sha256:406c57c95dabb590d9933e8f2ac203199e298a50f310065b97420c44b63ca083",
+          "cases_digest": "sha256:f6e834618951e59328e3758fa2f6a13bd06c08b8712c10321733274638e921ca",
+          "composition": [
+            {
+              "guide_digest": "sha256:93f04a3548ffd7b8b7da915fbb69327f8ae0866273a44088c1b2008583b0b669",
+              "id": "matt-pocock.diagnosing-bugs"
+            },
+            {
+              "guide_digest": "sha256:560716068baddc84a46ff26743c2e952a1dd5eff684036eafc1c523822058275",
+              "id": "matt-pocock.tdd"
+            },
+            {
+              "guide_digest": "sha256:6f733344f7183347a807f993873a7dd866e0db596a96c3bcf539122c8a380a0d",
+              "id": "matt-pocock.codebase-design"
+            },
+            {
+              "guide_digest": "sha256:f4458ac12d79a5fd860eaf5325f43a3a1617c516250695abb4be3b9724088355",
+              "id": "matt-pocock.code-review"
+            }
+          ],
+          "diff": "--- original/calc.py\n+++ candidate/calc.py\n@@ -1,2 +1,2 @@\n def transform(data):\n-    return str(sum(data[1:]))\n+    return str(sum(data))\n",
+          "limits": "仅单文件 transform(data)→str，冻结案例不等于完整正确性；无依赖安装、Shell 或任意项目构建。",
+          "original": {
+            "bom": true,
+            "content": "def transform(data):\n    return str(sum(data[1:]))\n",
+            "digest": "sha256:768cee751e0c64e5781953b065321af86e4b523993fdcf4903e135a23197839d",
+            "path": "calc.py",
+            "project_root": "C:\\Users\\samuel\\AppData\\Local\\Temp\\jarvis-coding-ui-7rqpysnh\\project"
+          },
+          "original_modified": false,
+          "passed": true,
+          "validation": {
+            "cases": 3,
+            "failures": [],
+            "passed": true,
+            "worker": {
+              "active_process_limit": 1,
+              "appcontainer": true,
+              "backend": "windows-lpac-job",
+              "capabilities": [
+                "registryRead"
+              ],
+              "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+              "cpu_seconds": 0.140625,
+              "cpu_time_limit_seconds": 3,
+              "elapsed_seconds": 0.9666,
+              "lpac": true,
+              "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+              "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+              "memory_limit_bytes": 201326592,
+              "package_sid": "S-1-15-2-1543894704-1448741690-1811781413-1717956852-4093442130-1044854335-3008424334",
+              "peak_process_memory_bytes": 12787712,
+              "pid": 3740,
+              "runtime_bytes": 22904399,
+              "wall_time_limit_seconds": 12
+            }
+          },
+          "work_directory": "C:\\Users\\samuel\\AppData\\Local\\Temp\\jarvis-coding-ui-7rqpysnh\\data\\coding\\act_377af7c2261950dbaa8b0168adc6ce73"
+        },
+        "decision": {
+          "bundle_digest": "sha256:2db8d6df82923aa06c6cd03ae865d496f3056556f205e7bceec61982fb501d58",
+          "direct": false,
+          "excluded": [],
+          "message_digest": "sha256:3d2dcb862f330043a98f31a3e361139ceb93baa56330b504a4a1342ff29d07cb",
+          "purpose": "task",
+          "schema_version": 1,
+          "selected": [
+            {
+              "id": "matt-pocock.tdd",
+              "policy": {
+                "mode": "auto",
+                "revision": 0,
+                "source": "package_default"
+              },
+              "reason": "用户明确指定。",
+              "version": "1.0.0",
+              "workflow": "guidance"
+            }
+          ]
+        },
+        "kind": "jarvis.skill-report",
+        "output": {
+          "completed_at": "2026-10-18T16:46:03.554712+00:00",
+          "created_at": "2026-10-18T16:46:03.362554+00:00",
+          "digest": "sha256:433c5ff9a870e019a1d0484f0094834ae69f961e0bd360998e51fe96b024c8c5",
+          "error_category": null,
+          "path": "C:\\Users\\samuel\\AppData\\Local\\Temp\\jarvis-coding-ui-7rqpysnh\\project\\技能产物-377af7c22619.txt",
+          "project_id": "5bdfd716302741669723aa26ce862ba3",
+          "request_id": "377af7c2261950dbaa8b0168adc6ce73",
+          "size_bytes": 368,
+          "status": "SAVED"
+        },
+        "skill_id": "matt-pocock.tdd",
+        "source_references": [
+          {
+            "digest": "sha256:768cee751e0c64e5781953b065321af86e4b523993fdcf4903e135a23197839d",
+            "path": "calc.py"
+          }
+        ],
+        "text": "# 编程副本与验收报告\n\n候选通过全部已提供案例，原文件未修改。\n\n仅单文件 transform(data)→str，冻结案例不等于完整正确性；无依赖安装、Shell 或任意项目构建。\n\n```diff\n--- original/calc.py\n+++ candidate/calc.py\n@@ -1,2 +1,2 @@\n def transform(data):\n-    return str(sum(data[1:]))\n+    return str(sum(data))\n\n```\n",
+        "validation_binding": "sha256:e47af71cdd82eecdfe400cc96228565553064593be2031847b58e926655196e4",
+        "verified": {
+          "delivery_digest": true,
+          "workflow_checks": true
+        }
+      },
+      "apply_rollback_bom_exact": true,
+      "missing_nonce_cross_scope_conflict_denied": true
+    }
+  ],
+  "status": "passed",
+  "page_errors": []
+}

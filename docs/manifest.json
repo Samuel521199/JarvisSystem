@@ -3247,7 +3247,19 @@
       "evals/reports/coding-workflow-live-r4-2026-10-19.json",
       "evals/reports/coding-workflow-live-r5-2026-10-19.json",
       "evals/reports/skills-mixed-soak-2026-10-19.json",
-      "evals/reports/skills-mixed-soak-final-2026-10-19.json"
+      "evals/reports/skills-mixed-soak-final-2026-10-19.json",
+      "evals/reports/skills-completion-baseline-2026-10-19.json",
+      "evals/reports/coding-workflow-final-ui-2026-10-19.json",
+      "evals/reports/skills-idle-30min-2026-10-19.json",
+      "evals/reports/skills-mixed-soak-release-2026-10-19.json",
+      "evals/reports/coding-workflow-release-ui-2026-10-19.json",
+      "evals/reports/skills-completion-deployment-2026-10-19.json",
+      "evals/reports/skills-completion-deployment-r2-2026-10-19.json",
+      "evals/reports/skills-saved-coding-delivery-2026-10-19.json",
+      "evals/reports/skills-saved-coding-delivery-r2-2026-10-19.json",
+      "evals/reports/skills-interface-soak-2026-10-19.json",
+      "evals/reports/skills-deployed-resource-point-2026-10-19.json",
+      "evals/reports/skills-completion-release-2026-10-19.json"
     ]
   }
 }

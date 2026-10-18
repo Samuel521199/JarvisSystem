@@ -1,8 +1,8 @@
 {
   "captured_at": "2026-10-18T16:20:10.298322+00:00",
   "source_version_label": "0.1.57",
-  "release_state": "unreleased_memory_review_increment",
-  "production_reloaded": false,
+  "release_state": "deployed_with_0.1.58",
+  "production_reloaded": true,
   "real_model_calls": 0,
   "owner_data_modified": false,
   "tests": [
@@ -147,7 +147,7 @@
     "No arbitrary new-source semantic erasure",
     "No multi-node replication",
     "No 8 GiB PC/overnight soak",
-    "Production deployment pending coordinated freeze"
+    "Deployment verified by instance and asset; no production-memory write test"
   ],
   "validation": {
     "javascript_syntax": "passed",
@@ -161,6 +161,20 @@
     "visual_review": [
       "review-ui-final/review-desktop.png",
       "review-ui-final/review-mobile.png"
+    ]
+  },
+  "initial_release_state": {
+    "release_state": "unreleased_memory_review_increment",
+    "production_reloaded": false
+  },
+  "deployment": {
+    "version": "0.1.58",
+    "instance_id": "34da810d4c5fd91c735ad709c0b61dfa",
+    "evidence": "evals/reports/skills-completion-deployment-r2-2026-10-19.json",
+    "scope": "Version and served personal_candidates.js digest checked; no owner memory mutated. Frozen fixture regressions are distinct from real model extraction quality.",
+    "integration_ui_reports": [
+      "H:/JarvisData/diagnostics/skills/memory-review-integration-20261019/report.json",
+      "H:/JarvisData/diagnostics/skills/semantic-integration-20261019/report.json"
     ]
   }
 }

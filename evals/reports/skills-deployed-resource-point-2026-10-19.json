@@ -1,0 +1,38 @@
+{
+  "observed_at": "2026-10-18T16:54:42.435043+00:00",
+  "instance_id": "34da810d4c5fd91c735ad709c0b61dfa",
+  "version": "0.1.58",
+  "pid": 19776,
+  "processes": [
+    {
+      "pid": 16448,
+      "parent_pid": 51364,
+      "name": "conhost.exe",
+      "created_ticks": 134368155766690333,
+      "cpu_seconds": 0.046875,
+      "private_bytes": 1282048,
+      "working_bytes": 7655424
+    },
+    {
+      "pid": 19776,
+      "parent_pid": 41764,
+      "name": "python.exe",
+      "created_ticks": 134368155763350089,
+      "cpu_seconds": 18.359375,
+      "private_bytes": 44437504,
+      "working_bytes": 61685760
+    },
+    {
+      "pid": 51364,
+      "parent_pid": 19776,
+      "name": "powershell.exe",
+      "created_ticks": 134368155765905040,
+      "cpu_seconds": 1.15625,
+      "private_bytes": 76185600,
+      "working_bytes": 103067648
+    }
+  ],
+  "private_bytes": 121905152,
+  "working_bytes": 172408832,
+  "limits": "One point on the running development PC, with existing application data and no active model task. Includes Host descendants; excludes independent browser and other applications. Not a low-end-machine or duration test."
+}

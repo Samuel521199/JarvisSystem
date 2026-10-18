@@ -30,7 +30,8 @@ def main():
     if a.report.exists():p.error('Do not overwrite evidence')
     record={'version':__version__,'observed_at':datetime.now(timezone.utc).isoformat(),'status':'running','cycles':[],
         'limits':'This development PC only. Pressure uses injected 8 GiB counters, not real low-memory hardware. Real queue, LPAC workers and supervised foreground processes; model text is a fixture, no paid requests. A bounded 20-minute mixed run is not multi-day reliability.'}
-    source_paths=['runtime/node-host/jarvis_core/'+n+'.py' for n in ['coding_workflow','skill_tasks','skills','task_queue','dialogue_process','resources']]
+    source_paths=['runtime/node-host/jarvis_core/'+n+'.py' for n in ['coding_workflow','skill_tasks','skill_validation','skills','task_queue','dialogue_process','dialogue_worker','resources','evolution/provider']]
+    source_paths+=['adapters/models/provider-native/jarvis_models/'+n+'.py' for n in ['gateway','catalog']]
     hashes=lambda:{n:hashlib.sha256((ROOT/n).read_bytes()).hexdigest() for n in source_paths}
     record['source_sha256']=hashes()
     def save():a.report.write_text(json.dumps(record,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')

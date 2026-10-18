@@ -405,7 +405,7 @@ preview_token 是当前宿主随机密钥 HMAC-SHA256 签名的规范 JSON 预�
 <a id="memory-candidate-review-contract"></a>
 ### 语义候选的本地核对与显式处理（2026-10-19）
 
-**implemented / 临时核心局部 verified，尚未随正式版本发布。** 唯一比较模块为 [memory_comparison.py](../runtime/node-host/jarvis_core/memory_comparison.py)，签名与决策编排为 [memory_review.py](../runtime/node-host/jarvis_core/memory_review.py)，事务写入仍只在 MemoryStore。没有引入新模型、常驻进程、库依赖或数据库 schema。实测和源码摘要见[本轮证据](delivery-validation.md#memory-candidate-review-evidence)。
+**implemented / 临时核心局部 verified，已随 0.1.58 部署。** 唯一比较模块为 [memory_comparison.py](../runtime/node-host/jarvis_core/memory_comparison.py)，签名与决策编排为 [memory_review.py](../runtime/node-host/jarvis_core/memory_review.py)，事务写入仍只在 MemoryStore。没有引入新模型、常驻进程、库依赖或数据库 schema。实测和源码摘要见[本轮证据](delivery-validation.md#memory-candidate-review-evidence)。
 
 | 接口 | 严格字段与结果 |
 |---|---|

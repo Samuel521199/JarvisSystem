@@ -1,13 +1,19 @@
 {
   "version": "0.1.58",
-  "observed_at": "2026-10-18T16:34:43.250000+00:00",
+  "observed_at": "2026-10-18T16:45:52.901103+00:00",
   "status": "local_verified_pending_deployment",
   "engineering_tests": {
-    "count": 248,
-    "seconds": 347.991,
+    "count": 249,
+    "seconds": 313.672,
     "status": "passed",
-    "log_path": "H:\\JarvisData\\diagnostics\\skills\\combined-final-20261019.txt",
-    "sha256": "b69d267a5aea0232f93f4be63aa905c085b8ab7453c7933608e402f55e69dc03"
+    "log_path": "H:\\JarvisData\\diagnostics\\skills\\combined-release-20261019.txt",
+    "sha256": "f884fb1b52937b069676816a9c01901e5220d65fd25606ff6e051c63cd6493ac",
+    "log_tail": [
+      "----------------------------------------------------------------------",
+      "Ran 249 tests in 313.672s",
+      "",
+      "OK"
+    ]
   },
   "quality": {
     "google": {
@@ -46,16 +52,16 @@
   "failure_notes": "Initial UI handler hid cases; then missing guard return prevented dispatch; Google formatting failed bounded validation; a probe selector reused a prior task. Fixed without loosening code/test contracts. Final live probe checks distinct task IDs and exact model identity. Invalid/unfinished debug results are not counted as successful deliveries; remote charges for an unfinished debug task are not inferred.",
   "scope": "Single-file data transformations only. Nine guidance skills retained; comparative evidence is case-level and model-dependent. Low-memory injection and bounded local soak are separate from physical low-end and multi-day acceptance.",
   "bindings": {
-    "anatomy.explainer": "sha256:7ed4aa06edaf1c143a1cb7ee4d5c85db89299b5526dedc68db082471d5c379fc",
-    "matt-pocock.diagnosing-bugs": "sha256:febe5ccb898e4022f82ca693aadb60b5782ed07f7c49c80a9f21b46ba5885cef",
-    "matt-pocock.code-review": "sha256:a7a416d6d16201ec48ce6f13b31d4e17f535e2527c07c1df05d8e86e066fe068",
-    "matt-pocock.tdd": "sha256:9974439059f8991ead15862d0dcf480080833054f07390fdd1be26d59e4b41da",
-    "matt-pocock.codebase-design": "sha256:d9f8124e84a9e93f147b68607523a39574346c3bc8c9b147162a473c41c0240d",
-    "matt-pocock.to-spec": "sha256:db78cc107c3071ae31bca5b98f0d2e8311e6e2cebb650aaa4151ab53b734bac1",
-    "matt-pocock.handoff": "sha256:be9ae93f533f84735a117e6f17100348cab316707ada9db1a3f9a7227e76df71",
-    "matt-pocock.teach": "sha256:6598c70af2dcc6fc90afac0c3d2286d87134b20ca27f111c086168cfef1bc64a",
-    "matt-pocock.to-questionnaire": "sha256:356e75f4c7e3a27740a1904118887ba039ac486408a4bf513083ea91afe5948d",
-    "matt-pocock.writing-for-agents": "sha256:a7632435f560c0663a4f2e266304d3d828818c0295da9a113a67e89028375237",
-    "rea.software-analysis": "sha256:2339a5853a41ca441062f71dd0d20886020ea649f077659f8de7d2fc06f867cd"
+    "anatomy.explainer": "sha256:5b37bccdacb85e918c33aeca9a23eb9d2afcb1775edc8b93e0086cc14242f74a",
+    "matt-pocock.diagnosing-bugs": "sha256:c22a7eb2d0e03e6e0e4029b4d303c91ee959f23f828cc0d680fc57cb9f7e2d10",
+    "matt-pocock.code-review": "sha256:da90872371aacde31a35332f8d4cb4ddb103ed28c3721d314f0fe87b83105606",
+    "matt-pocock.tdd": "sha256:e47af71cdd82eecdfe400cc96228565553064593be2031847b58e926655196e4",
+    "matt-pocock.codebase-design": "sha256:9b60d82f8716ea1963f43fac80bc1f07bb0f8a120369c83ddc0af56a5d6b9e7a",
+    "matt-pocock.to-spec": "sha256:2bba843cfe9e5b0ffcd45374896ac970d9fb0d548220fc9ffcbfa4019c4c384a",
+    "matt-pocock.handoff": "sha256:4604b32afa10da987e4871de60ac30c58c2ceffee678908065900aca1e29ead3",
+    "matt-pocock.teach": "sha256:8063bb94168afd5ac94b1892a2ae71b8ed96c4864e89390360a1996126400895",
+    "matt-pocock.to-questionnaire": "sha256:c61c3d6079048c22c277bf2c35a61af493aef3057e73d246a9c4b66a784f16bc",
+    "matt-pocock.writing-for-agents": "sha256:d19698b5c76789156e91fbbc7617560d2a2bb504fa440890e6bfbe09edf0bf94",
+    "rea.software-analysis": "sha256:9633d21ff0cefc2c78afe8be50c9ccac5cc73a5ec7dc5ca88d09027dc2677a83"
   }
 }

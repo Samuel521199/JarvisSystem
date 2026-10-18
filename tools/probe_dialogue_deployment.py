@@ -68,7 +68,9 @@ def main(report_name='dialogue-deployment-2026-10-18.json'):
         if not isinstance(exc.reason,ConnectionRefusedError):raise
         before={}
     if before:stop_idle(before)
-    subprocess.run([sys.executable,str(ROOT/'tools/start_jarvis.py'),'--no-browser'],cwd=ROOT,capture_output=True,text=True,encoding='utf-8',timeout=45,check=True)
+    # Launcher/PowerShell diagnostics may use the Windows OEM encoding. Keep
+    # bytes here; deployment is verified through the HTTP instance below.
+    subprocess.run([sys.executable,str(ROOT/'tools/start_jarvis.py'),'--no-browser'],cwd=ROOT,capture_output=True,timeout=45,check=True)
     token=re.search(r'<meta name="jarvis-nonce" content="([^"]+)"',request('/settings').decode())[1]
     after=get('/api/status');assert after['version']==__version__ and after['instance_id']!=before.get('instance_id') and after['core_ready']
     hashes={}

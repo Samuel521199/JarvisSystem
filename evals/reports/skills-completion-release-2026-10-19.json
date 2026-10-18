@@ -1,0 +1,179 @@
+{
+  "version": "0.1.58",
+  "observed_at": "2026-10-18T17:01:49.567676+00:00",
+  "status": "verified_within_declared_scope_and_deployed",
+  "instance_id": "34da810d4c5fd91c735ad709c0b61dfa",
+  "main_suite": {
+    "count": 249,
+    "seconds": 313.672,
+    "status": "passed",
+    "log_path": "H:\\JarvisData\\diagnostics\\skills\\combined-release-20261019.txt",
+    "sha256": "f884fb1b52937b069676816a9c01901e5220d65fd25606ff6e051c63cd6493ac",
+    "log_tail": [
+      "----------------------------------------------------------------------",
+      "Ran 249 tests in 313.672s",
+      "",
+      "OK"
+    ]
+  },
+  "additional_web_queue_suite": {
+    "count": 62,
+    "seconds": 13.213,
+    "log_path": "H:\\JarvisData\\diagnostics\\skills\\web-queue-release-20261019.txt",
+    "sha256": "0f68cfa2607898e0225b5dbc5b523ae38b3c91fe1d1b72fa1451cfb806e40596",
+    "log_tail": [
+      "----------------------------------------------------------------------",
+      "Ran 62 tests in 13.213s",
+      "",
+      "OK"
+    ]
+  },
+  "maintenance_recovery_suite": {
+    "count": 34,
+    "seconds": 4.63,
+    "log_path": "H:\\JarvisData\\diagnostics\\skills\\recovery-release-20261019.txt",
+    "sha256": "9a6b4b64849ab87dc60fba199545fb9893fc4de2da5042c0efa83a983cbb4b8c",
+    "log_tail": [
+      "H:\\Jarvis\\tools\\release_bundle.py:34: DeprecationWarning: pathlib.PurePath.is_reserved() is deprecated and scheduled for removal in Python 3.15. Use os.path.isreserved() to detect reserved paths on Windows.",
+      "  if parts.is_absolute() or any(p in {'','.', '..'} or p.endswith((' ','.')) or PureWindowsPath(p).is_reserved() for p in value.split('/')):",
+      "----------------------------------------------------------------------",
+      "Ran 34 tests in 4.630s",
+      "",
+      "OK"
+    ]
+  },
+  "quality": {
+    "google": {
+      "without_skill": {
+        "pass": 6,
+        "partial": 17,
+        "fail": 4
+      },
+      "with_skill": {
+        "pass": 8,
+        "partial": 16,
+        "fail": 3
+      }
+    },
+    "sol": {
+      "without_skill": {
+        "pass": 18,
+        "partial": 9,
+        "fail": 0
+      },
+      "with_skill": {
+        "pass": 27,
+        "partial": 0,
+        "fail": 0
+      }
+    }
+  },
+  "quality_method": "Agent read all 108 complete outputs against 27 prewritten rubrics; not independent human adjudication, not blinded, one sample per arm; counts describe these samples only. No model self-rating or keyword correctness proxy.",
+  "coding": {
+    "conversation_url": "http://127.0.0.1:18181/#chat=ba43cf1c82e340558975ca7d100fe2ec",
+    "task_id": "task_0b26ef3db02156bd899b65c5e0958e7d",
+    "model": "vertex::gemini-3.8-flash",
+    "frozen_cases": 3,
+    "lpac": true,
+    "apply_rollback_bom_exact": true,
+    "saved_twice_same_receipt": true,
+    "billing": {
+      "basis": "configured_price_estimate",
+      "calls": 1,
+      "amount": 0.0007455,
+      "currency": "USD"
+    }
+  },
+  "catalog": {
+    "displayed": 11,
+    "all_validation_bindings_current": true
+  },
+  "mixed_resources": {
+    "seconds": 1200.0,
+    "cycles": 50,
+    "confirmed": 34,
+    "cancelled": 16,
+    "paused_reopens": 10,
+    "source_unchanged": true,
+    "cloud_calls": 0
+  },
+  "idle_resources": {
+    "status": "passed_on_this_machine",
+    "checks": {
+      "full_duration": true,
+      "stable_process_tree": true,
+      "private_memory": true,
+      "idle_cpu": true,
+      "ready_time": true
+    },
+    "elapsed_seconds": 1800.017716800001,
+    "ready_seconds": 0.3710620999991079,
+    "cpu_percent_one_core": 0.044270397594566586,
+    "peak_private_bytes": 33914880,
+    "peak_working_bytes": 57061376
+  },
+  "deployed_resource_point": {
+    "observed_at": "2026-10-18T16:54:42.435043+00:00",
+    "instance_id": "34da810d4c5fd91c735ad709c0b61dfa",
+    "version": "0.1.58",
+    "pid": 19776,
+    "processes": [
+      {
+        "pid": 16448,
+        "parent_pid": 51364,
+        "name": "conhost.exe",
+        "created_ticks": 134368155766690333,
+        "cpu_seconds": 0.046875,
+        "private_bytes": 1282048,
+        "working_bytes": 7655424
+      },
+      {
+        "pid": 19776,
+        "parent_pid": 41764,
+        "name": "python.exe",
+        "created_ticks": 134368155763350089,
+        "cpu_seconds": 18.359375,
+        "private_bytes": 44437504,
+        "working_bytes": 61685760
+      },
+      {
+        "pid": 51364,
+        "parent_pid": 19776,
+        "name": "powershell.exe",
+        "created_ticks": 134368155765905040,
+        "cpu_seconds": 1.15625,
+        "private_bytes": 76185600,
+        "working_bytes": 103067648
+      }
+    ],
+    "private_bytes": 121905152,
+    "working_bytes": 172408832,
+    "limits": "One point on the running development PC, with existing application data and no active model task. Includes Host descendants; excludes independent browser and other applications. Not a low-end-machine or duration test."
+  },
+  "interface_resources": {
+    "cycles": 15,
+    "seconds": 310.168,
+    "page_errors": [],
+    "cloud_calls": 0
+  },
+  "evidence": [
+    "evals/reports/skills-completion-baseline-2026-10-19.json",
+    "evals/reports/skills-completion-deployment-2026-10-19.json",
+    "evals/reports/skills-completion-deployment-r2-2026-10-19.json",
+    "evals/reports/skills-saved-coding-delivery-r2-2026-10-19.json",
+    "evals/reports/skills-mixed-soak-release-2026-10-19.json",
+    "evals/reports/skills-idle-30min-2026-10-19.json",
+    "evals/reports/coding-workflow-release-ui-2026-10-19.json",
+    "evals/reports/skills-interface-soak-2026-10-19.json"
+  ],
+  "debug_failures_preserved": "The first deployment probe failed to import its browser worker after a successful reload. The second completed real model execution, apply/rollback and pricing, then expected detail before explicit lazy loading. A read-only follow-up also initially forgot to open the task panel; the corrected follow-up verifies two reloads with no repeated task/model call. Early resource runs are development/source-changed evidence, not the release result.",
+  "limits": [
+    "Single-file transform(data)->str only; visible cases do not prove arbitrary-input correctness.",
+    "Four fixed guidance components, not autonomous general skill composition or four independent review agents.",
+    "Quality review covers three authored scenarios per guide/model, one sample per arm, no independent blinded adjudication.",
+    "Resource load uses synthetic model text and supervised foreground process cancellation; no microphone/TTS/index/maintenance saturation matrix.",
+    "Injected 8 GiB admission counters are not a physical 8 GiB PC; no overnight or multi-day acceptance.",
+    "Documentation auto-admission retains 0.1.57 bounded Flash rule and external receipt dated 2026-10-18; no new external Context7 query in this release.",
+    "Memory deployment verifies the served asset and prior frozen fixture checks; no owner memory was changed by this verification."
+  ]
+}

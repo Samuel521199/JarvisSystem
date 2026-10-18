@@ -1,0 +1,1365 @@
+{
+  "status": "passed",
+  "observed_at": "2026-10-18T16:53:20.193157+00:00",
+  "delivery_evidence": "evals\\reports\\skills-completion-deployment-r2-2026-10-19.json",
+  "version": "0.1.58",
+  "conversation_id": "ba43cf1c82e340558975ca7d100fe2ec",
+  "task_id": "task_0b26ef3db02156bd899b65c5e0958e7d",
+  "conversation_url": "http://127.0.0.1:18181/#chat=ba43cf1c82e340558975ca7d100fe2ec",
+  "cloud_calls": 0,
+  "limits": "Read-only retrieval of the existing paid task. Earlier probe expected lazy-loaded detail before clicking View details; no new task, restart, model request or file change.",
+  "cycles": [
+    {
+      "cycle": 1,
+      "elapsed_seconds": 5.08,
+      "interaction_seconds": 0.219,
+      "processes": [
+        {
+          "pid": 6132,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008544374,
+          "cpu_seconds": 0.515625,
+          "private_bytes": 77783040,
+          "working_bytes": 122494976
+        },
+        {
+          "pid": 6800,
+          "parent_pid": 44304,
+          "name": "identity_helper.exe",
+          "created_ticks": 134368160030113892,
+          "cpu_seconds": 0.15625,
+          "private_bytes": 12079104,
+          "working_bytes": 31154176
+        },
+        {
+          "pid": 12864,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160007000551,
+          "cpu_seconds": 0.484375,
+          "private_bytes": 15507456,
+          "working_bytes": 42004480
+        },
+        {
+          "pid": 18336,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160007324130,
+          "cpu_seconds": 0.046875,
+          "private_bytes": 10493952,
+          "working_bytes": 20783104
+        },
+        {
+          "pid": 26468,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160006952900,
+          "cpu_seconds": 1.84375,
+          "private_bytes": 239284224,
+          "working_bytes": 153497600
+        },
+        {
+          "pid": 31836,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160009677398,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 9252864,
+          "working_bytes": 17293312
+        },
+        {
+          "pid": 38176,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008541920,
+          "cpu_seconds": 0.078125,
+          "private_bytes": 19673088,
+          "working_bytes": 33968128
+        },
+        {
+          "pid": 42664,
+          "parent_pid": 8648,
+          "name": "node.exe",
+          "created_ticks": 134368160003082522,
+          "cpu_seconds": 0.46875,
+          "private_bytes": 178294784,
+          "working_bytes": 127606784
+        },
+        {
+          "pid": 42860,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008907071,
+          "cpu_seconds": 0.0,
+          "private_bytes": 9850880,
+          "working_bytes": 19288064
+        },
+        {
+          "pid": 44304,
+          "parent_pid": 42664,
+          "name": "msedge.exe",
+          "created_ticks": 134368160005389546,
+          "cpu_seconds": 2.0625,
+          "private_bytes": 62799872,
+          "working_bytes": 162439168
+        },
+        {
+          "pid": 52944,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160005583862,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 2600960,
+          "working_bytes": 10715136
+        }
+      ]
+    },
+    {
+      "cycle": 2,
+      "elapsed_seconds": 25.445,
+      "interaction_seconds": 0.343,
+      "processes": [
+        {
+          "pid": 6132,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008544374,
+          "cpu_seconds": 1.703125,
+          "private_bytes": 93282304,
+          "working_bytes": 138690560
+        },
+        {
+          "pid": 12864,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160007000551,
+          "cpu_seconds": 0.59375,
+          "private_bytes": 15122432,
+          "working_bytes": 41754624
+        },
+        {
+          "pid": 18336,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160007324130,
+          "cpu_seconds": 0.046875,
+          "private_bytes": 10313728,
+          "working_bytes": 20692992
+        },
+        {
+          "pid": 26468,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160006952900,
+          "cpu_seconds": 5.4375,
+          "private_bytes": 191688704,
+          "working_bytes": 153010176
+        },
+        {
+          "pid": 31836,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160009677398,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 9195520,
+          "working_bytes": 17276928
+        },
+        {
+          "pid": 38176,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008541920,
+          "cpu_seconds": 0.078125,
+          "private_bytes": 19439616,
+          "working_bytes": 33771520
+        },
+        {
+          "pid": 42664,
+          "parent_pid": 8648,
+          "name": "node.exe",
+          "created_ticks": 134368160003082522,
+          "cpu_seconds": 0.65625,
+          "private_bytes": 109551616,
+          "working_bytes": 97144832
+        },
+        {
+          "pid": 42860,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008907071,
+          "cpu_seconds": 0.0,
+          "private_bytes": 9842688,
+          "working_bytes": 19312640
+        },
+        {
+          "pid": 44304,
+          "parent_pid": 42664,
+          "name": "msedge.exe",
+          "created_ticks": 134368160005389546,
+          "cpu_seconds": 2.375,
+          "private_bytes": 62681088,
+          "working_bytes": 163082240
+        },
+        {
+          "pid": 52944,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160005583862,
+          "cpu_seconds": 0.015625,
+          "private_bytes": 2654208,
+          "working_bytes": 10747904
+        }
+      ]
+    },
+    {
+      "cycle": 3,
+      "elapsed_seconds": 45.68,
+      "interaction_seconds": 0.214,
+      "processes": [
+        {
+          "pid": 6132,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008544374,
+          "cpu_seconds": 2.78125,
+          "private_bytes": 79646720,
+          "working_bytes": 124825600
+        },
+        {
+          "pid": 12864,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160007000551,
+          "cpu_seconds": 0.703125,
+          "private_bytes": 15040512,
+          "working_bytes": 41766912
+        },
+        {
+          "pid": 18336,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160007324130,
+          "cpu_seconds": 0.046875,
+          "private_bytes": 10313728,
+          "working_bytes": 20709376
+        },
+        {
+          "pid": 26468,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160006952900,
+          "cpu_seconds": 8.65625,
+          "private_bytes": 194605056,
+          "working_bytes": 153313280
+        },
+        {
+          "pid": 38176,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008541920,
+          "cpu_seconds": 0.078125,
+          "private_bytes": 19439616,
+          "working_bytes": 33783808
+        },
+        {
+          "pid": 42664,
+          "parent_pid": 8648,
+          "name": "node.exe",
+          "created_ticks": 134368160003082522,
+          "cpu_seconds": 0.71875,
+          "private_bytes": 109113344,
+          "working_bytes": 98320384
+        },
+        {
+          "pid": 42860,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008907071,
+          "cpu_seconds": 0.0,
+          "private_bytes": 9850880,
+          "working_bytes": 19337216
+        },
+        {
+          "pid": 44304,
+          "parent_pid": 42664,
+          "name": "msedge.exe",
+          "created_ticks": 134368160005389546,
+          "cpu_seconds": 2.578125,
+          "private_bytes": 62656512,
+          "working_bytes": 163119104
+        },
+        {
+          "pid": 52944,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160005583862,
+          "cpu_seconds": 0.046875,
+          "private_bytes": 3518464,
+          "working_bytes": 19755008
+        }
+      ]
+    },
+    {
+      "cycle": 4,
+      "elapsed_seconds": 65.924,
+      "interaction_seconds": 0.222,
+      "processes": [
+        {
+          "pid": 6132,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008544374,
+          "cpu_seconds": 4.09375,
+          "private_bytes": 85884928,
+          "working_bytes": 131792896
+        },
+        {
+          "pid": 12864,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160007000551,
+          "cpu_seconds": 0.828125,
+          "private_bytes": 15216640,
+          "working_bytes": 42151936
+        },
+        {
+          "pid": 18336,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160007324130,
+          "cpu_seconds": 0.046875,
+          "private_bytes": 10272768,
+          "working_bytes": 20717568
+        },
+        {
+          "pid": 26468,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160006952900,
+          "cpu_seconds": 12.0,
+          "private_bytes": 191836160,
+          "working_bytes": 153169920
+        },
+        {
+          "pid": 38176,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008541920,
+          "cpu_seconds": 0.078125,
+          "private_bytes": 19406848,
+          "working_bytes": 33775616
+        },
+        {
+          "pid": 42664,
+          "parent_pid": 8648,
+          "name": "node.exe",
+          "created_ticks": 134368160003082522,
+          "cpu_seconds": 0.828125,
+          "private_bytes": 109522944,
+          "working_bytes": 98635776
+        },
+        {
+          "pid": 42860,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008907071,
+          "cpu_seconds": 0.0,
+          "private_bytes": 9809920,
+          "working_bytes": 19333120
+        },
+        {
+          "pid": 44304,
+          "parent_pid": 42664,
+          "name": "msedge.exe",
+          "created_ticks": 134368160005389546,
+          "cpu_seconds": 3.328125,
+          "private_bytes": 63619072,
+          "working_bytes": 165392384
+        },
+        {
+          "pid": 52944,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160005583862,
+          "cpu_seconds": 0.046875,
+          "private_bytes": 3162112,
+          "working_bytes": 13737984
+        }
+      ]
+    },
+    {
+      "cycle": 5,
+      "elapsed_seconds": 86.251,
+      "interaction_seconds": 0.306,
+      "processes": [
+        {
+          "pid": 6132,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008544374,
+          "cpu_seconds": 5.0625,
+          "private_bytes": 75112448,
+          "working_bytes": 125165568
+        },
+        {
+          "pid": 12864,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160007000551,
+          "cpu_seconds": 0.890625,
+          "private_bytes": 15003648,
+          "working_bytes": 42020864
+        },
+        {
+          "pid": 18336,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160007324130,
+          "cpu_seconds": 0.046875,
+          "private_bytes": 10268672,
+          "working_bytes": 20713472
+        },
+        {
+          "pid": 26468,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160006952900,
+          "cpu_seconds": 15.34375,
+          "private_bytes": 191672320,
+          "working_bytes": 152989696
+        },
+        {
+          "pid": 38176,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008541920,
+          "cpu_seconds": 0.078125,
+          "private_bytes": 19406848,
+          "working_bytes": 33775616
+        },
+        {
+          "pid": 42664,
+          "parent_pid": 8648,
+          "name": "node.exe",
+          "created_ticks": 134368160003082522,
+          "cpu_seconds": 0.875,
+          "private_bytes": 112955392,
+          "working_bytes": 101216256
+        },
+        {
+          "pid": 42860,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008907071,
+          "cpu_seconds": 0.0,
+          "private_bytes": 9809920,
+          "working_bytes": 19337216
+        },
+        {
+          "pid": 44304,
+          "parent_pid": 42664,
+          "name": "msedge.exe",
+          "created_ticks": 134368160005389546,
+          "cpu_seconds": 3.5,
+          "private_bytes": 63823872,
+          "working_bytes": 165654528
+        },
+        {
+          "pid": 52944,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160005583862,
+          "cpu_seconds": 0.046875,
+          "private_bytes": 3162112,
+          "working_bytes": 13737984
+        }
+      ]
+    },
+    {
+      "cycle": 6,
+      "elapsed_seconds": 106.502,
+      "interaction_seconds": 0.23,
+      "processes": [
+        {
+          "pid": 6132,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008544374,
+          "cpu_seconds": 6.078125,
+          "private_bytes": 82739200,
+          "working_bytes": 132341760
+        },
+        {
+          "pid": 12864,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160007000551,
+          "cpu_seconds": 0.953125,
+          "private_bytes": 14999552,
+          "working_bytes": 42020864
+        },
+        {
+          "pid": 18336,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160007324130,
+          "cpu_seconds": 0.046875,
+          "private_bytes": 10272768,
+          "working_bytes": 20717568
+        },
+        {
+          "pid": 26468,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160006952900,
+          "cpu_seconds": 18.65625,
+          "private_bytes": 191639552,
+          "working_bytes": 152973312
+        },
+        {
+          "pid": 38176,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008541920,
+          "cpu_seconds": 0.078125,
+          "private_bytes": 19406848,
+          "working_bytes": 33775616
+        },
+        {
+          "pid": 42664,
+          "parent_pid": 8648,
+          "name": "node.exe",
+          "created_ticks": 134368160003082522,
+          "cpu_seconds": 0.90625,
+          "private_bytes": 111620096,
+          "working_bytes": 101011456
+        },
+        {
+          "pid": 42860,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008907071,
+          "cpu_seconds": 0.0,
+          "private_bytes": 9809920,
+          "working_bytes": 19337216
+        },
+        {
+          "pid": 44304,
+          "parent_pid": 42664,
+          "name": "msedge.exe",
+          "created_ticks": 134368160005389546,
+          "cpu_seconds": 3.6875,
+          "private_bytes": 63692800,
+          "working_bytes": 165527552
+        },
+        {
+          "pid": 52944,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160005583862,
+          "cpu_seconds": 0.046875,
+          "private_bytes": 3162112,
+          "working_bytes": 13737984
+        }
+      ]
+    },
+    {
+      "cycle": 7,
+      "elapsed_seconds": 126.764,
+      "interaction_seconds": 0.241,
+      "processes": [
+        {
+          "pid": 6132,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008544374,
+          "cpu_seconds": 7.265625,
+          "private_bytes": 77758464,
+          "working_bytes": 128208896
+        },
+        {
+          "pid": 12864,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160007000551,
+          "cpu_seconds": 1.046875,
+          "private_bytes": 15003648,
+          "working_bytes": 42078208
+        },
+        {
+          "pid": 18336,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160007324130,
+          "cpu_seconds": 0.046875,
+          "private_bytes": 10272768,
+          "working_bytes": 20717568
+        },
+        {
+          "pid": 26468,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160006952900,
+          "cpu_seconds": 22.109375,
+          "private_bytes": 185331712,
+          "working_bytes": 147116032
+        },
+        {
+          "pid": 38176,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008541920,
+          "cpu_seconds": 0.078125,
+          "private_bytes": 19406848,
+          "working_bytes": 33775616
+        },
+        {
+          "pid": 42664,
+          "parent_pid": 8648,
+          "name": "node.exe",
+          "created_ticks": 134368160003082522,
+          "cpu_seconds": 1.0,
+          "private_bytes": 112177152,
+          "working_bytes": 101834752
+        },
+        {
+          "pid": 42860,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008907071,
+          "cpu_seconds": 0.0,
+          "private_bytes": 9805824,
+          "working_bytes": 19333120
+        },
+        {
+          "pid": 44304,
+          "parent_pid": 42664,
+          "name": "msedge.exe",
+          "created_ticks": 134368160005389546,
+          "cpu_seconds": 3.921875,
+          "private_bytes": 63594496,
+          "working_bytes": 165769216
+        },
+        {
+          "pid": 52944,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160005583862,
+          "cpu_seconds": 0.046875,
+          "private_bytes": 3162112,
+          "working_bytes": 13737984
+        }
+      ]
+    },
+    {
+      "cycle": 8,
+      "elapsed_seconds": 147.01,
+      "interaction_seconds": 0.226,
+      "processes": [
+        {
+          "pid": 6132,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008544374,
+          "cpu_seconds": 8.25,
+          "private_bytes": 82894848,
+          "working_bytes": 132685824
+        },
+        {
+          "pid": 12864,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160007000551,
+          "cpu_seconds": 1.109375,
+          "private_bytes": 14860288,
+          "working_bytes": 41979904
+        },
+        {
+          "pid": 18336,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160007324130,
+          "cpu_seconds": 0.046875,
+          "private_bytes": 10272768,
+          "working_bytes": 20717568
+        },
+        {
+          "pid": 26468,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160006952900,
+          "cpu_seconds": 25.53125,
+          "private_bytes": 185290752,
+          "working_bytes": 146927616
+        },
+        {
+          "pid": 38176,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008541920,
+          "cpu_seconds": 0.078125,
+          "private_bytes": 19406848,
+          "working_bytes": 33775616
+        },
+        {
+          "pid": 42664,
+          "parent_pid": 8648,
+          "name": "node.exe",
+          "created_ticks": 134368160003082522,
+          "cpu_seconds": 1.0625,
+          "private_bytes": 112459776,
+          "working_bytes": 105402368
+        },
+        {
+          "pid": 42860,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008907071,
+          "cpu_seconds": 0.0,
+          "private_bytes": 9805824,
+          "working_bytes": 19333120
+        },
+        {
+          "pid": 44304,
+          "parent_pid": 42664,
+          "name": "msedge.exe",
+          "created_ticks": 134368160005389546,
+          "cpu_seconds": 4.078125,
+          "private_bytes": 63455232,
+          "working_bytes": 165699584
+        },
+        {
+          "pid": 52944,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160005583862,
+          "cpu_seconds": 0.046875,
+          "private_bytes": 3104768,
+          "working_bytes": 13705216
+        }
+      ]
+    },
+    {
+      "cycle": 9,
+      "elapsed_seconds": 167.268,
+      "interaction_seconds": 0.236,
+      "processes": [
+        {
+          "pid": 6132,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008544374,
+          "cpu_seconds": 9.296875,
+          "private_bytes": 78782464,
+          "working_bytes": 128892928
+        },
+        {
+          "pid": 12864,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160007000551,
+          "cpu_seconds": 1.203125,
+          "private_bytes": 14843904,
+          "working_bytes": 41963520
+        },
+        {
+          "pid": 18336,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160007324130,
+          "cpu_seconds": 0.046875,
+          "private_bytes": 10272768,
+          "working_bytes": 20717568
+        },
+        {
+          "pid": 26468,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160006952900,
+          "cpu_seconds": 29.015625,
+          "private_bytes": 191623168,
+          "working_bytes": 152973312
+        },
+        {
+          "pid": 38176,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008541920,
+          "cpu_seconds": 0.078125,
+          "private_bytes": 19406848,
+          "working_bytes": 33775616
+        },
+        {
+          "pid": 42664,
+          "parent_pid": 8648,
+          "name": "node.exe",
+          "created_ticks": 134368160003082522,
+          "cpu_seconds": 1.140625,
+          "private_bytes": 113725440,
+          "working_bytes": 106397696
+        },
+        {
+          "pid": 42860,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008907071,
+          "cpu_seconds": 0.0,
+          "private_bytes": 9814016,
+          "working_bytes": 19341312
+        },
+        {
+          "pid": 44304,
+          "parent_pid": 42664,
+          "name": "msedge.exe",
+          "created_ticks": 134368160005389546,
+          "cpu_seconds": 4.21875,
+          "private_bytes": 63479808,
+          "working_bytes": 165703680
+        },
+        {
+          "pid": 52944,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160005583862,
+          "cpu_seconds": 0.046875,
+          "private_bytes": 3047424,
+          "working_bytes": 13676544
+        }
+      ]
+    },
+    {
+      "cycle": 10,
+      "elapsed_seconds": 187.592,
+      "interaction_seconds": 0.302,
+      "processes": [
+        {
+          "pid": 6132,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008544374,
+          "cpu_seconds": 10.390625,
+          "private_bytes": 85090304,
+          "working_bytes": 134209536
+        },
+        {
+          "pid": 12864,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160007000551,
+          "cpu_seconds": 1.234375,
+          "private_bytes": 14880768,
+          "working_bytes": 42012672
+        },
+        {
+          "pid": 18336,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160007324130,
+          "cpu_seconds": 0.046875,
+          "private_bytes": 10272768,
+          "working_bytes": 20717568
+        },
+        {
+          "pid": 26468,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160006952900,
+          "cpu_seconds": 32.265625,
+          "private_bytes": 191315968,
+          "working_bytes": 152944640
+        },
+        {
+          "pid": 38176,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008541920,
+          "cpu_seconds": 0.078125,
+          "private_bytes": 19406848,
+          "working_bytes": 33775616
+        },
+        {
+          "pid": 42664,
+          "parent_pid": 8648,
+          "name": "node.exe",
+          "created_ticks": 134368160003082522,
+          "cpu_seconds": 1.234375,
+          "private_bytes": 112263168,
+          "working_bytes": 104919040
+        },
+        {
+          "pid": 42860,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008907071,
+          "cpu_seconds": 0.0,
+          "private_bytes": 9814016,
+          "working_bytes": 19341312
+        },
+        {
+          "pid": 44304,
+          "parent_pid": 42664,
+          "name": "msedge.exe",
+          "created_ticks": 134368160005389546,
+          "cpu_seconds": 4.34375,
+          "private_bytes": 63582208,
+          "working_bytes": 165781504
+        },
+        {
+          "pid": 52944,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160005583862,
+          "cpu_seconds": 0.046875,
+          "private_bytes": 3047424,
+          "working_bytes": 13676544
+        }
+      ]
+    },
+    {
+      "cycle": 11,
+      "elapsed_seconds": 207.872,
+      "interaction_seconds": 0.259,
+      "processes": [
+        {
+          "pid": 6132,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008544374,
+          "cpu_seconds": 11.5,
+          "private_bytes": 76943360,
+          "working_bytes": 127221760
+        },
+        {
+          "pid": 12864,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160007000551,
+          "cpu_seconds": 1.328125,
+          "private_bytes": 14835712,
+          "working_bytes": 41967616
+        },
+        {
+          "pid": 18336,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160007324130,
+          "cpu_seconds": 0.046875,
+          "private_bytes": 10272768,
+          "working_bytes": 20717568
+        },
+        {
+          "pid": 26468,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160006952900,
+          "cpu_seconds": 35.640625,
+          "private_bytes": 191717376,
+          "working_bytes": 153092096
+        },
+        {
+          "pid": 38176,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008541920,
+          "cpu_seconds": 0.078125,
+          "private_bytes": 19406848,
+          "working_bytes": 33775616
+        },
+        {
+          "pid": 42664,
+          "parent_pid": 8648,
+          "name": "node.exe",
+          "created_ticks": 134368160003082522,
+          "cpu_seconds": 1.296875,
+          "private_bytes": 113012736,
+          "working_bytes": 105791488
+        },
+        {
+          "pid": 42860,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008907071,
+          "cpu_seconds": 0.0,
+          "private_bytes": 9814016,
+          "working_bytes": 19341312
+        },
+        {
+          "pid": 44304,
+          "parent_pid": 42664,
+          "name": "msedge.exe",
+          "created_ticks": 134368160005389546,
+          "cpu_seconds": 4.484375,
+          "private_bytes": 63574016,
+          "working_bytes": 165867520
+        },
+        {
+          "pid": 52944,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160005583862,
+          "cpu_seconds": 0.046875,
+          "private_bytes": 2981888,
+          "working_bytes": 13635584
+        }
+      ]
+    },
+    {
+      "cycle": 12,
+      "elapsed_seconds": 228.157,
+      "interaction_seconds": 0.264,
+      "processes": [
+        {
+          "pid": 6132,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008544374,
+          "cpu_seconds": 12.515625,
+          "private_bytes": 83312640,
+          "working_bytes": 133058560
+        },
+        {
+          "pid": 12864,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160007000551,
+          "cpu_seconds": 1.359375,
+          "private_bytes": 14835712,
+          "working_bytes": 41967616
+        },
+        {
+          "pid": 18336,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160007324130,
+          "cpu_seconds": 0.046875,
+          "private_bytes": 10272768,
+          "working_bytes": 20717568
+        },
+        {
+          "pid": 26468,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160006952900,
+          "cpu_seconds": 38.984375,
+          "private_bytes": 191635456,
+          "working_bytes": 152985600
+        },
+        {
+          "pid": 38176,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008541920,
+          "cpu_seconds": 0.078125,
+          "private_bytes": 19406848,
+          "working_bytes": 33779712
+        },
+        {
+          "pid": 42664,
+          "parent_pid": 8648,
+          "name": "node.exe",
+          "created_ticks": 134368160003082522,
+          "cpu_seconds": 1.34375,
+          "private_bytes": 115269632,
+          "working_bytes": 107696128
+        },
+        {
+          "pid": 42860,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008907071,
+          "cpu_seconds": 0.0,
+          "private_bytes": 9814016,
+          "working_bytes": 19341312
+        },
+        {
+          "pid": 44304,
+          "parent_pid": 42664,
+          "name": "msedge.exe",
+          "created_ticks": 134368160005389546,
+          "cpu_seconds": 4.59375,
+          "private_bytes": 63528960,
+          "working_bytes": 165761024
+        },
+        {
+          "pid": 52944,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160005583862,
+          "cpu_seconds": 0.046875,
+          "private_bytes": 2981888,
+          "working_bytes": 13635584
+        }
+      ]
+    },
+    {
+      "cycle": 13,
+      "elapsed_seconds": 248.407,
+      "interaction_seconds": 0.23,
+      "processes": [
+        {
+          "pid": 6132,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008544374,
+          "cpu_seconds": 13.765625,
+          "private_bytes": 78065664,
+          "working_bytes": 127262720
+        },
+        {
+          "pid": 12864,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160007000551,
+          "cpu_seconds": 1.421875,
+          "private_bytes": 14880768,
+          "working_bytes": 41996288
+        },
+        {
+          "pid": 18336,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160007324130,
+          "cpu_seconds": 0.046875,
+          "private_bytes": 10272768,
+          "working_bytes": 20717568
+        },
+        {
+          "pid": 26468,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160006952900,
+          "cpu_seconds": 42.375,
+          "private_bytes": 191623168,
+          "working_bytes": 153255936
+        },
+        {
+          "pid": 38176,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008541920,
+          "cpu_seconds": 0.078125,
+          "private_bytes": 19406848,
+          "working_bytes": 33779712
+        },
+        {
+          "pid": 42664,
+          "parent_pid": 8648,
+          "name": "node.exe",
+          "created_ticks": 134368160003082522,
+          "cpu_seconds": 1.390625,
+          "private_bytes": 113995776,
+          "working_bytes": 106790912
+        },
+        {
+          "pid": 42860,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008907071,
+          "cpu_seconds": 0.0,
+          "private_bytes": 9814016,
+          "working_bytes": 19345408
+        },
+        {
+          "pid": 44304,
+          "parent_pid": 42664,
+          "name": "msedge.exe",
+          "created_ticks": 134368160005389546,
+          "cpu_seconds": 4.78125,
+          "private_bytes": 63545344,
+          "working_bytes": 165822464
+        },
+        {
+          "pid": 52944,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160005583862,
+          "cpu_seconds": 0.046875,
+          "private_bytes": 2977792,
+          "working_bytes": 13631488
+        }
+      ]
+    },
+    {
+      "cycle": 14,
+      "elapsed_seconds": 268.897,
+      "interaction_seconds": 0.468,
+      "processes": [
+        {
+          "pid": 6132,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008544374,
+          "cpu_seconds": 14.96875,
+          "private_bytes": 87445504,
+          "working_bytes": 134684672
+        },
+        {
+          "pid": 12864,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160007000551,
+          "cpu_seconds": 1.46875,
+          "private_bytes": 14864384,
+          "working_bytes": 41971712
+        },
+        {
+          "pid": 18336,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160007324130,
+          "cpu_seconds": 0.046875,
+          "private_bytes": 10326016,
+          "working_bytes": 20758528
+        },
+        {
+          "pid": 26468,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160006952900,
+          "cpu_seconds": 45.671875,
+          "private_bytes": 191320064,
+          "working_bytes": 152899584
+        },
+        {
+          "pid": 38176,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008541920,
+          "cpu_seconds": 0.078125,
+          "private_bytes": 19456000,
+          "working_bytes": 33816576
+        },
+        {
+          "pid": 42664,
+          "parent_pid": 8648,
+          "name": "node.exe",
+          "created_ticks": 134368160003082522,
+          "cpu_seconds": 1.46875,
+          "private_bytes": 114475008,
+          "working_bytes": 107315200
+        },
+        {
+          "pid": 42860,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008907071,
+          "cpu_seconds": 0.0,
+          "private_bytes": 9879552,
+          "working_bytes": 19386368
+        },
+        {
+          "pid": 44304,
+          "parent_pid": 42664,
+          "name": "msedge.exe",
+          "created_ticks": 134368160005389546,
+          "cpu_seconds": 4.96875,
+          "private_bytes": 63827968,
+          "working_bytes": 165580800
+        },
+        {
+          "pid": 52944,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160005583862,
+          "cpu_seconds": 0.046875,
+          "private_bytes": 3022848,
+          "working_bytes": 13651968
+        }
+      ]
+    },
+    {
+      "cycle": 15,
+      "elapsed_seconds": 289.13,
+      "interaction_seconds": 0.212,
+      "processes": [
+        {
+          "pid": 6132,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008544374,
+          "cpu_seconds": 15.984375,
+          "private_bytes": 78221312,
+          "working_bytes": 128315392
+        },
+        {
+          "pid": 12864,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160007000551,
+          "cpu_seconds": 1.5625,
+          "private_bytes": 14934016,
+          "working_bytes": 42045440
+        },
+        {
+          "pid": 18336,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160007324130,
+          "cpu_seconds": 0.046875,
+          "private_bytes": 10326016,
+          "working_bytes": 20758528
+        },
+        {
+          "pid": 26468,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160006952900,
+          "cpu_seconds": 49.015625,
+          "private_bytes": 191791104,
+          "working_bytes": 153096192
+        },
+        {
+          "pid": 38176,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008541920,
+          "cpu_seconds": 0.078125,
+          "private_bytes": 19456000,
+          "working_bytes": 33816576
+        },
+        {
+          "pid": 42664,
+          "parent_pid": 8648,
+          "name": "node.exe",
+          "created_ticks": 134368160003082522,
+          "cpu_seconds": 1.515625,
+          "private_bytes": 114679808,
+          "working_bytes": 107704320
+        },
+        {
+          "pid": 42860,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160008907071,
+          "cpu_seconds": 0.0,
+          "private_bytes": 9879552,
+          "working_bytes": 19386368
+        },
+        {
+          "pid": 44304,
+          "parent_pid": 42664,
+          "name": "msedge.exe",
+          "created_ticks": 134368160005389546,
+          "cpu_seconds": 5.09375,
+          "private_bytes": 63561728,
+          "working_bytes": 165896192
+        },
+        {
+          "pid": 52944,
+          "parent_pid": 44304,
+          "name": "msedge.exe",
+          "created_ticks": 134368160005583862,
+          "cpu_seconds": 0.046875,
+          "private_bytes": 3022848,
+          "working_bytes": 13651968
+        }
+      ]
+    }
+  ],
+  "two_page_reload_same_receipt": true,
+  "settings_current_and_latest_success": true,
+  "current_instance": "34da810d4c5fd91c735ad709c0b61dfa",
+  "page_errors": [],
+  "elapsed_seconds": 310.168
+}

@@ -1,0 +1,48 @@
+{
+  "status": "failed",
+  "version": "0.1.58",
+  "observed_at": "2026-10-18T16:46:14.710424+00:00",
+  "project": "H:\\JarvisData\\evals\\skill-loop-demo-20261019",
+  "cloud_route": "vertex::gemini-3.8-flash",
+  "limits": "One real deployed single-file task with visible frozen examples. Other model coverage is separate; no general repository correctness or independent quality acceptance.",
+  "reload": {
+    "status": "SUCCEEDED",
+    "source_version": "0.1.58",
+    "data_dir": "C:\\Users\\samuel\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\Jarvis\\data",
+    "previous_version": "0.1.57",
+    "previous_instance": "af5b1f7db5ecc80d7c9225ff2a990466",
+    "current_instance": "34da810d4c5fd91c735ad709c0b61dfa",
+    "idle_graceful_reload": true,
+    "startup_from_absent": false,
+    "served_sha256": {
+      "dialogue.js": "7c2d9a5b66e4a181f28781a8f035fb48f413e8707b16e46c779d6251d61ed085",
+      "resources.js": "586e03243199134cec0c4da7bedde691f904f73ca8e7aee09ea2dd0202c99e2b",
+      "workspace.js": "8f5a1bd76ba701c36eabae00758ada7181460715d68d6d2479635508287c4a57",
+      "conversation_tasks.js": "c5ad2d6c30f127e22b6241ead22a67877cfecc078c3c627ea0241e0ebdf315eb",
+      "mcp_manager.js": "0c74df31951193bbe830bdfe24a10eb90b9cb31bb604ce54109acc5fb1cd9702",
+      "skills.js": "7213e4e831ee57eda9d46ed307924421cc7bfebd8d54259a33f5b96f7f8212b5",
+      "skills_manager.js": "dbb74f1c7b75104aaefc894b622b2a14e9564701434d7d36bbcf1ab9d6d322ae",
+      "personal_candidates.js": "7d4bff554c6c2168313620872ffc7f2b51e7e073b42d7f95c7471328f6aaaffc"
+    },
+    "calculation": "84",
+    "personal_read_only": true,
+    "duplicate_did_not_repeat_calculation": true,
+    "cancel_before_submit": true,
+    "restart_fence": true,
+    "instance_fence": true,
+    "empty_restart_queue_reviewed_and_resumed": true,
+    "admission_ms": 34.618,
+    "backups": {
+      "/api/speech/fast": "stopped",
+      "/api/speech": "stopped"
+    },
+    "cloud_calls": 0,
+    "limits": "One local calculator and personal-settings query; no paid model, microphone, task replay, persistent dialogue recovery or physical voice timing."
+  },
+  "catalog": {
+    "displayed": 11,
+    "all_evidence_bindings_current": true
+  },
+  "error": "No module named 'jarvis_worker'",
+  "page_errors": []
+}

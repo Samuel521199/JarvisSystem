@@ -1,7 +1,7 @@
 {
   "version": "0.1.57",
   "observed_at": "2026-10-18T16:15:23.560742+00:00",
-  "status": "passed_on_this_machine",
+  "status": "development_run_not_release_evidence",
   "cycles": [
     {
       "number": 1,
@@ -1181,5 +1181,7 @@
     }
   ],
   "limits": "This development PC only. Pressure uses injected 8 GiB counters, not real low-memory hardware. Real queue, LPAC workers and supervised foreground processes; model text is a fixture, no paid requests. A bounded 20-minute mixed run is not multi-day reliability.",
-  "elapsed_seconds": 1200.0
+  "elapsed_seconds": 1200.0,
+  "observed_cycle_status": "passed_on_this_machine",
+  "release_evidence_note": "Runtime sources changed during this early development run; no start/end source hash was captured by that harness. Cycle receipts are preserved but do not establish final release behavior. See skills-mixed-soak-release-2026-10-19.json for the frozen-source run."
 }

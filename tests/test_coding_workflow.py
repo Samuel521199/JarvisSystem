@@ -98,5 +98,15 @@ class CodingTests(fixture.Fixture):
         class Runner:
             def run(self,*a):return [],{}
         self.assertFalse(check_code(Runner(),GOOD,CASES,lambda:None)['passed'])
+    def test_coding_route_preserves_prices_and_profile_parameters(self):
+        from jarvis_core.evolution.provider import ModelCodingProvider
+        from jarvis_models.catalog import resolve_settings
+        from jarvis_models.billing import estimate
+        provider=ModelCodingProvider(self.core)
+        for route in ['vertex::gemini-3.8-flash','openai::gpt-6.1-sol']:
+            config,key=provider.configuration(route);settings=resolve_settings(config,key)
+            self.assertIsNotNone(settings['price']);self.assertLessEqual(settings['max_output_tokens'],8192)
+            cost=estimate(settings.get('adapter',key),{'input_tokens':100,'output_tokens':10},settings['price'],dispatched=True)
+            self.assertIsNotNone(cost['amount'])
 
 if __name__=='__main__':unittest.main()

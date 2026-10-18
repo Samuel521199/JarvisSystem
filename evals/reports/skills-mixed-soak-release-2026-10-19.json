@@ -1,0 +1,1223 @@
+{
+  "version": "0.1.58",
+  "observed_at": "2026-10-18T16:41:18.974155+00:00",
+  "status": "passed_on_this_machine",
+  "cycles": [
+    {
+      "number": 1,
+      "elapsed_seconds": 6.11,
+      "task_status": "CONFIRMED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 6.375,
+          "private_bytes": 30339072,
+          "working_bytes": 44642304
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104227864576,
+        "commit_available_bytes": 107372253184
+      }
+    },
+    {
+      "number": 2,
+      "elapsed_seconds": 32.6,
+      "task_status": "CONFIRMED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 12.9375,
+          "private_bytes": 32444416,
+          "working_bytes": 45412352
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 103915569152,
+        "commit_available_bytes": 106992361472
+      }
+    },
+    {
+      "number": 3,
+      "elapsed_seconds": 53.01,
+      "task_status": "CANCELLED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 13.296875,
+          "private_bytes": 32444416,
+          "working_bytes": 46092288
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104002793472,
+        "commit_available_bytes": 107086344192
+      }
+    },
+    {
+      "number": 4,
+      "elapsed_seconds": 79.9,
+      "task_status": "CONFIRMED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 19.328125,
+          "private_bytes": 32452608,
+          "working_bytes": 46215168
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 103843545088,
+        "commit_available_bytes": 106919051264
+      }
+    },
+    {
+      "number": 5,
+      "elapsed_seconds": 107.3,
+      "task_status": "CONFIRMED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": true,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 25.375,
+          "private_bytes": 33304576,
+          "working_bytes": 46829568
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104124956672,
+        "commit_available_bytes": 107238301696
+      }
+    },
+    {
+      "number": 6,
+      "elapsed_seconds": 127.74,
+      "task_status": "CANCELLED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 25.75,
+          "private_bytes": 33300480,
+          "working_bytes": 46899200
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104166154240,
+        "commit_available_bytes": 107270414336
+      }
+    },
+    {
+      "number": 7,
+      "elapsed_seconds": 153.75,
+      "task_status": "CONFIRMED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 31.640625,
+          "private_bytes": 33316864,
+          "working_bytes": 46993408
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 103817310208,
+        "commit_available_bytes": 106856792064
+      }
+    },
+    {
+      "number": 8,
+      "elapsed_seconds": 179.57,
+      "task_status": "CONFIRMED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 37.53125,
+          "private_bytes": 33320960,
+          "working_bytes": 47116288
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104069181440,
+        "commit_available_bytes": 107146276864
+      }
+    },
+    {
+      "number": 9,
+      "elapsed_seconds": 199.97,
+      "task_status": "CANCELLED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 37.90625,
+          "private_bytes": 34275328,
+          "working_bytes": 48078848
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104136613888,
+        "commit_available_bytes": 107159273472
+      }
+    },
+    {
+      "number": 10,
+      "elapsed_seconds": 226.29,
+      "task_status": "CONFIRMED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": true,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 44.171875,
+          "private_bytes": 34271232,
+          "working_bytes": 47366144
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 103807234048,
+        "commit_available_bytes": 106830639104
+      }
+    },
+    {
+      "number": 11,
+      "elapsed_seconds": 252.16,
+      "task_status": "CONFIRMED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 50.1875,
+          "private_bytes": 34095104,
+          "working_bytes": 47255552
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104160018432,
+        "commit_available_bytes": 107303780352
+      }
+    },
+    {
+      "number": 12,
+      "elapsed_seconds": 272.58,
+      "task_status": "CANCELLED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 50.609375,
+          "private_bytes": 34242560,
+          "working_bytes": 48091136
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104305799168,
+        "commit_available_bytes": 107447144448
+      }
+    },
+    {
+      "number": 13,
+      "elapsed_seconds": 298.51,
+      "task_status": "CONFIRMED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 56.40625,
+          "private_bytes": 33325056,
+          "working_bytes": 47296512
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104503521280,
+        "commit_available_bytes": 107666550784
+      }
+    },
+    {
+      "number": 14,
+      "elapsed_seconds": 324.01,
+      "task_status": "CONFIRMED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 61.859375,
+          "private_bytes": 34283520,
+          "working_bytes": 47669248
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104365203456,
+        "commit_available_bytes": 107568332800
+      }
+    },
+    {
+      "number": 15,
+      "elapsed_seconds": 344.64,
+      "task_status": "CANCELLED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": true,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 62.21875,
+          "private_bytes": 34271232,
+          "working_bytes": 47656960
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104127819776,
+        "commit_available_bytes": 107084828672
+      }
+    },
+    {
+      "number": 16,
+      "elapsed_seconds": 370.36,
+      "task_status": "CONFIRMED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 67.75,
+          "private_bytes": 34213888,
+          "working_bytes": 47570944
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104533622784,
+        "commit_available_bytes": 107714449408
+      }
+    },
+    {
+      "number": 17,
+      "elapsed_seconds": 395.6,
+      "task_status": "CONFIRMED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 72.90625,
+          "private_bytes": 33755136,
+          "working_bytes": 47976448
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104460914688,
+        "commit_available_bytes": 107727032320
+      }
+    },
+    {
+      "number": 18,
+      "elapsed_seconds": 416.0,
+      "task_status": "CANCELLED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 73.28125,
+          "private_bytes": 35041280,
+          "working_bytes": 49147904
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104472236032,
+        "commit_available_bytes": 107742527488
+      }
+    },
+    {
+      "number": 19,
+      "elapsed_seconds": 441.74,
+      "task_status": "CONFIRMED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 79.078125,
+          "private_bytes": 33730560,
+          "working_bytes": 48029696
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104005386240,
+        "commit_available_bytes": 106926616576
+      }
+    },
+    {
+      "number": 20,
+      "elapsed_seconds": 466.9,
+      "task_status": "CONFIRMED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": true,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 84.296875,
+          "private_bytes": 33898496,
+          "working_bytes": 48103424
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104477630464,
+        "commit_available_bytes": 107755606016
+      }
+    },
+    {
+      "number": 21,
+      "elapsed_seconds": 487.31,
+      "task_status": "CANCELLED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 84.640625,
+          "private_bytes": 35065856,
+          "working_bytes": 49192960
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104481878016,
+        "commit_available_bytes": 107767582720
+      }
+    },
+    {
+      "number": 22,
+      "elapsed_seconds": 512.7,
+      "task_status": "CONFIRMED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 90.171875,
+          "private_bytes": 34164736,
+          "working_bytes": 48353280
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104142569472,
+        "commit_available_bytes": 107251879936
+      }
+    },
+    {
+      "number": 23,
+      "elapsed_seconds": 538.17,
+      "task_status": "CONFIRMED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 95.53125,
+          "private_bytes": 34131968,
+          "working_bytes": 48472064
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 103973343232,
+        "commit_available_bytes": 107110727680
+      }
+    },
+    {
+      "number": 24,
+      "elapsed_seconds": 558.72,
+      "task_status": "CANCELLED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 95.921875,
+          "private_bytes": 35016704,
+          "working_bytes": 49414144
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 103977525248,
+        "commit_available_bytes": 107122843648
+      }
+    },
+    {
+      "number": 25,
+      "elapsed_seconds": 584.08,
+      "task_status": "CONFIRMED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": true,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 101.453125,
+          "private_bytes": 34197504,
+          "working_bytes": 48574464
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104019955712,
+        "commit_available_bytes": 107145928704
+      }
+    },
+    {
+      "number": 26,
+      "elapsed_seconds": 609.74,
+      "task_status": "CONFIRMED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 106.984375,
+          "private_bytes": 35110912,
+          "working_bytes": 49729536
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104077651968,
+        "commit_available_bytes": 107218751488
+      }
+    },
+    {
+      "number": 27,
+      "elapsed_seconds": 630.15,
+      "task_status": "CANCELLED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 107.359375,
+          "private_bytes": 35049472,
+          "working_bytes": 49516544
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104280317952,
+        "commit_available_bytes": 107499773952
+      }
+    },
+    {
+      "number": 28,
+      "elapsed_seconds": 655.34,
+      "task_status": "CONFIRMED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 112.703125,
+          "private_bytes": 34021376,
+          "working_bytes": 48480256
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104515264512,
+        "commit_available_bytes": 107786772480
+      }
+    },
+    {
+      "number": 29,
+      "elapsed_seconds": 681.16,
+      "task_status": "CONFIRMED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 118.515625,
+          "private_bytes": 33820672,
+          "working_bytes": 48496640
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104444776448,
+        "commit_available_bytes": 107695718400
+      }
+    },
+    {
+      "number": 30,
+      "elapsed_seconds": 701.59,
+      "task_status": "CANCELLED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": true,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 118.875,
+          "private_bytes": 35397632,
+          "working_bytes": 49901568
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104510431232,
+        "commit_available_bytes": 107787980800
+      }
+    },
+    {
+      "number": 31,
+      "elapsed_seconds": 727.47,
+      "task_status": "CONFIRMED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 124.9375,
+          "private_bytes": 34045952,
+          "working_bytes": 48541696
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104070467584,
+        "commit_available_bytes": 106945294336
+      }
+    },
+    {
+      "number": 32,
+      "elapsed_seconds": 753.02,
+      "task_status": "CONFIRMED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 130.578125,
+          "private_bytes": 34131968,
+          "working_bytes": 48689152
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104091033600,
+        "commit_available_bytes": 107068604416
+      }
+    },
+    {
+      "number": 33,
+      "elapsed_seconds": 773.41,
+      "task_status": "CANCELLED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 130.921875,
+          "private_bytes": 35528704,
+          "working_bytes": 50069504
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104116809728,
+        "commit_available_bytes": 107109249024
+      }
+    },
+    {
+      "number": 34,
+      "elapsed_seconds": 798.92,
+      "task_status": "CONFIRMED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 136.28125,
+          "private_bytes": 34680832,
+          "working_bytes": 48807936
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104136445952,
+        "commit_available_bytes": 107145871360
+      }
+    },
+    {
+      "number": 35,
+      "elapsed_seconds": 824.47,
+      "task_status": "CONFIRMED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": true,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 141.859375,
+          "private_bytes": 34013184,
+          "working_bytes": 48496640
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104138813440,
+        "commit_available_bytes": 107140694016
+      }
+    },
+    {
+      "number": 36,
+      "elapsed_seconds": 844.91,
+      "task_status": "CANCELLED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 142.203125,
+          "private_bytes": 35520512,
+          "working_bytes": 50073600
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104141905920,
+        "commit_available_bytes": 107144163328
+      }
+    },
+    {
+      "number": 37,
+      "elapsed_seconds": 870.48,
+      "task_status": "CONFIRMED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 147.671875,
+          "private_bytes": 34263040,
+          "working_bytes": 48852992
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104102436864,
+        "commit_available_bytes": 107080163328
+      }
+    },
+    {
+      "number": 38,
+      "elapsed_seconds": 896.17,
+      "task_status": "CONFIRMED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 153.546875,
+          "private_bytes": 33624064,
+          "working_bytes": 48259072
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104334835712,
+        "commit_available_bytes": 107396272128
+      }
+    },
+    {
+      "number": 39,
+      "elapsed_seconds": 916.57,
+      "task_status": "CANCELLED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 153.890625,
+          "private_bytes": 35295232,
+          "working_bytes": 49889280
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104545779712,
+        "commit_available_bytes": 107684405248
+      }
+    },
+    {
+      "number": 40,
+      "elapsed_seconds": 941.87,
+      "task_status": "CONFIRMED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": true,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 159.4375,
+          "private_bytes": 33980416,
+          "working_bytes": 48640000
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104551256064,
+        "commit_available_bytes": 107714564096
+      }
+    },
+    {
+      "number": 41,
+      "elapsed_seconds": 967.19,
+      "task_status": "CONFIRMED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 164.96875,
+          "private_bytes": 34459648,
+          "working_bytes": 48807936
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104557023232,
+        "commit_available_bytes": 107714043904
+      }
+    },
+    {
+      "number": 42,
+      "elapsed_seconds": 987.59,
+      "task_status": "CANCELLED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 165.34375,
+          "private_bytes": 35532800,
+          "working_bytes": 50122752
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104537354240,
+        "commit_available_bytes": 107650330624
+      }
+    },
+    {
+      "number": 43,
+      "elapsed_seconds": 1013.01,
+      "task_status": "CONFIRMED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 170.96875,
+          "private_bytes": 34213888,
+          "working_bytes": 48840704
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 103977553920,
+        "commit_available_bytes": 106875191296
+      }
+    },
+    {
+      "number": 44,
+      "elapsed_seconds": 1038.49,
+      "task_status": "CONFIRMED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 176.375,
+          "private_bytes": 33955840,
+          "working_bytes": 48500736
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104716980224,
+        "commit_available_bytes": 107942215680
+      }
+    },
+    {
+      "number": 45,
+      "elapsed_seconds": 1058.92,
+      "task_status": "CANCELLED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": true,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 176.796875,
+          "private_bytes": 34975744,
+          "working_bytes": 49692672
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104735612928,
+        "commit_available_bytes": 107982733312
+      }
+    },
+    {
+      "number": 46,
+      "elapsed_seconds": 1084.2,
+      "task_status": "CONFIRMED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 181.8125,
+          "private_bytes": 34123776,
+          "working_bytes": 48902144
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104747237376,
+        "commit_available_bytes": 107992809472
+      }
+    },
+    {
+      "number": 47,
+      "elapsed_seconds": 1109.27,
+      "task_status": "CONFIRMED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 187.234375,
+          "private_bytes": 34570240,
+          "working_bytes": 49082368
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104757170176,
+        "commit_available_bytes": 108010426368
+      }
+    },
+    {
+      "number": 48,
+      "elapsed_seconds": 1129.67,
+      "task_status": "CANCELLED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 187.5625,
+          "private_bytes": 35532800,
+          "working_bytes": 50118656
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104780787712,
+        "commit_available_bytes": 108037206016
+      }
+    },
+    {
+      "number": 49,
+      "elapsed_seconds": 1154.9,
+      "task_status": "CONFIRMED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": false,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 192.921875,
+          "private_bytes": 35491840,
+          "working_bytes": 50106368
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104773435392,
+        "commit_available_bytes": 108034330624
+      }
+    },
+    {
+      "number": 50,
+      "elapsed_seconds": 1180.41,
+      "task_status": "CONFIRMED",
+      "foreground_cancelled": true,
+      "pressure_wait_and_recovery": true,
+      "reopened_paused": true,
+      "processes": [
+        {
+          "pid": 52000,
+          "parent_pid": 1008,
+          "name": "python.exe",
+          "created_ticks": 134368152785788558,
+          "cpu_seconds": 198.4375,
+          "private_bytes": 35057664,
+          "working_bytes": 48848896
+        }
+      ],
+      "system_memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 104984219648,
+        "commit_available_bytes": 108308369408
+      }
+    }
+  ],
+  "limits": "This development PC only. Pressure uses injected 8 GiB counters, not real low-memory hardware. Real queue, LPAC workers and supervised foreground processes; model text is a fixture, no paid requests. A bounded 20-minute mixed run is not multi-day reliability.",
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/coding_workflow.py": "f5685dd09aee94628fa6723b63c636a8c9d63517b5795d3dc53dd7351f2f90f4",
+    "runtime/node-host/jarvis_core/skill_tasks.py": "b11781b0815ce748055a842616f96bae69c773e6008d3ad6805ba0c4d0399357",
+    "runtime/node-host/jarvis_core/skill_validation.py": "278a9a744a37cea0e9df8f191ebcf0e754d0e6ce04468f2be67cf5c44435deec",
+    "runtime/node-host/jarvis_core/skills.py": "ae673579d19ac63d2d028e9811b0d551f448175dc659cbdb0cb3f6f263190753",
+    "runtime/node-host/jarvis_core/task_queue.py": "4f1a4732187b83f06f87bb0f7414f4e0c967e15c79a81abfcedcc322e5e3efc4",
+    "runtime/node-host/jarvis_core/dialogue_process.py": "e12e674980104c4f582086e7602850cf336361598cbd93ae195fb30a6bc6008c",
+    "runtime/node-host/jarvis_core/dialogue_worker.py": "0a4141da07a71f46c9fec84ed00a16de5bc48f7aa70c57be7bb2abfc2cad9317",
+    "runtime/node-host/jarvis_core/resources.py": "0cdd231f05d50022938f1cd0ee3521633bf4923bd6b5e0cf921ac0049935ac81",
+    "runtime/node-host/jarvis_core/evolution/provider.py": "f539113875b14d6187ec8f658f25698dcdefbbd5c667f4cc1b918cb4e9a59acb",
+    "adapters/models/provider-native/jarvis_models/gateway.py": "6bdcf16305499c52e6b19d28bab19fe8b5d4457d2264dfa1676be803463b4eee",
+    "adapters/models/provider-native/jarvis_models/catalog.py": "5950ec73e70469439c6075212bd5eaa9e798e2336b823b82825f10138c0282b0"
+  },
+  "source_unchanged": true,
+  "elapsed_seconds": 1200.0
+}

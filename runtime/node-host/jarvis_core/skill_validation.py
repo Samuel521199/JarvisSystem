@@ -4,7 +4,7 @@ from . import policy, __version__
 from .workspace import timestamp
 
 INDEX=policy.REPOSITORY_ROOT/'config/skills/validation.json'
-COMMON=('runtime/node-host/jarvis_core/skills.py','runtime/node-host/jarvis_core/skill_tasks.py','contracts/schemas/skill-report.schema.json')
+COMMON=('runtime/node-host/jarvis_core/skills.py','runtime/node-host/jarvis_core/skill_tasks.py','runtime/node-host/jarvis_core/skill_validation.py','contracts/schemas/skill-report.schema.json')
 
 def fingerprint(item):
     paths=list(COMMON)
@@ -12,7 +12,7 @@ def fingerprint(item):
         paths+=['runtime/node-host/jarvis_core/'+name+'.py' for name in ('rea','rea_process','rea_evidence','rea_asar','rea_focus','rea_explanation')]
         paths+=['config/skills/rea-runtime.json']
     elif item['workflow']=='anatomy':paths+=['runtime/node-host/jarvis_core/skill_renderer.py','config/skills/runtime.json']
-    else:paths+=['runtime/node-host/jarvis_core/chat.py','runtime/node-host/jarvis_core/coding_workflow.py','runtime/node-host/jarvis_core/dialogue_process.py','runtime/node-host/jarvis_core/evolution/runner.py']
+    else:paths+=['runtime/node-host/jarvis_core/chat.py','runtime/node-host/jarvis_core/coding_workflow.py','runtime/node-host/jarvis_core/dialogue_process.py','runtime/node-host/jarvis_core/dialogue_worker.py','runtime/node-host/jarvis_core/evolution/runner.py','runtime/node-host/jarvis_core/evolution/provider.py','adapters/models/provider-native/jarvis_models/gateway.py','adapters/models/provider-native/jarvis_models/catalog.py']
     return policy.digest(policy.canonical_json({'id':item['id'],'version':item['version'],'guide':item.get('guide',''),
         'files':{p:policy.digest((policy.REPOSITORY_ROOT/p).read_bytes()) for p in paths}}).encode())
 

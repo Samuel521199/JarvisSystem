@@ -30,6 +30,8 @@ SOURCE_PATHS += ('runtime/node-host/jarvis_core/rea.py', 'runtime/node-host/jarv
                  'config/skills/rea-runtime.json', 'adapters/skills/rea/SKILL.md',
                  'runtime/node-host/jarvis_core/coding_workflow.py', 'runtime/node-host/jarvis_core/evolution/runner.py',
                  'runtime/node-host/jarvis_core/dialogue_process.py')
+SOURCE_PATHS += ('runtime/node-host/jarvis_core/evolution/provider.py','runtime/node-host/jarvis_core/dialogue_worker.py',
+                 'adapters/models/provider-native/jarvis_models/gateway.py','runtime/node-host/jarvis_core/skill_validation.py')
 
 
 def validate_request(payload):

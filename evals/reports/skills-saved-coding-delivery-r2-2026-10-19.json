@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "observed_at": "2026-10-18T16:49:07.694199+00:00",
+  "delivery_evidence": "evals\\reports\\skills-completion-deployment-r2-2026-10-19.json",
+  "version": "0.1.58",
+  "conversation_id": "ba43cf1c82e340558975ca7d100fe2ec",
+  "task_id": "task_0b26ef3db02156bd899b65c5e0958e7d",
+  "conversation_url": "http://127.0.0.1:18181/#chat=ba43cf1c82e340558975ca7d100fe2ec",
+  "cloud_calls": 0,
+  "limits": "Read-only retrieval of the existing paid task. Earlier probe expected lazy-loaded detail before clicking View details; no new task, restart, model request or file change.",
+  "two_page_reload_same_receipt": true,
+  "settings_current_and_latest_success": true,
+  "current_instance": "34da810d4c5fd91c735ad709c0b61dfa",
+  "page_errors": []
+}

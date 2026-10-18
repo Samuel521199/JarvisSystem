@@ -30,7 +30,11 @@ class ModelCodingProvider:
             config = select_model(effective_config(self.config_path, self.core.data_dir), provider, model)
             settings = resolve_settings(config, provider)
             # Request-local bounds, never edit the owner's model settings.
-            config['providers'][provider] = {**settings, 'max_output_tokens': min(settings.get('max_output_tokens', 8192), 8192)}
+            # Keep the model profile: resolving twice after flattening loses its
+            # price and makes the gateway's accounting incorrectly unknown.
+            selected=config['providers'][provider]
+            parameters=selected['models'][model].setdefault('parameters',{}) if 'models' in selected else selected
+            parameters['max_output_tokens']=min(settings.get('max_output_tokens',8192),8192)
             return config, provider
         except (ValueError, KeyError):
             raise policy.CoreError('evolution_route_invalid', '编码模型未登记或已停用。') from None
