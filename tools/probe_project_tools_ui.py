@@ -20,7 +20,7 @@ import server as web
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--output',required=True,type=Path)
-    parser.add_argument('--intent',action='store_true');args=parser.parse_args();args.output.mkdir(parents=True,exist_ok=False)
+    parser.add_argument('--intent',action='store_true');parser.add_argument('--storage',action='store_true');args=parser.parse_args();args.output.mkdir(parents=True,exist_ok=False)
     report={'version':__version__,'status':'running','paid_model_calls':0,'checks':[]};errors=[];calls=[]
     def save():(args.output/'report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     save()
@@ -72,6 +72,7 @@ def main():
                     pane.get_by_role('button',name='审阅并进入灰度',exact=True).click()
                     status=pane.locator('[role=status]');expect(status).to_have_text('已完成',timeout=60000)
                     card=pane.locator('article');expect(card).to_contain_text('4 条保留案例')
+                    expect(card.locator('.tool-contract-quality')).to_contain_text('业务正确性仍需审阅')
                     expect(card).to_contain_text('灰度观察')
                     expect(card.get_by_role('button',name='运行工具',exact=True)).to_be_disabled()
                     expect(card.get_by_role('button',name='核对后正式启用',exact=True)).to_be_disabled()
@@ -190,6 +191,25 @@ def main():
                     review();card.get_by_role('button',name='核对后正式启用',exact=True).click()
                     expect(card).to_contain_text('已正式启用',timeout=60000)
                     report['checks'].append('retirement disables capability; restore is inactive until a new reviewed canary qualifies')
+                    if args.storage:
+                        from jarvis_core import policy
+                        from jarvis_core.evolution.catalog import ProjectTools
+                        tools=ProjectTools(server.evolution)
+                        active=tools.selected(pid,'sum-tool')['active'];old=tools.package(active)[0]
+                        old['metadata']['name']='unreferenced retired fixture'
+                        ident=policy.digest(policy.canonical_json(old).encode())[7:]
+                        with server.evolution.store.connection() as db:db.execute('INSERT INTO tool_versions VALUES(?,?,?)',(ident,'RETIRED',policy.canonical_json(old)))
+                        pane.get_by_role('button',name='刷新与核对请求',exact=True).click()
+                        expect(pane).to_contain_text('在线版本 2 / 64 · 已归档 0')
+                        review();card.get_by_text('旧版本归档与在线容量',exact=True).click()
+                        card.get_by_role('button',name='核对并归档版本',exact=True).click()
+                        expect(pane).to_contain_text('在线版本 1 / 64 · 已归档 1',timeout=15000)
+                        review();card.get_by_text('旧版本归档与在线容量',exact=True).click()
+                        card.get_by_role('button',name='载回为退役版本',exact=True).click()
+                        expect(pane).to_contain_text('在线版本 2 / 64 · 已归档 0',timeout=15000)
+                        assert tools.package(ident)[1]=='RETIRED' and tools.selected(pid,'sum-tool')['active']==active
+                        page.screenshot(path=str(args.output/'version-storage.png'))
+                        report['checks'].append('unreferenced retired package fixture -> reviewed real archive and load UI; slot counts update, load remains retired and stable unchanged')
                     page.set_viewport_size({'width':390,'height':844})
                     assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
                     page.screenshot(path=str(args.output/'narrow.png'))

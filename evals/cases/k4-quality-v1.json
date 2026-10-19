@@ -1,0 +1,34 @@
+{
+  "id": "k4-quality-v1",
+  "frozen_on": "2026-10-20",
+  "scope": "Three practical pure-transform tasks, explicit known contracts and independent challenges; seeded naive baselines, not a general semantic benchmark",
+  "tasks": [
+    {
+      "id": "binary-units", "name": "二进制容量换算",
+      "prompt": "修复容量换算：输入对象 value 为非负整数，unit 为 B、KiB 或 MiB。B=1 字节，KiB=1024 字节，MiB=1048576 字节，返回字节数十进制字符串，无空白。不支持其他单位、浮点数或负数，不读写文件、不联网、不装依赖。",
+      "baseline": "def transform(data):\n    factors = {'B': 1, 'KiB': 1000, 'MiB': 1048576}\n    return str(data['value'] * factors[data['unit']])\n",
+      "public": [{"input":{"value":3,"unit":"B"},"expected":"3"},{"input":{"value":1,"unit":"MiB"},"expected":"1048576"}],
+      "heldout": [{"input":{"value":7,"unit":"B"},"expected":"7"},{"input":{"value":2,"unit":"MiB"},"expected":"2097152"}],
+      "baseline_trials": [{"input":{"value":11,"unit":"B"},"expected":"11"},{"input":{"value":3,"unit":"MiB"},"expected":"3145728"}],
+      "challenges": [{"input":{"value":1,"unit":"KiB"},"expected":"1024"},{"input":{"value":3,"unit":"KiB"},"expected":"3072"}]
+    },
+    {
+      "id": "stable-lines", "name": "文本行整理",
+      "prompt": "修复文本行整理：输入字符串列表，逐项去掉首尾空白，忽略空行，按首次出现顺序去重，以换行符连接返回，不加末尾换行。支持中文，禁止排序。不支持嵌套对象或非字符串元素，不读写文件、不联网、不装依赖。",
+      "baseline": "def transform(data):\n    values = [s.strip() for s in data if s.strip()]\n    return '\\n'.join(sorted(set(values)))\n",
+      "public": [{"input":["apple","apple"],"expected":"apple"},{"input":[],"expected":""}],
+      "heldout": [{"input":["梨","梨"],"expected":"梨"},{"input":[" a ","a"],"expected":"a"}],
+      "baseline_trials": [{"input":[" x ","x"],"expected":"x"},{"input":["猫"," 猫 ",""],"expected":"猫"}],
+      "challenges": [{"input":["甲","乙","甲"],"expected":"甲\n乙"},{"input":["z","a","z"],"expected":"z\na"}]
+    },
+    {
+      "id": "stable-groups", "name": "分组数值统计",
+      "prompt": "修复分组统计：输入对象列表，每项 group 为非空英文字母字符串，value 为整数。按 group 汇总 value，按分组第一次出现顺序输出，每行 group:total，以换行符连接，不加末尾换行；空列表返回空字符串。禁止按组名排序。不支持缺字段和其他类型，不读写文件、不联网、不装依赖。",
+      "baseline": "def transform(data):\n    totals = {}\n    for item in data:\n        group = item['group']\n        totals[group] = totals.get(group, 0) + item['value']\n    return '\\n'.join(group + ':' + str(totals[group]) for group in sorted(totals))\n",
+      "public": [{"input":[],"expected":""},{"input":[{"group":"a","value":2},{"group":"a","value":3}],"expected":"a:5"}],
+      "heldout": [{"input":[{"group":"b","value":4},{"group":"b","value":-1}],"expected":"b:3"},{"input":[{"group":"x","value":0}],"expected":"x:0"}],
+      "baseline_trials": [{"input":[{"group":"c","value":1}],"expected":"c:1"},{"input":[{"group":"d","value":5}],"expected":"d:5"}],
+      "challenges": [{"input":[{"group":"z","value":3},{"group":"a","value":4},{"group":"z","value":2}],"expected":"z:5\na:4"},{"input":[{"group":"y","value":2},{"group":"b","value":1}],"expected":"y:2\nb:1"}]
+    }
+  ]
+}

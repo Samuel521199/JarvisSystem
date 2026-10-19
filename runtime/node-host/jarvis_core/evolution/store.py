@@ -50,7 +50,7 @@ class EvolutionStore:
         self.path = self.root / 'evolution.db'
         with self.connection() as db:
             version = db.execute('PRAGMA user_version').fetchone()[0]
-            if version not in (0, 1, 2, 3, 4):
+            if version not in (0, 1, 2, 3, 4, 5):
                 raise policy.CoreError('evolution_schema_invalid', '进化账本版本不兼容。')
             db.executescript('''
                 CREATE TABLE IF NOT EXISTS settings(singleton INTEGER PRIMARY KEY,document TEXT NOT NULL);
@@ -67,7 +67,7 @@ class EvolutionStore:
             db.execute('INSERT OR IGNORE INTO selection VALUES(1,NULL,NULL,0)')
             settings = migrate(json.loads(db.execute('SELECT document FROM settings WHERE singleton=1').fetchone()[0]))
             db.execute('UPDATE settings SET document=? WHERE singleton=1', (policy.canonical_json(settings),))
-            db.execute('PRAGMA user_version=4')
+            db.execute('PRAGMA user_version=5')
 
     @contextmanager
     def connection(self):
@@ -122,9 +122,11 @@ class EvolutionStore:
             if payload.get('action') in {'project-tool','project-tool-plan','tool-contract'}:
                 # Leave room for the immutable package, escaped output, recovery
                 # receipt and SQLite page growth; never fill the 32 MiB ledger.
-                used = db.execute('PRAGMA page_count').fetchone()[0] * db.execute('PRAGMA page_size').fetchone()[0]
+                used = (db.execute('PRAGMA page_count').fetchone()[0]-db.execute('PRAGMA freelist_count').fetchone()[0]) * db.execute('PRAGMA page_size').fetchone()[0]
                 reserve = 6 * len(policy.canonical_json(payload).encode()) + 2 * 1024 * 1024
-                if used + reserve > 28 * 1024 * 1024:
+                archiving=payload.get('action')=='project-tool' and payload.get('submission',{}).get('operation')=='archive-version'
+                if archiving:reserve=256*1024  # Small immutable digest request; preserve maintenance headroom.
+                if used + reserve > (30 if archiving else 28) * 1024 * 1024:
                     raise policy.CoreError('evolution_quota', '工具账本空间不足；已保留恢复空间，请先整理版本与证据。')
             value = {'id': uuid.uuid4().hex, 'request': payload, 'status': 'PROPOSED' if proposal is not None else 'QUEUED', 'created_at': now(),
                      'events': [], 'attempts': [], 'result': None, 'error': None}

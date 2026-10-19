@@ -10,7 +10,7 @@ from .. import policy
 from .catalog import encoded, fail, runtime_binding, FAULTS
 from .store import now
 
-OPERATIONS = {'publish', 'trial', 'promote', 'pause', 'resume', 'discard', 'retire', 'restore', 'retire-version'}
+OPERATIONS = {'publish', 'trial', 'promote', 'pause', 'resume', 'discard', 'retire', 'restore', 'retire-version','archive-version','load-version'}
 
 
 def checked_note(value):
@@ -32,6 +32,7 @@ class ToolLifecycle:
         extra = {'publish': {'reviewed', 'review_note', 'minimum_verified', 'maximum_trials', 'maximum_seconds'},
                  'trial': {'expected', 'useful', 'benefit_note'},
                  'retire-version': {'version', 'reviewed', 'review_note'}}
+        if op in {'archive-version','load-version'}:extra[op]={'version','reviewed','review_note'}
         common = {'operation', 'request_id', 'tool_id', 'generation', 'lifecycle_revision'}
         if op == 'publish': common |= {'task_id', 'name', 'when_to_use', 'when_not_to_use'}
         if op == 'trial': common |= {'input'}
@@ -52,7 +53,7 @@ class ToolLifecycle:
             for key, lo, hi in (('minimum_verified', 2, 10), ('maximum_trials', 2, 30), ('maximum_seconds', 1, 30)):
                 if type(payload[key]) is not int or not lo <= payload[key] <= hi: fail('灰度门槛超出限定范围。')
             if payload['maximum_trials'] < payload['minimum_verified']: fail('试用上限不能小于核验数量。')
-        if op == 'retire-version' and (not isinstance(payload['version'], str) or len(payload['version']) != 64
+        if op in {'retire-version','archive-version','load-version'} and (not isinstance(payload['version'], str) or len(payload['version']) != 64
                                       or any(c not in '0123456789abcdef' for c in payload['version'])):
             fail('旧版本标识无效。')
 
@@ -65,7 +66,7 @@ class ToolLifecycle:
         if current != req['lifecycle']: fail('灰度或退役状态已变化，请刷新原记录。', 'evolution_conflict')
         return current
 
-    def write(self, job, value, *, quarantine=None, retire_version=None, confirm=False, selection=None):
+    def write(self, job, value, *, quarantine=None, retire_version=None, confirm=False, selection=None, version_update=None):
         self.tools.checkpoint(job)
         req = job['request']; base = req['base']
         with self.core.effect_guard(), self.store.connection() as db:
@@ -80,6 +81,10 @@ class ToolLifecycle:
                 if selected['generation'] != expected['generation'] or selected['active'] != expected['version']:
                     fail('启用观察基线变化。', 'evolution_conflict')
             elif selected != base: fail('工具代际冲突。', 'evolution_conflict')
+            if version_update:
+                ident,old_state,old_raw,target,new_raw=version_update
+                if db.execute('UPDATE tool_versions SET state=?,document=? WHERE id=? AND state=? AND document=?',
+                              (target,new_raw,ident,old_state,old_raw)).rowcount!=1:fail('版本存储修订冲突。','evolution_conflict')
             if row is None and not db.execute('SELECT 1 FROM project_tools WHERE project_id=? AND tool_id=?',(base['project_id'],base['tool_id'])).fetchone():
                 if db.execute('SELECT COUNT(*) FROM project_tools').fetchone()[0]>=32: fail('工具目录达到上限。')
                 db.execute('INSERT INTO project_tools VALUES(?,?,?,?,?)',(base['project_id'],base['tool_id'],base['active'],base['previous'],base['generation']))
@@ -132,17 +137,21 @@ class ToolLifecycle:
     def execute(self, job):
         req = job['request']; p = req['submission']; base = req['base']; op = p['operation']
         value = self.fresh(job); check = lambda: self.fresh(job)
+        if op in {'archive-version','load-version'}:
+            from .tool_archive import ToolArchive
+            return ToolArchive(self).execute(job,value)
         if op == 'publish':
             if value['phase'] in {'CANARY', 'PAUSED', 'RETIRED'}: fail('请先处理原灰度或退役记录，不能覆盖在途候选。')
             doc = req['package']; proof = self.tools.evaluate(doc, check)
             ident = policy.digest(policy.canonical_json(doc).encode())[7:]
             if ident == base['active']: fail('候选已经是稳定版本，无须再次准入。')
             with self.store.connection() as db:
-                if not db.execute('SELECT 1 FROM tool_versions WHERE id=?',(ident,)).fetchone() and db.execute('SELECT COUNT(*) FROM tool_versions').fetchone()[0] >= 64: fail('版本保留达到上限；不自动删除恢复证据。')
+                if not db.execute('SELECT 1 FROM tool_versions WHERE id=?',(ident,)).fetchone() and db.execute("SELECT COUNT(*) FROM tool_versions WHERE state!='ARCHIVED'").fetchone()[0] >= 64: fail('在线版本保留达到上限；请审阅退役归档。')
                 db.execute('INSERT OR IGNORE INTO tool_versions VALUES(?,?,?)', (ident, 'VERIFIED', policy.canonical_json(doc)))
                 if db.execute('SELECT state FROM tool_versions WHERE id=?',(ident,)).fetchone()[0] != 'VERIFIED': fail('该版本已隔离或退役。')
             self.write(job, {'phase':'CANARY','candidate':ident,'admission_id':job['id'], 'runtime_binding':req['runtime_binding'],
                              'baseline':base,'limits':{k:p[k] for k in ('minimum_verified','maximum_trials','maximum_seconds')},
+                             'contract_quality':req['contract_quality'],
                              'review':{'note':p['review_note'],'source':'explicit_local_review','semantic_truth_verified':False}})
             return {'version':ident,'staged':True,'stable_unchanged':True,'validation':proof,'model_calls':0}
         if op == 'trial':

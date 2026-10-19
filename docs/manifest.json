@@ -313,7 +313,8 @@
         "project-tool-runtime",
         "project-tool-intents",
         "project-tool-contract-drafts",
-        "project-tool-lifecycle"
+        "project-tool-lifecycle",
+        "project-tool-quality-storage"
       ],
       "status": "proposed",
       "reader_summary": "怎样自编工具、改进模块，并验证和回退？"
@@ -522,7 +523,8 @@
         "k4-tool-intent-evidence",
         "k4-contract-evidence",
         "assistant-game-evidence",
-        "k4-lifecycle-evidence"
+        "k4-lifecycle-evidence",
+        "k4-quality-storage-evidence"
       ],
       "status": "proposed",
       "reader_summary": "哪些能力测过，证据在哪里，下一阶段怎样验收？"
@@ -3082,9 +3084,9 @@
     }
   ],
   "implementation": {
-    "version": "0.1.75",
-    "scope": "K3 closed; K4 adds explicitly reviewed staged admission, bounded real-input canaries, paired benefit evidence and reversible retirement. Arbitrary business semantic truth and full K4 remain open.",
-    "evidence": "evals/reports/k4-lifecycle-2026-10-20.json",
+    "version": "0.1.76",
+    "scope": "K3 closed; K4 adds structural contract observations, frozen three-task comparisons and reviewed archive/load of retired unreferenced tool versions. Semantic truth, receipt/directory reclamation and full K4 remain open.",
+    "evidence": "evals/reports/k4-quality-storage-2026-10-20.json",
     "overall_design_status": "proposed",
     "complete_k1_gate": false,
     "complete_k2_gate": false,
@@ -3349,7 +3351,8 @@
       "evals/reports/k4-tool-intents-2026-10-19.json",
       "evals/reports/k4-contracts-2026-10-19.json",
       "evals/reports/assistant-game-2026-10-20.json",
-      "evals/reports/k4-lifecycle-2026-10-20.json"
+      "evals/reports/k4-lifecycle-2026-10-20.json",
+      "evals/reports/k4-quality-storage-2026-10-20.json"
     ],
     "complete_k4_gate": false
   }

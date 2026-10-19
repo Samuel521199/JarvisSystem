@@ -48,7 +48,7 @@ def merge_cases(old, new):
 
 def runtime_binding():
     from ..skill_tasks import SkillTaskService
-    paths=('catalog','manager','store','runner','tool_intent','tool_contract','provider','demand','lifecycle')
+    paths=('catalog','manager','store','runner','tool_intent','tool_contract','provider','demand','lifecycle','quality','tool_archive')
     return policy.digest(policy.canonical_json({'coding':SkillTaskService.binding(),
         'tools':{p:policy.digest((policy.REPOSITORY_ROOT/'runtime/node-host/jarvis_core/evolution'/f'{p}.py').read_bytes()) for p in paths}}).encode())
 
@@ -71,6 +71,7 @@ class ProjectTools:
         with self.store.connection() as db:
             row=db.execute('SELECT document,state FROM tool_versions WHERE id=?',(ident,)).fetchone()
         if row is None:fail('工具版本未登记。','tool_package_changed')
+        if row['state']=='ARCHIVED':fail('版本已归档；需审阅载回，载回后仍为退役。','tool_version_archived')
         try:doc=json.loads(row['document'])
         except (ValueError,TypeError):fail('工具版本记录损坏。','tool_package_changed')
         if policy.digest(policy.canonical_json(doc).encode())[7:]!=ident:
@@ -109,7 +110,8 @@ class ProjectTools:
                           'usage':{'calls':len(uses),'succeeded':sum(j['status']=='SUCCEEDED' for j in uses),
                                    'verified_results':sum(bool((j.get('result') or {}).get('result_verified')) and j['status']=='SUCCEEDED' for j in uses),
                                    'model_calls':0}})
-        return {'tools':tools,'jobs':[j for j in jobs if j['request']['scope']==scope][:20],
+        from .tool_archive import capacity
+        return {'tools':tools,'capacity':capacity(self.store),'jobs':[j for j in jobs if j['request']['scope']==scope][:20],
                 'scope':'project','busy':self.manager.busy,'limits':{'tools':32,'versions':64,'cases':64,'input_bytes':8192},
                 'note':'运行成功与结果正确分别记录；只有提供独立预期并一致才记为结果已验证。'}
 
@@ -137,12 +139,15 @@ class ProjectTools:
         if base['generation']!=payload['generation']:fail('工具版本已变化，请刷新后重试。','evolution_conflict')
         life=lifecycle.state(scope['project_id'],payload['tool_id'])
         if op in OPERATIONS and life['revision']!=payload['lifecycle_revision']:fail('灰度或退役状态已变化，请刷新。','evolution_conflict')
-        if life['phase']=='RETIRED' and op not in {'restore','retire-version'}:fail('此能力已经退役；重新准入后才可使用。')
+        if life['phase']=='RETIRED' and op not in {'restore','retire-version','archive-version','load-version'}:fail('此能力已经退役；重新准入后才可使用。')
         if op=='rollback' and life['phase'] in {'CANARY','PAUSED'} and base['previous']==life.get('candidate'):
             fail('此版本正在重新准入，不能通过旧恢复入口绕过灰度。')
         if op=='trial' and life['phase']=='CANARY' and lifecycle.assessment(scope['project_id'],payload['tool_id'],life)['trials']>=life['limits']['maximum_trials']:
             fail('灰度试用次数已用完；请核对原记录并决定启用或放弃。')
         frozen={'lifecycle':life,'action':'project-tool','request_id':request,'scope':scope,'submission':copy.deepcopy(payload),'base':base,'runtime_binding':runtime_binding()}
+        if op in {'archive-version','load-version'}:
+            from .tool_archive import ToolArchive
+            frozen['version_storage']=ToolArchive(lifecycle).binding(payload['version'],base)
         if op=='publish':
             metadata={k:payload[k] for k in ('name','when_to_use','when_not_to_use')}
             if any(not isinstance(v,str) or not v.strip() or len(v.encode())>512 or '\0' in v for v in metadata.values()):fail('请填写名称、适用和不适用说明（每项最多 512 字节）。')
@@ -155,6 +160,8 @@ class ProjectTools:
             build=coding.get('build',{});bytes_from(build)
             if build['manifest'].get('recipe') not in RECIPES:fail('首期工具库只支持可执行 Python 配方；源码包和动画场景保留原交付方式。')
             if not args.get('heldout_cases'):fail('发布需要独立留出验收。')
+            from .quality import inspect_contract,require_consistent
+            quality=inspect_contract(args['cases'],args['heldout_cases']);require_consistent(quality)
             prior=self.package(base['active'],base)[0]['cases'] if base['active'] else self.package(base['previous'],base)[0]['cases'] if base['previous'] else []
             retained=base['active'] or base['previous']
             with self.store.connection() as db:
@@ -166,6 +173,7 @@ class ProjectTools:
             frozen['package']={'build':build,'cases':merge_cases(prior,args['cases']+args['heldout_cases']),
                                'metadata':metadata,'origin':{'task_id':payload['task_id'],'artifact_digest':record['artifact']['digest']},
                                'project_id':scope['project_id'],'tool_id':payload['tool_id']}
+            frozen['contract_quality']=inspect_contract(args['cases'],args['heldout_cases'],prior)
         elif op=='run':
             encoded(payload['input'])
             if 'expected' in payload and (not isinstance(payload['expected'],str) or len(payload['expected'].encode())>16384):fail('独立预期必须是最多 16 KiB 的文本。')

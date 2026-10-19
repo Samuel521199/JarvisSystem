@@ -126,7 +126,7 @@ class LifecycleTests(ProjectToolTests):
         self.assertEqual(self.state()['phase'],'LEGACY')
         self.assertEqual(self.tools.selected(self.project['id'],'sum-tool')['active'],staged['result']['version'])
         self.assertEqual(self.tools.submit(self.cid,old)['id'],staged['id'])
-        with self.evolution.store.connection() as db:self.assertEqual(db.execute('PRAGMA user_version').fetchone()[0],4)
+        with self.evolution.store.connection() as db:self.assertEqual(db.execute('PRAGMA user_version').fetchone()[0],5)
         old['request_id']=uuid.uuid4().hex
         with self.assertRaises(policy.CoreError):self.tools.submit(self.cid,old)
 
