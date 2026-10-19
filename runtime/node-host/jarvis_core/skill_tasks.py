@@ -34,7 +34,7 @@ SOURCE_PATHS += ('config/coding-runtime.json','config/codex-proposal-model.json'
 SOURCE_PATHS += ('runtime/node-host/jarvis_core/coding_demand.py','runtime/node-host/jarvis_core/coding_package.py','runtime/node-host/jarvis_core/coding_files.py')
 SOURCE_PATHS += ('runtime/node-host/jarvis_core/coding_dependencies.py', 'runtime/node-host/jarvis_core/coding_dependency_launcher.py')
 SOURCE_PATHS += ('runtime/node-host/jarvis_core/coding_js.py','runtime/node-host/jarvis_core/coding_scene.py','adapters/skills/anatomy/candidate-viewer.html')
-SOURCE_PATHS += ('runtime/node-host/jarvis_core/coding_secrets.py',)
+SOURCE_PATHS += ('runtime/node-host/jarvis_core/coding_secrets.py','runtime/node-host/jarvis_core/web_game.py','adapters/skills/games/tank-defense.html')
 SOURCE_PATHS += tuple('runtime/node-host/jarvis_core/'+p+'.py' for p in ('coding_task','coding_bundle','coding_apply','coding_codex','coding_settings','coding_build'))
 SOURCE_PATHS += ('runtime/node-host/jarvis_core/evolution/provider.py','runtime/node-host/jarvis_core/dialogue_worker.py',
                  'adapters/models/provider-native/jarvis_models/gateway.py','runtime/node-host/jarvis_core/skill_validation.py')
@@ -114,6 +114,13 @@ class SkillTaskService:
             workspace._project(db, args['project_id'])
         if selected in SOURCE_REQUIRED and not args['paths']:
             raise policy.CoreError('skill_source_required', '编程报告需要显式选择至少一个项目源码文件。')
+        if selected == 'jarvis.tank-game':
+            if args['paths'] or args.get('coding') or args['model']=='auto' or '::' not in args['model']:
+                raise policy.CoreError('invalid_skill_request', '坦克游戏使用明确模型和固定引擎，不读取源码或使用编程配方。')
+            if args.get('output_path') and not args['output_path'].endswith('.html'):
+                raise policy.CoreError('invalid_skill_request', '游戏产物使用 .html 文件。')
+            from .evolution.provider import ModelCodingProvider
+            ModelCodingProvider(self.core,self.config_path).configuration(args['model'])
         if selected == 'anatomy.explainer' and args['paths']:
             raise policy.CoreError('invalid_skill_request', '固定科普模板不读取项目源码。')
         if selected in CORE_GUIDES:
@@ -250,6 +257,10 @@ class SkillTaskService:
                     from .coding_workflow import execute
                     report = execute(self,args,checkpoint,action_id,task_id)
                     extension, content = '.txt', report['text']
+                elif skill == 'jarvis.tank-game':
+                    from .web_game import generate
+                    report=generate(self,args,checkpoint,task_id)
+                    extension,content='.html',report['html']
                 elif skill == 'anatomy.explainer':
                     from .skill_renderer import render, verify_browser
                     from .network_policy import NetworkPolicy
@@ -296,7 +307,7 @@ class SkillTaskService:
                 output_id = action_id[4:]
                 workspace = WorkspaceService(ScopedCore(self.core, checkpoint))
                 target = workspace.prepare({'project_id': args['project_id'], 'request_id': output_id,
-                                            'path': args.get('output_path') or '技能产物-' + task_id[5:17] + extension})
+                                            'path': args.get('output_path') or ('坦克游戏-' if skill=='jarvis.tank-game' else '技能产物-') + task_id[5:17] + extension})
                 checkpoint()
                 attempted_effect = True
                 output = workspace.save(output_id, {'content': content})

@@ -61,7 +61,7 @@ __JARVIS_READOUT_STYLE__
 
 <span class="app-version" aria-label="运行版本">v__JARVIS_VERSION__</span></main>
 </div>
-<dialog id="project-dialog" class="workspace-dialog" aria-labelledby="project-heading"><form id="project-form"><h2 id="project-heading">打开文件夹或工程</h2><p class="workspace-note">打开文件夹即可浏览文件树、查看和编辑文本。也可输入 .jarvis-workspace 工程文件的完整路径。读取目录与文件不会自动上传给模型。</p><button id="project-pick" type="button" class="project-secondary">选择文件夹…</button><label for="folder-path">或输入文件夹 / 工程文件完整路径</label><input id="folder-path" type="text" maxlength="4096" placeholder="例如 H:\我的项目" required autocomplete="off"><p id="project-error" class="task-error" role="alert"></p><div class="dialog-actions"><button type="button" data-close-dialog="project-dialog">取消</button><button id="project-open" class="primary" type="submit">打开项目</button></div></form></dialog>
+<dialog id="project-dialog" class="workspace-dialog" aria-labelledby="project-heading"><form id="project-form"><h2 id="project-heading">打开文件夹或工程</h2><p class="workspace-note">打开文件夹即可浏览文件树、查看和编辑文本。也可输入 .jarvis-workspace 工程文件的完整路径。要新建项目，请输入新文件夹完整路径并点击“创建并打开”，上级目录须已存在。网页和桌面均可通过本机后端创建；目录和文件不会自动上传给模型。</p><button id="project-pick" type="button" class="project-secondary">选择文件夹…</button><label for="folder-path">或输入文件夹 / 工程文件完整路径</label><input id="folder-path" type="text" maxlength="4096" placeholder="例如 H:\我的项目" required autocomplete="off"><p id="project-error" class="task-error" role="alert"></p><div class="dialog-actions"><button type="button" data-close-dialog="project-dialog">取消</button><button id="project-create" type="button">创建并打开</button><button id="project-open" class="primary" type="submit">打开项目</button></div></form></dialog>
 <dialog id="save-dialog" class="workspace-dialog" aria-labelledby="save-heading"><form id="save-form"><h2 id="save-heading">导出回答为文件</h2><p id="save-project" class="workspace-note"></p><label for="save-path">文件名或输出路径</label><input id="save-path" type="text" maxlength="4096" placeholder="留空使用默认文件名" autocomplete="off"><p id="save-note" class="workspace-note"></p><p id="save-error" class="task-error" role="alert"></p><div class="dialog-actions"><button type="button" data-close-dialog="save-dialog">取消</button><button id="save-new" type="button" hidden>改为另存…</button><button id="save-confirm" class="primary" type="submit">保存到指定位置</button></div></form></dialog>
 <dialog id="exports-dialog" class="workspace-dialog" aria-labelledby="exports-heading"><h2 id="exports-heading">文件保存记录</h2><p class="workspace-note">当前项目的最近记录。结果待核对时，请检查实际文件；不会自动重复写入。</p><div id="export-list" class="export-list"></div><div class="dialog-actions"><button type="button" data-close-dialog="exports-dialog">关闭</button></div></dialog>
 <dialog id="growth-dialog" class="workspace-dialog growth-dialog" aria-labelledby="growth-heading"><div class="growth-heading"><h2 id="growth-heading">需求与成长</h2><button id="growth-close" type="button">关闭</button></div><p class="workspace-note">先复用已有能力，缺少时再补齐。范围与验收条件在开始前明确，后台执行期间可以继续聊天。</p><button id="growth-refresh" type="button">刷新进度</button><p id="growth-error" class="task-error" role="status"></p><div id="growth-list"></div></dialog>
@@ -124,6 +124,7 @@ const encoder=new TextEncoder();
 const modelKey=item=>item.provider+"/"+item.model;
 function chosenModel(){return modelCatalog.find(item=>modelKey(item)===selectedKey);}
 function notify(text){$("toast").textContent=text;$("toast").hidden=!text;}
+function localCreationCommand(value=$("message").value.trim()){return Boolean(window.Creation?.classify(value)?.path);}
 function localToolCommand(value=$("message").value.trim()){return Boolean(window.ToolIntents?.command(value));}
 function localGrowthCommand(value=$("message").value.trim()){return /^\/(?:改进|成长进度)(?:\s|$)/u.test(value);}
 function localCalculationCommand(value=$("message").value.trim()){return /^\/(?:计算|calc)(?:\s|$)/iu.test(value);}
@@ -133,7 +134,7 @@ function setControls(){
  window.JarvisBrand?.setState(coreReady?(busy||assistantWorking?"thinking":"idle"):"offline");
  if(coreReady)$("connection-label").textContent=busy?"正在回复当前会话":assistantWorking?"助手正在运行后台任务":"助手待命中";
  $("connection").setAttribute("aria-label",$("connection-label").textContent);$("connection").classList.toggle("working",busy||assistantWorking);
- const unavailable=busy||refreshing||!coreReady||(!modelCatalog.length&&!localCalculationCommand()&&!localPersonalCommand()&&!localGrowthCommand()&&!localToolCommand()&&!localDocumentationCommand())||Boolean(window.Workspace?.isBusy());
+ const unavailable=busy||refreshing||!coreReady||(!modelCatalog.length&&!localCalculationCommand()&&!localPersonalCommand()&&!localGrowthCommand()&&!localToolCommand()&&!localCreationCommand()&&!localDocumentationCommand())||Boolean(window.Workspace?.isBusy());
  const running=Boolean(busy&&activeRun)&&!window.Dialogue,saving=activeRun?.phase==="saving"||Boolean(activeRun?.personal);
  $("send").disabled=window.Dialogue&&busy&&activeRun?!coreReady:running?saving:unavailable;$("send").type=running?"button":"submit";
  const label=running?(saving?(activeRun?.personal?"正在处理个人指令":"正在保存文件"):"停止生成"):"发送消息";
@@ -186,9 +187,10 @@ async function send(event,queuedText=null,onStarted=null){
   }
   return;
  }
- const inputText=queuedText===null?$("message").value.trim():queuedText;if(busy||refreshing||!coreReady||(!modelCatalog.length&&!localCalculationCommand(inputText)&&!localPersonalCommand(inputText)&&!localGrowthCommand(inputText)&&!localToolCommand(inputText)&&!(queuedText===null&&localDocumentationCommand(inputText)))||window.Workspace?.isBusy())return;
+ const inputText=queuedText===null?$("message").value.trim():queuedText;if(busy||refreshing||!coreReady||(!modelCatalog.length&&!localCalculationCommand(inputText)&&!localPersonalCommand(inputText)&&!localGrowthCommand(inputText)&&!localToolCommand(inputText)&&!localCreationCommand(inputText)&&!(queuedText===null&&localDocumentationCommand(inputText)))||window.Workspace?.isBusy())return;
  if(localGrowthCommand(inputText)){if(window.ConversationGrowth)await window.ConversationGrowth.handleSubmit();else notify("成长界面暂不可用；请检查模块后重试。");return;}
  if(queuedText===null&&!localCalculationCommand(inputText)&&!localPersonalCommand(inputText)){
+  if(await window.Creation?.handleSubmit())return;
   if(await window.ToolIntents?.handleSubmit())return;
   if(await window.SkillWorkbench?.handleSubmit())return;
   if(window.ConversationTasks?.handleSubmit())return;
@@ -225,7 +227,7 @@ async function send(event,queuedText=null,onStarted=null){
    personalSource={conversation_id:Workspace.currentConversation().id,message_index:index};
   }
   run.ticker=setInterval(()=>{$("activity").textContent="正在等待回复 · "+Math.floor((Date.now()-started)/1000)+" 秒";},1000);
-  run.timer=setTimeout(()=>run.controller.abort(),125000);run.submitted=true;run.phase="waiting";
+  run.timer=setTimeout(()=>run.controller.abort(),/^(gemini-4-|gpt-6-astra)/.test(model||'')?175000:125000);run.submitted=true;run.phase="waiting";
   const chatPayload={message:outgoing,provider,model,reasoning,personal_context:{temporary:Boolean(window.Workspace?.memoryContext?.().temporary),...(personalSource?{source:personalSource}:{})},continuity_context:window.Continuity?.context()||{enabled:false,ids:[]},history_continuity:historyContinuity,skill_context:directCalculation?{enabled:false}:window.SkillWorkbench?.context()||{enabled:false},history:requestHistory,history_knowledge:historyKnowledge,knowledge_context:window.ProjectKnowledge?.context()||{enabled:false,project_id:null},history_memory:historyMemory,memory_context:window.MemoryPanel?.context()||{enabled:false,project_id:null},...(contextNote?{context_note:contextNote}:{}),...(attachments.length?{attachments}:{})};
   const response=window.Dialogue?await Dialogue.request(run,chatPayload):await fetch("/api/chat",{method:"POST",credentials:"omit",cache:"no-store",headers:{"Content-Type":"application/json","X-Jarvis-Nonce":NONCE,"X-Jarvis-Request":run.id},body:JSON.stringify(chatPayload),signal:run.controller.signal});
   const result=await response.json();clearInterval(run.ticker);clearTimeout(run.timer);if(run.cancelled)return;
@@ -300,6 +302,7 @@ bindSuggestions();refresh();
 <script nonce="__JARVIS_NONCE__" src="/conversation_tasks.js"></script>
 <script nonce="__JARVIS_NONCE__" src="/growth.js"></script>
 <script nonce="__JARVIS_NONCE__" src="/skills.js"></script>
+<script nonce="__JARVIS_NONCE__" src="/creation.js"></script>
 <script nonce="__JARVIS_NONCE__" src="/project-tools.js"></script>
 <script nonce="__JARVIS_NONCE__" src="/tool-intents.js"></script>
 <script nonce="__JARVIS_NONCE__" src="/tool-contracts.js"></script>

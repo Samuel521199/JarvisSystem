@@ -22,7 +22,8 @@
   - [12.3.3 MCP 的使用条件与技能配合](#mcp-selection-policy)
   - [12.3.4 完整技能与组件归属](#skill-applicability-catalog)
   - [12.3.5 编程副本、独立检查与多文件交付（0.1.70）](#bounded-coding-workflow)
-  - [12.3.6 REA 软件解析的使用规则（含可选中文解释）](#rea-skill-policy)
+  - [12.3.6 坦克小游戏制作：模型关卡与固定引擎（0.1.74）](#tank-game-runtime)
+  - [12.3.7 REA 软件解析的使用规则（含可选中文解释）](#rea-skill-policy)
 - [12.4 多 Agent 组织](#interaction-tasks-4)
 - [12.5 冲突与调度](#interaction-tasks-5)
 - [12.6 核心端到端流程](#end-to-end-flows)
@@ -238,6 +239,19 @@ Worker 的暂存文件不直接成为正式产物。由产物入口核对路径�
 6. **应用与恢复。** 原文件直到明确点击应用前保持不变。先核对整组根路径和摘要，再用已有文件接口逐一 CAS 写入；多文件并非文件系统级原子事务。`coding_batches` 先持久记录本次原/目标绑定，部分写入进入 REVIEW_REQUIRED。重试先观察每个文件，匹配本次已写内容的不重复写入；可以继续或恢复。任何外部编辑都拒绝覆盖。新文件的原摘要为 null；恢复仅删除仍与候选摘要一致的新文件，保留空目录，不递归清理用户内容。单文件旧回执继续兼容。
 
 Python 旧配方同目录导入、包配方明确包内导入及既有 csv/io 可用；JSON 查询配方另开放锁定的 jmespath.search 与 json.dumps。不向宿主或原项目安装依赖，也不运行任意终端或自动提交 Git、发布能力。共享取消、停止、资源准入、源码绑定和 UNKNOWN 语义继续有效。独立案例可以发现公开示例过拟合，仍不等于任意输入正确或全面安全证明。手动运行下载的 PYZ 使用当前 Python 账户权限，下载包自身不建立 OS 沙箱。[离线重建工具](../tools/coding_build.py)可核对原摘要、重建新副本并用本机案例做 LPAC 复验，不访问模型或网络，不覆盖已有输出。相关实测见[构建与修复证据](delivery-validation.md#k3-build-evidence)。预算和接口见[契约](contracts.md#bounded-coding-contract)，可信边界见[执行隔离](security-sovereignty.md#bounded-coding-boundary)，外部登录及账单见[Codex 适配](evolution-release.md#external-coding-executor)。
+
+<a id="tank-game-runtime"></a>
+### 坦克小游戏制作：模型关卡与固定引擎（0.1.74）
+
+**implemented / verified，限定类型。** `jarvis.tank-game` 是独立原生技能，默认手动，复用原技能任务、会话回执、FIFO、取消、交付和沙箱预览。它服务于主人“让助手实际做出可用成果”的需求；不建立第二条开发阶段，也不等同于 K4 全部完成。
+
+流程是：**核对项目/需求/明确模型 → 一次模型设计 → 有界 JSON 校验 → 本机固定引擎生成 HTML → 实际浏览器验收 → 独占保存 → 试玩/下载**。自然语言入口先准备任务，核对后发送；策略禁用仍会拒绝。游戏模块只发送本轮要求和固定关卡契约，不读取项目源码、聊天历史或个人记忆。未知、不完整、格式错误或浏览器检查失败都不自动重发，也不交付成功产物。
+
+`web_game.py` 管理设计数据、渲染和验收，`adapters/skills/games/tank-defense.html` 是唯一引擎模板；未来增加其他游戏应分别提供契约、执行边界和真实玩法检查。模型生成标题、配色、波次、速度和障碍等关卡数据，不能提供脚本、Shell、依赖或资源下载。关卡字段定义见[技能任务契约](contracts.md#tank-game-contract)，这里不复制完整格式。
+
+当前游戏包含移动、瞄准、射击、基地生命、敌军波次、胜负、暂停/重开和触屏按钮。画面使用 2D Canvas 阴影坦克，页面无外部资源，保存后可离线打开；不是 Unity/Unreal、高画质 3D、任意类型游戏生成或自动安装。引擎代码由项目维护，模型设计关卡，不把它描述为模型从零编写整款游戏。
+
+交付前实际使用现有 Edge/Playwright 检查控制和胜负路径，阻断所有外部请求，浏览器 Job 受 512 MiB 内存、16 进程和 30 秒 CPU 限额约束；这不是整机内存测量。验收完成回收浏览器，不新增常驻服务或依赖。HTML 预览继续绑定会话、任务、真实交付文件摘要和过期令牌，使用原 sandbox/CSP。行为证据见[0.1.74 验证](delivery-validation.md#assistant-game-evidence)。
 
 <a id="rea-skill-policy"></a>
 ### REA 软件解析的使用规则（含可选中文解释）

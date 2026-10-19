@@ -59,7 +59,7 @@ function render(){
    if(detail.report&&detail.action_status==='CONFIRMED'){
     if(detail.report.kind==='jarvis.skill-report'){
      text.textContent='技能已完成：'+detail.report.skill_id+'。'+((detail.report.evidence||detail.report.evidence_ref)?(detail.report.explanation?.model_calls?'静态解析与中文解释已交付；引用已核对，模型结论尚需验证；未运行目标软件。':'本地静态解析与证据交付完成；未运行目标软件，未调用模型。'):detail.report.html?'数值、页面交互及交付摘要检查通过。':'只读模型分析已交付；源码未修改，分析结论尚需人工或测试验证。');
-     if(detail.report.html)button('预览交互图',()=>window.SkillWorkbench.preview(row.task_id));
+     if(detail.report.html)button(detail.report.skill_id==='jarvis.tank-game'?'试玩游戏':'预览交互图',()=>window.SkillWorkbench.preview(row.task_id));
      if(detail.report.coding){text.textContent=detail.report.coding.passed?'编程副本通过所提供案例；交付时原文件未修改。':'编程验收未通过；交付时原文件未修改。';button('查看差异与验收',()=>window.SkillWorkbench.codingPreview(detail.report,row.task_id));}
      button('下载产物',()=>window.SkillWorkbench.download(row.task_id,detail.report));
      if(detail.report.evidence||detail.report.evidence_ref)button('查看分析报告',()=>window.SkillWorkbench.reportPreview(detail.report,row.task_id));

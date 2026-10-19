@@ -65,18 +65,19 @@
 - [8.7 技能选择、策略与调用记录契约](#skill-selection-contract)
   - [8.7.1 编程副本与验证状态字段（0.1.70）](#bounded-coding-contract)
 - [8.8 资源租约、本地组件与安全事件契约](#extensions-3)
-- [8.9 项目资源与工程文件契约（0.1.27）](#project-resources-contract)
-- [8.10 MCP 与技能登记契约（0.1.27；0.1.37 管理增量）](#extension-catalog-contract)
-  - [8.10.1 Context7 只读文档任务（0.1.55）](#mcp-documentation-task-contract)
-- [8.11 限定成长运行接口](#evolution-runtime-contract)
-  - [8.11.1 会话需求适配接口（0.1.41）](#growth-demand-contract)
-  - [8.11.2 项目工具目录与调用接口（0.1.73）](#project-tool-contract)
-- [8.12 三能力消息与旧接口迁移](#growth-center-contract)
-- [8.13 统一对话受理、意图与事件契约（proposed）](#dialogue-turn-contract)
-  - [8.13.1 对话意图与限定任务受理契约（0.1.56—0.1.59）](#dialogue-intent-shadow-contract)
-  - [8.13.2 已实现的回复回执接口（0.1.48—0.1.49 / dialogue-receipt-v1）](#dialogue-receipt-contract)
-    - [8.13.2.1 普通会话的持久回复恢复（0.1.49）](#dialogue-recovery-contract)
-    - [8.13.2.2 对话与后台模型进程边界（0.1.54）](#dialogue-process-contract)
+- [8.9 坦克游戏任务契约（0.1.74）](#tank-game-contract)
+- [8.10 项目资源与工程文件契约（0.1.27）](#project-resources-contract)
+- [8.11 MCP 与技能登记契约（0.1.27；0.1.37 管理增量）](#extension-catalog-contract)
+  - [8.11.1 Context7 只读文档任务（0.1.55）](#mcp-documentation-task-contract)
+- [8.12 限定成长运行接口](#evolution-runtime-contract)
+  - [8.12.1 会话需求适配接口（0.1.41）](#growth-demand-contract)
+  - [8.12.2 项目工具目录与调用接口（0.1.73）](#project-tool-contract)
+- [8.13 三能力消息与旧接口迁移](#growth-center-contract)
+- [8.14 统一对话受理、意图与事件契约（proposed）](#dialogue-turn-contract)
+  - [8.14.1 对话意图与限定任务受理契约（0.1.56—0.1.59）](#dialogue-intent-shadow-contract)
+  - [8.14.2 已实现的回复回执接口（0.1.48—0.1.49 / dialogue-receipt-v1）](#dialogue-receipt-contract)
+    - [8.14.2.1 普通会话的持久回复恢复（0.1.49）](#dialogue-recovery-contract)
+    - [8.14.2.2 对话与后台模型进程边界（0.1.54）](#dialogue-process-contract)
 <!-- book-nav:end -->
 
 <a id="k0-contracts"></a>
@@ -271,6 +272,7 @@ HTTP 接入由 [server.py](../apps/web/server.py)校验本机 Host/Origin 和页
 |---|---|
 | `GET /api/workspace/projects` | 最近项目，含稳定 ID、完整路径、目录身份是否仍有效；不枚举文件 |
 | `POST /api/workspace/projects` | 严格 `{path}`：登记现有绝对目录；同一路径重复打开复用 ID，目录已被替换则拒绝 |
+| `POST /api/workspace/create-project` | 严格 `{path}`，显式完整新目录路径；上级目录已存在、单层创建；返回项目和 `created`，同目录重试打开原目录，已有文件或受保护路径拒绝 |
 | `POST /api/workspace/pick-folder` | 严格空对象；调用一次本机目录选择器，取消不创建项目；最多一个选择器，120 秒退出 |
 | `POST /api/workspace/outputs/prepare` | `{project_id, request_id, path?}`；ID 为 32 位小写十六进制。固定项目、最终路径及现存父目录身份，返回准备回执 |
 | `POST /api/workspace/outputs/<request_id>` | 严格 `{content}`；只保存非空、无 NUL、至多 1 MiB 的 UTF-8 文本。保存端不接受另一个路径 |
@@ -1051,6 +1053,15 @@ security_stop_event:
 
 上述额度、日期和编号均为示例，不是已完成验证的记录。真正运行时使用签名来源、实际评估和有效租约。
 
+<a id="tank-game-contract"></a>
+## 坦克游戏任务契约（0.1.74）
+
+复用 `POST /api/conversation-tasks/{conversation_id}` 的 `mode:skill`，`skill_id:jarvis.tank-game`、明确 `model:provider::model`、`project_id` 和本轮 `prompt`；`paths` 为空，不接受编程执行开关。可选 `output_path` 须以 `.html` 结尾。原请求号、会话范围、技能策略和不可覆盖保存语义不变。
+
+模型设计恰含 `title,player_color,enemy_color,ground_color,waves,base_hp,enemy_speed,obstacles`。标题 1—60 字符；三色为六位十六进制；波次 2—4 组，每组 1—4 敌军；基地生命 4—8，敌军速度 25—45。障碍 0—6 个，各为整数 `x,y,width,height`，位置/大小、开放通道及互不重叠规则只定义在 `web_game.validate`。原始回复最多 8 KiB，拒绝重复键、未知字段、非整数数值和脚本字段，可接受完整 JSON 代码围栏；错误不会自动修正后重发。
+
+任务只发起一次 75 秒模型响应调用，沿用原 120 秒技能任务预算。结果使用原 HTML 报告 schema：`model_data` 保存已验证设计，`model` 保存实际调用回执，`checks` 明确 `fixed_engine:tank-defense-v1/full_3d:false/generated_code_executed:false`，及浏览器检查范围。`verified.workflow_checks` 表示该固定工作流检查通过，不是通用游戏编程或完整 3D 验收。
+
 <a id="project-resources-contract"></a>
 ## 项目资源与工程文件契约（0.1.27）
 
@@ -1059,6 +1070,7 @@ security_stop_event:
 | API | 请求字段 | 结果与边界 |
 |---|---|---|
 | `/api/project-files/tree` | `project_id,path,exclude?` | `path` 可为空表示根目录；返回本层 `entries` 的 name/path/kind/editable/size_bytes，以及 excluded/truncated；不读文件正文 |
+| `/api/project-files/mkdir` | `project_id,path` | 当前项目内单层创建，父目录必须存在；返回 `path,created`，已有目录返回 false，链接/越界/凭据排除路径仍拒绝 |
 | `/api/project-files/read` | `project_id,path` | `content,digest,size_bytes,bom,path`；digest 为原始字节 SHA-256，UTF-8/BOM 解码，非文本拒绝 |
 | `/api/project-files/write` | `project_id,path,content,digest,bom` | digest 为读入版本，新文件用 null；内容相同的重试可回现有结果，不同旧版本返回 409；成功重新读盘核验摘要 |
 | `/api/project-files/save-project` | `project_id,path,document,digest` | 在项目根目录创建或按预期摘要更新 `.jarvis-workspace`，复用文本写入 |
@@ -1286,7 +1298,7 @@ JSON 不合规时，有完整 reply 就保留正文并标记识别失效；普�
 
 每实例最多 4096 个已发编号；正文最多保留 64 个完成结果，单结果最多 2 MiB，总预留 32 MiB（包括输入和进行中结果预算）。完成结果 600 秒后在访问/采样时可释放；已用 ID 的墓碑保留到实例结束，正文过期也不能自动重做。复用的取消句柄登记还有 256 条/600 秒保留上限；任一容量先满都明确拒绝新受理，草稿仍由前端保留。取消先于受理的短回执同样受数量上限与正文淘汰约束。
 
-**恢复边界：**0.1.48 仅有内存回执；0.1.49 的普通已归档会话增加下述持久恢复，临时会话与未声明持久范围的兼容请求仍只在内存。POST 响应丢失时，浏览器以原 ID 查询，不再次 POST；GET 临时失败继续查询，页面等待上限仍为 125 秒，单次 HTTP 最多 8 秒。超时、回执过期或实例变化不会自动重发。既有任务账本的恢复能力不受此回执替代；新静态资源缺失时旧同步聊天仍可用，界面显示降级。
+**恢复边界：**0.1.48 仅有内存回执；0.1.49 的普通已归档会话增加下述持久恢复，临时会话与未声明持久范围的兼容请求仍只在内存。POST 响应丢失时，浏览器以原 ID 查询，不再次 POST；GET 临时失败继续查询，页面等待上限通常为 125 秒；0.1.74 对明确选择 Gemini 4 / GPT-6 Astra 的重推理路由为 175 秒，单次 HTTP 最多 8 秒。超时、回执过期或实例变化不会自动重发。既有任务账本的恢复能力不受此回执替代；新静态资源缺失时旧同步聊天仍可用，界面显示降级。
 
 
 <a id="dialogue-recovery-contract"></a>
@@ -1320,7 +1332,7 @@ SQLite 写锁等待上限 150ms。受理落盘失败不调用模型；完成落�
 | 生命周期 | Windows 上按请求启动；普通回复最多 2 个、已接入后台分析最多 1 个，空闲不保留；一次完整回复一个进程。使用项目依赖路径和实际 Python 解释器，避开虚拟环境启动器的额外子进程 |
 | IPC | 私有 stdin/stdout JSON 行帧；请求含随机标识、经入口校验的本轮上下文引用/历史/附件、配置路径、数据目录、原授权代际与可选任务 ID；子进程按原规则筛选上下文。输入最多 24 MiB、输出累计最多 2 MiB、最多 16 帧；仅接受 context/model 阶段和单个结果，核对随机标识与顺序。不接受模型提供的程序路径/执行入口，不在参数、临时文件或监控中复制正文和密钥 |
 | 资源约束 | 发送输入前加入 Windows Job；单个 Job 最多 1 个进程、提交内存上限 384 MiB，kill-on-close。上限是保护预算，不是模型权重或实测占用；进程以当前用户运行，能读取既有凭据库，并非权限沙箱 |
-| 时间预算 | 每次回复总预算 110 秒；启动/上下文阶段每段 12 秒，卡住时回收，不仅依赖函数返回后才检查时间。保留网关单响应最多 60 秒及原自动路由预算；兼容 probe 子入口仍是 `min(85, max(1, response_deadline+20))` 秒。宿主约每 0.5 秒复查核心及任务检查点，取消/进程状态约 20ms 检查；这些周期不是负载下延迟保证 |
+| 时间预算 | 0.1.74 回复进程总预算为 170 秒；启动/上下文阶段仍每段 12 秒，卡住时回收。普通模型响应/路由预算仍为 60/90 秒，Gemini 4 与 GPT-6 Astra 为 120/150 秒；兼容 probe 子入口为 `min(145, max(1, response_deadline+20))` 秒，覆盖调用方声明的较长响应和认证清理。宿主约每 0.5 秒复查核心及任务检查点，取消/进程状态约 20ms 检查；这些周期不是负载下延迟保证 |
 | 停止与失败 | 发送前取消可确定未调用；输入开始传递后崩溃、超时、坏包或回收保守返回 UNKNOWN。现有回复层可将明确取消映射为 CANCELLED，但保留 `outcome_uncertain:true` 与 `cancel_requested`；禁止自动重发/切供应商。回收并等待本地进程退出后才释放槽。供应商或本地模型服务中的请求可能继续 |
 | 状态与授权 | 子进程沿用原核心授权代际；有任务 ID 时独立核查该任务，网络准入短事务同时核查任务取消。父进程保留超时/取消检查点，不把函数序列化给子进程。不初始化核心、不接管任务队列、不提交个人资料；取消/核心停止后不采用迟到输出 |
 | 正常与异常退出 | 成功结果进入原回执/恢复流程；Host 正常关闭回收活动 Job，Host 异常退出由 Job 关闭回收。进程被终止时供应商用量日志可能停在 RESERVED/DISPATCHING，不能据此认定零费用；不重放该日志 |

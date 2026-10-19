@@ -18,7 +18,7 @@ def confirmed(host, conversation, task):
         raise CoreError('skill_unavailable', '任务模块尚未准备。')
     report = json.loads(host.conversation_tasks.artifact(conversation, task))
     raw = None
-    if report.get('kind') == 'jarvis.skill-report' and report.get('skill_id') == 'anatomy.explainer' and isinstance(report.get('html'), str):
+    if report.get('kind') == 'jarvis.skill-report' and report.get('skill_id') in {'anatomy.explainer','jarvis.tank-game'} and isinstance(report.get('html'), str):
         raw = report['html'].encode('utf-8')
     value=report.get('coding',{})
     if (report.get('kind')=='jarvis.skill-report' and value.get('build_recipe')=='javascript-scene-v1'
@@ -27,7 +27,7 @@ def confirmed(host, conversation, task):
         with zipfile.ZipFile(io.BytesIO(bytes_from(value['build']))) as archive:
             raw=archive.read('scene.html')
     if raw is None:
-        raise CoreError('artifact_unavailable', '此任务没有已确认的科普页面。')
+        raise CoreError('artifact_unavailable', '此任务没有已确认的交互页面。')
     # Revalidate the actual delivered project file, not only the ledger JSON.
     output = report['output']
     with host.workspace.connection() as db:

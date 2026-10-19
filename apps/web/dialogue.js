@@ -88,10 +88,10 @@ function cancel(run){return rpc('/api/dialogue/cancel',run.dialogue).then(respon
 // Recovered answers are offered explicitly. They never replay a model, personal
 // command, file save, task, or speech playback, and never enter history silently.
 const recovery=document.createElement('section');recovery.id='dialogue-recovery';recovery.className='dialogue-pending';recovery.hidden=true;recovery.setAttribute('aria-label','回复恢复');panel.before(recovery);
-let recoveryTimer=null,recoveryEpoch=0,recoveryRequest=null,recoveryKey='';
+let recoveryTimer=null,recoveryEpoch=0,recoveryRequest=null,recoveryKey='';const dismissed=new Set();try{for(const id of JSON.parse(sessionStorage.getItem('jarvis.recovery.dismissed')||'[]'))if(typeof id==='string')dismissed.add(id);}catch{}
 function candidates(){
  const answered=new Set([...$('messages').querySelectorAll('.assistant[data-reply-ref],.stopped[data-reply-ref],.error[data-reply-ref]')].map(e=>e.dataset.replyRef));
- return [...$('messages').querySelectorAll('.user[data-reply-ref]')].filter(e=>!answered.has(e.dataset.replyRef)).slice(-8);
+ return [...$('messages').querySelectorAll('.user[data-reply-ref]')].filter(e=>!answered.has(e.dataset.replyRef)&&!dismissed.has(e.dataset.replyRef)).slice(-8);
 }
 function sessionChanged(){
  const scope=window.Workspace?.currentConversation(),rows=candidates();
@@ -116,6 +116,7 @@ async function checkRecovery(){
    catch{response={ok:false,data:{user_message:'暂时无法查询，可稍后重试；没有重发。'}};}
    if(epoch!==recoveryEpoch||scope.id!==Workspace.currentConversation().id||busy)return;
    const row=response.data;
+   if(response.ok&&row.finished){const hide=document.createElement('button');hide.type='button';hide.textContent='收起此提示';hide.title='只收起恢复提示；原请求与费用记录仍保留';hide.onclick=()=>{dismissed.add(id);try{sessionStorage.setItem('jarvis.recovery.dismissed',JSON.stringify([...dismissed].slice(-200)));}catch{}sessionChanged();};item.append(hide);}
    label.textContent=user.querySelector('.bubble').textContent.slice(0,40)+' · '+(!response.ok?row.user_message:row.expired?'正文已过期':row.finished?row.status==='SUCCEEDED'?'回复已完成':row.result?.user_message||row.status:'仍在处理');
    if(response.ok&&!row.finished){
     running=true;const stop=document.createElement('button');stop.type='button';stop.textContent='停止此回复';

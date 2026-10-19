@@ -82,12 +82,12 @@ class DialogueProcesses:
         packet = {'action': 'probe', 'config': config, 'provider': provider, 'prompt': prompt,
                   'data_dir': str(data_dir), 'deadline_seconds': deadline_seconds, 'options': options,
                   **({'task_id':task_id} if task_id else {})}
-        return self._run(packet, guard, cancel_event, min(85., max(1., float(deadline_seconds)+20.)))
+        return self._run(packet, guard, cancel_event, min(145., max(1., float(deadline_seconds)+20.)))
 
     def reply(self, chat, message, *, cancel_event=None, **options):
         packet = {'action': 'reply', 'config_path': str(chat.config_path), 'data_dir': str(chat.core.data_dir),
                   'message': message, 'options': options, 'task_id': getattr(chat.core, 'task_id', None)}
-        return self._run(packet, chat.core.assert_running, cancel_event, 110.)
+        return self._run(packet, chat.core.assert_running, cancel_event, 170.)
 
     def _run(self, packet, guard, cancel_event, limit):
         if cancel_event is not None and cancel_event.is_set():

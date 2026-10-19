@@ -2,7 +2,7 @@
 
 Explicit owner facts and registered project excerpts are optional. No general
 filesystem or tool execution is exposed. Conversation archives are independent.
-The 90-second routing budget is cooperative; provider authentication may add its
+The normal 90-second (frontier 150-second) routing budget is cooperative; provider authentication may add its
 own bounded wait outside the asynchronous response deadline.
 """
 from __future__ import annotations
@@ -46,7 +46,13 @@ FALLBACK_CATEGORIES = {"quota_exhausted", "rate_limited", "provider_unavailable"
 RESULT_FIELDS = {"status", "text", "provider", "model", "usage", "error", "error_category", "user_message",
                  "outcome_uncertain", "dispatch_admitted", "request_id", "elapsed_seconds", "http_status",
                  "retry_after_seconds", "automatic_retry"}
-RESULT_FIELDS.add("cancel_requested")
+def response_budgets(settings):
+    """Frontier reasoning can take longer; UNKNOWN is still never retried."""
+    heavy=settings.get('model','').startswith(('gemini-4-', 'gpt-6-astra'))
+    return (150.,120.) if heavy else (ROUTE_BUDGET_SECONDS,ATTEMPT_DEADLINE_SECONDS)
+
+
+RESULT_FIELDS.update({"cancel_requested","response_deadline_seconds"})
 RESULT_FIELDS.update({"billing", "billing_identity"})
 RESULT_FIELDS.update({"output_incomplete", "completion_reason"})
 
@@ -265,6 +271,7 @@ class ChatService:
             if type(_route_attempt_limit) is not int or not 1 <= _route_attempt_limit <= 5:
                 raise ValueError('Invalid host routing budget')
             routes = routes[:_route_attempt_limit]
+        route_budget,_=response_budgets(resolve_settings(config,routes[0]))
         started = time.monotonic()
         persona = None
         if not _purpose and personal_context and not personal_context['temporary']:
@@ -280,7 +287,7 @@ class ChatService:
             blocked = self._guard_error()
             if blocked:
                 return self._package(blocked, attempts, notice, info)
-            remaining = ROUTE_BUDGET_SECONDS - (time.monotonic() - started)
+            remaining = route_budget - (time.monotonic() - started)
             if remaining <= 0:
                 notice.append("本轮自动路由等待预算已用完，未继续尝试其他模型。")
                 return self._package(result, attempts, notice, info)
@@ -425,7 +432,7 @@ class ChatService:
                 transport = self.dialogue_models.probe if self.dialogue_models is not None and in_dialogue.get() else gateway.probe
                 response = transport(config, selected, view.message, Path(self.core.data_dir), self.core.assert_running,
                                          admission_context=self.core.effect_guard,
-                                         deadline_seconds=min(ATTEMPT_DEADLINE_SECONDS, remaining), history=selected_history,
+                                         deadline_seconds=min(response_budgets(resolve_settings(config,selected))[1], remaining), history=selected_history,
                                          instructions=instructions,
                                          **constrained,
                                          **({'attachments': attachments} if attachments else {}),

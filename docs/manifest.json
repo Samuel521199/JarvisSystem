@@ -236,7 +236,8 @@
         "conversation-intent-routing",
         "conversation-task-context-separation",
         "conversation-resource-isolation",
-        "bounded-coding-workflow"
+        "bounded-coding-workflow",
+        "tank-game-runtime"
       ],
       "status": "proposed",
       "reader_summary": "怎样一边交流一边执行任务，如何组织多 Agent？"
@@ -378,7 +379,8 @@
         "memory-candidate-review-contract",
         "bounded-coding-contract",
         "application-network-contract",
-        "project-tool-contract"
+        "project-tool-contract",
+        "tank-game-contract"
       ],
       "status": "proposed",
       "reader_summary": "模块之间怎样交换任务、事件和记忆数据？"
@@ -517,7 +519,8 @@
         "k3-closure-matrix",
         "k4-project-tool-evidence",
         "k4-tool-intent-evidence",
-        "k4-contract-evidence"
+        "k4-contract-evidence",
+        "assistant-game-evidence"
       ],
       "status": "proposed",
       "reader_summary": "哪些能力测过，证据在哪里，下一阶段怎样验收？"
@@ -3077,9 +3080,9 @@
     }
   ],
   "implementation": {
-    "version": "0.1.73",
-    "scope": "K3 closed at 0.1.70. K4 project tools at 0.1.71, bounded intents at 0.1.72, model acceptance drafts, explicit review and frozen K3 handoff verified at 0.1.73. Full K4 remains open.",
-    "evidence": "evals/reports/k4-contracts-2026-10-19.json",
+    "version": "0.1.74",
+    "scope": "K3 closed; K4 bounded tools and reviewed contracts retained. v0.1.74 verifies local folder creation, heavy-model wait handling and a fixed-engine AI-designed tank game. Full K4 remains open.",
+    "evidence": "evals/reports/assistant-game-2026-10-20.json",
     "overall_design_status": "proposed",
     "complete_k1_gate": false,
     "complete_k2_gate": false,
@@ -3342,7 +3345,8 @@
       "evals/reports/k3-closure-2026-10-19.json",
       "evals/reports/k4-project-tools-2026-10-19.json",
       "evals/reports/k4-tool-intents-2026-10-19.json",
-      "evals/reports/k4-contracts-2026-10-19.json"
+      "evals/reports/k4-contracts-2026-10-19.json",
+      "evals/reports/assistant-game-2026-10-20.json"
     ],
     "complete_k4_gate": false
   }

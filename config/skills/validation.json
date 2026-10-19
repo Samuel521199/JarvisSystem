@@ -253,6 +253,27 @@
       "reports": [
         "evals/reports/skills-completion-baseline-2026-10-19.json"
       ]
+    },
+    "jarvis.tank-game": {
+      "binding": "sha256:b39d1bba18661c7f840af449cd6332b12c0ab1c71794c39c0fad0837e14b4d8f",
+      "version": "0.1.74",
+      "observed_at": "2026-10-20T02:35:15+08:00",
+      "status": "passed",
+      "cases": 1,
+      "models": [
+        "vertex::gemini-4-argon"
+      ],
+      "model_results": {
+        "vertex::gemini-4-argon": {
+          "pass": 1,
+          "partial": 0,
+          "fail": 0
+        }
+      },
+      "scope": "一个真实模型关卡与固定2D坦克引擎的控制、胜负、离线交付及沙箱预览；不代表任意游戏源码生成或3D质量。",
+      "reports": [
+        "evals/reports/assistant-game-2026-10-20.json"
+      ]
     }
   }
 }

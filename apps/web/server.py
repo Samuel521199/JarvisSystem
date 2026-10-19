@@ -260,6 +260,7 @@ class LocalChatServer(ThreadingHTTPServer):
         self.growth_script = asset('growth.js')
         self.project_tools_script = asset('project-tools.js')
         self.tool_intents_script = asset('tool-intents.js')
+        self.creation_script = asset('creation.js')
         self.tool_contracts_script = asset('tool-contracts.js')
         self.html = self.html.replace(b'__JARVIS_GROWTH_STYLE__', asset('growth.css'))
         self.admin_html = self.admin_html.replace(b'__JARVIS_EXTENSIONS_STYLE__', asset('extensions.css') + b'\n' + asset('skills.css') + b'\n' + asset('mcp.css'))
@@ -658,6 +659,8 @@ class ChatHandler(BaseHTTPRequestHandler):
                 from jarvis_core.mcp_catalog import McpManager
                 self._send(200, McpManager(self.server.core).snapshot())
             except Exception as exc:self._workspace_error(exc)
+        elif self.path == '/creation.js':
+            self._send(200,self.server.creation_script,'application/javascript; charset=utf-8')
         elif self.path == '/workspace.js':
             self._send(200,self.server.workspace_script,'application/javascript; charset=utf-8')
         elif self.path in {'/api/workspace/projects', '/api/workspace/outputs'}:
@@ -727,8 +730,8 @@ class ChatHandler(BaseHTTPRequestHandler):
         computer_cancel=re.fullmatch(r'/api/(?:computer/tasks|tasks)/(task_[a-f0-9]{32})/cancel',self.path)
         workspace_save = re.fullmatch(r'/api/workspace/outputs/([a-f0-9]{32})', self.path)
         project_organization = re.fullmatch(r'/api/workspace/projects/([a-f0-9]{32})/(edit|archive|reveal)', self.path)
-        workspace_action = self.path in {'/api/workspace/projects', '/api/workspace/pick-folder', '/api/workspace/outputs/prepare'} or workspace_save or project_organization
-        files_action = re.fullmatch(r'/api/project-files/(tree|read|write|save-project|open-project)', self.path)
+        workspace_action = self.path in {'/api/workspace/projects', '/api/workspace/create-project', '/api/workspace/pick-folder', '/api/workspace/outputs/prepare'} or workspace_save or project_organization
+        files_action = re.fullmatch(r'/api/project-files/(tree|read|write|mkdir|save-project|open-project)', self.path)
         extension_action = re.fullmatch(r'/api/extensions/([a-f0-9]{32})(?:/(delete|inspect))?', self.path)
         skill_action = bool(re.fullmatch(r'/api/project-tools/[a-f0-9]{32}(?:/jobs/[a-f0-9]{32}/cancel|/plans(?:/[a-f0-9]{32}/(?:start|coding|cancel)|/[a-f0-9]{32}/contracts(?:/[a-f0-9]{32}/(?:review|cancel))?)?)?',self.path)) or self.path in {'/api/coding','/api/skills/policy','/api/skills/select','/api/skills/preview','/api/skills/coding-apply','/api/skills/coding-rollback'}
         mcp_action = self.path in {'/api/mcp/policy', '/api/mcp/view'}
@@ -922,6 +925,7 @@ class ChatHandler(BaseHTTPRequestHandler):
                     result=getattr(self.server.project_catalog,method)(project_organization[1],payload)
                 elif workspace_save:result = self.server.workspace.save(workspace_save[1], payload)
                 elif self.path.endswith('/projects'):result = self.server.workspace.open_project(payload)
+                elif self.path.endswith('/create-project'):result = self.server.workspace.create_project(payload)
                 elif self.path.endswith('/pick-folder'):result = self.server.workspace.choose_project(payload)
                 else:result = self.server.workspace.prepare(payload)
                 self._send(200, result)

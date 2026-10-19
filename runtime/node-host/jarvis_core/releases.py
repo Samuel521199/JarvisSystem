@@ -23,10 +23,10 @@ from .worker_recovery import locked
 SPEC = importlib.util.spec_from_file_location('jarvis_release_bundle', policy.REPOSITORY_ROOT/'tools/release_bundle.py')
 bundle = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(bundle)
-START_DATA_VERSIONS = frozenset({'0.1.13','0.1.14','0.1.15','0.1.16','0.1.17','0.1.18','0.1.19','0.1.20','0.1.21','0.1.22','0.1.62','0.1.63','0.1.64','0.1.65','0.1.66','0.1.67','0.1.68', '0.1.69','0.1.70','0.1.71','0.1.72','0.1.73'})
+START_DATA_VERSIONS = frozenset({'0.1.13','0.1.14','0.1.15','0.1.16','0.1.17','0.1.18','0.1.19','0.1.20','0.1.21','0.1.22','0.1.62','0.1.63','0.1.64','0.1.65','0.1.66','0.1.67','0.1.68', '0.1.69','0.1.70','0.1.71','0.1.72','0.1.73','0.1.74'})
 # Explicitly measured families, never a >= version guess. A newer personal store
 # must not be handed to a historical core-only fallback that ignores its state.
-PERSONAL_DATA_VERSIONS = frozenset({'0.1.62','0.1.63','0.1.64','0.1.65','0.1.66','0.1.67','0.1.68', '0.1.69','0.1.70','0.1.71','0.1.72','0.1.73'})
+PERSONAL_DATA_VERSIONS = frozenset({'0.1.62','0.1.63','0.1.64','0.1.65','0.1.66','0.1.67','0.1.68', '0.1.69','0.1.70','0.1.71','0.1.72','0.1.73','0.1.74'})
 OPTIONAL_DATA_SCHEMAS = {'conversations.db':(0,), 'memory.db':(1,2,3), 'persona.db':(1,),
     'continuity.db':(1,), 'workspace.db':(1,), 'project-catalog.db':(1,),
     'project-sources.db':(1,), 'extensions.db':(1,), 'evolution/evolution.db':(1,2,3), 'network-policy.db':(1,), 'coding-settings.db':(1,)}
@@ -288,13 +288,13 @@ class RuntimeSlots:
 
     @staticmethod
     def _compatible(version, data_format):
-        if data_format['optional_versions'].get('evolution/evolution.db') == 3 and version not in {'0.1.71','0.1.72','0.1.73'}:
+        if data_format['optional_versions'].get('evolution/evolution.db') == 3 and version not in {'0.1.71','0.1.72','0.1.73','0.1.74'}:
             return False  # Older growth workers cannot reconcile project tool publication.
-        if 'coding-settings.db' in data_format['optional_versions'] and version not in {'0.1.65','0.1.66','0.1.67','0.1.68', '0.1.69','0.1.70','0.1.71','0.1.72','0.1.73'}:
+        if 'coding-settings.db' in data_format['optional_versions'] and version not in {'0.1.65','0.1.66','0.1.67','0.1.68', '0.1.69','0.1.70','0.1.71','0.1.72','0.1.73','0.1.74'}:
             return False  # Older runtimes cannot recover multi-file coding tasks.
-        if data_format['optional_versions'].get('evolution/evolution.db') == 2 and version not in {'0.1.64','0.1.65','0.1.66','0.1.67','0.1.68', '0.1.69','0.1.70','0.1.71','0.1.72','0.1.73'}:
+        if data_format['optional_versions'].get('evolution/evolution.db') == 2 and version not in {'0.1.64','0.1.65','0.1.66','0.1.67','0.1.68', '0.1.69','0.1.70','0.1.71','0.1.72','0.1.73','0.1.74'}:
             return False
-        if 'network-policy.db' in data_format['optional_versions'] and version not in {'0.1.63','0.1.64','0.1.65','0.1.66','0.1.67','0.1.68', '0.1.69','0.1.70','0.1.71','0.1.72','0.1.73'}:
+        if 'network-policy.db' in data_format['optional_versions'] and version not in {'0.1.63','0.1.64','0.1.65','0.1.66','0.1.67','0.1.68', '0.1.69','0.1.70','0.1.71','0.1.72','0.1.73','0.1.74'}:
             return False  # A previous runtime must not silently ignore the saved offline switch.
         return version in START_DATA_VERSIONS and (not data_format['optional_versions'] or version in PERSONAL_DATA_VERSIONS)
 

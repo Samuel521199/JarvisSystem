@@ -37,6 +37,36 @@
       }
     },
     {
+      "id": "jarvis.tank-game",
+      "name": "坦克小游戏制作",
+      "source": "jarvis",
+      "version": "1.0.0",
+      "default_mode": "manual",
+      "workflow": "game",
+      "use_when": "明确请求制作可离线游玩的坦克基地守卫小游戏。",
+      "do_not_use_when": "任意类型游戏、Unity/Unreal、完整3D高画质、安装程序、联网游戏；模型只能生成关卡配置。",
+      "guide": "Design bounded JSON level data for the trusted offline tank-defense engine. Model output never becomes browser code. Distinguish this small 2D game from full 3D software; receipt-backed controls and gameplay checks are required before delivery.",
+      "positive_examples": [
+        "制作一个坦克守卫基地小游戏",
+        "创建离线坦克游戏关卡"
+      ],
+      "negative_examples": [
+        "解释坦克游戏如何制作",
+        "开发一款高画质3D联机游戏"
+      ],
+      "presentation": {
+        "category": "visual",
+        "icon": "game",
+        "summary": "AI 设计关卡，固定引擎实现移动、射击、基地、波次及胜负。",
+        "output": "可离线游玩的 HTML · 实际浏览器验收",
+        "requirements": "明确模型、已保存项目、Windows 与 Edge；当前为 2D 坦克游戏",
+        "kind": "independent",
+        "components": [
+          "tank-defense"
+        ]
+      }
+    },
+    {
       "id": "matt-pocock.diagnosing-bugs",
       "name": "故障诊断",
       "source": "matt-pocock",

@@ -1,6 +1,6 @@
 # 最小核心、初始资产与开发路线
 
-> 状态：整体 proposed；当前源码与部署版本 0.1.73；K4 工具与需求增量已验证，见[契约审阅证据](delivery-validation.md#k4-contract-evidence)，K3 开发协作通过，证据见[K3 收口](delivery-validation.md#k3-closure-matrix)，新增[K3 编码协作](delivery-validation.md#k3-coding-evidence)，保留[应用离线控制](models-offline.md#application-offline-control)；范围、验证与阻塞见[K2 本轮收口](delivery-validation.md#k2-completion-evidence)；完整 K1/K2 仍待原验收条件。跨主题差距见[后续方向指南](development-guide.md#direction-start)，实施次序见[当前推进队列](#near-term-work-queue) · 更新：2026-10-19
+> 状态：整体 proposed；当前源码版本 0.1.74；部署状态见[本轮记录](delivery-validation.md#assistant-game-evidence)；K4 工具与需求增量已验证，见[契约审阅证据](delivery-validation.md#k4-contract-evidence)，K3 开发协作通过，证据见[K3 收口](delivery-validation.md#k3-closure-matrix)，新增[K3 编码协作](delivery-validation.md#k3-coding-evidence)，保留[应用离线控制](models-offline.md#application-offline-control)；范围、验证与阻塞见[K2 本轮收口](delivery-validation.md#k2-completion-evidence)；完整 K1/K2 仍待原验收条件。跨主题差距见[后续方向指南](development-guide.md#direction-start)，实施次序见[当前推进队列](#near-term-work-queue) · 更新：2026-10-19
 > [文档入口](README.md) · [维护规则](MAINTENANCE.md) · [架构图册](architecture-atlas.md)
 
 <!-- book-nav:start -->
@@ -67,6 +67,8 @@
 
 <a id="current-implementation"></a>
 ## 当前实现、启动与下一步
+
+**0.1.74 使用修复：**网页/桌面共享本机目录创建，重推理有界等待、终态恢复提示可收起；新增[固定引擎坦克小游戏](tasks-agents.md#tank-game-runtime)。实际 Argon 普通回复、关卡生成与真实玩法检查见[本轮证据](delivery-validation.md#assistant-game-evidence)。原 K4 推进队列保持。
 
 **0.1.66 K3 完善：**可修复语法损坏的所选文件，交付可直接由 Python 运行的 PYZ，实际工具包入口单独复验，并提供严格离线重建工具。三类真实 Codex 任务、独立检查、界面应用/恢复和剩余边界见[本轮结果](delivery-validation.md#k3-build-evidence)。
 
@@ -343,7 +345,7 @@ $py = 'H:\JarvisData\envs\dev\Scripts\python.exe'
 <a id="native-skills-entry"></a>
 ### 原生技能、编程副本与齿轮科普（0.1.58）
 
-**implemented / 局部 verified。** 在[工作台](http://127.0.0.1:18181/)先打开项目文件夹；设置中的[技能管理](http://127.0.0.1:18181/settings#skill)按类别列出十一个完整技能，含八项独立与三项组合。内部组件与未接通候选不再混入菜单，归属可在清理记录查看，额外本地 SKILL.md 登记仍不执行。所有使用/不用规则和作用域解释只维护在[统一规则](tasks-agents.md#skill-selection-policy)。
+**implemented / 局部 verified。** 在[工作台](http://127.0.0.1:18181/)先打开项目文件夹；设置中的[技能管理](http://127.0.0.1:18181/settings#skill)按类别列出十二个完整技能，含九项独立与三项组合（0.1.74 新增固定引擎坦克游戏）。内部组件与未接通候选不再混入菜单，归属可在清理记录查看，额外本地 SKILL.md 登记仍不执行。所有使用/不用规则和作用域解释只维护在[统一规则](tasks-agents.md#skill-selection-policy)。
 
 - **齿轮科普：**输入“制作齿轮传动交互动画，支持拆解和组装”，或选择“技能任务 · 科普/源码报告”和 Anatomy。支持传动比 1:1、2:1、3:1；宿主验证要求与参数一致，比例不支持时明确拒绝。产物保存到所选项目，“本会话任务”提供预览和 HTML 下载；播放/暂停、角度、转速、拆解/组装、减弱动效可用。使用固定教学几何，不输出制造尺寸、公差或 CAD，也不输出 MP4。
 - **编程指导：**聊天可按需或显式选择排错、TDD、代码审阅、模块设计。只装配一项已适配指导，最多 1,800 UTF-8 字节，不直接注入上游整篇正文。
