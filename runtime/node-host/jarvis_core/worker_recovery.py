@@ -133,6 +133,8 @@ def recover(parent, *, only=None):
                         allowed |= {'lesson.js', 'iso-kit.mjs', 'LICENSE.txt'}
                     if record.get('binding', {}).get('operation') == 'coding.zipapp.v1':
                         allowed.add('candidate.pyz')
+                    if record.get('binding', {}).get('operation') == 'coding.javascript.v1':
+                        allowed.add('_quickjs.pyd')
                     files = list(stage.iterdir())
                     for path in files:
                         if path.name not in allowed: raise ValueError('Unexpected stage content')

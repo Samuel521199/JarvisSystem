@@ -1,0 +1,419 @@
+{
+  "frozen_at": "2026-10-19",
+  "scope": "Five paired pilot tasks; same Codex model, budget and cases. Not an unseen benchmark or proof of general coding superiority.",
+  "cases": [
+    {
+      "id": "csv-escaping",
+      "category": "bugfix",
+      "files": {
+        "report.py": "from table import render\ndef transform(data):\n    return render(data)\n",
+        "table.py": "def render(data):\n    return '\\n'.join(','.join(row) for row in data)\n"
+      },
+      "entry": "report.py",
+      "goal": "修复 CSV 导出，report.py 的 transform(data) 调用 table.py 的 render(data)。输入是二维字符串列表，每个内层列表是一行。使用标准 csv 最小引用，字段内逗号、双引号、换行要正确转义，行尾固定 LF，每行包括最后一行有 LF；空列表返回空字符串。完整保留 UTF-8 文本和空单元格，不修改输入。",
+      "public": [
+        {
+          "input": [],
+          "expected": ""
+        },
+        {
+          "input": [
+            [
+              "a",
+              "b"
+            ],
+            [
+              "c",
+              "d"
+            ]
+          ],
+          "expected": "a,b\nc,d\n"
+        }
+      ],
+      "private": [
+        {
+          "input": [
+            [
+              "名字",
+              "备注"
+            ],
+            [
+              "小明",
+              "a,b"
+            ],
+            [
+              "小红",
+              "say \"hi\""
+            ]
+          ],
+          "expected": "名字,备注\n小明,\"a,b\"\n小红,\"say \"\"hi\"\"\"\n"
+        },
+        {
+          "input": [
+            [
+              "",
+              "line1\nline2"
+            ],
+            [
+              " x ",
+              "y"
+            ]
+          ],
+          "expected": ",\"line1\nline2\"\n x ,y\n"
+        }
+      ],
+      "recipe": "python-zipapp-v1"
+    },
+    {
+      "id": "new-label-package",
+      "category": "small_feature",
+      "recipe": "python-package-v1",
+      "files": {
+        "labels/__init__.py": "",
+        "labels/main.py": "",
+        "labels/normalize.py": ""
+      },
+      "new_paths": [
+        "labels/__init__.py",
+        "labels/main.py",
+        "labels/normalize.py"
+      ],
+      "entry": "labels/main.py",
+      "goal": "创建 labels 包。输入是字符串数组，每项 strip 后 casefold，跳过空结果，按首次出现顺序去重，以 LF 连接且无末尾换行。main.py 的 transform 调用 normalize.py 的 unique；__init__.py 保持空。不得修改输入。",
+      "public": [
+        {
+          "input": [],
+          "expected": ""
+        },
+        {
+          "input": [
+            " A ",
+            "a",
+            "B"
+          ],
+          "expected": "a\nb"
+        }
+      ],
+      "private": [
+        {
+          "input": [
+            " X ",
+            "",
+            " x ",
+            "Y",
+            "y"
+          ],
+          "expected": "x\ny"
+        },
+        {
+          "input": [
+            " 上海 ",
+            "北京",
+            "上海"
+          ],
+          "expected": "上海\n北京"
+        },
+        {
+          "input": [
+            "ß",
+            "SS",
+            "İ"
+          ],
+          "expected": "ss\ni̇"
+        },
+        {
+          "input": [
+            "\n",
+            "\t"
+          ],
+          "expected": ""
+        }
+      ]
+    },
+    {
+      "id": "nested-query-package",
+      "category": "cross_file",
+      "recipe": "python-package-query-v1",
+      "files": {
+        "query/__init__.py": "",
+        "query/main.py": "from .render import render\ndef transform(data):\n    return render(data)\n",
+        "query/render.py": "import json\nfrom .selection import select\ndef render(data):\n    return json.dumps(select(data))\n",
+        "query/selection.py": "def select(data):\n    return []\n"
+      },
+      "entry": "query/main.py",
+      "goal": "修复 query 包处理对象 {items:[{active:boolean,name:string}]}。selection.py 使用固定 jmespath.search(\"items[?active == `true`].name\", data)，结果保持原顺序，items 缺失或为 null 则 []。render.py 使用 json.dumps 默认参数返回字符串；main.py 为 transform 入口。支持中文和空数组，不修改输入。",
+      "public": [
+        {
+          "input": {
+            "items": []
+          },
+          "expected": "[]"
+        },
+        {
+          "input": {
+            "items": [
+              {
+                "active": true,
+                "name": "A"
+              },
+              {
+                "active": false,
+                "name": "B"
+              }
+            ]
+          },
+          "expected": "[\"A\"]"
+        }
+      ],
+      "private": [
+        {
+          "input": {},
+          "expected": "[]"
+        },
+        {
+          "input": {
+            "items": null
+          },
+          "expected": "[]"
+        },
+        {
+          "input": {
+            "items": [
+              {
+                "active": true,
+                "name": "上海"
+              },
+              {
+                "name": "absent"
+              },
+              {
+                "active": true,
+                "name": "C"
+              }
+            ]
+          },
+          "expected": "[\"\\u4e0a\\u6d77\", \"C\"]"
+        },
+        {
+          "input": {
+            "items": [
+              {
+                "active": 1,
+                "name": "one"
+              },
+              {
+                "active": true,
+                "name": "yes"
+              }
+            ]
+          },
+          "expected": "[\"yes\"]"
+        }
+      ]
+    },
+    {
+      "id": "package-money-refactor",
+      "goal": "重构为 finance 包（__init__.py 保持空），保留四个模块职责，使用包内导入。修复四个模块，report.py 是入口 transform(data)。输入为记录数组，每项 cents 为整数分，category 为字符串或 null/缺省，void=true 的项忽略。类别为 (category 或空串).strip().casefold()，空类别写未分类。按类别累加整数分，再按类别 Unicode 字符顺序排序。输出 TSV 字符串：首行 category 和 amount；金额精确两位小数，负号只在负数时出现，禁止浮点计算，零为0.00。用 csv.writer 的制表分隔、最小引号和 LF 换行，每行含最后一行都有换行；空输入只有表头。不修改输入。四模块分别承担入口、类别归一、聚合、格式化，不引入第三方依赖。",
+      "entry": "finance/report.py",
+      "files": {
+        "finance/__init__.py": "",
+        "finance/report.py": "from .totals import collect\nfrom .formatting import render\ndef transform(data)\n    return render(collect(data))\n",
+        "finance/labels.py": "def label(row):\n    return \"wrong\"\n",
+        "finance/totals.py": "from .labels import label\ndef collect(data):\n    return {}\n",
+        "finance/formatting.py": "def render(totals):\n    return \"wrong\"\n"
+      },
+      "public": [
+        {
+          "input": [
+            {
+              "category": "Food",
+              "cents": 125
+            },
+            {
+              "category": " food ",
+              "cents": -25
+            }
+          ],
+          "expected": "category\tamount\nfood\t1.00\n"
+        },
+        {
+          "input": [],
+          "expected": "category\tamount\n"
+        }
+      ],
+      "private": [
+        {
+          "input": [
+            {
+              "category": "交通",
+              "cents": -1
+            },
+            {
+              "category": "交通",
+              "cents": -200
+            }
+          ],
+          "expected": "category\tamount\n交通\t-2.01\n"
+        },
+        {
+          "input": [
+            {
+              "category": " B ",
+              "cents": 99
+            },
+            {
+              "category": "a",
+              "cents": 100
+            },
+            {
+              "category": "b",
+              "cents": 1
+            }
+          ],
+          "expected": "category\tamount\na\t1.00\nb\t1.00\n"
+        },
+        {
+          "input": [
+            {
+              "category": null,
+              "cents": 123
+            },
+            {
+              "category": " ",
+              "cents": -23
+            }
+          ],
+          "expected": "category\tamount\n未分类\t1.00\n"
+        },
+        {
+          "input": [
+            {
+              "category": "ignore",
+              "cents": 900,
+              "void": true
+            }
+          ],
+          "expected": "category\tamount\n"
+        },
+        {
+          "input": [
+            {
+              "category": "a\tb",
+              "cents": -12345
+            }
+          ],
+          "expected": "category\tamount\n\"a\tb\"\t-123.45\n"
+        },
+        {
+          "input": [
+            {
+              "category": "line\nbreak",
+              "cents": 0
+            },
+            {
+              "category": "quote\"",
+              "cents": 1
+            }
+          ],
+          "expected": "category\tamount\n\"line\nbreak\"\t0.00\n\"quote\"\"\"\t0.01\n"
+        },
+        {
+          "input": [
+            {
+              "category": "STRASSE",
+              "cents": 100
+            },
+            {
+              "category": "Straße",
+              "cents": 200
+            }
+          ],
+          "expected": "category\tamount\nstrasse\t3.00\n"
+        },
+        {
+          "input": [
+            {
+              "cents": -9999999
+            },
+            {
+              "category": "x",
+              "cents": 1
+            },
+            {
+              "category": "x",
+              "cents": -1
+            }
+          ],
+          "expected": "category\tamount\nx\t0.00\n未分类\t-99999.99\n"
+        }
+      ],
+      "category": "refactor",
+      "recipe": "python-package-v1"
+    },
+    {
+      "id": "crank-slider-scene",
+      "category": "ui_state",
+      "recipe": "javascript-scene-v1",
+      "files": {
+        "scene.js": ""
+      },
+      "new_paths": [
+        "scene.js"
+      ],
+      "entry": "scene.js",
+      "goal": "创建曲柄滑块交互科普的 JavaScript 运动模型。transform({phase:角度}) 返回 JSON.stringify({parts:[...]})，无其他文字。输入角度按度转弧度；中心(300,300)，曲柄长100，连杆长250。曲柄端(cx,cy)=(300+100*cos(t),300+100*sin(t))，滑块中心 sx=300+100*cos(t)+sqrt(250^2-(100*sin(t))^2)，滑块 y=300。cx、cy、sx 分别四舍五入 Math.round 到整数（先计算原始几何再各自取整）。parts 严格按示例的 rail,crank,rod,pivot,slider 顺序和键顺序生成，颜色尺寸与示例相同；crank 终点为(cx,cy)，rod 从(cx,cy)到(sx,300)，slider 左上角(sx-20,280)，其余固定。连续全周运行，禁止用逐例表替代运动公式，不修改输入。",
+      "public": [
+        {
+          "input": {
+            "phase": 0
+          },
+          "expected": "{\"parts\":[{\"id\":\"rail\",\"kind\":\"line\",\"color\":\"#42657f\",\"x\":150,\"y\":300,\"x2\":900,\"y2\":300},{\"id\":\"crank\",\"kind\":\"line\",\"color\":\"#5ce1e6\",\"x\":300,\"y\":300,\"x2\":400,\"y2\":300},{\"id\":\"rod\",\"kind\":\"line\",\"color\":\"#9c8cff\",\"x\":400,\"y\":300,\"x2\":650,\"y2\":300},{\"id\":\"pivot\",\"kind\":\"circle\",\"color\":\"#f4d072\",\"x\":300,\"y\":300,\"r\":12},{\"id\":\"slider\",\"kind\":\"rect\",\"color\":\"#5ce1e6\",\"x\":630,\"y\":280,\"width\":40,\"height\":40}]}"
+        },
+        {
+          "input": {
+            "phase": 90
+          },
+          "expected": "{\"parts\":[{\"id\":\"rail\",\"kind\":\"line\",\"color\":\"#42657f\",\"x\":150,\"y\":300,\"x2\":900,\"y2\":300},{\"id\":\"crank\",\"kind\":\"line\",\"color\":\"#5ce1e6\",\"x\":300,\"y\":300,\"x2\":300,\"y2\":400},{\"id\":\"rod\",\"kind\":\"line\",\"color\":\"#9c8cff\",\"x\":300,\"y\":400,\"x2\":529,\"y2\":300},{\"id\":\"pivot\",\"kind\":\"circle\",\"color\":\"#f4d072\",\"x\":300,\"y\":300,\"r\":12},{\"id\":\"slider\",\"kind\":\"rect\",\"color\":\"#5ce1e6\",\"x\":509,\"y\":280,\"width\":40,\"height\":40}]}"
+        }
+      ],
+      "private": [
+        {
+          "input": {
+            "phase": 45
+          },
+          "expected": "{\"parts\":[{\"id\":\"rail\",\"kind\":\"line\",\"color\":\"#42657f\",\"x\":150,\"y\":300,\"x2\":900,\"y2\":300},{\"id\":\"crank\",\"kind\":\"line\",\"color\":\"#5ce1e6\",\"x\":300,\"y\":300,\"x2\":371,\"y2\":371},{\"id\":\"rod\",\"kind\":\"line\",\"color\":\"#9c8cff\",\"x\":371,\"y\":371,\"x2\":611,\"y2\":300},{\"id\":\"pivot\",\"kind\":\"circle\",\"color\":\"#f4d072\",\"x\":300,\"y\":300,\"r\":12},{\"id\":\"slider\",\"kind\":\"rect\",\"color\":\"#5ce1e6\",\"x\":591,\"y\":280,\"width\":40,\"height\":40}]}"
+        },
+        {
+          "input": {
+            "phase": 135
+          },
+          "expected": "{\"parts\":[{\"id\":\"rail\",\"kind\":\"line\",\"color\":\"#42657f\",\"x\":150,\"y\":300,\"x2\":900,\"y2\":300},{\"id\":\"crank\",\"kind\":\"line\",\"color\":\"#5ce1e6\",\"x\":300,\"y\":300,\"x2\":229,\"y2\":371},{\"id\":\"rod\",\"kind\":\"line\",\"color\":\"#9c8cff\",\"x\":229,\"y\":371,\"x2\":469,\"y2\":300},{\"id\":\"pivot\",\"kind\":\"circle\",\"color\":\"#f4d072\",\"x\":300,\"y\":300,\"r\":12},{\"id\":\"slider\",\"kind\":\"rect\",\"color\":\"#5ce1e6\",\"x\":449,\"y\":280,\"width\":40,\"height\":40}]}"
+        },
+        {
+          "input": {
+            "phase": 180
+          },
+          "expected": "{\"parts\":[{\"id\":\"rail\",\"kind\":\"line\",\"color\":\"#42657f\",\"x\":150,\"y\":300,\"x2\":900,\"y2\":300},{\"id\":\"crank\",\"kind\":\"line\",\"color\":\"#5ce1e6\",\"x\":300,\"y\":300,\"x2\":200,\"y2\":300},{\"id\":\"rod\",\"kind\":\"line\",\"color\":\"#9c8cff\",\"x\":200,\"y\":300,\"x2\":450,\"y2\":300},{\"id\":\"pivot\",\"kind\":\"circle\",\"color\":\"#f4d072\",\"x\":300,\"y\":300,\"r\":12},{\"id\":\"slider\",\"kind\":\"rect\",\"color\":\"#5ce1e6\",\"x\":430,\"y\":280,\"width\":40,\"height\":40}]}"
+        },
+        {
+          "input": {
+            "phase": 225
+          },
+          "expected": "{\"parts\":[{\"id\":\"rail\",\"kind\":\"line\",\"color\":\"#42657f\",\"x\":150,\"y\":300,\"x2\":900,\"y2\":300},{\"id\":\"crank\",\"kind\":\"line\",\"color\":\"#5ce1e6\",\"x\":300,\"y\":300,\"x2\":229,\"y2\":229},{\"id\":\"rod\",\"kind\":\"line\",\"color\":\"#9c8cff\",\"x\":229,\"y\":229,\"x2\":469,\"y2\":300},{\"id\":\"pivot\",\"kind\":\"circle\",\"color\":\"#f4d072\",\"x\":300,\"y\":300,\"r\":12},{\"id\":\"slider\",\"kind\":\"rect\",\"color\":\"#5ce1e6\",\"x\":449,\"y\":280,\"width\":40,\"height\":40}]}"
+        },
+        {
+          "input": {
+            "phase": 270
+          },
+          "expected": "{\"parts\":[{\"id\":\"rail\",\"kind\":\"line\",\"color\":\"#42657f\",\"x\":150,\"y\":300,\"x2\":900,\"y2\":300},{\"id\":\"crank\",\"kind\":\"line\",\"color\":\"#5ce1e6\",\"x\":300,\"y\":300,\"x2\":300,\"y2\":200},{\"id\":\"rod\",\"kind\":\"line\",\"color\":\"#9c8cff\",\"x\":300,\"y\":200,\"x2\":529,\"y2\":300},{\"id\":\"pivot\",\"kind\":\"circle\",\"color\":\"#f4d072\",\"x\":300,\"y\":300,\"r\":12},{\"id\":\"slider\",\"kind\":\"rect\",\"color\":\"#5ce1e6\",\"x\":509,\"y\":280,\"width\":40,\"height\":40}]}"
+        },
+        {
+          "input": {
+            "phase": 359
+          },
+          "expected": "{\"parts\":[{\"id\":\"rail\",\"kind\":\"line\",\"color\":\"#42657f\",\"x\":150,\"y\":300,\"x2\":900,\"y2\":300},{\"id\":\"crank\",\"kind\":\"line\",\"color\":\"#5ce1e6\",\"x\":300,\"y\":300,\"x2\":400,\"y2\":298},{\"id\":\"rod\",\"kind\":\"line\",\"color\":\"#9c8cff\",\"x\":400,\"y\":298,\"x2\":650,\"y2\":300},{\"id\":\"pivot\",\"kind\":\"circle\",\"color\":\"#f4d072\",\"x\":300,\"y\":300,\"r\":12},{\"id\":\"slider\",\"kind\":\"rect\",\"color\":\"#5ce1e6\",\"x\":630,\"y\":280,\"width\":40,\"height\":40}]}"
+        }
+      ]
+    }
+  ]
+}

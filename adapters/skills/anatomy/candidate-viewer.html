@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'none'; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Jarvis · 交互机械场景</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#09121d;color:#e3eef9;font:15px system-ui,sans-serif}main{max-width:1100px;margin:auto;padding:clamp(18px,4vw,42px)}header{display:flex;justify-content:space-between;gap:15px;align-items:center}.mark{color:#65e8ea;letter-spacing:.23em;font-size:12px}h1{font-size:clamp(22px,4vw,34px);font-weight:550;margin:12px 0}p{color:#98b2c8;line-height:1.7}svg{display:block;width:100%;background:radial-gradient(ellipse at center,#172c42,#0b1724);border:1px solid #233c53;border-radius:20px;margin:24px 0;aspect-ratio:5/3}nav{display:flex;flex-wrap:wrap;gap:12px;align-items:center}button{font:inherit;color:inherit;background:#172d42;border:1px solid #3b5f79;border-radius:9px;padding:10px 18px;cursor:pointer}button:focus-visible,input:focus-visible{outline:2px solid #65e8ea;outline-offset:3px}input{flex:1;min-width:100px;accent-color:#65e8ea}output{font-variant-numeric:tabular-nums;min-width:4em}.hint{font-size:12px}text{fill:#b8cddd;font-size:13px}
+</style>
+<main><header><div><div class="mark">JARVIS / SCENE LAB</div><h1>交互机械场景</h1></div><span class="mark">OFFLINE</span></header>
+<p>拖动相位观察运动，暂停后逐帧查看；展开可区分各个部件。</p>
+<svg role="img" aria-label="生成的机械场景" viewBox="0 0 1000 600"><g id="parts"></g></svg>
+<nav><button id="pause">暂停</button><button id="explode" aria-pressed="false">展开部件</button><input id="phase" aria-label="运动相位" type="range" min="0" max="71" value="0"><output id="angle">0°</output></nav>
+<p class="hint">生成代码已在隔离进程中编译为有限绘图帧。此页仅展示验收数据。用于科普与构思，不代表工程认证或真实机械安全。</p></main>
+<script>
+'use strict';
+const frames=/* JARVIS_FRAMES */;
+const $=id=>document.getElementById(id),ns='http://www.w3.org/2000/svg';
+const state=window.__jarvisScene={frame:0,paused:false,apart:false};
+const motion=matchMedia('(prefers-reduced-motion: reduce)');
+function draw(){const frame=frames[state.frame];$('parts').replaceChildren();frame.parts.forEach((part,i)=>{const g=document.createElementNS(ns,'g'),shape=document.createElementNS(ns,part.kind);g.setAttribute('data-part',part.id);if(state.apart)g.setAttribute('transform',`translate(${(i-frame.parts.length/2)*18},${i%2?40:-40})`);for(const [k,v] of Object.entries(part)){if(['x','y','x2','y2','r','width','height'].includes(k)){const key=part.kind==='circle'?({x:'cx',y:'cy'}[k]||k):part.kind==='line'?({x:'x1',y:'y1'}[k]||k):k;shape.setAttribute(key,v);}}shape.setAttribute('stroke',part.color);shape.setAttribute('stroke-width','5');shape.setAttribute('fill',part.kind==='line'?'none':part.color);g.append(shape);if(state.apart){const text=document.createElementNS(ns,'text');text.setAttribute('x',part.x+10);text.setAttribute('y',part.y-12);text.textContent=part.id;g.append(text);}$('parts').append(g);});$('phase').value=state.frame;$('angle').textContent=state.frame*5+'°';$('pause').textContent=state.paused?'播放':'暂停';$('explode').setAttribute('aria-pressed',state.apart);}
+$('pause').onclick=()=>{state.paused=!state.paused;draw();};$('explode').onclick=()=>{state.apart=!state.apart;draw();};$('phase').oninput=()=>{state.frame=Number($('phase').value);state.paused=true;draw();};
+function reduced(){if(motion.matches){state.paused=true;draw();}}motion.addEventListener('change',reduced);reduced();draw();let last=0;function tick(now){if(!state.paused&&now-last>70){state.frame=(state.frame+1)%frames.length;last=now;draw();}requestAnimationFrame(tick);}requestAnimationFrame(tick);
+</script></html>

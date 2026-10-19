@@ -17,6 +17,7 @@
   - [15.1.6 构建清单示例](#development-platform-6)
   - [15.1.7 真正离线与可复现](#development-platform-7)
     - [15.1.7.1 有界 Python 离线依赖配方（0.1.69）](#bounded-python-dependencies)
+    - [15.1.7.2 Python 包与 JavaScript 场景配方（0.1.70）](#bounded-package-scene-recipes)
   - [15.1.8 跨平台并非一个编译开关](#development-platform-8)
   - [15.1.9 来源证据与发布权](#development-platform-9)
   - [15.1.10 工具链本身的更新与退役](#development-platform-10)
@@ -171,6 +172,25 @@ Cargo vendoring 可保留依赖源 [S49](references.md#s49)；pnpm fetch 可用�
 - **验收与产物：**该配方的源码检查通过后直接构建候选 PYZ，在 Worker 中用公开/留出输入运行；最终交付包再以实际归档入口复验。模型只得到公开案例和公开失败反馈。包内含源码、固定启动器、依赖库源码、原许可证/METADATA 和清单；不携带 wheel 的命令行脚本、案例答案或账户信息。清单绑定原 wheel、每个库文件、候选源码及案例摘要。
 - **离线与兼容：**交付包在已有 CPython 3.11—3.13 上即可运行，不依赖 Jarvis 或全局 JMESPath。Jarvis 的严格重建仍需要同版本配方与已登记 wheel；重建器逐字节比较整个包，不执行 Host 候选。包最多 64 KiB，新配方最多 17 个成员、展开最多 128 KiB；原配方仍保留 7 个成员/48 KiB 展开限制。库只在临时 Worker 按需加载，既有每 Worker 192 MiB、12 秒与任务 240 秒上限不变；这是限制，实际资源消耗见验收证据。
 - **应用与后续：**应用/恢复仅操作被冻结的项目源码；不会向原项目安装依赖。需要直接运行时使用自带依赖的 PYZ；源码导入后的环境由相应项目管理。下载包手动执行使用当前账户权限，并不自动创建 LPAC。此版本不支持任意 wheels、原生扩展、传递依赖求解、通用 package 布局或新语言工具链；后续按新版本配方扩展，不改变旧配方解释。
+
+<a id="bounded-package-scene-recipes"></a>
+#### Python 包与 JavaScript 场景配方（0.1.70）
+
+**implemented；本轮闭环验证归[K3 收口清单](delivery-validation.md#k3-closure-matrix)。** 各配方独立版本，保持旧启动器的字节解释；共同使用原任务、冻结案例、候选目录、明确应用和恢复，没有新增常驻服务。
+
+| 配方 | 输入与构建 | 交付 |
+|---|---|---|
+| python-package-v1 | 1—8 个 .py、最多三级子目录；所有父包 __init__.py 显式选择；可绝对/相对包内导入，禁止循环与清单外模块 | 固定 PYZ 启动器、模块映射、源码与摘要 |
+| python-package-query-v1 | 同上，额外使用[固定 JMESPath 接口](#bounded-python-dependencies) | PYZ 自带库及许可；不向原项目安装 |
+| javascript-scene-v1 | 一个 .js，transform({phase:角度}) 返回 JSON 帧字符串；公开及留出案例后另编译 0—355°、间隔5°的72帧 | candidate-scene.zip：源码、frames.json、固定 scene.html、清单与说明 |
+
+包目录不是任意 Python 工程执行：每文件16 KiB、合计32 KiB不变，__init__.py 可为空，不执行 setup.py、钩子或自动发现。入口不能是包初始化文件，模块不得覆盖固定运行库。新增文件必须同时列入 paths 和 new_paths，冻结不存在状态；文件创建/恢复规则归[编程工作流](tasks-agents.md#bounded-coding-workflow)。包工具仍需兼容 CPython，最多21个归档成员、128 KiB展开；旧配方限制不变。
+
+场景执行器使用 [QuickJS-NG Python binding 0.17.0.1](https://pypi.org/project/quickjs-ng/0.17.0.1/) 的 Windows AMD64 abi3 wheel（519,389字节，MIT）。版本/摘要固定于 coding_js.py，来源及上游许可保存在 third_party/coding；缺失或被修改在调用模型前拒绝，不联网安装或替换。它提供独立上下文和资源限制，见[上游接口](https://github.com/genotrance/quickjs-ng)。原生库只在短命 Worker 装载，实际隔离规则归[执行边界](security-sovereignty.md#bounded-coding-boundary)，不是扩大整个 Host 的第三方环境。
+
+每帧仅包含 parts（2—24项），跨帧 id/kind 顺序一致。部件含 id、kind、color、x/y；line 再含 x2/y2，circle 含 r，rect 含 width/height。坐标/尺寸为0—1000内有限数、尺寸正数；颜色只允许 #RRGGBB，标识符限定 ASCII。固定1000×600画布不接受生成 HTML、事件、URL或可执行字符串。查看器支持播放/暂停、相位、展开、键盘和减弱动效；真实浏览器核对后才交付。查看器仅显示预计算帧，曲柄、连杆等运动关系必须来自本次生成源码，不能用固定齿轮替代。数值案例和取样不等于连续物理验证、CAD/制造图或工程安全认证，视频仍在后续阶段。
+
+场景包最多64 KiB压缩、1 MiB展开。读取时按固定配方重建并逐字节核对；实际复验重新运行包内源码，帧摘要必须相同，再运行独立案例。下载者解压后离线打开 scene.html 即可，不需要 Python；开发者通过现有 coding_build.py 离线复验则需要 Jarvis 的已锁定执行器。无浏览器/模型常驻实例；现场资源值见本轮证据。
 
 <a id="development-platform-8"></a>
 ### 跨平台并非一个编译开关

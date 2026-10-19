@@ -13,7 +13,7 @@
   - [7.1.2 当前个人使用范围](#current-personal-scope)
   - [7.1.3 0.1.7 固定 Worker 的隔离范围](#worker-isolation)
   - [7.1.4 0.1.8 浏览器操作的实际边界](#computer-boundary)
-    - [7.1.4.1 编程候选执行边界（0.1.65）](#bounded-coding-boundary)
+    - [7.1.4.1 编程候选执行边界（0.1.70）](#bounded-coding-boundary)
     - [7.1.4.2 REA 静态解析的实际边界（0.1.47）](#rea-static-boundary)
     - [7.1.4.3 0.1.10 网页控制台与队列边界](#computer-web-boundary)
   - [7.1.5 0.1.27 项目资源与编辑边界](#project-editor-boundary)
@@ -115,7 +115,7 @@ HTTP(S) 请求先检查 origin，通过 `route.fetch(max_redirects=0)` 读取响
 本机版本管理使用完整成员/摘要检查及独立健康测试，选择记录原子提交；无签名密钥或密码要求。它是当前用户下的显式维护工具，不是自动发布器或受保护引导器，不能把测试包选择等同于生产权限隔离。业务数据不随代码槽位复制或回退。
 
 <a id="bounded-coding-boundary"></a>
-#### 编程候选执行边界（0.1.65）
+#### 编程候选执行边界（0.1.70）
 
 **0.1.66 构建补充：**PYZ 的启动器由宿主固定，期望答案不打包。Host 仅检查归档成员、大小、配方和摘要；实际归档入口只在 LPAC 运行。重建工具拒绝额外路径、重复成员、超限解压和被改动的启动器，不执行归档安装脚本。原文件静态失败只阻止原代码执行，不阻止受限候选修复。下载后手动运行使用当前账户权限，不能沿用 Jarvis 内的 OS 隔离承诺。
 
@@ -123,9 +123,11 @@ HTTP(S) 请求先检查 origin，通过 `route.fetch(max_redirects=0)` 读取响
 
 **外部 Codex 和候选执行是两层不同边界。** CLI 为受信任的固定版本适配组件；核验实际二进制 SHA256，忽略用户配置与执行规则，禁用 Shell、MCP/插件、浏览器/电脑工具、子 Agent、记忆和自动安装，使用固定文本能力档案与禁止工具文件读写的权限档案。CLI 仍会声明若干通用工具；本机注入 `view_image`、命令、补丁和 spawn_agent 的模型回包已验证拒绝，不靠提示词保证。文本档案不是模型实际全部能力的广告。CLI 的 Windows Job 只限制资源/生命周期，**不等同 LPAC 隔离 CLI 自身或抵御被篡改的受信任二进制**。
 
-每次外部调用拥有独立工作目录，只含公开任务、JSON 输出契约和受控模型档案，不含独立验收答案或生产数据。受控进程只额外获得本机 Codex 登录目录；模型认证由 CLI 使用，凭据不复制进源码、源码包或候选 LPAC。依赖现有本机登录的信任边界必须保留。任务/子进程 Job 限 4 进程、1 GiB、CPU 45 秒、墙钟 90 秒、stdout 512 KiB、stderr 64 KiB，取消、超时与 Host 退出均回收进程树。正常结束保留候选和脱敏回执，不自动清空恢复材料。
+每次外部调用拥有独立工作目录，只含公开任务、JSON 输出契约和受控模型档案，不含独立验收答案或生产数据。0.1.70 为 CLI 创建空的 `CODEX_HOME`；宿主只读取既有文件式 ChatGPT 登录中的 access token/account ID，通过受控进程环境传给固定 `https://chatgpt.com/backend-api/codex`，不经命令行、提示词或报告，不复制 `auth.json`，不继承个人 AGENTS、MCP、插件或 hook。登录过期须在 Codex 重新登录，不隐式切换到 API Key 或重发未知请求；系统凭据库和其他认证方式尚未适配。此修复来自固定版本[全局规则加载器](https://github.com/openai/codex/blob/rust-v0.142.1/codex-rs/codex-home/src/instructions/mod.rs)的实际行为：`--ignore-user-config` 不会关闭全局 AGENTS，`--ignore-rules` 仅针对执行策略。任务/子进程 Job 限 4 进程、1 GiB、CPU 45 秒、墙钟 90 秒、stdout 512 KiB、stderr 64 KiB，取消、超时与 Host 退出均回收进程树。正常结束保留候选和脱敏回执，不自动清空恢复材料。CLI 与 Host 仍在同用户信任边界，内存传递不是对同用户恶意进程的保密保证。
 
 软件离线在认证/启动前拒绝外部执行，运行中持续核对模式修订和取消。网络策略仍为应用层约束，不声明系统防火墙。外部 session ID、usage 和结果状态存入任务；输出错误/不完整/工具异常不会确认候选，不自动重发。已外发资料不可撤回，未知调用也不假设免费。编程器无应用/发布权，实际写入与恢复规则只归[编程工作流](tasks-agents.md#bounded-coding-workflow)。
+
+0.1.70 增加两个边界：显式源码/请求与模型返回先检查常见字面密钥和私钥标记，拒绝后不上传或保存候选正文；它是可解释的检测器，不声称发现全部编码/隐藏秘密。JavaScript 使用锁定 QuickJS 原生库，仅在已有 LPAC Worker 中按需装载，不安装到 Host；没有 Python 回调、DOM、Node、文件或网络 API，每输入独立上下文，16 MiB JS 堆、512 KiB 栈、40 ms CPU 上限，并受外层 Worker 总预算约束。编译为有限数字帧后再送固定 HTML 查看器；浏览器不执行模型源码，预览仍是无同源权限 iframe、拒绝网络 CSP。场景浏览器验证仅按需启动私有 Edge/Driver，Job 限512 MiB、16进程和30秒CPU，结束回收。产物篡改须同时通过固定配方字节检查与重新计算帧比较。外部 CLI 的未知事件、完成后事件和非法 usage 拒绝确认；保留原 UNKNOWN 与停止语义。
 
 <a id="rea-static-boundary"></a>
 #### REA 静态解析的实际边界（0.1.47）

@@ -39,7 +39,7 @@ def archive_path(value):
 def source_files():
     selected=['pyproject.toml','uv.lock','README.md','tools/release_bundle.py','tools/runtime_releases.py',
               'apps/tray/assets/jarvis.ico', 'tools/coding_build.py',
-              'third_party/coding/NOTICE.txt', 'third_party/coding/jmespath-1.1.0-py3-none-any.whl']
+              'third_party/coding/NOTICE.txt', 'third_party/coding/quickjs_ng-0.17.0.1-cp310-abi3-win_amd64.whl', 'third_party/coding/quickjs-ng-LICENSE.txt', 'third_party/coding/quickjs-binding-LICENSE.txt', 'third_party/coding/jmespath-1.1.0-py3-none-any.whl']
     # Runtime brand exports only; high-resolution editable artwork is not needed.
     selected.extend(path.relative_to(ROOT).as_posix() for path in (ROOT/'apps/web/brand').iterdir()
                     if path.is_file() and path.suffix in {'.png', '.ico'})
@@ -120,8 +120,9 @@ def build(destination):
     # Exclusive destination creation; a failed/incomplete archive is not activated.
     with destination.open('xb') as target:
         with zipfile.ZipFile(target,'w',compression=zipfile.ZIP_DEFLATED) as archive:
-            for name,raw in sorted(files.items()):archive.writestr(name,raw)
-            archive.writestr('release.json',json.dumps(manifest,ensure_ascii=False,indent=2).encode())
+            for name,raw in [*sorted(files.items()),('release.json',json.dumps(manifest,ensure_ascii=False,indent=2).encode())]:
+                info=zipfile.ZipInfo(name,(2026,1,1,0,0,0));info.compress_type=zipfile.ZIP_DEFLATED
+                archive.writestr(info,raw)
         target.flush();os.fsync(target.fileno())
     verify(destination)
     return {'version':__version__,'path':str(destination),'sha256':sha(destination.read_bytes()),

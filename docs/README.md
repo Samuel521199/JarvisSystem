@@ -33,11 +33,11 @@
 <a id="project-status"></a>
 ## 目前做到哪里了？
 
-**本次升级 · 0.1.69：**编码任务新增“JSON 查询工具包 · 自带离线依赖”，可处理嵌套 JSON、筛选和报告。依赖锁定后随工具包携带，不向本机安装环境；保留改进单、独立验收和明确应用/恢复。见[使用方法](interaction-persona.md#growth-demand-ui)、[依赖规则](toolchains.md#bounded-python-dependencies)与[本轮验收](delivery-validation.md#coding-dependencies-evidence)。
+**本次升级 · 0.1.70：K3 编码协作已闭环。** 支持从会话改进单生成候选代码，经独立检查、实际构建和隔离运行，再审阅、应用或恢复；新增 Python 子目录包/新文件与 JavaScript 交互场景。五类真实任务的有/无技能指引对照均通过，未观察到成功率增益；范围与局限见[K3 最终验收](delivery-validation.md#k3-closure-matrix)。下一步进入[当前推进队列中的 K4](core-bootstrap.md#near-term-work-queue)，把候选接入受控工具启用与实际调用。
 
 **0.1.66 已有基础：** K3 增加可运行 Python 工具包、产物入口独立复验、离线重建与语法损坏修复；三类真实 Codex 任务通过，结果见[本轮证据](delivery-validation.md#k3-build-evidence)。使用与限制仍归[编程工作流](tasks-agents.md#bounded-coding-workflow)。
 
-**0.1.65 已有基础：** 已完成本轮限定 K3 编码协作：候选副本、独立公开/留出案例检查、1—4 个 Python 模块、源码构建包、文件组应用与恢复，以及外部 Codex。入口为[设置 → 编码协作](http://127.0.0.1:18181/settings#coding)；[使用规则](tasks-agents.md#bounded-coding-workflow)与[实测证据](delivery-validation.md#k3-coding-evidence)集中维护。v0.1.64 基线已上传 GitHub。完整 K3 仍需扩大任务和构建配方，不把该子集写成任意仓库自主开发。
+**0.1.65 已有基础：** 已完成本轮限定 K3 编码协作：候选副本、独立公开/留出案例检查、1—4 个 Python 模块、源码构建包、文件组应用与恢复，以及外部 Codex。入口为[设置 → 编码协作](http://127.0.0.1:18181/settings#coding)；[使用规则](tasks-agents.md#bounded-coding-workflow)与[实测证据](delivery-validation.md#k3-coding-evidence)集中维护。v0.1.64 基线已上传 GitHub。当时完整 K3 尚未收口；当前结果见上方 0.1.70，不将限定配方写成任意仓库自主开发。
 
 **0.1.64 已有基础：** 设置 → 成长中心已接通自检、自愈、进化三标签及独立模型/备选/档位；[增量证据](delivery-validation.md#growth-purposes-evidence)。按主人要求停止重复验收，继续[后续开发](core-bootstrap.md#near-term-work-queue)。 已增加[仅此软件离线开关](models-offline.md#application-offline-control)，入口为设置 → 网络与离线；[本轮测试](delivery-validation.md#application-offline-evidence)与整机断网分别记录。 新增称呼与交流设置、带来源的话题推荐、相关事实选择和三库查询；取消/存储争用已修复。本轮本机实现与独立验证已收口，结果和剩余条件集中于 [K2 本轮收口](delivery-validation.md#k2-completion-evidence)。完整 K2 尚未签收：物理低配机、整机断网及主人体验仍须如实验收。
 

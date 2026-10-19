@@ -1,6 +1,6 @@
 # 最小核心、初始资产与开发路线
 
-> 状态：整体 proposed；当前源码版本 0.1.69，部署见[本轮证据](delivery-validation.md#coding-dependencies-evidence)，新增[K3 编码协作](delivery-validation.md#k3-coding-evidence)，保留[应用离线控制](models-offline.md#application-offline-control)；范围、验证与阻塞见[K2 本轮收口](delivery-validation.md#k2-completion-evidence)；完整 K1/K2/K3 尚未通过。跨主题差距见[后续方向指南](development-guide.md#direction-start)，实施次序见[当前推进队列](#near-term-work-queue) · 更新：2026-10-19
+> 状态：整体 proposed；当前源码与部署版本 0.1.70，K3 开发协作通过，证据见[K3 收口](delivery-validation.md#k3-closure-matrix)，新增[K3 编码协作](delivery-validation.md#k3-coding-evidence)，保留[应用离线控制](models-offline.md#application-offline-control)；范围、验证与阻塞见[K2 本轮收口](delivery-validation.md#k2-completion-evidence)；完整 K1/K2 仍待原验收条件。跨主题差距见[后续方向指南](development-guide.md#direction-start)，实施次序见[当前推进队列](#near-term-work-queue) · 更新：2026-10-19
 > [文档入口](README.md) · [维护规则](MAINTENANCE.md) · [架构图册](architecture-atlas.md)
 
 <!-- book-nav:start -->
@@ -45,7 +45,7 @@
   - [4.2.6 两个层次：哪些能长大，哪些不能自行放开](#bootstrap-4)
 - [4.3 开发顺序与每一步的出口](#bootstrap-5)
 - [4.4 接下来具体做什么、什么时候进入下一步](#next-implementation)
-  - [4.4.1 当前推进队列（更新至0.1.69）](#near-term-work-queue)
+  - [4.4.1 当前推进队列（更新至0.1.70）](#near-term-work-queue)
   - [4.4.2 K2 内优先完成文字/语音对话与工作的分离](#dialogue-upgrade-order)
   - [4.4.3 K2 内的最小自主进化核心](#k2-growth-core)
   - [4.4.4 历史进度核对与优先事项（2026-10-16）](#progress-audit-2026-10-16)
@@ -634,16 +634,16 @@ K1 可以暂时用假模型/规则输入验证可靠性，但它还不能叫完�
 <a id="next-implementation"></a>
 ## 接下来具体做什么、什么时候进入下一步
 
-**截至 2026-10-19，0.1.64 已部署，本机可独立完成的 K2 实现与验证已收口；完整 K2 仍待实际验收条件。** 当前已不需要从零开发回复回执、意图影子评估、Context7 接线、LangMem/Mem0 单条提取对照或记忆重复核对。当前阶段结果与未验条件统一查[K2 收口记录](delivery-validation.md#k2-completion-evidence)，更广泛能力缺口查[后续方向指南](development-guide.md#direction-inventory)。完整 K1/K2/K3 未通过，不能按版本号自动推进阶段。
+**截至 2026-10-19，0.1.70 已部署；K3 开发协作闭环已完成。** 本机可独立完成的 K2 实现与验证沿用既有结果；完整 K1/K2 的物理低配机、整机断网及主人实际体验仍待原条件。K3 的实际范围、质量对照与局限统一查[K3 收口记录](delivery-validation.md#k3-closure-matrix)，下一项是 K4 的受控工具发布与调用闭环。
 
 本节是**当前工作顺序的唯一权威位置**。下面细分既有 K 工作包；后续指南的 F 编号只是工作项索引，不建立第二套 K/M 路线。日期较早的进度段落保留为历史，不再充当下一步队列。继续复用现有单机底座，K1 可靠性收口与 K2 个人核心增量按依赖推进。
 
 <a id="near-term-work-queue"></a>
-### 当前推进队列（更新至0.1.69）
+### 当前推进队列（更新至0.1.70）
 
 **2026-10-19 按主人最新要求停止重复验收，恢复向下开发。** 既有 K2 收口与待验条件保留，不降低门槛也不冒称整体验收通过。F08 的限定职责拆分已随 0.1.64 完成；按主人要求先上传该版本，再在 0.1.65 完成 F07 的候选代码、独立检查、多文件任务和外部 Codex 子集。每轮只做受影响的新改动必要检查，不重跑整套 K2、付费回答评审或离线验收。
 
-三库、人格/相关接续和限定成长的已有证据统一见[K2 收口](delivery-validation.md#k2-completion-evidence)。物理低配机、整机断网、主人真实体验仍待条件，不阻断本轮授权的可独立开发内容。0.1.64 已交付 F08 的限定对象三职责、三用途模型/备选/档位和真实界面；完整事件调度、广泛净收益及任意自我改造仍开放。0.1.65 已通过真实两模块 Codex 任务、独立留出检查、离线重建、应用和恢复。0.1.66 已增加三类实际调用和第二种可运行构建配方。0.1.67 阶段验收修复运行能力声明与诊断，限定编码子集通过。0.1.68 已补[有界改进单交接](delivery-validation.md#coding-demand-evidence)的来源/快照/验收/预算与结果绑定；0.1.69 增加[受控离线依赖配方](toolchains.md#bounded-python-dependencies)，接着按原阶段范围完善包结构、更多真实任务与故障矩阵，再扩大 K4 成长范围、K5 自身模块改造与 K6 多设备/Agent/形态。
+三库、人格/相关接续和限定成长的已有证据统一见[K2 收口](delivery-validation.md#k2-completion-evidence)。物理低配机、整机断网、主人真实体验仍待条件，不阻断本轮授权的可独立开发内容。0.1.64 已交付 F08 的限定对象三职责、三用途模型/备选/档位和真实界面；完整事件调度、广泛净收益及任意自我改造仍开放。0.1.65 已通过真实两模块 Codex 任务、独立留出检查、离线重建、应用和恢复。0.1.66 已增加三类实际调用和第二种可运行构建配方。0.1.67 阶段验收修复运行能力声明与诊断，限定编码子集通过。0.1.68 已补[有界改进单交接](delivery-validation.md#coding-demand-evidence)的来源/快照/验收/预算与结果绑定；0.1.69 增加[受控离线依赖配方](toolchains.md#bounded-python-dependencies)。0.1.70 已完成包/新文件与隔离 JavaScript 场景，并通过[K3 冻结收口清单](delivery-validation.md#k3-closure-matrix)的真实任务、技能对照、故障与运行包验收。下一阶段沿用 K4 成长范围、K5 自身模块改造与 K6 多设备/Agent/形态。
 
 | 优先安排与既有归属 | 本次应先交付的增量 | 依赖、边界与退出位置 |
 |---|---|---|
@@ -653,7 +653,7 @@ K1 可以暂时用假模型/规则输入验证可靠性，但它还不能叫完�
 | 已交付开发先导：K2/W1—W3 | [F04 八场景最终回答对照及能力说明修正](delivery-validation.md#memory-final-answer-evidence) | 0.1.61 已部署；同一窄开发集回归，不等于独立留出或框架对比，保留措辞局限 |
 | 已交付 K2 子集，更广泛验证仍开放 | [F04 扩大人物/时序/项目资料/保留历史的多轮回答对照](development-guide.md#direction-memory-quality)，并逐项完善 [F06 人格/接续](development-guide.md#direction-persona) | 来源与修订规则稳定后补检索；不再以30条公开提取同分决定框架胜负，不先换事实库。按 V-MEM/V-PAL 验收 |
 | 输入适配：K2/W3 | [F05 按键录音、本地转写、编辑发送和独立播报](development-guide.md#direction-voice) | 复用已稳定的文字受理；不等待完整记忆框架/所有工具建成。接口及真实设备测试可独立准备；连续语音和自动动作另过门，遵守下节③④ |
-| 已交付限定 K3，继续扩大真实任务 | [F07 编码范围](development-guide.md#direction-coding)：0.1.65 候选、独立检查、多文件与 Codex 已接通；随后才扩大 [F08 成长](development-guide.md#direction-growth) | 原边界保留；[阶段验收](delivery-validation.md#k3-acceptance-evidence)已完成限定故障与四文件实测，0.1.68 已接通[有界改进单到 CodingProvider](delivery-validation.md#coding-demand-evidence)，0.1.69 已增加受控离线依赖配方，随后补包结构、更多任务和开发故障矩阵，不立即开放任意终端与自身模块改写 |
+| K3 已闭环，转入 K4 | [F07 编码协作](delivery-validation.md#k3-closure-matrix)的候选、独立检查、多文件/包、新文件、离线构建与 Codex 通路已验收 | 保留支持配方边界；后续多语言工具链按各自出口扩展，不重复开放已完成的 K3 清单 |
 | 后续按需求：K5—K6 | 检索/模型替换、联网学习、双节点、Agent/NPC、硬件和形态 | 逐项见[工作清单](development-guide.md#direction-work)，按[唯一 K 阶段表](#bootstrap-5)及原出口。没有需求或前置证据时保持 proposed，不预装全部组件 |
 
 顺序表达依赖和产品重点，不是日历承诺。单个增量的范围、产物和冻结判据应在编码前明确；如果前置能力已满足可直接复用，不重新开发，也不为了“下一版”强行跳过未解决失败。最先推荐的可演示场景为：陪伴回应同时生成一个真实目录报告，随后只取消/修改该报告，刷新和重启不重复执行。

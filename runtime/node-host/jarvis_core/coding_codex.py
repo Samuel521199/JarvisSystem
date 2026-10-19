@@ -37,11 +37,35 @@ def command(exe,stage,settings,schema):
                   'history.persistence="none"','model_provider="jarvis-codex"',
                   'model_providers.jarvis-codex.name="OpenAI"',
                   'model_providers.jarvis-codex.wire_api="responses"',
-                  'model_providers.jarvis-codex.requires_openai_auth=true',
+                  'model_providers.jarvis-codex.requires_openai_auth=false',
+                  'model_providers.jarvis-codex.base_url="https://chatgpt.com/backend-api/codex"',
+                  'model_providers.jarvis-codex.env_key="JARVIS_CODEX_ACCESS_TOKEN"',
+                  'model_providers.jarvis-codex.env_http_headers={"ChatGPT-Account-Id"="JARVIS_CODEX_ACCOUNT_ID"}',
                   'model_providers.jarvis-codex.request_max_retries=0',
                   'model_providers.jarvis-codex.stream_max_retries=0']:
         args+=['-c',value]
     return args+['-']
+
+
+def authentication_environment(home,stage):
+    """Bridge an existing file-backed ChatGPT login in memory, never its rules.
+
+    This pinned CLI loads global AGENTS even with --ignore-user-config. A fresh
+    home plus explicit provider credentials avoids sharing ambient instructions,
+    extensions or credential files. Expiry requires re-login in Codex itself.
+    """
+    try:
+        source=policy.safe_path(Path(home)/'auth.json',directory=False)
+        if source.stat().st_size>65536:raise ValueError('size')
+        auth=json.loads(source.read_text(encoding='utf-8'))
+        tokens=auth['tokens'];access=tokens['access_token'];account=tokens['account_id']
+        if auth.get('auth_mode') not in {None,'chatgpt'}:raise ValueError('mode')
+        if any(not isinstance(v,str) or not v or len(v)>16384 or any(c in v for c in '\r\n\0') for v in (access,account)):raise ValueError('token')
+    except (OSError,ValueError,KeyError,TypeError,policy.CoreError):
+        raise policy.CoreError('codex_auth_unavailable','需要本机 Codex 的文件式 ChatGPT 登录；请在 Codex 登录后重试。') from None
+    clean=policy.safe_path(Path(stage)/'codex-home',must_exist=False)
+    clean.mkdir(exist_ok=False)
+    return {'CODEX_HOME':str(clean),'JARVIS_CODEX_ACCESS_TOKEN':access,'JARVIS_CODEX_ACCOUNT_ID':account}
 
 
 def parse_events(raw,exit_code):
@@ -52,14 +76,23 @@ def parse_events(raw,exit_code):
         value=json.loads(line)
         if not isinstance(value,dict): raise ValueError('event')
         event=value.get('type')
-        if event=='thread.started':thread=value.get('thread_id')
-        elif event=='turn.completed':complete=True;usage=value.get('usage',{})
+        if complete: raise policy.CoreError('model_unknown','Codex 完成后仍有事件，拒绝不一致回执。')
+        if event=='thread.started':
+            if thread or not isinstance(value.get('thread_id'),str) or not value['thread_id']:raise ValueError('thread')
+            thread=value['thread_id']
+        elif event=='turn.started':
+            if not thread:raise ValueError('thread missing')
+        elif event=='turn.completed':
+            if not thread:raise ValueError('thread missing')
+            complete=True;usage=value.get('usage',{})
+            if not isinstance(usage,dict) or any(type(v) is not int or v<0 for v in usage.values()):raise ValueError('usage')
         elif event in {'turn.failed','error'}: raise policy.CoreError('model_unknown','Codex 调用未得到确定成功回执；不自动重发。')
         elif event in {'item.started','item.updated','item.completed'}:
             item=value.get('item',{})
-            if item.get('type') not in {'agent_message','reasoning','plan','error'}:
+            if not isinstance(item,dict) or item.get('type') not in {'agent_message','reasoning','plan'}:
                 raise policy.CoreError('codex_tool_violation','外部执行器出现不允许的工具事件，拒绝交付。')
             if item.get('type')=='agent_message' and event=='item.completed': text=item.get('text','')
+        else: raise policy.CoreError('model_unknown','外部执行器协议包含未识别事件，未交付成功结果。')
     if not complete or exit_code or not text: raise policy.CoreError('model_unknown','Codex 回执不完整，未自动重发。')
     return {'status':'SUCCEEDED','text':text,'usage':usage,'request_id':thread}
 
@@ -74,7 +107,7 @@ class CodexCodingProvider:
         except policy.CoreError as exc: path=None;available=False;reason=str(exc)
         return {'settings':settings,'available':available,'reason':reason,'version':profile()['version'],
                 'executable':str(path) if path else None,'offline':self.network.snapshot()['offline'],
-                'authentication':'使用本机 Codex 已有登录；实际账户可用性以调用结果为准。',
+                'authentication':'使用本机 Codex 文件式 ChatGPT 登录，凭据仅经内存传入独立进程；过期后须在 Codex 重新登录。',
                 'scope':'只生成候选文本，禁用命令、MCP、插件、浏览器和子 Agent；Jarvis 单独隔离验收。',
                 'billing':'由 Codex 登录账户计费；回执记录 token，金额不计入 Jarvis API 费用估算。'}
     def preflight(self):
@@ -103,8 +136,9 @@ class CodexCodingProvider:
                              'candidate_execution':False,'tool_policy':'proposal-only','command_sandbox':'deny-filesystem'}}
         try:
             guard()
+            environment=authentication_environment(codex_home,stage)
             result=run(command(exe,stage,settings,schema_path),stage,guard,seconds=profile()['wall_seconds'],
-                       output_limit=512*1024,stdin_file=input_path,environment_extra={'CODEX_HOME':str(codex_home)})
+                       output_limit=512*1024,stdin_file=input_path,environment_extra=environment)
             guard();receipt['executor']['process']=result['process']
             parsed=parse_events(result['stdout'],result['exit_code'])
             receipt.update(parsed)

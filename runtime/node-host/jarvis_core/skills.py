@@ -258,6 +258,10 @@ class SkillManager:
             if item:
                 mode = self._mode(db, item, context)
                 ready = self.readiness(item)
+                if target == 'anatomy.explainer' and purpose == 'scene-guidance':
+                    from .coding_js import asset
+                    asset()  # This purpose composes guidance; it never calls the gear renderer.
+                    ready = {'executable': True}
                 reason = None
                 if not context['enabled']:
                     reason = '本轮已关闭技能。'
@@ -269,9 +273,9 @@ class SkillManager:
                     reason = '此技能仅允许显式指定。'
                 elif not ready['executable']:
                     reason = ready['reason']
-                elif target == 'anatomy.explainer' and re.search(r'(CAD|STEP|STL|公差|制造图|MP4|视频|发动机|机械手)', message, re.I):
+                elif target == 'anatomy.explainer' and purpose != 'scene-guidance' and re.search(r'(CAD|STEP|STL|公差|制造图|MP4|视频|发动机|机械手)', message, re.I):
                     reason = '当前已验证的是齿轮传动交互模板；自由结构、CAD 和视频任务尚未接通。'
-                elif target == 'anatomy.explainer' and not re.search(r'(齿轮|gear)', message, re.I):
+                elif target == 'anatomy.explainer' and purpose != 'scene-guidance' and not re.search(r'(齿轮|gear)', message, re.I):
                     reason = '当前科普执行器只支持齿轮传动，请在要求中明确齿轮主题。'
                 elif target == 'anatomy.explainer' and purpose == 'chat':
                     reason = '此技能需要真实产物任务，请使用科普技能任务入口。'

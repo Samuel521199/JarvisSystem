@@ -3,15 +3,14 @@ from . import policy
 from .coding_workflow import APPLY_LOCK
 from .project_files import ProjectFiles
 from .coding_bundle import validate_bundle
-from .coding_build import DEPENDENCY
-from .coding_dependencies import IMPORTS as DEPENDENCY_IMPORTS
+from .coding_build import validate_sources, SOURCE
+from .coding_files import snapshot, create_parent, remove_created
 
 
 def apply_bundle(core, report, action):
     value, project = report['coding'], report['output']['project_id']
     originals, candidates = value['originals'], value['candidates']
-    validate_bundle(candidates,value['entrypoint'],
-                    imports=DEPENDENCY_IMPORTS if value.get('build_recipe') == DEPENDENCY else None)
+    validate_sources(candidates,value['entrypoint'],value.get('build_recipe',SOURCE))
     if set(candidates) != {r['path'] for r in originals}: raise policy.CoreError('coding_invalid','文件清单不符。')
     files = ProjectFiles(core)
     rows = []
@@ -28,7 +27,7 @@ def apply_bundle(core, report, action):
             db.execute('CREATE TABLE IF NOT EXISTS coding_batches(output_id TEXT PRIMARY KEY,binding TEXT,action TEXT,state TEXT,completed INTEGER)')
             prior = db.execute('SELECT * FROM coding_batches WHERE output_id=?',(output_id,)).fetchone()
         if prior and prior['binding']!=binding: raise policy.CoreError('file_conflict','恢复记录与候选不匹配。')
-        snapshots={r['path']:files.read({'project_id':project,'path':r['path']}) for r in rows}
+        snapshots={r['path']:snapshot(files,project,r['path'],allow_missing=r['before'] is None) for r in rows}
         target = 'after' if action=='apply' else 'before'
         origin = 'before' if action=='apply' else 'after'
         if all(snapshots[r['path']]['digest']==r[target] for r in rows):
@@ -46,13 +45,17 @@ def apply_bundle(core, report, action):
         completed = 0
         try:
             for r in rows:
-                current=files.read({'project_id':project,'path':r['path']})
+                current=snapshot(files,project,r['path'],allow_missing=r['before'] is None)
                 if current['digest'] != r[target]:
                     if current['digest'] != r[origin]: raise policy.CoreError('file_conflict','应用期间源码被其他编辑改变。')
-                    files.write({'project_id':project,'path':r['path'],'content':r['content'],'digest':r[origin],'bom':r['bom']})
+                    if r[target] is None:
+                        remove_created(files,project,r['path'],r[origin])
+                    else:
+                        if r[origin] is None: create_parent(files,project,r['path'])
+                        files.write({'project_id':project,'path':r['path'],'content':r['content'],'digest':r[origin],'bom':r['bom']})
                 completed += 1
                 with core.ledger.transaction() as db: db.execute('UPDATE coding_batches SET state=?,completed=? WHERE output_id=?',('WRITING',completed,output_id))
-            if any(files.read({'project_id':project,'path':r['path']})['digest']!=r[target] for r in rows):
+            if any(snapshot(files,project,r['path'],allow_missing=r['before'] is None)['digest']!=r[target] for r in rows):
                 raise policy.CoreError('file_conflict','写入后发现外部修改，需核对文件组。')
             with core.ledger.transaction() as db: db.execute('UPDATE coding_batches SET state=? WHERE output_id=?',('CONFIRMED',output_id))
         except Exception as exc:

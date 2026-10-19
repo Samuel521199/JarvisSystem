@@ -16,7 +16,7 @@ BUILTINS = ('str','int','float','bool','list','dict','tuple','set','len','range'
             'Exception','ValueError','TypeError','KeyError')
 
 
-def validate_code(source, *, imports=None, require_entry=True):
+def validate_code(source, *, imports=None, require_entry=True, import_resolver=None):
     if not isinstance(source, str) or not 20 <= len(source.encode()) <= 24000:
         raise policy.CoreError('candidate_invalid', '候选代码大小无效。')
     try:
@@ -51,9 +51,11 @@ def validate_code(source, *, imports=None, require_entry=True):
             if isinstance(node, ast.Attribute) and (node.attr.startswith('_') or node.attr in FORBIDDEN):
                 raise ValueError('private attribute')
             permitted = IMPORTS if imports is None else {**IMPORTS, **imports}
-            if isinstance(node, ast.Import) and any(n.name not in permitted or (n.asname or '').startswith('_') for n in node.names):
+            if import_resolver and isinstance(node, (ast.Import, ast.ImportFrom)):
+                import_resolver(node)
+            elif isinstance(node, ast.Import) and any(n.name not in permitted or (n.asname or '').startswith('_') for n in node.names):
                 raise ValueError('import')
-            if isinstance(node, ast.ImportFrom) and (node.module not in permitted or node.level or any(n.name not in permitted[node.module] or (n.asname or '').startswith('_') for n in node.names)):
+            elif isinstance(node, ast.ImportFrom) and (node.module not in permitted or node.level or any(n.name not in permitted[node.module] or (n.asname or '').startswith('_') for n in node.names)):
                 raise ValueError('import')
             if isinstance(node, ast.FunctionDef) and (node.decorator_list or node.returns or
                     node.name.startswith('_') or node.args.defaults or node.args.kw_defaults or node.args.vararg or node.args.kwarg or node.args.posonlyargs or node.args.kwonlyargs or any(a.annotation or a.arg.startswith('_') for a in node.args.args)):
@@ -104,12 +106,21 @@ class IsolatedRunner:
     def run_build(self, artifact, inputs, checkpoint):
         from ..coding_build import bytes_from, VERIFY, executable
         raw = bytes_from(artifact)
+        from .. import coding_js
+        if artifact['manifest']['recipe'] == coding_js.RECIPE:
+            from ..coding_scene import inspect, compile_frames
+            sources, entry, rebuilt = inspect(raw)
+            engine = coding_js.Runner(self)
+            frames, evidence = compile_frames(engine, sources, entry, checkpoint)
+            if policy.digest(policy.canonical_json(frames).encode()) != rebuilt['manifest']['frames_digest']:
+                raise policy.CoreError('coding_build_invalid', '重新执行的场景帧与交付包不一致。')
+            return engine.run(sources, entry, inputs, checkpoint)
         if not executable(artifact['manifest']['recipe']):
             raise policy.CoreError('coding_recipe_invalid', '此入口仅运行已核对的 Python 工具包。')
         return self._execute({'archive_digest': policy.digest(raw), 'inputs': inputs},
                              VERIFY, 'coding.zipapp.v1', checkpoint, archive=raw)
 
-    def _execute(self, payload, harness, operation, checkpoint, *, archive=None):
+    def _execute(self, payload, harness, operation, checkpoint, *, archive=None, js_engine=None):
         inputs = payload['inputs']
         checkpoint()
         runtime, bundle = verify_bundle()
@@ -122,6 +133,9 @@ class IsolatedRunner:
         lease = StageLease(parent, binding)
         binding['nonce'] = lease.token
         try:
+            if js_engine is not None:
+                if operation != 'coding.javascript.v1': raise ValueError('unexpected engine')
+                (lease.stage / '_quickjs.pyd').write_bytes(js_engine)
             if archive is not None:
                 if operation != 'coding.zipapp.v1': raise ValueError('unexpected build asset')
                 (lease.stage / 'candidate.pyz').write_bytes(archive)

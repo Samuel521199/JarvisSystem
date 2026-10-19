@@ -435,6 +435,8 @@ UNKNOWN 会额外提示先核对远端用量和已有产物；重新分析不把
 
 在编码表单的“构建格式”选择“JSON 查询工具包 · 自带离线依赖”，可用 JMESPath 处理嵌套 JSON。待开始卡显示配方，验收后右侧结果可下载 PYZ；“离线使用与重建”说明依赖随包提供及源码应用方式。旧无依赖配方仍为默认。完整约束见[离线依赖配方](toolchains.md#bounded-python-dependencies)。
 
+0.1.70 在原表单增加“Python 包”和“JavaScript · 新建交互场景”，显示相应文件数/入口说明。包或场景可填“明确新增的文件路径”；它们也必须出现在源码清单。场景成功后右侧结果新增可展开预览，支持播放、相位及部件展开，下载 ZIP 后可离线打开 scene.html。切换配方保留草稿，隐藏字段不提交；所有详细范围只链接[配方规则](toolchains.md#bounded-package-scene-recipes)。
+
 <a id="workspace-panels"></a>
 ### 侧栏、搜索、会话与工作面板
 

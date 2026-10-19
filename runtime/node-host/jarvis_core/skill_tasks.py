@@ -31,15 +31,17 @@ SOURCE_PATHS += ('runtime/node-host/jarvis_core/rea.py', 'runtime/node-host/jarv
                  'runtime/node-host/jarvis_core/coding_workflow.py', 'runtime/node-host/jarvis_core/evolution/runner.py',
                  'runtime/node-host/jarvis_core/dialogue_process.py')
 SOURCE_PATHS += ('config/coding-runtime.json','config/codex-proposal-model.json')
-SOURCE_PATHS += ('runtime/node-host/jarvis_core/coding_demand.py',)
+SOURCE_PATHS += ('runtime/node-host/jarvis_core/coding_demand.py','runtime/node-host/jarvis_core/coding_package.py','runtime/node-host/jarvis_core/coding_files.py')
 SOURCE_PATHS += ('runtime/node-host/jarvis_core/coding_dependencies.py', 'runtime/node-host/jarvis_core/coding_dependency_launcher.py')
+SOURCE_PATHS += ('runtime/node-host/jarvis_core/coding_js.py','runtime/node-host/jarvis_core/coding_scene.py','adapters/skills/anatomy/candidate-viewer.html')
+SOURCE_PATHS += ('runtime/node-host/jarvis_core/coding_secrets.py',)
 SOURCE_PATHS += tuple('runtime/node-host/jarvis_core/'+p+'.py' for p in ('coding_task','coding_bundle','coding_apply','coding_codex','coding_settings','coding_build'))
 SOURCE_PATHS += ('runtime/node-host/jarvis_core/evolution/provider.py','runtime/node-host/jarvis_core/dialogue_worker.py',
                  'adapters/models/provider-native/jarvis_models/gateway.py','runtime/node-host/jarvis_core/skill_validation.py')
 
 
 def validate_request(payload):
-    fields(payload, {'prompt', 'project_id'}, {'model', 'skill_id', 'paths', 'output_path', 'conversation_id', 'ratio', 'theme', 'target_path', 'focus', 'explain', 'coding', 'cases', 'heldout_cases', 'entrypoint', 'coding_provider', 'coding_executor_binding', 'build_recipe', 'coding_demand'})
+    fields(payload, {'prompt', 'project_id'}, {'model', 'skill_id', 'paths', 'output_path', 'conversation_id', 'ratio', 'theme', 'target_path', 'focus', 'explain', 'coding', 'cases', 'heldout_cases', 'entrypoint', 'coding_provider', 'coding_executor_binding', 'build_recipe', 'coding_demand', 'new_paths'})
     if type(payload.get('explain',False)) is not bool:
         raise policy.CoreError('invalid_skill_request','中文解释选项必须为布尔值。')
     if payload.get('explain') and ('::' not in str(payload.get('model','')) or str(payload.get('model','')).startswith('auto::')):
@@ -140,7 +142,14 @@ class SkillTaskService:
         files = ProjectFiles(self.core)
         for path in args['paths']:
             checkpoint()
-            row = files.read({'project_id': args['project_id'], 'path': path})
+            from .coding_files import snapshot
+            declared_new = path in args.get('new_paths', [])
+            row = snapshot(files, args['project_id'], path, allow_missing=declared_new)
+            if declared_new and row['digest'] is not None:
+                raise policy.CoreError('skill_source_changed', '声明的新文件已存在，请重新分析文件范围。')
+            if args.get('coding'):
+                from .coding_secrets import ensure
+                ensure(row['content'])
             total += row['size_bytes']
             if row['size_bytes'] > 16384 or total > 32768:
                 raise policy.CoreError('skill_source_limit', '首期审阅最多读取 32 KiB，单个文件最多 16 KiB。')

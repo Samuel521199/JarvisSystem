@@ -20,9 +20,11 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--dependency', action='store_true', help='Verify the optional bundled JSON-query recipe')
+    parser.add_argument('--fixture-json',type=Path,help='Frozen synthetic replay of a package or scene candidate')
     args = parser.parse_args(); args.output.mkdir(parents=True, exist_ok=False)
     report = {'version': __version__, 'status': 'running', 'paid_model_calls': 0, 'checks': []}
     def save(): (args.output/'report.json').write_text(json.dumps(report, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
+    fixture=json.loads(args.fixture_json.read_text(encoding='utf-8')) if args.fixture_json else None
     save(); errors = []; entered = threading.Event(); release = threading.Event(); calls = []
     candidate = ('import queries\nimport json\ndef transform(data):\n    return json.dumps(queries.total(data))\n'
                  if args.dependency else 'def transform(data):\n    return str(sum(data))\n')
@@ -33,12 +35,19 @@ def main():
         if args.dependency:
             (project/'queries.py').write_text('def total(data):\n    return 0\n', encoding='utf-8')
         originals = {p.name: p.read_bytes() for p in project.glob('*.py')}
+        if fixture:
+            for name,content in fixture['files'].items():
+                if name not in fixture.get('new_paths',[]):
+                    destination=project/name;destination.parent.mkdir(parents=True,exist_ok=True);destination.write_text(content,encoding='utf-8')
+            originals={p:(project/p).read_bytes() if (project/p).exists() else None for p in fixture['files']}
+        def unchanged():return all(((project/p).read_bytes() if (project/p).exists() else None)==raw for p,raw in originals.items())
         core = CoreService(root/'data'); core.initialize(project)
         chat = SyntheticChat(); server = web.create_server(core=core, chat=chat, port=0)
         def generate(prompt, instructions, guard):
             calls.append(prompt); entered.set()
             while not release.wait(.05): guard()
             content = {'files': {'calc.py': candidate, 'queries.py': 'import jmespath\ndef total(data):\n    return jmespath.search("sum(@)", data)\n'}} if args.dependency else {'code': candidate}
+            if fixture:content={'files':fixture['candidates']} if len(fixture['files'])>1 else {'code':fixture['candidates'][fixture['entry']]}
             return {'status': 'SUCCEEDED', 'text': json.dumps({**content, 'notes': 'synthetic UI fixture'})}
         server.computer.skills.coding_generate = generate
         thread = threading.Thread(target=server.serve_forever, kwargs={'poll_interval': .02}, daemon=True); thread.start()
@@ -64,6 +73,14 @@ def main():
                         expect(page.locator('#skill-controls')).to_contain_text('不安装到本机环境')
                     page.locator('#skill-coding-cases').fill(json.dumps([{'input':[2,4], 'expected':'6'}, {'input':[], 'expected':'0'}]))
                     page.locator('#skill-coding-heldout').fill(json.dumps([{'input':[9], 'expected':'9'}, {'input':[-2,1], 'expected':'-1'}]))
+                    if fixture:
+                        page.locator('#skill-paths').fill('\n'.join(fixture['files']))
+                        page.locator('#skill-coding-recipe').select_option(fixture['recipe'])
+                        page.locator('#skill-coding-entry').fill(fixture['entry'])
+                        page.locator('#skill-coding-new-paths').fill('\n'.join(fixture.get('new_paths',[])))
+                        page.locator('#skill-coding-cases').fill(json.dumps(fixture['public']))
+                        page.locator('#skill-coding-heldout').fill(json.dumps(fixture['private'][:2]))
+                        page.locator('#message').fill(fixture['goal'])
                     page.locator('#model-trigger').click(); page.locator('#model-search').fill('离线验证模型')
                     page.locator('#model-options button').filter(has_text='离线验证模型').first.click()
                     page.locator('#composer').evaluate('element=>element.requestSubmit()')
@@ -83,13 +100,13 @@ def main():
                     send('/成长进度'); card = page.locator('[data-growth-id="'+job_id+'"]')
                     expect(card).to_contain_text('候选与产物已通过 4 条案例', timeout=90000)
                     assert source.read_bytes() == original
-                    assert all((project/p).read_bytes() == raw for p, raw in originals.items())
+                    assert unchanged()
                     page.screenshot(path=str(args.output/'verified.png'))
                     page.reload(); expect(page.locator('#send')).to_be_enabled(timeout=15000)
                     send('/成长进度'); card = page.locator('[data-growth-id="'+job_id+'"]')
                     expect(card).to_contain_text('候选与产物已通过 4 条案例', timeout=15000)
                     card.get_by_role('button', name='查看差异、验收与应用', exact=True).click()
-                    expect(page.locator('#coding-result .coding-diff')).to_contain_text('calc.py')
+                    expect(page.locator('#coding-result .coding-diff')).to_contain_text(fixture['entry'] if fixture else 'calc.py')
                     if args.dependency:
                         import zipfile
                         with page.expect_download() as downloaded:
@@ -102,11 +119,20 @@ def main():
                         expect(page.locator('#coding-result')).to_contain_text('无需安装')
                     page.get_by_role('button', name='应用到原文件', exact=True).click()
                     expect(page.locator('#coding-result [role=status]')).to_contain_text('候选文件组已应用')
-                    assert source.read_bytes() != original
+                    assert not unchanged()
                     page.get_by_role('button', name='恢复本次原文件', exact=True).click()
                     expect(page.locator('#coding-result [role=status]')).to_contain_text('原文件已恢复')
                     assert source.read_bytes() == original
-                    assert all((project/p).read_bytes() == raw for p, raw in originals.items())
+                    assert unchanged()
+                    if fixture:
+                        with page.expect_download() as downloaded:page.get_by_role('button',name='下载可运行工具包',exact=True).click()
+                        downloaded.value.save_as(str(args.output/('download.zip' if fixture['recipe']=='javascript-scene-v1' else 'download.pyz')))
+                        if fixture['recipe']=='javascript-scene-v1':
+                            page.get_by_text('预览交互场景',exact=True).click()
+                            frame=page.frame_locator('iframe[title="已验收的机械场景"]')
+                            expect(frame.locator('#pause')).to_be_visible(timeout=15000)
+                            frame.locator('#explode').click();expect(frame.locator('#explode')).to_have_attribute('aria-pressed','true')
+                        report['checks'].append('new file package download and explicit creation/restore verified')
                     page.screenshot(path=str(args.output/'result-panel.png'))
                     report['checks'].append('page reload restores the same receipt; right panel apply/rollback restores exact BOM bytes')
                     page.get_by_role('button', name='关闭编程结果', exact=True).click()

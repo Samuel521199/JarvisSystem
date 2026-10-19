@@ -73,7 +73,8 @@ def validate_binding(core, args, *, task_id=None):
     if str(files.root(args['project_id'])) != frozen['project_root']:
         conflict('项目根目录已变化，请重新分析。')
     for row in frozen['sources']:
-        if files.read({'project_id': args['project_id'], 'path': row['path']})['digest'] != row['digest']:
+        from .coding_files import snapshot
+        if snapshot(files, args['project_id'], row['path'], allow_missing=row['digest'] is None)['digest'] != row['digest']:
             conflict('改进单建立后的源文件已变化，请重新分析，未使用新内容替换旧基线。')
 
 
@@ -132,7 +133,7 @@ class CodingDemands:
         conversation_id(payload['request_id'])
         spec = payload['coding']
         required = {'paths', 'cases', 'heldout_cases', 'model', 'coding_provider', 'build_recipe'}
-        if not isinstance(spec, dict) or not required <= set(spec) or set(spec)-required-{'entrypoint'}:
+        if not isinstance(spec, dict) or not required <= set(spec) or set(spec)-required-{'entrypoint','new_paths'}:
             conflict('请选择文件、编码提供者、构建方式，填写公开及独立验收案例。')
         original = {'payload': payload, 'previous_job': previous_job}
         with self.core.ledger.connection() as db:

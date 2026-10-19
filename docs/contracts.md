@@ -63,7 +63,7 @@
   - [8.6.4 技能和模块包清单](#interfaces-4)
   - [8.6.5 接口类型选择](#interfaces-5)
 - [8.7 技能选择、策略与调用记录契约](#skill-selection-contract)
-  - [8.7.1 编程副本与验证状态字段（0.1.69）](#bounded-coding-contract)
+  - [8.7.1 编程副本与验证状态字段（0.1.70）](#bounded-coding-contract)
 - [8.8 资源租约、本地组件与安全事件契约](#extensions-3)
 - [8.9 项目资源与工程文件契约（0.1.27）](#project-resources-contract)
 - [8.10 MCP 与技能登记契约（0.1.27；0.1.37 管理增量）](#extension-catalog-contract)
@@ -981,9 +981,9 @@ REA 任务增加可选布尔 `explain`（默认 false）。true 时只接受明�
 
 
 <a id="bounded-coding-contract"></a>
-### 编程副本与验证状态字段（0.1.69）
+### 编程副本与验证状态字段（0.1.70）
 
-**改进单交接字段（0.1.68）。** 复用 `POST /api/conversation-growth/{conversation_id}`；编码请求为 `request_id`、`prompt`、`coding`。coding 必含 paths、cases、heldout_cases、model、coding_provider、build_recipe，可含 entrypoint；项目身份从已保存会话读取。源码包改进单也必须有独立案例。创建、查询、开始、取消和重新分析继续使用已有路由及 nonce/Origin 保护。
+**改进单交接字段（0.1.68）。** 复用 `POST /api/conversation-growth/{conversation_id}`；编码请求为 `request_id`、`prompt`、`coding`。coding 必含 paths、cases、heldout_cases、model、coding_provider、build_recipe，可含 entrypoint、new_paths；项目身份从已保存会话读取。源码包改进单也必须有独立案例。创建、查询、开始、取消和重新分析继续使用已有路由及 nonce/Origin 保护。
 
 Host 保存 `frozen`（规范化参数、源码快照、项目根目录、实现/技能绑定、预算），并返回 `proposal.binding`、文件摘要和待开始状态；源码正文不在改进单列表中重复返回。Host 写入任务参数 `coding_demand={id,digest}`，受理和运行都核对保存内容，客户端不能凭一个引用替换目标或验收条件。`web-{改进单 id}` 为唯一任务请求键；关联与队列入账同事务提交。最多保留 1,000 项改进单。
 
@@ -991,11 +991,11 @@ Host 保存 `frozen`（规范化参数、源码快照、项目根目录、实现
 
 0.1.67 的静态失败回执可含 `static_reason`，说明受限环境缺少的内置名称；该诊断不来自留出案例正文。候选生成提示包含实际内置函数清单，构建配方与允许执行能力不变。
 
-技能请求沿用 `coding:boolean` 与 `cases:[{input,expected}]`；新增 `heldout_cases`、`entrypoint`、`coding_provider=gateway|codex`（默认 gateway）；`build_recipe=python-source-v1|python-zipapp-v1|python-jmespath-v1`，API 缺省保持原源码配方，当前 UI 默认可运行工具包。每组案例 2—24 项、总计最多 16 KiB；每项仅含 input/expected，预期为最多 4 KiB 字符串。独立输入不得与公开输入重复。多文件或可运行工具包必须有 heldout_cases；旧单文件请求兼容，但不宣称已做独立检查。paths 为 1—4 个同目录 `.py` 文件，模块名普通英文字母开头，可含数字和下划线；入口默认第一份且必须在清单中。原始/候选每文件最多 16 KiB、合计 32 KiB。四项工程技能之一必须明确指定，不能并用 output_path 或 REA explain。
+技能请求沿用 `coding:boolean` 与 `cases:[{input,expected}]`；新增 `heldout_cases`、`entrypoint`、`coding_provider=gateway|codex`（默认 gateway）；`build_recipe` 接受 python-source-v1、python-zipapp-v1、python-jmespath-v1、python-package-v1、python-package-query-v1、javascript-scene-v1，API 缺省保持原源码配方，当前 UI 默认可运行工具包。每组案例 2—24 项、总计最多 16 KiB；每项仅含 input/expected，预期为最多 4 KiB 字符串。独立输入不得与公开输入重复。多文件或可运行工具包必须有 heldout_cases；旧单文件请求兼容，但不宣称已做独立检查。旧 Python 配方的 paths 为 1—4 个同目录 `.py` 文件，模块名普通英文字母开头，可含数字和下划线；入口默认第一份且必须在清单中。包配方最多 8 个文件、三级子目录，父包 __init__.py 须在清单中；场景配方为单个 .js。new_paths 为显式声明的不存在文件子集，只适用于包/场景，新增与存在状态都参与冻结。场景输入为 {phase:0到360}，expected 为帧 JSON 字符串。原始/候选每文件最多 16 KiB、合计 32 KiB。四项工程技能之一必须明确指定，不能并用 output_path 或 REA explain。
 
 gateway 使用明确 `provider::model`，Codex 使用[编码协作设置](evolution-release.md#external-coding-executor)中的模型。入队时宿主写入 `coding_executor_binding`，绑定设置修订和内容；排队及调用期间变化即停止旧任务。任务执行截止时间读取账本预算，编码任务 240 秒；最多两次完整候选生成，网关每次 55 秒，Codex 每次 90 秒；不是自动重发未知请求。
 
-回执沿用 `jarvis.skill-report`，包含 text、source_references、coding；[报告 schema](../contracts/schemas/skill-report.schema.json)维护字段约束。原有 original/candidate 保持单文件兼容，多文件增加 originals/candidates/entrypoint；validation 分 public/heldout 并标 independent_checks。build 绑定所选配方的 ZIP/PYZ、manifest、字节数和 SHA256；每个源文件与冻结案例摘要都进入清单。PYZ 增加 launcher_sha256、Python 版本范围；回执增加 build_recipe、build_validation（实际归档入口与案例）和 source_build（原无依赖配方的配套源码包）。依赖配方增加 dependencies（名称/版本/来源/许可证/原 wheel 摘要与公开接口），manifest 增加 dependency_files；具体锁定规则归[离线依赖配方](toolchains.md#bounded-python-dependencies)。文件名只接受 candidate-python.zip / candidate-python.pyz。静态失败基线的 executed=false、diagnostics 含文件及语法行号；不执行原始损坏源码。构建复验失败使 coding.passed=false；仅 coding.passed=true 可应用；CONFIRMED 只表示报告交付完成，失败诊断也可为 CONFIRMED。
+回执沿用 `jarvis.skill-report`，包含 text、source_references、coding；[报告 schema](../contracts/schemas/skill-report.schema.json)维护字段约束。原有 original/candidate 保持单文件兼容，多文件或新增文件增加 originals/candidates/entrypoint（1—8项，原 digest 可为 null）；validation 分 public/heldout 并标 independent_checks。build 绑定所选配方的 ZIP/PYZ、manifest、字节数和 SHA256；每个源文件与冻结案例摘要都进入清单。PYZ 增加 launcher_sha256、Python 版本范围；回执增加 build_recipe、build_validation（实际归档入口与案例）和 source_build（原无依赖配方的配套源码包）。依赖配方增加 dependencies（名称/版本/来源/许可证/原 wheel 摘要与公开接口），manifest 增加 dependency_files；具体锁定规则归[离线依赖配方](toolchains.md#bounded-python-dependencies)。文件名只接受 candidate-python.zip / candidate-python.pyz / candidate-scene.zip。场景回执另含 scene_html、scene_browser、scene_worker、toolchain；manifest 绑定帧、固定查看器和执行器；完整定义归[配方](toolchains.md#bounded-package-scene-recipes)。静态失败基线的 executed=false、diagnostics 含文件及语法行号；不执行原始损坏源码。构建复验失败使 coding.passed=false；仅 coding.passed=true 可应用；CONFIRMED 只表示报告交付完成，失败诊断也可为 CONFIRMED。
 
 `POST /api/skills/coding-apply`、`coding-rollback` 仍仅接收 conversation_id/task_id，从核验回执取源文件组，不接受客户端另传路径或代码。保留 nonce、Origin、会话归属、项目身份和内容冲突保护。部分多文件写入返回 coding_partial，允许在同一回执上继续/恢复；恢复日志不是自动回放命令。
 

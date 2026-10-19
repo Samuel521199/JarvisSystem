@@ -38,7 +38,7 @@ def main():
             body = stream.read(16385)
         if len(body) > 16384: parser.error('Case file exceeds 16 KiB')
         cases = json.loads(body)
-        validate({'coding': True, 'paths': [entry], 'skill_id': 'matt-pocock.tdd',
+        validate({'coding': True, 'paths': ['casecheck.py'], 'skill_id': 'matt-pocock.tdd',
                   'model': 'offline::verification', 'cases': cases})
         runner = IsolatedRunner(); runner.preflight()
         class ArtifactRunner:

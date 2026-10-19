@@ -26,6 +26,13 @@ if sys.argv[3]=='first':
     record=core.inventory(request_id='packaged-inventory')
     assert record['action']['status']=='CONFIRMED',record
     core._verify_artifact(record['artifact'])
+    from jarvis_core.coding_js import Runner
+    values,evidence=Runner().run({'scene.js':'function transform(data){return String(data.phase+1);}'},'scene.js',[{'phase':3}],lambda:None)
+    assert values==['4'] and evidence['lpac']
+    from jarvis_core.coding_build import build
+    from jarvis_core.evolution.runner import IsolatedRunner
+    artifact=build({'tool/__init__.py':'','tool/run.py':'def transform(data):\n    return str(sum(data))\n'},'tool/run.py','sha256:'+'0'*64,'python-package-v1')
+    assert IsolatedRunner().run_build(artifact,[[1,2]],lambda:None)[0]==['3']
     core.stop('synthetic release recovery probe')
 else:
     state=core.status();assert state['stopped']
@@ -61,7 +68,7 @@ def main():
             'limitations':['Same-version fallback slot; no cross-version schema migration or protected service activation.',
                            'Python network-denial hook only; machine-wide disconnected boot not tested.',
                            'Optional browser/speech, model weights, owner keys and live state are excluded.']}
-    output=Path(os.environ['LOCALAPPDATA'])/'Jarvis/data/diagnostics/k1-progress/runtime-package.json'
+    output=Path(sys.argv[2]).absolute() if len(sys.argv)>2 else Path(os.environ['LOCALAPPDATA'])/'Jarvis/data/diagnostics/k1-progress/runtime-package.json'
     output.parent.mkdir(parents=True,exist_ok=True);output.write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
     print(json.dumps({'status':'passed','package':package,'report':str(output)}))
 

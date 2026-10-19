@@ -32,3 +32,10 @@ THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
+
+QuickJS-NG Python binding 0.17.0.1 (MIT), Windows AMD64 abi3.
+Source: https://github.com/genotrance/quickjs-ng
+Wheel: https://pypi.org/project/quickjs-ng/0.17.0.1/
+SHA-256: 355511615baa17bc98092680f068e3536ea1ee5a650b16f59bf6871f497f3780
+Vendored only for the optional JavaScript LPAC worker; no Host import or pip install.
+The wheel contains its wrapper license; upstream engine and original binding notices accompany it.

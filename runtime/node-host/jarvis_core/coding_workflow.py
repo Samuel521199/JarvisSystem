@@ -21,14 +21,20 @@ def validate(args):
     if type(args.get('coding',False)) is not bool:
         raise policy.CoreError('coding_invalid','编程执行开关无效。')
     if not args.get('coding'):
-        if any(k in args for k in ('cases','heldout_cases','entrypoint','coding_provider','coding_executor_binding','build_recipe','coding_demand')):raise policy.CoreError('coding_invalid','验收案例与编码选项仅用于编程执行。')
+        if any(k in args for k in ('cases','heldout_cases','entrypoint','coding_provider','coding_executor_binding','build_recipe','coding_demand','new_paths')):raise policy.CoreError('coding_invalid','验收案例与编码选项仅用于编程执行。')
         return
     from .coding_bundle import layout
-    from .coding_build import recipe, SOURCE, DEPENDENCY, executable
+    from .coding_build import recipe, SOURCE, executable, uses_dependencies
+    from .coding_package import RECIPES as PACKAGE_RECIPES, layout as package_layout
+    from . import coding_js
     selected_recipe = recipe(args.get('build_recipe', SOURCE))
     if 'coding_executor_binding' in args and (not isinstance(args['coding_executor_binding'],str) or not re.fullmatch(r'sha256:[a-f0-9]{64}',args['coding_executor_binding'])):
         raise policy.CoreError('coding_invalid','执行器绑定格式无效。')
-    layout(args['paths'], args.get('entrypoint', next(iter(args['paths']), '')))
+    (coding_js.layout if selected_recipe == coding_js.RECIPE else package_layout if selected_recipe in PACKAGE_RECIPES else layout)(args['paths'], args.get('entrypoint', next(iter(args['paths']), '')))
+    new_paths = args.get('new_paths', [])
+    if (not isinstance(new_paths, list) or any(not isinstance(p,str) for p in new_paths) or len(new_paths) != len(set(new_paths)) or
+            any(p not in args['paths'] for p in new_paths) or (new_paths and selected_recipe not in PACKAGE_RECIPES|{coding_js.RECIPE})):
+        raise policy.CoreError('coding_invalid', '新增文件必须显式列在包任务的文件清单中。')
     if args.get('skill_id') not in GUIDES or not isinstance(args.get('coding_provider','gateway'),str) or args.get('coding_provider','gateway') not in {'gateway','codex'}:
         raise policy.CoreError('coding_invalid','请选择排错、TDD、模块设计或代码审阅及可用编码提供者。')
     if (args.get('coding_provider','gateway') == 'gateway' and '::' not in args.get('model','')) or args.get('output_path') or args.get('explain'):
@@ -42,33 +48,42 @@ def validate(args):
             if not isinstance(c,dict) or set(c)!={'input','expected'} or not isinstance(c['expected'],str) or len(c['expected'].encode())>4096:raise ValueError()
     except (TypeError,ValueError,RecursionError,UnicodeError):
         raise policy.CoreError('coding_invalid','验收案例必须是有界 JSON 和字符串预期。') from None
+    from .coding_secrets import ensure
+    ensure(policy.canonical_json(args))
     if 'heldout_cases' in args:
         other = {**args, 'cases': args['heldout_cases']}
         other.pop('heldout_cases')
         # Validate the private set with the same quotas without recursive multi-file requirement.
-        other['paths'] = [args['paths'][0]]; other.pop('entrypoint', None); other.pop('build_recipe', None)
+        other['paths'] = ['casecheck.py']; other.pop('entrypoint', None); other.pop('build_recipe', None); other.pop('new_paths', None)
         validate(other)
         public = {policy.canonical_json(c['input']) for c in cases}
         if any(policy.canonical_json(c['input']) in public for c in args['heldout_cases']):
             raise policy.CoreError('coding_invalid','独立验收输入不能与公开示例重复。')
     elif len(args['paths']) > 1 or executable(selected_recipe):
         raise policy.CoreError('coding_invalid','多文件或可运行工具包还需要 2—24 条不发送给编码模型的独立验收案例。')
-    if selected_recipe == DEPENDENCY:
+    if uses_dependencies(selected_recipe):
         from .coding_dependencies import members
         members()  # Missing/corrupt closure fails admission, before any model call.
+    if selected_recipe == coding_js.RECIPE:
+        coding_js.asset()
+        for case in args['cases']+args.get('heldout_cases',[]):
+            item=case['input']
+            if not isinstance(item,dict) or set(item)!={'phase'} or type(item['phase']) not in (int,float) or not 0<=item['phase']<=360:
+                raise policy.CoreError('coding_invalid','场景输入固定为 {"phase":0到360}，预期为场景帧 JSON 字符串。')
 
 
 def composition(service,args):
     decisions=[]
-    for ident in GUIDES:
+    chosen=GUIDES+('anatomy.explainer',) if args.get('build_recipe')=='javascript-scene-v1' else GUIDES
+    for ident in chosen:
         ctx={'explicit':ident,'project_id':args['project_id']}
         if args.get('conversation_id'):ctx['conversation_id']=args['conversation_id']
-        d=service.manager.select(args['prompt'],ctx,purpose='task')
+        d=service.manager.select(args['prompt'],ctx,purpose='scene-guidance' if ident=='anatomy.explainer' else 'task')
         if not d['selected']:raise policy.CoreError('coding_skill_disabled','组合中的技能不可用：'+ident)
         decisions.append(d)
     items={x['id']:x for x in catalog()[0]['skills']}
     # Jarvis adaptations are small enough to compose within the existing 4 KiB budget.
-    return decisions,{ident:items[ident]['guide'] for ident in GUIDES}
+    return decisions,{ident:items[ident]['guide'] for ident in chosen}
 
 
 def check_code(runner,source,cases,checkpoint):

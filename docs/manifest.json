@@ -317,7 +317,8 @@
       "title": "开发环境、多语言工具链与构建",
       "owns": [
         "开发能力、构建配方、依赖闭包、目标验证与隔离",
-        "bounded-python-dependencies"
+        "bounded-python-dependencies",
+        "bounded-package-scene-recipes"
       ],
       "status": "proposed",
       "reader_summary": "怎样准备编译环境，构建和测试不同语言的程序？"
@@ -506,7 +507,8 @@
         "application-offline-evidence",
         "growth-purposes-evidence",
         "coding-demand-evidence",
-        "coding-dependencies-evidence"
+        "coding-dependencies-evidence",
+        "k3-closure-matrix"
       ],
       "status": "proposed",
       "reader_summary": "哪些能力测过，证据在哪里，下一阶段怎样验收？"

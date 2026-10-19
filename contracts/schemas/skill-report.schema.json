@@ -40,13 +40,13 @@
         },
         "originals": {
           "type": "array",
-          "minItems": 2,
-          "maxItems": 4
+          "minItems": 1,
+          "maxItems": 8
         },
         "candidates": {
           "type": "object",
-          "minProperties": 2,
-          "maxProperties": 4,
+          "minProperties": 1,
+          "maxProperties": 8,
           "additionalProperties": {
             "type": "string",
             "maxLength": 16384
@@ -69,7 +69,8 @@
             "filename": {
               "enum": [
                 "candidate-python.zip",
-                "candidate-python.pyz"
+                "candidate-python.pyz",
+                "candidate-scene.zip"
               ]
             },
             "size_bytes": {
@@ -83,7 +84,10 @@
           "enum": [
             "python-source-v1",
             "python-zipapp-v1",
-            "python-jmespath-v1"
+            "python-jmespath-v1",
+            "python-package-v1",
+            "python-package-query-v1",
+            "javascript-scene-v1"
           ]
         },
         "source_build": {

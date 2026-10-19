@@ -1,0 +1,610 @@
+{
+  "version": "0.1.70",
+  "date": "2026-10-19",
+  "status": "passed",
+  "scope": "K3 development collaboration, V-K3-01 through V-K3-08; not completion of all B/M/K1/K2 or autonomous K4-K6 capabilities",
+  "dataset": {
+    "path": "evals/cases/k3-closure-v1.json",
+    "sha256": "87c48bd6bdd41545f5deaac21d04aa359dfc327a621fb7d812f3483e8ba68e6f",
+    "frozen_before_calls": true
+  },
+  "quality_comparison": {
+    "model": "gpt-6.1-sol",
+    "reasoning": "medium",
+    "max_calls_per_case": 2,
+    "guided": [
+      {
+        "id": "csv-escaping",
+        "status": "passed",
+        "calls": 1,
+        "usage": {
+          "input_tokens": 1638,
+          "output_tokens": 288,
+          "reasoning_output_tokens": 124
+        },
+        "model_seconds": 22.844,
+        "cases": 4,
+        "heldout_cases": 2,
+        "build_passed": true,
+        "build_digest": "sha256:715f92762c5017963f4da635cf7c242365863be49320d45abb4ed183d5ccfef2",
+        "artifact_bytes": 2436,
+        "offline_byte_identical": true,
+        "original_bytes_restored": true,
+        "worker_peak_bytes": 12972032
+      },
+      {
+        "id": "new-label-package",
+        "status": "passed",
+        "calls": 1,
+        "usage": {
+          "input_tokens": 1622,
+          "output_tokens": 267,
+          "reasoning_output_tokens": 82
+        },
+        "model_seconds": 20.965,
+        "cases": 6,
+        "heldout_cases": 4,
+        "build_passed": true,
+        "build_digest": "sha256:ec20601e205ff1600a47b7af87da5937ed0ca7c80c4577382ebfb74e8afc33ae",
+        "artifact_bytes": 3075,
+        "offline_byte_identical": true,
+        "original_bytes_restored": true,
+        "worker_peak_bytes": 18006016
+      },
+      {
+        "id": "nested-query-package",
+        "status": "passed",
+        "calls": 1,
+        "usage": {
+          "input_tokens": 1736,
+          "output_tokens": 291,
+          "reasoning_output_tokens": 83
+        },
+        "model_seconds": 21.166,
+        "cases": 6,
+        "heldout_cases": 4,
+        "build_passed": true,
+        "build_digest": "sha256:be9185297a2c27ba4b3ca932fed63f4aea5d279b64611aada7b72942dad0365b",
+        "artifact_bytes": 22974,
+        "offline_byte_identical": true,
+        "original_bytes_restored": true,
+        "worker_peak_bytes": 21024768
+      },
+      {
+        "id": "package-money-refactor",
+        "status": "passed",
+        "calls": 1,
+        "usage": {
+          "input_tokens": 1943,
+          "output_tokens": 759,
+          "reasoning_output_tokens": 289
+        },
+        "model_seconds": 37.861,
+        "cases": 10,
+        "heldout_cases": 8,
+        "build_passed": true,
+        "build_digest": "sha256:38560afde1746177120b14937040caf7c422ae69906c7facc0d6ced4d9890f43",
+        "artifact_bytes": 3803,
+        "offline_byte_identical": true,
+        "original_bytes_restored": true,
+        "worker_peak_bytes": 18567168
+      },
+      {
+        "id": "crank-slider-scene",
+        "status": "passed",
+        "calls": 1,
+        "usage": {
+          "input_tokens": 2166,
+          "output_tokens": 692,
+          "reasoning_output_tokens": 75
+        },
+        "model_seconds": 26.613,
+        "cases": 8,
+        "heldout_cases": 6,
+        "build_passed": true,
+        "build_digest": "sha256:a05c6a0901e37147e96137cabe0ba2ff529d07549f3b063d9083cd1b3a24d2db",
+        "artifact_bytes": 7268,
+        "offline_byte_identical": true,
+        "original_bytes_restored": true,
+        "worker_peak_bytes": 13361152
+      }
+    ],
+    "without_guides": [
+      {
+        "id": "csv-escaping",
+        "status": "passed",
+        "calls": 1,
+        "usage": {
+          "input_tokens": 1310,
+          "output_tokens": 190,
+          "reasoning_output_tokens": 56
+        },
+        "model_seconds": 17.623,
+        "cases": 4,
+        "heldout_cases": 2,
+        "build_passed": true,
+        "build_digest": "sha256:c0b256546b3785623bfd1b606d60cad928fa5fb1da1e4c0ed08981cb9235f41e",
+        "artifact_bytes": 2460,
+        "offline_byte_identical": true,
+        "original_bytes_restored": true,
+        "worker_peak_bytes": 12980224
+      },
+      {
+        "id": "new-label-package",
+        "status": "passed",
+        "calls": 1,
+        "usage": {
+          "input_tokens": 1302,
+          "output_tokens": 200,
+          "reasoning_output_tokens": 54
+        },
+        "model_seconds": 17.531,
+        "cases": 6,
+        "heldout_cases": 4,
+        "build_passed": true,
+        "build_digest": "sha256:cf1cf8ba180512337ebadc7b1eb0c232fb28cb28e1112e383ad0069d80036023",
+        "artifact_bytes": 3078,
+        "offline_byte_identical": true,
+        "original_bytes_restored": true,
+        "worker_peak_bytes": 18325504
+      },
+      {
+        "id": "nested-query-package",
+        "status": "passed",
+        "calls": 1,
+        "usage": {
+          "input_tokens": 1424,
+          "output_tokens": 197,
+          "reasoning_output_tokens": 41
+        },
+        "model_seconds": 22.444,
+        "cases": 6,
+        "heldout_cases": 4,
+        "build_passed": true,
+        "build_digest": "sha256:be9185297a2c27ba4b3ca932fed63f4aea5d279b64611aada7b72942dad0365b",
+        "artifact_bytes": 22974,
+        "offline_byte_identical": true,
+        "original_bytes_restored": true,
+        "worker_peak_bytes": 21155840
+      },
+      {
+        "id": "package-money-refactor",
+        "status": "passed",
+        "calls": 1,
+        "usage": {
+          "input_tokens": 1625,
+          "output_tokens": 547,
+          "reasoning_output_tokens": 172
+        },
+        "model_seconds": 34.963,
+        "cases": 10,
+        "heldout_cases": 8,
+        "build_passed": true,
+        "build_digest": "sha256:c78aa9af069a408a5313bac14e48059f5e7f79181bda8f4949cebcb5efb7dadc",
+        "artifact_bytes": 3807,
+        "offline_byte_identical": true,
+        "original_bytes_restored": true,
+        "worker_peak_bytes": 18735104
+      },
+      {
+        "id": "crank-slider-scene",
+        "status": "passed",
+        "calls": 1,
+        "usage": {
+          "input_tokens": 1783,
+          "output_tokens": 564,
+          "reasoning_output_tokens": 29
+        },
+        "model_seconds": 21.865,
+        "cases": 8,
+        "heldout_cases": 6,
+        "build_passed": true,
+        "build_digest": "sha256:c59a35e98730e58bfe9d5a91c0df06d08fba8199a5b2f986ce6a50bb02b46e93",
+        "artifact_bytes": 7011,
+        "offline_byte_identical": true,
+        "original_bytes_restored": true,
+        "worker_peak_bytes": 13877248
+      }
+    ],
+    "conclusion": "5/5 in each arm, all first call; no observed pass-rate gain. Small authored development set; not independent blind assessment or statistical evidence. Both arms used the previous login transport; the final isolated login bridge has a separate real regression below. Concurrent machine load prevents causal timing comparison."
+  },
+  "final_login_bridge": {
+    "id": "new-label-package",
+    "status": "passed",
+    "calls": 1,
+    "usage": {
+      "input_tokens": 1620,
+      "output_tokens": 265,
+      "reasoning_output_tokens": 55
+    },
+    "model_seconds": 22.438,
+    "cases": 6,
+    "heldout_cases": 4,
+    "build_passed": true,
+    "build_digest": "sha256:fb5f227867c979a4764a5661c85f63af51ea32dd9d46e92b44aabad92ae1a226",
+    "artifact_bytes": 3075,
+    "offline_byte_identical": true,
+    "original_bytes_restored": true,
+    "worker_peak_bytes": 18612224,
+    "credential_persistence_scan": {
+      "status": "passed",
+      "auth_json_copied": false,
+      "actual_access_token_found_in_task_files": false
+    }
+  },
+  "regression": {
+    "unique_completed_methods": 106,
+    "latest_method_outcomes": {
+      "test_actual_lpac_repair_apply_rollback_bom (test_coding_workflow.CodingTests.test_actual_lpac_repair_apply_rollback_bom)": "ok",
+      "test_all_composed_skills_must_be_available (test_coding_workflow.CodingTests.test_all_composed_skills_must_be_available)": "ok",
+      "test_cancellation_and_source_change_during_model (test_coding_workflow.CodingTests.test_cancellation_and_source_change_during_model)": "ok",
+      "test_changed_codex_settings_reject_queued_binding_without_model (test_coding_workflow.CodingTests.test_changed_codex_settings_reject_queued_binding_without_model)": "ok",
+      "test_coding_route_preserves_prices_and_profile_parameters (test_coding_workflow.CodingTests.test_coding_route_preserves_prices_and_profile_parameters)": "ok",
+      "test_failed_candidate_and_unknown_never_apply (test_coding_workflow.CodingTests.test_failed_candidate_and_unknown_never_apply)": "ok",
+      "test_invalid_candidate_repaired_without_host_execution (test_coding_workflow.CodingTests.test_invalid_candidate_repaired_without_host_execution)": "ok",
+      "test_passing_baseline_no_paid_call (test_coding_workflow.CodingTests.test_passing_baseline_no_paid_call)": "ok",
+      "test_receipt_interrupted_after_write_reconciles_without_rewrite (test_coding_workflow.CodingTests.test_receipt_interrupted_after_write_reconciles_without_rewrite)": "ok",
+      "test_single_json_fence_normalization_is_still_strict (test_coding_workflow.CodingTests.test_single_json_fence_normalization_is_still_strict)": "ok",
+      "test_source_conflict_no_overwrite (test_coding_workflow.CodingTests.test_source_conflict_no_overwrite)": "ok",
+      "test_validation_boundaries (test_coding_workflow.CodingTests.test_validation_boundaries)": "ok",
+      "test_worker_cannot_omit_cases (test_coding_workflow.CodingTests.test_worker_cannot_omit_cases)": "ok",
+      "test_contract_rejects_public_private_overlap_and_cycles (test_coding_bundle.BundleTests.test_contract_rejects_public_private_overlap_and_cycles)": "ok",
+      "test_extra_path_and_bad_import_never_delivered (test_coding_bundle.BundleTests.test_extra_path_and_bad_import_never_delivered)": "ok",
+      "test_hidden_overfit_is_rejected_without_leaking_values (test_coding_bundle.BundleTests.test_hidden_overfit_is_rejected_without_leaking_values)": "ok",
+      "test_multifile_real_build_apply_and_rollback (test_coding_bundle.BundleTests.test_multifile_real_build_apply_and_rollback)": "ok",
+      "test_partial_external_edit_is_never_overwritten (test_coding_bundle.BundleTests.test_partial_external_edit_is_never_overwritten)": "ok",
+      "test_partial_receipt_can_resume_or_restore (test_coding_bundle.BundleTests.test_partial_receipt_can_resume_or_restore)": "ok",
+      "test_whole_group_conflict_before_any_write (test_coding_bundle.BundleTests.test_whole_group_conflict_before_any_write)": "ok",
+      "test_actual_archive_entry_cannot_mutate_input (test_coding_build.BuildTests.test_actual_archive_entry_cannot_mutate_input)": "ok",
+      "test_missing_dependency_and_receipt_swap_fail_before_execution (test_coding_build.BuildTests.test_missing_dependency_and_receipt_swap_fail_before_execution)": "ok",
+      "test_real_archive_lpac_unicode_and_no_implicit_newline (test_coding_build.BuildTests.test_real_archive_lpac_unicode_and_no_implicit_newline)": "ok",
+      "test_reproducible_and_legacy_recipe (test_coding_build.BuildTests.test_reproducible_and_legacy_recipe)": "ok",
+      "test_tampered_digest_launcher_and_duplicate_member (test_coding_build.BuildTests.test_tampered_digest_launcher_and_duplicate_member)": "ok",
+      "test_artifact_failure_prevents_delivery_and_application (test_coding_build.BuildWorkflowTests.test_artifact_failure_prevents_delivery_and_application)": "ok",
+      "test_broken_baseline_can_be_repaired_and_built (test_coding_build.BuildWorkflowTests.test_broken_baseline_can_be_repaired_and_built)": "ok",
+      "test_passing_baseline_builds_offline_without_model (test_coding_build.BuildWorkflowTests.test_passing_baseline_builds_offline_without_model)": "ok",
+      "test_zipapp_requires_independent_cases_and_known_recipe (test_coding_build.BuildWorkflowTests.test_zipapp_requires_independent_cases_and_known_recipe)": "ok",
+      "test_descendant_is_reaped_on_timeout (test_coding_codex.CodexTests.test_descendant_is_reaped_on_timeout)": "ok",
+      "test_pinned_cli_rejects_file_read_and_execution_tools (test_coding_codex.CodexTests.test_pinned_cli_rejects_file_read_and_execution_tools)": "ok",
+      "test_process_stdin_isolated_env_and_cancellation (test_coding_codex.CodexTests.test_process_stdin_isolated_env_and_cancellation)": "ok",
+      "test_settings_cas_and_offline_before_executable (test_coding_codex.CodexTests.test_settings_cas_and_offline_before_executable)": "ok",
+      "test_unknown_or_tool_event_cannot_be_a_success (test_coding_codex.CodexTests.test_unknown_or_tool_event_cannot_be_a_success)": "ok",
+      "test_unknown_settings_schema_blocks_writes_and_older_runtime (test_coding_codex.CodexTests.test_unknown_settings_schema_blocks_writes_and_older_runtime)": "ok",
+      "test_actual_dependency_worker_cancellation (test_coding_dependencies.DependencyBuildTests.test_actual_dependency_worker_cancellation)": "ok",
+      "test_dependency_imports_do_not_leak_to_legacy_and_facade_has_no_options (test_coding_dependencies.DependencyBuildTests.test_dependency_imports_do_not_leak_to_legacy_and_facade_has_no_options)": "ok",
+      "test_forged_dependency_license_lock_or_extra_script_rejected (test_coding_dependencies.DependencyBuildTests.test_forged_dependency_license_lock_or_extra_script_rejected)": "ok",
+      "test_missing_or_corrupt_cache_never_falls_back_and_old_recipe_works (test_coding_dependencies.DependencyBuildTests.test_missing_or_corrupt_cache_never_falls_back_and_old_recipe_works)": "ok",
+      "test_offline_cli_rebuild_and_private_verification (test_coding_dependencies.DependencyBuildTests.test_offline_cli_rebuild_and_private_verification)": "ok",
+      "test_pinned_bundle_license_manifest_and_no_host_import (test_coding_dependencies.DependencyBuildTests.test_pinned_bundle_license_manifest_and_no_host_import)": "ok",
+      "test_real_lpac_uses_bundled_library_and_unicode (test_coding_dependencies.DependencyBuildTests.test_real_lpac_uses_bundled_library_and_unicode)": "ok",
+      "test_release_source_closure_includes_offline_assets (test_coding_dependencies.DependencyBuildTests.test_release_source_closure_includes_offline_assets)": "ok",
+      "test_cache_lost_after_admission_no_delivery_or_model (test_coding_dependencies.DependencyWorkflowTests.test_cache_lost_after_admission_no_delivery_or_model)": "ok",
+      "test_missing_cache_rejected_before_queue_or_model_and_legacy_still_works (test_coding_dependencies.DependencyWorkflowTests.test_missing_cache_rejected_before_queue_or_model_and_legacy_still_works)": "ok",
+      "test_multifile_dependency_apply_and_restore_without_cache (test_coding_dependencies.DependencyWorkflowTests.test_multifile_dependency_apply_and_restore_without_cache)": "ok",
+      "test_offline_passing_baseline_uses_no_model (test_coding_dependencies.DependencyWorkflowTests.test_offline_passing_baseline_uses_no_model)": "ok",
+      "test_repair_apply_restore_and_private_cases_not_sent (test_coding_dependencies.DependencyWorkflowTests.test_repair_apply_restore_and_private_cases_not_sent)": "ok",
+      "test_archive_staging_disk_full_does_not_deliver_or_block_chat (test_coding_acceptance.AcceptanceTests.test_archive_staging_disk_full_does_not_deliver_or_block_chat)": "ok",
+      "test_cancel_busy_coding_worker_keeps_chat_and_kills_process (test_coding_acceptance.AcceptanceTests.test_cancel_busy_coding_worker_keeps_chat_and_kills_process)": "ok",
+      "test_missing_builtin_is_diagnosed_before_execution_and_repaired (test_coding_acceptance.AcceptanceTests.test_missing_builtin_is_diagnosed_before_execution_and_repaired)": "ok",
+      "test_process_death_mid_apply_can_restore_with_fresh_core (test_coding_acceptance.AcceptanceTests.test_process_death_mid_apply_can_restore_with_fresh_core)": "ok",
+      "test_cancel_running_and_scope_and_receipt_tampering (test_coding_demand.CodingDemandTests.test_cancel_running_and_scope_and_receipt_tampering)": "ok",
+      "test_concurrent_start_and_lost_response_use_one_atomic_link (test_coding_demand.CodingDemandTests.test_concurrent_start_and_lost_response_use_one_atomic_link)": "ok",
+      "test_execution_uses_declared_budget (test_coding_demand.CodingDemandTests.test_execution_uses_declared_budget)": "ok",
+      "test_failed_independent_check_not_misreported_as_success (test_coding_demand.CodingDemandTests.test_failed_independent_check_not_misreported_as_success)": "ok",
+      "test_full_bridge_zero_call_preview_receipt_apply_remains_explicit (test_coding_demand.CodingDemandTests.test_full_bridge_zero_call_preview_receipt_apply_remains_explicit)": "ok",
+      "test_http_scope_token_and_saved_proposal (test_coding_demand.CodingDemandTests.test_http_scope_token_and_saved_proposal)": "ok",
+      "test_modified_or_forged_binding_rejected (test_coding_demand.CodingDemandTests.test_modified_or_forged_binding_rejected)": "ok",
+      "test_queue_restart_keeps_one_task_and_waits_for_review (test_coding_demand.CodingDemandTests.test_queue_restart_keeps_one_task_and_waits_for_review)": "ok",
+      "test_receipt_tampering_cannot_return_verified_result (test_coding_demand.CodingDemandTests.test_receipt_tampering_cannot_return_verified_result)": "ok",
+      "test_snapshot_stale_at_start_and_after_enqueue (test_coding_demand.CodingDemandTests.test_snapshot_stale_at_start_and_after_enqueue)": "ok",
+      "test_transaction_failure_rolls_back_task_and_proposal_link (test_coding_demand.CodingDemandTests.test_transaction_failure_rolls_back_task_and_proposal_link)": "ok",
+      "test_unknown_reanalysis_and_cancel_never_automatically_retry (test_coding_demand.CodingDemandTests.test_unknown_reanalysis_and_cancel_never_automatically_retry)": "ok",
+      "test_graph_boundaries (test_coding_package.PackageTests.test_graph_boundaries)": "ok",
+      "test_missing_undeclared_and_new_existing_refused (test_coding_package.PackageTests.test_missing_undeclared_and_new_existing_refused)": "ok",
+      "test_new_package_actual_build_create_restore_and_reapply (test_coding_package.PackageTests.test_new_package_actual_build_create_restore_and_reapply)": "ok",
+      "test_newfile_partial_can_restore (test_coding_package.PackageTests.test_newfile_partial_can_restore)": "ok",
+      "test_newfile_partial_restore_preserves_external_change (test_coding_package.PackageTests.test_newfile_partial_restore_preserves_external_change)": "ok",
+      "test_package_query_and_nested_absolute_import (test_coding_package.PackageTests.test_package_query_and_nested_absolute_import)": "ok",
+      "test_engine_denies_ambient_capabilities_and_limits_work (test_coding_scene.SceneTests.test_engine_denies_ambient_capabilities_and_limits_work)": "ok",
+      "test_forged_frame_rejected_by_actual_rebuild (test_coding_scene.SceneTests.test_forged_frame_rejected_by_actual_rebuild)": "ok",
+      "test_generated_scene_full_workflow_and_restore (test_coding_scene.SceneTests.test_generated_scene_full_workflow_and_restore)": "ok",
+      "test_literal_credentials_rejected_before_outbound_and_receipt (test_coding_scene.SceneTests.test_literal_credentials_rejected_before_outbound_and_receipt)": "ok",
+      "test_missing_engine_refused_before_model_and_geometry_rejected (test_coding_scene.SceneTests.test_missing_engine_refused_before_model_and_geometry_rejected)": "ok",
+      "test_crash_reclaims_registered_profile_and_stage_after_job_death (test_worker_recovery.RecoveryTests.test_crash_reclaims_registered_profile_and_stage_after_job_death)": "ok",
+      "test_live_lease_retained_then_registered_stage_removed (test_worker_recovery.RecoveryTests.test_live_lease_retained_then_registered_stage_removed)": "ok",
+      "test_shared_sweep_waits_but_owner_lease_stays_nonblocking (test_worker_recovery.RecoveryTests.test_shared_sweep_waits_but_owner_lease_stays_nonblocking)": "ok",
+      "test_unregistered_or_changed_identity_and_extra_content_are_retained (test_worker_recovery.RecoveryTests.test_unregistered_or_changed_identity_and_extra_content_are_retained)": "ok",
+      "test_anatomy_guidance_policy_does_not_expand_fixed_renderer (test_coding_scene.SceneTests.test_anatomy_guidance_policy_does_not_expand_fixed_renderer)": "ok",
+      "test_real_cli_authentication_failure_is_finite (test_coding_codex.CodexTests.test_real_cli_authentication_failure_is_finite)": "ok",
+      "test_coding_implementation_change_invalidates_quality (test_skill_validation.ValidationTests.test_coding_implementation_change_invalidates_quality)": "ok",
+      "test_last_success_is_not_quality_approval (test_skill_validation.ValidationTests.test_last_success_is_not_quality_approval)": "ok",
+      "test_source_change_and_missing_evidence (test_skill_validation.ValidationTests.test_source_change_and_missing_evidence)": "ok",
+      "test_unrelated_name_does_not_invalidate_content (test_skill_validation.ValidationTests.test_unrelated_name_does_not_invalidate_content)": "ok",
+      "test_failed_health_or_tampered_slot_never_replaces_active (test_runtime_releases.RuntimeReleaseTests.test_failed_health_or_tampered_slot_never_replaces_active)": "ok",
+      "test_install_is_idempotent_and_unchecked_release_cannot_be_selected (test_runtime_releases.RuntimeReleaseTests.test_install_is_idempotent_and_unchecked_release_cannot_be_selected)": "ok",
+      "test_manifest_or_extra_file_blocks_rollback (test_runtime_releases.RuntimeReleaseTests.test_manifest_or_extra_file_blocks_rollback)": "ok",
+      "test_running_release_prevents_switch_and_only_fixed_entry_is_used (test_runtime_releases.RuntimeReleaseTests.test_running_release_prevents_switch_and_only_fixed_entry_is_used)": "ok",
+      "test_select_and_rollback_keep_previous_and_unrelated_data (test_runtime_releases.RuntimeReleaseTests.test_select_and_rollback_keep_previous_and_unrelated_data)": "ok",
+      "test_selection_transaction_failure_keeps_original_pointer (test_runtime_releases.RuntimeReleaseTests.test_selection_transaction_failure_keeps_original_pointer)": "ok",
+      "test_tamper_extra_and_duplicate_members_fail_before_extract (test_release_bundle.BundleTests.test_tamper_extra_and_duplicate_members_fail_before_extract)": "ok",
+      "test_traversal_windows_devices_case_collisions_and_links_rejected (test_release_bundle.BundleTests.test_traversal_windows_devices_case_collisions_and_links_rejected)": "ok",
+      "test_verify_extract_and_existing_slot_is_preserved (test_release_bundle.BundleTests.test_verify_extract_and_existing_slot_is_preserved)": "ok",
+      "test_all_four_guides_reach_chat_under_instruction_limit (test_skills.PolicyTests.test_all_four_guides_reach_chat_under_instruction_limit)": "ok",
+      "test_capability_inventory_and_new_intents (test_skills.PolicyTests.test_capability_inventory_and_new_intents)": "ok",
+      "test_catalog_complete_unique_examples (test_skills.PolicyTests.test_catalog_complete_unique_examples)": "ok",
+      "test_changed_guide_needs_new_behavior_evidence (test_skills.PolicyTests.test_changed_guide_needs_new_behavior_evidence)": "ok",
+      "test_conservative_selection (test_skills.PolicyTests.test_conservative_selection)": "ok",
+      "test_digest_guidance_and_audit (test_skills.PolicyTests.test_digest_guidance_and_audit)": "ok",
+      "test_invalid_context_and_browser_readiness (test_skills.PolicyTests.test_invalid_context_and_browser_readiness)": "ok",
+      "test_revision_restore_and_unadmitted (test_skills.PolicyTests.test_revision_restore_and_unadmitted)": "ok",
+      "test_scopes_disable_manual_turn (test_skills.PolicyTests.test_scopes_disable_manual_turn)": "ok",
+      "test_real_anatomy (test_skills.TaskTests.test_real_anatomy)": "ok",
+      "test_login_bridge_rejects_missing_invalid_or_other_account_modes (test_coding_codex.CodexTests.test_login_bridge_rejects_missing_invalid_or_other_account_modes)": "ok",
+      "test_preview_comes_from_verified_archive_and_rechecks_project_output (test_coding_scene.SceneTests.test_preview_comes_from_verified_archive_and_rechecks_project_output)": "ok"
+    },
+    "final_targeted": {
+      "tests": 19,
+      "elapsed_seconds": 81.49942949999968
+    },
+    "final_targeted_failures": 0,
+    "final_targeted_errors": 0,
+    "final_targeted_skipped": 0
+  },
+  "ui": {
+    "ui-package": {
+      "version": "0.1.70",
+      "status": "passed",
+      "paid_model_calls": 0,
+      "checks": [
+        "natural improvement opens explicit coding draft; proposal makes zero model calls",
+        "chat responds while coding waits in background",
+        "new file package download and explicit creation/restore verified",
+        "page reload restores the same receipt; right panel apply/rollback restores exact BOM bytes"
+      ],
+      "model_calls": 1,
+      "page_errors": []
+    },
+    "ui-scene-final": {
+      "version": "0.1.70",
+      "status": "passed",
+      "paid_model_calls": 0,
+      "checks": [
+        "natural improvement opens explicit coding draft; proposal makes zero model calls",
+        "chat responds while coding waits in background",
+        "new file package download and explicit creation/restore verified",
+        "page reload restores the same receipt; right panel apply/rollback restores exact BOM bytes"
+      ],
+      "model_calls": 1,
+      "page_errors": []
+    }
+  },
+  "geometry": {
+    "status": "passed",
+    "frames": 72,
+    "independent_formula": "crank radius100, rod250, center300,300; integer pixel rounding from frozen requirement",
+    "all_frames_match": true,
+    "max_rounded_rod_length_error_pixels": 0.911662256138527,
+    "engineering_certification": false
+  },
+  "resources": {
+    "quickjs_wheel_bytes": 519389,
+    "quickjs_binary_bytes": 989696,
+    "js_scene_worker_peak_bytes": 13312000,
+    "browser_peak_job_bytes": 466415616,
+    "browser_limit_bytes": 536870912,
+    "browser_seconds": 3.491,
+    "persistent_new_services": 0,
+    "scope": "Measured on this PC; short task peaks, not 8 GiB device endurance or total system residency."
+  },
+  "initial_failures_preserved": [
+    "Regression referred to nonexistent test_runtime_slots; corrected to test_runtime_releases.",
+    "Anatomy fixed-gear admission rejected new scene before any model call; internal scene-guidance purpose now separately checked.",
+    "srcdoc inherited parent nonce CSP and blocked trusted viewer scripts; replaced with verified archive preview route.",
+    "Pinned Codex loaded global AGENTS despite --ignore-user-config; replaced shared home with fresh home and in-memory fixed-origin login bridge. Synthetic canary/tool/MCP checks and real call passed."
+  ],
+  "gates": {
+    "V-K3-01": [
+      "test_coding_demand",
+      "test_coding_acceptance",
+      "real guided improvement receipts"
+    ],
+    "V-K3-02": [
+      "test_coding_package",
+      "test_coding_workflow",
+      "test_coding_bundle",
+      "all 10 apply/restore and offline builds"
+    ],
+    "V-K3-03": [
+      "test_coding_codex",
+      "final isolated-login real call",
+      "test_coding_acceptance"
+    ],
+    "V-K3-04": [
+      "test_coding_build",
+      "test_coding_dependencies",
+      "test_release_bundle",
+      "runtime-package-published.json"
+    ],
+    "V-K3-05": [
+      "frozen five-category paired pilot"
+    ],
+    "V-K3-06": [
+      "test_coding_scene",
+      "guided-scene",
+      "72-frame independent geometry",
+      "test_skills.TaskTests.test_real_anatomy"
+    ],
+    "V-K3-07": [
+      "test_coding_acceptance",
+      "test_worker_recovery",
+      "test_coding_codex",
+      "test_coding_package"
+    ],
+    "V-K3-08": [
+      "ui-package",
+      "ui-scene-final",
+      "test_runtime_releases",
+      "deployment.json"
+    ]
+  },
+  "limitations": [
+    "K3 supports explicit bounded Python packages, pinned JMESPath and JavaScript scene recipes, not arbitrary repositories or dependencies.",
+    "No automatic production self-rewrite or new-skill activation; those remain K4/K5.",
+    "Literal credential detection is defense in depth, not proof against every secret or a compromised same-user Host/CLI.",
+    "External login bridge supports file-backed ChatGPT login; expired login requires reauthentication in Codex. CLI is trusted and Job-limited, not LPAC.",
+    "Offline runtime test denies Python connect/DNS; not physical machine disconnection. Browser verification requires installed Edge.",
+    "Low-end PC endurance, full K1/K2 owner experience and broader B gates remain pending as previously recorded."
+  ],
+  "private_evidence_directory": "H:\\JarvisData\\diagnostics\\k3-closure-20261019",
+  "deployment": {
+    "status": "passed",
+    "version": "0.1.70",
+    "previous_version": "0.1.69",
+    "instance_id": "c47bdb76b465e9dbb88760c7099975f6",
+    "idle_graceful_reload": true,
+    "served_sha256": {
+      "growth.js": "f83d590fb03b76809ec0c7f667547cf9e4c0dc54cc2fc52035b4ea6f76366f0b",
+      "skills.js": "e50949afbf9fc01db23b86158e9bf1fa84183bc23f5a0708be53c68d8fd2547f",
+      "coding.js": "3547507e77569145601f7d50660359172185269f5b566fddeefafcb54b04dae2",
+      "admin.js": "09d93597e84408dfd48ce8aaecb5b7a9b1554023a38811526c3b6bb291661c43"
+    },
+    "business_tables_compared": 11,
+    "business_unchanged": true,
+    "coding_settings_unchanged": true,
+    "empty_restart_queue_reviewed_and_resumed": true,
+    "cloud_calls": 0,
+    "runtime_archive_built": true,
+    "installer_built": false
+  },
+  "runtime_package": {
+    "captured_at": "2026-10-19T11:42:07.061184+00:00",
+    "status": "passed",
+    "package": {
+      "version": "0.1.70",
+      "path": "H:\\JarvisData\\diagnostics\\k3-closure-20261019\\jarvis-0.1.70.zip",
+      "sha256": "a63726f5d63a3cec9dbdbefed96f9c954c9fdbff1d1f74e8e042a3d5ab6d26df",
+      "files": 1572,
+      "bytes": 70357340,
+      "status": "candidate_verified",
+      "dependencies": {
+        "playwright": "1.64.0",
+        "greenlet": "3.5.6",
+        "pyee": "14.0.0",
+        "typing_extensions": "4.16.0",
+        "cryptography": "50.0.2",
+        "cffi": "2.1.1",
+        "pycparser": "3.11",
+        "google-auth": "2.62.0",
+        "requests": "2.34.2",
+        "certifi": "2026.7.22",
+        "urllib3": "2.8.0",
+        "idna": "3.20",
+        "charset-normalizer": "3.5.2",
+        "pyasn1_modules": "0.4.2",
+        "pyasn1": "0.6.4",
+        "httpx": "0.28.1",
+        "httpcore": "1.0.9",
+        "h11": "0.16.0",
+        "anyio": "4.15.1",
+        "jsonschema": "4.26.0",
+        "rpds-py": "2026.9.1",
+        "referencing": "0.37.0",
+        "attrs": "26.1.0",
+        "jsonschema-specifications": "2025.9.1"
+      }
+    },
+    "runs": [
+      {
+        "executable": "C:\\Users\\samuel\\AppData\\Local\\Temp\\jarvis-package-probe-3wa9mtk0\\candidate\\python\\python.exe",
+        "version": "0.1.70",
+        "stopped": true,
+        "task_id": "task_c4b9cba711c55af0beecf21c697abdf7",
+        "artifact_digest": "sha256:2aba68e31c1ccf2c347201bef4bc470c3543ac3564036014cc3b2360a24e713a",
+        "worker_manifest": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+        "network": "Python audit hook denies connect/DNS; not an OS network isolation test"
+      },
+      {
+        "executable": "C:\\Users\\samuel\\AppData\\Local\\Temp\\jarvis-package-probe-3wa9mtk0\\fallback\\python\\python.exe",
+        "version": "0.1.70",
+        "stopped": true,
+        "task_id": "task_c4b9cba711c55af0beecf21c697abdf7",
+        "artifact_digest": "sha256:2aba68e31c1ccf2c347201bef4bc470c3543ac3564036014cc3b2360a24e713a",
+        "worker_manifest": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+        "network": "Python audit hook denies connect/DNS; not an OS network isolation test"
+      }
+    ],
+    "limitations": [
+      "Same-version fallback slot; no cross-version schema migration or protected service activation.",
+      "Python network-denial hook only; machine-wide disconnected boot not tested.",
+      "Optional browser/speech, model weights, owner keys and live state are excluded."
+    ],
+    "deterministic_second_build": true
+  },
+  "source_sha256": {
+    "README.md": "0a59175debab477e78ec9a2e0e145161d6c778a7a7f1ea9515207841239c4162",
+    "apps/web/growth.js": "f83d590fb03b76809ec0c7f667547cf9e4c0dc54cc2fc52035b4ea6f76366f0b",
+    "apps/web/skill_routes.py": "743304f5680ed504698454eb58a3d56e2c99faf3ec91626584b981a3dfc7aa7c",
+    "apps/web/skills.js": "e50949afbf9fc01db23b86158e9bf1fa84183bc23f5a0708be53c68d8fd2547f",
+    "config/skills/validation.json": "eba85484839e2d139f5b38edc3d7b11f341ce94449fba6c9c60aa16ce0e8c133",
+    "contracts/schemas/skill-report.schema.json": "d18428beb5d173d50549752c515ead5ee02a0ac0040e6a5a453badd2f5d60bf6",
+    "docs/README.md": "ead0c39017ccfdc4081dfa36e94991b49b265d762bbe80ed07158557602e890b",
+    "docs/architecture.md": "1fda58ec447d1fe192ef556d448dda4e465f1f6e1e8f650cc19ff2ac1e5646fb",
+    "docs/contracts.md": "4e50d37d3bd582f7a1e510cc5bf0ddfda8a6f64c34bf5cf525968faf58b7812e",
+    "docs/core-bootstrap.md": "deae05d03f2e4089b48834551e780a3a6cde52fe9ceaed16df4f8754ba2d6755",
+    "docs/delivery-validation.md": "2c5b33a4ecffedee339730d8caf88c2d8e73b2752347e6e7b563ff8863e4c1d7",
+    "docs/development-guide.md": "c032a0051c0b96cbc9fef2ece7a24631556ef1ee442e232f190f8b4201f0559e",
+    "docs/interaction-persona.md": "32c78c03defbb0d900ee8db65a7e03223ec757766a3d0c81d0f98a441afb1558",
+    "docs/manifest.json": "132d4497232f6ec76791f7df6a3f95fa12815d01f899712291ce57506368de26",
+    "docs/security-sovereignty.md": "27f0d3d1a8598eccca28adf9197de5d6e9b444b5ca53fb6cfa75bfc35fbf56e7",
+    "docs/tasks-agents.md": "de3d54486346c86d1995f41da2ecfbcf313d6b533077a0822a9c2e681d593a3d",
+    "docs/toolchains.md": "c152e1f831d4def4048fdbb99ae51473d10806ed7eebea26dce5c8f07e882a4a",
+    "pyproject.toml": "48c363eabea7d6c1b3cc9190f497386c7c0e5403b30293f5a0e2e8922daa565e",
+    "runtime/node-host/jarvis_core/__init__.py": "ceabd74954aa2fe1c5de7b0dfeaa16b38a01b27de3ee03d177c35987cb53aabd",
+    "runtime/node-host/jarvis_core/coding_apply.py": "6ae33a6bc9de1c3c9f6baa60ac3afad5e17643f9bd67c9615f1f4535dddc51da",
+    "runtime/node-host/jarvis_core/coding_build.py": "99d2d67d667674225f0980d437f22e05f356776adf2fe0aed60e08878bb7305e",
+    "runtime/node-host/jarvis_core/coding_codex.py": "f00224c61ea0fdb226db4bb8e54ecbda0ac6e6abbe3acce07abf649f0e672c0c",
+    "runtime/node-host/jarvis_core/coding_demand.py": "0465d2e4b8016ca6db853f890a3926201c560d6441141c9a7011587102d7c5a3",
+    "runtime/node-host/jarvis_core/coding_task.py": "d3293ccc43ae9e239dab1012046e5160796b4f0976eebd4ea27e96213c7506a5",
+    "runtime/node-host/jarvis_core/coding_workflow.py": "66559a8aaff27cf383ef6e19767a30a2e56fd963f1e25b59800c003315147b0d",
+    "runtime/node-host/jarvis_core/conversation_tasks.py": "a0b1439c9b46422aee2675f0f4d434991e147a1c1f98d5839b85a047dc701b27",
+    "runtime/node-host/jarvis_core/evolution/runner.py": "55192af147d646765729bbaae8b70f41da406e9d4eb61e77620b9ae3b8a2ef2b",
+    "runtime/node-host/jarvis_core/rea_process.py": "2b4139db0f820db8dce6c1c2577b36c26530842eab9c0b4df62fd61f63bd2578",
+    "runtime/node-host/jarvis_core/releases.py": "4cdd309f84db91e5f7b465141429a069e9d9be042850d79d652e5ed10ab224d0",
+    "runtime/node-host/jarvis_core/skill_tasks.py": "419ed8ef24e4721c44e6adc4a5d03ddcd70c9c0128e035e2b7c327bef6a3b97a",
+    "runtime/node-host/jarvis_core/skill_validation.py": "dc5045226a50f25c8d28ed45b5bfae58ebca03ae271b061a2730fa25f7fa25c8",
+    "runtime/node-host/jarvis_core/skills.py": "57f1157bb2538fa1f2e0b707026138849c4133d7e740dc447d734488bf4a60b4",
+    "runtime/node-host/jarvis_core/worker_recovery.py": "d163b13c26a2cbb880ab7dbbe8f40cafb139b002a25dae2525402d6483210141",
+    "tests/test_coding_codex.py": "af81e0d298f290e6415445fe734ac7757be23482caa7c1793f3cbc2024ccb8b0",
+    "tests/test_skill_validation.py": "487a579fff75c3a0a4eb3f99c6e3042f2a01138b9ae92168f3be72620a641f7d",
+    "third_party/coding/NOTICE.txt": "0eca41f73226317c39824cacc647925d715e380e923cddf044d55839c2d8fa7b",
+    "tools/coding_build.py": "9b2ea8b83d3bb97b971bf9d97f9460fec93d5899517acf07d4e7a5eefba408b0",
+    "tools/probe_coding_demand_ui.py": "ab7948fc6e81a2f4e3a03b3218391b5f39dddbe25ee06f11780a760627a429cd",
+    "tools/probe_k3_build.py": "6f8b71bbda0df663e9cd3e24e2a11afb3455c3107594791cc77316769c63a1e0",
+    "tools/probe_release_bundle.py": "61b0474144d48aac23c65c6a52563d2ba39c6de643f2256922fe76e2e83a0a2d",
+    "tools/release_bundle.py": "ecd11fd7fe153c1e44ea551c7caedc3d0f8839e31d3f6e63bd00c2cb19169e35",
+    "uv.lock": "af6f71b498028f3f9f931a26c92f35ff3e0bbcfcde6801861307f1a1aeb77561",
+    "adapters/skills/anatomy/candidate-viewer.html": "49ad4d1684a15fcb4baeb35b669cdd97e6ff9ff7b82bc6943c800bedd01117b6",
+    "evals/cases/k3-closure-v1.json": "87c48bd6bdd41545f5deaac21d04aa359dfc327a621fb7d812f3483e8ba68e6f",
+    "runtime/node-host/jarvis_core/coding_files.py": "8706255bf8cf01fceeca2bc6a52d347609d54fac452bb2c71f387b598533d6d8",
+    "runtime/node-host/jarvis_core/coding_js.py": "b597a11cf64360171d06182a107243188e770a3fb669977e958e7e9401924e16",
+    "runtime/node-host/jarvis_core/coding_package.py": "31b27e0fc3a71abcf344e3a7a5a8cf15a63c5e16eada956a05b495cbb1321e12",
+    "runtime/node-host/jarvis_core/coding_scene.py": "9932b1a66e4f3609e90d0639a2fa655a69bcc174f0b51b5e5476a0765b9b0ba8",
+    "runtime/node-host/jarvis_core/coding_secrets.py": "a885ec5beecd4781242b2ecc2bfb246b7597a2e04e85b62f6e9ae22c33eb51b8",
+    "tests/test_coding_package.py": "7384a769f24dff3409ca0ca72e821dd9720a116334d1d804e3a72397ef4806f2",
+    "tests/test_coding_scene.py": "68e078203f8e65666ea0ac42729b7e2c8cf7640c083d1ae6f4bb33d2b0580338",
+    "third_party/coding/quickjs-binding-LICENSE.txt": "f4fdecb45a48f627ba1134542bb14309fc868e64b14a0d1343d75f6e7d8ad444",
+    "third_party/coding/quickjs-ng-LICENSE.txt": "d87922bc69421b002ec2dc1aaffe02eabd12ca6b6212273691fb8231f238b5a1",
+    "third_party/coding/quickjs_ng-0.17.0.1-cp310-abi3-win_amd64.whl": "355511615baa17bc98092680f068e3536ea1ee5a650b16f59bf6871f497f3780"
+  },
+  "gate_status": {
+    "V-K3-01": "passed",
+    "V-K3-02": "passed",
+    "V-K3-03": "passed",
+    "V-K3-04": "passed",
+    "V-K3-05": "passed",
+    "V-K3-06": "passed",
+    "V-K3-07": "passed",
+    "V-K3-08": "passed"
+  },
+  "closed_stage": "K3"
+}

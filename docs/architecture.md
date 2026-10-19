@@ -216,6 +216,9 @@ Jarvis 的通路是：观察指定应用/浏览器 → 模型提出结构化动�
 | ExtensionCatalog | MCP/技能配置、来源、修订和检查；无进程启动、网络握手、工具执行或技能注入职责 |
 | MCP transport adapter（Context7 HTTP子集已实现） | 已接通限定 Context7 HTTP；通用按需 stdio 子进程或 Streamable HTTP 会话、协议协商仍待扩展，、超时/取消/资源回收；只向能力注册模块提交工具描述，不授予执行权限 |
 | SkillManager（原生目录子集已实现，通用加载待实现） | 0.1.36 已实现原生目录、范围策略、宿主意图选择与限定报告/齿轮模板；用户登记的任意 SKILL.md 不因此获得执行能力。按[统一技能规则](tasks-agents.md#skill-selection-policy)筛选和解释选用/不用，技能文字不是高级别系统规则，附带代码仍经执行适配器 |
+| CodingDemands / CodingTask | 冻结来源与验收、关联原任务及回执、组合指导与编码提供者；不保存另一份任务状态权威，不负责自主发布 |
+| CodingPackage / CodingBuild / CodingJS / CodingScene | 分别承担包导入图、版本化归档、按需隔离 JS 运行、几何帧及固定查看器；新配方不改变旧产物解释。具体执行范围归[工具链](toolchains.md#bounded-package-scene-recipes) |
+| CodingFiles / CodingApply | 新文件不存在快照、路径保护和可恢复的整组 CAS；不拥有全仓库扫描、自动删除或版本发布权 |
 | Capability registry / Action gateway（完整通路待实现） | 统一可用能力、任务作用域、调用证据与资源约束；模型只能提出调用，扩展不能另建无限权限的任务循环 |
 
 当前操作流程是“打开文件夹/工程 → 绑定项目身份 → 按需列举 → 读取文件摘要 → 编辑草稿 → 预期版本校验 → 保存回执”；知识检索走独立引用链。扩展流程先到“登记 → 格式/来源检查”，后续才连接“协商/发现 → 范围绑定 → 按需调用 → 结果记录 → 停用回收”。每一步有失败状态，登记成功不折算为运行成功。

@@ -68,7 +68,7 @@ def run(argv, stage, checkpoint, *, seconds=60, output_limit=1200 * 1024, output
                        'TEMP': str(stage), 'TMP': str(stage), 'USERPROFILE': str(stage),
                        'LOCALAPPDATA': str(stage), 'APPDATA': str(stage), 'PATH': str(Path(argv[0]).parent)}
         extra = environment_extra or {}
-        if set(extra) - {'CODEX_HOME','HTTP_PROXY','HTTPS_PROXY','NO_PROXY'} or any(not isinstance(v,str) or '\0' in v for v in extra.values()):
+        if set(extra) - {'CODEX_HOME','JARVIS_CODEX_ACCESS_TOKEN','JARVIS_CODEX_ACCOUNT_ID','HTTP_PROXY','HTTPS_PROXY','NO_PROXY'} or any(not isinstance(v,str) or '\0' in v for v in extra.values()):
             raise policy.CoreError('process_environment_invalid','受控进程环境项不在允许清单中。')
         environment.update(extra)
         env = C.create_unicode_buffer('\0'.join(k + '=' + v for k, v in sorted(environment.items())) + '\0\0')
@@ -83,7 +83,7 @@ def run(argv, stage, checkpoint, *, seconds=60, output_limit=1200 * 1024, output
         while True:
             checkpoint()
             if time.monotonic() - started > seconds:
-                raise policy.CoreError('rea_timeout', '软件解析达到 60 秒预算；本次解析进程及子进程已回收。')
+                raise policy.CoreError('rea_timeout', '受控进程达到 '+str(seconds)+' 秒预算；本次进程及子进程已回收。')
             for index, handle in enumerate((pipes[1][0], pipes[2][0])):
                 while True:
                     checkpoint()

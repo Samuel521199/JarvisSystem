@@ -20,7 +20,7 @@
   function controls(){for(const b of dialog.querySelectorAll('button'))b.disabled=acting;}
   async function createCoding(payload){
     const context=current();if(!context||context.temporary)throw new Error('请在已保存的普通项目会话中建立改进单。');
-    const id=context.id,coding=Object.fromEntries(['paths','cases','heldout_cases','entrypoint','model','coding_provider','build_recipe'].filter(k=>k in payload).map(k=>[k,payload[k]])),spec={prompt:payload.prompt,coding},old=pending.get(id);
+    const id=context.id,coding=Object.fromEntries(['paths','cases','heldout_cases','entrypoint','model','coding_provider','build_recipe','new_paths'].filter(k=>k in payload).map(k=>[k,payload[k]])),spec={prompt:payload.prompt,coding},old=pending.get(id);
     if(old&&JSON.stringify(old.spec)!==JSON.stringify(spec))throw new Error('上次改进单回执尚未确认，请先打开原回执查询。');
     let node=old?.node;
     if(!node){message('user','改进需求：'+payload.prompt);node=message('assistant','正在冻结目标、源文件与验收条件；尚未开始执行。',{growthRequestId:crypto.randomUUID().replaceAll('-','')});pending.set(id,{spec,node});}
@@ -37,7 +37,7 @@
     card.append(make('strong',(states[job.status]||job.status)+' · '+job.request.origin.goal));
     const phases=make('div');phases.className='growth-steps';
     for(const [label,reached] of [['需求已冻结',true],['编码任务',!!job.task_id],['独立验收',!!job.result],['结果回填',!!job.result]]){const n=make('span',label);n.title=label+(reached?'：已有记录':'：待完成');if(reached)n.className='reached';phases.append(n);}card.append(phases);
-    card.append(make('p',args.paths.length+' 个文件 · '+args.cases.length+' 条公开示例 + '+args.heldout_cases.length+' 条独立验收 · '+(args.build_recipe==='python-jmespath-v1'?'JSON 查询工具包 · JMESPath 1.1.0':args.build_recipe==='python-zipapp-v1'?'可运行工具包':'源码包')));
+    card.append(make('p',args.paths.length+' 个文件 · '+args.cases.length+' 条公开示例 + '+args.heldout_cases.length+' 条独立验收 · '+(args.build_recipe==='javascript-scene-v1'?'JavaScript 交互场景':args.build_recipe.startsWith('python-package')?'Python 包工具':args.build_recipe==='python-jmespath-v1'?'JSON 查询工具包 · JMESPath 1.1.0':args.build_recipe==='python-zipapp-v1'?'可运行工具包':'源码包')));
     card.append(make('small','编码：'+(args.coding_provider==='codex'?'外部 Codex · '+(job.proposal.executor?.model||'编码协作设置')+' · '+(job.proposal.executor?.reasoning||'') :args.model)+'；最多 '+job.proposal.budget.max_model_calls+' 次模型调用，执行预算 '+job.proposal.budget.runtime_seconds+' 秒。独立案例保留在本机。'));
     card.append(make('small','项目：'+args.project_root+'；文件：'+args.paths.join('、')));
     if(job.result)card.append(make('p',job.result.verified?'候选与产物已通过 '+job.result.cases+' 条案例；模型调用 '+job.result.model_calls+' 次。可查看差异后应用，原文件未自动改写。':'候选未通过独立验收，保留诊断；原文件未改写。'));

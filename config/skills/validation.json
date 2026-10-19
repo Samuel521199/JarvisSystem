@@ -2,124 +2,108 @@
   "schema_version": 1,
   "skills": {
     "anatomy.explainer": {
-      "binding": "sha256:5b37bccdacb85e918c33aeca9a23eb9d2afcb1775edc8b93e0086cc14242f74a",
-      "version": "0.1.58",
-      "observed_at": "2026-10-18T16:45:52.901103+00:00",
+      "binding": "sha256:b0298d6340fccf8912298ce0a0c941f067915d5c4ff743b302a2bc355fc089e0",
+      "version": "0.1.70",
+      "observed_at": "2026-10-19T11:36:50.677057+00:00",
       "status": "passed",
       "cases": 1,
-      "models": [],
-      "model_results": {},
-      "scope": "当前专项覆盖固定齿轮数值、LPAC、实际浏览器与产物摘要；不是自由机械CAD或视频验证。",
+      "models": [
+        "codex::gpt-6.1-sol"
+      ],
+      "model_results": {
+        "codex::gpt-6.1-sol": {
+          "pass": 1,
+          "partial": 0,
+          "fail": 0
+        }
+      },
+      "scope": "固定齿轮回归；新增曲柄滑块 JS 的独立数值、LPAC、浏览器及可逆交付；不代表任意 CAD/视频。",
       "reports": [
-        "evals/reports/skills-completion-baseline-2026-10-19.json"
+        "evals/reports/k3-closure-2026-10-19.json"
       ]
     },
     "matt-pocock.diagnosing-bugs": {
-      "binding": "sha256:c22a7eb2d0e03e6e0e4029b4d303c91ee959f23f828cc0d680fc57cb9f7e2d10",
-      "version": "0.1.58",
-      "observed_at": "2026-10-18T16:45:52.901103+00:00",
+      "binding": "sha256:96103124da17b4d1c54e7949d6aa9ca71030d42a5fcc653cf50935a600dd6ac7",
+      "version": "0.1.70",
+      "observed_at": "2026-10-19T11:36:50.678317+00:00",
       "status": "passed",
-      "cases": 3,
+      "cases": 5,
       "models": [
-        "openai::gpt-6.1-sol",
-        "vertex::gemini-3.8-flash"
+        "codex::gpt-6.1-sol"
       ],
       "model_results": {
-        "openai::gpt-6.1-sol": {
-          "pass": 3,
+        "codex::gpt-6.1-sol": {
+          "pass": 5,
           "partial": 0,
-          "fail": 0
-        },
-        "vertex::gemini-3.8-flash": {
-          "pass": 0,
-          "partial": 3,
           "fail": 0
         }
       },
-      "scope": "每模型3个场景，另有无技能配对。Sol本批3项满足预声明要点；Google 0 项满足、3 项部分满足、0 项未满足。由本轮Agent审阅，无独立人工盲评；不代表普遍质量或当前可用余额。",
+      "scope": "四项工程指导组合用于五类限定真实编码任务，5/5；无指导对照也为5/5，未观察到成功率增益，不能推断每项指导的独立贡献。最终登录隔离通道另有真实包生成回归。",
       "reports": [
-        "evals/reports/skill-coverage-review-2026-10-19.json"
+        "evals/reports/k3-closure-2026-10-19.json"
       ]
     },
     "matt-pocock.code-review": {
-      "binding": "sha256:da90872371aacde31a35332f8d4cb4ddb103ed28c3721d314f0fe87b83105606",
-      "version": "0.1.58",
-      "observed_at": "2026-10-18T16:45:52.901103+00:00",
+      "binding": "sha256:fbc04e2ed71219b3dc23a42431399376abb529207ef0b71166a1067d38692eea",
+      "version": "0.1.70",
+      "observed_at": "2026-10-19T11:36:50.679733+00:00",
       "status": "passed",
-      "cases": 3,
+      "cases": 5,
       "models": [
-        "openai::gpt-6.1-sol",
-        "vertex::gemini-3.8-flash"
+        "codex::gpt-6.1-sol"
       ],
       "model_results": {
-        "openai::gpt-6.1-sol": {
-          "pass": 3,
+        "codex::gpt-6.1-sol": {
+          "pass": 5,
           "partial": 0,
           "fail": 0
-        },
-        "vertex::gemini-3.8-flash": {
-          "pass": 1,
-          "partial": 1,
-          "fail": 1
         }
       },
-      "scope": "每模型3个场景，另有无技能配对。Sol本批3项满足预声明要点；Google 1 项满足、1 项部分满足、1 项未满足。由本轮Agent审阅，无独立人工盲评；不代表普遍质量或当前可用余额。",
+      "scope": "四项工程指导组合用于五类限定真实编码任务，5/5；无指导对照也为5/5，未观察到成功率增益，不能推断每项指导的独立贡献。最终登录隔离通道另有真实包生成回归。",
       "reports": [
-        "evals/reports/skill-coverage-review-2026-10-19.json"
+        "evals/reports/k3-closure-2026-10-19.json"
       ]
     },
     "matt-pocock.tdd": {
-      "binding": "sha256:e47af71cdd82eecdfe400cc96228565553064593be2031847b58e926655196e4",
-      "version": "0.1.58",
-      "observed_at": "2026-10-18T16:45:52.901103+00:00",
+      "binding": "sha256:f710588abe098bfdd9c774d529fc20644713f7f990bec4c96d85b8adf9fccbca",
+      "version": "0.1.70",
+      "observed_at": "2026-10-19T11:36:50.680914+00:00",
       "status": "passed",
-      "cases": 3,
+      "cases": 5,
       "models": [
-        "openai::gpt-6.1-sol",
-        "vertex::gemini-3.8-flash"
+        "codex::gpt-6.1-sol"
       ],
       "model_results": {
-        "openai::gpt-6.1-sol": {
-          "pass": 3,
+        "codex::gpt-6.1-sol": {
+          "pass": 5,
           "partial": 0,
-          "fail": 0
-        },
-        "vertex::gemini-3.8-flash": {
-          "pass": 0,
-          "partial": 3,
           "fail": 0
         }
       },
-      "scope": "每模型3个场景，另有无技能配对。Sol本批3项满足预声明要点；Google 0 项满足、3 项部分满足、0 项未满足。由本轮Agent审阅，无独立人工盲评；不代表普遍质量或当前可用余额。",
+      "scope": "四项工程指导组合用于五类限定真实编码任务，5/5；无指导对照也为5/5，未观察到成功率增益，不能推断每项指导的独立贡献。最终登录隔离通道另有真实包生成回归。",
       "reports": [
-        "evals/reports/skill-coverage-review-2026-10-19.json"
+        "evals/reports/k3-closure-2026-10-19.json"
       ]
     },
     "matt-pocock.codebase-design": {
-      "binding": "sha256:9b60d82f8716ea1963f43fac80bc1f07bb0f8a120369c83ddc0af56a5d6b9e7a",
-      "version": "0.1.58",
-      "observed_at": "2026-10-18T16:45:52.901103+00:00",
+      "binding": "sha256:63de2e3c3bfa6a564cc34926d518c125176972c87c344fc43023f110331772f2",
+      "version": "0.1.70",
+      "observed_at": "2026-10-19T11:36:50.682014+00:00",
       "status": "passed",
-      "cases": 3,
+      "cases": 5,
       "models": [
-        "openai::gpt-6.1-sol",
-        "vertex::gemini-3.8-flash"
+        "codex::gpt-6.1-sol"
       ],
       "model_results": {
-        "openai::gpt-6.1-sol": {
-          "pass": 3,
+        "codex::gpt-6.1-sol": {
+          "pass": 5,
           "partial": 0,
           "fail": 0
-        },
-        "vertex::gemini-3.8-flash": {
-          "pass": 2,
-          "partial": 0,
-          "fail": 1
         }
       },
-      "scope": "每模型3个场景，另有无技能配对。Sol本批3项满足预声明要点；Google 2 项满足、0 项部分满足、1 项未满足。由本轮Agent审阅，无独立人工盲评；不代表普遍质量或当前可用余额。",
+      "scope": "四项工程指导组合用于五类限定真实编码任务，5/5；无指导对照也为5/5，未观察到成功率增益，不能推断每项指导的独立贡献。最终登录隔离通道另有真实包生成回归。",
       "reports": [
-        "evals/reports/skill-coverage-review-2026-10-19.json"
+        "evals/reports/k3-closure-2026-10-19.json"
       ]
     },
     "matt-pocock.to-spec": {

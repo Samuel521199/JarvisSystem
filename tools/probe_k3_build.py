@@ -27,30 +27,43 @@ def main():
     parser.add_argument('--directory', required=True, type=Path)
     parser.add_argument('--dataset', type=Path, default=ROOT/'evals/cases/k3-coding-v2.json')
     parser.add_argument('--improvement', action='store_true', help='Exercise saved improvement -> coding -> verified receipt')
+    parser.add_argument('--without-guides', action='store_true', help='Controlled evaluation only: same adapter and budget, no engineering guide text')
     args = parser.parse_args(); root = args.directory.resolve()
     if root.exists(): parser.error('Use a new directory; unknown outcomes must not be replayed')
     root.mkdir(parents=True)
     dataset = args.dataset.resolve(); raw = dataset.read_bytes()
     cases = json.loads(raw)['cases']
     result = {'version': __version__, 'started': datetime.now(timezone.utc).isoformat(),
-              'dataset_digest': policy.digest(raw), 'status': 'running', 'cases': []}
+              'dataset_digest': policy.digest(raw), 'status': 'running', 'cases': [], 'engineering_guides':not args.without_guides}
     def save(): (root/'report.json').write_text(json.dumps(result, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
     save()
     for case in cases:
         from jarvis_core.coding_bundle import layout
-        layout(list(case['files']), case['entry'])
+        from jarvis_core import coding_package,coding_js
+        selected=case.get('recipe',ZIPAPP)
+        (coding_js.layout if selected==coding_js.RECIPE else coding_package.layout if selected in coding_package.RECIPES else layout)(list(case['files']), case['entry'])
         if not case['id'].replace('-', '').isalnum(): raise ValueError('Unsafe fixture identifier')
         folder = root/case['id']; source = folder/'project'; source.mkdir(parents=True)
         for name, content in case['files'].items():
+            if name in case.get('new_paths',[]):continue
             target = source/name; target.parent.mkdir(parents=True, exist_ok=True)
             target.write_text(content, encoding='utf-8')
-        originals = {p: (source/p).read_bytes() for p in case['files']}
+        originals = {p: (source/p).read_bytes() if (source/p).exists() else None for p in case['files']}
         core = CoreService(folder/'data'); core.initialize(source)
         workspace = WorkspaceService(core); project = workspace.open_project({'path': str(source)})
         settings = CodingSettings(core); settings.write({**settings.read(), 'enabled': True, 'reasoning': 'medium'})
         manager = ComputerWeb(core, None); bridge = ConversationTasks(core, manager)
         row = {'id': case['id'], 'category': case.get('category', 'acceptance'), 'status': 'running'}
         result['cases'].append(row); save()
+        guide_patch=None
+        if args.without_guides:
+            from unittest.mock import patch
+            from jarvis_core import coding_task
+            original_composition=coding_task.composition
+            def no_guides(service,arguments):
+                decisions,guides=original_composition(service,arguments)
+                return decisions,{k:'' for k in guides}
+            guide_patch=patch.object(coding_task,'composition',no_guides);guide_patch.start()
         try:
             cid = uuid.uuid4().hex
             payload = {'mode': 'skill', 'request_id': 'web-'+uuid.uuid4().hex,
@@ -58,6 +71,7 @@ def main():
                 'paths': list(case['files']), 'entrypoint': case['entry'], 'coding': True,
                 'coding_provider': 'codex', 'model': 'auto', 'build_recipe': case.get('recipe', ZIPAPP),
                 'cases': case['public'], 'heldout_cases': case['private']}
+            if case.get('new_paths'):payload['new_paths']=case['new_paths']
             if args.improvement:
                 from jarvis_core.conversations import ConversationStore
                 from jarvis_core.coding_demand import CodingDemands
@@ -67,7 +81,7 @@ def main():
                          'attachments_omitted': False, 'incomplete': False}]}})
                 demands = CodingDemands(core, bridge)
                 proposal = demands.propose(cid, {'request_id': uuid.uuid4().hex, 'prompt': case['goal'],
-                    'coding': {k: payload[k] for k in ('paths','entrypoint','coding_provider','model','build_recipe','cases','heldout_cases')}})
+                    'coding': {k: payload[k] for k in ('paths','entrypoint','coding_provider','model','build_recipe','cases','heldout_cases','new_paths') if k in payload}})
                 assert proposal['status'] == 'PROPOSED' and proposal['task_id'] is None
                 row['proposal'] = proposal; save()
                 item = demands.start(cid, proposal['id'], {})
@@ -94,11 +108,11 @@ def main():
                 assert not done['result']['automatically_applied']
                 assert demands.start(cid, proposal['id'], {})['task_id'] == item['task_id']
                 row['improvement_result'] = done
-            assert all((source/p).read_text()==s for p,s in case['files'].items())
+            assert all(((source/p).read_bytes() if (source/p).exists() else None)==s for p,s in originals.items())
             row['apply'] = apply_result(core, report, 'apply')
-            assert all((source/p).read_text()==s for p,s in value['candidates'].items())
+            assert all((source/p).read_text()==s for p,s in value.get('candidates',{case['entry']:value['candidate']}).items())
             row['rollback'] = apply_result(core, report, 'rollback')
-            assert all((source/p).read_bytes()==s for p,s in originals.items())
+            assert all(((source/p).read_bytes() if (source/p).exists() else None)==s for p,s in originals.items())
             row['original_bytes_restored'] = True
             artifact = folder/value['build']['filename']; artifact.write_bytes(base64.b64decode(value['build']['base64']))
             checks = folder/'private-cases.json'; checks.write_text(json.dumps(case['private'], ensure_ascii=False), encoding='utf-8')
@@ -113,7 +127,9 @@ def main():
             print(json.dumps({'case': row['id'], 'status': row['status'], 'calls': len(value['attempts'])}), flush=True)
         except Exception as exc:
             row.update(status='failed', error=type(exc).__name__+': '+str(exc)); result['status']='failed'; save(); raise
-        finally: manager.close()
+        finally:
+            manager.close()
+            if guide_patch:guide_patch.stop()
     result['status'] = 'passed'; save()
     print(json.dumps({'status': result['status'], 'report': str(root/'report.json')}))
 
