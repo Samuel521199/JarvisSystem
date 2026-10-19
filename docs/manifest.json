@@ -3063,9 +3063,9 @@
     }
   ],
   "implementation": {
-    "version": "0.1.66",
-    "scope": "0.1.66 adds an offline executable Python zipapp recipe, actual artifact-entry LPAC verification, strict reproducible rebuild, and repair of syntax-broken selected files. Three real Codex scenarios and 85 targeted checks passed. Fixed Python subset only; full K1/K2/K3 gates remain incomplete.",
-    "evidence": "evals/reports/k3-build-2026-10-19.json",
+    "version": "0.1.67",
+    "scope": "0.1.67 K3 acceptance: 99 tests and one corrected real four-module Codex task passed; original failed attempts retained. Runtime builtin contract/diagnostics fixed without broadening execution permissions. Bounded coding accepted; generic improvement-request handoff and full development-platform gates remain incomplete.",
+    "evidence": "evals/reports/k3-acceptance-2026-10-19.json",
     "overall_design_status": "proposed",
     "complete_k1_gate": false,
     "complete_k2_gate": false,
@@ -3321,7 +3321,9 @@
       "evals/reports/growth-purposes-2026-10-19.json",
       "evals/reports/k3-coding-2026-10-19.json",
       "evals/reports/k3-build-2026-10-19.json",
-      "evals/cases/k3-coding-v2.json"
+      "evals/cases/k3-coding-v2.json",
+      "evals/reports/k3-acceptance-2026-10-19.json",
+      "evals/cases/k3-acceptance-v1.json"
     ]
   }
 }

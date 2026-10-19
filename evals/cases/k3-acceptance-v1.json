@@ -1,0 +1,141 @@
+{
+  "scope": "New frozen acceptance scenario, not an unseen model benchmark",
+  "cases": [
+    {
+      "id": "four-module-money-report",
+      "goal": "修复四个模块，report.py 是入口 transform(data)。输入为记录数组，每项 cents 为整数分，category 为字符串或 null/缺省，void=true 的项忽略。类别为 (category 或空串).strip().casefold()，空类别写未分类。按类别累加整数分，再按类别 Unicode 字符顺序排序。输出 TSV 字符串：首行 category 和 amount；金额精确两位小数，负号只在负数时出现，禁止浮点计算，零为0.00。用 csv.writer 的制表分隔、最小引号和 LF 换行，每行含最后一行都有换行；空输入只有表头。不修改输入。四模块分别承担入口、类别归一、聚合、格式化，不引入第三方依赖。",
+      "entry": "report.py",
+      "files": {
+        "report.py": "from totals import collect\nfrom formatting import render\ndef transform(data)\n    return render(collect(data))\n",
+        "labels.py": "def label(row):\n    return \"wrong\"\n",
+        "totals.py": "from labels import label\ndef collect(data):\n    return {}\n",
+        "formatting.py": "def render(totals):\n    return \"wrong\"\n"
+      },
+      "public": [
+        {
+          "input": [
+            {
+              "category": "Food",
+              "cents": 125
+            },
+            {
+              "category": " food ",
+              "cents": -25
+            }
+          ],
+          "expected": "category\tamount\nfood\t1.00\n"
+        },
+        {
+          "input": [],
+          "expected": "category\tamount\n"
+        }
+      ],
+      "private": [
+        {
+          "input": [
+            {
+              "category": "交通",
+              "cents": -1
+            },
+            {
+              "category": "交通",
+              "cents": -200
+            }
+          ],
+          "expected": "category\tamount\n交通\t-2.01\n"
+        },
+        {
+          "input": [
+            {
+              "category": " B ",
+              "cents": 99
+            },
+            {
+              "category": "a",
+              "cents": 100
+            },
+            {
+              "category": "b",
+              "cents": 1
+            }
+          ],
+          "expected": "category\tamount\na\t1.00\nb\t1.00\n"
+        },
+        {
+          "input": [
+            {
+              "category": null,
+              "cents": 123
+            },
+            {
+              "category": " ",
+              "cents": -23
+            }
+          ],
+          "expected": "category\tamount\n未分类\t1.00\n"
+        },
+        {
+          "input": [
+            {
+              "category": "ignore",
+              "cents": 900,
+              "void": true
+            }
+          ],
+          "expected": "category\tamount\n"
+        },
+        {
+          "input": [
+            {
+              "category": "a\tb",
+              "cents": -12345
+            }
+          ],
+          "expected": "category\tamount\n\"a\tb\"\t-123.45\n"
+        },
+        {
+          "input": [
+            {
+              "category": "line\nbreak",
+              "cents": 0
+            },
+            {
+              "category": "quote\"",
+              "cents": 1
+            }
+          ],
+          "expected": "category\tamount\n\"line\nbreak\"\t0.00\n\"quote\"\"\"\t0.01\n"
+        },
+        {
+          "input": [
+            {
+              "category": "STRASSE",
+              "cents": 100
+            },
+            {
+              "category": "Straße",
+              "cents": 200
+            }
+          ],
+          "expected": "category\tamount\nstrasse\t3.00\n"
+        },
+        {
+          "input": [
+            {
+              "cents": -9999999
+            },
+            {
+              "category": "x",
+              "cents": 1
+            },
+            {
+              "category": "x",
+              "cents": -1
+            }
+          ],
+          "expected": "category\tamount\nx\t0.00\n未分类\t-99999.99\n"
+        }
+      ]
+    }
+  ]
+}

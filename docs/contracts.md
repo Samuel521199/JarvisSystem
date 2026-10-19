@@ -63,7 +63,7 @@
   - [8.6.4 技能和模块包清单](#interfaces-4)
   - [8.6.5 接口类型选择](#interfaces-5)
 - [8.7 技能选择、策略与调用记录契约](#skill-selection-contract)
-  - [8.7.1 编程副本与验证状态字段（0.1.66）](#bounded-coding-contract)
+  - [8.7.1 编程副本与验证状态字段（0.1.67）](#bounded-coding-contract)
 - [8.8 资源租约、本地组件与安全事件契约](#extensions-3)
 - [8.9 项目资源与工程文件契约（0.1.27）](#project-resources-contract)
 - [8.10 MCP 与技能登记契约（0.1.27；0.1.37 管理增量）](#extension-catalog-contract)
@@ -981,7 +981,9 @@ REA 任务增加可选布尔 `explain`（默认 false）。true 时只接受明�
 
 
 <a id="bounded-coding-contract"></a>
-### 编程副本与验证状态字段（0.1.66）
+### 编程副本与验证状态字段（0.1.67）
+
+0.1.67 的静态失败回执可含 `static_reason`，说明受限环境缺少的内置名称；该诊断不来自留出案例正文。候选生成提示包含实际内置函数清单，构建配方与允许执行能力不变。
 
 技能请求沿用 `coding:boolean` 与 `cases:[{input,expected}]`；新增 `heldout_cases`、`entrypoint`、`coding_provider=gateway|codex`（默认 gateway）；`build_recipe=python-source-v1|python-zipapp-v1`，API 缺省保持原源码配方，当前 UI 默认可运行工具包。每组案例 2—24 项、总计最多 16 KiB；每项仅含 input/expected，预期为最多 4 KiB 字符串。独立输入不得与公开输入重复。多文件或可运行工具包必须有 heldout_cases；旧单文件请求兼容，但不宣称已做独立检查。paths 为 1—4 个同目录 `.py` 文件，模块名普通英文字母开头，可含数字和下划线；入口默认第一份且必须在清单中。原始/候选每文件最多 16 KiB、合计 32 KiB。四项工程技能之一必须明确指定，不能并用 output_path 或 REA explain。
 

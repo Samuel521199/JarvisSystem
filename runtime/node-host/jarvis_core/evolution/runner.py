@@ -1,5 +1,6 @@
 """Compile and run generated functions only in the existing Windows LPAC boundary."""
 import ast
+import builtins
 import json
 
 from .. import policy
@@ -10,6 +11,9 @@ from jarvis_worker.windows import run, WorkerError, require_acl_volume
 FORBIDDEN = {'open', 'eval', 'exec', 'compile', 'globals', 'locals', 'vars', 'getattr', 'setattr',
              'delattr', 'hasattr', 'breakpoint', 'input', 'help', 'exit', 'quit', 'memoryview', 'FileIO', 'open_code'}
 IMPORTS = {'csv': {'writer', 'QUOTE_MINIMAL', 'QUOTE_ALL', 'QUOTE_NONNUMERIC', 'QUOTE_NONE'}, 'io': {'StringIO'}}
+BUILTINS = ('str','int','float','bool','list','dict','tuple','set','len','range','enumerate','zip',
+            'sorted','sum','min','max','abs','round','reversed','isinstance',
+            'Exception','ValueError','TypeError','KeyError')
 
 
 def validate_code(source, *, imports=None, require_entry=True):
@@ -19,6 +23,19 @@ def validate_code(source, *, imports=None, require_entry=True):
         tree = ast.parse(source)
         if len(list(ast.walk(tree))) > 3000:
             raise ValueError('AST quota')
+        # Diagnose unavailable builtins before running a candidate. Locally bound
+        # names may legitimately shadow builtins; this is not a security sandbox.
+        bound = {n.id for n in ast.walk(tree) if isinstance(n, ast.Name) and isinstance(n.ctx, ast.Store)}
+        bound.update(n.name for n in ast.walk(tree) if isinstance(n, ast.FunctionDef))
+        bound.update(n.arg for n in ast.walk(tree) if isinstance(n, ast.arg))
+        bound.update(n.asname or n.name for n in ast.walk(tree) if isinstance(n, ast.alias))
+        bound.update(n.name for n in ast.walk(tree) if isinstance(n, ast.ExceptHandler) and n.name)
+        unavailable = sorted({n.id for n in ast.walk(tree) if isinstance(n, ast.Name)
+            and isinstance(n.ctx, ast.Load) and n.id in vars(builtins)
+            and n.id not in BUILTINS and n.id not in bound})
+        if unavailable:
+            raise policy.CoreError('candidate_invalid', '当前纯转换运行环境不提供这些内置名称：'
+                                   + ', '.join(unavailable) + '。请使用已声明的内置函数和普通运算符。')
         functions = [n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == 'transform']
         if require_entry and (len(functions) != 1 or len(functions[0].args.args) != 1):
             raise ValueError('entry')

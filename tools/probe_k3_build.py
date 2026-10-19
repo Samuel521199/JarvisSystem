@@ -25,23 +25,30 @@ from jarvis_core.network_policy import NetworkPolicy
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--directory', required=True, type=Path)
+    parser.add_argument('--dataset', type=Path, default=ROOT/'evals/cases/k3-coding-v2.json')
     args = parser.parse_args(); root = args.directory.resolve()
     if root.exists(): parser.error('Use a new directory; unknown outcomes must not be replayed')
     root.mkdir(parents=True)
-    dataset = ROOT/'evals/cases/k3-coding-v2.json'; raw = dataset.read_bytes()
+    dataset = args.dataset.resolve(); raw = dataset.read_bytes()
     cases = json.loads(raw)['cases']
     result = {'version': __version__, 'started': datetime.now(timezone.utc).isoformat(),
               'dataset_digest': policy.digest(raw), 'status': 'running', 'cases': []}
     def save(): (root/'report.json').write_text(json.dumps(result, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
     save()
     for case in cases:
+        from jarvis_core.coding_bundle import layout
+        layout(list(case['files']), case['entry'])
+        if not case['id'].replace('-', '').isalnum(): raise ValueError('Unsafe fixture identifier')
         folder = root/case['id']; source = folder/'project'; source.mkdir(parents=True)
-        for name, content in case['files'].items(): (source/name).write_text(content, encoding='utf-8')
+        for name, content in case['files'].items():
+            target = source/name; target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text(content, encoding='utf-8')
+        originals = {p: (source/p).read_bytes() for p in case['files']}
         core = CoreService(folder/'data'); core.initialize(source)
         workspace = WorkspaceService(core); project = workspace.open_project({'path': str(source)})
         settings = CodingSettings(core); settings.write({**settings.read(), 'enabled': True, 'reasoning': 'medium'})
         manager = ComputerWeb(core, None); bridge = ConversationTasks(core, manager)
-        row = {'id': case['id'], 'category': case['category'], 'status': 'running'}
+        row = {'id': case['id'], 'category': case.get('category', 'acceptance'), 'status': 'running'}
         result['cases'].append(row); save()
         try:
             cid = uuid.uuid4().hex
@@ -68,7 +75,8 @@ def main():
             row['apply'] = apply_result(core, report, 'apply')
             assert all((source/p).read_text()==s for p,s in value['candidates'].items())
             row['rollback'] = apply_result(core, report, 'rollback')
-            assert all((source/p).read_text()==s for p,s in case['files'].items())
+            assert all((source/p).read_bytes()==s for p,s in originals.items())
+            row['original_bytes_restored'] = True
             artifact = folder/value['build']['filename']; artifact.write_bytes(base64.b64decode(value['build']['base64']))
             checks = folder/'private-cases.json'; checks.write_text(json.dumps(case['private'], ensure_ascii=False), encoding='utf-8')
             NetworkPolicy(core.data_dir).change(True, 0)
