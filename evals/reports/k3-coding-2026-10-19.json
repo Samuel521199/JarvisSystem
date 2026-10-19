@@ -1,0 +1,230 @@
+{
+  "version": "0.1.65",
+  "status": "implemented_with_targeted_verification",
+  "observed_at": "2026-10-19T07:04:34.988022+00:00",
+  "github_baseline": {
+    "version": "0.1.64",
+    "commit": "20371d3940503c27693f8da13a5be4dc15ef9564",
+    "release": "https://github.com/Samuel521199/JarvisSystem/releases/tag/v0.1.64"
+  },
+  "checks": {
+    "targeted_unique_tests": 79,
+    "passed": true,
+    "groups": {
+      "coding_workflow": 13,
+      "coding_bundle": 7,
+      "coding_codex": 5,
+      "coding_http": 1,
+      "related_evolution_runtime_and_rea": 53
+    },
+    "full_k2_repeated": false
+  },
+  "real_codex": {
+    "status": "passed",
+    "raw_report": "H:/JarvisData/diagnostics/k3-coding-v0165-20261019-run2/report.json",
+    "task_id": "task_95d2a4cb19705704bb7fd39b50638d3d",
+    "provider": "codex-cli",
+    "model": "gpt-6.1-sol",
+    "calls": 1,
+    "files": [
+      "grouping.py",
+      "report.py"
+    ],
+    "baseline_passed": false,
+    "validation": {
+      "cases": 4,
+      "failures": [],
+      "heldout": {
+        "cases": 2,
+        "failures": [],
+        "passed": true,
+        "worker": {
+          "active_process_limit": 1,
+          "appcontainer": true,
+          "backend": "windows-lpac-job",
+          "capabilities": [
+            "registryRead"
+          ],
+          "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+          "cpu_seconds": 0.15625,
+          "cpu_time_limit_seconds": 3,
+          "elapsed_seconds": 3.3035,
+          "lpac": true,
+          "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+          "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+          "memory_limit_bytes": 201326592,
+          "package_sid": "S-1-15-2-3782780768-4052434929-3467202293-2244788753-1104407165-1429442420-3143347995",
+          "peak_process_memory_bytes": 13447168,
+          "pid": 44240,
+          "runtime_bytes": 22904399,
+          "wall_time_limit_seconds": 12
+        }
+      },
+      "independent_checks": true,
+      "passed": true,
+      "public": {
+        "cases": 2,
+        "failures": [],
+        "passed": true,
+        "worker": {
+          "active_process_limit": 1,
+          "appcontainer": true,
+          "backend": "windows-lpac-job",
+          "capabilities": [
+            "registryRead"
+          ],
+          "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+          "cpu_seconds": 0.140625,
+          "cpu_time_limit_seconds": 3,
+          "elapsed_seconds": 3.4802,
+          "lpac": true,
+          "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+          "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+          "memory_limit_bytes": 201326592,
+          "package_sid": "S-1-15-2-1504202757-1554250787-1196131914-586635235-1529692931-128518169-3265109532",
+          "peak_process_memory_bytes": 13119488,
+          "pid": 44892,
+          "runtime_bytes": 22904399,
+          "wall_time_limit_seconds": 12
+        }
+      },
+      "worker": {
+        "active_process_limit": 1,
+        "appcontainer": true,
+        "backend": "windows-lpac-job",
+        "capabilities": [
+          "registryRead"
+        ],
+        "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+        "cpu_seconds": 0.140625,
+        "cpu_time_limit_seconds": 3,
+        "elapsed_seconds": 3.4802,
+        "lpac": true,
+        "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+        "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+        "memory_limit_bytes": 201326592,
+        "package_sid": "S-1-15-2-1504202757-1554250787-1196131914-586635235-1529692931-128518169-3265109532",
+        "peak_process_memory_bytes": 13119488,
+        "pid": 44892,
+        "runtime_bytes": 22904399,
+        "wall_time_limit_seconds": 12
+      }
+    },
+    "model_receipts": [
+      {
+        "billing": {
+          "amount": null,
+          "basis": "external_codex_account"
+        },
+        "executor": {
+          "candidate_execution": false,
+          "command_sandbox": "deny-filesystem",
+          "process": {
+            "active_process_limit": 4,
+            "elapsed_seconds": 20.133,
+            "job_cpu_limit_seconds": 45,
+            "job_memory_limit_bytes": 1073741824,
+            "kill_on_close": true,
+            "os_sandbox": false,
+            "peak_job_memory_bytes": 27049984,
+            "pid": 42668,
+            "wall_limit_seconds": 90
+          },
+          "settings_revision": 1,
+          "stage": "H:\\JarvisData\\diagnostics\\k3-coding-v0165-20261019-run2\\data\\coding-external\\8cc0a3d9f82741e4aa42a4d3c720eadb",
+          "tool_policy": "proposal-only",
+          "version": "0.142.1"
+        },
+        "model": "gpt-6.1-sol",
+        "outcome_uncertain": false,
+        "provider": "codex-cli",
+        "request_id": "01a152fa-3432-7cf3-96ea-bd147caa006c",
+        "status": "SUCCEEDED",
+        "usage": {
+          "cached_input_tokens": 0,
+          "input_tokens": 1650,
+          "output_tokens": 453,
+          "reasoning_output_tokens": 129
+        }
+      }
+    ],
+    "apply": {
+      "status": "applied",
+      "files": 2
+    },
+    "rollback": {
+      "status": "restored",
+      "files": 2
+    },
+    "build": {
+      "filename": "candidate-python.zip",
+      "manifest": {
+        "cases_digest": "sha256:4d2d5e2e0d34d57b6f006a804afd65b5f0b44b5247da4bf1c5f9be191c054552",
+        "dependency_install": false,
+        "entry": "report.py",
+        "files": {
+          "grouping.py": "sha256:2e62891f542bc0b1c60aadbeaa9318bb21a00c5db56247b1560938c1c4d7a47d",
+          "report.py": "sha256:14f7f8a534214565705b13970fc6c74ced93734ee57fa8a9a30d73e065e34666"
+        },
+        "kind": "jarvis.python-source-build",
+        "recipe": "offline-python-lpac-v1",
+        "version": 1
+      },
+      "sha256": "sha256:61255453495d7742d3e79e7a416ab3db2dcd5ea7e28a91b70b6d948292248093",
+      "size_bytes": 980
+    },
+    "offline_rebuild": {
+      "passed": true,
+      "lpac": true,
+      "cases": 2,
+      "worker": {
+        "backend": "windows-lpac-job",
+        "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+        "runtime_bytes": 22904399,
+        "appcontainer": true,
+        "lpac": true,
+        "capabilities": [
+          "registryRead"
+        ],
+        "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+        "pid": 48564,
+        "package_sid": "S-1-15-2-1527616146-3775478213-3601357876-393529638-1334099609-3227148975-1429365032",
+        "active_process_limit": 1,
+        "cpu_time_limit_seconds": 3,
+        "wall_time_limit_seconds": 12,
+        "cpu_seconds": 0.140625,
+        "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+        "memory_limit_bytes": 201326592,
+        "peak_process_memory_bytes": 13144064,
+        "elapsed_seconds": 0.3373
+      }
+    }
+  },
+  "deployment": {
+    "status": "passed",
+    "version": "0.1.65",
+    "current_instance": "d63393fce1a2953a6ccc1e40930d8528",
+    "business_tables_unchanged": true,
+    "business_table_count": 11,
+    "expected_runtime_change": "dialogue_owner.owner is renewed by DialogueJournal.claim on each host startup; business rows/columns unchanged in the recorded restart.",
+    "assets": {
+      "coding.js": "3547507e77569145601f7d50660359172185269f5b566fddeefafcb54b04dae2",
+      "skills.js": "7d475246274887f5e6849a0c8d38d86d48daa9572e6301461943458623c7106d",
+      "admin.js": "09d93597e84408dfd48ce8aaecb5b7a9b1554023a38811526c3b6bb291661c43"
+    },
+    "raw_evidence": "H:/JarvisData/diagnostics/k3-deployment-v0165.json",
+    "coding_enabled": true,
+    "settings_ui": "passed",
+    "screenshot": "H:/JarvisData/diagnostics/k3-settings-v0165.png",
+    "result_ui_mouse_flow": "not_separately_exercised",
+    "admin_css_sha256": "deeb0de5f96ac1f2d35b1ba40ad0eb7093e59ec1103e90541ce88e6554776584",
+    "legacy_download_compatibility": "preserved"
+  },
+  "limitations": [
+    "Fixed 1-4 same-directory Python transform modules, not arbitrary repositories or compiled native installers.",
+    "Host-held cases and invariants are not a proof of arbitrary-input correctness.",
+    "Pinned trusted Codex CLI uses account auth; its Job is lifetime/resource containment, not an OS sandbox for the CLI itself.",
+    "No new runtime dependencies or resident coder; only one on-demand external executor.",
+    "K2 physical-device, full-machine-offline and owner-experience gates remain open; full K3/B-series are not declared passed."
+  ]
+}

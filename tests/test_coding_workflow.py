@@ -98,6 +98,11 @@ class CodingTests(fixture.Fixture):
         class Runner:
             def run(self,*a):return [],{}
         self.assertFalse(check_code(Runner(),GOOD,CASES,lambda:None)['passed'])
+    def test_changed_codex_settings_reject_queued_binding_without_model(self):
+        from jarvis_core.coding_codex import CodexCodingProvider
+        with patch.object(CodexCodingProvider,'preflight',return_value=({},None)),patch.object(CodexCodingProvider,'binding',side_effect=['sha256:'+'a'*64,'sha256:'+'b'*64]):
+            detail=self.wait(self.submit(coding_provider='codex'))
+        self.assertEqual(detail['error']['code'],'coding_settings_changed');self.assertFalse(self.calls)
     def test_coding_route_preserves_prices_and_profile_parameters(self):
         from jarvis_core.evolution.provider import ModelCodingProvider
         from jarvis_models.catalog import resolve_settings

@@ -32,6 +32,16 @@ def confirmed(host, conversation, task):
 def get(handler):
     host = handler.server
     parsed = urlsplit(handler.path)
+    if parsed.path == '/coding.js':
+        handler._send(200, host.coding_script, 'application/javascript; charset=utf-8')
+        return True
+    if parsed.path == '/api/coding':
+        if not handler._workspace_token() or not handler._guard(): return True
+        try:
+            from jarvis_core.coding_codex import CodexCodingProvider
+            handler._send(200, CodexCodingProvider(host.core).snapshot())
+        except Exception as exc: handler._workspace_error(exc)
+        return True
     evidence_match = re.fullmatch(r'/api/skills/evidence/([a-f0-9]{32})/(task_[a-f0-9]{32})', parsed.path)
     if evidence_match:
         if not handler._workspace_token() or not handler._guard(): return True
@@ -88,8 +98,13 @@ def get(handler):
 def post(handler, payload):
     host = handler.server
     try:
-        if host.skills is None: raise CoreError('skill_unavailable','技能模块尚未启用。')
-        if handler.path in {'/api/skills/coding-apply','/api/skills/coding-rollback'}:
+        if host.skills is None and handler.path != '/api/coding': raise CoreError('skill_unavailable','技能模块尚未启用。')
+        if handler.path == '/api/coding':
+            from jarvis_core.coding_codex import CodexCodingProvider
+            provider=CodexCodingProvider(host.core)
+            provider.settings.write(payload)
+            result=provider.snapshot()
+        elif handler.path in {'/api/skills/coding-apply','/api/skills/coding-rollback'}:
             fields(payload, {'conversation_id','task_id'}, set())
             report=json.loads(host.conversation_tasks.artifact(payload['conversation_id'],payload['task_id']))
             from jarvis_core.coding_workflow import apply_result

@@ -13,12 +13,14 @@ import time
 from . import policy
 
 
-def run(argv, stage, checkpoint, *, seconds=60, output_limit=1200 * 1024, output_path=None, on_started=lambda pid: None):
+def run(argv, stage, checkpoint, *, seconds=60, output_limit=1200 * 1024, output_path=None, on_started=lambda pid: None,
+        stdin_file=None, environment_extra=None):
     from . import worker  # Register the shared Win32 structures.
     from jarvis_worker.windows import Windows, JobLimits, SecurityAttributes, StartupInfoEx, ProcessInformation, SIZE, P
     api = Windows()
     handles, job, attributes, initialized = [], None, None, False
     sink = None
+    input_stream = None
     process = ProcessInformation()
     started = time.monotonic()
     try:
@@ -43,6 +45,15 @@ def run(argv, stage, checkpoint, *, seconds=60, output_limit=1200 * 1024, output
             handles.extend([read.value, write.value]); pipes.append((read.value, write.value))
         stdin, stdout, stderr = pipes[0][0], pipes[1][1], pipes[2][1]
         api.close(pipes[0][1]); handles.remove(pipes[0][1])
+        if stdin_file is not None:
+            import msvcrt
+            source = policy.safe_path(Path(stdin_file))
+            if source.parent != policy.safe_path(Path(stage), directory=True) or source.stat().st_size > 131072:
+                raise policy.CoreError('process_input_invalid', '受控进程输入必须在本次目录且不超过 128 KiB。')
+            api.close(stdin); handles.remove(stdin)
+            input_stream = source.open('rb')
+            stdin = msvcrt.get_osfhandle(input_stream.fileno())
+            os.set_handle_inheritable(stdin, True)
         for read in (pipes[1][0], pipes[2][0]):
             api.check(api.handle_flags(read, 1, 0), 'Protect REA read handle')
         size = SIZE(); api.init_attrs(None, 2, 0, C.byref(size))
@@ -56,12 +67,18 @@ def run(argv, stage, checkpoint, *, seconds=60, output_limit=1200 * 1024, output
         environment = {'SystemRoot': os.environ['SystemRoot'], 'WINDIR': os.environ['SystemRoot'],
                        'TEMP': str(stage), 'TMP': str(stage), 'USERPROFILE': str(stage),
                        'LOCALAPPDATA': str(stage), 'APPDATA': str(stage), 'PATH': str(Path(argv[0]).parent)}
+        extra = environment_extra or {}
+        if set(extra) - {'CODEX_HOME','HTTP_PROXY','HTTPS_PROXY','NO_PROXY'} or any(not isinstance(v,str) or '\0' in v for v in extra.values()):
+            raise policy.CoreError('process_environment_invalid','受控进程环境项不在允许清单中。')
+        environment.update(extra)
         env = C.create_unicode_buffer('\0'.join(k + '=' + v for k, v in sorted(environment.items())) + '\0\0')
         api.check(api.create(argv[0], C.create_unicode_buffer(subprocess.list2cmdline(argv)), None, None, True,
                              0x80000 | 0x400 | 0x8000000 | 0x4, env, str(stage), C.byref(startup), C.byref(process)), 'Start REA parser')
         handles.extend([process.process, process.thread]); on_started(process.pid); checkpoint()
         if api.resume(process.thread) == 0xFFFFFFFF: api.check(False, 'Resume REA parser')
-        for handle in (stdin, stdout, stderr): api.close(handle); handles.remove(handle)
+        for handle in (stdout, stderr): api.close(handle); handles.remove(handle)
+        if input_stream is None: api.close(stdin); handles.remove(stdin)
+        else: input_stream.close(); input_stream = None
         buffers, sizes, finished = [bytearray(), bytearray()], [0, 0], False
         while True:
             checkpoint()
@@ -103,3 +120,4 @@ def run(argv, stage, checkpoint, *, seconds=60, output_limit=1200 * 1024, output
         for handle in reversed(handles): api.close(handle)
         if initialized: api.delete_attrs(attributes)
         if sink is not None: sink.close()
+        if input_stream is not None: input_stream.close()

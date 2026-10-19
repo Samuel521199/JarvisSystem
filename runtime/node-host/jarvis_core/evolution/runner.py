@@ -12,7 +12,7 @@ FORBIDDEN = {'open', 'eval', 'exec', 'compile', 'globals', 'locals', 'vars', 'ge
 IMPORTS = {'csv': {'writer', 'QUOTE_MINIMAL', 'QUOTE_ALL', 'QUOTE_NONNUMERIC', 'QUOTE_NONE'}, 'io': {'StringIO'}}
 
 
-def validate_code(source):
+def validate_code(source, *, imports=None, require_entry=True):
     if not isinstance(source, str) or not 20 <= len(source.encode()) <= 24000:
         raise policy.CoreError('candidate_invalid', '候选代码大小无效。')
     try:
@@ -20,7 +20,7 @@ def validate_code(source):
         if len(list(ast.walk(tree))) > 3000:
             raise ValueError('AST quota')
         functions = [n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == 'transform']
-        if len(functions) != 1 or len(functions[0].args.args) != 1:
+        if require_entry and (len(functions) != 1 or len(functions[0].args.args) != 1):
             raise ValueError('entry')
         for node in tree.body:
             if not isinstance(node, (ast.Import, ast.ImportFrom, ast.FunctionDef)) and not (
@@ -33,12 +33,13 @@ def validate_code(source):
                 raise ValueError('forbidden name')
             if isinstance(node, ast.Attribute) and (node.attr.startswith('_') or node.attr in FORBIDDEN):
                 raise ValueError('private attribute')
-            if isinstance(node, ast.Import) and any(n.name not in {'csv', 'io'} for n in node.names):
+            permitted = IMPORTS if imports is None else {**IMPORTS, **imports}
+            if isinstance(node, ast.Import) and any(n.name not in permitted or (n.asname or '').startswith('_') for n in node.names):
                 raise ValueError('import')
-            if isinstance(node, ast.ImportFrom) and (node.module not in IMPORTS or node.level or any(n.name not in IMPORTS[node.module] for n in node.names)):
+            if isinstance(node, ast.ImportFrom) and (node.module not in permitted or node.level or any(n.name not in permitted[node.module] or (n.asname or '').startswith('_') for n in node.names)):
                 raise ValueError('import')
             if isinstance(node, ast.FunctionDef) and (node.decorator_list or node.returns or
-                    node.args.defaults or node.args.kw_defaults or any(a.annotation for a in node.args.args)):
+                    node.name.startswith('_') or node.args.defaults or node.args.kw_defaults or node.args.vararg or node.args.kwarg or node.args.posonlyargs or node.args.kwonlyargs or any(a.annotation or a.arg.startswith('_') for a in node.args.args)):
                 raise ValueError('definition effects')
         compile(tree, '<candidate>', 'exec')  # Compilation only; never executed in Host.
     except (ValueError, SyntaxError, RecursionError, TypeError):
@@ -76,20 +77,29 @@ class IsolatedRunner:
 
     def run(self, source, inputs, checkpoint):
         validate_code(source)
+        return self._execute({'source': source, 'inputs': inputs}, HARNESS, 'evolution.transform.v1', checkpoint)
+
+    def run_bundle(self, sources, entry, inputs, checkpoint):
+        from ..coding_bundle import validate_bundle, HARNESS as bundle_harness
+        validate_bundle(sources, entry)
+        return self._execute({'sources': sources, 'entry': entry, 'inputs': inputs}, bundle_harness, 'coding.bundle.v1', checkpoint)
+
+    def _execute(self, payload, harness, operation, checkpoint):
+        inputs = payload['inputs']
         checkpoint()
         runtime, bundle = verify_bundle()
         parent = policy.safe_path(workspace() / 'evolution-staging', directory=True, must_exist=False)
         parent.mkdir(parents=True, exist_ok=True)
         require_acl_volume(parent)
         recover(parent)
-        binding = {'operation': 'evolution.transform.v1', 'source': policy.digest(source.encode()),
+        binding = {'operation': operation, 'source': policy.digest(policy.canonical_json(payload).encode()),
                    'input': policy.digest(policy.canonical_json(inputs).encode())}
         lease = StageLease(parent, binding)
         binding['nonce'] = lease.token
         try:
-            (lease.stage / 'worker.py').write_text(HARNESS, encoding='utf-8')
+            (lease.stage / 'worker.py').write_text(harness, encoding='utf-8')
             (lease.stage / 'input.json').write_text(policy.canonical_json(
-                {'binding': binding, 'source': source, 'inputs': inputs}), encoding='utf-8')
+                {'binding': binding, **payload}), encoding='utf-8')
             result = run(runtime, lease.stage, checkpoint=checkpoint, profile_name=lease.profile,
                          on_started=lease.started, seconds=12, output_limit=2*1024*1024,
                          memory_limit=192*1024*1024)

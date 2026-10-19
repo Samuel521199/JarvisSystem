@@ -3063,9 +3063,9 @@
     }
   ],
   "implementation": {
-    "version": "0.1.64",
-    "scope": "Deployed 0.1.64 separates bounded inspection, healing and evolution with independent model purposes, a fallback and reasoning settings, and a dedicated growth center. Application-only offline control and the single-node personal assistant remain available. K2 pending physical-device and owner-experience acceptance is retained; development continues into K3 by explicit user direction. Full K1/K2/K3 gates remain incomplete.",
-    "evidence": "evals/reports/application-offline-2026-10-19.json",
+    "version": "0.1.65",
+    "scope": "Deployed 0.1.65 adds bounded K3 coding collaboration: 1-4 Python modules, host-held independent cases, source builds, journaled apply/restore, and a pinned optional external Codex proposer. Targeted tests and a real Codex workflow passed; no new resident service or runtime dependency. Full K1/K2/K3 gates remain incomplete.",
+    "evidence": "evals/reports/k3-coding-2026-10-19.json",
     "overall_design_status": "proposed",
     "complete_k1_gate": false,
     "complete_k2_gate": false,
@@ -3318,7 +3318,8 @@
       "evals/reports/k2-independent-review-2026-10-19.json",
       "evals/reports/k2-completion-2026-10-19.json",
       "evals/reports/application-offline-2026-10-19.json",
-      "evals/reports/growth-purposes-2026-10-19.json"
+      "evals/reports/growth-purposes-2026-10-19.json",
+      "evals/reports/k3-coding-2026-10-19.json"
     ]
   }
 }

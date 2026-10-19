@@ -11,7 +11,7 @@
 - [14.1 成长中心：三种能力、一个可追溯的成长过程](#growth-governance)
   - [14.1.1 成长记住什么，怎样避免越改越乱](#growth-learning-ledger)
 - [14.2 外部 Codex 放在哪里](#bootstrap-6)
-  - [14.2.1 第三方编码执行器：Grok Build 与后续提供者](#external-coding-executor)
+  - [14.2.1 第三方编码执行器：Codex 首期与后续提供者](#external-coding-executor)
 - [14.3 最小进化循环应该如何工作](#bootstrap-7)
   - [14.3.1 已实现：限定工具的自动成长闭环](#bounded-evolution-loop)
   - [14.3.2 已实现：从会话需求到实际交付（0.1.41）](#demand-growth-runtime)
@@ -95,9 +95,15 @@ Codex 不可用、限流或网络断开时，保存 coding_job 并显示等待�
 此处的完整外部 Codex 适配仍为设计状态。当前已经接入的是下节所述的 `ModelCodingProvider`：复用现有模型 API 产生限定 Python 候选，不包含外部 Codex CLI、任意仓库修复或通用终端权限。
 
 <a id="external-coding-executor"></a>
-### 第三方编码执行器：Grok Build 与后续提供者
+### 第三方编码执行器：Codex 首期与后续提供者
 
-**proposed。** `CodingProvider` 继续是唯一外部编码接入点；Codex、Grok Build、本地实现遵守上节同一 coding_job，不新增外部发布者。是否采用 Grok 的依据只在[开源对照](stack-project-layout.md#grok-build-comparison)维护。首个实现仍以 K3 的实际可用性、Windows 隔离、任务质量、成本和资源结果选定，不因本次审阅就默认安装或替换 Codex。
+**0.1.65 首个 Codex 文本候选适配 implemented；完整外部执行器方案仍 proposed。** `CodingProvider` 是统一替换点；现有 ModelCodingProvider 与 CodexCodingProvider 都交出候选，后续走同一独立编译、验收与应用流程，不新增外部发布者。入口为[设置 → 编码协作](http://127.0.0.1:18181/settings#coding)，概览有独立卡片；任务中选择当前模型网关或外部 Codex。Codex 不常驻、不自动安装；已核验的本机 0.142.1 CLI 按需运行，版本变化先重新核对。完整机制与可信边界见[候选隔离](security-sovereignty.md#bounded-coding-boundary)。
+
+适配器使用 `codex exec` 的 JSONL、结构化最终输出、临时会话与配置隔离能力；实测不能用当前 CLI 覆盖保留的 openai 供应商条目，故使用不硬编码 base_url 的独立 OpenAI 登录配置，按实际认证选择服务并关闭自动请求/流重连。不得把 ChatGPT 登录令牌发往硬编码 API 地址。参考官方[非交互执行](references.md#s239)、[配置](references.md#s240)和[权限档案](references.md#s241)，本机差异以[运行证据](delivery-validation.md#k3-coding-evidence)为准。
+
+只持久化开关、模型、推理档位和设置修订；使用已有本机 Codex 登录，不复制 Key。外部账单归 Codex 登录账户，回执中的输入/输出 token 单独记录，不冒充 Jarvis ModelGateway 的价格或余额观测。尚不提供 Codex 任意终端、仓库扫描、自动发布或独立长期 Agent。Grok 是否接入仍按[开源对照](stack-project-layout.md#grok-build-comparison)另作评估。
+
+以下为通用外部执行器的后续完整流程，不能把首个文本候选适配等同全部完成：
 
 Grok 候选首轮选择 headless 的结构化事件输出；需要持续插话/交互恢复时再评估 ACP，并只维护一条已采用的传输路径。[S150](references.md#s150) 中的 `--max-turns`、`--tools`、`--no-auto-update` 是应用级控制，不能当成 OS 沙箱。尤其 headless 的 built-in 工具 allowlist 会保留 MCP meta-tools，不能据此承诺已经关闭所有其他工具。启动前必须解析实际有效配置与工具集合，无法确定范围时不能启用写入/执行。
 

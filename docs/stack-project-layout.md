@@ -47,10 +47,11 @@
   - [9.7.1 复用现有实现，按边界拆分](#dialogue-runtime-adoption)
 - [9.8 项目文件结构与依赖规则](#project-structure)
   - [9.8.1 当前实际落地范围（0.1.18）](#implemented-layout)
-  - [9.8.2 推荐源码结构](#project-structure-1)
-  - [9.8.3 单个模块模板](#project-structure-2)
-  - [9.8.4 运行数据结构](#project-structure-3)
-  - [9.8.5 依赖规则](#project-structure-4)
+  - [9.8.2 编码协作的实际模块（0.1.65）](#coding-module-layout)
+  - [9.8.3 推荐源码结构](#project-structure-1)
+  - [9.8.4 单个模块模板](#project-structure-2)
+  - [9.8.5 运行数据结构](#project-structure-3)
+  - [9.8.6 依赖规则](#project-structure-4)
 - [9.9 领域目录与受保护状态](#extensions-2)
 - [9.10 构建模块的目录与复用边界](#development-platform-11)
 <!-- book-nav:end -->
@@ -733,6 +734,23 @@ Python I/O 使用有界线程/异步任务，原生推理/重 CPU 工作保持�
 | `%LOCALAPPDATA%\Jarvis\data` | 业务 control.db、独立 safety/control.db 与 safety/pending、model-probes.db 调用及价格快照、model-admin.db 有效模型配置（不含明文凭据）、workspace.db 项目/导出回执、conversations.db 会话文字及删除标记、memory.db 明确事实、project-sources.db 项目资料登记、extensions.db 扩展登记、任务产物和 diagnostics；清空聊天不删除这些记录 |
 
 `.gitignore` 排除凭据、数据库、虚拟环境、模型、构建缓存及 `artifacts/releases/*.zip`；源码、文档、图源与生成图、测试和验证报告纳入 Git。主人指定的项目仓库及历史规则见[受控历史](MAINTENANCE.md#retirement-and-history)，忽略规则不是访问控制。本次未下载全套 C++/Rust 编译器，也没有宣称能断网重建所有依赖。未来按[工具链能力](toolchains.md#development-platform)补离线依赖闭包，不能把下载推理引擎等同于拥有自主编译平台。
+
+<a id="coding-module-layout"></a>
+### 编码协作的实际模块（0.1.65）
+
+保持 Python 标准库和原队列/LPAC，不增加容器编排、数据库服务器、向量库或常驻编码 Agent。外部 Codex 是按需可选进程，现有 CLI 本体约 308 MiB 磁盘文件，不把磁盘大小当常驻 RAM；本轮新增代码无新的 pip/npm 依赖。
+
+| 模块 | 唯一职责 |
+|---|---|
+| `coding_workflow.py` / `coding_task.py` | 兼容入口与冻结任务编排；组装指导和反馈，独立检查并交付 |
+| `coding_bundle.py` | 模块图约束、受控测试驱动、确定性源码 ZIP 与 manifest |
+| `evolution/runner.py` | 复用既有固定 Python LPAC 工具链，不向候选开放 Host 执行 |
+| `coding_apply.py` | 多文件写入前检查、持久状态、继续/恢复；复用 ProjectFiles |
+| `evolution/provider.py` / `coding_codex.py` | 网关模型与外部 Codex 候选生成，均无应用或发布权 |
+| `coding_settings.py` / `config/coding-runtime.json` / `config/codex-proposal-model.json` | 小型本地设置、固定二进制与适配能力档案；不保存 Key |
+| `skills.js` / `coding.js` / `skill_routes.py` | 任务输入、结果面板与独立设置接线 |
+
+模块可以独立替换，但必须保留[候选接口](contracts.md#bounded-coding-contract)、[权限和凭据边界](security-sovereignty.md#bounded-coding-boundary)及当前回执/恢复语义。没有新增另一套聊天人格、记忆权威、调度器或自动发布者。
 
 <a id="project-structure-1"></a>
 ### 推荐源码结构

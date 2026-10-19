@@ -63,7 +63,7 @@
   - [8.6.4 技能和模块包清单](#interfaces-4)
   - [8.6.5 接口类型选择](#interfaces-5)
 - [8.7 技能选择、策略与调用记录契约](#skill-selection-contract)
-  - [8.7.1 编程副本与验证状态字段（0.1.58）](#bounded-coding-contract)
+  - [8.7.1 编程副本与验证状态字段（0.1.65）](#bounded-coding-contract)
 - [8.8 资源租约、本地组件与安全事件契约](#extensions-3)
 - [8.9 项目资源与工程文件契约（0.1.27）](#project-resources-contract)
 - [8.10 MCP 与技能登记契约（0.1.27；0.1.37 管理增量）](#extension-catalog-contract)
@@ -981,13 +981,19 @@ REA 任务增加可选布尔 `explain`（默认 false）。true 时只接受明�
 
 
 <a id="bounded-coding-contract"></a>
-### 编程副本与验证状态字段（0.1.58）
+### 编程副本与验证状态字段（0.1.65）
 
-既有技能提交增加 `coding:boolean`（默认 false）与 `cases:[{input,expected}]`。开启时必须显式指定四项工程技能之一、明确 `provider::model` 和唯一 `.py` 路径；不能同时指定自选 output_path 或 REA explain。cases 为 2—24 项，项内仅允许 input/expected；input 是有限 JSON，expected 是最多 4 KiB 的字符串，完整案例最多 16 KiB。原文件沿用 16 KiB 读取限制。任务总预算 240 秒、模型调用最多 2 次、每次等待 55 秒；不是两次自动重试未知请求。
+技能请求沿用 `coding:boolean` 与 `cases:[{input,expected}]`；新增 `heldout_cases`、`entrypoint`、`coding_provider=gateway|codex`（默认 gateway）。每组案例 2—24 项、总计最多 16 KiB；每项仅含 input/expected，预期为最多 4 KiB 字符串。独立输入不得与公开输入重复。多文件必须有 heldout_cases；旧单文件请求兼容，但不宣称已做独立检查。paths 为 1—4 个同目录 `.py` 文件，模块名普通英文字母开头，可含数字和下划线；入口默认第一份且必须在清单中。原始/候选每文件最多 16 KiB、合计 32 KiB。四项工程技能之一必须明确指定，不能并用 output_path 或 REA explain。
 
-回执沿用 `jarvis.skill-report`，编程分支包含 text、source_references、coding；coding 记录原文件及 BOM/根路径/摘要、候选内容、diff、冻结案例摘要、四项指导摘要、基线、逐次模型/计费/验收结果及工作目录。`coding.passed` 仅指提供案例全部满足；CONFIRMED 表示报告交付完整，失败候选报告也可为 CONFIRMED。`POST /api/skills/coding-apply` 与 `coding-rollback` 只接收 conversation_id/task_id，从已确认且摘要匹配的回执取内容，不接受调用者另传文件或代码；复用 nonce、Origin、会话归属与文件版本保护。
+gateway 使用明确 `provider::model`，Codex 使用[编码协作设置](evolution-release.md#external-coding-executor)中的模型。入队时宿主写入 `coding_executor_binding`，绑定设置修订和内容；排队及调用期间变化即停止旧任务。任务 240 秒；最多两次完整候选生成，网关每次 55 秒，Codex 每次 90 秒；不是自动重发未知请求。
 
-`GET /api/skills` 每项增加 validation：state（verified_scope / stale / needs_review / unverified）、binding、source_changed、evidence、latest_success、note。evidence 记录版本、日期、案例范围、模型及报告；binding 覆盖指导、相关执行器和正式报告 schema。latest_success 指新版已确认产物，带任务、时间、版本、作用范围和 current 摘要一致性；报告交付与质量审阅分别显示。旧任务不迁造成新证据；源码或正文变化后旧验证标记 stale，不伪造当前成功。状态维护实现为 `skill_validation.py` 与版本化 `config/skills/validation.json`；指导正文变化的准入约束仍按既有技能规则执行。
+回执沿用 `jarvis.skill-report`，包含 text、source_references、coding；[报告 schema](../contracts/schemas/skill-report.schema.json)维护字段约束。原有 original/candidate 保持单文件兼容，多文件增加 originals/candidates/entrypoint；validation 分 public/heldout 并标 independent_checks。build 绑定固定源码 ZIP、manifest、字节数和 SHA256；每个源文件与冻结案例摘要都进入清单。仅 coding.passed=true 可应用；CONFIRMED 只表示报告交付完成，失败诊断也可为 CONFIRMED。
+
+`POST /api/skills/coding-apply`、`coding-rollback` 仍仅接收 conversation_id/task_id，从核验回执取源文件组，不接受客户端另传路径或代码。保留 nonce、Origin、会话归属、项目身份和内容冲突保护。部分多文件写入返回 coding_partial，允许在同一回执上继续/恢复；恢复日志不是自动回放命令。
+
+`GET/POST /api/coding` 为独立编码设置：revision、enabled、model、reasoning（low/medium/high/xhigh），写入比较修订号；不接受任意命令、可执行路径或 Key。GET 同时返回已固定 CLI 的可用性、离线状态、认证与费用边界，不进行付费探测。`coding-settings.db` schema 1 只在明确保存时创建，不新增常驻服务；新数据不交给不理解它的旧运行包接管。
+
+`GET /api/skills` 的 validation 继续分别呈现 evidence 与 latest_success。指导、执行器或报告 schema 改变使旧质量证据 stale，不将旧任务搬成新验证，也不由一次成功报告宣称所有技能已复验。
 
 <a id="extensions-3"></a>
 ## 资源租约、本地组件与安全事件契约

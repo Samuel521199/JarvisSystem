@@ -38,6 +38,7 @@
 - [20.28 记忆与 Wiki 方法扩展复核（2026-10-18）](#memory-pattern-review-sources)
 - [20.29 REA 软件解析来源（2026-10-18）](#rea-sources)
 - [20.30 对话、语音与任务分离的工程依据（2026-10-18 查阅）](#conversation-isolation-sources)
+- [20.31 Codex 编码协作依据（2026-10-19）](#codex-coding-sources)
 <!-- book-nav:end -->
 
 <a id="references"></a>
@@ -488,6 +489,15 @@ Jarvis 专属入口来自本项目的需求和领域设计，不通过缺少竞�
 | <a id="s238"></a>S238 | [Microsoft NtQuerySystemInformation](https://learn.microsoft.com/en-us/windows/win32/api/winternl/nf-winternl-ntquerysysteminformation)、[System Informer 原始结构定义](https://github.com/winsiderss/phnt/blob/master/ntexapi.h) | 2026-10-19 查阅；仅用于 Windows 验收采样器的进程身份/创建时间与父子关系核对，修复父 PID 复用误归属；不扩大进程权限，不给运行产品新增原生依赖。内部结构可能随 Windows 版本变化，布局和真实进程时间不符即失败 |
 
 [架构选择](architecture.md#dialogue-separation-design)、[调度](tasks-agents.md#conversation-resource-isolation)和[验收预算](delivery-validation.md#conversation-separation-validation)是针对现有代码的工程判断，性能目标并非引用资料的实验结果。本轮未试装 Pipecat/LiveKit，未复测真实麦克风。
+
+<a id="codex-coding-sources"></a>
+## Codex 编码协作依据（2026-10-19）
+
+| 编号 | 官方来源 | 本项目使用与局限 |
+|---|---|---|
+| <a id="s239"></a>S239 | [Codex 非交互执行](https://learn.chatgpt.com/docs/non-interactive-mode) | exec、JSONL、结构化输出、临时会话；实际参数按本机固定 CLI 核对 |
+| <a id="s240"></a>S240 | [Codex 配置参考](https://learn.chatgpt.com/docs/config-file/config-reference) | 功能关闭、模型档案、配置隔离；工具声明与可执行性不同，必须做拒绝探针 |
+| <a id="s241"></a>S241 | [Codex 权限档案](https://learn.chatgpt.com/docs/permissions) | 禁止工具文件访问，不能与旧 sandbox 参数混用；CLI 的应用策略不等于候选 LPAC 或独立 OS 隔离 CLI |
 
 <!-- book-footer:start -->
 [返回全书目录](README.md#book-tree) · [上一章：架构与流程图册](architecture-atlas.md) · [下一章：文档维护规范](MAINTENANCE.md)

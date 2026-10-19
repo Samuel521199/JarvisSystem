@@ -1,6 +1,6 @@
 # 后续方向指南：现状、缺口与优化工作清单
 
-> 文档 ID：docs-development-guide｜分析基线：v0.1.58；增量更新至 v0.1.64，2026-10-19｜状态：现状为代码/既有证据复核，后续建议 proposed。  
+> 文档 ID：docs-development-guide｜分析基线：v0.1.58；增量更新至 v0.1.65，2026-10-19｜状态：现状为代码/既有证据复核，后续建议 proposed。
 > 本章独占维护跨主题缺口清单与优化建议；K0—K6、阶段内推进顺序仍归[核心路线](core-bootstrap.md#next-implementation)，正式通过条件仍归[验收章](delivery-validation.md#next-k1-acceptance)。这里没有第二套开发时间线，也不宣布完整 K1/K2 已通过。
 
 <!-- book-nav:start -->
@@ -79,7 +79,7 @@
 | 记忆与经历 | 局部 verified：明确记忆、按需候选、修订屏障、本地核对；0.1.62 补相关事实选择与话题推荐 | 复杂转述、有效时间、通用语义经历召回、完整受众与跨来源遗忘仍缺 | [F03](#direction-memory-integrity)、[F04](#direction-memory-quality) |
 | 人格与主动性 | implemented/局部 verified：自定义称呼、固定交流风格/关系、持久修订与整组撤销界面 | 自定义复杂表达/多形态、长期情境一致性、可撤回的主动跟进 | [F06](#direction-persona) |
 | 技能与工具 | 局部 verified：11 个可见技能；Context7 有实际调用 | 其他 MCP 多为目录推荐；自动组合仍有限，技能生效条件与收益不均 | [F01](#direction-dialogue)、[F07](#direction-coding) |
-| 编程与成长 | 局部 verified：单文件转换函数、LPAC 测试、应用/回退；已知配方成长 | 多文件/依赖、真实新增能力、外部编码器、完整事件调度与净收益；0.1.64 已拆分三职责 | [F07](#direction-coding)、[F08](#direction-growth) |
+| 编程与成长 | 局部 verified：单文件转换函数、LPAC 测试、应用/回退；已知配方成长 | 0.1.65 已接多文件、独立案例和外部 Codex 子集；任意依赖/工具链、完整事件调度与广泛净收益仍未完成 | [F07](#direction-coding)、[F08](#direction-growth) |
 | 模型与离线 | 局部 verified：多供应商、用量/估算、固定本地小模型及封闭任务 | 跨用途统一策略、质量驱动路由、真实整机断网和组件自更新 | [F09](#direction-offline)、[F10](#direction-routing) |
 | 资源与可靠性 | 局部 verified：准入、进程回收、UNKNOWN、短时与本机长时子集 | 跨通道原子资源预留、CPU/GPU/配额公平、完整设备/磁盘故障矩阵 | [F02](#direction-resources)、[F09](#direction-offline) |
 | 模块管理与版本 | implemented/局部 verified：监控、运行包切换、技能验证失效显示 | 任意有状态模块热换、在途版本兼容、跨库迁移、长期退役 | [F11](#direction-maintenance)、[F12](#direction-architecture) |
@@ -171,11 +171,11 @@
 <a id="direction-coding"></a>
 ### F07 · 将限定编程扩大为真实、可回退的开发能力
 
-**优先：K2 受限成长后续及 K3。** 现有单文件 `transform(data) -> str`、LPAC、冻结可见案例、差异、明确应用/恢复已经可用。下一步不应立即开放任意终端和整个仓库写入。
+**本轮 0.1.65 已完成候选、独立案例、多文件源码构建和 Codex 适配子集。** 证据见[K3 编码协作](delivery-validation.md#k3-coding-evidence)，完整使用规则只归[编程工作流](tasks-agents.md#bounded-coding-workflow)。原有单文件 `transform(data) -> str`、LPAC、冻结可见案例、差异、明确应用/恢复已经可用。下一步不应立即开放任意终端和整个仓库写入。
 
-先在现有单文件范围补隐藏输入、性质/边界测试、基线变化与失败产物检查，再选择一类确实需要两个文件或一个受控依赖的真实任务，固定允许路径、构建配方和交付契约。将“生成者写的测试”“宿主冻结测试”“真实需求结果”分别保留；通过三个可见案例不能证明任意输入正确。
+已补独立输入、输入不变/输出契约检查、基线变化与失败产物检查，并完成两模块文件清单汇总。后续扩大到有代表性的真实任务、一个受控依赖或第二种构建配方，继续冻结路径与交付契约。将“生成者写的测试”“宿主冻结测试”“真实需求结果”分别保留；通过三个可见案例不能证明任意输入正确。
 
-外部 Codex 等编码器接到现有 CodingProvider，约束作业而非赋予发布权。先完成一次候选补丁/真实构建/取消恢复/用量归属，再扩大交互或工具范围。无需为支持多语言而预装所有编译器；先保证一个按需工具链可离线重建。
+外部 Codex 已以文本候选方式接到现有 CodingProvider，约束作业而非赋予发布权。先完成一次候选补丁/真实构建/取消恢复/用量归属，再扩大交互或工具范围。无需为支持多语言而预装所有编译器；先保证一个按需工具链可离线重建。
 
 **主要落点：**[coding_workflow.py](../runtime/node-host/jarvis_core/coding_workflow.py)、[skill_tasks.py](../runtime/node-host/jarvis_core/skill_tasks.py)、[evolution/provider.py](../runtime/node-host/jarvis_core/evolution/provider.py)、[evolution/runner.py](../runtime/node-host/jarvis_core/evolution/runner.py) 和 [evolution/recipes.py](../runtime/node-host/jarvis_core/evolution/recipes.py)。当前仓库没有已部署的通用 `toolchains/` 实现；未来工具链资产按[唯一源码树](stack-project-layout.md#project-structure)逐项接入。范围规则见[编程工作流](tasks-agents.md#bounded-coding-workflow)、[外部执行器](evolution-release.md#external-coding-executor)，退出按 [B 系列](delivery-validation.md#development-platform-12)、[V-OSS](delivery-validation.md#open-source-adoption-validation)。
 
