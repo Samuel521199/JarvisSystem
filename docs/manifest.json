@@ -3063,9 +3063,9 @@
     }
   ],
   "implementation": {
-    "version": "0.1.65",
-    "scope": "Deployed 0.1.65 adds bounded K3 coding collaboration: 1-4 Python modules, host-held independent cases, source builds, journaled apply/restore, and a pinned optional external Codex proposer. Targeted tests and a real Codex workflow passed; no new resident service or runtime dependency. Full K1/K2/K3 gates remain incomplete.",
-    "evidence": "evals/reports/k3-coding-2026-10-19.json",
+    "version": "0.1.66",
+    "scope": "0.1.66 adds an offline executable Python zipapp recipe, actual artifact-entry LPAC verification, strict reproducible rebuild, and repair of syntax-broken selected files. Three real Codex scenarios and 85 targeted checks passed. Fixed Python subset only; full K1/K2/K3 gates remain incomplete.",
+    "evidence": "evals/reports/k3-build-2026-10-19.json",
     "overall_design_status": "proposed",
     "complete_k1_gate": false,
     "complete_k2_gate": false,
@@ -3319,7 +3319,9 @@
       "evals/reports/k2-completion-2026-10-19.json",
       "evals/reports/application-offline-2026-10-19.json",
       "evals/reports/growth-purposes-2026-10-19.json",
-      "evals/reports/k3-coding-2026-10-19.json"
+      "evals/reports/k3-coding-2026-10-19.json",
+      "evals/reports/k3-build-2026-10-19.json",
+      "evals/cases/k3-coding-v2.json"
     ]
   }
 }

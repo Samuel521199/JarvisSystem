@@ -31,13 +31,13 @@ SOURCE_PATHS += ('runtime/node-host/jarvis_core/rea.py', 'runtime/node-host/jarv
                  'runtime/node-host/jarvis_core/coding_workflow.py', 'runtime/node-host/jarvis_core/evolution/runner.py',
                  'runtime/node-host/jarvis_core/dialogue_process.py')
 SOURCE_PATHS += ('config/coding-runtime.json','config/codex-proposal-model.json')
-SOURCE_PATHS += tuple('runtime/node-host/jarvis_core/'+p+'.py' for p in ('coding_task','coding_bundle','coding_apply','coding_codex','coding_settings'))
+SOURCE_PATHS += tuple('runtime/node-host/jarvis_core/'+p+'.py' for p in ('coding_task','coding_bundle','coding_apply','coding_codex','coding_settings','coding_build'))
 SOURCE_PATHS += ('runtime/node-host/jarvis_core/evolution/provider.py','runtime/node-host/jarvis_core/dialogue_worker.py',
                  'adapters/models/provider-native/jarvis_models/gateway.py','runtime/node-host/jarvis_core/skill_validation.py')
 
 
 def validate_request(payload):
-    fields(payload, {'prompt', 'project_id'}, {'model', 'skill_id', 'paths', 'output_path', 'conversation_id', 'ratio', 'theme', 'target_path', 'focus', 'explain', 'coding', 'cases', 'heldout_cases', 'entrypoint', 'coding_provider', 'coding_executor_binding'})
+    fields(payload, {'prompt', 'project_id'}, {'model', 'skill_id', 'paths', 'output_path', 'conversation_id', 'ratio', 'theme', 'target_path', 'focus', 'explain', 'coding', 'cases', 'heldout_cases', 'entrypoint', 'coding_provider', 'coding_executor_binding', 'build_recipe'})
     if type(payload.get('explain',False)) is not bool:
         raise policy.CoreError('invalid_skill_request','中文解释选项必须为布尔值。')
     if payload.get('explain') and ('::' not in str(payload.get('model','')) or str(payload.get('model','')).startswith('auto::')):
@@ -117,9 +117,7 @@ class SkillTaskService:
         if args.get('coding'):
             from .coding_workflow import composition
             from .evolution.runner import IsolatedRunner
-            from .coding_bundle import validate_bundle
             composition(self,args)
-            validate_bundle({r['path']:r['content'] for r in self._sources(args,lambda:None)},args.get('entrypoint',args['paths'][0]))
             if args.get('coding_provider') == 'codex':
                 from .coding_codex import CodexCodingProvider
                 executor=CodexCodingProvider(self.core)
@@ -222,7 +220,7 @@ class SkillTaskService:
                 return record
             record = self.core.ledger.begin_dispatch(action_id, self.core.host_instance_id, _admission=_before_dispatch)
             task_id, attempted_effect = record['task']['task_id'], False
-            deadline = time.monotonic() + (240 if record['action']['arguments'].get('coding') else TIMEOUT_SECONDS)
+            deadline = time.monotonic() + (300 if record['action']['arguments'].get('coding') else TIMEOUT_SECONDS)
             def checkpoint():
                 self.core.assert_running()
                 self.core.ledger.assert_admitted(task_id)

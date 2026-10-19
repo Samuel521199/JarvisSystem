@@ -501,7 +501,7 @@ AI 资料范围的状态与行为见[项目资料](#project-knowledge-ui)。保�
 
 **0.1.63 网络入口（implemented）：**设置 → 网络与离线（`/settings#network`）提供“仅此软件离线”开关、保存结果和刷新核对。保存后跨重启保留，关闭时不会自动重发工作；不影响其他软件联网。完整行为和实际限制只维护于[应用离线控制](models-offline.md#application-offline-control)，验证见[应用离线证据](delivery-validation.md#application-offline-evidence)。
 
-**0.1.65 编码协作入口：**设置新增[编码协作](http://127.0.0.1:18181/settings#coding)专页及总览卡片，可启用已有本机 Codex、选择模型与推理档位，并查看可用状态。在技能任务的编程副本入口填写文件、公开/留出案例与执行器；结果在已有右侧面板查看差异、独立检查、下载源码包和应用/恢复文件组。完整步骤归[编程工作流](tasks-agents.md#bounded-coding-workflow)，实测归[K3 证据](delivery-validation.md#k3-coding-evidence)。没有新增占据聊天左栏的管理入口。
+**0.1.66 编码协作入口：**设置新增[编码协作](http://127.0.0.1:18181/settings#coding)专页及总览卡片，可启用已有本机 Codex、选择模型与推理档位，并查看可用状态。在技能任务的编程副本入口填写文件、公开/留出案例与执行器；选择源码 ZIP 或可运行 PYZ 配方；结果在已有右侧面板查看差异、独立案例与真实工具包检查、下载工具/配套源码和应用/恢复文件组。面板可放大/恢复并排；“离线使用与重建”说明 Python 要求、输入输出与隔离边界。完整步骤归[编程工作流](tasks-agents.md#bounded-coding-workflow)，实测归[K3 证据](delivery-validation.md#k3-coding-evidence)。没有新增占据聊天左栏的管理入口。
 
 **后续扩展规则（accepted）：**新增后台管理能力统一加入设置内的专用页面，并提供总览入口和可直接访问的页面地址；不再把供应商、Key、计费或诊断明细铺进聊天侧栏。聊天左栏优先留给项目与会话，不擅自新增全局工具或管理入口来占用宽度与纵向空间；此类入口优先复用顶栏或设置中心。入口可见不等于该能力已经实现，下方完整设置方案仍为 proposed。
 

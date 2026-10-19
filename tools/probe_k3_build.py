@@ -1,0 +1,90 @@
+"""Real Codex development scenarios and offline executable-artifact reconstruction."""
+import argparse
+import base64
+from datetime import datetime, timezone
+import json
+from pathlib import Path
+import subprocess
+import sys
+import time
+import uuid
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path[:0] = [str(ROOT/'runtime/node-host'), str(ROOT/'adapters/computer-use')]
+from jarvis_core import __version__, policy
+from jarvis_core.service import CoreService
+from jarvis_core.workspace import WorkspaceService
+from jarvis_core.conversation_tasks import ConversationTasks
+from jarvis_computer.web import ComputerWeb
+from jarvis_core.coding_settings import CodingSettings
+from jarvis_core.coding_workflow import apply_result
+from jarvis_core.coding_build import ZIPAPP
+from jarvis_core.network_policy import NetworkPolicy
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--directory', required=True, type=Path)
+    args = parser.parse_args(); root = args.directory.resolve()
+    if root.exists(): parser.error('Use a new directory; unknown outcomes must not be replayed')
+    root.mkdir(parents=True)
+    dataset = ROOT/'evals/cases/k3-coding-v2.json'; raw = dataset.read_bytes()
+    cases = json.loads(raw)['cases']
+    result = {'version': __version__, 'started': datetime.now(timezone.utc).isoformat(),
+              'dataset_digest': policy.digest(raw), 'status': 'running', 'cases': []}
+    def save(): (root/'report.json').write_text(json.dumps(result, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
+    save()
+    for case in cases:
+        folder = root/case['id']; source = folder/'project'; source.mkdir(parents=True)
+        for name, content in case['files'].items(): (source/name).write_text(content, encoding='utf-8')
+        core = CoreService(folder/'data'); core.initialize(source)
+        workspace = WorkspaceService(core); project = workspace.open_project({'path': str(source)})
+        settings = CodingSettings(core); settings.write({**settings.read(), 'enabled': True, 'reasoning': 'medium'})
+        manager = ComputerWeb(core, None); bridge = ConversationTasks(core, manager)
+        row = {'id': case['id'], 'category': case['category'], 'status': 'running'}
+        result['cases'].append(row); save()
+        try:
+            cid = uuid.uuid4().hex
+            item = bridge.submit(cid, {'mode': 'skill', 'request_id': 'web-'+uuid.uuid4().hex,
+                'prompt': case['goal'], 'project_id': project['id'], 'skill_id': 'matt-pocock.tdd',
+                'paths': list(case['files']), 'entrypoint': case['entry'], 'coding': True,
+                'coding_provider': 'codex', 'model': 'auto', 'build_recipe': ZIPAPP,
+                'cases': case['public'], 'heldout_cases': case['private']})
+            row.update(task=item, conversation_id=cid, project=project); save()
+            deadline = time.monotonic()+310
+            while time.monotonic() < deadline:
+                detail = bridge.detail(cid, item['task_id'])
+                if detail['task']['status'] not in {'READY', 'RUNNING', 'CANCELLING'}: break
+                time.sleep(.2)
+            row['task_status'] = detail; save()
+            if detail['action_status'] != 'CONFIRMED': raise RuntimeError('Task not confirmed; no automatic replay')
+            report = json.loads(bridge.artifact(cid, item['task_id'])); value = report['coding']
+            (folder/'delivery.json').write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding='utf-8')
+            row.update(passed=value['passed'], baseline_passed=value['baseline']['passed'],
+                       validation=value['validation'], build_validation=value.get('build_validation'),
+                       model_receipts=[a['model'] for a in value['attempts']])
+            save(); assert value['passed']
+            assert all((source/p).read_text()==s for p,s in case['files'].items())
+            row['apply'] = apply_result(core, report, 'apply')
+            assert all((source/p).read_text()==s for p,s in value['candidates'].items())
+            row['rollback'] = apply_result(core, report, 'rollback')
+            assert all((source/p).read_text()==s for p,s in case['files'].items())
+            artifact = folder/value['build']['filename']; artifact.write_bytes(base64.b64decode(value['build']['base64']))
+            checks = folder/'private-cases.json'; checks.write_text(json.dumps(case['private'], ensure_ascii=False), encoding='utf-8')
+            NetworkPolicy(core.data_dir).change(True, 0)
+            rebuilt = folder/'rebuilt.pyz'; evidence = folder/'offline-build.json'
+            subprocess.run([sys.executable, '-X', 'utf8', '-B', str(ROOT/'tools/coding_build.py'),
+                '--archive', str(artifact), '--sha256', value['build']['sha256'], '--cases', str(checks),
+                '--output', str(rebuilt), '--report', str(evidence)], capture_output=True, timeout=45, check=True)
+            assert rebuilt.read_bytes() == artifact.read_bytes()
+            row['offline_build'] = json.loads(evidence.read_text(encoding='utf-8'))
+            row['artifact_bytes'] = artifact.stat().st_size; row['status'] = 'passed'; save()
+            print(json.dumps({'case': row['id'], 'status': row['status'], 'calls': len(value['attempts'])}), flush=True)
+        except Exception as exc:
+            row.update(status='failed', error=type(exc).__name__+': '+str(exc)); result['status']='failed'; save(); raise
+        finally: manager.close()
+    result['status'] = 'passed'; save()
+    print(json.dumps({'status': result['status'], 'report': str(root/'report.json')}))
+
+
+if __name__ == '__main__': main()

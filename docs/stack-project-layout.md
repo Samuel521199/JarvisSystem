@@ -47,7 +47,7 @@
   - [9.7.1 复用现有实现，按边界拆分](#dialogue-runtime-adoption)
 - [9.8 项目文件结构与依赖规则](#project-structure)
   - [9.8.1 当前实际落地范围（0.1.18）](#implemented-layout)
-  - [9.8.2 编码协作的实际模块（0.1.65）](#coding-module-layout)
+  - [9.8.2 编码协作的实际模块（0.1.66）](#coding-module-layout)
   - [9.8.3 推荐源码结构](#project-structure-1)
   - [9.8.4 单个模块模板](#project-structure-2)
   - [9.8.5 运行数据结构](#project-structure-3)
@@ -554,7 +554,7 @@ REA 可以帮助理解 AI 应用的界面、客户端逻辑、可见接口和本
 
 1. **K2 按需加载。** 复用 `ExtensionCatalog` 的来源与摘要，在此基础上解析名称、描述、显式/隐式调用策略和参考资源，按任务装配所需正文；初次查询的额外登记模块返回 `runtime_available=false`、登记数为 0；0.1.35 的原生目录与它分开，五项已准入能力有真实 readiness，额外登记仍 dormant。关联技能与相对参考必须一起解析，不能只复制包装入口。UI 继续显示真实登记/可加载/可执行状态，入口归设置内技能管理。
 2. **上下文预算。** 现有网关单次宿主 `instructions` 上限为 4,096 UTF-8 字节；云端文本总输入为 65,536 字节，本地为 4,096 字节。去掉 frontmatter 后，`code-review` 为 6,207 字节、`diagnosing-bugs` 为 8,462 字节、`codebase-design` 为 6,135 字节，直接拼入现有 instructions 会被拒绝。38 个技能文件合计 170,800 字节，亦不能整包加入云端一次请求。采用元数据发现、正文按需读取、参考文件再按需读取，并独立分配技能与代码预算；本地路线选择短流程。Codex 的分级加载方式可作参考，不能通过伪造用户历史/system 或提升记忆为规则绕过宿主语义。[S173](references.md#s173)
-3. **K3 编码执行。** 复用既定 CodingProvider，接入一个实际可用的文件/补丁/检查执行器；本机能找到 Codex CLI 启动器，外部 Codex 适配仍未接通。0.1.37 / evolution-v1 已采用现有 ModelGateway 实现限定 Python 工具的 CodingProvider 与独立验收，见[模块边界](evolution-release.md#bounded-evolution-loop)。另一条原生路线需要在现有 ModelGateway 上接通工具调用、工具结果回传、有限循环、取消和产物核验。两条路线选一条做首个闭环，避免同时搭建重复执行平台。
+3. **K3 编码执行。** 复用既定 CodingProvider，接入一个实际可用的文件/补丁/检查执行器；0.1.65 已接通外部 Codex 文本候选，0.1.66 增加实际工具包构建与独立复验，范围见[编码协作](tasks-agents.md#bounded-coding-workflow)。0.1.37 / evolution-v1 已采用现有 ModelGateway 实现限定 Python 工具的 CodingProvider 与独立验收，见[模块边界](evolution-release.md#bounded-evolution-loop)。另一条原生路线需要在现有 ModelGateway 上接通工具调用、工具结果回传、有限循环、取消和产物核验。两条路线选一条做首个闭环，避免同时搭建重复执行平台。
 4. **交付与用量。** 每个编程作业记录需求/基线、技能版本、所选模型、实际 diff、检查命令/退出码、tokens/费用与未完成项。外部编码器若自行请求模型，其身份和账单单独观察；当前网页 API Key 可用并不能证明外部 CLI 使用同一线路、同一 Key 或同一费用记录。上游自动提交、任务跟踪器发布和脚本运行必须与实际作业授权匹配。
 
 采用文本技能不会必然增加常驻服务；主要额外成本来自更长上下文、多次验证/修复请求和可选审阅。只导入文件时质量增益为零；加载后可以改善需求与审阅步骤；完整代码质量改善需要真实编译/测试反馈，幅度须由同模型对照验证，不能承诺固定提升百分比或消除错误。
@@ -736,7 +736,7 @@ Python I/O 使用有界线程/异步任务，原生推理/重 CPU 工作保持�
 `.gitignore` 排除凭据、数据库、虚拟环境、模型、构建缓存及 `artifacts/releases/*.zip`；源码、文档、图源与生成图、测试和验证报告纳入 Git。主人指定的项目仓库及历史规则见[受控历史](MAINTENANCE.md#retirement-and-history)，忽略规则不是访问控制。本次未下载全套 C++/Rust 编译器，也没有宣称能断网重建所有依赖。未来按[工具链能力](toolchains.md#development-platform)补离线依赖闭包，不能把下载推理引擎等同于拥有自主编译平台。
 
 <a id="coding-module-layout"></a>
-### 编码协作的实际模块（0.1.65）
+### 编码协作的实际模块（0.1.66）
 
 保持 Python 标准库和原队列/LPAC，不增加容器编排、数据库服务器、向量库或常驻编码 Agent。外部 Codex 是按需可选进程，现有 CLI 本体约 308 MiB 磁盘文件，不把磁盘大小当常驻 RAM；本轮新增代码无新的 pip/npm 依赖。
 
@@ -744,6 +744,7 @@ Python I/O 使用有界线程/异步任务，原生推理/重 CPU 工作保持�
 |---|---|
 | `coding_workflow.py` / `coding_task.py` | 兼容入口与冻结任务编排；组装指导和反馈，独立检查并交付 |
 | `coding_bundle.py` | 模块图约束、受控测试驱动、确定性源码 ZIP 与 manifest |
+| `coding_build.py` / `tools/coding_build.py` | 固定配方、可运行 PYZ、严格归档检查与离线重建；不执行任意安装脚本，Host 不运行候选 |
 | `evolution/runner.py` | 复用既有固定 Python LPAC 工具链，不向候选开放 Host 执行 |
 | `coding_apply.py` | 多文件写入前检查、持久状态、继续/恢复；复用 ProjectFiles |
 | `evolution/provider.py` / `coding_codex.py` | 网关模型与外部 Codex 候选生成，均无应用或发布权 |

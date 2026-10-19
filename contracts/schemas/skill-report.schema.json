@@ -67,7 +67,10 @@
               "pattern": "^sha256:[a-f0-9]{64}$"
             },
             "filename": {
-              "const": "candidate-python.zip"
+              "enum": [
+                "candidate-python.zip",
+                "candidate-python.pyz"
+              ]
             },
             "size_bytes": {
               "type": "integer",
@@ -75,6 +78,18 @@
               "maximum": 65536
             }
           }
+        },
+        "build_recipe": {
+          "enum": [
+            "python-source-v1",
+            "python-zipapp-v1"
+          ]
+        },
+        "source_build": {
+          "type": "object"
+        },
+        "build_validation": {
+          "type": "object"
         }
       },
       "dependentRequired": {

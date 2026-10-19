@@ -1,10 +1,12 @@
 """Frozen coding task orchestration, independent evaluation and source delivery."""
+import ast
 import difflib
 import json
 import re
 
 from . import policy
 from .coding_bundle import validate_bundle, package
+from .coding_build import build, SOURCE, ZIPAPP
 from .coding_workflow import validate, composition, check_code, GUIDES, MAX_ATTEMPTS
 from .evolution.provider import ModelCodingProvider
 from .evolution.runner import IsolatedRunner
@@ -27,13 +29,13 @@ def execute(service, args, checkpoint, action_id, task_id):
     frozen = {r['path']: r['content'] for r in originals}
     entry = args.get('entrypoint', originals[0]['path'])
     multi = len(frozen) > 1
-    validate_bundle(frozen, entry)
     decisions, guides = composition(service, args)
     root = policy.safe_path(service.core.data_dir / 'coding' / action_id, must_exist=False)
     root.mkdir(parents=True, exist_ok=False)
     def save(name, value):
         with policy.safe_path(root/name, must_exist=False).open('x', encoding='utf-8', newline='') as f: f.write(value)
     private = args.get('heldout_cases', [])
+    selected_recipe = args.get('build_recipe', SOURCE)
     cases_digest = policy.digest(policy.canonical_json({'public':args['cases'],'heldout':private}).encode())
     save('original.json', policy.canonical_json(originals))
     save('cases.json', policy.canonical_json({'public':args['cases'], 'heldout':private}))
@@ -55,7 +57,18 @@ def execute(service, args, checkpoint, action_id, task_id):
     class BundleRunner:
         def run(self, source, inputs, check): return runner.run_bundle(source, entry, inputs, check)
     def evaluate(sources):
-        validate_bundle(sources, entry)
+        try:
+            validate_bundle(sources, entry)
+        except policy.CoreError as exc:
+            if exc.code not in {'candidate_invalid', 'coding_invalid'}: raise
+            diagnostics = []
+            for path, source in sources.items():
+                try: ast.parse(source)
+                except SyntaxError as error:
+                    diagnostics.append({'path': path, 'line': error.lineno, 'message': error.msg})
+            return {'passed': False, 'error': 'candidate_invalid', 'cases': 0,
+                    'message': '静态检查未通过；原始源码不执行，可以生成修复候选。',
+                    'diagnostics': diagnostics, 'independent_checks': False, 'executed': False}
         engine, source = (BundleRunner(), sources) if multi else (runner, sources[entry])
         public = check_code(engine, source, args['cases'], guard)
         heldout = check_code(engine, source, private, guard) if private else None
@@ -109,7 +122,7 @@ def execute(service, args, checkpoint, action_id, task_id):
             if not isinstance(candidate,dict) or set(candidate)!={key,'notes'} or not isinstance(candidate['notes'],str) or len(candidate['notes']) > 2000: raise ValueError('fields')
             sources = candidate['files'] if multi else {entry:candidate['code']}
             if not isinstance(sources,dict) or set(sources)!=set(frozen): raise ValueError('frozen paths')
-            validate_bundle(sources,entry)
+            if any(not isinstance(v, str) or len(v.encode()) > 16384 for v in sources.values()) or sum(len(v.encode()) for v in sources.values()) > 32768: raise ValueError('source quota')
             save('candidate-'+str(number+1)+'.json',policy.canonical_json(sources))
             validation = evaluate(sources)
         except (ValueError,TypeError,KeyError,policy.CoreError) as exc:
@@ -119,19 +132,36 @@ def execute(service, args, checkpoint, action_id, task_id):
         attempts.append({'number':number+1, 'model':receipt, 'validation':validation})
         save('attempt-'+str(number+1)+'.json',policy.canonical_json(attempts[-1]))
     guard()
+    built = None
+    build_validation = None
+    if validation['passed']:
+        built = build(sources, entry, cases_digest, selected_recipe)
+        if selected_recipe == ZIPAPP:
+            class ArtifactRunner:
+                def run(self, artifact, inputs, check): return runner.run_build(artifact, inputs, check)
+            build_validation = check_code(ArtifactRunner(), built, args['cases'] + private, guard)
+            build_validation.update(actual_archive_entry=True, reproducible=True)
+            save('build-validation.json', policy.canonical_json(build_validation))
+    guard()
     diff = ''.join(''.join(difflib.unified_diff(frozen[p].splitlines(True),sources[p].splitlines(True),
         fromfile='original/'+p,tofile='candidate/'+p)) for p in frozen)
-    coding = {'passed':validation['passed'],'baseline':baseline,'attempts':attempts,'validation':validation,
+    coding = {'passed':validation['passed'] and (build_validation is None or build_validation['passed']),
+        'baseline':baseline,'attempts':attempts,'validation':validation, 'build_recipe': selected_recipe,
         'original':originals[0], 'candidate':sources[entry], 'candidate_digest':policy.digest(sources[entry].encode()),
         'diff':diff,'work_directory':str(root),'cases_digest':cases_digest,'entrypoint':entry,
         'coding_provider':args.get('coding_provider','gateway'),
         'composition':[{'id':k,'guide_digest':policy.digest(guides[k].encode())} for k in GUIDES],
         'original_modified':False,'limits':'1—4 个同目录 Python 模块，固定 transform(data)→str；隔离编译和案例通过不代表任意项目或完整正确性。无依赖安装、Shell 或自主发布。'}
     if multi: coding.update(originals=originals, candidates=sources)
-    if validation['passed']: coding['build'] = package(sources,entry,cases_digest)
+    if build_validation is not None: coding['build_validation'] = build_validation
+    if coding['passed']:
+        coding['build'] = built
+        if selected_recipe == ZIPAPP: coding['source_build'] = package(sources, entry, cases_digest)
     save('result.json',policy.canonical_json(coding))
-    text = '# 编程副本与验收报告\n\n'+('原文件组已满足本次案例，未调用编码模型。' if baseline['passed'] else '候选通过本次验收；原文件未修改。' if coding['passed'] else '验收未通过；候选与诊断已保留，原文件未修改。')
+    text = '# 编程副本与验收报告\n\n'+('验收未通过；候选与诊断已保留，原文件未修改。' if not coding['passed'] else '原文件组已满足本次案例，未调用编码模型。' if baseline['passed'] else '候选通过本次验收；原文件未修改。')
+    if selected_recipe == ZIPAPP:
+        text += '\n\n构建配方：Python 可运行工具包。需要 CPython 3.11—3.13，JSON 标准输入 → UTF-8 字符串输出。真实归档入口'+('通过隔离复验。' if coding['passed'] else '未通过交付检查。')
     text += '\n\n'+coding['limits']+'\n\n```diff\n'+diff+'\n```\n'
     return {'text':text,'coding':coding,'source_references':[{'path':r['path'],'digest':r['digest']} for r in originals],
-        'checks':{'code_executed':True,'isolated':True,'test_cases_passed':coding['passed'],'independent_checks':bool(private),
+        'checks':{'code_executed':bool(baseline.get('worker') or any(a['validation'].get('worker') for a in attempts)),'isolated':True,'test_cases_passed':coding['passed'],'independent_checks':bool(private),
                   'model_calls':len(attempts),'source_rechecked':True,'original_modified':False}}

@@ -1,6 +1,6 @@
 # 最小核心、初始资产与开发路线
 
-> 状态：整体 proposed；当前源码与已部署版本 0.1.65，新增[K3 编码协作](delivery-validation.md#k3-coding-evidence)，保留[应用离线控制](models-offline.md#application-offline-control)；范围、验证与阻塞见[K2 本轮收口](delivery-validation.md#k2-completion-evidence)；完整 K1/K2/K3 尚未通过。跨主题差距见[后续方向指南](development-guide.md#direction-start)，实施次序见[当前推进队列](#near-term-work-queue) · 更新：2026-10-19
+> 状态：整体 proposed；当前源码版本 0.1.66，部署见[本轮证据](delivery-validation.md#k3-build-evidence)，新增[K3 编码协作](delivery-validation.md#k3-coding-evidence)，保留[应用离线控制](models-offline.md#application-offline-control)；范围、验证与阻塞见[K2 本轮收口](delivery-validation.md#k2-completion-evidence)；完整 K1/K2/K3 尚未通过。跨主题差距见[后续方向指南](development-guide.md#direction-start)，实施次序见[当前推进队列](#near-term-work-queue) · 更新：2026-10-19
 > [文档入口](README.md) · [维护规则](MAINTENANCE.md) · [架构图册](architecture-atlas.md)
 
 <!-- book-nav:start -->
@@ -68,11 +68,13 @@
 <a id="current-implementation"></a>
 ## 当前实现、启动与下一步
 
+**0.1.66 K3 完善：**可修复语法损坏的所选文件，交付可直接由 Python 运行的 PYZ，实际工具包入口单独复验，并提供严格离线重建工具。三类真实 Codex 任务、独立检查、界面应用/恢复和剩余边界见[本轮结果](delivery-validation.md#k3-build-evidence)。
+
 **0.1.65 编码协作：**在现有技能任务中增加独立留出检查、多文件候选与源码构建包、成组应用/恢复；外部 Codex 已真实接通，设置入口为[编码协作](http://127.0.0.1:18181/settings#coding)。范围归[编程工作流](tasks-agents.md#bounded-coding-workflow)，79 项针对检查、真实调用和部署归[本轮证据](delivery-validation.md#k3-coding-evidence)。
 
 **0.1.63 网络控制：**设置 → 网络与离线，可持久限制 Jarvis 外联并保留本机能力，其他软件正常联网；[行为与边界](models-offline.md#application-offline-control)、[本轮验证](delivery-validation.md#application-offline-evidence)分别维护。此前 0.1.62 的 K2 证据保留，未运行门槛没有改成通过。
 
-**K2 本轮冻结证据基线：v0.1.62；当前增量为 v0.1.65。** [K2 本轮实现与验收](delivery-validation.md#k2-completion-evidence)记录三库、个人配置、相关接续、资源争用修复和完整出口状态；0.1.61 的 [最终回答先导与能力说明修正](delivery-validation.md#memory-final-answer-evidence)已部署，[0.1.61 发布汇总](../evals/reports/memory-answer-release-2026-10-19.json)记录真实对照、回归与范围。0.1.60 新增[规则/语义记忆入口一致性](delivery-validation.md#rule-memory-review-evidence)，[0.1.60 发布汇总](../evals/reports/rule-memory-release-2026-10-19.json)记录源码、211 项回归、UI 与部署；下述 0.1.59 增量继续保留。0.1.59 新增[混合报告、指定取消与未开始任务原子修订](delivery-validation.md#mixed-report-admission-evidence)；[0.1.59 发布汇总](../evals/reports/report-admission-release-2026-10-19.json)记录本次有限范围。0.1.58 已上线限定编程副本/测试/应用与恢复、技能验证状态和本地记忆重复/差异核对；普通文字回执、有限恢复、对话/后台模型分槽与 Flash 限定文档自动受理继续可用。[发布汇总](../evals/reports/skills-completion-release-2026-10-19.json)记录实际范围；[后续方向指南](development-guide.md#direction-inventory)区分已完成、缺实现与缺验证。以下带版本的小节保留当时增量说明，其“尚缺”不能覆盖后续发布证据。
+**K2 本轮冻结证据基线：v0.1.62；当前增量为 v0.1.66。** [K2 本轮实现与验收](delivery-validation.md#k2-completion-evidence)记录三库、个人配置、相关接续、资源争用修复和完整出口状态；0.1.61 的 [最终回答先导与能力说明修正](delivery-validation.md#memory-final-answer-evidence)已部署，[0.1.61 发布汇总](../evals/reports/memory-answer-release-2026-10-19.json)记录真实对照、回归与范围。0.1.60 新增[规则/语义记忆入口一致性](delivery-validation.md#rule-memory-review-evidence)，[0.1.60 发布汇总](../evals/reports/rule-memory-release-2026-10-19.json)记录源码、211 项回归、UI 与部署；下述 0.1.59 增量继续保留。0.1.59 新增[混合报告、指定取消与未开始任务原子修订](delivery-validation.md#mixed-report-admission-evidence)；[0.1.59 发布汇总](../evals/reports/report-admission-release-2026-10-19.json)记录本次有限范围。0.1.58 已上线限定编程副本/测试/应用与恢复、技能验证状态和本地记忆重复/差异核对；普通文字回执、有限恢复、对话/后台模型分槽与 Flash 限定文档自动受理继续可用。[发布汇总](../evals/reports/skills-completion-release-2026-10-19.json)记录实际范围；[后续方向指南](development-guide.md#direction-inventory)区分已完成、缺实现与缺验证。以下带版本的小节保留当时增量说明，其“尚缺”不能覆盖后续发布证据。
 
 **0.1.50 按需语义记忆：**普通消息 →“整理为记忆…”→ 选择模型和档位 → 整理事实 → 核对原句、主体、用途并保存。保留原规则和明确指令；没有新数据库、框架依赖、模型下载或后台提取循环。实现范围见[语义候选](knowledge-learning.md#semantic-candidates-runtime)，测试及真实模型结果见[验收证据](delivery-validation.md#semantic-candidates-evidence)。
 
@@ -641,7 +643,7 @@ K1 可以暂时用假模型/规则输入验证可靠性，但它还不能叫完�
 
 **2026-10-19 按主人最新要求停止重复验收，恢复向下开发。** 既有 K2 收口与待验条件保留，不降低门槛也不冒称整体验收通过。F08 的限定职责拆分已随 0.1.64 完成；按主人要求先上传该版本，再在 0.1.65 完成 F07 的候选代码、独立检查、多文件任务和外部 Codex 子集。每轮只做受影响的新改动必要检查，不重跑整套 K2、付费回答评审或离线验收。
 
-三库、人格/相关接续和限定成长的已有证据统一见[K2 收口](delivery-validation.md#k2-completion-evidence)。物理低配机、整机断网、主人真实体验仍待条件，不阻断本轮授权的可独立开发内容。0.1.64 已交付 F08 的限定对象三职责、三用途模型/备选/档位和真实界面；完整事件调度、广泛净收益及任意自我改造仍开放。0.1.65 已通过真实两模块 Codex 任务、独立留出检查、离线重建、应用和恢复。下一步先扩大真实任务覆盖、增加一个有锁定与来源证据的受控依赖或第二种构建配方，再扩大 K4 成长范围、K5 自身模块改造与 K6 多设备/Agent/形态。
+三库、人格/相关接续和限定成长的已有证据统一见[K2 收口](delivery-validation.md#k2-completion-evidence)。物理低配机、整机断网、主人真实体验仍待条件，不阻断本轮授权的可独立开发内容。0.1.64 已交付 F08 的限定对象三职责、三用途模型/备选/档位和真实界面；完整事件调度、广泛净收益及任意自我改造仍开放。0.1.65 已通过真实两模块 Codex 任务、独立留出检查、离线重建、应用和恢复。0.1.66 已增加三类实际调用和第二种可运行构建配方。下一步仍在 K3 完善受控依赖、语言/包结构与完整故障矩阵，再扩大 K4 成长范围、K5 自身模块改造与 K6 多设备/Agent/形态。
 
 | 优先安排与既有归属 | 本次应先交付的增量 | 依赖、边界与退出位置 |
 |---|---|---|
@@ -651,7 +653,7 @@ K1 可以暂时用假模型/规则输入验证可靠性，但它还不能叫完�
 | 已交付开发先导：K2/W1—W3 | [F04 八场景最终回答对照及能力说明修正](delivery-validation.md#memory-final-answer-evidence) | 0.1.61 已部署；同一窄开发集回归，不等于独立留出或框架对比，保留措辞局限 |
 | 已交付 K2 子集，更广泛验证仍开放 | [F04 扩大人物/时序/项目资料/保留历史的多轮回答对照](development-guide.md#direction-memory-quality)，并逐项完善 [F06 人格/接续](development-guide.md#direction-persona) | 来源与修订规则稳定后补检索；不再以30条公开提取同分决定框架胜负，不先换事实库。按 V-MEM/V-PAL 验收 |
 | 输入适配：K2/W3 | [F05 按键录音、本地转写、编辑发送和独立播报](development-guide.md#direction-voice) | 复用已稳定的文字受理；不等待完整记忆框架/所有工具建成。接口及真实设备测试可独立准备；连续语音和自动动作另过门，遵守下节③④ |
-| 已交付限定 K3，继续扩大真实任务 | [F07 编码范围](development-guide.md#direction-coding)：0.1.65 候选、独立检查、多文件与 Codex 已接通；随后才扩大 [F08 成长](development-guide.md#direction-growth) | 原边界保留；下一项是受控依赖或第二构建配方及实际使用收益，不立即开放任意终端与自身模块改写 |
+| 已交付限定 K3，继续扩大真实任务 | [F07 编码范围](development-guide.md#direction-coding)：0.1.65 候选、独立检查、多文件与 Codex 已接通；随后才扩大 [F08 成长](development-guide.md#direction-growth) | 原边界保留；第二构建配方及三场景实际调用已完成，下一项是受控依赖、更多任务和开发故障矩阵，不立即开放任意终端与自身模块改写 |
 | 后续按需求：K5—K6 | 检索/模型替换、联网学习、双节点、Agent/NPC、硬件和形态 | 逐项见[工作清单](development-guide.md#direction-work)，按[唯一 K 阶段表](#bootstrap-5)及原出口。没有需求或前置证据时保持 proposed，不预装全部组件 |
 
 顺序表达依赖和产品重点，不是日历承诺。单个增量的范围、产物和冻结判据应在编码前明确；如果前置能力已满足可直接复用，不重新开发，也不为了“下一版”强行跳过未解决失败。最先推荐的可演示场景为：陪伴回应同时生成一个真实目录报告，随后只取消/修改该报告，刷新和重启不重复执行。

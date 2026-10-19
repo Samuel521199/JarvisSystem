@@ -92,7 +92,7 @@ coding_job:
 
 Codex 不可用、限流或网络断开时，保存 coding_job 并显示等待；可以切换到已经验证的本地 CodingProvider 完成较小改动，不能假装本地模型能胜任所有复杂编程。既有生产任务不应因此停止。不会因为接入 Codex 就自动获得未授权账号、费用额度或文件权限。
 
-此处的完整外部 Codex 适配仍为设计状态。当前已经接入的是下节所述的 `ModelCodingProvider`：复用现有模型 API 产生限定 Python 候选，不包含外部 Codex CLI、任意仓库修复或通用终端权限。
+此处的完整外部执行器方案仍为设计状态；当前已有 ModelCodingProvider 和 0.1.65 CodexCodingProvider 文本候选适配，0.1.66 增加可运行工具包。具体实现见[当前适配](#external-coding-executor)，不包含任意仓库修复或通用终端权限。
 
 <a id="external-coding-executor"></a>
 ### 第三方编码执行器：Codex 首期与后续提供者

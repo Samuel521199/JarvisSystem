@@ -84,7 +84,15 @@ class IsolatedRunner:
         validate_bundle(sources, entry)
         return self._execute({'sources': sources, 'entry': entry, 'inputs': inputs}, bundle_harness, 'coding.bundle.v1', checkpoint)
 
-    def _execute(self, payload, harness, operation, checkpoint):
+    def run_build(self, artifact, inputs, checkpoint):
+        from ..coding_build import bytes_from, VERIFY, ZIPAPP
+        raw = bytes_from(artifact)
+        if artifact['manifest']['recipe'] != ZIPAPP:
+            raise policy.CoreError('coding_recipe_invalid', '此入口仅运行已核对的 Python 工具包。')
+        return self._execute({'archive_digest': policy.digest(raw), 'inputs': inputs},
+                             VERIFY, 'coding.zipapp.v1', checkpoint, archive=raw)
+
+    def _execute(self, payload, harness, operation, checkpoint, *, archive=None):
         inputs = payload['inputs']
         checkpoint()
         runtime, bundle = verify_bundle()
@@ -97,6 +105,9 @@ class IsolatedRunner:
         lease = StageLease(parent, binding)
         binding['nonce'] = lease.token
         try:
+            if archive is not None:
+                if operation != 'coding.zipapp.v1': raise ValueError('unexpected build asset')
+                (lease.stage / 'candidate.pyz').write_bytes(archive)
             (lease.stage / 'worker.py').write_text(harness, encoding='utf-8')
             (lease.stage / 'input.json').write_text(policy.canonical_json(
                 {'binding': binding, **payload}), encoding='utf-8')

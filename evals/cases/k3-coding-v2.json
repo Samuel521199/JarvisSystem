@@ -1,0 +1,174 @@
+{
+  "version": 1,
+  "scope": "Fixed development scenarios; not an unseen benchmark or broad coding quality score.",
+  "cases": [
+    {
+      "id": "repair-expense-summary",
+      "category": "syntax_repair_and_multifile",
+      "files": {
+        "report.py": "from totals import totals\nfrom formatting import format_rows\ndef transform(data)\n    return format_rows(totals(data))\n",
+        "totals.py": "def totals(data):\n    return []\n",
+        "formatting.py": "def format_rows(data):\n    return 'wrong'\n"
+      },
+      "entry": "report.py",
+      "goal": "修复并完成分类收支汇总。输入是 category 字符串和 cents 整数的对象列表；cents 可负，按原样 category 分组求和，分类按字典顺序排序，不过滤空字符串类别。输出第一行 category | cents，其余每行分类名 | 整数金额，无末尾换行。空输入只有表头。report.py 提供 transform(data)，totals.py 完成汇总，formatting.py 完成排版。不得修改输入。",
+      "public": [
+        {
+          "input": [],
+          "expected": "category | cents"
+        },
+        {
+          "input": [
+            {
+              "category": "food",
+              "cents": 120
+            },
+            {
+              "category": "food",
+              "cents": 30
+            }
+          ],
+          "expected": "category | cents\nfood | 150"
+        }
+      ],
+      "private": [
+        {
+          "input": [
+            {
+              "category": "出行",
+              "cents": 20
+            },
+            {
+              "category": "food",
+              "cents": -50
+            },
+            {
+              "category": "food",
+              "cents": 20
+            }
+          ],
+          "expected": "category | cents\nfood | -30\n出行 | 20"
+        },
+        {
+          "input": [
+            {
+              "category": "",
+              "cents": 0
+            },
+            {
+              "category": "rent",
+              "cents": 150000
+            }
+          ],
+          "expected": "category | cents\n | 0\nrent | 150000"
+        }
+      ]
+    },
+    {
+      "id": "csv-escaping",
+      "category": "bugfix",
+      "files": {
+        "report.py": "from table import render\ndef transform(data):\n    return render(data)\n",
+        "table.py": "def render(data):\n    return '\\n'.join(','.join(row) for row in data)\n"
+      },
+      "entry": "report.py",
+      "goal": "修复 CSV 导出，report.py 的 transform(data) 调用 table.py 的 render(data)。输入是二维字符串列表，每个内层列表是一行。使用标准 csv 最小引用，字段内逗号、双引号、换行要正确转义，行尾固定 LF，每行包括最后一行有 LF；空列表返回空字符串。完整保留 UTF-8 文本和空单元格，不修改输入。",
+      "public": [
+        {
+          "input": [],
+          "expected": ""
+        },
+        {
+          "input": [
+            [
+              "a",
+              "b"
+            ],
+            [
+              "c",
+              "d"
+            ]
+          ],
+          "expected": "a,b\nc,d\n"
+        }
+      ],
+      "private": [
+        {
+          "input": [
+            [
+              "名字",
+              "备注"
+            ],
+            [
+              "小明",
+              "a,b"
+            ],
+            [
+              "小红",
+              "say \"hi\""
+            ]
+          ],
+          "expected": "名字,备注\n小明,\"a,b\"\n小红,\"say \"\"hi\"\"\"\n"
+        },
+        {
+          "input": [
+            [
+              "",
+              "line1\nline2"
+            ],
+            [
+              " x ",
+              "y"
+            ]
+          ],
+          "expected": ",\"line1\nline2\"\n x ,y\n"
+        }
+      ]
+    },
+    {
+      "id": "status-report",
+      "category": "feature_and_regression",
+      "files": {
+        "report.py": "from summary import summarize\ndef transform(data):\n    return summarize(data)\n",
+        "summary.py": "def summarize(data):\n    return 'open: 0\\ndone: 0\\nother: 0'\n"
+      },
+      "entry": "report.py",
+      "goal": "实现任务状态汇总。输入是 status 字符串组成的列表；每项先 strip 去首尾空白再 lower 转小写，open 和 done 分别计数，所有其余项（包括空字符串）计入 other。report.py 的 transform(data) 调用 summary.py 的 summarize(data)。结果固定三行 open: 数字、done: 数字、other: 数字，无末尾换行，不修改输入。",
+      "public": [
+        {
+          "input": [],
+          "expected": "open: 0\ndone: 0\nother: 0"
+        },
+        {
+          "input": [
+            "open",
+            "done",
+            "open"
+          ],
+          "expected": "open: 2\ndone: 1\nother: 0"
+        }
+      ],
+      "private": [
+        {
+          "input": [
+            " OPEN ",
+            "Done",
+            "pending",
+            ""
+          ],
+          "expected": "open: 1\ndone: 1\nother: 2"
+        },
+        {
+          "input": [
+            "\tdone\n",
+            "OPEN",
+            "  ",
+            "blocked",
+            "DONE"
+          ],
+          "expected": "open: 1\ndone: 2\nother: 2"
+        }
+      ]
+    }
+  ]
+}

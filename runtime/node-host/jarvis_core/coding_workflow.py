@@ -21,9 +21,11 @@ def validate(args):
     if type(args.get('coding',False)) is not bool:
         raise policy.CoreError('coding_invalid','编程执行开关无效。')
     if not args.get('coding'):
-        if any(k in args for k in ('cases','heldout_cases','entrypoint','coding_provider','coding_executor_binding')):raise policy.CoreError('coding_invalid','验收案例与编码选项仅用于编程执行。')
+        if any(k in args for k in ('cases','heldout_cases','entrypoint','coding_provider','coding_executor_binding','build_recipe')):raise policy.CoreError('coding_invalid','验收案例与编码选项仅用于编程执行。')
         return
     from .coding_bundle import layout
+    from .coding_build import recipe, SOURCE, ZIPAPP
+    selected_recipe = recipe(args.get('build_recipe', SOURCE))
     if 'coding_executor_binding' in args and (not isinstance(args['coding_executor_binding'],str) or not re.fullmatch(r'sha256:[a-f0-9]{64}',args['coding_executor_binding'])):
         raise policy.CoreError('coding_invalid','执行器绑定格式无效。')
     layout(args['paths'], args.get('entrypoint', next(iter(args['paths']), '')))
@@ -44,13 +46,13 @@ def validate(args):
         other = {**args, 'cases': args['heldout_cases']}
         other.pop('heldout_cases')
         # Validate the private set with the same quotas without recursive multi-file requirement.
-        other['paths'] = [args['paths'][0]]; other.pop('entrypoint', None)
+        other['paths'] = [args['paths'][0]]; other.pop('entrypoint', None); other.pop('build_recipe', None)
         validate(other)
         public = {policy.canonical_json(c['input']) for c in cases}
         if any(policy.canonical_json(c['input']) in public for c in args['heldout_cases']):
             raise policy.CoreError('coding_invalid','独立验收输入不能与公开示例重复。')
-    elif len(args['paths']) > 1:
-        raise policy.CoreError('coding_invalid','多文件任务还需要 2—24 条不发送给编码模型的独立验收案例。')
+    elif len(args['paths']) > 1 or selected_recipe == ZIPAPP:
+        raise policy.CoreError('coding_invalid','多文件或可运行工具包还需要 2—24 条不发送给编码模型的独立验收案例。')
 
 
 def composition(service,args):
