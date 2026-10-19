@@ -23,6 +23,8 @@ def unique(pairs):
 
 def execute(service, args, checkpoint, action_id, task_id):
     validate(args)
+    from .coding_demand import validate_binding
+    validate_binding(service.core, args, task_id=task_id)
     originals = service._sources(args, checkpoint)
     project_root = str(ProjectFiles(service.core).root(args['project_id']))
     for row in originals: row['project_root'] = project_root
@@ -43,6 +45,10 @@ def execute(service, args, checkpoint, action_id, task_id):
     runner.preflight()
     def guard():
         checkpoint()
+        if args.get('coding_demand'):
+            from .coding_demand import archive
+            if archive(service.core, args['conversation_id'])['project_id'] != args['project_id']:
+                raise policy.CoreError('coding_demand_conflict', '会话所属项目已改变，停止旧改进任务。')
         if args.get('coding_provider') == 'codex':
             from .coding_codex import CodexCodingProvider
             if CodexCodingProvider(service.core).binding() != args.get('coding_executor_binding'):

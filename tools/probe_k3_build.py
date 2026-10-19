@@ -26,6 +26,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--directory', required=True, type=Path)
     parser.add_argument('--dataset', type=Path, default=ROOT/'evals/cases/k3-coding-v2.json')
+    parser.add_argument('--improvement', action='store_true', help='Exercise saved improvement -> coding -> verified receipt')
     args = parser.parse_args(); root = args.directory.resolve()
     if root.exists(): parser.error('Use a new directory; unknown outcomes must not be replayed')
     root.mkdir(parents=True)
@@ -52,11 +53,26 @@ def main():
         result['cases'].append(row); save()
         try:
             cid = uuid.uuid4().hex
-            item = bridge.submit(cid, {'mode': 'skill', 'request_id': 'web-'+uuid.uuid4().hex,
+            payload = {'mode': 'skill', 'request_id': 'web-'+uuid.uuid4().hex,
                 'prompt': case['goal'], 'project_id': project['id'], 'skill_id': 'matt-pocock.tdd',
                 'paths': list(case['files']), 'entrypoint': case['entry'], 'coding': True,
                 'coding_provider': 'codex', 'model': 'auto', 'build_recipe': ZIPAPP,
-                'cases': case['public'], 'heldout_cases': case['private']})
+                'cases': case['public'], 'heldout_cases': case['private']}
+            if args.improvement:
+                from jarvis_core.conversations import ConversationStore
+                from jarvis_core.coding_demand import CodingDemands
+                ConversationStore(core).put(cid, {'revision': 0, 'document': {
+                    'title': '编码改进验收', 'project_id': project['id'], 'context_note': '', 'messages': [
+                        {'role': 'user', 'content': case['goal'], 'meta': '', 'short_meta': '',
+                         'attachments_omitted': False, 'incomplete': False}]}})
+                demands = CodingDemands(core, bridge)
+                proposal = demands.propose(cid, {'request_id': uuid.uuid4().hex, 'prompt': case['goal'],
+                    'coding': {k: payload[k] for k in ('paths','entrypoint','coding_provider','model','build_recipe','cases','heldout_cases')}})
+                assert proposal['status'] == 'PROPOSED' and proposal['task_id'] is None
+                row['proposal'] = proposal; save()
+                item = demands.start(cid, proposal['id'], {})
+            else:
+                item = bridge.submit(cid, payload)
             row.update(task=item, conversation_id=cid, project=project); save()
             deadline = time.monotonic()+310
             while time.monotonic() < deadline:
@@ -71,6 +87,13 @@ def main():
                        validation=value['validation'], build_validation=value.get('build_validation'),
                        model_receipts=[a['model'] for a in value['attempts']])
             save(); assert value['passed']
+            if args.improvement:
+                done = CodingDemands(core, bridge).bound(cid, proposal['id'])
+                assert done['status'] == 'SUCCEEDED' and done['result']['verified']
+                assert done['result']['artifact_digest'] == detail['artifact']['digest']
+                assert not done['result']['automatically_applied']
+                assert demands.start(cid, proposal['id'], {})['task_id'] == item['task_id']
+                row['improvement_result'] = done
             assert all((source/p).read_text()==s for p,s in case['files'].items())
             row['apply'] = apply_result(core, report, 'apply')
             assert all((source/p).read_text()==s for p,s in value['candidates'].items())

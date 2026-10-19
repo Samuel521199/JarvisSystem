@@ -10,23 +10,29 @@ import json
 import os
 from pathlib import Path
 import re
+import time
 import uuid
 
 from .policy import CoreError, safe_path, canonical_json
 
 
 @contextmanager
-def locked(path):
+def locked(path, *, timeout=0):
     import msvcrt
     path = safe_path(path, must_exist=False)
     with path.open('a+b') as handle:
         if handle.tell() == 0:
             handle.write(b'0'); handle.flush()
         handle.seek(0)
-        try:
-            msvcrt.locking(handle.fileno(), msvcrt.LK_NBLCK, 1)
-        except OSError as exc:
-            raise CoreError('recovery_busy', 'A live owner holds this recovery lock') from exc
+        deadline = time.monotonic() + timeout
+        while True:
+            try:
+                msvcrt.locking(handle.fileno(), msvcrt.LK_NBLCK, 1)
+                break
+            except OSError as exc:
+                if time.monotonic() >= deadline:
+                    raise CoreError('recovery_busy', 'A live owner holds this recovery lock') from exc
+                time.sleep(min(.02, max(0, deadline-time.monotonic())))
         try:
             yield
         finally:
@@ -64,7 +70,7 @@ class StageLease:
         self.token = uuid.uuid4().hex
         self.stage = self.parent / ('job-' + self.token)
         self.profile = 'Jarvis.Worker.' + self.token
-        with locked(self.parent / '.recovery.lock'):
+        with locked(self.parent / '.recovery.lock', timeout=3):
             self.stage.mkdir()
             self.record = {'version':1, 'token':self.token, 'stage_identity':identity(self.stage),
                            'profile':self.profile, 'pid':None, 'binding':binding}
@@ -97,7 +103,8 @@ def recover(parent, *, only=None):
     parent = safe_path(parent, directory=True)
     require_acl_volume(parent)
     result = {'removed':[], 'active':[], 'retained':[]}
-    with locked(parent / '.recovery.lock'):
+    # Only the short shared sweep lock waits; active owner leases never do.
+    with locked(parent / '.recovery.lock', timeout=3):
         stages = [parent / only] if only is not None else sorted(parent.iterdir())
         for stage in stages:
             if not stage.name.startswith('job-'): continue

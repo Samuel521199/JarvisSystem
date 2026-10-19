@@ -185,6 +185,8 @@ Grok 内部子 Agent 视为该 coding_job 的执行细节，不能自行成为�
 <a id="demand-growth-runtime"></a>
 ### 已实现：从会话需求到实际交付（0.1.41）
 
+**范围说明：**以下为固定目录报告格式的成长分支。0.1.68 新增[有界编码改进交接](tasks-agents.md#bounded-coding-workflow)，由同一会话入口分派至原共享任务队列，交付经过独立验收的候选；其创建、结果与明确应用规则以该节为准，不套用本节的自动工具发布步骤。
+
 **implemented / 验证范围见[本轮证据](delivery-validation.md#growth-demand-evidence)。** `ConversationGrowth` 是现有 evolution-v1 的需求适配器，复用同一 SQLite 成长账本、单执行通道、CodingProvider、LPAC 验收和发布/回退。没有第二套 Agent 调度、数据库、巡检器或安装依赖；普通聊天仍走独立通道。
 
 当前首个需求是把本会话已成功完成的样例目录报告导出为 CSV、Markdown 或 TSV。范围来自已核验产物，既不重新扫描当前项目，也不把聊天中的任意文件路径当成输入。意图匹配只接受这个有独立验收配方的完整要求；不支持的目标明确返回未执行。请求分析和查询不调用模型。

@@ -193,6 +193,8 @@ class TaskQueue:
             self._owned(db)
             if self.core.ledger._admit(db)['security_epoch'] != control['security_epoch']:
                 raise CoreError('stale_authorization', '技能任务受理期间状态代际已变化。')
+            from .coding_demand import register as register_demand
+            register_demand(db, args, record, request_id)
             if record['action']['status'] != 'PREPARED': return
             if db.execute('SELECT 1 FROM computer_queue WHERE task_id=?', (record['task']['task_id'],)).fetchone(): return
             if len(self._pending(db)) >= self.capacity:

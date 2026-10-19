@@ -31,13 +31,14 @@ SOURCE_PATHS += ('runtime/node-host/jarvis_core/rea.py', 'runtime/node-host/jarv
                  'runtime/node-host/jarvis_core/coding_workflow.py', 'runtime/node-host/jarvis_core/evolution/runner.py',
                  'runtime/node-host/jarvis_core/dialogue_process.py')
 SOURCE_PATHS += ('config/coding-runtime.json','config/codex-proposal-model.json')
+SOURCE_PATHS += ('runtime/node-host/jarvis_core/coding_demand.py',)
 SOURCE_PATHS += tuple('runtime/node-host/jarvis_core/'+p+'.py' for p in ('coding_task','coding_bundle','coding_apply','coding_codex','coding_settings','coding_build'))
 SOURCE_PATHS += ('runtime/node-host/jarvis_core/evolution/provider.py','runtime/node-host/jarvis_core/dialogue_worker.py',
                  'adapters/models/provider-native/jarvis_models/gateway.py','runtime/node-host/jarvis_core/skill_validation.py')
 
 
 def validate_request(payload):
-    fields(payload, {'prompt', 'project_id'}, {'model', 'skill_id', 'paths', 'output_path', 'conversation_id', 'ratio', 'theme', 'target_path', 'focus', 'explain', 'coding', 'cases', 'heldout_cases', 'entrypoint', 'coding_provider', 'coding_executor_binding', 'build_recipe'})
+    fields(payload, {'prompt', 'project_id'}, {'model', 'skill_id', 'paths', 'output_path', 'conversation_id', 'ratio', 'theme', 'target_path', 'focus', 'explain', 'coding', 'cases', 'heldout_cases', 'entrypoint', 'coding_provider', 'coding_executor_binding', 'build_recipe', 'coding_demand'})
     if type(payload.get('explain',False)) is not bool:
         raise policy.CoreError('invalid_skill_request','中文解释选项必须为布尔值。')
     if payload.get('explain') and ('::' not in str(payload.get('model','')) or str(payload.get('model','')).startswith('auto::')):
@@ -124,6 +125,8 @@ class SkillTaskService:
                 executor.preflight()
                 args['coding_executor_binding']=executor.binding()
             (getattr(self,'coding_runner',None) or IsolatedRunner()).preflight()
+            from .coding_demand import validate_binding
+            validate_binding(self.core, args)
         if selected == 'rea.software-analysis':
             from .rea import snapshot
             if args['paths']:
@@ -220,7 +223,7 @@ class SkillTaskService:
                 return record
             record = self.core.ledger.begin_dispatch(action_id, self.core.host_instance_id, _admission=_before_dispatch)
             task_id, attempted_effect = record['task']['task_id'], False
-            deadline = time.monotonic() + (300 if record['action']['arguments'].get('coding') else TIMEOUT_SECONDS)
+            deadline = time.monotonic() + record['task']['budget']['max_runtime_seconds']
             def checkpoint():
                 self.core.assert_running()
                 self.core.ledger.assert_admitted(task_id)

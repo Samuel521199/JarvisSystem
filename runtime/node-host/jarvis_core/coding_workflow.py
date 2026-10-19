@@ -21,7 +21,7 @@ def validate(args):
     if type(args.get('coding',False)) is not bool:
         raise policy.CoreError('coding_invalid','编程执行开关无效。')
     if not args.get('coding'):
-        if any(k in args for k in ('cases','heldout_cases','entrypoint','coding_provider','coding_executor_binding','build_recipe')):raise policy.CoreError('coding_invalid','验收案例与编码选项仅用于编程执行。')
+        if any(k in args for k in ('cases','heldout_cases','entrypoint','coding_provider','coding_executor_binding','build_recipe','coding_demand')):raise policy.CoreError('coding_invalid','验收案例与编码选项仅用于编程执行。')
         return
     from .coding_bundle import layout
     from .coding_build import recipe, SOURCE, ZIPAPP

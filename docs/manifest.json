@@ -503,7 +503,8 @@
         "memory-final-answer-evidence",
         "k2-completion-evidence",
         "application-offline-evidence",
-        "growth-purposes-evidence"
+        "growth-purposes-evidence",
+        "coding-demand-evidence"
       ],
       "status": "proposed",
       "reader_summary": "哪些能力测过，证据在哪里，下一阶段怎样验收？"
@@ -3063,9 +3064,9 @@
     }
   ],
   "implementation": {
-    "version": "0.1.67",
-    "scope": "0.1.67 K3 acceptance: 99 tests and one corrected real four-module Codex task passed; original failed attempts retained. Runtime builtin contract/diagnostics fixed without broadening execution permissions. Bounded coding accepted; generic improvement-request handoff and full development-platform gates remain incomplete.",
-    "evidence": "evals/reports/k3-acceptance-2026-10-19.json",
+    "version": "0.1.68",
+    "scope": "Bounded conversation improvement proposals now bind frozen Python sources, independent acceptance and budgets to the existing coding queue, then derive results from verified task receipts. One real four-module Codex handoff passed; no automatic skill publication or self-modification. Complete K3 remains open.",
+    "evidence": "evals/reports/k3-demand-2026-10-19.json",
     "overall_design_status": "proposed",
     "complete_k1_gate": false,
     "complete_k2_gate": false,

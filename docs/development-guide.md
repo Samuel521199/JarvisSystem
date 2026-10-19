@@ -1,6 +1,6 @@
 # 后续方向指南：现状、缺口与优化工作清单
 
-> 文档 ID：docs-development-guide｜分析基线：v0.1.58；增量更新至 v0.1.67，2026-10-19｜状态：现状为代码/既有证据复核，后续建议 proposed。
+> 文档 ID：docs-development-guide｜分析基线：v0.1.58；增量更新至 v0.1.68，2026-10-19｜状态：现状为代码/既有证据复核，后续建议 proposed。
 > 本章独占维护跨主题缺口清单与优化建议；K0—K6、阶段内推进顺序仍归[核心路线](core-bootstrap.md#next-implementation)，正式通过条件仍归[验收章](delivery-validation.md#next-k1-acceptance)。这里没有第二套开发时间线，也不宣布完整 K1/K2 已通过。
 
 <!-- book-nav:start -->
@@ -171,7 +171,7 @@
 <a id="direction-coding"></a>
 ### F07 · 将限定编程扩大为真实、可回退的开发能力
 
-**0.1.65 完成候选、独立案例、多文件源码构建和 Codex 适配；0.1.66 补可运行 PYZ、严格离线重建与损坏源码修复。0.1.67 [阶段验收](delivery-validation.md#k3-acceptance-evidence)修复内置能力声明/诊断问题，下一项优先接通改进单到编码任务的有界交接。** 证据见[K3 编码协作](delivery-validation.md#k3-coding-evidence)，完整使用规则只归[编程工作流](tasks-agents.md#bounded-coding-workflow)。原有单文件 `transform(data) -> str`、LPAC、冻结可见案例、差异、明确应用/恢复已经可用。下一步不应立即开放任意终端和整个仓库写入。
+**0.1.65 完成候选、独立案例、多文件源码构建和 Codex 适配；0.1.66 补可运行 PYZ、严格离线重建与损坏源码修复。0.1.67 [阶段验收](delivery-validation.md#k3-acceptance-evidence)修复内置能力声明/诊断问题，0.1.68 已接通[改进单到编码任务的有界交接](delivery-validation.md#coding-demand-evidence)；后续按原阶段扩大受控构建与故障矩阵。** 证据见[K3 编码协作](delivery-validation.md#k3-coding-evidence)，完整使用规则只归[编程工作流](tasks-agents.md#bounded-coding-workflow)。原有单文件 `transform(data) -> str`、LPAC、冻结可见案例、差异、明确应用/恢复已经可用。下一步不应立即开放任意终端和整个仓库写入。
 
 已补独立输入、输入不变/输出契约检查、基线变化与失败产物检查，并完成两模块文件清单汇总。本轮已增加三个真实开发场景与第二种固定构建配方，证据见[构建验收](delivery-validation.md#k3-build-evidence)。后续继续扩大任务覆盖、受控第三方依赖、语言/包结构和隔离故障矩阵，冻结路径与交付契约不变。将“生成者写的测试”“宿主冻结测试”“真实需求结果”分别保留；通过三个可见案例不能证明任意输入正确。
 

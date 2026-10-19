@@ -1,0 +1,225 @@
+{
+  "version": "0.1.68",
+  "date": "2026-10-19",
+  "status": "passed",
+  "scope": "Bounded saved improvement -> shared coding task -> independent acceptance -> receipt-backed result; explicit application remains separate.",
+  "complete_k3_gate": false,
+  "regression_initial": {
+    "status": "passed",
+    "tests": 85,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 285.378,
+    "suites": [
+      "test_coding_demand",
+      "test_growth_demand",
+      "test_coding_workflow",
+      "test_coding_bundle",
+      "test_coding_codex",
+      "test_coding_http",
+      "test_coding_build",
+      "test_coding_acceptance",
+      "test_task_queue",
+      "test_worker_recovery",
+      "test_runtime_start"
+    ]
+  },
+  "worker_regression": {
+    "status": "passed",
+    "tests": 10,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 5.061
+  },
+  "live": {
+    "status": "passed",
+    "case": "four-module-money-report",
+    "dataset_digest": "sha256:72f100cf5f56fd5ff63f7e9950946f9fc84e73490400acdf778790bb440ed54e",
+    "model_calls": 1,
+    "model": "gpt-6.1-sol",
+    "reasoning": "medium",
+    "usage": {
+      "cached_input_tokens": 0,
+      "input_tokens": 1848,
+      "output_tokens": 592,
+      "reasoning_output_tokens": 166
+    },
+    "billing": {
+      "amount": null,
+      "basis": "external_codex_account"
+    },
+    "source_cases": 10,
+    "artifact_cases": 10,
+    "independent_checks": true,
+    "backfilled_result": {
+      "verified": true,
+      "task_id": "task_2d6d222e9fe55b73ba441db6c4de59ff",
+      "artifact_digest": "sha256:164217d3e7b5e1de70772ca7c669588d116264057cb3fe805393a8900504f532",
+      "cases_digest": "sha256:26a6b1a2a53066a493f4db636869dd9333ea1d1b5bd7c444c067ace1c20bbef0",
+      "cases": 10,
+      "model_calls": 1,
+      "build_recipe": "python-zipapp-v1",
+      "delivery": "verified_candidate",
+      "automatically_applied": false
+    },
+    "original_bytes_restored": true,
+    "offline_build": {
+      "status": "verified",
+      "recipe": "python-zipapp-v1",
+      "sha256": "sha256:84ae0182bcce132fc540398048015facbfc6424890381e70b0ed17a0cf0a712d",
+      "bytes": 3125,
+      "byte_identical": true,
+      "model_calls": 0,
+      "expected_digest_checked": true,
+      "execution": "windows-lpac",
+      "validation": {
+        "passed": true,
+        "cases": 8,
+        "failures": [],
+        "worker": {
+          "backend": "windows-lpac-job",
+          "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+          "runtime_bytes": 22904399,
+          "appcontainer": true,
+          "lpac": true,
+          "capabilities": [
+            "registryRead"
+          ],
+          "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+          "pid": 53768,
+          "package_sid": "S-1-15-2-3402676910-305183423-2893569202-1495054971-1213438280-3026785100-2713739006",
+          "active_process_limit": 1,
+          "cpu_time_limit_seconds": 3,
+          "wall_time_limit_seconds": 12,
+          "cpu_seconds": 0.28125,
+          "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+          "memory_limit_bytes": 201326592,
+          "peak_process_memory_bytes": 18272256,
+          "elapsed_seconds": 0.3583
+        }
+      }
+    },
+    "artifact_bytes": 3125,
+    "timing": "Run before shared recovery-lock wait and declared-budget enforcement fixes; final sources covered by regression/UI, no second paid call."
+  },
+  "ui_initial_failure": {
+    "status": "failed",
+    "reason": "Shared evolution-staging recovery lock contended during concurrent UI and regression checks; no candidate applied.",
+    "fix": "Only the shared sweep lock waits up to 3 seconds; live owner leases remain nonblocking."
+  },
+  "probe_initial_failure": {
+    "paid_calls": 0,
+    "reason": "Probe tried to save an empty conversation; existing archive validation rejected it. Corrected probe seeds one explicit requirement message."
+  },
+  "budget_fix": "Execution now uses the declared task budget (240 seconds for coding), instead of a separate 300-second internal deadline.",
+  "resources": {
+    "added_resident_services": 0,
+    "added_model_frameworks": 0,
+    "added_dependencies": 0,
+    "new_table": "coding_demands in existing core SQLite ledger",
+    "proposal_limit": 1000,
+    "snapshot_per_job_max_bytes": 32768
+  },
+  "limits": [
+    "1-4 same-directory Python modules; transform(data) returns a string.",
+    "Owner supplies public and held-out acceptance; no general autonomous acceptance planner.",
+    "Confirmed task report can still yield FAILED improvement when cases fail.",
+    "No automatic candidate application, skill publication, arbitrary shell or self-modification.",
+    "Retains prior full K3/B-series open gates; no new low-end-PC benchmark."
+  ],
+  "raw_evidence_directory": "H:\\JarvisData\\diagnostics\\k3-demand-20261019",
+  "regression": {
+    "status": "passed",
+    "tests": 87,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 300.36,
+    "suites": [
+      "test_coding_demand",
+      "test_growth_demand",
+      "test_coding_workflow",
+      "test_coding_bundle",
+      "test_coding_codex",
+      "test_coding_http",
+      "test_coding_build",
+      "test_coding_acceptance",
+      "test_task_queue",
+      "test_worker_recovery",
+      "test_runtime_start"
+    ]
+  },
+  "checks_total": 97,
+  "deployment": {
+    "status": "passed",
+    "version": "0.1.68",
+    "previous_version": "0.1.67",
+    "instance_id": "5127960975f4f5e243fb735ed7198bb1",
+    "idle_graceful_reload": true,
+    "served_sha256": {
+      "growth.js": "1f5066f0df787e8df737b4bf9926afa8229b45b53b75d6c473024d8bf427daa7",
+      "skills.js": "7a10de9641f31fb7b89614a37d326e53a47dc405f35bfe9cd839f54972525ee9",
+      "coding.js": "3547507e77569145601f7d50660359172185269f5b566fddeefafcb54b04dae2",
+      "admin.js": "09d93597e84408dfd48ce8aaecb5b7a9b1554023a38811526c3b6bb291661c43"
+    },
+    "business_tables_compared": 11,
+    "business_unchanged": true,
+    "coding_settings_unchanged": true,
+    "empty_restart_queue_reviewed_and_resumed": true,
+    "cloud_calls": 0,
+    "installer_built": false
+  },
+  "ui": {
+    "version": "0.1.68",
+    "status": "passed",
+    "paid_model_calls": 0,
+    "checks": [
+      "natural improvement opens explicit coding draft; proposal makes zero model calls",
+      "chat responds while coding waits in background",
+      "page reload restores the same receipt; right panel apply/rollback restores exact BOM bytes"
+    ],
+    "model_calls": 1,
+    "conversation_id": "44868c384d594757b542f5cab95d2202",
+    "job_id": "61733169de7a4a9da63f8533b5b8d3be",
+    "page_errors": [],
+    "screenshots": {
+      "proposal.png": "H:\\JarvisData\\diagnostics\\k3-demand-20261019\\ui-complete\\proposal.png",
+      "verified.png": "H:\\JarvisData\\diagnostics\\k3-demand-20261019\\ui-complete\\verified.png",
+      "result-panel.png": "H:\\JarvisData\\diagnostics\\k3-demand-20261019\\ui-complete\\result-panel.png",
+      "narrow.png": "H:\\JarvisData\\diagnostics\\k3-demand-20261019\\ui-complete\\narrow.png"
+    },
+    "narrow_viewport": {
+      "width": 390,
+      "height": 844,
+      "dialog_visible": true,
+      "page_horizontal_overflow": false
+    },
+    "zero_page_errors": true
+  },
+  "documentation": {
+    "status": "passed",
+    "documents": 25,
+    "diagrams": 21,
+    "artifacts": 42
+  },
+  "source_sha256": {
+    "apps/web/growth.js": "1f5066f0df787e8df737b4bf9926afa8229b45b53b75d6c473024d8bf427daa7",
+    "apps/web/skills.js": "7a10de9641f31fb7b89614a37d326e53a47dc405f35bfe9cd839f54972525ee9",
+    "runtime/node-host/jarvis_core/__init__.py": "5a7cd40efc7783dc0c131d64aeb2590ab56b64266ba37349635aa2f8f9919fc3",
+    "runtime/node-host/jarvis_core/coding_task.py": "95e1ba9752abf22a7d105c812058c5f0735a878445f9d5d6c34b6726214e9f5d",
+    "runtime/node-host/jarvis_core/coding_workflow.py": "0a7a9de84507c482aa5d3b03d6f9b4fd76455bd66356a87c3d4a84cdfc9eeeb1",
+    "runtime/node-host/jarvis_core/conversation_tasks.py": "400c51ceb6e1333ae1516a0b8f0388a15da493da2ef6463d223b04ef9f090d56",
+    "runtime/node-host/jarvis_core/evolution/demand.py": "3810585565f81fdca16397c326fc248c155524bf4d266a4f57915a59ae584c4f",
+    "runtime/node-host/jarvis_core/releases.py": "d1fe029298c0e763c64339d875cbaf7a885dbfb0992808ebc9adcfb46d419af5",
+    "runtime/node-host/jarvis_core/skill_tasks.py": "004814c5f6a510f17b04e2a84232edb43a59b346606aabe91e4a36991bfd8193",
+    "runtime/node-host/jarvis_core/task_queue.py": "af14b3be07e78c3e7f50f7e903bcbcb2edbb2d1ca2115cb0f77d2dd744446914",
+    "runtime/node-host/jarvis_core/worker_recovery.py": "ac31f24cf1262a964af531bf06c142490517b84503a436cb5107f50182a2953d",
+    "tests/test_worker_recovery.py": "9e7b8609563cf949c2791a386d714cfc717e6a67221a3b13507a16f749aedef5",
+    "tools/probe_k3_build.py": "107355206066ea9d5eb7bd7e24777f9b55a3e0c16044250ecaf43b4515112f5c",
+    "runtime/node-host/jarvis_core/coding_demand.py": "519ae19c191841dfb74a26eaacd779cded10c9e2c5bfa33096ab184909cdb98e",
+    "tests/test_coding_demand.py": "63ce7fa92b0c3d99a25a55da5200ea4c06d6ade161491effafa0b80ec2189425",
+    "tools/probe_coding_demand_ui.py": "954cd1d7217ece5ed139bd86ccc1f70744d5e5da9c2b1911258162fb350e3f35"
+  }
+}

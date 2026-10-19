@@ -48,6 +48,12 @@ class ConversationGrowth:
     def __init__(self, core, manager, tasks):
         self.core, self.manager, self.tasks = core, manager, tasks
         self.archives = ConversationStore(core)
+        from ..coding_demand import CodingDemands
+        self.coding = CodingDemands(core, tasks)
+
+    def is_coding(self, job_id):
+        with self.core.ledger.connection() as db:
+            return db.execute('SELECT 1 FROM coding_demands WHERE id=?', (job_id,)).fetchone() is not None
 
     def archive(self, ident):
         conversation_id(ident)
@@ -56,6 +62,7 @@ class ConversationGrowth:
             raise policy.CoreError('growth_archive_required', '请先确认当前普通会话已保存；临时会话不建立持久改进单。') from None
 
     def bound(self, ident, job_id):
+        if self.is_coding(job_id): return self.coding.bound(ident, job_id)
         archive = self.archive(ident); conversation_id(job_id)
         job = self.manager.store.job(job_id)
         origin = job['request'].get('origin', {})
@@ -66,14 +73,17 @@ class ConversationGrowth:
     def lookup(self, ident, request_id):
         conversation_id(ident); conversation_id(request_id)
         job = self.manager.store.existing_job('growth-'+ident+'-'+request_id)
-        if job is None: raise policy.CoreError('not_found', '未找到改进请求；没有自动重发。')
+        if job is None: return self.coding.lookup(ident, request_id)
         return self.bound(ident, job['id'])
 
     def list(self, ident):
         archive = self.archive(ident)
         with self.manager.store.connection() as db:
             rows = db.execute("SELECT id FROM jobs WHERE json_extract(document,'$.request.origin.conversation_id')=? AND json_extract(document,'$.request.origin.project_id') IS ? ORDER BY status IN ('QUEUED','RUNNING','OBSERVING','PROPOSED') DESC,rowid DESC LIMIT 30", (ident, archive['project_id'])).fetchall()
-        return {'jobs': [self.bound(ident, row['id']) for row in rows], 'conversation_id': ident}
+        coding = self.coding.list(ident) if archive['project_id'] else []
+        jobs = [self.bound(ident, row['id']) for row in rows] + coding
+        jobs.sort(key=lambda job: (job['status'] in {'PROPOSED','QUEUED','RUNNING','OBSERVING'}, job['created_at']), reverse=True)
+        return {'jobs': jobs[:30], 'conversation_id': ident}
 
     def source(self, ident, task_id):
         raw = self.tasks.artifact(ident, task_id)
@@ -86,10 +96,17 @@ class ConversationGrowth:
         return entries, policy.digest(raw)
 
     def propose(self, ident, payload, *, previous_job=None):
+        if isinstance(payload, dict) and 'coding' in payload:
+            if self.manager.store.existing_job('growth-'+ident+'-'+str(payload.get('request_id', ''))):
+                raise policy.CoreError('evolution_conflict', '请求编号已用于报告改进，不能改为编码任务。')
+            return self.coding.propose(ident, payload, previous_job=previous_job)
         archive = self.archive(ident)
         if not isinstance(payload, dict) or set(payload) != {'request_id','prompt'}:
             raise policy.CoreError('growth_request_invalid', '需求分析只接受请求编号与本轮要求。')
         conversation_id(payload['request_id']); fmt = output_format(payload['prompt'])
+        with self.core.ledger.connection() as db:
+            if db.execute('SELECT 1 FROM coding_demands WHERE conversation_id=? AND request_id=?', (ident, payload['request_id'])).fetchone():
+                raise policy.CoreError('evolution_conflict', '请求编号已用于编码改进，不能改为报告任务。')
         request_id = 'growth-'+ident+'-'+payload['request_id']
         existing = self.manager.store.existing_job(request_id)
         if existing:
@@ -109,6 +126,7 @@ class ConversationGrowth:
         return self.manager.propose(request)
 
     def reanalyse(self, ident, job_id, payload):
+        if self.is_coding(job_id): return self.coding.reanalyse(ident, job_id, payload)
         if not isinstance(payload, dict) or set(payload) != {'request_id'}:
             raise policy.CoreError('growth_request_invalid', '重新分析只接受新的请求编号。')
         old = self.bound(ident, job_id)
@@ -117,6 +135,7 @@ class ConversationGrowth:
         return self.propose(ident, {'request_id': payload['request_id'], 'prompt': old['request']['origin']['goal']}, previous_job=job_id)
 
     def start(self, ident, job_id, payload):
+        if self.is_coding(job_id): return self.coding.start(ident, job_id, payload)
         if payload != {}: raise policy.CoreError('growth_request_invalid', '启动只接受已保存改进单，不接受替换参数。')
         job = self.bound(ident, job_id)
         if job['status'] == 'PROPOSED':
@@ -126,11 +145,17 @@ class ConversationGrowth:
         return self.manager.start_proposal(job_id)
 
     def cancel(self, ident, job_id, payload):
+        if self.is_coding(job_id): return self.coding.cancel(ident, job_id, payload)
         if payload != {}: raise policy.CoreError('growth_request_invalid', '取消只接受空对象。')
         self.bound(ident, job_id)
         return self.manager.cancel(job_id)
 
     def artifact(self, ident, job_id):
+        if self.is_coding(job_id):
+            job = self.coding.bound(ident, job_id)
+            if job['status'] != 'SUCCEEDED':
+                raise policy.CoreError('growth_result_unavailable', '编码改进尚未通过验收。')
+            return self.tasks.artifact(ident, job['task_id']), 'json'
         job = self.bound(ident, job_id); result = job.get('result') or {}
         text = result.get('text')
         if (job['status'] != 'SUCCEEDED' or not isinstance(text, str)
