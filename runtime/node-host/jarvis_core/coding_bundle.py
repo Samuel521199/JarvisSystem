@@ -25,10 +25,12 @@ def layout(paths, entry):
         raise policy.CoreError('coding_invalid', '首期多文件任务要求同目录且模块名不重名。')
 
 
-def validate_bundle(sources, entry):
+def validate_bundle(sources, entry, *, imports=None):
     if not isinstance(sources, dict):
         raise policy.CoreError('candidate_invalid', '候选必须包含冻结清单中的全部文件。')
     layout(list(sources), entry)
+    if imports and any(PurePosixPath(p).stem.lower() in imports for p in sources):
+        raise policy.CoreError('candidate_invalid', '本地模块不能覆盖构建配方中的依赖。')
     if any(not isinstance(v, str) or len(v.encode()) > 16384 for v in sources.values()) or sum(len(v.encode()) for v in sources.values()) > 32768:
         raise policy.CoreError('candidate_invalid', '候选源码总量超过 32 KiB。')
     try:
@@ -37,7 +39,7 @@ def validate_bundle(sources, entry):
         dependencies = {m: set() for m in trees}
         for path, source in sources.items():
             name = PurePosixPath(path).stem
-            validate_code(source, imports=exports, require_entry=path == entry)
+            validate_code(source, imports={**(imports or {}), **exports}, require_entry=path == entry)
             for node in ast.walk(trees[name]):
                 if isinstance(node, ast.Import): dependencies[name].update(n.name for n in node.names if n.name in trees)
                 if isinstance(node, ast.ImportFrom) and node.module in trees: dependencies[name].add(node.module)

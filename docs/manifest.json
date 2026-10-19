@@ -316,7 +316,8 @@
       "path": "docs/toolchains.md",
       "title": "开发环境、多语言工具链与构建",
       "owns": [
-        "开发能力、构建配方、依赖闭包、目标验证与隔离"
+        "开发能力、构建配方、依赖闭包、目标验证与隔离",
+        "bounded-python-dependencies"
       ],
       "status": "proposed",
       "reader_summary": "怎样准备编译环境，构建和测试不同语言的程序？"
@@ -504,7 +505,8 @@
         "k2-completion-evidence",
         "application-offline-evidence",
         "growth-purposes-evidence",
-        "coding-demand-evidence"
+        "coding-demand-evidence",
+        "coding-dependencies-evidence"
       ],
       "status": "proposed",
       "reader_summary": "哪些能力测过，证据在哪里，下一阶段怎样验收？"
@@ -3064,9 +3066,9 @@
     }
   ],
   "implementation": {
-    "version": "0.1.68",
-    "scope": "Bounded conversation improvement proposals now bind frozen Python sources, independent acceptance and budgets to the existing coding queue, then derive results from verified task receipts. One real four-module Codex handoff passed; no automatic skill publication or self-modification. Complete K3 remains open.",
-    "evidence": "evals/reports/k3-demand-2026-10-19.json",
+    "version": "0.1.69",
+    "scope": "Optional pinned JMESPath 1.1.0 offline Python recipe extends the existing coding and improvement workflow. Dependencies remain bundled assets, never installed into the host or project. Legacy recipes are retained; complete K3 and general dependency/toolchain management remain open.",
+    "evidence": "evals/reports/k3-dependencies-2026-10-19.json",
     "overall_design_status": "proposed",
     "complete_k1_gate": false,
     "complete_k2_gate": false,

@@ -7,7 +7,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'runtime/node-host'))
 from jarvis_core import policy
-from jarvis_core.coding_build import inspect, bytes_from, ZIPAPP
+from jarvis_core.coding_build import inspect, bytes_from, executable
 from jarvis_core.coding_workflow import check_code, validate
 from jarvis_core.evolution.runner import IsolatedRunner
 
@@ -43,7 +43,7 @@ def main():
         runner = IsolatedRunner(); runner.preflight()
         class ArtifactRunner:
             def run(self, artifact, inputs, check):
-                if rebuilt['manifest']['recipe'] == ZIPAPP: return runner.run_build(artifact, inputs, check)
+                if executable(rebuilt['manifest']['recipe']): return runner.run_build(artifact, inputs, check)
                 return runner.run_bundle(sources, entry, inputs, check)
         result['validation'] = check_code(ArtifactRunner(), rebuilt, cases, lambda: None)
         result['execution'] = 'windows-lpac'

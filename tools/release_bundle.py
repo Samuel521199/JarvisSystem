@@ -38,7 +38,8 @@ def archive_path(value):
 
 def source_files():
     selected=['pyproject.toml','uv.lock','README.md','tools/release_bundle.py','tools/runtime_releases.py',
-              'apps/tray/assets/jarvis.ico']
+              'apps/tray/assets/jarvis.ico', 'tools/coding_build.py',
+              'third_party/coding/NOTICE.txt', 'third_party/coding/jmespath-1.1.0-py3-none-any.whl']
     # Runtime brand exports only; high-resolution editable artwork is not needed.
     selected.extend(path.relative_to(ROOT).as_posix() for path in (ROOT/'apps/web/brand').iterdir()
                     if path.is_file() and path.suffix in {'.png', '.ico'})

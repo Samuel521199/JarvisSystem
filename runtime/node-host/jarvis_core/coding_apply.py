@@ -3,12 +3,15 @@ from . import policy
 from .coding_workflow import APPLY_LOCK
 from .project_files import ProjectFiles
 from .coding_bundle import validate_bundle
+from .coding_build import DEPENDENCY
+from .coding_dependencies import IMPORTS as DEPENDENCY_IMPORTS
 
 
 def apply_bundle(core, report, action):
     value, project = report['coding'], report['output']['project_id']
     originals, candidates = value['originals'], value['candidates']
-    validate_bundle(candidates,value['entrypoint'])
+    validate_bundle(candidates,value['entrypoint'],
+                    imports=DEPENDENCY_IMPORTS if value.get('build_recipe') == DEPENDENCY else None)
     if set(candidates) != {r['path'] for r in originals}: raise policy.CoreError('coding_invalid','文件清单不符。')
     files = ProjectFiles(core)
     rows = []

@@ -24,7 +24,7 @@ def validate(args):
         if any(k in args for k in ('cases','heldout_cases','entrypoint','coding_provider','coding_executor_binding','build_recipe','coding_demand')):raise policy.CoreError('coding_invalid','验收案例与编码选项仅用于编程执行。')
         return
     from .coding_bundle import layout
-    from .coding_build import recipe, SOURCE, ZIPAPP
+    from .coding_build import recipe, SOURCE, DEPENDENCY, executable
     selected_recipe = recipe(args.get('build_recipe', SOURCE))
     if 'coding_executor_binding' in args and (not isinstance(args['coding_executor_binding'],str) or not re.fullmatch(r'sha256:[a-f0-9]{64}',args['coding_executor_binding'])):
         raise policy.CoreError('coding_invalid','执行器绑定格式无效。')
@@ -51,8 +51,11 @@ def validate(args):
         public = {policy.canonical_json(c['input']) for c in cases}
         if any(policy.canonical_json(c['input']) in public for c in args['heldout_cases']):
             raise policy.CoreError('coding_invalid','独立验收输入不能与公开示例重复。')
-    elif len(args['paths']) > 1 or selected_recipe == ZIPAPP:
+    elif len(args['paths']) > 1 or executable(selected_recipe):
         raise policy.CoreError('coding_invalid','多文件或可运行工具包还需要 2—24 条不发送给编码模型的独立验收案例。')
+    if selected_recipe == DEPENDENCY:
+        from .coding_dependencies import members
+        members()  # Missing/corrupt closure fails admission, before any model call.
 
 
 def composition(service,args):

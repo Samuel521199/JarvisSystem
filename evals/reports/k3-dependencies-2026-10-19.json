@@ -1,0 +1,375 @@
+{
+  "version": "0.1.69",
+  "status": "passed",
+  "date": "2026-10-19",
+  "scope": "Optional pinned JMESPath recipe through the existing improvement and coding workflow; complete K3 remains open.",
+  "source_sha256": {
+    "apps/web/growth.js": "a0cd32be9d59d5d4c78a992602b671f4908bbf7f421dd26b556762aad689b165",
+    "apps/web/skills.js": "7b8ef1fb4c45a72e559b685b858cc750484e2e40572dc1c8e986bad81943481e",
+    "contracts/schemas/skill-report.schema.json": "def9ca378ceb05bc9e67d526549499bbd004ead8ada7d57dc0b7ff2cd4894bb6",
+    "evals/cases/k3-dependencies-v1.json": "d9cdad27f6f526517b810f1f4d191759dd851eafe35be69c3bf769d83cb1cef3",
+    "pyproject.toml": "5082ed5655f602374d3131f9fa701cb73f246cc2eff6cf83b4bb9116140d6e3c",
+    "runtime/node-host/jarvis_core/__init__.py": "b06410c16ebf4432088578bd4aa167aa2ed89f0c011791fa997de4668ef8b029",
+    "runtime/node-host/jarvis_core/coding_apply.py": "1d20418a460061541ce3b9cac6de72b9c8736c005b126e97fdd81f289ecc6084",
+    "runtime/node-host/jarvis_core/coding_build.py": "8b6f7e6cce22c2e3fff27f7e521721ff38f9666fb1eceb2b763299f06318fe24",
+    "runtime/node-host/jarvis_core/coding_bundle.py": "63e6e8b690ddceebe18e10417c25a39211349fbddd8da491acf7b8b61373d904",
+    "runtime/node-host/jarvis_core/coding_demand.py": "d0623877846000c805100bf0709ecf106cd4b086c320a5b63d4c2fbdbd885f3e",
+    "runtime/node-host/jarvis_core/coding_dependencies.py": "31add114ceac5acc52c2bbf6b5587ae94a7b05f25956e5726c22604d6d913217",
+    "runtime/node-host/jarvis_core/coding_dependency_launcher.py": "585687f77597e4ac038996e67440f1f19328b565291b6abd6526a662ae072a20",
+    "runtime/node-host/jarvis_core/coding_task.py": "aa8a240db6b96f8894719d44353631ac76548b3b12578944deb01f7d78ffdc58",
+    "runtime/node-host/jarvis_core/coding_workflow.py": "e304459adbc733cdbff5f7ee022340bfa3bd326d698cbaf3e9c9f3a73692e1f6",
+    "runtime/node-host/jarvis_core/evolution/runner.py": "bd1c374f0a8e469398a0ffcf807c234fabc79590ff9e9374096d5eb959ada664",
+    "runtime/node-host/jarvis_core/releases.py": "b9303236f52b986d16d7577fbd063b8887bfe09bbc15c5ee12cc4feed9a54c41",
+    "runtime/node-host/jarvis_core/skill_tasks.py": "1fb09feb991aa6b445b6d82fe430cf2378b3c5794d615945696d7986fb9a563b",
+    "tests/test_coding_dependencies.py": "a7deee32b1a67f82dc385c3cb3eb4ae4ed5fe2ad962116e0d460fcc0281be4f2",
+    "third_party/coding/NOTICE.txt": "e137182e5c1766bc6814ef35184b9be0bee1c1b28a079363b38df0a782f1f68d",
+    "third_party/coding/jmespath-1.1.0-py3-none-any.whl": "a5663118de4908c91729bea0acadca56526eb2698e83de10cd116ae0f4e97c64",
+    "tools/coding_build.py": "33c9140e058c563f8adc37e8e5ebb409386adccaa712c37a1ccffb4f1d572c31",
+    "tools/probe_coding_demand_ui.py": "6545d20ba74e77bb5a09e911fe7669137b1c4dcff3737cd210db252519669e19",
+    "tools/probe_k3_build.py": "ca0264afcfedb95096e55c11f5454f567feac13ae3e2bacf55a2727ca6fb8d23",
+    "tools/release_bundle.py": "2563e802d0f3536b8fce8d6a92ff0bde4b61320539f12bd24bd5e94df8cf0a34",
+    "uv.lock": "d3b7186982e2690c8487d29d13dd32f69af54873058d8bcd12372af41e5dc587"
+  },
+  "dependency": {
+    "exports": {
+      "jmespath": [
+        "search"
+      ],
+      "json": [
+        "dumps"
+      ]
+    },
+    "license": "MIT",
+    "name": "jmespath",
+    "requires": [],
+    "sha256": "sha256:a5663118de4908c91729bea0acadca56526eb2698e83de10cd116ae0f4e97c64",
+    "size_bytes": 20419,
+    "source": "https://pypi.org/project/jmespath/1.1.0/",
+    "version": "1.1.0",
+    "wheel": "jmespath-1.1.0-py3-none-any.whl"
+  },
+  "regression": {
+    "initial_finalized_suite": {
+      "status": "passed",
+      "tests": 98,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 327.462,
+      "suites": [
+        "test_coding_dependencies",
+        "test_coding_demand",
+        "test_growth_demand",
+        "test_coding_workflow",
+        "test_coding_bundle",
+        "test_coding_codex",
+        "test_coding_http",
+        "test_coding_build",
+        "test_coding_acceptance",
+        "test_task_queue",
+        "test_worker_recovery",
+        "test_runtime_start"
+      ]
+    },
+    "after_multifile_apply_fix": {
+      "status": "passed",
+      "tests": 25,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 221.715,
+      "suites": [
+        "test_coding_dependencies",
+        "test_coding_bundle",
+        "test_coding_acceptance",
+        "test_coding_http"
+      ]
+    },
+    "distinct_tests": 100,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "same_cases_may_be_rerun_not_counted_twice": true
+  },
+  "real_codex": {
+    "status": "passed_with_recorded_apply_fix",
+    "dataset": "evals/cases/k3-dependencies-v1.json",
+    "dataset_sha256": "sha256:d9cdad27f6f526517b810f1f4d191759dd851eafe35be69c3bf769d83cb1cef3",
+    "case": "json-query-report",
+    "model_receipts": [
+      {
+        "billing": {
+          "amount": null,
+          "basis": "external_codex_account"
+        },
+        "executor": {
+          "candidate_execution": false,
+          "command_sandbox": "deny-filesystem",
+          "process": {
+            "active_process_limit": 4,
+            "elapsed_seconds": 14.304,
+            "job_cpu_limit_seconds": 45,
+            "job_memory_limit_bytes": 1073741824,
+            "kill_on_close": true,
+            "os_sandbox": false,
+            "peak_job_memory_bytes": 26484736,
+            "pid": 58648,
+            "wall_limit_seconds": 90
+          },
+          "settings_revision": 1,
+          "stage": "H:\\JarvisData\\diagnostics\\k3-dependencies-20261019\\live\\json-query-report\\data\\coding-external\\36d9eddbd3b14206b5761e7d1b2519c6",
+          "tool_policy": "proposal-only",
+          "version": "0.142.1"
+        },
+        "model": "gpt-6.1-sol",
+        "outcome_uncertain": false,
+        "provider": "codex-cli",
+        "request_id": "01a153bd-5562-7d70-b354-20488676f63c",
+        "status": "SUCCEEDED",
+        "usage": {
+          "cached_input_tokens": 0,
+          "input_tokens": 1708,
+          "output_tokens": 194,
+          "reasoning_output_tokens": 34
+        }
+      }
+    ],
+    "public_cases": 2,
+    "heldout_cases": 6,
+    "source_validation": {
+      "cases": 8,
+      "failures": [],
+      "heldout": {
+        "cases": 6,
+        "failures": [],
+        "passed": true,
+        "worker": {
+          "active_process_limit": 1,
+          "appcontainer": true,
+          "backend": "windows-lpac-job",
+          "capabilities": [
+            "registryRead"
+          ],
+          "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+          "cpu_seconds": 0.46875,
+          "cpu_time_limit_seconds": 3,
+          "elapsed_seconds": 3.2623,
+          "lpac": true,
+          "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+          "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+          "memory_limit_bytes": 201326592,
+          "package_sid": "S-1-15-2-3813181195-2607252624-3312647587-3858156426-4290295984-3057260119-1603061592",
+          "peak_process_memory_bytes": 20848640,
+          "pid": 34884,
+          "runtime_bytes": 22904399,
+          "wall_time_limit_seconds": 12
+        }
+      },
+      "independent_checks": true,
+      "passed": true,
+      "public": {
+        "cases": 2,
+        "failures": [],
+        "passed": true,
+        "worker": {
+          "active_process_limit": 1,
+          "appcontainer": true,
+          "backend": "windows-lpac-job",
+          "capabilities": [
+            "registryRead"
+          ],
+          "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+          "cpu_seconds": 0.375,
+          "cpu_time_limit_seconds": 3,
+          "elapsed_seconds": 3.0583,
+          "lpac": true,
+          "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+          "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+          "memory_limit_bytes": 201326592,
+          "package_sid": "S-1-15-2-114690258-2413841287-3560530913-568857919-3883328673-1901289472-3930058951",
+          "peak_process_memory_bytes": 21143552,
+          "pid": 57636,
+          "runtime_bytes": 22904399,
+          "wall_time_limit_seconds": 12
+        }
+      },
+      "worker": {
+        "active_process_limit": 1,
+        "appcontainer": true,
+        "backend": "windows-lpac-job",
+        "capabilities": [
+          "registryRead"
+        ],
+        "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+        "cpu_seconds": 0.375,
+        "cpu_time_limit_seconds": 3,
+        "elapsed_seconds": 3.0583,
+        "lpac": true,
+        "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+        "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+        "memory_limit_bytes": 201326592,
+        "package_sid": "S-1-15-2-114690258-2413841287-3560530913-568857919-3883328673-1901289472-3930058951",
+        "peak_process_memory_bytes": 21143552,
+        "pid": 57636,
+        "runtime_bytes": 22904399,
+        "wall_time_limit_seconds": 12
+      }
+    },
+    "artifact_validation": {
+      "actual_archive_entry": true,
+      "cases": 8,
+      "failures": [],
+      "passed": true,
+      "reproducible": true,
+      "worker": {
+        "active_process_limit": 1,
+        "appcontainer": true,
+        "backend": "windows-lpac-job",
+        "capabilities": [
+          "registryRead"
+        ],
+        "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+        "cpu_seconds": 0.5,
+        "cpu_time_limit_seconds": 3,
+        "elapsed_seconds": 3.281,
+        "lpac": true,
+        "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+        "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+        "memory_limit_bytes": 201326592,
+        "package_sid": "S-1-15-2-2499671789-2528450306-3794124975-2366246449-3056616575-2254982627-4204106486",
+        "peak_process_memory_bytes": 21647360,
+        "pid": 59072,
+        "runtime_bytes": 22904399,
+        "wall_time_limit_seconds": 12
+      }
+    },
+    "artifact_bytes": 22169,
+    "artifact_sha256": "sha256:8c96ac581f24bd77f7bf9119bcd3d455822f474c111bc8352583d9d482cd7bfc",
+    "original_model_run_preceded_apply_fix": true,
+    "post_fix_same_receipt": {
+      "status": "passed",
+      "source_receipt_digest": "sha256:6b2e2c1d37ab028e461a7c7de154fe590c3d5a3b2d403461fbe687d805f2f116",
+      "additional_model_calls": 0,
+      "apply": {
+        "status": "applied",
+        "files": 2
+      },
+      "rollback": {
+        "status": "restored",
+        "files": 2
+      },
+      "original_bytes_restored": true,
+      "offline_build": {
+        "status": "verified",
+        "recipe": "python-jmespath-v1",
+        "sha256": "sha256:8c96ac581f24bd77f7bf9119bcd3d455822f474c111bc8352583d9d482cd7bfc",
+        "bytes": 22169,
+        "byte_identical": true,
+        "model_calls": 0,
+        "expected_digest_checked": true,
+        "execution": "windows-lpac",
+        "validation": {
+          "passed": true,
+          "cases": 6,
+          "failures": [],
+          "worker": {
+            "backend": "windows-lpac-job",
+            "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+            "runtime_bytes": 22904399,
+            "appcontainer": true,
+            "lpac": true,
+            "capabilities": [
+              "registryRead"
+            ],
+            "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+            "pid": 41660,
+            "package_sid": "S-1-15-2-3396850630-3697547578-728029277-137350228-541646776-849093142-2531697028",
+            "active_process_limit": 1,
+            "cpu_time_limit_seconds": 3,
+            "wall_time_limit_seconds": 12,
+            "cpu_seconds": 0.453125,
+            "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+            "memory_limit_bytes": 201326592,
+            "peak_process_memory_bytes": 22065152,
+            "elapsed_seconds": 0.5441
+          }
+        }
+      },
+      "files": 2,
+      "artifact_bytes": 22169
+    }
+  },
+  "ui": {
+    "version": "0.1.69",
+    "status": "passed",
+    "paid_model_calls": 0,
+    "checks": [
+      "natural improvement opens explicit coding draft; proposal makes zero model calls",
+      "chat responds while coding waits in background",
+      "browser download saved dependency PYZ with bundled license",
+      "page reload restores the same receipt; right panel apply/rollback restores exact BOM bytes"
+    ],
+    "model_calls": 1,
+    "conversation_id": "f341986f2ad24b2c8f3fae1e60e73f7f",
+    "job_id": "27c7e406b099453ea2c8c067d7f94f16",
+    "page_errors": [],
+    "multi_file": true,
+    "download_saved_and_inspected": true,
+    "screenshots_reviewed": [
+      "result-panel.png",
+      "narrow.png"
+    ],
+    "private_directory": "H:\\JarvisData\\diagnostics\\k3-dependencies-20261019\\ui-final"
+  },
+  "observed_failures": [
+    {
+      "stage": "initial dependency tests",
+      "finding": "Report schema did not register the new recipe; task refused artifact delivery",
+      "resolution": "Added the explicit recipe enum; no contract relaxation"
+    },
+    {
+      "stage": "initial dependency tests",
+      "finding": "Test expected artifact field absent; API correctly returned null",
+      "resolution": "Test asserts null and original missing_offline_dependency error"
+    },
+    {
+      "stage": "first real Codex workflow",
+      "finding": "Code and real artifact passed; multi-file application rejected dependency imports under legacy validation",
+      "resolution": "Application validates with the frozen recipe import map; same receipt applied and restored; no extra model request"
+    }
+  ],
+  "compatibility": {
+    "legacy_recipes_unchanged": true,
+    "no_host_package_install": true,
+    "no_new_service_or_database": true,
+    "release_asset_inclusion_tested": true,
+    "installer_built": false
+  },
+  "private_evidence_directory": "H:\\JarvisData\\diagnostics\\k3-dependencies-20261019",
+  "complete_k3": false,
+  "remaining": [
+    "General Python package/subdirectory structure",
+    "Additional reviewed dependency closures and real tasks",
+    "Complete B-series build fault and platform matrix",
+    "K4 skill publication and K5 self-module evolution"
+  ],
+  "deployment": {
+    "status": "passed",
+    "version": "0.1.69",
+    "previous_version": "0.1.68",
+    "instance_id": "87ec805bb30da41471935c79c6e2a3bd",
+    "idle_graceful_reload": true,
+    "served_sha256": {
+      "growth.js": "a0cd32be9d59d5d4c78a992602b671f4908bbf7f421dd26b556762aad689b165",
+      "skills.js": "7b8ef1fb4c45a72e559b685b858cc750484e2e40572dc1c8e986bad81943481e",
+      "coding.js": "3547507e77569145601f7d50660359172185269f5b566fddeefafcb54b04dae2",
+      "admin.js": "09d93597e84408dfd48ce8aaecb5b7a9b1554023a38811526c3b6bb291661c43"
+    },
+    "business_tables_compared": 11,
+    "business_unchanged": true,
+    "coding_settings_unchanged": true,
+    "empty_restart_queue_reviewed_and_resumed": true,
+    "cloud_calls": 0,
+    "installer_built": false
+  }
+}

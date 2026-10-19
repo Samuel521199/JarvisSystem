@@ -37,7 +37,7 @@
     card.append(make('strong',(states[job.status]||job.status)+' · '+job.request.origin.goal));
     const phases=make('div');phases.className='growth-steps';
     for(const [label,reached] of [['需求已冻结',true],['编码任务',!!job.task_id],['独立验收',!!job.result],['结果回填',!!job.result]]){const n=make('span',label);n.title=label+(reached?'：已有记录':'：待完成');if(reached)n.className='reached';phases.append(n);}card.append(phases);
-    card.append(make('p',args.paths.length+' 个文件 · '+args.cases.length+' 条公开示例 + '+args.heldout_cases.length+' 条独立验收 · '+(args.build_recipe==='python-zipapp-v1'?'可运行工具包':'源码包')));
+    card.append(make('p',args.paths.length+' 个文件 · '+args.cases.length+' 条公开示例 + '+args.heldout_cases.length+' 条独立验收 · '+(args.build_recipe==='python-jmespath-v1'?'JSON 查询工具包 · JMESPath 1.1.0':args.build_recipe==='python-zipapp-v1'?'可运行工具包':'源码包')));
     card.append(make('small','编码：'+(args.coding_provider==='codex'?'外部 Codex · '+(job.proposal.executor?.model||'编码协作设置')+' · '+(job.proposal.executor?.reasoning||'') :args.model)+'；最多 '+job.proposal.budget.max_model_calls+' 次模型调用，执行预算 '+job.proposal.budget.runtime_seconds+' 秒。独立案例保留在本机。'));
     card.append(make('small','项目：'+args.project_root+'；文件：'+args.paths.join('、')));
     if(job.result)card.append(make('p',job.result.verified?'候选与产物已通过 '+job.result.cases+' 条案例；模型调用 '+job.result.model_calls+' 次。可查看差异后应用，原文件未自动改写。':'候选未通过独立验收，保留诊断；原文件未改写。'));

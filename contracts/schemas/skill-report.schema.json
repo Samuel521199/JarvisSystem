@@ -82,7 +82,8 @@
         "build_recipe": {
           "enum": [
             "python-source-v1",
-            "python-zipapp-v1"
+            "python-zipapp-v1",
+            "python-jmespath-v1"
           ]
         },
         "source_build": {

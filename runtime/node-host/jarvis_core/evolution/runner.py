@@ -102,9 +102,9 @@ class IsolatedRunner:
         return self._execute({'sources': sources, 'entry': entry, 'inputs': inputs}, bundle_harness, 'coding.bundle.v1', checkpoint)
 
     def run_build(self, artifact, inputs, checkpoint):
-        from ..coding_build import bytes_from, VERIFY, ZIPAPP
+        from ..coding_build import bytes_from, VERIFY, executable
         raw = bytes_from(artifact)
-        if artifact['manifest']['recipe'] != ZIPAPP:
+        if not executable(artifact['manifest']['recipe']):
             raise policy.CoreError('coding_recipe_invalid', '此入口仅运行已核对的 Python 工具包。')
         return self._execute({'archive_digest': policy.digest(raw), 'inputs': inputs},
                              VERIFY, 'coding.zipapp.v1', checkpoint, archive=raw)

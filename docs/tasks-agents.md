@@ -21,7 +21,7 @@
   - [12.3.2 设置作用域、冲突与停用](#skill-selection-scope)
   - [12.3.3 MCP 的使用条件与技能配合](#mcp-selection-policy)
   - [12.3.4 完整技能与组件归属](#skill-applicability-catalog)
-  - [12.3.5 编程副本、独立检查与多文件交付（0.1.68）](#bounded-coding-workflow)
+  - [12.3.5 编程副本、独立检查与多文件交付（0.1.69）](#bounded-coding-workflow)
   - [12.3.6 REA 软件解析的使用规则（含可选中文解释）](#rea-skill-policy)
 - [12.4 多 Agent 组织](#interaction-tasks-4)
 - [12.5 冲突与调度](#interaction-tasks-5)
@@ -215,7 +215,7 @@ Worker 的暂存文件不直接成为正式产物。由产物入口核对路径�
 技能不授予工单发布、Git 操作、子代理或下载依赖权限。编码模型与推理设置沿用[模型章](models-offline.md#coding-skills-model-snapshot)，技能名不能绕过模型可用性与用量记录。
 
 <a id="bounded-coding-workflow"></a>
-### 编程副本、独立检查与多文件交付（0.1.68）
+### 编程副本、独立检查与多文件交付（0.1.69）
 
 **implemented；基础见[K3 阶段验收](delivery-validation.md#k3-acceptance-evidence)，新增交接见[改进单验收](delivery-validation.md#coding-demand-evidence)。** 这是助手按需要使用的编码能力，继续复用原技能任务、共享队列和会话结果。明确选择排错、TDD、模块设计或代码审阅后，宿主组合四份指导；不是四个独立审阅 Agent。普通文字分析继续只读。
 
@@ -234,10 +234,10 @@ Worker 的暂存文件不直接成为正式产物。由产物入口核对路径�
 2. **检查基线。** 先做静态检查；语法损坏或静态不合规的原文件只作为修复资料，不执行，保留文件/行号诊断继续生成候选。运行环境未提供的内置名称在执行前给出明确诊断；向编码器列出实际内置能力，不凭标准 Python 的全部功能推测可用。静态通过的副本交给既有 LPAC 工具链，编译全部模块并运行公开/独立案例。原实现已经满足本次案例时零生成调用；不能由此断言所有业务需求均满足。
 3. **生成候选。** 可用当前明确模型网关，或外部 Codex。模型只收到所选源码、需求、公开案例与公开失败反馈；独立输入、预期、实际输出和错误正文不发送，只反馈独立检查是否通过。两次候选生成上限；已知请求失败、不完整或 UNKNOWN 不自动重发或换供应商。
 4. **独立检查。** 宿主拒绝清单外/缺失文件、循环导入、非法模块与越界大小；随后在独立进程编译全部模块，检查输入不被修改、输出类型/大小和行为案例。预期值始终由 Host 比较，候选与编码器不能修改判据。生成者的说明不算独立验收。
-5. **交付。** 提供逐文件 diff、基线/尝试/独立检查回执与构建摘要。任务可选择源码 ZIP（原配方）或可运行 PYZ（新增配方，必须有独立案例）。PYZ 包含固定启动器与所选源码，读取标准输入 JSON，原样输出 UTF-8 字符串；需要已有 CPython 3.11—3.13，无第三方依赖。交付前另在 LPAC 中运行真实归档入口，重建字节必须一致；源码检查通过但工具包失败时禁止应用和已验收包下载。PYZ 同时提供配套源码 ZIP。未通过保留候选和诊断，均不属于原生 EXE 安装器。
+5. **交付。** 提供逐文件 diff、基线/尝试/独立检查回执与构建摘要。任务可选择源码 ZIP（原配方）或可运行 PYZ（新增配方，必须有独立案例）。PYZ 包含固定启动器与所选源码，读取标准输入 JSON，原样输出 UTF-8 字符串；需要已有 CPython 3.11—3.13；原配方无第三方依赖，可选 JSON 查询配方自带锁定依赖，完整规则见[离线依赖配方](toolchains.md#bounded-python-dependencies)。交付前另在 LPAC 中运行真实归档入口，重建字节必须一致；源码检查通过但工具包失败时禁止应用和已验收包下载。原无依赖 PYZ 同时提供配套源码 ZIP；依赖配方的源码与依赖直接包含在 PYZ 内。未通过保留候选和诊断，均不属于原生 EXE 安装器。
 6. **应用与恢复。** 原文件直到明确点击应用前保持不变。先核对整组根路径和摘要，再用已有文件接口逐一 CAS 写入；多文件并非文件系统级原子事务。`coding_batches` 先持久记录本次原/目标绑定，部分写入进入 REVIEW_REQUIRED。重试先观察每个文件，匹配本次已写内容的不重复写入；可以继续或恢复。任何外部编辑都拒绝覆盖。单文件旧回执继续兼容。
 
-同目录本地模块导入及既有 csv/io 可用，不安装依赖、不运行任意终端、不自动提交 Git 或发布能力。共享取消、停止、资源准入、源码绑定和 UNKNOWN 语义继续有效。独立案例可以发现公开示例过拟合，仍不等于任意输入正确或全面安全证明。手动运行下载的 PYZ 使用当前 Python 账户权限，下载包自身不建立 OS 沙箱。[离线重建工具](../tools/coding_build.py)可核对原摘要、重建新副本并用本机案例做 LPAC 复验，不访问模型或网络，不覆盖已有输出。相关实测见[构建与修复证据](delivery-validation.md#k3-build-evidence)。预算和接口见[契约](contracts.md#bounded-coding-contract)，可信边界见[执行隔离](security-sovereignty.md#bounded-coding-boundary)，外部登录及账单见[Codex 适配](evolution-release.md#external-coding-executor)。
+同目录本地模块导入及既有 csv/io 可用；JSON 查询配方另开放锁定的 jmespath.search 与 json.dumps。不向宿主或原项目安装依赖，也不运行任意终端或自动提交 Git、发布能力。共享取消、停止、资源准入、源码绑定和 UNKNOWN 语义继续有效。独立案例可以发现公开示例过拟合，仍不等于任意输入正确或全面安全证明。手动运行下载的 PYZ 使用当前 Python 账户权限，下载包自身不建立 OS 沙箱。[离线重建工具](../tools/coding_build.py)可核对原摘要、重建新副本并用本机案例做 LPAC 复验，不访问模型或网络，不覆盖已有输出。相关实测见[构建与修复证据](delivery-validation.md#k3-build-evidence)。预算和接口见[契约](contracts.md#bounded-coding-contract)，可信边界见[执行隔离](security-sovereignty.md#bounded-coding-boundary)，外部登录及账单见[Codex 适配](evolution-release.md#external-coding-executor)。
 
 <a id="rea-skill-policy"></a>
 ### REA 软件解析的使用规则（含可选中文解释）

@@ -16,6 +16,7 @@
   - [15.1.5 开发包内容与初期选择](#development-platform-5)
   - [15.1.6 构建清单示例](#development-platform-6)
   - [15.1.7 真正离线与可复现](#development-platform-7)
+    - [15.1.7.1 有界 Python 离线依赖配方（0.1.69）](#bounded-python-dependencies)
   - [15.1.8 跨平台并非一个编译开关](#development-platform-8)
   - [15.1.9 来源证据与发布权](#development-platform-9)
   - [15.1.10 工具链本身的更新与退役](#development-platform-10)
@@ -158,6 +159,18 @@ Cargo vendoring 可保留依赖源 [S49](references.md#s49)；pnpm fetch 可用�
 - **字节可复现：**独立构建得到完全相同输出摘要。
 
 前两项不自动证明第三项。时间戳、绝对路径、签名封装和构建器行为都可能影响字节；不满足字节复现时报告差异及验证方式。发布签名可作用于已记录摘要，不用修改来源信息来“凑”一致。
+
+<a id="bounded-python-dependencies"></a>
+#### 有界 Python 离线依赖配方（0.1.69）
+
+**implemented；限定验证见[依赖构建证据](delivery-validation.md#coding-dependencies-evidence)。** 新配方 `python-jmespath-v1` 用于嵌套 JSON 查询、筛选与报告。它延伸已有编码任务和改进单，不新增执行队列、环境管理器或常驻服务；原 `python-source-v1`、`python-zipapp-v1` 保留原固定启动器与字节重建规则。
+
+- **依赖准入：**首个登记库为 [JMESPath 1.1.0](https://pypi.org/project/jmespath/1.1.0/)（MIT）。上游 wheel 为 20,419 字节，无 Requires-Dist。原包保存在 `third_party/coding/`，来源、版权见 NOTICE；`coding_dependencies.py` 固定版本、SHA256、长度和导出接口。构建只读数据，不在 Host 导入库、不执行 wheel 脚本或构建钩子，不使用 pip，也不从本机全局环境补依赖。
+- **缺项与修改：**受理时检查完整 wheel，缺失为 `missing_offline_dependency`，摘要不符为 `coding_dependency_invalid`，都在模型调用前拒绝。排队后丢失或损坏也停止构建；不得联网补齐、放宽锁定或自动换库。普通无依赖配方不需要该 wheel。原包属于可随版本分发的开发资产；修复缺项应恢复已登记原包，新库需另审查并登记，模型不能用任务参数添加任意 URL 或版本。
+- **运行接口：**沿用 1—4 个同目录模块与 `transform(data)→str`。额外提供 `jmespath.search(expression, data)` 和 `json.dumps`；查询表达式最多 4 KiB，不开放 Options、自定义扩展或其他库。候选源码继续静态检查，第三方库视为已锁定的受信执行依赖；两者仍在真实 LPAC Worker 内运行，AST 检查本身不是 OS 安全边界。
+- **验收与产物：**该配方的源码检查通过后直接构建候选 PYZ，在 Worker 中用公开/留出输入运行；最终交付包再以实际归档入口复验。模型只得到公开案例和公开失败反馈。包内含源码、固定启动器、依赖库源码、原许可证/METADATA 和清单；不携带 wheel 的命令行脚本、案例答案或账户信息。清单绑定原 wheel、每个库文件、候选源码及案例摘要。
+- **离线与兼容：**交付包在已有 CPython 3.11—3.13 上即可运行，不依赖 Jarvis 或全局 JMESPath。Jarvis 的严格重建仍需要同版本配方与已登记 wheel；重建器逐字节比较整个包，不执行 Host 候选。包最多 64 KiB，新配方最多 17 个成员、展开最多 128 KiB；原配方仍保留 7 个成员/48 KiB 展开限制。库只在临时 Worker 按需加载，既有每 Worker 192 MiB、12 秒与任务 240 秒上限不变；这是限制，实际资源消耗见验收证据。
+- **应用与后续：**应用/恢复仅操作被冻结的项目源码；不会向原项目安装依赖。需要直接运行时使用自带依赖的 PYZ；源码导入后的环境由相应项目管理。下载包手动执行使用当前账户权限，并不自动创建 LPAC。此版本不支持任意 wheels、原生扩展、传递依赖求解、通用 package 布局或新语言工具链；后续按新版本配方扩展，不改变旧配方解释。
 
 <a id="development-platform-8"></a>
 ### 跨平台并非一个编译开关

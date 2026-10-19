@@ -56,7 +56,7 @@ def main():
             payload = {'mode': 'skill', 'request_id': 'web-'+uuid.uuid4().hex,
                 'prompt': case['goal'], 'project_id': project['id'], 'skill_id': 'matt-pocock.tdd',
                 'paths': list(case['files']), 'entrypoint': case['entry'], 'coding': True,
-                'coding_provider': 'codex', 'model': 'auto', 'build_recipe': ZIPAPP,
+                'coding_provider': 'codex', 'model': 'auto', 'build_recipe': case.get('recipe', ZIPAPP),
                 'cases': case['public'], 'heldout_cases': case['private']}
             if args.improvement:
                 from jarvis_core.conversations import ConversationStore

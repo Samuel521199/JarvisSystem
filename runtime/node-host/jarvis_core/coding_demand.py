@@ -189,7 +189,7 @@ class CodingDemands:
             case_digest = policy.digest(policy.canonical_json({'public': expected['cases'], 'heldout': expected['heldout_cases']}).encode())
             passed = (value.get('passed') is True and value.get('validation', {}).get('independent_checks') is True
                 and value.get('cases_digest') == case_digest and value.get('build') is not None
-                and (expected['build_recipe'] != 'python-zipapp-v1' or value.get('build_validation', {}).get('passed') is True))
+                and (expected['build_recipe'] == 'python-source-v1' or value.get('build_validation', {}).get('passed') is True))
             state = 'SUCCEEDED' if passed else 'FAILED'
             result = {'verified': passed, 'task_id': job['task_id'], 'artifact_digest': detail['artifact']['digest'],
                 'cases_digest': case_digest, 'cases': value.get('validation', {}).get('cases', 0),

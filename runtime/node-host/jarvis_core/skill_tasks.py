@@ -32,6 +32,7 @@ SOURCE_PATHS += ('runtime/node-host/jarvis_core/rea.py', 'runtime/node-host/jarv
                  'runtime/node-host/jarvis_core/dialogue_process.py')
 SOURCE_PATHS += ('config/coding-runtime.json','config/codex-proposal-model.json')
 SOURCE_PATHS += ('runtime/node-host/jarvis_core/coding_demand.py',)
+SOURCE_PATHS += ('runtime/node-host/jarvis_core/coding_dependencies.py', 'runtime/node-host/jarvis_core/coding_dependency_launcher.py')
 SOURCE_PATHS += tuple('runtime/node-host/jarvis_core/'+p+'.py' for p in ('coding_task','coding_bundle','coding_apply','coding_codex','coding_settings','coding_build'))
 SOURCE_PATHS += ('runtime/node-host/jarvis_core/evolution/provider.py','runtime/node-host/jarvis_core/dialogue_worker.py',
                  'adapters/models/provider-native/jarvis_models/gateway.py','runtime/node-host/jarvis_core/skill_validation.py')
