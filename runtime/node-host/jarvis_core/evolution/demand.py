@@ -51,6 +51,11 @@ class ConversationGrowth:
         from ..coding_demand import CodingDemands
         self.coding = CodingDemands(core, tasks)
 
+    def tool_intents(self):
+        from .catalog import ProjectTools
+        from .tool_intent import ToolIntents
+        return ToolIntents(ProjectTools(self.manager,self.tasks))
+
     def is_coding(self, job_id):
         with self.core.ledger.connection() as db:
             return db.execute('SELECT 1 FROM coding_demands WHERE id=?', (job_id,)).fetchone() is not None
@@ -65,6 +70,7 @@ class ConversationGrowth:
         if self.is_coding(job_id): return self.coding.bound(ident, job_id)
         archive = self.archive(ident); conversation_id(job_id)
         job = self.manager.store.job(job_id)
+        if job['request'].get('action')=='project-tool-plan':return self.tool_intents().view(ident,job_id)
         origin = job['request'].get('origin', {})
         if job['request'].get('action') != 'fulfill' or origin.get('conversation_id') != ident or origin.get('project_id') != archive['project_id']:
             raise policy.CoreError('not_found', '未找到当前会话范围的改进单。')
@@ -73,7 +79,10 @@ class ConversationGrowth:
     def lookup(self, ident, request_id):
         conversation_id(ident); conversation_id(request_id)
         job = self.manager.store.existing_job('growth-'+ident+'-'+request_id)
-        if job is None: return self.coding.lookup(ident, request_id)
+        if job is None:
+            plan=self.manager.store.existing_job('tool-plan-'+request_id)
+            if plan:return self.tool_intents().view(ident,plan['id'])
+            return self.coding.lookup(ident, request_id)
         return self.bound(ident, job['id'])
 
     def list(self, ident):
@@ -81,7 +90,8 @@ class ConversationGrowth:
         with self.manager.store.connection() as db:
             rows = db.execute("SELECT id FROM jobs WHERE json_extract(document,'$.request.origin.conversation_id')=? AND json_extract(document,'$.request.origin.project_id') IS ? ORDER BY status IN ('QUEUED','RUNNING','OBSERVING','PROPOSED') DESC,rowid DESC LIMIT 30", (ident, archive['project_id'])).fetchall()
         coding = self.coding.list(ident) if archive['project_id'] else []
-        jobs = [self.bound(ident, row['id']) for row in rows] + coding
+        plans=self.tool_intents().listing(ident) if archive['project_id'] else []
+        jobs = [self.bound(ident, row['id']) for row in rows] + coding + plans
         jobs.sort(key=lambda job: (job['status'] in {'PROPOSED','QUEUED','RUNNING','OBSERVING'}, job['created_at']), reverse=True)
         return {'jobs': jobs[:30], 'conversation_id': ident}
 
@@ -130,6 +140,7 @@ class ConversationGrowth:
         if not isinstance(payload, dict) or set(payload) != {'request_id'}:
             raise policy.CoreError('growth_request_invalid', '重新分析只接受新的请求编号。')
         old = self.bound(ident, job_id)
+        if old['request']['action']=='project-tool-plan':return self.tool_intents().propose(ident,{'request_id':payload['request_id'],'message':old['message']})
         if old['status'] not in {'FAILED', 'INTERRUPTED', 'UNKNOWN', 'CANCELLED'}:
             raise policy.CoreError('evolution_conflict', '当前记录尚未结束，无需重新分析；请先核对原单状态。')
         return self.propose(ident, {'request_id': payload['request_id'], 'prompt': old['request']['origin']['goal']}, previous_job=job_id)
@@ -138,6 +149,7 @@ class ConversationGrowth:
         if self.is_coding(job_id): return self.coding.start(ident, job_id, payload)
         if payload != {}: raise policy.CoreError('growth_request_invalid', '启动只接受已保存改进单，不接受替换参数。')
         job = self.bound(ident, job_id)
+        if job['request']['action']=='project-tool-plan':return self.tool_intents().start(ident,job_id,payload)
         if job['status'] == 'PROPOSED':
             entries, digest = self.source(ident, job['request']['origin']['source_task'])
             if digest != job['request']['origin']['source_digest'] or entries != job['request']['input']['entries']:
@@ -147,7 +159,8 @@ class ConversationGrowth:
     def cancel(self, ident, job_id, payload):
         if self.is_coding(job_id): return self.coding.cancel(ident, job_id, payload)
         if payload != {}: raise policy.CoreError('growth_request_invalid', '取消只接受空对象。')
-        self.bound(ident, job_id)
+        job=self.bound(ident, job_id)
+        if job['request']['action']=='project-tool-plan':return self.tool_intents().cancel(ident,job_id)
         return self.manager.cancel(job_id)
 
     def artifact(self, ident, job_id):

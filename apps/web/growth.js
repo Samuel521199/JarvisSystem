@@ -20,13 +20,14 @@
   function controls(){for(const b of dialog.querySelectorAll('button'))b.disabled=acting;}
   async function createCoding(payload){
     const context=current();if(!context||context.temporary)throw new Error('请在已保存的普通项目会话中建立改进单。');
+    const toolOrigin=window.ToolIntents?.codingOrigin(payload.prompt);
     const id=context.id,coding=Object.fromEntries(['paths','cases','heldout_cases','entrypoint','model','coding_provider','build_recipe','new_paths'].filter(k=>k in payload).map(k=>[k,payload[k]])),spec={prompt:payload.prompt,coding},old=pending.get(id);
-    if(old&&JSON.stringify(old.spec)!==JSON.stringify(spec))throw new Error('上次改进单回执尚未确认，请先打开原回执查询。');
+    if(old&&(JSON.stringify(old.spec)!==JSON.stringify(spec)||(old.toolOrigin||null)!==(toolOrigin?.id||null)))throw new Error('上次改进单回执尚未确认，请先打开原回执查询。');
     let node=old?.node;
-    if(!node){message('user','改进需求：'+payload.prompt);node=message('assistant','正在冻结目标、源文件与验收条件；尚未开始执行。',{growthRequestId:crypto.randomUUID().replaceAll('-','')});pending.set(id,{spec,node});}
+    if(!node){message('user','改进需求：'+payload.prompt);node=message('assistant','正在冻结目标、源文件与验收条件；尚未开始执行。',{growthRequestId:toolOrigin?.id||crypto.randomUUID().replaceAll('-','')});pending.set(id,{spec,node,toolOrigin:toolOrigin?.id||null});}
     try{
       await Workspace.flushConversation();
-      const job=await api(prefix(id),{request_id:node.dataset.growthRequestId,...spec});
+      const job=await api(toolOrigin?'/api/project-tools/'+id+'/plans/'+toolOrigin.id+'/coding':prefix(id),{request_id:node.dataset.growthRequestId,...spec});
       node.dataset.growthRef=job.id;pending.delete(id);node.querySelector('.bubble').textContent='编码改进单已保存：'+payload.prompt+'。核对文件、验收案例和模型后开始；完成时由独立验收回填结果。';linkReceipts();Workspace.remember();notify('');
       if(current()?.id===id)await show(node);
     }catch(e){node.querySelector('.bubble').textContent=e.message+'；没有自动重发。';if(e.status&&e.status<500){pending.delete(id);delete node.dataset.growthRequestId;}linkReceipts();Workspace.remember();throw e;}
@@ -83,6 +84,7 @@
     const list=$('growth-list');list.replaceChildren();
     if(!rows.length){list.textContent='本会话尚无改进单。可以建立编码改进单，或将已完成的目录报告导出为 CSV、TSV、Markdown。';return;}
     for(const job of rows){
+      if(job.request.action==='project-tool-plan'){const card=document.createElement('article'),title=document.createElement('p'),open=document.createElement('button');card.className='growth-card';title.textContent='工具需求 · '+job.message+' · '+(job.invocation?.status||job.coding?.status||job.proposal.reason);open.textContent='查看工具选择与实际结果';open.onclick=()=>{dialog.close();window.ToolIntents?.open(job.id);};card.append(title,open);list.append(card);continue;}
       if(job.request.action==='coding'){list.append(renderCoding(job));continue;}
       const card=document.createElement('article'),title=document.createElement('strong'),steps=document.createElement('div'),copy=document.createElement('p'),scope=document.createElement('small'),actions=document.createElement('div');
       card.className='growth-card';card.dataset.growthId=job.id;card.dataset.active=String(active(job.status));title.textContent=(states[job.status]||job.status)+' · '+job.request.origin.goal;

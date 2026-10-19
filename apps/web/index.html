@@ -124,6 +124,7 @@ const encoder=new TextEncoder();
 const modelKey=item=>item.provider+"/"+item.model;
 function chosenModel(){return modelCatalog.find(item=>modelKey(item)===selectedKey);}
 function notify(text){$("toast").textContent=text;$("toast").hidden=!text;}
+function localToolCommand(value=$("message").value.trim()){return Boolean(window.ToolIntents?.command(value));}
 function localGrowthCommand(value=$("message").value.trim()){return /^\/(?:改进|成长进度)(?:\s|$)/u.test(value);}
 function localCalculationCommand(value=$("message").value.trim()){return /^\/(?:计算|calc)(?:\s|$)/iu.test(value);}
 function localDocumentationCommand(value=$("message").value.trim()){return $("composer-mode").value==='mcp'||/^\/文档\s+\S+\s+[^\r\n]+$/u.test(value);}
@@ -132,7 +133,7 @@ function setControls(){
  window.JarvisBrand?.setState(coreReady?(busy||assistantWorking?"thinking":"idle"):"offline");
  if(coreReady)$("connection-label").textContent=busy?"正在回复当前会话":assistantWorking?"助手正在运行后台任务":"助手待命中";
  $("connection").setAttribute("aria-label",$("connection-label").textContent);$("connection").classList.toggle("working",busy||assistantWorking);
- const unavailable=busy||refreshing||!coreReady||(!modelCatalog.length&&!localCalculationCommand()&&!localPersonalCommand()&&!localGrowthCommand()&&!localDocumentationCommand())||Boolean(window.Workspace?.isBusy());
+ const unavailable=busy||refreshing||!coreReady||(!modelCatalog.length&&!localCalculationCommand()&&!localPersonalCommand()&&!localGrowthCommand()&&!localToolCommand()&&!localDocumentationCommand())||Boolean(window.Workspace?.isBusy());
  const running=Boolean(busy&&activeRun)&&!window.Dialogue,saving=activeRun?.phase==="saving"||Boolean(activeRun?.personal);
  $("send").disabled=window.Dialogue&&busy&&activeRun?!coreReady:running?saving:unavailable;$("send").type=running?"button":"submit";
  const label=running?(saving?(activeRun?.personal?"正在处理个人指令":"正在保存文件"):"停止生成"):"发送消息";
@@ -185,9 +186,10 @@ async function send(event,queuedText=null,onStarted=null){
   }
   return;
  }
- const inputText=queuedText===null?$("message").value.trim():queuedText;if(busy||refreshing||!coreReady||(!modelCatalog.length&&!localCalculationCommand(inputText)&&!localPersonalCommand(inputText)&&!localGrowthCommand(inputText)&&!(queuedText===null&&localDocumentationCommand(inputText)))||window.Workspace?.isBusy())return;
+ const inputText=queuedText===null?$("message").value.trim():queuedText;if(busy||refreshing||!coreReady||(!modelCatalog.length&&!localCalculationCommand(inputText)&&!localPersonalCommand(inputText)&&!localGrowthCommand(inputText)&&!localToolCommand(inputText)&&!(queuedText===null&&localDocumentationCommand(inputText)))||window.Workspace?.isBusy())return;
  if(localGrowthCommand(inputText)){if(window.ConversationGrowth)await window.ConversationGrowth.handleSubmit();else notify("成长界面暂不可用；请检查模块后重试。");return;}
  if(queuedText===null&&!localCalculationCommand(inputText)&&!localPersonalCommand(inputText)){
+  if(await window.ToolIntents?.handleSubmit())return;
   if(await window.SkillWorkbench?.handleSubmit())return;
   if(window.ConversationTasks?.handleSubmit())return;
  }
@@ -299,6 +301,7 @@ bindSuggestions();refresh();
 <script nonce="__JARVIS_NONCE__" src="/growth.js"></script>
 <script nonce="__JARVIS_NONCE__" src="/skills.js"></script>
 <script nonce="__JARVIS_NONCE__" src="/project-tools.js"></script>
+<script nonce="__JARVIS_NONCE__" src="/tool-intents.js"></script>
 <script nonce="__JARVIS_NONCE__" src="/workbench.js"></script>
 <script nonce="__JARVIS_NONCE__" src="/explorer.js"></script>
 <script nonce="__JARVIS_NONCE__" src="/dialogue.js"></script>

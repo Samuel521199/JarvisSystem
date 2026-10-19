@@ -259,6 +259,7 @@ class LocalChatServer(ThreadingHTTPServer):
         self.evolution_script = asset('evolution.js')
         self.growth_script = asset('growth.js')
         self.project_tools_script = asset('project-tools.js')
+        self.tool_intents_script = asset('tool-intents.js')
         self.html = self.html.replace(b'__JARVIS_GROWTH_STYLE__', asset('growth.css'))
         self.admin_html = self.admin_html.replace(b'__JARVIS_EXTENSIONS_STYLE__', asset('extensions.css') + b'\n' + asset('skills.css') + b'\n' + asset('mcp.css'))
         if not asset('admin.html') or not self.admin_script:
@@ -728,7 +729,7 @@ class ChatHandler(BaseHTTPRequestHandler):
         workspace_action = self.path in {'/api/workspace/projects', '/api/workspace/pick-folder', '/api/workspace/outputs/prepare'} or workspace_save or project_organization
         files_action = re.fullmatch(r'/api/project-files/(tree|read|write|save-project|open-project)', self.path)
         extension_action = re.fullmatch(r'/api/extensions/([a-f0-9]{32})(?:/(delete|inspect))?', self.path)
-        skill_action = bool(re.fullmatch(r'/api/project-tools/[a-f0-9]{32}(?:/jobs/[a-f0-9]{32}/cancel)?',self.path)) or self.path in {'/api/coding','/api/skills/policy','/api/skills/select','/api/skills/preview','/api/skills/coding-apply','/api/skills/coding-rollback'}
+        skill_action = bool(re.fullmatch(r'/api/project-tools/[a-f0-9]{32}(?:/jobs/[a-f0-9]{32}/cancel|/plans(?:/[a-f0-9]{32}/(?:start|coding|cancel))?)?',self.path)) or self.path in {'/api/coding','/api/skills/policy','/api/skills/select','/api/skills/preview','/api/skills/coding-apply','/api/skills/coding-rollback'}
         mcp_action = self.path in {'/api/mcp/policy', '/api/mcp/view'}
         if self.path != "/api/chat" and not chat_cancel and not dialogue_action and not computer_start and not computer_cancel and not computer_queue and not workspace_action and not admin_action and not module_action and not speech_action and not conversation_action and not conversation_task_action and not memory_action and not knowledge_action and not files_action and not extension_action and not skill_action and not mcp_action and not evolution_action and not continuity_action and not growth_action and not candidate_action and not persona_action:
             self._error(404, "not_found", "此入口不存在。")

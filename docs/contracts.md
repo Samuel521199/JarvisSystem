@@ -70,7 +70,7 @@
   - [8.10.1 Context7 只读文档任务（0.1.55）](#mcp-documentation-task-contract)
 - [8.11 限定成长运行接口](#evolution-runtime-contract)
   - [8.11.1 会话需求适配接口（0.1.41）](#growth-demand-contract)
-  - [8.11.2 项目工具目录与调用接口（0.1.71）](#project-tool-contract)
+  - [8.11.2 项目工具目录与调用接口（0.1.72）](#project-tool-contract)
 - [8.12 三能力消息与旧接口迁移](#growth-center-contract)
 - [8.13 统一对话受理、意图与事件契约（proposed）](#dialogue-turn-contract)
   - [8.13.1 对话意图与限定任务受理契约（0.1.56—0.1.59）](#dialogue-intent-shadow-contract)
@@ -1166,7 +1166,7 @@ security_stop_event:
 会话归档消息可选 `growth_ref` / `growth_request_id`，均为 32 位标识且必须搭配 `personal_control:true`；仅恢复回执链接，不加入模型历史。不认识新字段的旧宿主会拒绝该新归档而非静默丢字段，回退前需检查归档格式兼容。完整行为、数据保留与重启语义只维护于[需求成长](evolution-release.md#demand-growth-runtime)。
 
 <a id="project-tool-contract"></a>
-### 项目工具目录与调用接口（0.1.71）
+### 项目工具目录与调用接口（0.1.72）
 
 所有接口沿用本机 Origin、页面 nonce 和核心状态检查；`cid` 必须是已保存项目会话。完整行为规则归[工具运行](evolution-release.md#project-tool-runtime)。
 
@@ -1180,6 +1180,18 @@ security_stop_event:
 | `POST /api/project-tools/{cid}/jobs/{id}/cancel` | 空对象，取消当前绑定任务；不取消其他会话或聊天回复 |
 
 `request_id` 为 32 位小写十六进制；同编号同内容返回原回执，不因页面丢失响应而重复启用或调用。不同内容冲突；`generation` 过时拒绝。任务冻结 `scope/base/runtime_binding/submission`，发布额外冻结来源、包和案例。状态复用 `QUEUED/RUNNING/OBSERVING/SUCCEEDED/FAILED/CANCELLED/INTERRUPTED`。调用结果若无独立预期，只能记执行成功。存储和回退规则只维护在运行权威节。
+
+0.1.72 在相同路由域新增需求适配接口，判定规则见[需求选择](evolution-release.md#project-tool-intents)：
+
+| 接口 | 契约 |
+|---|---|
+| `POST /api/project-tools/{cid}/plans` | `{request_id,message}`；返回持久分析，创建本身不执行工具、不发起编码 |
+| `GET /api/project-tools/{cid}/plans` | 本作用域最近 30 条；`GET .../plans/{id}` 与 `GET .../plans/requests/{request_id}` 分别查询记录和核对未知响应 |
+| `POST .../plans/{id}/start` | 已明确调用可用 `{}`；选择模式为 `{tool_id,input,expected?}`，仅接受本次冻结候选。返回原执行任务 |
+| `POST .../plans/{id}/coding` | `{request_id:分析记录ID,prompt:原话,coding:原K3参数}`；仅目录未匹配可交接，返回待开始编码单 |
+| `POST .../plans/{id}/cancel` | `{}`；已有子任务时取消实际工具任务或编码单，否则取消分析 |
+
+分析响应为 `id/status/created_at/message/parsed/proposal/invocation/coding/coding_request_id/request`；`proposal` 带 `decision/candidates/reason`。内部请求以 `action:project-tool-plan` 保存原提交、作用域、解析输入、目录和执行器绑定；执行子任务以分析 ID 派生稳定请求编号，编码单使用相同分析 ID 对账。重试不得更换原内容，跨作用域查询拒绝；未知回执只查询，不自动重新创建。字段校验和正反例分别在 `evolution/tool_intent.py` 与 `tests/test_tool_intents.py`，不另维护平行调度协议。
 
 <a id="growth-center-contract"></a>
 ## 三能力消息与旧接口迁移

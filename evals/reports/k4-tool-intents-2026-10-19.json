@@ -1,0 +1,187 @@
+{
+  "version": "0.1.72",
+  "date": "2026-10-19",
+  "scope": "K4 local bounded named tool invocation, reviewable lexical selection and persistent K3 gap handoff; full K4 open",
+  "status": "verified_and_deployed",
+  "tests": {
+    "tests": 36,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 262.91583549999996,
+    "test_ids": [
+      "test_tool_intents.ParserTests.test_direct_calls_retain_exact_json_and_never_guess",
+      "test_tool_intents.ParserTests.test_negation_questions_quotes_conditions_and_ambiguity",
+      "test_tool_intents.ToolIntentTests.test_actual_named_invocation_reconciles_without_duplicate_after_change",
+      "test_tool_intents.ToolIntentTests.test_cancelled_gap_and_discussion_cannot_handoff",
+      "test_tool_intents.ToolIntentTests.test_changed_directory_runtime_and_candidate_forgery_rejected",
+      "test_tool_intents.ToolIntentTests.test_foreign_receipt_collision_never_returns_other_scope",
+      "test_tool_intents.ToolIntentTests.test_gap_to_original_coding_demand_persists_and_never_starts_model",
+      "test_tool_intents.ToolIntentTests.test_growth_receipts_lookup_list_cancel_and_reanalysis_share_plan",
+      "test_tool_intents.ToolIntentTests.test_scope_idempotency_cancel_and_input_unchanged",
+      "test_growth_demand.GrowthDemandTests.test_archive_growth_refs_are_typed_control_data",
+      "test_growth_demand.GrowthDemandTests.test_bad_candidate_and_unknown_do_not_fake_delivery",
+      "test_growth_demand.GrowthDemandTests.test_cancel_draft_and_running_no_second_job",
+      "test_growth_demand.GrowthDemandTests.test_changed_acceptance_requires_new_proposal",
+      "test_growth_demand.GrowthDemandTests.test_count_bound_input_tamper_and_core_stop",
+      "test_growth_demand.GrowthDemandTests.test_existing_capability_reuse_and_v1_to_v2_upgrade",
+      "test_growth_demand.GrowthDemandTests.test_fulfillment_and_followup_repair_share_two_candidate_budget",
+      "test_growth_demand.GrowthDemandTests.test_http_guard_preview_and_download",
+      "test_growth_demand.GrowthDemandTests.test_idempotent_proposal_lookup_and_no_replay_after_restart",
+      "test_growth_demand.GrowthDemandTests.test_preview_is_local_and_fulfillment_returns_real_verified_input",
+      "test_growth_demand.GrowthDemandTests.test_reanalysis_keeps_old_terminal_and_reuses_request_receipt",
+      "test_growth_demand.GrowthDemandTests.test_source_scope_unsupported_and_temporary_archive_absence",
+      "test_growth_demand.GrowthDemandTests.test_stale_route_baseline_and_damaged_source_block_start",
+      "test_project_tools.ProjectToolTests.test_actual_publish_use_disable_restore_restart_and_idempotency",
+      "test_project_tools.ProjectToolTests.test_capacity_reserves_recovery_space_and_contract_is_bounded",
+      "test_project_tools.ProjectToolTests.test_runtime_change_and_cancel_during_observation_disable_candidate",
+      "test_project_tools.ProjectToolTests.test_shared_project_context_other_project_and_corrupt_json",
+      "test_project_tools.ProjectToolTests.test_source_scope_generation_and_contract_cannot_be_bypassed",
+      "test_project_tools.ProjectToolTests.test_unchanged_regression_with_bad_input_does_not_quarantine",
+      "test_project_tools.ProjectToolTests.test_unconfirmed_publication_is_deactivated_on_recovery",
+      "test_project_tools.ProjectToolTests.test_upgrade_failure_rolls_back_without_replaying_real_input",
+      "test_runtime_releases.RuntimeReleaseTests.test_failed_health_or_tampered_slot_never_replaces_active",
+      "test_runtime_releases.RuntimeReleaseTests.test_install_is_idempotent_and_unchecked_release_cannot_be_selected",
+      "test_runtime_releases.RuntimeReleaseTests.test_manifest_or_extra_file_blocks_rollback",
+      "test_runtime_releases.RuntimeReleaseTests.test_running_release_prevents_switch_and_only_fixed_entry_is_used",
+      "test_runtime_releases.RuntimeReleaseTests.test_select_and_rollback_keep_previous_and_unrelated_data",
+      "test_runtime_releases.RuntimeReleaseTests.test_selection_transaction_failure_keeps_original_pointer"
+    ]
+  },
+  "ui": {
+    "version": "0.1.72",
+    "status": "passed",
+    "paid_model_calls": 0,
+    "checks": [
+      "verified candidate button -> publish with retained heldout contract -> active tool",
+      "new input actual LPAC execution with independent result; usage counted once",
+      "missing nonce / foreign origin rejected",
+      "reload retains receipts; disable and validated restore update controls"
+    ],
+    "intent_checks": [
+      "exact named natural request dispatched once",
+      "result displayed and archived as control receipt",
+      "reload opens original receipt without replay",
+      "lexical suggestion waits for explicit input and independent expectation",
+      "gap binds original coding demand without model dispatch",
+      "negation remains non-executable",
+      "ordinary prose remains chat",
+      "selection form survives panel refresh",
+      "all plan mutations reject foreign origin; plan reads require nonce"
+    ],
+    "execution": {
+      "elapsed_seconds": 2.355,
+      "isolation": {
+        "active_process_limit": 1,
+        "appcontainer": true,
+        "backend": "windows-lpac-job",
+        "capabilities": [
+          "registryRead"
+        ],
+        "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+        "cpu_seconds": 0.375,
+        "cpu_time_limit_seconds": 3,
+        "elapsed_seconds": 0.9114,
+        "lpac": true,
+        "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+        "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+        "memory_limit_bytes": 201326592,
+        "package_sid": "S-1-15-2-3949797608-1718631617-1039601286-3323763943-3172555920-1479234265-3306803938",
+        "peak_process_memory_bytes": 17682432,
+        "pid": 23812,
+        "runtime_bytes": 22904399,
+        "wall_time_limit_seconds": 12
+      },
+      "model_calls": 0,
+      "regression": {
+        "cases": 4,
+        "isolation": {
+          "active_process_limit": 1,
+          "appcontainer": true,
+          "backend": "windows-lpac-job",
+          "capabilities": [
+            "registryRead"
+          ],
+          "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+          "cpu_seconds": 0.359375,
+          "cpu_time_limit_seconds": 3,
+          "elapsed_seconds": 0.8204,
+          "lpac": true,
+          "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+          "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+          "memory_limit_bytes": 201326592,
+          "package_sid": "S-1-15-2-4232879829-1354700098-2902376097-1754343095-3016993584-3386135656-3634257698",
+          "peak_process_memory_bytes": 18386944,
+          "pid": 41868,
+          "runtime_bytes": 22904399,
+          "wall_time_limit_seconds": 12
+        },
+        "passed": true
+      },
+      "result_digest": "sha256:e629fa6598d732768f7c726b4b621285f9c3b85303900aa912017db7617d8bdb",
+      "result_verified": true,
+      "text": "15",
+      "version": "4806af7d767f30bea42f0af4478be99f569c03b6bf79a10b6290840b98cb164b"
+    },
+    "ledger_bytes": 98304,
+    "synthetic_proposal_calls": 1,
+    "tool_model_calls": 0,
+    "page_errors": [],
+    "business_source_unchanged": true,
+    "conversation_id": "7aa0a95e2c8a4252aa59897cd72968f8"
+  },
+  "paid_model_calls": 0,
+  "new_dependencies": [],
+  "new_resident_services": 0,
+  "new_schema": false,
+  "limitations": [
+    "No general semantic planner or automatic independent oracle generation",
+    "Gap handoff creates a proposed K3 demand, not automatically started coding or tool publication",
+    "No new live model quality benchmark in this increment",
+    "Single-machine small fixture; not ordinary-PC long-term resource acceptance",
+    "No tool retirement or cross-project/personal capability sharing"
+  ],
+  "deployment": {
+    "status": "passed",
+    "version": "0.1.72",
+    "previous_version": null,
+    "instance_id": "2de32fe55b48cba95e787fe26eea58dc",
+    "idle_graceful_reload": false,
+    "startup_from_absent": true,
+    "served_sha256": {
+      "growth.js": "873348ac4205eda56d67924ed7403602b9371b931040be673f6783e5e2d82cc0",
+      "skills.js": "0c4958172a019d3f1ad8520eafcce749b589690355443f777239b234c9949cf9",
+      "coding.js": "3547507e77569145601f7d50660359172185269f5b566fddeefafcb54b04dae2",
+      "admin.js": "09d93597e84408dfd48ce8aaecb5b7a9b1554023a38811526c3b6bb291661c43",
+      "project-tools.js": "9ca58c2924a7db4e899e540a7a09390c8a391b2c7b7859858c5095addb79412a",
+      "tool-intents.js": "a753bb862e7ebe911cc697925f6b2c143ad260f8d1dcaf05193889a664ad646c"
+    },
+    "business_tables_compared": 11,
+    "business_unchanged": true,
+    "coding_settings_unchanged": true,
+    "empty_restart_queue_reviewed_and_resumed": true,
+    "cloud_calls": 0,
+    "runtime_archive_built": false,
+    "installer_built": false
+  },
+  "failure_history": [
+    {
+      "phase": "UI draft-preservation regression",
+      "finding": "A second click while the panel refresh was in flight was silently ignored by the acting guard.",
+      "repair": "Disable action buttons during refresh and re-enable them when the request finishes.",
+      "recheck": "Full browser flow passed after repair; original local failed report retained."
+    }
+  ],
+  "checks": {
+    "documentation": "25 documents, 21 diagram sources, 42 generated artifacts; zero errors",
+    "navigation": "synchronized; second run changed zero files",
+    "frontend_syntax": "node --check tool-intents.js and growth.js passed",
+    "diff_whitespace": "git diff --check passed"
+  },
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/evolution/tool_intent.py": "77e1a3d8df516781b9c6714338ccf5503be85fc416f5922263a6867eca8cc686",
+    "apps/web/tool-intents.js": "a753bb862e7ebe911cc697925f6b2c143ad260f8d1dcaf05193889a664ad646c",
+    "tests/test_tool_intents.py": "d941a6a595dcaa488ec39533829f8c27964497a68f3505e9c7d10e2340f4e84d",
+    "tools/probe_project_tools_ui.py": "dae81fd08586f602654e959d627910a54bbe76787c9eae52b0c778b11c1e6969"
+  }
+}
