@@ -17,7 +17,7 @@
   }
   function controls(){
     const temporary=Boolean(window.Workspace?.memoryContext?.().temporary);
-    el('open-memory').disabled=busy||Boolean(window.Workspace?.isBusy());
+    el('open-memory').disabled=Boolean(window.Workspace?.isBusy());
     for(const control of dialog.querySelectorAll('#memory-facts input,#memory-facts textarea,#memory-facts select,#memory-facts button,#memory-close,#memory-enabled,[data-memory-tab]'))control.disabled=working;
     el('memory-save').disabled=working||temporary||!compatible;
     el('memory-enabled').disabled=working||temporary;
@@ -120,7 +120,7 @@
     if(!compatible)throw new Error('记忆界面已更新，宿主仍为旧版；请重启 Jarvis 后刷新页面，分类修改暂不可用。');
   }
   el('open-memory').addEventListener('click',async()=>{
-    if(busy||window.Workspace?.isBusy())return;dialog.showModal();edit();el('memory-search').value='';status('正在读取…');
+    if(window.Workspace?.isBusy())return;dialog.showModal();edit();el('memory-search').value='';status('正在读取…');
     try{await load();status(window.Workspace?.memoryContext?.().temporary?'临时会话不使用或修改长期记忆。':'记忆来自你的明确保存或聊天指令，不会自动提取普通闲聊。');}catch(error){status(error.message,true);}
   });
   el('memory-close').addEventListener('click',()=>{if(!working&&!window.Continuity?.isWorking())dialog.close();});

@@ -56,7 +56,7 @@ class RuntimeCatalog:
             except Exception:
                 running = False
             bindings = {
-                'system.status.v1': ('available', '本机状态入口；聊天尚无工具调用。'),
+                'system.status.v1': ('available', '本机状态入口；能力说明不代表执行任务已经完成。'),
                 'filesystem.read_sample.v1': ('conditional', '固定目录任务入口；执行前检查 Worker、根目录与授权。'),
                 'artifact.write.v1': ('internal', '仅由宿主任务提交已核验产物，不开放任意写入。'),
             }

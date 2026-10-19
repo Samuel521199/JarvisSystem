@@ -36,7 +36,8 @@ class CandidateTests(unittest.TestCase):
 
     def payload(self, index=0):
         data = self.service.suggest(self.query)
-        return {k:data[k] for k in ('source', 'project_id', 'source_digest')} | {'candidate':data['candidates'][index], 'scope':'current'}
+        item=data['candidates'][index]
+        return {k:data[k] for k in ('source', 'project_id', 'source_digest')} | {'candidate':item, 'scope':'current'} | ({'preview_token':data['preview_token']} if item['kind']=='fact' else {})
 
     def test_rule_positive_and_quoted_hypothetical_sensitive_negative(self):
         for text in ('我更喜欢简洁回答', '以后叫我老王', '我习惯晚上学习', '我不喜欢甜食', '下次我们继续讨论方案', '我还没完成读书笔记'):
@@ -137,5 +138,6 @@ class CandidateTests(unittest.TestCase):
             self.assertEqual(call('/api/personal-candidates/suggest',self.query,'bad')[0],403)
             status,data=call('/api/personal-candidates/suggest',self.query,server.nonce)
             self.assertEqual(status,200);self.assertEqual(len(data['candidates']),2)
-            self.assertEqual(call('/api/personal-candidates/confirm',self.payload(),server.nonce)[0],200)
+            payload={k:data[k] for k in ('source','project_id','source_digest','preview_token')} | {'candidate':data['candidates'][0],'scope':'current'}
+            self.assertEqual(call('/api/personal-candidates/confirm',payload,server.nonce)[0],200)
         finally:server.shutdown();server.server_close();thread.join(3)

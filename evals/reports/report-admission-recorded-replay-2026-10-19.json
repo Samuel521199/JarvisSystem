@@ -1,0 +1,48 @@
+{
+  "status": "SUCCEEDED",
+  "source_version": "0.1.59",
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/report_intents.py": "65a84f2e1eb0a401df7cb0fb11b14b981aded5c9be8cf26290d4b5948b81e83b",
+    "runtime/node-host/jarvis_core/work_admission.py": "e73cd0b0ca943df9e6b78ccc89f92105935f04c92163d9c9825e3032dc936dea"
+  },
+  "cloud_calls": 0,
+  "reports": [
+    {
+      "report": "evals/reports/report-intent-calibration-c1-2026-10-19.json",
+      "report_sha256": "7cdc5beeb6b85ee56571e5f793db8938cc8cffe96bae02817c52f573b770a0d9",
+      "cases": 24,
+      "false_selections": [],
+      "missed_selections": [],
+      "wrong_arguments": []
+    },
+    {
+      "report": "evals/reports/report-intent-calibration-c2-2026-10-19.json",
+      "report_sha256": "231ff09b9a9c60f82d44aa2a3b82d18d67b577d416f0a7b31906889cd586ecf9",
+      "cases": 24,
+      "false_selections": [],
+      "missed_selections": [],
+      "wrong_arguments": []
+    },
+    {
+      "report": "evals/reports/report-intent-heldout-h1-2026-10-19.json",
+      "report_sha256": "8d715551c6d8d05ff29384eb400020617800c0b0a873706f22f3afd602dd937c",
+      "cases": 48,
+      "false_selections": [],
+      "missed_selections": [
+        "H08"
+      ],
+      "wrong_arguments": []
+    },
+    {
+      "report": "evals/reports/report-intent-heldout-h2-2026-10-19.json",
+      "report_sha256": "4ec883ae28facf26a060a122a2043b0ac2b32f4f99b721dec3c830337d69dbf6",
+      "cases": 32,
+      "false_selections": [],
+      "missed_selections": [
+        "J02"
+      ],
+      "wrong_arguments": []
+    }
+  ],
+  "limits": "Offline replay of recorded model decisions after narrowing question punctuation admission. Not fresh model samples; historical reports remain unchanged."
+}

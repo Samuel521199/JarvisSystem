@@ -1,0 +1,254 @@
+{
+  "schema_version": 1,
+  "label_provenance": "New author-labelled synthetic heldout after v1 findings; not independent human annotation. Frozen before this model run.",
+  "release_criterion": {
+    "false_selections": 0,
+    "wrong_arguments": 0,
+    "positive_recall_minimum": 0.9,
+    "boundary": "Limited sample-report operations only; no full V-DLG claim."
+  },
+  "cases": [
+    {
+      "id": "J01",
+      "split": "heldout",
+      "text": "请帮我整理样例统计报告",
+      "selection": {
+        "operation": "create",
+        "relative_path": "."
+      }
+    },
+    {
+      "id": "J02",
+      "split": "heldout",
+      "text": "帮我把样例报告保存。",
+      "selection": {
+        "operation": "create",
+        "relative_path": "."
+      }
+    },
+    {
+      "id": "J03",
+      "split": "heldout",
+      "text": "我有些紧张，想找你聊天。顺便生成一份样例报告。",
+      "selection": {
+        "operation": "create",
+        "relative_path": "."
+      }
+    },
+    {
+      "id": "J04",
+      "split": "heldout",
+      "text": "我刚完成比赛，心情很激动；请保存样例目录报告。",
+      "selection": {
+        "operation": "create",
+        "relative_path": "."
+      }
+    },
+    {
+      "id": "J05",
+      "split": "heldout",
+      "text": "陪我聊聊今天的生活；请导出一份样例报告。",
+      "selection": {
+        "operation": "create",
+        "relative_path": "."
+      }
+    },
+    {
+      "id": "J06",
+      "split": "heldout",
+      "text": "什么是字节？请生成样例报告。",
+      "selection": {
+        "operation": "create",
+        "relative_path": "."
+      }
+    },
+    {
+      "id": "J07",
+      "split": "heldout",
+      "text": "请生成样例报告 目录: .",
+      "selection": {
+        "operation": "create",
+        "relative_path": "."
+      }
+    },
+    {
+      "id": "J08",
+      "split": "heldout",
+      "text": "保存样例目录报告 目录: data/2026",
+      "selection": {
+        "operation": "create",
+        "relative_path": "data/2026"
+      }
+    },
+    {
+      "id": "J09",
+      "split": "heldout",
+      "text": "I feel anxious; can you keep me company? Please export the sample report.",
+      "selection": {
+        "operation": "create",
+        "relative_path": "."
+      }
+    },
+    {
+      "id": "J10",
+      "split": "heldout",
+      "text": "I won a game today! Please save the sample directory report.",
+      "selection": {
+        "operation": "create",
+        "relative_path": "."
+      }
+    },
+    {
+      "id": "J11",
+      "split": "heldout",
+      "text": "Generate a sample directory report for .",
+      "selection": {
+        "operation": "create",
+        "relative_path": "."
+      }
+    },
+    {
+      "id": "J12",
+      "split": "heldout",
+      "text": "Also save the sample report for materials",
+      "selection": {
+        "operation": "create",
+        "relative_path": "materials"
+      }
+    },
+    {
+      "id": "J13",
+      "split": "heldout",
+      "text": "请取消任务 task_cccccccccccccccccccccccccccccccc",
+      "selection": {
+        "operation": "cancel",
+        "target": "task_cccccccccccccccccccccccccccccccc"
+      }
+    },
+    {
+      "id": "J14",
+      "split": "heldout",
+      "text": "取消 task_cccccccccccccccccccccccccccccccc",
+      "selection": {
+        "operation": "cancel",
+        "target": "task_cccccccccccccccccccccccccccccccc"
+      }
+    },
+    {
+      "id": "J15",
+      "split": "heldout",
+      "text": "请把任务 task_cccccccccccccccccccccccccccccccc 的目录改为 .",
+      "selection": {
+        "operation": "revise",
+        "target": "task_cccccccccccccccccccccccccccccccc",
+        "relative_path": "."
+      }
+    },
+    {
+      "id": "J16",
+      "split": "heldout",
+      "text": "change task_cccccccccccccccccccccccccccccccc directory to .",
+      "selection": {
+        "operation": "revise",
+        "target": "task_cccccccccccccccccccccccccccccccc",
+        "relative_path": "."
+      }
+    },
+    {
+      "id": "J17",
+      "split": "heldout",
+      "text": "我听说你会生成样例报告，是真的吗？",
+      "selection": null
+    },
+    {
+      "id": "J18",
+      "split": "heldout",
+      "text": "我想了解生成样例报告的原理。",
+      "selection": null
+    },
+    {
+      "id": "J19",
+      "split": "heldout",
+      "text": "我说的是不要生成样例报告。",
+      "selection": null
+    },
+    {
+      "id": "J20",
+      "split": "heldout",
+      "text": "先生成样例报告吗？请只解释。",
+      "selection": null
+    },
+    {
+      "id": "J21",
+      "split": "heldout",
+      "text": "等我说开始之后再保存样例目录报告。",
+      "selection": null
+    },
+    {
+      "id": "J22",
+      "split": "heldout",
+      "text": "请保存样例目录报告，但先不用执行。",
+      "selection": null
+    },
+    {
+      "id": "J23",
+      "split": "heldout",
+      "text": "如果我心情好就导出样例报告。",
+      "selection": null
+    },
+    {
+      "id": "J24",
+      "split": "heldout",
+      "text": "这是例句：请生成样例报告。",
+      "selection": null
+    },
+    {
+      "id": "J25",
+      "split": "heldout",
+      "text": "我很难过，别给我生成样例报告。",
+      "selection": null
+    },
+    {
+      "id": "J26",
+      "split": "heldout",
+      "text": "Please explain how to generate a sample report without doing it.",
+      "selection": null
+    },
+    {
+      "id": "J27",
+      "split": "heldout",
+      "text": "Once I approve, export a sample directory report.",
+      "selection": null
+    },
+    {
+      "id": "J28",
+      "split": "heldout",
+      "text": "Generate a sample report and email it to someone.",
+      "selection": null
+    },
+    {
+      "id": "J29",
+      "split": "heldout",
+      "text": "取消报告 A，保留报告 B。",
+      "selection": null
+    },
+    {
+      "id": "J30",
+      "split": "heldout",
+      "text": "请把报告 task_cccccccccccccccccccccccccccccccc 的目录改为 ../other",
+      "selection": null
+    },
+    {
+      "id": "J31",
+      "split": "heldout",
+      "text": "Do not cancel task_cccccccccccccccccccccccccccccccc",
+      "selection": null
+    },
+    {
+      "id": "J32",
+      "split": "heldout",
+      "text": "只告诉我取消 task_cccccccccccccccccccccccccccccccc 会有什么影响。",
+      "selection": null
+    }
+  ]
+}

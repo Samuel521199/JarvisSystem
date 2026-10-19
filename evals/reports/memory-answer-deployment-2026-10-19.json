@@ -1,0 +1,80 @@
+{
+  "status": "SUCCEEDED",
+  "source_version": "0.1.61",
+  "data_dir": "C:\\Users\\samuel\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\Jarvis\\data",
+  "previous_version": "0.1.60",
+  "previous_instance": "20109894bb97e899d3a816527bb79288",
+  "current_instance": "aec5b2509b8dbf243ae80e45cdf8aa21",
+  "idle_graceful_reload": true,
+  "startup_from_absent": false,
+  "served_sha256": {
+    "dialogue.js": "a5a62f8ab2c15601fff468e29b38cd5e1efcfcf3cfb9bd3b5b3f00cebd27c4ec",
+    "resources.js": "586e03243199134cec0c4da7bedde691f904f73ca8e7aee09ea2dd0202c99e2b",
+    "workspace.js": "8f5a1bd76ba701c36eabae00758ada7181460715d68d6d2479635508287c4a57",
+    "conversation_tasks.js": "5e2037607e548341669dee1a09a4d442cf877196723f5579c94db66cde7220cf",
+    "mcp_manager.js": "0c74df31951193bbe830bdfe24a10eb90b9cb31bb604ce54109acc5fb1cd9702",
+    "personal_candidates.js": "639e65703a53f36d101bc0323d7d26443417e8f4eae01697e43da90c6ab58549"
+  },
+  "calculation": "84",
+  "personal_read_only": true,
+  "duplicate_did_not_repeat_calculation": true,
+  "cancel_before_submit": true,
+  "restart_fence": true,
+  "instance_fence": true,
+  "empty_restart_queue_reviewed_and_resumed": true,
+  "admission_ms": 97.899,
+  "backups": {
+    "/api/speech/fast": "stopped",
+    "/api/speech": "stopped"
+  },
+  "cloud_calls": 0,
+  "limits": "One local calculator and personal-settings query; no paid model, microphone, task replay, persistent dialogue recovery or physical voice timing.",
+  "user_tables_unchanged": true,
+  "business_tables": {
+    "memory.db:facts": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "memory.db:receipts": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "memory.db:fact_origins": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "memory.db:candidate_bindings": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "workspace.db:projects": {
+      "rows": 6,
+      "sha256": "76b223ed1c9f7dde0d8ce09347f812aead4dd5392130233f1b38701146938404"
+    },
+    "workspace.db:outputs": {
+      "rows": 6,
+      "sha256": "9b07860a13b4169c4fd49c930cdec8fe7053b8a1a407f1aa8a556e0a91eba260"
+    },
+    "extensions.db:entries": {
+      "rows": 1,
+      "sha256": "c84c38104c5064cb4d0abfa85949472879813cb3df1505952214bfe0751986bc"
+    },
+    "extensions.db:skill_policies": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "extensions.db:skill_decisions": {
+      "rows": 6,
+      "sha256": "4198bb1c711ffe0ebae9a94b9725828f87be7d9e4970a1b4de870c6b1f96fba4"
+    },
+    "extensions.db:mcp_policies": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "conversations.db:conversations": {
+      "rows": 11,
+      "sha256": "1cccd23898c87af03ab6c89e218dbc3a8fafaa97b48f7ea91e4f0b47ccce75db"
+    }
+  },
+  "assistant_context_sha256": "6541e7daf8610e09a33f9d129edb680be5065b624b631e1c0baf3a278604bb28"
+}

@@ -17,6 +17,7 @@
         "title": "第二篇 · 核心与工程基础",
         "chapters": [
           "docs-core-bootstrap",
+          "docs-development-guide",
           "docs-architecture",
           "docs-security-sovereignty",
           "docs-contracts",
@@ -114,10 +115,21 @@
         "evolution-loop-entry",
         "growth-center-next",
         "k2-growth-core",
-        "dialogue-upgrade-order"
+        "dialogue-upgrade-order",
+        "near-term-work-queue"
       ],
       "status": "proposed",
       "reader_summary": "个人助手与自主成长核心从哪里开始，怎样沿 K0—K6 扩展？"
+    },
+    {
+      "id": "docs-development-guide",
+      "path": "docs/development-guide.md",
+      "title": "后续方向指南：现状、缺口与优化工作清单",
+      "owns": [
+        "跨主题现状差距、优化工作项F01—F16、原需求后续去向与滚动维护索引；不重复K阶段、接口或验收定义"
+      ],
+      "status": "proposed",
+      "reader_summary": "当前版本还缺什么、先优化哪里，原方案的后续工作怎样落到代码与验收？"
     },
     {
       "id": "docs-architecture",
@@ -201,7 +213,8 @@
         "unified-conversation-experience",
         "dialogue-receipt-ui",
         "dialogue-recovery-ui",
-        "dialogue-intent-shadow-ui"
+        "dialogue-intent-shadow-ui",
+        "mixed-report-ui"
       ],
       "status": "proposed",
       "reader_summary": "怎样自然交流、延续人格，并在需要时展开工作台？"
@@ -246,7 +259,8 @@
         "voice-resource-footprint",
         "cosyvoice3-runtime",
         "fast-speech-runtime",
-        "qwen-tts-runtime"
+        "qwen-tts-runtime",
+        "application-offline-control"
       ],
       "status": "proposed",
       "reader_summary": "用哪些云端和本地模型，怎样切换与离线降级？"
@@ -355,7 +369,8 @@
         "mcp-documentation-task-contract",
         "dialogue-intent-shadow-contract",
         "memory-candidate-review-contract",
-        "bounded-coding-contract"
+        "bounded-coding-contract",
+        "application-network-contract"
       ],
       "status": "proposed",
       "reader_summary": "模块之间怎样交换任务、事件和记忆数据？"
@@ -482,7 +497,13 @@
         "mcp-runtime-evidence",
         "rea-real-apps-evidence",
         "memory-candidate-review-evidence",
-        "skills-completion-evidence"
+        "skills-completion-evidence",
+        "mixed-report-admission-evidence",
+        "rule-memory-review-evidence",
+        "memory-final-answer-evidence",
+        "k2-completion-evidence",
+        "application-offline-evidence",
+        "growth-purposes-evidence"
       ],
       "status": "proposed",
       "reader_summary": "哪些能力测过，证据在哪里，下一阶段怎样验收？"
@@ -530,7 +551,7 @@
       "path": "docs/architecture-atlas.md",
       "title": "架构与流程图册",
       "owns": [
-        "19 张图的导航、图源和渲染说明"
+        "架构图的导航、图源和渲染说明"
       ],
       "status": "proposed",
       "reader_summary": "在哪里集中查看架构图和流程图？"
@@ -3042,9 +3063,9 @@
     }
   ],
   "implementation": {
-    "version": "0.1.47",
-    "scope": "Source-bound confirmed fact candidates, bounded source validation, correction/forget suppression and owner reaffirmation. No new runtime dependencies; full K2 remains incomplete. REA static JavaScript directory skill now includes published subtrees, bounded separate evidence storage and receipt-bound pagination; ASAR filtered-text acquisition, container/member provenance and literal identifier focus are now admitted; native formats remain unadmitted.",
-    "evidence": "evals/reports/memory-provenance-2026-10-18.json",
+    "version": "0.1.64",
+    "scope": "Deployed 0.1.64 separates bounded inspection, healing and evolution with independent model purposes, a fallback and reasoning settings, and a dedicated growth center. Application-only offline control and the single-node personal assistant remain available. K2 pending physical-device and owner-experience acceptance is retained; development continues into K3 by explicit user direction. Full K1/K2/K3 gates remain incomplete.",
+    "evidence": "evals/reports/application-offline-2026-10-19.json",
     "overall_design_status": "proposed",
     "complete_k1_gate": false,
     "complete_k2_gate": false,
@@ -3259,7 +3280,45 @@
       "evals/reports/skills-saved-coding-delivery-r2-2026-10-19.json",
       "evals/reports/skills-interface-soak-2026-10-19.json",
       "evals/reports/skills-deployed-resource-point-2026-10-19.json",
-      "evals/reports/skills-completion-release-2026-10-19.json"
+      "evals/reports/skills-completion-release-2026-10-19.json",
+      "evals/reports/memory-provenance-2026-10-18.json",
+      "evals/reports/memory-candidate-review-2026-10-19.json",
+      "evals/reports/memory-lifecycle-2026-10-18.json",
+      "evals/reports/mem0-shadow-2026-10-18.json",
+      "evals/reports/langmem-shadow-2026-10-18.json",
+      "evals/reports/report-admission-baseline-2026-10-19.json",
+      "evals/reports/report-admission-live-r1-2026-10-19.json",
+      "evals/reports/report-admission-live-r2-2026-10-19.json",
+      "evals/reports/report-admission-live-r3-2026-10-19.json",
+      "evals/reports/report-admission-recorded-replay-2026-10-19.json",
+      "evals/reports/report-admission-ui-2026-10-19.json",
+      "evals/reports/report-intent-calibration-c1-2026-10-19.json",
+      "evals/reports/report-intent-calibration-c2-2026-10-19.json",
+      "evals/reports/report-intent-heldout-h1-2026-10-19.json",
+      "evals/reports/report-intent-heldout-h2-2026-10-19.json",
+      "evals/cases/report-intent-v1.json",
+      "evals/cases/report-intent-v2.json",
+      "evals/reports/report-admission-release-2026-10-19.json",
+      "evals/reports/report-admission-deployment-2026-10-19.json",
+      "evals/reports/rule-memory-baseline-2026-10-19.json",
+      "evals/reports/rule-memory-ui-2026-10-19.json",
+      "evals/reports/rule-memory-deployment-2026-10-19.json",
+      "evals/reports/memory-answer-baseline-2026-10-19.json",
+      "evals/reports/memory-answer-pilot-2026-10-19.json",
+      "evals/reports/memory-answer-pilot-review-2026-10-19.json",
+      "evals/reports/memory-answer-recheck-2026-10-19.json",
+      "evals/reports/memory-answer-recheck-review-2026-10-19.json",
+      "evals/reports/report-intent-calibration-c3-2026-10-19.json",
+      "evals/reports/memory-answer-deployment-2026-10-19.json",
+      "evals/reports/rule-memory-release-2026-10-19.json",
+      "evals/reports/memory-answer-release-2026-10-19.json",
+      "evals/reports/k2-handoff-2026-10-19.json",
+      "evals/cases/k2-delegated-review-v1.json",
+      "evals/reports/k2-delegated-answer-review-2026-10-19.json",
+      "evals/reports/k2-independent-review-2026-10-19.json",
+      "evals/reports/k2-completion-2026-10-19.json",
+      "evals/reports/application-offline-2026-10-19.json",
+      "evals/reports/growth-purposes-2026-10-19.json"
     ]
   }
 }

@@ -44,10 +44,17 @@ function render(){
   function button(text,work){const b=document.createElement('button');b.type='button';b.textContent=text;b.onclick=async()=>{b.disabled=true;try{await work();}catch(e){notify(e.message);}finally{b.disabled=false;}};actions.append(b);return b;}
   button('查看详情',()=>openTask(row.task_id));
   if(['READY','RUNNING'].includes(row.status))button('取消任务',()=>cancelTask(row.task_id));
+  if(row.kind==='natural'&&row.status==='READY')button('修改目录…',()=>{
+   if(busy||submitting||$('message').value.trim()||Attachments.hasDraft()||$('file-mode').checked){notify('请先处理当前回复、草稿或附件；已有输入已保留。');return;}
+   $('composer-mode').value='chat';$('message').value='把报告 '+row.task_id+' 的目录改为 ';
+   controls();setControls();$('message').focus();notify('填写样例根内的相对目录后发送；只有尚未开始的报告可以替换。');
+  });
   const link=document.createElement('a');link.textContent='后台记录 ↗';link.href='/settings?task='+row.task_id+'#tasks';link.target='_blank';link.rel='noopener';actions.append(link);
   card.append(title,state,meta);
   const detail=details.get(currentId+':'+row.task_id);
   if(detail){
+   if(detail.report_control){const scope=document.createElement('small'),control=detail.report_control;
+    scope.textContent='样例根内目录：'+control.relative_path+(control.admission?.replacement?' · 替换原报告：'+control.admission.replacement.task_id:'');card.append(scope);}
    const text=document.createElement('p');
    if(detail.report&&detail.action_status==='CONFIRMED'){
     if(detail.report.kind==='jarvis.skill-report'){
@@ -219,9 +226,9 @@ $('conversation-task-refresh').onclick=()=>load(true);
 document.addEventListener('visibilitychange',()=>{clearTimeout(timer);if(!document.hidden&&(!$('conversation-task-panel').hidden||rows.some(r=>active(r.status))))load();});
 window.addEventListener('pagehide',()=>clearTimeout(timer));
 function automaticReceipt(receipt){
- if(receipt?.status!=='submitted'||!validTask(receipt.task_id)||!validRequest(receipt.request_id))return;
- if(!$('messages').querySelector('.message[data-task-control][data-task-ref="'+receipt.task_id+'"]')){
-  controlMessage('assistant','已按当前规则受理只读文档查询。进度与资料请查看本会话任务。',{taskRef:receipt.task_id,taskRequestId:receipt.request_id});
+ if(!['submitted','controlled'].includes(receipt?.status)||!validTask(receipt.task_id)||!validRequest(receipt.request_id))return;
+ if(!$('messages').querySelector('.message[data-task-control][data-task-request-id="'+receipt.request_id+'"]')){
+  controlMessage('assistant',receipt.reason||'任务操作已受理，进度与结果请查看本会话任务。',{taskRef:receipt.task_id,taskRequestId:receipt.request_id});
   window.Workspace?.remember();
  }
  selected=receipt.task_id;show(false);load(true);

@@ -4,40 +4,40 @@
 > [文档入口](README.md) · [维护规则](MAINTENANCE.md) · [架构图册](architecture-atlas.md)
 
 <!-- book-nav:start -->
-[全书目录](README.md#book-tree) › [第五篇 · 验证与参考](README.md#part-evidence) › 第 19 章 · 研究资料与证据边界
+[全书目录](README.md#book-tree) › [第五篇 · 验证与参考](README.md#part-evidence) › 第 20 章 · 研究资料与证据边界
 
 ## 本章导航
 
-- [19.1 研究资料与证据边界](#references)
-- [19.2 论文与研究文章](#references-1)
-- [19.3 官方工程资料](#references-2)
-- [19.4 证据使用说明](#references-3)
-- [19.5 架构评审、构建与自维护依据](#references-4)
-- [19.6 0.1.0 实施选型依据（2026-10-15）](#implementation-sources)
-- [19.7 0.1.1 提供商错误处理依据](#chat-error-sources)
-- [19.8 0.1.2 模型目录与参数迁移依据（2026-10-15 核验）](#model-catalog-sources)
-- [19.9 0.1.3 推理级别依据（2026-10-15 核验）](#reasoning-control-sources)
-- [19.10 0.1.4 Google Pro 与主流型号依据（2026-10-15 核验）](#google-catalog-sources)
-- [19.11 知识与记忆开源选型依据（2026-10-15 核验）](#memory-selection-sources)
-- [19.12 运行预检与控制实现的官方依据（2026-10-15 核验）](#preflight-sources)
-- [19.13 Eachlabs Claude 小额调用依据（2026-10-16 核验）](#eachlabs-claude-sources)
-- [19.14 模型后台价格依据（2026-10-16 核验）](#model-billing-sources)
-- [19.15 Codex 工作台与交互参考（2026-10-15 核验）](#codex-workbench-sources)
-- [19.16 宿主上下文与模型回答完整性（2026-10-16 核验）](#runtime-context-sources)
-- [19.17 Grok Build 源码评审依据（2026-10-16 核验）](#grok-build-sources)
-- [19.18 记忆组件与 OpenWiki 源码复核（2026-10-16）](#memory-component-audit-sources)
-- [19.19 扩展接入格式依据（2026-10-16 查阅）](#extension-interface-sources)
-- [19.20 本地运行与结构化规划依据（2026-10-16 查阅）](#local-runtime-sources)
-- [19.21 进程资源计数依据（2026-10-17 查阅）](#process-metric-sources)
-- [19.22 工作台布局参考（2026-10-16 查阅）](#workbench-layout-sources)
-- [19.23 编码技能与模型选择依据（2026-10-17 查阅）](#coding-skill-sources)
-- [19.24 科普动画与机械拆解的固定源码依据（2026-10-17）](#anatomy-sources)
-- [19.25 常用 MCP 来源（2026-10-17 查阅）](#mcp-server-sources)
-- [19.26 当前架构审计的补充依据（2026-10-17 查阅）](#current-audit-sources)
-- [19.27 语音主选与候补的来源（2026-10-18 查阅）](#voice-selection-sources)
-- [19.28 记忆与 Wiki 方法扩展复核（2026-10-18）](#memory-pattern-review-sources)
-- [19.29 REA 软件解析来源（2026-10-18）](#rea-sources)
-- [19.30 对话、语音与任务分离的工程依据（2026-10-18 查阅）](#conversation-isolation-sources)
+- [20.1 研究资料与证据边界](#references)
+- [20.2 论文与研究文章](#references-1)
+- [20.3 官方工程资料](#references-2)
+- [20.4 证据使用说明](#references-3)
+- [20.5 架构评审、构建与自维护依据](#references-4)
+- [20.6 0.1.0 实施选型依据（2026-10-15）](#implementation-sources)
+- [20.7 0.1.1 提供商错误处理依据](#chat-error-sources)
+- [20.8 0.1.2 模型目录与参数迁移依据（2026-10-15 核验）](#model-catalog-sources)
+- [20.9 0.1.3 推理级别依据（2026-10-15 核验）](#reasoning-control-sources)
+- [20.10 0.1.4 Google Pro 与主流型号依据（2026-10-15 核验）](#google-catalog-sources)
+- [20.11 知识与记忆开源选型依据（2026-10-15 核验）](#memory-selection-sources)
+- [20.12 运行预检与控制实现的官方依据（2026-10-15 核验）](#preflight-sources)
+- [20.13 Eachlabs Claude 小额调用依据（2026-10-16 核验）](#eachlabs-claude-sources)
+- [20.14 模型后台价格依据（2026-10-16 核验）](#model-billing-sources)
+- [20.15 Codex 工作台与交互参考（2026-10-15 核验）](#codex-workbench-sources)
+- [20.16 宿主上下文与模型回答完整性（2026-10-16 核验）](#runtime-context-sources)
+- [20.17 Grok Build 源码评审依据（2026-10-16 核验）](#grok-build-sources)
+- [20.18 记忆组件与 OpenWiki 源码复核（2026-10-16）](#memory-component-audit-sources)
+- [20.19 扩展接入格式依据（2026-10-16 查阅）](#extension-interface-sources)
+- [20.20 本地运行与结构化规划依据（2026-10-16 查阅）](#local-runtime-sources)
+- [20.21 进程资源计数依据（2026-10-17 查阅）](#process-metric-sources)
+- [20.22 工作台布局参考（2026-10-16 查阅）](#workbench-layout-sources)
+- [20.23 编码技能与模型选择依据（2026-10-17 查阅）](#coding-skill-sources)
+- [20.24 科普动画与机械拆解的固定源码依据（2026-10-17）](#anatomy-sources)
+- [20.25 常用 MCP 来源（2026-10-17 查阅）](#mcp-server-sources)
+- [20.26 当前架构审计的补充依据（2026-10-17 查阅）](#current-audit-sources)
+- [20.27 语音主选与候补的来源（2026-10-18 查阅）](#voice-selection-sources)
+- [20.28 记忆与 Wiki 方法扩展复核（2026-10-18）](#memory-pattern-review-sources)
+- [20.29 REA 软件解析来源（2026-10-18）](#rea-sources)
+- [20.30 对话、语音与任务分离的工程依据（2026-10-18 查阅）](#conversation-isolation-sources)
 <!-- book-nav:end -->
 
 <a id="references"></a>
@@ -485,6 +485,7 @@ Jarvis 专属入口来自本项目的需求和领域设计，不通过缺少竞�
 | S18（具体接口） | [sherpa-onnx SenseVoice Python API](https://k2-fsa.github.io/sherpa/onnx/sense-voice/python-api.html) | 非流式识别器结合 VAD 处理麦克风切段；区分持续采集、伪实时切段与原生流式识别 |
 | <a id="s237"></a>S237 | [Silero VAD 官方仓库](https://github.com/snakers4/silero-vad) | 小型本地 VAD 的实现参考；上游速度和模型文件大小不当作本项目完整 STT/轮次检测的 RAM 或延迟实测 |
 | S21（复核） | [SQLite WAL](https://www.sqlite.org/wal.html) | 读写并行边界、单写入者和检查点；不能借 WAL 声称数据库写入完全不会等待 |
+| <a id="s238"></a>S238 | [Microsoft NtQuerySystemInformation](https://learn.microsoft.com/en-us/windows/win32/api/winternl/nf-winternl-ntquerysysteminformation)、[System Informer 原始结构定义](https://github.com/winsiderss/phnt/blob/master/ntexapi.h) | 2026-10-19 查阅；仅用于 Windows 验收采样器的进程身份/创建时间与父子关系核对，修复父 PID 复用误归属；不扩大进程权限，不给运行产品新增原生依赖。内部结构可能随 Windows 版本变化，布局和真实进程时间不符即失败 |
 
 [架构选择](architecture.md#dialogue-separation-design)、[调度](tasks-agents.md#conversation-resource-isolation)和[验收预算](delivery-validation.md#conversation-separation-validation)是针对现有代码的工程判断，性能目标并非引用资料的实验结果。本轮未试装 Pipecat/LiveKit，未复测真实麦克风。
 

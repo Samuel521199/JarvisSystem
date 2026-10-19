@@ -105,6 +105,8 @@ class ComputerService:
             deadline = time.monotonic()+task['timeout_seconds']
             ended = threading.Event()
             def checkpoint():
+                from jarvis_core.network_policy import NetworkPolicy
+                NetworkPolicy(self.core.data_dir).require_online()
                 if ended.is_set():raise CoreError('cancelled','Browser run ended; late model output is discarded')
                 self.core.assert_running()
                 ledger.assert_admitted(task_id)

@@ -10,6 +10,7 @@ def post(handler, payload):
         try:
             service = server.semantic_candidates
             method = {'suggest': service.local.suggest, 'confirm': service.local.confirm,
+                      'rule-review': service.local.review, 'rule-resolve': service.local.resolve,
                       'semantic-confirm': service.confirm, 'semantic-review': service.review,
                       'semantic-resolve': service.resolve}[action]
             handler._send(200, method(payload))

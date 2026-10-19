@@ -4,24 +4,24 @@
 > [文档入口](README.md) · [维护规则](MAINTENANCE.md) · [架构图册](architecture-atlas.md)
 
 <!-- book-nav:start -->
-[全书目录](README.md#book-tree) › [第三篇 · 智能运行与多设备协同](README.md#part-runtime) › 第 12 章 · 离线自治、多设备共同体与重连
+[全书目录](README.md#book-tree) › [第三篇 · 智能运行与多设备协同](README.md#part-runtime) › 第 13 章 · 离线自治、多设备共同体与重连
 
 ## 本章导航
 
-- [12.1 离线自治与联网共同体](#offline-federation)
-  - [12.1.1 节点分级](#offline-federation-1)
-  - [12.1.2 三个相互独立的平面](#offline-federation-2)
-  - [12.1.3 网络状态不能只用“在线/离线”](#offline-federation-3)
-  - [12.1.4 “一个贾维斯”的工程身份](#offline-federation-4)
-  - [12.1.5 任务和设备控制权](#offline-federation-5)
-  - [12.1.6 共同体初期与后期](#offline-federation-6)
-  - [12.1.7 重连流程](#offline-federation-7)
-- [12.2 记忆复制与开源同步取舍（proposed）](#memory-replication)
-  - [12.2.1 统一意志的工程含义与离线边界](#unified-intent-memory)
-  - [12.2.2 同步方式取舍](#memory-sync-options)
-  - [12.2.3 复制顺序与收敛条件](#section-f7d85c1ef91d)
-  - [12.2.4 哪些内容可以合并，哪些不能](#section-6f50d96f4bfc)
-- [12.3 单机离线继续工作](#end-to-end-flows-2)
+- [13.1 离线自治与联网共同体](#offline-federation)
+  - [13.1.1 节点分级](#offline-federation-1)
+  - [13.1.2 三个相互独立的平面](#offline-federation-2)
+  - [13.1.3 网络状态不能只用“在线/离线”](#offline-federation-3)
+  - [13.1.4 “一个贾维斯”的工程身份](#offline-federation-4)
+  - [13.1.5 任务和设备控制权](#offline-federation-5)
+  - [13.1.6 共同体初期与后期](#offline-federation-6)
+  - [13.1.7 重连流程](#offline-federation-7)
+- [13.2 记忆复制与开源同步取舍（proposed）](#memory-replication)
+  - [13.2.1 统一意志的工程含义与离线边界](#unified-intent-memory)
+  - [13.2.2 同步方式取舍](#memory-sync-options)
+  - [13.2.3 复制顺序与收敛条件](#section-f7d85c1ef91d)
+  - [13.2.4 哪些内容可以合并，哪些不能](#section-6f50d96f4bfc)
+- [13.3 单机离线继续工作](#end-to-end-flows-2)
 <!-- book-nav:end -->
 
 <a id="offline-federation"></a>

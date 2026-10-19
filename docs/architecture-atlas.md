@@ -6,34 +6,34 @@
 图源以 diagrams 下的 .mmd 文件为唯一可编辑版本；主题页和本图册引用同一份 PNG/SVG。图的箭头说明设计关系，不证明相关程序已经实现或达到性能目标。详细约束以对应主题正文为准。
 
 <!-- book-nav:start -->
-[全书目录](README.md#book-tree) › [第五篇 · 验证与参考](README.md#part-evidence) › 第 18 章 · 架构与流程图册
+[全书目录](README.md#book-tree) › [第五篇 · 验证与参考](README.md#part-evidence) › 第 19 章 · 架构与流程图册
 
 ## 本章导航
 
-- [18.1 图表索引](#section-b888574d1a5c)
-- [18.2 修改和重新渲染](#rendering)
-- [18.3 架构与流程](#section-0c5d1bf57621)
-  - [18.3.1 共同体重连与对账](#federation-reconnect)
-  - [18.3.2 总体架构](#overview)
-  - [18.3.3 系统边界与信任分区](#system-boundaries)
-  - [18.3.4 Windows 单节点部署](#windows-deployment)
-  - [18.3.5 共同体多节点部署](#federation-deployment)
-  - [18.3.6 状态所有权与事务边界](#state-ownership)
-  - [18.3.7 模型路由与恢复](#model-routing)
-  - [18.3.8 任务生命周期](#task-lifecycle)
-  - [18.3.9 自主进化发布流程](#evolution-pipeline)
-  - [18.3.10 对话与任务并行](#parallel-dialogue-task)
-  - [18.3.11 断网任务处理](#offline-task-flow)
-  - [18.3.12 Agent 团队生命周期](#agent-team-lifecycle)
-  - [18.3.13 学习与知识晋升](#knowledge-learning-flow)
-  - [18.3.14 节点本地记忆与共同体同步](#memory-local-federation)
-  - [18.3.15 个人、工作与共享记忆的用途视图](#personal-work-memory)
-  - [18.3.16 网络诊断与恢复](#network-recovery)
-  - [18.3.17 安全锁存与关停](#safety-shutdown)
-  - [18.3.18 多语言构建与发布](#build-and-release)
-  - [18.3.19 健康检查与修复](#health-and-repair)
-  - [18.3.20 种子核心成长闭环](#seed-core)
-  - [18.3.21 个人助手核心与按需扩展](#pc-runtime-convergence)
+- [19.1 图表索引](#section-b888574d1a5c)
+- [19.2 修改和重新渲染](#rendering)
+- [19.3 架构与流程](#section-0c5d1bf57621)
+  - [19.3.1 共同体重连与对账](#federation-reconnect)
+  - [19.3.2 总体架构](#overview)
+  - [19.3.3 系统边界与信任分区](#system-boundaries)
+  - [19.3.4 Windows 单节点部署](#windows-deployment)
+  - [19.3.5 共同体多节点部署](#federation-deployment)
+  - [19.3.6 状态所有权与事务边界](#state-ownership)
+  - [19.3.7 模型路由与恢复](#model-routing)
+  - [19.3.8 任务生命周期](#task-lifecycle)
+  - [19.3.9 自主进化发布流程](#evolution-pipeline)
+  - [19.3.10 对话与任务并行](#parallel-dialogue-task)
+  - [19.3.11 断网任务处理](#offline-task-flow)
+  - [19.3.12 Agent 团队生命周期](#agent-team-lifecycle)
+  - [19.3.13 学习与知识晋升](#knowledge-learning-flow)
+  - [19.3.14 节点本地记忆与共同体同步](#memory-local-federation)
+  - [19.3.15 个人、工作与共享记忆的用途视图](#personal-work-memory)
+  - [19.3.16 网络诊断与恢复](#network-recovery)
+  - [19.3.17 安全锁存与关停](#safety-shutdown)
+  - [19.3.18 多语言构建与发布](#build-and-release)
+  - [19.3.19 健康检查与修复](#health-and-repair)
+  - [19.3.20 种子核心成长闭环](#seed-core)
+  - [19.3.21 个人助手核心与按需扩展](#pc-runtime-convergence)
 <!-- book-nav:end -->
 
 <a id="section-b888574d1a5c"></a>

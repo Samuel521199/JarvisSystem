@@ -1,0 +1,269 @@
+{
+  "schema_version": 1,
+  "source_version": "0.1.62",
+  "captured_at": "2026-10-19T03:13:15.686235+00:00",
+  "status": "passed_independent_handoff_checks",
+  "complete_k2_gate": false,
+  "checks": {
+    "historical_evidence_unchanged": true,
+    "original_runtime_sources_unchanged": true,
+    "only_declared_authorities_changed": true,
+    "archive_hash_unchanged": true,
+    "archive_source_inventory_matches": true,
+    "manifest_delta_is_only_documentation_registration": true,
+    "full_stage_claims_remain_false": true,
+    "package_differences_are_declared_documents": true,
+    "frozen_acceptance_plan_unchanged": true,
+    "startup_and_business_state": true,
+    "no_cloud_probe_calls": true,
+    "live_version_ready": true,
+    "live_instance_matches_startup": true,
+    "documentation": true
+  },
+  "base_report": {
+    "path": "evals/reports/k2-completion-2026-10-19.json",
+    "sha256": "7cd1422417703f16ae357cb525047be2a896fc5629689ef4f8abb03dc1a05c2f",
+    "status": "not_complete_external_acceptance"
+  },
+  "verified_historical_evidence": [
+    {
+      "name": "regression",
+      "path": "H:\\JarvisData\\diagnostics\\k2-regression-r3.json",
+      "sha256": "fd252089c28dc16acf6b2da7e1376fd2d97a87fcfd2db0b34ea2e0786d6bc741",
+      "matches": true
+    },
+    {
+      "name": "ui",
+      "path": "H:\\JarvisData\\diagnostics\\k2-personal-ui-r7\\report.json",
+      "sha256": "88bb9f7843e8900b9db0ec60e9017b0a25c4e59e9e331730d75dac9bf48a3712",
+      "matches": true
+    },
+    {
+      "name": "answers",
+      "path": "H:\\JarvisData\\diagnostics\\k2-personal-answers-r1.json",
+      "sha256": "fdfa0781c1c179554652c1bf0d97ce68b25b7c551d25877e386e6b9d8501a855",
+      "matches": true
+    },
+    {
+      "name": "contention",
+      "path": "H:\\JarvisData\\diagnostics\\k2-contention-r1.json",
+      "sha256": "8fdbc65ab6b6ab26c64c3e6659ae0091d1218f34c164fdb4b5e9dacfcfece9a9",
+      "matches": true
+    },
+    {
+      "name": "idle",
+      "path": "H:\\JarvisData\\diagnostics\\k2-idle-r2.json",
+      "sha256": "862902ef4eb741bff92fe94a6912b0d125fac658ec6aaebda585e2bec4901f82",
+      "matches": true
+    },
+    {
+      "name": "runtime",
+      "path": "H:\\JarvisData\\diagnostics\\k2-runtime-r4.json",
+      "sha256": "77d1eb2040b2c33b68335646391416405ed1555b370d5dbbc10d3375719b1d0d",
+      "matches": true
+    },
+    {
+      "name": "faults",
+      "path": "H:\\JarvisData\\diagnostics\\k2-task-faults-r1.json",
+      "sha256": "359212878b3e8f411d62bffeeb84e29b58f1589100d694f86b517c59bd63bb77",
+      "matches": true
+    },
+    {
+      "name": "offline_isolated",
+      "path": "H:\\JarvisData\\diagnostics\\k2-offline-isolated-r2.json",
+      "sha256": "7f0b93635a0a1477d7d9ffee32155624afa48600f84f793d679ecb5b6817acb0",
+      "matches": true
+    },
+    {
+      "name": "growth_repair",
+      "path": "H:\\JarvisData\\diagnostics\\k2-growth-r1.json",
+      "sha256": "a28af534b631993fc6b9a664089e873e899ddb505c330ae83c8c8f7e2a3b8ca8",
+      "matches": true
+    },
+    {
+      "name": "growth_delivery",
+      "path": "H:\\JarvisData\\diagnostics\\k2-growth-delivery-r1\\report.json",
+      "sha256": "a2974214a9a8cc4d510014990343214bbd52ee99c904e1da82cf0559dc5932d7",
+      "matches": true
+    },
+    {
+      "name": "package_candidate",
+      "path": "H:\\JarvisData\\diagnostics\\k2-package-r2.json",
+      "sha256": "b8ec2d9858fcad679702ed06f17931aaf5297a688ab122955377687b05f2936a",
+      "matches": true
+    },
+    {
+      "name": "package",
+      "path": "H:\\JarvisData\\diagnostics\\k2-package-final.json",
+      "sha256": "85ae028df10192f28d0d1765850690cf15cc8d30b398ff4d9c914b90a96c22fc",
+      "matches": true
+    },
+    {
+      "name": "browser_resources",
+      "path": "H:\\JarvisData\\diagnostics\\k2-browser-resources-r3\\report.json",
+      "sha256": "e6c729f55d3058a5944dd6bcb6f990a8b0e5f11f5580ff8e531d5d3d50d548aa",
+      "matches": true
+    },
+    {
+      "name": "sampler_identity",
+      "path": "H:\\JarvisData\\diagnostics\\k2-sampler-tests-r1.json",
+      "sha256": "dac31ec7199ce92217a192ed1d1776d8390ce2cbb0d57e9c02d7ec0afb369eff",
+      "matches": true
+    },
+    {
+      "name": "distribution",
+      "path": "H:\\JarvisData\\diagnostics\\k2-distribution-final.json",
+      "sha256": "7c3f4cfebab63a630a453a828fd4b297a3f8afbe57fcdc454f5e48ef073255da",
+      "matches": true
+    },
+    {
+      "name": "delivery_source",
+      "path": "H:\\JarvisData\\diagnostics\\k2-delivery-source-final.json",
+      "sha256": "9e98a45477b79b55dc16ef65267b284ef0c4aa6236771f6f70def663be0bbedf",
+      "matches": true
+    },
+    {
+      "name": "documentation",
+      "path": "H:\\JarvisData\\diagnostics\\k2-docs-final.json",
+      "sha256": "207a2690c0ddb47f50ebeb9da78dae0efde5d204416e09d1e290fb1b797d34cc",
+      "matches": true
+    },
+    {
+      "name": "optional_voice",
+      "path": "H:\\JarvisData\\diagnostics\\k2-optional-voice-r1.json",
+      "sha256": "01d695e808559f5d65229a66d0f48b820ce39d8a9ce2c89d6b3d64d1cd7f5d79",
+      "matches": true
+    },
+    {
+      "name": "final_live",
+      "path": "H:\\JarvisData\\diagnostics\\k2-final-live.json",
+      "sha256": "d0877a6a9333bc46e189e8f426b01f4a28cc70ad98740082c2a685e53f9b75bd",
+      "matches": true
+    },
+    {
+      "name": "deployment",
+      "path": "H:\\JarvisData\\diagnostics\\k2-deployment-r2.json",
+      "sha256": "61ef24b86997b7fd15713f456d147d6db6c358e8b8e307c3e0e3110c9b541468",
+      "matches": true
+    },
+    {
+      "name": "deployed_live",
+      "path": "H:\\JarvisData\\diagnostics\\k2-deployed-live-r1.json",
+      "sha256": "1cf1d943a354da36830a40c5289c93e5cb02e430d482e953164f8d1d3f21d3d5",
+      "matches": true
+    },
+    {
+      "name": "intent_calibration",
+      "path": "H:\\Jarvis\\evals\\reports\\dialogue-intent-v2-k2-r2-calibration-2026-10-19.json",
+      "sha256": "5090ff1ad9468752c88d36fa4dcd8b90f2b7ba6a4bf85193dcbdd9b57e498fe1",
+      "matches": true
+    },
+    {
+      "name": "intent_heldout",
+      "path": "H:\\Jarvis\\evals\\reports\\dialogue-intent-v2-k2-r2-heldout-2026-10-19.json",
+      "sha256": "51761ffc57607c968120eb0b05399828404cd35b713d4abf35ccea469f27367e",
+      "matches": true
+    }
+  ],
+  "runtime_bound_files": 161,
+  "runtime_changes": [],
+  "authority_updates": [
+    {
+      "path": "docs/manifest.json",
+      "historical_sha256": "b26254ea3063458eeb177eab32a9db0cf8e4abbd5e11ac05fea957548212b17d",
+      "current_sha256": "3076dc2f913ba2abbf58cd4176838683ed0ce89aa0bde1a193157806baa868d1"
+    },
+    {
+      "path": "docs/core-bootstrap.md",
+      "historical_sha256": "1599b72a1cf7e41bdc6003a4389d41bef78da995f17093af2d80c2f6e3afbf45",
+      "current_sha256": "2abfcab9a00d0ac645795be68f3735ee165e86cad3ce71df98a702adb3018363"
+    },
+    {
+      "path": "docs/delivery-validation.md",
+      "historical_sha256": "f91480c617bcffe83e0084b8a4e987000375bb5b573b04a7bfa4d018d8305182",
+      "current_sha256": "55864f0bba7d2f7d9b1f213b7c7223a818df7371ad4ed543bf9dcc52096edb45"
+    }
+  ],
+  "archive": {
+    "path": "H:\\Jarvis\\artifacts\\releases\\jarvis-0.1.62-k2-runtime.zip",
+    "sha256": "527cb8c1e9dcd9b1ce6bda560a1bf7e86f0ed351dcad58bbb89884609ab2b949",
+    "verified_members": 1545,
+    "compared_source_members": 300,
+    "exact_workspace_source_match": false,
+    "workspace_differences": [
+      {
+        "path": "docs/README.md",
+        "archive_sha256": "3c56fe79553eb5392cabe1bbcb3248355fc85973051e7c3c397f887525171c4b",
+        "workspace_sha256": "f06f492ada9f969d264fdb93fd99cce81bfc3a54beeae164e63644f946879bcb"
+      },
+      {
+        "path": "docs/core-bootstrap.md",
+        "archive_sha256": "ab16b916eb4a3d2e7a4764310e88f037a59ec3df43a35534b1108073a338147a",
+        "workspace_sha256": "2abfcab9a00d0ac645795be68f3735ee165e86cad3ce71df98a702adb3018363"
+      },
+      {
+        "path": "docs/delivery-validation.md",
+        "archive_sha256": "c1534b45ef893a8c0719246086ad093ef61f18c932b69861f0190d3f792daeb2",
+        "workspace_sha256": "55864f0bba7d2f7d9b1f213b7c7223a818df7371ad4ed543bf9dcc52096edb45"
+      },
+      {
+        "path": "docs/manifest.json",
+        "archive_sha256": "b26254ea3063458eeb177eab32a9db0cf8e4abbd5e11ac05fea957548212b17d",
+        "workspace_sha256": "3076dc2f913ba2abbf58cd4176838683ed0ce89aa0bde1a193157806baa868d1"
+      }
+    ],
+    "changed_runtime_payload": [],
+    "limits": "The immutable ZIP contains build-time documentation and the former 0.1.61 documentation registration; current documentation corrects the 0.1.62 record. This audit verifies every archive member and the explicitly limited manifest delta. It does not claim byte-identical full source selection or change verify_k2_delivery.py, whose strict comparison will still flag the manifest JSON difference. No archive was rebuilt or overwritten."
+  },
+  "startup": {
+    "evidence": "H:\\JarvisData\\diagnostics\\k2-handoff-20261019\\deployment.json",
+    "sha256": "078b6669cfd7fb8226ade6d989893162855b63c3e99c7bc3b3835e56ed26a7fb",
+    "startup_from_absent": true,
+    "business_state_unchanged": true,
+    "module_health": {
+      "host": "ready",
+      "persona": "ready",
+      "continuity": "ready",
+      "memory": "ready",
+      "seed-catalog": "ready"
+    },
+    "cloud_calls": 0
+  },
+  "live": {
+    "version": "0.1.62",
+    "instance_id": "787f86921e0002989744d0f56be9ef99",
+    "core_ready": true,
+    "active_tasks": 0,
+    "active_chat_requests": 0,
+    "stopped": false
+  },
+  "documentation": {
+    "command": "python tools/check_docs.py --root .",
+    "exit_code": 0,
+    "output": "OK documents=25 diagrams=21 artifacts=42 errors=0"
+  },
+  "external_dependencies": [
+    {
+      "item": "physical_reference_pc",
+      "status": "unavailable",
+      "basis": "Prior owner report: only current computer; no alternative device tested."
+    },
+    {
+      "item": "whole_machine_offline",
+      "status": "pending_owner_device_operation",
+      "runner": "tools/verify_k2_offline.ps1",
+      "basis": "No adapter changes or simulated whole-machine pass."
+    },
+    {
+      "item": "owner_experience",
+      "status": "not_yet_tried",
+      "owner_reply": "还没试用，先完成可独立执行的检查"
+    }
+  ],
+  "limits": [
+    "Existing 580-test run, model evaluation and 30-minute results were integrity-checked, not rerun.",
+    "One historic symbolic-link test remains skipped for OS privilege; no pass was fabricated.",
+    "No production memory write fixture, paid model request, new dependency, deployment version change or broadened execution permission.",
+    "All original reports, failed attempts and the previously retained test directory remain unchanged."
+  ]
+}

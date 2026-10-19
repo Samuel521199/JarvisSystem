@@ -50,17 +50,21 @@ class Provider:
         self.entered = threading.Event()
         self.release = None
 
-    def configuration(self, route):
+    def configuration(self, route, reasoning=None):
         if '::' not in route: raise policy.CoreError('evolution_route_invalid', '模型无效。')
 
-    def generate(self, revision, route, previous, feedback, cancel, checkpoint):
-        self.calls.append({'revision': revision, 'previous': previous, 'feedback': feedback})
+    def generate(self, revision, route, previous, feedback, cancel, checkpoint, reasoning=None):
+        self.calls.append({'revision': revision, 'route': route, 'reasoning': reasoning, 'previous': previous, 'feedback': feedback})
         self.entered.set()
         if self.release:
             while not self.release.wait(.01): checkpoint()
         source = self.sources.pop(0) if len(self.sources) > 1 else self.sources[0]
         if source is None: return None, {'status': 'UNKNOWN', 'outcome_uncertain': True}
         return {'code': source, 'notes': 'test fixture, not model evidence'}, {'status': 'SUCCEEDED', 'provider': 'test'}
+
+    def analyze(self, observation, route, cancel, checkpoint, reasoning=None):
+        self.calls.append({'observation': observation, 'route': route, 'reasoning': reasoning})
+        return '检查结果解释（测试替身）', {'status': 'SUCCEEDED'}
 
 
 class Runner:
@@ -94,6 +98,11 @@ class EvolutionTests(unittest.TestCase):
 
     def enable(self, revision=1):
         self.manager.configure({'enabled': True, 'route': 'test::test', 'target_revision': revision})
+
+    def configure(self, **changes):
+        fields = ('revision', 'enabled', 'interval_seconds', 'auto_heal', 'target_revision', 'models')
+        settings = self.manager.store.settings()
+        return self.manager.configure({**{k: settings[k] for k in fields}, **changes})
 
     def test_generation_independent_validation_activation_and_real_use(self):
         self.assertIsNone(self.manager.snapshot()['selection']['active'])
@@ -148,14 +157,20 @@ class EvolutionTests(unittest.TestCase):
         (self.manager.store.packages/second/'candidate.py').write_text(BAD, encoding='utf-8')
         job = self.submit('check')
         self.assertFalse(job['result']['healthy'])
-        self.assertEqual(job['rollback']['to'], first)
-        self.assertEqual(self.manager.store.selection()['active'], first)
+        self.assertEqual(job['result']['classification'], 'fault')
+        self.assertNotIn('rollback', job)
+        self.assertEqual(self.manager.store.selection()['active'], second)
+        healed = self.submit('heal')
+        self.assertEqual(healed['rollback']['to'], first)
+        self.assertEqual(healed['result']['restored_revision'], 2)
+        self.assertEqual(self.manager.store.package(self.manager.store.selection()['active'])['revision'], 2)
 
-    def test_enabled_check_detects_missing_and_builds_automatically(self):
+    def test_enabled_check_records_missing_optional_without_building(self):
         self.enable(2)
         job = self.submit('check')
-        self.assertEqual(job['result']['detected'], 'missing')
-        self.assertEqual(self.manager.store.package(self.manager.store.selection()['active'])['revision'], 2)
+        self.assertEqual(job['result']['classification'], 'missing_optional')
+        self.assertIsNone(self.manager.store.selection()['active'])
+        self.assertEqual(self.provider.calls, [])
 
     def test_no_model_when_auto_disabled(self):
         self.assertFalse(self.submit('check')['result']['healthy'])
@@ -240,6 +255,7 @@ class EvolutionTests(unittest.TestCase):
         self.submit('ensure',target_revision=1)
         self.submit('ensure',target_revision=2)
         self.enable(2)
+        self.configure(auto_heal=True)
         real = self.runner.run
         self.runner.run = lambda source, inputs, cp: (['bad'], {}) if len(inputs)==1 else real(source, inputs, cp)
         job = self.submit('execute',input=recipes.cases(1)[0])
@@ -265,7 +281,8 @@ class EvolutionTests(unittest.TestCase):
         active = self.submit('ensure', target_revision=1)['result']['package']
         with patch.object(self.manager, '_resources', side_effect=policy.CoreError('evolution_memory_pressure', '内存不足')):
             job = self.submit('check')
-        self.assertEqual(job['error'], 'evolution_memory_pressure')
+        self.assertIsNone(job['error'])
+        self.assertTrue(job['result']['healthy'])
         self.assertEqual(self.manager.store.selection()['active'], active)
         self.assertEqual(self.manager.store.package(active)['state'], 'VERIFIED')
 
@@ -298,6 +315,145 @@ class EvolutionTests(unittest.TestCase):
         with self.assertRaises(policy.CoreError): EvolutionStore(self.core, 'test::test')
         with self.manager.store.connection() as db:
             self.assertEqual(db.execute('PRAGMA user_version').fetchone()[0], 99)
+
+    def test_gap_is_not_a_fault_and_inspection_never_runs_worker(self):
+        active = self.submit('ensure', target_revision=1)['result']['package']
+        self.configure(target_revision=2, auto_heal=True)
+        calls = len(self.runner.calls)
+        checked = self.submit('check')
+        self.assertEqual(checked['result']['classification'], 'capability_gap')
+        self.assertTrue(checked['result']['healthy'])
+        self.assertFalse(self.submit('heal')['result']['changed'])
+        self.assertEqual(len(self.runner.calls), calls)
+        self.assertEqual(len(self.provider.calls), 1)
+        self.assertEqual(self.manager.store.selection()['active'], active)
+
+    def test_heal_restores_original_contract_using_its_own_model(self):
+        active = self.submit('ensure', target_revision=1)['result']['package']
+        models = self.manager.store.settings()['models']
+        models['heal']['primary'] = {'route':'test::repair', 'reasoning':'high'}
+        self.configure(target_revision=2, models=models)
+        (self.manager.store.packages/active/'candidate.py').write_text(BAD, encoding='utf-8')
+        result = self.submit('heal')
+        self.assertEqual(result['status'], 'SUCCEEDED', result)
+        self.assertEqual(result['result']['restored_revision'], 1)
+        self.assertEqual(self.provider.calls[-1]['route'], 'test::repair')
+        self.assertEqual(self.provider.calls[-1]['reasoning'], 'high')
+        self.assertEqual(self.provider.calls[-1]['revision'], 1)
+
+    def test_diagnosis_is_advisory_and_has_independent_model(self):
+        models = self.manager.store.settings()['models']
+        models['inspect']['primary'] = {'route':'test::diagnose', 'reasoning':'low'}
+        self.configure(models=models)
+        before = self.manager.store.selection()
+        job = self.submit('analyze')
+        self.assertTrue(job['result']['advisory_only'])
+        self.assertEqual(self.provider.calls[-1]['route'], 'test::diagnose')
+        self.assertEqual(self.provider.calls[-1]['reasoning'], 'low')
+        self.assertEqual(self.manager.store.selection(), before)
+        self.assertEqual(self.runner.calls, [])
+
+    def test_fallback_counts_against_two_calls_and_preserves_actual_route(self):
+        models = self.manager.store.settings()['models']
+        models['evolve'] = {'primary':{'route':'test::primary','reasoning':'high'},
+                            'fallback':{'route':'test::fallback','reasoning':'low'}}
+        self.configure(models=models)
+        original = self.provider.generate
+        def generate(revision, route, *args, **kwargs):
+            if route == 'test::primary':
+                return None, {'status':'FAILED','error_category':'quota_exhausted'}
+            return original(revision, route, *args, **kwargs)
+        with patch.object(self.provider, 'generate', side_effect=generate) as call:
+            job = self.submit('ensure', target_revision=1)
+        self.assertEqual(job['status'], 'SUCCEEDED', job)
+        self.assertEqual(call.call_count, 2)
+        self.assertEqual(len(job['attempts']), 2)
+        self.assertTrue(job['attempts'][1]['coding']['fallback'])
+        self.assertEqual(job['attempts'][1]['coding']['selection'], models['evolve']['fallback'])
+
+    def test_unknown_partial_and_offline_never_switch_models(self):
+        models = self.manager.store.settings()['models']
+        models['evolve']['fallback'] = {'route':'test::fallback','reasoning':None}
+        self.configure(models=models)
+        for receipt in ({'status':'UNKNOWN','error_category':'provider_unavailable'},
+                        {'status':'FAILED','error_category':'network_offline'},
+                        {'status':'FAILED','error_category':'quota_exhausted','output_incomplete':True}):
+            with self.subTest(receipt=receipt), patch.object(self.provider, 'generate', return_value=(None,receipt)) as call:
+                job = self.submit('ensure', target_revision=1)
+                self.assertNotEqual(job['status'], 'SUCCEEDED')
+                self.assertEqual(call.call_count, 1)
+
+    def test_config_compare_and_swap_and_job_policy_snapshot(self):
+        old = self.manager.store.settings()
+        self.configure(interval_seconds=3600)
+        with self.assertRaises(policy.CoreError) as caught: self.configure(revision=old['revision'])
+        self.assertEqual(caught.exception.code, 'evolution_conflict')
+        job = self.submit('check')
+        frozen = copy.deepcopy(job['policy'])
+        self.configure(interval_seconds=900)
+        self.assertEqual(self.manager.store.job(job['id'])['policy'], frozen)
+
+    def test_disabled_primary_can_fallback_before_dispatch(self):
+        models = self.manager.store.settings()['models']
+        primary = models['evolve']['primary']['route']
+        models['evolve']['fallback'] = {'route':'test::fallback','reasoning':None}
+        self.configure(models=models)
+        original = self.provider.generate
+        def generate(revision, route, *args, **kwargs):
+            if route == primary: raise policy.CoreError('evolution_route_invalid', 'disabled')
+            return original(revision, route, *args, **kwargs)
+        with patch.object(self.provider, 'generate', side_effect=generate):
+            job = self.submit('ensure', target_revision=1)
+        self.assertEqual(job['status'], 'SUCCEEDED', job)
+        self.assertFalse(job['attempts'][0]['coding']['dispatched'])
+        self.assertEqual(self.provider.calls[-1]['route'], 'test::fallback')
+
+    def test_inspection_diagnosis_fallback_does_not_publish(self):
+        models = self.manager.store.settings()['models']
+        models['inspect']['fallback'] = {'route':'test::fallback','reasoning':'low'}
+        self.configure(models=models)
+        with patch.object(self.provider, 'analyze', side_effect=[
+                (None,{'status':'FAILED','error_category':'authentication'}),
+                ('advice',{'status':'SUCCEEDED'})]) as call:
+            job = self.submit('analyze')
+        self.assertEqual(job['status'], 'SUCCEEDED', job)
+        self.assertEqual(call.call_count, 2)
+        self.assertTrue(job['attempts'][1]['coding']['fallback'])
+        self.assertEqual(self.manager.store.snapshot()['packages'], [])
+
+    def test_automatic_heal_requires_opt_in_and_separate_fault_job(self):
+        active = self.submit('ensure', target_revision=1)['result']['package']
+        (self.manager.store.packages/active/'candidate.py').write_text(BAD, encoding='utf-8')
+        checked = self.submit('check')
+        self.manager._queue_automatic_heal(checked)
+        self.assertEqual(len(self.provider.calls), 1)
+        self.configure(auto_heal=True)
+        self.manager._queue_automatic_heal(checked)
+        self.wait(checked)
+        healed = self.manager.store.snapshot()['jobs'][0]
+        self.assertEqual(healed['action'], 'heal')
+        self.assertEqual(healed['cause']['inspection_job'], checked['id'])
+        self.assertEqual(self.manager.store.job(checked['id'])['attempts'], [])
+        self.assertEqual(healed['status'], 'SUCCEEDED')
+
+    def test_v1_settings_migration_preserves_artifacts_without_enabling_healing(self):
+        from jarvis_core.evolution.store import EvolutionStore
+        from jarvis_core.releases import RuntimeSlots
+        self.submit('ensure', target_revision=1)
+        before = self.manager.store.selection()
+        with self.manager.store.connection() as db:
+            db.execute('UPDATE settings SET document=?', (json.dumps({'enabled':True,'interval_seconds':300,'route':'test::old','target_revision':2}),))
+            db.execute('PRAGMA user_version=1')
+        migrated = EvolutionStore(self.core, 'test::new')
+        self.assertEqual(migrated.selection(), before)
+        value = migrated.settings()
+        self.assertEqual(value['interval_seconds'], 300)
+        self.assertTrue(value['enabled'])
+        self.assertFalse(value['auto_heal'])
+        self.assertEqual(value['models']['evolve']['primary']['route'], 'test::old')
+        data_format = {'optional_versions':{'evolution/evolution.db':2}}
+        self.assertFalse(RuntimeSlots._compatible('0.1.63', data_format))
+        self.assertTrue(RuntimeSlots._compatible('0.1.64', data_format))
 
 
 class EvolutionHTTPTests(unittest.TestCase):

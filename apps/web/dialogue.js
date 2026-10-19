@@ -6,13 +6,13 @@ const dispositionNames={requested:'当前请求',discussed:'讨论/引述/假设
 function intentSummary(result){
  const d=result.intent_decision;if(!d)return '';
  const labels=d.state==='recognized'?[...new Set(d.intents.map(i=>intentNames[i.kind]||'其他'))].join(' + '):'暂未识别';
- return '意图参考：'+labels+' · '+(result.work_admission?.status==='submitted'?'已受理文档任务':'未自动派发');
+ return '意图参考：'+labels+' · '+(result.work_admission?.status==='submitted'?'任务已受理':result.work_admission?.status==='controlled'?'任务控制已受理':'未自动派发');
 }
 function markIntent(article,result){
  const d=result.intent_decision;if(!d||article.querySelector('.dialogue-intent'))return;
  const details=document.createElement('details');details.className='message-meta dialogue-intent';
  const summary=document.createElement('summary');summary.textContent=intentSummary(result);details.append(summary);
- const submitted=result.work_admission?.status==='submitted';
+ const submitted=['submitted','controlled'].includes(result.work_admission?.status);
  const note=document.createElement('p');note.textContent=result.work_admission?.reason||(d.state==='recognized'?'以下是本轮输入的识别参考，可同时包含多种需求。尚未提交任务或改变记忆、播放与系统状态。':d.state==='not_evaluated'?'此模型尚未验证意图协议，当前保留普通对话；明确任务入口仍可使用。':d.state==='skipped_budget'?'当前模型输入预算较小，保留普通回答并跳过意图识别；未自动派发。':'识别格式未确认。本轮没有根据候选执行操作，也没有额外重试模型。');details.append(note);
  const conversationId=window.Workspace?.currentConversation().id;
  for(const item of d.intents||[]){

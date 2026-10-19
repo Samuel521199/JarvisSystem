@@ -1,0 +1,49 @@
+{
+  "status": "verified_within_declared_scope_and_deployed",
+  "source_version": "0.1.59",
+  "date": "2026-10-19",
+  "scope": "F01 first bounded sample-report increment; not full F01 or V-DLG/K2.",
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/__init__.py": "e0dcd98d6ecb508af15d51d97be4020fcac2e30dd3f016c220d24c6c5ff91542",
+    "runtime/node-host/jarvis_core/report_intents.py": "65a84f2e1eb0a401df7cb0fb11b14b981aded5c9be8cf26290d4b5948b81e83b",
+    "runtime/node-host/jarvis_core/work_admission.py": "e73cd0b0ca943df9e6b78ccc89f92105935f04c92163d9c9825e3032dc936dea",
+    "runtime/node-host/jarvis_core/task_revisions.py": "3eb98f907bfc30c30d17d235dd7a42ee9b567cf5275d6f93bb1a30e9f80b8327",
+    "runtime/node-host/jarvis_core/task_queue.py": "4d2a4250062c20be22be9961ed0aa9b8ab38d830ef37e3a33f4aad304ce0db1c",
+    "runtime/node-host/jarvis_core/ledger.py": "b89c8fc52c1d5a12812c87f466e7077f94beccb7df6e6bdbc777ed58d5d7c83e",
+    "runtime/node-host/jarvis_core/conversation_tasks.py": "af5e97e3e8fcf3b2b213e91b0dcce0f849e6c4abbef9916c22f2623317174fbe",
+    "runtime/node-host/jarvis_core/turns.py": "1a8f1e1fdba3ebf1f432be147a4b5d6e13d779400f860355b16e115e5bf745f0",
+    "apps/web/server.py": "cb39a008580fdec00ee7f5e4ec0a4ffa48786bc8482105634f8923d41f50efb1",
+    "apps/web/dialogue.js": "a5a62f8ab2c15601fff468e29b38cd5e1efcfcf3cfb9bd3b5b3f00cebd27c4ec",
+    "apps/web/conversation_tasks.js": "5e2037607e548341669dee1a09a4d442cf877196723f5579c94db66cde7220cf",
+    "tests/test_report_admission.py": "b9d9e4a1373d0ab35510c656da788f29f8144f750efcaf75f1a2f8d1d4a9b4b7",
+    "config/dialogue-automation.json": "7821f76675ad0a4f4bd74fd974b69838e451ef8f1d2ef96032beb5d48ee2cff0"
+  },
+  "evidence": [
+    "report-admission-baseline-2026-10-19.json",
+    "report-admission-ui-2026-10-19.json",
+    "report-intent-heldout-h2-2026-10-19.json",
+    "report-admission-live-r3-2026-10-19.json",
+    "report-admission-recorded-replay-2026-10-19.json",
+    "report-admission-deployment-2026-10-19.json"
+  ],
+  "local_tests": 149,
+  "semantic_heldout": {
+    "new_cases": 32,
+    "positive_admitted": 15,
+    "positive_total": 16,
+    "false_admissions": 0,
+    "negative_total": 16,
+    "wrong_selected_arguments": 0,
+    "author_labelled": true
+  },
+  "deployment_instance": "562b80b6512eb8a47b8d8456fbea1601",
+  "user_tables_unchanged": true,
+  "limits": [
+    "One remaining missed explicit request in new holdout",
+    "Only configured Flash route and sample report operations",
+    "Explicit full task ID, not ambiguous pronouns",
+    "Only not-yet-started reports can be revised",
+    "Full V-DLG, long-load fairness and physical voice remain unverified"
+  ],
+  "next": "F03 rule and semantic candidate write/review consistency"
+}

@@ -169,7 +169,11 @@ class MemorySourceTests(unittest.TestCase):
     def test_existing_independent_fact_is_not_made_dependent_by_matching_candidate(self):
         memory=MemoryStore(self.core);body=self.payload();item=body['candidate']
         original=memory.command('remember',item['title'],item['content'],request_id=uuid.uuid4().hex)
-        result=self.service.confirm(body)['receipt'];self.assertEqual(original['id'],result['id'])
+        review=self.service.review({'preview_token':body['preview_token'],'candidate_id':item['candidate_id'],
+            'title':item['title'],'content':item['content'],'classification':item['classification'],'scope':'current'})
+        result=self.service.resolve({'review_token':review['review_token'],'decision':'keep','target_id':original['id']})['receipt']
+        self.assertEqual(original['id'],result['id'])
+        self.assertIsNone(memory.list()['facts'][0]['document'].get('classification'))
         self.archives.delete(self.cid,{'revision':1})
         self.assertTrue(memory.context({'enabled':True,'project_id':None},'local')[0])
 
@@ -181,7 +185,7 @@ class MemorySourceTests(unittest.TestCase):
         self.archives.put(other,{'revision':0,'document':document})
         query={'source':{'conversation_id':other,'message_index':0},'project_id':None}
         suggestion=self.service.suggest(query)
-        payload={**query,'source_digest':suggestion['source_digest'],'candidate':suggestion['candidates'][0],'scope':'current'}
+        payload={**query,'source_digest':suggestion['source_digest'],'preview_token':suggestion['preview_token'],'candidate':suggestion['candidates'][0],'scope':'current'}
         with self.assertRaises(MemoryError) as exc:self.service.confirm(payload)
         self.assertEqual(exc.exception.code,'memory_conflict')
         self.assertEqual(memory.context({'enabled':True,'project_id':None},'local')[0],'')

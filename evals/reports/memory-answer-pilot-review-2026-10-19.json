@@ -1,0 +1,37 @@
+{
+  "source_version": "0.1.60",
+  "report": "memory-answer-pilot-2026-10-19.json",
+  "status": "REVIEWED_WITH_LIMITATIONS",
+  "keyword_rubric": {
+    "memory": {
+      "runs": 8,
+      "rubric_passes": 8
+    },
+    "control": {
+      "runs": 8,
+      "rubric_passes": 8
+    }
+  },
+  "estimated_usd": 0.057998,
+  "assistant_context_sha256_post_run": "e5bb132969024d1225bbcefcce22e5dd3562249d24870c5434aef4ec1b0571a3",
+  "findings": [
+    {
+      "id": "ANSWER-PROMISE-01",
+      "cases": [
+        "A01/control",
+        "A02/control",
+        "A03/memory"
+      ],
+      "observation": "Answers offer to remember or use a memory command on the user behalf although ordinary model replies cannot execute memory writes. Not a current-write claim, but an unsupported future capability implication; not captured by keyword rubric."
+    },
+    {
+      "id": "CONTEXT-STALE-01",
+      "observation": "Host instructions still say no chat dispatch and shadow-only; this is outdated for 0.1.59 bounded Host admission. Intent remains a proposal until actual Host receipt."
+    }
+  ],
+  "limits": [
+    "Only two positive evidence-use cases and six exclusion cases, one run per arm",
+    "Original source conversation persists after fact forgetting",
+    "Not independent blind evaluation, framework comparison or complete memory quality score"
+  ]
+}

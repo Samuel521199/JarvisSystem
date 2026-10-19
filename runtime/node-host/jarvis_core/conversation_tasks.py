@@ -8,6 +8,7 @@ import re
 from . import policy
 from .policy import CoreError
 from .sample_tasks import CAPABILITY
+from .storage_budget import interactive
 
 
 def conversation_id(value):
@@ -67,9 +68,21 @@ class ConversationTasks:
                 'error':record['action'].get('error'),'kind':{'mcp.documentation.v1':'mcp','skill.report.v1':'skill'}.get(record['action']['capability_id'],'natural')}
 
     def detail(self, ident, task_id):
-        self._bound(ident,task_id)
-        return {**self.tasks.detail(task_id,all_tasks=True),'conversation_id':ident}
+        record=self._bound(ident,task_id)
+        result={**self.tasks.detail(task_id,all_tasks=True),'conversation_id':ident}
+        if record['action']['capability_id']==CAPABILITY:
+            from .task_revisions import revision
+            import json
+            control={'relative_path':record['action']['arguments']['inventory']['relative_path'],
+                     'revision':revision(record), 'admission':None}
+            with self.core.ledger.connection() as db:
+                if db.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='report_admissions'").fetchone():
+                    row=db.execute('SELECT document FROM report_admissions WHERE task_id=?',(task_id,)).fetchone()
+                    if row:control['admission']=json.loads(row['document'])
+            result['report_control']=control
+        return result
 
+    @interactive
     def cancel(self, ident, task_id, payload):
         if payload!={}:raise CoreError('invalid_request','取消只接受空对象。')
         self._bound(ident,task_id)

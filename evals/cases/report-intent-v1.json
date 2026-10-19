@@ -1,0 +1,551 @@
+{
+  "schema_version": 1,
+  "label_provenance": "Author-labelled synthetic cases; not independent human annotation. Heldout labels are frozen before calibration.",
+  "cases": [
+    {
+      "id": "C01",
+      "split": "calibration",
+      "text": "生成样例报告",
+      "selection": {
+        "operation": "create",
+        "relative_path": "."
+      }
+    },
+    {
+      "id": "C02",
+      "split": "calibration",
+      "text": "请生成样例目录报告。",
+      "selection": {
+        "operation": "create",
+        "relative_path": "."
+      }
+    },
+    {
+      "id": "C03",
+      "split": "calibration",
+      "text": "我很难过，陪我聊聊，顺便把样例报告导出。",
+      "selection": {
+        "operation": "create",
+        "relative_path": "."
+      }
+    },
+    {
+      "id": "C04",
+      "split": "calibration",
+      "text": "今天心情很好，顺便导出样例报告。",
+      "selection": {
+        "operation": "create",
+        "relative_path": "."
+      }
+    },
+    {
+      "id": "C05",
+      "split": "calibration",
+      "text": "导出样例报告 目录: sub/data",
+      "selection": {
+        "operation": "create",
+        "relative_path": "sub/data"
+      }
+    },
+    {
+      "id": "C06",
+      "split": "calibration",
+      "text": "Please export a sample directory report.",
+      "selection": {
+        "operation": "create",
+        "relative_path": "."
+      }
+    },
+    {
+      "id": "C07",
+      "split": "calibration",
+      "text": "I feel lonely; please chat with me; also generate a sample report.",
+      "selection": {
+        "operation": "create",
+        "relative_path": "."
+      }
+    },
+    {
+      "id": "C08",
+      "split": "calibration",
+      "text": "Save a sample report for photos",
+      "selection": {
+        "operation": "create",
+        "relative_path": "photos"
+      }
+    },
+    {
+      "id": "C09",
+      "split": "calibration",
+      "text": "取消报告 task_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "selection": {
+        "operation": "cancel",
+        "target": "task_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    },
+    {
+      "id": "C10",
+      "split": "calibration",
+      "text": "把报告 task_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa 的目录改为 sub",
+      "selection": {
+        "operation": "revise",
+        "target": "task_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "relative_path": "sub"
+      }
+    },
+    {
+      "id": "C11",
+      "split": "calibration",
+      "text": "cancel task_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "selection": {
+        "operation": "cancel",
+        "target": "task_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    },
+    {
+      "id": "C12",
+      "split": "calibration",
+      "text": "change task_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa directory to images",
+      "selection": {
+        "operation": "revise",
+        "target": "task_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "relative_path": "images"
+      }
+    },
+    {
+      "id": "C13",
+      "split": "calibration",
+      "text": "不要生成样例报告",
+      "selection": null
+    },
+    {
+      "id": "C14",
+      "split": "calibration",
+      "text": "如果我让你生成样例报告，你会做什么？",
+      "selection": null
+    },
+    {
+      "id": "C15",
+      "split": "calibration",
+      "text": "“生成样例报告”是什么意思？",
+      "selection": null
+    },
+    {
+      "id": "C16",
+      "split": "calibration",
+      "text": "我很难受，陪我聊聊。",
+      "selection": null
+    },
+    {
+      "id": "C17",
+      "split": "calibration",
+      "text": "生成样例报告，先别做，听我说完。",
+      "selection": null
+    },
+    {
+      "id": "C18",
+      "split": "calibration",
+      "text": "我以后想让你生成样例报告。",
+      "selection": null
+    },
+    {
+      "id": "C19",
+      "split": "calibration",
+      "text": "把报告目录改为 sub",
+      "selection": null
+    },
+    {
+      "id": "C20",
+      "split": "calibration",
+      "text": "停一下",
+      "selection": null
+    },
+    {
+      "id": "C21",
+      "split": "calibration",
+      "text": "生成样例报告，删除旧文件。",
+      "selection": null
+    },
+    {
+      "id": "C22",
+      "split": "calibration",
+      "text": "Please do not export a sample report.",
+      "selection": null
+    },
+    {
+      "id": "C23",
+      "split": "calibration",
+      "text": "生成样例报告 目录: ../private",
+      "selection": null
+    },
+    {
+      "id": "C24",
+      "split": "calibration",
+      "text": "取消报告 task_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa 和 task_bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "selection": null
+    },
+    {
+      "id": "H01",
+      "split": "heldout",
+      "text": "帮我导出样例目录报告。",
+      "selection": {
+        "operation": "create",
+        "relative_path": "."
+      }
+    },
+    {
+      "id": "H02",
+      "split": "heldout",
+      "text": "请保存一份样例报告",
+      "selection": {
+        "operation": "create",
+        "relative_path": "."
+      }
+    },
+    {
+      "id": "H03",
+      "split": "heldout",
+      "text": "整理样例目录统计报告。",
+      "selection": {
+        "operation": "create",
+        "relative_path": "."
+      }
+    },
+    {
+      "id": "H04",
+      "split": "heldout",
+      "text": "把样例目录报告保存一下。",
+      "selection": {
+        "operation": "create",
+        "relative_path": "."
+      }
+    },
+    {
+      "id": "H05",
+      "split": "heldout",
+      "text": "我有点失落，陪我说说话；顺便生成样例目录报告。",
+      "selection": {
+        "operation": "create",
+        "relative_path": "."
+      }
+    },
+    {
+      "id": "H06",
+      "split": "heldout",
+      "text": "今天很累，我想聊一会儿；也导出样例报告。",
+      "selection": {
+        "operation": "create",
+        "relative_path": "."
+      }
+    },
+    {
+      "id": "H07",
+      "split": "heldout",
+      "text": "我拿到了好成绩！请帮我生成样例报告。",
+      "selection": {
+        "operation": "create",
+        "relative_path": "."
+      }
+    },
+    {
+      "id": "H08",
+      "split": "heldout",
+      "text": "最近有些孤单，陪我聊聊；然后把样例报告导出。",
+      "selection": {
+        "operation": "create",
+        "relative_path": "."
+      }
+    },
+    {
+      "id": "H09",
+      "split": "heldout",
+      "text": "什么是文件扩展名？顺便保存样例目录报告。",
+      "selection": {
+        "operation": "create",
+        "relative_path": "."
+      }
+    },
+    {
+      "id": "H10",
+      "split": "heldout",
+      "text": "谢谢你陪我聊天，生成样例报告。",
+      "selection": {
+        "operation": "create",
+        "relative_path": "."
+      }
+    },
+    {
+      "id": "H11",
+      "split": "heldout",
+      "text": "导出样例目录报告 目录: reports/2026",
+      "selection": {
+        "operation": "create",
+        "relative_path": "reports/2026"
+      }
+    },
+    {
+      "id": "H12",
+      "split": "heldout",
+      "text": "请统计样例报告 目录: 测试目录",
+      "selection": {
+        "operation": "create",
+        "relative_path": "测试目录"
+      }
+    },
+    {
+      "id": "H13",
+      "split": "heldout",
+      "text": "Export the sample report.",
+      "selection": {
+        "operation": "create",
+        "relative_path": "."
+      }
+    },
+    {
+      "id": "H14",
+      "split": "heldout",
+      "text": "Please save a sample directory report for logs",
+      "selection": {
+        "operation": "create",
+        "relative_path": "logs"
+      }
+    },
+    {
+      "id": "H15",
+      "split": "heldout",
+      "text": "I am excited today; also export a sample report.",
+      "selection": {
+        "operation": "create",
+        "relative_path": "."
+      }
+    },
+    {
+      "id": "H16",
+      "split": "heldout",
+      "text": "What is a JSON report? Please generate a sample report.",
+      "selection": {
+        "operation": "create",
+        "relative_path": "."
+      }
+    },
+    {
+      "id": "H17",
+      "split": "heldout",
+      "text": "I am a little sad; please keep me company; export a sample directory report for demo",
+      "selection": {
+        "operation": "create",
+        "relative_path": "demo"
+      }
+    },
+    {
+      "id": "H18",
+      "split": "heldout",
+      "text": "只取消报告 task_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "selection": {
+        "operation": "cancel",
+        "target": "task_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    },
+    {
+      "id": "H19",
+      "split": "heldout",
+      "text": "请停止任务 task_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "selection": {
+        "operation": "cancel",
+        "target": "task_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    },
+    {
+      "id": "H20",
+      "split": "heldout",
+      "text": "今天我有点焦虑；取消报告 task_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "selection": {
+        "operation": "cancel",
+        "target": "task_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    },
+    {
+      "id": "H21",
+      "split": "heldout",
+      "text": "Please cancel report task_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "selection": {
+        "operation": "cancel",
+        "target": "task_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    },
+    {
+      "id": "H22",
+      "split": "heldout",
+      "text": "请把报告 task_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa 的目录改成 images/photos",
+      "selection": {
+        "operation": "revise",
+        "target": "task_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "relative_path": "images/photos"
+      }
+    },
+    {
+      "id": "H23",
+      "split": "heldout",
+      "text": "任务 task_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa 目录改为 .",
+      "selection": {
+        "operation": "revise",
+        "target": "task_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "relative_path": "."
+      }
+    },
+    {
+      "id": "H24",
+      "split": "heldout",
+      "text": "Please change task_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa directory to samples/中文",
+      "selection": {
+        "operation": "revise",
+        "target": "task_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "relative_path": "samples/中文"
+      }
+    },
+    {
+      "id": "H25",
+      "split": "heldout",
+      "text": "先不要导出样例目录报告。",
+      "selection": null
+    },
+    {
+      "id": "H26",
+      "split": "heldout",
+      "text": "如果明天下雨，请生成样例报告。",
+      "selection": null
+    },
+    {
+      "id": "H27",
+      "split": "heldout",
+      "text": "别人说“请保存样例报告”，我没让你做。",
+      "selection": null
+    },
+    {
+      "id": "H28",
+      "split": "heldout",
+      "text": "翻译成英文：生成样例报告。",
+      "selection": null
+    },
+    {
+      "id": "H29",
+      "split": "heldout",
+      "text": "以后有机会我想让你生成样例报告。",
+      "selection": null
+    },
+    {
+      "id": "H30",
+      "split": "heldout",
+      "text": "我今天不需要样例报告，只想聊天。",
+      "selection": null
+    },
+    {
+      "id": "H31",
+      "split": "heldout",
+      "text": "我很难过；顺便导出样例报告，但是先别做。",
+      "selection": null
+    },
+    {
+      "id": "H32",
+      "split": "heldout",
+      "text": "请导出样例报告和财务报表。",
+      "selection": null
+    },
+    {
+      "id": "H33",
+      "split": "heldout",
+      "text": "生成样例报告，然后上传到外部网站。",
+      "selection": null
+    },
+    {
+      "id": "H34",
+      "split": "heldout",
+      "text": "生成样例报告；再生成样例目录报告。",
+      "selection": null
+    },
+    {
+      "id": "H35",
+      "split": "heldout",
+      "text": "保存样例报告到 C:/Users/report.json",
+      "selection": null
+    },
+    {
+      "id": "H36",
+      "split": "heldout",
+      "text": "导出样例报告 目录: ../../docs",
+      "selection": null
+    },
+    {
+      "id": "H37",
+      "split": "heldout",
+      "text": "请读取所有文件正文并生成样例报告。",
+      "selection": null
+    },
+    {
+      "id": "H38",
+      "split": "heldout",
+      "text": "把样例报告保存为 PDF。",
+      "selection": null
+    },
+    {
+      "id": "H39",
+      "split": "heldout",
+      "text": "取消另一个会话里的报告。",
+      "selection": null
+    },
+    {
+      "id": "H40",
+      "split": "heldout",
+      "text": "取消刚才那个。",
+      "selection": null
+    },
+    {
+      "id": "H41",
+      "split": "heldout",
+      "text": "把它改为另一个目录。",
+      "selection": null
+    },
+    {
+      "id": "H42",
+      "split": "heldout",
+      "text": "先别取消报告 task_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "selection": null
+    },
+    {
+      "id": "H43",
+      "split": "heldout",
+      "text": "如果有空就取消报告 task_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "selection": null
+    },
+    {
+      "id": "H44",
+      "split": "heldout",
+      "text": "把报告 task_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa 的目录改为 C:/private",
+      "selection": null
+    },
+    {
+      "id": "H45",
+      "split": "heldout",
+      "text": "Cancel task_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa and task_bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "selection": null
+    },
+    {
+      "id": "H46",
+      "split": "heldout",
+      "text": "Translate: export a sample report.",
+      "selection": null
+    },
+    {
+      "id": "H47",
+      "split": "heldout",
+      "text": "Maybe one day you could generate a sample report.",
+      "selection": null
+    },
+    {
+      "id": "H48",
+      "split": "heldout",
+      "text": "Please export a sample report only if I confirm later.",
+      "selection": null
+    }
+  ]
+}

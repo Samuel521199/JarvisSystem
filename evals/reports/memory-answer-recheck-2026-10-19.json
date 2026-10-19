@@ -1,0 +1,2855 @@
+{
+  "status": "COMPLETED",
+  "source_version": "0.1.61",
+  "captured_at": "2026-10-18T18:27:48.434627+00:00",
+  "live": true,
+  "route": "vertex::gemini-3.1-pro-preview",
+  "split": "author_created_development_pilot",
+  "corpus_sha256": "0723439ccbb801371f957cc4791cbb845a9b371a00c8cdffda3d6ba6caebe364",
+  "source_sha256": {
+    "tools/eval_memory_answers.py": "19e5c0a2071cd42f9202e2340ac99bb40b0c5b1d334c92d04b9d90c041cba858",
+    "runtime/node-host/jarvis_core/assistant_context.py": "6541e7daf8610e09a33f9d129edb680be5065b624b631e1c0baf3a278604bb28",
+    "runtime/node-host/jarvis_core/chat.py": "5b16a14adef6f9a73364bf62b7df01b74701745461c0f06ff48124a384776b5f",
+    "runtime/node-host/jarvis_core/memory_view.py": "f7e4aab24001d80180819a33e73822fccb9e79a21149d4f8ced28dc1dc26cd8d",
+    "runtime/node-host/jarvis_core/memory.py": "9b84a9533c13ba146f8afeec847f16a9d7e4f31a1e1e6f931930d6612ac8f323",
+    "runtime/node-host/jarvis_core/personal_candidates.py": "3062b0623bcac4eeb5be4a5b46b09319d73225df78b8b77788ded74222e31c4e",
+    "runtime/node-host/jarvis_core/memory_review.py": "0f17e2f15e88b4c1182ab8d734daa6bc895c05e82e6c6b148097d7b867972a97"
+  },
+  "rows": [
+    {
+      "case": "A01",
+      "arm": "memory",
+      "events": [
+        "archive_source",
+        "rule_preview",
+        "local_review",
+        "explicit_synthetic_confirmation",
+        "permit_selected_provider_for_synthetic_fact",
+        "keep"
+      ],
+      "elapsed_ms": 8814.808,
+      "result": {
+        "provider": "vertex",
+        "model": "gemini-3.1-pro-preview",
+        "request_id": "cdb2e3719d7747b0b566101d4815c73c",
+        "billing_identity": {
+          "adapter": "vertex",
+          "label": "vertex",
+          "key_id": null,
+          "key_label": "历史未归属"
+        },
+        "dispatch_admitted": true,
+        "http_status": 200,
+        "usage": {
+          "promptTokenCount": 365,
+          "candidatesTokenCount": 13,
+          "totalTokenCount": 636,
+          "thoughtsTokenCount": 258
+        },
+        "output_incomplete": false,
+        "completion_reason": "complete",
+        "billing": {
+          "basis": "estimated",
+          "amount": 0.003982,
+          "currency": "USD",
+          "tokens": {
+            "input": 365,
+            "output": 271,
+            "cache_read": 0,
+            "cache_write": 0,
+            "total": 636,
+            "reasoning": 258
+          },
+          "price": {
+            "input": 2,
+            "output": 12,
+            "cache_read": 0.2,
+            "cache_write": null,
+            "max_input_tokens": 200000,
+            "currency": "USD",
+            "fee_percent": 0,
+            "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+            "checked_at": "2026-10-16"
+          },
+          "reason": "token_rates"
+        },
+        "outcome_uncertain": false,
+        "elapsed_seconds": 8.637,
+        "status": "SUCCEEDED",
+        "automatic_retry": false,
+        "text": "根据我的记录，您平时喜欢喝茉莉花茶。",
+        "reasoning": "low",
+        "attempts": [
+          {
+            "provider": "vertex",
+            "model": "gemini-3.1-pro-preview",
+            "status": "SUCCEEDED",
+            "outcome_uncertain": false,
+            "dispatch_admitted": true,
+            "request_id": "cdb2e3719d7747b0b566101d4815c73c",
+            "usage": {
+              "promptTokenCount": 365,
+              "candidatesTokenCount": 13,
+              "totalTokenCount": 636,
+              "thoughtsTokenCount": 258
+            },
+            "elapsed_seconds": 8.637
+          }
+        ],
+        "notice": [],
+        "history_info": {
+          "input_messages": 0,
+          "kept_messages": 0,
+          "dropped_messages": 0,
+          "truncated": false,
+          "kept_bytes": 0,
+          "max_messages": 20,
+          "max_bytes": 32768,
+          "kept_indexes": [],
+          "context": {
+            "schema_version": "1.0.0",
+            "strategy": "recent-whole-turns-v1",
+            "revision": "ec6944b2041b51b5f8a5cc79a6b73f152f28e5363f236ea7515969aedbc30ce0",
+            "provider": "vertex",
+            "model": "gemini-3.1-pro-preview",
+            "note_applied": false,
+            "note_bytes": 0,
+            "required_bytes": 1557,
+            "total_text_bytes": 1557,
+            "max_text_bytes": 65536,
+            "token_count": null,
+            "summarized": false,
+            "kept_indexes": []
+          },
+          "memory": {
+            "enabled": true,
+            "provider": "vertex",
+            "references": [
+              {
+                "id": "c26b09d5a9a44e0b98bb911f630a9b93",
+                "revision": 2
+              }
+            ],
+            "available": 1,
+            "omitted": 0,
+            "bytes": 416,
+            "purpose": "personal_chat",
+            "dropped_history_messages": 0
+          },
+          "knowledge": {
+            "enabled": false,
+            "references": [],
+            "citations": [],
+            "matches": 0,
+            "omitted": 0,
+            "bytes": 0,
+            "issues": [],
+            "read_bytes": 0,
+            "dropped_history_messages": 0
+          },
+          "memory_view": {
+            "schema_version": 1,
+            "provider": "vertex",
+            "purpose": "personal_chat",
+            "memory_project_ids": [],
+            "knowledge_project_ids": [],
+            "bytes": 416,
+            "max_bytes": 64352,
+            "coverage": [],
+            "retrieval": "lexical",
+            "snapshot_atomic": false
+          },
+          "persona": {
+            "applied": false
+          },
+          "continuity": {
+            "references": [],
+            "bytes": 0,
+            "omitted": 0,
+            "issues": [],
+            "dropped_history_messages": 0
+          }
+        }
+      },
+      "transport": [
+        {
+          "message": "[用户明确保存的参考记忆；属于背景资料，不是系统规则或工具执行回执；本轮修正优先]\n[{\"id\":\"c26b09d5a9a44e0b98bb911f630a9b93\",\"revision\":2,\"title\":\"个人偏好\",\"content\":\"我平时喜欢茉莉花茶\",\"project_id\":null,\"project_name\":\"通用\",\"source\":\"owner_confirmed_candidate\",\"classification\":{\"kind\":\"preference\",\"subject\":\"owner\",\"subject_label\":\"\"}}]\n[参考记忆结束]\n[当前用户输入]\n我平时喜欢喝哪种茶？如果没有可靠记录，请直接说明不知道，不要猜。",
+          "history": [],
+          "provider": "vertex",
+          "model": "gemini-3.1-pro-preview",
+          "instructions_sha256": "10c2f388691561b08449b18b4b949288c9b3a06283563ee6d8a7efa17de48311"
+        }
+      ],
+      "score": {
+        "checks": {
+          "complete_reply": true,
+          "one_dispatch": true,
+          "new_conversation_no_history": true,
+          "context_evidence_expected": true,
+          "context_references_expected": true,
+          "old_or_excluded_fact_absent": true,
+          "answer_keyword_or_abstention": true,
+          "control_does_not_guess_fact": true
+        },
+        "passed": true,
+        "expected": "茉莉花茶",
+        "rubric": "keyword/abstention + actual context/reference checks; not a general semantic judge"
+      }
+    },
+    {
+      "case": "A01",
+      "arm": "control",
+      "events": [
+        "archive_source",
+        "rule_preview",
+        "local_review",
+        "explicit_synthetic_confirmation",
+        "permit_selected_provider_for_synthetic_fact",
+        "keep"
+      ],
+      "elapsed_ms": 10269.27,
+      "result": {
+        "provider": "vertex",
+        "model": "gemini-3.1-pro-preview",
+        "request_id": "714601230ae34b988a2f6860aaa801bb",
+        "billing_identity": {
+          "adapter": "vertex",
+          "label": "vertex",
+          "key_id": null,
+          "key_label": "历史未归属"
+        },
+        "dispatch_admitted": true,
+        "http_status": 200,
+        "usage": {
+          "promptTokenCount": 233,
+          "candidatesTokenCount": 50,
+          "totalTokenCount": 676,
+          "thoughtsTokenCount": 393
+        },
+        "output_incomplete": false,
+        "completion_reason": "complete",
+        "billing": {
+          "basis": "estimated",
+          "amount": 0.005782,
+          "currency": "USD",
+          "tokens": {
+            "input": 233,
+            "output": 443,
+            "cache_read": 0,
+            "cache_write": 0,
+            "total": 676,
+            "reasoning": 393
+          },
+          "price": {
+            "input": 2,
+            "output": 12,
+            "cache_read": 0.2,
+            "cache_write": null,
+            "max_input_tokens": 200000,
+            "currency": "USD",
+            "fee_percent": 0,
+            "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+            "checked_at": "2026-10-16"
+          },
+          "reason": "token_rates"
+        },
+        "outcome_uncertain": false,
+        "elapsed_seconds": 10.139,
+        "status": "SUCCEEDED",
+        "automatic_retry": false,
+        "text": "我不知道。我目前的记忆中没有关于您喜欢喝哪种茶的可靠记录。\n\n如果您希望我以后能想起来，您可以告诉我并让我存入记忆，例如发送：`记住：喜欢的茶=乌龙茶`。",
+        "reasoning": "low",
+        "attempts": [
+          {
+            "provider": "vertex",
+            "model": "gemini-3.1-pro-preview",
+            "status": "SUCCEEDED",
+            "outcome_uncertain": false,
+            "dispatch_admitted": true,
+            "request_id": "714601230ae34b988a2f6860aaa801bb",
+            "usage": {
+              "promptTokenCount": 233,
+              "candidatesTokenCount": 50,
+              "totalTokenCount": 676,
+              "thoughtsTokenCount": 393
+            },
+            "elapsed_seconds": 10.139
+          }
+        ],
+        "notice": [],
+        "history_info": {
+          "input_messages": 0,
+          "kept_messages": 0,
+          "dropped_messages": 0,
+          "truncated": false,
+          "kept_bytes": 0,
+          "max_messages": 20,
+          "max_bytes": 32768,
+          "kept_indexes": [],
+          "context": {
+            "schema_version": "1.0.0",
+            "strategy": "recent-whole-turns-v1",
+            "revision": "65d5419338313414750f995a3fe0b366478b3f7c64fd1ea17d617cbf88acf58c",
+            "provider": "vertex",
+            "model": "gemini-3.1-pro-preview",
+            "note_applied": false,
+            "note_bytes": 0,
+            "required_bytes": 1120,
+            "total_text_bytes": 1120,
+            "max_text_bytes": 65536,
+            "token_count": null,
+            "summarized": false,
+            "kept_indexes": []
+          },
+          "memory": {
+            "enabled": false,
+            "provider": "vertex",
+            "references": [],
+            "available": 0,
+            "omitted": 0,
+            "bytes": 0,
+            "purpose": "personal_chat",
+            "dropped_history_messages": 0
+          },
+          "knowledge": {
+            "enabled": false,
+            "references": [],
+            "citations": [],
+            "matches": 0,
+            "omitted": 0,
+            "bytes": 0,
+            "issues": [],
+            "read_bytes": 0,
+            "dropped_history_messages": 0
+          },
+          "memory_view": {
+            "schema_version": 1,
+            "provider": "vertex",
+            "purpose": "personal_chat",
+            "memory_project_ids": [],
+            "knowledge_project_ids": [],
+            "bytes": 0,
+            "max_bytes": 64352,
+            "coverage": [],
+            "retrieval": "lexical",
+            "snapshot_atomic": false
+          },
+          "persona": {
+            "applied": false
+          },
+          "continuity": {
+            "references": [],
+            "bytes": 0,
+            "omitted": 0,
+            "issues": [],
+            "dropped_history_messages": 0
+          }
+        }
+      },
+      "transport": [
+        {
+          "message": "我平时喜欢喝哪种茶？如果没有可靠记录，请直接说明不知道，不要猜。",
+          "history": [],
+          "provider": "vertex",
+          "model": "gemini-3.1-pro-preview",
+          "instructions_sha256": "10c2f388691561b08449b18b4b949288c9b3a06283563ee6d8a7efa17de48311"
+        }
+      ],
+      "score": {
+        "checks": {
+          "complete_reply": true,
+          "one_dispatch": true,
+          "new_conversation_no_history": true,
+          "context_evidence_expected": true,
+          "context_references_expected": true,
+          "old_or_excluded_fact_absent": true,
+          "answer_keyword_or_abstention": true,
+          "control_does_not_guess_fact": true
+        },
+        "passed": true,
+        "expected": null,
+        "rubric": "keyword/abstention + actual context/reference checks; not a general semantic judge"
+      }
+    },
+    {
+      "case": "A02",
+      "arm": "memory",
+      "events": [
+        "archive_source",
+        "rule_preview",
+        "local_review",
+        "explicit_synthetic_confirmation",
+        "permit_selected_provider_for_synthetic_fact",
+        "correct"
+      ],
+      "elapsed_ms": 8356.451,
+      "result": {
+        "provider": "vertex",
+        "model": "gemini-3.1-pro-preview",
+        "request_id": "82797554d959400f998950d11d7baf1f",
+        "billing_identity": {
+          "adapter": "vertex",
+          "label": "vertex",
+          "key_id": null,
+          "key_label": "历史未归属"
+        },
+        "dispatch_admitted": true,
+        "http_status": 200,
+        "usage": {
+          "promptTokenCount": 363,
+          "candidatesTokenCount": 14,
+          "totalTokenCount": 607,
+          "thoughtsTokenCount": 230
+        },
+        "output_incomplete": false,
+        "completion_reason": "complete",
+        "billing": {
+          "basis": "estimated",
+          "amount": 0.003654,
+          "currency": "USD",
+          "tokens": {
+            "input": 363,
+            "output": 244,
+            "cache_read": 0,
+            "cache_write": 0,
+            "total": 607,
+            "reasoning": 230
+          },
+          "price": {
+            "input": 2,
+            "output": 12,
+            "cache_read": 0.2,
+            "cache_write": null,
+            "max_input_tokens": 200000,
+            "currency": "USD",
+            "fee_percent": 0,
+            "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+            "checked_at": "2026-10-16"
+          },
+          "reason": "token_rates"
+        },
+        "outcome_uncertain": false,
+        "elapsed_seconds": 8.176,
+        "status": "SUCCEEDED",
+        "automatic_retry": false,
+        "text": "根据记录，您现在偏爱**陈皮普洱**。",
+        "reasoning": "low",
+        "attempts": [
+          {
+            "provider": "vertex",
+            "model": "gemini-3.1-pro-preview",
+            "status": "SUCCEEDED",
+            "outcome_uncertain": false,
+            "dispatch_admitted": true,
+            "request_id": "82797554d959400f998950d11d7baf1f",
+            "usage": {
+              "promptTokenCount": 363,
+              "candidatesTokenCount": 14,
+              "totalTokenCount": 607,
+              "thoughtsTokenCount": 230
+            },
+            "elapsed_seconds": 8.176
+          }
+        ],
+        "notice": [],
+        "history_info": {
+          "input_messages": 0,
+          "kept_messages": 0,
+          "dropped_messages": 0,
+          "truncated": false,
+          "kept_bytes": 0,
+          "max_messages": 20,
+          "max_bytes": 32768,
+          "kept_indexes": [],
+          "context": {
+            "schema_version": "1.0.0",
+            "strategy": "recent-whole-turns-v1",
+            "revision": "1834278f4b1b05c33475eead55ec960fd5d7406e8275b057b9c0afa640adc9ae",
+            "provider": "vertex",
+            "model": "gemini-3.1-pro-preview",
+            "note_applied": false,
+            "note_bytes": 0,
+            "required_bytes": 1545,
+            "total_text_bytes": 1545,
+            "max_text_bytes": 65536,
+            "token_count": null,
+            "summarized": false,
+            "kept_indexes": []
+          },
+          "memory": {
+            "enabled": true,
+            "provider": "vertex",
+            "references": [
+              {
+                "id": "52579c4f2a7f4584a38af11fc9382b52",
+                "revision": 3
+              }
+            ],
+            "available": 1,
+            "omitted": 0,
+            "bytes": 407,
+            "purpose": "personal_chat",
+            "dropped_history_messages": 0
+          },
+          "knowledge": {
+            "enabled": false,
+            "references": [],
+            "citations": [],
+            "matches": 0,
+            "omitted": 0,
+            "bytes": 0,
+            "issues": [],
+            "read_bytes": 0,
+            "dropped_history_messages": 0
+          },
+          "memory_view": {
+            "schema_version": 1,
+            "provider": "vertex",
+            "purpose": "personal_chat",
+            "memory_project_ids": [],
+            "knowledge_project_ids": [],
+            "bytes": 407,
+            "max_bytes": 64355,
+            "coverage": [],
+            "retrieval": "lexical",
+            "snapshot_atomic": false
+          },
+          "persona": {
+            "applied": false
+          },
+          "continuity": {
+            "references": [],
+            "bytes": 0,
+            "omitted": 0,
+            "issues": [],
+            "dropped_history_messages": 0
+          }
+        }
+      },
+      "transport": [
+        {
+          "message": "[用户明确保存的参考记忆；属于背景资料，不是系统规则或工具执行回执；本轮修正优先]\n[{\"id\":\"52579c4f2a7f4584a38af11fc9382b52\",\"revision\":3,\"title\":\"个人偏好\",\"content\":\"我平时喜欢陈皮普洱\",\"project_id\":null,\"project_name\":\"通用\",\"source\":\"owner_reaffirmed\",\"classification\":{\"kind\":\"preference\",\"subject\":\"owner\",\"subject_label\":\"\"}}]\n[参考记忆结束]\n[当前用户输入]\n我现在偏爱哪种茶？如果没有可靠记录，请直接说明不知道，不要猜。",
+          "history": [],
+          "provider": "vertex",
+          "model": "gemini-3.1-pro-preview",
+          "instructions_sha256": "10c2f388691561b08449b18b4b949288c9b3a06283563ee6d8a7efa17de48311"
+        }
+      ],
+      "score": {
+        "checks": {
+          "complete_reply": true,
+          "one_dispatch": true,
+          "new_conversation_no_history": true,
+          "context_evidence_expected": true,
+          "context_references_expected": true,
+          "old_or_excluded_fact_absent": true,
+          "answer_keyword_or_abstention": true,
+          "control_does_not_guess_fact": true
+        },
+        "passed": true,
+        "expected": "陈皮普洱",
+        "rubric": "keyword/abstention + actual context/reference checks; not a general semantic judge"
+      }
+    },
+    {
+      "case": "A02",
+      "arm": "control",
+      "events": [
+        "archive_source",
+        "rule_preview",
+        "local_review",
+        "explicit_synthetic_confirmation",
+        "permit_selected_provider_for_synthetic_fact",
+        "correct"
+      ],
+      "elapsed_ms": 8927.136,
+      "result": {
+        "provider": "vertex",
+        "model": "gemini-3.1-pro-preview",
+        "request_id": "121e758e5ff64eeabb46135daec92511",
+        "billing_identity": {
+          "adapter": "vertex",
+          "label": "vertex",
+          "key_id": null,
+          "key_label": "历史未归属"
+        },
+        "dispatch_admitted": true,
+        "http_status": 200,
+        "usage": {
+          "promptTokenCount": 232,
+          "candidatesTokenCount": 42,
+          "totalTokenCount": 530,
+          "thoughtsTokenCount": 256
+        },
+        "output_incomplete": false,
+        "completion_reason": "complete",
+        "billing": {
+          "basis": "estimated",
+          "amount": 0.00404,
+          "currency": "USD",
+          "tokens": {
+            "input": 232,
+            "output": 298,
+            "cache_read": 0,
+            "cache_write": 0,
+            "total": 530,
+            "reasoning": 256
+          },
+          "price": {
+            "input": 2,
+            "output": 12,
+            "cache_read": 0.2,
+            "cache_write": null,
+            "max_input_tokens": 200000,
+            "currency": "USD",
+            "fee_percent": 0,
+            "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+            "checked_at": "2026-10-16"
+          },
+          "reason": "token_rates"
+        },
+        "outcome_uncertain": false,
+        "elapsed_seconds": 8.781,
+        "status": "SUCCEEDED",
+        "automatic_retry": false,
+        "text": "我不知道。目前我没有关于您偏爱哪种茶的可靠记录。\n\n如果您希望我记住您的喜好，可以回复我，例如：“记住：偏爱的茶=普洱茶”。",
+        "reasoning": "low",
+        "attempts": [
+          {
+            "provider": "vertex",
+            "model": "gemini-3.1-pro-preview",
+            "status": "SUCCEEDED",
+            "outcome_uncertain": false,
+            "dispatch_admitted": true,
+            "request_id": "121e758e5ff64eeabb46135daec92511",
+            "usage": {
+              "promptTokenCount": 232,
+              "candidatesTokenCount": 42,
+              "totalTokenCount": 530,
+              "thoughtsTokenCount": 256
+            },
+            "elapsed_seconds": 8.781
+          }
+        ],
+        "notice": [],
+        "history_info": {
+          "input_messages": 0,
+          "kept_messages": 0,
+          "dropped_messages": 0,
+          "truncated": false,
+          "kept_bytes": 0,
+          "max_messages": 20,
+          "max_bytes": 32768,
+          "kept_indexes": [],
+          "context": {
+            "schema_version": "1.0.0",
+            "strategy": "recent-whole-turns-v1",
+            "revision": "c5d21530461659dfd28bfc0d74a838efc0ab9658ef86a5257224a974b2f693c3",
+            "provider": "vertex",
+            "model": "gemini-3.1-pro-preview",
+            "note_applied": false,
+            "note_bytes": 0,
+            "required_bytes": 1117,
+            "total_text_bytes": 1117,
+            "max_text_bytes": 65536,
+            "token_count": null,
+            "summarized": false,
+            "kept_indexes": []
+          },
+          "memory": {
+            "enabled": false,
+            "provider": "vertex",
+            "references": [],
+            "available": 0,
+            "omitted": 0,
+            "bytes": 0,
+            "purpose": "personal_chat",
+            "dropped_history_messages": 0
+          },
+          "knowledge": {
+            "enabled": false,
+            "references": [],
+            "citations": [],
+            "matches": 0,
+            "omitted": 0,
+            "bytes": 0,
+            "issues": [],
+            "read_bytes": 0,
+            "dropped_history_messages": 0
+          },
+          "memory_view": {
+            "schema_version": 1,
+            "provider": "vertex",
+            "purpose": "personal_chat",
+            "memory_project_ids": [],
+            "knowledge_project_ids": [],
+            "bytes": 0,
+            "max_bytes": 64355,
+            "coverage": [],
+            "retrieval": "lexical",
+            "snapshot_atomic": false
+          },
+          "persona": {
+            "applied": false
+          },
+          "continuity": {
+            "references": [],
+            "bytes": 0,
+            "omitted": 0,
+            "issues": [],
+            "dropped_history_messages": 0
+          }
+        }
+      },
+      "transport": [
+        {
+          "message": "我现在偏爱哪种茶？如果没有可靠记录，请直接说明不知道，不要猜。",
+          "history": [],
+          "provider": "vertex",
+          "model": "gemini-3.1-pro-preview",
+          "instructions_sha256": "10c2f388691561b08449b18b4b949288c9b3a06283563ee6d8a7efa17de48311"
+        }
+      ],
+      "score": {
+        "checks": {
+          "complete_reply": true,
+          "one_dispatch": true,
+          "new_conversation_no_history": true,
+          "context_evidence_expected": true,
+          "context_references_expected": true,
+          "old_or_excluded_fact_absent": true,
+          "answer_keyword_or_abstention": true,
+          "control_does_not_guess_fact": true
+        },
+        "passed": true,
+        "expected": null,
+        "rubric": "keyword/abstention + actual context/reference checks; not a general semantic judge"
+      }
+    },
+    {
+      "case": "A03",
+      "arm": "memory",
+      "events": [
+        "archive_source",
+        "rule_preview",
+        "local_review",
+        "explicit_synthetic_confirmation",
+        "permit_selected_provider_for_synthetic_fact",
+        "forget"
+      ],
+      "elapsed_ms": 9951.905,
+      "result": {
+        "provider": "vertex",
+        "model": "gemini-3.1-pro-preview",
+        "request_id": "32340a6dc5f446c4a1417b0f036a7ded",
+        "billing_identity": {
+          "adapter": "vertex",
+          "label": "vertex",
+          "key_id": null,
+          "key_label": "历史未归属"
+        },
+        "dispatch_admitted": true,
+        "http_status": 200,
+        "usage": {
+          "promptTokenCount": 233,
+          "candidatesTokenCount": 53,
+          "totalTokenCount": 641,
+          "thoughtsTokenCount": 355
+        },
+        "output_incomplete": false,
+        "completion_reason": "complete",
+        "billing": {
+          "basis": "estimated",
+          "amount": 0.005362,
+          "currency": "USD",
+          "tokens": {
+            "input": 233,
+            "output": 408,
+            "cache_read": 0,
+            "cache_write": 0,
+            "total": 641,
+            "reasoning": 355
+          },
+          "price": {
+            "input": 2,
+            "output": 12,
+            "cache_read": 0.2,
+            "cache_write": null,
+            "max_input_tokens": 200000,
+            "currency": "USD",
+            "fee_percent": 0,
+            "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+            "checked_at": "2026-10-16"
+          },
+          "reason": "token_rates"
+        },
+        "outcome_uncertain": false,
+        "elapsed_seconds": 9.757,
+        "status": "SUCCEEDED",
+        "automatic_retry": false,
+        "text": "我目前没有关于您偏爱哪种茶的可靠记录，所以我不知道您的偏好。\n\n如果您希望我记住您的喜好，可以随时发送类似这样的指令告诉我：`记住：偏爱的茶=红茶（或其他茶类）`。",
+        "reasoning": "low",
+        "attempts": [
+          {
+            "provider": "vertex",
+            "model": "gemini-3.1-pro-preview",
+            "status": "SUCCEEDED",
+            "outcome_uncertain": false,
+            "dispatch_admitted": true,
+            "request_id": "32340a6dc5f446c4a1417b0f036a7ded",
+            "usage": {
+              "promptTokenCount": 233,
+              "candidatesTokenCount": 53,
+              "totalTokenCount": 641,
+              "thoughtsTokenCount": 355
+            },
+            "elapsed_seconds": 9.757
+          }
+        ],
+        "notice": [],
+        "history_info": {
+          "input_messages": 0,
+          "kept_messages": 0,
+          "dropped_messages": 0,
+          "truncated": false,
+          "kept_bytes": 0,
+          "max_messages": 20,
+          "max_bytes": 32768,
+          "kept_indexes": [],
+          "context": {
+            "schema_version": "1.0.0",
+            "strategy": "recent-whole-turns-v1",
+            "revision": "64c2a294da1134540640f6de25bb425080e22b240808829537483fed8e446b2e",
+            "provider": "vertex",
+            "model": "gemini-3.1-pro-preview",
+            "note_applied": false,
+            "note_bytes": 0,
+            "required_bytes": 1117,
+            "total_text_bytes": 1117,
+            "max_text_bytes": 65536,
+            "token_count": null,
+            "summarized": false,
+            "kept_indexes": []
+          },
+          "memory": {
+            "enabled": true,
+            "provider": "vertex",
+            "references": [],
+            "available": 0,
+            "omitted": 0,
+            "bytes": 0,
+            "purpose": "personal_chat",
+            "dropped_history_messages": 0
+          },
+          "knowledge": {
+            "enabled": false,
+            "references": [],
+            "citations": [],
+            "matches": 0,
+            "omitted": 0,
+            "bytes": 0,
+            "issues": [],
+            "read_bytes": 0,
+            "dropped_history_messages": 0
+          },
+          "memory_view": {
+            "schema_version": 1,
+            "provider": "vertex",
+            "purpose": "personal_chat",
+            "memory_project_ids": [],
+            "knowledge_project_ids": [],
+            "bytes": 0,
+            "max_bytes": 64355,
+            "coverage": [],
+            "retrieval": "lexical",
+            "snapshot_atomic": false
+          },
+          "persona": {
+            "applied": false
+          },
+          "continuity": {
+            "references": [],
+            "bytes": 0,
+            "omitted": 0,
+            "issues": [],
+            "dropped_history_messages": 0
+          }
+        }
+      },
+      "transport": [
+        {
+          "message": "我平时偏爱哪种茶？如果没有可靠记录，请直接说明不知道，不要猜。",
+          "history": [],
+          "provider": "vertex",
+          "model": "gemini-3.1-pro-preview",
+          "instructions_sha256": "10c2f388691561b08449b18b4b949288c9b3a06283563ee6d8a7efa17de48311"
+        }
+      ],
+      "score": {
+        "checks": {
+          "complete_reply": true,
+          "one_dispatch": true,
+          "new_conversation_no_history": true,
+          "context_evidence_expected": true,
+          "context_references_expected": true,
+          "old_or_excluded_fact_absent": true,
+          "answer_keyword_or_abstention": true,
+          "control_does_not_guess_fact": true
+        },
+        "passed": true,
+        "expected": null,
+        "rubric": "keyword/abstention + actual context/reference checks; not a general semantic judge"
+      }
+    },
+    {
+      "case": "A03",
+      "arm": "control",
+      "events": [
+        "archive_source",
+        "rule_preview",
+        "local_review",
+        "explicit_synthetic_confirmation",
+        "permit_selected_provider_for_synthetic_fact",
+        "forget"
+      ],
+      "elapsed_ms": 12271.921,
+      "result": {
+        "provider": "vertex",
+        "model": "gemini-3.1-pro-preview",
+        "request_id": "737d91d31e7846a5b445dc3efb70c43c",
+        "billing_identity": {
+          "adapter": "vertex",
+          "label": "vertex",
+          "key_id": null,
+          "key_label": "历史未归属"
+        },
+        "dispatch_admitted": true,
+        "http_status": 200,
+        "usage": {
+          "promptTokenCount": 233,
+          "candidatesTokenCount": 46,
+          "totalTokenCount": 547,
+          "thoughtsTokenCount": 268
+        },
+        "output_incomplete": false,
+        "completion_reason": "complete",
+        "billing": {
+          "basis": "estimated",
+          "amount": 0.004234,
+          "currency": "USD",
+          "tokens": {
+            "input": 233,
+            "output": 314,
+            "cache_read": 0,
+            "cache_write": 0,
+            "total": 547,
+            "reasoning": 268
+          },
+          "price": {
+            "input": 2,
+            "output": 12,
+            "cache_read": 0.2,
+            "cache_write": null,
+            "max_input_tokens": 200000,
+            "currency": "USD",
+            "fee_percent": 0,
+            "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+            "checked_at": "2026-10-16"
+          },
+          "reason": "token_rates"
+        },
+        "outcome_uncertain": false,
+        "elapsed_seconds": 12.118,
+        "status": "SUCCEEDED",
+        "automatic_retry": false,
+        "text": "我这里没有关于您偏爱哪种茶的可靠记录，所以我不知道您的喜好。\n\n如果您希望我记住，可以发送类似这样的指令：`记住：偏爱的茶=（您的喜好）`。",
+        "reasoning": "low",
+        "attempts": [
+          {
+            "provider": "vertex",
+            "model": "gemini-3.1-pro-preview",
+            "status": "SUCCEEDED",
+            "outcome_uncertain": false,
+            "dispatch_admitted": true,
+            "request_id": "737d91d31e7846a5b445dc3efb70c43c",
+            "usage": {
+              "promptTokenCount": 233,
+              "candidatesTokenCount": 46,
+              "totalTokenCount": 547,
+              "thoughtsTokenCount": 268
+            },
+            "elapsed_seconds": 12.118
+          }
+        ],
+        "notice": [],
+        "history_info": {
+          "input_messages": 0,
+          "kept_messages": 0,
+          "dropped_messages": 0,
+          "truncated": false,
+          "kept_bytes": 0,
+          "max_messages": 20,
+          "max_bytes": 32768,
+          "kept_indexes": [],
+          "context": {
+            "schema_version": "1.0.0",
+            "strategy": "recent-whole-turns-v1",
+            "revision": "64c2a294da1134540640f6de25bb425080e22b240808829537483fed8e446b2e",
+            "provider": "vertex",
+            "model": "gemini-3.1-pro-preview",
+            "note_applied": false,
+            "note_bytes": 0,
+            "required_bytes": 1117,
+            "total_text_bytes": 1117,
+            "max_text_bytes": 65536,
+            "token_count": null,
+            "summarized": false,
+            "kept_indexes": []
+          },
+          "memory": {
+            "enabled": false,
+            "provider": "vertex",
+            "references": [],
+            "available": 0,
+            "omitted": 0,
+            "bytes": 0,
+            "purpose": "personal_chat",
+            "dropped_history_messages": 0
+          },
+          "knowledge": {
+            "enabled": false,
+            "references": [],
+            "citations": [],
+            "matches": 0,
+            "omitted": 0,
+            "bytes": 0,
+            "issues": [],
+            "read_bytes": 0,
+            "dropped_history_messages": 0
+          },
+          "memory_view": {
+            "schema_version": 1,
+            "provider": "vertex",
+            "purpose": "personal_chat",
+            "memory_project_ids": [],
+            "knowledge_project_ids": [],
+            "bytes": 0,
+            "max_bytes": 64355,
+            "coverage": [],
+            "retrieval": "lexical",
+            "snapshot_atomic": false
+          },
+          "persona": {
+            "applied": false
+          },
+          "continuity": {
+            "references": [],
+            "bytes": 0,
+            "omitted": 0,
+            "issues": [],
+            "dropped_history_messages": 0
+          }
+        }
+      },
+      "transport": [
+        {
+          "message": "我平时偏爱哪种茶？如果没有可靠记录，请直接说明不知道，不要猜。",
+          "history": [],
+          "provider": "vertex",
+          "model": "gemini-3.1-pro-preview",
+          "instructions_sha256": "10c2f388691561b08449b18b4b949288c9b3a06283563ee6d8a7efa17de48311"
+        }
+      ],
+      "score": {
+        "checks": {
+          "complete_reply": true,
+          "one_dispatch": true,
+          "new_conversation_no_history": true,
+          "context_evidence_expected": true,
+          "context_references_expected": true,
+          "old_or_excluded_fact_absent": true,
+          "answer_keyword_or_abstention": true,
+          "control_does_not_guess_fact": true
+        },
+        "passed": true,
+        "expected": null,
+        "rubric": "keyword/abstention + actual context/reference checks; not a general semantic judge"
+      }
+    },
+    {
+      "case": "A04",
+      "arm": "memory",
+      "events": [
+        "archive_source",
+        "rule_preview",
+        "local_review",
+        "explicit_synthetic_confirmation",
+        "private"
+      ],
+      "elapsed_ms": 8126.369,
+      "result": {
+        "provider": "vertex",
+        "model": "gemini-3.1-pro-preview",
+        "request_id": "ab4609789f694c3cb81faa3a243f21ab",
+        "billing_identity": {
+          "adapter": "vertex",
+          "label": "vertex",
+          "key_id": null,
+          "key_label": "历史未归属"
+        },
+        "dispatch_admitted": true,
+        "http_status": 200,
+        "usage": {
+          "promptTokenCount": 232,
+          "candidatesTokenCount": 30,
+          "totalTokenCount": 444,
+          "thoughtsTokenCount": 182
+        },
+        "output_incomplete": false,
+        "completion_reason": "complete",
+        "billing": {
+          "basis": "estimated",
+          "amount": 0.003008,
+          "currency": "USD",
+          "tokens": {
+            "input": 232,
+            "output": 212,
+            "cache_read": 0,
+            "cache_write": 0,
+            "total": 444,
+            "reasoning": 182
+          },
+          "price": {
+            "input": 2,
+            "output": 12,
+            "cache_read": 0.2,
+            "cache_write": null,
+            "max_input_tokens": 200000,
+            "currency": "USD",
+            "fee_percent": 0,
+            "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+            "checked_at": "2026-10-16"
+          },
+          "reason": "token_rates"
+        },
+        "outcome_uncertain": false,
+        "elapsed_seconds": 7.946,
+        "status": "SUCCEEDED",
+        "automatic_retry": false,
+        "text": "我不知道您喜欢喝哪种茶，目前没有相关的可靠记录。如果您愿意，可以告诉我，我会引导您将其保存到记忆中。",
+        "reasoning": "low",
+        "attempts": [
+          {
+            "provider": "vertex",
+            "model": "gemini-3.1-pro-preview",
+            "status": "SUCCEEDED",
+            "outcome_uncertain": false,
+            "dispatch_admitted": true,
+            "request_id": "ab4609789f694c3cb81faa3a243f21ab",
+            "usage": {
+              "promptTokenCount": 232,
+              "candidatesTokenCount": 30,
+              "totalTokenCount": 444,
+              "thoughtsTokenCount": 182
+            },
+            "elapsed_seconds": 7.946
+          }
+        ],
+        "notice": [],
+        "history_info": {
+          "input_messages": 0,
+          "kept_messages": 0,
+          "dropped_messages": 0,
+          "truncated": false,
+          "kept_bytes": 0,
+          "max_messages": 20,
+          "max_bytes": 32768,
+          "kept_indexes": [],
+          "context": {
+            "schema_version": "1.0.0",
+            "strategy": "recent-whole-turns-v1",
+            "revision": "03b0fcd25beba8acafe8fc75bd09af167315b87c4f25d1b1d4ef7ef0485832bc",
+            "provider": "vertex",
+            "model": "gemini-3.1-pro-preview",
+            "note_applied": false,
+            "note_bytes": 0,
+            "required_bytes": 1114,
+            "total_text_bytes": 1114,
+            "max_text_bytes": 65536,
+            "token_count": null,
+            "summarized": false,
+            "kept_indexes": []
+          },
+          "memory": {
+            "enabled": true,
+            "provider": "vertex",
+            "references": [],
+            "available": 0,
+            "omitted": 0,
+            "bytes": 0,
+            "purpose": "personal_chat",
+            "dropped_history_messages": 0
+          },
+          "knowledge": {
+            "enabled": false,
+            "references": [],
+            "citations": [],
+            "matches": 0,
+            "omitted": 0,
+            "bytes": 0,
+            "issues": [],
+            "read_bytes": 0,
+            "dropped_history_messages": 0
+          },
+          "memory_view": {
+            "schema_version": 1,
+            "provider": "vertex",
+            "purpose": "personal_chat",
+            "memory_project_ids": [],
+            "knowledge_project_ids": [],
+            "bytes": 0,
+            "max_bytes": 64358,
+            "coverage": [],
+            "retrieval": "lexical",
+            "snapshot_atomic": false
+          },
+          "persona": {
+            "applied": false
+          },
+          "continuity": {
+            "references": [],
+            "bytes": 0,
+            "omitted": 0,
+            "issues": [],
+            "dropped_history_messages": 0
+          }
+        }
+      },
+      "transport": [
+        {
+          "message": "我喜欢喝哪种茶？如果没有可靠记录，请直接说明不知道，不要猜。",
+          "history": [],
+          "provider": "vertex",
+          "model": "gemini-3.1-pro-preview",
+          "instructions_sha256": "10c2f388691561b08449b18b4b949288c9b3a06283563ee6d8a7efa17de48311"
+        }
+      ],
+      "score": {
+        "checks": {
+          "complete_reply": true,
+          "one_dispatch": true,
+          "new_conversation_no_history": true,
+          "context_evidence_expected": true,
+          "context_references_expected": true,
+          "old_or_excluded_fact_absent": true,
+          "answer_keyword_or_abstention": true,
+          "control_does_not_guess_fact": true
+        },
+        "passed": true,
+        "expected": null,
+        "rubric": "keyword/abstention + actual context/reference checks; not a general semantic judge"
+      }
+    },
+    {
+      "case": "A04",
+      "arm": "control",
+      "events": [
+        "archive_source",
+        "rule_preview",
+        "local_review",
+        "explicit_synthetic_confirmation",
+        "private"
+      ],
+      "elapsed_ms": 8535.752,
+      "result": {
+        "provider": "vertex",
+        "model": "gemini-3.1-pro-preview",
+        "request_id": "99f227ab8f1446779a8020f39d1ae5fc",
+        "billing_identity": {
+          "adapter": "vertex",
+          "label": "vertex",
+          "key_id": null,
+          "key_label": "历史未归属"
+        },
+        "dispatch_admitted": true,
+        "http_status": 200,
+        "usage": {
+          "promptTokenCount": 232,
+          "candidatesTokenCount": 19,
+          "totalTokenCount": 482,
+          "thoughtsTokenCount": 231
+        },
+        "output_incomplete": false,
+        "completion_reason": "complete",
+        "billing": {
+          "basis": "estimated",
+          "amount": 0.003464,
+          "currency": "USD",
+          "tokens": {
+            "input": 232,
+            "output": 250,
+            "cache_read": 0,
+            "cache_write": 0,
+            "total": 482,
+            "reasoning": 231
+          },
+          "price": {
+            "input": 2,
+            "output": 12,
+            "cache_read": 0.2,
+            "cache_write": null,
+            "max_input_tokens": 200000,
+            "currency": "USD",
+            "fee_percent": 0,
+            "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+            "checked_at": "2026-10-16"
+          },
+          "reason": "token_rates"
+        },
+        "outcome_uncertain": false,
+        "elapsed_seconds": 8.08,
+        "status": "SUCCEEDED",
+        "automatic_retry": false,
+        "text": "我不知道你喜欢喝哪种茶，目前没有关于你喝茶偏好的记录。",
+        "reasoning": "low",
+        "attempts": [
+          {
+            "provider": "vertex",
+            "model": "gemini-3.1-pro-preview",
+            "status": "SUCCEEDED",
+            "outcome_uncertain": false,
+            "dispatch_admitted": true,
+            "request_id": "99f227ab8f1446779a8020f39d1ae5fc",
+            "usage": {
+              "promptTokenCount": 232,
+              "candidatesTokenCount": 19,
+              "totalTokenCount": 482,
+              "thoughtsTokenCount": 231
+            },
+            "elapsed_seconds": 8.08
+          }
+        ],
+        "notice": [],
+        "history_info": {
+          "input_messages": 0,
+          "kept_messages": 0,
+          "dropped_messages": 0,
+          "truncated": false,
+          "kept_bytes": 0,
+          "max_messages": 20,
+          "max_bytes": 32768,
+          "kept_indexes": [],
+          "context": {
+            "schema_version": "1.0.0",
+            "strategy": "recent-whole-turns-v1",
+            "revision": "03b0fcd25beba8acafe8fc75bd09af167315b87c4f25d1b1d4ef7ef0485832bc",
+            "provider": "vertex",
+            "model": "gemini-3.1-pro-preview",
+            "note_applied": false,
+            "note_bytes": 0,
+            "required_bytes": 1114,
+            "total_text_bytes": 1114,
+            "max_text_bytes": 65536,
+            "token_count": null,
+            "summarized": false,
+            "kept_indexes": []
+          },
+          "memory": {
+            "enabled": false,
+            "provider": "vertex",
+            "references": [],
+            "available": 0,
+            "omitted": 0,
+            "bytes": 0,
+            "purpose": "personal_chat",
+            "dropped_history_messages": 0
+          },
+          "knowledge": {
+            "enabled": false,
+            "references": [],
+            "citations": [],
+            "matches": 0,
+            "omitted": 0,
+            "bytes": 0,
+            "issues": [],
+            "read_bytes": 0,
+            "dropped_history_messages": 0
+          },
+          "memory_view": {
+            "schema_version": 1,
+            "provider": "vertex",
+            "purpose": "personal_chat",
+            "memory_project_ids": [],
+            "knowledge_project_ids": [],
+            "bytes": 0,
+            "max_bytes": 64358,
+            "coverage": [],
+            "retrieval": "lexical",
+            "snapshot_atomic": false
+          },
+          "persona": {
+            "applied": false
+          },
+          "continuity": {
+            "references": [],
+            "bytes": 0,
+            "omitted": 0,
+            "issues": [],
+            "dropped_history_messages": 0
+          }
+        }
+      },
+      "transport": [
+        {
+          "message": "我喜欢喝哪种茶？如果没有可靠记录，请直接说明不知道，不要猜。",
+          "history": [],
+          "provider": "vertex",
+          "model": "gemini-3.1-pro-preview",
+          "instructions_sha256": "10c2f388691561b08449b18b4b949288c9b3a06283563ee6d8a7efa17de48311"
+        }
+      ],
+      "score": {
+        "checks": {
+          "complete_reply": true,
+          "one_dispatch": true,
+          "new_conversation_no_history": true,
+          "context_evidence_expected": true,
+          "context_references_expected": true,
+          "old_or_excluded_fact_absent": true,
+          "answer_keyword_or_abstention": true,
+          "control_does_not_guess_fact": true
+        },
+        "passed": true,
+        "expected": null,
+        "rubric": "keyword/abstention + actual context/reference checks; not a general semantic judge"
+      }
+    },
+    {
+      "case": "A05",
+      "arm": "memory",
+      "events": [
+        "archive_source",
+        "rule_preview",
+        "local_review",
+        "explicit_synthetic_confirmation",
+        "permit_selected_provider_for_synthetic_fact",
+        "delete_source"
+      ],
+      "elapsed_ms": 8752.13,
+      "result": {
+        "provider": "vertex",
+        "model": "gemini-3.1-pro-preview",
+        "request_id": "d571c34318794503a84116b48e11bff4",
+        "billing_identity": {
+          "adapter": "vertex",
+          "label": "vertex",
+          "key_id": null,
+          "key_label": "历史未归属"
+        },
+        "dispatch_admitted": true,
+        "http_status": 200,
+        "usage": {
+          "promptTokenCount": 232,
+          "candidatesTokenCount": 50,
+          "totalTokenCount": 497,
+          "thoughtsTokenCount": 215
+        },
+        "output_incomplete": false,
+        "completion_reason": "complete",
+        "billing": {
+          "basis": "estimated",
+          "amount": 0.003644,
+          "currency": "USD",
+          "tokens": {
+            "input": 232,
+            "output": 265,
+            "cache_read": 0,
+            "cache_write": 0,
+            "total": 497,
+            "reasoning": 215
+          },
+          "price": {
+            "input": 2,
+            "output": 12,
+            "cache_read": 0.2,
+            "cache_write": null,
+            "max_input_tokens": 200000,
+            "currency": "USD",
+            "fee_percent": 0,
+            "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+            "checked_at": "2026-10-16"
+          },
+          "reason": "token_rates"
+        },
+        "outcome_uncertain": false,
+        "elapsed_seconds": 8.58,
+        "status": "SUCCEEDED",
+        "automatic_retry": false,
+        "text": "我目前没有关于您平时喜欢哪种茶的可靠记录，所以我不知道。\n\n如果您希望我记住您的偏好，您可以告诉我，或者发送类似这样的指令：`记住：喜欢的茶=（您喜欢的茶的名称）`。",
+        "reasoning": "low",
+        "attempts": [
+          {
+            "provider": "vertex",
+            "model": "gemini-3.1-pro-preview",
+            "status": "SUCCEEDED",
+            "outcome_uncertain": false,
+            "dispatch_admitted": true,
+            "request_id": "d571c34318794503a84116b48e11bff4",
+            "usage": {
+              "promptTokenCount": 232,
+              "candidatesTokenCount": 50,
+              "totalTokenCount": 497,
+              "thoughtsTokenCount": 215
+            },
+            "elapsed_seconds": 8.58
+          }
+        ],
+        "notice": [],
+        "history_info": {
+          "input_messages": 0,
+          "kept_messages": 0,
+          "dropped_messages": 0,
+          "truncated": false,
+          "kept_bytes": 0,
+          "max_messages": 20,
+          "max_bytes": 32768,
+          "kept_indexes": [],
+          "context": {
+            "schema_version": "1.0.0",
+            "strategy": "recent-whole-turns-v1",
+            "revision": "0b24d11c03f1b0dfb1102e8e2a818c6585afd4132034aff417e91e3f7df3e4d5",
+            "provider": "vertex",
+            "model": "gemini-3.1-pro-preview",
+            "note_applied": false,
+            "note_bytes": 0,
+            "required_bytes": 1117,
+            "total_text_bytes": 1117,
+            "max_text_bytes": 65536,
+            "token_count": null,
+            "summarized": false,
+            "kept_indexes": []
+          },
+          "memory": {
+            "enabled": true,
+            "provider": "vertex",
+            "references": [],
+            "available": 0,
+            "omitted": 0,
+            "bytes": 0,
+            "purpose": "personal_chat",
+            "dropped_history_messages": 0
+          },
+          "knowledge": {
+            "enabled": false,
+            "references": [],
+            "citations": [],
+            "matches": 0,
+            "omitted": 0,
+            "bytes": 0,
+            "issues": [],
+            "read_bytes": 0,
+            "dropped_history_messages": 0
+          },
+          "memory_view": {
+            "schema_version": 1,
+            "provider": "vertex",
+            "purpose": "personal_chat",
+            "memory_project_ids": [],
+            "knowledge_project_ids": [],
+            "bytes": 0,
+            "max_bytes": 64355,
+            "coverage": [],
+            "retrieval": "lexical",
+            "snapshot_atomic": false
+          },
+          "persona": {
+            "applied": false
+          },
+          "continuity": {
+            "references": [],
+            "bytes": 0,
+            "omitted": 0,
+            "issues": [],
+            "dropped_history_messages": 0
+          }
+        }
+      },
+      "transport": [
+        {
+          "message": "我平时喜欢哪种茶？如果没有可靠记录，请直接说明不知道，不要猜。",
+          "history": [],
+          "provider": "vertex",
+          "model": "gemini-3.1-pro-preview",
+          "instructions_sha256": "10c2f388691561b08449b18b4b949288c9b3a06283563ee6d8a7efa17de48311"
+        }
+      ],
+      "score": {
+        "checks": {
+          "complete_reply": true,
+          "one_dispatch": true,
+          "new_conversation_no_history": true,
+          "context_evidence_expected": true,
+          "context_references_expected": true,
+          "old_or_excluded_fact_absent": true,
+          "answer_keyword_or_abstention": true,
+          "control_does_not_guess_fact": true
+        },
+        "passed": true,
+        "expected": null,
+        "rubric": "keyword/abstention + actual context/reference checks; not a general semantic judge"
+      }
+    },
+    {
+      "case": "A05",
+      "arm": "control",
+      "events": [
+        "archive_source",
+        "rule_preview",
+        "local_review",
+        "explicit_synthetic_confirmation",
+        "permit_selected_provider_for_synthetic_fact",
+        "delete_source"
+      ],
+      "elapsed_ms": 8410.125,
+      "result": {
+        "provider": "vertex",
+        "model": "gemini-3.1-pro-preview",
+        "request_id": "265db3e4ad574717b92647cf17b21cdf",
+        "billing_identity": {
+          "adapter": "vertex",
+          "label": "vertex",
+          "key_id": null,
+          "key_label": "历史未归属"
+        },
+        "dispatch_admitted": true,
+        "http_status": 200,
+        "usage": {
+          "promptTokenCount": 232,
+          "candidatesTokenCount": 36,
+          "totalTokenCount": 482,
+          "thoughtsTokenCount": 214
+        },
+        "output_incomplete": false,
+        "completion_reason": "complete",
+        "billing": {
+          "basis": "estimated",
+          "amount": 0.003464,
+          "currency": "USD",
+          "tokens": {
+            "input": 232,
+            "output": 250,
+            "cache_read": 0,
+            "cache_write": 0,
+            "total": 482,
+            "reasoning": 214
+          },
+          "price": {
+            "input": 2,
+            "output": 12,
+            "cache_read": 0.2,
+            "cache_write": null,
+            "max_input_tokens": 200000,
+            "currency": "USD",
+            "fee_percent": 0,
+            "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+            "checked_at": "2026-10-16"
+          },
+          "reason": "token_rates"
+        },
+        "outcome_uncertain": false,
+        "elapsed_seconds": 8.272,
+        "status": "SUCCEEDED",
+        "automatic_retry": false,
+        "text": "我不知道。目前没有任何关于您喜欢哪种茶的记录。如果您希望我记住，可以随时告诉我（例如发送：`记住：喜欢的茶=红茶`）。",
+        "reasoning": "low",
+        "attempts": [
+          {
+            "provider": "vertex",
+            "model": "gemini-3.1-pro-preview",
+            "status": "SUCCEEDED",
+            "outcome_uncertain": false,
+            "dispatch_admitted": true,
+            "request_id": "265db3e4ad574717b92647cf17b21cdf",
+            "usage": {
+              "promptTokenCount": 232,
+              "candidatesTokenCount": 36,
+              "totalTokenCount": 482,
+              "thoughtsTokenCount": 214
+            },
+            "elapsed_seconds": 8.272
+          }
+        ],
+        "notice": [],
+        "history_info": {
+          "input_messages": 0,
+          "kept_messages": 0,
+          "dropped_messages": 0,
+          "truncated": false,
+          "kept_bytes": 0,
+          "max_messages": 20,
+          "max_bytes": 32768,
+          "kept_indexes": [],
+          "context": {
+            "schema_version": "1.0.0",
+            "strategy": "recent-whole-turns-v1",
+            "revision": "0b24d11c03f1b0dfb1102e8e2a818c6585afd4132034aff417e91e3f7df3e4d5",
+            "provider": "vertex",
+            "model": "gemini-3.1-pro-preview",
+            "note_applied": false,
+            "note_bytes": 0,
+            "required_bytes": 1117,
+            "total_text_bytes": 1117,
+            "max_text_bytes": 65536,
+            "token_count": null,
+            "summarized": false,
+            "kept_indexes": []
+          },
+          "memory": {
+            "enabled": false,
+            "provider": "vertex",
+            "references": [],
+            "available": 0,
+            "omitted": 0,
+            "bytes": 0,
+            "purpose": "personal_chat",
+            "dropped_history_messages": 0
+          },
+          "knowledge": {
+            "enabled": false,
+            "references": [],
+            "citations": [],
+            "matches": 0,
+            "omitted": 0,
+            "bytes": 0,
+            "issues": [],
+            "read_bytes": 0,
+            "dropped_history_messages": 0
+          },
+          "memory_view": {
+            "schema_version": 1,
+            "provider": "vertex",
+            "purpose": "personal_chat",
+            "memory_project_ids": [],
+            "knowledge_project_ids": [],
+            "bytes": 0,
+            "max_bytes": 64355,
+            "coverage": [],
+            "retrieval": "lexical",
+            "snapshot_atomic": false
+          },
+          "persona": {
+            "applied": false
+          },
+          "continuity": {
+            "references": [],
+            "bytes": 0,
+            "omitted": 0,
+            "issues": [],
+            "dropped_history_messages": 0
+          }
+        }
+      },
+      "transport": [
+        {
+          "message": "我平时喜欢哪种茶？如果没有可靠记录，请直接说明不知道，不要猜。",
+          "history": [],
+          "provider": "vertex",
+          "model": "gemini-3.1-pro-preview",
+          "instructions_sha256": "10c2f388691561b08449b18b4b949288c9b3a06283563ee6d8a7efa17de48311"
+        }
+      ],
+      "score": {
+        "checks": {
+          "complete_reply": true,
+          "one_dispatch": true,
+          "new_conversation_no_history": true,
+          "context_evidence_expected": true,
+          "context_references_expected": true,
+          "old_or_excluded_fact_absent": true,
+          "answer_keyword_or_abstention": true,
+          "control_does_not_guess_fact": true
+        },
+        "passed": true,
+        "expected": null,
+        "rubric": "keyword/abstention + actual context/reference checks; not a general semantic judge"
+      }
+    },
+    {
+      "case": "A06",
+      "arm": "memory",
+      "events": [
+        "archive_source",
+        "rule_preview",
+        "local_review",
+        "explicit_synthetic_confirmation",
+        "permit_selected_provider_for_synthetic_fact",
+        "other_project"
+      ],
+      "elapsed_ms": 9333.521,
+      "result": {
+        "provider": "vertex",
+        "model": "gemini-3.1-pro-preview",
+        "request_id": "450411229a6c4ce9a4dd9e7203f89e66",
+        "billing_identity": {
+          "adapter": "vertex",
+          "label": "vertex",
+          "key_id": null,
+          "key_label": "历史未归属"
+        },
+        "dispatch_admitted": true,
+        "http_status": 200,
+        "usage": {
+          "promptTokenCount": 233,
+          "candidatesTokenCount": 40,
+          "totalTokenCount": 502,
+          "thoughtsTokenCount": 229
+        },
+        "output_incomplete": false,
+        "completion_reason": "complete",
+        "billing": {
+          "basis": "estimated",
+          "amount": 0.003694,
+          "currency": "USD",
+          "tokens": {
+            "input": 233,
+            "output": 269,
+            "cache_read": 0,
+            "cache_write": 0,
+            "total": 502,
+            "reasoning": 229
+          },
+          "price": {
+            "input": 2,
+            "output": 12,
+            "cache_read": 0.2,
+            "cache_write": null,
+            "max_input_tokens": 200000,
+            "currency": "USD",
+            "fee_percent": 0,
+            "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+            "checked_at": "2026-10-16"
+          },
+          "reason": "token_rates"
+        },
+        "outcome_uncertain": false,
+        "elapsed_seconds": 8.984,
+        "status": "SUCCEEDED",
+        "automatic_retry": false,
+        "text": "当前项目中没有关于您喜欢哪种茶的可靠记录，所以我不知道。如果您希望我记住您的喜好，可以发送类似：`记住：喜欢的茶=西湖龙井`。",
+        "reasoning": "low",
+        "attempts": [
+          {
+            "provider": "vertex",
+            "model": "gemini-3.1-pro-preview",
+            "status": "SUCCEEDED",
+            "outcome_uncertain": false,
+            "dispatch_admitted": true,
+            "request_id": "450411229a6c4ce9a4dd9e7203f89e66",
+            "usage": {
+              "promptTokenCount": 233,
+              "candidatesTokenCount": 40,
+              "totalTokenCount": 502,
+              "thoughtsTokenCount": 229
+            },
+            "elapsed_seconds": 8.984
+          }
+        ],
+        "notice": [],
+        "history_info": {
+          "input_messages": 0,
+          "kept_messages": 0,
+          "dropped_messages": 0,
+          "truncated": false,
+          "kept_bytes": 0,
+          "max_messages": 20,
+          "max_bytes": 32768,
+          "kept_indexes": [],
+          "context": {
+            "schema_version": "1.0.0",
+            "strategy": "recent-whole-turns-v1",
+            "revision": "525584966e3a4598f1074c7c80d524073635a720e8aed24027a62a1291fd8239",
+            "provider": "vertex",
+            "model": "gemini-3.1-pro-preview",
+            "note_applied": false,
+            "note_bytes": 0,
+            "required_bytes": 1126,
+            "total_text_bytes": 1126,
+            "max_text_bytes": 65536,
+            "token_count": null,
+            "summarized": false,
+            "kept_indexes": []
+          },
+          "memory": {
+            "enabled": true,
+            "provider": "vertex",
+            "references": [],
+            "available": 0,
+            "omitted": 0,
+            "bytes": 0,
+            "purpose": "personal_chat",
+            "dropped_history_messages": 0
+          },
+          "knowledge": {
+            "enabled": false,
+            "references": [],
+            "citations": [],
+            "matches": 0,
+            "omitted": 0,
+            "bytes": 0,
+            "issues": [],
+            "read_bytes": 0,
+            "dropped_history_messages": 0
+          },
+          "memory_view": {
+            "schema_version": 1,
+            "provider": "vertex",
+            "purpose": "personal_chat",
+            "memory_project_ids": [
+              "32df739b0b6d46f5b4cf39e300e2b1e9"
+            ],
+            "knowledge_project_ids": [],
+            "bytes": 0,
+            "max_bytes": 64346,
+            "coverage": [],
+            "retrieval": "lexical",
+            "snapshot_atomic": false
+          },
+          "persona": {
+            "applied": false
+          },
+          "continuity": {
+            "references": [],
+            "bytes": 0,
+            "omitted": 0,
+            "issues": [],
+            "dropped_history_messages": 0
+          }
+        }
+      },
+      "transport": [
+        {
+          "message": "当前项目中我喜欢哪种茶？如果没有可靠记录，请直接说明不知道，不要猜。",
+          "history": [],
+          "provider": "vertex",
+          "model": "gemini-3.1-pro-preview",
+          "instructions_sha256": "10c2f388691561b08449b18b4b949288c9b3a06283563ee6d8a7efa17de48311"
+        }
+      ],
+      "score": {
+        "checks": {
+          "complete_reply": true,
+          "one_dispatch": true,
+          "new_conversation_no_history": true,
+          "context_evidence_expected": true,
+          "context_references_expected": true,
+          "old_or_excluded_fact_absent": true,
+          "answer_keyword_or_abstention": true,
+          "control_does_not_guess_fact": true
+        },
+        "passed": true,
+        "expected": null,
+        "rubric": "keyword/abstention + actual context/reference checks; not a general semantic judge"
+      }
+    },
+    {
+      "case": "A06",
+      "arm": "control",
+      "events": [
+        "archive_source",
+        "rule_preview",
+        "local_review",
+        "explicit_synthetic_confirmation",
+        "permit_selected_provider_for_synthetic_fact",
+        "other_project"
+      ],
+      "elapsed_ms": 8573.244,
+      "result": {
+        "provider": "vertex",
+        "model": "gemini-3.1-pro-preview",
+        "request_id": "836347035f6d4bf9b24c632bfc26c561",
+        "billing_identity": {
+          "adapter": "vertex",
+          "label": "vertex",
+          "key_id": null,
+          "key_label": "历史未归属"
+        },
+        "dispatch_admitted": true,
+        "http_status": 200,
+        "usage": {
+          "promptTokenCount": 233,
+          "candidatesTokenCount": 37,
+          "totalTokenCount": 461,
+          "thoughtsTokenCount": 191
+        },
+        "output_incomplete": false,
+        "completion_reason": "complete",
+        "billing": {
+          "basis": "estimated",
+          "amount": 0.003202,
+          "currency": "USD",
+          "tokens": {
+            "input": 233,
+            "output": 228,
+            "cache_read": 0,
+            "cache_write": 0,
+            "total": 461,
+            "reasoning": 191
+          },
+          "price": {
+            "input": 2,
+            "output": 12,
+            "cache_read": 0.2,
+            "cache_write": null,
+            "max_input_tokens": 200000,
+            "currency": "USD",
+            "fee_percent": 0,
+            "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+            "checked_at": "2026-10-16"
+          },
+          "reason": "token_rates"
+        },
+        "outcome_uncertain": false,
+        "elapsed_seconds": 8.433,
+        "status": "SUCCEEDED",
+        "automatic_retry": false,
+        "text": "根据目前的记录，我不知道你喜欢哪种茶。如果你希望我记住，可以告诉我，或者发送类似这样的指令：`记住：喜欢的茶=茶的名称`。",
+        "reasoning": "low",
+        "attempts": [
+          {
+            "provider": "vertex",
+            "model": "gemini-3.1-pro-preview",
+            "status": "SUCCEEDED",
+            "outcome_uncertain": false,
+            "dispatch_admitted": true,
+            "request_id": "836347035f6d4bf9b24c632bfc26c561",
+            "usage": {
+              "promptTokenCount": 233,
+              "candidatesTokenCount": 37,
+              "totalTokenCount": 461,
+              "thoughtsTokenCount": 191
+            },
+            "elapsed_seconds": 8.433
+          }
+        ],
+        "notice": [],
+        "history_info": {
+          "input_messages": 0,
+          "kept_messages": 0,
+          "dropped_messages": 0,
+          "truncated": false,
+          "kept_bytes": 0,
+          "max_messages": 20,
+          "max_bytes": 32768,
+          "kept_indexes": [],
+          "context": {
+            "schema_version": "1.0.0",
+            "strategy": "recent-whole-turns-v1",
+            "revision": "525584966e3a4598f1074c7c80d524073635a720e8aed24027a62a1291fd8239",
+            "provider": "vertex",
+            "model": "gemini-3.1-pro-preview",
+            "note_applied": false,
+            "note_bytes": 0,
+            "required_bytes": 1126,
+            "total_text_bytes": 1126,
+            "max_text_bytes": 65536,
+            "token_count": null,
+            "summarized": false,
+            "kept_indexes": []
+          },
+          "memory": {
+            "enabled": false,
+            "provider": "vertex",
+            "references": [],
+            "available": 0,
+            "omitted": 0,
+            "bytes": 0,
+            "purpose": "personal_chat",
+            "dropped_history_messages": 0
+          },
+          "knowledge": {
+            "enabled": false,
+            "references": [],
+            "citations": [],
+            "matches": 0,
+            "omitted": 0,
+            "bytes": 0,
+            "issues": [],
+            "read_bytes": 0,
+            "dropped_history_messages": 0
+          },
+          "memory_view": {
+            "schema_version": 1,
+            "provider": "vertex",
+            "purpose": "personal_chat",
+            "memory_project_ids": [],
+            "knowledge_project_ids": [],
+            "bytes": 0,
+            "max_bytes": 64346,
+            "coverage": [],
+            "retrieval": "lexical",
+            "snapshot_atomic": false
+          },
+          "persona": {
+            "applied": false
+          },
+          "continuity": {
+            "references": [],
+            "bytes": 0,
+            "omitted": 0,
+            "issues": [],
+            "dropped_history_messages": 0
+          }
+        }
+      },
+      "transport": [
+        {
+          "message": "当前项目中我喜欢哪种茶？如果没有可靠记录，请直接说明不知道，不要猜。",
+          "history": [],
+          "provider": "vertex",
+          "model": "gemini-3.1-pro-preview",
+          "instructions_sha256": "10c2f388691561b08449b18b4b949288c9b3a06283563ee6d8a7efa17de48311"
+        }
+      ],
+      "score": {
+        "checks": {
+          "complete_reply": true,
+          "one_dispatch": true,
+          "new_conversation_no_history": true,
+          "context_evidence_expected": true,
+          "context_references_expected": true,
+          "old_or_excluded_fact_absent": true,
+          "answer_keyword_or_abstention": true,
+          "control_does_not_guess_fact": true
+        },
+        "passed": true,
+        "expected": null,
+        "rubric": "keyword/abstention + actual context/reference checks; not a general semantic judge"
+      }
+    },
+    {
+      "case": "A07",
+      "arm": "memory",
+      "events": [
+        "archive_source",
+        "rule_preview",
+        "local_review",
+        "explicit_synthetic_confirmation",
+        "permit_selected_provider_for_synthetic_fact",
+        "work_purpose"
+      ],
+      "elapsed_ms": 8457.237,
+      "result": {
+        "provider": "vertex",
+        "model": "gemini-3.1-pro-preview",
+        "request_id": "fb71628f672b44938825e62106f34cc5",
+        "billing_identity": {
+          "adapter": "vertex",
+          "label": "vertex",
+          "key_id": null,
+          "key_label": "历史未归属"
+        },
+        "dispatch_admitted": true,
+        "http_status": 200,
+        "usage": {
+          "promptTokenCount": 238,
+          "candidatesTokenCount": 15,
+          "totalTokenCount": 475,
+          "thoughtsTokenCount": 222
+        },
+        "output_incomplete": false,
+        "completion_reason": "complete",
+        "billing": {
+          "basis": "estimated",
+          "amount": 0.00332,
+          "currency": "USD",
+          "tokens": {
+            "input": 238,
+            "output": 237,
+            "cache_read": 0,
+            "cache_write": 0,
+            "total": 475,
+            "reasoning": 222
+          },
+          "price": {
+            "input": 2,
+            "output": 12,
+            "cache_read": 0.2,
+            "cache_write": null,
+            "max_input_tokens": 200000,
+            "currency": "USD",
+            "fee_percent": 0,
+            "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+            "checked_at": "2026-10-16"
+          },
+          "reason": "token_rates"
+        },
+        "outcome_uncertain": false,
+        "elapsed_seconds": 8.287,
+        "status": "SUCCEEDED",
+        "automatic_retry": false,
+        "text": "根据目前可用的记录，我不知道你偏爱哪种茶。",
+        "reasoning": "low",
+        "attempts": [
+          {
+            "provider": "vertex",
+            "model": "gemini-3.1-pro-preview",
+            "status": "SUCCEEDED",
+            "outcome_uncertain": false,
+            "dispatch_admitted": true,
+            "request_id": "fb71628f672b44938825e62106f34cc5",
+            "usage": {
+              "promptTokenCount": 238,
+              "candidatesTokenCount": 15,
+              "totalTokenCount": 475,
+              "thoughtsTokenCount": 222
+            },
+            "elapsed_seconds": 8.287
+          }
+        ],
+        "notice": [],
+        "history_info": {
+          "input_messages": 0,
+          "kept_messages": 0,
+          "dropped_messages": 0,
+          "truncated": false,
+          "kept_bytes": 0,
+          "max_messages": 20,
+          "max_bytes": 32768,
+          "kept_indexes": [],
+          "context": {
+            "schema_version": "1.0.0",
+            "strategy": "recent-whole-turns-v1",
+            "revision": "c0652cc741d02840d807701908e435c2be25ff9da3433eefd6b3ef2c0ee3f7d8",
+            "provider": "vertex",
+            "model": "gemini-3.1-pro-preview",
+            "note_applied": false,
+            "note_bytes": 0,
+            "required_bytes": 1138,
+            "total_text_bytes": 1138,
+            "max_text_bytes": 65536,
+            "token_count": null,
+            "summarized": false,
+            "kept_indexes": []
+          },
+          "memory": {
+            "enabled": true,
+            "provider": "vertex",
+            "references": [],
+            "available": 0,
+            "omitted": 0,
+            "bytes": 0,
+            "purpose": "work_assist",
+            "dropped_history_messages": 0
+          },
+          "knowledge": {
+            "enabled": false,
+            "references": [],
+            "citations": [],
+            "matches": 0,
+            "omitted": 0,
+            "bytes": 0,
+            "issues": [],
+            "read_bytes": 0,
+            "dropped_history_messages": 0
+          },
+          "memory_view": {
+            "schema_version": 1,
+            "provider": "vertex",
+            "purpose": "work_assist",
+            "memory_project_ids": [],
+            "knowledge_project_ids": [],
+            "bytes": 0,
+            "max_bytes": 64334,
+            "coverage": [],
+            "retrieval": "lexical",
+            "snapshot_atomic": false
+          },
+          "persona": {
+            "applied": false
+          },
+          "continuity": {
+            "references": [],
+            "bytes": 0,
+            "omitted": 0,
+            "issues": [],
+            "dropped_history_messages": 0
+          }
+        }
+      },
+      "transport": [
+        {
+          "message": "根据本次工作协助可用的记录，我偏爱哪种茶？没有可靠记录就说明不知道，不要猜。",
+          "history": [],
+          "provider": "vertex",
+          "model": "gemini-3.1-pro-preview",
+          "instructions_sha256": "10c2f388691561b08449b18b4b949288c9b3a06283563ee6d8a7efa17de48311"
+        }
+      ],
+      "score": {
+        "checks": {
+          "complete_reply": true,
+          "one_dispatch": true,
+          "new_conversation_no_history": true,
+          "context_evidence_expected": true,
+          "context_references_expected": true,
+          "old_or_excluded_fact_absent": true,
+          "answer_keyword_or_abstention": true,
+          "control_does_not_guess_fact": true
+        },
+        "passed": true,
+        "expected": null,
+        "rubric": "keyword/abstention + actual context/reference checks; not a general semantic judge"
+      }
+    },
+    {
+      "case": "A07",
+      "arm": "control",
+      "events": [
+        "archive_source",
+        "rule_preview",
+        "local_review",
+        "explicit_synthetic_confirmation",
+        "permit_selected_provider_for_synthetic_fact",
+        "work_purpose"
+      ],
+      "elapsed_ms": 7707.987,
+      "result": {
+        "provider": "vertex",
+        "model": "gemini-3.1-pro-preview",
+        "request_id": "856cec79ef6a4b14878ab6d5833fafdc",
+        "billing_identity": {
+          "adapter": "vertex",
+          "label": "vertex",
+          "key_id": null,
+          "key_label": "历史未归属"
+        },
+        "dispatch_admitted": true,
+        "http_status": 200,
+        "usage": {
+          "promptTokenCount": 238,
+          "candidatesTokenCount": 40,
+          "totalTokenCount": 424,
+          "thoughtsTokenCount": 146
+        },
+        "output_incomplete": false,
+        "completion_reason": "complete",
+        "billing": {
+          "basis": "estimated",
+          "amount": 0.002708,
+          "currency": "USD",
+          "tokens": {
+            "input": 238,
+            "output": 186,
+            "cache_read": 0,
+            "cache_write": 0,
+            "total": 424,
+            "reasoning": 146
+          },
+          "price": {
+            "input": 2,
+            "output": 12,
+            "cache_read": 0.2,
+            "cache_write": null,
+            "max_input_tokens": 200000,
+            "currency": "USD",
+            "fee_percent": 0,
+            "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+            "checked_at": "2026-10-16"
+          },
+          "reason": "token_rates"
+        },
+        "outcome_uncertain": false,
+        "elapsed_seconds": 7.567,
+        "status": "SUCCEEDED",
+        "automatic_retry": false,
+        "text": "根据目前的记录，我没有找到关于你偏爱哪种茶的信息。如果你愿意，可以告诉我，我帮你记录下来（例如回复：记住：偏爱的茶=你的喜好）。",
+        "reasoning": "low",
+        "attempts": [
+          {
+            "provider": "vertex",
+            "model": "gemini-3.1-pro-preview",
+            "status": "SUCCEEDED",
+            "outcome_uncertain": false,
+            "dispatch_admitted": true,
+            "request_id": "856cec79ef6a4b14878ab6d5833fafdc",
+            "usage": {
+              "promptTokenCount": 238,
+              "candidatesTokenCount": 40,
+              "totalTokenCount": 424,
+              "thoughtsTokenCount": 146
+            },
+            "elapsed_seconds": 7.567
+          }
+        ],
+        "notice": [],
+        "history_info": {
+          "input_messages": 0,
+          "kept_messages": 0,
+          "dropped_messages": 0,
+          "truncated": false,
+          "kept_bytes": 0,
+          "max_messages": 20,
+          "max_bytes": 32768,
+          "kept_indexes": [],
+          "context": {
+            "schema_version": "1.0.0",
+            "strategy": "recent-whole-turns-v1",
+            "revision": "c0652cc741d02840d807701908e435c2be25ff9da3433eefd6b3ef2c0ee3f7d8",
+            "provider": "vertex",
+            "model": "gemini-3.1-pro-preview",
+            "note_applied": false,
+            "note_bytes": 0,
+            "required_bytes": 1138,
+            "total_text_bytes": 1138,
+            "max_text_bytes": 65536,
+            "token_count": null,
+            "summarized": false,
+            "kept_indexes": []
+          },
+          "memory": {
+            "enabled": false,
+            "provider": "vertex",
+            "references": [],
+            "available": 0,
+            "omitted": 0,
+            "bytes": 0,
+            "purpose": "work_assist",
+            "dropped_history_messages": 0
+          },
+          "knowledge": {
+            "enabled": false,
+            "references": [],
+            "citations": [],
+            "matches": 0,
+            "omitted": 0,
+            "bytes": 0,
+            "issues": [],
+            "read_bytes": 0,
+            "dropped_history_messages": 0
+          },
+          "memory_view": {
+            "schema_version": 1,
+            "provider": "vertex",
+            "purpose": "work_assist",
+            "memory_project_ids": [],
+            "knowledge_project_ids": [],
+            "bytes": 0,
+            "max_bytes": 64334,
+            "coverage": [],
+            "retrieval": "lexical",
+            "snapshot_atomic": false
+          },
+          "persona": {
+            "applied": false
+          },
+          "continuity": {
+            "references": [],
+            "bytes": 0,
+            "omitted": 0,
+            "issues": [],
+            "dropped_history_messages": 0
+          }
+        }
+      },
+      "transport": [
+        {
+          "message": "根据本次工作协助可用的记录，我偏爱哪种茶？没有可靠记录就说明不知道，不要猜。",
+          "history": [],
+          "provider": "vertex",
+          "model": "gemini-3.1-pro-preview",
+          "instructions_sha256": "10c2f388691561b08449b18b4b949288c9b3a06283563ee6d8a7efa17de48311"
+        }
+      ],
+      "score": {
+        "checks": {
+          "complete_reply": true,
+          "one_dispatch": true,
+          "new_conversation_no_history": true,
+          "context_evidence_expected": true,
+          "context_references_expected": true,
+          "old_or_excluded_fact_absent": true,
+          "answer_keyword_or_abstention": true,
+          "control_does_not_guess_fact": true
+        },
+        "passed": true,
+        "expected": null,
+        "rubric": "keyword/abstention + actual context/reference checks; not a general semantic judge"
+      }
+    },
+    {
+      "case": "A08",
+      "arm": "memory",
+      "events": [
+        "archive_source",
+        "rule_preview",
+        "local_review",
+        "explicit_synthetic_confirmation",
+        "permit_selected_provider_for_synthetic_fact",
+        "edit_source"
+      ],
+      "elapsed_ms": 10085.845,
+      "result": {
+        "provider": "vertex",
+        "model": "gemini-3.1-pro-preview",
+        "request_id": "39ccfb58afd44925949c611a7174c1ea",
+        "billing_identity": {
+          "adapter": "vertex",
+          "label": "vertex",
+          "key_id": null,
+          "key_label": "历史未归属"
+        },
+        "dispatch_admitted": true,
+        "http_status": 200,
+        "usage": {
+          "promptTokenCount": 233,
+          "candidatesTokenCount": 46,
+          "totalTokenCount": 485,
+          "thoughtsTokenCount": 206
+        },
+        "output_incomplete": false,
+        "completion_reason": "complete",
+        "billing": {
+          "basis": "estimated",
+          "amount": 0.00349,
+          "currency": "USD",
+          "tokens": {
+            "input": 233,
+            "output": 252,
+            "cache_read": 0,
+            "cache_write": 0,
+            "total": 485,
+            "reasoning": 206
+          },
+          "price": {
+            "input": 2,
+            "output": 12,
+            "cache_read": 0.2,
+            "cache_write": null,
+            "max_input_tokens": 200000,
+            "currency": "USD",
+            "fee_percent": 0,
+            "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+            "checked_at": "2026-10-16"
+          },
+          "reason": "token_rates"
+        },
+        "outcome_uncertain": false,
+        "elapsed_seconds": 9.917,
+        "status": "SUCCEEDED",
+        "automatic_retry": false,
+        "text": "我目前没有关于您偏爱哪种茶的记录，所以我不知道。如果您希望我记住您的喜好，您可以告诉我，并使用类似“记住：偏爱的茶=某某茶”的指令来保存。",
+        "reasoning": "low",
+        "attempts": [
+          {
+            "provider": "vertex",
+            "model": "gemini-3.1-pro-preview",
+            "status": "SUCCEEDED",
+            "outcome_uncertain": false,
+            "dispatch_admitted": true,
+            "request_id": "39ccfb58afd44925949c611a7174c1ea",
+            "usage": {
+              "promptTokenCount": 233,
+              "candidatesTokenCount": 46,
+              "totalTokenCount": 485,
+              "thoughtsTokenCount": 206
+            },
+            "elapsed_seconds": 9.917
+          }
+        ],
+        "notice": [],
+        "history_info": {
+          "input_messages": 0,
+          "kept_messages": 0,
+          "dropped_messages": 0,
+          "truncated": false,
+          "kept_bytes": 0,
+          "max_messages": 20,
+          "max_bytes": 32768,
+          "kept_indexes": [],
+          "context": {
+            "schema_version": "1.0.0",
+            "strategy": "recent-whole-turns-v1",
+            "revision": "64c2a294da1134540640f6de25bb425080e22b240808829537483fed8e446b2e",
+            "provider": "vertex",
+            "model": "gemini-3.1-pro-preview",
+            "note_applied": false,
+            "note_bytes": 0,
+            "required_bytes": 1117,
+            "total_text_bytes": 1117,
+            "max_text_bytes": 65536,
+            "token_count": null,
+            "summarized": false,
+            "kept_indexes": []
+          },
+          "memory": {
+            "enabled": true,
+            "provider": "vertex",
+            "references": [],
+            "available": 0,
+            "omitted": 0,
+            "bytes": 0,
+            "purpose": "personal_chat",
+            "dropped_history_messages": 0
+          },
+          "knowledge": {
+            "enabled": false,
+            "references": [],
+            "citations": [],
+            "matches": 0,
+            "omitted": 0,
+            "bytes": 0,
+            "issues": [],
+            "read_bytes": 0,
+            "dropped_history_messages": 0
+          },
+          "memory_view": {
+            "schema_version": 1,
+            "provider": "vertex",
+            "purpose": "personal_chat",
+            "memory_project_ids": [],
+            "knowledge_project_ids": [],
+            "bytes": 0,
+            "max_bytes": 64355,
+            "coverage": [],
+            "retrieval": "lexical",
+            "snapshot_atomic": false
+          },
+          "persona": {
+            "applied": false
+          },
+          "continuity": {
+            "references": [],
+            "bytes": 0,
+            "omitted": 0,
+            "issues": [],
+            "dropped_history_messages": 0
+          }
+        }
+      },
+      "transport": [
+        {
+          "message": "我平时偏爱哪种茶？如果没有可靠记录，请直接说明不知道，不要猜。",
+          "history": [],
+          "provider": "vertex",
+          "model": "gemini-3.1-pro-preview",
+          "instructions_sha256": "10c2f388691561b08449b18b4b949288c9b3a06283563ee6d8a7efa17de48311"
+        }
+      ],
+      "score": {
+        "checks": {
+          "complete_reply": true,
+          "one_dispatch": true,
+          "new_conversation_no_history": true,
+          "context_evidence_expected": true,
+          "context_references_expected": true,
+          "old_or_excluded_fact_absent": true,
+          "answer_keyword_or_abstention": true,
+          "control_does_not_guess_fact": true
+        },
+        "passed": true,
+        "expected": null,
+        "rubric": "keyword/abstention + actual context/reference checks; not a general semantic judge"
+      }
+    },
+    {
+      "case": "A08",
+      "arm": "control",
+      "events": [
+        "archive_source",
+        "rule_preview",
+        "local_review",
+        "explicit_synthetic_confirmation",
+        "permit_selected_provider_for_synthetic_fact",
+        "edit_source"
+      ],
+      "elapsed_ms": 9610.969,
+      "result": {
+        "provider": "vertex",
+        "model": "gemini-3.1-pro-preview",
+        "request_id": "b812eb7754804290adc2a9aff0ba9bee",
+        "billing_identity": {
+          "adapter": "vertex",
+          "label": "vertex",
+          "key_id": null,
+          "key_label": "历史未归属"
+        },
+        "dispatch_admitted": true,
+        "http_status": 200,
+        "usage": {
+          "promptTokenCount": 233,
+          "candidatesTokenCount": 49,
+          "totalTokenCount": 597,
+          "thoughtsTokenCount": 315
+        },
+        "output_incomplete": false,
+        "completion_reason": "complete",
+        "billing": {
+          "basis": "estimated",
+          "amount": 0.004834,
+          "currency": "USD",
+          "tokens": {
+            "input": 233,
+            "output": 364,
+            "cache_read": 0,
+            "cache_write": 0,
+            "total": 597,
+            "reasoning": 315
+          },
+          "price": {
+            "input": 2,
+            "output": 12,
+            "cache_read": 0.2,
+            "cache_write": null,
+            "max_input_tokens": 200000,
+            "currency": "USD",
+            "fee_percent": 0,
+            "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+            "checked_at": "2026-10-16"
+          },
+          "reason": "token_rates"
+        },
+        "outcome_uncertain": false,
+        "elapsed_seconds": 9.467,
+        "status": "SUCCEEDED",
+        "automatic_retry": false,
+        "text": "我目前没有任何关于您偏爱哪种茶的可靠记录，所以我不知道。\n\n如果您希望我记住您的喜好，请向我发送格式如下的指令：\n`记住：偏爱的茶=您喜欢的茶的名称`",
+        "reasoning": "low",
+        "attempts": [
+          {
+            "provider": "vertex",
+            "model": "gemini-3.1-pro-preview",
+            "status": "SUCCEEDED",
+            "outcome_uncertain": false,
+            "dispatch_admitted": true,
+            "request_id": "b812eb7754804290adc2a9aff0ba9bee",
+            "usage": {
+              "promptTokenCount": 233,
+              "candidatesTokenCount": 49,
+              "totalTokenCount": 597,
+              "thoughtsTokenCount": 315
+            },
+            "elapsed_seconds": 9.467
+          }
+        ],
+        "notice": [],
+        "history_info": {
+          "input_messages": 0,
+          "kept_messages": 0,
+          "dropped_messages": 0,
+          "truncated": false,
+          "kept_bytes": 0,
+          "max_messages": 20,
+          "max_bytes": 32768,
+          "kept_indexes": [],
+          "context": {
+            "schema_version": "1.0.0",
+            "strategy": "recent-whole-turns-v1",
+            "revision": "64c2a294da1134540640f6de25bb425080e22b240808829537483fed8e446b2e",
+            "provider": "vertex",
+            "model": "gemini-3.1-pro-preview",
+            "note_applied": false,
+            "note_bytes": 0,
+            "required_bytes": 1117,
+            "total_text_bytes": 1117,
+            "max_text_bytes": 65536,
+            "token_count": null,
+            "summarized": false,
+            "kept_indexes": []
+          },
+          "memory": {
+            "enabled": false,
+            "provider": "vertex",
+            "references": [],
+            "available": 0,
+            "omitted": 0,
+            "bytes": 0,
+            "purpose": "personal_chat",
+            "dropped_history_messages": 0
+          },
+          "knowledge": {
+            "enabled": false,
+            "references": [],
+            "citations": [],
+            "matches": 0,
+            "omitted": 0,
+            "bytes": 0,
+            "issues": [],
+            "read_bytes": 0,
+            "dropped_history_messages": 0
+          },
+          "memory_view": {
+            "schema_version": 1,
+            "provider": "vertex",
+            "purpose": "personal_chat",
+            "memory_project_ids": [],
+            "knowledge_project_ids": [],
+            "bytes": 0,
+            "max_bytes": 64355,
+            "coverage": [],
+            "retrieval": "lexical",
+            "snapshot_atomic": false
+          },
+          "persona": {
+            "applied": false
+          },
+          "continuity": {
+            "references": [],
+            "bytes": 0,
+            "omitted": 0,
+            "issues": [],
+            "dropped_history_messages": 0
+          }
+        }
+      },
+      "transport": [
+        {
+          "message": "我平时偏爱哪种茶？如果没有可靠记录，请直接说明不知道，不要猜。",
+          "history": [],
+          "provider": "vertex",
+          "model": "gemini-3.1-pro-preview",
+          "instructions_sha256": "10c2f388691561b08449b18b4b949288c9b3a06283563ee6d8a7efa17de48311"
+        }
+      ],
+      "score": {
+        "checks": {
+          "complete_reply": true,
+          "one_dispatch": true,
+          "new_conversation_no_history": true,
+          "context_evidence_expected": true,
+          "context_references_expected": true,
+          "old_or_excluded_fact_absent": true,
+          "answer_keyword_or_abstention": true,
+          "control_does_not_guess_fact": true
+        },
+        "passed": true,
+        "expected": null,
+        "rubric": "keyword/abstention + actual context/reference checks; not a general semantic judge"
+      }
+    }
+  ],
+  "limits": [
+    "Eight author-created development cases, one run per arm; no independent holdout",
+    "Rule extraction and explicit synthetic confirmation only; not Mem0/LangMem comparison",
+    "Empty new-conversation history; original source chat still contains forgotten words",
+    "Memory references are injected-context evidence, not proof every output claim was grounded",
+    "Fixture mode cannot score language-model quality; no production memory is opened"
+  ],
+  "summary": {
+    "memory": {
+      "runs": 8,
+      "rubric_passes": 8
+    },
+    "control": {
+      "runs": 8,
+      "rubric_passes": 8
+    }
+  },
+  "cost": {
+    "currency": "USD",
+    "estimated_amount": 0.061882,
+    "receipts": 16,
+    "cloud_dispatches": 16,
+    "missing_receipts": 0
+  },
+  "source_unchanged": true
+}

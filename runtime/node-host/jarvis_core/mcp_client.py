@@ -22,6 +22,7 @@ def failure(code, message):
 class Context7Client:
     def __init__(self, checkpoint=lambda: None, *, transport=None):
         self.checkpoint, self.transport = checkpoint, transport
+        self.network_checkpoint = lambda: None
         self.headers = {'Accept': 'application/json, text/event-stream'}
         self.trace, self.ordinal, self.dispatched = [], 0, False
 
@@ -119,6 +120,7 @@ class Context7Client:
             if method == 'tools/call':
                 # Cancellation is best effort; it cannot retract the sent query.
                 try:
+                    self.network_checkpoint()
                     await asyncio.wait_for(client.post(ENDPOINT, headers=self.headers, json={
                         'jsonrpc': '2.0', 'method': 'notifications/cancelled',
                         'params': {'requestId': payload['id'], 'reason': 'Client stopped waiting'}}), 1)
@@ -168,6 +170,7 @@ class Context7Client:
             finally:
                 if self.headers.get('Mcp-Session-Id'):
                     try:
+                        self.network_checkpoint()
                         await asyncio.wait_for(client.delete(ENDPOINT, headers=self.headers), 1)
                     except Exception:
                         pass

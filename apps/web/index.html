@@ -69,7 +69,7 @@ __JARVIS_READOUT_STYLE__
   <div class="memory-heading"><h2 id="memory-heading">Jarvis 记忆</h2><button id="memory-close" type="button" aria-label="关闭记忆">关闭</button></div>
   <label class="memory-toggle"><input id="memory-enabled" type="checkbox" checked>在普通会话中使用记忆与接续（临时会话不使用）</label>
   <label for="memory-purpose">本页对话使用哪些记忆</label><select id="memory-purpose"><option value="">自动：无项目为日常，项目内为工作</option><option value="personal_chat">日常交流</option><option value="work_assist">工作协助</option></select><p class="workspace-note">这里只筛选长期事实记忆，不清除当前聊天、附件或接续。工作协助仍面向你，不是对外发送模式。</p>
-  <nav class="memory-tabs" aria-label="记忆分类"><button type="button" data-memory-tab="facts" aria-pressed="true" aria-controls="memory-facts">事实记忆</button><button type="button" data-memory-tab="continuity" aria-pressed="false" aria-controls="continuity-panel">接续</button></nav>
+  <nav class="memory-tabs" aria-label="记忆分类"><button type="button" data-memory-tab="facts" aria-pressed="true" aria-controls="memory-facts">事实记忆</button><button type="button" data-memory-tab="continuity" aria-pressed="false" aria-controls="continuity-panel">接续</button><button type="button" data-memory-tab="persona" aria-pressed="false" aria-controls="persona-panel">交流设置</button></nav>
   <section id="memory-facts" aria-label="事实记忆">
   <p class="workspace-note">保存值得长期使用的偏好和事实。通用记忆跨普通会话使用，项目记忆只用于对应项目。</p>
   <details class="workspace-note"><summary>在聊天中记住我与调整交流方式</summary><p>普通会话可发送：<code>记住：饮品=喜欢无糖茶</code>、<code>修改记忆：饮品=喜欢黑咖啡</code>、<code>忘记：饮品</code>、<code>查看记忆</code>。项目内使用“记住本项目：名称=内容”。新记忆默认仅本地使用；下方可授权云端接入方。</p><p>交流设置：<code>设置交流风格：温暖</code>（自然 / 简洁 / 温暖 / 严谨 / 幽默）、<code>设置相处方式：伙伴</code>（助手 / 伙伴）。也可查看交流设置、撤销交流设置、恢复默认交流设置。设置会用于后续普通对话，包括所选云端模型；临时会话不使用。当前仅调整表达，不改变权限与事实。</p></details>
@@ -85,8 +85,16 @@ __JARVIS_READOUT_STYLE__
   <section id="continuity-panel" aria-label="接续记录" hidden>
     <p class="workspace-note">记录共同讨论的进展与下一步，在另一个会话中接着聊。每条记录都关联你明确输入的原消息；来源不代表工作已经执行。</p>
     <details class="workspace-note"><summary>如何保存和接着聊</summary><p><code>保存接续：旅行计划=已确定去杭州｜下一步比较住宿</code></p><p>更新接续：标题=新进展｜下一步；继续话题：标题；查看接续；完成接续：标题；重新打开接续：标题；忘记接续：标题。</p><p>新会话可在下方选用记录。云端模型需要逐条授权。来源被删除或改动后，旧接续暂停使用；普通闲聊不会自动提取成记录。</p></details>
-    <div class="dialog-actions"><button id="continuity-reload" type="button">刷新接续</button></div>
+    <label for="continuity-query">查找相关话题</label><input id="continuity-query" type="search" maxlength="512" placeholder="如：英语学习、旅行住宿"><div class="dialog-actions"><button id="continuity-suggest" type="button">按话题推荐</button><button id="continuity-reload" type="button">查看全部接续</button></div><p class="workspace-note">推荐最多三条，按当前模型许可和有效来源筛选；选中后才用于本会话，不自动执行下一步。</p>
     <p id="continuity-status" role="status"></p><div id="continuity-list"></div>
+  </section>
+  <section id="persona-panel" aria-label="交流设置" hidden>
+    <p class="workspace-note">称呼和表达用于后续普通对话，包括所选云端模型；临时会话不使用。不会改变事实、身份或任务权限。</p>
+    <form id="persona-form"><label for="persona-name">希望怎样称呼你</label><input id="persona-name" maxlength="32" autocomplete="off" placeholder="可留空">
+    <label for="persona-style">交流风格</label><select id="persona-style"><option>自然</option><option>简洁</option><option>温暖</option><option>严谨</option><option>幽默</option></select>
+    <label for="persona-relationship">相处方式</label><select id="persona-relationship"><option>助手</option><option>伙伴</option></select>
+    <p id="persona-version" class="workspace-note"></p><div class="dialog-actions"><button id="persona-save" type="submit" class="primary">保存交流设置</button><button id="persona-undo" type="button">恢复上一版</button><button id="persona-reset" type="button">恢复默认</button><button id="persona-reload" type="button">核对最新修订</button></div></form>
+    <p id="persona-status" role="status"></p>
   </section>
 </dialog>
 <dialog id="knowledge-dialog" class="workspace-dialog knowledge-dialog" aria-labelledby="knowledge-heading">
@@ -119,7 +127,7 @@ function notify(text){$("toast").textContent=text;$("toast").hidden=!text;}
 function localGrowthCommand(value=$("message").value.trim()){return /^\/(?:改进|成长进度)(?:\s|$)/u.test(value);}
 function localCalculationCommand(value=$("message").value.trim()){return /^\/(?:计算|calc)(?:\s|$)/iu.test(value);}
 function localDocumentationCommand(value=$("message").value.trim()){return $("composer-mode").value==='mcp'||/^\/文档\s+\S+\s+[^\r\n]+$/u.test(value);}
-function localPersonalCommand(value=$("message").value.trim()){return /^(?:请)?(?:记住本项目|修改本项目记忆|忘记本项目|查看本项目记忆|记住|修改记忆|忘记|查看记忆|设置交流风格|设置相处方式|保存接续|更新接续|继续话题|完成接续|重新打开接续|忘记接续)\s*[：:]\s*[^\r\n]+$/u.test(value)||['查看接续','查看记忆','查看本项目记忆','查看交流设置','恢复默认交流设置','撤销交流设置'].includes(value);}
+function localPersonalCommand(value=$("message").value.trim()){return /^(?:请)?(?:记住本项目|修改本项目记忆|忘记本项目|查看本项目记忆|记住|修改记忆|忘记|查看记忆|设置交流风格|设置相处方式|设置称呼|查询三库|保存接续|更新接续|继续话题|完成接续|重新打开接续|忘记接续)\s*[：:]\s*[^\r\n]+$/u.test(value)||['查看接续','查看记忆','查看本项目记忆','查看交流设置','恢复默认交流设置','撤销交流设置','查看能力'].includes(value);}
 function setControls(){
  window.JarvisBrand?.setState(coreReady?(busy||assistantWorking?"thinking":"idle"):"offline");
  if(coreReady)$("connection-label").textContent=busy?"正在回复当前会话":assistantWorking?"助手正在运行后台任务":"助手待命中";
@@ -281,6 +289,7 @@ bindSuggestions();refresh();
 <script nonce="__JARVIS_NONCE__" src="/conversations.js"></script>
 <script nonce="__JARVIS_NONCE__" src="/readout.js"></script>
 <script nonce="__JARVIS_NONCE__" src="/memory.js"></script>
+<script nonce="__JARVIS_NONCE__" src="/persona.js"></script>
 <script nonce="__JARVIS_NONCE__" src="/continuity.js"></script>
 <script nonce="__JARVIS_NONCE__" src="/knowledge.js"></script>
 <script nonce="__JARVIS_NONCE__" src="/project_menu.js"></script>

@@ -130,6 +130,7 @@ class Replay:
             preview = service.suggest(self.sources[s['source']])
             candidate = preview['candidates'][s.get('index', 0)]
             service.confirm({**{k: preview[k] for k in ('source', 'project_id', 'source_digest')},
+                             **({'preview_token':preview['preview_token']} if candidate['kind']=='fact' else {}),
                              'candidate': candidate, 'scope': 'current'})
         elif op == 'remember':
             receipt = self.memory.command('remember', s['title'], s['content'],

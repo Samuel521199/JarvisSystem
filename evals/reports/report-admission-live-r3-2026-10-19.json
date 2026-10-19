@@ -1,0 +1,664 @@
+{
+  "status": "SUCCEEDED",
+  "source_version": "0.1.59",
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/__init__.py": "e0dcd98d6ecb508af15d51d97be4020fcac2e30dd3f016c220d24c6c5ff91542",
+    "runtime/node-host/jarvis_core/report_intents.py": "f6c44b97801a6c2bad2c8785fee0f9885a713bb1bbea0e9c06a84089ec95b34b",
+    "runtime/node-host/jarvis_core/work_admission.py": "e73cd0b0ca943df9e6b78ccc89f92105935f04c92163d9c9825e3032dc936dea",
+    "runtime/node-host/jarvis_core/task_revisions.py": "3eb98f907bfc30c30d17d235dd7a42ee9b567cf5275d6f93bb1a30e9f80b8327",
+    "runtime/node-host/jarvis_core/turns.py": "1a8f1e1fdba3ebf1f432be147a4b5d6e13d779400f860355b16e115e5bf745f0",
+    "runtime/node-host/jarvis_core/ledger.py": "b89c8fc52c1d5a12812c87f466e7077f94beccb7df6e6bdbc777ed58d5d7c83e",
+    "runtime/node-host/jarvis_core/task_queue.py": "4d2a4250062c20be22be9961ed0aa9b8ab38d830ef37e3a33f4aad304ce0db1c",
+    "runtime/node-host/jarvis_core/conversation_tasks.py": "af5e97e3e8fcf3b2b213e91b0dcce0f849e6c4abbef9916c22f2623317174fbe",
+    "apps/web/server.py": "cb39a008580fdec00ee7f5e4ec0a4ffa48786bc8482105634f8923d41f50efb1",
+    "tools/probe_report_admission_live.py": "539bd87514ff24912d5a3fa9ee36d20872c43f559a219653648d1813b063a216"
+  },
+  "route": "vertex::gemini-3.8-flash",
+  "turns": [
+    {
+      "request_id": "a9cbfb5842964b2c8a5702dbb686256a",
+      "message": "我很难过，陪我聊聊，顺便把样例报告导出。",
+      "result": {
+        "provider": "vertex",
+        "model": "gemini-3.8-flash",
+        "request_id": "013deb5a98ce412faaae6f6420625576",
+        "billing_identity": {
+          "adapter": "vertex",
+          "label": "Google Vertex",
+          "key_id": null,
+          "key_label": "历史未归属"
+        },
+        "dispatch_admitted": true,
+        "http_status": 200,
+        "usage": {
+          "promptTokenCount": 708,
+          "candidatesTokenCount": 154,
+          "totalTokenCount": 862
+        },
+        "output_incomplete": false,
+        "completion_reason": "complete",
+        "billing": {
+          "basis": "estimated",
+          "amount": 0.0011085,
+          "currency": "USD",
+          "tokens": {
+            "input": 708,
+            "output": 154,
+            "cache_read": 0,
+            "cache_write": 0,
+            "total": 862,
+            "reasoning": 0
+          },
+          "price": {
+            "input": 0.75,
+            "output": 3.75,
+            "cache_read": 0.075,
+            "cache_write": null,
+            "max_input_tokens": 1000000,
+            "currency": "USD",
+            "fee_percent": 0,
+            "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+            "checked_at": "2026-10-16",
+            "valid_until": "2026-12-31"
+          },
+          "reason": "token_rates"
+        },
+        "outcome_uncertain": false,
+        "elapsed_seconds": 5.53,
+        "status": "SUCCEEDED",
+        "automatic_retry": false,
+        "text": "抱歉听到你心情不好，我一直都在，想聊什么都可以告诉我。关于样例报告的导出请求，我已经记录下来，稍后会为你处理。现在想先和我说说发生什么事了吗？",
+        "reasoning": "low",
+        "intent_decision": {
+          "state": "recognized",
+          "interaction_style": "empathetic",
+          "intents": [
+            {
+              "kind": "emotion",
+              "quote": "我很难过",
+              "disposition": "requested",
+              "capability": null,
+              "arguments": {},
+              "missing_fields": [],
+              "source_span": {
+                "start": 0,
+                "end": 4
+              },
+              "execution": "not_submitted",
+              "intent_id": "1054d512a2315309d7727bceb123da7c-1"
+            },
+            {
+              "kind": "chat",
+              "quote": "陪我聊聊",
+              "disposition": "requested",
+              "capability": null,
+              "arguments": {},
+              "missing_fields": [],
+              "source_span": {
+                "start": 5,
+                "end": 9
+              },
+              "execution": "not_submitted",
+              "intent_id": "1054d512a2315309d7727bceb123da7c-2"
+            },
+            {
+              "kind": "action",
+              "quote": "把样例报告导出",
+              "disposition": "requested",
+              "capability": null,
+              "arguments": {},
+              "missing_fields": [],
+              "source_span": {
+                "start": 12,
+                "end": 19
+              },
+              "execution": "submitted",
+              "intent_id": "1054d512a2315309d7727bceb123da7c-3",
+              "task_id": "task_3f4948565a1257d6b333e16fa0e5799e"
+            }
+          ],
+          "schema_version": 1,
+          "mode": "bounded_sample_report",
+          "engine": "dialogue-intent-v2",
+          "automatic_execution": true,
+          "provider": "vertex",
+          "model": "gemini-3.8-flash",
+          "validation_error": null,
+          "decision_id": "1054d512a2315309d7727bceb123da7c",
+          "turn_id": "a9cbfb5842964b2c8a5702dbb686256a",
+          "revision": 1
+        },
+        "attempts": [
+          {
+            "provider": "vertex",
+            "model": "gemini-3.8-flash",
+            "status": "SUCCEEDED",
+            "outcome_uncertain": false,
+            "dispatch_admitted": true,
+            "request_id": "013deb5a98ce412faaae6f6420625576",
+            "usage": {
+              "promptTokenCount": 708,
+              "candidatesTokenCount": 154,
+              "totalTokenCount": 862
+            },
+            "elapsed_seconds": 5.53
+          }
+        ],
+        "notice": [],
+        "history_info": {
+          "input_messages": 0,
+          "kept_messages": 0,
+          "dropped_messages": 0,
+          "truncated": false,
+          "kept_bytes": 0,
+          "max_messages": 20,
+          "max_bytes": 32768,
+          "kept_indexes": [],
+          "context": {
+            "schema_version": "1.0.0",
+            "strategy": "recent-whole-turns-v1",
+            "revision": "0f2169312f60d4cb827ead4c79f8deb56f8138213b842acd2aa18891c12ceef7",
+            "provider": "vertex",
+            "model": "gemini-3.8-flash",
+            "note_applied": false,
+            "note_bytes": 0,
+            "required_bytes": 3482,
+            "total_text_bytes": 3482,
+            "max_text_bytes": 65536,
+            "token_count": null,
+            "summarized": false,
+            "kept_indexes": []
+          },
+          "memory": {
+            "enabled": false,
+            "provider": "vertex",
+            "references": [],
+            "available": 0,
+            "omitted": 0,
+            "bytes": 0,
+            "purpose": "personal_chat",
+            "dropped_history_messages": 0
+          },
+          "knowledge": {
+            "enabled": false,
+            "references": [],
+            "citations": [],
+            "matches": 0,
+            "omitted": 0,
+            "bytes": 0,
+            "issues": [],
+            "read_bytes": 0,
+            "dropped_history_messages": 0
+          },
+          "memory_view": {
+            "schema_version": 1,
+            "provider": "vertex",
+            "purpose": "personal_chat",
+            "memory_project_ids": [],
+            "knowledge_project_ids": [],
+            "bytes": 0,
+            "max_bytes": 61990,
+            "coverage": [],
+            "retrieval": "lexical",
+            "snapshot_atomic": false
+          },
+          "persona": {
+            "applied": true,
+            "revision": 0,
+            "style": "自然",
+            "relationship": "助手"
+          },
+          "continuity": {
+            "references": [],
+            "bytes": 0,
+            "omitted": 0,
+            "issues": [],
+            "dropped_history_messages": 0
+          }
+        },
+        "work_admission": {
+          "status": "submitted",
+          "capability": "sample.report.v1",
+          "automatic": true,
+          "operation": "create",
+          "task_id": "task_3f4948565a1257d6b333e16fa0e5799e",
+          "request_id": "web-7a803f712f24ca20e3bed08c5bbb41d5",
+          "reason": "已受理一项样例目录报告，聊天可以继续；进度和产物以任务记录为准。"
+        }
+      },
+      "elapsed_seconds": 6.015
+    },
+    {
+      "request_id": "36c14fc379284c7cb7e8578a04f08bb4",
+      "message": "把报告 task_3f4948565a1257d6b333e16fa0e5799e 的目录改为 sub",
+      "result": {
+        "provider": "vertex",
+        "model": "gemini-3.8-flash",
+        "request_id": "9c56eefe56ba488b95651836923f8fb0",
+        "billing_identity": {
+          "adapter": "vertex",
+          "label": "Google Vertex",
+          "key_id": null,
+          "key_label": "历史未归属"
+        },
+        "dispatch_admitted": true,
+        "http_status": 200,
+        "usage": {
+          "promptTokenCount": 731,
+          "candidatesTokenCount": 130,
+          "totalTokenCount": 861
+        },
+        "output_incomplete": false,
+        "completion_reason": "complete",
+        "billing": {
+          "basis": "estimated",
+          "amount": 0.00103575,
+          "currency": "USD",
+          "tokens": {
+            "input": 731,
+            "output": 130,
+            "cache_read": 0,
+            "cache_write": 0,
+            "total": 861,
+            "reasoning": 0
+          },
+          "price": {
+            "input": 0.75,
+            "output": 3.75,
+            "cache_read": 0.075,
+            "cache_write": null,
+            "max_input_tokens": 1000000,
+            "currency": "USD",
+            "fee_percent": 0,
+            "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+            "checked_at": "2026-10-16",
+            "valid_until": "2026-12-31"
+          },
+          "reason": "token_rates"
+        },
+        "outcome_uncertain": false,
+        "elapsed_seconds": 5.738,
+        "status": "SUCCEEDED",
+        "automatic_retry": false,
+        "text": "已收到请求，准备将报告 task_3f4948565a1257d6b333e16fa0e5799e 的目录修改为 sub。",
+        "reasoning": "low",
+        "intent_decision": {
+          "state": "recognized",
+          "interaction_style": "neutral",
+          "intents": [
+            {
+              "kind": "action",
+              "quote": "把报告 task_3f4948565a1257d6b333e16fa0e5799e 的目录改为 sub",
+              "disposition": "requested",
+              "capability": null,
+              "arguments": {},
+              "missing_fields": [],
+              "source_span": {
+                "start": 0,
+                "end": 51
+              },
+              "execution": "submitted",
+              "intent_id": "bb90316bc90ed9360babad2b3832729f-1",
+              "task_id": "task_a752dedafd3d59268a2880d0fdfb55bd"
+            }
+          ],
+          "schema_version": 1,
+          "mode": "bounded_sample_report",
+          "engine": "dialogue-intent-v2",
+          "automatic_execution": true,
+          "provider": "vertex",
+          "model": "gemini-3.8-flash",
+          "validation_error": null,
+          "decision_id": "bb90316bc90ed9360babad2b3832729f",
+          "turn_id": "36c14fc379284c7cb7e8578a04f08bb4",
+          "revision": 1
+        },
+        "attempts": [
+          {
+            "provider": "vertex",
+            "model": "gemini-3.8-flash",
+            "status": "SUCCEEDED",
+            "outcome_uncertain": false,
+            "dispatch_admitted": true,
+            "request_id": "9c56eefe56ba488b95651836923f8fb0",
+            "usage": {
+              "promptTokenCount": 731,
+              "candidatesTokenCount": 130,
+              "totalTokenCount": 861
+            },
+            "elapsed_seconds": 5.738
+          }
+        ],
+        "notice": [],
+        "history_info": {
+          "input_messages": 0,
+          "kept_messages": 0,
+          "dropped_messages": 0,
+          "truncated": false,
+          "kept_bytes": 0,
+          "max_messages": 20,
+          "max_bytes": 32768,
+          "kept_indexes": [],
+          "context": {
+            "schema_version": "1.0.0",
+            "strategy": "recent-whole-turns-v1",
+            "revision": "51e4dd6ab3da5db5965ea1a27bfb9fd6cd815cd86157e3332609a098295a46bd",
+            "provider": "vertex",
+            "model": "gemini-3.8-flash",
+            "note_applied": false,
+            "note_bytes": 0,
+            "required_bytes": 3489,
+            "total_text_bytes": 3489,
+            "max_text_bytes": 65536,
+            "token_count": null,
+            "summarized": false,
+            "kept_indexes": []
+          },
+          "memory": {
+            "enabled": false,
+            "provider": "vertex",
+            "references": [],
+            "available": 0,
+            "omitted": 0,
+            "bytes": 0,
+            "purpose": "personal_chat",
+            "dropped_history_messages": 0
+          },
+          "knowledge": {
+            "enabled": false,
+            "references": [],
+            "citations": [],
+            "matches": 0,
+            "omitted": 0,
+            "bytes": 0,
+            "issues": [],
+            "read_bytes": 0,
+            "dropped_history_messages": 0
+          },
+          "memory_view": {
+            "schema_version": 1,
+            "provider": "vertex",
+            "purpose": "personal_chat",
+            "memory_project_ids": [],
+            "knowledge_project_ids": [],
+            "bytes": 0,
+            "max_bytes": 61983,
+            "coverage": [],
+            "retrieval": "lexical",
+            "snapshot_atomic": false
+          },
+          "persona": {
+            "applied": true,
+            "revision": 0,
+            "style": "自然",
+            "relationship": "助手"
+          },
+          "continuity": {
+            "references": [],
+            "bytes": 0,
+            "omitted": 0,
+            "issues": [],
+            "dropped_history_messages": 0
+          }
+        },
+        "work_admission": {
+          "status": "submitted",
+          "capability": "sample.report.v1",
+          "automatic": true,
+          "operation": "revise",
+          "task_id": "task_a752dedafd3d59268a2880d0fdfb55bd",
+          "request_id": "web-9b91971e8745a711d86c6252c0697157",
+          "reason": "已原子替换尚未开始的报告，原任务保留取消记录。",
+          "replaces_task_id": "task_3f4948565a1257d6b333e16fa0e5799e"
+        }
+      },
+      "elapsed_seconds": 6.258
+    },
+    {
+      "request_id": "7a94985e1ce04e799df3772c5d037cec",
+      "message": "用一句简短的话鼓励一下正在学习的人。",
+      "result": {
+        "provider": "vertex",
+        "model": "gemini-3.8-flash",
+        "request_id": "1dfabb5c69744b3bb03d14b95ffef1b1",
+        "billing_identity": {
+          "adapter": "vertex",
+          "label": "Google Vertex",
+          "key_id": null,
+          "key_label": "历史未归属"
+        },
+        "dispatch_admitted": true,
+        "http_status": 200,
+        "usage": {
+          "promptTokenCount": 703,
+          "candidatesTokenCount": 77,
+          "totalTokenCount": 780
+        },
+        "output_incomplete": false,
+        "completion_reason": "complete",
+        "billing": {
+          "basis": "estimated",
+          "amount": 0.000816,
+          "currency": "USD",
+          "tokens": {
+            "input": 703,
+            "output": 77,
+            "cache_read": 0,
+            "cache_write": 0,
+            "total": 780,
+            "reasoning": 0
+          },
+          "price": {
+            "input": 0.75,
+            "output": 3.75,
+            "cache_read": 0.075,
+            "cache_write": null,
+            "max_input_tokens": 1000000,
+            "currency": "USD",
+            "fee_percent": 0,
+            "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+            "checked_at": "2026-10-16",
+            "valid_until": "2026-12-31"
+          },
+          "reason": "token_rates"
+        },
+        "outcome_uncertain": false,
+        "elapsed_seconds": 5.612,
+        "status": "SUCCEEDED",
+        "automatic_retry": false,
+        "text": "每一个专注当下、默默积累的日常，都在悄悄铺就走向辽阔未来的路。加油！",
+        "reasoning": "low",
+        "intent_decision": {
+          "state": "recognized",
+          "interaction_style": "warm",
+          "intents": [
+            {
+              "kind": "action",
+              "quote": "用一句简短的话鼓励一下正在学习的人",
+              "disposition": "requested",
+              "capability": null,
+              "arguments": {},
+              "missing_fields": [],
+              "source_span": {
+                "start": 0,
+                "end": 17
+              },
+              "execution": "not_submitted",
+              "intent_id": "c893d00212118cfdc9cc58c83e7c121b-1"
+            }
+          ],
+          "schema_version": 1,
+          "mode": "shadow",
+          "engine": "dialogue-intent-v2",
+          "automatic_execution": false,
+          "provider": "vertex",
+          "model": "gemini-3.8-flash",
+          "validation_error": null,
+          "decision_id": "c893d00212118cfdc9cc58c83e7c121b",
+          "turn_id": "7a94985e1ce04e799df3772c5d037cec",
+          "revision": 1
+        },
+        "attempts": [
+          {
+            "provider": "vertex",
+            "model": "gemini-3.8-flash",
+            "status": "SUCCEEDED",
+            "outcome_uncertain": false,
+            "dispatch_admitted": true,
+            "request_id": "1dfabb5c69744b3bb03d14b95ffef1b1",
+            "usage": {
+              "promptTokenCount": 703,
+              "candidatesTokenCount": 77,
+              "totalTokenCount": 780
+            },
+            "elapsed_seconds": 5.612
+          }
+        ],
+        "notice": [],
+        "history_info": {
+          "input_messages": 0,
+          "kept_messages": 0,
+          "dropped_messages": 0,
+          "truncated": false,
+          "kept_bytes": 0,
+          "max_messages": 20,
+          "max_bytes": 32768,
+          "kept_indexes": [],
+          "context": {
+            "schema_version": "1.0.0",
+            "strategy": "recent-whole-turns-v1",
+            "revision": "ced3beb46edbc28ce04114f42314f795150686190bd5d67804dd2f4f3de0f274",
+            "provider": "vertex",
+            "model": "gemini-3.8-flash",
+            "note_applied": false,
+            "note_bytes": 0,
+            "required_bytes": 3476,
+            "total_text_bytes": 3476,
+            "max_text_bytes": 65536,
+            "token_count": null,
+            "summarized": false,
+            "kept_indexes": []
+          },
+          "memory": {
+            "enabled": false,
+            "provider": "vertex",
+            "references": [],
+            "available": 0,
+            "omitted": 0,
+            "bytes": 0,
+            "purpose": "personal_chat",
+            "dropped_history_messages": 0
+          },
+          "knowledge": {
+            "enabled": false,
+            "references": [],
+            "citations": [],
+            "matches": 0,
+            "omitted": 0,
+            "bytes": 0,
+            "issues": [],
+            "read_bytes": 0,
+            "dropped_history_messages": 0
+          },
+          "memory_view": {
+            "schema_version": 1,
+            "provider": "vertex",
+            "purpose": "personal_chat",
+            "memory_project_ids": [],
+            "knowledge_project_ids": [],
+            "bytes": 0,
+            "max_bytes": 61996,
+            "coverage": [],
+            "retrieval": "lexical",
+            "snapshot_atomic": false
+          },
+          "persona": {
+            "applied": true,
+            "revision": 0,
+            "style": "自然",
+            "relationship": "助手"
+          },
+          "continuity": {
+            "references": [],
+            "bytes": 0,
+            "omitted": 0,
+            "issues": [],
+            "dropped_history_messages": 0
+          }
+        }
+      },
+      "elapsed_seconds": 6.139
+    }
+  ],
+  "task_status_before_followup": "RUNNING",
+  "artifact": {
+    "total_files": 1,
+    "total_bytes": 5,
+    "by_type": [
+      {
+        "file_count": 1,
+        "total_bytes": 5,
+        "type": ".txt"
+      }
+    ],
+    "model": {
+      "completion_reason": "complete",
+      "elapsed_seconds": 6.212,
+      "model": "gemini-3.8-flash",
+      "outcome_uncertain": false,
+      "output_incomplete": false,
+      "provider": "vertex",
+      "request_id": "9651c3661d134da4ae3e36cafec107e3",
+      "status": "SUCCEEDED",
+      "usage": {
+        "candidatesTokenCount": 46,
+        "promptTokenCount": 252,
+        "thoughtsTokenCount": 137,
+        "totalTokenCount": 435
+      }
+    },
+    "plan": {
+      "kind": "inventory_report",
+      "schema_version": 1,
+      "steps": [
+        {
+          "arguments": {
+            "relative_path": "sub"
+          },
+          "skill": "sample_metadata_read"
+        },
+        {
+          "arguments": {
+            "format": "json"
+          },
+          "skill": "artifact_output"
+        }
+      ]
+    }
+  },
+  "worker": {
+    "backend": "windows-lpac-job",
+    "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+    "runtime_bytes": 22904399,
+    "appcontainer": true,
+    "lpac": true,
+    "capabilities": [
+      "registryRead"
+    ],
+    "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+    "pid": 38568,
+    "package_sid": "S-1-15-2-2894400683-3923690486-1329879117-1958298448-2503187579-671393559-1622477582",
+    "active_process_limit": 1,
+    "cpu_time_limit_seconds": 3,
+    "wall_time_limit_seconds": 10.0,
+    "cpu_seconds": 0.15625,
+    "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+    "memory_limit_bytes": 268435456,
+    "peak_process_memory_bytes": 13824000,
+    "elapsed_seconds": 0.3356
+  },
+  "task_count": 2,
+  "duplicate_replayed_without_new_task": true,
+  "source_changed": false,
+  "limits": "One real mixed report, one pending target revision, and one subsequent chat. Separate finite experiment; not independent semantic annotation or prolonged resource fairness."
+}

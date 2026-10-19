@@ -4,47 +4,47 @@
 > [文档入口](README.md) · [维护规则](MAINTENANCE.md) · [架构图册](architecture-atlas.md)
 
 <!-- book-nav:start -->
-[全书目录](README.md#book-tree) › [第三篇 · 智能运行与多设备协同](README.md#part-runtime) › 第 11 章 · 任务、动作、多 Agent 与资源调度
+[全书目录](README.md#book-tree) › [第三篇 · 智能运行与多设备协同](README.md#part-runtime) › 第 12 章 · 任务、动作、多 Agent 与资源调度
 
 ## 本章导航
 
-- [11.1 任务状态机](#interaction-tasks-3)
-- [11.2 首期后台任务与有限工具循环](#initial-task-loop)
-  - [11.2.1 0.1.30 首条自然语言目录报告任务](#sample-task-runtime)
-  - [11.2.2 0.1.31 会话与后台任务的关联](#conversation-task-runtime)
-  - [11.2.3 0.1.13 本机持久队列（含浏览器）](#browser-durable-queue)
-  - [11.2.4 0.1.16 后台任务内存准入](#queue-resource-admission)
-  - [11.2.5 从一句需求到可检查的结果](#section-4586f8e644b1)
-  - [11.2.6 把失败收口在正确的位置](#section-51878ee61b73)
-- [11.3 所有技能的统一管理与使用规则](#skill-selection-policy)
-  - [11.3.1 选择顺序与不用技能的条件](#skill-selection-order)
-  - [11.3.2 设置作用域、冲突与停用](#skill-selection-scope)
-  - [11.3.3 MCP 的使用条件与技能配合](#mcp-selection-policy)
-  - [11.3.4 完整技能与组件归属](#skill-applicability-catalog)
-  - [11.3.5 编程副本、冻结案例与回退（0.1.58）](#bounded-coding-workflow)
-  - [11.3.6 REA 软件解析的使用规则（含可选中文解释）](#rea-skill-policy)
-- [11.4 多 Agent 组织](#interaction-tasks-4)
-- [11.5 冲突与调度](#interaction-tasks-5)
-- [11.6 核心端到端流程](#end-to-end-flows)
-  - [11.6.1 聊天同时完成任务](#end-to-end-flows-1)
-    - [11.6.1.1 统一理解输入，允许一轮包含多个意图](#conversation-intent-routing)
-    - [11.6.1.2 分开上下文，通过结果与引用协作](#conversation-task-context-separation)
-  - [11.6.2 未知外部动作结果](#end-to-end-flows-3)
-- [11.7 Agent 自主生成、部署、分工与回收](#agent-factory)
-  - [11.7.1 Agent 数量与类型不写死](#agent-factory-1)
-  - [11.7.2 自主组队流程](#agent-factory-2)
-  - [11.7.3 工厂和团队控制器](#agent-factory-3)
-  - [11.7.4 委派不会扩大权限](#agent-factory-4)
-  - [11.7.5 生命周期](#agent-factory-5)
-  - [11.7.6 关键契约](#agent-factory-6)
-- [11.8 Agent、模型与模块的统一资源自调度](#resource-scheduling)
-  - [11.8.1 所有工作使用同一资源账本](#resource-scheduling-1)
-  - [11.8.2 优先级](#resource-scheduling-2)
-  - [11.8.3 自适应决策](#resource-scheduling-3)
-    - [11.8.3.1 普通 PC 的并行、保留与公平调度](#conversation-resource-isolation)
-  - [11.8.4 能力快照与重新规划](#resource-scheduling-4)
-  - [11.8.5 从小到大的实测扩展](#resource-scheduling-5)
-- [11.9 补足预算与委派协议](#critical-review-6)
+- [12.1 任务状态机](#interaction-tasks-3)
+- [12.2 首期后台任务与有限工具循环](#initial-task-loop)
+  - [12.2.1 0.1.30 首条自然语言目录报告任务](#sample-task-runtime)
+  - [12.2.2 0.1.31 会话与后台任务的关联](#conversation-task-runtime)
+  - [12.2.3 0.1.13 本机持久队列（含浏览器）](#browser-durable-queue)
+  - [12.2.4 0.1.16 后台任务内存准入](#queue-resource-admission)
+  - [12.2.5 从一句需求到可检查的结果](#section-4586f8e644b1)
+  - [12.2.6 把失败收口在正确的位置](#section-51878ee61b73)
+- [12.3 所有技能的统一管理与使用规则](#skill-selection-policy)
+  - [12.3.1 选择顺序与不用技能的条件](#skill-selection-order)
+  - [12.3.2 设置作用域、冲突与停用](#skill-selection-scope)
+  - [12.3.3 MCP 的使用条件与技能配合](#mcp-selection-policy)
+  - [12.3.4 完整技能与组件归属](#skill-applicability-catalog)
+  - [12.3.5 编程副本、冻结案例与回退（0.1.58）](#bounded-coding-workflow)
+  - [12.3.6 REA 软件解析的使用规则（含可选中文解释）](#rea-skill-policy)
+- [12.4 多 Agent 组织](#interaction-tasks-4)
+- [12.5 冲突与调度](#interaction-tasks-5)
+- [12.6 核心端到端流程](#end-to-end-flows)
+  - [12.6.1 聊天同时完成任务](#end-to-end-flows-1)
+    - [12.6.1.1 统一理解输入，允许一轮包含多个意图](#conversation-intent-routing)
+    - [12.6.1.2 分开上下文，通过结果与引用协作](#conversation-task-context-separation)
+  - [12.6.2 未知外部动作结果](#end-to-end-flows-3)
+- [12.7 Agent 自主生成、部署、分工与回收](#agent-factory)
+  - [12.7.1 Agent 数量与类型不写死](#agent-factory-1)
+  - [12.7.2 自主组队流程](#agent-factory-2)
+  - [12.7.3 工厂和团队控制器](#agent-factory-3)
+  - [12.7.4 委派不会扩大权限](#agent-factory-4)
+  - [12.7.5 生命周期](#agent-factory-5)
+  - [12.7.6 关键契约](#agent-factory-6)
+- [12.8 Agent、模型与模块的统一资源自调度](#resource-scheduling)
+  - [12.8.1 所有工作使用同一资源账本](#resource-scheduling-1)
+  - [12.8.2 优先级](#resource-scheduling-2)
+  - [12.8.3 自适应决策](#resource-scheduling-3)
+    - [12.8.3.1 普通 PC 的并行、保留与公平调度](#conversation-resource-isolation)
+  - [12.8.4 能力快照与重新规划](#resource-scheduling-4)
+  - [12.8.5 从小到大的实测扩展](#resource-scheduling-5)
+- [12.9 补足预算与委派协议](#critical-review-6)
 <!-- book-nav:end -->
 
 <a id="interaction-tasks-3"></a>
@@ -311,7 +311,15 @@ Agent 是带模型、工具、状态和任务契约的工作者。共享的是�
 
 **0.1.57 已实现的限定范围：**`documentation_admission.py` 只受理 `vertex::gemini-3.8-flash` 的单项只读文档查询。必须是普通已保存会话、没有附件或附加会话要求、本轮成功完整回复、恰好一个来源可核对且参数完整的 requested/action/mcp.documentation。整条原输入还须匹配受限查询句式，例如“查询 Electron 文档中的 ipcMain.handle 示例”或“check /electron/electron documentation for BrowserWindow”。Electron 固定映射到此前实测过的 `/electron/electron`；其他库只接受用户原文明确写出的库 ID。程序使用整段原问题，拒绝引述、否定、假设、多句混合、外部 URL、路径和敏感赋值模式；不从私人聊天或附件补齐参数。连接必须是唯一官方 Context7 HTTP 配置，策略为 auto，配置门控开放且会话项目未变化。任一条件不满足均不自动派单，完整候选仍可经显式草稿核对。分类表现及未覆盖范围见[实测证据](delivery-validation.md#dialogue-intent-shadow-evidence)。
 
-普通对话的受理检查在回复完成与取消共用的锁内进行，只写本机队列，网络调用在原 FIFO 执行。请求键由会话和回复编号生成；同输入的新回复仍是新请求，重连或恢复原回复不重建任务。停止回复在受理前可阻止提交，受理后须用任务取消。任务保存原回复编号、决策编号及输入摘要；任务回执独立显示，产物来自实际账本。该范围不自动编辑代码、记忆或系统状态，混合任务、多行动依赖、任务目标修订和其他模型的自动执行继续按 K2 验收。
+普通对话的受理检查在回复完成与取消共用的锁内进行，只写本机队列，网络调用在原 FIFO 执行。请求键由会话和回复编号生成；同输入的新回复仍是新请求，重连或恢复原回复不重建任务。停止回复在受理前可阻止提交，受理后须用任务取消。任务保存原回复编号、决策编号及输入摘要；任务回执独立显示，产物来自实际账本。该范围不自动编辑代码、记忆或系统状态，该文档能力不接受混合任务；报告混合增量见下段。通用多行动依赖、任意任务目标修订和其他模型自动执行仍待 K2 验收。
+
+**0.1.59 混合样例报告增量：**`work_admission.py` 统一连接已有文档受理器和 `sample.report.v1`，后者由 `config/dialogue-automation.json` 单独开关，仅开放实测的 Flash 路线。普通已保存会话、无附件/附加要求、完整成功回复且会话项目未变化时，允许闲聊/问答/情绪与**一项**报告操作并存。模型片段须唯一来自本轮，完整覆盖原文（仅允许明确的连接词和标点留在片段外）；行动必须匹配 `report_intents.py` 的完整受限句式。否定、引述、假设、问句行动、未知路径/操作、含糊对象、多项行动或未补齐参数均不自动执行。模型把显式“修改”标为 action 或 control 都由宿主按真实操作解析；其他对话片段不取得行动权。
+
+生成只支持固定样例根内的目录统计 JSON；未明确子目录时为 `.`，任务只收到固定报告描述、已核对的相对目录和本轮实际模型，不接收情绪、聊天历史、记忆或附件。来源仅存轮次/决策 ID 和原文摘要。路径仍经原策略检查，输出由原执行器提交，不从项目根或模型文字推断任意文件授权。
+
+取消/修改必须在本轮写出本会话样例报告的完整 `task_…` 编号，受理对话时捕获原行动的参数/所有权修订摘要。取消只改变该任务，已完成产物保留；修改仅对 PREPARED 且未取消的任务开放，旧任务取消、新任务、来源及替换关系在同一账本事务提交，失败全部回滚。已经开始、结果未知或结束的任务不能原地改写。旧请求重取原回执，两个不同修改请求争抢同一原任务时最多一个成功；“它”“停一下”等模糊指代仍需明确目标。`/取消` 和任务按钮继续走原快速入口，普通自然语言控制仍需等待本轮理解，不能宣称即时控制已达标。
+
+完整使用见[混合报告入口](interaction-persona.md#mixed-report-ui)，回执与存储归[契约](contracts.md#dialogue-intent-shadow-contract)，范围及漏受理记录见[本轮证据](delivery-validation.md#mixed-report-admission-evidence)。
 
 一轮内每个行动有稳定编号。重连、语音末尾重复转写、模型切换、前端重复点击均不能另建同一任务；不同时间同文的真实新请求不能仅靠文本哈希误去重。附带任务状态的模型文本不充当实际回执，详情和产物始终从账本读取。原始输入、路由决策和修订记录用于纠正误判；不保存模型隐藏思维链。
 

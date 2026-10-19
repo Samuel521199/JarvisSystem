@@ -238,6 +238,14 @@ class ChatService:
                 routes = list(dict.fromkeys(item for item in candidates if item in config["providers"] and config["providers"][item].get("enabled", True)))
             else:
                 routes = [provider]
+            from .network_policy import NetworkPolicy
+            if provider == 'auto' and NetworkPolicy(self.core.data_dir).snapshot()['offline']:
+                routes = [name for name, settings in config['providers'].items()
+                          if settings.get('adapter', name) == 'local' and settings.get('enabled', True)]
+                notice.append('仅此软件离线：自动路由只使用已登记的本地模型，不更改原默认配置。')
+                if not routes:
+                    return self._package(self._failure('network_offline', 'network_offline',
+                        'Jarvis 已限制外联，且没有启用本地模型；记忆、文件与确定性控制仍可使用。'), attempts, notice, info)
             if not routes:
                 raise ValueError("没有可用的模型路由配置。")
             if current_images or image_budget(base_history)[1]:
@@ -349,8 +357,10 @@ class ChatService:
                 if checkpoints and not checkpoint_text:
                     return self._package(self._failure('continuity_unavailable', 'continuity_budget',
                         '所选模型剩余预算不足以容纳一条完整接续，请缩短记录、减少本轮输入或切换模型。', selected, model), attempts, notice, base_info)
+                from .relevance import followup_ids
                 background, memory_info, knowledge_info, memory_view_info = resolver.context(
-                    memory_context, selected, facts, source_snapshot, message, max_bytes=available-continuity_info['bytes'])
+                    memory_context, selected, facts, source_snapshot, message, max_bytes=available-continuity_info['bytes'],
+                    preferred_ids=followup_ids(message,history_memory))
                 background = checkpoint_text+background
                 continuity_info.update(issues=continuity_issues, dropped_history_messages=continuity_dropped,
                     references=list({r['id']: r for r in checkpoint_inherited+continuity_info['references']}.values()))

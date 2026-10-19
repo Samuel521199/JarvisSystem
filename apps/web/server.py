@@ -201,6 +201,7 @@ class LocalChatServer(ThreadingHTTPServer):
         self.conversation_script = self.ui_assets.required('conversations.js')
         self.conversation_tasks_script = asset('conversation_tasks.js')
         self.memory_script = asset('memory.js')
+        self.persona_script = asset('persona.js')
         self.continuity_script = asset('continuity.js')
         self.personal_candidates_script = asset('personal_candidates.js')
         self.knowledge_script = asset('knowledge.js')
@@ -248,6 +249,7 @@ class LocalChatServer(ThreadingHTTPServer):
         self.workspace_script = self.ui_assets.required('workspace.js')
         self.admin_html = asset('admin.html').replace(b'__JARVIS_ADMIN_STYLE__', asset('admin.css')).replace(b'__JARVIS_NONCE__', self.nonce.encode('ascii')).replace(b'__JARVIS_VERSION__', version.encode('ascii')).replace(b'__JARVIS_THEME_STYLE__', self.theme_style)
         self.admin_script = asset('admin.js')
+        self.network_script = asset('network.js')
         self.admin_html = self.admin_html.replace(b'__JARVIS_MODULE_STYLE__', asset('modules.css') + b'\n' + asset('evolution.css') + b'\n' + asset('speech.css')).replace(b'__JARVIS_BRAND_STYLE__', asset('brand/logo.css'))
         self.module_script = asset('modules.js')
         self.speech_script = asset('speech.js')
@@ -420,9 +422,10 @@ class ChatHandler(BaseHTTPRequestHandler):
 
     def _computer_error(self,exc):
         code=getattr(exc,'code','computer_unavailable')
-        status=404 if code=='not_found' else 409 if code in {'computer_busy','worker_busy','idempotency_conflict','submission_unknown','queue_full','queue_version_changed','queue_content_changed'} else 503 if code in {'stopped','stale_authorization','computer_unavailable','queue_owner_changed'} else 400
+        status=404 if code=='not_found' else 409 if code in {'computer_busy','worker_busy','idempotency_conflict','submission_unknown','queue_full','queue_version_changed','queue_content_changed'} else 503 if code in {'stopped','stale_authorization','computer_unavailable','queue_owner_changed','control_unavailable'} else 400
         # Only these explicitly typed module errors carry user-facing text.
         message=str(exc) if type(exc).__name__ in {'ComputerError','CoreError'} else '浏览器任务请求未完成，请检查任务列表。'
+        if code=='control_unavailable':message='任务存储暂忙或不可用，本次结果未确认。请稍后核对任务状态，再重试；没有自动重复执行。'
         self._error(status,code,message)
 
     def _workspace_token(self):
@@ -473,7 +476,7 @@ class ChatHandler(BaseHTTPRequestHandler):
 
     def _memory_error(self, exc):
         code = exc.code if isinstance(exc, MemoryError) else 'memory_unavailable'
-        status = 404 if code in {'memory_not_found','continuity_not_found'} else 409 if code in {'memory_conflict', 'memory_deleted','continuity_conflict','continuity_source_conflict','candidate_review_changed','candidate_target_changed','candidate_duplicate'} else 503 if code in {'memory_unavailable','continuity_unavailable'} else 400
+        status = 404 if code in {'memory_not_found','continuity_not_found'} else 409 if code in {'memory_conflict', 'memory_deleted','continuity_conflict','continuity_source_conflict','candidate_review_changed','candidate_review_required','candidate_target_changed','candidate_duplicate'} else 503 if code in {'memory_unavailable','continuity_unavailable'} else 400
         self._error(status, code, str(exc) if isinstance(exc, MemoryError) else '记忆操作未确认，请重试；输入仍保留。')
 
     def _knowledge_token(self):
@@ -505,6 +508,10 @@ class ChatHandler(BaseHTTPRequestHandler):
         if growth_get(self): return
         from continuity_routes import get as continuity_get
         if continuity_get(self): return
+        if self.path == '/api/persona':
+            from persona_routes import token, respond
+            if token(self) and self._guard(): respond(self)
+            return
         from evolution_routes import get as evolution_get
         if evolution_get(self): return
         if self.path == '/project_menu.js':
@@ -529,6 +536,8 @@ class ChatHandler(BaseHTTPRequestHandler):
             except Exception as exc:self._knowledge_error(exc)
         elif self.path == '/memory.js':
             self._send(200, self.server.memory_script, 'application/javascript; charset=utf-8')
+        elif self.path == '/persona.js':
+            self._send(200, self.server.persona_script, 'application/javascript; charset=utf-8')
         elif self.path == '/continuity.js':
             self._send(200, self.server.continuity_script, 'application/javascript; charset=utf-8')
         elif self.path == '/personal_candidates.js':
@@ -537,10 +546,11 @@ class ChatHandler(BaseHTTPRequestHandler):
             if not self._memory_token() or not self._guard():return
             try:
                 query = parse_qs(urlsplit(self.path).query, keep_blank_values=True)
-                if set(query)-{'project_id'} or any(len(v)!=1 for v in query.values()):
+                if set(query)-{'project_id','q','provider'} or any(len(v)!=1 for v in query.values()):
                     raise MemoryError('invalid_continuity', '接续查询字段无效。')
                 from jarvis_core.continuity import ContinuityStore
-                self._send(200, ContinuityStore(self.server.core).list(query.get('project_id',[None])[0]))
+                store=ContinuityStore(self.server.core);project_id=query.get('project_id',[None])[0]
+                self._send(200,store.suggest(query['q'][0],project_id,query.get('provider',['local'])[0]) if 'q' in query else store.list(project_id))
             except Exception as exc:self._memory_error(exc)
         elif urlsplit(self.path).path == '/api/memory':
             if not self._memory_token() or not self._guard():return
@@ -596,6 +606,11 @@ class ChatHandler(BaseHTTPRequestHandler):
             self._send(200, {**self.server.resource_usage.snapshot(), 'runtime':self.server.runtime_snapshot()})
         elif self.path == "/admin.js":
             self._send(200, self.server.admin_script, "application/javascript; charset=utf-8")
+        elif self.path == '/network.js':
+            self._send(200, self.server.network_script, 'application/javascript; charset=utf-8')
+        elif self.path == '/api/network':
+            if not self._admin_token():return
+            self._send(200, self.server.network.snapshot())
         elif self.path == '/modules.js':
             self._send(200, self.server.module_script, 'application/javascript; charset=utf-8')
         elif self.path == '/api/modules':
@@ -689,12 +704,13 @@ class ChatHandler(BaseHTTPRequestHandler):
         conversation_action = re.fullmatch(r'/api/conversations/([a-f0-9]{32})(/delete)?', self.path)
         conversation_task_action = re.fullmatch(r'/api/conversation-tasks/([a-f0-9]{32})(?:/(task_[a-f0-9]{32})/cancel|/(documentation-candidate))?',self.path)
         memory_action = re.fullmatch(r'/api/memory/([a-f0-9]{32})(/delete)?', self.path)
+        persona_action = self.path == '/api/persona'
         continuity_action = re.fullmatch(r'/api/continuity/([a-f0-9]{32})', self.path)
-        candidate_action = self.path in {'/api/personal-candidates/suggest', '/api/personal-candidates/confirm', '/api/personal-candidates/semantic', '/api/personal-candidates/semantic-confirm', '/api/personal-candidates/semantic-review', '/api/personal-candidates/semantic-resolve'}
+        candidate_action = self.path in {'/api/personal-candidates/suggest', '/api/personal-candidates/confirm', '/api/personal-candidates/rule-review', '/api/personal-candidates/rule-resolve', '/api/personal-candidates/semantic', '/api/personal-candidates/semantic-confirm', '/api/personal-candidates/semantic-review', '/api/personal-candidates/semantic-resolve'}
         knowledge_source = re.fullmatch(r'/api/knowledge/([a-f0-9]{32})(/delete)?', self.path)
         knowledge_action = knowledge_source or self.path in {'/api/knowledge/search','/api/knowledge/read','/api/knowledge/view'}
         computer_start=self.path in {'/api/computer/tasks','/api/tasks'}
-        admin_action=self.path in {'/api/admin/config','/api/admin/balance'}
+        admin_action=self.path in {'/api/admin/config','/api/admin/balance','/api/network'}
         module_action=self.path in {'/api/modules/refresh','/api/modules/maintenance'}
         speech_action=self.path in {'/api/speech','/api/speech/fast','/api/speech/primary','/api/speech/readout'}
         growth_action=re.fullmatch(r'/api/conversation-growth/([a-f0-9]{32})(?:/([a-f0-9]{32})/(start|cancel|reanalyse))?',self.path)
@@ -710,7 +726,7 @@ class ChatHandler(BaseHTTPRequestHandler):
         extension_action = re.fullmatch(r'/api/extensions/([a-f0-9]{32})(?:/(delete|inspect))?', self.path)
         skill_action = self.path in {'/api/skills/policy','/api/skills/select','/api/skills/preview','/api/skills/coding-apply','/api/skills/coding-rollback'}
         mcp_action = self.path in {'/api/mcp/policy', '/api/mcp/view'}
-        if self.path != "/api/chat" and not chat_cancel and not dialogue_action and not computer_start and not computer_cancel and not computer_queue and not workspace_action and not admin_action and not module_action and not speech_action and not conversation_action and not conversation_task_action and not memory_action and not knowledge_action and not files_action and not extension_action and not skill_action and not mcp_action and not evolution_action and not continuity_action and not growth_action and not candidate_action:
+        if self.path != "/api/chat" and not chat_cancel and not dialogue_action and not computer_start and not computer_cancel and not computer_queue and not workspace_action and not admin_action and not module_action and not speech_action and not conversation_action and not conversation_task_action and not memory_action and not knowledge_action and not files_action and not extension_action and not skill_action and not mcp_action and not evolution_action and not continuity_action and not growth_action and not candidate_action and not persona_action:
             self._error(404, "not_found", "此入口不存在。")
             return
         if (self.path.startswith('/api/computer/') or self.path.startswith('/api/tasks')) and not self._computer_token():
@@ -721,6 +737,9 @@ class ChatHandler(BaseHTTPRequestHandler):
                 self._error(503,'computer_unavailable','会话任务模块未启用。');return
         if conversation_action and not self._conversation_token():return
         if memory_action and not self._memory_token():return
+        if persona_action:
+            from persona_routes import token
+            if not token(self): return
         if continuity_action and not self._memory_token():return
         if candidate_action and not self._memory_token():return
         if knowledge_action and not self._knowledge_token():return
@@ -766,6 +785,10 @@ class ChatHandler(BaseHTTPRequestHandler):
         if dialogue_action:
             from dialogue_routes import post as dialogue_post
             dialogue_post(self, payload)
+            return
+        if persona_action:
+            from persona_routes import respond
+            respond(self,payload)
             return
         if skill_action:
             from skill_routes import post as skill_post
@@ -856,7 +879,20 @@ class ChatHandler(BaseHTTPRequestHandler):
             return
         if admin_action:
             try:
-                if self.path.endswith('/balance'):
+                if self.path == '/api/network':
+                    if not isinstance(payload, dict) or set(payload) != {'offline', 'revision'}:
+                        raise ValueError('只接受离线开关与当前修订号。')
+                    # Native browser jobs cannot be fenced by a Python socket hook.
+                    # Require an idle transition rather than pretend active sockets disappear.
+                    network_queue = self.server.computer.queue.snapshot() if self.server.computer else {}
+                    evolution = self.server.evolution
+                    if payload.get('offline') is True and (self.server.chat_requests.active or network_queue.get('running')
+                            or (evolution is not None and evolution.snapshot().get('busy'))
+                            or self.server.modules.snapshot().get('maintenance_busy')):
+                        from jarvis_core.policy import CoreError
+                        raise CoreError('network_busy', '当前仍有对话或后台工作，请先停止或等待结束，再启用仅此软件离线。')
+                    result = self.server.network.change(payload['offline'], payload['revision'])
+                elif self.path.endswith('/balance'):
                     if not isinstance(payload,dict) or set(payload)!={'connection'} or not isinstance(payload['connection'],str):raise ValueError('余额查询参数无效。')
                     result=self.server.admin.balance(payload['connection'])
                 else:result=self.server.admin.mutate(payload)
@@ -954,7 +990,7 @@ class ChatHandler(BaseHTTPRequestHandler):
 
 
     def _admin_token(self):
-        if self.server.admin is None:
+        if self.server.admin is None and self.path != '/api/network':
             self._error(503, 'admin_unavailable', '配置后台未初始化。');return False
         values=self.headers.get_all('X-Jarvis-Nonce',[])
         if len(values)!=1 or not values[0].isascii() or not secrets.compare_digest(values[0],self.server.nonce):
@@ -963,7 +999,10 @@ class ChatHandler(BaseHTTPRequestHandler):
 
     def _admin_error(self, exc):
         # Only local validation messages are public; never reflect provider/vault errors.
-        if type(exc) is ValueError:
+        from jarvis_core.policy import CoreError
+        if isinstance(exc, CoreError) and exc.code.startswith('network_'):
+            self._error(409 if exc.code in {'network_conflict','network_busy'} else 503 if exc.code == 'network_policy_unavailable' else 400, exc.code, str(exc))
+        elif type(exc) is ValueError:
             message=str(exc)
             if not any('\u4e00'<=char<='\u9fff' for char in message):message='配置或筛选条件无效，请检查填写内容。'
             self._error(400,'invalid_admin_request',message)
@@ -994,6 +1033,8 @@ def create_server(*, core=None, chat=None, data_dir=None, config_path=None, port
     from jarvis_computer.web import ComputerWeb
     # Bind first: a failed duplicate launch must not fence the live dispatcher.
     server = LocalChatServer(("127.0.0.1", port), core, chat, version=__version__, workspace=WorkspaceService(core))
+    from jarvis_core.network_policy import NetworkPolicy
+    server.network = NetworkPolicy(core.data_dir)
     try:
         from jarvis_core.chat import ChatService
         if isinstance(chat, ChatService) and chat.dialogue_models is None:
@@ -1026,13 +1067,14 @@ def create_server(*, core=None, chat=None, data_dir=None, config_path=None, port
         server.computer = ComputerWeb(core,chat,metrics=server.metrics)
         from jarvis_core.conversation_tasks import ConversationTasks
         server.conversation_tasks = ConversationTasks(core,server.computer)
-        from jarvis_core.documentation_admission import DocumentationAdmission
-        server.dialogue.work_admission = DocumentationAdmission(core,server.computer)
+        from jarvis_core.work_admission import WorkAdmission
+        server.dialogue.work_admission = WorkAdmission(core,server.computer)
         from jarvis_core.modules import ModuleMonitor
         server.modules = ModuleMonitor(core,lambda:{'chat':server.chat_requests.active,
             'calculator_uses':server.metrics.snapshot()['counters'].get('calculation_completed',0),
             'computer':server.computer is not None,
             'memory':server.memory is not None, 'knowledge':server.knowledge is not None,
+            'personal':isinstance(server.chat,ChatService),
             'extensions':server.extensions is not None,
             'tasks':server.computer.queue.snapshot()['running'] if server.computer else []},
             config_path=getattr(chat,'config_path',None))
@@ -1049,6 +1091,9 @@ def main(argv=None):
     parser.add_argument("--port", type=int, default=18181)
     parser.add_argument("--no-tray", action="store_true", help="Run without the Windows notification-area icon")
     args = parser.parse_args(argv)
+    from jarvis_core.network_policy import activate_process
+    from jarvis_core.policy import default_data_dir
+    activate_process(args.data_dir or default_data_dir())
     server = create_server(data_dir=args.data_dir, config_path=args.config, port=args.port)
     print(f"Jarvis: http://127.0.0.1:{server.server_address[1]} (projects, chat and browser tasks; Ctrl+C closes this web service)", flush=True)
     tray = None

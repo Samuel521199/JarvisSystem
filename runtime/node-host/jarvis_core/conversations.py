@@ -114,6 +114,8 @@ class ConversationStore:
 
     @contextmanager
     def connection(self, *, timeout=2):
+        from .storage_budget import timeout as bounded_timeout
+        timeout = bounded_timeout(timeout)
         safe_path(self.directory, directory=True)
         for suffix in ('', '-journal', '-wal', '-shm'):
             safe_path(str(self.path) + suffix, must_exist=False)

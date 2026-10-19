@@ -1,0 +1,55 @@
+{
+  "status": "SUCCEEDED_DECLARED_SCOPE_DEPLOYED",
+  "source_version": "0.1.61",
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/__init__.py": "db61c83e40d3ffd0cc65b5ace22c00b1e785c4d096518e71742126986c47e05a",
+    "runtime/node-host/jarvis_core/assistant_context.py": "6541e7daf8610e09a33f9d129edb680be5065b624b631e1c0baf3a278604bb28",
+    "runtime/node-host/jarvis_core/chat.py": "5b16a14adef6f9a73364bf62b7df01b74701745461c0f06ff48124a384776b5f",
+    "runtime/node-host/jarvis_core/context_assembly.py": "6ddcaa5a1be1c6e5bb2ba8fcb0eaae0b9d63a322a007b939c108160ad8ee66f9",
+    "runtime/node-host/jarvis_core/memory.py": "9b84a9533c13ba146f8afeec847f16a9d7e4f31a1e1e6f931930d6612ac8f323",
+    "runtime/node-host/jarvis_core/memory_view.py": "f7e4aab24001d80180819a33e73822fccb9e79a21149d4f8ced28dc1dc26cd8d",
+    "runtime/node-host/jarvis_core/report_intents.py": "65a84f2e1eb0a401df7cb0fb11b14b981aded5c9be8cf26290d4b5948b81e83b",
+    "runtime/node-host/jarvis_core/work_admission.py": "e73cd0b0ca943df9e6b78ccc89f92105935f04c92163d9c9825e3032dc936dea",
+    "tests/test_assistant_readiness.py": "38e9ee0860f5c8574cc20940c85534aed97e4c1c931fd8a36659985cb62e24c7",
+    "tests/test_chat.py": "c1d324ec97aa755654c3c7060ec80d06a9bd714528448b170cadc6a5ff83c9a5",
+    "tests/test_context_assembly.py": "6bc245cfa3706dc3d8cd313d46471f16135df9e9581add321f8d05f8bf89cc73",
+    "tests/test_intent.py": "fb9c92c14db8d611279517f6cf3b636046c436a5c83df092b2a3908c01c3d29e",
+    "tests/test_report_admission.py": "b9d9e4a1373d0ab35510c656da788f29f8144f750efcaf75f1a2f8d1d4a9b4b7",
+    "tests/test_memory_answers_eval.py": "6e2c470db034601f4b02e29cea87f8acddd71ec0d907f72654af3aa47b320f6d"
+  },
+  "evidence": [
+    "memory-answer-baseline-2026-10-19.json",
+    "memory-answer-pilot-2026-10-19.json",
+    "memory-answer-pilot-review-2026-10-19.json",
+    "memory-answer-recheck-2026-10-19.json",
+    "memory-answer-recheck-review-2026-10-19.json",
+    "report-intent-calibration-c3-2026-10-19.json",
+    "memory-answer-deployment-2026-10-19.json"
+  ],
+  "local_tests": 69,
+  "prior_memory_regression": {
+    "version": "0.1.60",
+    "tests": 211,
+    "evidence": "rule-memory-baseline-2026-10-19.json"
+  },
+  "live_answer_calls": 32,
+  "answer_recheck_rubric_passes": 16,
+  "report_intent_calibration_calls": 24,
+  "calibration_matches": 24,
+  "all_f04_cloud_calls": 56,
+  "estimated_usd": 0.146318,
+  "answer_recheck_ms": {
+    "p50": 8783.469000000001,
+    "p95": 12271.921,
+    "scope": "New-conversation reply incl. provider/auth, sequential pairs while a separate calibration ran; not isolated-PC or voice latency."
+  },
+  "deployment_instance": "aec5b2509b8dbf243ae80e45cdf8aa21",
+  "user_tables_unchanged": true,
+  "limits": [
+    "Author-created narrow development cases; not independent held-out model quality",
+    "Some memory-offer wording remains ambiguous despite command examples",
+    "No Mem0/LangMem final-answer comparison or arbitrary semantic forgetting",
+    "Full F01/F03/F04, V-DLG and K1/K2/K3 incomplete"
+  ],
+  "next": "Broaden F04 beyond one fact/drinks to people, time, project knowledge and retained-history counterexamples; then F06/F05 per core queue."
+}

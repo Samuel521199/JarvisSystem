@@ -9,6 +9,7 @@ import uuid
 
 from .. import policy
 from . import recipes
+from .settings import migrate, purpose
 
 ACTIVE = ('QUEUED', 'RUNNING', 'OBSERVING')
 
@@ -34,7 +35,7 @@ class EvolutionStore:
         self.path = self.root / 'evolution.db'
         with self.connection() as db:
             version = db.execute('PRAGMA user_version').fetchone()[0]
-            if version not in (0, 1):
+            if version not in (0, 1, 2):
                 raise policy.CoreError('evolution_schema_invalid', '进化账本版本不兼容。')
             db.executescript('''
                 CREATE TABLE IF NOT EXISTS settings(singleton INTEGER PRIMARY KEY,document TEXT NOT NULL);
@@ -44,9 +45,11 @@ class EvolutionStore:
                 CREATE TABLE IF NOT EXISTS incidents(id TEXT PRIMARY KEY,created_at TEXT NOT NULL);
             ''')
             db.execute('INSERT OR IGNORE INTO settings VALUES(1,?)', (policy.canonical_json(
-                {'enabled': False, 'route': route, 'target_revision': 1, 'interval_seconds': 300}),))
+                {'enabled': False, 'route': route, 'target_revision': 1, 'interval_seconds': 1800}),))
             db.execute('INSERT OR IGNORE INTO selection VALUES(1,NULL,NULL,0)')
-            db.execute('PRAGMA user_version=1')
+            settings = migrate(json.loads(db.execute('SELECT document FROM settings WHERE singleton=1').fetchone()[0]))
+            db.execute('UPDATE settings SET document=? WHERE singleton=1', (policy.canonical_json(settings),))
+            db.execute('PRAGMA user_version=2')
 
     @contextmanager
     def connection(self):
@@ -68,6 +71,11 @@ class EvolutionStore:
 
     def configure(self, settings):
         with self.core.effect_guard(), self.connection() as db:
+            db.execute('BEGIN IMMEDIATE')
+            current = json.loads(db.execute('SELECT document FROM settings WHERE singleton=1').fetchone()[0])
+            if settings['revision'] != current['revision']:
+                raise policy.CoreError('evolution_conflict', '成长设置已被其他页面修改，请重新载入后再保存。')
+            settings = {**settings, 'revision': current['revision'] + 1}
             db.execute('UPDATE settings SET document=? WHERE singleton=1', (policy.canonical_json(settings),))
 
     def selection(self):
@@ -95,6 +103,8 @@ class EvolutionStore:
                 raise policy.CoreError('evolution_quota', '改进账本达到保留上限，请整理证据后再继续。')
             value = {'id': uuid.uuid4().hex, 'request': payload, 'status': 'PROPOSED' if proposal is not None else 'QUEUED', 'created_at': now(),
                      'events': [], 'attempts': [], 'result': None, 'error': None}
+            settings = json.loads(db.execute('SELECT document FROM settings WHERE singleton=1').fetchone()[0])
+            value.update(purpose=purpose(payload['action']), policy_revision=settings['revision'], policy=settings)
             if proposal is not None: value['proposal'] = proposal
             db.execute('INSERT INTO jobs VALUES(?,?,?,?)', (value['id'], payload['request_id'], value['status'], policy.canonical_json(value)))
             return value, True
@@ -212,6 +222,8 @@ class EvolutionStore:
             if pause_automatic:
                 settings = json.loads(db.execute('SELECT document FROM settings WHERE singleton=1').fetchone()[0])
                 settings['enabled'] = False
+                settings['auto_heal'] = False
+                settings['revision'] += 1
                 db.execute('UPDATE settings SET document=? WHERE singleton=1', (policy.canonical_json(settings),))
             if broken:
                 db.execute("UPDATE packages SET state='QUARANTINED' WHERE id=?", (broken,))
@@ -254,12 +266,21 @@ class EvolutionStore:
             for row in rows:
                 value = json.loads(row['document'])
                 if (value['request']['action'] == 'check' and not value.get('issue') and not value['attempts']
-                        and value.get('result', {}).get('healthy') is True): healthy.append(row['id'])
+                        and (value.get('result', {}).get('healthy') is True
+                             or value.get('result', {}).get('classification') == 'missing_optional')): healthy.append(row['id'])
             db.executemany('DELETE FROM jobs WHERE id=?', [(ident,) for ident in healthy[30:]])
 
     def snapshot(self):
         with self.connection() as db:
-            jobs = [json.loads(r[0]) for r in db.execute('SELECT document FROM jobs ORDER BY rowid DESC LIMIT 30')]
+            # Routine inspections must not push the last healing/evolution work
+            # out of their tabs. Legacy jobs keep their original mixed semantics.
+            jobs = []
+            for lane in ('inspect', 'heal', 'evolve'):
+                rows = db.execute('''SELECT document FROM jobs WHERE COALESCE(json_extract(document,'$.purpose'),
+                    CASE json_extract(document,'$.request.action') WHEN 'check' THEN 'inspect'
+                    WHEN 'rollback' THEN 'heal' ELSE 'evolve' END)=? ORDER BY rowid DESC LIMIT 30''', (lane,))
+                jobs.extend(json.loads(r[0]) for r in rows)
+            jobs.sort(key=lambda row: row['created_at'], reverse=True)
             packages = [{**json.loads(r['document']), 'state': r['state']} for r in
                         db.execute('SELECT * FROM packages ORDER BY rowid DESC LIMIT 64')]
         return {'settings': self.settings(), 'selection': self.selection(), 'packages': packages,

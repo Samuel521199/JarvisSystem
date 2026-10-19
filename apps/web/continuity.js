@@ -5,7 +5,7 @@
   const state=()=>window.Workspace?.memoryContext?.()||{project_id:null,temporary:false};
   const status=(text,error=false)=>{el('continuity-status').textContent=text;el('continuity-status').dataset.error=String(error);};
   function controls(){
-    const locked=working||loading||state().temporary||busy;
+    const locked=working||loading||state().temporary;
     for(const control of panel.querySelectorAll('button,input'))control.disabled=locked;
     el('continuity-reload').disabled=working||loading;
     el('memory-close').disabled=working||Boolean(window.MemoryPanel?.isWorking());
@@ -95,12 +95,21 @@
   }
   function tab(name){
     for(const button of dialog.querySelectorAll('[data-memory-tab]')){const on=button.dataset.memoryTab===name;button.setAttribute('aria-pressed',String(on));}
-    el('memory-facts').hidden=name!=='facts';panel.hidden=name!=='continuity';
+    el('memory-facts').hidden=name!=='facts';panel.hidden=name!=='continuity';el('persona-panel').hidden=name!=='persona';
+    if(name==='persona')window.PersonaPanel?.open();
     if(name==='continuity'){status(state().temporary?'临时会话可查看列表，不使用或修改接续。':'最多选三条。普通会话和每个项目各有独立范围。');load().catch(e=>status(e.message,true));}
   }
   for(const button of dialog.querySelectorAll('[data-memory-tab]'))button.addEventListener('click',()=>tab(button.dataset.memoryTab));
   el('open-memory').addEventListener('click',()=>tab('facts'));
   el('continuity-reload').addEventListener('click',()=>load().then(()=>status('已刷新。')).catch(e=>status(e.message,true)));
+  el('continuity-suggest').addEventListener('click',async()=>{
+    if(working||loading||state().temporary)return;
+    const q=el('continuity-query').value.trim();if(!q){status('先输入你想接着聊的话题。');return;}
+    const query=new URLSearchParams({q,provider:chosenModel()?.provider||'local'});if(state().project_id)query.set('project_id',state().project_id);
+    const current=++generation;loading=true;controls();status('正在核对相关话题与来源…');
+    try{const data=await api('?'+query);if(current===generation){render(data.records);status(data.records.length?'这些是可用于当前模型的相关记录；选中后用于下一轮。':'没有符合当前范围、模型许可和有效来源的相关记录。');}}
+    catch(error){if(current===generation)status(error.message,true);}finally{if(current===generation){loading=false;controls();}}
+  });
   dialog.addEventListener('cancel',event=>{if(working)event.preventDefault();});
   window.Continuity={controls,isWorking:()=>working,accept,
     context:()=>({enabled:Boolean(window.MemoryPanel?.context().enabled)&&!state().temporary,ids:[...selected]}),

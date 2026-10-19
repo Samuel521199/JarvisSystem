@@ -1,54 +1,55 @@
 # 模型路由、本地模型与离线生存
 
-> 状态：完整路由 proposed；0.1.19 模型后台、Key 管理与费用估算 implemented / verified，真实接口范围按版本记录 · 更新：2026-10-16
+> 状态：完整路由 proposed；模型后台已实现，0.1.63 新增[应用离线控制](#application-offline-control)，验证按版本和范围记录 · 更新：2026-10-19
 > [文档入口](README.md) · [维护规则](MAINTENANCE.md) · [架构图册](architecture-atlas.md)
 
 <!-- book-nav:start -->
-[全书目录](README.md#book-tree) › [第三篇 · 智能运行与多设备协同](README.md#part-runtime) › 第 09 章 · 模型路由、本地模型与离线生存
+[全书目录](README.md#book-tree) › [第三篇 · 智能运行与多设备协同](README.md#part-runtime) › 第 10 章 · 模型路由、本地模型与离线生存
 
 ## 本章导航
 
-- [9.1 当前凭据、模型与调用边界](#configured-models)
-  - [9.1.1 编码技能候选模型快照（2026-10-17）](#coding-skills-model-snapshot)
-  - [9.1.2 2026-10-15 核验后的模型目录](#section-55d563b5f318)
-  - [9.1.3 模型配置后台与费用口径（0.1.19）](#model-admin-config)
-  - [9.1.4 Eachlabs Claude 独立调用核验（2026-10-16）](#eachlabs-claude-probe-config)
-  - [9.1.5 Google 当前主流与本项目选择（0.1.4，2026-10-15 核验）](#google-model-selection)
-  - [9.1.6 统一模型菜单与推理级别（0.1.3）](#reasoning-controls)
-  - [9.1.7 当前路由和单次资源边界](#section-896f72aed9a9)
-    - [9.1.7.1 当前宿主能力上下文与回答完整性](#runtime-chat-context)
-    - [9.1.7.2 本地精确计算与能力分流（0.1.37 implemented）](#deterministic-calculation-runtime)
-  - [9.1.8 本地小组件的当前选型](#section-4a9504a4187f)
-  - [9.1.9 语音主选与候补：本地优先（2026-10-18）](#voice-model-selection)
-    - [9.1.9.1 本地主选、备选与真实能力边界](#voice-local-candidates)
-    - [9.1.9.2 内存、显存与模型文件分开预算](#voice-resource-footprint)
-    - [9.1.9.3 Qwen 本地主力语音组件](#qwen-tts-runtime)
-    - [9.1.9.4 ZipVoice 快速备用组件（2026-10-18）](#fast-speech-runtime)
-    - [9.1.9.5 CosyVoice3 独立文件语音组件（2026-10-18）](#cosyvoice3-runtime)
-    - [9.1.9.6 说话人识别、分段和重叠分离分开验收](#voice-overlap-separation)
-    - [9.1.9.7 国内外云端候补与价格口径](#voice-cloud-candidates)
-    - [9.1.9.8 资源与效果驱动的候补规则](#voice-routing-policy)
-- [9.2 Computer Use：已验证的 DOM 规划与视觉候选](#computer-use-models)
-- [9.3 本地嵌入模型的候选与资源边界（proposed）](#embedding-candidates)
-- [9.4 双路模型连接与恢复设计](#model-routing)
-  - [9.4.1 结论：需要独立恢复路径，生产与进化还需分配独立资源](#model-routing-1)
-  - [9.4.2 通道设计](#model-routing-2)
-  - [9.4.3 路由输入与选择顺序](#model-routing-3)
-  - [9.4.4 流式回答与工具调用](#model-routing-4)
-  - [9.4.5 自检、自愈、进化的模型与档位策略](#growth-model-policy)
-    - [9.4.5.1 备选切换的确定规则](#growth-fallback-policy)
-    - [9.4.5.2 Token、费用与普通 PC 的资源预算](#growth-budget-policy)
-  - [9.4.6 路由流程图](#model-routing-5)
-- [9.5 本地小模型、离线生存与网络自恢复](#local-survival)
-  - [9.5.1 当前小模型运行、启停与资源边界（0.1.32）](#local-model-runtime)
-  - [9.5.2 目标：在较低资源下仍保留有用能力](#local-survival-1)
-  - [9.5.3 本地组件种类](#local-survival-2)
-  - [9.5.4 离线能力包内容](#local-survival-3)
-  - [9.5.5 资源 Profile](#local-survival-4)
-  - [9.5.6 自主切换与替换](#local-survival-5)
-  - [9.5.7 资源不足时如何换模型](#local-survival-6)
-  - [9.5.8 网络诊断和修复](#local-survival-7)
-  - [9.5.9 所有恢复从属于 G0](#local-survival-8)
+- [10.1 当前凭据、模型与调用边界](#configured-models)
+  - [10.1.1 编码技能候选模型快照（2026-10-17）](#coding-skills-model-snapshot)
+  - [10.1.2 2026-10-15 核验后的模型目录](#section-55d563b5f318)
+  - [10.1.3 模型配置后台与费用口径（0.1.19）](#model-admin-config)
+  - [10.1.4 Eachlabs Claude 独立调用核验（2026-10-16）](#eachlabs-claude-probe-config)
+  - [10.1.5 Google 当前主流与本项目选择（0.1.4，2026-10-15 核验）](#google-model-selection)
+  - [10.1.6 统一模型菜单与推理级别（0.1.3）](#reasoning-controls)
+  - [10.1.7 当前路由和单次资源边界](#section-896f72aed9a9)
+    - [10.1.7.1 当前宿主能力上下文与回答完整性](#runtime-chat-context)
+    - [10.1.7.2 本地精确计算与能力分流（0.1.37 implemented）](#deterministic-calculation-runtime)
+  - [10.1.8 本地小组件的当前选型](#section-4a9504a4187f)
+  - [10.1.9 语音主选与候补：本地优先（2026-10-18）](#voice-model-selection)
+    - [10.1.9.1 本地主选、备选与真实能力边界](#voice-local-candidates)
+    - [10.1.9.2 内存、显存与模型文件分开预算](#voice-resource-footprint)
+    - [10.1.9.3 Qwen 本地主力语音组件](#qwen-tts-runtime)
+    - [10.1.9.4 ZipVoice 快速备用组件（2026-10-18）](#fast-speech-runtime)
+    - [10.1.9.5 CosyVoice3 独立文件语音组件（2026-10-18）](#cosyvoice3-runtime)
+    - [10.1.9.6 说话人识别、分段和重叠分离分开验收](#voice-overlap-separation)
+    - [10.1.9.7 国内外云端候补与价格口径](#voice-cloud-candidates)
+    - [10.1.9.8 资源与效果驱动的候补规则](#voice-routing-policy)
+- [10.2 Computer Use：已验证的 DOM 规划与视觉候选](#computer-use-models)
+- [10.3 本地嵌入模型的候选与资源边界（proposed）](#embedding-candidates)
+- [10.4 双路模型连接与恢复设计](#model-routing)
+  - [10.4.1 结论：需要独立恢复路径，生产与进化还需分配独立资源](#model-routing-1)
+  - [10.4.2 通道设计](#model-routing-2)
+  - [10.4.3 路由输入与选择顺序](#model-routing-3)
+  - [10.4.4 流式回答与工具调用](#model-routing-4)
+  - [10.4.5 自检、自愈、进化的模型与档位策略](#growth-model-policy)
+    - [10.4.5.1 备选切换的确定规则](#growth-fallback-policy)
+    - [10.4.5.2 Token、费用与普通 PC 的资源预算](#growth-budget-policy)
+  - [10.4.6 路由流程图](#model-routing-5)
+- [10.5 本地小模型、离线生存与网络自恢复](#local-survival)
+  - [10.5.1 仅此软件离线（0.1.63）](#application-offline-control)
+  - [10.5.2 当前小模型运行、启停与资源边界（0.1.32）](#local-model-runtime)
+  - [10.5.3 目标：在较低资源下仍保留有用能力](#local-survival-1)
+  - [10.5.4 本地组件种类](#local-survival-2)
+  - [10.5.5 离线能力包内容](#local-survival-3)
+  - [10.5.6 资源 Profile](#local-survival-4)
+  - [10.5.7 自主切换与替换](#local-survival-5)
+  - [10.5.8 资源不足时如何换模型](#local-survival-6)
+  - [10.5.9 网络诊断和修复](#local-survival-7)
+  - [10.5.10 所有恢复从属于 G0](#local-survival-8)
 <!-- book-nav:end -->
 
 <a id="configured-models"></a>
@@ -206,6 +207,8 @@ Google JSON 是服务账户凭据，以 OAuth 换取短期令牌，并非普通 
 0.1.21 起 `assistant_context.py` 提供精简宿主能力说明：Jarvis 身份、配置路由、聊天实际可见的消息/附件，以及文件保存和限定任务属于独立 UI。0.1.25 增加[明确事实上下文](knowledge-learning.md#explicit-memory-runtime)，说明面板记忆可用但自然语言声明不能代替真实写入；0.1.26 增加[明确项目文档摘录](knowledge-learning.md#project-retrieval-runtime)，仍不扫描整个项目或自动检索其他会话。它是当前能力种子，不能代替完整知识、规则或 Skill 系统。调用者历史仍只接受 user/assistant，不允许借历史伪造 system 消息。此说明按各协议使用 Responses `instructions`、Google `systemInstruction`、Anthropic `system` 或 Chat Completions system 消息，依据 [S143](references.md#s143)、[S144](references.md#s144)、[S145](references.md#s145)。
 
 宿主说明也计入云端 64 KiB / 本地 4 KiB 的文本输入预算；0.1.23 起由独立[上下文装配模块](contracts.md#context-assembly-current)预留本轮消息、附件、固定会话要求与说明，再按完整轮次裁剪历史。模型可遵循也可能误解说明，尤其 0.6B 模型实测仍有能力幻觉，详见[本轮评估](delivery-validation.md#readiness-evidence)。因此操作事实必须以系统回执为准，不能以模型自述替代。
+
+0.1.61 收紧能力表述：普通模型回复不能代替主人保存记忆或运行记忆命令，不能承诺自动记住；需要引导主人确认候选或发送明确命令。同时移除“聊天任务只能影子识别”的过时描述：意图是建议，限定受理由 Host 判断，受理回执不等于完成。说明在本地测试路由下为 929 UTF-8 字节，仍受 4 KiB 总预算；提示词改善不构成消除幻觉的保证。真实回答与任务回归见[最终回答先导](delivery-validation.md#memory-final-answer-evidence)。
 
 网关解析各家完成原因：已知长度截断或其他未完整结束返回 `output_incomplete=true`，`completion_reason` 只保留归一化类型，不保存供应商任意字段。部分正文可在聊天中显示并有持久警示，但不自动保存为完整文件，浏览器规划器也拒绝采用。用户检查后可明确手动另存；不会静默续写、自动重试或自动切换到另一家再次计费。若供应商明确返回不完整且无正文，记为已知失败 `response_incomplete`，保留数值用量；只有未确定的传输结果才按既有 UNKNOWN 规则处理。旧兼容接口未给完成原因时标记 `unspecified`，不伪造完成凭证。
 
@@ -525,7 +528,7 @@ OpenAI 当前文件转写推荐为 `gpt-transcribe`；新语音应用指南另�
 <a id="growth-model-policy"></a>
 ### 自检、自愈、进化的模型与档位策略
 
-**proposed，三用途分别配置；当前成长实现仍只有一个编码 route。** 共用一个 ModelGateway 与模型目录，增加用途策略选择器，不启动三个模型服务或复制三套凭据。每种用途先决定是否需要模型，再选择已允许的连接；无模型可用时仍可本地自检和执行确定性恢复。
+**0.1.64 implemented：Inspect / Heal / Evolve 各有主选、一个可选备选及各自原生推理档位。** 同用原 ModelGateway、模型目录、凭据与记账；不启动三个模型服务。日常自检不调用模型，只有显式“请模型解释检查结果”使用 Inspect 策略，结果只是建议，不执行输出。后文的多备选、分阶段覆盖、动态升档及总费用硬预算属于更广泛 proposed 设计。
 
 | 用途档案 | 默认调用时机 | 选择依据 | 可进一步细分的阶段 |
 |---|---|---|---|
@@ -533,14 +536,16 @@ OpenAI 当前文件转写推荐为 `gpt-transcribe`；新语音应用指南另�
 | 自愈 | 配方无法解决且证据指向代码缺陷时 | 修复与兼容测试实绩优先；复杂度增加时在已设范围内升档 | 定位、修复编码；默认继承本用途档案 |
 | 进化 | 主人目标或已接受的能力提案进入研发 | 规划/编码质量与成本、耗时综合比较 | 规划、编码、评审；默认继承本用途档案 |
 
-每个档案可设置：启用方式、首选连接/模型、**该模型实际支持的推理档位**、有序备选（初期最多三个）、允许自动切换的故障类别、上下文范围、输出上限、总耗时、请求次数与费用提醒。备选每一行独立设置档位；切换模型后只显示目录核验的合法选项，不把不支持思考的模型伪装成“高”。“省资源 / 均衡 / 深度”可作为界面预设，但保存与任务详情必须展示实际原生档位；自动升档若启用须给出上限和原因，不能擅自选任意最贵模型。
+完整目标中每个档案可设置：启用方式、首选连接/模型、**该模型实际支持的推理档位**、有序备选（初期最多三个）、允许自动切换的故障类别、上下文范围、输出上限、总耗时、请求次数与费用提醒。备选每一行独立设置档位；切换模型后只显示目录核验的合法选项，不把不支持思考的模型伪装成“高”。“省资源 / 均衡 / 深度”可作为界面预设，但保存与任务详情必须展示实际原生档位；自动升档若启用须给出上限和原因，不能擅自选任意最贵模型。
 
 默认模型从本机已启用、能力满足、已有测试证据的目录选择，用户可覆盖；不硬编码“某品牌永远最好”。建议首选与至少一个备选来自不同供应商，减少同家配额故障的关联；同模型两个名字不代表两个故障域。本地模型只在已安装、资源足够且该类任务验收通过时成为可执行备选，不能把 0.6B 自动视为复杂修复的等价替代。外部 Codex 的认证、模型和费用仍按 [CodingProvider 边界](evolution-release.md#external-coding-executor)单列。
 
 <a id="growth-fallback-policy"></a>
 #### 备选切换的确定规则
 
-任务开始时冻结用途配置版本。顺序为能力/范围过滤 → 配额与资源准入 → 首选请求 → 分类回执 → 合格备选；单次逻辑请求中每条连接最多派发一次，所有备选共享一次任务的时间、调用和费用预算。发现首选未配置/已禁用/明确不可用时直接跳过并解释，不用付费“探活”维持绿灯。
+当前实现冻结三用途策略与修订到每单；调用记录保留请求档位、适配后的实际档位、实际路线、备选原因、用量及费用回执。每单合计最多两次模型尝试，包括候选质量反馈和备选；未派发的失效配置也占一次尝试，防止循环跳转。配置备选即允许额度、认证、限流、模型不可用或连接未建立时切换一次；未配置则停止。UNKNOWN、已派发断连、取消、输出不完整或软件离线拒绝均不切换。本轮不做跨任务冷却或自动改 Key。
+
+以下为完整多备选策略目标，超出上述子集的项目仍 proposed。任务开始时冻结用途配置版本。顺序为能力/范围过滤 → 配额与资源准入 → 首选请求 → 分类回执 → 合格备选；单次逻辑请求中每条连接最多派发一次，所有备选共享一次任务的时间、调用和费用预算。发现首选未配置/已禁用/明确不可用时直接跳过并解释，不用付费“探活”维持绿灯。
 
 | 结果 | 自动处理 |
 |---|---|
@@ -576,6 +581,25 @@ OpenAI 当前文件转写推荐为 `gpt-transcribe`；新语音应用指南另�
 ## 本地小模型、离线生存与网络自恢复
 
 
+
+<a id="application-offline-control"></a>
+### 仅此软件离线（0.1.63）
+
+**implemented / 有限 verified。** 设置 → 网络与离线（`/settings#network`）提供“仅此软件离线”开关。它作用于同一数据目录的 Jarvis 实例，保存后跨页面、对话子进程和 Host 重启保留；不改变 Windows 网卡、VPN、其他软件或系统防火墙。默认允许联网，恢复联网不会自动重放失败或中断的工作。入口复用现有设置中心，不占用聊天侧栏。
+
+独立模块 [network_policy.py](../runtime/node-host/jarvis_core/network_policy.py) 持有 `network-policy.db`；一个设置行采用 SQLite 事务与修订比较，不新增第三方依赖、驻留模型或定时轮询线程。设置损坏或暂不可读时禁止外联；旧页面的修订冲突要求刷新核对。已经保存此设置的数据目录，当前启动器拒绝交给不认识该存储的旧运行包；这不防止用户绕过启动器手动运行旧源码。
+
+| 能力 | 开启后行为 |
+|---|---|
+| 云模型、认证与账户余额 | 模型网关在读取凭据和发出请求前拦截；自动聊天路由只选择已配置的本地线路，不改写默认模型。显式云模型请求返回原因，不偷偷转发 |
+| 本地模型 | 仅接受固定 `http://127.0.0.1:18180` 入口；标签改为“local”不能授权任意远端或本地代理。仍需手动加载已下载模型；没有模型时保留确定性本地能力 |
+| 远程 MCP | 首次连接、调用检查点、取消通知和会话清理都受限制；已外发但未确定结果的调用记为 UNKNOWN，不自动重试 |
+| 受控浏览器及浏览器验证 | 暂停，包括本地演示和技能浏览器验证；原生浏览器网络不受 Python socket 钩子完整控制，因此不把它当作离线能力 |
+| 记忆、交流设置、文件、固定任务 | 继续本机运行；需要云端推理的步骤显示离线原因。已有固定本地引擎使用自己的离线配置和已校验文件 |
+
+Host 与对话子进程另安装 Python 审计钩子，阻止新的非环回 TCP、UDP 与 DNS 操作，并禁止受控浏览器驱动启动。模型与 MCP 的请求等待阶段重新核对修订，网络模式变化后停止等待；未发出请求记零 API 费用，已发出的请求保留不确定费用/结果。开启时要求前台对话、后台执行和组件维护空闲，避免把仍活动的原生作业误显示成已隔离；队列中的后续步骤仍各自检查。
+
+**这是应用级外联限制，不能等同于整机断网、操作系统防火墙或恶意插件沙箱。** 已发送的数据不能撤回；外部手动运行的下载器、工具和其他应用不受此开关控制，原生引擎也不是由此获得 OS 网络隔离。新增联网适配器必须接入同一策略并补齐“发起、等待、失败清理、子进程”测试后才能登记为受控。整机离线原验收保持未运行，本轮按主人要求先完成应用离线替代测试，结果见[验收记录](delivery-validation.md#application-offline-evidence)，接口唯一说明见[网络控制契约](contracts.md#application-network-contract)。
 
 <a id="local-model-runtime"></a>
 ### 当前小模型运行、启停与资源边界（0.1.32）

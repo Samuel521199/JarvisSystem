@@ -1,6 +1,6 @@
 # 最小核心、初始资产与开发路线
 
-> 状态：整体 proposed；当前源码 0.1.47，已接通明确个人记忆、候选事实来源与失效处理、真实任务状态接续及受限需求成长；完整 K1/K2/K3 未通过，局部验证见[本轮证据](delivery-validation.md#memory-provenance-evidence)，下一步见[推进表](#next-implementation) · 更新：2026-10-18
+> 状态：整体 proposed；当前源码与已部署版本 0.1.64，新增[成长职责拆分](evolution-release.md#growth-governance)，保留[应用离线控制](models-offline.md#application-offline-control)；范围、验证与阻塞见[K2 本轮收口](delivery-validation.md#k2-completion-evidence)；完整 K1/K2/K3 尚未通过。跨主题差距见[后续方向指南](development-guide.md#direction-start)，实施次序见[当前推进队列](#near-term-work-queue) · 更新：2026-10-19
 > [文档入口](README.md) · [维护规则](MAINTENANCE.md) · [架构图册](architecture-atlas.md)
 
 <!-- book-nav:start -->
@@ -45,15 +45,16 @@
   - [4.2.6 两个层次：哪些能长大，哪些不能自行放开](#bootstrap-4)
 - [4.3 开发顺序与每一步的出口](#bootstrap-5)
 - [4.4 接下来具体做什么、什么时候进入下一步](#next-implementation)
-  - [4.4.1 K2 内优先完成文字/语音对话与工作的分离](#dialogue-upgrade-order)
-  - [4.4.2 K2 内的最小自主进化核心](#k2-growth-core)
-  - [4.4.3 当前进度核对与优先事项（2026-10-16）](#progress-audit-2026-10-16)
-  - [4.4.4 K1：先交付可控、可恢复的单机执行底座](#next-k1-work)
-  - [4.4.5 K2：再把“聊天”接到“做事”](#next-k2-work)
-  - [4.4.6 统一技能管理、编程包与科普能力的阶段归属](#skills-adoption-stage-map)
-  - [4.4.7 Grok Build 借鉴项怎样进入既有工作包](#grok-adoption-stage-map)
-  - [4.4.8 工作台设计怎样进入既有阶段](#workbench-stage-map)
-  - [4.4.9 K3—K6 什么时候开始](#section-0f6c7791761e)
+  - [4.4.1 当前推进队列（更新至0.1.64）](#near-term-work-queue)
+  - [4.4.2 K2 内优先完成文字/语音对话与工作的分离](#dialogue-upgrade-order)
+  - [4.4.3 K2 内的最小自主进化核心](#k2-growth-core)
+  - [4.4.4 历史进度核对与优先事项（2026-10-16）](#progress-audit-2026-10-16)
+  - [4.4.5 K1：先交付可控、可恢复的单机执行底座](#next-k1-work)
+  - [4.4.6 K2：再把“聊天”接到“做事”](#next-k2-work)
+  - [4.4.7 统一技能管理、编程包与科普能力的阶段归属](#skills-adoption-stage-map)
+  - [4.4.8 Grok Build 借鉴项怎样进入既有工作包](#grok-adoption-stage-map)
+  - [4.4.9 工作台设计怎样进入既有阶段](#workbench-stage-map)
+  - [4.4.10 K3—K6 什么时候开始](#section-0f6c7791761e)
 - [4.5 实施边界与成长演示](#bootstrap-implementation-boundaries)
   - [4.5.1 每次成长的共同约束](#system-health-3)
   - [4.5.2 第一个应该做的演示](#bootstrap-9)
@@ -66,6 +67,10 @@
 
 <a id="current-implementation"></a>
 ## 当前实现、启动与下一步
+
+**0.1.63 网络控制：**设置 → 网络与离线，可持久限制 Jarvis 外联并保留本机能力，其他软件正常联网；[行为与边界](models-offline.md#application-offline-control)、[本轮验证](delivery-validation.md#application-offline-evidence)分别维护。此前 0.1.62 的 K2 证据保留，未运行门槛没有改成通过。
+
+**K2 本轮冻结证据基线：v0.1.62；当前增量为 v0.1.64。** [K2 本轮实现与验收](delivery-validation.md#k2-completion-evidence)记录三库、个人配置、相关接续、资源争用修复和完整出口状态；0.1.61 的 [最终回答先导与能力说明修正](delivery-validation.md#memory-final-answer-evidence)已部署，[0.1.61 发布汇总](../evals/reports/memory-answer-release-2026-10-19.json)记录真实对照、回归与范围。0.1.60 新增[规则/语义记忆入口一致性](delivery-validation.md#rule-memory-review-evidence)，[0.1.60 发布汇总](../evals/reports/rule-memory-release-2026-10-19.json)记录源码、211 项回归、UI 与部署；下述 0.1.59 增量继续保留。0.1.59 新增[混合报告、指定取消与未开始任务原子修订](delivery-validation.md#mixed-report-admission-evidence)；[0.1.59 发布汇总](../evals/reports/report-admission-release-2026-10-19.json)记录本次有限范围。0.1.58 已上线限定编程副本/测试/应用与恢复、技能验证状态和本地记忆重复/差异核对；普通文字回执、有限恢复、对话/后台模型分槽与 Flash 限定文档自动受理继续可用。[发布汇总](../evals/reports/skills-completion-release-2026-10-19.json)记录实际范围；[后续方向指南](development-guide.md#direction-inventory)区分已完成、缺实现与缺验证。以下带版本的小节保留当时增量说明，其“尚缺”不能覆盖后续发布证据。
 
 **0.1.50 按需语义记忆：**普通消息 →“整理为记忆…”→ 选择模型和档位 → 整理事实 → 核对原句、主体、用途并保存。保留原规则和明确指令；没有新数据库、框架依赖、模型下载或后台提取循环。实现范围见[语义候选](knowledge-learning.md#semantic-candidates-runtime)，测试及真实模型结果见[验收证据](delivery-validation.md#semantic-candidates-evidence)。
 
@@ -89,7 +94,7 @@
 
 **0.1.37 更新：**[本地精确计算](#calculator-entry)接管完整纯算式，支持小数、分数、乘方及明确舍入；无需模型配置，不新增依赖。它解决系统的计算路径，未改变原小模型的质量结论。[MCP 管理页](interaction-persona.md#extension-management-ui)新增十项已核对来源的分类卡片、配置模板、技能配合说明和分层选用规则。当前完成目录与配置管理；协议握手、工具发现、凭据绑定及 MCP 调用仍待接入，不计为十项已可执行能力。实现继续归既有 K2 有界工具入口，完整编码循环归 K3；验证分别见[计算证据](delivery-validation.md#calculator-evidence)与[MCP 管理证据](delivery-validation.md#mcp-management-evidence)。
 
-**0.1.55 K2 增量：**接通 Context7 只读文档任务并复用现有 FIFO/取消/回执；其他 MCP 按实际接入状态管理。REA 增加真实开源应用主进程源码对照、处理器关系显示与推断等级校正；完整范围和未验证项见[文档工具证据](delivery-validation.md#mcp-runtime-evidence)与[真实应用证据](delivery-validation.md#rea-real-apps-evidence)。K3 编码闭环和通用模型选工具仍待后续实现。
+**0.1.55 K2 增量：**接通 Context7 只读文档任务并复用现有 FIFO/取消/回执；其他 MCP 按实际接入状态管理。REA 增加真实开源应用主进程源码对照、处理器关系显示与推断等级校正；完整范围和未验证项见[文档工具证据](delivery-validation.md#mcp-runtime-evidence)与[真实应用证据](delivery-validation.md#rea-real-apps-evidence)。当时完整 K3 编码与通用选工具仍未完成；0.1.58 已增加[限定单文件编程](#native-skills-entry)，仍不代表通用开发闭环。
 
 **0.1.36 更新：**[原生技能入口](#native-skills-entry)将 43 条原始登记整理为十个完整用户技能，带分类卡片和分层策略；九项文本指导进入聊天和报告任务，Anatomy 固定齿轮模板形成选择、执行、检查、交付、沙箱预览与下载闭环。此增量属于 K2 子集；任意生成代码、完整编程修复循环、自由机械建模和视频出口仍待 K3 及后续验收。
 
@@ -129,7 +134,7 @@
 
 0.1.27 部署记录：2026-10-16 默认端口 18181 更新至 0.1.27，沿用原有 Python 环境和数据目录，保留浏览器依赖。本轮源码刷新核对保留 10 项任务和 1 项会话归档，项目/资料/扩展登记未改动；项目资源与扩展入口验证见[0.1.27 记录](delivery-validation.md#project-resources-evidence)，资料检索历史见[0.1.26 记录](delivery-validation.md#project-knowledge-evidence)，明确事实证据见[0.1.25 记录](delivery-validation.md#explicit-memory-evidence)，归档历史证据见[0.1.24 记录](delivery-validation.md#conversation-archive-evidence)；实际工作台聊天已验证，见[本轮使用测试](delivery-validation.md#readiness-evidence)；托盘和先前版本部署分别见[托盘记录](delivery-validation.md#tray-evidence)、[历史部署](delivery-validation.md#local-deployment-idle-evidence)。这是源码启动，不是运行槽位激活；以后更改源码仍需显式重启后端，普通页面刷新不能替代。服务重启后旧页签 nonce 失效，先检查会话保存状态并保留未发送草稿与附件，再刷新或另开工作台；0.1.23 及更早页面的聊天尚未自动归档。
 
-**日常使用入口：[打开 Jarvis 工作台](http://127.0.0.1:18181/)。** 2026-10-19 当前默认端口已更新至 **0.1.58**，采用空闲时的实例专属托盘退出与源码重启；空队列核对后继续，旧实例请求被拒绝，未重放旧 UNKNOWN。真实 Google 编程交付、应用/恢复与已保存会话取回见[本次部署证据](delivery-validation.md#skills-completion-evidence)。历史 0.1.43 的恢复、候选及业务状态核对仍见[原记录](delivery-validation.md#recovery-candidates-evidence)。
+**日常使用入口：[打开 Jarvis 工作台](http://127.0.0.1:18181/)。** 当前版本 0.1.64，设置 → 成长中心为本轮新增入口。沿用空闲实例正常退出与源码重启，不重放旧任务；本轮变更与部署记录见[成长职责增量](delivery-validation.md#growth-purposes-evidence)。历史部署及 K2 未验条件保留于[K2 收口](delivery-validation.md#k2-completion-evidence)。
 
 当前能否日用、各模型表现和未完成功能，先看[2026-10-16 真实模型与功能测试](delivery-validation.md#readiness-evidence)。可以从云端问答、计划、单份文件生成和限定浏览器任务开始；本地微型模型仅作简单应急应答。源码现在会传入实际能力说明，截断回答不自动保存，规则见[模型上下文与完整性](models-offline.md#runtime-chat-context)。
 
@@ -268,7 +273,7 @@ $py = 'H:\JarvisData\envs\dev\Scripts\python.exe'
 <a id="growth-center-next"></a>
 ### K3—K4 下一步：从混合成长循环拆为三种能力
 
-**2026-10-17 设计增量，尚未替换线上实现。** 按主人最新要求，采用[自检 / 自愈 / 进化职责](evolution-release.md#growth-governance)与[三个标签](interaction-persona.md#evolution-settings-ui)。先看[可交互设计预览](prototypes/growth-center/index.html)，再按以下依赖在既有 K3—K4 内实施，不重开第二条开发时间线：
+**0.1.64 已完成第 1、2 项与第 4 项的限定对象子集。** 分开纯完整性检查、按旧契约修复、明确目标进化，三个用途有主/备模型和原生档位；真实三标签替换原混合面板。未完成的事件计划、深度检查和策略抽屉保留在原目标内，不改变 K3—K4 归属。
 
 1. 拆开只读检查、故障恢复与能力目标：先补故障分类、配置代际和迁移验证，让“自检”不再顺带写代码或升级。
 2. 接三用途模型策略：原生档位、备选链、确定回执分类、预算与真实用量；UNKNOWN 不自动重发。
@@ -432,18 +437,18 @@ $py = 'H:\JarvisData\envs\dev\Scripts\python.exe'
 <a id="runtime-package"></a>
 ### 运行包与本机版本选择（0.1.15）
 
-[打包工具](../tools/release_bundle.py)收集固定源码、配置、文本说明、核心 Python 依赖及已校验 Worker Python，不包含凭据、现用账本、模型权重和可选浏览器/语音依赖。当前托盘候选包为 `artifacts/releases/jarvis-0.1.18-tray-runtime.zip`；[本轮证据](delivery-validation.md#tray-evidence)记录摘要、实际包启动和回退结果。0.1.13—0.1.17 包保留为历史回退测试对象。
+[打包工具](../tools/release_bundle.py)收集固定源码、配置、文本说明、核心 Python 依赖及已校验 Worker Python，不包含凭据、现用账本、模型权重、完整浏览器和可选语音依赖。0.1.62 当前运行包与独立启动/回退证据见[K2 本轮收口](delivery-validation.md#k2-completion-evidence)，交付路径为 `artifacts/releases/jarvis-0.1.62-k2-reviewed.zip`；原 `k2-runtime.zip` 保留不覆盖。0.1.13—0.1.18 包仅保留为历史测试对象，不能直接承接新增个人数据；当前包包含固定 Playwright 驱动，浏览器仍需已安装 Edge。
 
 [版本入口](../tools/runtime_releases.py)提供安装、独立健康检查、选择、回退和启动。默认槽位目录为 `%LOCALAPPDATA%\Jarvis\runtime`，可用 `--root <完整路径>` 指定本机支持 ACL 的位置；每个运行包独占一个槽，业务数据始终放在独立的数据目录。安装不会启动服务或改变当前版本。
 
 ```powershell
 $py = 'H:\JarvisData\envs\dev\Scripts\python.exe'
-$installed = & $py tools/runtime_releases.py install artifacts/releases/jarvis-0.1.18-tray-runtime.zip | ConvertFrom-Json
+$installed = & $py tools/runtime_releases.py install artifacts/releases/jarvis-0.1.62-k2-runtime.zip | ConvertFrom-Json
 $releaseId = $installed.id
 & $py tools/runtime_releases.py health $releaseId
 & $py tools/runtime_releases.py select $releaseId
 & $py tools/runtime_releases.py status
-& $py tools/runtime_releases.py run --data-dir "$env:LOCALAPPDATA\Jarvis\data" --mode web
+& $py tools/runtime_releases.py start --data-dir "$env:LOCALAPPDATA\Jarvis\data" --mode web
 # 选择上一个已验证版本，下一次显式启动时生效：
 & $py tools/runtime_releases.py rollback
 ```
@@ -623,9 +628,29 @@ K1 可以暂时用假模型/规则输入验证可靠性，但它还不能叫完�
 <a id="next-implementation"></a>
 ## 接下来具体做什么、什么时候进入下一步
 
-**基础验收与修复（2026-10-17）：**0.1.37 的[基础验收](delivery-validation.md#foundation-acceptance-evidence)结论为部分通过；0.1.38 已修复可选资产阻断启动、前端夹具和编码等待预算问题，并以新请求完成限定成长复验。旧 UNKNOWN 仍保留，不当成已确认成功。0.1.39 已接通明确记忆指令、基础持久表达与按范围的新会话事实使用，见[个人核心证据](delivery-validation.md#personal-core-evidence)。0.1.40 已补[明确话题接续](delivery-validation.md#continuity-evidence)。0.1.41 已将已知报告导出需求接入原成长通路，并核验本次实际输入；0.1.42 已补真实任务关联与按需状态核对；已完成[个人核心联合场景验收](delivery-validation.md#companion-journey-evidence)：当前明确指令与限定任务范围通过，包含前台响应、服务重建和中断不重放。0.1.43 已增加失败/中断后的重新分析按钮及常见中文的候选事实/未结事项确认，复用原记忆、接续与成长存储。按主人选择，本轮只做应用层隔离离线和当前机器连续 5 分钟待命；整机断网另行安排，长时与 8 GiB 目标设备未验。完整 K2 逐项缺口见[本轮出口核对](delivery-validation.md#recovery-candidates-evidence)。下一步仍在 K2，优先补候选事实的完整来源链、带来源的相关经历选择和真实需求收益对照，再完成已列出的阶段出口；不跳入通用自主源码改写。自动经历召回与主动跟进继续待验；[修复证据与剩余边界](delivery-validation.md#foundation-repair-evidence)不等于 K1/K2 整体完成。
+**截至 2026-10-19，0.1.64 已部署，本机可独立完成的 K2 实现与验证已收口；完整 K2 仍待实际验收条件。** 当前已不需要从零开发回复回执、意图影子评估、Context7 接线、LangMem/Mem0 单条提取对照或记忆重复核对。当前阶段结果与未验条件统一查[K2 收口记录](delivery-validation.md#k2-completion-evidence)，更广泛能力缺口查[后续方向指南](development-guide.md#direction-inventory)。完整 K1/K2/K3 未通过，不能按版本号自动推进阶段。
 
-**当前产品优先级（2026-10-18 修订）：**继续完成 K1 的可靠性收口；按主人最新要求，在 K2/W1—W4 优先落实[统一对话与工作分离](#dialogue-upgrade-order)，复用已有个人记忆、会话接续、能力目录和成长实验。先保证能持续交流并按需做事，再扩大自动经历召回与成长范围。下面带日期的进度记录是对应批次事实；下一步排序以本段和唯一 K 阶段表为准。
+本节是**当前工作顺序的唯一权威位置**。下面细分既有 K 工作包；后续指南的 F 编号只是工作项索引，不建立第二套 K/M 路线。日期较早的进度段落保留为历史，不再充当下一步队列。继续复用现有单机底座，K1 可靠性收口与 K2 个人核心增量按依赖推进。
+
+<a id="near-term-work-queue"></a>
+### 当前推进队列（更新至0.1.64）
+
+**2026-10-19 按主人最新要求停止重复验收，恢复向下开发。** 既有 K2 收口与待验条件保留，不降低门槛也不冒称整体验收通过。当前先完成 F08 的自检/自愈/进化职责拆分，再进入 F07 的 K3 编码协作增量。每轮只做受影响的新改动必要检查，不重跑整套 K2、付费回答评审或离线验收。
+
+三库、人格/相关接续和限定成长的已有证据统一见[K2 收口](delivery-validation.md#k2-completion-evidence)。物理低配机、整机断网、主人真实体验仍待条件，不阻断本轮授权的可独立开发内容。0.1.64 已交付 F08 的限定对象三职责、三用途模型/备选/档位和真实界面；完整事件调度、广泛净收益及任意自我改造仍开放。随后从 F07 的保留边界与失败产物约束开始，选择一个两文件或单受控依赖的真实任务，接现有 CodingProvider；完成后才扩大 K4 成长范围、K5 自身模块改造与 K6 多设备/Agent/形态。
+
+| 优先安排与既有归属 | 本次应先交付的增量 | 依赖、边界与退出位置 |
+|---|---|---|
+| 贯穿每项：K1/W4—W6、K2/W4 | [F02 资源准入](development-guide.md#direction-resources)、[F09 离线恢复](development-guide.md#direction-offline)、[F12 依赖治理](development-guide.md#direction-architecture)随受影响通道补齐 | 先保留当前可用性；不要求完成所有未来监督设计才改普通功能。每项都核对取消、UNKNOWN、源码绑定及资源，完整出口仍按原 V-K1/V-K2 |
+| 已交付首个子集：K2/W1—W3 | [F01 混合样例报告、指定取消与未开始任务修订](delivery-validation.md#mixed-report-admission-evidence) | 0.1.59有限模型/能力范围已验证；更多能力/模型、模糊指代、多行动依赖及独立人工标注仍开放，不宣布完整F01通过 |
+| 已交付入口子集：K2/W1 | [F03 规则/语义候选共用核对和修订屏障](delivery-validation.md#rule-memory-review-evidence) | 0.1.60 已验证并部署；复杂同义、跨来源遗忘与完整 F03 仍开放 |
+| 已交付开发先导：K2/W1—W3 | [F04 八场景最终回答对照及能力说明修正](delivery-validation.md#memory-final-answer-evidence) | 0.1.61 已部署；同一窄开发集回归，不等于独立留出或框架对比，保留措辞局限 |
+| 已交付 K2 子集，更广泛验证仍开放 | [F04 扩大人物/时序/项目资料/保留历史的多轮回答对照](development-guide.md#direction-memory-quality)，并逐项完善 [F06 人格/接续](development-guide.md#direction-persona) | 来源与修订规则稳定后补检索；不再以30条公开提取同分决定框架胜负，不先换事实库。按 V-MEM/V-PAL 验收 |
+| 输入适配：K2/W3 | [F05 按键录音、本地转写、编辑发送和独立播报](development-guide.md#direction-voice) | 复用已稳定的文字受理；不等待完整记忆框架/所有工具建成。接口及真实设备测试可独立准备；连续语音和自动动作另过门，遵守下节③④ |
+| 扩大成长：K2 最小成长及 K3—K4 子集 | [F08 自检/自愈/进化分工](development-guide.md#direction-growth)，再按真实需求推进 [F07 编码范围](development-guide.md#direction-coding) | 不把健康旧版本判成故障；先证实一个真实新需求净收益、原能力不退化和可回退，再增加依赖/多文件/外部编码器 |
+| 后续按需求：K5—K6 | 检索/模型替换、联网学习、双节点、Agent/NPC、硬件和形态 | 逐项见[工作清单](development-guide.md#direction-work)，按[唯一 K 阶段表](#bootstrap-5)及原出口。没有需求或前置证据时保持 proposed，不预装全部组件 |
+
+顺序表达依赖和产品重点，不是日历承诺。单个增量的范围、产物和冻结判据应在编码前明确；如果前置能力已满足可直接复用，不重新开发，也不为了“下一版”强行跳过未解决失败。最先推荐的可演示场景为：陪伴回应同时生成一个真实目录报告，随后只取消/修改该报告，刷新和重启不重复执行。
 
 <a id="dialogue-upgrade-order"></a>
 ### K2 内优先完成文字/语音对话与工作的分离
@@ -639,7 +664,7 @@ K1 可以暂时用假模型/规则输入验证可靠性，但它还不能叫完�
 | ③ K2/W3 的输入/输出适配 | 按键录音、本地 STT、可编辑最终转写；复用文字入口与 Qwen 短段播报 | 麦克风失败可打字，中文/英文可用；工作、朗读、输入独立取消；实测内存和首声 |
 | ④ K2/W3＋W4 的连续交流增量 | 显式开启连续语音、VAD/轮次、AEC 验证、说话打断、句间情绪；CPU/GPU/配额公平调度 | 通过真实房间音频及负载测试，只有有效代际能播放，后台工作仍有进展 |
 
-当前已有[回执/待发](delivery-validation.md#dialogue-receipt-evidence)、[普通会话持久恢复](delivery-validation.md#dialogue-recovery-evidence)和[上下文与后台模型分槽](delivery-validation.md#conversation-lanes-evidence)。第①项已补普通上下文阶段超时和目录/技能/解释规划进程；仍需核对维护与网页规划路径、完整 WorkAdmission 和压力公平性。第②项已完成[200 条新合成样例的分集评测与限定受理](delivery-validation.md#dialogue-intent-shadow-evidence)：40 条校准、160 条留出，Flash 单项只读文档查询已有真实任务闭环，混合需求仍提供草稿。下一步补独立人工标注与更多同工具正负例、混合任务唯一受理及目标修改，再扩大能力和模型范围。整个 R07、麦克风或资源公平调度仍未验收，不能把待发队列视为已经理解连续补充。
+当前已有[回执/待发](delivery-validation.md#dialogue-receipt-evidence)、[普通会话持久恢复](delivery-validation.md#dialogue-recovery-evidence)和[上下文与后台模型分槽](delivery-validation.md#conversation-lanes-evidence)。第①项已补普通上下文阶段超时和目录/技能/解释规划进程；仍需核对维护与网页规划路径、完整 WorkAdmission 和压力公平性。第②项已完成[200 条新合成样例的分集评测与限定受理](delivery-validation.md#dialogue-intent-shadow-evidence)：40 条校准、160 条留出，Flash 单项只读文档查询已有真实任务闭环，0.1.59进一步完成[混合样例报告子集](delivery-validation.md#mixed-report-admission-evidence)，独立人工标注、更多工具/模型、模糊指代和多行动依赖仍待补齐。整个 R07、麦克风或资源公平调度仍未验收，不能把待发队列视为已经理解连续补充。
 
 完整 M2 语音体验和 K6 多设备验收归属不变；本轮提出的单机语音增量可先沿已有 K2 入口实施，不必等 NPC、完整 Agent 工厂或共同体。按步骤验证后再默认启用相应能力，阶段性仍允许文字或按键模式。每个增量采用功能开关/适配器与故障降级；撤回新路由不影响既有已入账任务。验收统一见[分离与并行验收](delivery-validation.md#conversation-separation-validation)，不以生成文件数量、模型自评分或异步函数数量判定完成。
 
@@ -655,7 +680,9 @@ K2/W1 提供真实能力清单与既有改进经验；W2 将主人需求或已�
 **截至 0.1.37，固定报告、会话任务关联和本地模型的封闭外联流程验证已经接通，K1 各工作包已有可运行子集，K2/W1 的事实记忆、跨项目词法联合查询与种子状态入口、W3 的会话归档也已提前实现；K1 和 K2 均未整体验收。** 按个人使用范围继续完成离线、资源与整体验收；监督身份、认证和全局停止延期，不重新作为个人功能推进的前置条件。0.1.37 已补[确定性计算](#calculator-entry)、有界原生技能与限定成长闭环，当前已补 [K3—K4 限定成长子集](#evolution-loop-entry)；剩余关键缺口为通用模型答案可靠性、普通 PC 长时资源、通用技能执行绑定、整机离线，以及更多模块的开发与发布验收。工作包编号仅细分上面的 K 阶段；不另设按版本或日期推进的路线。
 
 <a id="progress-audit-2026-10-16"></a>
-### 当前进度核对与优先事项（2026-10-16）
+### 历史进度核对与优先事项（2026-10-16）
+
+**历史快照，非当前队列。** 2026-10-19 的推进选择以[当前推进队列](#near-term-work-queue)为准，下述原始版本范围及先后理由保留。
 
 本次对照权威文档、运行代码、分版本报告和本机 `/api/status`：该次核对时源码与运行实例均为 **0.1.27**，网页及核心就绪。定位是**已有记忆和项目资料的本机助手工作台，正在补齐可执行的最小智能核心**。现有能力与限制只在[当前实现表](#current-implementation)维护；K0 已有种子与夹具证据，不能由此推导 K1—K6 全部完成，也不按文档篇幅估计完成百分比。
 
@@ -695,10 +722,12 @@ K1/W3—W5 按[普通 PC 优先规则](stack-project-layout.md#technology-select
 
 | 工作包 | 具体交付与用户可见结果 | 依赖与验收入口 |
 |---|---|---|
-| K2/W1 三库运行入口 | **已有明确事实、单项目检索、文件树/编辑与扩展登记；0.1.28 加入已校验种子视图与真实能力状态**；种子正文可在本机查询，聊天仅取得状态摘要；0.1.30 固定报告已绑定两项种子技能，0.1.33 已补有界联合查询，0.1.39/40 已补明确个人指令与有来源的话题接续；下一步完善有界个人经历召回和需求驱动协助，再补其他准入技能，规则仍由宿主执行器独立判断 | K1 出口；[首期知识与记忆范围](knowledge-learning.md#initial-runtime-memory)、[V-K2-01](delivery-validation.md#v-k2-01) |
-| K2/W2 有限计划与技能调用 | **0.1.30 已接通固定目录报告实验**；0.1.31 已接会话查询/取消和核验报告；后续增加更多已准入工具，不支持的请求继续说明缺口 | W1；[任务执行闭环](tasks-agents.md#initial-task-loop)、[V-K2-02](delivery-validation.md#v-k2-02) |
-| K2/W3 个人会话与任务接续 | **已有普通会话自动归档、临时会话排除、持久任务面板与取消**；0.1.31 已补明确任务入口、任务/产物关联和查询/取消；0.1.34 已补局部并行时延、资源监控与中断证据；0.1.39/40 已补基础持久表达与明确话题接续，下一步补需求驱动协助及完整连续性；目标机压力和完整出口仍未通过 | 个人交流部分复用 W1，不依赖全部工具完成；任务部分依赖 W2；[V-PAL](delivery-validation.md#personal-companion-validation)、[V-K2-03](delivery-validation.md#v-k2-03)、[V-K2-04](delivery-validation.md#v-k2-04) |
-| K2/W4 离线与失败收口 | **0.1.32 已验证本地小模型在封闭外联测试中完成固定报告、拒绝 12 项不支持请求及冷重启就绪**；整机断网、完整恢复与资源性能仍待验收；云端异常、模型乱填工具、资源紧张时保留可解释状态 | W3；[V-K2-05](delivery-validation.md#v-k2-05)、[V-K2-06](delivery-validation.md#v-k2-06) |
+| K2/W1 三库运行入口 | **0.1.62 已补三库正文查询、版本/来源和历史种子冲突说明、损坏派生索引重建、相关事实及话题推荐**；复用已有个人记忆、项目资料、撤回/纠正和外发过滤；规则由宿主独立执行 | K1 适用基础；[首期知识与记忆范围](knowledge-learning.md#initial-runtime-memory)、[V-K2-01](delivery-validation.md#v-k2-01)；本轮证据统一见下文链接 |
+| K2/W2 有限计划与技能调用 | 已接普通对话的限定文档/报告任务、真实 Worker 产物、查询/取消及已有受限成长交付；**0.1.62 复验计划拒绝、实际任务与候选启用/回退**；不支持的请求说明缺口 | W1；[任务执行闭环](tasks-agents.md#initial-task-loop)、[V-K2-02](delivery-validation.md#v-k2-02) |
+| K2/W3 个人会话与任务接续 | **0.1.62 已补称呼和完整交流配置界面、来源可见的相关话题、纠正/遗忘后的回答对照，以及争用时的独立查询/取消**；保留会话归档、临时排除和真实任务接续；主人体验、普通设备仍需实际验收 | 个人交流复用 W1，任务依赖 W2；[V-PAL](delivery-validation.md#personal-companion-validation)、[V-K2-03](delivery-validation.md#v-k2-03)、[V-K2-04](delivery-validation.md#v-k2-04) |
+| K2/W4 离线与失败收口 | **0.1.62 已复验应用隔离下小模型任务、无模型/资源不足降级、七个真实退出点、兼容运行包和启动回退**；已准备整机断网脚本，物理低配机不可用；未完成项保留原门槛 | W3；[V-K2-05](delivery-validation.md#v-k2-05)、[V-K2-06](delivery-validation.md#v-k2-06) |
+
+这四个工作包属于一次完整 K2 交付，不能逐包要求主人重新发起。当前逐项结论、原始证据和外部阻塞只在 [0.1.62 K2 收口记录](delivery-validation.md#k2-completion-evidence)维护；以下较早的记忆选型记录保留来由，不作为另一条推进队列。
 
 首个自然语言任务“列出样例目录的文件，按类型统计并保存结果”已在 0.1.30 通过云端规划与固定 Worker 的子集验证，见[当前使用](#sample-task-entry)。这个演示证明规划与执行连通，不称为自主生成新技能。资料外发、持久聊天和主人偏好分别设置范围；当前允许云端聊天不自动扩大到读取并上传整份知识库。
 
@@ -855,5 +884,5 @@ K0 准备 SeedBundle、契约、规则与夹具；详细开发出口只维护于
 先建立最小种子，再在已有授权内组织后续开发。下列 K0—K6 是唯一实施顺序；能力验收门另见 [验收文档](delivery-validation.md#delivery-gates)。Codex 是可替换的开发提供者，日常运行与恢复不依赖其在线。
 
 <!-- book-footer:start -->
-[返回全书目录](README.md#book-tree) · [上一章：NPC 小镇与虚拟世界](simulation.md) · [下一章：系统架构、运行边界与模块职责](architecture.md)
+[返回全书目录](README.md#book-tree) · [上一章：NPC 小镇与虚拟世界](simulation.md) · [下一章：后续方向指南：现状、缺口与优化工作清单](development-guide.md)
 <!-- book-footer:end -->

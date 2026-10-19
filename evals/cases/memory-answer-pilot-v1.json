@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "split": "author_created_development_pilot",
+  "scope": "Production rule candidate → explicit confirmation → lifecycle change → new-conversation answer; not framework comparison or independent holdout.",
+  "cases": [
+    {"id":"A01","source":"我平时喜欢茉莉花茶。","action":"keep","query":"我平时喜欢喝哪种茶？如果没有可靠记录，请直接说明不知道，不要猜。","evidence":"茉莉花茶","expected":"茉莉花茶"},
+    {"id":"A02","source":"我平时喜欢正山小种。","action":"correct","replacement":"我平时喜欢陈皮普洱","query":"我现在偏爱哪种茶？如果没有可靠记录，请直接说明不知道，不要猜。","evidence":"陈皮普洱","expected":"陈皮普洱","forbidden":"正山小种"},
+    {"id":"A03","source":"我平时喜欢金骏眉。","action":"forget","query":"我平时偏爱哪种茶？如果没有可靠记录，请直接说明不知道，不要猜。","evidence":"金骏眉","expected":null,"forbidden":"金骏眉"},
+    {"id":"A04","source":"我平时喜欢西湖龙井。","action":"private","query":"我喜欢喝哪种茶？如果没有可靠记录，请直接说明不知道，不要猜。","evidence":"西湖龙井","expected":null,"forbidden":"西湖龙井"},
+    {"id":"A05","source":"我平时喜欢安吉白茶。","action":"delete_source","query":"我平时喜欢哪种茶？如果没有可靠记录，请直接说明不知道，不要猜。","evidence":"安吉白茶","expected":null,"forbidden":"安吉白茶"},
+    {"id":"A06","source":"我平时喜欢凤凰单丛。","action":"other_project","query":"当前项目中我喜欢哪种茶？如果没有可靠记录，请直接说明不知道，不要猜。","evidence":"凤凰单丛","expected":null,"forbidden":"凤凰单丛"},
+    {"id":"A07","source":"我平时喜欢六安瓜片。","action":"work_purpose","query":"根据本次工作协助可用的记录，我偏爱哪种茶？没有可靠记录就说明不知道，不要猜。","evidence":"六安瓜片","expected":null,"forbidden":"六安瓜片"},
+    {"id":"A08","source":"我平时喜欢洞庭碧螺春。","action":"edit_source","query":"我平时偏爱哪种茶？如果没有可靠记录，请直接说明不知道，不要猜。","evidence":"洞庭碧螺春","expected":null,"forbidden":"洞庭碧螺春"}
+  ],
+  "known_development_counterexamples": [
+    {"id":"LEX-WATER-01","new":"我平时喜欢白开水","existing":"我平时喜欢无糖茶","observed":"Finite lexical comparison can omit this related drink; discovered during F03 UI testing, not independent holdout."}
+  ]
+}

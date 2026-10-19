@@ -252,7 +252,7 @@ class MemoryStore:
         db.execute('INSERT INTO receipts VALUES (?,?,?,?,?)', (fact_id, expected+1, 'forget', 'owner_explicit', now))
         return {'id': fact_id, 'status': 'forgotten'}
 
-    def command(self, action, title, content, *, project_id=None, request_id, cancel_event=None, candidate_source=None, classification=None, candidate_review_revision=None, candidate_target=None, candidate_deduplicate=False):
+    def command(self, action, title, content, *, project_id=None, request_id, cancel_event=None, candidate_source=None, classification=None, candidate_review_revision=None, candidate_target=None, candidate_deduplicate=False, candidate_review_required=False):
         """An explicit chat edit and its retry receipt commit in one transaction.
 
         Matching is exact within one scope. Receipts retain no fact body. They
@@ -299,6 +299,8 @@ class MemoryStore:
                 if previous['fingerprint'] != fingerprint:
                     fail('memory_conflict', '同一请求标识不能用于不同的记忆操作。')
                 return {**json.loads(previous['receipt']), 'replayed': True}
+            if candidate_review_required and candidate_review_revision is None:
+                fail('candidate_review_required', '旧规则预览不能新增事实，请重新整理本机候选并核对；已完成回执仍可查询。')
             binding_key = None
             if candidate_source is not None:
                 from .memory_sources import read_source, source_key

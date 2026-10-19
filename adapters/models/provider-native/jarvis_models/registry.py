@@ -294,6 +294,8 @@ class Registry:
 
     def balance(self, connection):
         """Explicit read, no retries or polling. Account balance is not per-key usage."""
+        from jarvis_core.network_policy import NetworkPolicy
+        NetworkPolicy(self.path.parent).require_online()
         import httpx
         config = effective_config(self.seed_path, self.path.parent)
         item = config["providers"].get(connection, {})

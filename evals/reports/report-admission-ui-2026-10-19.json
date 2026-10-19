@@ -1,0 +1,33 @@
+{
+  "status": "SUCCEEDED",
+  "source_version": "0.1.59",
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/report_intents.py": "f6c44b97801a6c2bad2c8785fee0f9885a713bb1bbea0e9c06a84089ec95b34b",
+    "runtime/node-host/jarvis_core/work_admission.py": "e73cd0b0ca943df9e6b78ccc89f92105935f04c92163d9c9825e3032dc936dea",
+    "runtime/node-host/jarvis_core/task_revisions.py": "3eb98f907bfc30c30d17d235dd7a42ee9b567cf5275d6f93bb1a30e9f80b8327",
+    "runtime/node-host/jarvis_core/task_queue.py": "4d2a4250062c20be22be9961ed0aa9b8ab38d830ef37e3a33f4aad304ce0db1c",
+    "runtime/node-host/jarvis_core/ledger.py": "b89c8fc52c1d5a12812c87f466e7077f94beccb7df6e6bdbc777ed58d5d7c83e",
+    "runtime/node-host/jarvis_core/turns.py": "1a8f1e1fdba3ebf1f432be147a4b5d6e13d779400f860355b16e115e5bf745f0",
+    "apps/web/server.py": "cb39a008580fdec00ee7f5e4ec0a4ffa48786bc8482105634f8923d41f50efb1",
+    "apps/web/dialogue.js": "a5a62f8ab2c15601fff468e29b38cd5e1efcfcf3cfb9bd3b5b3f00cebd27c4ec",
+    "apps/web/conversation_tasks.js": "5e2037607e548341669dee1a09a4d442cf877196723f5579c94db66cde7220cf",
+    "tools/probe_report_admission_ui.py": "bb461ec391654e003d5b3501750f5d30c264015df108c3b56219d193e4329375"
+  },
+  "source_changed": false,
+  "checks": [
+    "mixed answer plus actual unique report; draft preserved; target-specific pending report atomically replaced",
+    "foreground dialogue completes while background planner held; natural cancellation targets only the selected report",
+    "real LPAC artifact exact counts; refresh restores existing records without re-execution; 390px no horizontal overflow"
+  ],
+  "browser_errors": [],
+  "latency": {
+    "chat_during_held_task_ms": 604.469,
+    "cancel_during_held_task_ms": 613.479
+  },
+  "cloud_calls": 0,
+  "limits": "Synthetic dialogue/planner timing, real HTTP/browser/ledger/LPAC. Not cloud latency, general semantics or long-load fairness.",
+  "screenshots": [
+    "H:\\JarvisData\\diagnostics\\dialogue\\report-admission-desktop.png",
+    "H:\\JarvisData\\diagnostics\\dialogue\\report-admission-mobile.png"
+  ]
+}

@@ -275,6 +275,24 @@ class ContinuityStore:
             db.commit()
             return receipt
 
+    def suggest(self, query, project_id, provider):
+        from .relevance import score
+        if not isinstance(query,str) or not 1 <= len(query.strip()) <= 512 or not isinstance(provider,str) or not re.fullmatch(r'[a-z][a-z0-9_-]{0,31}',provider):
+            raise MemoryError('invalid_continuity','话题或接入方字段无效。')
+        candidates=[]
+        for row in self.list(project_id)['records']:
+            doc=row['document']
+            rank=score(query,doc['title'],doc['progress']+' '+doc['next_step'])
+            if rank: candidates.append((rank,row['id']))
+        candidates.sort(key=lambda value:-value[0])
+        result=[]
+        for rank, ident in candidates:
+            rows,_=self.snapshot({'enabled':True,'ids':[ident]},project_id,provider)
+            if rows:
+                result.append({**rows[0],'match':{'method':'lexical','score':rank}})
+                if len(result)==MAX_SELECTED: break
+        return {'records':result,'max_records':MAX_SELECTED,'provider':provider,'automatic_execution':False}
+
     def snapshot(self, request, project_id, provider):
         request = validate_context(request)
         rows, issues, cache = [], [], {}

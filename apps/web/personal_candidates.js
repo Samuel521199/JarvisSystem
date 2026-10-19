@@ -11,16 +11,17 @@
   const modelLabel=document.createElement('label'),model=document.createElement('select');model.id='candidate-model';modelLabel.textContent='语义整理模型';modelLabel.append(model);
   const levelLabel=document.createElement('label'),level=document.createElement('select');level.id='candidate-reasoning';levelLabel.textContent='推理档位';levelLabel.append(level);
   const disclosure=document.createElement('p');disclosure.id='candidate-disclosure';
+  const reload=document.createElement('button');reload.type='button';reload.id='candidate-reload-local';reload.textContent='重新整理本机候选';
   const generate=document.createElement('button'),stop=document.createElement('button');generate.type=stop.type='button';generate.id='candidate-generate';stop.id='candidate-stop';generate.textContent='用此模型重新整理事实';stop.textContent='停止整理';stop.hidden=true;
   toolbar.append(modelLabel,levelLabel,disclosure);
-  const modelActions=document.createElement('div');modelActions.className='candidate-actions';modelActions.append(generate,stop);
+  const modelActions=document.createElement('div');modelActions.className='candidate-actions';modelActions.append(reload,generate,stop);
   dialog.append(heading,hint,source,toolbar,modelActions,status,list);document.body.append(dialog);
   let working=false,context=null,run=null,query=null;
   const labels={personal_fact:'主人事实',preference:'个人偏好',episode:'个人经历',shared_experience:'共同经历',project_fact:'项目事实',work_result:'工作结果',third_party:'他人信息',fiction:'虚构角色'};
   const subjects={personal_fact:'owner',preference:'owner',episode:'owner',shared_experience:'owner',project_fact:'project',work_result:'project',third_party:'other',fiction:'character'};
   function controls(){
     for(const e of dialog.querySelectorAll('button,input,textarea,select'))e.disabled=working||e.dataset.saved==='true'||e.dataset.previewStale==='true';
-    generate.disabled=working||!context||!model.value;stop.disabled=!run;stop.hidden=!run;close.disabled=working&&!run;
+    reload.disabled=working||!query;generate.disabled=working||!context||!model.value;stop.disabled=!run;stop.hidden=!run;close.disabled=working&&!run;
   }
   async function api(action,payload,signal){
     const response=await fetch('/api/personal-candidates/'+action,{method:'POST',credentials:'omit',cache:'no-store',headers:{'X-Jarvis-Nonce':NONCE,'Content-Type':'application/json'},body:JSON.stringify(payload),signal:signal||AbortSignal.timeout(12000)});
@@ -45,16 +46,17 @@
   function render(data,semantic=false){
     list.replaceChildren();
     for(const item of data.candidates){
+      const reviewable=semantic||item.kind==='fact',reviewKind=semantic?'semantic':'rule';
       const card=document.createElement('article');card.className='candidate-card';
       const type=document.createElement('strong');type.textContent=semantic?'模型提出的事实候选':item.kind==='fact'?'规则提出的事实候选':'候选未结事项';card.append(type);
-      if(semantic){const quote=document.createElement('blockquote');quote.textContent='原句：'+item.quote;card.append(quote);}
+      if(reviewable){const quote=document.createElement('blockquote');quote.textContent='原句：'+item.quote;card.append(quote);}
       const name=field(card,'名称',item.title,60),content=field(card,item.kind==='continuity'?'当前记录':'记忆内容',item.content,1024,true);
       const next=item.kind==='continuity'?field(card,'下一步（不会自动执行）',item.next_step,512,true):null;
       const scope=document.createElement('select'),scopeLabel=document.createElement('label');scopeLabel.textContent='使用范围';scope.setAttribute('aria-label','使用范围');
       scope.add(new Option(data.project_id?'当前项目':'普通个人会话','current'));
       if((semantic||item.kind==='fact')&&data.project_id)scope.add(new Option('通用个人记忆','global'));scopeLabel.append(scope);card.append(scopeLabel);
       let category,subject,daily,work;
-      if(semantic){
+      if(reviewable){
         const label=document.createElement('label');label.textContent='类型 / 主体';category=document.createElement('select');category.setAttribute('aria-label','类型 / 主体');
         for(const [k,v] of Object.entries(labels))if(data.project_id||subjects[k]!=='project')category.add(new Option(v,k));
         category.value=item.classification.kind;label.append(category);card.append(label);
@@ -77,7 +79,7 @@
       ignore.onclick=()=>card.remove();
       const reviewPanel=document.createElement('section');reviewPanel.className='candidate-review';reviewPanel.hidden=true;card.insertBefore(reviewPanel,actions);
       let checked=null,pending=null;
-      function payload(){return semantic?{preview_token:data.preview_token,candidate_id:item.candidate_id,title:name.value,content:content.value,scope:scope.value,
+      function payload(){return reviewable?{preview_token:data.preview_token,candidate_id:item.candidate_id,title:name.value,content:content.value,scope:scope.value,
         classification:{kind:category.value,subject:subjects[category.value],subject_label:subject.value,uses:category.value==='fiction'?[]:[...(daily.checked?['personal_chat']:[]),...(work.checked?['work_assist']:[])],expires_at:null}}
         :{source:data.source,project_id:data.project_id,source_digest:data.source_digest,scope:scope.value,candidate:{kind:item.kind,title:name.value,content:content.value,next_step:next?.value||'',candidate_id:item.candidate_id}};}
       function completed(result){
@@ -86,7 +88,7 @@
       }
       async function resolve(decision,target=null){
         pending={review_token:checked.review_token,decision,target_id:target};
-        completed(await api('semantic-resolve',pending));
+        completed(await api(reviewKind+'-resolve',pending));
       }
       async function perform(task){
         if(working)return;if(!sameConversation()){status.textContent='会话或记忆开关已变化，请重新整理。';return;}
@@ -97,7 +99,7 @@
           if(e.code==='candidate_review_changed'){
             for(const button of list.querySelectorAll('[data-candidate-save]'))button.dataset.previewStale='true';
             receipt.textContent=e.message;
-            status.textContent='记忆已经变化，本批旧预览停止保存，编辑内容仍保留。请核对后点击“用此模型重新整理事实”；不会自动调用模型。';
+            status.textContent='记忆已经变化，本批旧预览停止保存，编辑内容仍保留。请核对后点击'+(semantic?'“用此模型重新整理事实”或“重新整理本机候选”':'“重新整理本机候选”')+'；不会自动调用模型。';
           }else receipt.textContent=e.message+' 重试相同内容使用同一回执；如结果不确定，请在记忆面板核对。';
           if(pending)save.textContent='重试同一次保存';
         }
@@ -129,15 +131,15 @@
         }
         receipt.textContent='核对完成，尚未保存。更新仅替换旧记忆内容与来源，沿用其名称、分类、用途、有效期和权限。上方用途设置用于另存新记忆；另存时请使用不同名称。';
       }
-      if(semantic){
+      if(reviewable){
         const check=document.createElement('button');check.type='button';check.textContent='核对已有记忆';check.dataset.candidateSave='true';actions.prepend(check);
-        check.onclick=()=>perform(async()=>showReview(await api('semantic-review',payload())));
+        check.onclick=()=>perform(async()=>showReview(await api(reviewKind+'-review',payload())));
         card.addEventListener('input',e=>{if(!e.target.matches('input,textarea,select'))return;checked=pending=null;reviewPanel.hidden=true;reviewPanel.replaceChildren();save.textContent='确认并保存';receipt.textContent='内容已编辑，保存前会重新在本机核对。';});
       }
       save.onclick=()=>perform(async()=>{
-        if(!semantic){completed(await api('confirm',payload()));return;}
-        if(pending){completed(await api('semantic-resolve',pending));return;}
-        const result=await api('semantic-review',payload());showReview(result);
+        if(!reviewable){completed(await api('confirm',payload()));return;}
+        if(pending){completed(await api(reviewKind+'-resolve',pending));return;}
+        const result=await api(reviewKind+'-review',payload());showReview(result);
         if(!result.matches.length)await resolve('new');
       });
     }
@@ -159,6 +161,12 @@
       render(context);
     }catch(e){status.textContent=e.message;}finally{working=false;controls();policyControls();}
   }
+  reload.onclick=async()=>{
+    if(working||!sameConversation())return;working=true;controls();
+    try{const data=await api('suggest',query);context=data;source.textContent=data.source_text;render(data);status.textContent=data.candidates.length?'已重新整理本机候选，尚未保存；本次没有模型调用。':'本机规则没有候选，没有写入记忆。';}
+    catch(e){status.textContent=e.message;}
+    finally{working=false;controls();policyControls();}
+  };
   generate.onclick=async()=>{
     if(working||!sameConversation())return;const item=modelCatalog.find(x=>modelKey(x)===model.value);if(!item)return;
     const active={id:crypto.randomUUID().replaceAll('-',''),controller:new AbortController()};run=active;working=true;list.replaceChildren();controls();

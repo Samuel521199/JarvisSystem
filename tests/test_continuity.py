@@ -72,6 +72,19 @@ class ContinuityTests(unittest.TestCase):
         self.assertEqual(row['document']['source']['archive_revision'], 1)
         self.assertEqual(row['document']['state'], 'open')
 
+    def test_suggestions_recheck_scope_provider_and_deleted_source(self):
+        personal, source, _ = self.save(title='英语学习',progress='完成单词',next_step='练习英语口语')
+        project, _, _ = self.save(title='英语学习',progress='项目英语文档',project=self.project)
+        self.assertEqual([r['id'] for r in self.store.suggest('英语',None,'local')['records']],[personal['id']])
+        self.assertFalse(self.store.suggest('英语',None,'vertex')['records'])
+        self.change(personal['id'],'permissions',providers=['vertex'])
+        self.assertEqual([r['id'] for r in self.store.suggest('英语',None,'vertex')['records']],[personal['id']])
+        self.change(personal['id'],'permissions',providers=[])
+        self.assertFalse(self.store.suggest('英语',None,'vertex')['records'])
+        self.archives.delete(source['conversation_id'],{'revision':1})
+        self.assertFalse(self.store.suggest('英语',None,'local')['records'])
+        self.assertEqual([r['id'] for r in self.store.suggest('英语',self.project,'local')['records']],[project['id']])
+
     def test_source_must_be_exact_owner_command_in_same_project(self):
         message = '保存接续：旅行=杭州｜订票'; source = self.source(message)
         for changes in ({'source': {**source, 'message_index': 1}}, {'source': self.source('其他消息')},

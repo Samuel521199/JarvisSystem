@@ -6,6 +6,7 @@ local owner UI/Host, never model-generated scope. Each route builds a fresh view
 from .knowledge import KnowledgeStore, KnowledgeError, terms, normalized
 from .memory import MemoryStore
 from .memory_policy import purpose
+from .relevance import select_facts
 
 
 def project_scope(request):
@@ -28,15 +29,13 @@ class MemoryView:
         sources = self.knowledge.snapshot(knowledge_context, provider)
         return facts, sources
 
-    def context(self, memory_context, provider, facts, sources, query, *, max_bytes):
+    def context(self, memory_context, provider, facts, sources, query, *, max_bytes, preferred_ids=()):
         # Rank relevant facts before background preferences; ties keep recency.
         # Provider/scope exclusion already happened before candidate scoring.
-        words = terms(query)
-        ranked = sorted(facts, key=lambda row: -sum(
-            int(word in normalized(row['document']['title']+' '+row['document']['content']))
-            for word in words))
+        ranked = select_facts(facts, query, preferred_ids=preferred_ids)
         memory_budget = min(2048, max_bytes//3) if sources['documents'] else min(6144, max_bytes)
         text, memory = self.memory.context(memory_context, provider, max_bytes=memory_budget, facts=ranked)
+        memory['relevance_omitted'] = len(facts)-len(ranked)
         excerpts, knowledge = self.knowledge.context(sources, query, max_bytes=min(8192, max_bytes-memory['bytes']))
         coverage = []
         for project in sources.get('project_ids', []):

@@ -26,7 +26,7 @@ function localControls(m){
 function renderCatalog(){
  const c=data?.catalog,query=$('seed-query').value.trim().toLowerCase();
  $('seed-status').textContent=c?.status==='ready'?`已校验 · 种子 ${c.seed_version}`:c?'不可用':'采集中';
- $('seed-notice').textContent=(c?.message||'正在读取发布种子。')+' 这里只展示本机资料；聊天尚不能调用这些工具。规则条文是 K0/K1 基线说明，当前执行限制以宿主为准。';
+ $('seed-notice').textContent=(c?.message||'正在读取发布种子。')+' 此处展示本机资料；三库查询本身不执行工具。规则条文保留 K0/K1 基线，当前受限任务与成长能力以宿主入口及执行前检查为准。';
  const labels={available:'本机入口',conditional:'执行前检查',internal:'宿主内部',planned:'规划中',unavailable:'不可用'};
  const includes=x=>!query||x.toLowerCase().includes(query);
  const groups=[['能力',(c?.capabilities||[]).filter(x=>includes(x.id+' '+x.description)).map(x=>`<article><strong>${esc(x.id)} ${tag(labels[x.status]||'未知',x.status==='available'?'ok':'off')}</strong><p>${esc(x.description)}</p><small>${esc(x.reason)} · ${esc(x.version)}</small></article>`)],

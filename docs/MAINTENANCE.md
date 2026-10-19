@@ -4,19 +4,19 @@
 > 本文约束当前文档集的组织与维护。它不是已经部署的自动维护服务，也不代表 Jarvis 已具备文中能力。
 
 <!-- book-nav:start -->
-[全书目录](README.md#book-tree) › [第五篇 · 验证与参考](README.md#part-evidence) › 第 20 章 · 文档维护规范
+[全书目录](README.md#book-tree) › [第五篇 · 验证与参考](README.md#part-evidence) › 第 21 章 · 文档维护规范
 
 ## 本章导航
 
-- [20.1 维护范围与入口](#maintenance-scope)
-- [20.2 每项内容只有一个权威位置](#single-authority)
-  - [20.2.1 全书章节树与技术文档归类](#book-organization)
-- [20.3 实施顺序与验收门分开](#roadmap-authority)
-- [20.4 稳定编号、锚点与清单](#stable-identifiers)
-- [20.5 图源与生成物](#diagram-authority)
-- [20.6 一次文档变更的完成流程](#change-workflow)
-- [20.7 状态与证据口径](#status-and-evidence)
-- [20.8 退役与删除](#retirement-and-history)
+- [21.1 维护范围与入口](#maintenance-scope)
+- [21.2 每项内容只有一个权威位置](#single-authority)
+  - [21.2.1 全书章节树与技术文档归类](#book-organization)
+- [21.3 实施顺序与验收门分开](#roadmap-authority)
+- [21.4 稳定编号、锚点与清单](#stable-identifiers)
+- [21.5 图源与生成物](#diagram-authority)
+- [21.6 一次文档变更的完成流程](#change-workflow)
+- [21.7 状态与证据口径](#status-and-evidence)
+- [21.8 退役与删除](#retirement-and-history)
 <!-- book-nav:end -->
 
 <a id="maintenance-scope"></a>

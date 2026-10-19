@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "frozen_at": "2026-10-19",
+  "baseline_version": "0.1.61",
+  "limits": "Deterministic integration corpus, not subjective conversation-quality evidence or broad semantic recall acceptance.",
+  "cases": [
+    {"id":"KR01","input":"查询三库：UNKNOWN","expect":"versioned rule and knowledge bodies; no cloud call"},
+    {"id":"KR02","input":"查看能力","expect":"current bounded abilities distinguished from planned generic construction"},
+    {"id":"KR03","input":"查询三库：候选构建","expect":"historical seed and current bounded growth explicitly distinguished"},
+    {"id":"KR04","input":"他说‘查看能力’，这句话是什么含义？","expect":"no command execution"},
+    {"id":"KR05","fault":"corrupted derived search index","expect":"rebuild from verified sources; identical answers; authoritative data untouched"},
+    {"id":"KR06","fault":"seed checksum mismatch","expect":"no stale source body and no model fallback; ordinary arithmetic usable"},
+    {"id":"KP01","input":"设置称呼：小林","expect":"persistent literal name; survives restart and provider switch; temporary chat excludes it"},
+    {"id":"KP02","operation":"simultaneous stale profile edits and exact retry","expect":"revision conflict for stale change; prior exact receipt replayed once"},
+    {"id":"KP03","operation":"profile undo/reset","expect":"all expression fields restored together; facts/tasks/identity untouched"},
+    {"id":"KM01","domain":"life","query":"晚饭有什么建议","facts":["晚饭：喜欢清淡","旅行：去年去过青岛"],"expect":"meal fact included, unrelated travel excluded"},
+    {"id":"KM02","domain":"learning","query":"英语学习下一步","facts":["英语学习：完成基础音标","购物：正在挑水杯"],"expect":"learning included, shopping excluded"},
+    {"id":"KM03","domain":"work","query":"登录设计","facts":["登录：采用短期令牌","生活：喜欢喝茶"],"expect":"project fact included; purpose and provider still filter before scoring"},
+    {"id":"KM04","operation":"correct, forget, revoke provider, change source with retained history","expect":"old material removed from actual request and related history"},
+    {"id":"KM05","operation":"contradictory same-topic facts","expect":"both relevant sources visible; no silent winner inferred from recency"},
+    {"id":"KC01","operation":"related continuity suggestion","expect":"max three source-visible matches; exact project and provider; changed/deleted source excluded; no task execution"}
+  ]
+}

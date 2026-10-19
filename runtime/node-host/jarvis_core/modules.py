@@ -107,6 +107,8 @@ class ModuleMonitor:
                 'tasks': [('browser','浏览器执行','bundled'),('worker','目录元数据 Worker','bundled')],
                 'workspace': [('workspace','项目资源与文件','bundled')],
                 'memory': [('memory','明确事实记忆','bundled')],
+                'persona': [('persona','称呼与交流设置','bundled')],
+                'continuity': [('continuity','话题接续','bundled')],
                 'knowledge': [('knowledge','项目资料检索','bundled')],
                 'mcp': [('mcp-registration','MCP 登记','bundled')],
                 'skills': [('skill-registration','技能登记','bundled')],
@@ -119,6 +121,7 @@ class ModuleMonitor:
             for ident, collector in (('host', self._host), ('models', self._models), ('calculator',self._calculator),
                                       ('tasks', self._tasks), ('workspace', self._workspace),
                                       ('memory', self._memory), ('knowledge', self._knowledge),
+                                      ('persona',self._persona), ('continuity',self._continuity),
                                       ('mcp', self._mcp), ('skills', self._skills),
                                       ('sample-report', self._sample_report),
                                       ('speech', self._speech)):
@@ -267,6 +270,16 @@ class ModuleMonitor:
         return [self._store('memory', '明确事实记忆', 'memory.db',
                 'SELECT updated_at FROM facts WHERE deleted=0 ORDER BY rowid DESC LIMIT 1000',
                 'memory', '已保存事实', '已接入明确记忆、分类用途与候选来源；此处不核对原文有效性，不表示自动提取或完整长期记忆。', versions=(1,2,3))]
+
+    def _persona(self):
+        return [self._store('persona','称呼与交流设置','persona.db',
+                'SELECT NULL FROM profile WHERE id=1','personal','表达配置',
+                '称呼、风格和相处方式按轮次读取，可恢复上一版；观察仅检查存储，不读取称呼或改写设置。')]
+
+    def _continuity(self):
+        return [self._store('continuity','话题接续','continuity.db',
+                'SELECT updated_at FROM notes WHERE deleted=0 ORDER BY rowid DESC LIMIT 200','personal','接续记录',
+                '按话题推荐并明确选用，逐轮核验来源、范围和接入方；观察不读进展正文，不执行关联任务。')]
 
     def _knowledge(self):
         return [self._store('knowledge', '项目资料检索', 'project-sources.db',

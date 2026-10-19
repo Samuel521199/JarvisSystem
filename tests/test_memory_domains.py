@@ -36,8 +36,8 @@ class MemoryDomainTests(unittest.TestCase):
         self.other=WorkspaceService(self.core).open_project({'path':str(other)})['id']
         self.store=MemoryStore(self.core)
 
-    def put(self, content, meta=None, project=None, providers=None):
-        doc={'title':content[:30], 'content':content, 'project_id':project, 'providers':providers or []}
+    def put(self, content, meta=None, project=None, providers=None, title=None):
+        doc={'title':title or content[:30], 'content':content, 'project_id':project, 'providers':providers or []}
         if meta is not None:doc['classification']=meta
         return self.store.put(uuid.uuid4().hex, {'revision':0, 'document':doc})
 
@@ -147,7 +147,7 @@ class MemoryDomainTests(unittest.TestCase):
             {'role':'user','content':body,'meta':'','short_meta':'','attachments_omitted':False,'incomplete':False}]}
         ConversationStore(self.core).put(cid,{'revision':0,'document':doc})
         service=PersonalCandidates(self.core);suggest=service.suggest({'source':{'conversation_id':cid,'message_index':0},'project_id':None})
-        payload={k:suggest[k] for k in ('source','project_id','source_digest')}
+        payload={k:suggest[k] for k in ('source','project_id','source_digest','preview_token')}
         payload.update(candidate=suggest['candidates'][0],scope='global')
         receipt=service.confirm(payload)['receipt']
         return cid,payload,receipt
@@ -175,8 +175,10 @@ class MemoryDomainTests(unittest.TestCase):
 
     def test_route_fallback_rebuilds_actual_context_and_derived_history(self):
         private=self.put('PRIVATE_REASON',classification(),providers=['vertex','openai'])
-        self.put('ROUTE_A',classification('preference',['work_assist']),providers=['vertex'])
-        self.put('SHARED_STYLE',classification('preference',['work_assist']),providers=['vertex','openai'])
+        # This test concerns routing of applicable expression preferences, not
+        # filling a prompt with every unrelated fact. Keep all exclusion checks.
+        self.put('ROUTE_A',classification('preference',['work_assist']),providers=['vertex'],title='回复风格')
+        self.put('SHARED_STYLE',classification('preference',['work_assist']),providers=['vertex','openai'],title='回复风格')
         config=json.loads((ROOT/'config/model-profiles/providers.json').read_text(encoding='utf-8'))
         config.update(default_provider='vertex',automatic_fallback=True,fallback_order=['openai'])
         path=self.base/'providers.json';path.write_text(json.dumps(config),encoding='utf-8')

@@ -1,0 +1,95 @@
+{
+  "status": "SUCCEEDED",
+  "version": "0.1.60",
+  "probes": {
+    "rule": {
+      "version": "0.1.60",
+      "captured_at": "2026-10-18T18:15:21.333619+00:00",
+      "page_errors": [],
+      "real_model_calls": 0,
+      "user_data_modified": false,
+      "status": "passed",
+      "mode": "rule",
+      "fixture_model_calls": 4,
+      "checks": [
+        "Explicit local review has zero model calls and no fact writes",
+        "Edited fields invalidate local review; stale target is never silently reused",
+        "Shows original/new text, relation and old permissions at desktop and 390px",
+        "Replacement response loss retries once: same ID, revision 2, old permissions and title preserved",
+        "Duplicate from a new message keeps original source/document/revision; no second fact",
+        "Ignore changed preference leaves stored fact unchanged",
+        "Correction invalidates old preview with 409; edited fields retained and save disabled",
+        "Explicit local reload refreshes watermark without extraction model calls",
+        "Continuity candidate still saves through its original independent path"
+      ]
+    },
+    "semantic_review": {
+      "version": "0.1.60",
+      "captured_at": "2026-10-18T18:16:05.526852+00:00",
+      "page_errors": [],
+      "real_model_calls": 0,
+      "user_data_modified": false,
+      "status": "passed",
+      "mode": "semantic",
+      "fixture_model_calls": 6,
+      "checks": [
+        "Explicit local review has zero model calls and no fact writes",
+        "Edited fields invalidate local review; stale target is never silently reused",
+        "Shows original/new text, relation and old permissions at desktop and 390px",
+        "Replacement response loss retries once: same ID, revision 2, old permissions and title preserved",
+        "Duplicate from a new message keeps original source/document/revision; no second fact",
+        "Ignore changed preference leaves stored fact unchanged"
+      ]
+    },
+    "semantic_extraction": {
+      "version": "0.1.60",
+      "captured_at": "2026-10-18T18:13:43.432862+00:00",
+      "checks": [
+        "Rule preview has no extra model call; explicit provider and scope disclosure",
+        "Actual extraction transport has only selected source, no history or private fact",
+        "Review edits classification and both uses; lost response creates exactly one revision",
+        "Third-party remains distinct and stored-only by default; ignore does not write",
+        "Memory correction rejects old preview with HTTP 409; edits stay visible, save is disabled, explicit regeneration restores it without automatic model use",
+        "Same sentence cannot resurrect forgotten fact with new model wording",
+        "390px and desktop fit; stop clears pending candidates and shares admission slots",
+        "Malformed model output shows failure and actual returned usage without saving"
+      ],
+      "page_errors": [],
+      "real_model_calls": 0,
+      "user_data_modified": false,
+      "fixture_model_calls": 6,
+      "facts_after": 1,
+      "dialogue_transport": "Explicit fixture; no model child started. Supervisor has separate tests.",
+      "status": "passed"
+    }
+  },
+  "cloud_calls": 0,
+  "user_data_modified": false,
+  "visual_inspection": [
+    "rule-review-0160-r3/review-mobile.png",
+    "rule-review-0160-r3/rule-stale.png"
+  ],
+  "diagnostics_root": "H:\\JarvisData\\diagnostics\\memory",
+  "prior_attempts": [
+    {
+      "path": "rule-review-0160/report.json",
+      "status": "failed",
+      "reason": "Fixture expected possible_change without a change phrase; actual related is the intended conservative result."
+    },
+    {
+      "path": "rule-review-0160-r2/report.json",
+      "status": "failed",
+      "reason": "Existing lexical comparison missed white-water vs tea; retained as known F04 development counterexample. Passing UI path uses explicit tea topic; comparison algorithm unchanged."
+    }
+  ],
+  "source_sha256": {
+    "tools/probe_memory_review_ui.py": "e3d4e47ea88bfa81617e1e028708759c4fa9172b3d22b7f33df54afb3e3bf0bf",
+    "tools/probe_semantic_candidates_ui.py": "ee83f00253a007f5b986752287dc529a0920c820be83126fbf7fda1c11b40332",
+    "apps/web/personal_candidates.js": "639e65703a53f36d101bc0323d7d26443417e8f4eae01697e43da90c6ab58549"
+  },
+  "limits": [
+    "Synthetic model responses; no live extraction quality conclusion",
+    "Finite lexical matching can miss white-water vs tea",
+    "No new-source semantic forgetting guarantee"
+  ]
+}

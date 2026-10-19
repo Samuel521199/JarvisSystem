@@ -1,5 +1,6 @@
 """Explicit paid pilot through the actual isolated reply path, synthetic data only."""
 import argparse
+from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import hashlib
 import json
@@ -43,8 +44,8 @@ def main():
     hashes=lambda:source_hashes(dataset)
     before=hashes();rows=[];start=time.monotonic()
     suffix=('-'+args.dataset if args.dataset!='pilot' else '')+('-'+args.tag if args.tag else '')
-    destination=ROOT/'evals/reports'/('dialogue-intent'+suffix+'-'+args.split+'-2026-10-18.json')
-    if args.dataset!='pilot' and destination.exists():parser.error('Report exists; choose a new tag rather than replacing an evaluation')
+    destination=ROOT/'evals/reports'/('dialogue-intent'+suffix+'-'+args.split+'-'+datetime.now().strftime('%Y-%m-%d')+'.json')
+    if destination.exists():parser.error('Report exists; choose a new tag rather than replacing an evaluation')
     def save(status):
         labels={}
         for kind in KINDS:

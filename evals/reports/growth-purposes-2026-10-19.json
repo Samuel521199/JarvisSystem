@@ -1,0 +1,72 @@
+{
+  "version": "0.1.64",
+  "date": "2026-10-19",
+  "status": "implemented_with_targeted_checks",
+  "user_direction": "Continue development; do not repeat K2 acceptance.",
+  "scope": "F08 bounded inventory-export purpose separation; not complete F08 or K3.",
+  "checks": {
+    "unittest": {
+      "command": "python -X utf8 -B -m unittest tests.test_evolution tests.test_growth_demand tests.test_network_policy tests.test_runtime_start -q",
+      "tests": 72,
+      "passed": 72,
+      "skipped": 0,
+      "elapsed_seconds": 36.71,
+      "includes_real_lpac": true,
+      "model_requests": "test doubles; no paid model requests"
+    },
+    "javascript_syntax": "evolution.js and admin.js checked",
+    "browser": {
+      "url": "http://127.0.0.1:18181/settings#growth",
+      "observed": [
+        "Independent navigation and live v0.1.64 state",
+        "Inspect / Heal / Evolve tabs present; Inspect and Heal content observed",
+        "Existing J icon, purpose color, model and fallback controls",
+        "Old 5-minute period retained, auto-heal disabled",
+        "Legacy mixed-maintenance history explicitly labeled"
+      ],
+      "screenshot": "H:\\JarvisData\\diagnostics\\growth-purposes-20261019\\growth-center.png",
+      "settings_changed": false
+    }
+  },
+  "deployment": {
+    "version": "0.1.64",
+    "previous_instance": "f987fa9cdf40efbd450e94a327f36213",
+    "instance": "c044ce43a524c3ce3b07021ee86c18c4",
+    "business_state_unchanged": true,
+    "selection_and_packages_unchanged": true,
+    "schema_backup": "H:\\JarvisData\\diagnostics\\growth-purposes-20261019\\evolution-schema1-before.db",
+    "settings_migration": {
+      "old_interval": 300,
+      "new_interval": 300,
+      "auto_heal": false
+    },
+    "assets": {
+      "evolution.js": "565b4fc7f9696188ef80dcee703b99bc8e7f84f16b7175e888305f9dc20e7415",
+      "admin.js": "443fda252cca9c405891ebd5a166476725b026c46d799a9e6ceb6ae0a3e4e103",
+      "growth.js": "868759f663c4c4dfd4a5b0e2a7537573e0fb3514b22421071f41a55b235a3061"
+    },
+    "model_calls_in_deployment": 0,
+    "complete_k2_rerun": false
+  },
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/evolution/settings.py": "87c1f42d7552f95bc99402b359b4036d13929231b1a5764157a5dc4ff58d11fb",
+    "runtime/node-host/jarvis_core/evolution/manager.py": "375ca4141a82aca0b4bcffd78af7f0cd377e46a4b8d4af776ac6ed1f36f8eabc",
+    "runtime/node-host/jarvis_core/evolution/store.py": "cf769d69c793c968d04eaa4d26aa81c9f78eed7a9a4e927d7429482d8fe3e987",
+    "runtime/node-host/jarvis_core/evolution/provider.py": "dfabd78010e469f0ecd9acb4c0dfc1366dbf3063a099cf3657cb5651f5129b05",
+    "runtime/node-host/jarvis_core/releases.py": "12a869f154bd0f1e4f2fa0878578a6f9c53e24050f1fef859743cdbbbe328c70",
+    "apps/web/evolution.js": "565b4fc7f9696188ef80dcee703b99bc8e7f84f16b7175e888305f9dc20e7415",
+    "apps/web/evolution.css": "9908801f0a13ca0c3a96777863ab7bd31f96e0810c7e44d431a58299a6f24d13",
+    "apps/web/admin.html": "bfa688a0ade6539e784618b072b1bd7e08d31db2849555b69cb2b2734ce79756",
+    "apps/web/admin.js": "443fda252cca9c405891ebd5a166476725b026c46d799a9e6ceb6ae0a3e4e103",
+    "apps/web/growth.js": "868759f663c4c4dfd4a5b0e2a7537573e0fb3514b22421071f41a55b235a3061",
+    "tests/test_evolution.py": "b9f055ecc57f030bd2982fbd961c860e06b3bf176a3b79e38fa2a47c6c3637dd",
+    "tools/evolution.py": "6c7bfaed224df53709c528357e159e25781d68b3c4163ef6a18e6a2137ce61f0"
+  },
+  "limits": [
+    "No complete K2 rerun or revised acceptance thresholds.",
+    "No real paid primary/fallback calls in this increment; fallback logic checked with deterministic responses.",
+    "No newly packaged release or slot-launch campaign. Schema 2 is rejected by supported launcher when paired with pre-0.1.64 runtimes; manual old-source startup is outside that protection.",
+    "No event/cache/deep-probe scheduler, full platform resource benchmark or proof of unknown new capability.",
+    "External Codex executor, general multi-file build, host rewrite and federation remain future work."
+  ]
+}

@@ -37,7 +37,7 @@ class DialogueJournal:
 
     @contextmanager
     def transaction(self):
-        with self.store.connection(timeout=.15) as db:
+        with self.store.connection(timeout=.05) as db:
             db.execute('BEGIN IMMEDIATE')
             yield db
             db.commit()

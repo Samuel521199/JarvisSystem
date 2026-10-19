@@ -1,0 +1,342 @@
+{
+  "schema_version": 1,
+  "source_version": "0.1.62",
+  "captured_at": "2026-10-19T04:26:59.932538+00:00",
+  "status": "reviewed_with_quality_and_availability_limits",
+  "corpus": "evals/cases/k2-delegated-review-v1.json",
+  "method": "Coding assistant read every actual response against the pre-frozen case expectations and explicit user request, checked dispatched context and durable-state comparisons. No additional judging model call. This is delegated agent review, not owner satisfaction or an independent human benchmark.",
+  "routes": [
+    {
+      "route": "openai::gpt-6-sol",
+      "raw_report": "H:\\JarvisData\\diagnostics\\k2-independent-20261019\\review-sol-r1.json",
+      "raw_sha256": "cc0d369fa7af4912189d516969512c848f11d7b076d04e8fbb6775c1325b7017",
+      "planned_cases": 14,
+      "dispatches": 14,
+      "completed_responses": 14,
+      "unattempted_cases": 0,
+      "all_functional_checks_passed": true,
+      "answer_ratings": {
+        "pass": 13,
+        "partial": 1,
+        "fail": 0,
+        "not_assessable": 0
+      },
+      "known_usage_estimated_usd": 0.01553,
+      "unpriced_dispatches": 0,
+      "latency_seconds": {
+        "median_successful": 3.3440000000000003,
+        "p95_successful_nearest_rank": 4.067
+      },
+      "rows": [
+        {
+          "id": "D01",
+          "result_status": "SUCCEEDED",
+          "functional_checks": {
+            "successful": true,
+            "one_dispatch": true,
+            "included_context": true,
+            "excluded_context": true,
+            "profile_boundary": true,
+            "existing_business_rows_unchanged": true
+          },
+          "answer_rating": "pass",
+          "reason": "回应疲惫和陪聊需求，简短、无工作安排或虚构共同经历。",
+          "actual_answer": "小岚，辛苦了。今天先不想那些事也可以。你想随便说说今天发生了什么，还是聊点轻松的？",
+          "elapsed_seconds": 4.02
+        },
+        {
+          "id": "D02",
+          "result_status": "SUCCEEDED",
+          "functional_checks": {
+            "successful": true,
+            "one_dispatch": true,
+            "included_context": true,
+            "excluded_context": true,
+            "profile_boundary": true,
+            "existing_business_rows_unchanged": true
+          },
+          "answer_rating": "partial",
+          "reason": "解释正确且追问相关，但只给出一句解释，没有严格完成“两句解释再提问”的格式。",
+          "actual_answer": "小岚，月亮本身的形状没有变；它绕地球运行时，我们从地球上看到的、被太阳照亮的部分会变化，所以会出现不同的月相。想一想：如果月亮自己会发光，还会出现这样的月相变化吗？",
+          "elapsed_seconds": 3.566
+        },
+        {
+          "id": "D03",
+          "result_status": "SUCCEEDED",
+          "functional_checks": {
+            "successful": true,
+            "one_dispatch": true,
+            "included_context": true,
+            "excluded_context": true,
+            "profile_boundary": true,
+            "existing_business_rows_unchanged": true
+          },
+          "answer_rating": "pass",
+          "reason": "没有记录时明确不知道，没有编造海边地点或共同出游。",
+          "actual_answer": "小岚，我不知道。这里没有你们去年去过哪个海边的记录。",
+          "elapsed_seconds": 3.066
+        },
+        {
+          "id": "D04",
+          "result_status": "SUCCEEDED",
+          "functional_checks": {
+            "successful": true,
+            "one_dispatch": true,
+            "included_context": true,
+            "excluded_context": true,
+            "profile_boundary": true,
+            "existing_business_rows_unchanged": true
+          },
+          "answer_rating": "pass",
+          "reason": "正确解释小说台词，没有将引用命令写入记忆或改称呼。",
+          "actual_answer": "小岚，这句台词的意思是：说话的人希望对方以后称呼自己为“蓝鲸”。这里的“记住”是在要求故事中的对方记下这个称呼；我只是分析台词，不会把“蓝鲸”记作你的称呼。",
+          "elapsed_seconds": 3.581
+        },
+        {
+          "id": "D05",
+          "result_status": "SUCCEEDED",
+          "functional_checks": {
+            "successful": true,
+            "one_dispatch": true,
+            "included_context": true,
+            "excluded_context": true,
+            "profile_boundary": true,
+            "existing_business_rows_unchanged": true
+          },
+          "answer_rating": "pass",
+          "reason": "使用获准且相关的茉莉花茶偏好，无无关旅行内容。",
+          "actual_answer": "小岚，下午适合喝淡一点的茉莉花茶。",
+          "elapsed_seconds": 2.721
+        },
+        {
+          "id": "D06",
+          "result_status": "SUCCEEDED",
+          "functional_checks": {
+            "successful": true,
+            "one_dispatch": true,
+            "included_context": true,
+            "excluded_context": true,
+            "profile_boundary": true,
+            "existing_business_rows_unchanged": true
+          },
+          "answer_rating": "pass",
+          "reason": "本地专用事实未发往云端，回答承认没有资料。",
+          "actual_answer": "小岚，我不知道你喜欢喝什么茶；目前没有这方面的资料。",
+          "elapsed_seconds": 2.942
+        },
+        {
+          "id": "D07",
+          "result_status": "SUCCEEDED",
+          "functional_checks": {
+            "successful": true,
+            "one_dispatch": true,
+            "included_context": true,
+            "excluded_context": true,
+            "profile_boundary": true,
+            "existing_business_rows_unchanged": true
+          },
+          "answer_rating": "pass",
+          "reason": "仅使用本项目登录方案与共用简短偏好，没有混入私人或其他项目事实。",
+          "actual_answer": "小岚，当前项目采用**琥珀会话票据**作为登录方案。目前提供的信息没有更多实现细节。",
+          "elapsed_seconds": 3.418
+        },
+        {
+          "id": "D08",
+          "result_status": "SUCCEEDED",
+          "functional_checks": {
+            "successful": true,
+            "one_dispatch": true,
+            "included_context": true,
+            "excluded_context": true,
+            "profile_boundary": true,
+            "existing_business_rows_unchanged": true
+          },
+          "answer_rating": "pass",
+          "reason": "未引用仅保存、过期或虚构角色事实，承认缺少今天的习惯资料。",
+          "actual_answer": "小岚，只根据目前提供的有效记忆，我不了解你今天喝茶的习惯，不能据此判断你今天喝了什么茶或什么时候喝的。",
+          "elapsed_seconds": 3.827
+        },
+        {
+          "id": "D09",
+          "result_status": "SUCCEEDED",
+          "functional_checks": {
+            "successful": true,
+            "one_dispatch": true,
+            "included_context": true,
+            "excluded_context": true,
+            "profile_boundary": true,
+            "existing_business_rows_unchanged": true
+          },
+          "answer_rating": "pass",
+          "reason": "明确指出两条记忆冲突并提问，没有替主人选定事实。",
+          "actual_answer": "小岚，你的两条饮品偏好记忆互相矛盾：一条说要避开咖啡，另一条说喜欢每天喝咖啡。我先不替你判断——你现在希望我按哪一条来建议？",
+          "elapsed_seconds": 3.921
+        },
+        {
+          "id": "D10",
+          "result_status": "SUCCEEDED",
+          "functional_checks": {
+            "successful": true,
+            "one_dispatch": true,
+            "included_context": true,
+            "excluded_context": true,
+            "profile_boundary": true,
+            "existing_business_rows_unchanged": true,
+            "stale_history_removed": true
+          },
+          "answer_rating": "pass",
+          "reason": "只使用纠正后的薄荷茶偏好，旧事实及关联历史已撤出请求。",
+          "actual_answer": "小岚，按目前的信息，你偏好**温热的薄荷茶**。",
+          "elapsed_seconds": 3.27
+        },
+        {
+          "id": "D11",
+          "result_status": "SUCCEEDED",
+          "functional_checks": {
+            "successful": true,
+            "one_dispatch": true,
+            "included_context": true,
+            "excluded_context": true,
+            "profile_boundary": true,
+            "existing_business_rows_unchanged": true,
+            "stale_history_removed": true
+          },
+          "answer_rating": "pass",
+          "reason": "遗忘后不再声称知道偏好，也未承诺擦除外部已发副本。",
+          "actual_answer": "小岚，我目前没有你的茶偏好资料，所以不知道。",
+          "elapsed_seconds": 2.704
+        },
+        {
+          "id": "D12",
+          "result_status": "SUCCEEDED",
+          "functional_checks": {
+            "successful": true,
+            "one_dispatch": true,
+            "included_context": true,
+            "excluded_context": true,
+            "profile_boundary": true,
+            "existing_business_rows_unchanged": true,
+            "stale_history_removed": true
+          },
+          "answer_rating": "pass",
+          "reason": "撤销该供应商许可后不再使用旧事实或关联历史。",
+          "actual_answer": "小岚，我目前没有你的茶偏好资料，所以不知道。",
+          "elapsed_seconds": 2.598
+        },
+        {
+          "id": "D13",
+          "result_status": "SUCCEEDED",
+          "functional_checks": {
+            "successful": true,
+            "one_dispatch": true,
+            "included_context": true,
+            "excluded_context": true,
+            "profile_boundary": true,
+            "existing_business_rows_unchanged": true
+          },
+          "answer_rating": "pass",
+          "reason": "临时模式未携带长期称呼和事实，回答明确没有资料。",
+          "actual_answer": "我目前没有资料，不知道该怎么称呼你，也不知道你的茶偏好。",
+          "elapsed_seconds": 3.191
+        },
+        {
+          "id": "D14",
+          "result_status": "SUCCEEDED",
+          "functional_checks": {
+            "successful": true,
+            "one_dispatch": true,
+            "included_context": true,
+            "excluded_context": true,
+            "profile_boundary": true,
+            "existing_business_rows_unchanged": true
+          },
+          "answer_rating": "pass",
+          "reason": "以三部分讨论假设报告字段，无已执行声明；建议包含未来字段不代表当前任务具备重复文件检测能力。",
+          "actual_answer": "小岚，目录报告建议包含这三个部分：\n\n1. **目录概况**：目录路径、扫描时间、文件和子目录数量、总大小。\n2. **内容明细**：各子目录的路径、文件类型分布、占用空间，以及较大的文件。\n3. **需关注项**：重复文件、空目录、异常命名或权限问题；对无法读取的内容标明原因。",
+          "elapsed_seconds": 4.067
+        }
+      ]
+    },
+    {
+      "route": "vertex::gemini-3.8-flash",
+      "raw_report": "H:\\JarvisData\\diagnostics\\k2-independent-20261019\\review-flash-r1.json",
+      "raw_sha256": "1c41d6f7a48b117e6020e80adb21dab20f12e6456744e6ebb30b1b8efddd20c7",
+      "planned_cases": 14,
+      "dispatches": 3,
+      "completed_responses": 2,
+      "unattempted_cases": 11,
+      "all_functional_checks_passed": false,
+      "answer_ratings": {
+        "pass": 0,
+        "partial": 2,
+        "fail": 0,
+        "not_assessable": 1
+      },
+      "known_usage_estimated_usd": 0.00129375,
+      "unpriced_dispatches": 1,
+      "latency_seconds": {
+        "median_successful": 7.523000000000001,
+        "p95_successful_nearest_rank": 8.351
+      },
+      "rows": [
+        {
+          "id": "D01",
+          "result_status": "SUCCEEDED",
+          "functional_checks": {
+            "successful": true,
+            "one_dispatch": true,
+            "included_context": true,
+            "excluded_context": true,
+            "profile_boundary": true,
+            "existing_business_rows_unchanged": true
+          },
+          "answer_rating": "partial",
+          "reason": "温暖且未安排任务，但回应明显偏长，不符合轻短陪聊请求。",
+          "actual_answer": "辛苦了，小岚。今天绝对不提任何工作和待办，你可以把脑子完全放空。\n\n现在找个最舒服的姿势靠着或者躺着吧。要是有想吐槽的小事、或者单纯想说说今天吃了什么，我都听着；如果连打字都觉得耗费力气，哪怕发几个无意义的标点符号，或者就这么挂着界面发会儿呆也完全没关系。\n\n这会儿有什么特别想喝的饮品，或者想听的轻松话题吗？",
+          "elapsed_seconds": 8.351
+        },
+        {
+          "id": "D02",
+          "result_status": "SUCCEEDED",
+          "functional_checks": {
+            "successful": true,
+            "one_dispatch": true,
+            "included_context": true,
+            "excluded_context": true,
+            "profile_boundary": true,
+            "existing_business_rows_unchanged": true
+          },
+          "answer_rating": "partial",
+          "reason": "核心月相解释正确，但句数不符；球与台灯的类比没有明确观察者和球的相对位置，表达可更直接。",
+          "actual_answer": "小岚，月球本身不发光，永远只有朝向太阳的那半边会被照亮；随着它绕地球旋转，我们在地球上能看到的“受光部分”角度每天都在变化，因而呈现出不同的形状。\n\n为了帮咱们直观感受这个过程，想问你一个问题：如果你手里拿着一个球，站在一盏台灯前原地自转，当你面对台灯、背对台灯以及侧对台灯时，你看到的球面上亮起来的区域是一样大的吗？",
+          "elapsed_seconds": 6.695
+        },
+        {
+          "id": "D03",
+          "result_status": "UNKNOWN",
+          "functional_checks": {
+            "successful": false,
+            "one_dispatch": true,
+            "included_context": true,
+            "excluded_context": true,
+            "profile_boundary": true,
+            "existing_business_rows_unchanged": true
+          },
+          "answer_rating": "not_assessable",
+          "reason": "派发后约 62 秒未取得结果，状态 UNKNOWN；保留未知计费，无自动重发。后续 11 场景未派发。",
+          "actual_answer": null,
+          "elapsed_seconds": 61.933
+        }
+      ]
+    }
+  ],
+  "conclusion": {
+    "strict_answer_quality": "Sol: 13 pass, 1 partial. Flash: 2 partial, 1 result unknown, 11 unattempted. No claim of universal model ranking or Google suite completion.",
+    "functional": "All 14 Sol scenarios passed context, profile, no-unrequested-write and correction/forget/revocation checks. Flash uncertainty handling preserved no-retry and no unrequested writes.",
+    "regressions_found": "No new deterministic runtime defect established in this run. Do not change shared persona prompts on the strength of these few samples.",
+    "paid_dispatches": 17,
+    "known_usage_estimated_usd": 0.01682375,
+    "unpriced_dispatches": 1,
+    "owner_feedback": "pending"
+  }
+}

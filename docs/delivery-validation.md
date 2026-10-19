@@ -1,142 +1,148 @@
 # 能力验收、故障演练与评估证据
 
-> 状态：完整验收计划 proposed；最新增量为 0.1.37 本地精确计算与 MCP 管理；宿主计算与原小模型算术失败分开登记；完整 K1/K2/K3 未通过 · 更新：2026-10-17
+> 状态：完整验收计划 proposed；当前部署 v0.1.63，新增[应用离线控制](#application-offline-evidence)，K2 实现与外部阻塞见 [K2 收口记录](#k2-completion-evidence)；完整 K1/K2/K3 未通过 · 更新：2026-10-19
 > [文档入口](README.md) · [维护规则](MAINTENANCE.md) · [架构图册](architecture-atlas.md)
 
 <!-- book-nav:start -->
-[全书目录](README.md#book-tree) › [第五篇 · 验证与参考](README.md#part-evidence) › 第 16 章 · 能力验收、故障演练与评估证据
+[全书目录](README.md#book-tree) › [第五篇 · 验证与参考](README.md#part-evidence) › 第 17 章 · 能力验收、故障演练与评估证据
 
 ## 本章导航
 
-- [16.1 已有版本的验证记录](#versioned-evidence)
-  - [16.1.1 语音主备选型与本地复测（2026-10-18）](#voice-selection-evidence)
-    - [16.1.1.1 现有本地语音组件的独立进程内存（2026-10-18）](#voice-component-memory)
-    - [16.1.1.2 CosyVoice3 独立组件的验证（2026-10-18）](#cosyvoice3-evidence)
-    - [16.1.1.3 快速本地 TTS 的速度对照与接入（2026-10-18）](#fast-speech-evidence)
-    - [16.1.1.4 本地情绪语音主力的三项筛选（2026-10-18）](#emotion-tts-evidence)
-    - [16.1.1.5 Qwen 主力语音接入与听感接受（0.1.43 工作树，2026-10-18）](#qwen-tts-integration-evidence)
-    - [16.1.1.6 分层表达、停顿与 A/B/C 真机对照（0.1.43 工作树）](#speech-expression-evidence)
-    - [16.1.1.7 聊天朗读、连续播放与后台任务并行（0.1.45 工作树）](#chat-readout-evidence)
-  - [16.1.2 对话/工作分离的现状复核与后续验收](#conversation-separation-evidence)
-    - [16.1.2.1 0.1.45—0.1.46 源码与既有能力复核（2026-10-18）](#conversation-separation-review)
-    - [16.1.2.2 文字回复回执与待发分离（0.1.48）](#dialogue-receipt-evidence)
-    - [16.1.2.3 回复持久恢复、删除与故障收口（0.1.49）](#dialogue-recovery-evidence)
-    - [16.1.2.4 对话模型进程隔离与故障恢复（0.1.51—0.1.52）](#dialogue-process-evidence)
-    - [16.1.2.5 上下文与后台模型分槽（0.1.54—0.1.55）](#conversation-lanes-evidence)
-    - [16.1.2.6 多意图识别与限定文档自动受理（0.1.56—0.1.57）](#dialogue-intent-shadow-evidence)
-    - [16.1.2.7 V-DLG：统一对话、混合意图与并行验收（proposed）](#conversation-separation-validation)
-  - [16.1.3 限定成长闭环：生成、升级与自动修复（0.1.37 / evolution-v1）](#evolution-loop-evidence)
-  - [16.1.4 本地精确计算与分流证据（0.1.37）](#calculator-evidence)
-  - [16.1.5 MCP 分类管理证据（0.1.37）](#mcp-management-evidence)
-    - [16.1.5.1 Context7 实际调用与统一任务管理（0.1.55）](#mcp-runtime-evidence)
-  - [16.1.6 REA 源码评估、技能接入与验证（2026-10-18）](#rea-review-evidence)
-    - [16.1.6.1 REA 实际效果补测与改进对照（0.1.45，2026-10-18）](#rea-effectiveness-evidence)
-    - [16.1.6.2 REA 发布目录与证据交付改进（0.1.46）](#rea-improvement-evidence)
-    - [16.1.6.3 REA ASAR 与关注项（0.1.47）](#rea-asar-focus-evidence)
-    - [16.1.6.4 REA 中文解释、右侧结果与统一设置（0.1.53）](#rea-explanation-workspace-evidence)
-    - [16.1.6.5 真实应用源码对照与处理器证据修复（0.1.55）](#rea-real-apps-evidence)
-  - [16.1.7 原生技能管理与产物闭环证据（0.1.35—0.1.36）](#native-skills-evidence)
-  - [16.1.8 技能执行、质量覆盖与资源复验（0.1.58）](#skills-completion-evidence)
-  - [16.1.9 项目详情、组织与恢复证据（2026-10-17）](#project-management-evidence)
-  - [16.1.10 0.1.34 并行运行、资源观测、延迟与恢复](#parallel-runtime-evidence)
-  - [16.1.11 0.1.33 事实与项目资料联合查询](#memory-view-evidence)
-  - [16.1.12 0.1.32 本地模型启停与固定离线流程](#offline-task-evidence)
-  - [16.1.13 0.1.31 会话关联任务、查询取消与报告下载](#conversation-task-evidence)
-  - [16.1.14 0.1.30 首条自然语言任务与真实产物](#sample-task-evidence)
-  - [16.1.15 0.1.29 可缩放导航与独立右侧工作区](#workbench-layout-evidence)
-  - [16.1.16 0.1.28 模块真实状态、种子入口与底座复核](#runtime-entry-evidence)
-  - [16.1.17 2026-10-16 当前进度核对（0.1.27）](#progress-audit-evidence)
-  - [16.1.18 0.1.27 项目资源、工程文件与扩展管理](#project-resources-evidence)
-  - [16.1.19 0.1.26 带来源的项目文档检索](#project-knowledge-evidence)
-  - [16.1.20 0.1.25 明确事实记忆、修订与上下文引用](#explicit-memory-evidence)
-  - [16.1.21 0.1.24 会话文字自动归档与紧凑文件操作](#conversation-archive-evidence)
-  - [16.1.22 0.1.23 临时聊天上下文与固定要求](#context-assembly-evidence)
-  - [16.1.23 0.1.22 设置模块监控与升级验证](#module-monitor-evidence)
-  - [16.1.24 0.1.20—0.1.21 源码：能否开始使用与智能表现](#readiness-evidence)
-  - [16.1.25 0.1.21 拖拽附件与图片输入](#attachments-evidence)
-  - [16.1.26 统一设置入口（2026-10-16）](#settings-navigation-evidence)
-  - [16.1.27 配色卡片与整机资源栏（2026-10-16 增量）](#appearance-resource-evidence)
-  - [16.1.28 0.1.20 页面配色与偏好记忆](#appearance-evidence)
-  - [16.1.29 0.1.19 模型配置、Key 版本与费用估算](#model-admin-evidence)
-  - [16.1.30 0.1.18 环境：Eachlabs Claude 独立小额探测](#eachlabs-claude-evidence)
-  - [16.1.31 0.1.18 Windows 托盘与含托盘的待命资源](#tray-evidence)
-  - [16.1.32 0.1.17 任务崩溃矩阵与程序出站阻断恢复](#task-fault-network-evidence)
-  - [16.1.33 0.1.17 本机部署、五分钟待命与代码仓库基线](#local-deployment-idle-evidence)
-  - [16.1.34 0.1.17 启动前健康检查与备用版本恢复](#runtime-start-evidence)
-  - [16.1.35 0.1.16 队列内存准入与短时竞争](#resource-admission-evidence)
-  - [16.1.36 0.1.15 浏览器回收、版本回退与前台响应](#runtime-continuity-evidence)
-  - [16.1.37 0.1.14 私人助手待命与会话停止](#personal-lifecycle-evidence)
-  - [16.1.38 0.1.13 K1 队列、登记回收与候选运行包](#k1-progress-evidence)
-  - [16.1.39 0.1.12 运行中的发送/停止按钮](#chat-stop-evidence)
-  - [16.1.40 0.1.11 项目文件夹与默认文本输出](#project-workspace-evidence)
-  - [16.1.41 0.1.10 浏览器持久后台队列](#computer-queue-evidence)
-  - [16.1.42 0.1.9 网页浏览器任务控制台](#computer-console-evidence)
-  - [16.1.43 0.1.8 独立浏览器 Computer Use](#computer-evidence)
-  - [16.1.44 0.1.7 K1/W3 固定元数据 Worker](#worker-evidence)
-  - [16.1.45 0.1.6 K1/W2 独立控制、签名恢复与默认实例迁移](#control-evidence)
-  - [16.1.46 0.1.5 K1/W1 只读运行预检](#preflight-evidence)
-  - [16.1.47 0.1.4 Google Pro 与轻量模型验证](#google-models-evidence)
-  - [16.1.48 0.1.3 统一模型菜单与推理级别历史验证](#web-workspace-evidence)
-  - [16.1.49 0.1.2 模型目录与迁移历史验证](#model-catalog-evidence)
-  - [16.1.50 0.1.1 聊天与模型路由历史验证](#chat-evidence)
-  - [16.1.51 K0 起步的历史验证记录](#k0-evidence)
-- [16.2 下一轮 K1/K2 出口验收计划](#next-k1-acceptance)
-  - [16.2.1 K1 出口：确定性控制与后台执行](#section-adaf0d5fff7c)
-  - [16.2.2 K2 出口：自然语言、知识与技能闭环](#next-k2-acceptance)
-  - [16.2.3 编码技能静态评估与质量对照（2026-10-17）](#coding-skills-evaluation-plan)
-  - [16.2.4 测试模型选择与最小验证范围](#model-test-selection)
-  - [16.2.5 Anatomy 固定源码试跑与证据边界（2026-10-17）](#anatomy-source-evidence)
-  - [16.2.6 所有技能统一选择与管理验收（V-SKL，0.1.35 局部验证）](#skill-selection-validation)
-  - [16.2.7 科普交互动画、机械拆解与视频验收（V-ANI，0.1.35 局部验证）](#anatomy-validation)
-- [16.3 开源 Agent 机制与编码适配验收（proposed）](#open-source-adoption-validation)
-- [16.4 知识与记忆选型实验（proposed）](#memory-selection-evaluation)
-  - [16.4.1 对照方法](#section-73af5598cfee)
-  - [16.4.2 分开比较提取、原文检索、知识编纂和后台整合](#memory-comparison-tracks)
-  - [16.4.3 个人、工作与共享记忆的防串用验收（proposed）](#memory-domain-validation)
-  - [16.4.4 稳定验收编号](#section-8ee1910d01a6)
-  - [16.4.5 中文全文检索的本机探测（2026-10-15）](#memory-fts-evidence)
-  - [16.4.6 本轮源码证据与未验证范围（2026-10-16）](#memory-source-evidence)
-  - [16.4.7 记忆与 Wiki 扩展调研证据（2026-10-18）](#memory-review-evidence)
-  - [16.4.8 记忆模块的资源模型与待验证预算](#memory-resource-envelope)
-- [16.5 怎样证明它确实变好了](#bootstrap-8)
-- [16.6 产品能力验收门（M0—M6）](#delivery-gates)
-  - [16.6.1 能力扩展的端到端验收场景](#delivery-gates-2)
-- [16.7 验收标准与故障演练](#acceptance)
-  - [16.7.1 验收环境必须记录](#acceptance-1)
-  - [16.7.2 体验与可靠性目标](#acceptance-2)
-  - [16.7.3 普通 PC 的安装、空闲与负载开销](#pc-footprint)
-  - [16.7.4 核心不变量测试](#acceptance-3)
-  - [16.7.5 故障注入矩阵](#acceptance-4)
-  - [16.7.6 研究效果评估](#acceptance-5)
-- [16.8 开发路线与验收门的对应](#extensions-5)
-- [16.9 扩展能力与停止控制验收](#extensions-6)
-- [16.10 停机测量与声明](#extensions-7)
-- [16.11 需要什么证据才能重新评分](#critical-review-10)
-- [16.12 多语言开放性的验收出口](#development-platform-12)
-- [16.13 健康与污染防护验收（H01—H12）](#system-health-14)
-- [16.14 桌面工作台与输入交互验收（V-UI）](#workbench-validation)
-- [16.15 需求到设计与验收的追踪](#requirement-traceability)
-- [16.16 成长中心三能力验收（设计要求）](#growth-center-validation)
-- [16.17 当前结构审计与回归证据（2026-10-17）](#current-audit-evidence)
-- [16.18 现有基础验收：可复用范围与阻断项（2026-10-17）](#foundation-acceptance-evidence)
-  - [16.18.1 逐项结果](#foundation-acceptance-results)
-  - [16.18.2 优先处理的问题与下一步](#foundation-acceptance-findings)
-  - [16.18.3 0.1.38 基础修复与复验（2026-10-17）](#foundation-repair-evidence)
-  - [16.18.4 0.1.39 K2 个人核心首段（2026-10-18）](#personal-core-evidence)
-  - [16.18.5 0.1.40 K2 有来源的话题接续（2026-10-18）](#continuity-evidence)
-  - [16.18.6 0.1.41 K2 会话需求成长接线（2026-10-18）](#growth-demand-evidence)
-  - [16.18.7 0.1.42 K2 真实任务状态接续（2026-10-18）](#work-continuity-evidence)
-  - [16.18.8 0.1.42 K2 个人核心联合日常场景验收（2026-10-18）](#companion-journey-evidence)
-  - [16.18.9 多轮记忆回放与候选修订屏障（2026-10-18）](#memory-lifecycle-evidence)
-  - [16.18.10 Mem0 公开 SDK 隔离适配与多轮观察（2026-10-18）](#memory-mem0-shadow-evidence)
-  - [16.18.11 本地重复、差异核对与显式更新（2026-10-19）](#memory-candidate-review-evidence)
-  - [16.18.12 LangMem 独立进程影子对照（2026-10-18）](#memory-langmem-shadow-evidence)
-  - [16.18.13 固定记忆提取样例与边界修复（2026-10-18）](#memory-extraction-pilot-evidence)
-  - [16.18.14 0.1.50 按需语义记忆候选验证（2026-10-18）](#semantic-candidates-evidence)
-  - [16.18.15 0.1.47 事实分类、用途与轻量资源验证（2026-10-18）](#memory-domain-evidence)
-  - [16.18.16 0.1.44 候选事实来源、纠正与遗忘验收（2026-10-18）](#memory-provenance-evidence)
-  - [16.18.17 0.1.43 恢复入口、候选整理与本机验收（2026-10-18）](#recovery-candidates-evidence)
-- [16.19 个人助手与伙伴核心体验验收](#personal-companion-validation)
+- [17.1 已有版本的验证记录](#versioned-evidence)
+  - [17.1.1 语音主备选型与本地复测（2026-10-18）](#voice-selection-evidence)
+    - [17.1.1.1 现有本地语音组件的独立进程内存（2026-10-18）](#voice-component-memory)
+    - [17.1.1.2 CosyVoice3 独立组件的验证（2026-10-18）](#cosyvoice3-evidence)
+    - [17.1.1.3 快速本地 TTS 的速度对照与接入（2026-10-18）](#fast-speech-evidence)
+    - [17.1.1.4 本地情绪语音主力的三项筛选（2026-10-18）](#emotion-tts-evidence)
+    - [17.1.1.5 Qwen 主力语音接入与听感接受（0.1.43 工作树，2026-10-18）](#qwen-tts-integration-evidence)
+    - [17.1.1.6 分层表达、停顿与 A/B/C 真机对照（0.1.43 工作树）](#speech-expression-evidence)
+    - [17.1.1.7 聊天朗读、连续播放与后台任务并行（0.1.45 工作树）](#chat-readout-evidence)
+  - [17.1.2 对话/工作分离的现状复核与后续验收](#conversation-separation-evidence)
+    - [17.1.2.1 0.1.45—0.1.46 源码与既有能力复核（2026-10-18）](#conversation-separation-review)
+    - [17.1.2.2 文字回复回执与待发分离（0.1.48）](#dialogue-receipt-evidence)
+    - [17.1.2.3 回复持久恢复、删除与故障收口（0.1.49）](#dialogue-recovery-evidence)
+    - [17.1.2.4 对话模型进程隔离与故障恢复（0.1.51—0.1.52）](#dialogue-process-evidence)
+    - [17.1.2.5 上下文与后台模型分槽（0.1.54—0.1.55）](#conversation-lanes-evidence)
+    - [17.1.2.6 多意图识别与限定文档自动受理（0.1.56—0.1.57）](#dialogue-intent-shadow-evidence)
+    - [17.1.2.7 混合报告、目标修订与局部取消（0.1.59）](#mixed-report-admission-evidence)
+    - [17.1.2.8 V-DLG：统一对话、混合意图与并行验收（proposed）](#conversation-separation-validation)
+  - [17.1.3 限定成长闭环：生成、升级与自动修复（0.1.37 / evolution-v1）](#evolution-loop-evidence)
+  - [17.1.4 本地精确计算与分流证据（0.1.37）](#calculator-evidence)
+  - [17.1.5 MCP 分类管理证据（0.1.37）](#mcp-management-evidence)
+    - [17.1.5.1 Context7 实际调用与统一任务管理（0.1.55）](#mcp-runtime-evidence)
+  - [17.1.6 REA 源码评估、技能接入与验证（2026-10-18）](#rea-review-evidence)
+    - [17.1.6.1 REA 实际效果补测与改进对照（0.1.45，2026-10-18）](#rea-effectiveness-evidence)
+    - [17.1.6.2 REA 发布目录与证据交付改进（0.1.46）](#rea-improvement-evidence)
+    - [17.1.6.3 REA ASAR 与关注项（0.1.47）](#rea-asar-focus-evidence)
+    - [17.1.6.4 REA 中文解释、右侧结果与统一设置（0.1.53）](#rea-explanation-workspace-evidence)
+    - [17.1.6.5 真实应用源码对照与处理器证据修复（0.1.55）](#rea-real-apps-evidence)
+  - [17.1.7 原生技能管理与产物闭环证据（0.1.35—0.1.36）](#native-skills-evidence)
+  - [17.1.8 技能执行、质量覆盖与资源复验（0.1.58）](#skills-completion-evidence)
+  - [17.1.9 项目详情、组织与恢复证据（2026-10-17）](#project-management-evidence)
+  - [17.1.10 0.1.34 并行运行、资源观测、延迟与恢复](#parallel-runtime-evidence)
+  - [17.1.11 0.1.33 事实与项目资料联合查询](#memory-view-evidence)
+  - [17.1.12 0.1.32 本地模型启停与固定离线流程](#offline-task-evidence)
+  - [17.1.13 0.1.31 会话关联任务、查询取消与报告下载](#conversation-task-evidence)
+  - [17.1.14 0.1.30 首条自然语言任务与真实产物](#sample-task-evidence)
+  - [17.1.15 0.1.29 可缩放导航与独立右侧工作区](#workbench-layout-evidence)
+  - [17.1.16 0.1.28 模块真实状态、种子入口与底座复核](#runtime-entry-evidence)
+  - [17.1.17 2026-10-16 当前进度核对（0.1.27）](#progress-audit-evidence)
+  - [17.1.18 0.1.27 项目资源、工程文件与扩展管理](#project-resources-evidence)
+  - [17.1.19 0.1.26 带来源的项目文档检索](#project-knowledge-evidence)
+  - [17.1.20 0.1.25 明确事实记忆、修订与上下文引用](#explicit-memory-evidence)
+  - [17.1.21 0.1.24 会话文字自动归档与紧凑文件操作](#conversation-archive-evidence)
+  - [17.1.22 0.1.23 临时聊天上下文与固定要求](#context-assembly-evidence)
+  - [17.1.23 0.1.22 设置模块监控与升级验证](#module-monitor-evidence)
+  - [17.1.24 0.1.20—0.1.21 源码：能否开始使用与智能表现](#readiness-evidence)
+  - [17.1.25 0.1.21 拖拽附件与图片输入](#attachments-evidence)
+  - [17.1.26 统一设置入口（2026-10-16）](#settings-navigation-evidence)
+  - [17.1.27 配色卡片与整机资源栏（2026-10-16 增量）](#appearance-resource-evidence)
+  - [17.1.28 0.1.20 页面配色与偏好记忆](#appearance-evidence)
+  - [17.1.29 0.1.19 模型配置、Key 版本与费用估算](#model-admin-evidence)
+  - [17.1.30 0.1.18 环境：Eachlabs Claude 独立小额探测](#eachlabs-claude-evidence)
+  - [17.1.31 0.1.18 Windows 托盘与含托盘的待命资源](#tray-evidence)
+  - [17.1.32 0.1.17 任务崩溃矩阵与程序出站阻断恢复](#task-fault-network-evidence)
+  - [17.1.33 0.1.17 本机部署、五分钟待命与代码仓库基线](#local-deployment-idle-evidence)
+  - [17.1.34 0.1.17 启动前健康检查与备用版本恢复](#runtime-start-evidence)
+  - [17.1.35 0.1.16 队列内存准入与短时竞争](#resource-admission-evidence)
+  - [17.1.36 0.1.15 浏览器回收、版本回退与前台响应](#runtime-continuity-evidence)
+  - [17.1.37 0.1.14 私人助手待命与会话停止](#personal-lifecycle-evidence)
+  - [17.1.38 0.1.13 K1 队列、登记回收与候选运行包](#k1-progress-evidence)
+  - [17.1.39 0.1.12 运行中的发送/停止按钮](#chat-stop-evidence)
+  - [17.1.40 0.1.11 项目文件夹与默认文本输出](#project-workspace-evidence)
+  - [17.1.41 0.1.10 浏览器持久后台队列](#computer-queue-evidence)
+  - [17.1.42 0.1.9 网页浏览器任务控制台](#computer-console-evidence)
+  - [17.1.43 0.1.8 独立浏览器 Computer Use](#computer-evidence)
+  - [17.1.44 0.1.7 K1/W3 固定元数据 Worker](#worker-evidence)
+  - [17.1.45 0.1.6 K1/W2 独立控制、签名恢复与默认实例迁移](#control-evidence)
+  - [17.1.46 0.1.5 K1/W1 只读运行预检](#preflight-evidence)
+  - [17.1.47 0.1.4 Google Pro 与轻量模型验证](#google-models-evidence)
+  - [17.1.48 0.1.3 统一模型菜单与推理级别历史验证](#web-workspace-evidence)
+  - [17.1.49 0.1.2 模型目录与迁移历史验证](#model-catalog-evidence)
+  - [17.1.50 0.1.1 聊天与模型路由历史验证](#chat-evidence)
+  - [17.1.51 K0 起步的历史验证记录](#k0-evidence)
+- [17.2 下一轮 K1/K2 出口验收计划](#next-k1-acceptance)
+  - [17.2.1 K1 出口：确定性控制与后台执行](#section-adaf0d5fff7c)
+  - [17.2.2 K2 出口：自然语言、知识与技能闭环](#next-k2-acceptance)
+  - [17.2.3 编码技能静态评估与质量对照（2026-10-17）](#coding-skills-evaluation-plan)
+  - [17.2.4 测试模型选择与最小验证范围](#model-test-selection)
+  - [17.2.5 Anatomy 固定源码试跑与证据边界（2026-10-17）](#anatomy-source-evidence)
+  - [17.2.6 所有技能统一选择与管理验收（V-SKL，0.1.35 局部验证）](#skill-selection-validation)
+  - [17.2.7 科普交互动画、机械拆解与视频验收（V-ANI，0.1.35 局部验证）](#anatomy-validation)
+- [17.3 开源 Agent 机制与编码适配验收（proposed）](#open-source-adoption-validation)
+- [17.4 知识与记忆选型实验（proposed）](#memory-selection-evaluation)
+  - [17.4.1 对照方法](#section-73af5598cfee)
+  - [17.4.2 分开比较提取、原文检索、知识编纂和后台整合](#memory-comparison-tracks)
+  - [17.4.3 个人、工作与共享记忆的防串用验收（proposed）](#memory-domain-validation)
+  - [17.4.4 稳定验收编号](#section-8ee1910d01a6)
+  - [17.4.5 中文全文检索的本机探测（2026-10-15）](#memory-fts-evidence)
+  - [17.4.6 本轮源码证据与未验证范围（2026-10-16）](#memory-source-evidence)
+  - [17.4.7 记忆与 Wiki 扩展调研证据（2026-10-18）](#memory-review-evidence)
+  - [17.4.8 记忆模块的资源模型与待验证预算](#memory-resource-envelope)
+- [17.5 怎样证明它确实变好了](#bootstrap-8)
+- [17.6 产品能力验收门（M0—M6）](#delivery-gates)
+  - [17.6.1 能力扩展的端到端验收场景](#delivery-gates-2)
+- [17.7 验收标准与故障演练](#acceptance)
+  - [17.7.1 验收环境必须记录](#acceptance-1)
+  - [17.7.2 体验与可靠性目标](#acceptance-2)
+  - [17.7.3 普通 PC 的安装、空闲与负载开销](#pc-footprint)
+  - [17.7.4 核心不变量测试](#acceptance-3)
+  - [17.7.5 故障注入矩阵](#acceptance-4)
+  - [17.7.6 研究效果评估](#acceptance-5)
+- [17.8 开发路线与验收门的对应](#extensions-5)
+- [17.9 扩展能力与停止控制验收](#extensions-6)
+- [17.10 停机测量与声明](#extensions-7)
+- [17.11 需要什么证据才能重新评分](#critical-review-10)
+- [17.12 多语言开放性的验收出口](#development-platform-12)
+- [17.13 健康与污染防护验收（H01—H12）](#system-health-14)
+- [17.14 桌面工作台与输入交互验收（V-UI）](#workbench-validation)
+- [17.15 需求到设计与验收的追踪](#requirement-traceability)
+- [17.16 成长中心三能力验收（设计要求）](#growth-center-validation)
+- [17.17 当前结构审计与回归证据（2026-10-17）](#current-audit-evidence)
+- [17.18 现有基础验收：可复用范围与阻断项（2026-10-17）](#foundation-acceptance-evidence)
+  - [17.18.1 逐项结果](#foundation-acceptance-results)
+  - [17.18.2 优先处理的问题与下一步](#foundation-acceptance-findings)
+  - [17.18.3 0.1.38 基础修复与复验（2026-10-17）](#foundation-repair-evidence)
+  - [17.18.4 0.1.39 K2 个人核心首段（2026-10-18）](#personal-core-evidence)
+  - [17.18.5 0.1.40 K2 有来源的话题接续（2026-10-18）](#continuity-evidence)
+  - [17.18.6 0.1.41 K2 会话需求成长接线（2026-10-18）](#growth-demand-evidence)
+  - [17.18.7 0.1.42 K2 真实任务状态接续（2026-10-18）](#work-continuity-evidence)
+  - [17.18.8 0.1.42 K2 个人核心联合日常场景验收（2026-10-18）](#companion-journey-evidence)
+  - [17.18.9 多轮记忆回放与候选修订屏障（2026-10-18）](#memory-lifecycle-evidence)
+  - [17.18.10 Mem0 公开 SDK 隔离适配与多轮观察（2026-10-18）](#memory-mem0-shadow-evidence)
+  - [17.18.11 本地重复、差异核对与显式更新（2026-10-19）](#memory-candidate-review-evidence)
+  - [17.18.12 多轮记忆到最终回答的成对先导（0.1.60—0.1.61）](#memory-final-answer-evidence)
+  - [17.18.13 规则与语义记忆入口一致性（0.1.60，2026-10-19）](#rule-memory-review-evidence)
+  - [17.18.14 LangMem 独立进程影子对照（2026-10-18）](#memory-langmem-shadow-evidence)
+  - [17.18.15 固定记忆提取样例与边界修复（2026-10-18）](#memory-extraction-pilot-evidence)
+  - [17.18.16 0.1.50 按需语义记忆候选验证（2026-10-18）](#semantic-candidates-evidence)
+  - [17.18.17 0.1.47 事实分类、用途与轻量资源验证（2026-10-18）](#memory-domain-evidence)
+  - [17.18.18 0.1.44 候选事实来源、纠正与遗忘验收（2026-10-18）](#memory-provenance-evidence)
+  - [17.18.19 0.1.43 恢复入口、候选整理与本机验收（2026-10-18）](#recovery-candidates-evidence)
+  - [17.18.20 K2 完整范围的本轮收口（0.1.62，2026-10-19）](#k2-completion-evidence)
+  - [17.18.21 应用离线开关验收（0.1.63，2026-10-19）](#application-offline-evidence)
+  - [17.18.22 成长三职责增量（0.1.64，2026-10-19）](#growth-purposes-evidence)
+- [17.19 个人助手与伙伴核心体验验收](#personal-companion-validation)
 <!-- book-nav:end -->
 
 <a id="versioned-evidence"></a>
@@ -441,6 +447,25 @@ Vulkan 首次启动到 ready 约 6.04 秒，含默认预热；CPU 4/8 线程约 
 真实发布样例为“查询 Electron 文档中的 ipcMain.handle 错误处理示例”，普通回复完成 11.247 秒，文档任务完成 27.930 秒；模型 705 输入/539 输出 token，估算 USD **0.002550**。任务 `task_aaec732543a45455aea7af10c7b05bd6`、会话 `ed662b178c0b4b97af43f7925a540012`。工具只收到库 ID 与本轮问题，没有本机文件；远端文档未作为已核验事实，也未自动再调用模型总结。首次模型回答产生于检索前，实际检索资料在“查看文档结果”中，不能把前者说成有本次检索支持的回答。发布辅助子进程出现一次控制台解码警告；启动状态、资源、最终源码和真实任务均独立核对通过，没有重发模型请求。
 
 下一步仍在 K2/W1—W2：扩大同工具正负例和独立预期，增加混合任务唯一受理、结果引用回传和目标修订，再开放具体能力。其他模型的自动执行未开放，不能用 Flash 结果代替跨模型验收；无变更的供应商连接与模型短文本连通性本轮无需重复付费探测。
+
+<a id="mixed-report-admission-evidence"></a>
+#### 混合报告、目标修订与局部取消（0.1.59）
+
+2026-10-19，**implemented / 限定范围 verified，并已部署**。[发布汇总](../evals/reports/report-admission-release-2026-10-19.json)与[空闲重载核对](../evals/reports/report-admission-deployment-2026-10-19.json)：18181已为0.1.59，11个用户业务表摘要保持一致，备用语音仍停止。本增量对应 F01 与 V-DLG-02—05 的报告子场景，完整 V-DLG、K1/K2 仍未通过。未安装新框架、模型或常驻服务；实际规则归[统一意图受理](tasks-agents.md#conversation-intent-routing)。
+
+| 证据 | 结果与限制 |
+|---|---|
+| [本地最终回归](../evals/reports/report-admission-baseline-2026-10-19.json) | 149项全部通过，覆盖意图/队列/回执、跨会话拒绝、并发重复、两个替换竞争、替换失败回滚、完成后取消不撤销结果、持久写失败与重启不重做；以报告内最终计数和源码摘要为准 |
+| [校准初轮](../evals/reports/report-intent-calibration-c1-2026-10-19.json) → [修正复测](../evals/reports/report-intent-calibration-c2-2026-10-19.json) | 相同24条公开合成输入，两轮真实Flash调用；初轮4条漏受理，修正连接词/修改类别衔接后24条符合期望；不计作48个独立样本 |
+| [首次48条留出](../evals/reports/report-intent-heldout-h1-2026-10-19.json) | 明确请求21/24受理，反例0/24误派；发现情绪 discussed、根目录点号处理与模型声明缺参三个漏受理，记录保留 |
+| [新增32条留出](../evals/reports/report-intent-heldout-h2-2026-10-19.json) | 确定性修正后，明确请求15/16受理（93.75%）、反例0/16误派、已选目标参数全部正确；一条模型声明缺参仍不执行。满足[该集合预置的有限启用标准](../evals/cases/report-intent-v2.json)，不是整体智能评分 |
+| [最终策略离线回放](../evals/reports/report-admission-recorded-replay-2026-10-19.json) | 最后收紧问句行动后，重放已记录决策，新增留出仍15/16、无误派；第一次留出还剩1条缺参。零新模型调用，不能作为新的盲测或用它覆盖原失败 |
+| [真实模型到产物](../evals/reports/report-admission-live-r3-2026-10-19.json) | 三次真实Google对话（混合、指定修改、继续聊天）＋一次实际后台规划，真实LPAC报告；原报告取消，新目录实际1个文件/5字节，重取原轮次未新增任务。继续聊天开始前后台为RUNNING；不是长时饱和负载 |
+| [Edge界面](../evals/reports/report-admission-ui-2026-10-19.json) | 真实HTTP/账本/LPAC，模型为替身：草稿保护、修改入口、指定取消、后台等待时继续聊天、刷新不重做、390px无横向溢出，页面脚本错误为零。约0.6秒的页面完成测量含轮询，不代表真实云模型延迟或200ms受理预算通过 |
+
+模型集合均为实现者编写的合成标注，缺少独立人工标注；共104条不同输入、128次分类调用，不宣称独立盲评、泛化零误派或支持其他路线。样例根外目录、任意报告格式、多任务依赖、模糊对象绑定及通用目标修改尚未交付。存在漏受理时保留自然回复与原因，主人可核对后使用明确任务入口；没有为追求通过而自动忽略缺参。
+
+真实链路探测前两次因夹具归档字段/空消息不合规在调用模型前失败，分别保留[准备失败1](../evals/reports/report-admission-live-r1-2026-10-19.json)与[准备失败2](../evals/reports/report-admission-live-r2-2026-10-19.json)。修正夹具后完成；未更改产品会话校验。
 
 <a id="conversation-separation-validation"></a>
 #### V-DLG：统一对话、混合意图与并行验收（proposed）
@@ -2254,7 +2279,44 @@ Jarvis 自身已有[同源保护与待确认语义预览修订屏障](#memory-li
 
 **本机资源观察：**1000 条独立且已分类的合成事实，每条 1024 字符，全部落入相近主题，连续 20 次真实 review 调用，P50 **298.25 ms**、P95 **321.79 ms**、最大 **345.24 ms**；返回始终限定五条，报告总匹配 1000。事实库 **8,429,568 bytes（8.04 MiB）**；进程工作集从造数后的 **42.34 MiB** 到读取后的 **50.19 MiB**，整个进程峰值 **52.69 MiB**，包含 Python/核心/测试夹具，不是模块独占内存。没有新增依赖、模型权重、后台进程或云费用。此测量不含旧来源归档读取、浏览器、并发语音、8 GiB PC 或长期运行，不替代整机资源验收。
 
-边界仍包括：规则候选路径未接新比较；关系提示可能漏检或误报；无通用多来源合并、自动画像更新、新来源同义遗忘、多设备冲突和独立留出准确率结论。Mem0/LangMem 旧实验结果原样保留，本次来源保护未用于追溯性补分。下一步在同一 K2/W1 先补独立多轮留出与复杂表达验证，再按[实施顺序](core-bootstrap.md#next-implementation)推进中文混合召回和相关经历接续。
+该版本边界包括：规则候选路径当时未接新比较（后由下节 0.1.60 补齐）；关系提示可能漏检或误报；无通用多来源合并、自动画像更新、新来源同义遗忘、多设备冲突和独立留出准确率结论。Mem0/LangMem 旧实验结果原样保留，本次来源保护未用于追溯性补分。下一步在同一 K2/W1 补独立多轮留出与复杂表达验证，再按[实施顺序](core-bootstrap.md#next-implementation)推进中文混合召回和相关经历接续。
+
+<a id="memory-final-answer-evidence"></a>
+### 多轮记忆到最终回答的成对先导（0.1.60—0.1.61）
+
+**这是 F04 开发先导，非完整 V-MEM 或框架胜负结论。** [八组开发样例](../evals/cases/memory-answer-pilot-v1.json)通过[可复跑程序](../tools/eval_memory_answers.py)运行真实规则候选、明确合成确认、纠正/遗忘或范围变化，再用空历史的新会话提问。每组分别开启和关闭记忆，共 16 次真实调用；使用项目既有验证首选 `vertex::gemini-3.1-pro-preview`，不修改聊天默认模型，不读取主人正式记忆。
+
+| 场景 | 应当进入最终请求的证据 | 最终回答判据 |
+|---|---|---|
+| A01 已确认偏好 | 当前已许可事实与对应修订 | 说出该偏好；关闭记忆时说明未知 |
+| A02 已纠正偏好 | 仅新内容及新修订 | 使用新值，不带出旧值 |
+| A03 遗忘、A04 未许可供应商、A05 来源删除 | 没有该事实及引用 | 说明未知，不复述被排除值 |
+| A06 其他项目、A07 日常事实用于工作、A08 来源改写 | 没有该事实及引用 | 说明未知，不串用范围或无效来源 |
+
+首轮 [0.1.60 真实结果](../evals/reports/memory-answer-pilot-2026-10-19.json)：开记忆 8/8、关记忆 8/8 满足关键词/弃答及实际上下文检查；16 次用量回执齐全，按本地配置费率估算 **0.057998 USD**，不是账户扣款证明。两组正例包含应有事实及 ID/修订，其余组无相应内容或引用；模型返回成功且未截断。模型请求使用空历史，不把遗忘说成删除了源会话。逐条正文、实际发送文本、引用、用量和耗时保留于报告，未以抽取检查代替最终回答。
+
+**关键词通过仍有问题。** [人工复核记录](../evals/reports/memory-answer-pilot-review-2026-10-19.json)发现部分弃答顺带承诺“我会记下来”或替用户运行命令，容易误导自动记忆能力；旧宿主说明又仍写聊天任务只做影子识别。0.1.61 在[宿主能力上下文](models-offline.md#runtime-chat-context)修正这些表述，继续以系统回执区分提议、受理与完成。[69 项相关回归](../evals/reports/memory-answer-baseline-2026-10-19.json)通过，包括模型协议、上下文预算、意图、报告受理以及四项评估器检查；正确关键词但没有注入证据、含遗忘值的弃答、不完整回答都不能得分。
+
+修正后的 [0.1.61 真实复验](../evals/reports/memory-answer-recheck-2026-10-19.json)开/关记忆各 8/8 满足原判据，16 次估算 **0.061882 USD**；[报告意图校准复跑](../evals/reports/report-intent-calibration-c3-2026-10-19.json)24 条全部匹配、无误受理/漏受理/错误参数，未创建真实任务。两轮回答加本次校准共 **56 次真实调用，估算 0.146318 USD**，不包含此前 F01 的模型评测。复验回答端到端耗时 P50 **8.78 秒**、P95 **12.27 秒**，包含供应商/认证并同期运行另一校准，不能代表纯推理速度、隔离资源测试或实时语音性能。[逐句复核](../evals/reports/memory-answer-recheck-review-2026-10-19.json)仍记录 A05/A06/A07 的部分记忆邀约措辞含糊；提示已修正，不把模型幻觉标为已消除。
+
+**0.1.61 已部署，完整状态见[汇总](../evals/reports/memory-answer-release-2026-10-19.json)。** [空闲重载探针](../evals/reports/memory-answer-deployment-2026-10-19.json)核对版本、原候选 UI 摘要、计算/只读设置、旧实例拒绝以及备用 TTS 停止，11 个业务表的行数和内容摘要不变。复用同一开发集用于回归，不能称新的独立留出；首轮未在每次请求记录宿主提示摘要，补充复核只记录运行后文件摘要，复验程序已增加逐次指令摘要与该文件的前后绑定。
+
+**剩余边界：**只有两组正例与六组排除例，且均为中文饮品、单事实、每臂一次。未比较 Mem0/LangMem、未重跑语义提取质量、未加入用户原历史、未证明所有回复声明有依据，未覆盖真实长期记忆、文档召回、人物/时间冲突或低配长时资源。词项“白开水”漏关联继续作为已见开发反例；不能因本批通过给既有框架补分或启用自动画像写入。完整判据仍归[分轨实验](#memory-comparison-tracks)。
+
+复跑前先执行 `python -m unittest test_memory_answers_eval -v`；`python tools/eval_memory_answers.py --output <新报告.json>`只测合成传输与真实存储/上下文，**不能评分模型质量**。加 `--live` 才执行付费模型路径；`--route provider::model`可显式指定同一模型，结果另表记录，不能覆盖历史结果。
+
+<a id="rule-memory-review-evidence"></a>
+### 规则与语义记忆入口一致性（0.1.60，2026-10-19）
+
+**状态：implemented / 临时数据局部 verified，已部署 0.1.60；[发布汇总](../evals/reports/rule-memory-release-2026-10-19.json)绑定源码。** [部署探针](../evals/reports/rule-memory-deployment-2026-10-19.json)在空闲时统一重载，核对线上候选脚本摘要、确定性计算与只读设置查询；11 个业务表的行数和内容摘要不变，备用语音组件保持停止，未写入正式测试记忆。 本轮完成 F03 的入口统一子集，完整 F03、F04、V-MEM 与 K2 仍未完成。字段与兼容性归[公共核对契约](contracts.md#memory-candidate-review-contract)，使用归[候选窗口](interaction-persona.md#personal-candidates-ui)。规则事实复用既有比较、签名处理与 MemoryStore，不新增数据库、索引、模型、后台进程或依赖。
+
+[组合回归](../evals/reports/rule-memory-baseline-2026-10-19.json)：**211 项通过，0 失败、0 错误、0 跳过**，15 个模块，包含 13 项新规则核对用例、既有语义提取/核对、事实来源/分类/生命周期、记忆视图、个人核心、接续、Web 和 F01 报告回归；报告绑定运行前后不变的源码摘要。验证签名/重启/过期、同源规则与语义切换、纠正/遗忘后旧预览、来源删除、旧版无签名新写拒绝、已完成回执重放及 HTTP nonce/409。旧精确回执只返回旧结果，不复活已遗忘事实；未结事项仍沿旧路径。
+
+[三组实际 Edge/HTTP 探针](../evals/reports/rule-memory-ui-2026-10-19.json)通过，使用临时核心和合成模型响应，**真实云请求为零**。规则链路完成旧内容与权限展示、显式更新、响应丢失后同一次保存重试、下一条来源沿用、忽略不写入、纠正后保留编辑并禁用旧保存、显式本机刷新以及未结事项保存；更新修订只增加一次，沿用不改正文/修订/权限。原语义提取和核对两组探针均重新运行，覆盖停止、失败、失效预览与编辑用途。1440×1080 和 390×844 无横向溢出，脚本错误为零；已查看规则窄屏核对及桌面过期预览截图。
+
+**测试发现与未完成范围：**第一次规则探针错误地期待没有变化词的原句显示“可能发生变化”，现按原比较语义检查“相关内容”；第二次暴露“白开水”与茶的词项漏关联，保留原失败报告，没有改比较算法或给它补分。最终交互探针使用明确茶主题完成流程验证，这不证明白开水漏检已修复；该例进入 F04 开发反例，不能再当作未见留出。复杂同义、时序、跨消息语义遗忘、多设备撤销、低配长时与最终回答质量仍须另验。旧 Mem0/LangMem 质量和成本结果原样保留。
+
+复跑：`python -m unittest test_rule_memory_review test_personal_candidates test_semantic_candidates test_memory_review test_memory_sources test_memory_domains test_memory_lifecycle -q`（将 tests、runtime/node-host、apps/web、adapters/models/provider-native 加入 PYTHONPATH）；UI 使用 `python tools/probe_memory_review_ui.py --mode rule --output <新目录>`，去掉 mode 参数复验语义核对，另运行 `tools/probe_semantic_candidates_ui.py --output <新目录>`。不要以正式主人记忆造数。
 
 复跑：`python -m unittest discover -s tests -p test_memory_review.py`；UI 为 `python tools/probe_memory_review_ui.py --output <新目录>` 与 `tools/probe_semantic_candidates_ui.py` 同参数；资源为 `python tools/probe_memory_review_resources.py --output <新JSON>`。使用既有开发环境，无需额外安装库。资源入口最初误引用未安装的 psutil，在造数前失败；已改用本仓库既有 Windows 进程计数器，并从新调用完成上列测量，没有为探测器扩充主环境。
 
@@ -2416,6 +2478,101 @@ P50/P95 包含临时核心/归档、框架进程启动及云模型等待，也�
 默认端口 `18181` 已从 0.1.42 更新到 **0.1.43**，core 与 UI assets ready。空闲窗口使用实例专属托盘事件退出，原数据目录启动；业务摘要、人格/接续库、任务及暂停状态、成长设置/选择/能力包核对保持一致，原自动维护开关仍为 true，原本停止的本地模型保持停止。部署辅助脚本先误请求不存在的独立 memory.css 路径，再遇到内联 CSS 的换行比较差异；只修核对脚本，不改产品路由，共两次空闲源码启动，最终使用保留的启动前基线补完只读核对。源码重启不是热替换，旧页面保留未发送草稿后刷新。
 
 已明确延期的身份认证、独立全局监督不重新成为个人使用的前置审批；也不在此记为通过。下一步顺序只在[核心实施优先级](core-bootstrap.md#next-implementation)维护。
+
+<a id="k2-completion-evidence"></a>
+### K2 完整范围的本轮收口（0.1.62，2026-10-19）
+
+**本轮可独立完成的实现与验证已收口，v0.1.62 已部署；完整 K2 尚未签收。** 尚缺物理普通设备、整机断网和主人实际体验验收。本轮按主人要求连续完成 K2 的必要实现和验证，不以一个小步作为终点。范围冻结于[执行清单](../evals/plans/k2-completion-v1.json)，原出口仍为[V-K2](#next-k2-acceptance)和下节适用 V-PAL；本节记录结果，不修改验收定义。过程与原始文件摘要见[机器汇总](../evals/reports/k2-completion-2026-10-19.json)。
+
+已补齐三库正文与来源/版本、历史种子与当前能力冲突说明、派生索引重建；相关事实选择、来源可见的话题推荐、可撤销称呼与完整交流配置界面；新增两个独立模块观察条目。运行规则分别归[三库与记忆](knowledge-learning.md#seed-runtime-entry)、[交流与接续](interaction-persona.md#personal-core-ui)、[接口](contracts.md#personal-profile-v2)与[模块观察](health-maintenance.md#module-monitoring)。
+
+发现并修复的 K1 基础问题包括：业务库写锁使取消等待约 5.5 秒；对话收尾在公共锁内等待存储；交流设置加载旧响应覆盖新输入；运行包启动兼容名单未跟上当前版本。存储争用现在使用一个共享的短 SQLite 等待预算，取消先通知运行者，持久结果无法确认时保持 UNKNOWN；这不是硬实时或任意文件 I/O 的时限。旧版本不支持个人数据时拒绝启动降级，完整包与数据另行验真。
+
+| 对应出口 | 本轮实现与已取得证据 | 当前尚需区分的条件 |
+|---|---|---|
+| V-K2-01 | 知识/规则/技能固定来源正文、版本和冲突说明；索引损坏重建、写盘失败内存降级、坏种子拒绝、撤回/纠正与外发前过滤 | 词法基线，不是通用语义知识库；校验种子不等于规则执行靠模型 |
+| V-K2-02 | 18 个本地真实模型任务/拒绝场景；实际 LPAC 产物、非法计划/路径/循环/诱导指令与有限修正回归 | 限定目录报告等已准入能力，不推导任意任务成功率 |
+| V-K2-03、V-PAL-05 | 慢模型、真实任务、数据库锁和 4 CPU 争用均有 30 轮控制/比较；最终真实小模型 1,801.027 秒运行通过，355 个任务产物正确，采样无错误；详见下文及机器汇总 `runtime` | 普通 8 GiB 实机缺失；开发机和进程亲和性不能替代目标机 |
+| V-K2-04、V-PAL-02—04 | 浏览器临时/保存、称呼及整组配置撤销/冲突、轮次边界、相关经历来源、保留历史纠正/遗忘；实际重载业务摘要保持 | 真实主人体验待反馈；长期自然相处没有用短探针冒充 |
+| V-K2-05、V-PAL-07 | 应用隔离下真实小模型、无模型、低内存准入、重建服务和进程回收 | 整机断网冷启动尚未运行，需主人本机断开网络 |
+| V-K2-06 | 七个真实进程退出点、损坏/缺失产物、重复请求、UNKNOWN 与路由重新过滤；受理/完成/动作对应回归 | 固定工作流；不能外推不可撤回的外部操作 |
+| V-PAL-09—10 | 已知配方真实生成/独立验收、损坏检测回退与再次修复；本轮真实验收文件清单的 CSV→TSV 交付、复用零新编码调用，回退保留个人状态；记忆相关性开关前后对照 | 已知配方的 Host 拥有完整答案，不称为未知能力自主发明；净体验结论仍需主人反馈 |
+
+**最终版本回归与意图结果。** K2 四组相关回归 580 项，579 通过、1 项 Windows 创建符号链接权限不足而跳过，耗时 290.454 秒，源码摘要前后一致；包含 HTTP 配置/损坏隔离及发布兼容修复。跳过不是通过，也没有要求提升系统权限。真实 Google Flash 意图集为 [40 条校准](../evals/reports/dialogue-intent-v2-k2-r2-calibration-2026-10-19.json)＋[160 条留出](../evals/reports/dialogue-intent-v2-k2-r2-heldout-2026-10-19.json)，宏平均 F1 分别 **0.9796 / 0.9613**，高于冻结的 0.90 目标。留出 149/160 标签完全匹配；5 条明确行动被要求补充信息而计为漏受理（ACT18/24/25、MIX12/23），另有 MIX11 未识别；没有误请求行动，8 条应自动选择的文档请求均选中，无错误自动选择。分类探针本身不执行任务，不能用零实际任务证明语义永远正确；实际任务另由执行/恢复探针验证。上一轮 0.9623 等原始结果保留，不挑较高分覆盖本轮。该集合已有开发者接触，不是全新独立人工留出。
+
+生活、学习和工作三个冻结场景共 15 次真实 Google Flash 回答，包含全量候选对照、相关事实、新会话无记忆、保留历史的纠正和遗忘；固定上下文/关键词判据全部通过，估算 $0.03344175。相关事实组排除无关事实，不因此撤销许可内全部资料；结果只说明这些场景，不是通用语义或不同记忆框架质量排名。成长已用两次真实编码调用生成并升级本次验收资料索引，再次同格式交付不调用编码模型；已完成状态和个人数据摘要保持。
+
+开发机 300.018 秒空闲 Host 复验：私有提交峰值 32.63 MiB、工作集 54.74 MiB、单核心口径 CPU 0.03125%、就绪 0.421 秒；这是未加载模型/浏览器的 Host，未含托盘。4 个逻辑 CPU 的慢模型/任务争用测试中，单独/并行完成 p95 为 335.13 / 346.50 ms，退化约 3.39%；输入 p95 53.63 ms，查询 p95 21.76 ms，业务库忙时取消 p95 158.39 ms。内存不足为准入计数注入，未耗尽真实机器内存。
+
+浏览器资源另行采样：采用创建时间校验后的 15.517 秒真实无头 Edge 操作中，Edge 进程树私有提交峰值 481.40 MiB、工作集 603.17 MiB；Playwright 驱动分别约 185.33 / 171.08 MiB，Host 加测试夹具分别约 48.02 / 67.03 MiB。驱动是测试开销，主人正常用已有浏览器打开网页不需要它。此短探针核对桌面/窄屏、设置保存和模块页，也确认所启动进程树结束；不能替代五分钟待命或普通设备长期资源验收。首次分组曾把 Windows venv 的 Python 子进程计入驱动，已修正探针并重跑，原报告保留。
+
+**保留失败与复跑记录。** 首次 K2 回归暴露无关事实过滤后背景风格标题兼容问题，修复后复跑通过；浏览器探针发现配置加载竞争，修复后真实 Edge 桌面/窄屏通过。短时资源冒烟未达到 1,800 秒，进程退出时的采样竞争亦被记录并修正；第一轮长测因随后修复启动器主动中止，不能计作 30 分钟通过。最终长测和运行包结果以机器汇总的明确状态为准。
+
+随后的 r3 长测跑满 1,800.321 秒，320 个浸泡任务加 30 个比较任务产物正确，延迟门槛通过，但资源读取出现三次拒绝访问，因此**整体未通过**。50 个真实 Worker 的诊断复现出父 PID 复用：旧采样器把早于本次任务存在的其他软件误归到子树。修复后的探针按 PID＋创建时间核验父子关系，保留已观察到的孤儿子进程，仍将真正自有进程读取失败作为错误；真实进程/编号复用测试通过，依据见 [S238](references.md#s238)。原报告未补分，重新运行完整时长；空闲和浏览器既有样本亦核对创建时间，无发现同类错归属。
+
+**最终 r4 长测通过。** 实际持续运行 1,801.027 秒，完成 325 个持续运行任务，另有 30 个单独/并行对照阶段的后台任务，全部产物正确；共 3,639 个资源样本，最终采样错误为空，源码前后摘要一致，测试引擎已回收。30 轮单独/并行聊天完成 p95 为 910.02 / 1,060.21 ms，退化 **16.50%**，低于原 30% 门槛；385 条聊天受理 p95 **60.96 ms**，10,204 次状态查询 p95 **24.87 ms**，均低于原 200 ms 门槛。
+
+Host、采样器和自有子进程的采样私有提交合计峰值 **595.52 MiB**、工作集合计峰值 **1,202.85 MiB**，含真实 Qwen3 0.6B CPU 4 线程推理；共享页可能在进程工作集合计中重复，不能当唯一物理 RAM 用量。观测最低整机可用内存约 95.99 GiB，再次说明该机不能替代 8 GiB 设备。每轮一个聊天与一个后台任务，轮间最多等待 3 秒；实测约 10.83 个任务/分钟，不是饱和吞吐能力。各轮结束时等待队列为 0，最大观察排队等待 271.44 ms；轮末队列读数不是整个过程的最大队列长度。
+
+**兼容补验与最终在运行状态。** 既有语音、Qwen 语音、表达标签与朗读接口补充回归 **42 项全部通过**，无跳过、无源码变化；使用确定性替身，未把它计作连续麦克风语音或新一轮真实音质验证。采样器另有 2 项真实进程/身份回归通过。正式实例仍为已部署的 v0.1.62，核心就绪，25 个模块可观察，个人模块正常，六项关键静态资源与源码一致；最终只读检查未派发任务、调用模型或修改个人数据。运行包实际启动/回退通过，最终交付核对 300 个发布源文件、无运行代码差异；构建后 Markdown 证据更新逐项登记于机器汇总的 `delivery_source`。
+
+**运行与交付入口。** 本机工作台为 `http://127.0.0.1:18181/`，模块观察为 `/settings#modules`；无需新建项目即可普通交流。称呼/表达在右上记忆图标内的“交流设置”，接续在同一面板；完整操作只维护于[交互章](interaction-persona.md#personal-core-ui)。当前独立发行包为 `artifacts/releases/jarvis-0.1.62-k2-reviewed.zip`，原 `jarvis-0.1.62-k2-runtime.zip` 保留为已有验收和恢复对象。使用[运行包入口](core-bootstrap.md#runtime-package)安装、健康检查和显式启动；新包的精确 SHA-256 与真实启动/回退结果见[独立复核汇总](../evals/reports/k2-independent-review-2026-10-19.json)的 `package` 证据。包自带固定 Python 与核心依赖，模型权重、凭据和主人现用数据独立保存；浏览器能力使用已安装 Edge。兼容回退是启动前选择已验证槽位，不是运行中无感热替换，也不支持任意旧 schema 降级。
+
+运行包是执行依赖与构建时说明的快照，不代替完整开发仓库、图册和验收材料；全书及后续完成的报告由当前项目的 [docs/README.md](README.md) 管理。发行后补充的验收说明不会改写已验证 ZIP；运行源码一致性和文档差异分别记录，不用重打包覆盖恢复对象。
+
+**交付续验（2026-10-19）。** 用户尚未试用，要求先完成可独立执行的检查。复核原 23 份证据、161 个运行文件及冻结验收清单，历史摘要未变；检查时 18181 未启动，已使用原启动器恢复同一 v0.1.62，业务数据表摘要保持，确定性计算、重复受理、取消和个人模块读取通过，未调用云模型。已修正文档清单及核心入口残留的 0.1.61 登记，保持 K1/K2/K3 未整体验收。续验结果见[交付核对记录](../evals/reports/k2-handoff-2026-10-19.json)。原验收报告和 ZIP 均保留构建时内容；当前清单及正文与包内文档的差异单独列出，不宣称全部发布源文件仍逐字节一致，也不重写旧证据摘要。
+
+**再次独立验收与实际效果（2026-10-19）。** 主人进一步要求代为验证全部 K2 后，重新运行了回归、真实浏览器、隔离离线和包启动，不只核对旧报告。新增[独立复核汇总](../evals/reports/k2-independent-review-2026-10-19.json)、[冻结对话场景](../evals/cases/k2-delegated-review-v1.json)与[逐条回答评审](../evals/reports/k2-delegated-answer-review-2026-10-19.json)，保留失败、未知和未派发项。核心运行代码未改变，因此原 30 分钟资源、故障注入及受限成长证据经摘要核对后复用；不把这次复核写成又完成一轮长测。
+
+| 本次重新执行的检查 | 实际结果 | 对使用效果的含义 |
+|---|---|---|
+| K2 个人、对话、执行、成长及可选语音回归 | 622 项中 621 通过，1 项 Windows 符号链接权限不足而跳过，耗时 211.917 秒 | 已有确定性功能未发现新回归；语音替身测试不等于真实音质验收 |
+| 真实 Edge 界面 | 6 组通过，无页面错误；桌面和窄屏截图已检查 | 称呼/表达保存、冲突保留输入、整组撤销、下一轮生效和来源可见接续可操作；窄屏需在弹窗内滚动到底部按钮 |
+| 本机隔离与真实小模型 | 18 场景通过，19 次本地调用，0 付费调用；引擎已回收 | 有模型能完成限定任务；无模型、资源不足时如实降级，个人状态可读取；仍不等于整台电脑断网 |
+| 原 0.1.62 包独立启动与回退 | A→B→A 三次启动及坏槽回退通过，业务数据摘要不变 | 同兼容版本可回退；不能外推任意旧版本或运行中热替换 |
+| GPT-6 Sol 真实回答 | 14/14 功能检查通过；逐条评审 13 通过、1 部分符合 | 生活/学习/工作、项目隔离、矛盾、纠正、遗忘、撤销供应商授权和临时模式均有实际回答；月相解释未严格满足句数 |
+| Gemini 3.8 Flash 真实回答 | 前两条得到回答且功能检查通过，但均存在表达或格式不足；第 3 条约 62 秒后 UNKNOWN，后 11 条未派发 | 闲聊偏长；云端可用性影响体验。系统未虚构成功、未自动重发，也没有额外记忆写入；Google 本次全套未通过 |
+
+这组真实评审使用临时合成事实，未把测试称呼或偏好写入主人正式数据。Sol 成功回答中位耗时 **3.344 秒**、本组最近秩 p95 **4.067 秒**；Flash 两条成功回答中位 **7.523 秒**。这是少量场景的本次端到端延迟，不是供应商稳定性或模型综合排名。共派发 17 次付费请求，已返回用量部分估算 **$0.01682375**，另 1 次 UNKNOWN 用量/费用未知，不能按零计费。全部回答由本次执行助手对照预先固定的要求逐条阅读，无新增裁判模型调用；它可以发现措辞问题，不能冒充主人满意度或独立人工盲测。未针对这 14 条题目改写公共提示词以制造更高分。
+
+**效果结论。** 当前能作为单机文字助手使用：不建项目即可交流，按已确认的称呼和表达配置回答，选择相关且获准的记忆，纠正或遗忘后剔除旧派生上下文；聊天与限定后台任务可并行，任务结果与未知状态可追溯，受限能力包可生成、验收、启用和回退。其长处是轻量、数据范围可控和恢复路径明确。薄弱处仍是词法召回的语义覆盖、不同模型的表达一致性、云端等待，以及成长范围较窄。尚不能据此宣称通用自主发明、全天候主动陪伴、多设备统一意识或电影式完整贾维斯已实现。14 个冻结出口中，7 个已有其限定范围证据，另 7 个关联三类外部验收条件；该数量不是开发完成百分比，也不新增实施阶段。
+
+**交付包清单修正。** 旧 ZIP 保持不可变，新包使用独立文件名 `artifacts/releases/jarvis-0.1.62-k2-reviewed.zip`，收录正确的 0.1.62 文档登记。新包的 1,545 个成员校验、300 个源文件严格对账、A→B→A 独立启动及坏槽回退均通过。与原包相比只有四份文档/清单改变，运行代码及依赖逐字节相同，个人业务状态保持。状态、精确摘要和结果统一记录于本次独立复核汇总；构建后新增的 Markdown 验收结果按原检查器逐项列出，不修改旧包或降低标准。
+
+**正式实例与现有自检。** 最后只读检查确认默认端口仍运行同一 v0.1.62，核心就绪、25 个模块可观察，六项前端资源与源码一致，未派发模型请求。即时检查前后所有业务表摘要相同；与较早交付快照比较，会话、记忆、人格、接续等均相同，只有 `evolution.jobs` 变化。现有配置原本启用每 300 秒自检，最近五条回执均为健康、成功、零编码调用；代码只保留最近 30 条冗余健康自检，因此日志摘要变化符合该机制。未修改设置或新建定时任务。旧快照只有表摘要，不能重建完整历史行差异；不据此承诺所有时间都零模型费用。
+
+**剩余外部条件。** 主人已明确“只有当前这台电脑”，物理 8 GiB 设备项保持未验证。整机断网可在本机运行 [verify_k2_offline.ps1](../tools/verify_k2_offline.ps1)：先保存工作并手动断开 Wi-Fi/网线/VPN，再执行脚本；脚本不会改网卡，会记录前后网络状态、冷启动本地引擎和任务结果，结束后可恢复网络。必须确认整个测试期间保持断开；联网时 `-CheckOnly` 只检查条件，不能算离线通过。交流体验以主人实际试用反馈为准。本轮可独立完成的工作已结束，这三项依赖保留原验收要求；不因设备缺失或反馈尚未提供而改成可选项。
+
+断网前先在设置停止现有本地模型，确保 18180 空闲，然后在本机 PowerShell 执行 `& 'H:\Jarvis\tools\verify_k2_offline.ps1'`。结果保存在 `H:\JarvisData\diagnostics\k2-offline-device-时间戳`；失败返回非零退出码并保留网络记录。它使用临时数据和模型进程，不修改正式个人记忆，不自动改变网卡；本机引擎冷启动不等于重启整台 Windows。
+
+自动审批以 `blocked by policy` 拒绝清理中止长测的一个临时目录，已原样保留；对应测试进程和引擎已停止，不影响当前版本或通过数。没有改用其他删除方式绕过拒绝，路径记在机器汇总的 `maintenance_remainder`，与业务数据和正式恢复包分开。
+
+<a id="application-offline-evidence"></a>
+### 应用离线开关验收（0.1.63，2026-10-19）
+
+主人要求用“只限制 Jarvis 的外网访问”替代本轮手动整机断网操作。已实现独立持久网络策略、后台设置入口、自动路由离线选择及模型/MCP/浏览器出口检查，具体规则只维护于[应用离线控制](models-offline.md#application-offline-control)。本轮不改动冻结清单、历史证据或原整机离线门槛；完整 K2 继续未签收。
+
+- **K2 本机回归：631 项，630 通过、1 项因 Windows 无符号链接权限跳过。** 覆盖个人、对话、执行、成长和可选语音；模型质量及实际声学体验不由替身测试证明。回归后只补设置总览入口，单独进行网页与出口集成复验，差异与最终源码摘要登记于[本轮机器报告](../evals/reports/application-offline-2026-10-19.json)。
+- **真实本地模型：18 个固定样例全部通过，19 次本地调用、0 次付费调用。** 在持久开关开启、Python 非环回访问拦截和引擎 `--offline` 同时生效时完成目录任务；无模型/内存不足仍可查询个人记忆和交流设置。模型冷启动约 6.60 秒，本次引擎峰值工作集约 943.33 MiB、私有提交约 393.45 MiB；这是本机短测，非全应用总内存或普通 8 GiB PC 证明。
+- **真实 Host 与界面：**设置开关开启、页面刷新、Host 进程重启保留、关闭恢复联网均核对；明确云模型请求在约 0.69 秒返回 `network_offline`、未派发且零 API 费用，本地计算成功。Jarvis 离线期间，另一进程访问公共 HTTPS 返回 200，未修改系统网络。
+- **边界与回归修复：**覆盖设置损坏时禁止外联、修订冲突、活动作业拒绝切换、云模型读取凭据前拦截、在途结果 UNKNOWN、MCP 清理也不得外联、浏览器启动前拦截和旧包兼容拒绝。过程中发现并修复新增变量遮蔽 `queue` 和正常 MCP 取消通知被误拦的问题，保留正常联网取消行为。
+- **正式部署：**18181 空闲时由 0.1.62 正常退出并启动 0.1.63；会话、记忆、人格、接续等业务表摘要一致，25 个模块可观察，七项前端资源与当前源码一致。正式实例保留原来的允许联网状态；离线开关在独立数据目录验证，不往主人记忆注入测试内容。
+
+独立网页、模型、MCP 与浏览器集成回归 **116 项全部通过**，包含最终设置总览入口；它们与上述 K2 回归有重叠，不相加为独立用例总数。独立运行包为 `artifacts/releases/jarvis-0.1.63-network-control.zip`，包内固定 Python 与核心依赖沿用既有打包方式；精确摘要、真实启动和槽位回退结果以本轮机器报告为准，0.1.62 历史包保留。
+
+详细计数、包验证、原始本机证据路径及摘要集中于本轮机器报告。新增模块无第三方依赖、常驻模型或后台定时任务；开关查询是本机 SQLite 操作，不消耗模型 Token。限制仍包括物理整机断网、低配参考 PC、长期资源和主人的真实陪伴体验；本轮应用离线通过不代表这些范围通过。
+
+<a id="growth-purposes-evidence"></a>
+### 成长三职责增量（0.1.64，2026-10-19）
+
+主人要求停止重复 K2 验收并继续后续开发。本轮先完成 F08 的限定工具三职责及实际界面，不重新跑全量 K2、不降低原出口，也不将完整 K2/F08/K3 改成通过。行为权威见[成长运行](evolution-release.md#bounded-evolution-loop)，后续工作只归[当前推进队列](core-bootstrap.md#near-term-work-queue)。
+
+- **实现：**纯完整性自检、原契约自愈、明确目标进化；独立主模型/一个备选/原生档位，设置修订与任务快照，旧配置迁移；独立成长中心与三标签，保留 J 标志和状态动效。未增加第三方依赖、服务或常驻模型。
+- **新增改动的必要检查：72 项全部通过。** 范围为 evolution、growth_demand、network_policy、runtime_start，包括真实 LPAC 执行/资源限制；模型为替身，不是实际供应商质量证明。覆盖纯检查不改包/不启动 Worker、能力差距不修复、修复保持旧契约、用途路由、明确失败备选、UNKNOWN/离线不重发、配置冲突/冻结、自动自愈独立来源和 schema 迁移/旧包拒绝。JS 语法通过。
+- **部署：**18181 空闲正常退出后启动 v0.1.64。会话、记忆、人格等业务表摘要一致，活动指针和包记录一致；成长库迁移前备份保存在本机受控诊断目录。原 300 秒周期保留，新增 auto_heal=false。新页面资源与源码摘要一致，打开页面没有模型调用。
+- **界面：**真实页面确认独立导航、三标签、自检/自愈内容、主备模型与档位控件、既有标志和旧记录标注；未在正式数据上点击付费诊断或开启自动自愈。原始截图与部署摘要位置见[机器记录](../evals/reports/growth-purposes-2026-10-19.json)。
+
+本轮为源码部署，未重打独立安装包或重做槽位启动验收；0.1.63 历史包保留。新成长 schema 不交给旧运行包接管，受支持的启动器已添加兼容拒绝。全量事件调度、策略抽屉、多备选排序、广泛收益验证、实际跨供应商付费切换与普通 PC 长时数据仍未完成；不从本次定向检查外推这些结论。
 
 <a id="personal-companion-validation"></a>
 ## 个人助手与伙伴核心体验验收

@@ -12,6 +12,7 @@ from .task_queue import ComputerQueue
 from jarvis_core.sample_tasks import SampleTaskService
 from jarvis_core.skill_tasks import SkillTaskService
 from jarvis_core.mcp_tasks import McpTaskService
+from jarvis_core.storage_budget import interactive
 
 
 class ComputerWeb:
@@ -135,6 +136,7 @@ class ComputerWeb:
                           'model':json.loads(s['model_json'])} for s in result['steps']],
                 'has_screenshot':result['report'] is not None}
 
+    @interactive
     def cancel(self,task_id, *, all_tasks=False):
         record=self.core.ledger.record(task_id=task_id)
         if record['action']['capability_id']!='browser.operate.v1' and not all_tasks:

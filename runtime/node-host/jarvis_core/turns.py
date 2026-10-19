@@ -10,6 +10,7 @@ import json
 import re
 import threading
 import time
+from .storage_budget import interactive
 
 
 class TurnError(ValueError):
@@ -122,6 +123,7 @@ class DialogueTurns:
             value['user_message'] = '回复正文缓存已过期；请查看已保存会话，没有自动重发。'
         return value
 
+    @interactive
     def view(self, instance_id, conversation_id, request_id):
         with self.lock:
             row = self._scope(instance_id, conversation_id, request_id)
@@ -130,6 +132,7 @@ class DialogueTurns:
             self._trim()
             return self._view(row)
 
+    @interactive
     def recover(self, conversation_id, request_id):
         identifier(conversation_id);identifier(request_id)
         with self.lock:
@@ -140,6 +143,7 @@ class DialogueTurns:
                 if result is not None:return result
             raise TurnError('turn_not_found','未找到可恢复的回复；临时会话、未受理或过期记录不会自动重发。',404)
 
+    @interactive
     def submit(self, instance_id, conversation_id, request_id, payload):
         encoded = json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(',', ':'), allow_nan=False).encode()
         digest = hashlib.sha256(encoded).hexdigest()
@@ -177,6 +181,10 @@ class DialogueTurns:
             if self.work_admission is not None:
                 try: row['work_scope'] = self.work_admission.capture(conversation_id)
                 except Exception: row['work_scope'] = None
+                capture_target = getattr(self.work_admission, 'capture_target', None)
+                if capture_target is not None:
+                    try: row['work_target'] = capture_target(conversation_id, payload.get('message', ''))
+                    except Exception: row['work_target'] = None
             if persistent and self.journal:
                 try:
                     self.journal.admit(conversation_id, request_id, digest)
@@ -211,6 +219,7 @@ class DialogueTurns:
                       'user_message': '回复结果未确认，请核对状态；没有自动重发。'}
         self._complete(row, result, metric)
 
+    @interactive
     def _complete(self, row, result, metric):
         with self.lock:
             # Cancellation may arrive between invoke_reply returning and publication.
@@ -224,7 +233,7 @@ class DialogueTurns:
                 try: result = self.work_admission.admit(row, row.get('work_payload', {}), result)
                 except Exception:
                     result = {**result, 'work_admission': {'status': 'unconfirmed', 'automatic': False,
-                        'reason': '文档受理结果未确认，请查询本会话任务；没有自动重试。'}}
+                        'reason': '任务受理结果未确认，请查询本会话任务；没有自动重试。'}}
             row.pop('work_payload', None)
             if row.get('durable'):
                 try:
@@ -249,6 +258,7 @@ class DialogueTurns:
                 self.metrics.event('calculation_completed')
             self._trim()
 
+    @interactive
     def cancel(self, instance_id, conversation_id, request_id):
         with self.lock:
             row = self._scope(instance_id, conversation_id, request_id)
@@ -269,10 +279,13 @@ class DialogueTurns:
                 self.bytes += row['bytes']
                 self._trim()
             elif not row['finished']:
+                # Signal the running transport before attempting durable storage.
+                # A busy journal must not delay cancellation of inference.
+                row['event'].set()
                 if row.get('durable'):
                     try:self.journal.cancel(conversation_id,request_id)
                     except Exception:row['persistence_error']=True
-                row['event'].set(); row['status'] = 'CANCELLING'; row['revision'] += 1
+                row['status'] = 'CANCELLING'; row['revision'] += 1
             return self._view(row)
 
     def snapshot(self):

@@ -87,7 +87,8 @@ class WorkspaceService:
         safe_path(self.data_dir, directory=True)
         for suffix in ("", "-journal", "-wal", "-shm"):
             safe_path(str(self.db_path) + suffix, must_exist=False)
-        db = sqlite3.connect(self.db_path, timeout=5, isolation_level=None)
+        from .storage_budget import timeout as bounded_timeout
+        db = sqlite3.connect(self.db_path, timeout=bounded_timeout(5), isolation_level=None)
         db.row_factory = sqlite3.Row
         try:
             db.execute("PRAGMA synchronous=FULL")

@@ -8,9 +8,11 @@ from datetime import datetime,timezone
 import argparse
 from contextlib import closing
 import ctypes as C
+import hashlib
 import ipaddress
 import json
 import os
+import platform
 from pathlib import Path
 import socket
 import sqlite3
@@ -27,6 +29,7 @@ from jarvis_core import __version__
 from jarvis_core.service import CoreService
 from jarvis_core.chat import ChatService
 from jarvis_core.local_model import LocalModel,LocalModelError
+from jarvis_core.resources import memory_snapshot
 from jarvis_core.conversation_tasks import ConversationTasks
 from jarvis_computer.web import ComputerWeb
 
@@ -55,7 +58,15 @@ CASES=[
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output',type=Path,default=ROOT/'evals/reports/offline-task-live.json')
+    parser.add_argument('--application-policy',action='store_true',help='Also enable the persisted Jarvis offline switch')
     args=parser.parse_args()
+    if args.output.exists():parser.error('Evidence exists; choose a fresh output')
+    bound=[p for folder in ('runtime/node-host/jarvis_core','adapters/computer-use','adapters/models/provider-native')
+           for p in (ROOT/folder).rglob('*.py')]
+    bound += [Path(__file__), ROOT/'config/model-profiles/local-candidates.json',ROOT/'config/model-profiles/providers.json']
+    def source_hashes():
+        return {p.relative_to(ROOT).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(bound)}
+    source_before=source_hashes()
     attempts=[];loopback_calls=0
     def audit(event,args):
         nonlocal loopback_calls
@@ -79,6 +90,7 @@ def main():
             if api(owned.process,C.byref(value),C.sizeof(value)):samples.append({'working_set':value.ws,'peak_working_set':value.peak_ws,'private_commit':value.pagefile})
     result={'version':__version__,'captured_at':datetime.now(timezone.utc).isoformat(),'status':'failed','cases':[],
             'scope':'temporary local-only configuration; real Qwen3 0.6B CPU planning and LPAC metadata Worker',
+            'source_sha256':source_before,'environment':{'platform':platform.platform(),'logical_cpus':os.cpu_count(),'memory':memory_snapshot()},
             'network_boundary':'Python audit rejects non-loopback socket/DNS; credential loading forbidden; llama.cpp --offline',
             'limits':['Not whole-machine disconnected boot, OS outbound firewall, speech or federation acceptance.','Small fixed workflow corpus does not prove general intelligence, semantic safety or arbitrary tool competence.']}
     with tempfile.TemporaryDirectory(prefix='jarvis-offline-tasks-') as temp:
@@ -90,6 +102,11 @@ def main():
         config.update(default_provider='local',automatic_fallback=True,fallback_order=['local'],providers={'local':config['providers']['local']})
         cfg=root/'providers.json';cfg.write_text(json.dumps(config),encoding='utf-8')
         core=CoreService(root/'data');core.initialize(source);runtime=LocalModel(core)
+        if args.application_policy:
+            from jarvis_core.network_policy import NetworkPolicy,activate_process
+            NetworkPolicy(core.data_dir).change(True,0)
+            activate_process(core.data_dir)
+            result['application_policy']=NetworkPolicy(core.data_dir).snapshot()
         manager=ComputerWeb(core,ChatService(core,config_path=cfg));bridge=ConversationTasks(core,manager);cid=uuid.uuid4().hex
         try:
             with patch('jarvis_models.gateway.load',side_effect=AssertionError('Credential vault forbidden')):
@@ -152,7 +169,9 @@ def main():
         peak_working_set_mib=round(max((s['peak_working_set'] for s in samples),default=0)/1024**2,2),
         peak_private_commit_mib=round(max((s['private_commit'] for s in samples),default=0)/1024**2,2),
         sample_count=len(samples))
-    result['status']='passed' if all(x['passed'] for x in result['cases']) and not attempts and result['real_worker_lpac'] and result['engine_reclaimed'] else 'failed'
+    source_after=source_hashes()
+    result['source_changed']=[p for p in source_before if source_before[p]!=source_after.get(p)]
+    result['status']='passed' if all(x['passed'] for x in result['cases']) and not attempts and result['real_worker_lpac'] and result['engine_reclaimed'] and not result['source_changed'] else 'failed'
     args.output.parent.mkdir(parents=True,exist_ok=True)
     args.output.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print(json.dumps({k:v for k,v in result.items() if k!='cases'},ensure_ascii=False))

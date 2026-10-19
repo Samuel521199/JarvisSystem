@@ -233,6 +233,8 @@ class SkillTaskService:
                     extension, content = '.txt', report['text']
                 elif skill == 'anatomy.explainer':
                     from .skill_renderer import render, verify_browser
+                    from .network_policy import NetworkPolicy
+                    NetworkPolicy(self.core.data_dir).require_online()
                     value, worker = render({'driver_teeth': 12, 'ratio': args['ratio'], 'theme': args['theme'],
                                             'title': '齿轮传动原理 · 交互与拆解'},
                                            {'task_id': task_id, 'action_id': action_id, 'arguments_digest': record['action']['arguments_digest']}, checkpoint)

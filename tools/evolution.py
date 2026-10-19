@@ -14,7 +14,7 @@ from jarvis_core.evolution import EvolutionManager
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('action', choices=['status','ensure','check','execute','rollback'])
+    parser.add_argument('action', choices=['status','ensure','check','analyze','heal','execute','rollback'])
     parser.add_argument('--data-dir', type=Path, required=True)
     parser.add_argument('--revision', type=int, choices=[1,2], default=1)
     parser.add_argument('--input', type=Path, help='Bounded JSON metadata file for execute')

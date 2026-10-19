@@ -8,7 +8,7 @@
 
 > **在 Cursor 中打开链接：**打开整个 `Jarvis` 文件夹。若页面顶部有 `Preview / Markdown`，先选 `Markdown`，再按 `Ctrl+Shift+V` 打开内置预览（标签名为 `Preview README.md`），单击链接阅读对应文件。VS Code 也可使用此快捷键；源码视图使用 `Ctrl+单击`。更多说明见[阅读与链接规范](MAINTENANCE.md#stable-identifiers)。
 
-[选择阅读入口](#start-here) · [查看当前进度](#project-status) · [查找专题](#quick-topics) · [完整文档目录](#book-tree) · [维护文档](#for-maintainers)
+[后续方向指南](development-guide.md#direction-start) · [选择阅读入口](#start-here) · [查看当前进度](#project-status) · [查找专题](#quick-topics) · [完整文档目录](#book-tree) · [维护文档](#for-maintainers)
 
 ---
 
@@ -20,19 +20,28 @@
 | **了解 Jarvis 的个人助手与伙伴定位** | [核心定义与体验判据](product-requirements.md#personal-companion-core) | [个人交流与工作台](interaction-persona.md#desktop-workbench) → [核心如何起步](core-bootstrap.md#bootstrap-1) |
 | **启动并使用现有原型** | [启动方法与聊天入口](core-bootstrap.md#current-implementation) | [可选模型与切换方式](models-offline.md#configured-models) |
 | **使用本地主力语音与备用组件** | [Qwen 主力语音](models-offline.md#qwen-tts-runtime) | [接入、速度与内存证据](delivery-validation.md#qwen-tts-integration-evidence) · [主备选型](models-offline.md#voice-local-candidates) · [ZipVoice 备用](models-offline.md#fast-speech-runtime) |
-| **判断现在能否使用、智能有多强** | [真实模型与功能测试](delivery-validation.md#readiness-evidence) | [当前能力和完整性规则](models-offline.md#runtime-chat-context) |
-| **查看个人核心的使用与验证** | [聊天记忆与交流设置](interaction-persona.md#personal-core-ui) → [跨会话继续话题](interaction-persona.md#continuity-ui) | [个人核心联合验收与范围](delivery-validation.md#companion-journey-evidence) |
+| **判断现在能否使用、智能有多强** | [v0.1.62 的实现、实测与剩余验收](delivery-validation.md#k2-completion-evidence) | [当前能力和完整性规则](models-offline.md#runtime-chat-context) |
+| **查看个人核心的使用与验证** | [聊天记忆与交流设置](interaction-persona.md#personal-core-ui) → [跨会话继续话题](interaction-persona.md#continuity-ui) | [当前 K2 验收结果与范围](delivery-validation.md#k2-completion-evidence) |
 | **从聊天提出改进并取回成果** | [改进与成长进度](interaction-persona.md#growth-demand-ui) | [0.1.41 需求成长验证](delivery-validation.md#growth-demand-evidence) |
-| **查看刚完成的基础验收** | [原始验收与修复复验](delivery-validation.md#foundation-repair-evidence) | [下一步实施](core-bootstrap.md#next-implementation) |
+| **查看本轮修复与验收** | [K2 与关联 K1 基础修复](delivery-validation.md#k2-completion-evidence) | [原始基础验收](delivery-validation.md#foundation-repair-evidence) |
 | **查看当前实现离个人助手目标还有多远** | [个人核心评价与工程审计](decisions-review.md#personal-core-assessment) | [助手核心架构图](architecture.md#pc-runtime-convergence) → [既有测试证据](delivery-validation.md#current-audit-evidence) |
 | **用自然语言执行首条任务** | [聊天任务入口](core-bootstrap.md#conversation-task-entry) | [执行边界与记录](tasks-agents.md#sample-task-runtime) |
 | **查看模块运行和准备升级** | [设置模块入口](core-bootstrap.md#module-monitor-entry) | [监控与维护边界](health-maintenance.md#module-monitoring) |
+| **看后续优化、缺口与原方案下一步** | [后续方向指南：16项工作清单](development-guide.md#direction-start) | [当前推进队列](core-bootstrap.md#near-term-work-queue) → [对应验收](development-guide.md#direction-evidence) |
 | **继续设计或开发** | [下一步具体工作](core-bootstrap.md#next-implementation) | [技术栈与代码结构](stack-project-layout.md#technology-selection) → [下一阶段验收](delivery-validation.md#next-k1-acceptance) |
 
 <a id="project-status"></a>
 ## 目前做到哪里了？
 
-**本次更新 · 0.1.58 已启动：增加限定编程闭环和技能验证状态。** 四项工程指导可组合处理一个 Python 转换函数，真实运行提供的案例，交付差异，并支持明确应用和恢复。九项文字技能已增加 Google / Sol 共 108 次配对回答，设置页显示各模型的覆盖及问题、验证版本和最近成功任务。使用见[技能入口](core-bootstrap.md#native-skills-entry)，实际部署、测试和资源边界见[本轮证据](delivery-validation.md#skills-completion-evidence)。[记忆重复与差异核对](delivery-validation.md#memory-candidate-review-evidence)同期部署。
+**本次更新 · 0.1.64：** 设置 → 成长中心已接通自检、自愈、进化三标签及独立模型/备选/档位；[增量证据](delivery-validation.md#growth-purposes-evidence)。按主人要求停止重复验收，继续[后续开发](core-bootstrap.md#near-term-work-queue)。 已增加[仅此软件离线开关](models-offline.md#application-offline-control)，入口为设置 → 网络与离线；[本轮测试](delivery-validation.md#application-offline-evidence)与整机断网分别记录。 新增称呼与交流设置、带来源的话题推荐、相关事实选择和三库查询；取消/存储争用已修复。本轮本机实现与独立验证已收口，结果和剩余条件集中于 [K2 本轮收口](delivery-validation.md#k2-completion-evidence)。完整 K2 尚未签收：物理低配机、整机断网及主人体验仍须如实验收。
+
+**0.1.61 已有基础：**[多轮记忆最终回答先导](delivery-validation.md#memory-final-answer-evidence)已运行；修正自动记忆承诺与聊天任务的过时能力说明。16 次真实回答复验、24 条报告校准及69项针对回归通过各自判据，仍保留少量措辞模糊等局限。
+
+**0.1.60 已有基础：**[规则与语义候选统一核对](delivery-validation.md#rule-memory-review-evidence)已部署：旧记忆比较、纠正/遗忘屏障、本机重新整理；211 项回归与三组 UI 探针通过，核对的 11 个业务表未变化。后续扩大到人物、时序、资料和保留历史的多轮回答验证。
+
+**0.1.59 已有基础：**普通已保存会话选择 Google Flash，可边聊天边生成样例报告，并指定取消或修改尚未开始的报告；[使用方法](interaction-persona.md#mixed-report-ui)与[实测限制](delivery-validation.md#mixed-report-admission-evidence)。该范围继续保留，完整通用任务调度仍未验收。
+
+**0.1.58 已有基础：增加限定编程闭环和技能验证状态。** 四项工程指导可组合处理一个 Python 转换函数，真实运行提供的案例，交付差异，并支持明确应用和恢复。九项文字技能已增加 Google / Sol 共 108 次配对回答，设置页显示各模型的覆盖及问题、验证版本和最近成功任务。使用见[技能入口](core-bootstrap.md#native-skills-entry)，实际部署、测试和资源边界见[本轮证据](delivery-validation.md#skills-completion-evidence)。[记忆重复与差异核对](delivery-validation.md#memory-candidate-review-evidence)同期部署。
 
 **限定文档查询继续可用。** 在普通已保存会话选择 Google Flash，输入“查询 Electron 文档中的 ipcMain.handle 示例”，满足规则时自动生成只读 Context7 任务；其他请求保留草稿。条件见[文档任务入口](interaction-persona.md#dialogue-intent-shadow-ui)，先前 40 条校准＋160 条留出与真实调用见[0.1.57 证据](delivery-validation.md#dialogue-intent-shadow-evidence)。完整 V-DLG 和通用自动执行仍未验收。
 
@@ -46,9 +55,9 @@
 
 | 状态 | 当前情况 |
 |---|---|
-| **已有可运行原型 · 0.1.58** | 新增[轻量事实分类与日常/工作用途](knowledge-learning.md#memory-domain-runtime)；新增 [REA 软件结构与行为解析](tasks-agents.md#rea-skill-policy)及[发布目录与证据分页改进](delivery-validation.md#rea-improvement-evidence)、[ASAR 与关注项](delivery-validation.md#rea-asar-focus-evidence)； 新增[候选事实来源与遗忘保护](knowledge-learning.md#candidate-fact-provenance)； 新增[候选记忆与未结事项](interaction-persona.md#personal-candidates-ui)、[中断重新分析](interaction-persona.md#growth-demand-ui)；新增[真实任务状态接续](interaction-persona.md#work-continuity-ui)； 新增[会话需求成长与真实交付](interaction-persona.md#growth-demand-ui)； 新增[有来源的话题接续](interaction-persona.md#continuity-ui)；保留[个人记忆指令与基础交流设置](interaction-persona.md#personal-core-ui)； 已修复[基础启动隔离与响应预算](delivery-validation.md#foundation-repair-evidence)；保留[限定代码与技能成长闭环](core-bootstrap.md#evolution-loop-entry)；新增[本地精确计算](core-bootstrap.md#calculator-entry)；新增[原生技能、源码报告与齿轮科普闭环](core-bootstrap.md#native-skills-entry)；新增[并行资源与延迟监控](core-bootstrap.md#parallel-runtime-entry)；保留[跨项目联合知识查询](core-bootstrap.md#memory-view-entry)；保留[本地模型启停与离线报告](core-bootstrap.md#offline-task-entry)；保留[会话关联任务与真实报告下载](core-bootstrap.md#conversation-task-entry)；保留[自然语言目录报告与产物核验](core-bootstrap.md#sample-task-entry)；保留[可缩放导航与右侧文件工作区](interaction-persona.md#workbench-layout)；保留[记忆/扩展真实状态](health-maintenance.md#module-monitoring)与[已校验种子入口](knowledge-learning.md#seed-runtime-entry)；保留[项目资源与工程文件](interaction-persona.md#project-resource-workbench)、[MCP / 技能管理入口](interaction-persona.md#extension-management-ui)，保留[项目资料检索与来源预览](interaction-persona.md#project-knowledge-ui)，保留[明确事实记忆](interaction-persona.md#explicit-memory-ui)，保留[本机会话自动保存与紧凑导出](interaction-persona.md#conversation-archive-ui)，保留[本会话要求与上下文编排](interaction-persona.md#composer-context-note)，保留[设置模块监控与升级](core-bootstrap.md#module-monitor-entry)，保留[拖拽附件与图片输入](interaction-persona.md#composer-attachments)，保留[页面配色](interaction-persona.md#workbench-appearance)，保留[模型与费用后台](core-bootstrap.md#model-admin-entry)、Eachlabs Claude、托盘、任务恢复、项目根目录和会话停止；验证见[分版本证据](delivery-validation.md#versioned-evidence)。 |
-| **下一步重点** | 最新优先级为[统一对话、自动分流与文字/语音并行改造](core-bootstrap.md#dialogue-upgrade-order)，回复回执、有限恢复、普通上下文与限定后台模型分槽已落地，下一步做自动意图识别的影子评估；完整隔离与语音输入仍待实现；以下是已有基础和记忆方向的剩余工作。[基础修复已复验](delivery-validation.md#foundation-repair-evidence)：启动资产隔离、资源面板测试和限定成长链已补证；0.1.39 已接通明确记忆指令和基础持久表达；0.1.40 已补有来源的明确话题接续；0.1.41 已接通已知目录导出需求、成长和实际交付；0.1.42 已补真实任务状态关联、变化失效和跨会话核对；当前范围的[个人核心联合验收已完成](delivery-validation.md#companion-journey-evidence)；0.1.43 已增加重新分析入口和按需中文候选整理；0.1.44 已补[新候选事实来源与纠正/遗忘保护](delivery-validation.md#memory-provenance-evidence)，0.1.47 已补[事实分类与用途子集](delivery-validation.md#memory-domain-evidence)，后续做提取器影子对照与完整受众隔离；[本轮验收与完整 K2 缺口](delivery-validation.md#recovery-candidates-evidence)区分新功能、隔离离线及本机 5 分钟资源结果。整机断网另行安排，普通 PC 长时和完整阶段出口未通过。见[实施优先级](core-bootstrap.md#next-implementation)。 |
-| **仍属设计目标** | 完整多形态人格、自动相关经历召回与完整主动跟进尚未形成核心闭环；自动记忆提取、完整知识检索、多设备共同体、任意源码自主编程发布、完整语音和 NPC 世界亦未实现。 |
+| **已有可运行原型 · 0.1.64** | 新增[轻量事实分类与日常/工作用途](knowledge-learning.md#memory-domain-runtime)；新增 [REA 软件结构与行为解析](tasks-agents.md#rea-skill-policy)及[发布目录与证据分页改进](delivery-validation.md#rea-improvement-evidence)、[ASAR 与关注项](delivery-validation.md#rea-asar-focus-evidence)； 新增[候选事实来源与遗忘保护](knowledge-learning.md#candidate-fact-provenance)； 新增[候选记忆与未结事项](interaction-persona.md#personal-candidates-ui)、[中断重新分析](interaction-persona.md#growth-demand-ui)；新增[真实任务状态接续](interaction-persona.md#work-continuity-ui)； 新增[会话需求成长与真实交付](interaction-persona.md#growth-demand-ui)； 新增[有来源的话题接续](interaction-persona.md#continuity-ui)；保留[个人记忆指令与基础交流设置](interaction-persona.md#personal-core-ui)； 已修复[基础启动隔离与响应预算](delivery-validation.md#foundation-repair-evidence)；保留[限定代码与技能成长闭环](core-bootstrap.md#evolution-loop-entry)；新增[本地精确计算](core-bootstrap.md#calculator-entry)；新增[原生技能、源码报告与齿轮科普闭环](core-bootstrap.md#native-skills-entry)；新增[并行资源与延迟监控](core-bootstrap.md#parallel-runtime-entry)；保留[跨项目联合知识查询](core-bootstrap.md#memory-view-entry)；保留[本地模型启停与离线报告](core-bootstrap.md#offline-task-entry)；保留[会话关联任务与真实报告下载](core-bootstrap.md#conversation-task-entry)；保留[自然语言目录报告与产物核验](core-bootstrap.md#sample-task-entry)；保留[可缩放导航与右侧文件工作区](interaction-persona.md#workbench-layout)；保留[记忆/扩展真实状态](health-maintenance.md#module-monitoring)与[已校验种子入口](knowledge-learning.md#seed-runtime-entry)；保留[项目资源与工程文件](interaction-persona.md#project-resource-workbench)、[MCP / 技能管理入口](interaction-persona.md#extension-management-ui)，保留[项目资料检索与来源预览](interaction-persona.md#project-knowledge-ui)，保留[明确事实记忆](interaction-persona.md#explicit-memory-ui)，保留[本机会话自动保存与紧凑导出](interaction-persona.md#conversation-archive-ui)，保留[本会话要求与上下文编排](interaction-persona.md#composer-context-note)，保留[设置模块监控与升级](core-bootstrap.md#module-monitor-entry)，保留[拖拽附件与图片输入](interaction-persona.md#composer-attachments)，保留[页面配色](interaction-persona.md#workbench-appearance)，保留[模型与费用后台](core-bootstrap.md#model-admin-entry)、Eachlabs Claude、托盘、任务恢复、项目根目录和会话停止；验证见[分版本证据](delivery-validation.md#versioned-evidence)。 |
+| **当前交付重点** | 按主人最新要求，保存 v0.1.64 GitHub 基线后推进 K3 编码协作；顺序见[当前推进队列](core-bootstrap.md#near-term-work-queue)。K2 已有结果和未验项见[K2 收口](delivery-validation.md#k2-completion-evidence)，保留门槛而不重复验收。原需求去向见[后续方向指南](development-guide.md#direction-requirements)。 |
+| **仍属设计目标** | 完整多形态人格、通用语义经历召回、完整主动跟进、自动正式记忆建档、完整知识检索、多设备共同体、任意源码自主编程发布、完整语音和 NPC 世界尚未实现。已有词法相关推荐与按需记忆候选不等于这些完整能力。 |
 
 以[当前实现说明](core-bootstrap.md#current-implementation)和[分版本验证记录](delivery-validation.md#versioned-evidence)为准。文档中的设计方案不代表功能已经上线。
 
@@ -103,40 +112,41 @@
 | 章 | 文档 | 这章回答什么 |
 |---|---|---|
 | 04 | [最小核心、初始资产与开发路线](core-bootstrap.md) | 个人助手与自主成长核心从哪里开始，怎样沿 K0—K6 扩展？ |
-| 05 | [系统架构、运行边界与模块职责](architecture.md) | 个人助手核心如何连接记忆、模型、任务与可替换能力？ |
-| 06 | [主人利益原则、身份授权与停止控制](security-sovereignty.md) | 当前个人使用边界是什么，哪些监督与认证设计已延期？ |
-| 07 | [公共接口与数据契约](contracts.md) | 模块之间怎样交换任务、事件和记忆数据？ |
-| 08 | [技术栈、源码目录与运行数据](stack-project-layout.md) | 选哪些技术，代码放哪里，开源组件如何取舍？ |
+| 05 | [后续方向指南：现状、缺口与优化工作清单](development-guide.md) | 当前版本还缺什么、先优化哪里，原方案的后续工作怎样落到代码与验收？ |
+| 06 | [系统架构、运行边界与模块职责](architecture.md) | 个人助手核心如何连接记忆、模型、任务与可替换能力？ |
+| 07 | [主人利益原则、身份授权与停止控制](security-sovereignty.md) | 当前个人使用边界是什么，哪些监督与认证设计已延期？ |
+| 08 | [公共接口与数据契约](contracts.md) | 模块之间怎样交换任务、事件和记忆数据？ |
+| 09 | [技术栈、源码目录与运行数据](stack-project-layout.md) | 选哪些技术，代码放哪里，开源组件如何取舍？ |
 
 <a id="part-runtime"></a>
 ### 第三篇 · 智能运行与多设备协同
 
 | 章 | 文档 | 这章回答什么 |
 |---|---|---|
-| 09 | [模型路由、本地模型与离线生存](models-offline.md) | 用哪些云端和本地模型，怎样切换与离线降级？ |
-| 10 | [记忆、知识库与持续学习](knowledge-learning.md) | 记住什么，怎样检索、纠正、遗忘和持续学习？ |
-| 11 | [任务、动作、多 Agent 与资源调度](tasks-agents.md) | 怎样一边交流一边执行任务，如何组织多 Agent？ |
-| 12 | [离线自治、多设备共同体与重连](federation.md) | 断网怎样独立工作，重连怎样共享记忆与协同？ |
+| 10 | [模型路由、本地模型与离线生存](models-offline.md) | 用哪些云端和本地模型，怎样切换与离线降级？ |
+| 11 | [记忆、知识库与持续学习](knowledge-learning.md) | 记住什么，怎样检索、纠正、遗忘和持续学习？ |
+| 12 | [任务、动作、多 Agent 与资源调度](tasks-agents.md) | 怎样一边交流一边执行任务，如何组织多 Agent？ |
+| 13 | [离线自治、多设备共同体与重连](federation.md) | 断网怎样独立工作，重连怎样共享记忆与协同？ |
 
 <a id="part-evolution"></a>
 ### 第四篇 · 自主成长与维护
 
 | 章 | 文档 | 这章回答什么 |
 |---|---|---|
-| 13 | [自主进化、外部编码协作与版本发布](evolution-release.md) | 怎样自编工具、改进模块，并验证和回退？ |
-| 14 | [开发环境、多语言工具链与构建](toolchains.md) | 怎样准备编译环境，构建和测试不同语言的程序？ |
-| 15 | [系统健康、防退化与自愈](health-maintenance.md) | 怎样发现故障与结构退化，清理和修复隐患？ |
+| 14 | [自主进化、外部编码协作与版本发布](evolution-release.md) | 怎样自编工具、改进模块，并验证和回退？ |
+| 15 | [开发环境、多语言工具链与构建](toolchains.md) | 怎样准备编译环境，构建和测试不同语言的程序？ |
+| 16 | [系统健康、防退化与自愈](health-maintenance.md) | 怎样发现故障与结构退化，清理和修复隐患？ |
 
 <a id="part-evidence"></a>
 ### 第五篇 · 验证与参考
 
 | 章 | 文档 | 这章回答什么 |
 |---|---|---|
-| 16 | [能力验收、故障演练与评估证据](delivery-validation.md) | 哪些能力测过，证据在哪里，下一阶段怎样验收？ |
-| 17 | [架构决策、批判性评审与评分](decisions-review.md) | 当前实现离伙伴核心有多远，工程评分和架构取舍依据是什么？ |
-| 18 | [架构与流程图册](architecture-atlas.md) | 在哪里集中查看架构图和流程图？ |
-| 19 | [研究资料与证据边界](references.md) | 设计和选型参考了哪些论文与官方资料？ |
-| 20 | [文档维护规范](MAINTENANCE.md) | 以后怎样归类、更新、检查和清理文档？ |
+| 17 | [能力验收、故障演练与评估证据](delivery-validation.md) | 哪些能力测过，证据在哪里，下一阶段怎样验收？ |
+| 18 | [架构决策、批判性评审与评分](decisions-review.md) | 当前实现离伙伴核心有多远，工程评分和架构取舍依据是什么？ |
+| 19 | [架构与流程图册](architecture-atlas.md) | 在哪里集中查看架构图和流程图？ |
+| 20 | [研究资料与证据边界](references.md) | 设计和选型参考了哪些论文与官方资料？ |
+| 21 | [文档维护规范](MAINTENANCE.md) | 以后怎样归类、更新、检查和清理文档？ |
 <!-- book-tree:end -->
 
 ---
@@ -157,6 +167,7 @@
 |---|---|
 | [product-requirements.md](product-requirements.md) | 产品文案、作用、R/N 需求与能力上限 |
 | [core-bootstrap.md](core-bootstrap.md) | 当前启动、聊天、预检与独立控制操作、迁移、SeedBundle、知识/规则/技能种子、K0—K6 与阶段内工作包及技能接入归属、首个演示 |
+| [development-guide.md](development-guide.md) | 当前版本跨主题差距与优化工作项、原需求去向、未验项目及滚动维护；不另定K路线或验收门 |
 | [architecture.md](architecture.md) | 总体视图、部署、信任边界、数据所有权、唯一控制权威 |
 | [security-sovereignty.md](security-sovereignty.md) | G0、权限、委派、安全代际、锁存、离线解锁 |
 | [federation.md](federation.md) | 单机/局域网/外网模式、统一意志的一致性边界、所有权、租约、记忆复制协议、同步选型与冲突 |
@@ -173,7 +184,7 @@
 | [delivery-validation.md](delivery-validation.md) | M 验收门、R/N 追踪、阶段出口验收、B/H/V-MEM/V-PC/V-UI/V-OSS/V-SKL/V-ANI 测试、记忆资源预算、选型与故障证据 |
 | [decisions-review.md](decisions-review.md) | ADR、历史设计评分、EV 证据等级、取舍与待验证假设 |
 | [references.md](references.md) | 稳定 S 系列来源、使用范围与论据限制 |
-| [architecture-atlas.md](architecture-atlas.md) | 19 张图的导航、图源和渲染说明 |
+| [architecture-atlas.md](architecture-atlas.md) | 架构图的导航、图源和渲染说明 |
 | [MAINTENANCE.md](MAINTENANCE.md) | 文档权威、章节树与技术文档归类、状态、增删改、检查、删除与历史规则 |
 
 ### 文档与资产结构
@@ -184,7 +195,7 @@ Jarvis/
 ├── AGENTS.md                       # AI 维护约定
 ├── docs/
 │   ├── README.md                   # 本页，完整导航和权威地图
-│   ├── <topic>.md                  # 上表的20篇当前主题页
+│   ├── <topic>.md                  # 按 manifest 登记的当前主题页
 │   ├── manifest.json              # 登记、图源/图片摘要、迁移依据
 │   ├── assets/                   # 品牌设计等非架构图资产，由 manifest 登记
 │   └── diagrams/
@@ -215,7 +226,7 @@ python tools/check_docs.py --root .
 
 整体设计状态仍为 proposed；accepted、implemented、verified 的区别见[状态与证据口径](MAINTENANCE.md#status-and-evidence)。K0—K6 是唯一实施顺序，M0—M6 是能力验收门。
 
-0.1.0—0.1.11 的历史证据与当前 0.1.12 聊天停止验证分别保留在[验收章](delivery-validation.md#versioned-evidence)；历史设计评分见[评审章](decisions-review.md#critical-review)，不能当作当前产品成绩。原文档迁移依据保存在 manifest 的 migration 字段。
+各版本的历史证据与当前发布验证分别保留在[验收章](delivery-validation.md#versioned-evidence)；历史设计评分见[评审章](decisions-review.md#critical-review)，不能当作当前产品成绩。原文档迁移依据保存在 manifest 的 migration 字段。
 
 已按主人 2026-10-16 的明确要求建立 Git，并关联 [Samuel521199/JarvisSystem](https://github.com/Samuel521199/JarvisSystem)；后续历史按[受控历史与退役规则](MAINTENANCE.md#retirement-and-history)管理。既有版本报告仍保留原时点的文件摘要，不补造历史提交。现已增加显式启用的限定工具成长观察器，范围见[进化章](evolution-release.md#bounded-evolution-loop)；启动与运行边界见[核心章](core-bootstrap.md#current-implementation)。
 

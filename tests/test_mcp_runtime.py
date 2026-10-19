@@ -180,6 +180,23 @@ class TaskTests(unittest.TestCase):
         result=self.service.run(self.prepare()['action']['action_id'])
         self.assertEqual(result['action']['status'],'UNKNOWN');self.assertNotIn('secret',result['action']['error']['message'])
 
+    def test_offline_blocks_before_transport_and_skips_remote_cleanup(self):
+        from jarvis_core.network_policy import NetworkPolicy
+        network=NetworkPolicy(self.core.data_dir)
+        network.change(True,0)
+        result=self.service.run(self.prepare()['action']['action_id'])
+        self.assertEqual(result['action']['error']['code'],'network_offline')
+        self.assertFalse(self.protocol.calls)
+        network.change(False,1)
+        def change(body,response):
+            if body['method']=='tools/call':network.change(True,2)
+        self.protocol.change=change
+        result=self.service.run(self.prepare()['action']['action_id'])
+        self.assertEqual(result['action']['status'],'UNKNOWN')
+        self.assertIsNone(result['artifact'])
+        self.assertEqual([json.loads(r.content)['method'] for r in self.protocol.calls],
+                         ['initialize','notifications/initialized','tools/list','tools/call'])
+
     def test_cancel_before_dispatch_and_argument_boundary(self):
         record=self.prepare();self.core.cancel(record['task']['task_id'])
         self.assertEqual(self.service.run(record['action']['action_id'])['action']['status'],'CANCELLED');self.assertFalse(self.protocol.calls)

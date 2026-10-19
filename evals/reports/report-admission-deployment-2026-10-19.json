@@ -1,0 +1,124 @@
+{
+  "status": "SUCCEEDED",
+  "source_version": "0.1.59",
+  "data_dir": "C:\\Users\\samuel\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\Jarvis\\data",
+  "previous_version": "0.1.58",
+  "previous_instance": "34da810d4c5fd91c735ad709c0b61dfa",
+  "current_instance": "562b80b6512eb8a47b8d8456fbea1601",
+  "idle_graceful_reload": true,
+  "startup_from_absent": false,
+  "served_sha256": {
+    "dialogue.js": "a5a62f8ab2c15601fff468e29b38cd5e1efcfcf3cfb9bd3b5b3f00cebd27c4ec",
+    "resources.js": "586e03243199134cec0c4da7bedde691f904f73ca8e7aee09ea2dd0202c99e2b",
+    "workspace.js": "8f5a1bd76ba701c36eabae00758ada7181460715d68d6d2479635508287c4a57",
+    "conversation_tasks.js": "5e2037607e548341669dee1a09a4d442cf877196723f5579c94db66cde7220cf",
+    "mcp_manager.js": "0c74df31951193bbe830bdfe24a10eb90b9cb31bb604ce54109acc5fb1cd9702"
+  },
+  "calculation": "84",
+  "personal_read_only": true,
+  "duplicate_did_not_repeat_calculation": true,
+  "cancel_before_submit": true,
+  "restart_fence": true,
+  "instance_fence": true,
+  "empty_restart_queue_reviewed_and_resumed": true,
+  "admission_ms": 37.187,
+  "backups": {
+    "/api/speech/fast": "stopped",
+    "/api/speech": "stopped"
+  },
+  "cloud_calls": 0,
+  "limits": "One local calculator and personal-settings query; no paid model, microphone, task replay, persistent dialogue recovery or physical voice timing.",
+  "user_tables_before": {
+    "memory.db:facts": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "memory.db:receipts": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "memory.db:fact_origins": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "memory.db:candidate_bindings": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "workspace.db:projects": {
+      "rows": 6,
+      "sha256": "95ffd437c5a87145a5e9f8f78c7f6224a937602bf7b2025551f4e7d4cd761d98"
+    },
+    "workspace.db:outputs": {
+      "rows": 6,
+      "sha256": "d1946744e75acefce04b54e940a679288daab9c9d749ca5caac9b229ff4c8933"
+    },
+    "extensions.db:entries": {
+      "rows": 1,
+      "sha256": "9854dc25337e93858813a8d866995ac08cfdaf04a9ea69ba55d1dbcf850c0033"
+    },
+    "extensions.db:skill_policies": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "extensions.db:skill_decisions": {
+      "rows": 6,
+      "sha256": "4e515f57684180489250e4176ecfe0fc5edb7c12e2fd079c24a71da089658c5f"
+    },
+    "extensions.db:mcp_policies": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "conversations.db:conversations": {
+      "rows": 11,
+      "sha256": "954e0d13f6bc3919b7752f34c6e3bb40a5361aec080dbd7ae9354c96c89b9504"
+    }
+  },
+  "user_tables_after": {
+    "memory.db:facts": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "memory.db:receipts": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "memory.db:fact_origins": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "memory.db:candidate_bindings": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "workspace.db:projects": {
+      "rows": 6,
+      "sha256": "95ffd437c5a87145a5e9f8f78c7f6224a937602bf7b2025551f4e7d4cd761d98"
+    },
+    "workspace.db:outputs": {
+      "rows": 6,
+      "sha256": "d1946744e75acefce04b54e940a679288daab9c9d749ca5caac9b229ff4c8933"
+    },
+    "extensions.db:entries": {
+      "rows": 1,
+      "sha256": "9854dc25337e93858813a8d866995ac08cfdaf04a9ea69ba55d1dbcf850c0033"
+    },
+    "extensions.db:skill_policies": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "extensions.db:skill_decisions": {
+      "rows": 6,
+      "sha256": "4e515f57684180489250e4176ecfe0fc5edb7c12e2fd079c24a71da089658c5f"
+    },
+    "extensions.db:mcp_policies": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "conversations.db:conversations": {
+      "rows": 11,
+      "sha256": "954e0d13f6bc3919b7752f34c6e3bb40a5361aec080dbd7ae9354c96c89b9504"
+    }
+  },
+  "user_tables_unchanged": true
+}

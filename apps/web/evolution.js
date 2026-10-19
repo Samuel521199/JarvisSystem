@@ -1,59 +1,59 @@
-/* Independent growth panel. Opening settings never starts a paid coding job. */
+/* Growth policies share one bounded worker; viewing this page never invokes a model. */
 (()=>{'use strict';
-const view=document.getElementById('modules-view');if(!view)return;
+const view=document.getElementById('growth-view');if(!view)return;
 const nonce=document.querySelector('meta[name="jarvis-nonce"]').content;
-const panel=document.createElement('section');panel.className='panel module-upgrades';panel.id='evolution-panel';
-panel.innerHTML=`<div class="panel-heading"><div><h2>自主成长 · 代码与技能</h2><p>自动发现缺失或退化 → 生成代码 → 隔离验收 → 启用 → 自检与回退。</p></div></div>
-<p id="evolution-summary" role="status">正在读取成长状态…</p>
-<p class="module-note">当前对象：文件清单导出工具。v1 支持 CSV / Markdown，v2 增加 TSV。生成的 Python 与技能说明独立成包，可查看源码；核心宿主和任意软件尚不自动改写。</p>
-<form id="evolution-policy"><label>编码模型<select id="evolution-route" required></select></label>
-<label>期望能力<select id="evolution-target"><option value="1">v1 · CSV / Markdown</option><option value="2">v2 · 增加 TSV，保留旧能力</option></select></label>
-<label><input id="evolution-enabled" type="checkbox"> 自动检查并修复</label>
-<p class="muted">启用后每 5 分钟检查一次；缺失、低于期望版本或退化时自动研发。每次最多 2 个候选，每天最多 4 个自动事件。健康检查不调用模型，编码使用所选账户额度。</p>
-<button class="secondary" type="submit">保存成长设置</button></form>
-<div class="module-release-actions"><button class="primary" id="evolution-start" type="button">生成 / 升级到期望版本</button><button class="secondary" id="evolution-check" type="button">立即自检</button><button class="secondary" id="evolution-rollback" type="button">回退上个版本</button><button class="secondary" id="evolution-stop" type="button">停止本次</button></div>
-<p id="evolution-error" class="error" role="alert" hidden></p>
-<details><summary>调用已发布技能</summary><p>输入已有的文件清单；工具不扫描磁盘。结果经过独立核验后显示。</p><label>JSON 数据<textarea id="evolution-input" rows="5" spellcheck="false">{"format":"csv","entries":[{"path":"hello.txt","size":12},{"path":"readme.md","size":48}]}</textarea></label><button class="secondary" id="evolution-execute" type="button">执行已发布工具</button><pre id="evolution-output" tabindex="0"></pre></details>
-<h3>改进记录与证据</h3><div id="evolution-jobs"></div><details id="evolution-detail-box"><summary>任务详情 / 候选源码</summary><pre id="evolution-detail" tabindex="0"></pre></details>`;
-view.prepend(panel);
-const skillsView=document.getElementById('skill-view');
-if(skillsView){const note=document.createElement('p');note.className='module-note';const link=document.createElement('a');link.href='#modules';link.textContent='生成工具技能与自动升级 → 模块与升级';note.append(link);skillsView.prepend(note);}
+const lanes=['inspect','heal','evolve'];
+const copy={inspect:{name:'自检',en:'INSPECT',title:'看清状态，再决定下一步。',note:'读取活动技能的清单、摘要和契约。快速检查不运行模型，不修改代码，也不自动升级。',action:'立即快速自检'},heal:{name:'自愈',en:'HEAL',title:'修复故障，找回原来的能力。',note:'只恢复已确认损坏的技能契约。先尝试可用版本，再隔离修复；健康的旧版本不会因此升级。',action:'检查并修复故障'},evolve:{name:'进化',en:'EVOLVE',title:'带着明确目标，多学一项本领。',note:'按目标生成候选，在隔离环境中通过验收后启用。当前支持文件清单导出技能，聊天仍可继续。',action:'生成 / 升级技能'}};
+const modelFields=lane=>'<div class="growth-model-grid">'+['primary','fallback'].map(role=>'<fieldset class="growth-model"><legend>'+(role==='primary'?'主选模型':'备选模型')+'</legend><label>模型<select id="evolution-'+lane+'-'+role+'"></select></label><label>推理档位<select id="evolution-'+lane+'-'+role+'-reasoning"></select></label></fieldset>').join('')+'</div>';
+view.innerHTML='<section id="evolution-panel" data-lane="inspect"><div class="growth-tabs" role="tablist" aria-label="成长能力">'+lanes.map((lane,i)=>'<button type="button" role="tab" id="evolution-tab-'+lane+'" aria-controls="evolution-pane-'+lane+'" aria-selected="'+!i+'" tabindex="'+(i?-1:0)+'" data-lane="'+lane+'"><span>'+copy[lane].name+'</span><small>'+copy[lane].en+'</small></button>').join('')+'</div>'+
+'<div class="growth-hero"><div><span id="evolution-state" class="growth-state">正在读取</span><h2 id="evolution-heading"></h2><p id="evolution-description"></p><p id="evolution-summary" role="status"></p></div><div class="growth-art" aria-hidden="true"><div class="growth-orbit"></div><div class="growth-brackets"></div><img src="/brand/icon-256.png" alt="" width="110" height="110"><div class="growth-scan"></div><span>J / ADAPTIVE CORE</span></div></div>'+
+'<p class="growth-scope">当前范围 · 文件清单导出技能。宿主、记忆和任意第三方组件尚不自动改写。</p><form id="evolution-policy">'+lanes.map(lane=>'<section role="tabpanel" id="evolution-pane-'+lane+'" aria-labelledby="evolution-tab-'+lane+'" '+(lane==='inspect'?'':'hidden')+' tabindex="0">'+
+'<div class="growth-actions"><button class="primary" type="button" id="evolution-act-'+lane+'">'+copy[lane].action+'</button>'+(lane==='inspect'?'<button class="secondary" type="button" id="evolution-analyze">请模型解释检查结果</button>':lane==='heal'?'<button class="secondary" type="button" id="evolution-rollback">回退上个版本</button>':'')+'</div>'+
+'<div class="growth-options">'+(lane==='inspect'?'<label class="growth-check"><input type="checkbox" id="evolution-enabled">定期快速自检</label><label>检查间隔<select id="evolution-interval"><option value="300">5 分钟</option><option value="900">15 分钟</option><option value="1800">30 分钟（新安装默认）</option><option value="3600">1 小时</option><option value="21600">6 小时</option></select></label><p>关闭后仍可手动检查。周期检查只读取当前工具包，模型解释需单独点击；周期检查为 0 token。</p>':lane==='heal'?'<label class="growth-check"><input type="checkbox" id="evolution-auto-heal">允许对确认的技能故障自动自愈</label><p>仅接收巡检和实际执行发现的包故障，不处理能力差距。未开启巡检时，仍可响应实际执行故障。每个自动事件最多 2 次模型请求，每日最多 4 个事件；同一故障去重。</p>':'<label>本次能力目标<select id="evolution-target"><option value="1">v1 · CSV / Markdown</option><option value="2">v2 · 增加 TSV，保留旧能力</option></select></label><p>进化由明确的需求或上方按钮启动，没有定时自动升级。先保存目标和模型设置再运行。</p>')+'</div>'+
+'<h3>'+copy[lane].name+'的模型策略</h3>'+modelFields(lane)+'<p class="growth-hint">'+(lane==='inspect'?'此处模型只供主动请求的解释使用。':'调用记入账户用量。')+'只有明确拒绝或连接未建立才可切到备选；超时、结果未知或输出不完整时停止。每单合计最多 2 次请求。</p></section>').join('')+
+'<div class="growth-save"><button class="secondary" id="evolution-save" type="submit">保存成长设置</button><button class="text-button" id="evolution-reset" type="button">重新载入设置</button><span id="evolution-draft" role="status"></span></div></form>'+
+'<p id="evolution-error" class="error" role="alert" hidden></p><div class="growth-record-heading"><h3 id="evolution-record-title">自检记录</h3><button class="secondary" id="evolution-stop" type="button" disabled>停止当前任务</button></div><p id="evolution-result" role="status"></p><div id="evolution-jobs"></div>'+
+'<details id="evolution-tool"><summary>调用已发布的文件清单技能</summary><p>输入已有清单，不扫描磁盘。</p><label>JSON 数据<textarea id="evolution-input" rows="4" spellcheck="false">{"format":"csv","entries":[{"path":"hello.txt","size":12}]}</textarea></label><button class="secondary" type="button" id="evolution-execute">执行工具</button><pre id="evolution-output" tabindex="0"></pre></details>'+
+'<details id="evolution-detail-box"><summary>任务回执 / 候选源码</summary><button class="text-button" id="evolution-source" type="button">查看当前技能源码</button><pre id="evolution-detail" tabindex="0"></pre></details></section>';
 const $=id=>document.getElementById('evolution-'+id);
-let data=null,timer=null,loading=false,visible=false,loadedPolicy=false,dirty=false,submitting=false,selectedJob=null;
-const statuses={QUEUED:'排队',RUNNING:'执行中',OBSERVING:'发布后观察',SUCCEEDED:'已完成',FAILED:'失败',UNKNOWN:'结果待核对',CANCELLED:'已停止',INTERRUPTED:'进程中断'};
-async function api(path,body){const response=await fetch(path,{method:body===undefined?'GET':'POST',headers:{'X-Jarvis-Nonce':nonce,...(body===undefined?{}:{'Content-Type':'application/json'})},body:body===undefined?undefined:JSON.stringify(body)});const result=await response.json();if(!response.ok)throw Error(result.user_message||result.error?.message||result.error||'成长服务暂不可用');return result;}
+let data=null,models=[],timer=null,loading=false,visible=false,loadedModels=false,dirty=false,submitting=false,selectedJob=null,lane='inspect',draftRevision=null,recordsKey='';
+const statuses={PROPOSED:'待启动',QUEUED:'排队',RUNNING:'执行中',OBSERVING:'发布后观察',SUCCEEDED:'已完成',FAILED:'失败',UNKNOWN:'结果待核对',CANCELLED:'已停止',INTERRUPTED:'进程中断'};
+const actions={check:'快速自检',analyze:'模型解释',heal:'自愈',ensure:'进化',fulfill:'需求进化',execute:'执行工具',rollback:'回退'};
+const labels={healthy:'包完整，满足当前目标',capability_gap:'当前包完整，有尚未实现的目标能力',missing_optional:'可选技能尚未生成',fault:'发现包故障'};
+async function api(path,body){const control=new AbortController(),timeout=setTimeout(()=>control.abort(),22000);try{const response=await fetch(path,{method:body===undefined?'GET':'POST',cache:'no-store',headers:{'X-Jarvis-Nonce':nonce,...(body===undefined?{}:{'Content-Type':'application/json'})},body:body===undefined?undefined:JSON.stringify(body),signal:control.signal});const result=await response.json();if(!response.ok)throw Error(result.user_message||result.message||'成长服务暂不可用');return result;}finally{clearTimeout(timeout);}}
 function error(text){$('error').textContent=text;$('error').hidden=!text;}
-function showJob(detail){$('detail').textContent=JSON.stringify(detail,null,2);if(detail.result?.text!==undefined)$('output').textContent=detail.result.text;}
+function option(select,value,label){const el=document.createElement('option');el.value=value;el.textContent=label;select.append(el);}
+function modelChoice(id,selection,optional){const select=$(id);select.replaceChildren();if(optional)option(select,'','不启用备选');for(const m of models)option(select,m.provider+'::'+m.model,m.label+' · '+m.provider);if(selection&&!models.some(m=>m.provider+'::'+m.model===selection.route))option(select,selection.route,selection.route+'（需检查可用性）');select.value=selection?.route||'';reasoning(id,selection?.reasoning||'');}
+function reasoning(id,selected=''){const choice=$(id+'-reasoning');choice.replaceChildren();option(choice,'','使用模型默认');const model=models.find(m=>m.provider+'::'+m.model===$(id).value);for(const level of model?.reasoning_levels||[])option(choice,level,level);if(selected&&!(model?.reasoning_levels||[]).includes(selected))option(choice,selected,selected+'（需检查可用性）');choice.value=selected;choice.disabled=!$(id).value||!model?.reasoning_levels?.length;}
+function fillPolicy(){const s=data.settings;draftRevision=s.revision;$('enabled').checked=s.enabled;$('auto-heal').checked=s.auto_heal;$('interval').value=String(s.interval_seconds);$('target').value=String(s.target_revision);for(const p of lanes)for(const role of ['primary','fallback'])modelChoice(p+'-'+role,s.models[p][role],role==='fallback');}
+function getModels(){return Object.fromEntries(lanes.map(p=>[p,Object.fromEntries(['primary','fallback'].map(role=>{const id=p+'-'+role;return [role,$(id).value?{route:$(id).value,reasoning:$(id+'-reasoning').value||null}:null];}))]));}
+function purpose(job){return job.purpose||(['check','analyze'].includes(job.action)?'inspect':['heal','rollback'].includes(job.action)?'heal':'evolve');}
+function showJob(detail){$('detail').textContent=JSON.stringify(detail,null,2);const r=detail.result;$('result').textContent=r?.advice||r?.message||(r?.classification?labels[r.classification]+' · '+new Date(r.checked_at).toLocaleString():r?.restored_revision?'已恢复 v'+r.restored_revision+' 的契约':r?.revision?'当前能力 v'+r.revision:detail.error?'任务停止：'+detail.error:'');if(r?.text!==undefined)$('output').textContent=r.text;}
 function render(){
- const active=data.packages.find(x=>x.id===data.selection.active),busy=data.busy||submitting;
- $('summary').textContent=`${active?'已启用 v'+active.revision+' · '+active.id.slice(0,12):'尚无已启用的生成技能'} · ${data.busy?'正在处理':'待命'} · ${data.settings.enabled?'自动检查已启用':'自动检查未启用'}`;
- for(const id of ['start','check','rollback','execute'])$(id).disabled=busy||(id==='start'&&dirty)||(id==='rollback'&&!data.selection.previous)||(id==='execute'&&!active);
- $('stop').disabled=!data.busy||submitting;
- $('policy').querySelector('button').disabled=busy;
- if(!dirty){$('enabled').checked=data.settings.enabled;$('target').value=String(data.settings.target_revision);$('route').value=data.settings.route;}
- $('jobs').replaceChildren();
- for(const job of data.jobs.slice(0,8)){
-  const row=document.createElement('div');row.className='module-job';
-  const button=document.createElement('button');button.className='text-button';button.type='button';button.textContent=`${statuses[job.status]||job.status} · ${job.action} · ${new Date(job.created_at).toLocaleString()}${job.error?' · '+job.error:''}`;
-  button.onclick=async()=>{try{selectedJob=job.id;showJob(await api('/api/evolution/jobs/'+job.id));$('detail-box').open=true;}catch(e){error(e.message);}};row.append(button);$('jobs').append(row);
- }
- if(active){const button=document.createElement('button');button.type='button';button.className='secondary';button.textContent='查看当前技能源码与清单';button.onclick=async()=>{try{selectedJob=null;$('detail').textContent=JSON.stringify(await api('/api/evolution/packages/'+active.id),null,2);$('detail-box').open=true;}catch(e){error(e.message);}};$('jobs').append(button);}
+ if(!data)return;const active=data.packages.find(x=>x.id===data.selection.active),busy=data.busy||submitting,current=data.jobs.find(x=>['QUEUED','RUNNING','OBSERVING'].includes(x.status));
+ const running=!!current&&purpose(current)===lane;$('panel').classList.toggle('is-running',running);$('state').textContent=running?'正在'+copy[lane].name:current?'另一能力正在处理 · 本页待命':'待命';
+ $('summary').textContent=(active?'已启用 v'+active.revision:'尚无活动技能')+' · '+(data.settings.enabled?'周期自检 '+data.settings.interval_seconds/60+' 分钟':'周期自检关闭')+' · '+(data.settings.auto_heal?'自动自愈已启用':'自动自愈关闭');
+ for(const p of lanes)$('act-'+p).disabled=busy||dirty;for(const id of ['analyze','execute','rollback'])$(id).disabled=busy||dirty||(id==='execute'&&!active)||(id==='rollback'&&!active);
+ $('stop').disabled=!data.busy||submitting;$('save').disabled=busy||!dirty;$('reset').disabled=busy;
+ for(const item of $('policy').querySelectorAll('.growth-model'))item.disabled=busy;
+ for(const id of ['enabled','auto-heal','interval','target'])$(id).disabled=busy;
+ $('draft').textContent=dirty?'有未保存的设置，运行前请保存':'设置已同步 · r'+data.settings.revision;
+ $('source').disabled=!active;$('tool').hidden=lane!=='evolve';
+ const jobs=data.jobs.filter(x=>purpose(x)===lane).slice(0,10);const key=JSON.stringify([lane,jobs]);if(key!==recordsKey){recordsKey=key;$('jobs').replaceChildren();if(!jobs.length){const empty=document.createElement('p');empty.className='growth-empty';empty.textContent='还没有'+copy[lane].name+'记录。';$('jobs').append(empty);}for(const job of jobs){const b=document.createElement('button');b.type='button';b.className='growth-job';const title=document.createElement('strong'),meta=document.createElement('span');title.textContent=(!job.purpose&&job.action==='check'?'历史混合维护':actions[job.action]||job.action)+' · '+(statuses[job.status]||job.status);meta.textContent=new Date(job.created_at).toLocaleString()+(job.error?' · '+job.error:'');b.append(title,meta);b.onclick=async()=>{try{selectedJob=job.id;showJob(await api('/api/evolution/jobs/'+job.id));$('detail-box').open=true;}catch(e){error(e.message);}};$('jobs').append(b);}}
 }
-async function load(){if(!visible||loading)return;loading=true;try{
- data=await api('/api/evolution');
- if(!loadedPolicy){const models=await api('/api/models');for(const m of models.models||[]){const option=document.createElement('option');option.value=m.provider+'::'+m.model;option.textContent=m.label+' · '+m.provider;$('route').append(option);}loadedPolicy=true;}
- render();
- if(selectedJob)showJob(await api('/api/evolution/jobs/'+selectedJob));
- if(data.monitor_error)error(data.monitor_error);
-}catch(e){error(e.message);}finally{loading=false;clearTimeout(timer);if(visible)timer=setTimeout(load,data?.busy?1500:10000);}}
-async function act(payload){if(submitting)return;submitting=true;error('');if(data)render();try{const job=await api('/api/evolution/jobs',{...payload,request_id:'ui-'+crypto.randomUUID().replaceAll('-','')});selectedJob=job.id;showJob(job);$('detail-box').open=true;}catch(e){error(e.message);}finally{submitting=false;await load();if(data)render();}}
-for(const el of [$('route'),$('enabled'),$('target')])el.addEventListener('change',()=>{dirty=true;if(data)render();});
-$('policy').onsubmit=async event=>{event.preventDefault();if(submitting)return;submitting=true;error('');try{data=await api('/api/evolution/policy',{enabled:$('enabled').checked,route:$('route').value,target_revision:Number($('target').value)});dirty=false;}catch(e){error(e.message);}finally{submitting=false;if(data)render();}};
-$('start').onclick=()=>act({action:'ensure',target_revision:Number($('target').value)});
-$('check').onclick=()=>act({action:'check'});
-$('rollback').onclick=()=>act({action:'rollback'});
-$('execute').onclick=()=>{try{const input=JSON.parse($('input').value);act({action:'execute',input});}catch{error('请填写有效 JSON。');}};
+function choose(next,focus=false){lane=next;recordsKey='';$('panel').dataset.lane=lane;for(const p of lanes){const on=p===lane;$('tab-'+p).setAttribute('aria-selected',String(on));$('tab-'+p).tabIndex=on?0:-1;$('pane-'+p).hidden=!on;}$('heading').textContent=copy[lane].title;$('description').textContent=copy[lane].note;$('record-title').textContent=copy[lane].name+'记录';$('result').textContent='';selectedJob=null;if(focus)$('tab-'+lane).focus();render();}
+for(const [index,p] of lanes.entries()){$('tab-'+p).onclick=()=>choose(p);$('tab-'+p).onkeydown=e=>{let target;if(e.key==='ArrowRight')target=lanes[(index+1)%3];else if(e.key==='ArrowLeft')target=lanes[(index+2)%3];else if(e.key==='Home')target=lanes[0];else if(e.key==='End')target=lanes[2];if(target){e.preventDefault();choose(target,true);}};}
+async function load(){if(!visible||loading)return;loading=true;try{data=await api('/api/evolution');if(!loadedModels){models=(await api('/api/models')).models||[];loadedModels=true;}if(!dirty)fillPolicy();render();if(selectedJob)showJob(await api('/api/evolution/jobs/'+selectedJob));if(data.monitor_error)error(data.monitor_error);}catch(e){error(e.name==='AbortError'?'读取超时，请稍后重新载入。':e.message);}finally{loading=false;clearTimeout(timer);if(visible)timer=setTimeout(load,data?.busy?1500:10000);}}
+async function act(payload){if(submitting||dirty)return;submitting=true;error('');render();try{const job=await api('/api/evolution/jobs',{...payload,request_id:'ui-'+crypto.randomUUID().replaceAll('-','')});selectedJob=job.id;showJob(job);}catch(e){error(e.message);}finally{submitting=false;await load();render();}}
+$('policy').addEventListener('change',event=>{if(!data)return;for(const p of lanes)for(const role of ['primary','fallback'])if(event.target===$(p+'-'+role))reasoning(p+'-'+role);dirty=true;render();});
+$('policy').onsubmit=async e=>{e.preventDefault();if(submitting||!dirty)return;submitting=true;error('');render();try{data=await api('/api/evolution/policy',{revision:draftRevision,enabled:$('enabled').checked,interval_seconds:Number($('interval').value),auto_heal:$('auto-heal').checked,target_revision:Number($('target').value),models:getModels()});dirty=false;fillPolicy();}catch(e){error(e.message);}finally{submitting=false;render();}};
+$('reset').onclick=()=>{dirty=false;loadedModels=false;error('');load();};
+$('act-inspect').onclick=()=>act({action:'check'});$('act-heal').onclick=()=>act({action:'heal'});$('act-evolve').onclick=()=>act({action:'ensure',target_revision:data.settings.target_revision});$('analyze').onclick=()=>act({action:'analyze'});$('rollback').onclick=()=>act({action:'rollback'});
+$('execute').onclick=()=>{try{act({action:'execute',input:JSON.parse($('input').value)});}catch{error('请填写有效 JSON。');}};
+$('source').onclick=async()=>{try{selectedJob=null;$('detail').textContent=JSON.stringify(await api('/api/evolution/packages/'+data.selection.active),null,2);}catch(e){error(e.message);}};
 $('stop').onclick=async()=>{const job=data?.jobs.find(x=>['QUEUED','RUNNING','OBSERVING'].includes(x.status));if(!job)return;try{await api('/api/evolution/cancel',{job_id:job.id});await load();}catch(e){error(e.message);}};
-function sync(){const next=!document.hidden&&!view.hidden;if(next===visible)return;visible=next;if(visible)load();else clearTimeout(timer);}
-document.addEventListener('jarvis:settings-view',sync);document.addEventListener('visibilitychange',sync);sync();
+function sync(){const next=!document.hidden&&!view.hidden;view.classList.toggle('growth-paused',!next);if(next===visible)return;visible=next;if(visible)load();else clearTimeout(timer);}
+for(const button of view.querySelectorAll('button:not([role=tab])'))button.disabled=true;
+$('reset').disabled=false;
+document.addEventListener('jarvis:settings-view',sync);document.addEventListener('visibilitychange',sync);choose('inspect');sync();
 })();

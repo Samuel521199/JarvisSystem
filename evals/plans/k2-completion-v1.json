@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "objective": "Complete the existing K2 single-node text personal-assistant and bounded-growth exit, including applicable K1 dependencies. Do not declare completion with required items unverified.",
+  "baseline_version": "0.1.61",
+  "frozen_at": "2026-10-19",
+  "authorities": ["docs/core-bootstrap.md#bootstrap-5", "docs/core-bootstrap.md#k2-growth-core", "docs/core-bootstrap.md#next-k2-work", "docs/delivery-validation.md#next-k2-acceptance", "docs/delivery-validation.md#personal-companion-validation", "docs/delivery-validation.md#pc-footprint"],
+  "required_gates": ["V-K2-01", "V-K2-02", "V-K2-03", "V-K2-04", "V-K2-05", "V-K2-06", "V-PAL-01", "V-PAL-02", "V-PAL-03", "V-PAL-04", "V-PAL-05", "V-PAL-07", "V-PAL-09", "V-PAL-10"],
+  "out_of_stage": [
+    {"items":["V-PAL-06","V-PAL-08"],"basis":"The existing next-k2-acceptance explicitly assigns full proactivity and federation to later capability acceptance; these remain open, not passed."},
+    {"items":["full M2 continuous voice","K3 external coding provider expansion","K4 general autonomous releases","K5 runtime self-replacement","K6 second node, hardware, NPC"],"basis":"Existing K sequence and text/single-node K2 exit. Existing optional speech remains regression scope; no requirement is deleted."}
+  ],
+  "work": [
+    {"id":"K2-A","gates":["V-K2-01"],"baseline":"partial","implemented":["pinned seed read-only views","project sources and provider filters","capability states"],"missing":["bounded knowledge/rule/skill body answers with version and source","conflict explanation between historical seed and runtime","derived-index recovery demonstration"],"verify":["withdrawal/correction","private source absent from cloud transport","corrupted seed fails without blocking chat"]},
+    {"id":"K2-B","gates":["V-PAL-01","V-PAL-02","V-PAL-03","V-PAL-04","V-K2-04"],"baseline":"partial","implemented":["facts and rule/semantic review","explicit continuity","style/relationship persistence and undo","conversation archive"],"missing":["bounded relevance selection rather than filling context with unrelated facts","source-visible related continuity suggestions","preferred name and version-safe profile UI"],"verify":["life, learning and work contexts","unclassified compatibility","correction/forget with retained history","temporary and contradictory memory","restart, switch model and persona rollback","owner experience feedback"]},
+    {"id":"K2-C","gates":["V-K2-02","V-K2-03","V-K2-06","V-PAL-05"],"baseline":"implemented_subsets_reverify","implemented":["bounded inventory plan and workers","Flash document/report admission","process-separated dialogue and planners","task revision and cancellation"],"verify":["fixed valid/invalid/loop/injection cases","at least 200 frozen multilingual intention examples with separate calibration/test","same-input single vs concurrent load","slow model, CPU pressure and database lock","host crash and duplicate completion","provider switch re-filters sources","task progress continues during chat/control"]},
+    {"id":"K2-D","gates":["V-PAL-10","V-PAL-09"],"baseline":"partial","implemented":["bounded demand, candidate, LPAC validation, immutable enable/rollback","actual delivered artifacts"],"missing":["frozen real owner-demand improvement with measured benefit, not only known export recipe"],"verify":["good and bad candidate","active new capability invocation","core personal state preserved on enable and rollback","failed optional module does not block chat"]},
+    {"id":"K2-E","gates":["V-K2-04","V-K2-05","V-K2-06","V-PAL-07","V-PAL-09"],"baseline":"partial","implemented":["application-isolated local model","typed failure receipts","restart recovery without blind replay"],"missing":["whole-machine offline cold-start evidence","ordinary-device resource evidence"],"verify":["local task result","no model and insufficient memory degradation","disk write failure and busy database","process tree termination","prepared package startup/rollback","identity/facts/continuity preserved"]}
+  ],
+  "frozen_resource_targets": {
+    "reference_pc":{"logical_cpu":4,"ram_gib":8,"storage":"SSD","dedicated_gpu":false},
+    "idle_private_commit_mib_max":512,
+    "idle_cpu_fraction_of_one_core_max":0.01,
+    "idle_observation_seconds":300,
+    "cold_ready_seconds_max":5,
+    "text_admission_control_p95_ms_max":200,
+    "single_vs_parallel_degradation_max":0.30,
+    "warm_rounds_per_condition_min":30,
+    "mixed_text_background_soak_seconds_min":1800,
+    "required_inclusions":["all owned processes and models","working set and private commit","actual task throughput","queue depth and maximum wait","browser separately","machine available memory"],
+    "limits":"Development machine and constrained process/VM tests are separate evidence and cannot replace a physical reference PC claim. Speech-specific latency is outside the text exit and remains unverified unless separately run."
+  },
+  "evidence_rules": ["Freeze scenarios before changing their implementation", "Keep failures and all required items", "Do not mark missing device or owner feedback passed", "Never use production personal data for mutation fixtures", "No real task replay on UNKNOWN", "Complete all work independent of external blockers before pausing", "Every reported pass binds source, version, inputs, outputs and environment"],
+  "external_dependencies": ["Owner feedback on personal experience", "Physical reference-PC access", "Whole-machine offline operation and reconnect performed locally without losing recovery instructions"]
+}

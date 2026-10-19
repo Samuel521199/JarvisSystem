@@ -10,6 +10,8 @@ def main():
     raw = sys.stdin.buffer.read(MAX_INPUT + 1)
     if not raw or len(raw) > MAX_INPUT: return 2
     request = json.loads(raw)
+    from jarvis_core.network_policy import activate_process
+    activate_process(request['data_dir'])
     from jarvis_core.service import CoreService
     from jarvis_core.chat import gateway
     core = CoreService(request['data_dir'])

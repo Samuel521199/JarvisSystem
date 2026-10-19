@@ -1,31 +1,31 @@
 # 架构决策、批判性评审与评分
 
-> 状态：设计取舍 proposed；2026-10-17 代码审计与测试事实见当前评审，建议尚未实施 · 更新：2026-10-17
+> 状态：设计取舍 proposed；下列评分与代码审计保留2026-10-17范围；其后实现及剩余方向见[0.1.58后续指南](development-guide.md#direction-start)，不据文档整理重算评分 · 索引更新：2026-10-19
 > [文档入口](README.md) · [维护规则](MAINTENANCE.md) · [架构图册](architecture-atlas.md)
 
 <!-- book-nav:start -->
-[全书目录](README.md#book-tree) › [第五篇 · 验证与参考](README.md#part-evidence) › 第 17 章 · 架构决策、批判性评审与评分
+[全书目录](README.md#book-tree) › [第五篇 · 验证与参考](README.md#part-evidence) › 第 18 章 · 架构决策、批判性评审与评分
 
 ## 本章导航
 
-- [17.1 关键架构决策与待验证问题](#architecture-decisions)
-  - [17.1.1 当前建议采纳的决策](#architecture-decisions-1)
-  - [17.1.2 开工前的验证清单](#architecture-decisions-2)
-  - [17.1.3 最大的工程难点](#architecture-decisions-3)
-- [17.2 批判性评审、评分与更好的设计取舍](#critical-review)
-  - [17.2.1 评审对象与结论](#critical-review-1)
-  - [17.2.2 设计评分表](#critical-review-2)
-  - [17.2.3 证据成熟度：设计不等于产品成绩](#critical-review-3)
-  - [17.2.4 六个实质问题及本版处理](#critical-review-4)
-  - [17.2.5 必须接受的五组取舍](#critical-review-5)
-  - [17.2.6 更好的方案比较](#critical-review-8)
-- [17.3 当前系统审计：个人助手核心、扩展能力与工程底座（2026-10-17）](#current-system-audit)
-  - [17.3.1 审计范围与结论](#current-audit-method)
-  - [17.3.2 个人核心及其扩展目标逐项对照](#current-goal-coverage)
-  - [17.3.3 按个人助手与伙伴重新评价](#personal-core-assessment)
-  - [17.3.4 工程底座评分与其适用范围](#current-engineering-score)
-  - [17.3.5 代码中的主要结构问题](#current-code-findings)
-  - [17.3.6 更好的架构与实施取舍](#current-architecture-choice)
+- [18.1 关键架构决策与待验证问题](#architecture-decisions)
+  - [18.1.1 当前建议采纳的决策](#architecture-decisions-1)
+  - [18.1.2 开工前的验证清单](#architecture-decisions-2)
+  - [18.1.3 最大的工程难点](#architecture-decisions-3)
+- [18.2 批判性评审、评分与更好的设计取舍](#critical-review)
+  - [18.2.1 评审对象与结论](#critical-review-1)
+  - [18.2.2 设计评分表](#critical-review-2)
+  - [18.2.3 证据成熟度：设计不等于产品成绩](#critical-review-3)
+  - [18.2.4 六个实质问题及本版处理](#critical-review-4)
+  - [18.2.5 必须接受的五组取舍](#critical-review-5)
+  - [18.2.6 更好的方案比较](#critical-review-8)
+- [18.3 当前系统审计：个人助手核心、扩展能力与工程底座（2026-10-17）](#current-system-audit)
+  - [18.3.1 审计范围与结论](#current-audit-method)
+  - [18.3.2 个人核心及其扩展目标逐项对照](#current-goal-coverage)
+  - [18.3.3 按个人助手与伙伴重新评价](#personal-core-assessment)
+  - [18.3.4 工程底座评分与其适用范围](#current-engineering-score)
+  - [18.3.5 代码中的主要结构问题](#current-code-findings)
+  - [18.3.6 更好的架构与实施取舍](#current-architecture-choice)
 <!-- book-nav:end -->
 
 <a id="architecture-decisions"></a>
@@ -231,6 +231,8 @@ K 阶段判断：K0 有真实种子/契约；K1、K2 有多项已验子集但整
 <a id="personal-core-assessment"></a>
 ### 按个人助手与伙伴重新评价
 
+**以下为2026-10-17审计快照。** 此后基础人格、明确记忆操作、话题/任务接续、候选来源和核对已有多轮实现；当前差距以[后续指南](development-guide.md#direction-inventory)及其链接证据为准，不再把表内所有“待接通”当作当前缺失。
+
 这一分析复用同一代码审计，不是新增运行测评。个人伙伴核心应当首先通过下列场景，再独立评价每项扩展能力。对缺少真实长期使用证据的体验，不另编一个精确总分。
 
 | 产品维度 | 当前判断 | 核心差距与验证方式 |
@@ -273,7 +275,7 @@ K 阶段判断：K0 有真实种子/契约；K1、K2 有多项已验子集但整
 
 优先级表示对下一步迭代的影响；“缺失”不自动等于当前限定范围出现故障。以下不包含未经复现的漏洞猜测。
 
-以下保留 0.1.37 审计时点。A-01 已在 0.1.38 完成界面资产隔离并复验，见[基础修复记录](delivery-validation.md#foundation-repair-evidence)；其他结构问题及原评分不因单项修复自动消失或上调。
+以下保留 0.1.37 审计时点。A-01 已在 0.1.38 完成界面资产隔离并复验，见[基础修复记录](delivery-validation.md#foundation-repair-evidence)；A-03 在 0.1.64 完成限定工具的三职责、独立模型和可配置周期拆分，见[本轮证据](delivery-validation.md#growth-purposes-evidence)；完整事件调度仍缺。其他问题及原评分不因单项修复自动消失或上调。
 
 | 编号 / 优先级 | 证据与影响 | 修订方向 |
 |---|---|---|

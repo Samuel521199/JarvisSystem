@@ -153,5 +153,21 @@ class RuntimeStartTests(unittest.TestCase):
         with patch('jarvis_core.releases.subprocess.run',side_effect=self.process):self.start()
         self.assertEqual(before,self.core.ledger.control())
 
+    def test_personal_store_blocks_historical_fallback_and_unknown_schema(self):
+        from jarvis_core.persona import PersonaStore
+        PersonaStore(self.core).change('preferred_name','小林',request_id='a'*32)
+        original=(self.data/'persona.db').read_bytes()
+        with patch('jarvis_core.releases.subprocess.run',side_effect=self.process):
+            with self.assertRaises(ValueError):self.start()
+        self.assertEqual(self.launches,[]);self.assertEqual(self.health_calls,[])
+        self.assertEqual((self.data/'persona.db').read_bytes(),original)
+        data_format=self.slots._data_format(self.data)
+        self.assertTrue(self.slots._compatible('0.1.62',data_format))
+        self.assertFalse(self.slots._compatible('0.1.22',data_format))
+        db=sqlite3.connect(self.data/'persona.db')
+        try:db.execute('PRAGMA user_version=99');db.commit()
+        finally:db.close()
+        with self.assertRaises(ValueError):self.slots._data_format(self.data)
+
 
 if __name__=='__main__':unittest.main()

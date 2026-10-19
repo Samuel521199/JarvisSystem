@@ -39,6 +39,8 @@ class Ledger:
 
     @contextmanager
     def connection(self, timeout=5):
+        from .storage_budget import timeout as bounded_timeout
+        timeout = bounded_timeout(timeout)
         self._check_paths()
         connection = None
         try:
@@ -377,16 +379,20 @@ class Ledger:
             if row is None:
                 raise CoreError("not_found", "Unknown task")
             record = self._record(connection, row["action_id"])
-            if record["action"]["status"] == "CONFIRMED":
-                return record
-            connection.execute("UPDATE tasks SET cancel_requested=1 WHERE task_id=?", (task_id,))
-            record["cancel_requested"] = True
-            if record["action"]["status"] == "PREPARED":
-                record["task"]["status"] = record["action"]["status"] = "CANCELLED"
-            elif record["action"]["status"] == "DISPATCHING":
-                record["task"]["status"] = "CANCELLING"
-            self._save(connection, record)
+            self._cancel_record(connection, record)
             return record
+
+    def _cancel_record(self, connection, record):
+        """Caller owns the transaction; replacement and cancellation commit together."""
+        if record["action"]["status"] == "CONFIRMED":
+            return
+        connection.execute("UPDATE tasks SET cancel_requested=1 WHERE task_id=?", (record['task']['task_id'],))
+        record["cancel_requested"] = True
+        if record["action"]["status"] == "PREPARED":
+            record["task"]["status"] = record["action"]["status"] = "CANCELLED"
+        elif record["action"]["status"] == "DISPATCHING":
+            record["task"]["status"] = "CANCELLING"
+        self._save(connection, record)
 
     def stop(self, reason):
         if not isinstance(reason, str) or not 1 <= len(reason) <= 512:

@@ -4,76 +4,78 @@
 > [文档入口](README.md) · [维护规则](MAINTENANCE.md) · [架构图册](architecture-atlas.md)
 
 <!-- book-nav:start -->
-[全书目录](README.md#book-tree) › [第二篇 · 核心与工程基础](README.md#part-foundation) › 第 07 章 · 公共接口与数据契约
+[全书目录](README.md#book-tree) › [第二篇 · 核心与工程基础](README.md#part-foundation) › 第 08 章 · 公共接口与数据契约
 
 ## 本章导航
 
-- [7.1 K0 当前实现与验证](#k0-contracts)
-- [7.2 个人助手核心接口（设计）](#personal-assistant-contracts)
-  - [7.2.1 身份、个人上下文与行动意图的边界](#personal-context-contract)
-- [7.3 K1/K2 下一轮最小接口面](#next-control-contracts)
-  - [7.3.1 0.1.5 已实现的只读预检报告](#preflight-contract)
-  - [7.3.2 0.1.7 已实现的固定 Worker 消息](#worker-contract)
-  - [7.3.3 0.1.8 浏览器任务与动作契约](#computer-contract)
-    - [7.3.3.1 0.1.10 网页任务与队列接口](#computer-web-contract)
-  - [7.3.4 0.1.13 共用后台任务接口](#task-queue-contract)
-  - [7.3.5 0.1.31 会话任务接口](#conversation-task-contract)
-  - [7.3.6 0.1.30 自然语言样例报告接口](#sample-task-contract)
-  - [7.3.7 0.1.15 本机运行版本与临时目录契约](#runtime-slots-contract)
-  - [7.3.8 0.1.14 旧版停止状态兼容消息](#recovery-contract)
-  - [7.3.9 0.1.11 项目与文本导出接口](#project-workspace-contract)
-  - [7.3.10 项目组织与可恢复归档接口（2026-10-17）](#project-organization-contract)
-  - [7.3.11 0.1.24 本机会话归档接口](#conversation-archive-contract)
-  - [7.3.12 0.1.25 明确事实记忆与聊天引用接口](#explicit-memory-contract)
-  - [7.3.13 0.1.39 个人指令与表达扩展](#personal-core-contract)
-  - [7.3.14 0.1.40 接续记录与会话来源扩展](#continuity-contract)
-  - [7.3.15 本人消息候选整理接口（0.1.43 起，0.1.44 扩展）](#personal-candidates-contract)
-  - [7.3.16 语义事实候选接口（0.1.50）](#semantic-candidates-contract)
-  - [7.3.17 语义候选的本地核对与显式处理（2026-10-19）](#memory-candidate-review-contract)
-  - [7.3.18 候选事实来源与数据库迁移（0.1.44）](#memory-provenance-contract)
-  - [7.3.19 事实分类、用途与兼容接口（0.1.47）](#memory-domain-contract)
-  - [7.3.20 0.1.42 接续与执行账本关联](#work-continuity-contract)
-  - [7.3.21 0.1.26 项目文档登记、检索和来源引用](#project-knowledge-contract)
-  - [7.3.22 0.1.21 聊天附件接口](#chat-attachments-contract)
-  - [7.3.23 聊天完成状态字段（0.1.21）](#chat-completion-contract)
-  - [7.3.24 0.1.12 单次聊天取消接口](#chat-cancel-contract)
-  - [7.3.25 设置总览资源快照接口（2026-10-16 增量）](#resource-usage-contract)
-  - [7.3.26 并行运行指标接口（0.1.34）](#parallel-runtime-contract)
-  - [7.3.27 精确计算聊天回执（0.1.37）](#deterministic-calculation-contract)
-  - [7.3.28 模型后台配置与统计接口（0.1.19）](#model-admin-contract)
-  - [7.3.29 0.1.22 模块观察与维护接口](#module-monitor-contract)
-  - [7.3.30 独立 CosyVoice3 文件语音接口](#cosyvoice3-contract)
-  - [7.3.31 独立主力 Qwen 语音接口](#qwen-tts-contract)
-    - [7.3.31.1 分层表达、分段预览与语音合成](#speech-expression-score)
-    - [7.3.31.2 聊天回复的有界朗读通道](#chat-readout-contract)
-  - [7.3.32 独立快速本地语音接口](#fast-speech-contract)
-- [7.4 记忆组件的替换契约（proposed）](#memory-provider-contracts)
-  - [7.4.1 开源提取器、编纂器与路由的适配要求（proposed）](#memory-extractor-adapter)
-  - [7.4.2 联合知识视图运行契约（0.1.33）](#memory-view-runtime-contract)
-  - [7.4.3 MemoryView 与知识候选的必要语义（proposed）](#memory-view-contract)
-- [7.5 上下文编排：当前装配与后续压缩](#context-assembly-contract)
-  - [7.5.1 0.1.23 已实现的临时聊天上下文](#context-assembly-current)
-  - [7.5.2 后续完整 ContextAssembler 契约（proposed）](#context-assembly-future)
-- [7.6 接口与数据契约](#interfaces)
-  - [7.6.1 模块生命周期](#interfaces-1)
-  - [7.6.2 任务与动作分离](#interfaces-2)
-  - [7.6.3 事件信封](#interfaces-3)
-  - [7.6.4 技能和模块包清单](#interfaces-4)
-  - [7.6.5 接口类型选择](#interfaces-5)
-- [7.7 技能选择、策略与调用记录契约](#skill-selection-contract)
-  - [7.7.1 编程副本与验证状态字段（0.1.58）](#bounded-coding-contract)
-- [7.8 资源租约、本地组件与安全事件契约](#extensions-3)
-- [7.9 项目资源与工程文件契约（0.1.27）](#project-resources-contract)
-- [7.10 MCP 与技能登记契约（0.1.27；0.1.37 管理增量）](#extension-catalog-contract)
-  - [7.10.1 Context7 只读文档任务（0.1.55）](#mcp-documentation-task-contract)
-- [7.11 限定成长运行接口](#evolution-runtime-contract)
-  - [7.11.1 会话需求适配接口（0.1.41）](#growth-demand-contract)
-- [7.12 三能力消息与旧接口迁移](#growth-center-contract)
-- [7.13 统一对话受理、意图与事件契约（proposed）](#dialogue-turn-contract)
-  - [7.13.1 对话意图与限定文档受理契约（0.1.56—0.1.57）](#dialogue-intent-shadow-contract)
-  - [7.13.2 已实现的回复回执接口（0.1.48—0.1.49 / dialogue-receipt-v1）](#dialogue-receipt-contract)
-    - [7.13.2.1 普通会话的持久回复恢复（0.1.49）](#dialogue-recovery-contract)
-    - [7.13.2.2 对话与后台模型进程边界（0.1.54）](#dialogue-process-contract)
+- [8.1 K0 当前实现与验证](#k0-contracts)
+- [8.2 个人助手核心接口（设计）](#personal-assistant-contracts)
+  - [8.2.1 身份、个人上下文与行动意图的边界](#personal-context-contract)
+- [8.3 K1/K2 下一轮最小接口面](#next-control-contracts)
+  - [8.3.1 0.1.5 已实现的只读预检报告](#preflight-contract)
+  - [8.3.2 0.1.7 已实现的固定 Worker 消息](#worker-contract)
+  - [8.3.3 0.1.8 浏览器任务与动作契约](#computer-contract)
+    - [8.3.3.1 0.1.10 网页任务与队列接口](#computer-web-contract)
+  - [8.3.4 0.1.13 共用后台任务接口](#task-queue-contract)
+  - [8.3.5 0.1.31 会话任务接口](#conversation-task-contract)
+  - [8.3.6 0.1.30 自然语言样例报告接口](#sample-task-contract)
+  - [8.3.7 0.1.15 本机运行版本与临时目录契约](#runtime-slots-contract)
+  - [8.3.8 0.1.14 旧版停止状态兼容消息](#recovery-contract)
+  - [8.3.9 0.1.11 项目与文本导出接口](#project-workspace-contract)
+  - [8.3.10 项目组织与可恢复归档接口（2026-10-17）](#project-organization-contract)
+  - [8.3.11 0.1.24 本机会话归档接口](#conversation-archive-contract)
+  - [8.3.12 0.1.25 明确事实记忆与聊天引用接口](#explicit-memory-contract)
+  - [8.3.13 0.1.39 个人指令与表达扩展](#personal-core-contract)
+  - [8.3.14 0.1.62 交流配置、三库查询与接续推荐扩展](#personal-profile-v2)
+  - [8.3.15 0.1.40 接续记录与会话来源扩展](#continuity-contract)
+  - [8.3.16 本人消息候选整理接口（0.1.43 起，0.1.44 扩展）](#personal-candidates-contract)
+  - [8.3.17 语义事实候选接口（0.1.50）](#semantic-candidates-contract)
+  - [8.3.18 规则与语义事实候选的本地核对与显式处理（0.1.58—0.1.60）](#memory-candidate-review-contract)
+  - [8.3.19 候选事实来源与数据库迁移（0.1.44）](#memory-provenance-contract)
+  - [8.3.20 事实分类、用途与兼容接口（0.1.47）](#memory-domain-contract)
+  - [8.3.21 0.1.42 接续与执行账本关联](#work-continuity-contract)
+  - [8.3.22 0.1.26 项目文档登记、检索和来源引用](#project-knowledge-contract)
+  - [8.3.23 0.1.21 聊天附件接口](#chat-attachments-contract)
+  - [8.3.24 聊天完成状态字段（0.1.21）](#chat-completion-contract)
+  - [8.3.25 0.1.12 单次聊天取消接口](#chat-cancel-contract)
+  - [8.3.26 设置总览资源快照接口（2026-10-16 增量）](#resource-usage-contract)
+  - [8.3.27 并行运行指标接口（0.1.34）](#parallel-runtime-contract)
+  - [8.3.28 精确计算聊天回执（0.1.37）](#deterministic-calculation-contract)
+  - [8.3.29 模型后台配置与统计接口（0.1.19）](#model-admin-contract)
+  - [8.3.30 0.1.63 应用网络控制接口](#application-network-contract)
+  - [8.3.31 0.1.22 模块观察与维护接口](#module-monitor-contract)
+  - [8.3.32 独立 CosyVoice3 文件语音接口](#cosyvoice3-contract)
+  - [8.3.33 独立主力 Qwen 语音接口](#qwen-tts-contract)
+    - [8.3.33.1 分层表达、分段预览与语音合成](#speech-expression-score)
+    - [8.3.33.2 聊天回复的有界朗读通道](#chat-readout-contract)
+  - [8.3.34 独立快速本地语音接口](#fast-speech-contract)
+- [8.4 记忆组件的替换契约（proposed）](#memory-provider-contracts)
+  - [8.4.1 开源提取器、编纂器与路由的适配要求（proposed）](#memory-extractor-adapter)
+  - [8.4.2 联合知识视图运行契约（0.1.33）](#memory-view-runtime-contract)
+  - [8.4.3 MemoryView 与知识候选的必要语义（proposed）](#memory-view-contract)
+- [8.5 上下文编排：当前装配与后续压缩](#context-assembly-contract)
+  - [8.5.1 0.1.23 已实现的临时聊天上下文](#context-assembly-current)
+  - [8.5.2 后续完整 ContextAssembler 契约（proposed）](#context-assembly-future)
+- [8.6 接口与数据契约](#interfaces)
+  - [8.6.1 模块生命周期](#interfaces-1)
+  - [8.6.2 任务与动作分离](#interfaces-2)
+  - [8.6.3 事件信封](#interfaces-3)
+  - [8.6.4 技能和模块包清单](#interfaces-4)
+  - [8.6.5 接口类型选择](#interfaces-5)
+- [8.7 技能选择、策略与调用记录契约](#skill-selection-contract)
+  - [8.7.1 编程副本与验证状态字段（0.1.58）](#bounded-coding-contract)
+- [8.8 资源租约、本地组件与安全事件契约](#extensions-3)
+- [8.9 项目资源与工程文件契约（0.1.27）](#project-resources-contract)
+- [8.10 MCP 与技能登记契约（0.1.27；0.1.37 管理增量）](#extension-catalog-contract)
+  - [8.10.1 Context7 只读文档任务（0.1.55）](#mcp-documentation-task-contract)
+- [8.11 限定成长运行接口](#evolution-runtime-contract)
+  - [8.11.1 会话需求适配接口（0.1.41）](#growth-demand-contract)
+- [8.12 三能力消息与旧接口迁移](#growth-center-contract)
+- [8.13 统一对话受理、意图与事件契约（proposed）](#dialogue-turn-contract)
+  - [8.13.1 对话意图与限定任务受理契约（0.1.56—0.1.59）](#dialogue-intent-shadow-contract)
+  - [8.13.2 已实现的回复回执接口（0.1.48—0.1.49 / dialogue-receipt-v1）](#dialogue-receipt-contract)
+    - [8.13.2.1 普通会话的持久回复恢复（0.1.49）](#dialogue-recovery-contract)
+    - [8.13.2.2 对话与后台模型进程边界（0.1.54）](#dialogue-process-contract)
 <!-- book-nav:end -->
 
 <a id="k0-contracts"></a>
@@ -340,6 +342,17 @@ GET 需要既有本机 Host/Origin 边界和页面 nonce；POST 另要求同源 
 
 会话消息兼容增加布尔 `personal_control`；官方客户端在归档及恢复时标记并排除整条个人控制消息，避免查询正文通过历史再次外发。`history_info.persona` 返回 `applied` 和使用的 `revision/style/relationship`，不改既有 context-report schema。一般事实与派生回答仍执行原修订引用过滤；人为复制粘贴旧正文不受该引用机制保护。完整使用语法归[交互节](interaction-persona.md#personal-core-ui)，表达生效与回退规则归[人格运行范围](interaction-persona.md#persona-runtime)。
 
+<a id="personal-profile-v2"></a>
+### 0.1.62 交流配置、三库查询与接续推荐扩展
+
+`GET /api/persona` 返回 `schema_version=2`、修订和当前 `style/relationship/preferred_name`。`POST /api/persona` 严格接受 `{action,revision,request_id,profile}`；action 为 profile、undo、reset，后两者 profile 必须为空。完整 profile 以一个事务保存，旧修订返回 409；同请求的原操作先返回原回执，不重复写入。接口独立于记忆模块的开关，仍核验 Host/Origin、页面 nonce 和核心写入约束。正文、错误与校验只在 [persona_routes.py](../apps/web/persona_routes.py) 和 [persona.py](../runtime/node-host/jarvis_core/persona.py) 实现。
+
+称呼是最多 32 字符的字母/汉字、组合标记、数字及空格、间隔点、单引号或连字符；不允许换行或任意提示词。姓名属于表达配置，不能据此改写主体身份或授权。旧两字段配置与上一版读入时补空称呼，不在读取时写库；旧请求摘要仍可辨认。数据库仍为 v1，新 JSON 配置包含第三字段，**不兼容把已经写入新配置的数据直接交给严格两字段的旧 Host**；跨版本降级必须先验兼容性，不能删除新配置换取启动成功。
+
+三库显式查询复用个人控制回执，`kind=reference/committed=false`，附带来源、版本、状态与派生索引状态；答复不交给云模型，官方客户端不把这类控制消息带入后续模型历史。范围与重建规则归[三库运行入口](knowledge-learning.md#seed-runtime-entry)。
+
+`GET /api/continuity?q=…&provider=…&project_id=…` 返回最多 3 条词法相关的有效记录及分数，q 限 1—512 字符；逐条重验原来源、精确项目和接入方。无 q 继续使用原列表接口。推荐不等于选择、任务派发或模型推断；实际消息装配仍重新检查，原配额不变。
+
 <a id="continuity-contract"></a>
 ### 0.1.40 接续记录与会话来源扩展
 
@@ -364,23 +377,26 @@ GET 需要既有本机 Host/Origin 边界和页面 nonce；POST 另要求同源 
 <a id="personal-candidates-contract"></a>
 ### 本人消息候选整理接口（0.1.43 起，0.1.44 扩展）
 
-唯一运行校验器为 [personal_candidates.py](../runtime/node-host/jarvis_core/personal_candidates.py)，正反例见 [test_personal_candidates.py](../tests/test_personal_candidates.py)。两接口沿用 Host/Origin、页面 nonce、严格 JSON 和记忆接口大小限制；不接收模型生成的执行命令。
+唯一运行校验器为 [personal_candidates.py](../runtime/node-host/jarvis_core/personal_candidates.py)，正反例见 [test_personal_candidates.py](../tests/test_personal_candidates.py)和 [0.1.60 入口一致性测试](../tests/test_rule_memory_review.py)。各接口沿用 Host/Origin、页面 nonce、严格 JSON 和记忆接口大小限制；不接收模型生成的执行命令。
 
 | 接口 | 严格输入与结果 |
 |---|---|
-| `POST /api/personal-candidates/suggest` | `{source,project_id}`；source 为原有 `{conversation_id,message_index}`，project_id 可 null。读取同范围普通本人消息，返回 engine、原输入、source_digest、source_text、candidates、`model_used:false,committed:false` |
-| `POST /api/personal-candidates/confirm` | `{source,project_id,source_digest,candidate,scope}`；candidate 为 `{kind,title,content,next_step}`，0.1.44 增加可选 candidate_id，kind 为 fact / continuity；未知字段仍拒绝，返回原存储 receipt 和显示文字 |
+| `POST /api/personal-candidates/suggest` | `{source,project_id}`；source 为原有 `{conversation_id,message_index}`，project_id 可 null。读取同范围普通本人消息，返回 engine、原输入、source_digest、source_text、candidates、`model_used:false,committed:false`；0.1.60 的事实候选另含 quote、classification，非空事实批次另有 preview_token |
+| `POST /api/personal-candidates/confirm` | `{source,project_id,source_digest,candidate,scope}`，0.1.60 可选 preview_token；candidate 为 `{kind,title,content,next_step}`，可选 candidate_id，fact 可原样携带 quote/classification。新事实必须有有效预览；该兼容入口不接受修改来源元数据或分类。未结事项仍沿原路径。未知字段拒绝，返回原存储 receipt 和显示文字 |
+| `POST /api/personal-candidates/rule-review` / `rule-resolve` | 0.1.60 新增；字段及事务语义与下述[公共核对契约](#memory-candidate-review-contract)一致，使用规则入口签发的 token，不能混用语义 token |
 
 规则引擎标识 `personal-candidates-v1`；只分析不超过 800 字符的消息，按句切分，每句不超过 240 字符，最多返回 3 项。长输入没有截断后提取，source_text 的展示最多 800 字符。确认内容上限为 title 60、content 1024、next_step 512 字符，禁止 NUL；前两者非空，continuity 的下一步非空，fact 的下一步必须为空。候选类型必须与当前来源可提取类型一致，文本可由主人明确编辑。
 
-scope 为 current / global；continuity 只接受 current，项目必须仍登记。确认重新验证来源 SHA-256；UUID5 根据引擎标识与规范化 JSON 输入计算稳定请求 ID，0.1.44 计算时剔除新增 candidate_id 以保留原精确重试回执。改变内容或范围是新请求，候选事实还需通过[来源撤销检查](#memory-provenance-contract)，不新建确认数据库。
+scope 为 current / global；continuity 只接受 current，项目必须仍登记。确认重新验证来源 SHA-256；旧 confirm 的 UUID5 根据引擎标识与规范化 JSON 输入计算稳定请求 ID，剔除新增 candidate_id、quote、classification 和 preview_token，保留旧精确重试身份。改变内容或范围是新请求，候选事实还需通过[来源撤销检查](#memory-provenance-contract)，不新建确认数据库。
+
+0.1.60 规则事实预览由 [candidate_tokens.py](../runtime/node-host/jarvis_core/candidate_tokens.py)签名，purpose 为 `rule-candidates-v1`，绑定来源、摘要、候选与全库修订水位；生成前后检查水位，有效期 20 分钟，重启失效。规则与语义服务分别持有进程内密钥；未结事项不增加事实 token。旧 confirm 缺少/过期 token 时只允许返回已存在的精确回执，新写入在原事务内返回 `candidate_review_required`（HTTP 409）；不会借兼容性复活遗忘记录。新确认默认个人偏好、主人主体、仅日常/本地使用；旧无分类记录不回填。改变分类改用 rule-review/resolve；明确“记住”命令仍是独立的主人直接指令。
 
 continuity.db 仍为 schema 1，source 兼容增加可选 `owner_confirmed_candidate:true`，缺省沿用控制消息校验，false 或未知字段拒绝。该标志仅由内部确认路径设置，旧显式接口不能以普通消息冒充控制消息；读取时继续验证来源资格。新 Host 可读旧记录；旧 Host 不认识新字段，会拒绝新记录，回退前必须做兼容检查。完整数据语义归[候选整理](knowledge-learning.md#personal-candidates-runtime)，不承诺双向无条件降级。
 
 <a id="semantic-candidates-contract"></a>
 ### 语义事实候选接口（0.1.50）
 
-唯一运行校验器为 [semantic_candidates.py](../runtime/node-host/jarvis_core/semantic_candidates.py)；HTTP 接线在 [candidate_routes.py](../apps/web/candidate_routes.py)，复用既有 Host/Origin、页面 nonce、核心状态、请求大小、ChatRequests 及两个聊天并发槽。原[规则候选接口](#personal-candidates-contract)不变；内部 `ChatService` 增加 `memory_candidates` purpose，禁止继承历史、人格、技能或记忆输入，浏览器不能在普通聊天 JSON 中指定内部 purpose。
+唯一运行校验器为 [semantic_candidates.py](../runtime/node-host/jarvis_core/semantic_candidates.py)；HTTP 接线在 [candidate_routes.py](../apps/web/candidate_routes.py)，复用既有 Host/Origin、页面 nonce、核心状态、请求大小、ChatRequests 及两个聊天并发槽。0.1.50 未改原[规则候选接口](#personal-candidates-contract)，后续 0.1.60 兼容变化见该节；内部 `ChatService` 增加 `memory_candidates` purpose，禁止继承历史、人格、技能或记忆输入，浏览器不能在普通聊天 JSON 中指定内部 purpose。
 
 | 接口 | 严格字段与结果 |
 |---|---|
@@ -403,18 +419,19 @@ preview_token 是当前宿主随机密钥 HMAC-SHA256 签名的规范 JSON 预�
 范围、句级身份与遗忘限制见[运行语义](knowledge-learning.md#semantic-candidates-runtime)，使用见[候选面板](interaction-persona.md#personal-candidates-ui)，验证见[证据](delivery-validation.md#semantic-candidates-evidence)。这不是完整插件 MemoryExtractor 或自动记忆写入接口。
 
 <a id="memory-candidate-review-contract"></a>
-### 语义候选的本地核对与显式处理（2026-10-19）
+### 规则与语义事实候选的本地核对与显式处理（0.1.58—0.1.60）
 
-**implemented / 临时核心局部 verified，已随 0.1.58 部署。** 唯一比较模块为 [memory_comparison.py](../runtime/node-host/jarvis_core/memory_comparison.py)，签名与决策编排为 [memory_review.py](../runtime/node-host/jarvis_core/memory_review.py)，事务写入仍只在 MemoryStore。没有引入新模型、常驻进程、库依赖或数据库 schema。实测和源码摘要见[本轮证据](delivery-validation.md#memory-candidate-review-evidence)。
+**implemented / 局部 verified。** 0.1.58 接通语义入口；0.1.60 将规则事实接入同一 [memory_comparison.py](../runtime/node-host/jarvis_core/memory_comparison.py) 与 [memory_review.py](../runtime/node-host/jarvis_core/memory_review.py)，事务写入仍只在 MemoryStore。没有引入新模型、常驻进程、库依赖或数据库 schema。历史见[原核对证据](delivery-validation.md#memory-candidate-review-evidence)，新入口及部署范围见[规则入口证据](delivery-validation.md#rule-memory-review-evidence)。
 
 | 接口 | 严格字段与结果 |
 |---|---|
 | `POST /api/personal-candidates/semantic-review` | 与 semantic-confirm 相同的六个字段，核对编辑后的内容与范围；返回 `matches,total_matches,truncated,source_unusable,method,model_used:false,committed:false,review_token,note`。每个 match 含旧事实 ID、修订、document、provenance、relation、reason；最多五条 |
 | `POST /api/personal-candidates/semantic-resolve` | 必须且仅有 `{review_token,decision,target_id}`。decision 为 new / keep / replace；new 的 target_id 必须 null，其他只能选择本次 token 列出的 ID。返回原事实回执及文字，不接受客户端附加正文或权限 |
+| `POST /api/personal-candidates/rule-review` / `rule-resolve` | 分别与上述 review / resolve 相同字段和结果；规则 review 的六字段为 `{preview_token,candidate_id,title,content,classification,scope}`，必须有明确分类；只接受规则服务签名，原规则候选 ID 不变化 |
 
 比较只读目标**精确项目范围**中的记录，不自动把通用与项目合并。已分类记录须 kind、subject、subject_label 相同。`duplicate` 指正文经 NFKC、空白、末尾标点及有限主人称谓规范化后一致；不把相似度直接当等价。有限饮品/回答风格/姓名主题、同名或字符二元组重合可提示 `possible_change`、`possible_addition`、`related`，不是通用矛盾推理器。未分类记录只在原正文完全相同时提示 `unclassified`，不自动补分类。来源失效或未核查记录不作为处理目标，另报数量；有效期仍沿用旧记录，核对不自动使过期事实生效。
 
-review_token 复用宿主 HMAC，但 purpose 为 `memory-review-v1`，绑定编辑后文档、原来源、旧事实 ID/修订/摘要/关系及原语义预览的 review_revision；有效期不得超过原预览。只能用原始语义 token 重新核对，不能借核对刷新过期或跨越纠正/遗忘水位。签名前后均校验水位；只读核对不创建空事实库，也不把已有记忆发给模型。
+review_token 复用对应服务 HMAC，但 purpose 为 `memory-review-v1`，绑定编辑后文档、原来源、旧事实 ID/修订/摘要/关系及原预览的 review_revision；有效期不得超过原预览。只能用对应入口的原始预览 token 重新核对，不能借核对刷新过期或跨越纠正/遗忘水位。签名前后均校验水位；只读核对不创建空事实库，也不把已有记忆发给模型。
 
 | 决定 | 同一事务中的效果 |
 |---|---|
@@ -422,7 +439,7 @@ review_token 复用宿主 HMAC，但 purpose 为 `memory-review-v1`，绑定编�
 | keep | 仅允许 duplicate / unclassified；不改原事实正文、修订、来源、用途或接入方许可。将新候选来源绑定到原 ID，并保存幂等回执，后续纠正/遗忘能抑制这一来源；不声称增加了完整多来源证据图 |
 | replace | 仅允许同类型、同主体且并非重复/未分类的目标；替换内容及当前来源，保留原 ID、名称、分类、用途、有效期和 providers。增加修订、抑制原候选绑定；旧正文不复制进修订回执，依赖旧修订的历史依原机制失效 |
 
-提交在原 `BEGIN IMMEDIATE` 内重新检查来源、全库纠正/遗忘水位、目标修订/摘要和旧来源可用性；失败不提交事实、来源绑定或回执。`candidate_target_changed`、`candidate_duplicate` 与 `candidate_review_changed` 返回 HTTP 409。精确重试先返回原已提交回执，即使之后已纠正或忘记也不再次执行；过期 token 则不能作为重试凭据。请求身份包含编辑文档、来源、决定及旧目标快照。旧 semantic-confirm 接口保留，也增加有效重复检查；规则候选保持原路径，不把这一增量写成所有入口均完成语义去重。
+提交在原 `BEGIN IMMEDIATE` 内重新检查来源、全库纠正/遗忘水位、目标修订/摘要和旧来源可用性；失败不提交事实、来源绑定或回执。`candidate_target_changed`、`candidate_duplicate` 与 `candidate_review_changed` 返回 HTTP 409。resolve 精确重试先返回原已提交回执，即使之后已纠正或忘记也不再次执行；过期 token 则不能作为 resolve 重试凭据。请求身份包含编辑文档、来源、决定及旧目标快照。旧 semantic-confirm 和规则 confirm 保留有效重复检查；后者旧回执兼容例外见[规则接口](#personal-candidates-contract)。两个入口共用规则不等于通用语义去重已经完成。
 
 另补针对实测 P24 的有限来源保护：整条消息各句均只是纠正助手猜测、没有检测到新的一人称断言时，semantic 返回成功空候选、`model_used:false` 和 notice；不发模型请求。混合消息仍可提取其他句子，但模型把被标记的纠错句做成事实时以 `candidate_correction_only` 拒绝整批并保留实际用量。此检查不修改已有错误记忆，不保证识别所有语言或混合转述，也不改变来源身份。原单条提取对照结果不因增加此检查而重新评分。
 
@@ -552,6 +569,15 @@ queue 为原队列的 paused/owned/waiting/capacity/error/resources，加 runnin
 | `POST /api/admin/balance` | 只接受 connection；仅 Eachlabs 显式账户余额读取，无自动重试，不作每 Key 余额相加 |
 
 读写后台 API 都要求当前页面 nonce；写入另要求同源 Origin。复用 loopback Host 校验、严格 JSON、131072 字节边界和无请求内容日志，不增加登录密码。错误只回传本地可展示的校验文案，远端错误体与凭据不透出。浏览器任务支持 `connection::model` 明确选择同名模型的线路；原有唯一模型 ID 仍兼容。计费快照与未知结果的语义由[模型章](models-offline.md#model-admin-config)唯一维护。
+
+<a id="application-network-contract"></a>
+### 0.1.63 应用网络控制接口
+
+`GET /api/network` 返回 `offline/revision/updated_at/valid/scope/process_guard` 与当前允许/阻止能力摘要。`POST /api/network` 只接受 `{ "offline": true|false, "revision": 非负整数 }`；成功返回提交后的同一快照。字段、类型及修订校验由 [NetworkPolicy](../runtime/node-host/jarvis_core/network_policy.py) 唯一执行，测试见 [test_network_policy.py](../tests/test_network_policy.py)。读写要求当前页面 nonce，写入要求同源 Origin，沿用本机 Host 和停止状态检查。
+
+错误语义：无效输入 400 `network_request_invalid`；陈旧修订 409 `network_conflict`；开启时存在活动作业 409 `network_busy`；不可读/损坏策略 503 `network_policy_unavailable`。读取异常时快照为 `offline=true, valid=false, revision=null`，界面禁用修改并保留刷新入口；不以默认在线覆盖损坏配置。网络请求分发另用 `network_offline/network_policy_changed` 标识阻断，不视作供应商故障、不触发云端备选。
+
+浏览器超时不能判断写入是否完成，必须 GET 核对，不自动重复 POST。持久范围、子进程限制、本地例外与回退兼容唯一规则见[模型与离线章](models-offline.md#application-offline-control)。
 
 <a id="module-monitor-contract"></a>
 ### 0.1.22 模块观察与维护接口
@@ -1083,15 +1109,15 @@ security_stop_event:
 <a id="evolution-runtime-contract"></a>
 ## 限定成长运行接口
 
-**0.1.37 / evolution-v1 implemented。** 行为权威见[限定成长闭环](evolution-release.md#bounded-evolution-loop)。所有接口仅绑定本机回环，复用 Host / Origin、页面 nonce 和核心就绪检查；请求 JSON 字段严格匹配，查询尾缀不扩张文件访问范围。
+**0.1.37 建立接口；0.1.64 增量见[三能力契约](#growth-center-contract)，implemented。** 行为权威见[限定成长闭环](evolution-release.md#bounded-evolution-loop)。所有接口仅绑定本机回环，复用 Host / Origin、页面 nonce 和核心就绪检查；请求 JSON 字段严格匹配，查询尾缀不扩张文件访问范围。
 
 | 接口 | 输入 / 输出 |
 |---|---|
 | `GET /api/evolution` | 设置、活动/前一版本与代际、最近任务、包状态、限额、已支持配方；不返回凭据 |
 | `GET /api/evolution/jobs/{32hex}` | 完整改进阶段、模型调用引用、候选验收、回退、错误和执行结果 |
 | `GET /api/evolution/packages/{64hex}` | 重新核对摘要后返回固定三个包文件及元数据；不接受任意文件路径 |
-| `POST /api/evolution/policy` | `{enabled: bool, route: "provider::model", target_revision: 1或2}`；只允许登记且启用的模型，任务运行时不改设置 |
-| `POST /api/evolution/jobs` | `{action, request_id}`；`ensure` 另需 `target_revision`，`execute` 另需 `input`，`check` / `rollback` 无其他参数；返回 202 与任务编号 |
+| `POST /api/evolution/policy` | 当前字段和旧三字段适配见[三能力契约](#growth-center-contract)；只允许登记模型及合法档位，任务运行时不改设置 |
+| `POST /api/evolution/jobs` | `{action, request_id}`；`ensure` 另需 `target_revision`，`execute` 另需 `input`，`check` / `analyze` / `heal` / `rollback` 无其他参数；返回 202 与任务编号 |
 | `POST /api/evolution/cancel` | `{job_id}`；停止当前对应任务，已完成任务幂等返回 |
 
 `request_id` 为 8—80 个字母/数字/下划线/短横线；同编号同内容返回原任务，内容不同为 409。单维护通道最多一个运行中任务，其他新请求为 409；聊天使用独立通道。任务状态为 `QUEUED/RUNNING/OBSERVING/SUCCEEDED/FAILED/UNKNOWN/CANCELLED/INTERRUPTED`。`SUCCEEDED` 表示该动作完成，`check.result.healthy=false` 仍需处理；不能只看 HTTP 200/202 判断修复完成。
@@ -1125,7 +1151,11 @@ security_stop_event:
 <a id="growth-center-contract"></a>
 ## 三能力消息与旧接口迁移
 
-**proposed，尚无可调用的新 API 或完成的机器 schema。** 新消息在实现前应按[公共契约规范](#next-control-contracts)建立单一机器定义及正反例；此节仅定义语义边界，不能照此向当前服务器发送请求。
+**0.1.64 已实现既有 `/api/evolution` 的增量契约；没有建立第二组调度 API。** 当前字段的机器校验位于 [settings.py](../runtime/node-host/jarvis_core/evolution/settings.py) 和 [manager.py](../runtime/node-host/jarvis_core/evolution/manager.py)；正反例见 [test_evolution.py](../tests/test_evolution.py)。后续通用消息仍需按[公共契约规范](#next-control-contracts)扩展，不能认为下表每个目标字段均已实现。
+
+当前 `POST /api/evolution/policy` 接收 `{revision, enabled, interval_seconds, auto_heal, target_revision, models}`；`models` 必须恰含 `inspect/heal/evolve`，每项 `{primary, fallback}`，模型选择为 `{route: "provider::model", reasoning: 原生档位或null}`，fallback 可为 null。保存时 revision 比较并递增，忙时拒绝。旧三字段请求只更新自检开关、目标和进化主模型，不开启自动自愈、不清除其他用途。GET 继续带兼容 `route` 别名及 `schema_version:2`。
+
+动作新增 `analyze/heal`，均无额外参数；`check` 改为纯完整性检查，执行包和候选均不改变。新任务持久记录 `purpose/policy_revision/policy`；观察报告含检查时间、范围、选择代际、实际/目标 revision、classification 与 fault；自动 heal 的 cause 引用原检查单。主/备调用共享两次上限，回执与切换规则见[用途路由](models-offline.md#growth-model-policy)。旧 `PROPOSED` 单没有新策略修订时须重新分析，不静默套用新策略启动。
 
 | 对象 | 必须明确的语义 |
 |---|---|
@@ -1138,9 +1168,9 @@ security_stop_event:
 
 新 `inspect` 只产出报告；事件消费者是否提交 `heal`、提案是否提交 `evolve` 由各自策略决定。复用 Task/Action/Artifact 的幂等、取消与 UNKNOWN 语义，不复制独立执行账本。对同一对象的候选提交使用基线代际检查；设置保存使用乐观并发，旧页面不能覆盖新配置。HTTP 202 只表示受理；动作完成、检测正常、故障复测通过、实验已发布为不同字段。
 
-迁移以增量 schema 事务进行：只读兼容旧包和旧报告，保留其原动作/混合行为标签；旧单模型可作为三用途的初始候选配置，但不得凭迁移开启新的 AI 自检或扩大数据/发布范围。原自动开关仅映射原已登记对象的既有行为范围；自检与独立的故障/能力差距消费者分离后，共享原总预算，未支持的新能力默认只形成提案。当前设置、包和恢复材料迁移前后必须可核对。
+迁移将成长库从 schema 1 升到 2；保留原包、指针、任务和历史混合 `check` 记录，不重写旧结果。旧 route 初始化三个独立用途，旧 enabled 只保留周期检查，新 auto_heal=false。使用同一观察器，不凭升级启用新付费诊断/修复。启动器识别 schema 2 并拒绝 0.1.63 及更旧包接管；未来格式仍明确拒绝，不覆盖降级。
 
-旧调用者在过渡期仍走一个适配入口，不同时启动 v1/v2 两个观察器；旧 `check` 必须标注旧语义，不将其暗中映射为新纯检查。取消、任务冻结策略、进程崩溃及旧版本回退均须有兼容处理；尚不支持的 schema 明确拒绝，不降级覆盖。新增 HTTP 路径的具体定义在机器 schema 与处理器实现时唯一确定。
+旧调用者仍走相同路径，但新请求的 `check` 统一收窄为纯检查；功能变化通过 `feature=growth-purposes-v2`、schema 及本契约明确声明。历史没有 purpose 的 check 在界面标记“历史混合维护”，不可当作新自检证据。取消、重启不重放、基线比较继续复用原实现；schema 迁移不是旧运行包兼容承诺。
 
 <a id="dialogue-turn-contract"></a>
 ## 统一对话受理、意图与事件契约（proposed）
@@ -1164,7 +1194,7 @@ security_stop_event:
 被新输入替代的 generation 不再播放或插入当前回复，但对应模型用量和 UNKNOWN 必须保存；未最终转写的语音不得改变正式任务。澄清关联 turn/intent/候选对象与有效修订，后续“好的”仅在绑定明确时解决该澄清，不能确认另一项工作。技术实现和取消能力有差异时必须在 capability 描述中声明，不谎称请求撤回后供应商立即停止计费。
 
 <a id="dialogue-intent-shadow-contract"></a>
-### 对话意图与限定文档受理契约（0.1.56—0.1.57）
+### 对话意图与限定任务受理契约（0.1.56—0.1.59）
 
 **implemented；语义正确率只按[先导证据](delivery-validation.md#dialogue-intent-shadow-evidence)评价，完整 V-DLG 仍 proposed。** 网页普通对话经同一 `invoke_reply` 入口调用现有 Dialogue 子进程；一次模型回答同时提供自然回复与候选意图，不增加串行分类调用、不另启常驻模型。明确个人命令、本地计算、后台固定规划保持原接口。协议试点名单限 `vertex::gemini-3.1-pro-preview` 与 `vertex::gemini-3.8-flash`；其他供应商、其他版本及本地模型保持原自然回复协议，返回 `state=not_evaluated`。新增路线需独立格式/退化验证，名单不代表语义验收或执行授权。
 
@@ -1176,12 +1206,16 @@ security_stop_event:
 
 JSON 不合规时，有完整 reply 就保留正文并标记识别失效；普通非 JSON 回答可继续阅读；破碎协议不作为正文/文件自动保存。取消、UNKNOWN、进程退出沿现有规则，不为修复分类再次调用模型。输入预算放不下识别协议时，在调用前回退普通回答并返回 `state=skipped_budget`，不挤掉当前输入或新增调用。完整候选随原回复回执受限保存，临时会话仍不入持久表；普通会话归档只额外保留简短识别摘要，详细可操作卡仅在本次回复或回执取回时建立，不加入后续模型历史。
 
-文档候选的按钮仍只请求[只读能力检查与草稿准备](#mcp-documentation-task-contract)。0.1.57 另由宿主按[限定准入规则](tasks-agents.md#conversation-intent-routing)检查本轮回复及原输入，返回 `work_admission={status,capability,automatic,reason,reason_code?,task_id?,request_id?}`；submitted 必须对应已持久受理的真实任务。未通过时保留正文与原因，不重试模型。受理后回复持久化失败则返回 UNKNOWN 并保留已取得的 work_admission，任务仍可从本会话账本找回，不能自动重放。尚无通用 WorkAdmission、目标绑定修订或多行动依赖执行。
+文档候选的按钮仍只请求[只读能力检查与草稿准备](#mcp-documentation-task-contract)。0.1.57 另由宿主按[限定准入规则](tasks-agents.md#conversation-intent-routing)检查本轮回复及原输入，返回 `work_admission={status,capability,automatic,reason,reason_code?,task_id?,request_id?}`；submitted 必须对应已持久受理的真实任务。未通过时保留正文与原因，不重试模型。受理后回复持久化失败则返回 UNKNOWN 并保留已取得的 work_admission，任务仍可从本会话账本找回，不能自动重放。尚无通用多能力规划与多行动依赖执行；限定报告目标修订见下文。
+
+0.1.59 增加可替换的 `WorkAdmission` 端口，保留文档规则，扩展已验范围的样例报告。新增回执 `mode=bounded_sample_report`，`work_admission.operation=create/revise/cancel`；创建/替换为 `status=submitted`，指定取消为 `status=controlled`，附 `task_status` 和实际 task_id；未执行为 not_submitted 及原因。仅实际采用的意图片段标记 submitted/controlled，同行的情绪/问答仍是 not_submitted。新任务请求键按会话/轮次派生，不向浏览器开放内部 `_origin` 或 `_replacement`。
+
+任务账本按需增加 `report_admissions(task_id,document)` 与 `report_controls(request_id,arguments,result)`，没有第二套任务状态或队列。前者与新任务、旧任务取消同事务保存来源及替换关系；后者保存唯一取消回执。原样例任务参数和执行协议保持不变。任务详情增加 `report_control={relative_path,revision,admission}`，修订摘要绑定原行动身份/参数/所有权/策略；不是全局可变计数。旧 Host 忽略新增辅助表，但在途版本/源码绑定仍须核对，不保证带待执行任务直接回退。范围规则归[受理规则](tasks-agents.md#conversation-intent-routing)。
 
 <a id="dialogue-receipt-contract"></a>
 ### 已实现的回复回执接口（0.1.48—0.1.49 / dialogue-receipt-v1）
 
-状态 **implemented；限定验证见[运行证据](delivery-validation.md#dialogue-receipt-evidence)**。本接口只调用既有 `ChatService.reply`，不进行自动意图分流或任务创建；既有明确个人指令仍沿原个人核心处理。旧 `/api/chat` 保留兼容，与新接口共用 `invoke_reply`，每条输入只走一条入口。
+状态 **implemented；限定验证见[运行证据](delivery-validation.md#dialogue-receipt-evidence)**。初始0.1.48接口只调用既有 `ChatService.reply`；0.1.57/0.1.59的限定任务受理见上节，既有明确个人指令仍沿原个人核心处理。旧 `/api/chat` 保留兼容，与新接口共用 `invoke_reply`，每条输入只走一条入口。
 
 | 接口 | 字段与返回 | 边界 |
 |---|---|---|

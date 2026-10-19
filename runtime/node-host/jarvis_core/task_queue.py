@@ -144,7 +144,8 @@ class TaskQueue:
             'workflow': {p: digest((ROOT/p).read_bytes()) for p in SOURCE_PATHS},
             'seed': digest((ROOT/'seed/system-manifest/seed-bundle.json').read_bytes())}).encode())
 
-    def enqueue_sample(self, *, request_id, prompt, model='auto', relative_path='.', conversation_id=None):
+    def enqueue_sample(self, *, request_id, prompt, model='auto', relative_path='.', conversation_id=None,
+                       _origin=None, _replacement=None):
         from .sample_tasks import CAPABILITY, TIMEOUT_SECONDS, validate_request
         if self.sample_executor is None: raise self.error_type('executor_unavailable', '固定报告执行器尚未接入。')
         control = self.core.assert_running()
@@ -155,6 +156,9 @@ class TaskQueue:
             if self.core.ledger._admit(db)['security_epoch'] != control['security_epoch']:
                 raise CoreError('stale_authorization', 'Safety generation changed during queue admission')
             task_id = record['task']['task_id']
+            if _origin is not None:
+                from .task_revisions import register_origin
+                register_origin(self.core.ledger, db, record, _origin, _replacement)
             if record['action']['status'] != 'PREPARED': return
             if db.execute('SELECT 1 FROM computer_queue WHERE task_id=?', (task_id,)).fetchone(): return
             if len(self._pending(db)) >= self.capacity:

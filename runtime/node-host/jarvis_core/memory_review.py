@@ -1,11 +1,11 @@
-"""Signed review of edited semantic candidates; facts remain in MemoryStore."""
+"""Signed review of edited rule or semantic candidates; MemoryStore owns facts."""
 import hashlib
 import time
 import uuid
 
 from .memory import MemoryStore, fail
 from .memory_comparison import compare
-from .semantic_candidates import encoded, TTL
+from .candidate_tokens import encoded, TTL
 
 
 class MemoryReview:

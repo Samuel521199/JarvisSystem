@@ -102,7 +102,11 @@ class McpTaskService:
                 arguments = record['action']['arguments']
                 args = self.validate({k: v for k, v in arguments.items() if k not in {'_connection','_origin'}})
                 selected = arguments['_connection']
+                from .network_policy import NetworkPolicy
+                network = NetworkPolicy(self.core.data_dir)
+                network_revision = network.require_online()
                 def checkpoint():
+                    network.require_online(network_revision)
                     self.core.assert_running()
                     self.core.ledger.assert_admitted(task_id)
                     if time.monotonic() > deadline:
@@ -111,6 +115,7 @@ class McpTaskService:
                         raise policy.CoreError('mcp_policy_changed', '连接配置或选用规则已改变，停止此任务。')
                 checkpoint()
                 client = self.client_factory(checkpoint)
+                client.network_checkpoint = lambda: network.require_online(network_revision)
                 report = asyncio.run(client.query(args['library'], args['prompt']))
                 checkpoint()
                 report['selection'] = selected
@@ -131,7 +136,7 @@ class McpTaskService:
                     self.core.ledger.complete(db, action_id, artifact)
             except Exception as exc:
                 code = getattr(exc, 'code', 'mcp_network_error')
-                uncertain = code in {'mcp_timeout', 'mcp_network_error', 'mcp_incomplete', 'mcp_http_error'} and client is not None and client.dispatched
+                uncertain = code in {'mcp_timeout', 'mcp_network_error', 'mcp_incomplete', 'mcp_http_error', 'network_offline', 'network_policy_changed'} and client is not None and client.dispatched
                 status = 'UNKNOWN' if attempted_write or uncertain else 'CANCELLED' if code in {'cancelled', 'stopped'} else 'FAILED'
                 self.core.ledger.finish_without_receipt(action_id, status, {'code': code,
                     'message': str(exc) if isinstance(exc, policy.CoreError) else 'MCP 网络请求未完成；没有自动重试。'})

@@ -1,0 +1,466 @@
+{
+  "schema_version": 1,
+  "version": "0.1.63",
+  "captured_at": "2026-10-19T05:55:40.366438+00:00",
+  "status": "implemented_verified_application_scope",
+  "scope": "Persistent Jarvis-only offline control; no OS adapter or firewall changes",
+  "complete_k2_gate": false,
+  "paid_model_calls": 0,
+  "production_offline": false,
+  "regression": {
+    "version": "0.1.63",
+    "captured_at": "2026-10-19T05:52:25.568841+00:00",
+    "groups": [
+      "personal",
+      "dialogue",
+      "execution",
+      "growth",
+      "optional_voice"
+    ],
+    "tests": 631,
+    "status": "passed",
+    "failures": [],
+    "skipped": [
+      {
+        "id": "test_core.CoreTests.test_symlink_is_rejected",
+        "reason": "OS denied test symlink creation: [WinError 1314] 客户端没有所需的特权。: 'C:\\\\Users\\\\samuel\\\\AppData\\\\Local\\\\Temp\\\\jarvis-core-test-mvl0z2er\\\\outside.txt' -> 'C:\\\\Users\\\\samuel\\\\AppData\\\\Local\\\\Temp\\\\jarvis-core-test-mvl0z2er\\\\input\\\\linked.txt'"
+      }
+    ],
+    "seconds": 217.096,
+    "source_changed": []
+  },
+  "integration": {
+    "tests": 116,
+    "failures": [],
+    "skipped": [],
+    "seconds": 107.129,
+    "status": "passed",
+    "groups": [
+      "test_mcp_runtime",
+      "test_computer",
+      "test_computer_web",
+      "test_computer_queue",
+      "test_network_policy",
+      "test_models",
+      "test_model_admin",
+      "test_web"
+    ],
+    "admin_html_sha256": "9553b5e507d90a67fabbd7055e411efc2dd86e222dcf5fb5344ce4d3fcf0ee1f"
+  },
+  "local_model": {
+    "version": "0.1.63",
+    "captured_at": "2026-10-19T05:47:54.132520+00:00",
+    "status": "passed",
+    "scope": "temporary local-only configuration; real Qwen3 0.6B CPU planning and LPAC metadata Worker",
+    "environment": {
+      "platform": "Windows-11-10.0.26200-SP0",
+      "logical_cpus": 32,
+      "memory": {
+        "total_bytes": 132766306304,
+        "available_bytes": 107515269120,
+        "commit_available_bytes": 111253958656
+      }
+    },
+    "network_boundary": "Python audit rejects non-loopback socket/DNS; credential loading forbidden; llama.cpp --offline",
+    "limits": [
+      "Not whole-machine disconnected boot, OS outbound firewall, speech or federation acceptance.",
+      "Small fixed workflow corpus does not prove general intelligence, semantic safety or arbitrary tool competence."
+    ],
+    "application_policy": {
+      "offline": true,
+      "revision": 1,
+      "updated_at": "2026-10-19T05:47:54.300814+00:00",
+      "valid": true,
+      "scope": "application",
+      "process_guard": true,
+      "local_available": [
+        "本地模型",
+        "记忆与交流设置",
+        "文件与确定性任务"
+      ],
+      "blocked": [
+        "云模型及认证",
+        "远程 MCP",
+        "在线余额查询",
+        "受控浏览器"
+      ],
+      "notice": "只限制此 Jarvis 数据目录对应的运行实例；不改变其他软件或系统网络。已外发请求无法撤回。应用级限制不等于系统防火墙。"
+    },
+    "no_model": {
+      "chat_status": "FAILED",
+      "error": "connection_unavailable",
+      "personal_memory_available": true,
+      "persona_available": true
+    },
+    "resource_pressure": {
+      "method": "injected available/commit counters",
+      "rejected": true,
+      "message": "内存不足：本地模型启动估算需 1,536 MiB，并保留 1,024 MiB 前台余量。"
+    },
+    "verified_start_seconds": 6.604,
+    "cold_restart_ready": true,
+    "personal_memory_after_service_recreation": true,
+    "model_requests_by_provider": {
+      "local": 19
+    },
+    "real_worker_lpac": true,
+    "source_files_unchanged": true,
+    "engine_reclaimed": true,
+    "external_network_attempts": [],
+    "loopback_socket_events": 42,
+    "paid_model_calls": 0,
+    "peak_working_set_mib": 943.33,
+    "peak_private_commit_mib": 393.45,
+    "sample_count": 433,
+    "source_changed": []
+  },
+  "ui": {
+    "version": "0.1.63",
+    "status": "passed",
+    "fixture": "temporary real Host at 127.0.0.1:51842",
+    "checks": [
+      "settings navigation and accessible switch visible",
+      "enable through UI confirmed revision 1",
+      "page reload retains offline",
+      "Host process restarted and UI still offline at revision 1",
+      "restore through UI confirmed online revision 2"
+    ],
+    "screenshot": "H:/JarvisData/diagnostics/network-mode-20261019/settings-offline.png",
+    "limits": [
+      "Desktop viewport only; no mobile device or OS-level firewall validation.",
+      "Production personal data not used."
+    ],
+    "production_network": {
+      "offline": false,
+      "revision": 0,
+      "updated_at": null,
+      "valid": true,
+      "scope": "application",
+      "process_guard": true,
+      "local_available": [
+        "本地模型",
+        "记忆与交流设置",
+        "文件与确定性任务"
+      ],
+      "blocked": [
+        "云模型及认证",
+        "远程 MCP",
+        "在线余额查询",
+        "受控浏览器"
+      ],
+      "notice": "只限制此 Jarvis 数据目录对应的运行实例；不改变其他软件或系统网络。已外发请求无法撤回。应用级限制不等于系统防火墙。"
+    },
+    "production_home_card": true,
+    "production_screenshot": "H:/JarvisData/diagnostics/network-mode-20261019/settings-production.png"
+  },
+  "deployment": {
+    "status": "passed",
+    "captured_at": "2026-10-19T05:53:09.170779+00:00",
+    "excluded_tables": {
+      "dialogue_owner": "Host instance ownership is expected to change on restart.",
+      "computer_queue_control": "The idle queue is reviewed/resumed during the authorized reload; task rows are compared separately."
+    },
+    "limits": [
+      "Production business rows compared as counts/digests, no content exported. Runtime owner/queue controls legitimately change.",
+      "This verifies source deployment, not packaged-slot or schema downgrade compatibility. No production test memory is created."
+    ],
+    "reload": {
+      "status": "SUCCEEDED",
+      "source_version": "0.1.63",
+      "data_dir": "C:\\Users\\samuel\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\Jarvis\\data",
+      "previous_version": "0.1.62",
+      "previous_instance": "787f86921e0002989744d0f56be9ef99",
+      "current_instance": "f987fa9cdf40efbd450e94a327f36213",
+      "idle_graceful_reload": true,
+      "startup_from_absent": false,
+      "served_sha256": {
+        "dialogue.js": "a5a62f8ab2c15601fff468e29b38cd5e1efcfcf3cfb9bd3b5b3f00cebd27c4ec",
+        "resources.js": "586e03243199134cec0c4da7bedde691f904f73ca8e7aee09ea2dd0202c99e2b",
+        "workspace.js": "8f5a1bd76ba701c36eabae00758ada7181460715d68d6d2479635508287c4a57",
+        "conversation_tasks.js": "5e2037607e548341669dee1a09a4d442cf877196723f5579c94db66cde7220cf",
+        "mcp_manager.js": "0c74df31951193bbe830bdfe24a10eb90b9cb31bb604ce54109acc5fb1cd9702"
+      },
+      "calculation": "84",
+      "personal_read_only": true,
+      "duplicate_did_not_repeat_calculation": true,
+      "cancel_before_submit": true,
+      "restart_fence": true,
+      "instance_fence": true,
+      "empty_restart_queue_reviewed_and_resumed": true,
+      "admission_ms": 30.44,
+      "backups": {
+        "/api/speech/fast": "stopped",
+        "/api/speech": "stopped"
+      },
+      "cloud_calls": 0,
+      "limits": "One local calculator and personal-settings query; no paid model, microphone, task replay, persistent dialogue recovery or physical voice timing."
+    },
+    "assets": {
+      "persona.js": "6bc5a0a122163bad505a718843fd0751a921a348e8c918236d67d1408555af51",
+      "memory.js": "fc16bcb250bdf1d157fd8ff8fbd11e1a53c6daa96006345de2da7b2728af3fd5",
+      "continuity.js": "d2d147426c27c9ae3c65b70d7fe405604f0fd56a4538c93c059fdb9c77841890",
+      "modules.js": "fbc1bf5383a24cf983e17a67bf9bdd5afc6056d49647312d20e850663ac9224b",
+      "dialogue.js": "a5a62f8ab2c15601fff468e29b38cd5e1efcfcf3cfb9bd3b5b3f00cebd27c4ec",
+      "resources.js": "586e03243199134cec0c4da7bedde691f904f73ca8e7aee09ea2dd0202c99e2b",
+      "network.js": "3ef180e617208ab0d2cc598ff9bad306d1649ca114baf7eac6189de42b1e640f"
+    },
+    "profile_available": true,
+    "profile_revision": 0,
+    "module_health": {
+      "host": "ready",
+      "persona": "ready",
+      "continuity": "ready",
+      "memory": "ready",
+      "seed-catalog": "ready"
+    },
+    "business_state_unchanged": true,
+    "version": "0.1.63"
+  },
+  "outside_process_https": {
+    "status": 200,
+    "destination": "https://example.com/"
+  },
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/__init__.py": "ad850cc2b4cbad5ff9c964c8f7ddb759b8f9275ff366e64db39846df6b5d8020",
+    "runtime/node-host/jarvis_core/assistant_context.py": "6541e7daf8610e09a33f9d129edb680be5065b624b631e1c0baf3a278604bb28",
+    "runtime/node-host/jarvis_core/browser_recovery.py": "c3923508c3daea35610beaee08de9f3531fe0330119a8609e07a234b03d18b58",
+    "runtime/node-host/jarvis_core/calculator.py": "a5f2ebcb5cbbc5146a5ded764495eff835ad7328e9666f1e953baa2b0632dc09",
+    "runtime/node-host/jarvis_core/candidate_tokens.py": "547f0bc4cacbdd8b466b39d41e2274f61da1aa26f5deae033e56ad8e800ad8f1",
+    "runtime/node-host/jarvis_core/chat.py": "0549006f29cc1f5dc0205ce57122acdcdb8d119db7cc8aa5e42be97bcdddb2a8",
+    "runtime/node-host/jarvis_core/coding_workflow.py": "f5685dd09aee94628fa6723b63c636a8c9d63517b5795d3dc53dd7351f2f90f4",
+    "runtime/node-host/jarvis_core/context_assembly.py": "6ddcaa5a1be1c6e5bb2ba8fcb0eaae0b9d63a322a007b939c108160ad8ee66f9",
+    "runtime/node-host/jarvis_core/continuity.py": "6b780a1dd12cc379245850bf9fbbe5989600297d684e31d36f1e25ca235bce15",
+    "runtime/node-host/jarvis_core/control.py": "67062072d97748fa83fad2d23637c231b542af4b16650568f17b6daec5e24389",
+    "runtime/node-host/jarvis_core/conversation_tasks.py": "f4430f03f8dd189661d1af81008582a3bd4027caea5a7c10e221034a35c71ded",
+    "runtime/node-host/jarvis_core/conversations.py": "c264e7aa5308800e75b71766448b5da704edc7a73d462627aa2757cd37bdf497",
+    "runtime/node-host/jarvis_core/dialogue_journal.py": "53654f18f8b4c9abf4d3d53246b29cadbc43b288b8c0118ae337ac49ff35da41",
+    "runtime/node-host/jarvis_core/dialogue_process.py": "e12e674980104c4f582086e7602850cf336361598cbd93ae195fb30a6bc6008c",
+    "runtime/node-host/jarvis_core/dialogue_worker.py": "e7eb09f053f81a01dcc1a74e0286cd442a056ec11abc9d613ffe769e1e63a3a3",
+    "runtime/node-host/jarvis_core/documentation_admission.py": "d3cf0fc6236ae04224bb58af56464204d3ce907becac1c4b9a18d34e5ca4ed24",
+    "runtime/node-host/jarvis_core/evolution/__init__.py": "5b3e9dd8be5b53643223d3cf329620096742d3b586be0844a1eeed3ca75d537d",
+    "runtime/node-host/jarvis_core/evolution/demand.py": "de351c452cc72ebbb64c6bb348d654f5a9fb9d6424051dc497be7412f5c322a4",
+    "runtime/node-host/jarvis_core/evolution/manager.py": "916fca34dedf87e5e5c6a2ae168f823e3fb0d816681f8b747b1c8daa1388eb6e",
+    "runtime/node-host/jarvis_core/evolution/provider.py": "f539113875b14d6187ec8f658f25698dcdefbbd5c667f4cc1b918cb4e9a59acb",
+    "runtime/node-host/jarvis_core/evolution/recipes.py": "11492699e4221f73630de61d092cdda2ad2b141a4ffbca3be20ae971c13c49c8",
+    "runtime/node-host/jarvis_core/evolution/runner.py": "c4e26f93a7eee48127307b52bbb84a32ecfac05ed87d64ddfb964cdc4a61a61d",
+    "runtime/node-host/jarvis_core/evolution/store.py": "da0cb0388c5b2e0ccb586f1231e6376238458b5a6a42717048b11301c6b5f6e4",
+    "runtime/node-host/jarvis_core/extensions.py": "ce6ea3a66ab9962e652226f5f3abd15d0cd5a8393749f4f8ef00db056bea4186",
+    "runtime/node-host/jarvis_core/fast_speech.py": "b63c82b48ddb8f4840b903578680234fa0d8608a33541c3d68c36574b632d7f3",
+    "runtime/node-host/jarvis_core/gpu_memory.py": "71e8470d09f56be80ddfc06e0e7f15a1ea6c939c138526909e238ead21365d6c",
+    "runtime/node-host/jarvis_core/intent.py": "bb6a7566628add8e2ba72b07838ee7e18dbc7a66a78a02b09ee3854ce1a64f55",
+    "runtime/node-host/jarvis_core/knowledge.py": "6973e4f740e8858ab326cf6b2c8594138054a44fd7bb6ba4c76d5530ccf28838",
+    "runtime/node-host/jarvis_core/ledger.py": "7e8ef2e3719a29d197a7207ce8ebc75cd3a8f674509e9e0309884e28c8f8dd77",
+    "runtime/node-host/jarvis_core/local_model.py": "11ff52ca9fe734cb2d5c123e11d075f1b172a40822b7cd8278c61f495ae72e1a",
+    "runtime/node-host/jarvis_core/mcp_candidates.py": "d456ba965d76d897f141007e0202a7f4aa3213ac6ec6651fd80558f0b0095120",
+    "runtime/node-host/jarvis_core/mcp_catalog.py": "38b3ba10acbe7f2613d8948b814e2212890cb7bc9477eed5465c588f9ca06a69",
+    "runtime/node-host/jarvis_core/mcp_client.py": "ed769c6337b5e5cc370850b9fc455541a867fa50d8d209c19346e9d6925d4874",
+    "runtime/node-host/jarvis_core/mcp_tasks.py": "f238c9f5c11301def61ab07e3ea971dadc65862678f363b84754ed1610458315",
+    "runtime/node-host/jarvis_core/memory.py": "9b84a9533c13ba146f8afeec847f16a9d7e4f31a1e1e6f931930d6612ac8f323",
+    "runtime/node-host/jarvis_core/memory_comparison.py": "4718395810dbb39adffed67393613fb78a2ed27573b95998ace590072cc0eefd",
+    "runtime/node-host/jarvis_core/memory_policy.py": "86548663f469018ccf3201e6c730746b8be7302bb74d30d1dc283c16ae5e1feb",
+    "runtime/node-host/jarvis_core/memory_review.py": "0f17e2f15e88b4c1182ab8d734daa6bc895c05e82e6c6b148097d7b867972a97",
+    "runtime/node-host/jarvis_core/memory_sources.py": "58acc0452914b83ca8bac8c8241b2512c9893c494eeed4a0a4e0bbdbccb6bcb4",
+    "runtime/node-host/jarvis_core/memory_view.py": "bb8ad0e8b34eb3de4468bcb0fb1d005a8e288efd72c540630c08373ed4b00642",
+    "runtime/node-host/jarvis_core/modules.py": "326e997f9b3c24c7258279bf00f6adf6ec470b5e16010edb9676c64439b4d476",
+    "runtime/node-host/jarvis_core/network_policy.py": "8696580bc134c7a16b91a6cadc56fc2cc71fbc9734a4632caa2631d889faa2c6",
+    "runtime/node-host/jarvis_core/persona.py": "134d9a1c3087e73da49102e7722ab2e4dbc1a144d841126f6078135cf90e1db0",
+    "runtime/node-host/jarvis_core/personal.py": "8e78e0f8e00a8629b3d2e61396242b129135ff3da9faea716629e1ff03809e7a",
+    "runtime/node-host/jarvis_core/personal_candidates.py": "3062b0623bcac4eeb5be4a5b46b09319d73225df78b8b77788ded74222e31c4e",
+    "runtime/node-host/jarvis_core/policy.py": "1065143f3d1d6b0af63b002903241161b464199a3238755a9762b2a762d8106e",
+    "runtime/node-host/jarvis_core/preflight.py": "b91b9ea6562e286d74f63a2ef8865f1f2dcc4600f28dfdfe96005067302ccbb3",
+    "runtime/node-host/jarvis_core/process_memory.py": "8bfa293e98df172f114c09b1be9227b4d2323ee3bb060161f4e67e2f657f80be",
+    "runtime/node-host/jarvis_core/process_usage.py": "5535a3303556a18d9219f615d58cd6d7fa620284ce2d728a03edeb5c4555fcf2",
+    "runtime/node-host/jarvis_core/project_catalog.py": "8c8c5f4f697493f4d5463b0dc3a1c3f038c03b3fea4629af6f674e84caf5328a",
+    "runtime/node-host/jarvis_core/project_files.py": "fc7b372c091f5f53e8d99b45b86cfe6556205ebf1bff318a2f49cce6b5809f11",
+    "runtime/node-host/jarvis_core/qwen_protocol.py": "1fc1f03db68edc0935d82a2431644195c9c095f8829c6f246843b98f7b672a83",
+    "runtime/node-host/jarvis_core/qwen_speech.py": "bde815326fc6d0756d63df40943ab4797fcdebeadb5703ba63953869da0e58d9",
+    "runtime/node-host/jarvis_core/qwen_speech_contract.py": "58de540c781ede84f76dba887cc45fccc52dd6ae008a3ba47f6dc92672814f3a",
+    "runtime/node-host/jarvis_core/rea.py": "e7b2982a5ba5a3093280e07edf25792a2d5462bbf5ac51d139d08b2eb74a2f8b",
+    "runtime/node-host/jarvis_core/rea_asar.py": "f0e19530fabc3e59134a4f27626ceec19bfbe2ae21de575e14092963a02abed1",
+    "runtime/node-host/jarvis_core/rea_evidence.py": "32a85a1eeff2ee91d6d1f029bd30af842d856d23e1cd92342c9cd3e4221b62cb",
+    "runtime/node-host/jarvis_core/rea_explanation.py": "19a6ce9b6a81d045d3a31833266d1821ac0c41bc54f782c829d1ee3edf873135",
+    "runtime/node-host/jarvis_core/rea_focus.py": "2b9a7e1e7f52e7bfb6f74ec46e45089b69f73b6535bd9d5d8193afa7eb1c5263",
+    "runtime/node-host/jarvis_core/rea_process.py": "79e0137d0b863be352f5d85d6736d624df4927449968284e492a877fc50b6c83",
+    "runtime/node-host/jarvis_core/readout.py": "6333abb1e208f2fd768651df70345571ecb950fdcb603d0613c83456aefcb1c8",
+    "runtime/node-host/jarvis_core/readout_text.py": "181320c8e5f2226939d076bb2a2e2832405074dc50052b9e0432fb54e8b7b23d",
+    "runtime/node-host/jarvis_core/reference_library.py": "a0eeb7a668caffdc3f5918e66ad003f9c1b1a1a4d4e95070d7381c5793ad2810",
+    "runtime/node-host/jarvis_core/releases.py": "6785a5884abc0b2b7874729bebde846b2139b5d174fafef45b7d0e95bd9c8f72",
+    "runtime/node-host/jarvis_core/relevance.py": "7c07a29e6587fc5589956e281d45120b1a14ba90b159405dda6e0e600f145350",
+    "runtime/node-host/jarvis_core/report_intents.py": "65a84f2e1eb0a401df7cb0fb11b14b981aded5c9be8cf26290d4b5948b81e83b",
+    "runtime/node-host/jarvis_core/resource_usage.py": "fd8d1422fdabd05ca4a86bfc3b755920dc33b2c10a8d2e625b91cd9f527d24a7",
+    "runtime/node-host/jarvis_core/resources.py": "0cdd231f05d50022938f1cd0ee3521633bf4923bd6b5e0cf921ac0049935ac81",
+    "runtime/node-host/jarvis_core/runtime_catalog.py": "a570a6334a8e450cbb0a92cd799d15fd326d7071433ee14df62e900b154d19bf",
+    "runtime/node-host/jarvis_core/runtime_metrics.py": "8f007a8ff2c50673de9fbfa9a9e65fa1db6e8750bfaa8c3946acfb71760bb6a4",
+    "runtime/node-host/jarvis_core/sample_tasks.py": "4c30305711532b5275b9307a7621eba92162b134c97167fe3eda9bc81010018d",
+    "runtime/node-host/jarvis_core/semantic_candidates.py": "c4b05505e7efb72029744cd289030adb0686c351ae23890c9668f9f99c995ed9",
+    "runtime/node-host/jarvis_core/service.py": "17eb3a6e91dc8b700e4b54fb831864eb7dd4a07912e807bdbd53d065f59d909a",
+    "runtime/node-host/jarvis_core/skill_renderer.py": "20fb0f6bf9be3ca63c6aabfa0254ec6d4b2b98f5222c030636ff591802e7ba81",
+    "runtime/node-host/jarvis_core/skill_tasks.py": "8afb005520062a99d03e3b2f166cd833f0144d0c3c7e33d40a0b0c686d546e67",
+    "runtime/node-host/jarvis_core/skill_validation.py": "278a9a744a37cea0e9df8f191ebcf0e754d0e6ce04468f2be67cf5c44435deec",
+    "runtime/node-host/jarvis_core/skills.py": "ae673579d19ac63d2d028e9811b0d551f448175dc659cbdb0cb3f6f263190753",
+    "runtime/node-host/jarvis_core/speech.py": "29d33a35a35d505a64d1e9dded1fa5d7ef8ba1cec65a78bc2c2455a8f41750de",
+    "runtime/node-host/jarvis_core/speech_audio.py": "e45197ed56bc18b6d0d6d346b19892d7851b6c84d2a997eca49399b757108d58",
+    "runtime/node-host/jarvis_core/speech_contract.py": "e157144718b9abba677a737e63de29048f6816bc5195a504b16d8375fa368ef8",
+    "runtime/node-host/jarvis_core/storage_budget.py": "8022757047a8bf1892ee5865651c84d9d37a1717f09b9911547b760a4f6e45d3",
+    "runtime/node-host/jarvis_core/task_queue.py": "4d2a4250062c20be22be9961ed0aa9b8ab38d830ef37e3a33f4aad304ce0db1c",
+    "runtime/node-host/jarvis_core/task_revisions.py": "3eb98f907bfc30c30d17d235dd7a42ee9b567cf5275d6f93bb1a30e9f80b8327",
+    "runtime/node-host/jarvis_core/turns.py": "2b848602b0111cd49e40a0e14fa8996ba1c54c9a02422bbe976c54f6fd863e8a",
+    "runtime/node-host/jarvis_core/work_admission.py": "e73cd0b0ca943df9e6b78ccc89f92105935f04c92163d9c9825e3032dc936dea",
+    "runtime/node-host/jarvis_core/work_state.py": "0f2f8e9ecb3ea6c0ca2c02d88620c1fe8eddedb38e3d625329e130fa8aa1755f",
+    "runtime/node-host/jarvis_core/worker.py": "9330cf53a54429a0108deeb5c06a24cfe9cea2daa987c1c7e23d6af8507ea5dd",
+    "runtime/node-host/jarvis_core/worker_recovery.py": "8f70b4ec46dc7a7bfa64f53166abf38fb252ab08a61f37b2c933bfa479e68a0b",
+    "runtime/node-host/jarvis_core/workspace.py": "0f55936e6bdd7bc58c69957d6cb9120f750683a1c52ac7da872e25e932a8da1f",
+    "apps/web/admin.css": "800ed6e223396a64ab4a4c6f7627c00c6a1fa617599719e1089784f881c2f6bd",
+    "apps/web/admin.html": "9553b5e507d90a67fabbd7055e411efc2dd86e222dcf5fb5344ce4d3fcf0ee1f",
+    "apps/web/admin.js": "c8866f47f08014db089d5c1eaba1956bb8bbe57b4adce0fcc1cc6e8769b919c1",
+    "apps/web/attachments.css": "6615ea896fe697a09e929ca3c8458178b1b2103f408e14a45442177eb555a2a3",
+    "apps/web/attachments.js": "0c9424d4bdd4732edf4a2712b1fa475e3f7ab9342b75c113adc3c18d0ecccea3",
+    "apps/web/brand/lifecycle.css": "3c8d7e784eb102f2f14d8dc63804eb62e44e1685030a68126fa612a1483eb2b7",
+    "apps/web/brand/lifecycle.js": "453394bcbbee8865d3664feba225d20c6073c3f0aeec16d285f83aaacd510813",
+    "apps/web/brand/logo.css": "349f2bf7b40aaa9cf54b275947afc2682df71153fdca0a19380f933dd4226675",
+    "apps/web/brand/logo.js": "3e9eeb750d88106637ecfe659db05e4571e4795202bda9a5c0eaf66f69ac2486",
+    "apps/web/brand/preview.css": "51f8ce20ace24fa534d2e0b9749be291571069121e5344a8142359ff20840956",
+    "apps/web/brand/preview.html": "35acc2a1d7aa8fdb0417a7681d00b8958f9a704d3317d1067cf1fcab252c015c",
+    "apps/web/brand/preview.js": "c007de010ecd0da1281429af794bc526367ae113e92d5647029c06b42388c577",
+    "apps/web/brand/sound.js": "570aedd63cf5fb7fff439a098f3595bbc322b79a624dc2278ddf72a1dfce93f3",
+    "apps/web/candidate_routes.py": "bb99f12e0e4b7615827e0670993c7e533e36fdf2c580d74b7b0009a30c30baf6",
+    "apps/web/computer.js": "1077d04743205e8fd2e5844851d1cc3e0ba182ca1b8608c837184d89bc305e0c",
+    "apps/web/context.css": "122ea231c87026eda3d1384c277c1f9626955653d1efd4f6e1e53abd103c5b6f",
+    "apps/web/context.js": "90cbf50e5410241e946d5d5aa8a7feb1dac4125bd8e8006abcc30449a822535a",
+    "apps/web/continuity.js": "d2d147426c27c9ae3c65b70d7fe405604f0fd56a4538c93c059fdb9c77841890",
+    "apps/web/continuity_routes.py": "40730e0cb48bb155a07de69e181e2af6f48680856f95c05ed40d968e2c1ca570",
+    "apps/web/conversation_tasks.css": "5f6552d3d2f2bfa7699de084b0877b97868a8bc5f17e08c966f430fe26871fb3",
+    "apps/web/conversation_tasks.js": "5e2037607e548341669dee1a09a4d442cf877196723f5579c94db66cde7220cf",
+    "apps/web/conversations.js": "530c5b90e47d1a858a3701bfbbad5147627b5ec1dc84eeb330fc69275de94b7d",
+    "apps/web/dialogue.js": "a5a62f8ab2c15601fff468e29b38cd5e1efcfcf3cfb9bd3b5b3f00cebd27c4ec",
+    "apps/web/dialogue_routes.py": "4b3e9a32701edff81c8036718af194aeabbd1a30e92b319d2be291a48b2a6903",
+    "apps/web/evolution.css": "98c4845ef2e3989c0b427916d2aed7bc985489f569376681b41677595eecc16b",
+    "apps/web/evolution.js": "f5828417c7eb25ceda2993588e7ebb24eee07a9495daf89e0bc6b017cc5cd726",
+    "apps/web/evolution_routes.py": "d24026b35f8eed9bdd40c011f9485e3e7a91aa76db17d100bb15ccdaecbfd844",
+    "apps/web/explorer.css": "4129c01c275d79ebe45757a5cd58c65e6533b9e5c89c63ee056bbb092dd696e0",
+    "apps/web/explorer.js": "5e498fec8a20e2891bae1af1ca75848b0556390a2f88967d86d796650a6382f5",
+    "apps/web/extensions.css": "444ac5abe99165446fa0efbe796c85a1fccaeed54a7daf0095ea786831a1b762",
+    "apps/web/extensions.js": "636cc5eca956872a49201652894dcce80ac5456bd83654d81f0b770df085594f",
+    "apps/web/growth.css": "6295a3b4efdde3e7d7b2193623287f38a4a7598aa206ae3bbc78be293fa90123",
+    "apps/web/growth.js": "25fd951c1ab8a1cb9579a8b66d7b2807c4dc7cf8323506a91a19f8960114482e",
+    "apps/web/growth_routes.py": "78eaf240e9e65c9d324256a5916976cb9004152f8a67ada4b7408b55cc6beeaf",
+    "apps/web/index.html": "f87364ac768c9163610776271a287f9b3200849799f4cc7caf77b81898a51a9f",
+    "apps/web/knowledge.css": "b9345e1e2ef008ab995eefbc002f277d296ad3a98db88c2c12a9c1478ec9d2b3",
+    "apps/web/knowledge.js": "eedf737d8f7205d6b178ebf3971c48c4f2199d6748c64f8210cb1ff32523e131",
+    "apps/web/mcp.css": "cd010bd65594cae3eb37a8635cd616725176121e6426b5cbaad54757787d5860",
+    "apps/web/mcp_manager.js": "0c74df31951193bbe830bdfe24a10eb90b9cb31bb604ce54109acc5fb1cd9702",
+    "apps/web/memory.css": "8c83281e5c3d30ea2e9dfafd379b820192dba01ce0797c02e62f44341b1cf918",
+    "apps/web/memory.js": "fc16bcb250bdf1d157fd8ff8fbd11e1a53c6daa96006345de2da7b2728af3fd5",
+    "apps/web/modules.css": "272caf64eb90b3e63d1b4d1b62651bfe0978cc1ae488bfd3b22cd5a1c4be6c40",
+    "apps/web/modules.js": "fbc1bf5383a24cf983e17a67bf9bdd5afc6056d49647312d20e850663ac9224b",
+    "apps/web/network.js": "3ef180e617208ab0d2cc598ff9bad306d1649ca114baf7eac6189de42b1e640f",
+    "apps/web/persona.js": "6bc5a0a122163bad505a718843fd0751a921a348e8c918236d67d1408555af51",
+    "apps/web/persona_routes.py": "b5ffad4816bb904875d67b7d2958d631e79de6fd7aa8e89cb447ef2538c51bcf",
+    "apps/web/personal_candidates.js": "639e65703a53f36d101bc0323d7d26443417e8f4eae01697e43da90c6ab58549",
+    "apps/web/project_menu.css": "23a03c138ecb8feb237a100880f91e145584f51ffbc8cc21f5a5a0053c7b62be",
+    "apps/web/project_menu.js": "f5296b544b70bd423fd6264e184e6ffd2cebc95cfed17541273f274758a4b06f",
+    "apps/web/readout.css": "d74bed0e05d1ec880e4c50a0bb90e30f032d07c97307da9113fe9077e5d448b7",
+    "apps/web/readout.js": "935f7dd4f4c777943aa7d9aaf7745e716a032f0eadb707cd0da892b26c4bd560",
+    "apps/web/resources.js": "586e03243199134cec0c4da7bedde691f904f73ca8e7aee09ea2dd0202c99e2b",
+    "apps/web/server.py": "f2ca043b63166e29123ef012c3db9d758c721053ba313e4cd52f3ab8010bc687",
+    "apps/web/skill_routes.py": "80efee22246b1feb5a7e947a609266414aa420021bfcd61c879f00fc8c459694",
+    "apps/web/skills.css": "1cd622bdf4f437f838b48f97117d8114c0d401197fb77e94150149825174b1b2",
+    "apps/web/skills.js": "7213e4e831ee57eda9d46ed307924421cc7bfebd8d54259a33f5b96f7f8212b5",
+    "apps/web/skills_manager.js": "dbb74f1c7b75104aaefc894b622b2a14e9564701434d7d36bbcf1ab9d6d322ae",
+    "apps/web/speech.css": "16b8db2441b23152d311bf6a1cd2cfda98f2cd6a70e6b6ff903db7028f54b844",
+    "apps/web/speech.js": "5dafde263fcbca6f40dc25373632b9dbe600408a19d09e627b411aa8562574c3",
+    "apps/web/speech_routes.py": "65ed5264a99632a034bdde498565c19fd40b1e604b6c5cafbd1e0d3d3a0b2045",
+    "apps/web/theme.css": "8d11aed299c3f9c71e429bbf414793a4beec70bd09707c564477934bab1728ba",
+    "apps/web/theme.js": "689cfdfa7de8da5fb30450503840e1f21a5ab6f59f530c3c749375dec70011c2",
+    "apps/web/ui_assets.py": "8eaca98c895d56d1cc6c1ccd1eee448cc8d65561951bf75ad612d3e765e8e492",
+    "apps/web/workbench.css": "26582fe7a0c777515321efef192b8c8859d7678f47003f2f0669420fad074cf6",
+    "apps/web/workbench.js": "bb21564c7424190d6aab6315714ab95ff262fa3b371fb3ab59b08ef17f07153b",
+    "apps/web/workspace.css": "060bf4dd0edea25d2f441697e2dcee7dae4b2610144707c0de6f91d4226462ef",
+    "apps/web/workspace.js": "8f5a1bd76ba701c36eabae00758ada7181460715d68d6d2479635508287c4a57",
+    "adapters/models/provider-native/jarvis_models/__init__.py": "540da8307103109969366729f5a547c81bc88b269a7f723a476c1a753c856d6f",
+    "adapters/models/provider-native/jarvis_models/attachments.py": "2a04a5007ae7b527b8b2269bde00289def5977026df9fec5ff72cf6440b3ce22",
+    "adapters/models/provider-native/jarvis_models/billing.py": "7fbec8ceab7c44677be3f9cfda2236774c321f908756afee43412ea4e8a7ea79",
+    "adapters/models/provider-native/jarvis_models/catalog.py": "5950ec73e70469439c6075212bd5eaa9e798e2336b823b82825f10138c0282b0",
+    "adapters/models/provider-native/jarvis_models/gateway.py": "9ff1cf84a85ff1da55c0d887e8ea721428560070860c1c34e9d137abeeadca47",
+    "adapters/models/provider-native/jarvis_models/registry.py": "8912121b74823793d3ce1e5e91a975532e7d75cc7507df02f57cbfd34b4a6031",
+    "adapters/models/provider-native/jarvis_models/vault.py": "3d61692b5301561b8d2be4f1f1f827c5330b1991af457b84cfd306b544989200",
+    "adapters/computer-use/jarvis_computer/__init__.py": "b763f32a58f21aa3f698ee8ac6e72f256d7231600f933be2b966255c9c11ef69",
+    "adapters/computer-use/jarvis_computer/browser.py": "0bd040e7a8619345c6154e33559702725741b2f5e8faa1289c82ebe60a22d0d8",
+    "adapters/computer-use/jarvis_computer/planner.py": "5507b08638c6881885395d5d86f8f5504f29ed9168f6b1f8477d67ba202f1e1c",
+    "adapters/computer-use/jarvis_computer/protocol.py": "c64bffdc5e6af6a94597b0cb22ff56f29848f380af27aec00ad441f8d1a70e1d",
+    "adapters/computer-use/jarvis_computer/service.py": "fc20049b4ffb64dccd8530cc0de7def2cc9f82c68a855536c281900916ba2fba",
+    "adapters/computer-use/jarvis_computer/task_queue.py": "a9b810ab0d616d44b2024b8fb290a7716540605892a5cbf7d9539215b5ceea72",
+    "adapters/computer-use/jarvis_computer/web.py": "2a28e8301172818955b01009bdf078432fb9a5df1227ef3b7851fb8482048ef0"
+  },
+  "post_regression_changes": [
+    {
+      "path": "apps/web/admin.html",
+      "reason": "Add settings overview card linking to existing network page",
+      "validation": "116-test integration regression and real production UI navigation"
+    }
+  ],
+  "evidence": {
+    "deployment.json": {
+      "path": "H:\\JarvisData\\diagnostics\\network-mode-20261019\\deployment.json",
+      "sha256": "ac761088ed89a292e7e69bc0e9ed249bdc48d28e1ebdf470ad0a0cca272b0938"
+    },
+    "integration.json": {
+      "path": "H:\\JarvisData\\diagnostics\\network-mode-20261019\\integration.json",
+      "sha256": "0b1d0fab182c680c086e4b171bbb80a8a1c140e0d10be1daa30266d22376e3bc"
+    },
+    "local-model.json": {
+      "path": "H:\\JarvisData\\diagnostics\\network-mode-20261019\\local-model.json",
+      "sha256": "4f7b68c39da3f317a219db38003f6986d8f31e6c2ebbc372695cf33c6e68850a"
+    },
+    "real-host.json": {
+      "path": "H:\\JarvisData\\diagnostics\\network-mode-20261019\\real-host.json",
+      "sha256": "8f4905c850dd23b480b4b825ca14e4aa7923e87c9cdcfe2006a4ca231e067c1d"
+    },
+    "regression.json": {
+      "path": "H:\\JarvisData\\diagnostics\\network-mode-20261019\\regression.json",
+      "sha256": "28f21c6a262307935dfa96db31e51c28ea910b692949f85e0491cabc10687f29"
+    },
+    "ui.json": {
+      "path": "H:\\JarvisData\\diagnostics\\network-mode-20261019\\ui.json",
+      "sha256": "2b4492a2d5a922ac3cdf8e56ebfc591acd8c3c34c10bf5937205da4f849bbdbf"
+    },
+    "delivery.json": {
+      "path": "H:\\JarvisData\\diagnostics\\network-mode-20261019\\delivery.json",
+      "sha256": "393562cbaaba3ca1999bf7fb5807b9a53d0f8ab96c6a018690ce83de9d518b13"
+    },
+    "package.json": {
+      "path": "H:\\JarvisData\\diagnostics\\network-mode-20261019\\package.json",
+      "sha256": "92b96bb48f9d4958ebd2847b13e2e68dd71229a7f5fe6bc99f1d1ac21ba1d850"
+    }
+  },
+  "package": {
+    "status": "passed",
+    "archive": "artifacts\\releases\\jarvis-0.1.63-network-control.zip",
+    "sha256": "7955251d82ddc5e1bd227072bd1691f2f87fe6535dbbe3a65930e66a5039410e",
+    "verified_members": 1547,
+    "source_members_compared": 302,
+    "real_startups": 3,
+    "saved_offline_policy_preserved": true,
+    "business_state_unchanged": true,
+    "corrupt_slot_fallback": true,
+    "runtime_changes": [],
+    "post_build_documentation_changes": []
+  },
+  "limitations": [
+    "Application policy is not an OS firewall or protection against hostile native code. Existing sent data cannot be retracted.",
+    "Local inference process uses fixed offline arguments; unrelated external tools and manual downloads are not governed.",
+    "No new physical whole-machine offline, reference 8 GiB device, long-duration resource or subjective owner acceptance.",
+    "Previous 0.1.62 evidence and frozen K2 gate remain unchanged."
+  ],
+  "resolved_regression_findings": [
+    "Avoid queue variable shadowing in HTTP chat handler.",
+    "Keep online MCP cancellation notification while preventing offline cancellation/session cleanup requests."
+  ],
+  "checks": {
+    "documentation": "passed: 25 documents, 21 diagrams, 42 artifacts, zero errors",
+    "javascript_syntax": "admin.js and network.js passed",
+    "git_whitespace": "passed with existing CRLF policy",
+    "runtime_source_unchanged_since_integration": true
+  },
+  "completed_at": "2026-10-19T05:57:57.085386+00:00"
+}

@@ -27,7 +27,7 @@ class ModuleTests(unittest.TestCase):
         self.root=Path(self.temp.name)
         self.core=test_web.FakeCore();self.core.data_dir=self.root
         self.monitor=ModuleMonitor(self.core,lambda:{'chat':0,'computer':False,'tasks':[],
-                                   'memory':True,'knowledge':True,'extensions':True},
+                                   'memory':True,'knowledge':True,'extensions':True,'personal':True},
                                    model_root=self.root/'models',releases_root=self.root/'releases')
         self.addCleanup(self.monitor.close)
 
@@ -52,7 +52,7 @@ class ModuleTests(unittest.TestCase):
             self.monitor._refresh()
         rows={r['id']:r for r in self.monitor.cache['modules']}
         self.assertEqual(rows['models']['health'],'unknown')
-        self.assertEqual(rows['local-llm']['health'],'unknown');self.assertEqual(len(rows),23)
+        self.assertEqual(rows['local-llm']['health'],'unknown');self.assertEqual(len(rows),25)
         self.assertEqual(rows['calculator']['health'],'ready')
         self.assertTrue(rows['calculator']['enabled'])
         self.assertEqual(rows['calculator']['count_scope'],'host_lifetime')
@@ -68,7 +68,7 @@ class ModuleTests(unittest.TestCase):
         self.assertFalse((self.root/'releases').exists())
 
     def test_new_stores_are_lazy_and_observation_never_creates_them(self):
-        for collector in (self.monitor._memory,self.monitor._knowledge,self.monitor._mcp,self.monitor._skills):
+        for collector in (self.monitor._memory,self.monitor._knowledge,self.monitor._mcp,self.monitor._skills,self.monitor._persona,self.monitor._continuity):
             row=next(r for r in collector() if r['id'] != 'native-skills')
             self.assertEqual(row['storage_state'],'not_created')
             self.assertEqual(row['record_count'],0)

@@ -68,7 +68,7 @@
       }
       if(job.request.origin.previous_job){const previous=document.createElement('small');previous.textContent='重新分析自：'+job.request.origin.previous_job+'；原记录未改写。';card.append(previous);}
       const details=document.createElement('details'),summary=document.createElement('summary'),pre=document.createElement('pre');summary.textContent=job.result?'查看输出与证据':'查看验收与记录';pre.textContent=job.result?.text||JSON.stringify({acceptance_digest:p.acceptance_digest,input_digest:p.input_digest,events:job.events,attempts:job.attempts},null,2);details.append(summary,pre);
-      const settings=document.createElement('a');settings.href='/settings#modules';settings.target='_blank';settings.rel='noopener';settings.textContent='成长设置与回退 ↗';actions.append(settings);
+      const settings=document.createElement('a');settings.href='/settings#growth';settings.target='_blank';settings.rel='noopener';settings.textContent='成长设置与回退 ↗';actions.append(settings);
       card.append(title,steps,copy,scope,actions,details);list.append(card);
     }controls();
   }

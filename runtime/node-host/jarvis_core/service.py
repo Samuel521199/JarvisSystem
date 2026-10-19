@@ -12,6 +12,7 @@ import time
 from . import __version__, policy, worker
 from .ledger import Ledger, TERMINAL_ACTIONS, now
 from .policy import CoreError, canonical_json, digest, safe_path
+from .storage_budget import interactive
 
 LIMITATIONS = [
     "Restricted K1 validation prototype; K1 production isolation is not complete.",
@@ -171,6 +172,7 @@ class CoreService:
                 self.ledger.finish_without_receipt(action_id, state, {"code": code, "message": str(exc)})
             return self.ledger.record(action_id)
 
+    @interactive
     def cancel(self, task_id):
         self._recover()
         return self.ledger.cancel(task_id)

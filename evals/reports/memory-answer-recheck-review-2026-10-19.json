@@ -1,0 +1,26 @@
+{
+  "status": "REVIEWED_WITH_LIMITATIONS",
+  "source_version": "0.1.61",
+  "report": "memory-answer-recheck-2026-10-19.json",
+  "inspected_answers": 16,
+  "observations": [
+    "Positive facts and corrected values are used with actual context references; excluded values absent.",
+    "Most no-evidence replies point to explicit owner commands instead of promising automatic writes."
+  ],
+  "residual_wording": [
+    {
+      "case": "A05/memory",
+      "note": "Offers telling the assistant OR a command, so the confirmation requirement could still be clearer."
+    },
+    {
+      "case": "A06/control",
+      "note": "Telling the assistant OR a command remains slightly ambiguous."
+    },
+    {
+      "case": "A07/control",
+      "note": "Says I can help record, followed by an explicit command example; not proof of an actual save."
+    }
+  ],
+  "automatic_remembering_enabled": false,
+  "model_hallucination_eliminated": false
+}

@@ -316,6 +316,9 @@ def probe(config: dict, provider: str, prompt: str, data_dir: Path, guard, *, cl
             or len(instructions.encode("utf-8")) + text_size(current) + sum(text_size(m) for m in messages) > max_input):
         raise ModelError("invalid_or_oversized_prompt")
     item = resolve_settings(config, provider)
+    from jarvis_core.network_policy import NetworkPolicy, NetworkDenied
+    network = NetworkPolicy(data_dir)
+    network_revision = network.snapshot()['revision']
     if response_schema is not None:
         try:
             if (item.get('adapter',provider)!='local' or not isinstance(response_schema,dict)
@@ -336,6 +339,7 @@ def probe(config: dict, provider: str, prompt: str, data_dir: Path, guard, *, cl
     def check_cancel():
         if cancel_event is not None and cancel_event.is_set():
             raise RequestCancelled()
+        network.check_model(item, provider, network_revision)
 
     async def receive(url, headers, payload):
         async def request(active_client):
@@ -378,8 +382,6 @@ def probe(config: dict, provider: str, prompt: str, data_dir: Path, guard, *, cl
                                          trust_env=provider != "local") as active_client:
                 return await request(active_client)
         async def cancellable_request():
-            if cancel_event is None:
-                return await bounded_request()
             check_cancel()
             pending = asyncio.create_task(bounded_request())
             try:
@@ -448,6 +450,9 @@ def probe(config: dict, provider: str, prompt: str, data_dir: Path, guard, *, cl
         else:
             metadata.update(error="transport_error_no_automatic_retry", error_category="transport_unknown",
                             user_message="连接中断或等待超时，远端结果可能未知；可由你明确重新发送。")
+    except NetworkDenied as exc:
+        status = 'UNKNOWN' if dispatched and not rejected else 'FAILED'
+        metadata.update(error=exc.code, error_category='network_offline', user_message=str(exc))
     except VaultError:
         metadata.update(error="credentials_unavailable", error_category="authentication",
                         user_message="当前提供商凭据不可用，请检查本地配置。")
