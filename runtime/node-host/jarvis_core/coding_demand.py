@@ -126,7 +126,7 @@ class CodingDemands:
             raise policy.CoreError('not_found', '未找到编码改进请求，没有自动重发。')
         return self.bound(ident, row['id'])
 
-    def propose(self, ident, payload, *, previous_job=None):
+    def propose(self, ident, payload, *, previous_job=None, expected_source_digest=None):
         doc = archive(self.core, ident)
         if not isinstance(payload, dict) or set(payload) != {'request_id', 'prompt', 'coding'}:
             conflict('编码改进单需要请求编号、目标及编码验收配置。')
@@ -150,6 +150,8 @@ class CodingDemands:
             'project_root': str(ProjectFiles(self.core).root(doc['project_id'])),
             'runtime_binding': self.service.binding(), 'composition': decisions,
             'budget': {'max_model_calls': MAX_ATTEMPTS, 'runtime_seconds': 240}}
+        if expected_source_digest is not None and policy.digest(policy.canonical_json(frozen['sources']).encode()) != expected_source_digest:
+            conflict('审阅后的源码已经变化，请重新分析，未交接新的文件内容。')
         origin = {'conversation_id': ident, 'project_id': doc['project_id'], 'goal': args['prompt']}
         if previous_job: origin['previous_job'] = previous_job
         job = {'id': uuid.uuid4().hex, 'created_at': now(), 'status': 'PROPOSED',

@@ -20,14 +20,15 @@
   function controls(){for(const b of dialog.querySelectorAll('button'))b.disabled=acting;}
   async function createCoding(payload){
     const context=current();if(!context||context.temporary)throw new Error('请在已保存的普通项目会话中建立改进单。');
-    const toolOrigin=window.ToolIntents?.codingOrigin(payload.prompt);
+    const contractOrigin=window.ToolContracts?.codingOrigin(payload.prompt),toolOrigin=contractOrigin?{id:contractOrigin.planId}:window.ToolIntents?.codingOrigin(payload.prompt),reviewKey=contractOrigin?JSON.stringify(contractOrigin):null;
     const id=context.id,coding=Object.fromEntries(['paths','cases','heldout_cases','entrypoint','model','coding_provider','build_recipe','new_paths'].filter(k=>k in payload).map(k=>[k,payload[k]])),spec={prompt:payload.prompt,coding},old=pending.get(id);
-    if(old&&(JSON.stringify(old.spec)!==JSON.stringify(spec)||(old.toolOrigin||null)!==(toolOrigin?.id||null)))throw new Error('上次改进单回执尚未确认，请先打开原回执查询。');
+    if(old&&(JSON.stringify(old.spec)!==JSON.stringify(spec)||(old.toolOrigin||null)!==(toolOrigin?.id||null)||(old.reviewKey||null)!==reviewKey))throw new Error('上次改进单回执尚未确认，请先打开原回执查询。');
     let node=old?.node;
-    if(!node){message('user','改进需求：'+payload.prompt);node=message('assistant','正在冻结目标、源文件与验收条件；尚未开始执行。',{growthRequestId:toolOrigin?.id||crypto.randomUUID().replaceAll('-','')});pending.set(id,{spec,node,toolOrigin:toolOrigin?.id||null});}
+    if(!node){message('user','改进需求：'+payload.prompt);node=message('assistant','正在冻结目标、源文件与验收条件；尚未开始执行。',{growthRequestId:toolOrigin?.id||crypto.randomUUID().replaceAll('-','')});pending.set(id,{spec,node,toolOrigin:toolOrigin?.id||null,reviewKey});}
     try{
       await Workspace.flushConversation();
-      const job=await api(toolOrigin?'/api/project-tools/'+id+'/plans/'+toolOrigin.id+'/coding':prefix(id),{request_id:node.dataset.growthRequestId,...spec});
+      const path=contractOrigin?'/api/project-tools/'+id+'/plans/'+contractOrigin.planId+'/contracts/'+contractOrigin.id+'/review':toolOrigin?'/api/project-tools/'+id+'/plans/'+toolOrigin.id+'/coding':prefix(id);
+      const job=await api(path,{request_id:node.dataset.growthRequestId,...spec,...(contractOrigin?.review||{})});
       node.dataset.growthRef=job.id;pending.delete(id);node.querySelector('.bubble').textContent='编码改进单已保存：'+payload.prompt+'。核对文件、验收案例和模型后开始；完成时由独立验收回填结果。';linkReceipts();Workspace.remember();notify('');
       if(current()?.id===id)await show(node);
     }catch(e){node.querySelector('.bubble').textContent=e.message+'；没有自动重发。';if(e.status&&e.status<500){pending.delete(id);delete node.dataset.growthRequestId;}linkReceipts();Workspace.remember();throw e;}
@@ -35,7 +36,8 @@
   function renderCoding(job){
     const make=(tag,text)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;return n;},card=make('article'),args=job.coding;
     card.className='growth-card';card.dataset.growthId=job.id;card.dataset.active=String(active(job.status));
-    card.append(make('strong',(states[job.status]||job.status)+' · '+job.request.origin.goal));
+    const marker='\n\n已审阅验收契约：\n',goal=job.request.origin.goal,parts=goal.split(marker);card.append(make('strong',(states[job.status]||job.status)+' · '+parts[0]));
+    if(parts.length>1){const details=make('details');details.append(make('summary','已审阅契约与澄清'),make('pre',parts.slice(1).join(marker)));card.append(details);}
     const phases=make('div');phases.className='growth-steps';
     for(const [label,reached] of [['需求已冻结',true],['编码任务',!!job.task_id],['独立验收',!!job.result],['结果回填',!!job.result]]){const n=make('span',label);n.title=label+(reached?'：已有记录':'：待完成');if(reached)n.className='reached';phases.append(n);}card.append(phases);
     card.append(make('p',args.paths.length+' 个文件 · '+args.cases.length+' 条公开示例 + '+args.heldout_cases.length+' 条独立验收 · '+(args.build_recipe==='javascript-scene-v1'?'JavaScript 交互场景':args.build_recipe.startsWith('python-package')?'Python 包工具':args.build_recipe==='python-jmespath-v1'?'JSON 查询工具包 · JMESPath 1.1.0':args.build_recipe==='python-zipapp-v1'?'可运行工具包':'源码包')));

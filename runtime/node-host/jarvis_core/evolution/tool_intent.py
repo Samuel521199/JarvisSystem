@@ -168,4 +168,7 @@ class ToolIntents:
         job=self.view(cid,ident)
         if job['invocation']:return self.tools.manager.cancel(job['invocation']['id'])
         if job['coding']:return CodingDemands(self.core,self.tools.tasks).cancel(cid,job['coding']['id'],{})
+        from .tool_contract import ToolContracts
+        for draft in ToolContracts(self.tools).listing(cid,ident):
+            if draft['status'] in {'QUEUED','RUNNING','OBSERVING'}:self.tools.manager.cancel(draft['id'])
         return self.tools.manager.cancel(ident)

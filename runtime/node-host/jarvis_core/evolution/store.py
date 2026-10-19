@@ -103,7 +103,7 @@ class EvolutionStore:
                 raise policy.CoreError('evolution_busy', '已有一个改进或工具任务正在处理。')
             if db.execute('SELECT COUNT(*) FROM jobs').fetchone()[0] >= 1000:
                 raise policy.CoreError('evolution_quota', '改进账本达到保留上限，请整理证据后再继续。')
-            if payload.get('action') in {'project-tool','project-tool-plan'}:
+            if payload.get('action') in {'project-tool','project-tool-plan','tool-contract'}:
                 # Leave room for the immutable package, escaped output, recovery
                 # receipt and SQLite page growth; never fill the 32 MiB ledger.
                 used = db.execute('PRAGMA page_count').fetchone()[0] * db.execute('PRAGMA page_size').fetchone()[0]

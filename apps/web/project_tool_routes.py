@@ -2,6 +2,7 @@
 import re
 from jarvis_core.evolution.catalog import ProjectTools
 from jarvis_core.evolution.tool_intent import ToolIntents
+from jarvis_core.evolution.tool_contract import ToolContracts
 from jarvis_core.policy import CoreError
 from evolution_routes import failure
 
@@ -14,6 +15,16 @@ def service(handler):
 
 
 def get(handler):
+    if handler.path=='/tool-contracts.js':
+        handler._send(200,handler.server.tool_contracts_script,'application/javascript; charset=utf-8');return True
+    contract=re.fullmatch(r'/api/project-tools/([a-f0-9]{32})/plans/([a-f0-9]{32})/contracts(?:/([a-f0-9]{32}))?',handler.path)
+    if contract:
+        if not handler._workspace_token() or not handler._guard():return True
+        try:
+            drafts=ToolContracts(service(handler))
+            handler._send(200,drafts.bound(*contract.groups()) if contract[3] else drafts.listing(contract[1],contract[2]))
+        except Exception as exc:failure(handler,exc)
+        return True
     if handler.path=='/tool-intents.js':
         handler._send(200,handler.server.tool_intents_script,'application/javascript; charset=utf-8');return True
     if handler.path=='/project-tools.js':
@@ -38,6 +49,15 @@ def get(handler):
 
 def post(handler,payload):
     try:
+        contract=re.fullmatch(r'/api/project-tools/([a-f0-9]{32})/plans/([a-f0-9]{32})/contracts(?:/([a-f0-9]{32})/(review|cancel))?',handler.path)
+        if contract:
+            drafts=ToolContracts(service(handler))
+            if contract[4]=='cancel':
+                if payload!={}:raise CoreError('invalid_request','取消只接受空对象。')
+                value=drafts.cancel(contract[1],contract[2],contract[3])
+            elif contract[4]=='review':value=drafts.review(contract[1],contract[2],contract[3],payload)
+            else:value=drafts.submit(contract[1],contract[2],payload)
+            handler._send(202,value);return
         plan=re.fullmatch(r'/api/project-tools/([a-f0-9]{32})/plans(?:/([a-f0-9]{32})/(start|coding|cancel))?',handler.path)
         if plan:
             intents=ToolIntents(service(handler))

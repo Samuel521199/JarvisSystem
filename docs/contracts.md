@@ -70,7 +70,7 @@
   - [8.10.1 Context7 只读文档任务（0.1.55）](#mcp-documentation-task-contract)
 - [8.11 限定成长运行接口](#evolution-runtime-contract)
   - [8.11.1 会话需求适配接口（0.1.41）](#growth-demand-contract)
-  - [8.11.2 项目工具目录与调用接口（0.1.72）](#project-tool-contract)
+  - [8.11.2 项目工具目录与调用接口（0.1.73）](#project-tool-contract)
 - [8.12 三能力消息与旧接口迁移](#growth-center-contract)
 - [8.13 统一对话受理、意图与事件契约（proposed）](#dialogue-turn-contract)
   - [8.13.1 对话意图与限定任务受理契约（0.1.56—0.1.59）](#dialogue-intent-shadow-contract)
@@ -1166,7 +1166,7 @@ security_stop_event:
 会话归档消息可选 `growth_ref` / `growth_request_id`，均为 32 位标识且必须搭配 `personal_control:true`；仅恢复回执链接，不加入模型历史。不认识新字段的旧宿主会拒绝该新归档而非静默丢字段，回退前需检查归档格式兼容。完整行为、数据保留与重启语义只维护于[需求成长](evolution-release.md#demand-growth-runtime)。
 
 <a id="project-tool-contract"></a>
-### 项目工具目录与调用接口（0.1.72）
+### 项目工具目录与调用接口（0.1.73）
 
 所有接口沿用本机 Origin、页面 nonce 和核心状态检查；`cid` 必须是已保存项目会话。完整行为规则归[工具运行](evolution-release.md#project-tool-runtime)。
 
@@ -1192,6 +1192,19 @@ security_stop_event:
 | `POST .../plans/{id}/cancel` | `{}`；已有子任务时取消实际工具任务或编码单，否则取消分析 |
 
 分析响应为 `id/status/created_at/message/parsed/proposal/invocation/coding/coding_request_id/request`；`proposal` 带 `decision/candidates/reason`。内部请求以 `action:project-tool-plan` 保存原提交、作用域、解析输入、目录和执行器绑定；执行子任务以分析 ID 派生稳定请求编号，编码单使用相同分析 ID 对账。重试不得更换原内容，跨作用域查询拒绝；未知回执只查询，不自动重新创建。字段校验和正反例分别在 `evolution/tool_intent.py` 与 `tests/test_tool_intents.py`，不另维护平行调度协议。
+
+0.1.73 增加同一需求下的验收草案接口，定义归[草案与审阅流程](evolution-release.md#project-tool-contract-drafts)：
+
+| 接口 | 契约 |
+|---|---|
+| `POST .../plans/{plan_id}/contracts` | `{request_id}`，在原成长通道受理生成；同编号返回原记录，每个需求最多 4 条，不自动重放未知响应 |
+| `GET .../plans/{plan_id}/contracts` / `GET .../contracts/{id}` | 列表/详情；记录含原目标、作用域、冻结模型策略、尝试回执和草案结果，不因查询发起生成 |
+| `POST .../contracts/{id}/cancel` | `{}`，只取消本次生成；取消父需求也会停止其活动草案任务 |
+| `POST .../contracts/{id}/review` | `{request_id:plan_id,prompt:原话,coding,draft_digest,contract,answers,oracle_note,reviewed:true}`；审阅成功返回原 K3 待开始单，重试对账而不启动编码 |
+
+草案 `contract` 恰有 `input_contract/output_contract/non_goals/public_cases/questions`；前两项为不超过 2,000 字符的非空文本，两个文字列表各最多 8 项，每项最多 500 字符；草案整体不超过 24 KiB，原始模型回复不超过 32 KiB。`public_cases` 为 `{input,expected}` 列表，提议可空，审阅后需 2—24 条，输入不重复，另受原 K3 案例限额约束。问题不得直接删除，`answers` 须逐项非空且每项最多 1,000 字符；`oracle_note` 为 5—2,000 字符。原目标加公开审阅说明受现有 4 KiB 编码目标限制，案例单独传递。专用留出输入沿用 K3 的 2—24 条及不重复规则，不能由模型草案携带。
+
+结果包含 `draft/digest/review_required:true/independently_verified:false/model_calls`。接受的 `review` 保存提交内容摘要、源码摘要、时间和 `source:explicit_local_review/oracle_verified_by_system:false`；这表示已明确提交审阅，不是系统验真。原始草案不可变，审阅不能覆盖；交接通过确定请求编号关联 K3，使用 `expected_source_digest` 防止中断后换用新源码。正文与字段机器校验见 `evolution/tool_contract.py`，正反例见 `tests/test_tool_contracts.py`。
 
 <a id="growth-center-contract"></a>
 ## 三能力消息与旧接口迁移

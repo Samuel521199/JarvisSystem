@@ -4,7 +4,7 @@
 
 项目代码仓库：[Samuel521199/JarvisSystem](https://github.com/Samuel521199/JarvisSystem)。仓库保存源码、锁定依赖清单、设计文档、图源和验证记录；本机凭据、业务数据库、模型、依赖缓存和构建的运行包不入库。首次运行按[安装与启动说明](docs/core-bootstrap.md#section-6a93004233bf)准备环境。
 
-当前源码与部署版本为 **0.1.72**。这是以普通 PC 为主的个人助手与伙伴原型，已接入个人记忆、跨会话接续、项目工作区、技能与 MCP、语音和受限成长能力。**K3 编码协作已闭环**：从改进单到候选代码、独立检查、实际构建、隔离执行、审阅、应用与恢复，支持限定 Python 多文件/包、新文件、锁定查询依赖和 JavaScript 交互场景；详见[验收与效果](docs/delivery-validation.md#k3-closure-matrix)。**K4 已开始落地**：通过验收的 Python 候选可纳入项目工具库，跨同项目会话隔离调用、核对结果、停用或回退；新增点名工具与 JSON 的本地调用、用途候选待选和能力缺口到编码改进单的交接；[入口与使用](docs/interaction-persona.md#project-tool-ui)、[实测证据](docs/delivery-validation.md#k4-project-tool-evidence)。完整 K4 继续按[当前推进队列](docs/core-bootstrap.md#near-term-work-queue)推进。
+当前源码与部署版本为 **0.1.73**。这是以普通 PC 为主的个人助手与伙伴原型，已接入个人记忆、跨会话接续、项目工作区、技能与 MCP、语音和受限成长能力。**K3 编码协作已闭环**：从改进单到候选代码、独立检查、实际构建、隔离执行、审阅、应用与恢复，支持限定 Python 多文件/包、新文件、锁定查询依赖和 JavaScript 交互场景；详见[验收与效果](docs/delivery-validation.md#k3-closure-matrix)。**K4 已开始落地**：通过验收的 Python 候选可纳入项目工具库，跨同项目会话隔离调用、核对结果、停用或回退；新增点名工具与 JSON 的本地调用、用途候选待选和能力缺口到编码改进单的交接，并支持模型验收草案、明确审阅与独立留出案例；[入口与使用](docs/interaction-persona.md#project-tool-ui)、[实测证据](docs/delivery-validation.md#k4-project-tool-evidence)。完整 K4 继续按[当前推进队列](docs/core-bootstrap.md#near-term-work-queue)推进。
 
 **源码上传与正式部署分开记录。** 各功能的已实现、已验证和部署状态，以[当前进度](docs/README.md#project-status)及[分版本验收](docs/delivery-validation.md#versioned-evidence)为准；不能仅凭源码版本判断本机正在运行的版本。完整设计仍为 `proposed`；K3 开发协作已验证，完整 K1/K2 仍保留原待验条件，K4—K6 尚未完成。
 

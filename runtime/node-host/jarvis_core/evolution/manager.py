@@ -386,6 +386,10 @@ class EvolutionManager:
                 if action == 'project-tool':
                     from .catalog import ProjectTools
                     result = ProjectTools(self).execute(job)
+                elif action == 'tool-contract':
+                    from .catalog import ProjectTools
+                    from .tool_contract import ToolContracts
+                    result = ToolContracts(ProjectTools(self)).execute(job)
                 elif action == 'ensure': result = self._ensure(job, job['request']['target_revision'])
                 elif action == 'check': result = self._check(job, background)
                 elif action == 'analyze': result = self._analyze(job)

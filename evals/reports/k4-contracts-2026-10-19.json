@@ -1,0 +1,544 @@
+{
+  "version": "0.1.73",
+  "date": "2026-10-19",
+  "scope": "K4 acceptance drafts, explicit local review, frozen source handoff and real candidate/tool delivery",
+  "status": "verified_and_deployed",
+  "tests": {
+    "tests": 95,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 264.00441379999984,
+    "test_ids": [
+      "test_tool_contracts.ContractParserTests.test_strict_model_shape_never_accepts_executable_or_approval",
+      "test_tool_contracts.ToolContractTests.test_capacity_and_same_request_wrong_plan_rejected",
+      "test_tool_contracts.ToolContractTests.test_crash_between_review_and_handoff_reconciles_or_blocks_changed_source",
+      "test_tool_contracts.ToolContractTests.test_draft_to_review_code_publish_and_actual_use",
+      "test_tool_contracts.ToolContractTests.test_fallback_and_unknown_are_bounded_and_recorded",
+      "test_tool_contracts.ToolContractTests.test_parent_cancel_stops_inflight_draft_and_restart_does_not_replay",
+      "test_tool_contracts.ToolContractTests.test_review_requires_answers_nonoverlapping_oracle_and_exact_contract",
+      "test_tool_contracts.ToolContractTests.test_scope_stale_directory_runtime_and_cancel_block_acceptance",
+      "test_tool_intents.ParserTests.test_direct_calls_retain_exact_json_and_never_guess",
+      "test_tool_intents.ParserTests.test_negation_questions_quotes_conditions_and_ambiguity",
+      "test_tool_intents.ToolIntentTests.test_actual_named_invocation_reconciles_without_duplicate_after_change",
+      "test_tool_intents.ToolIntentTests.test_cancelled_gap_and_discussion_cannot_handoff",
+      "test_tool_intents.ToolIntentTests.test_changed_directory_runtime_and_candidate_forgery_rejected",
+      "test_tool_intents.ToolIntentTests.test_foreign_receipt_collision_never_returns_other_scope",
+      "test_tool_intents.ToolIntentTests.test_gap_to_original_coding_demand_persists_and_never_starts_model",
+      "test_tool_intents.ToolIntentTests.test_growth_receipts_lookup_list_cancel_and_reanalysis_share_plan",
+      "test_tool_intents.ToolIntentTests.test_scope_idempotency_cancel_and_input_unchanged",
+      "test_coding_demand.CodingDemandTests.test_cancel_running_and_scope_and_receipt_tampering",
+      "test_coding_demand.CodingDemandTests.test_concurrent_start_and_lost_response_use_one_atomic_link",
+      "test_coding_demand.CodingDemandTests.test_execution_uses_declared_budget",
+      "test_coding_demand.CodingDemandTests.test_failed_independent_check_not_misreported_as_success",
+      "test_coding_demand.CodingDemandTests.test_full_bridge_zero_call_preview_receipt_apply_remains_explicit",
+      "test_coding_demand.CodingDemandTests.test_http_scope_token_and_saved_proposal",
+      "test_coding_demand.CodingDemandTests.test_modified_or_forged_binding_rejected",
+      "test_coding_demand.CodingDemandTests.test_queue_restart_keeps_one_task_and_waits_for_review",
+      "test_coding_demand.CodingDemandTests.test_receipt_tampering_cannot_return_verified_result",
+      "test_coding_demand.CodingDemandTests.test_snapshot_stale_at_start_and_after_enqueue",
+      "test_coding_demand.CodingDemandTests.test_transaction_failure_rolls_back_task_and_proposal_link",
+      "test_coding_demand.CodingDemandTests.test_unknown_reanalysis_and_cancel_never_automatically_retry",
+      "test_growth_demand.GrowthDemandTests.test_archive_growth_refs_are_typed_control_data",
+      "test_growth_demand.GrowthDemandTests.test_bad_candidate_and_unknown_do_not_fake_delivery",
+      "test_growth_demand.GrowthDemandTests.test_cancel_draft_and_running_no_second_job",
+      "test_growth_demand.GrowthDemandTests.test_changed_acceptance_requires_new_proposal",
+      "test_growth_demand.GrowthDemandTests.test_count_bound_input_tamper_and_core_stop",
+      "test_growth_demand.GrowthDemandTests.test_existing_capability_reuse_and_v1_to_v2_upgrade",
+      "test_growth_demand.GrowthDemandTests.test_fulfillment_and_followup_repair_share_two_candidate_budget",
+      "test_growth_demand.GrowthDemandTests.test_http_guard_preview_and_download",
+      "test_growth_demand.GrowthDemandTests.test_idempotent_proposal_lookup_and_no_replay_after_restart",
+      "test_growth_demand.GrowthDemandTests.test_preview_is_local_and_fulfillment_returns_real_verified_input",
+      "test_growth_demand.GrowthDemandTests.test_reanalysis_keeps_old_terminal_and_reuses_request_receipt",
+      "test_growth_demand.GrowthDemandTests.test_source_scope_unsupported_and_temporary_archive_absence",
+      "test_growth_demand.GrowthDemandTests.test_stale_route_baseline_and_damaged_source_block_start",
+      "test_project_tools.ProjectToolTests.test_actual_publish_use_disable_restore_restart_and_idempotency",
+      "test_project_tools.ProjectToolTests.test_capacity_reserves_recovery_space_and_contract_is_bounded",
+      "test_project_tools.ProjectToolTests.test_runtime_change_and_cancel_during_observation_disable_candidate",
+      "test_project_tools.ProjectToolTests.test_shared_project_context_other_project_and_corrupt_json",
+      "test_project_tools.ProjectToolTests.test_source_scope_generation_and_contract_cannot_be_bypassed",
+      "test_project_tools.ProjectToolTests.test_unchanged_regression_with_bad_input_does_not_quarantine",
+      "test_project_tools.ProjectToolTests.test_unconfirmed_publication_is_deactivated_on_recovery",
+      "test_project_tools.ProjectToolTests.test_upgrade_failure_rolls_back_without_replaying_real_input",
+      "test_evolution.ActualWorkerTests.test_compiles_and_executes_candidate_with_real_lpac",
+      "test_evolution.ActualWorkerTests.test_infinite_candidate_is_terminated_by_real_limits",
+      "test_evolution.EvolutionHTTPTests.test_auth_assets_strict_requests_and_asynchronous_job",
+      "test_evolution.EvolutionHTTPTests.test_coding_does_not_occupy_chat_lane",
+      "test_evolution.EvolutionHTTPTests.test_growth_initialization_failure_does_not_block_host_start",
+      "test_evolution.EvolutionTests.test_automatic_heal_requires_opt_in_and_separate_fault_job",
+      "test_evolution.EvolutionTests.test_background_incident_dedupe_and_daily_budget",
+      "test_evolution.EvolutionTests.test_candidate_static_rejection_before_execution",
+      "test_evolution.EvolutionTests.test_config_compare_and_swap_and_job_policy_snapshot",
+      "test_evolution.EvolutionTests.test_corrupt_package_detected_and_fallback_verified",
+      "test_evolution.EvolutionTests.test_diagnosis_is_advisory_and_has_independent_model",
+      "test_evolution.EvolutionTests.test_disabled_primary_can_fallback_before_dispatch",
+      "test_evolution.EvolutionTests.test_enabled_check_records_missing_optional_without_building",
+      "test_evolution.EvolutionTests.test_failed_candidate_is_rejected_then_repaired_with_feedback",
+      "test_evolution.EvolutionTests.test_fallback_counts_against_two_calls_and_preserves_actual_route",
+      "test_evolution.EvolutionTests.test_future_database_not_migrated",
+      "test_evolution.EvolutionTests.test_gap_is_not_a_fault_and_inspection_never_runs_worker",
+      "test_evolution.EvolutionTests.test_generation_independent_validation_activation_and_real_use",
+      "test_evolution.EvolutionTests.test_heal_restores_original_contract_using_its_own_model",
+      "test_evolution.EvolutionTests.test_healthy_automatic_records_bounded_and_failure_preserved",
+      "test_evolution.EvolutionTests.test_healthy_checks_and_repeated_ensure_do_not_call_model",
+      "test_evolution.EvolutionTests.test_inspection_diagnosis_fallback_does_not_publish",
+      "test_evolution.EvolutionTests.test_interrupted_publication_deactivated_and_not_replayed",
+      "test_evolution.EvolutionTests.test_invalid_inputs_never_reach_worker",
+      "test_evolution.EvolutionTests.test_memory_pressure_stops_before_paid_call",
+      "test_evolution.EvolutionTests.test_metadata_or_extra_file_drift_rejected",
+      "test_evolution.EvolutionTests.test_no_model_when_auto_disabled",
+      "test_evolution.EvolutionTests.test_post_activation_failure_rolls_back",
+      "test_evolution.EvolutionTests.test_real_input_regression_rolls_back_without_returning_bad_output",
+      "test_evolution.EvolutionTests.test_runtime_repair_survives_restart_while_original_call_stays_failed",
+      "test_evolution.EvolutionTests.test_singleflight_cancellation_and_idempotent_request",
+      "test_evolution.EvolutionTests.test_stale_base_and_unverified_packages_cannot_activate",
+      "test_evolution.EvolutionTests.test_stopped_core_blocks_dispatch",
+      "test_evolution.EvolutionTests.test_temporary_resource_failure_does_not_quarantine_healthy_code",
+      "test_evolution.EvolutionTests.test_two_bad_candidates_do_not_replace_good_version",
+      "test_evolution.EvolutionTests.test_unknown_model_result_never_retried",
+      "test_evolution.EvolutionTests.test_unknown_partial_and_offline_never_switch_models",
+      "test_evolution.EvolutionTests.test_upgrade_preserves_old_contract_and_manual_rollback",
+      "test_evolution.EvolutionTests.test_v1_settings_migration_preserves_artifacts_without_enabling_healing",
+      "test_runtime_releases.RuntimeReleaseTests.test_failed_health_or_tampered_slot_never_replaces_active",
+      "test_runtime_releases.RuntimeReleaseTests.test_install_is_idempotent_and_unchecked_release_cannot_be_selected",
+      "test_runtime_releases.RuntimeReleaseTests.test_manifest_or_extra_file_blocks_rollback",
+      "test_runtime_releases.RuntimeReleaseTests.test_running_release_prevents_switch_and_only_fixed_entry_is_used",
+      "test_runtime_releases.RuntimeReleaseTests.test_select_and_rollback_keep_previous_and_unrelated_data",
+      "test_runtime_releases.RuntimeReleaseTests.test_selection_transaction_failure_keeps_original_pointer"
+    ],
+    "initial_runner_errors": 3,
+    "runner_correction": "Added repository root to sys.path for tests.test_web imports; reran only the three failed setup cases.",
+    "rerun": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.8303015999999843,
+      "test_ids": [
+        "test_evolution.EvolutionHTTPTests.test_auth_assets_strict_requests_and_asynchronous_job",
+        "test_evolution.EvolutionHTTPTests.test_coding_does_not_occupy_chat_lane",
+        "test_evolution.EvolutionHTTPTests.test_growth_initialization_failure_does_not_block_host_start"
+      ]
+    }
+  },
+  "ui": {
+    "version": "0.1.73",
+    "status": "passed",
+    "paid_model_calls": 0,
+    "checks": [
+      "gap -> model draft without code execution",
+      "review gate and independent examples",
+      "draft inputs survive panel refresh",
+      "reviewed public requirements passed to K3; actual isolated acceptance",
+      "reload freezes accepted review; retry reconciles same coding task",
+      "nonce and Origin enforced on all draft mutations",
+      "390px layout and zero page errors",
+      "original source unchanged"
+    ],
+    "draft_fixture_calls": 1,
+    "coding_fixture_calls": 1,
+    "coding_result": {
+      "artifact_digest": "sha256:377009d0f0f05493d3dec65d324f8450690dd81793555dc4e5d9c8ca3214d1af",
+      "automatically_applied": false,
+      "build_recipe": "python-zipapp-v1",
+      "cases": 4,
+      "cases_digest": "sha256:4ab3e99d18de55152869979f9eede134efb6916abeece2f2fe4f3b2c8900a1eb",
+      "delivery": "verified_candidate",
+      "model_calls": 1,
+      "task_id": "task_391038b201f250af8f8f9cc7780017e2",
+      "verified": true
+    },
+    "page_errors": []
+  },
+  "live": {
+    "version": "0.1.73",
+    "status": "passed",
+    "synthetic_code": false,
+    "route": "vertex::gemini-3.1-pro-preview",
+    "draft_status": "SUCCEEDED",
+    "draft_attempts": [
+      {
+        "contract": {
+          "actual_reasoning": "low",
+          "billing": {
+            "amount": 0.01332,
+            "basis": "estimated",
+            "currency": "USD",
+            "price": {
+              "cache_read": 0.2,
+              "cache_write": null,
+              "checked_at": "2026-10-16",
+              "currency": "USD",
+              "fee_percent": 0,
+              "input": 2,
+              "max_input_tokens": 200000,
+              "output": 12,
+              "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing"
+            },
+            "reason": "token_rates",
+            "tokens": {
+              "cache_read": 0,
+              "cache_write": 0,
+              "input": 252,
+              "output": 1068,
+              "reasoning": 570,
+              "total": 1320
+            }
+          },
+          "elapsed_seconds": 16.477,
+          "http_status": 200,
+          "model": "gemini-3.1-pro-preview",
+          "outcome_uncertain": false,
+          "output_incomplete": false,
+          "provider": "vertex",
+          "request_id": "05497ad459b745139654fcaaba3159a5",
+          "response_deadline_seconds": 90,
+          "status": "SUCCEEDED",
+          "usage": {
+            "candidatesTokenCount": 498,
+            "promptTokenCount": 252,
+            "thoughtsTokenCount": 570,
+            "totalTokenCount": 1320
+          }
+        },
+        "selection": {
+          "reasoning": null,
+          "route": "vertex::gemini-3.1-pro-preview"
+        }
+      }
+    ],
+    "draft": {
+      "digest": "sha256:b1640b320dab8e28b70ac29d4185121961f1b2c92d3155ba75274b461f10b0c2",
+      "draft": {
+        "input_contract": "输入必须是一个包含 'length'、'width' 和 'height' 三个键的JSON对象，且这三个键对应的值均必须为非负整数。",
+        "non_goals": [
+          "支持浮点数或负数输入",
+          "提供单位换算或在输出中附带单位（如 cm³）",
+          "处理缺少 'length'、'width' 或 'height' 中任意一键的非法输入",
+          "文件读写、网络请求或引入外部依赖"
+        ],
+        "output_contract": "返回一个仅由十进制数字组成的字符串，代表输入的长、宽、高的乘积。不得包含任何空白字符、符号或单位。若任一边长为0，则必须返回纯字符串 '0'。",
+        "public_cases": [
+          {
+            "expected": "24",
+            "input": {
+              "height": 4,
+              "length": 2,
+              "width": 3
+            }
+          },
+          {
+            "expected": "0",
+            "input": {
+              "height": 10,
+              "length": 0,
+              "width": 5
+            }
+          },
+          {
+            "expected": "1",
+            "input": {
+              "height": 1,
+              "length": 1,
+              "width": 1
+            }
+          },
+          {
+            "expected": "6000000",
+            "input": {
+              "height": 300,
+              "length": 100,
+              "width": 200
+            }
+          }
+        ],
+        "questions": [
+          "如果输入对象包含除了 length、width、height 之外的额外键值对，是应该忽略这些额外字段正常计算，还是抛出异常？",
+          "对于极大的非负整数输入，是否需要设定尺寸上限以防止计算时超出内存或超时？",
+          "如果输入的值类型是数字字符串（如 \"5\"）而不是JSON整数，是否需要尝试解析，还是直接视为非法输入？"
+        ]
+      },
+      "independently_verified": false,
+      "model_calls": 1,
+      "review_required": true
+    },
+    "coding_status": "SUCCEEDED",
+    "coding_result": {
+      "verified": true,
+      "task_id": "task_5b31c9245bdb5103b5d34357c2b50275",
+      "artifact_digest": "sha256:646e2bbb62d7e13c8cfeb89912f8796751b2104eb7ea8586fd7fc038ae7340a6",
+      "cases_digest": "sha256:f52251620cb9d6b86a6f1555893ef1ba98c4f8470d752f21504132c2c5a500ac",
+      "cases": 6,
+      "model_calls": 1,
+      "build_recipe": "python-zipapp-v1",
+      "delivery": "verified_candidate",
+      "automatically_applied": false
+    },
+    "coding_error": null,
+    "coding_attempts": [
+      {
+        "billing": {
+          "amount": 0.00572,
+          "basis": "estimated",
+          "currency": "USD",
+          "price": {
+            "cache_read": 0.2,
+            "cache_write": null,
+            "checked_at": "2026-10-16",
+            "currency": "USD",
+            "fee_percent": 0,
+            "input": 2,
+            "max_input_tokens": 200000,
+            "output": 12,
+            "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing"
+          },
+          "reason": "token_rates",
+          "tokens": {
+            "cache_read": 0,
+            "cache_write": 0,
+            "input": 952,
+            "output": 318,
+            "reasoning": 255,
+            "total": 1270
+          }
+        },
+        "model": "gemini-3.1-pro-preview",
+        "outcome_uncertain": false,
+        "provider": "vertex",
+        "request_id": "93abccb4ab3c4a79a4de756e16451afb",
+        "status": "SUCCEEDED",
+        "usage": {
+          "candidatesTokenCount": 63,
+          "promptTokenCount": 952,
+          "thoughtsTokenCount": 255,
+          "totalTokenCount": 1270
+        }
+      }
+    ],
+    "review_method": "test-client explicitly supplies a known volume contract and preselected arithmetic oracle; not autonomous semantic review",
+    "published": true,
+    "actual_result": {
+      "elapsed_seconds": 1.505,
+      "isolation": {
+        "active_process_limit": 1,
+        "appcontainer": true,
+        "backend": "windows-lpac-job",
+        "capabilities": [
+          "registryRead"
+        ],
+        "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+        "cpu_seconds": 0.265625,
+        "cpu_time_limit_seconds": 3,
+        "elapsed_seconds": 0.5233,
+        "lpac": true,
+        "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+        "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+        "memory_limit_bytes": 201326592,
+        "package_sid": "S-1-15-2-820398472-928394686-2940552185-1682212077-3273670522-2239114330-2922648011",
+        "peak_process_memory_bytes": 18186240,
+        "pid": 34040,
+        "runtime_bytes": 22904399,
+        "wall_time_limit_seconds": 12
+      },
+      "model_calls": 0,
+      "regression": {
+        "cases": 6,
+        "isolation": {
+          "active_process_limit": 1,
+          "appcontainer": true,
+          "backend": "windows-lpac-job",
+          "capabilities": [
+            "registryRead"
+          ],
+          "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+          "cpu_seconds": 0.265625,
+          "cpu_time_limit_seconds": 3,
+          "elapsed_seconds": 0.6449,
+          "lpac": true,
+          "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+          "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+          "memory_limit_bytes": 201326592,
+          "package_sid": "S-1-15-2-4266594966-1272396491-1167319224-3521605348-3293268317-2924610076-3850147592",
+          "peak_process_memory_bytes": 18419712,
+          "pid": 21776,
+          "runtime_bytes": 22904399,
+          "wall_time_limit_seconds": 12
+        },
+        "passed": true
+      },
+      "result_digest": "sha256:fe675fe7aaee830b6fed09b64e034f84dcbdaeb429d9cccd4ebb90e15af8dd71",
+      "result_verified": true,
+      "text": "1001",
+      "version": "cadac5cf4e7249a4aac23095740b43ba9248af86229f3d0460ad009757d8f7bb"
+    },
+    "paid_model_calls": 2,
+    "source_unchanged": true
+  },
+  "failed_live_runs": [
+    {
+      "version": "0.1.73",
+      "status": "failed",
+      "synthetic_code": false,
+      "route": "vertex::gemini-3.1-pro-preview",
+      "draft_status": "FAILED",
+      "draft_attempts": [
+        {
+          "contract": {
+            "actual_reasoning": "low",
+            "billing": {
+              "amount": 0.014076,
+              "basis": "estimated",
+              "currency": "USD",
+              "price": {
+                "cache_read": 0.2,
+                "cache_write": null,
+                "checked_at": "2026-10-16",
+                "currency": "USD",
+                "fee_percent": 0,
+                "input": 2,
+                "max_input_tokens": 200000,
+                "output": 12,
+                "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing"
+              },
+              "reason": "token_rates",
+              "tokens": {
+                "cache_read": 0,
+                "cache_write": 0,
+                "input": 252,
+                "output": 1131,
+                "reasoning": 656,
+                "total": 1383
+              }
+            },
+            "elapsed_seconds": 18.858,
+            "http_status": 200,
+            "model": "gemini-3.1-pro-preview",
+            "outcome_uncertain": false,
+            "output_incomplete": false,
+            "provider": "vertex",
+            "request_id": "cd69ebcc514642149e8507928cb3b58c",
+            "response_deadline_seconds": 90,
+            "status": "SUCCEEDED",
+            "usage": {
+              "candidatesTokenCount": 475,
+              "promptTokenCount": 252,
+              "thoughtsTokenCount": 656,
+              "totalTokenCount": 1383
+            },
+            "validation_error": "contract_format"
+          },
+          "selection": {
+            "reasoning": null,
+            "route": "vertex::gemini-3.1-pro-preview"
+          }
+        }
+      ],
+      "draft": null,
+      "error": "AssertionError: contract_draft_failed"
+    },
+    {
+      "version": "0.1.73",
+      "status": "failed",
+      "synthetic_code": false,
+      "route": "vertex::gemini-3.1-pro-preview",
+      "draft_status": "FAILED",
+      "draft_attempts": [
+        {
+          "contract": {
+            "actual_reasoning": "low",
+            "billing": {
+              "amount": 0.009816,
+              "basis": "estimated",
+              "currency": "USD",
+              "price": {
+                "cache_read": 0.2,
+                "cache_write": null,
+                "checked_at": "2026-10-16",
+                "currency": "USD",
+                "fee_percent": 0,
+                "input": 2,
+                "max_input_tokens": 200000,
+                "output": 12,
+                "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing"
+              },
+              "reason": "token_rates",
+              "tokens": {
+                "cache_read": 0,
+                "cache_write": 0,
+                "input": 252,
+                "output": 776,
+                "reasoning": 409,
+                "total": 1028
+              }
+            },
+            "elapsed_seconds": 13.073,
+            "http_status": 200,
+            "model": "gemini-3.1-pro-preview",
+            "outcome_uncertain": false,
+            "output_incomplete": false,
+            "provider": "vertex",
+            "request_id": "d574eee27da44ba9baa9ce5205391878",
+            "response_deadline_seconds": 90,
+            "status": "SUCCEEDED",
+            "usage": {
+              "candidatesTokenCount": 367,
+              "promptTokenCount": 252,
+              "thoughtsTokenCount": 409,
+              "totalTokenCount": 1028
+            },
+            "validation_error": "contract_format"
+          },
+          "selection": {
+            "reasoning": null,
+            "route": "vertex::gemini-3.1-pro-preview"
+          }
+        }
+      ],
+      "draft": null,
+      "error": "AssertionError: contract_draft_failed"
+    }
+  ],
+  "all_live_model_requests": 4,
+  "estimated_cost_usd": 0.042932,
+  "cost_basis": "sum of provider receipts using configured token rates; not account settlement",
+  "limitations": [
+    "One known multiplication task; no general semantic-contract accuracy claim",
+    "Test client supplies reviewed requirements and independent arithmetic oracle; model does not self-approve",
+    "Publication remains explicit; full K4 not complete",
+    "Single local machine; no low-memory long-term benchmark"
+  ],
+  "new_dependencies": [],
+  "new_services": 0,
+  "schema_changed": false,
+  "deployment": {
+    "status": "passed",
+    "version": "0.1.73",
+    "previous_version": "0.1.72",
+    "instance_id": "a7f40cba4c66e2ffc3412c354194ca0c",
+    "idle_graceful_reload": true,
+    "startup_from_absent": false,
+    "served_sha256": {
+      "growth.js": "ab13c97445ac63ed51fc709414b37471bf62018b07d67c88445bbdc82c42af7a",
+      "skills.js": "0c4958172a019d3f1ad8520eafcce749b589690355443f777239b234c9949cf9",
+      "coding.js": "3547507e77569145601f7d50660359172185269f5b566fddeefafcb54b04dae2",
+      "admin.js": "09d93597e84408dfd48ce8aaecb5b7a9b1554023a38811526c3b6bb291661c43",
+      "project-tools.js": "9ca58c2924a7db4e899e540a7a09390c8a391b2c7b7859858c5095addb79412a",
+      "tool-intents.js": "dfe71dda751161226a32d9be6fe04f2b22d38b25aa8a2fc3016e0e80194f3449",
+      "tool-contracts.js": "410cc289e507a0e52691eb4f51dddd60ec784fa170d1183a04c6d3971734c293"
+    },
+    "business_tables_compared": 11,
+    "business_unchanged": true,
+    "coding_settings_unchanged": true,
+    "empty_restart_queue_reviewed_and_resumed": true,
+    "cloud_calls": 0,
+    "runtime_archive_built": false,
+    "installer_built": false
+  },
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/evolution/tool_contract.py": "eb30196665db54a21a648533f3672f4f7a2f854397304842e19585f68f6bfe06",
+    "runtime/node-host/jarvis_core/evolution/provider.py": "c4718125ad94f1d3256f4269802de9b96416499e855e694b462083c633213e7e",
+    "apps/web/tool-contracts.js": "410cc289e507a0e52691eb4f51dddd60ec784fa170d1183a04c6d3971734c293",
+    "tests/test_tool_contracts.py": "e2d0a1d5f87673f361ff8e5aeaeabfa101adfc338b33744ba4e64d4cf462fb16",
+    "tools/probe_tool_contracts_ui.py": "fd0d4225c37bc78f0beb5698feae766c5efd1eba7a58843a2452ff98a73ca13a"
+  }
+}

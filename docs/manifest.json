@@ -310,7 +310,8 @@
         "growth-learning-ledger",
         "demand-growth-runtime",
         "project-tool-runtime",
-        "project-tool-intents"
+        "project-tool-intents",
+        "project-tool-contract-drafts"
       ],
       "status": "proposed",
       "reader_summary": "怎样自编工具、改进模块，并验证和回退？"
@@ -515,7 +516,8 @@
         "coding-dependencies-evidence",
         "k3-closure-matrix",
         "k4-project-tool-evidence",
-        "k4-tool-intent-evidence"
+        "k4-tool-intent-evidence",
+        "k4-contract-evidence"
       ],
       "status": "proposed",
       "reader_summary": "哪些能力测过，证据在哪里，下一阶段怎样验收？"
@@ -3075,9 +3077,9 @@
     }
   ],
   "implementation": {
-    "version": "0.1.72",
-    "scope": "K3 development collaboration closed at 0.1.70. K4 project tool publication/reuse/recovery at 0.1.71; local bounded intent selection and persistent K3 gap handoff at 0.1.72. Full autonomous K4 remains open.",
-    "evidence": "evals/reports/k4-tool-intents-2026-10-19.json",
+    "version": "0.1.73",
+    "scope": "K3 closed at 0.1.70. K4 project tools at 0.1.71, bounded intents at 0.1.72, model acceptance drafts, explicit review and frozen K3 handoff verified at 0.1.73. Full K4 remains open.",
+    "evidence": "evals/reports/k4-contracts-2026-10-19.json",
     "overall_design_status": "proposed",
     "complete_k1_gate": false,
     "complete_k2_gate": false,
@@ -3339,7 +3341,8 @@
       "evals/reports/k3-dependencies-2026-10-19.json",
       "evals/reports/k3-closure-2026-10-19.json",
       "evals/reports/k4-project-tools-2026-10-19.json",
-      "evals/reports/k4-tool-intents-2026-10-19.json"
+      "evals/reports/k4-tool-intents-2026-10-19.json",
+      "evals/reports/k4-contracts-2026-10-19.json"
     ],
     "complete_k4_gate": false
   }

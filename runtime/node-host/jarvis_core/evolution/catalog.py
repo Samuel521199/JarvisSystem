@@ -48,7 +48,7 @@ def merge_cases(old, new):
 
 def runtime_binding():
     from ..skill_tasks import SkillTaskService
-    paths=('catalog','manager','store','runner','tool_intent','demand')
+    paths=('catalog','manager','store','runner','tool_intent','tool_contract','provider','demand')
     return policy.digest(policy.canonical_json({'coding':SkillTaskService.binding(),
         'tools':{p:policy.digest((policy.REPOSITORY_ROOT/'runtime/node-host/jarvis_core/evolution'/f'{p}.py').read_bytes()) for p in paths}}).encode())
 

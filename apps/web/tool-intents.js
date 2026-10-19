@@ -50,7 +50,7 @@ async function open(selected=null){
     const draft=drafts.get(plan.id);if(draft)select.value=draft.tool;else if(decision.candidates.length===1)select.value=decision.candidates[0].tool_id;l.append(select);card.append(l);
     const input=field(card,'本次 JSON 输入',draft?.input??('input' in plan.parsed?JSON.stringify(plan.parsed.input,null,2):'')),expected=field(card,'独立预期（可选）',draft?.expected??'');const verify=el('input');verify.type='checkbox';verify.checked=draft?.verify??false;const remember=()=>drafts.set(plan.id,{tool:select.value,input:input.value,expected:expected.value,verify:verify.checked});input.oninput=expected.oninput=select.onchange=verify.onchange=remember;verify.style.cssText='width:auto;display:inline-block;margin-right:8px';const v=el('label','核对独立预期');v.prepend(verify);card.append(v);
     button(card,'使用所选工具',()=>action(async()=>{if(!select.value)throw new Error('请选择本次工具。');let value;try{value=JSON.parse(input.value);}catch{throw new Error('请提供有效的 JSON 输入；没有使用示例代替。');}await api(prefix(cid)+'/'+plan.id+'/start',{tool_id:select.value,input:value,...(verify.checked?{expected:expected.value}:{})});}));
-   }else if(decision.decision==='gap')button(card,'补齐验收并建立编码改进单',()=>{if($('message').value.trim()&&$('message').value.trim()!==plan.message){notify('输入框已有草稿，请先保留后再补齐编码需求。');return;}if(SkillWorkbench.prepareImprovement(plan.message))origin={cid,id:plan.id,message:plan.message};});
+   }else if(decision.decision==='gap'){button(card,'验收草案与审阅',()=>ToolContracts.open(plan));button(card,'补齐验收并建立编码改进单',()=>{if($('message').value.trim()&&$('message').value.trim()!==plan.message){notify('输入框已有草稿，请先保留后再补齐编码需求。');return;}if(SkillWorkbench.prepareImprovement(plan.message)){window.ToolContracts?.clearOrigin();origin={cid,id:plan.id,message:plan.message};}});}
    else if(decision.decision==='unavailable')button(card,'打开工具库核对',()=>ProjectTools.open());
   }
   if((!job&&!plan.coding&&plan.status==='PROPOSED')||active(job?.status))button(card,'取消此需求或调用',()=>action(()=>api(prefix(cid)+'/'+plan.id+'/cancel',{})));
@@ -60,5 +60,5 @@ async function open(selected=null){
  async function load(){if(!valid()||document.hidden)return;clearTimeout(timer);try{const plans=await api(prefix(cid));if(!valid())return;if(selected&&!plans.some(p=>p.id===selected))plans.unshift(await api(prefix(cid)+'/'+selected));list.replaceChildren(...plans.map(render));if(!plans.length)list.append(el('p','尚无工具需求。可在上方描述，或在聊天中使用 /工具。'));if(plans.some(p=>active(p.invocation?.status))&&pane.offsetParent!==null)timer=setTimeout(load,1000);}catch(e){status.textContent=e.message;}}
  if(!ProjectExplorer.openView({id:'tool-intents',title:'工具需求',element:pane}))return;await load();
 }
-window.ToolIntents={open,command,handleSubmit,codingOrigin(prompt){return origin?.cid===current()?.id&&origin.message===prompt?origin:null;}};
+window.ToolIntents={open,command,handleSubmit,clearOrigin(){origin=null;},codingOrigin(prompt){return origin?.cid===current()?.id&&origin.message===prompt?origin:null;}};
 })();
