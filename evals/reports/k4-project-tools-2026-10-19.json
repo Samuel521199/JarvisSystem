@@ -1,0 +1,400 @@
+{
+  "version": "0.1.71",
+  "date": "2026-10-19",
+  "scope": "K4 first vertical: explicit project tool publication, isolated use and recovery; full K4 remains open",
+  "status": "verified_and_deployed",
+  "tests": {
+    "tests": 7,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 271.6215747000024
+  },
+  "regressions": {
+    "tests": 81,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 60.93716739999945
+  },
+  "ui": {
+    "version": "0.1.71",
+    "status": "passed",
+    "paid_model_calls": 0,
+    "checks": [
+      "verified candidate button -> publish with retained heldout contract -> active tool",
+      "new input actual LPAC execution with independent result; usage counted once",
+      "missing nonce / foreign origin rejected",
+      "reload retains receipts; disable and validated restore update controls"
+    ],
+    "execution": {
+      "elapsed_seconds": 2.004,
+      "isolation": {
+        "active_process_limit": 1,
+        "appcontainer": true,
+        "backend": "windows-lpac-job",
+        "capabilities": [
+          "registryRead"
+        ],
+        "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+        "cpu_seconds": 0.28125,
+        "cpu_time_limit_seconds": 3,
+        "elapsed_seconds": 0.7052,
+        "lpac": true,
+        "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+        "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+        "memory_limit_bytes": 201326592,
+        "package_sid": "S-1-15-2-2051551026-4056202946-3468291566-760271422-568679364-1741744733-140651689",
+        "peak_process_memory_bytes": 18448384,
+        "pid": 62248,
+        "runtime_bytes": 22904399,
+        "wall_time_limit_seconds": 12
+      },
+      "model_calls": 0,
+      "regression": {
+        "cases": 4,
+        "isolation": {
+          "active_process_limit": 1,
+          "appcontainer": true,
+          "backend": "windows-lpac-job",
+          "capabilities": [
+            "registryRead"
+          ],
+          "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+          "cpu_seconds": 0.328125,
+          "cpu_time_limit_seconds": 3,
+          "elapsed_seconds": 0.7485,
+          "lpac": true,
+          "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+          "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+          "memory_limit_bytes": 201326592,
+          "package_sid": "S-1-15-2-3729636389-3798876097-2040390765-2025208255-3689166708-961807197-1091353019",
+          "peak_process_memory_bytes": 18288640,
+          "pid": 15972,
+          "runtime_bytes": 22904399,
+          "wall_time_limit_seconds": 12
+        },
+        "passed": true
+      },
+      "result_digest": "sha256:ad48ff99415b2f007dc35b7eb553fd1eb35ebfa2f2f308acd9488eeb86f71fa8",
+      "result_verified": true,
+      "text": "95",
+      "version": "2b09dc1c58d7f1740a3e6fc2d536e1707b07a7d9bb918c317d1055c7613a446d"
+    },
+    "ledger_bytes": 77824,
+    "synthetic_proposal_calls": 1,
+    "tool_model_calls": 0,
+    "page_errors": [],
+    "business_source_unchanged": true,
+    "conversation_id": "974b017600424ad788c13080a93c812d"
+  },
+  "business_reuse": {
+    "version": "0.1.71",
+    "status": "passed",
+    "cases": [
+      {
+        "id": "csv-escaping",
+        "status": "passed",
+        "proposal_source": "replayed actual v0.1.70 Codex candidate; no new paid proposal",
+        "source_sha256": "c5625de46a2067d5d6a8c456bb1e0d7d05d97566c8ff1119aff2a1dbe7e01242",
+        "new_input": [
+          [
+            "项目",
+            "金额",
+            "备注"
+          ],
+          [
+            "火星,计划",
+            "125",
+            "含\"引号\"和\n换行"
+          ],
+          [
+            "",
+            "",
+            ""
+          ]
+        ],
+        "expected": "项目,金额,备注\n\"火星,计划\",125,\"含\"\"引号\"\"和\n换行\"\n,,\n",
+        "publication": {
+          "benefit": {
+            "new_capability": true,
+            "real_use_verified": false,
+            "retained_cases": 4
+          },
+          "model_calls": 0,
+          "validation": {
+            "cases": 4,
+            "isolation": {
+              "active_process_limit": 1,
+              "appcontainer": true,
+              "backend": "windows-lpac-job",
+              "capabilities": [
+                "registryRead"
+              ],
+              "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+              "cpu_seconds": 0.28125,
+              "cpu_time_limit_seconds": 3,
+              "elapsed_seconds": 0.8856,
+              "lpac": true,
+              "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+              "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+              "memory_limit_bytes": 201326592,
+              "package_sid": "S-1-15-2-2603851192-1869854350-1191017417-1930814040-876150764-2244600929-3157184355",
+              "peak_process_memory_bytes": 18903040,
+              "pid": 58804,
+              "runtime_bytes": 22904399,
+              "wall_time_limit_seconds": 12
+            },
+            "passed": true
+          },
+          "version": "656987876a0bbeccb5e062df0636bcd91c52c5311960740bfb5bffe38badfc6d"
+        },
+        "invocation": {
+          "elapsed_seconds": 2.213,
+          "isolation": {
+            "active_process_limit": 1,
+            "appcontainer": true,
+            "backend": "windows-lpac-job",
+            "capabilities": [
+              "registryRead"
+            ],
+            "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+            "cpu_seconds": 0.296875,
+            "cpu_time_limit_seconds": 3,
+            "elapsed_seconds": 0.7486,
+            "lpac": true,
+            "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+            "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+            "memory_limit_bytes": 201326592,
+            "package_sid": "S-1-15-2-1627415858-973503826-2497289109-4217786054-2683223193-3364632361-912200506",
+            "peak_process_memory_bytes": 18018304,
+            "pid": 48744,
+            "runtime_bytes": 22904399,
+            "wall_time_limit_seconds": 12
+          },
+          "model_calls": 0,
+          "regression": {
+            "cases": 4,
+            "isolation": {
+              "active_process_limit": 1,
+              "appcontainer": true,
+              "backend": "windows-lpac-job",
+              "capabilities": [
+                "registryRead"
+              ],
+              "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+              "cpu_seconds": 0.28125,
+              "cpu_time_limit_seconds": 3,
+              "elapsed_seconds": 0.8289,
+              "lpac": true,
+              "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+              "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+              "memory_limit_bytes": 201326592,
+              "package_sid": "S-1-15-2-112086348-2601459595-3639105787-955705745-3052926811-182103692-4051857476",
+              "peak_process_memory_bytes": 17608704,
+              "pid": 35548,
+              "runtime_bytes": 22904399,
+              "wall_time_limit_seconds": 12
+            },
+            "passed": true
+          },
+          "result_digest": "sha256:9857983f7479ec95df51f0887f02158d09b74539a281941341e55c68c075a9d5",
+          "result_verified": true,
+          "text": "项目,金额,备注\n\"火星,计划\",125,\"含\"\"引号\"\"和\n换行\"\n,,\n",
+          "version": "656987876a0bbeccb5e062df0636bcd91c52c5311960740bfb5bffe38badfc6d"
+        },
+        "ledger_bytes": 73728,
+        "paid_model_calls": 0
+      },
+      {
+        "id": "nested-query-package",
+        "status": "passed",
+        "proposal_source": "replayed actual v0.1.70 Codex candidate; no new paid proposal",
+        "source_sha256": "5f6c5b19fdda34a5f7700402f73594fca85f7e360d61699db76fb9d1122b2d73",
+        "new_input": {
+          "items": [
+            {
+              "active": true,
+              "name": "全新任务甲"
+            },
+            {
+              "active": false,
+              "name": "不要入选"
+            },
+            {
+              "active": true,
+              "name": "任务乙"
+            }
+          ]
+        },
+        "expected": "[\"\\u5168\\u65b0\\u4efb\\u52a1\\u7532\", \"\\u4efb\\u52a1\\u4e59\"]",
+        "publication": {
+          "benefit": {
+            "new_capability": true,
+            "real_use_verified": false,
+            "retained_cases": 4
+          },
+          "model_calls": 0,
+          "validation": {
+            "cases": 4,
+            "isolation": {
+              "active_process_limit": 1,
+              "appcontainer": true,
+              "backend": "windows-lpac-job",
+              "capabilities": [
+                "registryRead"
+              ],
+              "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+              "cpu_seconds": 0.421875,
+              "cpu_time_limit_seconds": 3,
+              "elapsed_seconds": 0.8704,
+              "lpac": true,
+              "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+              "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+              "memory_limit_bytes": 201326592,
+              "package_sid": "S-1-15-2-1817416669-1541971961-1460554195-931558127-2828131687-584358251-1073189249",
+              "peak_process_memory_bytes": 21528576,
+              "pid": 53848,
+              "runtime_bytes": 22904399,
+              "wall_time_limit_seconds": 12
+            },
+            "passed": true
+          },
+          "version": "01de78909cf6d9c47c4ca82ef2fe63446965bb4b5c0a303ebff9fc7684dd040b"
+        },
+        "invocation": {
+          "elapsed_seconds": 2.496,
+          "isolation": {
+            "active_process_limit": 1,
+            "appcontainer": true,
+            "backend": "windows-lpac-job",
+            "capabilities": [
+              "registryRead"
+            ],
+            "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+            "cpu_seconds": 0.375,
+            "cpu_time_limit_seconds": 3,
+            "elapsed_seconds": 0.9716,
+            "lpac": true,
+            "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+            "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+            "memory_limit_bytes": 201326592,
+            "package_sid": "S-1-15-2-1723070813-736432767-1447558865-2683647786-3585829947-3935875478-3782990331",
+            "peak_process_memory_bytes": 21164032,
+            "pid": 55580,
+            "runtime_bytes": 22904399,
+            "wall_time_limit_seconds": 12
+          },
+          "model_calls": 0,
+          "regression": {
+            "cases": 4,
+            "isolation": {
+              "active_process_limit": 1,
+              "appcontainer": true,
+              "backend": "windows-lpac-job",
+              "capabilities": [
+                "registryRead"
+              ],
+              "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+              "cpu_seconds": 0.453125,
+              "cpu_time_limit_seconds": 3,
+              "elapsed_seconds": 0.8456,
+              "lpac": true,
+              "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+              "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+              "memory_limit_bytes": 201326592,
+              "package_sid": "S-1-15-2-178255523-2166155375-4228492789-2705377756-1982480310-2032782723-1116191756",
+              "peak_process_memory_bytes": 21360640,
+              "pid": 53816,
+              "runtime_bytes": 22904399,
+              "wall_time_limit_seconds": 12
+            },
+            "passed": true
+          },
+          "result_digest": "sha256:b13e1a38b0a3e41d37fc4b32ef5b1f6da7acb49e913d0ad581ab9857fd1c9ffb",
+          "result_verified": true,
+          "text": "[\"\\u5168\\u65b0\\u4efb\\u52a1\\u7532\", \"\\u4efb\\u52a1\\u4e59\"]",
+          "version": "01de78909cf6d9c47c4ca82ef2fe63446965bb4b5c0a303ebff9fc7684dd040b"
+        },
+        "ledger_bytes": 159744,
+        "paid_model_calls": 0
+      }
+    ]
+  },
+  "paid_model_calls": 0,
+  "failures_and_repairs": [
+    {
+      "kind": "fixture",
+      "issue": "Initial unit fixture lacked saved project conversation; all five rejected before publication",
+      "resolution": "Saved scoped test conversation; seven tests passed"
+    },
+    {
+      "kind": "product",
+      "issue": "Tool panel omitted main page NONCE fallback; HTTP correctly refused requests",
+      "resolution": "Shared page credential fallback; actual UI rerun passed"
+    },
+    {
+      "kind": "product",
+      "issue": "Screenshot review found panel overflow and cleared input after run",
+      "resolution": "Independent bounded scrolling and retained input drafts; geometry and value checked"
+    }
+  ],
+  "remaining": [
+    "Natural-language automatic tool selection and gap proposal",
+    "More contracts, measured net benefit and gradual rollout",
+    "Capacity/retirement and broader personal tool scope",
+    "Full K1/K2 original external conditions unchanged",
+    "No new real model proposal: prior K3 Codex candidate source replayed in fresh K4 fixture",
+    "Project tool operations reserve ledger headroom; automatic version retirement is not implemented"
+  ],
+  "deployment": {
+    "status": "passed",
+    "version": "0.1.71",
+    "previous_version": "0.1.71",
+    "instance_id": "474f1ab19f310912ea3703b8db3e2a39",
+    "idle_graceful_reload": true,
+    "served_sha256": {
+      "growth.js": "f83d590fb03b76809ec0c7f667547cf9e4c0dc54cc2fc52035b4ea6f76366f0b",
+      "skills.js": "0c4958172a019d3f1ad8520eafcce749b589690355443f777239b234c9949cf9",
+      "coding.js": "3547507e77569145601f7d50660359172185269f5b566fddeefafcb54b04dae2",
+      "admin.js": "09d93597e84408dfd48ce8aaecb5b7a9b1554023a38811526c3b6bb291661c43",
+      "project-tools.js": "76cced24680ff6fd86c2340db25c1a5c967a12f2fc34da9523bd80cd7da460c7"
+    },
+    "business_tables_compared": 11,
+    "business_unchanged": true,
+    "coding_settings_unchanged": true,
+    "empty_restart_queue_reviewed_and_resumed": true,
+    "cloud_calls": 0,
+    "runtime_archive_built": false,
+    "installer_built": false
+  },
+  "capacity_regression": {
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 31.569694099998742
+  },
+  "unique_test_methods": 89,
+  "initial_deployment": {
+    "status": "passed",
+    "version": "0.1.71",
+    "previous_version": "0.1.70",
+    "instance_id": "910cc6baeb8cdc0999ace4aa10ef10eb",
+    "idle_graceful_reload": true,
+    "served_sha256": {
+      "growth.js": "f83d590fb03b76809ec0c7f667547cf9e4c0dc54cc2fc52035b4ea6f76366f0b",
+      "skills.js": "0c4958172a019d3f1ad8520eafcce749b589690355443f777239b234c9949cf9",
+      "coding.js": "3547507e77569145601f7d50660359172185269f5b566fddeefafcb54b04dae2",
+      "admin.js": "09d93597e84408dfd48ce8aaecb5b7a9b1554023a38811526c3b6bb291661c43",
+      "project-tools.js": "ed30b18e5ba46a06123b9d7cfe4d3da87b73922cd0f83c8006d778a16b0a9481"
+    },
+    "business_tables_compared": 11,
+    "business_unchanged": true,
+    "coding_settings_unchanged": true,
+    "empty_restart_queue_reviewed_and_resumed": true,
+    "cloud_calls": 0,
+    "runtime_archive_built": false,
+    "installer_built": false
+  }
+}

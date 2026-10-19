@@ -35,7 +35,7 @@ class EvolutionStore:
         self.path = self.root / 'evolution.db'
         with self.connection() as db:
             version = db.execute('PRAGMA user_version').fetchone()[0]
-            if version not in (0, 1, 2):
+            if version not in (0, 1, 2, 3):
                 raise policy.CoreError('evolution_schema_invalid', '进化账本版本不兼容。')
             db.executescript('''
                 CREATE TABLE IF NOT EXISTS settings(singleton INTEGER PRIMARY KEY,document TEXT NOT NULL);
@@ -43,13 +43,15 @@ class EvolutionStore:
                 CREATE TABLE IF NOT EXISTS packages(id TEXT PRIMARY KEY,revision INTEGER NOT NULL,state TEXT NOT NULL,document TEXT NOT NULL);
                 CREATE TABLE IF NOT EXISTS jobs(id TEXT PRIMARY KEY,request_id TEXT UNIQUE NOT NULL,status TEXT NOT NULL,document TEXT NOT NULL);
                 CREATE TABLE IF NOT EXISTS incidents(id TEXT PRIMARY KEY,created_at TEXT NOT NULL);
+                CREATE TABLE IF NOT EXISTS project_tools(project_id TEXT NOT NULL,tool_id TEXT NOT NULL,active TEXT,previous TEXT,generation INTEGER NOT NULL,PRIMARY KEY(project_id,tool_id));
+                CREATE TABLE IF NOT EXISTS tool_versions(id TEXT PRIMARY KEY,state TEXT NOT NULL,document TEXT NOT NULL);
             ''')
             db.execute('INSERT OR IGNORE INTO settings VALUES(1,?)', (policy.canonical_json(
                 {'enabled': False, 'route': route, 'target_revision': 1, 'interval_seconds': 1800}),))
             db.execute('INSERT OR IGNORE INTO selection VALUES(1,NULL,NULL,0)')
             settings = migrate(json.loads(db.execute('SELECT document FROM settings WHERE singleton=1').fetchone()[0]))
             db.execute('UPDATE settings SET document=? WHERE singleton=1', (policy.canonical_json(settings),))
-            db.execute('PRAGMA user_version=2')
+            db.execute('PRAGMA user_version=3')
 
     @contextmanager
     def connection(self):
@@ -101,6 +103,13 @@ class EvolutionStore:
                 raise policy.CoreError('evolution_busy', '已有一个改进或工具任务正在处理。')
             if db.execute('SELECT COUNT(*) FROM jobs').fetchone()[0] >= 1000:
                 raise policy.CoreError('evolution_quota', '改进账本达到保留上限，请整理证据后再继续。')
+            if payload.get('action') == 'project-tool':
+                # Leave room for the immutable package, escaped output, recovery
+                # receipt and SQLite page growth; never fill the 32 MiB ledger.
+                used = db.execute('PRAGMA page_count').fetchone()[0] * db.execute('PRAGMA page_size').fetchone()[0]
+                reserve = 6 * len(policy.canonical_json(payload).encode()) + 2 * 1024 * 1024
+                if used + reserve > 28 * 1024 * 1024:
+                    raise policy.CoreError('evolution_quota', '工具账本空间不足；已保留恢复空间，请先整理版本与证据。')
             value = {'id': uuid.uuid4().hex, 'request': payload, 'status': 'PROPOSED' if proposal is not None else 'QUEUED', 'created_at': now(),
                      'events': [], 'attempts': [], 'result': None, 'error': None}
             settings = json.loads(db.execute('SELECT document FROM settings WHERE singleton=1').fetchone()[0])
@@ -232,9 +241,14 @@ class EvolutionStore:
         # Called only while holding the cross-process lane lock.
         with self.connection() as db:
             db.execute('BEGIN IMMEDIATE')
-            rows = db.execute("SELECT document FROM jobs WHERE status IN ('QUEUED','RUNNING','OBSERVING') OR (json_extract(document,'$.published') IS NOT NULL AND json_extract(document,'$.activation_confirmed')=0)").fetchall()
+            rows = db.execute("SELECT document FROM jobs WHERE status IN ('QUEUED','RUNNING','OBSERVING') OR (json_extract(document,'$.published') IS NOT NULL AND json_extract(document,'$.activation_confirmed')=0) OR (json_extract(document,'$.tool_activation.version') IS NOT NULL AND json_extract(document,'$.tool_activation_confirmed')=0)").fetchall()
             for row in rows:
                 value = json.loads(row[0])
+                pending=value.get('tool_activation')
+                if pending and not value.get('tool_activation_confirmed'):
+                    db.execute('UPDATE project_tools SET active=NULL,generation=generation+1 WHERE project_id=? AND tool_id=? AND active=? AND generation=?',
+                               (pending['project_id'],pending['tool_id'],pending['version'],pending['generation']))
+                    db.execute("UPDATE tool_versions SET state='QUARANTINED' WHERE id=?",(pending['version'],))
                 active = db.execute('SELECT active FROM selection').fetchone()[0]
                 if active and active == value.get('published') and not value.get('activation_confirmed'):
                     # Deactivate until a fresh check; do not trust an unverified fallback on recovery.

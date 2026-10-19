@@ -73,6 +73,10 @@ class EvolutionManager:
             raise policy.CoreError('evolution_request_invalid', '动作参数不匹配。')
         if action == 'ensure': recipes.specification(payload['target_revision'])
         if action == 'execute': recipes.validate_input(payload['input'], 2)
+        return self._enqueue(payload, background=background, cause=cause)
+
+    def _enqueue(self, payload, *, background=False, cause=None):
+        """Shared bounded growth lane; adapters validate before entering here."""
         payload = copy.deepcopy(payload)
         with self.lock:
             if self.closed.is_set(): raise policy.CoreError('evolution_closed', '维护服务已关闭。')
@@ -379,7 +383,10 @@ class EvolutionManager:
                 self._checkpoint()
                 self.store.update(job, 'STARTED', status='RUNNING')
                 action = job['request']['action']
-                if action == 'ensure': result = self._ensure(job, job['request']['target_revision'])
+                if action == 'project-tool':
+                    from .catalog import ProjectTools
+                    result = ProjectTools(self).execute(job)
+                elif action == 'ensure': result = self._ensure(job, job['request']['target_revision'])
                 elif action == 'check': result = self._check(job, background)
                 elif action == 'analyze': result = self._analyze(job)
                 elif action == 'heal': result = self._heal(job)
@@ -409,6 +416,9 @@ class EvolutionManager:
                 if background and action == 'check' and not job.get('issue') and not job['attempts']:
                     self.store.compact_health_checks()
         except Exception as exc:
+            if job['request']['action']=='project-tool':
+                from .catalog import ProjectTools
+                ProjectTools(self).abort(job)
             code = exc.code if isinstance(exc, policy.CoreError) else 'evolution_internal_error'
             status = 'CANCELLED' if code == 'evolution_cancelled' else 'UNKNOWN' if job.get('model_outcome') == 'UNKNOWN' else 'FAILED'
             self.store.update(job, 'STOPPED', status=status, error=code)

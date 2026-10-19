@@ -70,6 +70,7 @@
   - [8.10.1 Context7 只读文档任务（0.1.55）](#mcp-documentation-task-contract)
 - [8.11 限定成长运行接口](#evolution-runtime-contract)
   - [8.11.1 会话需求适配接口（0.1.41）](#growth-demand-contract)
+  - [8.11.2 项目工具目录与调用接口（0.1.71）](#project-tool-contract)
 - [8.12 三能力消息与旧接口迁移](#growth-center-contract)
 - [8.13 统一对话受理、意图与事件契约（proposed）](#dialogue-turn-contract)
   - [8.13.1 对话意图与限定任务受理契约（0.1.56—0.1.59）](#dialogue-intent-shadow-contract)
@@ -1163,6 +1164,22 @@ security_stop_event:
 `proposal` 保存 selection、route、baseline_revision、issue、decision、max_coding_attempts、acceptance_digest、input_digest；`decision` 为 reuse/create/upgrade/repair。在原 jobs 表新增 `PROPOSED` 状态，不更改数据库 schema 版本。开始后沿用原状态集合；`result` 增加 `growth` 与 `benefit={format,entries,source_digest,verified_on_user_input}`。UI 的成功说明只取真实终态，HTTP 成功不表示执行成功。
 
 会话归档消息可选 `growth_ref` / `growth_request_id`，均为 32 位标识且必须搭配 `personal_control:true`；仅恢复回执链接，不加入模型历史。不认识新字段的旧宿主会拒绝该新归档而非静默丢字段，回退前需检查归档格式兼容。完整行为、数据保留与重启语义只维护于[需求成长](evolution-release.md#demand-growth-runtime)。
+
+<a id="project-tool-contract"></a>
+### 项目工具目录与调用接口（0.1.71）
+
+所有接口沿用本机 Origin、页面 nonce 和核心状态检查；`cid` 必须是已保存项目会话。完整行为规则归[工具运行](evolution-release.md#project-tool-runtime)。
+
+| 接口 | 契约 |
+|---|---|
+| `GET /api/project-tools/{cid}` | 返回项目工具、选择代际、适用说明、保留案例数、用量和本会话最近任务；不把其他项目工具带入上下文 |
+| `POST /api/project-tools/{cid}` | 基础字段 `operation/request_id/tool_id/generation`；动作 `publish/run/disable/rollback`，多余字段拒绝 |
+| `publish` | 另传 `task_id/name/when_to_use/when_not_to_use`；从已确认回执取包和原案例，不能由客户端直接上传可执行包或伪造通过结果 |
+| `run` | 另传 JSON `input`，可选文本 `expected`；空文本也可作为预期。返回异步任务，完成结果包含 `text/result_digest/version/result_verified/regression/isolation/elapsed_seconds/model_calls` |
+| `GET /api/project-tools/{cid}/jobs/{id}` | 核对当前会话所属原任务；不重新运行 |
+| `POST /api/project-tools/{cid}/jobs/{id}/cancel` | 空对象，取消当前绑定任务；不取消其他会话或聊天回复 |
+
+`request_id` 为 32 位小写十六进制；同编号同内容返回原回执，不因页面丢失响应而重复启用或调用。不同内容冲突；`generation` 过时拒绝。任务冻结 `scope/base/runtime_binding/submission`，发布额外冻结来源、包和案例。状态复用 `QUEUED/RUNNING/OBSERVING/SUCCEEDED/FAILED/CANCELLED/INTERRUPTED`。调用结果若无独立预期，只能记执行成功。存储和回退规则只维护在运行权威节。
 
 <a id="growth-center-contract"></a>
 ## 三能力消息与旧接口迁移

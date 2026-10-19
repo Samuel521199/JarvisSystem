@@ -14,8 +14,9 @@
   - [7.1.3 0.1.7 固定 Worker 的隔离范围](#worker-isolation)
   - [7.1.4 0.1.8 浏览器操作的实际边界](#computer-boundary)
     - [7.1.4.1 编程候选执行边界（0.1.70）](#bounded-coding-boundary)
-    - [7.1.4.2 REA 静态解析的实际边界（0.1.47）](#rea-static-boundary)
-    - [7.1.4.3 0.1.10 网页控制台与队列边界](#computer-web-boundary)
+    - [7.1.4.2 项目工具复用的边界（0.1.71）](#project-tool-boundary)
+    - [7.1.4.3 REA 静态解析的实际边界（0.1.47）](#rea-static-boundary)
+    - [7.1.4.4 0.1.10 网页控制台与队列边界](#computer-web-boundary)
   - [7.1.5 0.1.27 项目资源与编辑边界](#project-editor-boundary)
   - [7.1.6 0.1.27 扩展登记边界](#extension-registration-boundary)
   - [7.1.7 0.1.26 明确项目文档读取边界](#project-knowledge-boundary)
@@ -128,6 +129,13 @@ HTTP(S) 请求先检查 origin，通过 `route.fetch(max_redirects=0)` 读取响
 软件离线在认证/启动前拒绝外部执行，运行中持续核对模式修订和取消。网络策略仍为应用层约束，不声明系统防火墙。外部 session ID、usage 和结果状态存入任务；输出错误/不完整/工具异常不会确认候选，不自动重发。已外发资料不可撤回，未知调用也不假设免费。编程器无应用/发布权，实际写入与恢复规则只归[编程工作流](tasks-agents.md#bounded-coding-workflow)。
 
 0.1.70 增加两个边界：显式源码/请求与模型返回先检查常见字面密钥和私钥标记，拒绝后不上传或保存候选正文；它是可解释的检测器，不声称发现全部编码/隐藏秘密。JavaScript 使用锁定 QuickJS 原生库，仅在已有 LPAC Worker 中按需装载，不安装到 Host；没有 Python 回调、DOM、Node、文件或网络 API，每输入独立上下文，16 MiB JS 堆、512 KiB 栈、40 ms CPU 上限，并受外层 Worker 总预算约束。编译为有限数字帧后再送固定 HTML 查看器；浏览器不执行模型源码，预览仍是无同源权限 iframe、拒绝网络 CSP。场景浏览器验证仅按需启动私有 Edge/Driver，Job 限512 MiB、16进程和30秒CPU，结束回收。产物篡改须同时通过固定配方字节检查与重新计算帧比较。外部 CLI 的未知事件、完成后事件和非法 usage 拒绝确认；保留原 UNKNOWN 与停止语义。
+
+<a id="project-tool-boundary"></a>
+#### 项目工具复用的边界（0.1.71）
+
+[项目工具目录](evolution-release.md#project-tool-runtime)继承上一节候选隔离，只执行已确认回执中的 Python 产物。用途文字和新输入都不能改变 OS 权限、导入清单、验收案例、宿主代码或项目选择。发布与调用核对会话/项目、包摘要、代际及执行器摘要；外部网页缺 nonce 或 Origin 不符不能触发本机接口。
+
+工具被隔离、未完成发布或上一版未通过复验时不会直接恢复使用；失败原调用不自动重放。作用域检查提供应用内防串用，不宣称能防御具有同一 Windows 用户权限且可任意改写账本、运行代码的攻击者。工具生成与整机/硬件操作权限分离；当前不赋予文件写入、网络、Shell 或自行安装依赖的能力。相同项目共享工具不意味着共享私人画像或跨项目资料。
 
 <a id="rea-static-boundary"></a>
 #### REA 静态解析的实际边界（0.1.47）

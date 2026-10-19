@@ -161,7 +161,8 @@
         "extension-registration-boundary",
         "sample-task-boundary",
         "rea-static-boundary",
-        "bounded-coding-boundary"
+        "bounded-coding-boundary",
+        "project-tool-boundary"
       ],
       "status": "proposed",
       "reader_summary": "当前个人使用边界是什么，哪些监督与认证设计已延期？"
@@ -214,7 +215,8 @@
         "dialogue-receipt-ui",
         "dialogue-recovery-ui",
         "dialogue-intent-shadow-ui",
-        "mixed-report-ui"
+        "mixed-report-ui",
+        "project-tool-ui"
       ],
       "status": "proposed",
       "reader_summary": "怎样自然交流、延续人格，并在需要时展开工作台？"
@@ -306,7 +308,8 @@
         "bounded-evolution-loop",
         "growth-governance",
         "growth-learning-ledger",
-        "demand-growth-runtime"
+        "demand-growth-runtime",
+        "project-tool-runtime"
       ],
       "status": "proposed",
       "reader_summary": "怎样自编工具、改进模块，并验证和回退？"
@@ -372,7 +375,8 @@
         "dialogue-intent-shadow-contract",
         "memory-candidate-review-contract",
         "bounded-coding-contract",
-        "application-network-contract"
+        "application-network-contract",
+        "project-tool-contract"
       ],
       "status": "proposed",
       "reader_summary": "模块之间怎样交换任务、事件和记忆数据？"
@@ -508,7 +512,8 @@
         "growth-purposes-evidence",
         "coding-demand-evidence",
         "coding-dependencies-evidence",
-        "k3-closure-matrix"
+        "k3-closure-matrix",
+        "k4-project-tool-evidence"
       ],
       "status": "proposed",
       "reader_summary": "哪些能力测过，证据在哪里，下一阶段怎样验收？"
@@ -3068,13 +3073,13 @@
     }
   ],
   "implementation": {
-    "version": "0.1.69",
-    "scope": "Optional pinned JMESPath 1.1.0 offline Python recipe extends the existing coding and improvement workflow. Dependencies remain bundled assets, never installed into the host or project. Legacy recipes are retained; complete K3 and general dependency/toolchain management remain open.",
-    "evidence": "evals/reports/k3-dependencies-2026-10-19.json",
+    "version": "0.1.71",
+    "scope": "K3 development collaboration closed at 0.1.70. K4 explicit project tool publication, retained regression, isolated reuse, rollback and usage receipts verified at 0.1.71; full autonomous K4 remains open.",
+    "evidence": "evals/reports/k4-project-tools-2026-10-19.json",
     "overall_design_status": "proposed",
     "complete_k1_gate": false,
     "complete_k2_gate": false,
-    "complete_k3_gate": false,
+    "complete_k3_gate": true,
     "supplemental_evidence": [
       "evals/reports/local-deployment.json",
       "evals/reports/idle-resources.json",
@@ -3328,7 +3333,11 @@
       "evals/reports/k3-build-2026-10-19.json",
       "evals/cases/k3-coding-v2.json",
       "evals/reports/k3-acceptance-2026-10-19.json",
-      "evals/cases/k3-acceptance-v1.json"
-    ]
+      "evals/cases/k3-acceptance-v1.json",
+      "evals/reports/k3-dependencies-2026-10-19.json",
+      "evals/reports/k3-closure-2026-10-19.json",
+      "evals/reports/k4-project-tools-2026-10-19.json"
+    ],
+    "complete_k4_gate": false
   }
 }

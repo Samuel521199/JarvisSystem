@@ -107,6 +107,9 @@ def get(handler):
 
 
 def post(handler, payload):
+    if handler.path.startswith('/api/project-tools/'):
+        from project_tool_routes import post as tool_post
+        return tool_post(handler,payload)
     host = handler.server
     try:
         if host.skills is None and handler.path != '/api/coding': raise CoreError('skill_unavailable','技能模块尚未启用。')
