@@ -48,7 +48,7 @@ def merge_cases(old, new):
 
 def runtime_binding():
     from ..skill_tasks import SkillTaskService
-    paths=('catalog','manager','store','runner','tool_intent','tool_contract','provider','demand')
+    paths=('catalog','manager','store','runner','tool_intent','tool_contract','provider','demand','lifecycle')
     return policy.digest(policy.canonical_json({'coding':SkillTaskService.binding(),
         'tools':{p:policy.digest((policy.REPOSITORY_ROOT/'runtime/node-host/jarvis_core/evolution'/f'{p}.py').read_bytes()) for p in paths}}).encode())
 
@@ -93,11 +93,17 @@ class ProjectTools:
             jobs=[json.loads(r[0]) for r in db.execute("SELECT document FROM jobs WHERE json_extract(document,'$.request.action')='project-tool' AND json_extract(document,'$.request.scope.project_id')=? ORDER BY rowid DESC LIMIT 1000",(scope['project_id'],))]
         for raw in rows:
             row=dict(raw);meta=None;issue=None
+            from .lifecycle import ToolLifecycle
+            lifecycle=ToolLifecycle(self);life=lifecycle.state(scope['project_id'],row['tool_id'])
+            candidate=life.get('candidate')
             try:
-                if row['active'] or row['previous']:meta=self.package(row['active'] or row['previous'],row)[0]
+                ident=row['active'] or row['previous'] or candidate or life.get('retired_version')
+                if ident:meta=self.package(ident,row)[0]
             except policy.CoreError as exc:issue=exc.code
             uses=[j for j in jobs if j['request']['submission']['tool_id']==row['tool_id'] and j['request']['submission']['operation']=='run']
-            tools.append({**row,'metadata':meta['metadata'] if meta else None,'issue':issue,
+            with self.store.connection() as db:
+                versions=[{'id':r['id'],'state':r['state']} for r in db.execute("SELECT id,state FROM tool_versions WHERE CASE WHEN json_valid(document) THEN json_extract(document,'$.project_id') END=? AND CASE WHEN json_valid(document) THEN json_extract(document,'$.tool_id') END=? ORDER BY rowid DESC",(scope['project_id'],row['tool_id']))]
+            tools.append({**row,'lifecycle':life,'assessment':lifecycle.assessment(scope['project_id'],row['tool_id'],life,jobs=[j for j in jobs if j['request']['submission']['tool_id']==row['tool_id']]),'versions':versions,'metadata':meta['metadata'] if meta else None,'issue':issue,
                           'example_input':meta['cases'][0]['input'] if meta else None,
                           'cases':len(meta['cases']) if meta else 0,
                           'usage':{'calls':len(uses),'succeeded':sum(j['status']=='SUCCEEDED' for j in uses),
@@ -110,11 +116,14 @@ class ProjectTools:
     def submit(self,cid,payload):
         scope=self.scope(cid)
         if not isinstance(payload,dict):fail('工具请求必须是对象。')
+        from .lifecycle import ToolLifecycle, OPERATIONS
+        lifecycle=ToolLifecycle(self)
         op=payload.get('operation');required={'operation','request_id','tool_id','generation'}
         if op=='publish':required|={'task_id','name','when_to_use','when_not_to_use'}
         elif op=='run':required|={'input'}
-        elif op not in {'rollback','disable'}:fail('工具动作不支持。')
-        if not required<=set(payload) or set(payload)-required-({'expected'} if op=='run' else set()):fail('工具请求字段不完整。')
+        elif op not in {'rollback','disable'} and op not in OPERATIONS:fail('工具动作不支持。')
+        if not required<=set(payload):fail('工具请求字段不完整。')
+        if op not in OPERATIONS and set(payload)-required-({'expected'} if op=='run' else set()):fail('工具请求字段不完整。')
         if not isinstance(payload['request_id'],str) or not re.fullmatch('[a-f0-9]{32}',payload['request_id']):fail('请求编号无效。')
         if not isinstance(payload['tool_id'],str) or not re.fullmatch('[a-z][a-z0-9-]{1,47}',payload['tool_id']):fail('工具标识使用 2—48 位小写字母、数字或短横线。')
         if type(payload['generation']) is not int or payload['generation']<0:fail('工具代际无效。')
@@ -123,9 +132,17 @@ class ProjectTools:
         if existing:
             if existing['request']['scope']!=scope or existing['request']['submission']!=payload:fail('请求编号已用于其他内容。','evolution_conflict')
             return existing
+        if op in OPERATIONS:lifecycle.validate(payload)
         base=self.selected(scope['project_id'],payload['tool_id'])
         if base['generation']!=payload['generation']:fail('工具版本已变化，请刷新后重试。','evolution_conflict')
-        frozen={'action':'project-tool','request_id':request,'scope':scope,'submission':copy.deepcopy(payload),'base':base,'runtime_binding':runtime_binding()}
+        life=lifecycle.state(scope['project_id'],payload['tool_id'])
+        if op in OPERATIONS and life['revision']!=payload['lifecycle_revision']:fail('灰度或退役状态已变化，请刷新。','evolution_conflict')
+        if life['phase']=='RETIRED' and op not in {'restore','retire-version'}:fail('此能力已经退役；重新准入后才可使用。')
+        if op=='rollback' and life['phase'] in {'CANARY','PAUSED'} and base['previous']==life.get('candidate'):
+            fail('此版本正在重新准入，不能通过旧恢复入口绕过灰度。')
+        if op=='trial' and life['phase']=='CANARY' and lifecycle.assessment(scope['project_id'],payload['tool_id'],life)['trials']>=life['limits']['maximum_trials']:
+            fail('灰度试用次数已用完；请核对原记录并决定启用或放弃。')
+        frozen={'lifecycle':life,'action':'project-tool','request_id':request,'scope':scope,'submission':copy.deepcopy(payload),'base':base,'runtime_binding':runtime_binding()}
         if op=='publish':
             metadata={k:payload[k] for k in ('name','when_to_use','when_not_to_use')}
             if any(not isinstance(v,str) or not v.strip() or len(v.encode())>512 or '\0' in v for v in metadata.values()):fail('请填写名称、适用和不适用说明（每项最多 512 字节）。')
@@ -139,6 +156,13 @@ class ProjectTools:
             if build['manifest'].get('recipe') not in RECIPES:fail('首期工具库只支持可执行 Python 配方；源码包和动画场景保留原交付方式。')
             if not args.get('heldout_cases'):fail('发布需要独立留出验收。')
             prior=self.package(base['active'],base)[0]['cases'] if base['active'] else self.package(base['previous'],base)[0]['cases'] if base['previous'] else []
+            retained=base['active'] or base['previous']
+            with self.store.connection() as db:
+                history=[json.loads(r[0]) for r in db.execute("SELECT document FROM jobs WHERE status='SUCCEEDED' AND json_extract(document,'$.request.action')='project-tool' AND json_extract(document,'$.request.scope.project_id')=? AND json_extract(document,'$.request.submission.tool_id')=?",(scope['project_id'],payload['tool_id']))]
+            for old in history:
+                p=old['request']['submission'];result=old.get('result') or {}
+                if p.get('operation') in {'run','trial'} and 'expected' in p and result.get('result_verified') and result.get('text')==p['expected'] and (result.get('version') or result.get('trial',{}).get('version'))==retained:
+                    prior=merge_cases(prior,[{'input':p['input'],'expected':p['expected']}])
             frozen['package']={'build':build,'cases':merge_cases(prior,args['cases']+args['heldout_cases']),
                                'metadata':metadata,'origin':{'task_id':payload['task_id'],'artifact_digest':record['artifact']['digest']},
                                'project_id':scope['project_id'],'tool_id':payload['tool_id']}
@@ -173,6 +197,15 @@ class ProjectTools:
             db.execute('INSERT INTO project_tools VALUES(?,?,?,?,?) ON CONFLICT(project_id,tool_id) DO UPDATE SET active=excluded.active,previous=excluded.previous,generation=excluded.generation',
                        (base['project_id'],base['tool_id'],target,previous,base['generation']+1))
             if quarantine:db.execute("UPDATE tool_versions SET state='QUARANTINED' WHERE id=?",(quarantine,))
+            if not observing:
+                row=db.execute('SELECT document FROM tool_lifecycle WHERE project_id=? AND tool_id=?',(base['project_id'],base['tool_id'])).fetchone()
+                if row:
+                    life=json.loads(row[0]);phase=life['phase']
+                    if phase in {'CANARY','PAUSED'}:life.update(phase='PAUSED',reason='stable_selection_changed')
+                    elif phase in {'ACTIVE','LEGACY','DISABLED','ROLLED_BACK'}:
+                        life.update(phase='ROLLED_BACK' if target else 'DISABLED',candidate=None,reason='stable_selection_changed')
+                    life.update(revision=life['revision']+1,updated_at=now(),last_job=job['id'])
+                    db.execute('UPDATE tool_lifecycle SET document=? WHERE project_id=? AND tool_id=?',(policy.canonical_json(life),base['project_id'],base['tool_id']))
             job['tool_activation']={'project_id':base['project_id'],'tool_id':base['tool_id'],'version':target,'generation':base['generation']+1}
             job['tool_activation_confirmed']=not observing
             if observing:job['status']='OBSERVING'
@@ -184,28 +217,25 @@ class ProjectTools:
         if not pending or job.get('tool_activation_confirmed'):return
         with self.store.connection() as db:
             db.execute('BEGIN IMMEDIATE')
-            db.execute('UPDATE project_tools SET active=NULL,generation=generation+1 WHERE project_id=? AND tool_id=? AND active=? AND generation=?',
-                       (pending['project_id'],pending['tool_id'],pending['version'],pending['generation']))
+            from .store import tool_fallback
+            fallback=tool_fallback(db,job)
+            db.execute('UPDATE project_tools SET active=?,previous=NULL,generation=generation+1 WHERE project_id=? AND tool_id=? AND active=? AND generation=?',
+                       (fallback,pending['project_id'],pending['tool_id'],pending['version'],pending['generation']))
             db.execute("UPDATE tool_versions SET state='QUARANTINED' WHERE id=?",(pending['version'],))
+            row=db.execute('SELECT document FROM tool_lifecycle WHERE project_id=? AND tool_id=?',(pending['project_id'],pending['tool_id'])).fetchone()
+            if row:
+                life=json.loads(row[0]);life.update(phase='REJECTED',reason='promotion_aborted',revision=life['revision']+1)
+                db.execute('UPDATE tool_lifecycle SET document=? WHERE project_id=? AND tool_id=?',(policy.canonical_json(life),pending['project_id'],pending['tool_id']))
 
     def execute(self,job):
         request=job['request'];payload=request['submission'];base=request['base'];op=payload['operation']
         checkpoint=lambda:self.checkpoint(job);checkpoint()
+        from .lifecycle import ToolLifecycle, OPERATIONS
+        lifecycle=ToolLifecycle(self)
+        if payload['operation'] in OPERATIONS:return lifecycle.execute(job)
+        if lifecycle.state(base['project_id'],base['tool_id'])!=request.get('lifecycle'):fail('生命周期状态变化，旧调用未执行。','evolution_conflict')
         if self.selected(base['project_id'],base['tool_id'])!=base:fail('工具基线已变化。','evolution_conflict')
         start=time.monotonic()
-        if op=='publish':
-            doc=request['package'];proof=self.evaluate(doc,checkpoint);checkpoint()
-            ident=policy.digest(policy.canonical_json(doc).encode())[7:]
-            with self.store.connection() as db:
-                if db.execute('SELECT COUNT(*) FROM tool_versions').fetchone()[0]>=64:fail('工具版本达到 64 项保留上限。')
-                db.execute('INSERT OR IGNORE INTO tool_versions VALUES(?,?,?)',(ident,'VERIFIED',policy.canonical_json(doc)))
-                if db.execute('SELECT state FROM tool_versions WHERE id=?',(ident,)).fetchone()[0]!='VERIFIED':fail('该版本已隔离，不能重新启用。')
-            if ident==base['active']:return {'version':ident,'already_active':True,'validation':proof,'model_calls':0}
-            self.select(job,ident,base['active'] or base['previous'],observing=True)
-            self.evaluate(self.package(ident,base)[0],checkpoint)
-            # Persist observation before finishing; restart never exposes an unobserved version.
-            self.store.update(job,'TOOL_OBSERVED',tool_activation_confirmed=True)
-            return {'version':ident,'validation':proof,'model_calls':0,'benefit':{'new_capability':base['active'] is None,'retained_cases':len(doc['cases']),'real_use_verified':False}}
         if op=='disable':
             self.select(job,None,base['active'] or base['previous'])
             return {'disabled':True,'model_calls':0}

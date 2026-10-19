@@ -35,9 +35,14 @@ class ProjectToolTests(CodingTests):
         base=self.tools.selected(self.project['id'],'sum-tool')
         value={'operation':op,'request_id':uuid.uuid4().hex,'tool_id':'sum-tool','generation':base['generation']}
         if op=='publish':value.update(name='求和工具',when_to_use='整数列表求和',when_not_to_use='不用于对象、字符串或财务计算')
+        from jarvis_core.evolution.lifecycle import ToolLifecycle,OPERATIONS
+        if op in OPERATIONS:
+            value['lifecycle_revision']=ToolLifecycle(self.tools).state(self.project['id'],'sum-tool')['revision']
+            if op!='trial':value.update(reviewed=True,review_note='已按独立求和要求核对本轮操作。')
+        if op=='publish':value.update(minimum_verified=2,maximum_trials=10,maximum_seconds=15)
         value.update(kw);return value
 
-    def completed(self,payload,success=True):
+    def completed(self,payload,success=True,*,auto_admit=True):
         job=self.tools.submit(self.cid,payload);deadline=time.monotonic()+50
         while time.monotonic()<deadline:
             result=self.tools.bound_job(self.cid,job['id'])
@@ -45,9 +50,18 @@ class ProjectToolTests(CodingTests):
                 deadline2=time.monotonic()+2
                 while self.evolution.busy and time.monotonic()<deadline2:time.sleep(.02)
                 if success:self.assertEqual(result['status'],'SUCCEEDED',result.get('error'))
+                if auto_admit and success and payload['operation']=='publish':
+                    self.qualify(result)
+                    self.completed(self.request('promote'),auto_admit=False)
                 return result
             time.sleep(.04)
         self.fail('tool task timeout')
+
+    def qualify(self,stage):
+        salt=int(stage['id'][:6],16)+100
+        for n in (2,3):
+            self.completed(self.request('trial',input=[salt,n],expected=str(salt+n),useful=True,
+                                        benefit_note='独立整数相加核算，用于本项目统计。'),auto_admit=False)
 
     def test_actual_publish_use_disable_restore_restart_and_idempotency(self):
         task=self.candidate();payload=self.request(task_id=task);pub=self.completed(payload)
@@ -95,6 +109,9 @@ class ProjectToolTests(CodingTests):
 
     def test_unconfirmed_publication_is_deactivated_on_recovery(self):
         job=self.completed(self.request(task_id=self.candidate()))
+        with self.evolution.store.connection() as db:
+            row=db.execute("SELECT document FROM jobs WHERE json_extract(document,'$.request.submission.operation')='promote' ORDER BY rowid DESC LIMIT 1").fetchone()
+            job=json.loads(row[0])
         self.evolution.store.update(job,status='OBSERVING',tool_activation_confirmed=False)
         self.evolution.close();self.evolution=EvolutionManager(self.core,monitor=False);self.addCleanup(self.evolution.close);self.tools=ProjectTools(self.evolution,self.bridge)
         self.assertIsNone(self.tools.selected(self.project['id'],'sum-tool')['active'])
@@ -136,6 +153,8 @@ class ProjectToolTests(CodingTests):
             job=self.evolution._enqueue(frozen)
             while self.evolution.busy:time.sleep(.03)
         self.assertEqual(self.evolution.store.job(job['id'])['error'],'tool_runtime_changed')
+        stable=self.completed(self.request(task_id=task))['result']['version']
+        staged=self.completed(self.request(task_id=task),auto_admit=False);self.qualify(staged)
         entered=threading.Event();original=self.evolution.runner.run_build;calls=[]
         def observe(build,inputs,checkpoint):
             calls.append(True)
@@ -144,12 +163,12 @@ class ProjectToolTests(CodingTests):
                 while True:checkpoint();time.sleep(.02)
             return original(build,inputs,checkpoint)
         with patch.object(self.evolution.runner,'run_build',side_effect=observe):
-            job=self.tools.submit(self.cid,self.request(task_id=task));self.assertTrue(entered.wait(25))
+            job=self.tools.submit(self.cid,self.request('promote'));self.assertTrue(entered.wait(25))
             self.evolution.cancel(job['id']);end=time.monotonic()+10
             while self.evolution.busy and time.monotonic()<end:time.sleep(.03)
         self.assertFalse(self.evolution.busy)
         self.assertEqual(self.evolution.store.job(job['id'])['status'],'CANCELLED')
-        self.assertIsNone(self.tools.selected(self.project['id'],'sum-tool')['active'])
+        self.assertEqual(self.tools.selected(self.project['id'],'sum-tool')['active'],stable)
 
 for name in dir(CodingTests):
     if name.startswith('test_') and name not in ProjectToolTests.__dict__:setattr(ProjectToolTests,name,None)

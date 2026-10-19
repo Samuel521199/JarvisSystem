@@ -57,10 +57,13 @@ class ToolIntents:
             rows=db.execute('SELECT * FROM project_tools WHERE project_id=? ORDER BY tool_id',(scope['project_id'],)).fetchall()
         for raw in rows:
             row=dict(raw);meta=None;issue=None
+            from .lifecycle import ToolLifecycle
+            life=ToolLifecycle(self.tools).state(scope['project_id'],row['tool_id'])
             try:
-                if row['active'] or row['previous']:meta=self.tools.package(row['active'] or row['previous'],row)[0]['metadata']
+                ident=row['active'] or row['previous'] or life.get('candidate') or life.get('retired_version')
+                if ident:meta=self.tools.package(ident,row)[0]['metadata']
             except policy.CoreError as exc:issue=exc.code
-            result.append({**{k:row[k] for k in ('tool_id','active','previous','generation')},'metadata':meta,'issue':issue})
+            result.append({**{k:row[k] for k in ('tool_id','active','previous','generation')},'metadata':meta,'issue':issue,'lifecycle_phase':life['phase'],'lifecycle_revision':life['revision']})
         return result
 
     @staticmethod

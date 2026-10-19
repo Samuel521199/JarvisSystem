@@ -15,6 +15,8 @@ def service(handler):
 
 
 def get(handler):
+    if handler.path=='/tool-lifecycle.js':
+        handler._send(200,handler.server.tool_lifecycle_script,'application/javascript; charset=utf-8');return True
     if handler.path=='/tool-contracts.js':
         handler._send(200,handler.server.tool_contracts_script,'application/javascript; charset=utf-8');return True
     contract=re.fullmatch(r'/api/project-tools/([a-f0-9]{32})/plans/([a-f0-9]{32})/contracts(?:/([a-f0-9]{32}))?',handler.path)

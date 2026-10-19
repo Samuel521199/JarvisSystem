@@ -25,6 +25,21 @@ def plain_file(path, limit=1024*1024):
     return path
 
 
+def tool_fallback(db, job):
+    """Restore only the recorded prior stable package; never execute on recovery."""
+    ident=job.get('tool_recovery_previous');base=job['request'].get('base',{})
+    if not ident or ident!=base.get('active'):return None
+    try:
+        row=db.execute('SELECT state,document FROM tool_versions WHERE id=?',(ident,)).fetchone()
+        if not row or row['state']!='VERIFIED':return None
+        doc=json.loads(row['document'])
+        if policy.digest(policy.canonical_json(doc).encode())[7:]!=ident or any(doc.get(k)!=base.get(k) for k in ('project_id','tool_id')):return None
+        from ..coding_build import bytes_from
+        bytes_from(doc['build'])
+        return ident
+    except (ValueError,KeyError,TypeError,policy.CoreError):return None
+
+
 class EvolutionStore:
     def __init__(self, core, route):
         self.core = core
@@ -35,7 +50,7 @@ class EvolutionStore:
         self.path = self.root / 'evolution.db'
         with self.connection() as db:
             version = db.execute('PRAGMA user_version').fetchone()[0]
-            if version not in (0, 1, 2, 3):
+            if version not in (0, 1, 2, 3, 4):
                 raise policy.CoreError('evolution_schema_invalid', '进化账本版本不兼容。')
             db.executescript('''
                 CREATE TABLE IF NOT EXISTS settings(singleton INTEGER PRIMARY KEY,document TEXT NOT NULL);
@@ -45,13 +60,14 @@ class EvolutionStore:
                 CREATE TABLE IF NOT EXISTS incidents(id TEXT PRIMARY KEY,created_at TEXT NOT NULL);
                 CREATE TABLE IF NOT EXISTS project_tools(project_id TEXT NOT NULL,tool_id TEXT NOT NULL,active TEXT,previous TEXT,generation INTEGER NOT NULL,PRIMARY KEY(project_id,tool_id));
                 CREATE TABLE IF NOT EXISTS tool_versions(id TEXT PRIMARY KEY,state TEXT NOT NULL,document TEXT NOT NULL);
+                CREATE TABLE IF NOT EXISTS tool_lifecycle(project_id TEXT NOT NULL,tool_id TEXT NOT NULL,document TEXT NOT NULL,PRIMARY KEY(project_id,tool_id));
             ''')
             db.execute('INSERT OR IGNORE INTO settings VALUES(1,?)', (policy.canonical_json(
                 {'enabled': False, 'route': route, 'target_revision': 1, 'interval_seconds': 1800}),))
             db.execute('INSERT OR IGNORE INTO selection VALUES(1,NULL,NULL,0)')
             settings = migrate(json.loads(db.execute('SELECT document FROM settings WHERE singleton=1').fetchone()[0]))
             db.execute('UPDATE settings SET document=? WHERE singleton=1', (policy.canonical_json(settings),))
-            db.execute('PRAGMA user_version=3')
+            db.execute('PRAGMA user_version=4')
 
     @contextmanager
     def connection(self):
@@ -246,9 +262,14 @@ class EvolutionStore:
                 value = json.loads(row[0])
                 pending=value.get('tool_activation')
                 if pending and not value.get('tool_activation_confirmed'):
-                    db.execute('UPDATE project_tools SET active=NULL,generation=generation+1 WHERE project_id=? AND tool_id=? AND active=? AND generation=?',
-                               (pending['project_id'],pending['tool_id'],pending['version'],pending['generation']))
+                    fallback=tool_fallback(db,value)
+                    db.execute('UPDATE project_tools SET active=?,previous=NULL,generation=generation+1 WHERE project_id=? AND tool_id=? AND active=? AND generation=?',
+                               (fallback,pending['project_id'],pending['tool_id'],pending['version'],pending['generation']))
                     db.execute("UPDATE tool_versions SET state='QUARANTINED' WHERE id=?",(pending['version'],))
+                    state=db.execute('SELECT document FROM tool_lifecycle WHERE project_id=? AND tool_id=?',(pending['project_id'],pending['tool_id'])).fetchone()
+                    if state:
+                        state=json.loads(state[0]);state.update(phase='REJECTED',reason='promotion_interrupted',revision=state['revision']+1)
+                        db.execute('UPDATE tool_lifecycle SET document=? WHERE project_id=? AND tool_id=?',(policy.canonical_json(state),pending['project_id'],pending['tool_id']))
                 active = db.execute('SELECT active FROM selection').fetchone()[0]
                 if active and active == value.get('published') and not value.get('activation_confirmed'):
                     # Deactivate until a fresh check; do not trust an unverified fallback on recovery.
@@ -256,6 +277,13 @@ class EvolutionStore:
                     db.execute("UPDATE packages SET state='QUARANTINED' WHERE id=?", (active,))
                 value.update(status='INTERRUPTED', error='进程中断；未重放模型调用，未确认的启用已停用。')
                 self.write_job(db, value)
+
+        with self.connection() as db:
+            for row in db.execute('SELECT project_id,tool_id,document FROM tool_lifecycle').fetchall():
+                value=json.loads(row['document'])
+                if value['phase']=='CANARY':
+                    value.update(phase='PAUSED',revision=value['revision']+1,reason='restart_review',updated_at=now())
+                    db.execute('UPDATE tool_lifecycle SET document=? WHERE project_id=? AND tool_id=?',(policy.canonical_json(value),row['project_id'],row['tool_id']))
 
     def existing_job(self, request_id):
         with self.connection() as db:

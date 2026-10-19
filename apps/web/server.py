@@ -262,6 +262,7 @@ class LocalChatServer(ThreadingHTTPServer):
         self.tool_intents_script = asset('tool-intents.js')
         self.creation_script = asset('creation.js')
         self.tool_contracts_script = asset('tool-contracts.js')
+        self.tool_lifecycle_script = asset('tool-lifecycle.js')
         self.html = self.html.replace(b'__JARVIS_GROWTH_STYLE__', asset('growth.css'))
         self.admin_html = self.admin_html.replace(b'__JARVIS_EXTENSIONS_STYLE__', asset('extensions.css') + b'\n' + asset('skills.css') + b'\n' + asset('mcp.css'))
         if not asset('admin.html') or not self.admin_script:

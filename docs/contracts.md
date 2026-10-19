@@ -71,7 +71,7 @@
   - [8.11.1 Context7 只读文档任务（0.1.55）](#mcp-documentation-task-contract)
 - [8.12 限定成长运行接口](#evolution-runtime-contract)
   - [8.12.1 会话需求适配接口（0.1.41）](#growth-demand-contract)
-  - [8.12.2 项目工具目录与调用接口（0.1.73）](#project-tool-contract)
+  - [8.12.2 项目工具目录与调用接口（0.1.75）](#project-tool-contract)
 - [8.13 三能力消息与旧接口迁移](#growth-center-contract)
 - [8.14 统一对话受理、意图与事件契约（proposed）](#dialogue-turn-contract)
   - [8.14.1 对话意图与限定任务受理契约（0.1.56—0.1.59）](#dialogue-intent-shadow-contract)
@@ -1178,20 +1178,25 @@ security_stop_event:
 会话归档消息可选 `growth_ref` / `growth_request_id`，均为 32 位标识且必须搭配 `personal_control:true`；仅恢复回执链接，不加入模型历史。不认识新字段的旧宿主会拒绝该新归档而非静默丢字段，回退前需检查归档格式兼容。完整行为、数据保留与重启语义只维护于[需求成长](evolution-release.md#demand-growth-runtime)。
 
 <a id="project-tool-contract"></a>
-### 项目工具目录与调用接口（0.1.73）
+### 项目工具目录与调用接口（0.1.75）
 
 所有接口沿用本机 Origin、页面 nonce 和核心状态检查；`cid` 必须是已保存项目会话。完整行为规则归[工具运行](evolution-release.md#project-tool-runtime)。
 
 | 接口 | 契约 |
 |---|---|
-| `GET /api/project-tools/{cid}` | 返回项目工具、选择代际、适用说明、保留案例数、用量和本会话最近任务；不把其他项目工具带入上下文 |
-| `POST /api/project-tools/{cid}` | 基础字段 `operation/request_id/tool_id/generation`；动作 `publish/run/disable/rollback`，多余字段拒绝 |
-| `publish` | 另传 `task_id/name/when_to_use/when_not_to_use`；从已确认回执取包和原案例，不能由客户端直接上传可执行包或伪造通过结果 |
+| `GET /api/project-tools/{cid}` | 返回项目工具、选择代际、适用说明、保留案例数、用量、本会话最近任务，以及 `lifecycle/assessment/versions`；不把其他项目工具带入上下文 |
+| `POST /api/project-tools/{cid}` | 基础字段 `operation/request_id/tool_id/generation`；动作见下行，未知/多余字段拒绝 |
+| 生命周期公共字段 | `publish/trial/promote/pause/resume/discard/retire/restore/retire-version` 另需非负整数 `lifecycle_revision`；除 `trial` 外须 `reviewed:true` 和 5—1000 字符 `review_note` |
+| `publish` | 另传 `task_id/name/when_to_use/when_not_to_use`、整数 `minimum_verified`（2—10）、`maximum_trials`（2—30，且不小于前者）、`maximum_seconds`（1—30）。从已确认回执取包和原案例；成功仅进入灰度，不直接启用 |
+| `trial` | 另传 JSON `input`、文本 `expected`（可为空，最多 16 KiB）、布尔 `useful`、5—1000 字符 `benefit_note`；返回独立结果与 `trial` 的版本、输入摘要、新颖性、用途声明、候选耗时/内存和可选旧版配对 |
+| `promote/pause/resume/discard/retire/restore` | 只有公共字段和明确审阅；每项核对当前状态/修订，不由请求携带包或客户端“达标”结果 |
+| `retire-version` | 另传本项目本工具的 64 位十六进制 `version`；仍有稳定/候选/恢复引用则拒绝 |
 | `run` | 另传 JSON `input`，可选文本 `expected`；空文本也可作为预期。返回异步任务，完成结果包含 `text/result_digest/version/result_verified/regression/isolation/elapsed_seconds/model_calls` |
+| `disable/rollback` | 仅基础字段；退役工具不能通过旧接口恢复，必须 `restore` 后重新准入 |
 | `GET /api/project-tools/{cid}/jobs/{id}` | 核对当前会话所属原任务；不重新运行 |
 | `POST /api/project-tools/{cid}/jobs/{id}/cancel` | 空对象，取消当前绑定任务；不取消其他会话或聊天回复 |
 
-`request_id` 为 32 位小写十六进制；同编号同内容返回原回执，不因页面丢失响应而重复启用或调用。不同内容冲突；`generation` 过时拒绝。任务冻结 `scope/base/runtime_binding/submission`，发布额外冻结来源、包和案例。状态复用 `QUEUED/RUNNING/OBSERVING/SUCCEEDED/FAILED/CANCELLED/INTERRUPTED`。调用结果若无独立预期，只能记执行成功。存储和回退规则只维护在运行权威节。
+`request_id` 为 32 位小写十六进制；同编号同内容返回原回执，不因页面丢失响应而重复启用或调用。不同内容冲突；`generation` 或生命周期修订过时拒绝。任务冻结 `scope/base/runtime_binding/submission/lifecycle`，发布额外冻结来源、包和案例。任务状态复用 `QUEUED/RUNNING/OBSERVING/SUCCEEDED/FAILED/CANCELLED/INTERRUPTED`，与候选生命周期状态分开。调用结果若无独立预期，只能记执行成功。`assessment` 返回门槛、不同新输入/用途/失败/次数、运行时与基线状态、配对观察和建议；只有后端重新计算后才能启用。存储、计数、退役和回退规则只维护在[生命周期权威节](evolution-release.md#project-tool-lifecycle)。
 
 0.1.72 在相同路由域新增需求适配接口，判定规则见[需求选择](evolution-release.md#project-tool-intents)：
 
