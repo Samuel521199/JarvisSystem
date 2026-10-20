@@ -45,10 +45,11 @@
   - [8.3.30 0.1.63 应用网络控制接口](#application-network-contract)
   - [8.3.31 0.1.22 模块观察与维护接口](#module-monitor-contract)
   - [8.3.32 独立 CosyVoice3 文件语音接口](#cosyvoice3-contract)
-  - [8.3.33 独立主力 Qwen 语音接口](#qwen-tts-contract)
-    - [8.3.33.1 分层表达、分段预览与语音合成](#speech-expression-score)
-    - [8.3.33.2 聊天回复的有界朗读通道](#chat-readout-contract)
-  - [8.3.34 独立快速本地语音接口](#fast-speech-contract)
+  - [8.3.33 本地语音输入与会话衔接](#speech-input-contract)
+  - [8.3.34 独立主力 Qwen 语音接口](#qwen-tts-contract)
+    - [8.3.34.1 分层表达、分段预览与语音合成](#speech-expression-score)
+    - [8.3.34.2 聊天回复的有界朗读通道](#chat-readout-contract)
+  - [8.3.35 独立快速本地语音接口](#fast-speech-contract)
 - [8.4 记忆组件的替换契约（proposed）](#memory-provider-contracts)
   - [8.4.1 开源提取器、编纂器与路由的适配要求（proposed）](#memory-extractor-adapter)
   - [8.4.2 联合知识视图运行契约（0.1.33）](#memory-view-runtime-contract)
@@ -624,6 +625,22 @@ queue 为原队列的 paused/owned/waiting/capacity/error/resources，加 runnin
 输出为 24kHz PCM16 WAV，单次至多 60 秒；生成超过边界或 300 秒请求超时会失败并回收本次受管语音进程。Windows Job 只持有本实例创建的进程；停止递增内部代次，丢弃旧代次的迟到回执。操作进行时检查核心控制状态；核心停止或宿主退出触发组件回收，不清除停止锁存。成功合成的 uses 是本次启动计数，不是长期账本；没有以此宣称无限并发或硬实时停止上界。
 
 上传参考音频仅保存为本机随机临时文件，操作结束清理；清理异常在回执中给出 cleanup_notice，不悄悄写入长期声纹库。生成 WAV 保留在本机组件输出目录，由有 nonce 的请求取得；浏览器通过受检请求转为 blob 播放/下载，不把 nonce 放进 URL。进程工作集、峰值工作集、私有提交和峰值提交分列；读不到时为 null，不能按零处理。first_internal_chunk_seconds 是后端第一块音频产生时间，不是浏览器首播时延。
+
+<a id="speech-input-contract"></a>
+### 本地语音输入与会话衔接
+
+`GET /api/speech/input` 返回独立识别槽、PID/内存和限制；`GET /api/speech/input/{id}` 只查询原编号；`POST /api/speech/input` 受现有 Host/Origin/nonce/核心运行门禁保护。输入接口仅接受：
+
+- `transcribe`：精确字段 `action,id,pcm,language`，id 为 32 位小写十六进制；pcm 为 base64 PCM16LE、单声道 16 kHz，0.2—20 秒，最多 640,000 原始字节；语言 auto/zh/en/ja/ko/yue。
+- `cancel` / `forget`：精确字段 `action,id`。前者取消此编号并丢弃结果，后者用于已填入草稿后的文本清理；两者均阻止该编号的迟到结果，不影响另一个请求。
+
+返回 RUNNING、SUCCEEDED、FAILED、CANCELLED、FORGOTTEN 或 MISSING。同编号同内容查询已有回执，不再识别；内容改变或取消先于开始则拒绝。响应丢失仅 GET 核对，不自动重新 POST；MISSING 不代表可以重放。最多 64 条内存回执，结束 5 分钟后在下次操作/查询时惰性淘汰，满额拒绝，重启清空。惰性清理不是 5 分钟整点内存擦除保证；录音本身仅存在处理期间的内存/管道，不写音频文件、日志或业务数据库。
+
+浏览器固定 AudioWorklet 产生有界样本，归一到输入格式，20 秒自动结束；CSP 仅为该同源固定脚本添加精确来源，其他脚本继续使用 nonce。转写先进入独立预览，编辑后显式追加到现有消息草稿；发送仍走原会话接口及模型/记忆/任务规则，不创建另一条语音大脑通道。
+
+`jarvis:message-start` / `jarvis:reply-ready` 携带原请求编号；自动朗读只消费本页启用后新请求的完整成功回复。会话编号、输入代次不符，取消、页面隐藏或切换会话均丢弃迟到结果。`jarvis:conversation-context` 从真实会话变更同步，不使用首次保存时改变的 URL 推断新会话。开始录音先停止本页旧朗读；不停止其他页面的语音操作，不提供声纹授权。
+
+完整使用方式归[语音交互](interaction-persona.md#voice-chat-plan)，进程/模型与资源规则归[识别组件](models-offline.md#speech-input-runtime)。
 
 <a id="qwen-tts-contract"></a>
 ### 独立主力 Qwen 语音接口

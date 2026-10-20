@@ -114,7 +114,7 @@
     s.archiveJSON=encoded;s.archiveState="saving";s.archiveError="";locationForProject();render();
     Conversations.save(id,document).then(()=>{s.archiveState="saved";s.archiveError="";archiveWarning="";}).catch(error=>{s.archiveState="failed";s.archiveError=error.message;}).finally(()=>{const current=sessions.get(id);if(current&&current.archiveJSON===encoded){current.archiveState=s.archiveState;current.archiveError=s.archiveError;}if(id===activeId)archiveStatus();else if(current?.archiveJSON===encoded&&current.archiveState==="failed"){render();notify("会话“"+current.title+"”保存失败："+current.archiveError);}});
   }
-  function locationForProject(){window.history.replaceState(null,"",sessions.has(activeId)&&!temporary?"#chat="+activeId:project?"#project="+project.id:location.pathname);}
+  function locationForProject(){window.history.replaceState(null,"",sessions.has(activeId)&&!temporary?"#chat="+activeId:project?"#project="+project.id:location.pathname);window.dispatchEvent(new Event("jarvis:conversation-context"));}
   function newSession(next=project,isTemporary=false){
     if(busy||Boolean(window.Dialogue?.hasPending())||operationBusy)return;
     remember();activeId=newId();project=next;temporary=isTemporary;resetConversation();el("file-mode").checked=false;el("output-path").value="";el("file-options").open=false;

@@ -22,12 +22,13 @@
   - [10.1.9 语音主选与候补：本地优先（2026-10-18）](#voice-model-selection)
     - [10.1.9.1 本地主选、备选与真实能力边界](#voice-local-candidates)
     - [10.1.9.2 内存、显存与模型文件分开预算](#voice-resource-footprint)
-    - [10.1.9.3 Qwen 本地主力语音组件](#qwen-tts-runtime)
-    - [10.1.9.4 ZipVoice 快速备用组件（2026-10-18）](#fast-speech-runtime)
-    - [10.1.9.5 CosyVoice3 独立文件语音组件（2026-10-18）](#cosyvoice3-runtime)
-    - [10.1.9.6 说话人识别、分段和重叠分离分开验收](#voice-overlap-separation)
-    - [10.1.9.7 国内外云端候补与价格口径](#voice-cloud-candidates)
-    - [10.1.9.8 资源与效果驱动的候补规则](#voice-routing-policy)
+    - [10.1.9.3 按需本地语音识别（0.1.80）](#speech-input-runtime)
+    - [10.1.9.4 Qwen 本地主力语音组件](#qwen-tts-runtime)
+    - [10.1.9.5 ZipVoice 快速备用组件（2026-10-18）](#fast-speech-runtime)
+    - [10.1.9.6 CosyVoice3 独立文件语音组件（2026-10-18）](#cosyvoice3-runtime)
+    - [10.1.9.7 说话人识别、分段和重叠分离分开验收](#voice-overlap-separation)
+    - [10.1.9.8 国内外云端候补与价格口径](#voice-cloud-candidates)
+    - [10.1.9.9 资源与效果驱动的候补规则](#voice-routing-policy)
 - [10.2 Computer Use：已验证的 DOM 规划与视觉候选](#computer-use-models)
 - [10.3 本地嵌入模型的候选与资源边界（proposed）](#embedding-candidates)
 - [10.4 双路模型连接与恢复设计](#model-routing)
@@ -326,6 +327,17 @@ CosyVoice3 的 **0.5B 不是整条语音流水线的全部权重**。2026-10-18 
 ZipVoice 尚未安装，163.32 MB 下载量不能当成运行 RAM。即使仅按参数估算，0.6B 的 FP16 参数本身约 1.12 GiB、0.5B 约 0.93 GiB，也未计入前后端模型、激活、缓存和推理库，不能据此宣传整套只占这些内存。当前普通 PC 的轻量目标组合为 Silero + CAM++ + SenseVoiceSmall int8 + ZipVoice int8，先为**语音推理进程合计预留 2—3 GiB RAM、无需独立显存**；这是待测集成预算，当前顺序诊断不能证明该克隆组合已运行，也不构成整台机器只需 3 GiB 的配置建议。
 
 后续记录候选进程的基线、冷加载、预热、单轮、并发和释放后读数，再冻结准入预算；共同运行时的实际峰值不能简单相加各进程独测值。GPU 表仅为兼容后端的候选预算，不证明当前 Windows/AMD 设备支持 CUDA；能分配共享显存也不等于对应算子可运行。集成 GPU 的共享内存来自同一物理 RAM 池，不能把系统内存和共享显存当作两份额外容量。默认不同时常驻全部候选，资源不足时按[候补规则](#voice-routing-policy)降级。
+
+<a id="speech-input-runtime"></a>
+#### 按需本地语音识别（0.1.80）
+
+**implemented：**复用已固定的 SenseVoiceSmall int8 ONNX 与 sherpa-onnx 1.13.8，当前 Windows 主机已有组件，无新增模型下载、云端 STT 或常驻服务。浏览器只在主人点击麦克风后采集；[SpeechInput](../runtime/node-host/jarvis_core/speech_input.py) 经管道交给[固定识别入口](../runtime/node-host/jarvis_core/speech_input_worker.py)，按原清单校验模型摘要，然后退出释放模型。该进程是资源隔离，不是运行不可信代码的安全沙箱。支持语言枚举不等于各语言质量均已验收。
+
+单次最多 20 秒，CPU 两线程、低于普通优先级，独立单槽；启动至少保留 2 GiB 可用物理/提交余量，Windows Job 提交上限 1.5 GiB、45 秒处理时限。上限不是常驻占用，实测另见[本轮证据](delivery-validation.md#k6-voice-input-evidence)。取消和核心停止回收此进程，不取消后台任务。不加载声纹模型，不做身份认证、云端候补或自动模型替换。
+
+运行环境需要已有可选 `speech` 依赖及 `config/model-profiles/local-candidates.json` 的 STT 文件；默认精简运行包不包含语音依赖或模型。缺失、损坏、版本不符或资源不足时返回失败并保留文字入口，不静默下载安装。模型根目录沿用现有配置；本轮未更换组件版本或扩大模型分发许可。该非流式识别按段处理，不能称为全双工实时 ASR。
+
+录音不落盘；转写回执只在 Host 内存中有界保留，取消/填入消息后清除转写文本，服务重启丢弃，不重放。具体时限、去重和清理语义见[输入接口](contracts.md#speech-input-contract)。回答语音仍复用下方 Qwen 与[原朗读生命周期](interaction-persona.md#chat-readout-ui)，已有 TTS 音频缓存规则不改变。
 
 <a id="qwen-tts-runtime"></a>
 #### Qwen 本地主力语音组件

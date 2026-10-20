@@ -265,7 +265,8 @@
         "cosyvoice3-runtime",
         "fast-speech-runtime",
         "qwen-tts-runtime",
-        "application-offline-control"
+        "application-offline-control",
+        "speech-input-runtime"
       ],
       "status": "proposed",
       "reader_summary": "用哪些云端和本地模型，怎样切换与离线降级？"
@@ -389,7 +390,8 @@
         "application-network-contract",
         "project-tool-contract",
         "tank-game-contract",
-        "ranking-module-contract"
+        "ranking-module-contract",
+        "speech-input-contract"
       ],
       "status": "proposed",
       "reader_summary": "模块之间怎样交换任务、事件和记忆数据？"
@@ -536,7 +538,8 @@
         "k4-closure-readiness",
         "k4-growth-closure-evidence",
         "k5-ranking-entry-evidence",
-        "k5-ranking-module-evidence"
+        "k5-ranking-module-evidence",
+        "k6-voice-input-evidence"
       ],
       "status": "proposed",
       "reader_summary": "哪些能力测过，证据在哪里，下一阶段怎样验收？"

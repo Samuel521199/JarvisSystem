@@ -23,7 +23,7 @@
 | **判断现在能否使用、智能有多强** | [v0.1.62 的实现、实测与剩余验收](delivery-validation.md#k2-completion-evidence) | [当前能力和完整性规则](models-offline.md#runtime-chat-context) |
 | **查看个人核心的使用与验证** | [聊天记忆与交流设置](interaction-persona.md#personal-core-ui) → [跨会话继续话题](interaction-persona.md#continuity-ui) | [当前 K2 验收结果与范围](delivery-validation.md#k2-completion-evidence) |
 | **从聊天提出改进并取回成果** | [改进与成长进度](interaction-persona.md#growth-demand-ui) | [0.1.41 需求成长验证](delivery-validation.md#growth-demand-evidence) |
-| **查看本轮修复与验收** | [K5 首个模块闭环](delivery-validation.md#k5-ranking-module-evidence) | [原始基础验收](delivery-validation.md#foundation-repair-evidence) |
+| **查看本轮修复与验收** | [K6 按键语音交流](delivery-validation.md#k6-voice-input-evidence) | [原始基础验收](delivery-validation.md#foundation-repair-evidence) |
 | **查看当前实现离个人助手目标还有多远** | [个人核心评价与工程审计](decisions-review.md#personal-core-assessment) | [助手核心架构图](architecture.md#pc-runtime-convergence) → [既有测试证据](delivery-validation.md#current-audit-evidence) |
 | **用自然语言执行首条任务** | [聊天任务入口](core-bootstrap.md#conversation-task-entry) | [执行边界与记录](tasks-agents.md#sample-task-runtime) |
 | **查看模块运行和准备升级** | [设置模块入口](core-bootstrap.md#module-monitor-entry) | [监控与维护边界](health-maintenance.md#module-monitoring) |
@@ -33,7 +33,9 @@
 <a id="project-status"></a>
 ## 目前做到哪里了？
 
-**当前已部署 0.1.79：K4 三个明确任务域闭环保持；K5 首个受限检索模块已完成模型生成、独立评估、试用/保留和重启回退。** [K5 实测与限制](delivery-validation.md#k5-ranking-module-evidence) · [模块如何工作](knowledge-learning.md#retrieval-ranking-module) · [唯一推进顺序](core-bootstrap.md#k4-next-delivery)。
+**当前已部署 0.1.80：K6 按键录音、本地转写与新回复播报已接通；[本轮验证与限制](delivery-validation.md#k6-voice-input-evidence)。** 输入框右下角麦克风 → 录音/结束 → 编辑转写 → 填入消息；语音选项可开启新回复自动朗读。录音不自动发送，刷新后自动朗读关闭。
+
+**上一部署 0.1.79：K4 三个明确任务域闭环保持；K5 首个受限检索模块已完成模型生成、独立评估、试用/保留和重启回退。** [K5 实测与限制](delivery-validation.md#k5-ranking-module-evidence) · [模块如何工作](knowledge-learning.md#retrieval-ranking-module) · [唯一推进顺序](core-bootstrap.md#k4-next-delivery)。
 
 **本次升级 · 0.1.79：**设置 → 成长中心 → 进化 →「自身模块改造 · 检索排序」。生成后查看源码、质量与用量，再审阅试用；原内置排序仍是正式默认。模型候选的检索与回答对照均有有限范围收益，不等于通用自主重写。[使用方式](interaction-persona.md#ranking-module-ui)。
 

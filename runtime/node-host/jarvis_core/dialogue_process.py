@@ -23,7 +23,7 @@ MEMORY_LIMIT = 384 * 1024 * 1024
 
 class ProcessJob:
     """Attach before sending any input. Closing the job kills its owned child."""
-    def __init__(self):
+    def __init__(self, *, memory_limit=MEMORY_LIMIT):
         if os.name != 'nt':
             raise OSError('No verified dialogue process backend on this platform')
         from . import worker
@@ -34,7 +34,7 @@ class ProcessJob:
             limits = JobLimits()
             limits.basic.flags = 0x2000 | 0x8 | 0x200
             limits.basic.active = 1
-            limits.job_memory = MEMORY_LIMIT
+            limits.job_memory = memory_limit
             self.api.check(self.api.set_job(self.handle, 9, C.byref(limits), C.sizeof(limits)), 'Bound dialogue Job')
         except BaseException:
             self.api.close(self.handle)

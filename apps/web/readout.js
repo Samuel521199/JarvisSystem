@@ -56,5 +56,6 @@ $('close-options').addEventListener('click',()=>{$('options').open=false;$('opti
 document.addEventListener('click',event=>{if($('options').open&&!event.target.closest('#readout-options'))$('options').open=false;});
 document.addEventListener('keydown',event=>{if(event.key==='Escape'&&$('options').open){$('options').open=false;$('options').querySelector('summary').focus();}});
 $('options').addEventListener('toggle',()=>{if($('options').open)options().catch(e=>{$('error').textContent=e.message;});});
+window.JarvisReadout={stop,speak(article){if(!article?.isConnected)return;attach(article);$('text').value=article.querySelector('.bubble')?.textContent||'';return start(article,article.querySelector('.readout-button'));}};
 window.addEventListener('pagehide',()=>{stop('页面已关闭，朗读已停止。',true);});
 })();

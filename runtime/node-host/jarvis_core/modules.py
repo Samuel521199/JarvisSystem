@@ -56,6 +56,8 @@ class ModuleMonitor:
         self.fast_speech = FastSpeechService(core)
         from .qwen_speech import QwenSpeechService
         self.primary_speech = QwenSpeechService(core)
+        from .speech_input import SpeechInput
+        self.speech_input = SpeechInput(core, model_root=self.model_root)
 
     def _load_jobs(self):
         try:
@@ -85,6 +87,7 @@ class ModuleMonitor:
         self.speech.close()
         self.fast_speech.close()
         self.primary_speech.close()
+        self.speech_input.close()
 
     def snapshot(self, *, refresh=False):
         with self.lock:
@@ -338,6 +341,11 @@ class ModuleMonitor:
             result.append(self._row(ident,name,installed=installed,enabled=False,health='ready' if installed else 'unavailable',
                           activity='not_integrated',version=component+' / '+(engine or '引擎未安装'),update='external',
                           message=assets['message']+' 当前仅文件诊断，未接入工作台实时语音；不推断外部诊断进程状态。'))
+            if ident == 'stt':
+                state = self.speech_input.snapshot()
+                result[-1].update(enabled=installed, activity='busy' if state['busy'] else 'on_demand',
+                                  active=int(state['busy']), runtime=state,
+                                  message='输入区麦克风：20 秒以内本地转写，检查后填入消息。每次独立识别，结束释放模型；不自动发送或认证身份。')
         status = self.speech.snapshot()
         row = self._row('cosyvoice3', 'CosyVoice3 克隆与情绪语音', installed=status['installed'],
             enabled=status['owned'], health='ready' if status['installed'] and status['state'] != 'failed' else 'unavailable',

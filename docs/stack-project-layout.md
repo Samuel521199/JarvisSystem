@@ -605,9 +605,9 @@ REA 可以帮助理解 AI 应用的界面、客户端逻辑、可见接口和本
 | 拟新增 `intent.py` | 复用确定性命令解析；一般输入使用有界结构化模型输出并校验 | 通用语义不是堆关键词；不默认常驻另一个大模型，也不每轮启动多 Agent 投票 |
 | `task_queue.py`、`conversation_tasks.py`、技能/成长服务 | 共用 WorkAdmission 适配器，保留唯一账本与幂等键 | 不建立与原队列平行的新任务系统，逐项迁移旧前端拦截 |
 | `resources.py`、`runtime_metrics.py` 与模型网关 | 由内存准入扩展到用途额度、等待原因、预算与公平调度 | 用现有监控和生命周期，不先引入 Redis、Celery 或集群调度 |
-| 拟新增 STT 适配器＋现有 `speech.py`/Qwen | sherpa-onnx 的 SenseVoice int8＋已验证 VAD 起步；Qwen 短段合成 | 本地优先；精确模型/内存和云候补仍由[模型章](models-offline.md#voice-model-selection)维护；不把非流式切段识别包装为原生流式 |
+| `speech_input.py`/`speech_input_worker.py`＋现有 `speech.py`/Qwen | SenseVoice int8 按次进程与 Qwen 短段合成已接入；VAD 自动轮次待后续 | 本地优先；精确模型/内存和云候补仍由[模型章](models-offline.md#voice-model-selection)维护；不把非流式切段识别包装为原生流式 |
 | `server.py`＋已新增 `dialogue_routes.py` / 拟新增语音输入路由 | 先异步受理＋有界事件查询，按需加 SSE；连续 PCM 再加一个可关闭 WebSocket 适配层 | 保留现有 HTTP 边界和正常启动，不为长连接创建无限线程；跨协议共用 nonce/origin/实例与取消校验 |
-| `index.html`、`dialogue.js`、`conversations.js`、`readout.js` 与拟新增语音输入模块 | 抽出发送状态机，任务卡不占全局 busy；AudioWorklet/Web Audio 负责有界采集与播放调度 | 麦克风接入/撤销、重采样、缓冲和断线分别验证；保留可访问图标及 J 品牌 |
+| `index.html`、`dialogue.js`、`conversations.js`、`readout.js`、`voice-input.js`/`voice-capture.js` | 抽出发送状态机，任务卡不占全局 busy；AudioWorklet/Web Audio 负责有界采集与播放调度 | 麦克风接入/撤销、重采样、缓冲和断线分别验证；保留可访问图标及 J 品牌 |
 
 0.1.48 文件职责：`runtime/node-host/jarvis_core/turns.py` 管短期受理/结果/取消，`apps/web/dialogue_routes.py` 管 HTTP 边界，`apps/web/dialogue.js` 管页面待发与回执查询，`server.py` 只接线并共享旧聊天槽。验证入口为 `tests/test_dialogue_turns.py`、`tools/probe_dialogue_ui.py`、`tools/probe_dialogue_deployment.py`。0.1.49 新增 `jarvis_core/dialogue_journal.py`，共用 `conversations.db`，由 `tests/test_dialogue_recovery.py` 与两项 `probe_dialogue_recovery_*` 验证恢复与删除。尚未加入通用持久事件流、独立 Dialogue 进程、意图解析和新第三方依赖。
 

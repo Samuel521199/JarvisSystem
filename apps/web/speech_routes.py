@@ -6,6 +6,14 @@ from jarvis_core.policy import CoreError
 
 def get(handler):
     path = handler.path
+    if path in {'/voice-input.js', '/voice-capture.js'}:
+        handler._send(200, getattr(handler.server, 'voice_input_script' if path == '/voice-input.js' else 'voice_capture_script'), 'application/javascript; charset=utf-8'); return True
+    transcribe = re.fullmatch(r'/api/speech/input(?:/([a-f0-9]{32}))?', path)
+    if transcribe:
+        if not handler._module_token(): return True
+        try: handler._send(200, handler.server.modules.speech_input.snapshot(transcribe[1]))
+        except Exception: handler._error(503, 'speech_input_unavailable', '识别暂不可用，文字输入仍可使用。')
+        return True
     if path == '/speech.js':
         handler._send(200, handler.server.speech_script, 'application/javascript; charset=utf-8'); return True
     if path == '/readout.js':
@@ -28,6 +36,11 @@ def get(handler):
 
 
 def post(handler, payload):
+    if handler.path == '/api/speech/input':
+        try: handler._send(202, handler.server.modules.speech_input.submit(payload))
+        except SpeechError as exc: handler._error(400, 'speech_input_invalid', str(exc))
+        except Exception: handler._error(503, 'speech_input_unavailable', '识别暂不可用，录音没有发往云端。')
+        return
     if handler.path=='/api/speech/readout':
         try:handler._send(200,handler.server.modules.primary_speech.reader.submit(payload))
         except SpeechError as exc:handler._error(400,'readout_invalid',str(exc))

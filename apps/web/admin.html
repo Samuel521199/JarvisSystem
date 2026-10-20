@@ -78,7 +78,7 @@ __JARVIS_BRAND_STYLE__</style></head>
 <div class="module-release-actions"><button id="primary-speech-preview" class="secondary" type="button">预览表达分段</button><button id="primary-speech-generate" class="primary" type="submit">生成语音</button></div>
 <div id="primary-speech-preview-result" hidden><p id="primary-speech-preview-summary" role="status"></p><ol id="primary-speech-preview-list"></ol></div></form>
 <div id="primary-speech-result" hidden><p id="primary-speech-result-info"></p><audio id="primary-speech-audio" controls preload="none"></audio><p><a id="primary-speech-download" download="jarvis-qwen-speech.wav">下载 WAV</a></p></div>
-<p class="muted">生成完整 WAV 后可播放，暂未接入麦克风或聊天自动朗读。GPU 专用与共享内存为进程分项；核显使用统一内存，不能与 RAM 直接相加。打开页面不会加载模型。</p>
+<p class="muted">本页生成完整 WAV 后播放；聊天输入区已支持按键录音与本地转写，语音选项可开启新回复自动朗读。GPU 专用与共享内存为进程分项；核显使用统一内存，不能与 RAM 直接相加。打开页面不会加载模型。</p>
 </section>
 <section id="fast-speech-panel" class="panel seed-catalog local-speech" aria-labelledby="fast-speech-title">
 <h2 id="fast-speech-title">ZipVoice · 备用语音</h2>
@@ -89,7 +89,7 @@ __JARVIS_BRAND_STYLE__</style></head>
 <details><summary>可选：使用获许可的参考声音</summary><label for="fast-speech-reference">1–15 秒 PCM16 WAV，最大 3 MB<input id="fast-speech-reference" type="file" accept="audio/wav,.wav"></label><label for="fast-speech-transcript">参考录音的准确文字<input id="fast-speech-transcript" type="text" maxlength="500" autocomplete="off"></label><p class="muted">默认使用发布方演示参考声音。上传文件只用于本次合成，结束后移除，不会登记为主人声纹。</p></details>
 <button id="fast-speech-generate" class="primary" type="submit">快速生成语音</button></form>
 <div id="fast-speech-result" hidden><p id="fast-speech-result-info"></p><audio id="fast-speech-audio" controls preload="none"></audio><p><a id="fast-speech-download" download="jarvis-fast-speech.wav">下载 WAV</a></p></div>
-<p class="muted">当前可生成、试听短句；麦克风实时对话和聊天自动播报尚未接通。</p>
+<p class="muted">本页可生成、试听短句；聊天输入区支持按键转写，自动播报复用 Qwen 主力。连续免按键对话尚未接通。</p>
 </section>
 <div id="module-list" class="module-grid" aria-live="polite"></div>
 <section id="speech-panel" class="panel seed-catalog local-speech" aria-labelledby="speech-title">

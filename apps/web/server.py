@@ -255,6 +255,8 @@ class LocalChatServer(ThreadingHTTPServer):
         self.module_script = asset('modules.js')
         self.speech_script = asset('speech.js')
         self.readout_script = asset('readout.js')
+        self.voice_input_script = asset('voice-input.js')
+        self.voice_capture_script = asset('voice-capture.js')
         self.html = self.html.replace(b'__JARVIS_READOUT_STYLE__', asset('readout.css'))
         self.evolution_script = asset('evolution.js')
         self.ranking_modules_script = asset('ranking-modules.js')
@@ -367,7 +369,7 @@ class ChatHandler(BaseHTTPRequestHandler):
             self.send_header("X-Frame-Options", "DENY")
             self.send_header("Referrer-Policy", "no-referrer")
             self.send_header("Content-Security-Policy", "default-src 'none'; "
-                             f"script-src 'nonce-{self.server.nonce}'; style-src 'nonce-{self.server.nonce}'; "
+                             f"script-src 'nonce-{self.server.nonce}' http://127.0.0.1:{self.server.server_port}/voice-capture.js http://localhost:{self.server.server_port}/voice-capture.js; style-src 'nonce-{self.server.nonce}'; "
                              "connect-src 'self'; img-src 'self' blob:; media-src 'self' blob:; frame-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'")
             self.end_headers()
             self.wfile.write(body)
@@ -724,7 +726,7 @@ class ChatHandler(BaseHTTPRequestHandler):
         computer_start=self.path in {'/api/computer/tasks','/api/tasks'}
         admin_action=self.path in {'/api/admin/config','/api/admin/balance','/api/network'}
         module_action=self.path in {'/api/modules/refresh','/api/modules/maintenance'}
-        speech_action=self.path in {'/api/speech','/api/speech/fast','/api/speech/primary','/api/speech/readout'}
+        speech_action=self.path in {'/api/speech','/api/speech/fast','/api/speech/primary','/api/speech/readout','/api/speech/input'}
         growth_action=re.fullmatch(r'/api/conversation-growth/([a-f0-9]{32})(?:/([a-f0-9]{32})/(start|cancel|reanalyse))?',self.path)
         evolution_action=self.path in {'/api/evolution/jobs','/api/evolution/policy','/api/evolution/cancel','/api/evolution/maintenance','/api/evolution/ranking/generate','/api/evolution/ranking/select'}
         chat_cancel = self.path == '/api/chat/cancel'

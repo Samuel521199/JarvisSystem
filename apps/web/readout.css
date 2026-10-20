@@ -2,3 +2,14 @@
 .chat-readout{position:relative;margin:0 0 10px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--surface);font-size:12px}.chat-readout[hidden]{display:none}.readout-header{display:flex;align-items:center;gap:9px}.readout-status{flex:1;min-width:0;color:var(--muted);overflow-wrap:anywhere}.readout-options{margin-top:8px}.readout-options summary{cursor:pointer;color:var(--muted)}.readout-options-body{position:fixed;left:50%;top:80px;transform:translateX(-50%);width:min(840px,calc(100vw - 28px));z-index:12;max-height:min(60dvh,440px);overflow:auto;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--surface);box-shadow:0 10px 32px var(--shadow)}.readout-options label{display:block;margin:9px 0}.readout-options select,.readout-options textarea{display:block;width:100%;margin-top:5px;padding:7px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--ink)}.readout-options textarea{resize:vertical;min-height:58px}.readout-selects{display:flex;gap:10px}.readout-selects label{flex:1;min-width:90px}.readout-note,.readout-error{font-size:11px;line-height:1.6;margin:7px 0 0;color:var(--muted)}.readout-error{color:var(--error)}.readout-restart{padding:7px 10px;border:1px solid var(--line);border-radius:7px;background:var(--soft)}
 
 .readout-close-options{display:block;margin:0 0 5px auto;padding:4px 9px;border:1px solid var(--line);border-radius:7px;color:var(--muted);background:var(--soft)}
+.voice-panel{margin:8px 0;padding:10px 14px;background:var(--surface);border:1px solid var(--line);border-radius:14px;font-size:12px}
+.voice-status-row{display:flex;align-items:center;gap:9px;min-height:30px}.voice-status-row>span[role]{flex:1}
+.voice-panel textarea{width:100%;resize:vertical;max-height:160px;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--page);color:var(--ink)}
+.voice-panel label{display:block;margin:5px 0}.voice-panel select{margin-left:8px;background:var(--page);color:var(--ink);border:1px solid var(--line);border-radius:6px}
+.voice-panel p{color:var(--muted);margin:6px 0}.voice-panel summary{cursor:pointer;color:var(--muted)}
+#voice-insert{padding:6px 12px;border:1px solid var(--line);border-radius:7px;margin:6px 0}
+.voice-record{margin-left:auto}.voice-record~.send,.voice-record~.dialogue-stop{margin-left:4px}
+.voice-record[data-state=recording]{color:var(--error);box-shadow:0 0 0 2px currentColor;animation:voice-glow 1.5s ease-in-out infinite}
+.voice-pulse{width:6px;height:6px;border-radius:50%;background:var(--focus)}
+@keyframes voice-glow{50%{box-shadow:0 0 0 5px transparent;opacity:.65}}
+@media(prefers-reduced-motion:reduce){.voice-record[data-state=recording]{animation:none}}
