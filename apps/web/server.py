@@ -257,6 +257,7 @@ class LocalChatServer(ThreadingHTTPServer):
         self.readout_script = asset('readout.js')
         self.html = self.html.replace(b'__JARVIS_READOUT_STYLE__', asset('readout.css'))
         self.evolution_script = asset('evolution.js')
+        self.ranking_modules_script = asset('ranking-modules.js')
         self.growth_script = asset('growth.js')
         self.project_tools_script = asset('project-tools.js')
         self.growth_cycles_script = asset('growth-cycles.js')
@@ -725,7 +726,7 @@ class ChatHandler(BaseHTTPRequestHandler):
         module_action=self.path in {'/api/modules/refresh','/api/modules/maintenance'}
         speech_action=self.path in {'/api/speech','/api/speech/fast','/api/speech/primary','/api/speech/readout'}
         growth_action=re.fullmatch(r'/api/conversation-growth/([a-f0-9]{32})(?:/([a-f0-9]{32})/(start|cancel|reanalyse))?',self.path)
-        evolution_action=self.path in {'/api/evolution/jobs','/api/evolution/policy','/api/evolution/cancel','/api/evolution/maintenance'}
+        evolution_action=self.path in {'/api/evolution/jobs','/api/evolution/policy','/api/evolution/cancel','/api/evolution/maintenance','/api/evolution/ranking/generate','/api/evolution/ranking/select'}
         chat_cancel = self.path == '/api/chat/cancel'
         dialogue_action = self.path in {'/api/dialogue/turns', '/api/dialogue/cancel'}
         computer_queue=self.path in {'/api/computer/queue','/api/tasks/queue'}
@@ -1082,6 +1083,10 @@ def create_server(*, core=None, chat=None, data_dir=None, config_path=None, port
         if server.evolution is not None:
             from jarvis_core.evolution.growth_cycle import GrowthCycles
             server.evolution.growth = GrowthCycles(server.evolution,server.conversation_tasks)
+            from jarvis_core.evolution.ranking_module import RankingModules
+            server.evolution.ranking_modules = RankingModules(server.evolution, getattr(chat, 'background_models', None))
+            try: server.evolution.ranking_modules.recover()
+            except Exception: server.evolution.ranking_modules = None  # Optional corruption cannot take down chat.
         from jarvis_core.work_admission import WorkAdmission
         server.dialogue.work_admission = WorkAdmission(core,server.computer)
         from jarvis_core.modules import ModuleMonitor

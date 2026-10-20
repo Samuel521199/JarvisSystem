@@ -73,11 +73,12 @@
   - [8.12.1 会话需求适配接口（0.1.41）](#growth-demand-contract)
   - [8.12.2 项目工具目录与调用接口（0.1.76）](#project-tool-contract)
 - [8.13 三能力消息与旧接口迁移](#growth-center-contract)
-- [8.14 统一对话受理、意图与事件契约（proposed）](#dialogue-turn-contract)
-  - [8.14.1 对话意图与限定任务受理契约（0.1.56—0.1.59）](#dialogue-intent-shadow-contract)
-  - [8.14.2 已实现的回复回执接口（0.1.48—0.1.49 / dialogue-receipt-v1）](#dialogue-receipt-contract)
-    - [8.14.2.1 普通会话的持久回复恢复（0.1.49）](#dialogue-recovery-contract)
-    - [8.14.2.2 对话与后台模型进程边界（0.1.54）](#dialogue-process-contract)
+- [8.14 K5 检索模块选择契约（0.1.79）](#ranking-module-contract)
+- [8.15 统一对话受理、意图与事件契约（proposed）](#dialogue-turn-contract)
+  - [8.15.1 对话意图与限定任务受理契约（0.1.56—0.1.59）](#dialogue-intent-shadow-contract)
+  - [8.15.2 已实现的回复回执接口（0.1.48—0.1.49 / dialogue-receipt-v1）](#dialogue-receipt-contract)
+    - [8.15.2.1 普通会话的持久回复恢复（0.1.49）](#dialogue-recovery-contract)
+    - [8.15.2.2 对话与后台模型进程边界（0.1.54）](#dialogue-process-contract)
 <!-- book-nav:end -->
 
 <a id="k0-contracts"></a>
@@ -1272,6 +1273,24 @@ schema 7 新增 `growth_policies / growth_cycles`，记录阶段、冻结契约�
 迁移将成长库从 schema 1 升到 2；保留原包、指针、任务和历史混合 `check` 记录，不重写旧结果。旧 route 初始化三个独立用途，旧 enabled 只保留周期检查，新 auto_heal=false。使用同一观察器，不凭升级启用新付费诊断/修复。启动器识别 schema 2 并拒绝 0.1.63 及更旧包接管；未来格式仍明确拒绝，不覆盖降级。
 
 旧调用者仍走相同路径，但新请求的 `check` 统一收窄为纯检查；功能变化通过 `feature=growth-purposes-v2`、schema 及本契约明确声明。历史没有 purpose 的 check 在界面标记“历史混合维护”，不可当作新自检证据。取消、重启不重放、基线比较继续复用原实现；schema 迁移不是旧运行包兼容承诺。
+
+<a id="ranking-module-contract"></a>
+## K5 检索模块选择契约（0.1.79）
+
+规则实现位于 [ranking_module.py](../runtime/node-host/jarvis_core/evolution/ranking_module.py) 和 [ranking_registry.py](../runtime/node-host/jarvis_core/ranking_registry.py)。沿用本机 Origin、页面 nonce、停止控制和原成长队列；没有外部任意源码执行入口。
+
+| 入口 | 输入与语义 |
+|---|---|
+| `GET /api/evolution/ranking` | 当前选择、最多 32 个候选及评估/源码/模型用量、最近生成回执、当前契约绑定；只读，不请求模型 |
+| `POST /api/evolution/ranking/generate` | 恰含 `{request_id: 32位十六进制, model: "provider::model"}`。只生成并评估，绝不顺便启用；在原任务表记为 `ranking-improve`，一次模型请求 |
+| `POST /api/evolution/ranking/select` | 恰含 `{action, generation, version, review}`；action 为 `trial/confirm/rollback/baseline`；version 为目标 64 位摘要或 null；review 为 8—1000 字审阅依据 |
+| `POST /api/evolution/cancel` | 沿用 `{job_id}` 停止生成，不重发远端未知调用 |
+
+`trial` 只能选择通过当前绑定验收的候选，保留原 active 为 previous；`confirm` 要求当前仍为该试用版本且至少 3 组不同有效查询；`rollback/baseline` 要求提交的 version 等于当前 active。每次成功切换递增 generation；相同最近已完成选择请求返回当前回执，旧代次的新操作拒绝。页面响应丢失先读取原记录，不能重新创建生成编号。重启不重放生成，试用恢复规则归[生命周期](evolution-release.md#ranking-module-growth)。
+
+原 `evolution/evolution.db` 升为 schema 8，新增 `ranking_versions(id, document)`、`ranking_selection(singleton, document)`。版本 ID 是规范化完整记录摘要，包含候选源码、编译键序、固定验收结果、模型回执和绑定；绑定覆盖案例、验收器、受限解释器、排序边界、知识路径、选择读取器与隔离运行器。每次使用重新核对，不仅相信 UI 的“通过”。选择保存 active/previous、代次、试用标志、最多 12 个查询摘要和最近审阅请求；来源正文仍按原项目资料契约读取。
+
+遇到未来 schema，检索返回内置算法，不修改未知结构；可选成长初始化失败不应关闭聊天。运行槽兼容表明确禁止 0.1.78 及更早版本接管 schema 8，不能因为能读取旧核心表就冒称可降级。
 
 <a id="dialogue-turn-contract"></a>
 ## 统一对话受理、意图与事件契约（proposed）

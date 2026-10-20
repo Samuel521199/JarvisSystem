@@ -11,6 +11,14 @@ def failure(handler, exc):
 
 
 def get(handler):
+    if handler.path == '/ranking-modules.js':
+        handler._send(200, handler.server.ranking_modules_script, 'application/javascript; charset=utf-8')
+        return True
+    if handler.path == '/api/evolution/ranking':
+        if not handler._workspace_token() or not handler._guard(): return True
+        try: handler._send(200, handler.server.evolution.ranking_modules.snapshot())
+        except Exception as exc: failure(handler, exc)
+        return True
     if handler.path == '/evolution.js':
         handler._send(200, handler.server.evolution_script, 'application/javascript; charset=utf-8')
         return True
@@ -41,7 +49,11 @@ def post(handler, payload):
     try:
         manager = handler.server.evolution
         if manager is None: raise CoreError('evolution_unavailable', '成长模块未初始化。')
-        if handler.path == '/api/evolution/maintenance':
+        if handler.path == '/api/evolution/ranking/generate':
+            result = manager.ranking_modules.submit(payload)
+        elif handler.path == '/api/evolution/ranking/select':
+            result = manager.ranking_modules.transition(payload)
+        elif handler.path == '/api/evolution/maintenance':
             from jarvis_core.evolution.maintenance import LedgerMaintenance
             result = LedgerMaintenance(manager).apply(payload)
         elif handler.path == '/api/evolution/policy':

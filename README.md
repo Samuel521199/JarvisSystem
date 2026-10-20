@@ -4,7 +4,7 @@
 
 项目代码仓库：[Samuel521199/JarvisSystem](https://github.com/Samuel521199/JarvisSystem)。仓库保存源码、锁定依赖清单、设计文档、图源和验证记录；本机凭据、业务数据库、模型、依赖缓存和构建的运行包不入库。首次运行按[安装与启动说明](docs/core-bootstrap.md#section-6a93004233bf)准备环境。
 
-当前源码与本机部署版本为 **0.1.78**。这是以普通 PC 为主的个人助手与伙伴原型，已有个人记忆、跨会话接续、项目工作区、技能/MCP 与受限成长能力。**K3 已闭环，K4 在三个明确任务域完成独立验收、预授权灰度/启用、收益观察和失败停用，现已进入 K5 检索排序模块起步。** [本轮验收、费用负例与限制](docs/delivery-validation.md#k4-growth-closure-evidence) · [使用入口](docs/interaction-persona.md#project-tool-ui) · [下一步](docs/core-bootstrap.md#k4-next-delivery)。
+当前源码与本机部署版本为 **0.1.79**。这是以普通 PC 为主的个人助手与伙伴原型，已有个人记忆、跨会话接续、项目工作区、技能/MCP 与受限成长能力。**K3 已闭环，K4 在三个明确任务域完成独立验收、预授权灰度/启用、收益观察和失败停用，K5 首个受限检索模块已接通真实模型生成、独立评估、持久试用/保留与重启回退。** [本轮验收与限制](docs/delivery-validation.md#k5-ranking-module-evidence) · [使用入口](docs/interaction-persona.md#ranking-module-ui) · [下一步](docs/core-bootstrap.md#k4-next-delivery)。
 
 **源码上传与正式部署分开记录。** 各功能的已实现、已验证和部署状态，以[当前进度](docs/README.md#project-status)及[分版本验收](docs/delivery-validation.md#versioned-evidence)为准；不能仅凭源码版本判断本机正在运行的版本。完整设计仍为 `proposed`；K3 开发协作已验证，完整 K1/K2 仍保留原待验条件，K4 仅在明确任务域收口，完整 K5—K6 尚未完成。
 

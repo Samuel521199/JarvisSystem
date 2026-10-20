@@ -188,7 +188,7 @@
 
 本轮已使 Inspect 只产出观察，Heal 消费故障并恢复原契约，Evolve 消费需求并增加能力；三者共享已有账本/候选/验证/发布底座。健康旧版本低于目标版本应是能力差距，余额不足、网络失败、低内存不能自动变成改代码任务。
 
-K4 已由 0.1.78 的[限定领域整链](delivery-validation.md#k4-growth-closure-evidence)补证；后续扩大领域仍须用未提供完整候选答案、但能独立验收的真实工具需求验证收益，现有[三任务挑战](delivery-validation.md#k4-quality-storage-evidence)不代替正常基线和长期使用证据。若要替换 Jarvis 自身检索实现，则归 K5：冻结同一任务集、比较质量/成本、验证原能力不退化、坏候选拒绝和回退。具体推进只见[当前队列](core-bootstrap.md#k4-next-delivery)。修复通过不应把触发它的原失败任务改写为成功。自检触发与去重按[分层检查](health-maintenance.md#inspection-scheduling)，不另加一套常驻模型心跳。
+K4 已由 0.1.78 的[限定领域整链](delivery-validation.md#k4-growth-closure-evidence)补证；后续扩大领域仍须用未提供完整候选答案、但能独立验收的真实工具需求验证收益，现有[三任务挑战](delivery-validation.md#k4-quality-storage-evidence)不代替正常基线和长期使用证据。K5 的[首个受限检索模块闭环](delivery-validation.md#k5-ranking-module-evidence)已在 0.1.79 接通模型源码生成、独立对照、持久选择和回退；后续更广泛替换仍须冻结任务集、比较质量/成本、验证原能力不退化。具体推进只见[当前队列](core-bootstrap.md#k4-next-delivery)。修复通过不应把触发它的原失败任务改写为成功。自检触发与去重按[分层检查](health-maintenance.md#inspection-scheduling)，不另加一套常驻模型心跳。
 
 **主要落点：**[evolution/manager.py](../runtime/node-host/jarvis_core/evolution/manager.py)、[evolution/store.py](../runtime/node-host/jarvis_core/evolution/store.py)、[evolution/recipes.py](../runtime/node-host/jarvis_core/evolution/recipes.py)、[evolution/demand.py](../runtime/node-host/jarvis_core/evolution/demand.py) 及用途路由。准入和退出仍按[三能力治理](evolution-release.md#growth-governance)、[净收益](delivery-validation.md#bootstrap-8)、[V-PAL-10](delivery-validation.md#personal-companion-validation)；任意自身模块改写仍需 K5 证据。
 

@@ -1,8 +1,8 @@
 """K5 ranking boundary v1: immutable candidates in, a permutation out.
 
 The host owns source permission, eligibility, project diversity and citations.
-Only trusted in-process adapters are accepted here. Generated code must later
-use a separately reviewed isolated adapter; this is not a Python plugin loader.
+Only trusted in-process adapters are accepted here. StoredRanking interprets
+verified finite programs; this is not a Python plugin loader.
 """
 from types import MappingProxyType
 import time
@@ -44,7 +44,7 @@ def rank(rows, words, adapter=None):
     baseline = LexicalV1.order(snapshot, words)
     selected = adapter if adapter is not None else LexicalV1()
     started = time.perf_counter()
-    metadata = {'protocol': 1, 'requested': getattr(selected, 'module_id', 'unknown'),
+    metadata = {'protocol': 1, 'requested': getattr(selected, 'requested_id', getattr(selected, 'module_id', 'unknown')),
                 'used': 'lexical-v1', 'fallback': False, 'candidates': len(rows)}
     try:
         if selected.protocol != 1: raise ValueError('protocol')

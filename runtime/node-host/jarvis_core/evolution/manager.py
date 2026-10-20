@@ -32,6 +32,7 @@ class EvolutionManager:
         self.thread = None
         self.observer = None
         self.growth = None
+        self.ranking_modules = None
         self.last_check = None
         self.monitor_error = None
         self.schedule_changed = threading.Event()
@@ -387,6 +388,9 @@ class EvolutionManager:
                 if action == 'project-tool':
                     from .catalog import ProjectTools
                     result = ProjectTools(self).execute(job)
+                elif action == 'ranking-improve':
+                    if self.ranking_modules is None: raise policy.CoreError('evolution_unavailable', '检索成长未初始化。')
+                    result = self.ranking_modules.execute(job)
                 elif action == 'growth-baseline':
                     from .growth_cycle import baseline
                     result = baseline(self,job)

@@ -50,7 +50,7 @@ class EvolutionStore:
         self.path = self.root / 'evolution.db'
         with self.connection() as db:
             version = db.execute('PRAGMA user_version').fetchone()[0]
-            if version not in (0, 1, 2, 3, 4, 5, 6, 7):
+            if version not in (0, 1, 2, 3, 4, 5, 6, 7, 8):
                 raise policy.CoreError('evolution_schema_invalid', '进化账本版本不兼容。')
             db.executescript('''
                 CREATE TABLE IF NOT EXISTS settings(singleton INTEGER PRIMARY KEY,document TEXT NOT NULL);
@@ -64,13 +64,17 @@ class EvolutionStore:
                 CREATE TABLE IF NOT EXISTS maintenance_receipts(id TEXT PRIMARY KEY,binding TEXT NOT NULL,document TEXT NOT NULL);
                 CREATE TABLE IF NOT EXISTS growth_policies(project_id TEXT PRIMARY KEY,document TEXT NOT NULL);
                 CREATE TABLE IF NOT EXISTS growth_cycles(id TEXT PRIMARY KEY,project_id TEXT NOT NULL,document TEXT NOT NULL);
+                CREATE TABLE IF NOT EXISTS ranking_versions(id TEXT PRIMARY KEY,document TEXT NOT NULL);
+                CREATE TABLE IF NOT EXISTS ranking_selection(singleton INTEGER PRIMARY KEY,document TEXT NOT NULL);
             ''')
             db.execute('INSERT OR IGNORE INTO settings VALUES(1,?)', (policy.canonical_json(
                 {'enabled': False, 'route': route, 'target_revision': 1, 'interval_seconds': 1800}),))
             db.execute('INSERT OR IGNORE INTO selection VALUES(1,NULL,NULL,0)')
             settings = migrate(json.loads(db.execute('SELECT document FROM settings WHERE singleton=1').fetchone()[0]))
             db.execute('UPDATE settings SET document=? WHERE singleton=1', (policy.canonical_json(settings),))
-            db.execute('PRAGMA user_version=7')
+            db.execute('INSERT OR IGNORE INTO ranking_selection VALUES(1,?)', (policy.canonical_json(
+                {'active':None,'previous':None,'generation':0,'trial':False,'samples':[],'last_event':'initial'}),))
+            db.execute('PRAGMA user_version=8')
 
     @contextmanager
     def connection(self):
@@ -128,7 +132,7 @@ class EvolutionStore:
                 raise policy.CoreError('evolution_quota', '改进账本达到保留上限，请整理证据后再继续。')
             if db.execute('SELECT COUNT(*) FROM jobs').fetchone()[0] >= 5096:
                 raise policy.CoreError('evolution_quota', '回执总索引达到上限，原任务编号继续保留。')
-            if payload.get('action') in {'project-tool','project-tool-plan','tool-contract'}:
+            if payload.get('action') in {'project-tool','project-tool-plan','tool-contract','ranking-improve'}:
                 # Leave room for the immutable package, escaped output, recovery
                 # receipt and SQLite page growth; never fill the 32 MiB ledger.
                 used = (db.execute('PRAGMA page_count').fetchone()[0]-db.execute('PRAGMA freelist_count').fetchone()[0]) * db.execute('PRAGMA page_size').fetchone()[0]

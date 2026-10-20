@@ -110,7 +110,8 @@ def chunks(text):
 class KnowledgeStore:
     def __init__(self, core, *, ranking=None):
         self.core = core
-        self.ranking = ranking
+        from .ranking_registry import StoredRanking
+        self.ranking = ranking if ranking is not None else StoredRanking(core)
         self.directory = Path(core.data_dir)
         self.path = self.directory/'project-sources.db'
 

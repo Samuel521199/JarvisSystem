@@ -217,7 +217,8 @@
         "dialogue-recovery-ui",
         "dialogue-intent-shadow-ui",
         "mixed-report-ui",
-        "project-tool-ui"
+        "project-tool-ui",
+        "ranking-module-ui"
       ],
       "status": "proposed",
       "reader_summary": "怎样自然交流、延续人格，并在需要时展开工作台？"
@@ -318,7 +319,8 @@
         "project-tool-lifecycle",
         "project-tool-quality-storage",
         "growth-ledger-maintenance",
-        "bounded-growth-policy"
+        "bounded-growth-policy",
+        "ranking-module-growth"
       ],
       "status": "proposed",
       "reader_summary": "怎样自编工具、改进模块，并验证和回退？"
@@ -386,7 +388,8 @@
         "bounded-coding-contract",
         "application-network-contract",
         "project-tool-contract",
-        "tank-game-contract"
+        "tank-game-contract",
+        "ranking-module-contract"
       ],
       "status": "proposed",
       "reader_summary": "模块之间怎样交换任务、事件和记忆数据？"
@@ -532,7 +535,8 @@
         "k4-maintenance-evidence",
         "k4-closure-readiness",
         "k4-growth-closure-evidence",
-        "k5-ranking-entry-evidence"
+        "k5-ranking-entry-evidence",
+        "k5-ranking-module-evidence"
       ],
       "status": "proposed",
       "reader_summary": "哪些能力测过，证据在哪里，下一阶段怎样验收？"

@@ -22,24 +22,25 @@
     - [14.3.3.4 成长回执与目录容量治理（0.1.77）](#growth-ledger-maintenance)
     - [14.3.3.5 本地需求选择与能力缺口交接（0.1.72）](#project-tool-intents)
     - [14.3.3.6 验收草案、明确审阅与编码交接（0.1.73）](#project-tool-contract-drafts)
-- [14.4 自主进化与自我重构](#self-evolution)
-  - [14.4.1 六级进化对象](#self-evolution-1)
-  - [14.4.2 进化触发条件](#self-evolution-2)
-  - [14.4.3 发布流水线](#self-evolution-3)
-  - [14.4.4 研发、验证与发布分权](#self-evolution-4)
-  - [14.4.5 技能包的准入、升级与退役](#skill-admission-release)
-  - [14.4.6 修改自己的“形态和结构”](#self-evolution-5)
-  - [14.4.7 评估防退化](#self-evolution-6)
-- [14.5 持续服务、升级与迁移](#service-continuity)
-  - [14.5.1 连续性分级](#service-continuity-1)
-  - [14.5.2 新旧版本并行](#service-continuity-2)
-  - [14.5.3 长任务与会话](#service-continuity-3)
-  - [14.5.4 状态迁移](#service-continuity-4)
-    - [14.5.4.1 0.1.17 启动恢复规则](#runtime-startup-policy)
-  - [14.5.5 恢复底座自身升级](#service-continuity-5)
-  - [14.5.6 必须显式测试的底层条件](#service-continuity-6)
-- [14.6 自主改进实际例子](#end-to-end-flows-4)
-- [14.7 发布单元矩阵](#critical-review-7)
+- [14.4 K5 受限检索模块成长（0.1.79）](#ranking-module-growth)
+- [14.5 自主进化与自我重构](#self-evolution)
+  - [14.5.1 六级进化对象](#self-evolution-1)
+  - [14.5.2 进化触发条件](#self-evolution-2)
+  - [14.5.3 发布流水线](#self-evolution-3)
+  - [14.5.4 研发、验证与发布分权](#self-evolution-4)
+  - [14.5.5 技能包的准入、升级与退役](#skill-admission-release)
+  - [14.5.6 修改自己的“形态和结构”](#self-evolution-5)
+  - [14.5.7 评估防退化](#self-evolution-6)
+- [14.6 持续服务、升级与迁移](#service-continuity)
+  - [14.6.1 连续性分级](#service-continuity-1)
+  - [14.6.2 新旧版本并行](#service-continuity-2)
+  - [14.6.3 长任务与会话](#service-continuity-3)
+  - [14.6.4 状态迁移](#service-continuity-4)
+    - [14.6.4.1 0.1.17 启动恢复规则](#runtime-startup-policy)
+  - [14.6.5 恢复底座自身升级](#service-continuity-5)
+  - [14.6.6 必须显式测试的底层条件](#service-continuity-6)
+- [14.7 自主改进实际例子](#end-to-end-flows-4)
+- [14.8 发布单元矩阵](#critical-review-7)
 <!-- book-nav:end -->
 
 <a id="growth-governance"></a>
@@ -352,6 +353,21 @@ K5 继续沿[唯一阶段顺序](core-bootstrap.md#bootstrap-5)进入检索模�
 - **本机成本与边界：**复用已有 `evolution.db/jobs` 和 K3 账本，没有新表、schema、依赖或常驻模型。生成占用原成长通道，不占普通对话通道；既有账本配额和恢复余量继续生效。当前只接现有可运行 Python 纯转换配方，不扩展 Shell、设备、网络或依赖安装权限。
 
 字段与限额见[工具接口](contracts.md#project-tool-contract)，交互见[项目工具入口](interaction-persona.md#project-tool-ui)，测试、真实调用及失败修复见[0.1.73 证据](delivery-validation.md#k4-contract-evidence)。
+
+<a id="ranking-module-growth"></a>
+## K5 受限检索模块成长（0.1.79）
+
+**implemented；实际模型、资料路径与恢复证据见[本轮验证](delivery-validation.md#k5-ranking-module-evidence)。** 复用原成长队列、模型凭据/用量、取消和 LPAC，不另建一套后台调度。模型编写完整但受限的 Python 排序函数；[有限语言与知识边界](knowledge-learning.md#retrieval-ranking-module)限定它可以改变什么。它不能修改验收器、来源权限、记忆、人格或宿主源码。
+
+流程为：明确选择模型 → 持久请求与冻结契约摘要 → 一次模型生成 → 完整 AST 准入 → LPAC 执行与宿主独立比较 → 质量/资源评估 → 保存候选 → 审阅后试用 → 观察 → 明确保留，或者回退。生成请求不包含主人资料或留出答案；未知、不完整、取消和中断均不自动重发。失败或不达标的候选不改变当前选择。相同请求编号只查原回执；满容量在调用模型前停止。
+
+准入使用固定 24 条词法来源选择案例：相对原算法至少增加 4 条正确，不得使原来正确的案例失败；隔离输出须与解释器完全一致；本机 2048 项代表性排序最长不得超过 50 ms。它是当前配方的明确判据，不是任意需求的正确性证明；重复使用这份留出集不等于新增未见数据。回答层对照单独记录，不能混成一个分数。
+
+试用通过原 `KnowledgeStore` 服务真实查询。至少记录 3 组不同查询词的有效结果后才允许“保留”；只保存查询词摘要、样本数量及最大排序耗时，不存资料正文，也不增加模型调用。样本只证明运行成功，不代表主人满意或答案正确。试用排序超过 50 ms、版本摘要/协议/运行绑定失效或异常时回退；编译语言本身有界，250 ms 检查是在计算后判断，并非实时抢占保证。
+
+`active / previous / generation / trial` 持久保存，切换比较代次。宿主重启时，尚未确认的试用回到上一个仍兼容版本，否则内置算法；已确认且仍兼容的选择保留。真实查询若发现坏版本，同次返回内置算法，并尝试登记恢复；SQLite 不可用时仍返回内置结果，不保证此时能写回修复状态。默认算法作为始终可用的恢复入口，不被删除。
+
+当前最多保留 32 个完整候选记录，复用原账本空间与请求上限。没有自动删除候选或模型缓存；达到配额需后续显式整理，不能称为无限运行。schema 8 新增两个表，保留原业务表；旧运行包不能接管这个新格式。K5 当前仅覆盖这个有限排序模块，通用算法重写、长期自然流量收益、自动为任意模块制定正确验收仍开放。
 
 <a id="self-evolution"></a>
 ## 自主进化与自我重构

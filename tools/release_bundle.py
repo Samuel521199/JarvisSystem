@@ -38,6 +38,7 @@ def archive_path(value):
 
 def source_files():
     selected=['pyproject.toml','uv.lock','README.md','tools/release_bundle.py','tools/runtime_releases.py',
+              'evals/cases/k5-ranking-heldout-v1.json',
               'apps/tray/assets/jarvis.ico', 'tools/coding_build.py',
               'third_party/coding/NOTICE.txt', 'third_party/coding/quickjs_ng-0.17.0.1-cp310-abi3-win_amd64.whl', 'third_party/coding/quickjs-ng-LICENSE.txt', 'third_party/coding/quickjs-binding-LICENSE.txt', 'third_party/coding/jmespath-1.1.0-py3-none-any.whl']
     # Runtime brand exports only; high-resolution editable artwork is not needed.
