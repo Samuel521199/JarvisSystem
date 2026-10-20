@@ -42,6 +42,8 @@ if sys.argv[3]=='first':
     from jarvis_core.federation import Federation
     sharing=Federation(core)
     assert not sharing.connection.previews
+    from jarvis_core.federation_scoped import empty, received_cards
+    assert not empty()['enabled'] and not empty()['grants']
     assert not sharing.status()['initialized']
     sharing.initialize()
     assert sharing.status()['fingerprint'] and sharing.status()['endpoint'] is None
@@ -49,6 +51,7 @@ if sys.argv[3]=='first':
     identity=sharing._identity().load()
     data={'id':'a'*32,'label':'Package probe','members':{sharing.node:identity.pem},'peer':None,'items':{}}
     assert validate_export(make_export(data,identity))['space']==data
+    assert received_cards(data)==[]
     from jarvis_core.federation_access import context, empty_policy, destination
     assert not empty_policy()['providers']
     assert context(None)[0]['references']==[]

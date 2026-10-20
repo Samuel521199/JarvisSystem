@@ -18,6 +18,9 @@ MAX_RECOVERIES = 8
 def make_export(space, identity):
     body = {'format': EXPORT_FORMAT, 'node': identity.node,
             'space': {key: copy.deepcopy(space[key]) for key in ('id', 'label', 'members', 'peer', 'items')}}
+    if 'scoped' in space:
+        body['format'] = 'jarvis.shared-cards.export.v2'
+        body['space']['received'] = copy.deepcopy(space['scoped']['inbox'])
     return p.sign(body, identity.key)
 
 
@@ -26,10 +29,10 @@ def validate_export(value):
     body = value['body']
     p.fields(body, 'format node space')
     p.ident(body['node'])
-    if body['format'] != EXPORT_FORMAT:
+    if body['format'] not in (EXPORT_FORMAT, 'jarvis.shared-cards.export.v2'):
         p.fail('资料导出格式不支持。')
     space = body['space']
-    p.fields(space, 'id label members peer items')
+    p.fields(space, 'id label members peer items' + (' received' if body['format'].endswith('.v2') else ''))
     p.ident(space['id']); p.text(space['label'], 160)
     members = space['members']
     if not isinstance(members, dict) or not 1 <= len(members) <= 2 or body['node'] not in members:
@@ -48,6 +51,14 @@ def validate_export(value):
         for head in heads:
             if p.revision(head, space)['item'] != item:
                 p.fail()
+    if 'received' in space:
+        from .federation_scoped import validate_entry, MAX_ITEMS
+        if not isinstance(space['received'], dict) or len(space['received']) > MAX_ITEMS: p.fail()
+        for item, row in space['received'].items():
+            p.ident(item); p.fields(row, 'signed project_id grant_revision admission_seq')
+            p.counter(row['grant_revision']);p.counter(row['admission_seq'])
+            if row['project_id'] is not None: p.ident(row['project_id'])
+            if validate_entry(row['signed'],space)['item']!=item: p.fail()
     return body
 
 
@@ -56,6 +67,9 @@ def read_only_space(export, node):
     if body['node'] != node:
         p.fail('资料不属于本机导出记录。')
     space = copy.deepcopy(body['space'])
+    if 'received' in space:
+        from .federation_scoped import empty
+        space['scoped'] = {**empty(), 'inbox':space.pop('received')}
     space.update(state='revoked', role='archive', endpoint=None, seq=0, peer_seq=0, seen={})
     for heads in space['items'].values():
         for signed in heads:
@@ -257,7 +271,8 @@ class Lifecycle:
                     vault.save({'node': self.service.node, 'revision': preview['next_revision']}, guard)
                     db.execute('UPDATE shared_state SET state=?,revision=? WHERE id=1',
                                (p.encode(preview['_state']).decode('utf-8'), preview['next_revision']))
-                    db.execute('PRAGMA user_version=3')
+                    db.execute('PRAGMA user_version=4' if db.execute('PRAGMA user_version').fetchone()[0]==4 or any(
+                        'scoped' in s for s in preview['_state']['spaces'].values()) else 'PRAGMA user_version=3')
             return self.service.status()
         finally:
             self.service.flight.release()

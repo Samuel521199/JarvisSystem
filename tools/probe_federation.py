@@ -46,8 +46,8 @@ def child(directory, source):
 
 
 class Node:
-    def __init__(self, directory, source):
-        self.proc = subprocess.Popen([sys.executable, '-X', 'utf8', '-u', '-B', __file__,
+    def __init__(self, directory, source, script=None):
+        self.proc = subprocess.Popen([sys.executable, '-X', 'utf8', '-u', '-B', script or __file__,
                                       '--node', str(directory), str(source)], stdin=subprocess.PIPE,
                                      stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True,
                                      encoding='utf-8', creationflags=getattr(subprocess, 'CREATE_NO_WINDOW', 0))

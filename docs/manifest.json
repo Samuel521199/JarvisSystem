@@ -181,7 +181,8 @@
         "shared-card-copies",
         "shared-model-use",
         "shared-live-references",
-        "shared-connection-recovery"
+        "shared-connection-recovery",
+        "scoped-memory-sharing"
       ],
       "status": "proposed",
       "reader_summary": "断网怎样独立工作，重连怎样共享记忆与协同？"
@@ -308,7 +309,8 @@
         "memory-use-boundary",
         "memory-domain-runtime",
         "semantic-candidates-runtime",
-        "retrieval-ranking-module"
+        "retrieval-ranking-module",
+        "shared-memory-projection"
       ],
       "status": "proposed",
       "reader_summary": "记住什么，怎样检索、纠正、遗忘和持续学习？"
@@ -557,7 +559,8 @@
         "k6-federation-evidence",
         "k6-shared-lifecycle-evidence",
         "k6-shared-access-evidence",
-        "k6-connection-recovery-evidence"
+        "k6-connection-recovery-evidence",
+        "k6-scoped-sharing-evidence"
       ],
       "status": "proposed",
       "reader_summary": "哪些能力测过，证据在哪里，下一阶段怎样验收？"
@@ -3117,9 +3120,9 @@
     }
   ],
   "implementation": {
-    "version": "0.1.86",
-    "scope": "K3 closed; bounded K4/K5 and K6 voice/team/two-node sharing retained. K6 adds read-only signed connection proof and explicit same-identity endpoint recovery, preserving cards and local model grants without automatic synchronization. Local process/browser checks passed; physical second-device LAN/firewall/sleep gates deferred by user. No full memory federation, peer per-card receive grants or task authority.",
-    "evidence": "evals/reports/k6-connection-recovery-2026-10-20.json",
+    "version": "0.1.87",
+    "scope": "K3 closed; bounded K4/K5 and K6 voice/team retained. K6 scoped channel adds source selection, peer per-item receive grants, explicit personal/project mapping, source-owned projections and inherited model constraints. Two local OS processes and browser simulation verified; full memory federation, physical LAN/sleep and task ownership remain open.",
+    "evidence": "evals/reports/k6-scoped-sharing-2026-10-20.json",
     "overall_design_status": "proposed",
     "complete_k1_gate": false,
     "complete_k2_gate": false,
@@ -3395,7 +3398,8 @@
       "evals/reports/k6-team-2026-10-20.json",
       "evals/reports/k6-federation-2026-10-20.json",
       "evals/reports/k6-shared-lifecycle-2026-10-20.json",
-      "evals/reports/k6-shared-access-2026-10-20.json"
+      "evals/reports/k6-shared-access-2026-10-20.json",
+      "evals/reports/k6-connection-recovery-2026-10-20.json"
     ],
     "complete_k4_gate": false
   }

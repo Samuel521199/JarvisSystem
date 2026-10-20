@@ -20,7 +20,7 @@ class FederationStore:
         return self.path
 
     def _read(self, db, node):
-        if db.execute('PRAGMA user_version').fetchone()[0] not in (1, 2, 3):
+        if db.execute('PRAGMA user_version').fetchone()[0] not in (1, 2, 3, 4):
             p.fail('共享资料版本无法识别。', 'federation_storage')
         row = db.execute('SELECT node,state,revision FROM shared_state WHERE id=1').fetchone()
         if not row or row[0] != node or len(row[1].encode('utf-8')) > 5 * 1024 * 1024:
@@ -74,5 +74,8 @@ class FederationStore:
             vault.save({'node': node, 'revision': revision + 1}, self._guard_path())
             db.execute('UPDATE shared_state SET state=?,revision=? WHERE id=1',
                        (p.encode(state).decode('utf-8'), revision + 1))
-            db.execute('PRAGMA user_version=3')
+            # Once scoped controls exist, old runtimes must not bypass them.
+            version = 4 if (db.execute('PRAGMA user_version').fetchone()[0] == 4 or
+                            any('scoped' in s for s in state['spaces'].values())) else 3
+            db.execute('PRAGMA user_version='+str(version))
             return result

@@ -81,7 +81,7 @@
     - [8.15.2.1 普通会话的持久回复恢复（0.1.49）](#dialogue-recovery-contract)
     - [8.15.2.2 对话与后台模型进程边界（0.1.54）](#dialogue-process-contract)
 - [8.16 单机双职责协作契约（0.1.82）](#team-analysis-contract)
-- [8.17 双节点共享资料契约（0.1.86）](#shared-cards-contract)
+- [8.17 双节点共享资料契约（0.1.87）](#shared-cards-contract)
 <!-- book-nav:end -->
 
 <a id="k0-contracts"></a>
@@ -1437,9 +1437,9 @@ SQLite 写锁等待上限 150ms。受理落盘失败不调用模型；完成落�
 
 
 <a id="shared-cards-contract"></a>
-## 双节点共享资料契约（0.1.86）
+## 双节点共享资料契约（0.1.87）
 
-协议标识 `jarvis.shared-cards.v1`。本机 `GET/POST /api/federation` 继承页面 nonce、Host/Origin 防护与核心停止守卫；基础动作为 `initialize/listen/close/invite/join/retry/sync/edit/revoke`；生命周期动作为 `export/archive_preview/archive/restore_archive/recovery_preview/recover`，全部拒绝未知字段。网络接收端独立，仅 `POST /pair`、`/sync` 和只读 `/inspect`，不暴露聊天、文件或任务 API。
+协议标识 `jarvis.shared-cards.v1`。本机 `GET/POST /api/federation` 继承页面 nonce、Host/Origin 防护与核心停止守卫；基础动作为 `initialize/listen/close/invite/join/retry/sync/edit/revoke`；生命周期动作为 `export/archive_preview/archive/restore_archive/recovery_preview/recover`，全部拒绝未知字段。网络接收端独立，仅 `POST /pair`、`/sync` 、只读 `/inspect` 与 `/domains`，不暴露聊天、文件或任务 API。
 
 请求与回复为 `{body, signature}`，使用固定 JSON 序列化和 ECDSA P-256/SHA-256。配对请求携带协议、空间、两端身份、原请求编号、公开证书与一次性随机令牌；服务端只保存令牌摘要，加入端待确认令牌受 DPAPI 保护。客户端 TLS 握手后、发送任何配对码或正文前检查预期证书指纹；已配对请求还核验签名、目标、空间和当前撤销状态。回复必须匹配原请求编号。使用身份指纹绑定，不依赖公开 CA 签发或 DNS 认证。
 
@@ -1468,7 +1468,18 @@ ChatService 返回 `history_info.shared={references,dropped_history_messages,use
 
 `POST /inspect` 使用同一签名封装。请求体严格为 `protocol/kind/space/sender/target/request_id`，其中 kind 为 `jarvis.shared-connection.v1`；回复严格为同组字段加 `paired:true`，双方身份互换，原挑战不变。没有卡正文、快照、授权或同步计数。双方仍须校验原身份、活跃空间与联网策略；这不是新配对入口。预览绑定、失效、重试及确认规则只在[连接恢复](federation.md#shared-connection-recovery)维护。
 
-持久状态为可选 `federation.db` 与 `federation/`。0.1.86 兼容读取 schema 1/2/3，首次成功写入旧结构升级至 schema 3；本轮未新增 schema。策略为本机字段，不在同步/导出中出现，连接预览仅在内存。短写事务沿用核心 effect guard。受管理运行槽允许 0.1.85/0.1.86 读取 schema 3；schema 2 支持 0.1.84—0.1.86，schema 1 支持 0.1.83—0.1.86。这不限制手动运行旧源码。[模型用途验证](delivery-validation.md#k6-shared-access-evidence)、[连接验证](delivery-validation.md#k6-connection-recovery-evidence)与[交互](interaction-persona.md#shared-cards-ui)分别维护。
+分域网络动作使用 `jarvis.scoped-sharing.v1`，仍为 `{body,signature}`。`POST /domains` 严格请求/回复字段为 `format/space/sender/target/request_id/operation/catalog/receive/receiver_revision/seq/items`；operation 为 catalog 或 transfer。catalog 仅含发布 ID → `domain/source_project/title`；receive 为 `revision/items`，其 item 为 `domain/source_project/project_id`，最后一项是接收端本地映射。目录请求不得携带正文；transfer 必须匹配当前接收修订。
+
+正文逐项签名，字段为 `format/space/sender/item/domain/source_project/title/text/source_revision/model_targets/expires_at/classification`。外层序号防版本倒退，同序异文拒绝；本机入站记录另带目标项目和准入代次，既有引用摘要覆盖来源正文及映射/代次，不受 ECDSA 随机签名变化影响。
+
+| 0.1.87 本机动作 / 输入 | 返回及语义 |
+|---|---|
+| `scope_options`：`space/kind/project_id` | 当前选择/接收修订、目录、投影、可用项目和精确域来源；kind 为 card 或 memory |
+| `scope_change`：`space/revision/selected/grants` | CAS 启用或保存；selected 每项为 kind/source/source_project/expected，grants 按目录 ID 绑定域和本机目标项目；清空即撤销 |
+| `scope_catalog`：`space` | 加入端交换目录与接收策略，不交换正文 |
+| `scope_sync`：`space` | 加入端先更新目录/策略，再按双方许可同步正文 |
+
+持久状态仍为可选 `federation.db` 与 `federation/`。0.1.87 读取 schema 1—4；首次启用分域控制升至 4，旧卡写入保留 schema 3。受管理运行槽只允许 0.1.87 读取 schema 4；schema 3 支持 0.1.85—0.1.87，schema 2 支持 0.1.84—0.1.87，schema 1 支持 0.1.83—0.1.87。分域导出格式 `jarvis.shared-cards.export.v2` 在 space 中增加 received，逐项保存来源签名及本机映射/准入代次，不导出发布选择或本机许可。旧 v1 仍可读；恢复不恢复权限。具体权限/容量归[分域共享](federation.md#scoped-memory-sharing)，[验收](delivery-validation.md#k6-scoped-sharing-evidence)另列。
 
 <!-- book-footer:start -->
 [返回全书目录](README.md#book-tree) · [上一章：主人利益原则、身份授权与停止控制](security-sovereignty.md) · [下一章：技术栈、源码目录与运行数据](stack-project-layout.md)

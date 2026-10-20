@@ -1,0 +1,1217 @@
+{
+  "version": "0.1.87",
+  "captured_at": "2026-10-20T14:51:27.009271+00:00",
+  "processes": {
+    "status": "passed",
+    "checks": [
+      "metadata_only_selected_publications_no_private_fact",
+      "default_receiver_denial",
+      "personal_project_mapping_without_local_memory_writes",
+      "correction_and_forgetting_converge",
+      "offline_local_inbox_and_no_exchange",
+      "both_process_restarts_and_new_endpoint_preserve_grants",
+      "receiver_revocation_and_resync_no_resurrection"
+    ],
+    "resources": {
+      "private_bytes": [
+        32043008,
+        28659712
+      ],
+      "one_second_idle_cpu_seconds": [
+        0.0,
+        0.0
+      ]
+    },
+    "limitations": [
+      "Two independent OS processes on one PC, loopback TLS; not physical LAN/firewall/sleep.",
+      "One-second idle sample is not long-duration or low-memory acceptance."
+    ]
+  },
+  "ui": {
+    "status": "passed",
+    "checks": [
+      "enable_disables_legacy_sync",
+      "catalog_grant_and_explicit_body_sync",
+      "separate_model_authorization_options",
+      "light_dark_narrow_layout",
+      "receiver_revocation_removes_local_body"
+    ],
+    "page_errors": [],
+    "screenshots": [
+      "H:\\JarvisData\\diagnostics\\k6-scoped-20261020\\scopes-light.png",
+      "H:\\JarvisData\\diagnostics\\k6-scoped-20261020\\scopes-mobile.png"
+    ]
+  },
+  "cloud_model_calls": 0,
+  "physical_second_device": "simulated_on_one_pc_at_user_request",
+  "regression": {
+    "status": "passed_after_repairs",
+    "broad_tests": 95,
+    "broad_seconds": 80.039,
+    "targeted_cases": 34,
+    "targeted_first_passed": 33,
+    "targeted_first_cleanup_errors": 1,
+    "cleanup_fix_rerun": {
+      "tests": 1,
+      "seconds": 1.634,
+      "status": "passed"
+    },
+    "new_scoped_cases": 20,
+    "commands": [
+      "python -m unittest test_federation_scoped test_federation_access test_federation_lifecycle test_federation_connection test_federation test_web -q",
+      "python -m unittest test_federation_scoped test_federation_lifecycle test_shared_dialogue_process.SharedProcessTests -q",
+      "python -m unittest test_federation_scoped.ScopedTests.test_schema_four_rejects_older_managed_runtime -q"
+    ],
+    "repairs": [
+      "Read projects and fact provenance without nested mutation transactions.",
+      "Load original device identity before signing after restart.",
+      "Stable body hash plus admission generation prevents both spurious invalidation and withdrawn-reference resurrection.",
+      "Close test-only SQLite handle explicitly before temporary directory cleanup."
+    ],
+    "javascript_syntax": "4 changed scripts passed",
+    "visual_review": "390px dark screenshot inspected; controls and wrapped text readable.",
+    "additional_targeted_tests": [
+      {
+        "test": "test_real_model_worker_uses_only_granted_received_memory",
+        "status": "passed",
+        "seconds": 2.719
+      },
+      {
+        "test": "test_project_only_card_model_permission_is_not_personal_permission",
+        "status": "passed",
+        "seconds": 1.511
+      }
+    ]
+  },
+  "checks": {
+    "documentation": "OK documents=25 diagrams=21 artifacts=42 errors=0",
+    "navigation": "synchronized",
+    "python_ast": "passed",
+    "release_documentation": "OK documents=25 diagrams=21 artifacts=42 errors=0",
+    "credential_pattern_scan": "no matches in owned staged changes",
+    "staged_diff_whitespace": "passed with repository CRLF convention"
+  },
+  "deployment": {
+    "status": "passed",
+    "source_version": "0.1.87",
+    "data_dir": "C:\\Users\\samuel\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\Jarvis\\data",
+    "previous_version": "0.1.87",
+    "previous_instance": "b5a7fe7e7a280118bbedd651c4bc2af8",
+    "current_instance": "dee0860aaf0e7790318725d96e4068e8",
+    "idle_graceful_reload": true,
+    "startup_from_absent": false,
+    "served_sha256": {
+      "dialogue.js": "5703f81a4c594b6b7112bb7d0f2a4a16ec2603e834794db78ec2016c4e1ff530",
+      "resources.js": "586e03243199134cec0c4da7bedde691f904f73ca8e7aee09ea2dd0202c99e2b",
+      "workspace.js": "d4a06de9863c55c59a5fc56135d9995690f9ee77b3a2c281fc9a118a12bcbb9f",
+      "conversation_tasks.js": "030e1f3d791988b33a8c2ddeec4baf129d9506cb93a6c8e1e592b5cf92d42a63",
+      "mcp_manager.js": "0c74df31951193bbe830bdfe24a10eb90b9cb31bb604ce54109acc5fb1cd9702"
+    },
+    "calculation": "84",
+    "personal_read_only": true,
+    "duplicate_did_not_repeat_calculation": true,
+    "cancel_before_submit": true,
+    "restart_fence": true,
+    "instance_fence": true,
+    "empty_restart_queue_reviewed_and_resumed": true,
+    "admission_ms": 36.011,
+    "backups": {
+      "/api/speech/fast": "stopped",
+      "/api/speech": "stopped"
+    },
+    "cloud_calls": 0,
+    "limits": "One local calculator and personal-settings query; no paid model, microphone, task replay, persistent dialogue recovery or physical voice timing.",
+    "business_state_unchanged": true,
+    "before": {
+      "control.db": {
+        "present": true,
+        "schema": 2,
+        "tables": {
+          "actions": {
+            "rows": 18,
+            "sha256": "f0f3121a62d0b6e74483a0b5be7d8ac744e0fee11216b66c5ab037472529ebf7"
+          },
+          "artifacts": {
+            "rows": 16,
+            "sha256": "3e07687fc930429e1333c717e5fd1639f4990dbc36f257db1a639c5e02914acc"
+          },
+          "coding_changes": {
+            "rows": 2,
+            "sha256": "c1bcce173ae88c3d8d05deb8c7c9050ad00153f88f4f97eb19afbcfd043746ec"
+          },
+          "coding_demands": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "computer_queue": {
+            "rows": 10,
+            "sha256": "94f3d4b0390d10600486f554ae93f036b059585d967fb4a7ff4ae530f3448b3b"
+          },
+          "computer_steps": {
+            "rows": 17,
+            "sha256": "e0545ca686975b54075e17b4731acf1f0e76011f5e0388f5e719368b99e9fb0d"
+          },
+          "control": {
+            "rows": 1,
+            "sha256": "48f40bf56a231b8feb405f550a2d499a1ce3ca573825861f738b37b0678fce61"
+          },
+          "skill_success": {
+            "rows": 1,
+            "sha256": "c12df120359907b15d94a6885f688255040d7a3e36ba426a8622dee0b50d0170"
+          },
+          "tasks": {
+            "rows": 18,
+            "sha256": "608b6a89f8273395f31dab6563767c43caa8c372ff167b8e2d1ab940d87ba51a"
+          },
+          "team_calls": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "safety/control.db": {
+        "present": true,
+        "schema": 1,
+        "tables": {
+          "audit": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "challenges": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "incidents": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "state": {
+            "rows": 1,
+            "sha256": "7d1b6c645e716519211bb12f69c843400a8ee7dd2df509ed79508687e3be65f3"
+          }
+        }
+      },
+      "conversations.db": {
+        "present": true,
+        "schema": 0,
+        "tables": {
+          "conversations": {
+            "rows": 13,
+            "sha256": "d9113838ee9bebeab24fc904b5604826e6ea686a4748b4086486a6cac1916a50"
+          },
+          "dialogue_receipts": {
+            "rows": 9,
+            "sha256": "0606bd6ef96202cb8706e86c0c4a66f6bbf9b1e4cb832ef3359d1d0d97ca7e7a"
+          }
+        }
+      },
+      "memory.db": {
+        "present": true,
+        "schema": 3,
+        "tables": {
+          "candidate_bindings": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "fact_origins": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "facts": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "receipts": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "persona.db": {
+        "present": false
+      },
+      "continuity.db": {
+        "present": false
+      },
+      "extensions.db": {
+        "present": true,
+        "schema": 1,
+        "tables": {
+          "entries": {
+            "rows": 1,
+            "sha256": "9708b491ef1783ca4d78c61951270ce2b617f7fcd714f5aeff52dde67e608641"
+          },
+          "mcp_policies": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "skill_decisions": {
+            "rows": 6,
+            "sha256": "b4a5f2272f2e2281d27052a50a7814678ed4f010cfa1c575d3a1ccd26d77956f"
+          },
+          "skill_policies": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "project-sources.db": {
+        "present": true,
+        "schema": 1,
+        "tables": {
+          "sources": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "project-catalog.db": {
+        "present": true,
+        "schema": 1,
+        "tables": {
+          "archived_chats": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "profiles": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "workspace.db": {
+        "present": true,
+        "schema": 1,
+        "tables": {
+          "outputs": {
+            "rows": 6,
+            "sha256": "59a8c005756561ef13b6088017b495780a8ddc74cc490d9522d2e721b5105098"
+          },
+          "projects": {
+            "rows": 6,
+            "sha256": "dfaf49e4e880e4b293dc9bb0e4b9ab6bf3f0285061dc6f8a2f96551cc3020231"
+          }
+        }
+      },
+      "evolution/evolution.db": {
+        "present": true,
+        "schema": 8,
+        "tables": {
+          "growth_cycles": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "growth_policies": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "incidents": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "jobs": {
+            "rows": 33,
+            "sha256": "a1fa1a2c9004a3687044b56f3a8646cdfd741c5fef8795ff17bce9a77d7bdb7b"
+          },
+          "maintenance_receipts": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "packages": {
+            "rows": 1,
+            "sha256": "8b232f9ca8aaae5366ed4fcd9b36badd017ea6b96498f3eb4eb6ea2d61df904d"
+          },
+          "project_tools": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "ranking_selection": {
+            "rows": 1,
+            "sha256": "f6b7607bb95f8fb8487782f076f128916e772ea79c00cd37ad616608177fa439"
+          },
+          "ranking_versions": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "selection": {
+            "rows": 1,
+            "sha256": "0935b109577cc19f9dee5f7e834a1af42eafd01f85726f3576e809d9c7a33665"
+          },
+          "settings": {
+            "rows": 1,
+            "sha256": "a43e218bb971c8e61bd819130450962ae54eeaf91493bfe8687fa2c84015fb95"
+          },
+          "tool_lifecycle": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "tool_versions": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "network-policy.db": {
+        "present": false
+      },
+      "federation.db": {
+        "present": false
+      }
+    },
+    "after": {
+      "control.db": {
+        "present": true,
+        "schema": 2,
+        "tables": {
+          "actions": {
+            "rows": 18,
+            "sha256": "f0f3121a62d0b6e74483a0b5be7d8ac744e0fee11216b66c5ab037472529ebf7"
+          },
+          "artifacts": {
+            "rows": 16,
+            "sha256": "3e07687fc930429e1333c717e5fd1639f4990dbc36f257db1a639c5e02914acc"
+          },
+          "coding_changes": {
+            "rows": 2,
+            "sha256": "c1bcce173ae88c3d8d05deb8c7c9050ad00153f88f4f97eb19afbcfd043746ec"
+          },
+          "coding_demands": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "computer_queue": {
+            "rows": 10,
+            "sha256": "94f3d4b0390d10600486f554ae93f036b059585d967fb4a7ff4ae530f3448b3b"
+          },
+          "computer_steps": {
+            "rows": 17,
+            "sha256": "e0545ca686975b54075e17b4731acf1f0e76011f5e0388f5e719368b99e9fb0d"
+          },
+          "control": {
+            "rows": 1,
+            "sha256": "48f40bf56a231b8feb405f550a2d499a1ce3ca573825861f738b37b0678fce61"
+          },
+          "skill_success": {
+            "rows": 1,
+            "sha256": "c12df120359907b15d94a6885f688255040d7a3e36ba426a8622dee0b50d0170"
+          },
+          "tasks": {
+            "rows": 18,
+            "sha256": "608b6a89f8273395f31dab6563767c43caa8c372ff167b8e2d1ab940d87ba51a"
+          },
+          "team_calls": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "safety/control.db": {
+        "present": true,
+        "schema": 1,
+        "tables": {
+          "audit": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "challenges": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "incidents": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "state": {
+            "rows": 1,
+            "sha256": "7d1b6c645e716519211bb12f69c843400a8ee7dd2df509ed79508687e3be65f3"
+          }
+        }
+      },
+      "conversations.db": {
+        "present": true,
+        "schema": 0,
+        "tables": {
+          "conversations": {
+            "rows": 13,
+            "sha256": "d9113838ee9bebeab24fc904b5604826e6ea686a4748b4086486a6cac1916a50"
+          },
+          "dialogue_receipts": {
+            "rows": 9,
+            "sha256": "0606bd6ef96202cb8706e86c0c4a66f6bbf9b1e4cb832ef3359d1d0d97ca7e7a"
+          }
+        }
+      },
+      "memory.db": {
+        "present": true,
+        "schema": 3,
+        "tables": {
+          "candidate_bindings": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "fact_origins": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "facts": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "receipts": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "persona.db": {
+        "present": false
+      },
+      "continuity.db": {
+        "present": false
+      },
+      "extensions.db": {
+        "present": true,
+        "schema": 1,
+        "tables": {
+          "entries": {
+            "rows": 1,
+            "sha256": "9708b491ef1783ca4d78c61951270ce2b617f7fcd714f5aeff52dde67e608641"
+          },
+          "mcp_policies": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "skill_decisions": {
+            "rows": 6,
+            "sha256": "b4a5f2272f2e2281d27052a50a7814678ed4f010cfa1c575d3a1ccd26d77956f"
+          },
+          "skill_policies": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "project-sources.db": {
+        "present": true,
+        "schema": 1,
+        "tables": {
+          "sources": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "project-catalog.db": {
+        "present": true,
+        "schema": 1,
+        "tables": {
+          "archived_chats": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "profiles": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "workspace.db": {
+        "present": true,
+        "schema": 1,
+        "tables": {
+          "outputs": {
+            "rows": 6,
+            "sha256": "59a8c005756561ef13b6088017b495780a8ddc74cc490d9522d2e721b5105098"
+          },
+          "projects": {
+            "rows": 6,
+            "sha256": "dfaf49e4e880e4b293dc9bb0e4b9ab6bf3f0285061dc6f8a2f96551cc3020231"
+          }
+        }
+      },
+      "evolution/evolution.db": {
+        "present": true,
+        "schema": 8,
+        "tables": {
+          "growth_cycles": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "growth_policies": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "incidents": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "jobs": {
+            "rows": 33,
+            "sha256": "a1fa1a2c9004a3687044b56f3a8646cdfd741c5fef8795ff17bce9a77d7bdb7b"
+          },
+          "maintenance_receipts": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "packages": {
+            "rows": 1,
+            "sha256": "8b232f9ca8aaae5366ed4fcd9b36badd017ea6b96498f3eb4eb6ea2d61df904d"
+          },
+          "project_tools": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "ranking_selection": {
+            "rows": 1,
+            "sha256": "f6b7607bb95f8fb8487782f076f128916e772ea79c00cd37ad616608177fa439"
+          },
+          "ranking_versions": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "selection": {
+            "rows": 1,
+            "sha256": "0935b109577cc19f9dee5f7e834a1af42eafd01f85726f3576e809d9c7a33665"
+          },
+          "settings": {
+            "rows": 1,
+            "sha256": "a43e218bb971c8e61bd819130450962ae54eeaf91493bfe8687fa2c84015fb95"
+          },
+          "tool_lifecycle": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "tool_versions": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "network-policy.db": {
+        "present": false
+      },
+      "federation.db": {
+        "present": false
+      }
+    },
+    "sharing_uninitialized": true,
+    "reason": "Reload final source-scope restriction after targeted card-permission test."
+  },
+  "initial_deployment": {
+    "status": "passed",
+    "source_version": "0.1.87",
+    "data_dir": "C:\\Users\\samuel\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\Jarvis\\data",
+    "previous_version": "0.1.86",
+    "previous_instance": "a19a75104394b01cca7259cf4b0b3b87",
+    "current_instance": "b5a7fe7e7a280118bbedd651c4bc2af8",
+    "idle_graceful_reload": true,
+    "startup_from_absent": false,
+    "served_sha256": {
+      "dialogue.js": "5703f81a4c594b6b7112bb7d0f2a4a16ec2603e834794db78ec2016c4e1ff530",
+      "resources.js": "586e03243199134cec0c4da7bedde691f904f73ca8e7aee09ea2dd0202c99e2b",
+      "workspace.js": "d4a06de9863c55c59a5fc56135d9995690f9ee77b3a2c281fc9a118a12bcbb9f",
+      "conversation_tasks.js": "030e1f3d791988b33a8c2ddeec4baf129d9506cb93a6c8e1e592b5cf92d42a63",
+      "mcp_manager.js": "0c74df31951193bbe830bdfe24a10eb90b9cb31bb604ce54109acc5fb1cd9702"
+    },
+    "calculation": "84",
+    "personal_read_only": true,
+    "duplicate_did_not_repeat_calculation": true,
+    "cancel_before_submit": true,
+    "restart_fence": true,
+    "instance_fence": true,
+    "empty_restart_queue_reviewed_and_resumed": true,
+    "admission_ms": 30.446,
+    "backups": {
+      "/api/speech/fast": "stopped",
+      "/api/speech": "stopped"
+    },
+    "cloud_calls": 0,
+    "limits": "One local calculator and personal-settings query; no paid model, microphone, task replay, persistent dialogue recovery or physical voice timing.",
+    "before": {
+      "control.db": {
+        "present": true,
+        "schema": 2,
+        "tables": {
+          "actions": {
+            "rows": 18,
+            "sha256": "f0f3121a62d0b6e74483a0b5be7d8ac744e0fee11216b66c5ab037472529ebf7"
+          },
+          "artifacts": {
+            "rows": 16,
+            "sha256": "3e07687fc930429e1333c717e5fd1639f4990dbc36f257db1a639c5e02914acc"
+          },
+          "coding_changes": {
+            "rows": 2,
+            "sha256": "c1bcce173ae88c3d8d05deb8c7c9050ad00153f88f4f97eb19afbcfd043746ec"
+          },
+          "coding_demands": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "computer_queue": {
+            "rows": 10,
+            "sha256": "94f3d4b0390d10600486f554ae93f036b059585d967fb4a7ff4ae530f3448b3b"
+          },
+          "computer_steps": {
+            "rows": 17,
+            "sha256": "e0545ca686975b54075e17b4731acf1f0e76011f5e0388f5e719368b99e9fb0d"
+          },
+          "control": {
+            "rows": 1,
+            "sha256": "48f40bf56a231b8feb405f550a2d499a1ce3ca573825861f738b37b0678fce61"
+          },
+          "skill_success": {
+            "rows": 1,
+            "sha256": "c12df120359907b15d94a6885f688255040d7a3e36ba426a8622dee0b50d0170"
+          },
+          "tasks": {
+            "rows": 18,
+            "sha256": "608b6a89f8273395f31dab6563767c43caa8c372ff167b8e2d1ab940d87ba51a"
+          },
+          "team_calls": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "safety/control.db": {
+        "present": true,
+        "schema": 1,
+        "tables": {
+          "audit": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "challenges": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "incidents": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "state": {
+            "rows": 1,
+            "sha256": "7d1b6c645e716519211bb12f69c843400a8ee7dd2df509ed79508687e3be65f3"
+          }
+        }
+      },
+      "conversations.db": {
+        "present": true,
+        "schema": 0,
+        "tables": {
+          "conversations": {
+            "rows": 13,
+            "sha256": "d9113838ee9bebeab24fc904b5604826e6ea686a4748b4086486a6cac1916a50"
+          },
+          "dialogue_receipts": {
+            "rows": 9,
+            "sha256": "0606bd6ef96202cb8706e86c0c4a66f6bbf9b1e4cb832ef3359d1d0d97ca7e7a"
+          }
+        }
+      },
+      "memory.db": {
+        "present": true,
+        "schema": 3,
+        "tables": {
+          "candidate_bindings": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "fact_origins": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "facts": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "receipts": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "persona.db": {
+        "present": false
+      },
+      "continuity.db": {
+        "present": false
+      },
+      "extensions.db": {
+        "present": true,
+        "schema": 1,
+        "tables": {
+          "entries": {
+            "rows": 1,
+            "sha256": "9708b491ef1783ca4d78c61951270ce2b617f7fcd714f5aeff52dde67e608641"
+          },
+          "mcp_policies": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "skill_decisions": {
+            "rows": 6,
+            "sha256": "b4a5f2272f2e2281d27052a50a7814678ed4f010cfa1c575d3a1ccd26d77956f"
+          },
+          "skill_policies": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "project-sources.db": {
+        "present": true,
+        "schema": 1,
+        "tables": {
+          "sources": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "project-catalog.db": {
+        "present": true,
+        "schema": 1,
+        "tables": {
+          "archived_chats": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "profiles": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "workspace.db": {
+        "present": true,
+        "schema": 1,
+        "tables": {
+          "outputs": {
+            "rows": 6,
+            "sha256": "59a8c005756561ef13b6088017b495780a8ddc74cc490d9522d2e721b5105098"
+          },
+          "projects": {
+            "rows": 6,
+            "sha256": "dfaf49e4e880e4b293dc9bb0e4b9ab6bf3f0285061dc6f8a2f96551cc3020231"
+          }
+        }
+      },
+      "evolution/evolution.db": {
+        "present": true,
+        "schema": 8,
+        "tables": {
+          "growth_cycles": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "growth_policies": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "incidents": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "jobs": {
+            "rows": 33,
+            "sha256": "bdca74bb12a7da747993debb121af0ee2bc5d6fcd21b09fdd550358743a5c25a"
+          },
+          "maintenance_receipts": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "packages": {
+            "rows": 1,
+            "sha256": "8b232f9ca8aaae5366ed4fcd9b36badd017ea6b96498f3eb4eb6ea2d61df904d"
+          },
+          "project_tools": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "ranking_selection": {
+            "rows": 1,
+            "sha256": "f6b7607bb95f8fb8487782f076f128916e772ea79c00cd37ad616608177fa439"
+          },
+          "ranking_versions": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "selection": {
+            "rows": 1,
+            "sha256": "0935b109577cc19f9dee5f7e834a1af42eafd01f85726f3576e809d9c7a33665"
+          },
+          "settings": {
+            "rows": 1,
+            "sha256": "a43e218bb971c8e61bd819130450962ae54eeaf91493bfe8687fa2c84015fb95"
+          },
+          "tool_lifecycle": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "tool_versions": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "network-policy.db": {
+        "present": false
+      },
+      "federation.db": {
+        "present": false
+      }
+    },
+    "after": {
+      "control.db": {
+        "present": true,
+        "schema": 2,
+        "tables": {
+          "actions": {
+            "rows": 18,
+            "sha256": "f0f3121a62d0b6e74483a0b5be7d8ac744e0fee11216b66c5ab037472529ebf7"
+          },
+          "artifacts": {
+            "rows": 16,
+            "sha256": "3e07687fc930429e1333c717e5fd1639f4990dbc36f257db1a639c5e02914acc"
+          },
+          "coding_changes": {
+            "rows": 2,
+            "sha256": "c1bcce173ae88c3d8d05deb8c7c9050ad00153f88f4f97eb19afbcfd043746ec"
+          },
+          "coding_demands": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "computer_queue": {
+            "rows": 10,
+            "sha256": "94f3d4b0390d10600486f554ae93f036b059585d967fb4a7ff4ae530f3448b3b"
+          },
+          "computer_steps": {
+            "rows": 17,
+            "sha256": "e0545ca686975b54075e17b4731acf1f0e76011f5e0388f5e719368b99e9fb0d"
+          },
+          "control": {
+            "rows": 1,
+            "sha256": "48f40bf56a231b8feb405f550a2d499a1ce3ca573825861f738b37b0678fce61"
+          },
+          "skill_success": {
+            "rows": 1,
+            "sha256": "c12df120359907b15d94a6885f688255040d7a3e36ba426a8622dee0b50d0170"
+          },
+          "tasks": {
+            "rows": 18,
+            "sha256": "608b6a89f8273395f31dab6563767c43caa8c372ff167b8e2d1ab940d87ba51a"
+          },
+          "team_calls": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "safety/control.db": {
+        "present": true,
+        "schema": 1,
+        "tables": {
+          "audit": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "challenges": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "incidents": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "state": {
+            "rows": 1,
+            "sha256": "7d1b6c645e716519211bb12f69c843400a8ee7dd2df509ed79508687e3be65f3"
+          }
+        }
+      },
+      "conversations.db": {
+        "present": true,
+        "schema": 0,
+        "tables": {
+          "conversations": {
+            "rows": 13,
+            "sha256": "d9113838ee9bebeab24fc904b5604826e6ea686a4748b4086486a6cac1916a50"
+          },
+          "dialogue_receipts": {
+            "rows": 9,
+            "sha256": "0606bd6ef96202cb8706e86c0c4a66f6bbf9b1e4cb832ef3359d1d0d97ca7e7a"
+          }
+        }
+      },
+      "memory.db": {
+        "present": true,
+        "schema": 3,
+        "tables": {
+          "candidate_bindings": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "fact_origins": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "facts": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "receipts": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "persona.db": {
+        "present": false
+      },
+      "continuity.db": {
+        "present": false
+      },
+      "extensions.db": {
+        "present": true,
+        "schema": 1,
+        "tables": {
+          "entries": {
+            "rows": 1,
+            "sha256": "9708b491ef1783ca4d78c61951270ce2b617f7fcd714f5aeff52dde67e608641"
+          },
+          "mcp_policies": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "skill_decisions": {
+            "rows": 6,
+            "sha256": "b4a5f2272f2e2281d27052a50a7814678ed4f010cfa1c575d3a1ccd26d77956f"
+          },
+          "skill_policies": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "project-sources.db": {
+        "present": true,
+        "schema": 1,
+        "tables": {
+          "sources": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "project-catalog.db": {
+        "present": true,
+        "schema": 1,
+        "tables": {
+          "archived_chats": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "profiles": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "workspace.db": {
+        "present": true,
+        "schema": 1,
+        "tables": {
+          "outputs": {
+            "rows": 6,
+            "sha256": "59a8c005756561ef13b6088017b495780a8ddc74cc490d9522d2e721b5105098"
+          },
+          "projects": {
+            "rows": 6,
+            "sha256": "dfaf49e4e880e4b293dc9bb0e4b9ab6bf3f0285061dc6f8a2f96551cc3020231"
+          }
+        }
+      },
+      "evolution/evolution.db": {
+        "present": true,
+        "schema": 8,
+        "tables": {
+          "growth_cycles": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "growth_policies": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "incidents": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "jobs": {
+            "rows": 33,
+            "sha256": "bdca74bb12a7da747993debb121af0ee2bc5d6fcd21b09fdd550358743a5c25a"
+          },
+          "maintenance_receipts": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "packages": {
+            "rows": 1,
+            "sha256": "8b232f9ca8aaae5366ed4fcd9b36badd017ea6b96498f3eb4eb6ea2d61df904d"
+          },
+          "project_tools": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "ranking_selection": {
+            "rows": 1,
+            "sha256": "f6b7607bb95f8fb8487782f076f128916e772ea79c00cd37ad616608177fa439"
+          },
+          "ranking_versions": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "selection": {
+            "rows": 1,
+            "sha256": "0935b109577cc19f9dee5f7e834a1af42eafd01f85726f3576e809d9c7a33665"
+          },
+          "settings": {
+            "rows": 1,
+            "sha256": "a43e218bb971c8e61bd819130450962ae54eeaf91493bfe8687fa2c84015fb95"
+          },
+          "tool_lifecycle": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "tool_versions": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "network-policy.db": {
+        "present": false
+      },
+      "federation.db": {
+        "present": false
+      }
+    },
+    "excluded_tables": {
+      "dialogue_owner": "Host instance ownership is expected to change on restart.",
+      "computer_queue_control": "The idle queue is reviewed/resumed during the authorized reload; task rows are compared separately."
+    },
+    "business_state_unchanged": true,
+    "sharing_uninitialized": true,
+    "scoped_assets": {
+      "shared-scopes.js": "8f46bccd5014894c6f7a1d61bd25152886bd04f18564e0f5052b4966882d3163",
+      "shared-access.js": "379d4ceb24a9a9bda0103c6668c449013f1108425bc7813b73d9645dcaad8d05",
+      "shared-reference.js": "547a96568dd797031cf72615fe5d0a671a1570297c56bf7ff09c539cfa6d317f",
+      "federation.js": "a9538d06002c2bfee1b9825b3cbd2d631f8a3bf6dfd8b7608823576eef6078f0"
+    },
+    "inline_css_verified": true
+  },
+  "package": {
+    "captured_at": "2026-10-20T14:56:42.335486+00:00",
+    "status": "passed",
+    "package": {
+      "version": "0.1.87",
+      "path": "H:\\JarvisData\\diagnostics\\jarvis-v0.1.87.zip",
+      "sha256": "da526ed0acde2b6c601b61f79ecf8ae137847483c027b4076e0ad857c97d7433",
+      "files": 1625,
+      "bytes": 70623096,
+      "status": "candidate_verified",
+      "dependencies": {
+        "playwright": "1.64.0",
+        "greenlet": "3.5.6",
+        "pyee": "14.0.0",
+        "typing_extensions": "4.16.0",
+        "cryptography": "50.0.2",
+        "cffi": "2.1.1",
+        "pycparser": "3.11",
+        "google-auth": "2.62.0",
+        "requests": "2.34.2",
+        "certifi": "2026.7.22",
+        "urllib3": "2.8.0",
+        "idna": "3.20",
+        "charset-normalizer": "3.5.2",
+        "pyasn1_modules": "0.4.2",
+        "pyasn1": "0.6.4",
+        "httpx": "0.28.1",
+        "httpcore": "1.0.9",
+        "h11": "0.16.0",
+        "anyio": "4.15.1",
+        "jsonschema": "4.26.0",
+        "rpds-py": "2026.9.1",
+        "referencing": "0.37.0",
+        "attrs": "26.1.0",
+        "jsonschema-specifications": "2025.9.1"
+      }
+    },
+    "runs": [
+      {
+        "executable": "C:\\Users\\samuel\\AppData\\Local\\Temp\\jarvis-package-probe-nz_q5jmr\\candidate\\python\\python.exe",
+        "version": "0.1.87",
+        "stopped": true,
+        "task_id": "task_4d2c05eff8cf5b56bd8b1408a11a4734",
+        "artifact_digest": "sha256:2aba68e31c1ccf2c347201bef4bc470c3543ac3564036014cc3b2360a24e713a",
+        "worker_manifest": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+        "network": "Python audit hook denies connect/DNS; not an OS network isolation test"
+      },
+      {
+        "executable": "C:\\Users\\samuel\\AppData\\Local\\Temp\\jarvis-package-probe-nz_q5jmr\\fallback\\python\\python.exe",
+        "version": "0.1.87",
+        "stopped": true,
+        "task_id": "task_4d2c05eff8cf5b56bd8b1408a11a4734",
+        "artifact_digest": "sha256:2aba68e31c1ccf2c347201bef4bc470c3543ac3564036014cc3b2360a24e713a",
+        "worker_manifest": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+        "network": "Python audit hook denies connect/DNS; not an OS network isolation test"
+      }
+    ],
+    "limitations": [
+      "Same-version fallback slot; no cross-version schema migration or protected service activation.",
+      "Python network-denial hook only; machine-wide disconnected boot not tested.",
+      "Optional browser/speech, model weights, owner keys and live state are excluded."
+    ],
+    "source_files_verified_against_index": 380,
+    "activated": false,
+    "unrelated_screensaver_excluded": true
+  },
+  "source_sha256": {
+    "README.md": "320f5bf4fbda5106b7a6c724f9a61c2be3587efe9f309acefadd6941413b8c9c",
+    "docs/README.md": "484f997b7e3e0d5302da2de537f038a079ea31d6a7ff7d599e45884c75266b47",
+    "docs/contracts.md": "8f47e3eb0b0e146d568e75a69458be280c23bf73f979e17cd1afc72ae560ae8b",
+    "docs/core-bootstrap.md": "4da509eb4ea2c5ce84cd2a17b739dc903634c54835f14354468cff02b07c3c91",
+    "docs/delivery-validation.md": "3053efd96cda5d826108f83010366f9e26e18c6b556f92b617aa39d65df0e67e",
+    "docs/federation.md": "e0c51ae16fed05b77ee9fdb5ad10fba11e3468bcdb75e1933c462f62fb0f304d",
+    "docs/interaction-persona.md": "a4380a34f3fba29f79673bf6442b3a8ffed961f79c54b0656344755dd83d1a3c",
+    "docs/knowledge-learning.md": "97d733b8ea724f4ebdc8c62f4438ad4ce0ae5d8f3ccb1a8b1f69ea376bee046a",
+    "docs/manifest.json": "6491feb177ae753a12c1b42ae4dde715f74067cc907e0a4f5b6c9a8dd1bf92a1",
+    "docs/stack-project-layout.md": "3a97f4c7ae0d0c3bd3a55bac8ce3bd38f0cc0701f130803a05e8027e75a77829",
+    "apps/web/admin.html": "675e2bed586c00d487766e9d4ea6c78098c251f0a875530477caed0459580d5d",
+    "apps/web/federation.css": "650b4c861d85aec159baff7cf1cefcaca97fd7a9208156855aa30e655713be90",
+    "apps/web/federation.js": "a9538d06002c2bfee1b9825b3cbd2d631f8a3bf6dfd8b7608823576eef6078f0",
+    "apps/web/server.py": "0a12d628364675ff91a7b3b38b7ac552dba3ddd21f1b817fe52cd310706ed05f",
+    "apps/web/shared-access.js": "379d4ceb24a9a9bda0103c6668c449013f1108425bc7813b73d9645dcaad8d05",
+    "apps/web/shared-reference.js": "547a96568dd797031cf72615fe5d0a671a1570297c56bf7ff09c539cfa6d317f",
+    "apps/web/shared-scopes.js": "8f46bccd5014894c6f7a1d61bd25152886bd04f18564e0f5052b4966882d3163",
+    "pyproject.toml": "5a10bfad93da25982371d3ff4b674ed3c3f49213fac5bf0f1d18ac5ec3902937",
+    "uv.lock": "3fb987f3b1a1da9cc6b6b74d852f128ba6eb57996a101fdee3e78b60c8ba7bb1",
+    "runtime/node-host/jarvis_core/__init__.py": "828f7eddc0b81ccb6ac8868077d84b90b7b35f5128c4e198c5971eef09163e6b",
+    "runtime/node-host/jarvis_core/federation.py": "f697f10f86074f4a549cb530f8131c35d5ca8caddb2122960960c94871b4705c",
+    "runtime/node-host/jarvis_core/federation_access.py": "b9e3f6c741fb140d97a687a58776f03f64148e346c473d11085392573fc17bc8",
+    "runtime/node-host/jarvis_core/federation_lifecycle.py": "478ca878e80795038f69b1689b2aeb546eaf2360a7465829071822e8d444806f",
+    "runtime/node-host/jarvis_core/federation_store.py": "bdf37382467f53c3a1f13121214be5d1d1fb47a50a3b09d7f54a78fdb97abcd7",
+    "runtime/node-host/jarvis_core/federation_transport.py": "3c4bec389ce27f9a6e5ccee878b3779f3f45ca0cb2889de3733ad2f320d822d9",
+    "runtime/node-host/jarvis_core/releases.py": "c2b1de2db1e3ff1fae691a78a4fd1a5401b293eadc9c0d005820373dccc22831",
+    "runtime/node-host/jarvis_core/federation_scoped.py": "25fe77b1cb3959f98f9f50982205815257c1f315e32e443615603d40acea8b04",
+    "runtime/node-host/jarvis_core/federation_sources.py": "eae71a3e60e943d92807d95317870ea46ce118819981d76395b45fbf18e3ec2a",
+    "tests/test_federation_scoped.py": "3d1caf1e07f6f15d942479476b083e1f829664a035d061bd661b503604733b92",
+    "tools/probe_federation.py": "6da33e60875d57116b101578647975b89565de9194042d346a05e005f0d3b8bd",
+    "tools/probe_federation_scoped.py": "48bbd8a51bc6bedd726d828ff565922287214c1963a5e46f84cc938e537d1a2b",
+    "tools/probe_release_bundle.py": "95bfa95af34e09809bb5ad226898ff8083554e21153b5a471d0d5ed5c4c6618d"
+  },
+  "parallel_work_preserved": "Unrelated screensaver files, ignore rule and documentation kept in working tree; staged documentation reconstructed from base plus this task changes and regenerated navigation."
+}

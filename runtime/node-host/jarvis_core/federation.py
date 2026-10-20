@@ -32,6 +32,8 @@ class Federation:
         self.access = Access(self, config_path)
         from .federation_connection import Connection
         self.connection = Connection(self)
+        from .federation_scoped import Scoped
+        self.scoped = Scoped(self)
 
     @property
     def node(self):
@@ -65,7 +67,12 @@ class Federation:
                               'conflict': len(heads) > 1, 'versions': [
                                   {k: h['body'][k] for k in ('author', 'title', 'text', 'clock')}
                                   for h in heads]})
+            from .federation_scoped import received_cards, state as scoped_state
             result.append({'id': space['id'], 'label': space['label'], 'role': space['role'],
+                           'scoped_enabled': scoped_state(space)['enabled'],
+                           'scoped_revision': scoped_state(space)['revision'],
+                           'scoped_seq': scoped_state(space)['seq'],
+                           'received_cards': received_cards(space),
                            'state': space['state'], 'peer': space.get('peer'),
                            'endpoint': space.get('endpoint'), 'cards': cards,
                            'access_revision': space.get('model_access', {}).get('revision', 0),
@@ -204,6 +211,8 @@ class Federation:
         return self.status()
 
     def receive(self, route, signed):
+        if route == '/domains':
+            return self.scoped.receive(signed)
         if route == '/inspect':
             return self.connection.receive(signed)
         revision = self.online()
@@ -251,6 +260,8 @@ class Federation:
                        'target': body['sender'], 'request_id': body['request_id'], 'snapshot': result}, identity.key)
 
     def _validate_envelope(self, signed, space):
+        if space.get('scoped', {}).get('enabled'):
+            p.fail('此空间已启用分域接收控制，请使用分域同步。', 'federation_scope')
         body = p.verify(signed, space['members'][space['peer']])
         p.fields(body, 'protocol space sender target request_id snapshot')
         if (body['protocol'] != p.PROTOCOL or body['space'] != space['id'] or
@@ -264,6 +275,8 @@ class Federation:
         try:
             revision = self.online()
             space = self._space(self.store.read(self.node), sid)
+            if space.get('scoped', {}).get('enabled'):
+                p.fail('此空间已启用分域接收控制，请使用分域同步。', 'federation_scope')
             if space['role'] != 'client':
                 p.fail('请在加入此空间的另一台设备点击同步；本机将同时收取和发送变更。')
             identity = self._identity().load()
@@ -340,10 +353,19 @@ class Federation:
                    'access_change': 'action space revision cards providers project_id',
                    'reference_issue': 'action space item expected scope',
                    'connection_check': 'action space', 'connection_preview': 'action space endpoint',
-                   'connection_apply': 'action space token'}
+                   'connection_apply': 'action space token',
+                   'scope_options': 'action space kind project_id',
+                   'scope_change': 'action space revision selected grants',
+                   'scope_catalog': 'action space', 'scope_sync': 'action space'}
         if action not in schemas:
             p.fail()
         p.fields(payload, schemas[action])
+        if action == 'scope_options':
+            return self.scoped.options(payload['space'], payload['kind'], payload['project_id'])
+        if action == 'scope_change':
+            return self.scoped.configure(payload['space'], payload['revision'], payload['selected'], payload['grants'])
+        if action in ('scope_catalog', 'scope_sync'):
+            return self.scoped.sync(payload['space'], action == 'scope_sync')
         if action == 'connection_check': return self.connection.check(payload['space'])
         if action == 'connection_preview': return self.connection.preview(payload['space'], payload['endpoint'])
         if action == 'connection_apply': return self.connection.apply(payload['space'], payload['token'])

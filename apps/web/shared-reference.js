@@ -36,7 +36,8 @@
       if (state.recovery_required) throw new Error('共享资料需要恢复，请到设置中检查。');
       let count = 0;
       for (const space of state.spaces.filter(s => s.state === 'active')) {
-        for (const card of space.cards.filter(c => !c.deleted && !c.conflict)) {
+        const project=window.Workspace?.memoryContext?.()?.project_id||null;
+        for (const card of [...space.cards,...(space.received_cards||[]).filter(c=>c.project_id===project)].filter(c => !c.deleted && !c.conflict)) {
           ++count;
           const section = document.createElement('section'), title = document.createElement('h3'),
             preview = document.createElement('p'), button = document.createElement('button');

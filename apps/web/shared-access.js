@@ -50,7 +50,7 @@
   }
   root.addEventListener('change',()=>{dirty=true;});
   window.addEventListener('jarvis:shared-space',event=>{
-    const space=event.detail, next=space?space.id+':'+space.state+':'+space.access_revision:'';
+    const space=event.detail, next=space?space.id+':'+space.state+':'+space.access_revision+':'+space.scoped_revision+':'+space.scoped_seq:'';
     if(next===key)return;
     if(dirty && space?.id===current?.id){status('授权已在另一处改变；当前选择保留，保存将重新检查版本。');return;}
     key=next;load(space);
