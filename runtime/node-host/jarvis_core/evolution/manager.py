@@ -380,7 +380,15 @@ class EvolutionManager:
             raise policy.CoreError('evolution_execution_recovered', '执行失败已触发回退/修复；请查看记录后重新调用。') from None
 
     def _work(self, job, background):
+        from ..runtime_admission import coordinator
+        lease = None
         try:
+            while lease is None:
+                self._checkpoint()
+                try: lease = coordinator(self.core).acquire('growth', 512, owner=job['id'])
+                except policy.CoreError as exc:
+                    if exc.code != 'resource_wait': raise
+                    self.cancel_event.wait(.5)
             with locked(self.store.root / '.lane.lock'):
                 self._checkpoint()
                 self.store.update(job, 'STARTED', status='RUNNING')
@@ -435,6 +443,8 @@ class EvolutionManager:
             status = 'CANCELLED' if code == 'evolution_cancelled' else 'UNKNOWN' if job.get('model_outcome') == 'UNKNOWN' else 'FAILED'
             self.store.update(job, 'STOPPED', status=status, error=code)
         finally:
+            if lease is not None: coordinator(self.core).release(lease)
+            coordinator(self.core).clear_waiters('growth')
             with self.lock: self.busy = False
         if background and job['request']['action'] == 'check':
             try: self._queue_automatic_heal(job)

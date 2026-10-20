@@ -119,5 +119,20 @@ function codingPreview(report,task){
  if(!window.ProjectExplorer.openView({id:'coding-result',title:'编程验收',element:section}))notify('请先选择任务所属项目。');
 }
 function prepareImprovement(prompt){if(current()?.temporary||!context().project_id){notify('请先选择普通项目会话，再建立编码改进单。');return false;}enabled.checked=true;$('composer-mode').value='skill';explicit.value='matt-pocock.code-review';coding.checked=true;demand.checked=true;if(prompt)$('message').value=prompt;controls();paths.focus();notify('补充源码路径、公开示例与独立验收案例，再发送以建立待开始的改进单。');return true;}
-window.SkillWorkbench={context,handleSubmit,preview,download,evidence,reportPreview,codingPreview,controls,prepareImprovement};controls();
+function planPayload(prompt){
+ const ctx=context(),skill=explicit.value;
+ if(!ctx.project_id||!ctx.conversation_id)throw new Error('先选择项目并保存会话。');
+ if(!skill||skill==='auto')throw new Error('请在输入区明确选择技能和编程设置，再导入计划。');
+ const item=chosenModel(),payload={mode:'skill',prompt:prompt.trim(),project_id:ctx.project_id,skill_id:skill,
+  paths:paths.value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean),model:item?item.provider+'::'+item.model:'auto'};
+ if(coding.checked){
+  if(executor.value==='codex')throw new Error('外部 Codex 请独立执行后关联任务；其费用不纳入自动计划预算。');
+  payload.coding=true;payload.coding_provider='gateway';payload.build_recipe=recipe.value;
+  payload.cases=JSON.parse(cases.value);if(heldout.value.trim())payload.heldout_cases=JSON.parse(heldout.value);
+  if(entry.value.trim())payload.entrypoint=entry.value.trim();
+  if(newPaths.value.trim())payload.new_paths=newPaths.value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
+ }
+ return payload;
+}
+window.SkillWorkbench={planPayload,context,handleSubmit,preview,download,evidence,reportPreview,codingPreview,controls,prepareImprovement};controls();
 })();

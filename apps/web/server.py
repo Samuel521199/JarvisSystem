@@ -187,6 +187,7 @@ class LocalChatServer(ThreadingHTTPServer):
         self.modules = None
         self.evolution = None
         self.conversation_tasks = None
+        self.assistant_plans = None
         self.version = version
         self.instance_id = secrets.token_hex(16)
         self.nonce = secrets.token_urlsafe(32)
@@ -228,7 +229,7 @@ class LocalChatServer(ThreadingHTTPServer):
         self.html = self.html.replace(b'__JARVIS_MEMORY_STYLE__', asset('memory.css'))
         self.html = self.html.replace(b'__JARVIS_KNOWLEDGE_STYLE__', asset('knowledge.css'))
         self.html = self.html.replace(b'__JARVIS_EXPLORER_STYLE__', asset('explorer.css'))
-        self.html = self.html.replace(b'__JARVIS_CONVERSATION_TASKS_STYLE__', asset('conversation_tasks.css'))
+        self.html = self.html.replace(b'__JARVIS_CONVERSATION_TASKS_STYLE__', asset('conversation_tasks.css') + b'\n' + asset('assistant-plans.css'))
         self.html = self.html.replace(b'__JARVIS_WORKBENCH_STYLE__', asset('workbench.css'))
         self.html = self.html.replace(b'__JARVIS_PROJECT_MENU_STYLE__', asset('project_menu.css'))
         # Exact public asset map; source artwork and arbitrary paths stay private.
@@ -351,6 +352,7 @@ class LocalChatServer(ThreadingHTTPServer):
         try:
             if self.federation:self.federation.close()
             self.chat_requests.cancel_all()
+            if self.assistant_plans:self.assistant_plans.close()
             self.dialogue.close()
             models = getattr(self.chat, 'dialogue_models', None)
             if models is not None: models.close()
@@ -527,6 +529,8 @@ class ChatHandler(BaseHTTPRequestHandler):
         if self.path.lstrip('/') in self.server.ui_assets.failures:
             self._error(503, 'ui_asset_unavailable', '此界面资源暂不可用；聊天核心继续可用。')
             return
+        from assistant_plan_routes import handle as plan_route
+        if plan_route(self):return
         from speech_routes import get as speech_get
         from dialogue_routes import get as dialogue_get
         if dialogue_get(self): return
@@ -752,6 +756,8 @@ class ChatHandler(BaseHTTPRequestHandler):
     def do_POST(self):
         if not self._boundary(post=True):
             return
+        from assistant_plan_routes import handle as plan_route
+        if plan_route(self,post=True):return
         conversation_action = re.fullmatch(r'/api/conversations/([a-f0-9]{32})(/delete)?', self.path)
         conversation_task_action = re.fullmatch(r'/api/conversation-tasks/([a-f0-9]{32})(?:/(task_[a-f0-9]{32})/cancel|/(documentation-candidate))?',self.path)
         memory_action = re.fullmatch(r'/api/memory/([a-f0-9]{32})(/delete)?', self.path)
@@ -1137,6 +1143,14 @@ def create_server(*, core=None, chat=None, data_dir=None, config_path=None, port
             except Exception: server.evolution.ranking_modules = None  # Optional corruption cannot take down chat.
         from jarvis_core.work_admission import WorkAdmission
         server.dialogue.work_admission = WorkAdmission(core,server.computer)
+        from jarvis_core.assistant_plans import AssistantPlans
+        try:
+            server.assistant_plans = AssistantPlans(core, server.conversation_tasks)
+        except Exception:
+            # An unreadable optional plan store must not take down foreground chat.
+            # Its routes return unavailable; memory provenance still fails closed.
+            server.assistant_plans = None
+        server.dialogue.work_admission.plans = server.assistant_plans
         from jarvis_core.modules import ModuleMonitor
         server.modules = ModuleMonitor(core,lambda:{'chat':server.chat_requests.active,
             'calculator_uses':server.metrics.snapshot()['counters'].get('calculation_completed',0),

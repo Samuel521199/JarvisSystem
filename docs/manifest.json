@@ -230,7 +230,8 @@
         "ranking-module-ui",
         "team-analysis-ui",
         "shared-cards-ui",
-        "cooperation-learning-ui"
+        "cooperation-learning-ui",
+        "personal-plan-ui"
       ],
       "status": "proposed",
       "reader_summary": "怎样自然交流、延续人格，并在需要时展开工作台？"
@@ -253,7 +254,8 @@
         "bounded-coding-workflow",
         "tank-game-runtime",
         "bounded-team-runtime",
-        "dynamic-team-runtime"
+        "dynamic-team-runtime",
+        "personal-plan-runtime"
       ],
       "status": "proposed",
       "reader_summary": "怎样一边交流一边执行任务，如何组织多 Agent？"
@@ -314,7 +316,8 @@
         "semantic-candidates-runtime",
         "retrieval-ranking-module",
         "shared-memory-projection",
-        "learning-candidate-provenance"
+        "learning-candidate-provenance",
+        "plan-result-provenance"
       ],
       "status": "proposed",
       "reader_summary": "记住什么，怎样检索、纠正、遗忘和持续学习？"
@@ -411,7 +414,8 @@
         "speech-input-contract",
         "team-analysis-contract",
         "shared-cards-contract",
-        "cooperation-learning-contract"
+        "cooperation-learning-contract",
+        "personal-plan-contract"
       ],
       "status": "proposed",
       "reader_summary": "模块之间怎样交换任务、事件和记忆数据？"
@@ -567,7 +571,8 @@
         "k6-shared-access-evidence",
         "k6-connection-recovery-evidence",
         "k6-scoped-sharing-evidence",
-        "cooperation-learning-evidence"
+        "cooperation-learning-evidence",
+        "personal-plan-evidence"
       ],
       "status": "proposed",
       "reader_summary": "哪些能力测过，证据在哪里，下一阶段怎样验收？"
@@ -3127,9 +3132,9 @@
     }
   ],
   "implementation": {
-    "version": "0.1.88",
-    "scope": "Four bounded increments: fixed-owner peer text tasks, cached assistant continuity, 2-4 sequential role allocation, demand/evidence handoff to existing K4/K5. One-PC independent process and browser simulation; physical LAN, arbitrary effects and universal autonomous acceptance remain unverified.",
-    "evidence": "evals/reports/k6-cooperation-learning-2026-10-21.json",
+    "version": "0.1.89",
+    "scope": "Personal assistant loop: reviewed multi-step plans, existing executors and recovery, local authorized follow-up and price-table budgets, revocable result provenance, shared Host admission. Bounded local and live probes; universal planning, physical low-RAM PC and cross-node resource scheduling remain unverified.",
+    "evidence": "evals/reports/personal-assistant-loop-2026-10-21.json",
     "overall_design_status": "proposed",
     "complete_k1_gate": false,
     "complete_k2_gate": false,
@@ -3413,7 +3418,10 @@
       "evals/reports/k6-learning-live-2026-10-21.json",
       "evals/reports/k6-cooperation-deployment-2026-10-21.json",
       "evals/reports/k6-cooperation-deployment-final-2026-10-21.json",
-      "evals/reports/k6-cooperation-package-2026-10-21.json"
+      "evals/reports/k6-cooperation-package-2026-10-21.json",
+      "evals/reports/k6-cooperation-learning-2026-10-21.json",
+      "evals/reports/personal-assistant-ui-2026-10-21.json",
+      "evals/reports/personal-assistant-live-2026-10-21.json"
     ],
     "complete_k4_gate": false
   }

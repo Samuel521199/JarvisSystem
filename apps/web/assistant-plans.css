@@ -1,0 +1,18 @@
+.personal-plans{position:fixed;inset:0 0 0 auto;margin:0;width:min(720px,96vw);height:100dvh;max-height:100dvh;max-width:96vw;min-width:min(360px,96vw);resize:horizontal;overflow:auto;border:0;border-left:1px solid var(--line);background:var(--surface);color:var(--ink);padding:22px;box-shadow:-18px 0 70px #0005;z-index:100}
+.personal-plans header{display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:-22px;background:var(--surface);padding:12px 0;z-index:1}
+.personal-plans h2{font-size:19px;margin:0}.personal-plans h3{font-size:15px}
+.personal-plans button,.personal-plans select,.personal-plans input,.personal-plans textarea{border:1px solid var(--line);border-radius:8px;background:var(--page);color:var(--ink);padding:8px;max-width:100%;box-sizing:border-box}
+.personal-plans button{cursor:pointer}.personal-plans label{display:grid;gap:5px;color:var(--muted);font-size:12px}
+.personal-plans textarea{width:100%;min-height:68px;resize:vertical}.personal-plans small,.personal-plans p{overflow-wrap:anywhere}
+.plan-actions,.plan-policy{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.plan-policy label{min-width:100px;flex:1}
+.plan-step,.plan-entry{padding:14px;border:1px solid var(--line);border-radius:12px;margin:12px 0;background:var(--page)}
+.plan-step[data-state=RUNNING]{border-color:var(--focus);animation:plan-glow 2s ease-in-out infinite}
+.plan-step[data-state=SUCCEEDED]{border-left:3px solid var(--green)}
+.plan-error{color:var(--error);white-space:pre-wrap}.plan-state{font-size:12px;color:var(--muted)}
+.plan-step pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;max-height:220px;overflow:auto}
+.plan-step .plan-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.plan-dirty{color:var(--accent);font-size:12px}
+.plan-notice{border-left:3px solid var(--focus);padding:8px 12px;background:var(--selected)}
+#open-personal-plans[data-unread=true]::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--focus);position:absolute;right:3px;top:3px}
+@keyframes plan-glow{50%{box-shadow:0 0 14px color-mix(in srgb,var(--focus) 15%,transparent)}}
+@media(prefers-reduced-motion:reduce){.plan-step[data-state=RUNNING]{animation:none}}
+@media(max-width:520px){.personal-plans{width:100vw;max-width:100vw;padding:14px;resize:none}.plan-step .plan-grid{grid-template-columns:1fr}}

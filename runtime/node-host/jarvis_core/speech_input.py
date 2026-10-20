@@ -124,7 +124,10 @@ class SpeechInput:
 
     def _run(self, ident, pcm, language, cancel):
         started = time.monotonic()
+        from .runtime_admission import coordinator
+        lease = None
         try:
+            lease = coordinator(self.core).acquire('stt', 768, owner=ident)
             result = self.runner(pcm, language, cancel)
             self.core.assert_running()
             if not isinstance(result, dict) or not isinstance(result.get('text'), str) or len(result['text']) > 4000:
@@ -138,6 +141,7 @@ class SpeechInput:
                 if not cancel.is_set():
                     self.rows[ident].update(status='FAILED', message='本地识别未完成。请检查模型和内存，或继续打字；没有上传录音。')
         finally:
+            if lease is not None: coordinator(self.core).release(lease)
             with self.lock:
                 if self.active == ident:
                     self.active = None

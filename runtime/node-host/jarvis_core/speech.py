@@ -209,6 +209,8 @@ class SpeechService:
 
     def _run(self, row, epoch, parsed):
         temporary = None
+        from .runtime_admission import coordinator
+        lease = None
         finished = threading.Event()
         def watch_control():
             while not finished.wait(.25):
@@ -219,6 +221,7 @@ class SpeechService:
                     return
         threading.Thread(target=watch_control, name='jarvis-speech-control', daemon=True).start()
         try:
+            lease = coordinator(self.core).acquire('tts', 1024, owner=row['id'])
             if row['action'] == 'start': result = self._start(epoch)
             else:
                 self._checkpoint(epoch)
@@ -238,6 +241,7 @@ class SpeechService:
                     row.update(status='FAILED', finished_at=now(), message=str(exc) if isinstance(exc, SpeechError) else
                         '语音操作失败或超时，本次语音进程已回收；聊天服务继续运行。')
         finally:
+            if lease is not None: coordinator(self.core).release(lease)
             finished.set()
             if temporary and temporary.exists():
                 try: temporary.unlink()

@@ -464,6 +464,7 @@ class ChatService:
                 transport = self.dialogue_models.probe if self.dialogue_models is not None and in_dialogue.get() else gateway.probe
                 response = transport(config, selected, view.message, Path(self.core.data_dir), guard,
                                          admission_context=admission,
+                                         **({'task_id':self.core.task_id} if getattr(self.core, 'task_id', None) else {}),
                                          **({'shared_dispatch': {'scope': shared_context['scope'], 'references': shared_refs,
                                               'config_path': str(self.config_path)}}
                                             if shared_refs and transport != gateway.probe else {}),

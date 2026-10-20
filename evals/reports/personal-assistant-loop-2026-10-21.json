@@ -1,0 +1,139 @@
+{
+  "version": "0.1.89",
+  "status": "passed_bounded_scope",
+  "captured_at": "2026-10-20T19:40:50.693092+00:00",
+  "requirements": {
+    "editable_plan": {
+      "implemented": true,
+      "automatic_intent_routes": "existing Gemini protocol routes only",
+      "max_steps": 8,
+      "unfinished_source_revision_checked": true
+    },
+    "execution_and_recovery": {
+      "implemented": true,
+      "executors": [
+        "Context7 research",
+        "sample report",
+        "2-4 sequential analysis roles",
+        "existing skills and checked coding candidates"
+      ],
+      "completed_receipts_reused": true,
+      "unknown_never_auto_replayed": true,
+      "restart_pauses_active_plan": true
+    },
+    "authorized_followup": {
+      "implemented": true,
+      "channel": "local in-app",
+      "quiet_hours": true,
+      "frequency_and_daily_limit": true,
+      "per_plan_call_limit": true,
+      "currency_caps": "conservative configured-price reservations, USD and CNY separately",
+      "model_calls_per_status_tick": 0
+    },
+    "revocable_results": {
+      "implemented": true,
+      "pending_before_confirmation": true,
+      "correction_withdrawal_and_source_change_invalidate": true,
+      "work_result_not_profile": true
+    },
+    "foreground_availability": {
+      "implemented": true,
+      "host_shared_estimated_memory_leases": true,
+      "background_fifo": true,
+      "nonmodal_ui": true,
+      "os_reservation": false
+    }
+  },
+  "regression": {
+    "tests": 149,
+    "status": "passed",
+    "log": "H:\\JarvisData\\diagnostics\\personal-plans-regression-release.txt",
+    "suites": [
+      "task_queue",
+      "sample_tasks",
+      "team_tasks",
+      "speech_input",
+      "speech",
+      "qwen_speech",
+      "dialogue_process",
+      "memory_sources",
+      "memory_view",
+      "runtime_releases",
+      "web",
+      "assistant_plans",
+      "personal_plan_execution"
+    ]
+  },
+  "browser": {
+    "status": "passed",
+    "checks": [
+      "nonmodal_plan_panel_keeps_chat_focusable",
+      "editable_two_step_plan_real_worker",
+      "foreground_reply_during_plan",
+      "candidate_correction_and_knowledge_admission",
+      "candidate_withdrawal_ui",
+      "narrow_layout_and_accessible_controls"
+    ],
+    "page_errors": [],
+    "fixture_reply_seconds": 0.039
+  },
+  "live": {
+    "status": "passed",
+    "model": "vertex::gemini-3.1-pro-preview",
+    "automatic_draft_steps": 3,
+    "reviewed_steps": 2,
+    "owner_review_simulated_by_test": true,
+    "actual_model_calls_successful_run": 3,
+    "context7_tool_calls": 1,
+    "estimated_usd_successful_run": 0.033636,
+    "first_attempt": {
+      "status": "no_plan_proposed",
+      "cause": "Probe omitted persistent-session flag; draft creation correctly refused for a temporary turn.",
+      "cloud_calls": 1,
+      "estimated_usd": 0.015072
+    },
+    "total_estimated_usd": 0.048708,
+    "automatic_retries": 0
+  },
+  "dependencies_added": [],
+  "production_test_memory_written": false,
+  "deployment": {
+    "status": "passed",
+    "version": "0.1.89",
+    "business_state_unchanged": true,
+    "assets": {
+      "assistant-plans.js": "e047018c4ddb405b8146a1bf00d4f8fe57c0c95b799fed839219dd53bde3da9d",
+      "assistant-plans.css": "d50b336fb29d51427e641f260d3e7a43a05000743e67d40657f61d4fb69f0dd8"
+    },
+    "personal_plan_api_checked": true,
+    "instance_id": "ce18ae73adee4cfd07108c3ebb181b0b",
+    "cloud_calls": 0,
+    "metadata_evidence_sha256": "1ba3c78e2c50a295ed8dfe2b843d6df32cccf5f3841f670530ea4c716d02aebc"
+  },
+  "limitations": [
+    "No universal planning or business-acceptance guarantee; generated live draft was reviewed and configured by the test.",
+    "Code generation in combined execution uses synthetic model output with real Worker and independent checks; live probe covers research and role analysis.",
+    "Configured prices and actual token receipts estimate charges; supplier invoice can differ.",
+    "Single PC only; not a physical 8 GiB PC saturation, GPU scheduling, multi-node resource scheduling or long-term companionship evaluation.",
+    "External Codex remains an independently authorized task that may be linked, not automatically charged inside this plan budget."
+  ],
+  "extra_context_check": {
+    "status": "passed",
+    "scope": "stale memory snapshot excluded from model context after candidate correction; withdrawn result absent from fresh context",
+    "tests": 1
+  },
+  "runtime_package": {
+    "status": "passed",
+    "version": "0.1.89",
+    "sha256": "72dee0918d4232a3cf39bbef3df773a35e36bbf6cb233fa57069f936e3412410",
+    "bytes": 70683201,
+    "files": 1637,
+    "source_snapshot": "Excludes unrelated screensaver work",
+    "checks": "Two isolated same-version runtime slots; original task and artifact survive reopen; Python network-denial hook",
+    "limitations": [
+      "Same-version fallback slot; no cross-version schema migration or protected service activation.",
+      "Python network-denial hook only; machine-wide disconnected boot not tested.",
+      "Optional browser/speech, model weights, owner keys and live state are excluded."
+    ]
+  }
+}

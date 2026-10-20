@@ -18,6 +18,8 @@ def main():
     # Carry the parent's authorization epoch. Never initialize/recover the core.
     core._security_epoch = request['epoch']
     core.assert_running()
+    from jarvis_core.plan_budget import current_task
+    current_task.set(request.get('task_id'))
     if request.get('task_id'):
         from jarvis_core.sample_tasks import ScopedCore
         original = core

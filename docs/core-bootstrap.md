@@ -1,6 +1,6 @@
 # 最小核心、初始资产与开发路线
 
-> 状态：整体 proposed；当前源码版本 0.1.88；实现与部署状态见[本轮记录](delivery-validation.md#cooperation-learning-evidence)；K4 工具与需求增量已验证，见[契约审阅证据](delivery-validation.md#k4-contract-evidence)，K3 开发协作通过，证据见[K3 收口](delivery-validation.md#k3-closure-matrix)，新增[K3 编码协作](delivery-validation.md#k3-coding-evidence)，保留[应用离线控制](models-offline.md#application-offline-control)；范围、验证与阻塞见[K2 本轮收口](delivery-validation.md#k2-completion-evidence)；完整 K1/K2 仍待原验收条件。跨主题差距见[后续方向指南](development-guide.md#direction-start)，实施次序见[当前推进队列](#near-term-work-queue) · 更新：2026-10-20
+> 状态：整体 proposed；当前源码版本 0.1.89；实现与部署状态见[本轮记录](delivery-validation.md#personal-plan-evidence)；K4 工具与需求增量已验证，见[契约审阅证据](delivery-validation.md#k4-contract-evidence)，K3 开发协作通过，证据见[K3 收口](delivery-validation.md#k3-closure-matrix)，新增[K3 编码协作](delivery-validation.md#k3-coding-evidence)，保留[应用离线控制](models-offline.md#application-offline-control)；范围、验证与阻塞见[K2 本轮收口](delivery-validation.md#k2-completion-evidence)；完整 K1/K2 仍待原验收条件。跨主题差距见[后续方向指南](development-guide.md#direction-start)，实施次序见[当前推进队列](#near-term-work-queue) · 更新：2026-10-20
 > [文档入口](README.md) · [维护规则](MAINTENANCE.md) · [架构图册](architecture-atlas.md)
 
 <!-- book-nav:start -->
@@ -45,7 +45,7 @@
   - [4.2.6 两个层次：哪些能长大，哪些不能自行放开](#bootstrap-4)
 - [4.3 开发顺序与每一步的出口](#bootstrap-5)
 - [4.4 接下来具体做什么、什么时候进入下一步](#next-implementation)
-  - [4.4.1 当前推进队列（更新至 0.1.88）](#near-term-work-queue)
+  - [4.4.1 当前推进队列（更新至 0.1.89）](#near-term-work-queue)
     - [4.4.1.1 K4/K5 已有闭环与 K6 当前工作（2026-10-20）](#k4-next-delivery)
   - [4.4.2 K2 内优先完成文字/语音对话与工作的分离](#dialogue-upgrade-order)
   - [4.4.3 K2 内的最小自主进化核心](#k2-growth-core)
@@ -642,9 +642,11 @@ K1 可以暂时用假模型/规则输入验证可靠性，但它还不能叫完�
 本节是**当前工作顺序的唯一权威位置**。下面细分既有 K 工作包；后续指南的 F 编号只是工作项索引，不建立第二套 K/M 路线。日期较早的进度段落保留为历史，不再充当下一步队列。继续复用现有单机底座，K1 可靠性收口与 K2 个人核心增量按依赖推进。
 
 <a id="near-term-work-queue"></a>
-### 当前推进队列（更新至 0.1.88）
+### 当前推进队列（更新至 0.1.89）
 
-**本轮按主人要求连续交付四项：共同任务所有权与交接 → 缓存回执接续 → 2—4 个按需分析角色 → 真实需求学习与原 K4/K5 改造链。** [逐项范围与证据](delivery-validation.md#cooperation-learning-evidence)。均可在单机独立进程及既有隔离执行器内验证；真实跨机、任意副作用接管和通用自主改造不在本次完成口径。后续按实际用途扩展任务能力、语音体验和模块，不再把本轮入口重复列为未实现。
+**0.1.89 已完成本轮个人助理闭环的限定实现：**目标／未结事项草案 → 明确审阅 → 多步执行与接续 → 授权跟进 → 可纠正结果记忆；同时收敛 Host 资源准入。[本轮验收和剩余边界](delivery-validation.md#personal-plan-evidence)。下一轮应按真实使用反馈扩展更多意图路由和执行场景、验证普通 PC 资源表现，不重复建设平行任务系统；真实第二台设备仍待条件，继续保留单机模拟范围。
+
+**上一轮按主人要求连续交付四项：共同任务所有权与交接 → 缓存回执接续 → 2—4 个按需分析角色 → 真实需求学习与原 K4/K5 改造链。** [逐项范围与证据](delivery-validation.md#cooperation-learning-evidence)。均可在单机独立进程及既有隔离执行器内验证；真实跨机、任意副作用接管和通用自主改造不在本次完成口径。后续按实际用途扩展任务能力、语音体验和模块，不再把本轮入口重复列为未实现。
 
 **2026-10-19 按主人最新要求停止重复验收，恢复向下开发。** 既有 K2 收口与待验条件保留，不降低门槛也不冒称整体验收通过。F08 的限定职责拆分已随 0.1.64 完成；按主人要求先上传该版本，再在 0.1.65 完成 F07 的候选代码、独立检查、多文件任务和外部 Codex 子集。每轮只做受影响的新改动必要检查，不重跑整套 K2、付费回答评审或离线验收。
 

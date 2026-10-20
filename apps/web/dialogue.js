@@ -22,6 +22,10 @@ function markIntent(article,result){
    button.onclick=async()=>{button.disabled=true;try{await ConversationTasks.prepareDocumentation(item.arguments,conversationId,item.quote);}catch{notify('未能准备文档查询草稿，请查看连接和当前会话。');}finally{button.disabled=false;}};details.append(button);
   }
  }
+ if(result.plan_proposal?.id){
+  const open=document.createElement('button');open.type='button';open.textContent='查看可编辑计划 · '+result.plan_proposal.steps+' 步';
+  open.onclick=()=>window.PersonalPlans?.open(result.plan_proposal.id);details.append(open);details.open=true;
+ }
  article.append(details);
  if(submitted)window.ConversationTasks?.automaticReceipt(result.work_admission);
 }

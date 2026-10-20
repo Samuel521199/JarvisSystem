@@ -28,6 +28,7 @@ class WorkAdmission:
     def __init__(self, core, tasks):
         self.core, self.tasks = core, tasks
         self.documentation = DocumentationAdmission(core, tasks)
+        self.plans = None
 
     def capture(self, conversation_id):
         return self.documentation.capture(conversation_id)
@@ -46,6 +47,14 @@ class WorkAdmission:
     def admit(self, row, payload, result):
         if payload.get('voice_mode') == 'conversation':
             return result
+        intents = (result.get('intent_decision') or {}).get('intents', [])
+        requested = [i for i in intents if i.get('kind')=='action' and i.get('disposition')=='requested']
+        if self.plans is not None and (len(requested)>1 or '计划' in payload.get('message','')):
+            proposal = self.plans.propose_turn(row,payload,result)
+            if proposal:
+                return {**result, 'plan_proposal':proposal, 'work_admission':{
+                    'status':'draft', 'automatic':False, 'capability':'assistant.plan',
+                    'reason':proposal['message']}}
         choice = select_report(payload.get('message', ''), result.get('intent_decision'))
         if choice is None:
             result = self.documentation.admit(row, payload, result)

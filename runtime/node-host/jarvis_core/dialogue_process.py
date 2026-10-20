@@ -100,7 +100,11 @@ class DialogueProcesses:
         started = time.monotonic()
         sent = False
         reason = 'start_failed'
+        lease = None
         try:
+            if packet.get('action') == 'reply' and not packet.get('task_id'):
+                from .runtime_admission import coordinator
+                lease = coordinator(self.core).acquire('chat', 256, owner=ident)
             control = guard()
             packet = {**packet, 'id': ident, 'epoch': control['security_epoch']}
             raw = json.dumps(packet, ensure_ascii=False, allow_nan=False).encode('utf-8')
@@ -214,6 +218,7 @@ class DialogueProcesses:
                 if job: job.close()
                 self.completed += 1
                 self.last = {'reason': reason, 'seconds': round(time.monotonic()-started, 3)}
+            if lease is not None: coordinator(self.core).release(lease)
             self.slots.release()
 
     def snapshot(self):

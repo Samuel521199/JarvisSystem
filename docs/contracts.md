@@ -83,6 +83,7 @@
 - [8.16 单机双职责协作契约（0.1.82）](#team-analysis-contract)
 - [8.17 双节点共享资料契约（0.1.87）](#shared-cards-contract)
 - [8.18 共同任务、动态团队与学习交接增量（0.1.88）](#cooperation-learning-contract)
+- [8.19 个人计划、预算与本机资源准入契约](#personal-plan-contract)
 <!-- book-nav:end -->
 
 <a id="k0-contracts"></a>
@@ -1502,6 +1503,19 @@ ChatService 返回 `history_info.shared={references,dropped_history_messages,use
 任务 envelope 绑定 `format/space/sender/target/request_id`；spec 绑定 `id/owner/executor/generation/capability/title/text/scope`。所有者命令序号 1 为交接、2 为取消；执行回执独立版本单调增加。调用端重新检查许可修订、终态一致性和确定性结果。
 
 新受管理运行包兼容 federation schema 5、evolution schema 9；含动态 `_team` 的任务数据禁止回退到旧解释器。学习表和团队附表仍复用原数据库，未更改旧任务/动作的唯一状态权威。手工运行旧源码不属于受管理兼容保证。
+
+<a id="personal-plan-contract"></a>
+## 个人计划、预算与本机资源准入契约
+
+0.1.89 的 `AssistantPlans` 是可选 Host 协调模块，运行语义归[任务章](tasks-agents.md#personal-plan-runtime)。首次使用才创建 `assistant-plans.db`（schema 1），最多 64 份计划、每份 128 KiB，库文件上限 24 MiB；达到容量时明确拒绝，不自动清理主人资料。数据库损坏时计划接口不可用，前台聊天仍能启动；来源无法核验的记忆不可使用。存在该库时旧运行包不能绕过来源规则回退运行，需兼容版本。
+
+`GET /api/assistant-plans?conversation_id=…` 返回当前会话计划、同范围有效未结事项、默认政策及资源状态；`GET /api/assistant-plans/{id}` 返回详情。POST 创建，或携带 `action + revision` 执行 edit/start/pause/cancel/link/replan/candidate/accept/withdraw/ack。沿用回环 Host、页面 token、严格 JSON 与请求大小限制；修改采用乐观修订检查，计划范围还要核对当前持久会话与项目。暂停、取消和撤回不依赖新模型许可。
+
+模型 Gateway 在 HTTP 派发前，通过原任务请求号绑定计划，原子预留调用数和费用。USD/CNY 各自累计，不自动换汇；默认 12 次、USD 1、CNY 5，界面可在明确确认后调整。文本预算按配置价表、输入字节保守界限及输出／推理余量计算；价格未知、过期、输入超出适用层级或含图片时不自动派发。失败或 UNKNOWN 的预留不自动退还，不做模型自动重试。`usage.receipts` 保留实际返回用量与预留依据；这不是供应商账单的数学硬上限，也不包括独立执行后再关联的历史任务。
+
+站内跟进默认关闭；开启后的默认最短间隔 60 分钟、每日最多 3 条、22:00—08:00 安静时间，按保存的 UTC 偏移解释。间隔至少 15 分钟，每日最多 6 条；同一状态已有未读提醒时不重复。该限额管理站内提醒，不自动取消已授权运行中的任务。前端每 15 秒的状态读取与后台每 5 秒协调均不调用模型。
+
+`RuntimeAdmission` 统一同一 Host 内聊天、TaskQueue、成长、TTS/STT 的内存估算租约：前台聊天最多 2 槽；任务与成长共用 1 个后台槽并按等待顺序竞争；语音各自限并发。后台准入至少保留 1024 MiB 观察余量，聊天采用较低余量要求；取消、异常与正常结束均释放租约，等待不触发模型。它是本机进程内资源准入，不是 OS 实际预留、GPU 显存调度或跨节点全局调度；索引和其他外部进程不因此得到统一 CPU/GPU 限额，低内存设备仍需实机测量。
 
 <!-- book-footer:start -->
 [返回全书目录](README.md#book-tree) · [上一章：主人利益原则、身份授权与停止控制](security-sovereignty.md) · [下一章：技术栈、源码目录与运行数据](stack-project-layout.md)

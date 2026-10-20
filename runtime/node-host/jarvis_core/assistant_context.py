@@ -12,6 +12,9 @@ def chat_instructions(provider: str, model: str, *, catalog_summary: str = '') -
         "Skills guide replies; skill tasks can make an offline 2D tank game. Only receipts prove actions and completion. "
         "Ordinary replies cannot save memory or run commands for the user. Do not promise automatic remembering. "
         "For memory writes, guide the user to confirm a candidate or send: 记住：名称=内容; 修改记忆：名称=新内容; 忘记：名称. "
+        "Personal Plans UI can turn requested actions into editable steps, approve a bounded budget, "
+        "run existing research/coding/team tasks and show receipts, reminders and reviewed result candidates. "
+        "A draft is not execution; unknown outcomes are never automatically replayed. "
         "Cite supplied project excerpts. "
         + catalog_summary +
         "Never claim memory edits, actions or verification without receipts. "

@@ -1,6 +1,6 @@
 # 后续方向指南：现状、缺口与优化工作清单
 
-> 文档 ID：docs-development-guide｜分析基线：v0.1.58；增量更新至 v0.1.77，2026-10-20｜状态：现状为代码/既有证据复核，后续建议 proposed。
+> 文档 ID：docs-development-guide｜分析基线：v0.1.58；增量更新至 v0.1.89，2026-10-21｜状态：现状为代码/既有证据复核，后续建议 proposed。
 > 本章独占维护跨主题缺口清单与优化建议；K0—K6、阶段内推进顺序仍归[核心路线](core-bootstrap.md#next-implementation)，正式通过条件仍归[验收章](delivery-validation.md#next-k1-acceptance)。这里没有第二套开发时间线，也不宣布完整 K1/K2 已通过。
 
 <!-- book-nav:start -->
@@ -75,17 +75,17 @@
 | 领域 | 当前可复用状态 | 仍缺什么 | 后续工作项 |
 |---|---|---|---|
 | 文字交流与任务 | 局部 verified：回执、持久恢复、两个对话槽、独立后台槽、限定混合报告及指定修改/取消 | 通用混合意图与模糊指代、更多模型/能力、逐步输出 | [F01](#direction-dialogue)、[F02](#direction-resources) |
-| 语音 | 局部 verified：Qwen 表达/朗读、按键录音、本地转写与新回复播报 | 持续轮次、声学回声/打断、多人识别、真实环境质量与全面资源竞争 | [F05](#direction-voice) |
+| 语音 | 局部 verified：按键输入、Qwen 合成、连续轮次、Silero 门控与受限插话 | 真实 AEC、多人识别、逐字流式、真实环境质量及饱和资源验证 | [F05](#direction-voice) |
 | 记忆与经历 | 局部 verified：明确记忆、按需候选、修订屏障、本地核对；0.1.62 补相关事实选择与话题推荐 | 复杂转述、有效时间、通用语义经历召回、完整受众与跨来源遗忘仍缺 | [F03](#direction-memory-integrity)、[F04](#direction-memory-quality) |
-| 人格与主动性 | implemented/局部 verified：自定义称呼、固定交流风格/关系、持久修订与整组撤销界面 | 自定义复杂表达/多形态、长期情境一致性、可撤回的主动跟进 | [F06](#direction-persona) |
+| 人格与主动性 | implemented／局部 verified：持久称呼风格；0.1.89 可编辑个人计划、未结事项导入和授权站内跟进 | 长期情境一致性、多形态与自然规划泛化；提醒打扰感需真实反馈 | [F06](#direction-persona) |
 | 技能与工具 | 局部 verified：11 个可见技能；Context7 有实际调用 | 其他 MCP 多为目录推荐；自动组合仍有限，技能生效条件与收益不均 | [F01](#direction-dialogue)、[F07](#direction-coding) |
-| 编程与成长 | [K3 已闭环](delivery-validation.md#k3-closure-matrix)；K4 已有受审阅工具发布、灰度/回退、契约体检及退役版本归档 | 0.1.78 已完成三个明确领域的 K4 闭环；长期收益、通用业务语义仍未证明；当前 K5 已拆排序接口，模型生成的自身模块与持久切换待补 | [F07](#direction-coding)、[F08](#direction-growth) |
+| 编程与成长 | K3 已闭环；K4 受审阅发布／灰度／退役；K5 限定排序模块生成、对照与持久切换；0.1.88 需求学习接原改造链 | 通用自身源码改造、任意业务验收正确性和长期净收益 | [F07](#direction-coding)、[F08](#direction-growth) |
 | 模型与离线 | 局部 verified：多供应商、用量/估算、固定本地小模型及封闭任务 | 跨用途统一策略、质量驱动路由、真实整机断网和组件自更新 | [F09](#direction-offline)、[F10](#direction-routing) |
-| 资源与可靠性 | 局部 verified：准入、进程回收、UNKNOWN、短时与本机长时子集 | 跨通道原子资源预留、CPU/GPU/配额公平、完整设备/磁盘故障矩阵 | [F02](#direction-resources)、[F09](#direction-offline) |
+| 资源与可靠性 | 0.1.89 聊天、任务、成长与语音共用 Host 内存估算租约；任务／成长 FIFO | OS 资源预留、CPU/GPU／跨节点公平、物理小内存 PC 和完整故障矩阵 | [F02](#direction-resources)、[F09](#direction-offline) |
 | 模块管理与版本 | implemented/局部 verified：监控、运行包切换、技能验证失效显示 | 任意有状态模块热换、在途版本兼容、跨库迁移、长期退役 | [F11](#direction-maintenance)、[F12](#direction-architecture) |
-| 学习与知识库 | 局部 implemented：登记资料词法查询、来源片段、限定成长记录 | 增量索引/编纂、目标相关互联网学习、派生依赖撤销 | [F04](#direction-memory-quality)、[F13](#direction-learning) |
+| 学习与知识库 | 资料查询、0.1.88 需求／研究交接；0.1.89 可纠正结果知识与来源失效 | 通用自动知识编纂、长期语义质量、跨来源完整依赖撤销 | [F04](#direction-memory-quality)、[F13](#direction-learning) |
 | 电脑、设备、创作 | 局部 verified：限定浏览器、REA 静态分析、固定齿轮科普 | 通用桌面/应用操作、设备反馈、任意 CAD/三维/视频创作 | [F14](#direction-connectors) |
-| 多设备、动态 Agent、NPC | proposed，存在契约与设计，未形成系统验收 | 双节点自治与合并、任务唯一执行、资源受控组队、虚拟世界隔离 | [F15](#direction-federation)、[F16](#direction-agents) |
+| 多设备、动态 Agent、NPC | 0.1.87 分域共享与接收许可；0.1.88 固定所有权共同任务及 2—4 顺序角色；单机独立进程模拟 verified | 真实双机／复杂故障、任意副作用接管、跨节点调度与 NPC 世界 | [F15](#direction-federation)、[F16](#direction-agents) |
 
 <a id="direction-work"></a>
 ## 4. 后续工作项：交付什么、依赖什么
@@ -108,7 +108,7 @@
 <a id="direction-resources"></a>
 ### F02 · 统一资源准入，完成真正有负载的并行验证
 
-**优先：随 F01/F05 收口的基础工作；归属 K1/W4—W6、K2/W3—W4。** 现有 `ResourceAdmission` 是内存观察与准入，不能当作 OS 预留；聊天、成长、维护、TTS 也尚未共享一份原子资源租约。
+**优先：随 F01/F05 收口的基础工作；归属 K1/W4—W6、K2/W3—W4。** 现有 `ResourceAdmission` 是内存观察与准入，不能当作 OS 预留；0.1.89 已将聊天、队列、成长与 TTS/STT 接到共享 Host 租约，契约见[统一资源准入](contracts.md#personal-plan-contract)。尚不覆盖所有索引／外部进程及 CPU/GPU 配额。
 
 0.1.62 已修复数据库争用造成的长取消等待、对话持久收尾占用公共锁；慢模型/4 CPU 争用、真实本地模型混合运行和浏览器分别测量，结果统一见 [K2 证据](delivery-validation.md#k2-completion-evidence)。这是文本与一个后台任务的适用范围；全语音/索引/维护的统一资源租约仍保留在本项。
 
@@ -159,6 +159,8 @@
 
 <a id="direction-persona"></a>
 ### F06 · 补长期伙伴连续性与可控主动性
+
+0.1.89 已交付[个人计划与授权跟进](tasks-agents.md#personal-plan-runtime)，不再把这部分列为未实现；长期自然相处效果仍需真实反馈。
 
 **优先：K2 核心体验逐项补齐；更复杂形态归 K6。** 0.1.62 已实现自定义称呼、持久风格/关系、版本冲突保护、整组撤销和设置界面，正在生成的回答保持原快照，修改从下一轮生效。性别表达、声音/化身映射及长期情境一致性仍未实现/完整验证，不能将称呼继续列为待实现。
 
@@ -243,6 +245,8 @@ K4 已由 0.1.78 的[限定领域整链](delivery-validation.md#k4-growth-closur
 <a id="direction-learning"></a>
 ### F13 · 做目标驱动的知识编纂与联网学习
 
+0.1.88 的需求学习和 0.1.89 的[结果来源与知识笔记](knowledge-learning.md#plan-result-provenance)已接通，后续重点是更大范围的知识编纂质量。
+
 **更新至 0.1.88：** 已接通[需求、研究来源、审阅与 K4/K5 交接](evolution-release.md#demand-learning-loop)，并读取确认失败和重复任务提出学习机会；下文大规模知识编纂与广泛收益仍开放。
 
 **优先：F03/F04 的来源与失效链稳定后；归属 K2/W1、K3，后端替换归 K5。** 先选一组明确资料，比较直接读原文与增量编纂的回答收益；保留材料版本、段落引用、时间、冲突与重建入口，不先把全库转 Wiki。
@@ -265,6 +269,8 @@ K4 已由 0.1.78 的[限定领域整链](delivery-validation.md#k4-growth-closur
 <a id="direction-federation"></a>
 ### F15 · 从两台机器验证离线自治与重连合并
 
+0.1.87—0.1.88 已完成分域共享、接收许可、固定所有权交接和缓存接续的单机多进程验证，见[四项证据](delivery-validation.md#cooperation-learning-evidence)；真实两台机器仍待条件。
+
 **更新至 0.1.88：** 资料卡、分域共享、对端许可与固定所有权文本任务已完成单机双进程模拟，见[共同任务](federation.md#delegated-task-runtime)。下文总体目标中，真实跨机、更多任务及自动接管仍开放，不能把已完成链路重复列为待开发。
 
 **优先：设计保留，单机状态/恢复契约稳定后实施；归属 K6。** “离线是独立 Jarvis，联网形成共同体”应落为身份/策略、事实/经历、任务所有权和资源能力的协作，不是把各节点提示词或数据库文件直接拼在一起。
@@ -275,6 +281,8 @@ K4 已由 0.1.78 的[限定领域整链](delivery-validation.md#k4-growth-closur
 
 <a id="direction-agents"></a>
 ### F16 · 动态 Agent、NPC 与可变形态按预算扩展
+
+0.1.88 已实现 2—4 角色按预算顺序分析，0.1.89 已能作为[计划步骤](tasks-agents.md#personal-plan-runtime)执行；无限 Agent、跨机资源池和 NPC 世界仍是 proposed。
 
 **更新至 0.1.88：** 已在原执行器增加[2—4 角色按需分配与父任务预算](tasks-agents.md#dynamic-team-runtime)。更多角色模板、跨节点模型协作与 NPC 场景仍需独立实现和验收。
 

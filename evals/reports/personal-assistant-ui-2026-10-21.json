@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "version": "0.1.89",
+  "checks": [
+    "nonmodal_plan_panel_keeps_chat_focusable",
+    "editable_two_step_plan_real_worker",
+    "foreground_reply_during_plan",
+    "candidate_correction_and_knowledge_admission",
+    "candidate_withdrawal_ui",
+    "narrow_layout_and_accessible_controls"
+  ],
+  "page_errors": [],
+  "foreground_fixture_seconds": 0.039,
+  "model_fixture_calls": 2,
+  "actual_cloud_calls": 0,
+  "production_data_modified": false,
+  "screenshots": "H:\\JarvisData\\diagnostics\\personal-plans-ui-release-20261021",
+  "limitations": [
+    "Single-PC synthetic model output; not a real model latency or low-memory PC benchmark."
+  ],
+  "captured_at": "2026-10-20T19:39:59.099858+00:00"
+}

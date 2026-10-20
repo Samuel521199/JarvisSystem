@@ -338,6 +338,10 @@ class TaskQueue:
             retry = False
             delay = .25
             outcome = 'UNKNOWN'
+            lease = None
+            from .runtime_admission import coordinator
+            from .plan_budget import current_task
+            budget_context = current_task.set(None)
             try:
                 with self.core.ledger.connection() as db:
                     state = self._owned(db)
@@ -348,6 +352,9 @@ class TaskQueue:
                     if not self.resources.check(row['capability']):
                         delay = self.resources.retry_seconds
                         raise self.error_type('resource_wait', '后台任务正在等待内存。')
+                    coordinator(self.core).clear_waiters('task',row['task_id'])
+                    lease = coordinator(self.core).acquire('task', getattr(self.resources, 'profile', {'task_memory_mib': {row['capability']:256}})['task_memory_mib'][row['capability']], owner=row['task_id'])
+                    current_task.set(row['task_id'])
                     html = self._validate_binding(row)
                     record = self.core.ledger.record(task_id=row['task_id'])
                     args = record['action']['arguments']
@@ -374,6 +381,7 @@ class TaskQueue:
                         self._pause_on_error('result_unknown')
                     outcome = result['action']['status']
                 else:
+                    coordinator(self.core).clear_waiters('task')
                     self.resources.idle()
             except Exception as exc:
                 code = getattr(exc, 'code', 'queue_execution_failed')
@@ -385,6 +393,8 @@ class TaskQueue:
                         self._pause_on_error(code)
                     except (CoreError, OSError):pass
             finally:
+                if lease is not None: coordinator(self.core).release(lease)
+                current_task.reset(budget_context)
                 if self.metric_token is not None:
                     self.metrics.finish(self.metric_token,outcome)
                     self.metric_token = None
@@ -394,6 +404,8 @@ class TaskQueue:
 
     def close(self):
         self.closing.set()
+        from .runtime_admission import coordinator
+        coordinator(self.core).clear_waiters('task')
         # Serializes with begin_dispatch: after this transaction no new action
         # from this owner can start, including a race with the worker callback.
         with self.core.ledger.transaction() as db:
