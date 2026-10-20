@@ -55,7 +55,7 @@ class NetworkPolicy:
             value.update(offline=True, revision=None, valid=False, error='network_policy_unavailable')
         return {**value, 'scope': 'application', 'process_guard': bool(_process_policy and _process_policy.root == self.root),
                 'local_available': ['本地模型', '记忆与交流设置', '文件与确定性任务'],
-                'blocked': ['云模型及认证', '远程 MCP', '在线余额查询', '受控浏览器'],
+                'blocked': ['云模型及认证', '远程 MCP', '在线余额查询', '受控浏览器', '设备资料同步'],
                 'notice': '只限制此 Jarvis 数据目录对应的运行实例；不改变其他软件或系统网络。已外发请求无法撤回。应用级限制不等于系统防火墙。'}
 
     def change(self, offline, revision):

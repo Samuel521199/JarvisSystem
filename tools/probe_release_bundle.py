@@ -38,6 +38,12 @@ if sys.argv[3]=='first':
     TeamTaskService(core)
     assert validate({'prompt':'Package smoke','criteria':['bounded'],
                      'planner_model':'local::fixture','reviewer_model':'local::fixture'})['criteria']==['bounded']
+    sys.path.insert(0,str(root/'adapters/models/provider-native'))
+    from jarvis_core.federation import Federation
+    sharing=Federation(core)
+    assert not sharing.status()['initialized']
+    sharing.initialize()
+    assert sharing.status()['fingerprint'] and sharing.status()['endpoint'] is None
     core.stop('synthetic release recovery probe')
 else:
     state=core.status();assert state['stopped']

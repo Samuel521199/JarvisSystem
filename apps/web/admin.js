@@ -6,12 +6,12 @@ const count=value=>Number(value||0).toLocaleString('zh-CN');
 const money=(value,currency='USD')=>value==null?'待核对':value>0&&value<.000001?(currency==='CNY'?'<¥0.000001':'<$0.000001'):(currency==='CNY'?'¥':'$')+Number(value).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:6});
 const rate=value=>value==null?'—':Number(value).toLocaleString('en-US',{maximumFractionDigits:6});
 const statusNames={SUCCEEDED:'成功',FAILED:'失败',UNKNOWN:'结果未确认',CANCELLED:'已停止',RESERVED:'等待发送',DISPATCHING:'已发送'};
-const titles={coding:['CODING COLLABORATION','编码协作','候选由模型提出，交付由 Jarvis 独立检查。'],growth:['ADAPTIVE CORE','成长中心','观察状态，修复故障，按目标学习新能力。'],network:['NETWORK & OFFLINE','联网，由你控制。','只限制 Jarvis 的外网访问，保留本地能力和其他软件的网络。'],mcp:['CAPABILITIES','技能与工具','按用途发现 MCP，统一管理连接、条件和接入后的选用规则。'],skill:['CAPABILITIES','技能与工具','按任务选用合适的技能，集中管理使用条件。'],modules:['MODULE HEALTH','模块与升级','独立观察每项能力；准备升级时保留当前服务。'],home:['SETTINGS','设置','偏好与后台管理，集中在一个地方。'],appearance:['APPEARANCE','外观','按你的习惯调整页面配色。'],tasks:['BACKGROUND TASKS','后台任务','管理执行进度、队列和任务结果。'],overview:['USAGE OVERVIEW','每一次调用，都有记录。','在一个地方查看模型、接入方和每天的 API 费用。'],connections:['CONNECTIONS & KEYS','连接你的模型。','官方直连、第三方中转和多个 Key，统一管理。'],models:['MODELS & PRICING','选好模型，也算清费用。','按实际调用线路配置模型参数、价格和平台附加费。'],calls:['REQUEST HISTORY','从总额，看到每次调用。','按接入方、模型或 Key 筛选，核对调用状态与费用来源。']};
+const titles={federation:['DEVICES & SHARING','设备与共享','分开生活，共享你明确选择的资料。'],coding:['CODING COLLABORATION','编码协作','候选由模型提出，交付由 Jarvis 独立检查。'],growth:['ADAPTIVE CORE','成长中心','观察状态，修复故障，按目标学习新能力。'],network:['NETWORK & OFFLINE','联网，由你控制。','只限制 Jarvis 的外网访问，保留本地能力和其他软件的网络。'],mcp:['CAPABILITIES','技能与工具','按用途发现 MCP，统一管理连接、条件和接入后的选用规则。'],skill:['CAPABILITIES','技能与工具','按任务选用合适的技能，集中管理使用条件。'],modules:['MODULE HEALTH','模块与升级','独立观察每项能力；准备升级时保留当前服务。'],home:['SETTINGS','设置','偏好与后台管理，集中在一个地方。'],appearance:['APPEARANCE','外观','按你的习惯调整页面配色。'],tasks:['BACKGROUND TASKS','后台任务','管理执行进度、队列和任务结果。'],overview:['USAGE OVERVIEW','每一次调用，都有记录。','在一个地方查看模型、接入方和每天的 API 费用。'],connections:['CONNECTIONS & KEYS','连接你的模型。','官方直连、第三方中转和多个 Key，统一管理。'],models:['MODELS & PRICING','选好模型，也算清费用。','按实际调用线路配置模型参数、价格和平台附加费。'],calls:['REQUEST HISTORY','从总额，看到每次调用。','按接入方、模型或 Key 筛选，核对调用状态与费用来源。']};
 let config=null,usage=null,view='overview',offset=0,busy=false,editorAction=null,editorRevision=null;
 const connection=id=>config.connections.find(item=>item.id===id);
 const label=id=>connection(id)?.label||id;
 async function api(path,body){const control=new AbortController(),timer=setTimeout(()=>control.abort(),22000);try{const response=await fetch(path,{method:body?'POST':'GET',credentials:'omit',cache:'no-store',headers:{'X-Jarvis-Nonce':nonce,...(body?{'Content-Type':'application/json'}:{})},body:body?JSON.stringify(body):undefined,signal:control.signal});const result=await response.json();if(!response.ok)throw new Error(result.user_message||result.message||'请求失败，请刷新后重试。');return result;}finally{clearTimeout(timer);}}
-function message(text,error=false){$(error?'error':'notice').textContent=text;$(error?'error':'notice').hidden=!text||['home','appearance','tasks','modules','mcp','skill','network','growth','coding'].includes(view);}
+function message(text,error=false){$(error?'error':'notice').textContent=text;$(error?'error':'notice').hidden=!text||['home','appearance','tasks','modules','mcp','skill','network','growth','coding','federation'].includes(view);}
 function option(value,text,selected=false){return `<option value="${esc(value)}"${selected?' selected':''}>${esc(text)}</option>`;}
 function fillSelect(id,items,first){const before=$(id).value;$(id).innerHTML=option('',first)+items.map(x=>option(x.id,x.label)).join('');if(items.some(x=>x.id===before))$(id).value=before;}
 function filters(){const routes=config.connections.map(c=>({id:c.id,label:c.label}));fillSelect('route-filter',routes,'全部接入方');fillSelect('model-route',routes,'全部接入方');dependentFilters();}
@@ -25,13 +25,13 @@ function show(name){
  for(const id of Object.keys(titles)){$(id+'-view').hidden=id!==name;document.querySelector(`[data-view="${id}"]`).setAttribute('aria-current',id===name?'page':'false');}
  $('capability-navigation').hidden=!['mcp','skill'].includes(name);for(const link of $('capability-navigation').querySelectorAll('a'))link.setAttribute('aria-current',link.hash==='#'+name?'page':'false');if(name==='mcp')document.querySelector('[data-view=skill]').setAttribute('aria-current','page');
  const t=titles[name];$('eyebrow').textContent=t[0];$('page-title').textContent=t[1];$('page-description').textContent=t[2];
- document.title=(name==='home'?'设置':{coding:'编码协作',growth:'成长中心',network:'网络与离线',mcp:'MCP 连接',skill:'技能管理',modules:'模块与升级',appearance:'外观',tasks:'后台任务',overview:'用量总览',connections:'接入方与 Key',models:'模型与价格',calls:'调用明细'}[name])+' · Jarvis';
+ document.title=(name==='home'?'设置':{federation:'设备与共享',coding:'编码协作',growth:'成长中心',network:'网络与离线',mcp:'MCP 连接',skill:'技能管理',modules:'模块与升级',appearance:'外观',tasks:'后台任务',overview:'用量总览',connections:'接入方与 Key',models:'模型与价格',calls:'调用明细'}[name])+' · Jarvis';
  $('filters').hidden=!['overview','calls'].includes(name);$('primary-action').hidden=!['connections','models'].includes(name);
  $('primary-action').textContent=name==='connections'?'+ 添加接入方':'+ 添加模型';
- $('updated').hidden=['home','appearance','tasks','modules','mcp','skill','network','growth','coding'].includes(name);$('refresh').hidden=['home','appearance','tasks','modules','mcp','skill','network','growth','coding'].includes(name);
- $('notice').hidden=true;$('error').hidden=!$('error').textContent||['home','appearance','tasks','modules','mcp','skill','network','growth','coding'].includes(name);
+ $('updated').hidden=['home','appearance','tasks','modules','mcp','skill','network','growth','coding','federation'].includes(name);$('refresh').hidden=['home','appearance','tasks','modules','mcp','skill','network','growth','coding','federation'].includes(name);
+ $('notice').hidden=true;$('error').hidden=!$('error').textContent||['home','appearance','tasks','modules','mcp','skill','network','growth','coding','federation'].includes(name);
  document.dispatchEvent(new CustomEvent('jarvis:settings-view',{detail:name}));
- if(!config&&!['home','appearance','tasks','modules','mcp','skill','network','growth','coding'].includes(name))refresh();
+ if(!config&&!['home','appearance','tasks','modules','mcp','skill','network','growth','coding','federation'].includes(name))refresh();
 }
 function navigate(name){if(location.hash.slice(1)===name)show(name);else location.hash=name;}
 

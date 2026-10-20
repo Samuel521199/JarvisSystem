@@ -176,6 +176,7 @@ class LocalChatServer(ThreadingHTTPServer):
         self.conversations = None
         self.memory = None
         self.knowledge = None
+        self.federation = None
         self.admin = None
         self.modules = None
         self.evolution = None
@@ -251,9 +252,10 @@ class LocalChatServer(ThreadingHTTPServer):
         self.workspace_script = self.ui_assets.required('workspace.js')
         self.admin_html = asset('admin.html').replace(b'__JARVIS_ADMIN_STYLE__', asset('admin.css')).replace(b'__JARVIS_NONCE__', self.nonce.encode('ascii')).replace(b'__JARVIS_VERSION__', version.encode('ascii')).replace(b'__JARVIS_THEME_STYLE__', self.theme_style)
         self.admin_script = asset('admin.js')
+        self.federation_script = asset('federation.js')
         self.network_script = asset('network.js')
         self.coding_script = asset('coding.js')
-        self.admin_html = self.admin_html.replace(b'__JARVIS_MODULE_STYLE__', asset('modules.css') + b'\n' + asset('evolution.css') + b'\n' + asset('speech.css')).replace(b'__JARVIS_BRAND_STYLE__', asset('brand/logo.css'))
+        self.admin_html = self.admin_html.replace(b'__JARVIS_MODULE_STYLE__', asset('modules.css') + b'\n' + asset('evolution.css') + b'\n' + asset('speech.css') + b'\n' + asset('federation.css')).replace(b'__JARVIS_BRAND_STYLE__', asset('brand/logo.css'))
         self.module_script = asset('modules.js')
         self.speech_script = asset('speech.js')
         self.readout_script = asset('readout.js')
@@ -335,6 +337,7 @@ class LocalChatServer(ThreadingHTTPServer):
 
     def server_close(self):
         try:
+            if self.federation:self.federation.close()
             self.chat_requests.cancel_all()
             self.dialogue.close()
             models = getattr(self.chat, 'dialogue_models', None)
@@ -624,6 +627,12 @@ class ChatHandler(BaseHTTPRequestHandler):
             self._send(200, {**self.server.resource_usage.snapshot(), 'runtime':self.server.runtime_snapshot()})
         elif self.path == "/admin.js":
             self._send(200, self.server.admin_script, "application/javascript; charset=utf-8")
+        elif self.path == '/federation.js':
+            self._send(200, self.server.federation_script, 'application/javascript; charset=utf-8')
+        elif self.path == '/api/federation':
+            if not self._admin_token():return
+            try:self._send(200, self.server.federation.status())
+            except Exception as exc:self._admin_error(exc)
         elif self.path == '/network.js':
             self._send(200, self.server.network_script, 'application/javascript; charset=utf-8')
         elif self.path == '/api/network':
@@ -730,7 +739,7 @@ class ChatHandler(BaseHTTPRequestHandler):
         knowledge_source = re.fullmatch(r'/api/knowledge/([a-f0-9]{32})(/delete)?', self.path)
         knowledge_action = knowledge_source or self.path in {'/api/knowledge/search','/api/knowledge/read','/api/knowledge/view'}
         computer_start=self.path in {'/api/computer/tasks','/api/tasks'}
-        admin_action=self.path in {'/api/admin/config','/api/admin/balance','/api/network'}
+        admin_action=self.path in {'/api/admin/config','/api/admin/balance','/api/network','/api/federation'}
         module_action=self.path in {'/api/modules/refresh','/api/modules/maintenance'}
         speech_action=self.path in {'/api/speech','/api/speech/fast','/api/speech/primary','/api/speech/readout','/api/speech/input'}
         growth_action=re.fullmatch(r'/api/conversation-growth/([a-f0-9]{32})(?:/([a-f0-9]{32})/(start|cancel|reanalyse))?',self.path)
@@ -899,7 +908,9 @@ class ChatHandler(BaseHTTPRequestHandler):
             return
         if admin_action:
             try:
-                if self.path == '/api/network':
+                if self.path == '/api/federation':
+                    result = self.server.federation.action(payload)
+                elif self.path == '/api/network':
                     if not isinstance(payload, dict) or set(payload) != {'offline', 'revision'}:
                         raise ValueError('只接受离线开关与当前修订号。')
                     # Native browser jobs cannot be fenced by a Python socket hook.
@@ -912,6 +923,7 @@ class ChatHandler(BaseHTTPRequestHandler):
                         from jarvis_core.policy import CoreError
                         raise CoreError('network_busy', '当前仍有对话或后台工作，请先停止或等待结束，再启用仅此软件离线。')
                     result = self.server.network.change(payload['offline'], payload['revision'])
+                    if result['offline'] and self.server.federation:self.server.federation.close()
                 elif self.path.endswith('/balance'):
                     if not isinstance(payload,dict) or set(payload)!={'connection'} or not isinstance(payload['connection'],str):raise ValueError('余额查询参数无效。')
                     result=self.server.admin.balance(payload['connection'])
@@ -1011,7 +1023,7 @@ class ChatHandler(BaseHTTPRequestHandler):
 
 
     def _admin_token(self):
-        if self.server.admin is None and self.path != '/api/network':
+        if self.server.admin is None and self.path not in {'/api/network','/api/federation'}:
             self._error(503, 'admin_unavailable', '配置后台未初始化。');return False
         values=self.headers.get_all('X-Jarvis-Nonce',[])
         if len(values)!=1 or not values[0].isascii() or not secrets.compare_digest(values[0],self.server.nonce):
@@ -1021,7 +1033,9 @@ class ChatHandler(BaseHTTPRequestHandler):
     def _admin_error(self, exc):
         # Only local validation messages are public; never reflect provider/vault errors.
         from jarvis_core.policy import CoreError
-        if isinstance(exc, CoreError) and exc.code.startswith('network_'):
+        if isinstance(exc, CoreError) and exc.code.startswith('federation_'):
+            self._error(409, exc.code, str(exc))
+        elif isinstance(exc, CoreError) and exc.code.startswith('network_'):
             self._error(409 if exc.code in {'network_conflict','network_busy'} else 503 if exc.code == 'network_policy_unavailable' else 400, exc.code, str(exc))
         elif type(exc) is ValueError:
             message=str(exc)
@@ -1056,6 +1070,8 @@ def create_server(*, core=None, chat=None, data_dir=None, config_path=None, port
     server = LocalChatServer(("127.0.0.1", port), core, chat, version=__version__, workspace=WorkspaceService(core))
     from jarvis_core.network_policy import NetworkPolicy
     server.network = NetworkPolicy(core.data_dir)
+    from jarvis_core.federation import Federation
+    server.federation = Federation(core)
     try:
         from jarvis_core.chat import ChatService
         if isinstance(chat, ChatService) and chat.dialogue_models is None:

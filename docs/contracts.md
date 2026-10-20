@@ -81,6 +81,7 @@
     - [8.15.2.1 普通会话的持久回复恢复（0.1.49）](#dialogue-recovery-contract)
     - [8.15.2.2 对话与后台模型进程边界（0.1.54）](#dialogue-process-contract)
 - [8.16 单机双职责协作契约（0.1.82）](#team-analysis-contract)
+- [8.17 双节点共享资料契约（0.1.83）](#shared-cards-contract)
 <!-- book-nav:end -->
 
 <a id="k0-contracts"></a>
@@ -1434,6 +1435,19 @@ SQLite 写锁等待上限 150ms。受理落盘失败不调用模型；完成落�
 
 附表不会改动原任务/动作的状态权威或 control.db 版本。存在协作任务后，当前受控启动器拒绝回落到不能解释该能力的 0.1.81 及更早版本；不声称手工运行历史源码仍兼容。后续版本需明确扩充兼容名单。中断任务仍沿原 UNKNOWN 核对路径，不自动继续未完成角色。[执行流程](tasks-agents.md#bounded-team-runtime) · [验证](delivery-validation.md#k6-team-evidence)。
 
+
+<a id="shared-cards-contract"></a>
+## 双节点共享资料契约（0.1.83）
+
+协议标识 `jarvis.shared-cards.v1`。本机 `GET/POST /api/federation` 继承页面 nonce、Host/Origin 防护与核心停止守卫；POST 动作仅为 `initialize/listen/close/invite/join/retry/sync/edit/revoke`，拒绝未知字段。网络接收端独立，仅 `POST /pair` 和 `/sync`，不暴露聊天、文件或任务 API。
+
+请求与回复为 `{body, signature}`，使用固定 JSON 序列化和 ECDSA P-256/SHA-256。配对请求携带协议、空间、两端身份、原请求编号、公开证书与一次性随机令牌；服务端只保存令牌摘要，加入端待确认令牌受 DPAPI 保护。客户端 TLS 握手后、发送任何配对码或正文前检查预期证书指纹；已配对请求还核验签名、目标、空间和当前撤销状态。回复必须匹配原请求编号。使用身份指纹绑定，不依赖公开 CA 签发或 DNS 认证。
+
+快照只含空间 ID、发送节点、源序号和各卡当前签名版本。单卡修订字段为 `space/item/author/seq/clock/deleted/title/text`；两维版本向量判断祖先与并发，签名覆盖这些字段。收到的自身修订必须已登记于本机；同源同序号不同摘要、越界计数、跨空间或签名错误整批拒绝。删除胜出与保留规则只在[同步权威节](federation.md#shared-cards-runtime)定义。
+
+传输上限 512 KiB，最多两个接收请求并发，单请求 12 秒硬期限和 4 秒套接字等待；客户端连接/单段网络等待 8 秒，连接完成后另有 12 秒硬期限。客户端同步不自动重试，超时按可能已经远端提交处理，下一次同步继续幂等对账；配对超时可重试原编号。关闭/离线/停止拒绝后续准入和提交检查，不能撤回已发数据或已完成的对端提交。
+
+持久状态为可选 `federation.db` schema 1 与 `federation/` 身份/版本标记目录；并发写使用 SQLite 短事务与核心 effect guard。受管理运行槽显式拒绝把此新数据交给 0.1.82 及更早运行时；这不是对手动直接运行旧源码的系统级禁止。[验证](delivery-validation.md#k6-federation-evidence)与[交互](interaction-persona.md#shared-cards-ui)分别维护。
 
 <!-- book-footer:start -->
 [返回全书目录](README.md#book-tree) · [上一章：主人利益原则、身份授权与停止控制](security-sovereignty.md) · [下一章：技术栈、源码目录与运行数据](stack-project-layout.md)

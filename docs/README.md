@@ -23,7 +23,7 @@
 | **判断现在能否使用、智能有多强** | [v0.1.62 的实现、实测与剩余验收](delivery-validation.md#k2-completion-evidence) | [当前能力和完整性规则](models-offline.md#runtime-chat-context) |
 | **查看个人核心的使用与验证** | [聊天记忆与交流设置](interaction-persona.md#personal-core-ui) → [跨会话继续话题](interaction-persona.md#continuity-ui) | [当前 K2 验收结果与范围](delivery-validation.md#k2-completion-evidence) |
 | **从聊天提出改进并取回成果** | [改进与成长进度](interaction-persona.md#growth-demand-ui) | [0.1.41 需求成长验证](delivery-validation.md#growth-demand-evidence) |
-| **查看本轮修复与验收** | [K6 单机方案/审阅协作](delivery-validation.md#k6-team-evidence) | [原始基础验收](delivery-validation.md#foundation-repair-evidence) |
+| **查看本轮修复与验收** | [K6 双节点共享资料卡](delivery-validation.md#k6-federation-evidence) | [原始基础验收](delivery-validation.md#foundation-repair-evidence) |
 | **查看当前实现离个人助手目标还有多远** | [个人核心评价与工程审计](decisions-review.md#personal-core-assessment) | [助手核心架构图](architecture.md#pc-runtime-convergence) → [既有测试证据](delivery-validation.md#current-audit-evidence) |
 | **用自然语言执行首条任务** | [聊天任务入口](core-bootstrap.md#conversation-task-entry) | [执行边界与记录](tasks-agents.md#sample-task-runtime) |
 | **查看模块运行和准备升级** | [设置模块入口](core-bootstrap.md#module-monitor-entry) | [监控与维护边界](health-maintenance.md#module-monitoring) |
@@ -33,7 +33,7 @@
 <a id="project-status"></a>
 ## 目前做到哪里了？
 
-**当前已部署 0.1.82：K6 单机方案/审阅协作已接通；[本轮验证与限制](delivery-validation.md#k6-team-evidence)。** 输入框上方选择“协作分析 · 方案与审阅”，展开分工设置模型/档位与检查要求，发送后从“本会话任务”查看报告；可切回普通对话继续聊天。报告是候选与审阅意见，不自动执行或写入个人记忆。
+**当前已部署 0.1.83：K6 双节点共享资料卡已接通；[本轮验证与限制](delivery-validation.md#k6-federation-evidence)。** 在“设置 → 设备与共享”启用身份、按需配对，只同步明确写入的共享卡；支持离线编辑、冲突合并与删除记录。聊天、个人记忆与项目文件仍按原范围保存，默认不开放监听。使用方法见[交互入口](interaction-persona.md#shared-cards-ui)，后续安排见[当前工作顺序](core-bootstrap.md#k4-next-delivery)。
 
 连续语音、Silero 门控和受限插话保持可用，入口为输入区耳机图标；[语音使用与边界](interaction-persona.md#voice-chat-plan)、[0.1.81 验证](delivery-validation.md#k6-continuous-voice-evidence)保留。
 

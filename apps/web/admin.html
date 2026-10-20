@@ -11,6 +11,7 @@ __JARVIS_BRAND_STYLE__</style></head>
 <p class="nav-caption">偏好与后台管理</p><nav aria-label="设置导航">
 <button data-view="home" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 9-8 9 8M5 9v12h14V9M9 21v-8h6v8"/></svg>设置总览</button><button data-view="appearance"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4v16a8 8 0 0 0 0-16"/></svg>外观</button>
 <button data-view="mcp" hidden>⌘ MCP 工具</button><button data-view="skill">✧ 技能与工具</button>
+<button data-view="federation"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="12" height="10" rx="2"/><path d="M5 18h6m-3-4v4"/><rect x="17" y="8" width="5" height="13" rx="1"/></svg>设备与共享</button>
 <button data-view="network"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8a15 15 0 0 1 18 0M6 12a10 10 0 0 1 12 0M9 16a5 5 0 0 1 6 0"/><circle cx="12" cy="20" r="1"/></svg>网络与离线</button>
 <button data-view="coding"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 6-6 6 6 6m8-12 6 6-6 6m-3-16-2 20"/></svg>编码协作</button>
 <button data-view="growth"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 8 4v6c0 4-8 8-8 8s-8-4-8-8V7zM8 12h8m-4-4v8"/></svg>成长中心</button>
@@ -24,6 +25,7 @@ __JARVIS_BRAND_STYLE__</style></head>
 <div class="content"><div class="heading"><div><p class="eyebrow" id="eyebrow">USAGE OVERVIEW</p><h1 id="page-title">每一次调用，都有记录。</h1><p id="page-description">在一个地方查看模型、接入方和每天的 API 费用。</p></div><button id="primary-action" class="primary" hidden>添加接入方</button></div>
 <nav id="capability-navigation" class="capability-navigation" aria-label="技能与工具" hidden><a href="#skill">技能</a><a href="#mcp">MCP 工具</a></nav>
 <p id="notice" class="notice" role="status" hidden></p><p id="error" class="error" role="alert" hidden></p>
+<section id="federation-view" hidden aria-label="设备与共享"><div id="federation-root"></div></section>
 <section id="network-view" hidden aria-label="网络与离线">
 <div class="panel"><div class="panel-head"><h2 id="network-state">正在读取</h2><button id="network-refresh" class="quiet" type="button">刷新状态</button></div>
 <label class="network-toggle"><input id="network-offline" type="checkbox" role="switch" disabled><span><strong>仅此软件离线</strong><small>限制 Jarvis 连接外网，其他软件保持联网</small></span></label>
@@ -129,6 +131,7 @@ __JARVIS_BRAND_STYLE__</style></head>
 <script src="/resources.js" nonce="__JARVIS_NONCE__"></script>
 <script src="/admin.js" nonce="__JARVIS_NONCE__"></script>
 <script src="/coding.js" nonce="__JARVIS_NONCE__"></script>
+<script src="/federation.js" nonce="__JARVIS_NONCE__"></script>
 <script src="/network.js" nonce="__JARVIS_NONCE__"></script>
 <dialog id="extension-preview"><header><h2 id="extension-preview-title"></h2><button id="extension-preview-close" class="secondary" type="button">关闭预览</button></header><p id="extension-preview-status"></p><pre id="extension-preview-text"></pre></dialog>
 <script src="/extensions.js" nonce="__JARVIS_NONCE__"></script>
