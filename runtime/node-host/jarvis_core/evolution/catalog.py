@@ -48,7 +48,7 @@ def merge_cases(old, new):
 
 def runtime_binding():
     from ..skill_tasks import SkillTaskService
-    paths=('catalog','manager','store','runner','tool_intent','tool_contract','provider','demand','lifecycle','quality','tool_archive','maintenance')
+    paths=('catalog','manager','store','runner','tool_intent','tool_contract','provider','demand','lifecycle','quality','tool_archive','maintenance','growth_domains','growth_policy','growth_cycle')
     return policy.digest(policy.canonical_json({'coding':SkillTaskService.binding(),
         'tools':{p:policy.digest((policy.REPOSITORY_ROOT/'runtime/node-host/jarvis_core/evolution'/f'{p}.py').read_bytes()) for p in paths}}).encode())
 
@@ -115,7 +115,7 @@ class ProjectTools:
                 'scope':'project','busy':self.manager.busy,'limits':{'tools':32,'versions':64,'cases':64,'input_bytes':8192},
                 'note':'运行成功与结果正确分别记录；只有提供独立预期并一致才记为结果已验证。'}
 
-    def submit(self,cid,payload):
+    def submit(self,cid,payload,*,authorization=None):
         scope=self.scope(cid)
         if not isinstance(payload,dict):fail('工具请求必须是对象。')
         from .lifecycle import ToolLifecycle, OPERATIONS
@@ -132,7 +132,7 @@ class ProjectTools:
         request='project-tool-'+payload['request_id']
         existing=self.store.existing_job(request)
         if existing:
-            if existing['request']['scope']!=scope or existing['request']['submission']!=payload:fail('请求编号已用于其他内容。','evolution_conflict')
+            if existing['request']['scope']!=scope or existing['request']['submission']!=payload or existing['request'].get('growth_authorization')!=authorization:fail('请求编号已用于其他内容。','evolution_conflict')
             return existing
         if op in OPERATIONS:lifecycle.validate(payload)
         base=self.selected(scope['project_id'],payload['tool_id'])
@@ -146,6 +146,10 @@ class ProjectTools:
         if op=='trial' and life['phase']=='CANARY' and lifecycle.assessment(scope['project_id'],payload['tool_id'],life)['trials']>=life['limits']['maximum_trials']:
             fail('灰度试用次数已用完；请核对原记录并决定启用或放弃。')
         frozen={'lifecycle':life,'action':'project-tool','request_id':request,'scope':scope,'submission':copy.deepcopy(payload),'base':base,'runtime_binding':runtime_binding()}
+        if authorization is not None:
+            frozen['growth_authorization']=copy.deepcopy(authorization)
+            from .growth_policy import authorize
+            with self.store.connection() as db: authorize(db,frozen)
         if op in {'archive-version','load-version'}:
             from .tool_archive import ToolArchive
             frozen['version_storage']=ToolArchive(lifecycle).binding(payload['version'],base)
@@ -184,6 +188,8 @@ class ProjectTools:
 
     def checkpoint(self,job):
         self.manager._checkpoint()
+        from .growth_policy import authorize
+        with self.store.connection() as db: authorize(db,job['request'])
         if job['request']['runtime_binding']!=runtime_binding():
             fail('执行器已更新，请重新提交工具任务。','tool_runtime_changed')
         if self.scope(job['request']['scope']['conversation_id'])!=job['request']['scope']:
@@ -199,6 +205,8 @@ class ProjectTools:
         base=job['request']['base'];checkpoint=lambda:self.checkpoint(job);checkpoint()
         with self.core.effect_guard(),self.store.connection() as db:
             db.execute('BEGIN IMMEDIATE')
+            from .growth_policy import authorize
+            authorize(db,job['request'])
             row=db.execute('SELECT * FROM project_tools WHERE project_id=? AND tool_id=?',(base['project_id'],base['tool_id'])).fetchone()
             current=dict(row) if row else {**base,'generation':0,'active':None,'previous':None}
             if current!=base:fail('活动工具已变化，未覆盖其他版本。','evolution_conflict')

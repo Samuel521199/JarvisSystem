@@ -1,0 +1,380 @@
+{
+  "clean-lines": {
+    "id": "clean-lines",
+    "version": 1,
+    "name": "清理重复清单",
+    "contract": "输入为字符串列表。每项去除首尾空白，丢弃空项，按首次出现顺序去重（区分大小写），用换行连接；空表返回空字符串。",
+    "public": [
+      {
+        "input": [],
+        "expected": ""
+      },
+      {
+        "input": [
+          " A ",
+          "A",
+          "",
+          "B"
+        ],
+        "expected": "A\nB"
+      }
+    ],
+    "heldout": [
+      {
+        "input": [
+          "a",
+          "A",
+          "a"
+        ],
+        "expected": "a\nA"
+      },
+      {
+        "input": [
+          "  ",
+          "\t",
+          "中文"
+        ],
+        "expected": "中文"
+      }
+    ],
+    "samples": [
+      {
+        "input": [
+          "旅行",
+          " 旅行 ",
+          "机票",
+          "酒店"
+        ],
+        "expected": "旅行\n机票\n酒店"
+      },
+      {
+        "input": [
+          "milk",
+          "Milk",
+          "",
+          "milk"
+        ],
+        "expected": "milk\nMilk"
+      },
+      {
+        "input": [
+          "书",
+          "笔",
+          "书",
+          "纸"
+        ],
+        "expected": "书\n笔\n纸"
+      },
+      {
+        "input": [
+          " Alice ",
+          "Bob",
+          "Alice",
+          "Eve"
+        ],
+        "expected": "Alice\nBob\nEve"
+      },
+      {
+        "input": [
+          "任务甲",
+          "任务乙",
+          "\n任务甲\n"
+        ],
+        "expected": "任务甲\n任务乙"
+      },
+      {
+        "input": [
+          "x",
+          " x ",
+          "\tY",
+          "z",
+          "Y"
+        ],
+        "expected": "x\nY\nz"
+      }
+    ],
+    "oracle_source": "host-authored explicit contract v1",
+    "criterion": "exact output equality; no claim of arbitrary semantic correctness",
+    "digest": "sha256:2083918c18767f8e3b176be842bcf415c584f30f37abcb3daf633975d13af5a2"
+  },
+  "group-counts": {
+    "id": "group-counts",
+    "version": 1,
+    "name": "分类数量汇总",
+    "contract": "输入为包含 group（非空字符串）和 count（非负整数）的对象列表。按 group 精确相等分组、累加 count，保留组首次出现顺序；每行输出 group:count，无空格；空表为空字符串。不用于金额或浮点数。",
+    "public": [
+      {
+        "input": [],
+        "expected": ""
+      },
+      {
+        "input": [
+          {
+            "group": "书",
+            "count": 2
+          },
+          {
+            "group": "书",
+            "count": 3
+          }
+        ],
+        "expected": "书:5"
+      }
+    ],
+    "heldout": [
+      {
+        "input": [
+          {
+            "group": "B",
+            "count": 0
+          },
+          {
+            "group": "A",
+            "count": 1
+          }
+        ],
+        "expected": "B:0\nA:1"
+      },
+      {
+        "input": [
+          {
+            "group": "笔",
+            "count": 4
+          },
+          {
+            "group": "纸",
+            "count": 7
+          },
+          {
+            "group": "笔",
+            "count": 1
+          }
+        ],
+        "expected": "笔:5\n纸:7"
+      }
+    ],
+    "samples": [
+      {
+        "input": [
+          {
+            "group": "工作",
+            "count": 5
+          },
+          {
+            "group": "生活",
+            "count": 3
+          },
+          {
+            "group": "工作",
+            "count": 6
+          }
+        ],
+        "expected": "工作:11\n生活:3"
+      },
+      {
+        "input": [
+          {
+            "group": "电影",
+            "count": 2
+          },
+          {
+            "group": "书籍",
+            "count": 8
+          }
+        ],
+        "expected": "电影:2\n书籍:8"
+      },
+      {
+        "input": [
+          {
+            "group": "早餐",
+            "count": 0
+          },
+          {
+            "group": "午餐",
+            "count": 3
+          }
+        ],
+        "expected": "早餐:0\n午餐:3"
+      },
+      {
+        "input": [
+          {
+            "group": "Z",
+            "count": 3
+          },
+          {
+            "group": "a",
+            "count": 4
+          },
+          {
+            "group": "Z",
+            "count": 8
+          }
+        ],
+        "expected": "Z:11\na:4"
+      },
+      {
+        "input": [
+          {
+            "group": "邮件",
+            "count": 12
+          },
+          {
+            "group": "会议",
+            "count": 2
+          }
+        ],
+        "expected": "邮件:12\n会议:2"
+      },
+      {
+        "input": [
+          {
+            "group": "红",
+            "count": 9
+          },
+          {
+            "group": "蓝",
+            "count": 1
+          },
+          {
+            "group": "红",
+            "count": 0
+          }
+        ],
+        "expected": "红:9\n蓝:1"
+      }
+    ],
+    "oracle_source": "host-authored explicit contract v1",
+    "criterion": "exact output equality; no claim of arbitrary semantic correctness",
+    "digest": "sha256:8bd052078ce8c5d7e0f454df32bc4bc97dc5654fcc2b2e50b67de7f4388386cb"
+  },
+  "byte-total": {
+    "id": "byte-total",
+    "version": 1,
+    "name": "文件大小汇总",
+    "contract": "输入为包含 size（非负整数）和 unit 的对象列表。unit 只允许 B、KiB、MiB，分别乘 1、1024、1048576 后求和；返回十进制总字节数字符串，空表返回 0。不处理 KB/MB 或小数，也不扫描磁盘。",
+    "public": [
+      {
+        "input": [],
+        "expected": "0"
+      },
+      {
+        "input": [
+          {
+            "size": 2,
+            "unit": "KiB"
+          },
+          {
+            "size": 3,
+            "unit": "B"
+          }
+        ],
+        "expected": "2051"
+      }
+    ],
+    "heldout": [
+      {
+        "input": [
+          {
+            "size": 1,
+            "unit": "MiB"
+          },
+          {
+            "size": 1,
+            "unit": "KiB"
+          }
+        ],
+        "expected": "1049600"
+      },
+      {
+        "input": [
+          {
+            "size": 0,
+            "unit": "MiB"
+          }
+        ],
+        "expected": "0"
+      }
+    ],
+    "samples": [
+      {
+        "input": [
+          {
+            "size": 7,
+            "unit": "KiB"
+          },
+          {
+            "size": 9,
+            "unit": "B"
+          }
+        ],
+        "expected": "7177"
+      },
+      {
+        "input": [
+          {
+            "size": 3,
+            "unit": "MiB"
+          },
+          {
+            "size": 2,
+            "unit": "KiB"
+          }
+        ],
+        "expected": "3147776"
+      },
+      {
+        "input": [
+          {
+            "size": 55,
+            "unit": "B"
+          },
+          {
+            "size": 11,
+            "unit": "B"
+          }
+        ],
+        "expected": "66"
+      },
+      {
+        "input": [
+          {
+            "size": 8,
+            "unit": "KiB"
+          }
+        ],
+        "expected": "8192"
+      },
+      {
+        "input": [
+          {
+            "size": 2,
+            "unit": "MiB"
+          },
+          {
+            "size": 21,
+            "unit": "B"
+          }
+        ],
+        "expected": "2097173"
+      },
+      {
+        "input": [
+          {
+            "size": 17,
+            "unit": "KiB"
+          },
+          {
+            "size": 90,
+            "unit": "B"
+          }
+        ],
+        "expected": "17498"
+      }
+    ],
+    "oracle_source": "host-authored explicit contract v1",
+    "criterion": "exact output equality; no claim of arbitrary semantic correctness",
+    "digest": "sha256:8a6e4bf8a2ea5a3da6caaaea65f4341d5e1b8c54416509febcaa674fb4421752"
+  }
+}

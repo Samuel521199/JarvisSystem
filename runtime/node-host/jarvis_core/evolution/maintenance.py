@@ -107,6 +107,10 @@ class LedgerMaintenance:
             if doc['status'] not in TERMINAL: add(doc.get('result'), '在途结果')
         for table in ('tool_lifecycle', 'packages'):
             for row in db.execute('SELECT document FROM '+table): add(json.loads(row[0]), '生命周期或恢复材料')
+        for row in db.execute('SELECT document FROM growth_cycles'):
+            cycle = json.loads(row[0])
+            if cycle['status'] not in {'COMPLETE','PAUSED','CANCELLED','INTERRUPTED'}:
+                add(cycle, 'Active growth cycle')
         # Read only: do not initialize/mutate the conversation database here.
         from ..conversations import ConversationStore
         path = policy.safe_path(ConversationStore(self.core).path, directory=False, must_exist=False)

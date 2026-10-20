@@ -108,8 +108,9 @@ def chunks(text):
 
 
 class KnowledgeStore:
-    def __init__(self, core):
+    def __init__(self, core, *, ranking=None):
         self.core = core
+        self.ranking = ranking
         self.directory = Path(core.data_dir)
         self.path = self.directory/'project-sources.db'
 
@@ -261,7 +262,8 @@ class KnowledgeStore:
         return result
 
     def context(self, snapshot, query, *, max_bytes=MAX_CONTEXT_BYTES):
-        words = terms(query); ranked = []; issues = list(snapshot['issues'])
+        from .retrieval_ranking import lexical_score, rank
+        words = terms(query); ranked = []; ranking_rows = []; issues = list(snapshot['issues'])
         visited = 0; started = time.monotonic()
         for doc in snapshot['documents']:
             for ordinal, chunk in enumerate(chunks(doc['text'])):
@@ -270,10 +272,13 @@ class KnowledgeStore:
                     break
                 visited += 1
                 haystack = normalized(chunk['text']); heading = normalized(chunk['title']+' '+doc['path'])
-                score = sum(min(haystack.count(w), 2)+2*(w in heading) for w in words)
+                score = lexical_score(haystack, heading, words)
                 if score:
                     ranked.append((score, doc, chunk))
-        ranked.sort(key=lambda item: (-item[0], item[1]['path'], item[2]['start_line']))
+                    ranking_rows.append({'score':score,'path':doc['path'],'start_line':chunk['start_line'],
+                                         'text':haystack,'heading':heading})
+        order, ranking_evidence = rank(ranking_rows, words, self.ranking)
+        ranked = [ranked[i] for i in order]
         # Give each matching project its best excerpt before filling remaining
         # slots; a verbose first project must not hide a comparison partner.
         first, rest, seen = [], [], set()
@@ -295,7 +300,7 @@ class KnowledgeStore:
         text = self.render(selected) if selected else ''
         return text, {'enabled': snapshot['enabled'], 'references': list(refs.values()), 'citations': citations,
                       'matches': len(ranked), 'omitted': len(ranked)-len(selected), 'bytes': len(text.encode('utf-8')),
-                      'issues': issues, 'read_bytes': snapshot['read_bytes']}
+                      'issues': issues, 'read_bytes': snapshot['read_bytes'], 'ranking': ranking_evidence}
 
     @staticmethod
     def render(rows):

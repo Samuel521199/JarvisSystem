@@ -909,6 +909,9 @@ persona_revision:
 
 普通聊天不要求打开项目；新增工具入口只在已保存项目会话使用，普通无 JSON 的文字表达继续走聊天。规则与当前边界见[运行权威节](evolution-release.md#project-tool-runtime)和[需求选择](evolution-release.md#project-tool-intents)，验证见[本轮证据](delivery-validation.md#k4-tool-intent-evidence)。
 
+
+**0.1.78 可持续成长入口：**项目工具库 →「可持续成长」，或聊天 `/工具` 的缺口记录 →「按限定契约持续成长」。仍使用可缩放、可关闭的右侧工作区，不占用聊天输入区。先选择受支持的契约并保存项目成长策略，再开始一轮；进度展示编码、正常对照、灰度、启用观察和停止原因。策略模型沿用现有模型目录，刷新只查原回执，取消与恢复记录持久保存。费用/token 未知显示未知，未提供主人体验反馈不显示“满意”。规则归[成长策略](evolution-release.md#bounded-growth-policy)。
+
 <a id="growth-center-policy-ui"></a>
 ### 模型、备选和费用怎样设置
 

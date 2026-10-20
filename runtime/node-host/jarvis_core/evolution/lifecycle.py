@@ -71,6 +71,8 @@ class ToolLifecycle:
         req = job['request']; base = req['base']
         with self.core.effect_guard(), self.store.connection() as db:
             db.execute('BEGIN IMMEDIATE')
+            from .growth_policy import authorize
+            authorize(db,req)
             row = db.execute('SELECT document FROM tool_lifecycle WHERE project_id=? AND tool_id=?', (base['project_id'], base['tool_id'])).fetchone()
             current = json.loads(row[0]) if row else {'revision': 0, 'phase': 'LEGACY', 'candidate': None}
             if current != req['lifecycle']: fail('生命周期修订冲突。', 'evolution_conflict')
@@ -154,7 +156,7 @@ class ToolLifecycle:
             self.write(job, {'phase':'CANARY','candidate':ident,'admission_id':job['id'], 'runtime_binding':req['runtime_binding'],
                              'baseline':base,'limits':{k:p[k] for k in ('minimum_verified','maximum_trials','maximum_seconds')},
                              'contract_quality':req['contract_quality'],
-                             'review':{'note':p['review_note'],'source':'explicit_local_review','semantic_truth_verified':False}})
+                             'review':{'note':p['review_note'],'source':'preauthorized_domain_policy' if req.get('growth_authorization') else 'explicit_local_review','semantic_truth_verified':False}})
             return {'version':ident,'staged':True,'stable_unchanged':True,'validation':proof,'model_calls':0}
         if op == 'trial':
             if value['phase'] != 'CANARY' or value['baseline'] != base or value['runtime_binding'] != req['runtime_binding']:
@@ -183,7 +185,7 @@ class ToolLifecycle:
                         baseline={'correct':False,'error':exc.code,'elapsed_seconds':None}
                 trial={'passed':True,'version':value['candidate'],'input_digest':policy.digest(encoded(p['input'])),
                        'novel':all(encoded(c['input'])!=encoded(p['input']) for c in doc['cases']),
-                       'useful':p['useful'],'usefulness_source':'explicit_local_review','benefit_note':p['benefit_note'],
+                       'useful':p['useful'],'usefulness_source':'preauthorized_domain_scope' if req.get('growth_authorization') else 'explicit_local_review','benefit_note':p['benefit_note'],
                        'candidate_seconds':round(elapsed,4),'peak_process_memory_bytes':evidence.get('peak_process_memory_bytes'),'baseline':baseline}
                 check(); self.tools.package(value['candidate'],base)
                 return {'trial':trial,'text':outputs[0],'result_verified':True,'regression':proof,'isolation':evidence,'model_calls':0}
@@ -232,7 +234,7 @@ class ToolLifecycle:
             self.tools.evaluate(doc,check)
             self.write(job,{**value,'phase':'CANARY','candidate':value['retired_version'],'baseline':base,
                             'admission_id':job['id'],'runtime_binding':req['runtime_binding'],
-                            'review':{'note':p['review_note'],'source':'explicit_local_review','semantic_truth_verified':False},
+                            'review':{'note':p['review_note'],'source':'preauthorized_domain_policy' if req.get('growth_authorization') else 'explicit_local_review','semantic_truth_verified':False},
                             'limits':value.get('limits',{'minimum_verified':2,'maximum_trials':10,'maximum_seconds':15}),
                             'reason':p['review_note']})
         elif op == 'retire-version':

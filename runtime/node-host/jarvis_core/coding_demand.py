@@ -54,6 +54,9 @@ def validate_binding(core, args, *, task_id=None):
             conflict('编码改进单尚未登记。')
         job = read(db, ref['id'])
     frozen = job['frozen']
+    if frozen.get('growth_request'):
+        from .evolution.growth_policy import check_core
+        check_core(core, frozen['growth_request'])
     if (ref['digest'] != job['proposal']['binding'] or
             policy.digest(policy.canonical_json(frozen).encode()) != ref['digest'] or
             {k: v for k, v in args.items() if k != 'coding_demand'} != frozen['arguments']):
@@ -126,7 +129,7 @@ class CodingDemands:
             raise policy.CoreError('not_found', '未找到编码改进请求，没有自动重发。')
         return self.bound(ident, row['id'])
 
-    def propose(self, ident, payload, *, previous_job=None, expected_source_digest=None):
+    def propose(self, ident, payload, *, previous_job=None, expected_source_digest=None, growth_request=None):
         doc = archive(self.core, ident)
         if not isinstance(payload, dict) or set(payload) != {'request_id', 'prompt', 'coding'}:
             conflict('编码改进单需要请求编号、目标及编码验收配置。')
@@ -136,6 +139,10 @@ class CodingDemands:
         if not isinstance(spec, dict) or not required <= set(spec) or set(spec)-required-{'entrypoint','new_paths'}:
             conflict('请选择文件、编码提供者、构建方式，填写公开及独立验收案例。')
         original = {'payload': payload, 'previous_job': previous_job}
+        if growth_request is not None:
+            from .evolution.growth_policy import check_core
+            check_core(self.core, growth_request)
+            original['growth_request'] = growth_request
         with self.core.ledger.connection() as db:
             row = db.execute('SELECT id,document FROM coding_demands WHERE conversation_id=? AND request_id=?', (ident, payload['request_id'])).fetchone()
         if row:
@@ -150,6 +157,7 @@ class CodingDemands:
             'project_root': str(ProjectFiles(self.core).root(doc['project_id'])),
             'runtime_binding': self.service.binding(), 'composition': decisions,
             'budget': {'max_model_calls': MAX_ATTEMPTS, 'runtime_seconds': 240}}
+        if growth_request is not None: frozen['growth_request'] = growth_request
         if expected_source_digest is not None and policy.digest(policy.canonical_json(frozen['sources']).encode()) != expected_source_digest:
             conflict('审阅后的源码已经变化，请重新分析，未交接新的文件内容。')
         origin = {'conversation_id': ident, 'project_id': doc['project_id'], 'goal': args['prompt']}

@@ -31,6 +31,7 @@ class EvolutionManager:
         self.busy = False
         self.thread = None
         self.observer = None
+        self.growth = None
         self.last_check = None
         self.monitor_error = None
         self.schedule_changed = threading.Event()
@@ -386,6 +387,9 @@ class EvolutionManager:
                 if action == 'project-tool':
                     from .catalog import ProjectTools
                     result = ProjectTools(self).execute(job)
+                elif action == 'growth-baseline':
+                    from .growth_cycle import baseline
+                    result = baseline(self,job)
                 elif action == 'tool-contract':
                     from .catalog import ProjectTools
                     from .tool_contract import ToolContracts
@@ -436,6 +440,9 @@ class EvolutionManager:
         # One sleeping thread; no model process or model request while healthy.
         next_check = time.monotonic() + 15
         while not self.closed.wait(1):
+            if self.growth is not None:
+                try: self.growth.tick()
+                except Exception: self.monitor_error = '成长推进暂停，请核对原记录；未重发模型请求。'
             if self.schedule_changed.is_set():
                 self.schedule_changed.clear()
                 next_check = time.monotonic() + 15

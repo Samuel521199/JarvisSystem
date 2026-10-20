@@ -15,6 +15,14 @@ def service(handler):
 
 
 def get(handler):
+    if handler.path=='/growth-cycles.js':
+        handler._send(200,handler.server.growth_cycles_script,'application/javascript; charset=utf-8');return True
+    growth=re.fullmatch(r'/api/project-tools/([a-f0-9]{32})/growth',handler.path)
+    if growth:
+        if not handler._workspace_token() or not handler._guard():return True
+        try: handler._send(200,handler.server.evolution.growth.snapshot(growth[1]))
+        except Exception as exc:failure(handler,exc)
+        return True
     if handler.path=='/tool-lifecycle.js':
         handler._send(200,handler.server.tool_lifecycle_script,'application/javascript; charset=utf-8');return True
     if handler.path=='/tool-contracts.js':
@@ -51,6 +59,15 @@ def get(handler):
 
 def post(handler,payload):
     try:
+        growth=re.fullmatch(r'/api/project-tools/([a-f0-9]{32})/growth(?:/(policy)|/([a-f0-9]{32})/cancel)?',handler.path)
+        if growth:
+            service(handler);cycles=handler.server.evolution.growth
+            if growth[2]: value=cycles.configure(growth[1],payload)
+            elif growth[3]:
+                if payload!={}:raise CoreError('invalid_request','取消只接受空对象。')
+                value=cycles.cancel(growth[1],growth[3])
+            else:value=cycles.start(growth[1],payload)
+            handler._send(202,value);return
         contract=re.fullmatch(r'/api/project-tools/([a-f0-9]{32})/plans/([a-f0-9]{32})/contracts(?:/([a-f0-9]{32})/(review|cancel))?',handler.path)
         if contract:
             drafts=ToolContracts(service(handler))

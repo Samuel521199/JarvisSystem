@@ -79,7 +79,7 @@
 | 记忆与经历 | 局部 verified：明确记忆、按需候选、修订屏障、本地核对；0.1.62 补相关事实选择与话题推荐 | 复杂转述、有效时间、通用语义经历召回、完整受众与跨来源遗忘仍缺 | [F03](#direction-memory-integrity)、[F04](#direction-memory-quality) |
 | 人格与主动性 | implemented/局部 verified：自定义称呼、固定交流风格/关系、持久修订与整组撤销界面 | 自定义复杂表达/多形态、长期情境一致性、可撤回的主动跟进 | [F06](#direction-persona) |
 | 技能与工具 | 局部 verified：11 个可见技能；Context7 有实际调用 | 其他 MCP 多为目录推荐；自动组合仍有限，技能生效条件与收益不均 | [F01](#direction-dialogue)、[F07](#direction-coding) |
-| 编程与成长 | [K3 已闭环](delivery-validation.md#k3-closure-matrix)；K4 已有受审阅工具发布、灰度/回退、契约体检及退役版本归档 | 完整 K4 未收口：有界回执/目录整理已补；独立领域质量、长期收益及按策略自动准入仍待补；任意工具链与自身模块替换未完成 | [F07](#direction-coding)、[F08](#direction-growth) |
+| 编程与成长 | [K3 已闭环](delivery-validation.md#k3-closure-matrix)；K4 已有受审阅工具发布、灰度/回退、契约体检及退役版本归档 | 0.1.78 已完成三个明确领域的 K4 闭环；长期收益、通用业务语义仍未证明；当前 K5 已拆排序接口，模型生成的自身模块与持久切换待补 | [F07](#direction-coding)、[F08](#direction-growth) |
 | 模型与离线 | 局部 verified：多供应商、用量/估算、固定本地小模型及封闭任务 | 跨用途统一策略、质量驱动路由、真实整机断网和组件自更新 | [F09](#direction-offline)、[F10](#direction-routing) |
 | 资源与可靠性 | 局部 verified：准入、进程回收、UNKNOWN、短时与本机长时子集 | 跨通道原子资源预留、CPU/GPU/配额公平、完整设备/磁盘故障矩阵 | [F02](#direction-resources)、[F09](#direction-offline) |
 | 模块管理与版本 | implemented/局部 verified：监控、运行包切换、技能验证失效显示 | 任意有状态模块热换、在途版本兼容、跨库迁移、长期退役 | [F11](#direction-maintenance)、[F12](#direction-architecture) |
@@ -188,7 +188,7 @@
 
 本轮已使 Inspect 只产出观察，Heal 消费故障并恢复原契约，Evolve 消费需求并增加能力；三者共享已有账本/候选/验证/发布底座。健康旧版本低于目标版本应是能力差距，余额不足、网络失败、低内存不能自动变成改代码任务。
 
-K4 继续用宿主未预先实现完整答案、但能独立验收的真实工具需求验证收益，现有[三任务挑战](delivery-validation.md#k4-quality-storage-evidence)不代替正常基线和长期使用证据。若要替换 Jarvis 自身检索实现，则归 K5：冻结同一任务集、比较质量/成本、验证原能力不退化、坏候选拒绝和回退。具体推进只见[当前队列](core-bootstrap.md#k4-next-delivery)。修复通过不应把触发它的原失败任务改写为成功。自检触发与去重按[分层检查](health-maintenance.md#inspection-scheduling)，不另加一套常驻模型心跳。
+K4 已由 0.1.78 的[限定领域整链](delivery-validation.md#k4-growth-closure-evidence)补证；后续扩大领域仍须用未提供完整候选答案、但能独立验收的真实工具需求验证收益，现有[三任务挑战](delivery-validation.md#k4-quality-storage-evidence)不代替正常基线和长期使用证据。若要替换 Jarvis 自身检索实现，则归 K5：冻结同一任务集、比较质量/成本、验证原能力不退化、坏候选拒绝和回退。具体推进只见[当前队列](core-bootstrap.md#k4-next-delivery)。修复通过不应把触发它的原失败任务改写为成功。自检触发与去重按[分层检查](health-maintenance.md#inspection-scheduling)，不另加一套常驻模型心跳。
 
 **主要落点：**[evolution/manager.py](../runtime/node-host/jarvis_core/evolution/manager.py)、[evolution/store.py](../runtime/node-host/jarvis_core/evolution/store.py)、[evolution/recipes.py](../runtime/node-host/jarvis_core/evolution/recipes.py)、[evolution/demand.py](../runtime/node-host/jarvis_core/evolution/demand.py) 及用途路由。准入和退出仍按[三能力治理](evolution-release.md#growth-governance)、[净收益](delivery-validation.md#bootstrap-8)、[V-PAL-10](delivery-validation.md#personal-companion-validation)；任意自身模块改写仍需 K5 证据。
 

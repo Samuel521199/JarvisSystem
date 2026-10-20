@@ -1242,6 +1242,13 @@ security_stop_event:
 
 结果包含 `draft/digest/review_required:true/independently_verified:false/model_calls`。接受的 `review` 保存提交内容摘要、源码摘要、时间和 `source:explicit_local_review/oracle_verified_by_system:false`；这表示已明确提交审阅，不是系统验真。原始草案不可变，审阅不能覆盖；交接通过确定请求编号关联 K3，使用 `expected_source_digest` 防止中断后换用新源码。正文与字段机器校验见 `evolution/tool_contract.py`，正反例见 `tests/test_tool_contracts.py`。
 
+
+**0.1.78 成长策略与连续进度：**同一 nonce、Origin 和核心运行检查保护 `GET/POST /api/project-tools/{conversation}/growth`，`POST .../growth/policy` 和 `POST .../growth/{id}/cancel`。开始字段为 `request_id / goal / domain / policy_revision`；请求编号就是持久化周期身份，相同编号与内容返回原状态。策略明确 `enabled/domains/model/expires_at`、修订、轮次、观察、延迟和内存预算；必须核对说明后保存。内部成长授权不能通过公开项目工具请求字段注入。
+
+每轮预留最多 8 次模型调用（K3 最多 2 次，正常对照 6 次），3 次灰度及 3 次启用后验证，两个独立窗口各 30—3600 秒；单次工具 1—30 秒，周期总时限 300—86400 秒，Worker 内存上限最多 192 MiB。每个策略修订最多 1—10 轮，授权最长 31 天，最多 32 个项目策略、128 份周期记录，账本保留原 32 MiB 硬上限及维护余量。策略修订或关闭不自动删除已达标工具；停用已有工具沿原明确入口。达到总保留配额提示维护，不能把无限成长当作实现承诺。
+
+schema 7 新增 `growth_policies / growth_cycles`，记录阶段、冻结契约、子回执和实际观测。在途周期引用保护子任务；完成周期仍保存子回执 ID，而子任务确定终态可以按原归档规则保留完整材料和幂等查询。旧版本不了解授权撤销与中断恢复，运行槽拒绝以旧程序打开 schema 7。无需新增模型/服务依赖。
+
 <a id="growth-center-contract"></a>
 ## 三能力消息与旧接口迁移
 

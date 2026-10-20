@@ -1,0 +1,3094 @@
+{
+  "version": "0.1.78",
+  "date": "2026-10-20",
+  "status": "verified_bounded_K4_K5_entry",
+  "scope": "K4 closure for three owner-selected pure transformation domains and preauthorized finite cycles; K5 ranking seam entry only.",
+  "acceptance": {
+    "V-K4-C01": {
+      "status": "verified_bounded",
+      "evidence": [
+        "evals/reports/k4-maintenance-2026-10-20.json",
+        "test_growth_maintenance",
+        "test_tool_quality_archive"
+      ],
+      "limits": "Finite retention remains; no unlimited storage, physical disk reclamation or long-term guarantee."
+    },
+    "V-K4-C02": {
+      "status": "verified_bounded",
+      "domains": [
+        "clean-lines",
+        "group-counts",
+        "byte-total"
+      ],
+      "normal_baseline": "Real same-input model calls, all 18 independently verified; not seeded broken implementations. Host oracle is independent of generated candidates."
+    },
+    "V-K4-C03": {
+      "status": "verified_bounded",
+      "primary_criterion": "6 correct samples, fewer repeated model calls after coding cost, latency/memory budgets",
+      "window_seconds_each": 30,
+      "samples_each": 6,
+      "negative_action": "Own active version disabled with recoverable package; unit fault injection verifies response. Token/monetary deltas are reported separately, not the primary promotion criterion.",
+      "limits": "No user satisfaction or longitudinal benefit claim; group-counts costs more in this sample."
+    },
+    "V-K4-C04": {
+      "status": "verified_bounded",
+      "evidence": "Live automatic stage/trial/promote/use; expired/revised/stopping/unknown/out-of-domain/budget tests; authorization rechecked in selection transactions and K3 checkpoints."
+    },
+    "V-K4-C05": {
+      "status": "verified_bounded",
+      "evidence": "Real candidate loop + original-file preservation; failure/rejection/cancel/restart/idempotence regression; real HTTP/Edge lost-response recovery and concurrent synthetic chat; deployed data digests unchanged."
+    }
+  },
+  "live_matrix": {
+    "version": "0.1.78",
+    "status": "passed",
+    "runtime_binding": "sha256:32c235893f999752b8b9c36e142696529394be41799b4f27ef36e3cd65b3495b",
+    "frozen_sha256": "746d567313f25e808b8334b1a9e0333ce72cfefd820e8bd8278f2bc5b80b0327",
+    "tasks": [
+      {
+        "domain": "clean-lines",
+        "status": "passed",
+        "phase": "COMPLETE",
+        "elapsed_seconds": 144.242,
+        "cycle": {
+          "assessment": {
+            "accepted": true,
+            "amount_delta_baseline_minus_coding": 0.016776,
+            "calls_saved": 5,
+            "coding": {
+              "amount": 0.007132,
+              "calls": 1,
+              "currency": "USD",
+              "tokens": 1216
+            },
+            "criterion": "six independently verified uses, fewer repeated model calls after coding, bounded latency and memory",
+            "experiment_model_calls": 7,
+            "interventions": 0,
+            "limits": "短窗口、限定任务域；不证明长期稳定或总费用降低。对照调用计入实验支出，不计为实际节省。",
+            "maximum_tool_seconds": 1.571,
+            "maximum_worker_memory_bytes": 18595840,
+            "samples": 6,
+            "token_delta_baseline_minus_coding": 1158,
+            "user_feedback": {
+              "source": "not_provided",
+              "useful": null
+            },
+            "verified": true,
+            "working_model_baseline": {
+              "amount": 0.023908,
+              "calls": 6,
+              "currency": "USD",
+              "tokens": 2374
+            }
+          },
+          "baseline": [
+            {
+              "correct": true,
+              "job_id": "a77e2eb49e6748aba3be857b18f8f3de",
+              "receipt": {
+                "actual_reasoning": "low",
+                "billing": {
+                  "amount": 0.00411,
+                  "basis": "estimated",
+                  "currency": "USD",
+                  "price": {
+                    "cache_read": 0.2,
+                    "cache_write": null,
+                    "checked_at": "2026-10-16",
+                    "currency": "USD",
+                    "fee_percent": 0,
+                    "input": 2,
+                    "max_input_tokens": 200000,
+                    "output": 12,
+                    "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing"
+                  },
+                  "reason": "token_rates",
+                  "tokens": {
+                    "cache_read": 0,
+                    "cache_write": 0,
+                    "input": 75,
+                    "output": 330,
+                    "reasoning": 318,
+                    "total": 405
+                  }
+                },
+                "elapsed_seconds": 9.007,
+                "http_status": 200,
+                "model": "gemini-3.1-pro-preview",
+                "outcome_uncertain": false,
+                "output_incomplete": false,
+                "provider": "vertex",
+                "request_id": "e413b9e84af54ab5a33f4801b63b0862",
+                "response_deadline_seconds": 90,
+                "status": "SUCCEEDED",
+                "usage": {
+                  "candidatesTokenCount": 12,
+                  "promptTokenCount": 75,
+                  "thoughtsTokenCount": 318,
+                  "totalTokenCount": 405
+                }
+              },
+              "text": "旅行\n机票\n酒店"
+            },
+            {
+              "correct": true,
+              "job_id": "3a96e643a24940e9a2b91a18da63c0ea",
+              "receipt": {
+                "actual_reasoning": "low",
+                "billing": {
+                  "amount": 0.004648,
+                  "basis": "estimated",
+                  "currency": "USD",
+                  "price": {
+                    "cache_read": 0.2,
+                    "cache_write": null,
+                    "checked_at": "2026-10-16",
+                    "currency": "USD",
+                    "fee_percent": 0,
+                    "input": 2,
+                    "max_input_tokens": 200000,
+                    "output": 12,
+                    "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing"
+                  },
+                  "reason": "token_rates",
+                  "tokens": {
+                    "cache_read": 0,
+                    "cache_write": 0,
+                    "input": 74,
+                    "output": 375,
+                    "reasoning": 366,
+                    "total": 449
+                  }
+                },
+                "elapsed_seconds": 9.136,
+                "http_status": 200,
+                "model": "gemini-3.1-pro-preview",
+                "outcome_uncertain": false,
+                "output_incomplete": false,
+                "provider": "vertex",
+                "request_id": "c7d71811c8784d939add069a9db41a4e",
+                "response_deadline_seconds": 90,
+                "status": "SUCCEEDED",
+                "usage": {
+                  "candidatesTokenCount": 9,
+                  "promptTokenCount": 74,
+                  "thoughtsTokenCount": 366,
+                  "totalTokenCount": 449
+                }
+              },
+              "text": "milk\nMilk"
+            },
+            {
+              "correct": true,
+              "job_id": "6c12474753764e42b9d57917f5623f1f",
+              "receipt": {
+                "actual_reasoning": "low",
+                "billing": {
+                  "amount": 0.002526,
+                  "basis": "estimated",
+                  "currency": "USD",
+                  "price": {
+                    "cache_read": 0.2,
+                    "cache_write": null,
+                    "checked_at": "2026-10-16",
+                    "currency": "USD",
+                    "fee_percent": 0,
+                    "input": 2,
+                    "max_input_tokens": 200000,
+                    "output": 12,
+                    "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing"
+                  },
+                  "reason": "token_rates",
+                  "tokens": {
+                    "cache_read": 0,
+                    "cache_write": 0,
+                    "input": 75,
+                    "output": 198,
+                    "reasoning": 181,
+                    "total": 273
+                  }
+                },
+                "elapsed_seconds": 7.255,
+                "http_status": 200,
+                "model": "gemini-3.1-pro-preview",
+                "outcome_uncertain": false,
+                "output_incomplete": false,
+                "provider": "vertex",
+                "request_id": "2471d91cb3c44053940961acee69b929",
+                "response_deadline_seconds": 90,
+                "status": "SUCCEEDED",
+                "usage": {
+                  "candidatesTokenCount": 17,
+                  "promptTokenCount": 75,
+                  "thoughtsTokenCount": 181,
+                  "totalTokenCount": 273
+                }
+              },
+              "text": "书\n笔\n纸"
+            },
+            {
+              "correct": true,
+              "job_id": "61b3fc9b6ac048f0aeb05cfda8ce1269",
+              "receipt": {
+                "actual_reasoning": "low",
+                "billing": {
+                  "amount": 0.00411,
+                  "basis": "estimated",
+                  "currency": "USD",
+                  "price": {
+                    "cache_read": 0.2,
+                    "cache_write": null,
+                    "checked_at": "2026-10-16",
+                    "currency": "USD",
+                    "fee_percent": 0,
+                    "input": 2,
+                    "max_input_tokens": 200000,
+                    "output": 12,
+                    "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing"
+                  },
+                  "reason": "token_rates",
+                  "tokens": {
+                    "cache_read": 0,
+                    "cache_write": 0,
+                    "input": 75,
+                    "output": 330,
+                    "reasoning": 313,
+                    "total": 405
+                  }
+                },
+                "elapsed_seconds": 9.401,
+                "http_status": 200,
+                "model": "gemini-3.1-pro-preview",
+                "outcome_uncertain": false,
+                "output_incomplete": false,
+                "provider": "vertex",
+                "request_id": "84d82c43b5ec4e57832f22f2d6079c55",
+                "response_deadline_seconds": 90,
+                "status": "SUCCEEDED",
+                "usage": {
+                  "candidatesTokenCount": 17,
+                  "promptTokenCount": 75,
+                  "thoughtsTokenCount": 313,
+                  "totalTokenCount": 405
+                }
+              },
+              "text": "Alice\nBob\nEve"
+            },
+            {
+              "correct": true,
+              "job_id": "294833dec9184fabb33a129afad6049d",
+              "receipt": {
+                "actual_reasoning": "low",
+                "billing": {
+                  "amount": 0.002632,
+                  "basis": "estimated",
+                  "currency": "USD",
+                  "price": {
+                    "cache_read": 0.2,
+                    "cache_write": null,
+                    "checked_at": "2026-10-16",
+                    "currency": "USD",
+                    "fee_percent": 0,
+                    "input": 2,
+                    "max_input_tokens": 200000,
+                    "output": 12,
+                    "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing"
+                  },
+                  "reason": "token_rates",
+                  "tokens": {
+                    "cache_read": 0,
+                    "cache_write": 0,
+                    "input": 80,
+                    "output": 206,
+                    "reasoning": 190,
+                    "total": 286
+                  }
+                },
+                "elapsed_seconds": 7.568,
+                "http_status": 200,
+                "model": "gemini-3.1-pro-preview",
+                "outcome_uncertain": false,
+                "output_incomplete": false,
+                "provider": "vertex",
+                "request_id": "195c1dcd665342c69ccbd3ece2edcefb",
+                "response_deadline_seconds": 90,
+                "status": "SUCCEEDED",
+                "usage": {
+                  "candidatesTokenCount": 16,
+                  "promptTokenCount": 80,
+                  "thoughtsTokenCount": 190,
+                  "totalTokenCount": 286
+                }
+              },
+              "text": "任务甲\n任务乙"
+            },
+            {
+              "correct": true,
+              "job_id": "91f5be53638f473a855f6eba6a35316f",
+              "receipt": {
+                "actual_reasoning": "low",
+                "billing": {
+                  "amount": 0.005882,
+                  "basis": "estimated",
+                  "currency": "USD",
+                  "price": {
+                    "cache_read": 0.2,
+                    "cache_write": null,
+                    "checked_at": "2026-10-16",
+                    "currency": "USD",
+                    "fee_percent": 0,
+                    "input": 2,
+                    "max_input_tokens": 200000,
+                    "output": 12,
+                    "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing"
+                  },
+                  "reason": "token_rates",
+                  "tokens": {
+                    "cache_read": 0,
+                    "cache_write": 0,
+                    "input": 79,
+                    "output": 477,
+                    "reasoning": 462,
+                    "total": 556
+                  }
+                },
+                "elapsed_seconds": 10.44,
+                "http_status": 200,
+                "model": "gemini-3.1-pro-preview",
+                "outcome_uncertain": false,
+                "output_incomplete": false,
+                "provider": "vertex",
+                "request_id": "39f53a87a85f4080a944dfd57fd3567d",
+                "response_deadline_seconds": 90,
+                "status": "SUCCEEDED",
+                "usage": {
+                  "candidatesTokenCount": 15,
+                  "promptTokenCount": 79,
+                  "thoughtsTokenCount": 462,
+                  "totalTokenCount": 556
+                }
+              },
+              "text": "x\nY\nz"
+            }
+          ],
+          "canary_epoch": 1792483480.5915773,
+          "candidate_version": "c274e1b7c7449f060bb5c674b09240755cd58481acf9d1aa3ae9afe652ea68a2",
+          "coding_receipts": [
+            {
+              "billing": {
+                "amount": 0.007132,
+                "basis": "estimated",
+                "currency": "USD",
+                "price": {
+                  "cache_read": 0.2,
+                  "cache_write": null,
+                  "checked_at": "2026-10-16",
+                  "currency": "USD",
+                  "fee_percent": 0,
+                  "input": 2,
+                  "max_input_tokens": 200000,
+                  "output": 12,
+                  "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing"
+                },
+                "reason": "token_rates",
+                "tokens": {
+                  "cache_read": 0,
+                  "cache_write": 0,
+                  "input": 746,
+                  "output": 470,
+                  "reasoning": 359,
+                  "total": 1216
+                }
+              },
+              "model": "gemini-3.1-pro-preview",
+              "outcome_uncertain": false,
+              "provider": "vertex",
+              "request_id": "33a6606181b34a9b9285dbf2290c18e2",
+              "status": "SUCCEEDED",
+              "usage": {
+                "candidatesTokenCount": 111,
+                "promptTokenCount": 746,
+                "thoughtsTokenCount": 359,
+                "totalTokenCount": 1216
+              }
+            }
+          ],
+          "created_at": "2026-10-20T08:03:19.050059+00:00",
+          "domain": {
+            "contract": "输入为字符串列表。每项去除首尾空白，丢弃空项，按首次出现顺序去重（区分大小写），用换行连接；空表返回空字符串。",
+            "criterion": "exact output equality; no claim of arbitrary semantic correctness",
+            "digest": "sha256:2083918c18767f8e3b176be842bcf415c584f30f37abcb3daf633975d13af5a2",
+            "heldout": [
+              {
+                "expected": "a\nA",
+                "input": [
+                  "a",
+                  "A",
+                  "a"
+                ]
+              },
+              {
+                "expected": "中文",
+                "input": [
+                  "  ",
+                  "\t",
+                  "中文"
+                ]
+              }
+            ],
+            "id": "clean-lines",
+            "name": "清理重复清单",
+            "oracle_source": "host-authored explicit contract v1",
+            "public": [
+              {
+                "expected": "",
+                "input": []
+              },
+              {
+                "expected": "A\nB",
+                "input": [
+                  " A ",
+                  "A",
+                  "",
+                  "B"
+                ]
+              }
+            ],
+            "samples": [
+              {
+                "expected": "旅行\n机票\n酒店",
+                "input": [
+                  "旅行",
+                  " 旅行 ",
+                  "机票",
+                  "酒店"
+                ]
+              },
+              {
+                "expected": "milk\nMilk",
+                "input": [
+                  "milk",
+                  "Milk",
+                  "",
+                  "milk"
+                ]
+              },
+              {
+                "expected": "书\n笔\n纸",
+                "input": [
+                  "书",
+                  "笔",
+                  "书",
+                  "纸"
+                ]
+              },
+              {
+                "expected": "Alice\nBob\nEve",
+                "input": [
+                  " Alice ",
+                  "Bob",
+                  "Alice",
+                  "Eve"
+                ]
+              },
+              {
+                "expected": "任务甲\n任务乙",
+                "input": [
+                  "任务甲",
+                  "任务乙",
+                  "\n任务甲\n"
+                ]
+              },
+              {
+                "expected": "x\nY\nz",
+                "input": [
+                  "x",
+                  " x ",
+                  "\tY",
+                  "z",
+                  "Y"
+                ]
+              }
+            ],
+            "version": 1
+          },
+          "events": [
+            {
+              "at": "2026-10-20T08:03:19.050072+00:00",
+              "domain_digest": "sha256:2083918c18767f8e3b176be842bcf415c584f30f37abcb3daf633975d13af5a2",
+              "phase": "CONTRACT_FROZEN"
+            },
+            {
+              "at": "2026-10-20T08:03:39.783736+00:00",
+              "phase": "coding",
+              "receipt": "71ede1268f414b3d8bd9a10068743b59"
+            },
+            {
+              "at": "2026-10-20T08:03:49.900210+00:00",
+              "phase": "baseline-0",
+              "receipt": "a77e2eb49e6748aba3be857b18f8f3de"
+            },
+            {
+              "at": "2026-10-20T08:03:59.912191+00:00",
+              "phase": "baseline-1",
+              "receipt": "3a96e643a24940e9a2b91a18da63c0ea"
+            },
+            {
+              "at": "2026-10-20T08:04:08.133195+00:00",
+              "phase": "baseline-2",
+              "receipt": "6c12474753764e42b9d57917f5623f1f"
+            },
+            {
+              "at": "2026-10-20T08:04:18.451438+00:00",
+              "phase": "baseline-3",
+              "receipt": "61b3fc9b6ac048f0aeb05cfda8ce1269"
+            },
+            {
+              "at": "2026-10-20T08:04:27.013001+00:00",
+              "phase": "baseline-4",
+              "receipt": "294833dec9184fabb33a129afad6049d"
+            },
+            {
+              "at": "2026-10-20T08:04:38.597357+00:00",
+              "phase": "baseline-5",
+              "receipt": "91f5be53638f473a855f6eba6a35316f"
+            },
+            {
+              "at": "2026-10-20T08:04:40.591561+00:00",
+              "phase": "publish",
+              "receipt": "bbaf924de5dc4860822aba701cb10d76"
+            },
+            {
+              "at": "2026-10-20T08:04:43.339758+00:00",
+              "phase": "trial-0",
+              "receipt": "61af0545d4604beeaa548ae5cefcaac7"
+            },
+            {
+              "at": "2026-10-20T08:04:45.989261+00:00",
+              "phase": "trial-1",
+              "receipt": "cc33b95e30e8441f931bb6c8f09b972d"
+            },
+            {
+              "at": "2026-10-20T08:04:48.820007+00:00",
+              "phase": "trial-2",
+              "receipt": "cb6fae5113ef438189169a6d7d957d40"
+            },
+            {
+              "at": "2026-10-20T08:05:13.156286+00:00",
+              "phase": "promote",
+              "receipt": "bdf93687d438429ab9f04daf77e5ca06"
+            },
+            {
+              "at": "2026-10-20T08:05:15.837224+00:00",
+              "phase": "use-0",
+              "receipt": "0c2826d288ac421a9f3429902eec01d8"
+            },
+            {
+              "at": "2026-10-20T08:05:18.525481+00:00",
+              "phase": "use-1",
+              "receipt": "5a3d91ec3e5443a4b81a7a5969c72cac"
+            },
+            {
+              "at": "2026-10-20T08:05:21.264050+00:00",
+              "phase": "use-2",
+              "receipt": "4ae59a60fdde4cb9b7814281a7441e90"
+            }
+          ],
+          "feedback": {
+            "source": "not_provided",
+            "useful": null
+          },
+          "id": "40e52a6a61e94396aaa397ef94e4fe1c",
+          "observation_epoch": 1792483513.1563017,
+          "pending": null,
+          "policy": {
+            "domains": [
+              "clean-lines",
+              "group-counts",
+              "byte-total"
+            ],
+            "enabled": true,
+            "expires_at": 1792486998.9223819,
+            "maximum_cycle_seconds": 1800,
+            "maximum_cycles": 3,
+            "maximum_memory_bytes": 201326592,
+            "maximum_model_calls": 8,
+            "maximum_seconds": 15,
+            "minimum_calls_saved": 1,
+            "model": "vertex::gemini-3.1-pro-preview",
+            "review_note": "独立核对清单契约、观察窗口及调用预算。",
+            "revision": 1,
+            "runtime_binding": "sha256:32c235893f999752b8b9c36e142696529394be41799b4f27ef36e3cd65b3495b",
+            "window_seconds": 30
+          },
+          "reserved_model_calls": 8,
+          "scope": {
+            "conversation_id": "260bdc541fad49c094ae1185b8e93554",
+            "project_id": "4e37385bb3cb4777817b1d5adb7c849c",
+            "root": "C:\\Users\\samuel\\AppData\\Local\\Temp\\tmpi0bips1f\\project"
+          },
+          "started_epoch": 1792483399.0500562,
+          "status": "COMPLETE",
+          "submission": {
+            "domain": "clean-lines",
+            "goal": "我希望每天重复整理我的清单或统计资料，请把这项明确需求做成可复用能力：输入为字符串列表。每项去除首尾空白，丢弃空项，按首次出现顺序去重（区分大小写），用换行连接；空表返回空字符串。",
+            "policy_revision": 1,
+            "request_id": "40e52a6a61e94396aaa397ef94e4fe1c"
+          },
+          "task_id": "task_22729a29c7515a40b4dc07b708816524",
+          "tool_id": "growth-clean-lines-40e52a6a",
+          "trials": [
+            {
+              "baseline": null,
+              "benefit_note": "适用性依据用户选定契约；非主人体验反馈。",
+              "candidate_seconds": 0.77,
+              "input_digest": "sha256:191c8c75398e9ef3d6ca10e06de745f61d9f956cba3a83018429bfbe3ddfdac9",
+              "job_id": "61af0545d4604beeaa548ae5cefcaac7",
+              "novel": true,
+              "passed": true,
+              "peak_process_memory_bytes": 18460672,
+              "useful": true,
+              "usefulness_source": "preauthorized_domain_scope",
+              "version": "c274e1b7c7449f060bb5c674b09240755cd58481acf9d1aa3ae9afe652ea68a2"
+            },
+            {
+              "baseline": null,
+              "benefit_note": "适用性依据用户选定契约；非主人体验反馈。",
+              "candidate_seconds": 0.7055,
+              "input_digest": "sha256:e2f3ae179c84f6641639edee9b1a7047c05058f349aa78435163537e59f23ea4",
+              "job_id": "cc33b95e30e8441f931bb6c8f09b972d",
+              "novel": true,
+              "passed": true,
+              "peak_process_memory_bytes": 18472960,
+              "useful": true,
+              "usefulness_source": "preauthorized_domain_scope",
+              "version": "c274e1b7c7449f060bb5c674b09240755cd58481acf9d1aa3ae9afe652ea68a2"
+            },
+            {
+              "baseline": null,
+              "benefit_note": "适用性依据用户选定契约；非主人体验反馈。",
+              "candidate_seconds": 0.7248,
+              "input_digest": "sha256:d695606c4074f8e8b89aa92d97d194ab195ef041ddab363908e709bf378d8da5",
+              "job_id": "cb6fae5113ef438189169a6d7d957d40",
+              "novel": true,
+              "passed": true,
+              "peak_process_memory_bytes": 17788928,
+              "useful": true,
+              "usefulness_source": "preauthorized_domain_scope",
+              "version": "c274e1b7c7449f060bb5c674b09240755cd58481acf9d1aa3ae9afe652ea68a2"
+            }
+          ],
+          "updated_at": "2026-10-20T08:05:43.260744+00:00",
+          "uses": [
+            {
+              "elapsed_seconds": 1.461,
+              "isolation": {
+                "active_process_limit": 1,
+                "appcontainer": true,
+                "backend": "windows-lpac-job",
+                "capabilities": [
+                  "registryRead"
+                ],
+                "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+                "cpu_seconds": 0.265625,
+                "cpu_time_limit_seconds": 3,
+                "elapsed_seconds": 0.5113,
+                "lpac": true,
+                "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+                "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+                "memory_limit_bytes": 201326592,
+                "package_sid": "S-1-15-2-2553019161-3092601115-2452458690-2612424386-1002842262-4250129544-195783571",
+                "peak_process_memory_bytes": 18255872,
+                "pid": 46644,
+                "runtime_bytes": 22904399,
+                "wall_time_limit_seconds": 12
+              },
+              "job_id": "0c2826d288ac421a9f3429902eec01d8",
+              "model_calls": 0,
+              "regression": {
+                "cases": 4,
+                "isolation": {
+                  "active_process_limit": 1,
+                  "appcontainer": true,
+                  "backend": "windows-lpac-job",
+                  "capabilities": [
+                    "registryRead"
+                  ],
+                  "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+                  "cpu_seconds": 0.28125,
+                  "cpu_time_limit_seconds": 3,
+                  "elapsed_seconds": 0.5873,
+                  "lpac": true,
+                  "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+                  "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+                  "memory_limit_bytes": 201326592,
+                  "package_sid": "S-1-15-2-241926435-677466697-67844107-4273926566-2912367703-1364192846-608563401",
+                  "peak_process_memory_bytes": 17899520,
+                  "pid": 33396,
+                  "runtime_bytes": 22904399,
+                  "wall_time_limit_seconds": 12
+                },
+                "passed": true
+              },
+              "result_digest": "sha256:2f5769ec7f46dbf3007587aeec7983cb18dc66dc5fadaac849edab70eff383d3",
+              "result_verified": true,
+              "text": "Alice\nBob\nEve",
+              "version": "c274e1b7c7449f060bb5c674b09240755cd58481acf9d1aa3ae9afe652ea68a2"
+            },
+            {
+              "elapsed_seconds": 1.47,
+              "isolation": {
+                "active_process_limit": 1,
+                "appcontainer": true,
+                "backend": "windows-lpac-job",
+                "capabilities": [
+                  "registryRead"
+                ],
+                "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+                "cpu_seconds": 0.265625,
+                "cpu_time_limit_seconds": 3,
+                "elapsed_seconds": 0.5187,
+                "lpac": true,
+                "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+                "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+                "memory_limit_bytes": 201326592,
+                "package_sid": "S-1-15-2-1118468291-1539417820-2478255587-2048416408-2758623002-2199615938-2547376962",
+                "peak_process_memory_bytes": 18595840,
+                "pid": 47888,
+                "runtime_bytes": 22904399,
+                "wall_time_limit_seconds": 12
+              },
+              "job_id": "5a3d91ec3e5443a4b81a7a5969c72cac",
+              "model_calls": 0,
+              "regression": {
+                "cases": 4,
+                "isolation": {
+                  "active_process_limit": 1,
+                  "appcontainer": true,
+                  "backend": "windows-lpac-job",
+                  "capabilities": [
+                    "registryRead"
+                  ],
+                  "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+                  "cpu_seconds": 0.28125,
+                  "cpu_time_limit_seconds": 3,
+                  "elapsed_seconds": 0.5423,
+                  "lpac": true,
+                  "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+                  "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+                  "memory_limit_bytes": 201326592,
+                  "package_sid": "S-1-15-2-2854363368-3660590233-3284890338-3008672916-2714868434-63879795-1935652692",
+                  "peak_process_memory_bytes": 18317312,
+                  "pid": 50560,
+                  "runtime_bytes": 22904399,
+                  "wall_time_limit_seconds": 12
+                },
+                "passed": true
+              },
+              "result_digest": "sha256:049eda38ec0b1dc18b54249be602c3a2a92b9c3df4f73b1815ebd62120f68e60",
+              "result_verified": true,
+              "text": "任务甲\n任务乙",
+              "version": "c274e1b7c7449f060bb5c674b09240755cd58481acf9d1aa3ae9afe652ea68a2"
+            },
+            {
+              "elapsed_seconds": 1.571,
+              "isolation": {
+                "active_process_limit": 1,
+                "appcontainer": true,
+                "backend": "windows-lpac-job",
+                "capabilities": [
+                  "registryRead"
+                ],
+                "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+                "cpu_seconds": 0.265625,
+                "cpu_time_limit_seconds": 3,
+                "elapsed_seconds": 0.5865,
+                "lpac": true,
+                "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+                "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+                "memory_limit_bytes": 201326592,
+                "package_sid": "S-1-15-2-3705765976-978013610-1575460399-3693313569-2479793175-840287977-993905733",
+                "peak_process_memory_bytes": 18292736,
+                "pid": 45168,
+                "runtime_bytes": 22904399,
+                "wall_time_limit_seconds": 12
+              },
+              "job_id": "4ae59a60fdde4cb9b7814281a7441e90",
+              "model_calls": 0,
+              "regression": {
+                "cases": 4,
+                "isolation": {
+                  "active_process_limit": 1,
+                  "appcontainer": true,
+                  "backend": "windows-lpac-job",
+                  "capabilities": [
+                    "registryRead"
+                  ],
+                  "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+                  "cpu_seconds": 0.28125,
+                  "cpu_time_limit_seconds": 3,
+                  "elapsed_seconds": 0.6012,
+                  "lpac": true,
+                  "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+                  "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+                  "memory_limit_bytes": 201326592,
+                  "package_sid": "S-1-15-2-2046957238-228389339-4182130292-3475255560-1460676615-936021547-3392968386",
+                  "peak_process_memory_bytes": 18280448,
+                  "pid": 44768,
+                  "runtime_bytes": 22904399,
+                  "wall_time_limit_seconds": 12
+                },
+                "passed": true
+              },
+              "result_digest": "sha256:62356493b46253d948eb22cbf7751a21c5730e318c5cf10f4b4534423ba68ec3",
+              "result_verified": true,
+              "text": "x\nY\nz",
+              "version": "c274e1b7c7449f060bb5c674b09240755cd58481acf9d1aa3ae9afe652ea68a2"
+            }
+          ]
+        },
+        "concurrent_conversation_saved": true,
+        "source_unchanged": true,
+        "new_python_files": [],
+        "delivered_files": [
+          "技能产物-22729a29c751.txt"
+        ],
+        "maintenance_available": true
+      },
+      {
+        "domain": "group-counts",
+        "status": "passed",
+        "phase": "COMPLETE",
+        "elapsed_seconds": 140.997,
+        "cycle": {
+          "assessment": {
+            "accepted": true,
+            "amount_delta_baseline_minus_coding": -0.002293999999999999,
+            "calls_saved": 5,
+            "coding": {
+              "amount": 0.01275,
+              "calls": 1,
+              "currency": "USD",
+              "tokens": 1725
+            },
+            "criterion": "six independently verified uses, fewer repeated model calls after coding, bounded latency and memory",
+            "experiment_model_calls": 7,
+            "interventions": 0,
+            "limits": "短窗口、限定任务域；不证明长期稳定或总费用降低。对照调用计入实验支出，不计为实际节省。",
+            "maximum_tool_seconds": 1.8,
+            "maximum_worker_memory_bytes": 18644992,
+            "samples": 6,
+            "token_delta_baseline_minus_coding": -307,
+            "user_feedback": {
+              "source": "not_provided",
+              "useful": null
+            },
+            "verified": true,
+            "working_model_baseline": {
+              "amount": 0.010456,
+              "calls": 6,
+              "currency": "USD",
+              "tokens": 1418
+            }
+          },
+          "baseline": [
+            {
+              "correct": true,
+              "job_id": "4ce9cb78dc33453e8856f022460b4e2a",
+              "receipt": {
+                "actual_reasoning": "low",
+                "billing": {
+                  "amount": 0.001822,
+                  "basis": "estimated",
+                  "currency": "USD",
+                  "price": {
+                    "cache_read": 0.2,
+                    "cache_write": null,
+                    "checked_at": "2026-10-16",
+                    "currency": "USD",
+                    "fee_percent": 0,
+                    "input": 2,
+                    "max_input_tokens": 200000,
+                    "output": 12,
+                    "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing"
+                  },
+                  "reason": "token_rates",
+                  "tokens": {
+                    "cache_read": 0,
+                    "cache_write": 0,
+                    "input": 113,
+                    "output": 133,
+                    "reasoning": 120,
+                    "total": 246
+                  }
+                },
+                "elapsed_seconds": 8.419,
+                "http_status": 200,
+                "model": "gemini-3.1-pro-preview",
+                "outcome_uncertain": false,
+                "output_incomplete": false,
+                "provider": "vertex",
+                "request_id": "888e3ec5eae1479fa04291f6aa98915a",
+                "response_deadline_seconds": 90,
+                "status": "SUCCEEDED",
+                "usage": {
+                  "candidatesTokenCount": 13,
+                  "promptTokenCount": 113,
+                  "thoughtsTokenCount": 120,
+                  "totalTokenCount": 246
+                }
+              },
+              "text": "工作:11\n生活:3"
+            },
+            {
+              "correct": true,
+              "job_id": "c7e1acf0dc9e4e299c071cb763544aa1",
+              "receipt": {
+                "actual_reasoning": "low",
+                "billing": {
+                  "amount": 0.000426,
+                  "basis": "estimated",
+                  "currency": "USD",
+                  "price": {
+                    "cache_read": 0.2,
+                    "cache_write": null,
+                    "checked_at": "2026-10-16",
+                    "currency": "USD",
+                    "fee_percent": 0,
+                    "input": 2,
+                    "max_input_tokens": 200000,
+                    "output": 12,
+                    "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing"
+                  },
+                  "reason": "token_rates",
+                  "tokens": {
+                    "cache_read": 0,
+                    "cache_write": 0,
+                    "input": 105,
+                    "output": 18,
+                    "reasoning": 0,
+                    "total": 123
+                  }
+                },
+                "elapsed_seconds": 5.714,
+                "http_status": 200,
+                "model": "gemini-3.1-pro-preview",
+                "outcome_uncertain": false,
+                "output_incomplete": false,
+                "provider": "vertex",
+                "request_id": "6367c7dad6c546d0befbed00f9931e49",
+                "response_deadline_seconds": 90,
+                "status": "SUCCEEDED",
+                "usage": {
+                  "candidatesTokenCount": 18,
+                  "promptTokenCount": 105,
+                  "totalTokenCount": 123
+                }
+              },
+              "text": "电影:2\n书籍:8"
+            },
+            {
+              "correct": true,
+              "job_id": "771b37ec2987447fb00eb6fac80b8bbc",
+              "receipt": {
+                "actual_reasoning": "low",
+                "billing": {
+                  "amount": 0.00044,
+                  "basis": "estimated",
+                  "currency": "USD",
+                  "price": {
+                    "cache_read": 0.2,
+                    "cache_write": null,
+                    "checked_at": "2026-10-16",
+                    "currency": "USD",
+                    "fee_percent": 0,
+                    "input": 2,
+                    "max_input_tokens": 200000,
+                    "output": 12,
+                    "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing"
+                  },
+                  "reason": "token_rates",
+                  "tokens": {
+                    "cache_read": 0,
+                    "cache_write": 0,
+                    "input": 106,
+                    "output": 19,
+                    "reasoning": 0,
+                    "total": 125
+                  }
+                },
+                "elapsed_seconds": 5.711,
+                "http_status": 200,
+                "model": "gemini-3.1-pro-preview",
+                "outcome_uncertain": false,
+                "output_incomplete": false,
+                "provider": "vertex",
+                "request_id": "d820e874d2ab4143a6df3441220a78cf",
+                "response_deadline_seconds": 90,
+                "status": "SUCCEEDED",
+                "usage": {
+                  "candidatesTokenCount": 19,
+                  "promptTokenCount": 106,
+                  "totalTokenCount": 125
+                }
+              },
+              "text": "早餐:0\n午餐:3"
+            },
+            {
+              "correct": true,
+              "job_id": "99e0053ccb9d4dd5acec15aacc4ef788",
+              "receipt": {
+                "actual_reasoning": "low",
+                "billing": {
+                  "amount": 0.002626,
+                  "basis": "estimated",
+                  "currency": "USD",
+                  "price": {
+                    "cache_read": 0.2,
+                    "cache_write": null,
+                    "checked_at": "2026-10-16",
+                    "currency": "USD",
+                    "fee_percent": 0,
+                    "input": 2,
+                    "max_input_tokens": 200000,
+                    "output": 12,
+                    "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing"
+                  },
+                  "reason": "token_rates",
+                  "tokens": {
+                    "cache_read": 0,
+                    "cache_write": 0,
+                    "input": 113,
+                    "output": 200,
+                    "reasoning": 188,
+                    "total": 313
+                  }
+                },
+                "elapsed_seconds": 7.716,
+                "http_status": 200,
+                "model": "gemini-3.1-pro-preview",
+                "outcome_uncertain": false,
+                "output_incomplete": false,
+                "provider": "vertex",
+                "request_id": "acdfdfec8cc04bdd973488f8de445eed",
+                "response_deadline_seconds": 90,
+                "status": "SUCCEEDED",
+                "usage": {
+                  "candidatesTokenCount": 12,
+                  "promptTokenCount": 113,
+                  "thoughtsTokenCount": 188,
+                  "totalTokenCount": 313
+                }
+              },
+              "text": "Z:11\na:4"
+            },
+            {
+              "correct": true,
+              "job_id": "167b4ca1ba0545dcb4f1fed7f86fb820",
+              "receipt": {
+                "actual_reasoning": "low",
+                "billing": {
+                  "amount": 0.002324,
+                  "basis": "estimated",
+                  "currency": "USD",
+                  "price": {
+                    "cache_read": 0.2,
+                    "cache_write": null,
+                    "checked_at": "2026-10-16",
+                    "currency": "USD",
+                    "fee_percent": 0,
+                    "input": 2,
+                    "max_input_tokens": 200000,
+                    "output": 12,
+                    "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing"
+                  },
+                  "reason": "token_rates",
+                  "tokens": {
+                    "cache_read": 0,
+                    "cache_write": 0,
+                    "input": 106,
+                    "output": 176,
+                    "reasoning": 163,
+                    "total": 282
+                  }
+                },
+                "elapsed_seconds": 7.626,
+                "http_status": 200,
+                "model": "gemini-3.1-pro-preview",
+                "outcome_uncertain": false,
+                "output_incomplete": false,
+                "provider": "vertex",
+                "request_id": "ab0a599605484745a30c997385759e83",
+                "response_deadline_seconds": 90,
+                "status": "SUCCEEDED",
+                "usage": {
+                  "candidatesTokenCount": 13,
+                  "promptTokenCount": 106,
+                  "thoughtsTokenCount": 163,
+                  "totalTokenCount": 282
+                }
+              },
+              "text": "邮件:12\n会议:2"
+            },
+            {
+              "correct": true,
+              "job_id": "e827cb0477094b4a9b994c24b8de8bf0",
+              "receipt": {
+                "actual_reasoning": "low",
+                "billing": {
+                  "amount": 0.002818,
+                  "basis": "estimated",
+                  "currency": "USD",
+                  "price": {
+                    "cache_read": 0.2,
+                    "cache_write": null,
+                    "checked_at": "2026-10-16",
+                    "currency": "USD",
+                    "fee_percent": 0,
+                    "input": 2,
+                    "max_input_tokens": 200000,
+                    "output": 12,
+                    "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing"
+                  },
+                  "reason": "token_rates",
+                  "tokens": {
+                    "cache_read": 0,
+                    "cache_write": 0,
+                    "input": 113,
+                    "output": 216,
+                    "reasoning": 198,
+                    "total": 329
+                  }
+                },
+                "elapsed_seconds": 8.11,
+                "http_status": 200,
+                "model": "gemini-3.1-pro-preview",
+                "outcome_uncertain": false,
+                "output_incomplete": false,
+                "provider": "vertex",
+                "request_id": "af173b6de8464a4585bfca03e784ce82",
+                "response_deadline_seconds": 90,
+                "status": "SUCCEEDED",
+                "usage": {
+                  "candidatesTokenCount": 18,
+                  "promptTokenCount": 113,
+                  "thoughtsTokenCount": 198,
+                  "totalTokenCount": 329
+                }
+              },
+              "text": "红:9\n蓝:1"
+            }
+          ],
+          "canary_epoch": 1792483621.9249926,
+          "candidate_version": "0687b0c9cd1980aa0ac988bfffce29ff990ec8b3a227920bd6c83414201e59b1",
+          "coding_receipts": [
+            {
+              "billing": {
+                "amount": 0.01275,
+                "basis": "estimated",
+                "currency": "USD",
+                "price": {
+                  "cache_read": 0.2,
+                  "cache_write": null,
+                  "checked_at": "2026-10-16",
+                  "currency": "USD",
+                  "fee_percent": 0,
+                  "input": 2,
+                  "max_input_tokens": 200000,
+                  "output": 12,
+                  "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing"
+                },
+                "reason": "token_rates",
+                "tokens": {
+                  "cache_read": 0,
+                  "cache_write": 0,
+                  "input": 795,
+                  "output": 930,
+                  "reasoning": 728,
+                  "total": 1725
+                }
+              },
+              "model": "gemini-3.1-pro-preview",
+              "outcome_uncertain": false,
+              "provider": "vertex",
+              "request_id": "22ac3fcfec074115ae43461462f8e857",
+              "status": "SUCCEEDED",
+              "usage": {
+                "candidatesTokenCount": 202,
+                "promptTokenCount": 795,
+                "thoughtsTokenCount": 728,
+                "totalTokenCount": 1725
+              }
+            }
+          ],
+          "created_at": "2026-10-20T08:05:43.768332+00:00",
+          "domain": {
+            "contract": "输入为包含 group（非空字符串）和 count（非负整数）的对象列表。按 group 精确相等分组、累加 count，保留组首次出现顺序；每行输出 group:count，无空格；空表为空字符串。不用于金额或浮点数。",
+            "criterion": "exact output equality; no claim of arbitrary semantic correctness",
+            "digest": "sha256:8bd052078ce8c5d7e0f454df32bc4bc97dc5654fcc2b2e50b67de7f4388386cb",
+            "heldout": [
+              {
+                "expected": "B:0\nA:1",
+                "input": [
+                  {
+                    "count": 0,
+                    "group": "B"
+                  },
+                  {
+                    "count": 1,
+                    "group": "A"
+                  }
+                ]
+              },
+              {
+                "expected": "笔:5\n纸:7",
+                "input": [
+                  {
+                    "count": 4,
+                    "group": "笔"
+                  },
+                  {
+                    "count": 7,
+                    "group": "纸"
+                  },
+                  {
+                    "count": 1,
+                    "group": "笔"
+                  }
+                ]
+              }
+            ],
+            "id": "group-counts",
+            "name": "分类数量汇总",
+            "oracle_source": "host-authored explicit contract v1",
+            "public": [
+              {
+                "expected": "",
+                "input": []
+              },
+              {
+                "expected": "书:5",
+                "input": [
+                  {
+                    "count": 2,
+                    "group": "书"
+                  },
+                  {
+                    "count": 3,
+                    "group": "书"
+                  }
+                ]
+              }
+            ],
+            "samples": [
+              {
+                "expected": "工作:11\n生活:3",
+                "input": [
+                  {
+                    "count": 5,
+                    "group": "工作"
+                  },
+                  {
+                    "count": 3,
+                    "group": "生活"
+                  },
+                  {
+                    "count": 6,
+                    "group": "工作"
+                  }
+                ]
+              },
+              {
+                "expected": "电影:2\n书籍:8",
+                "input": [
+                  {
+                    "count": 2,
+                    "group": "电影"
+                  },
+                  {
+                    "count": 8,
+                    "group": "书籍"
+                  }
+                ]
+              },
+              {
+                "expected": "早餐:0\n午餐:3",
+                "input": [
+                  {
+                    "count": 0,
+                    "group": "早餐"
+                  },
+                  {
+                    "count": 3,
+                    "group": "午餐"
+                  }
+                ]
+              },
+              {
+                "expected": "Z:11\na:4",
+                "input": [
+                  {
+                    "count": 3,
+                    "group": "Z"
+                  },
+                  {
+                    "count": 4,
+                    "group": "a"
+                  },
+                  {
+                    "count": 8,
+                    "group": "Z"
+                  }
+                ]
+              },
+              {
+                "expected": "邮件:12\n会议:2",
+                "input": [
+                  {
+                    "count": 12,
+                    "group": "邮件"
+                  },
+                  {
+                    "count": 2,
+                    "group": "会议"
+                  }
+                ]
+              },
+              {
+                "expected": "红:9\n蓝:1",
+                "input": [
+                  {
+                    "count": 9,
+                    "group": "红"
+                  },
+                  {
+                    "count": 1,
+                    "group": "蓝"
+                  },
+                  {
+                    "count": 0,
+                    "group": "红"
+                  }
+                ]
+              }
+            ],
+            "version": 1
+          },
+          "events": [
+            {
+              "at": "2026-10-20T08:05:43.768361+00:00",
+              "domain_digest": "sha256:8bd052078ce8c5d7e0f454df32bc4bc97dc5654fcc2b2e50b67de7f4388386cb",
+              "phase": "CONTRACT_FROZEN"
+            },
+            {
+              "at": "2026-10-20T08:06:10.412353+00:00",
+              "phase": "coding",
+              "receipt": "3b255a1773414756adc7de495d5bdf7b"
+            },
+            {
+              "at": "2026-10-20T08:06:19.991085+00:00",
+              "phase": "baseline-0",
+              "receipt": "4ce9cb78dc33453e8856f022460b4e2a"
+            },
+            {
+              "at": "2026-10-20T08:06:26.676242+00:00",
+              "phase": "baseline-1",
+              "receipt": "c7e1acf0dc9e4e299c071cb763544aa1"
+            },
+            {
+              "at": "2026-10-20T08:06:33.342399+00:00",
+              "phase": "baseline-2",
+              "receipt": "771b37ec2987447fb00eb6fac80b8bbc"
+            },
+            {
+              "at": "2026-10-20T08:06:42.213739+00:00",
+              "phase": "baseline-3",
+              "receipt": "99e0053ccb9d4dd5acec15aacc4ef788"
+            },
+            {
+              "at": "2026-10-20T08:06:50.892425+00:00",
+              "phase": "baseline-4",
+              "receipt": "167b4ca1ba0545dcb4f1fed7f86fb820"
+            },
+            {
+              "at": "2026-10-20T08:06:59.984069+00:00",
+              "phase": "baseline-5",
+              "receipt": "e827cb0477094b4a9b994c24b8de8bf0"
+            },
+            {
+              "at": "2026-10-20T08:07:01.924978+00:00",
+              "phase": "publish",
+              "receipt": "2edf72f1d22140bbad9bbe4f9aedb61c"
+            },
+            {
+              "at": "2026-10-20T08:07:04.677073+00:00",
+              "phase": "trial-0",
+              "receipt": "37ea817b63164ed1a96bb65b26c664a6"
+            },
+            {
+              "at": "2026-10-20T08:07:07.550801+00:00",
+              "phase": "trial-1",
+              "receipt": "a01e22061fc140d0ba2ab3167c8552ee"
+            },
+            {
+              "at": "2026-10-20T08:07:10.378236+00:00",
+              "phase": "trial-2",
+              "receipt": "86104179d83f4e6bad420c2bbde87e3a"
+            },
+            {
+              "at": "2026-10-20T08:07:34.652015+00:00",
+              "phase": "promote",
+              "receipt": "1ddbbc5eda1c46318ceaf5bb62bc3af7"
+            },
+            {
+              "at": "2026-10-20T08:07:37.582960+00:00",
+              "phase": "use-0",
+              "receipt": "b776a4c7f2b64aa986fee2e5e9b6f7b1"
+            },
+            {
+              "at": "2026-10-20T08:07:40.362710+00:00",
+              "phase": "use-1",
+              "receipt": "25009ef675ed4c44a581464a1d3b98e8"
+            },
+            {
+              "at": "2026-10-20T08:07:43.062618+00:00",
+              "phase": "use-2",
+              "receipt": "dd924f268af34e58a3e1223b0377692f"
+            }
+          ],
+          "feedback": {
+            "source": "not_provided",
+            "useful": null
+          },
+          "id": "3441f401c6f447b6bf3955fc23649e6a",
+          "observation_epoch": 1792483654.65203,
+          "pending": null,
+          "policy": {
+            "domains": [
+              "clean-lines",
+              "group-counts",
+              "byte-total"
+            ],
+            "enabled": true,
+            "expires_at": 1792487143.6349225,
+            "maximum_cycle_seconds": 1800,
+            "maximum_cycles": 3,
+            "maximum_memory_bytes": 201326592,
+            "maximum_model_calls": 8,
+            "maximum_seconds": 15,
+            "minimum_calls_saved": 1,
+            "model": "vertex::gemini-3.1-pro-preview",
+            "review_note": "独立核对清单契约、观察窗口及调用预算。",
+            "revision": 1,
+            "runtime_binding": "sha256:32c235893f999752b8b9c36e142696529394be41799b4f27ef36e3cd65b3495b",
+            "window_seconds": 30
+          },
+          "reserved_model_calls": 8,
+          "scope": {
+            "conversation_id": "9cac8891df474a658f4abd10a5c0db9d",
+            "project_id": "dac3cd34816f4a5083ced5814db0f034",
+            "root": "C:\\Users\\samuel\\AppData\\Local\\Temp\\tmpqwoc_fxa\\project"
+          },
+          "started_epoch": 1792483543.7683291,
+          "status": "COMPLETE",
+          "submission": {
+            "domain": "group-counts",
+            "goal": "我希望每天重复整理我的清单或统计资料，请把这项明确需求做成可复用能力：输入为包含 group（非空字符串）和 count（非负整数）的对象列表。按 group 精确相等分组、累加 count，保留组首次出现顺序；每行输出 group:count，无空格；空表为空字符串。不用于金额或浮点数。",
+            "policy_revision": 1,
+            "request_id": "3441f401c6f447b6bf3955fc23649e6a"
+          },
+          "task_id": "task_aee76bf52f9254da80a58496e7ad930f",
+          "tool_id": "growth-group-counts-3441f401",
+          "trials": [
+            {
+              "baseline": null,
+              "benefit_note": "适用性依据用户选定契约；非主人体验反馈。",
+              "candidate_seconds": 0.8335,
+              "input_digest": "sha256:2b2c6cf09072d9d9ad1ab58a83d6a6a84e1980a5394c23e862cdd66c82d29284",
+              "job_id": "37ea817b63164ed1a96bb65b26c664a6",
+              "novel": true,
+              "passed": true,
+              "peak_process_memory_bytes": 18534400,
+              "useful": true,
+              "usefulness_source": "preauthorized_domain_scope",
+              "version": "0687b0c9cd1980aa0ac988bfffce29ff990ec8b3a227920bd6c83414201e59b1"
+            },
+            {
+              "baseline": null,
+              "benefit_note": "适用性依据用户选定契约；非主人体验反馈。",
+              "candidate_seconds": 0.8374,
+              "input_digest": "sha256:14e0bd21a34cf0090134b1b1b9344888ab8dc7dd3cdfb2bb07c1c7bed7bc6ef7",
+              "job_id": "a01e22061fc140d0ba2ab3167c8552ee",
+              "novel": true,
+              "passed": true,
+              "peak_process_memory_bytes": 18116608,
+              "useful": true,
+              "usefulness_source": "preauthorized_domain_scope",
+              "version": "0687b0c9cd1980aa0ac988bfffce29ff990ec8b3a227920bd6c83414201e59b1"
+            },
+            {
+              "baseline": null,
+              "benefit_note": "适用性依据用户选定契约；非主人体验反馈。",
+              "candidate_seconds": 0.7686,
+              "input_digest": "sha256:a920cd729261eae5d3e0d7a56c959700f7a23954852a77012c42dbfc13c342fd",
+              "job_id": "86104179d83f4e6bad420c2bbde87e3a",
+              "novel": true,
+              "passed": true,
+              "peak_process_memory_bytes": 18567168,
+              "useful": true,
+              "usefulness_source": "preauthorized_domain_scope",
+              "version": "0687b0c9cd1980aa0ac988bfffce29ff990ec8b3a227920bd6c83414201e59b1"
+            }
+          ],
+          "updated_at": "2026-10-20T08:08:04.724076+00:00",
+          "uses": [
+            {
+              "elapsed_seconds": 1.8,
+              "isolation": {
+                "active_process_limit": 1,
+                "appcontainer": true,
+                "backend": "windows-lpac-job",
+                "capabilities": [
+                  "registryRead"
+                ],
+                "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+                "cpu_seconds": 0.28125,
+                "cpu_time_limit_seconds": 3,
+                "elapsed_seconds": 0.7239,
+                "lpac": true,
+                "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+                "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+                "memory_limit_bytes": 201326592,
+                "package_sid": "S-1-15-2-1902474314-1661774802-1694646514-81742384-4252095614-1884009984-636804916",
+                "peak_process_memory_bytes": 18644992,
+                "pid": 18748,
+                "runtime_bytes": 22904399,
+                "wall_time_limit_seconds": 12
+              },
+              "job_id": "b776a4c7f2b64aa986fee2e5e9b6f7b1",
+              "model_calls": 0,
+              "regression": {
+                "cases": 4,
+                "isolation": {
+                  "active_process_limit": 1,
+                  "appcontainer": true,
+                  "backend": "windows-lpac-job",
+                  "capabilities": [
+                    "registryRead"
+                  ],
+                  "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+                  "cpu_seconds": 0.296875,
+                  "cpu_time_limit_seconds": 3,
+                  "elapsed_seconds": 0.6728,
+                  "lpac": true,
+                  "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+                  "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+                  "memory_limit_bytes": 201326592,
+                  "package_sid": "S-1-15-2-3903217514-2087065124-4248831628-2873291876-1222757264-3847328003-2160580711",
+                  "peak_process_memory_bytes": 18558976,
+                  "pid": 14692,
+                  "runtime_bytes": 22904399,
+                  "wall_time_limit_seconds": 12
+                },
+                "passed": true
+              },
+              "result_digest": "sha256:e5226154f33729a141300a3eb4a843393c925904bfd91d2d9aa8cc791402181c",
+              "result_verified": true,
+              "text": "Z:11\na:4",
+              "version": "0687b0c9cd1980aa0ac988bfffce29ff990ec8b3a227920bd6c83414201e59b1"
+            },
+            {
+              "elapsed_seconds": 1.589,
+              "isolation": {
+                "active_process_limit": 1,
+                "appcontainer": true,
+                "backend": "windows-lpac-job",
+                "capabilities": [
+                  "registryRead"
+                ],
+                "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+                "cpu_seconds": 0.265625,
+                "cpu_time_limit_seconds": 3,
+                "elapsed_seconds": 0.5452,
+                "lpac": true,
+                "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+                "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+                "memory_limit_bytes": 201326592,
+                "package_sid": "S-1-15-2-3147305047-3658485675-1679857640-3400581134-2981255210-4216964432-1334837519",
+                "peak_process_memory_bytes": 17989632,
+                "pid": 22700,
+                "runtime_bytes": 22904399,
+                "wall_time_limit_seconds": 12
+              },
+              "job_id": "25009ef675ed4c44a581464a1d3b98e8",
+              "model_calls": 0,
+              "regression": {
+                "cases": 4,
+                "isolation": {
+                  "active_process_limit": 1,
+                  "appcontainer": true,
+                  "backend": "windows-lpac-job",
+                  "capabilities": [
+                    "registryRead"
+                  ],
+                  "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+                  "cpu_seconds": 0.28125,
+                  "cpu_time_limit_seconds": 3,
+                  "elapsed_seconds": 0.6811,
+                  "lpac": true,
+                  "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+                  "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+                  "memory_limit_bytes": 201326592,
+                  "package_sid": "S-1-15-2-2358426858-4097721003-192056520-1262269344-2690197099-2865066350-4094907005",
+                  "peak_process_memory_bytes": 18128896,
+                  "pid": 3396,
+                  "runtime_bytes": 22904399,
+                  "wall_time_limit_seconds": 12
+                },
+                "passed": true
+              },
+              "result_digest": "sha256:81a24558ad4df2a5af10b2e4900dedd47fc3c6d07b7192080a1074c5adacfa69",
+              "result_verified": true,
+              "text": "邮件:12\n会议:2",
+              "version": "0687b0c9cd1980aa0ac988bfffce29ff990ec8b3a227920bd6c83414201e59b1"
+            },
+            {
+              "elapsed_seconds": 1.61,
+              "isolation": {
+                "active_process_limit": 1,
+                "appcontainer": true,
+                "backend": "windows-lpac-job",
+                "capabilities": [
+                  "registryRead"
+                ],
+                "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+                "cpu_seconds": 0.296875,
+                "cpu_time_limit_seconds": 3,
+                "elapsed_seconds": 0.6136,
+                "lpac": true,
+                "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+                "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+                "memory_limit_bytes": 201326592,
+                "package_sid": "S-1-15-2-3747850048-1956366893-623655012-176223345-4234768426-3256626078-2741811577",
+                "peak_process_memory_bytes": 18444288,
+                "pid": 4324,
+                "runtime_bytes": 22904399,
+                "wall_time_limit_seconds": 12
+              },
+              "job_id": "dd924f268af34e58a3e1223b0377692f",
+              "model_calls": 0,
+              "regression": {
+                "cases": 4,
+                "isolation": {
+                  "active_process_limit": 1,
+                  "appcontainer": true,
+                  "backend": "windows-lpac-job",
+                  "capabilities": [
+                    "registryRead"
+                  ],
+                  "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+                  "cpu_seconds": 0.28125,
+                  "cpu_time_limit_seconds": 3,
+                  "elapsed_seconds": 0.6061,
+                  "lpac": true,
+                  "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+                  "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+                  "memory_limit_bytes": 201326592,
+                  "package_sid": "S-1-15-2-2292358467-310663848-1760228200-3468452178-2489749010-121788253-514400539",
+                  "peak_process_memory_bytes": 18362368,
+                  "pid": 20668,
+                  "runtime_bytes": 22904399,
+                  "wall_time_limit_seconds": 12
+                },
+                "passed": true
+              },
+              "result_digest": "sha256:f7ee27db74062f503762a6b4e7baebe743b0d86d7923bafe22ad222301c53de5",
+              "result_verified": true,
+              "text": "红:9\n蓝:1",
+              "version": "0687b0c9cd1980aa0ac988bfffce29ff990ec8b3a227920bd6c83414201e59b1"
+            }
+          ]
+        },
+        "concurrent_conversation_saved": true,
+        "source_unchanged": true,
+        "new_python_files": [],
+        "delivered_files": [
+          "技能产物-aee76bf52f92.txt"
+        ],
+        "maintenance_available": true
+      },
+      {
+        "domain": "byte-total",
+        "status": "passed",
+        "phase": "COMPLETE",
+        "elapsed_seconds": 147.32,
+        "cycle": {
+          "assessment": {
+            "accepted": true,
+            "amount_delta_baseline_minus_coding": 0.010192,
+            "calls_saved": 5,
+            "coding": {
+              "amount": 0.007226,
+              "calls": 1,
+              "currency": "USD",
+              "tokens": 1293
+            },
+            "criterion": "six independently verified uses, fewer repeated model calls after coding, bounded latency and memory",
+            "experiment_model_calls": 7,
+            "interventions": 0,
+            "limits": "短窗口、限定任务域；不证明长期稳定或总费用降低。对照调用计入实验支出，不计为实际节省。",
+            "maximum_tool_seconds": 1.889,
+            "maximum_worker_memory_bytes": 18530304,
+            "samples": 6,
+            "token_delta_baseline_minus_coding": 761,
+            "user_feedback": {
+              "source": "not_provided",
+              "useful": null
+            },
+            "verified": true,
+            "working_model_baseline": {
+              "amount": 0.017418,
+              "calls": 6,
+              "currency": "USD",
+              "tokens": 2054
+            }
+          },
+          "baseline": [
+            {
+              "correct": true,
+              "job_id": "04ef79b02b284599a950eb2148d4d18c",
+              "receipt": {
+                "actual_reasoning": "low",
+                "billing": {
+                  "amount": 0.00173,
+                  "basis": "estimated",
+                  "currency": "USD",
+                  "price": {
+                    "cache_read": 0.2,
+                    "cache_write": null,
+                    "checked_at": "2026-10-16",
+                    "currency": "USD",
+                    "fee_percent": 0,
+                    "input": 2,
+                    "max_input_tokens": 200000,
+                    "output": 12,
+                    "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing"
+                  },
+                  "reason": "token_rates",
+                  "tokens": {
+                    "cache_read": 0,
+                    "cache_write": 0,
+                    "input": 121,
+                    "output": 124,
+                    "reasoning": 110,
+                    "total": 245
+                  }
+                },
+                "elapsed_seconds": 6.684,
+                "http_status": 200,
+                "model": "gemini-3.1-pro-preview",
+                "outcome_uncertain": false,
+                "output_incomplete": false,
+                "provider": "vertex",
+                "request_id": "4608b78d247547168dc1fb3c14d4feca",
+                "response_deadline_seconds": 90,
+                "status": "SUCCEEDED",
+                "usage": {
+                  "candidatesTokenCount": 14,
+                  "promptTokenCount": 121,
+                  "thoughtsTokenCount": 110,
+                  "totalTokenCount": 245
+                }
+              },
+              "text": "7177"
+            },
+            {
+              "correct": true,
+              "job_id": "406363bf78924c80bd1987f1004d99f2",
+              "receipt": {
+                "actual_reasoning": "low",
+                "billing": {
+                  "amount": 0.004588,
+                  "basis": "estimated",
+                  "currency": "USD",
+                  "price": {
+                    "cache_read": 0.2,
+                    "cache_write": null,
+                    "checked_at": "2026-10-16",
+                    "currency": "USD",
+                    "fee_percent": 0,
+                    "input": 2,
+                    "max_input_tokens": 200000,
+                    "output": 12,
+                    "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing"
+                  },
+                  "reason": "token_rates",
+                  "tokens": {
+                    "cache_read": 0,
+                    "cache_write": 0,
+                    "input": 122,
+                    "output": 362,
+                    "reasoning": 345,
+                    "total": 484
+                  }
+                },
+                "elapsed_seconds": 9.833,
+                "http_status": 200,
+                "model": "gemini-3.1-pro-preview",
+                "outcome_uncertain": false,
+                "output_incomplete": false,
+                "provider": "vertex",
+                "request_id": "a4bada364db9474f8b7005db77c71b3d",
+                "response_deadline_seconds": 90,
+                "status": "SUCCEEDED",
+                "usage": {
+                  "candidatesTokenCount": 17,
+                  "promptTokenCount": 122,
+                  "thoughtsTokenCount": 345,
+                  "totalTokenCount": 484
+                }
+              },
+              "text": "3147776"
+            },
+            {
+              "correct": true,
+              "job_id": "ca55c593c69c425093baab93cd2cd057",
+              "receipt": {
+                "actual_reasoning": "low",
+                "billing": {
+                  "amount": 0.001276,
+                  "basis": "estimated",
+                  "currency": "USD",
+                  "price": {
+                    "cache_read": 0.2,
+                    "cache_write": null,
+                    "checked_at": "2026-10-16",
+                    "currency": "USD",
+                    "fee_percent": 0,
+                    "input": 2,
+                    "max_input_tokens": 200000,
+                    "output": 12,
+                    "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing"
+                  },
+                  "reason": "token_rates",
+                  "tokens": {
+                    "cache_read": 0,
+                    "cache_write": 0,
+                    "input": 122,
+                    "output": 86,
+                    "reasoning": 75,
+                    "total": 208
+                  }
+                },
+                "elapsed_seconds": 7.018,
+                "http_status": 200,
+                "model": "gemini-3.1-pro-preview",
+                "outcome_uncertain": false,
+                "output_incomplete": false,
+                "provider": "vertex",
+                "request_id": "d3360ec0febf4184814a53cb9b707500",
+                "response_deadline_seconds": 90,
+                "status": "SUCCEEDED",
+                "usage": {
+                  "candidatesTokenCount": 11,
+                  "promptTokenCount": 122,
+                  "thoughtsTokenCount": 75,
+                  "totalTokenCount": 208
+                }
+              },
+              "text": "66"
+            },
+            {
+              "correct": true,
+              "job_id": "fa880ec3679c420bb10ac7a31bc6e94e",
+              "receipt": {
+                "actual_reasoning": "low",
+                "billing": {
+                  "amount": 0.003394,
+                  "basis": "estimated",
+                  "currency": "USD",
+                  "price": {
+                    "cache_read": 0.2,
+                    "cache_write": null,
+                    "checked_at": "2026-10-16",
+                    "currency": "USD",
+                    "fee_percent": 0,
+                    "input": 2,
+                    "max_input_tokens": 200000,
+                    "output": 12,
+                    "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing"
+                  },
+                  "reason": "token_rates",
+                  "tokens": {
+                    "cache_read": 0,
+                    "cache_write": 0,
+                    "input": 113,
+                    "output": 264,
+                    "reasoning": 250,
+                    "total": 377
+                  }
+                },
+                "elapsed_seconds": 8.479,
+                "http_status": 200,
+                "model": "gemini-3.1-pro-preview",
+                "outcome_uncertain": false,
+                "output_incomplete": false,
+                "provider": "vertex",
+                "request_id": "da448a0322994dbdb555284255bf703f",
+                "response_deadline_seconds": 90,
+                "status": "SUCCEEDED",
+                "usage": {
+                  "candidatesTokenCount": 14,
+                  "promptTokenCount": 113,
+                  "thoughtsTokenCount": 250,
+                  "totalTokenCount": 377
+                }
+              },
+              "text": "8192"
+            },
+            {
+              "correct": true,
+              "job_id": "14f1d4214df54da691568632a3b3881b",
+              "receipt": {
+                "actual_reasoning": "low",
+                "billing": {
+                  "amount": 0.0043,
+                  "basis": "estimated",
+                  "currency": "USD",
+                  "price": {
+                    "cache_read": 0.2,
+                    "cache_write": null,
+                    "checked_at": "2026-10-16",
+                    "currency": "USD",
+                    "fee_percent": 0,
+                    "input": 2,
+                    "max_input_tokens": 200000,
+                    "output": 12,
+                    "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing"
+                  },
+                  "reason": "token_rates",
+                  "tokens": {
+                    "cache_read": 0,
+                    "cache_write": 0,
+                    "input": 122,
+                    "output": 338,
+                    "reasoning": 321,
+                    "total": 460
+                  }
+                },
+                "elapsed_seconds": 9.226,
+                "http_status": 200,
+                "model": "gemini-3.1-pro-preview",
+                "outcome_uncertain": false,
+                "output_incomplete": false,
+                "provider": "vertex",
+                "request_id": "c52bd93292854c889991e1b4c1480fbe",
+                "response_deadline_seconds": 90,
+                "status": "SUCCEEDED",
+                "usage": {
+                  "candidatesTokenCount": 17,
+                  "promptTokenCount": 122,
+                  "thoughtsTokenCount": 321,
+                  "totalTokenCount": 460
+                }
+              },
+              "text": "2097173"
+            },
+            {
+              "correct": true,
+              "job_id": "6964586f059744ceb098f5b791e7ad61",
+              "receipt": {
+                "actual_reasoning": "low",
+                "billing": {
+                  "amount": 0.00213,
+                  "basis": "estimated",
+                  "currency": "USD",
+                  "price": {
+                    "cache_read": 0.2,
+                    "cache_write": null,
+                    "checked_at": "2026-10-16",
+                    "currency": "USD",
+                    "fee_percent": 0,
+                    "input": 2,
+                    "max_input_tokens": 200000,
+                    "output": 12,
+                    "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing"
+                  },
+                  "reason": "token_rates",
+                  "tokens": {
+                    "cache_read": 0,
+                    "cache_write": 0,
+                    "input": 123,
+                    "output": 157,
+                    "reasoning": 148,
+                    "total": 280
+                  }
+                },
+                "elapsed_seconds": 6.851,
+                "http_status": 200,
+                "model": "gemini-3.1-pro-preview",
+                "outcome_uncertain": false,
+                "output_incomplete": false,
+                "provider": "vertex",
+                "request_id": "d0e5a3313b334e4f9e0963d97d305567",
+                "response_deadline_seconds": 90,
+                "status": "SUCCEEDED",
+                "usage": {
+                  "candidatesTokenCount": 9,
+                  "promptTokenCount": 123,
+                  "thoughtsTokenCount": 148,
+                  "totalTokenCount": 280
+                }
+              },
+              "text": "17498"
+            }
+          ],
+          "canary_epoch": 1792483769.2947524,
+          "candidate_version": "89fb970055c4f63e34120b1c7c75a27a45b000fd8efbcdc5ec417dc58196ffa9",
+          "coding_receipts": [
+            {
+              "billing": {
+                "amount": 0.007226,
+                "basis": "estimated",
+                "currency": "USD",
+                "price": {
+                  "cache_read": 0.2,
+                  "cache_write": null,
+                  "checked_at": "2026-10-16",
+                  "currency": "USD",
+                  "fee_percent": 0,
+                  "input": 2,
+                  "max_input_tokens": 200000,
+                  "output": 12,
+                  "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing"
+                },
+                "reason": "token_rates",
+                "tokens": {
+                  "cache_read": 0,
+                  "cache_write": 0,
+                  "input": 829,
+                  "output": 464,
+                  "reasoning": 318,
+                  "total": 1293
+                }
+              },
+              "model": "gemini-3.1-pro-preview",
+              "outcome_uncertain": false,
+              "provider": "vertex",
+              "request_id": "43e9b1bd6f9d46c08f8be9dd15aada62",
+              "status": "SUCCEEDED",
+              "usage": {
+                "candidatesTokenCount": 146,
+                "promptTokenCount": 829,
+                "thoughtsTokenCount": 318,
+                "totalTokenCount": 1293
+              }
+            }
+          ],
+          "created_at": "2026-10-20T08:08:05.435722+00:00",
+          "domain": {
+            "contract": "输入为包含 size（非负整数）和 unit 的对象列表。unit 只允许 B、KiB、MiB，分别乘 1、1024、1048576 后求和；返回十进制总字节数字符串，空表返回 0。不处理 KB/MB 或小数，也不扫描磁盘。",
+            "criterion": "exact output equality; no claim of arbitrary semantic correctness",
+            "digest": "sha256:8a6e4bf8a2ea5a3da6caaaea65f4341d5e1b8c54416509febcaa674fb4421752",
+            "heldout": [
+              {
+                "expected": "1049600",
+                "input": [
+                  {
+                    "size": 1,
+                    "unit": "MiB"
+                  },
+                  {
+                    "size": 1,
+                    "unit": "KiB"
+                  }
+                ]
+              },
+              {
+                "expected": "0",
+                "input": [
+                  {
+                    "size": 0,
+                    "unit": "MiB"
+                  }
+                ]
+              }
+            ],
+            "id": "byte-total",
+            "name": "文件大小汇总",
+            "oracle_source": "host-authored explicit contract v1",
+            "public": [
+              {
+                "expected": "0",
+                "input": []
+              },
+              {
+                "expected": "2051",
+                "input": [
+                  {
+                    "size": 2,
+                    "unit": "KiB"
+                  },
+                  {
+                    "size": 3,
+                    "unit": "B"
+                  }
+                ]
+              }
+            ],
+            "samples": [
+              {
+                "expected": "7177",
+                "input": [
+                  {
+                    "size": 7,
+                    "unit": "KiB"
+                  },
+                  {
+                    "size": 9,
+                    "unit": "B"
+                  }
+                ]
+              },
+              {
+                "expected": "3147776",
+                "input": [
+                  {
+                    "size": 3,
+                    "unit": "MiB"
+                  },
+                  {
+                    "size": 2,
+                    "unit": "KiB"
+                  }
+                ]
+              },
+              {
+                "expected": "66",
+                "input": [
+                  {
+                    "size": 55,
+                    "unit": "B"
+                  },
+                  {
+                    "size": 11,
+                    "unit": "B"
+                  }
+                ]
+              },
+              {
+                "expected": "8192",
+                "input": [
+                  {
+                    "size": 8,
+                    "unit": "KiB"
+                  }
+                ]
+              },
+              {
+                "expected": "2097173",
+                "input": [
+                  {
+                    "size": 2,
+                    "unit": "MiB"
+                  },
+                  {
+                    "size": 21,
+                    "unit": "B"
+                  }
+                ]
+              },
+              {
+                "expected": "17498",
+                "input": [
+                  {
+                    "size": 17,
+                    "unit": "KiB"
+                  },
+                  {
+                    "size": 90,
+                    "unit": "B"
+                  }
+                ]
+              }
+            ],
+            "version": 1
+          },
+          "events": [
+            {
+              "at": "2026-10-20T08:08:05.435743+00:00",
+              "domain_digest": "sha256:8a6e4bf8a2ea5a3da6caaaea65f4341d5e1b8c54416509febcaa674fb4421752",
+              "phase": "CONTRACT_FROZEN"
+            },
+            {
+              "at": "2026-10-20T08:08:32.057679+00:00",
+              "phase": "coding",
+              "receipt": "c868e33b78e04f7a910b77dc3b0eabf8"
+            },
+            {
+              "at": "2026-10-20T08:08:40.006177+00:00",
+              "phase": "baseline-0",
+              "receipt": "04ef79b02b284599a950eb2148d4d18c"
+            },
+            {
+              "at": "2026-10-20T08:08:50.987352+00:00",
+              "phase": "baseline-1",
+              "receipt": "406363bf78924c80bd1987f1004d99f2"
+            },
+            {
+              "at": "2026-10-20T08:08:59.136978+00:00",
+              "phase": "baseline-2",
+              "receipt": "ca55c593c69c425093baab93cd2cd057"
+            },
+            {
+              "at": "2026-10-20T08:09:08.918475+00:00",
+              "phase": "baseline-3",
+              "receipt": "fa880ec3679c420bb10ac7a31bc6e94e"
+            },
+            {
+              "at": "2026-10-20T08:09:19.258411+00:00",
+              "phase": "baseline-4",
+              "receipt": "14f1d4214df54da691568632a3b3881b"
+            },
+            {
+              "at": "2026-10-20T08:09:27.195498+00:00",
+              "phase": "baseline-5",
+              "receipt": "6964586f059744ceb098f5b791e7ad61"
+            },
+            {
+              "at": "2026-10-20T08:09:29.294734+00:00",
+              "phase": "publish",
+              "receipt": "985f201ace8447229d033cd5faab0ffd"
+            },
+            {
+              "at": "2026-10-20T08:09:32.345347+00:00",
+              "phase": "trial-0",
+              "receipt": "755655e1646f4116a8a6aae06b22cf2b"
+            },
+            {
+              "at": "2026-10-20T08:09:35.263636+00:00",
+              "phase": "trial-1",
+              "receipt": "ce745041354841aaa2f2c2e5717eb7e4"
+            },
+            {
+              "at": "2026-10-20T08:09:38.722969+00:00",
+              "phase": "trial-2",
+              "receipt": "ea30dccb49214b4ea2d79f2f5c57f6a4"
+            },
+            {
+              "at": "2026-10-20T08:10:02.466652+00:00",
+              "phase": "promote",
+              "receipt": "96f9c30d22694f5cbb26c8e4f976e6c2"
+            },
+            {
+              "at": "2026-10-20T08:10:05.420103+00:00",
+              "phase": "use-0",
+              "receipt": "cf0d7715df7c4599ace539446bd2ca21"
+            },
+            {
+              "at": "2026-10-20T08:10:08.350663+00:00",
+              "phase": "use-1",
+              "receipt": "91cb5619c1d44e388a4d90ce631cdd67"
+            },
+            {
+              "at": "2026-10-20T08:10:11.145126+00:00",
+              "phase": "use-2",
+              "receipt": "916d3f9d249541578ef1dd341265c3be"
+            }
+          ],
+          "feedback": {
+            "source": "not_provided",
+            "useful": null
+          },
+          "id": "a1cf9623faf4454fa8370a96bedcb2ff",
+          "observation_epoch": 1792483802.4666674,
+          "pending": null,
+          "policy": {
+            "domains": [
+              "clean-lines",
+              "group-counts",
+              "byte-total"
+            ],
+            "enabled": true,
+            "expires_at": 1792487285.17552,
+            "maximum_cycle_seconds": 1800,
+            "maximum_cycles": 3,
+            "maximum_memory_bytes": 201326592,
+            "maximum_model_calls": 8,
+            "maximum_seconds": 15,
+            "minimum_calls_saved": 1,
+            "model": "vertex::gemini-3.1-pro-preview",
+            "review_note": "独立核对清单契约、观察窗口及调用预算。",
+            "revision": 1,
+            "runtime_binding": "sha256:32c235893f999752b8b9c36e142696529394be41799b4f27ef36e3cd65b3495b",
+            "window_seconds": 30
+          },
+          "reserved_model_calls": 8,
+          "scope": {
+            "conversation_id": "634aa5b74dd54c30a5af4e28a4935a7b",
+            "project_id": "9ee3e739dcdd44489bfa80198d9f400b",
+            "root": "C:\\Users\\samuel\\AppData\\Local\\Temp\\tmp_bbkovuy\\project"
+          },
+          "started_epoch": 1792483685.4357178,
+          "status": "COMPLETE",
+          "submission": {
+            "domain": "byte-total",
+            "goal": "我希望每天重复整理我的清单或统计资料，请把这项明确需求做成可复用能力：输入为包含 size（非负整数）和 unit 的对象列表。unit 只允许 B、KiB、MiB，分别乘 1、1024、1048576 后求和；返回十进制总字节数字符串，空表返回 0。不处理 KB/MB 或小数，也不扫描磁盘。",
+            "policy_revision": 1,
+            "request_id": "a1cf9623faf4454fa8370a96bedcb2ff"
+          },
+          "task_id": "task_6e6255d4db025772866479370ef86e56",
+          "tool_id": "growth-byte-total-a1cf9623",
+          "trials": [
+            {
+              "baseline": null,
+              "benefit_note": "适用性依据用户选定契约；非主人体验反馈。",
+              "candidate_seconds": 0.8106,
+              "input_digest": "sha256:fa9b451b2fe6aa8af1fbf8668ae80ec45140f52fd021c8d6e4cd4b8428cad34c",
+              "job_id": "755655e1646f4116a8a6aae06b22cf2b",
+              "novel": true,
+              "passed": true,
+              "peak_process_memory_bytes": 18472960,
+              "useful": true,
+              "usefulness_source": "preauthorized_domain_scope",
+              "version": "89fb970055c4f63e34120b1c7c75a27a45b000fd8efbcdc5ec417dc58196ffa9"
+            },
+            {
+              "baseline": null,
+              "benefit_note": "适用性依据用户选定契约；非主人体验反馈。",
+              "candidate_seconds": 0.8608,
+              "input_digest": "sha256:b674b9d94f9b09d37301516b8eb95b4b2b39f9cbd7142d9f51060da9253fbc80",
+              "job_id": "ce745041354841aaa2f2c2e5717eb7e4",
+              "novel": true,
+              "passed": true,
+              "peak_process_memory_bytes": 18112512,
+              "useful": true,
+              "usefulness_source": "preauthorized_domain_scope",
+              "version": "89fb970055c4f63e34120b1c7c75a27a45b000fd8efbcdc5ec417dc58196ffa9"
+            },
+            {
+              "baseline": null,
+              "benefit_note": "适用性依据用户选定契约；非主人体验反馈。",
+              "candidate_seconds": 0.9409,
+              "input_digest": "sha256:ed99cb742892c459054240bf7208e2952d9e7777cfc9d17e5cc401989b0a7696",
+              "job_id": "ea30dccb49214b4ea2d79f2f5c57f6a4",
+              "novel": true,
+              "passed": true,
+              "peak_process_memory_bytes": 18436096,
+              "useful": true,
+              "usefulness_source": "preauthorized_domain_scope",
+              "version": "89fb970055c4f63e34120b1c7c75a27a45b000fd8efbcdc5ec417dc58196ffa9"
+            }
+          ],
+          "updated_at": "2026-10-20T08:10:32.728331+00:00",
+          "uses": [
+            {
+              "elapsed_seconds": 1.867,
+              "isolation": {
+                "active_process_limit": 1,
+                "appcontainer": true,
+                "backend": "windows-lpac-job",
+                "capabilities": [
+                  "registryRead"
+                ],
+                "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+                "cpu_seconds": 0.28125,
+                "cpu_time_limit_seconds": 3,
+                "elapsed_seconds": 0.7068,
+                "lpac": true,
+                "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+                "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+                "memory_limit_bytes": 201326592,
+                "package_sid": "S-1-15-2-2367285918-2038111819-435793049-2087236812-2170772973-2200160155-77352802",
+                "peak_process_memory_bytes": 18530304,
+                "pid": 2276,
+                "runtime_bytes": 22904399,
+                "wall_time_limit_seconds": 12
+              },
+              "job_id": "cf0d7715df7c4599ace539446bd2ca21",
+              "model_calls": 0,
+              "regression": {
+                "cases": 4,
+                "isolation": {
+                  "active_process_limit": 1,
+                  "appcontainer": true,
+                  "backend": "windows-lpac-job",
+                  "capabilities": [
+                    "registryRead"
+                  ],
+                  "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+                  "cpu_seconds": 0.3125,
+                  "cpu_time_limit_seconds": 3,
+                  "elapsed_seconds": 0.7614,
+                  "lpac": true,
+                  "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+                  "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+                  "memory_limit_bytes": 201326592,
+                  "package_sid": "S-1-15-2-1913581304-3193810027-2834230775-2294227330-2498052658-2786959569-2978918973",
+                  "peak_process_memory_bytes": 18669568,
+                  "pid": 47116,
+                  "runtime_bytes": 22904399,
+                  "wall_time_limit_seconds": 12
+                },
+                "passed": true
+              },
+              "result_digest": "sha256:864a936a35324151e1c79c44a2e903ff2497f52fa892282d340585f493c637f0",
+              "result_verified": true,
+              "text": "8192",
+              "version": "89fb970055c4f63e34120b1c7c75a27a45b000fd8efbcdc5ec417dc58196ffa9"
+            },
+            {
+              "elapsed_seconds": 1.889,
+              "isolation": {
+                "active_process_limit": 1,
+                "appcontainer": true,
+                "backend": "windows-lpac-job",
+                "capabilities": [
+                  "registryRead"
+                ],
+                "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+                "cpu_seconds": 0.296875,
+                "cpu_time_limit_seconds": 3,
+                "elapsed_seconds": 0.7382,
+                "lpac": true,
+                "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+                "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+                "memory_limit_bytes": 201326592,
+                "package_sid": "S-1-15-2-2842876873-237801859-3081555276-1186204957-1782936877-3180429417-3305550612",
+                "peak_process_memory_bytes": 17797120,
+                "pid": 47756,
+                "runtime_bytes": 22904399,
+                "wall_time_limit_seconds": 12
+              },
+              "job_id": "91cb5619c1d44e388a4d90ce631cdd67",
+              "model_calls": 0,
+              "regression": {
+                "cases": 4,
+                "isolation": {
+                  "active_process_limit": 1,
+                  "appcontainer": true,
+                  "backend": "windows-lpac-job",
+                  "capabilities": [
+                    "registryRead"
+                  ],
+                  "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+                  "cpu_seconds": 0.328125,
+                  "cpu_time_limit_seconds": 3,
+                  "elapsed_seconds": 0.7179,
+                  "lpac": true,
+                  "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+                  "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+                  "memory_limit_bytes": 201326592,
+                  "package_sid": "S-1-15-2-4088575468-480613973-1086261015-1823566357-1792120982-2019954143-3086016824",
+                  "peak_process_memory_bytes": 18702336,
+                  "pid": 42128,
+                  "runtime_bytes": 22904399,
+                  "wall_time_limit_seconds": 12
+                },
+                "passed": true
+              },
+              "result_digest": "sha256:18e344a73e0552e82604ce26c0bc64b8848c4886e672a582fc17a9b01b9f660a",
+              "result_verified": true,
+              "text": "2097173",
+              "version": "89fb970055c4f63e34120b1c7c75a27a45b000fd8efbcdc5ec417dc58196ffa9"
+            },
+            {
+              "elapsed_seconds": 1.792,
+              "isolation": {
+                "active_process_limit": 1,
+                "appcontainer": true,
+                "backend": "windows-lpac-job",
+                "capabilities": [
+                  "registryRead"
+                ],
+                "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+                "cpu_seconds": 0.3125,
+                "cpu_time_limit_seconds": 3,
+                "elapsed_seconds": 0.6504,
+                "lpac": true,
+                "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+                "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+                "memory_limit_bytes": 201326592,
+                "package_sid": "S-1-15-2-971028538-1125103971-2457557411-4259734187-507436508-3243750740-3450699264",
+                "peak_process_memory_bytes": 18395136,
+                "pid": 49688,
+                "runtime_bytes": 22904399,
+                "wall_time_limit_seconds": 12
+              },
+              "job_id": "916d3f9d249541578ef1dd341265c3be",
+              "model_calls": 0,
+              "regression": {
+                "cases": 4,
+                "isolation": {
+                  "active_process_limit": 1,
+                  "appcontainer": true,
+                  "backend": "windows-lpac-job",
+                  "capabilities": [
+                    "registryRead"
+                  ],
+                  "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+                  "cpu_seconds": 0.3125,
+                  "cpu_time_limit_seconds": 3,
+                  "elapsed_seconds": 0.6159,
+                  "lpac": true,
+                  "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+                  "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+                  "memory_limit_bytes": 201326592,
+                  "package_sid": "S-1-15-2-3813130160-4196787877-1185110201-2837924469-1792360771-3390921500-546857180",
+                  "peak_process_memory_bytes": 18534400,
+                  "pid": 15124,
+                  "runtime_bytes": 22904399,
+                  "wall_time_limit_seconds": 12
+                },
+                "passed": true
+              },
+              "result_digest": "sha256:943cbef5c73445123408076600c9c43d366610498e51ee29bf45f4eebaa9c66a",
+              "result_verified": true,
+              "text": "17498",
+              "version": "89fb970055c4f63e34120b1c7c75a27a45b000fd8efbcdc5ec417dc58196ffa9"
+            }
+          ]
+        },
+        "concurrent_conversation_saved": true,
+        "source_unchanged": true,
+        "new_python_files": [],
+        "delivered_files": [
+          "技能产物-6e6255d4db02.txt"
+        ],
+        "maintenance_available": true
+      }
+    ],
+    "scope": "Three selected pure transformation domains; actual cloud coder and normal cloud baseline; no prewritten candidate.",
+    "observation_window_seconds": 30,
+    "minimum_samples": 6,
+    "baseline": "same-input normal model transformation; all results must independently pass",
+    "limitations": [
+      "short controlled window, not longitudinal user benefit",
+      "no claim of universal business semantics",
+      "temporary project, not owner data"
+    ],
+    "paid_model_calls": 21
+  },
+  "prior_probe": {
+    "path": "H:\\JarvisData\\diagnostics\\k4-growth-20261020-live\\report.json",
+    "status": "failed",
+    "calls": 7,
+    "reason": "Probe incorrectly treated newly delivered K3 report files as changes to original sources. Fixed to check every original byte plus absence of new Python files; final three cases passed. No production files involved."
+  },
+  "model_calls": {
+    "final_matrix": 21,
+    "prior_probe": 7,
+    "total": 28
+  },
+  "configured_price_estimate_usd": {
+    "final_matrix": 0.07889,
+    "total_including_prior": 0.113254,
+    "basis": "Configured provider prices, not an account invoice."
+  },
+  "tests": {
+    "unique_final_passed": 83,
+    "executions": 95,
+    "runs": [
+      {
+        "log": "H:\\JarvisData\\diagnostics\\k4-growth-20261020-regression.log",
+        "tests": [
+          {
+            "id": "test_growth_cycles.GrowthCycleTests.test_actual_code_build_canary_admission_use_and_idempotence.test_actual_code_build_canary_admission_use_and_idempotence",
+            "status": "ok"
+          },
+          {
+            "id": "test_growth_cycles.GrowthCycleTests.test_cancel_and_unknown_accounting_are_not_success.test_cancel_and_unknown_accounting_are_not_success",
+            "status": "ok"
+          },
+          {
+            "id": "test_growth_cycles.GrowthCycleTests.test_domain_ambiguity_wrong_unit_and_scope_fail_before_model.test_domain_ambiguity_wrong_unit_and_scope_fail_before_model",
+            "status": "ok"
+          },
+          {
+            "id": "test_growth_cycles.GrowthCycleTests.test_expiry_validator_tamper_and_revision_fail_closed.test_expiry_validator_tamper_and_revision_fail_closed",
+            "status": "ok"
+          },
+          {
+            "id": "test_growth_cycles.GrowthCycleTests.test_failed_independent_candidate_never_published.test_failed_independent_candidate_never_published",
+            "status": "ok"
+          },
+          {
+            "id": "test_growth_cycles.GrowthCycleTests.test_negative_benefit_stops_own_active_version_and_retains_package.test_negative_benefit_stops_own_active_version_and_retains_package",
+            "status": "ok"
+          },
+          {
+            "id": "test_growth_cycles.GrowthCycleTests.test_restart_preserves_intent_without_starting_coder.test_restart_preserves_intent_without_starting_coder",
+            "status": "ok"
+          },
+          {
+            "id": "test_growth_cycles.GrowthCycleTests.test_revocation_at_atomic_activation_check.test_revocation_at_atomic_activation_check",
+            "status": "ok"
+          },
+          {
+            "id": "test_growth_cycles.GrowthCycleTests.test_revocation_stops_and_no_automatic_retry.test_revocation_stops_and_no_automatic_retry",
+            "status": "ok"
+          },
+          {
+            "id": "test_growth_cycles.GrowthCycleTests.test_unknown_coder_is_not_resent.test_unknown_coder_is_not_resent",
+            "status": "ok"
+          },
+          {
+            "id": "test_growth_cycles.GrowthCycleTests.test_wrong_baseline_rejected_not_counted_as_candidate_benefit.test_wrong_baseline_rejected_not_counted_as_candidate_benefit",
+            "status": "ok"
+          },
+          {
+            "id": "test_project_tools.ProjectToolTests.test_actual_publish_use_disable_restore_restart_and_idempotency.test_actual_publish_use_disable_restore_restart_and_idempotency",
+            "status": "ok"
+          },
+          {
+            "id": "test_project_tools.ProjectToolTests.test_capacity_reserves_recovery_space_and_contract_is_bounded.test_capacity_reserves_recovery_space_and_contract_is_bounded",
+            "status": "ok"
+          },
+          {
+            "id": "test_project_tools.ProjectToolTests.test_runtime_change_and_cancel_during_observation_disable_candidate.test_runtime_change_and_cancel_during_observation_disable_candidate",
+            "status": "ok"
+          },
+          {
+            "id": "test_project_tools.ProjectToolTests.test_shared_project_context_other_project_and_corrupt_json.test_shared_project_context_other_project_and_corrupt_json",
+            "status": "ok"
+          },
+          {
+            "id": "test_project_tools.ProjectToolTests.test_source_scope_generation_and_contract_cannot_be_bypassed.test_source_scope_generation_and_contract_cannot_be_bypassed",
+            "status": "ok"
+          },
+          {
+            "id": "test_project_tools.ProjectToolTests.test_unchanged_regression_with_bad_input_does_not_quarantine.test_unchanged_regression_with_bad_input_does_not_quarantine",
+            "status": "ok"
+          },
+          {
+            "id": "test_project_tools.ProjectToolTests.test_unconfirmed_publication_is_deactivated_on_recovery.test_unconfirmed_publication_is_deactivated_on_recovery",
+            "status": "ok"
+          },
+          {
+            "id": "test_project_tools.ProjectToolTests.test_upgrade_failure_rolls_back_without_replaying_real_input.test_upgrade_failure_rolls_back_without_replaying_real_input",
+            "status": "ok"
+          },
+          {
+            "id": "test_tool_lifecycle.LifecycleTests.test_corrupt_baseline_is_evidence_but_corrupt_candidate_is_quarantined.test_corrupt_baseline_is_evidence_but_corrupt_candidate_is_quarantined",
+            "status": "ok"
+          },
+          {
+            "id": "test_tool_lifecycle.LifecycleTests.test_failure_quarantines_only_candidate_and_stable_keeps_serving.test_failure_quarantines_only_candidate_and_stable_keeps_serving",
+            "status": "ok"
+          },
+          {
+            "id": "test_tool_lifecycle.LifecycleTests.test_legacy_publication_without_review_and_evidence_cannot_bypass_gate.test_legacy_publication_without_review_and_evidence_cannot_bypass_gate",
+            "status": "ok"
+          },
+          {
+            "id": "test_tool_lifecycle.LifecycleTests.test_new_admission_does_not_activate_until_distinct_novel_real_inputs_and_feedback.test_new_admission_does_not_activate_until_distinct_novel_real_inputs_and_feedback",
+            "status": "ok"
+          },
+          {
+            "id": "test_tool_lifecycle.LifecycleTests.test_old_versions_retire_only_after_live_and_recovery_references_release.test_old_versions_retire_only_after_live_and_recovery_references_release",
+            "status": "ok"
+          },
+          {
+            "id": "test_tool_lifecycle.LifecycleTests.test_paired_quality_evidence_and_interrupted_upgrade_restore_stable_without_replay.test_paired_quality_evidence_and_interrupted_upgrade_restore_stable_without_replay",
+            "status": "ok"
+          },
+          {
+            "id": "test_tool_lifecycle.LifecycleTests.test_restart_pauses_without_replay_resume_and_revision_scope_guards.test_restart_pauses_without_replay_resume_and_revision_scope_guards",
+            "status": "ok"
+          },
+          {
+            "id": "test_tool_lifecycle.LifecycleTests.test_retirement_blocks_bypass_restore_requires_fresh_canary_and_keeps_files.test_retirement_blocks_bypass_restore_requires_fresh_canary_and_keeps_files",
+            "status": "ok"
+          },
+          {
+            "id": "test_tool_lifecycle.LifecycleTests.test_schema3_migration_keeps_selection_legacy_and_old_receipt_is_query_only.test_schema3_migration_keeps_selection_legacy_and_old_receipt_is_query_only",
+            "status": "FAIL"
+          },
+          {
+            "id": "test_tool_lifecycle.LifecycleTests.test_trial_budget_and_stable_change_cannot_reuse_old_admission.test_trial_budget_and_stable_change_cannot_reuse_old_admission",
+            "status": "ok"
+          },
+          {
+            "id": "test_tool_quality_archive.ArchiveTests.test_archive_before_db_failure_leaves_original_and_retry_uses_same_bytes.test_archive_before_db_failure_leaves_original_and_retry_uses_same_bytes",
+            "status": "ok"
+          },
+          {
+            "id": "test_tool_quality_archive.ArchiveTests.test_archive_load_idempotency_and_receipts_keep_stable_and_source.test_archive_load_idempotency_and_receipts_keep_stable_and_source",
+            "status": "ok"
+          },
+          {
+            "id": "test_tool_quality_archive.ArchiveTests.test_capacity_summary_has_bounded_memory_with_large_stored_packages.test_capacity_summary_has_bounded_memory_with_large_stored_packages",
+            "status": "ok"
+          },
+          {
+            "id": "test_tool_quality_archive.ArchiveTests.test_corrupt_archive_cannot_load_or_be_overwritten_and_scope_is_strict.test_corrupt_archive_cannot_load_or_be_overwritten_and_scope_is_strict",
+            "status": "ok"
+          },
+          {
+            "id": "test_tool_quality_archive.ArchiveTests.test_live_recovery_refs_and_unretired_versions_cannot_archive.test_live_recovery_refs_and_unretired_versions_cannot_archive",
+            "status": "ok"
+          },
+          {
+            "id": "test_tool_quality_archive.ArchiveTests.test_online_limit_released_but_restoration_respects_capacity.test_online_limit_released_but_restoration_respects_capacity",
+            "status": "ok"
+          },
+          {
+            "id": "test_tool_quality_archive.QualityTests.test_counts_conflicts_duplicates_overlap_and_never_certifies_semantic_truth.test_counts_conflicts_duplicates_overlap_and_never_certifies_semantic_truth",
+            "status": "ok"
+          },
+          {
+            "id": "test_growth_maintenance.MaintenanceHTTPTests.test_maintenance_auth_and_query_remain_available_when_queue_full.test_maintenance_auth_and_query_remain_available_when_queue_full",
+            "status": "ok"
+          },
+          {
+            "id": "test_growth_maintenance.MaintenanceTests.test_archive_file_and_audit_budgets_remain_bounded.test_archive_file_and_audit_budgets_remain_bounded",
+            "status": "ok"
+          },
+          {
+            "id": "test_growth_maintenance.MaintenanceTests.test_archive_original_identity_lookup_and_idempotency_survive_restart.test_archive_original_identity_lookup_and_idempotency_survive_restart",
+            "status": "ok"
+          },
+          {
+            "id": "test_growth_maintenance.MaintenanceTests.test_busy_lane_archive_budget_and_review_checks.test_busy_lane_archive_budget_and_review_checks",
+            "status": "ok"
+          },
+          {
+            "id": "test_growth_maintenance.MaintenanceTests.test_commit_failure_keeps_original_then_verified_orphan_can_be_reused.test_commit_failure_keeps_original_then_verified_orphan_can_be_reused",
+            "status": "ok"
+          },
+          {
+            "id": "test_growth_maintenance.MaintenanceTests.test_conversation_lifecycle_and_parent_references_are_blocked.test_conversation_lifecycle_and_parent_references_are_blocked",
+            "status": "ok"
+          },
+          {
+            "id": "test_growth_maintenance.MaintenanceTests.test_corrupt_archive_fails_closed_and_original_request_never_reexecutes.test_corrupt_archive_fails_closed_and_original_request_never_reexecutes",
+            "status": "ok"
+          },
+          {
+            "id": "test_growth_maintenance.MaintenanceTests.test_directory_restore_rejects_full_capacity_and_pending_project.test_directory_restore_rejects_full_capacity_and_pending_project",
+            "status": "ok"
+          },
+          {
+            "id": "test_growth_maintenance.MaintenanceTests.test_directory_store_and_restore_release_slot_keep_identity_and_never_activate.test_directory_store_and_restore_release_slot_keep_identity_and_never_activate",
+            "status": "ok"
+          },
+          {
+            "id": "test_growth_maintenance.MaintenanceTests.test_full_job_quota_does_not_block_maintenance_or_idempotent_lookup.test_full_job_quota_does_not_block_maintenance_or_idempotent_lookup",
+            "status": "ok"
+          },
+          {
+            "id": "test_growth_maintenance.MaintenanceTests.test_preview_is_readonly_and_protects_unknown_proposed_and_unconfirmed.test_preview_is_readonly_and_protects_unknown_proposed_and_unconfirmed",
+            "status": "ok"
+          },
+          {
+            "id": "test_growth_maintenance.MaintenanceTests.test_small_terminal_receipts_can_release_online_slot_without_claiming_byte_savings.test_small_terminal_receipts_can_release_online_slot_without_claiming_byte_savings",
+            "status": "ok"
+          },
+          {
+            "id": "test_growth_maintenance.MaintenanceTests.test_stale_preview_and_batch_failure_do_not_change_online_receipts.test_stale_preview_and_batch_failure_do_not_change_online_receipts",
+            "status": "ok"
+          },
+          {
+            "id": "test_growth_maintenance.MaintenanceToolTests.test_archived_verified_run_keeps_result_and_regression_for_future_candidates.test_archived_verified_run_keeps_result_and_regression_for_future_candidates",
+            "status": "ok"
+          },
+          {
+            "id": "test_growth_maintenance.MaintenanceToolTests.test_stored_identity_cannot_be_reused_and_restore_requires_fresh_canary.test_stored_identity_cannot_be_reused_and_restore_requires_fresh_canary",
+            "status": "ok"
+          },
+          {
+            "id": "test_coding_demand.CodingDemandTests.test_cancel_running_and_scope_and_receipt_tampering.test_cancel_running_and_scope_and_receipt_tampering",
+            "status": "ok"
+          },
+          {
+            "id": "test_coding_demand.CodingDemandTests.test_concurrent_start_and_lost_response_use_one_atomic_link.test_concurrent_start_and_lost_response_use_one_atomic_link",
+            "status": "ok"
+          },
+          {
+            "id": "test_coding_demand.CodingDemandTests.test_execution_uses_declared_budget.test_execution_uses_declared_budget",
+            "status": "ok"
+          },
+          {
+            "id": "test_coding_demand.CodingDemandTests.test_failed_independent_check_not_misreported_as_success.test_failed_independent_check_not_misreported_as_success",
+            "status": "ok"
+          },
+          {
+            "id": "test_coding_demand.CodingDemandTests.test_full_bridge_zero_call_preview_receipt_apply_remains_explicit.test_full_bridge_zero_call_preview_receipt_apply_remains_explicit",
+            "status": "ok"
+          },
+          {
+            "id": "test_coding_demand.CodingDemandTests.test_http_scope_token_and_saved_proposal.test_http_scope_token_and_saved_proposal",
+            "status": "ok"
+          },
+          {
+            "id": "test_coding_demand.CodingDemandTests.test_modified_or_forged_binding_rejected.test_modified_or_forged_binding_rejected",
+            "status": "ok"
+          },
+          {
+            "id": "test_coding_demand.CodingDemandTests.test_queue_restart_keeps_one_task_and_waits_for_review.test_queue_restart_keeps_one_task_and_waits_for_review",
+            "status": "ok"
+          },
+          {
+            "id": "test_coding_demand.CodingDemandTests.test_receipt_tampering_cannot_return_verified_result.test_receipt_tampering_cannot_return_verified_result",
+            "status": "ok"
+          },
+          {
+            "id": "test_coding_demand.CodingDemandTests.test_snapshot_stale_at_start_and_after_enqueue.test_snapshot_stale_at_start_and_after_enqueue",
+            "status": "ok"
+          },
+          {
+            "id": "test_coding_demand.CodingDemandTests.test_transaction_failure_rolls_back_task_and_proposal_link.test_transaction_failure_rolls_back_task_and_proposal_link",
+            "status": "ok"
+          },
+          {
+            "id": "test_coding_demand.CodingDemandTests.test_unknown_reanalysis_and_cancel_never_automatically_retry.test_unknown_reanalysis_and_cancel_never_automatically_retry",
+            "status": "ok"
+          }
+        ],
+        "summary": "----------------------------------------------------------------------\nRan 63 tests in 1013.582s\n\nFAILED (failures=1)"
+      },
+      {
+        "log": "H:\\JarvisData\\diagnostics\\k4-k5-20261020-final-regression.log",
+        "tests": [
+          {
+            "id": "test_growth_cycles.GrowthCycleTests.test_actual_code_build_canary_admission_use_and_idempotence.test_actual_code_build_canary_admission_use_and_idempotence",
+            "status": "ok"
+          },
+          {
+            "id": "test_growth_cycles.GrowthCycleTests.test_cancel_and_unknown_accounting_are_not_success.test_cancel_and_unknown_accounting_are_not_success",
+            "status": "ok"
+          },
+          {
+            "id": "test_growth_cycles.GrowthCycleTests.test_domain_ambiguity_wrong_unit_and_scope_fail_before_model.test_domain_ambiguity_wrong_unit_and_scope_fail_before_model",
+            "status": "ok"
+          },
+          {
+            "id": "test_growth_cycles.GrowthCycleTests.test_expiry_validator_tamper_and_revision_fail_closed.test_expiry_validator_tamper_and_revision_fail_closed",
+            "status": "ok"
+          },
+          {
+            "id": "test_growth_cycles.GrowthCycleTests.test_failed_independent_candidate_never_published.test_failed_independent_candidate_never_published",
+            "status": "ok"
+          },
+          {
+            "id": "test_growth_cycles.GrowthCycleTests.test_negative_benefit_stops_own_active_version_and_retains_package.test_negative_benefit_stops_own_active_version_and_retains_package",
+            "status": "ok"
+          },
+          {
+            "id": "test_growth_cycles.GrowthCycleTests.test_policy_round_budget_and_runtime_compatibility.test_policy_round_budget_and_runtime_compatibility",
+            "status": "ok"
+          },
+          {
+            "id": "test_growth_cycles.GrowthCycleTests.test_restart_preserves_intent_without_starting_coder.test_restart_preserves_intent_without_starting_coder",
+            "status": "ok"
+          },
+          {
+            "id": "test_growth_cycles.GrowthCycleTests.test_revocation_at_atomic_activation_check.test_revocation_at_atomic_activation_check",
+            "status": "ok"
+          },
+          {
+            "id": "test_growth_cycles.GrowthCycleTests.test_revocation_stops_and_no_automatic_retry.test_revocation_stops_and_no_automatic_retry",
+            "status": "ok"
+          },
+          {
+            "id": "test_growth_cycles.GrowthCycleTests.test_stop_intent_immediately_rejects_queued_authorization.test_stop_intent_immediately_rejects_queued_authorization",
+            "status": "ok"
+          },
+          {
+            "id": "test_growth_cycles.GrowthCycleTests.test_unknown_coder_is_not_resent.test_unknown_coder_is_not_resent",
+            "status": "ok"
+          },
+          {
+            "id": "test_growth_cycles.GrowthCycleTests.test_wrong_baseline_rejected_not_counted_as_candidate_benefit.test_wrong_baseline_rejected_not_counted_as_candidate_benefit",
+            "status": "ok"
+          },
+          {
+            "id": "test_tool_lifecycle.LifecycleTests.test_schema3_migration_keeps_selection_legacy_and_old_receipt_is_query_only.test_schema3_migration_keeps_selection_legacy_and_old_receipt_is_query_only",
+            "status": "ok"
+          },
+          {
+            "id": "test_retrieval_ranking.RankingTests.test_bad_order_cannot_inject_or_suppress_sources_and_falls_back.test_bad_order_cannot_inject_or_suppress_sources_and_falls_back",
+            "status": "ok"
+          },
+          {
+            "id": "test_retrieval_ranking.RankingTests.test_default_compatible_and_candidate_can_be_swapped_without_data_migration.test_default_compatible_and_candidate_can_be_swapped_without_data_migration",
+            "status": "ok"
+          },
+          {
+            "id": "test_retrieval_ranking.RankingTests.test_frozen_development_set_reports_both_algorithms.test_frozen_development_set_reports_both_algorithms",
+            "status": "ok"
+          },
+          {
+            "id": "test_retrieval_ranking.RankingTests.test_immutable_input_and_protocol_mismatch.test_immutable_input_and_protocol_mismatch",
+            "status": "ok"
+          },
+          {
+            "id": "test_retrieval_ranking.RankingTests.test_restricted_provider_never_passes_content_to_ranker.test_restricted_provider_never_passes_content_to_ranker",
+            "status": "ok"
+          },
+          {
+            "id": "test_knowledge.KnowledgeTests.test_archive_metadata_validates_and_keeps_no_excerpt_copy.test_archive_metadata_validates_and_keeps_no_excerpt_copy",
+            "status": "ok"
+          },
+          {
+            "id": "test_knowledge.KnowledgeTests.test_budgets_do_not_slice_evidence_or_overread.test_budgets_do_not_slice_evidence_or_overread",
+            "status": "ok"
+          },
+          {
+            "id": "test_knowledge.KnowledgeTests.test_chat_fallback_history_and_input_budget.test_chat_fallback_history_and_input_budget",
+            "status": "ok"
+          },
+          {
+            "id": "test_knowledge.KnowledgeTests.test_file_digest_detects_change_even_same_stat_size_and_time.test_file_digest_detects_change_even_same_stat_size_and_time",
+            "status": "ok"
+          },
+          {
+            "id": "test_knowledge.KnowledgeTests.test_history_invalidated_on_revision_digest_scope_and_removal.test_history_invalidated_on_revision_digest_scope_and_removal",
+            "status": "ok"
+          },
+          {
+            "id": "test_knowledge.KnowledgeTests.test_http_requires_nonce_origin_and_only_registered_read.test_http_requires_nonce_origin_and_only_registered_read",
+            "status": "ok"
+          },
+          {
+            "id": "test_knowledge.KnowledgeTests.test_missing_sources_do_not_reuse_content.test_missing_sources_do_not_reuse_content",
+            "status": "ok"
+          },
+          {
+            "id": "test_knowledge.KnowledgeTests.test_paths_encoding_hardlinks_and_limits.test_paths_encoding_hardlinks_and_limits",
+            "status": "ok"
+          },
+          {
+            "id": "test_knowledge.KnowledgeTests.test_provider_scope_precedes_disk_reads.test_provider_scope_precedes_disk_reads",
+            "status": "ok"
+          },
+          {
+            "id": "test_knowledge.KnowledgeTests.test_registration_restart_retry_and_no_body_copy.test_registration_restart_retry_and_no_body_copy",
+            "status": "ok"
+          },
+          {
+            "id": "test_knowledge.KnowledgeTests.test_remove_tombstone_preserves_original_and_blocks_stale_save.test_remove_tombstone_preserves_original_and_blocks_stale_save",
+            "status": "ok"
+          },
+          {
+            "id": "test_knowledge.KnowledgeTests.test_schema_unknown_database_and_registration_limits.test_schema_unknown_database_and_registration_limits",
+            "status": "ok"
+          },
+          {
+            "id": "test_knowledge.KnowledgeTests.test_sections_chinese_citations_and_literal_preview.test_sections_chinese_citations_and_literal_preview",
+            "status": "ok"
+          }
+        ],
+        "summary": "----------------------------------------------------------------------\nRan 32 tests in 139.031s\n\nOK"
+      }
+    ],
+    "initial_failure": "One legacy migration assertion expected schema 6; updated to schema 7 while retaining all old-selection and idempotence assertions; final rerun passed."
+  },
+  "ui": {
+    "version": "0.1.78",
+    "paid_model_calls": 0,
+    "checks": [
+      "explicit contract and policy; rejected request can be corrected; actual committed request with lost reply reconciled once",
+      "parallel synthetic chat, cancellation, refresh receipt recovery and narrow viewport"
+    ],
+    "status": "passed",
+    "page_errors": []
+  },
+  "ui_probe_fix": "Exact text selector did not match multi-line chat bubbles; final probe requires two completed bubble responses and passed.",
+  "deployment": {
+    "status": "SUCCEEDED",
+    "source_version": "0.1.78",
+    "data_dir": "C:\\Users\\samuel\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\Jarvis\\data",
+    "previous_version": "0.1.77",
+    "previous_instance": "aae0b10e345327b8f9734a01eeb45713",
+    "current_instance": "d879565b8668b6e6ea6bbfc6eff5bbfc",
+    "idle_graceful_reload": true,
+    "startup_from_absent": false,
+    "served_sha256": {
+      "dialogue.js": "ef95a69c43ec38d94d48c1b6ab40106faa8777426eb925ea3224a34bb61132a3",
+      "resources.js": "586e03243199134cec0c4da7bedde691f904f73ca8e7aee09ea2dd0202c99e2b",
+      "workspace.js": "295e8a18545e5f73649f382205da3d8e76d462396bdb0189223cdf1beae4e76a",
+      "conversation_tasks.js": "bcc474ac43ab1acd3ed38b965d7935a334eaa9fd6c53d1dbb60745097cd616b8",
+      "mcp_manager.js": "0c74df31951193bbe830bdfe24a10eb90b9cb31bb604ce54109acc5fb1cd9702",
+      "growth-cycles.js": "bdc369733827b093da14061045b95028084bb9e71e1a50969064208c4bb273bd",
+      "project-tools.js": "59a03d864b98e3f6cf94b6a8b35a9e299bc41fbdad07ef4df3aa90d5b33468eb",
+      "tool-intents.js": "dc8b1cab73867ae125af4430a0ba4c5de6b874628019b00e3823abb71a73702e"
+    },
+    "calculation": "84",
+    "personal_read_only": true,
+    "duplicate_did_not_repeat_calculation": true,
+    "cancel_before_submit": true,
+    "restart_fence": true,
+    "instance_fence": true,
+    "empty_restart_queue_reviewed_and_resumed": true,
+    "admission_ms": 30.938,
+    "backups": {
+      "/api/speech/fast": "stopped",
+      "/api/speech": "stopped"
+    },
+    "cloud_calls": 0,
+    "limits": "One local calculator and personal-settings query; no paid model, microphone, task replay, persistent dialogue recovery or physical voice timing.",
+    "business_table_changes": [],
+    "growth_schema": {
+      "before": 6,
+      "after": 7
+    },
+    "new_growth_tables": {
+      "growth_policies": {
+        "rows": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "growth_cycles": {
+        "rows": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "ranking_default": "lexical-v1"
+  },
+  "seed": {
+    "checked_assets": 22,
+    "fixture_cases": 12,
+    "passed": true
+  },
+  "runtime_binding_final": "sha256:c00f2e92f8b87ce45c8fdc908ec4c1c53edb6e62148621fee102a32f43e20b52",
+  "post_live_change": "Final STOPPING-state authorization rejection tightened before final 32 tests and deployment; live matrix retains its earlier exact source binding.",
+  "source_digests": {
+    "runtime/node-host/jarvis_core/evolution/growth_domains.py": "4d26f6737f4a2de56cd743b1c484d849ab86a37b7d0812db09a36a70c77bd537",
+    "runtime/node-host/jarvis_core/evolution/growth_policy.py": "8790df3b4bc1d6842f9a646c52658b1bb26ea868149d48685a72e74aa6b2f986",
+    "runtime/node-host/jarvis_core/evolution/growth_cycle.py": "37e53a29182fdab44476d611f6116ac045e3e348aecef96072b41dac85ac7606",
+    "runtime/node-host/jarvis_core/evolution/catalog.py": "c66481239f1db2da370301f30917f9f4f9318fc42cc2757cef4664d3bc45cbdc",
+    "runtime/node-host/jarvis_core/evolution/lifecycle.py": "b6214b84dab289e0287aba5124132512a2c0bc2ad1b6568eee38ff3134c2e267",
+    "runtime/node-host/jarvis_core/evolution/store.py": "70ef171353693fd28adc1bd167bbc1d09e8a7c5287e9a22a7ddce4de62d37402",
+    "runtime/node-host/jarvis_core/evolution/maintenance.py": "e2bfb60fd70ab1413ecd2845e9bcc5a117ba4f0aef3a2d19658371848aa20ce7",
+    "runtime/node-host/jarvis_core/evolution/manager.py": "c7d145f430ed0b7ec10584d1083b2e9a160f737c836c522380a98a8bca81bbf1",
+    "runtime/node-host/jarvis_core/coding_demand.py": "44153e68d4809a9c4c6bd7a317c941d3158c13450f07685da41f619477687ef6",
+    "runtime/node-host/jarvis_core/retrieval_ranking.py": "263885e6fac7baa41ca710b1936597b550fb7f19248e145e6bba5944892e5a22",
+    "runtime/node-host/jarvis_core/knowledge.py": "ba7cde223c1f42e82b85c19e2dfc2eb9d37e6cdc9b4f26249d986c3e85e6a367",
+    "apps/web/growth-cycles.js": "bdc369733827b093da14061045b95028084bb9e71e1a50969064208c4bb273bd",
+    "apps/web/project_tool_routes.py": "2f056362a545e8beeb50606f6b6d12c96615200d87643acae524d9ea16ed016a",
+    "apps/web/server.py": "3dd5700a7c49841066cab432d2bd368885f89e227e36daa32f4f98543d57d466"
+  },
+  "K5": {
+    "status": "entry_implemented_verified_not_complete",
+    "evidence": "evals/reports/k5-ranking-entry-2026-10-20.json",
+    "remaining": [
+      "independent holdout queries",
+      "model-generated isolated module candidate",
+      "persistent selection and restart rollback",
+      "same-set net benefit before production default change"
+    ]
+  },
+  "limitations": [
+    "Explicit task contracts; no general business semantic oracle",
+    "No automatic policy expansion, indefinite self-development, arbitrary host edits or multi-device collective",
+    "128 growth cycle receipts and bounded SQLite/archive capacity; total limits halt admissions rather than delete owner data",
+    "Existing K1/K2 physical low-resource machine, whole-machine offline and owner experience gates remain open"
+  ],
+  "docs": {
+    "documents": 25,
+    "diagrams": 21,
+    "artifacts": 42,
+    "errors": 0,
+    "navigation_synced": true
+  }
+}

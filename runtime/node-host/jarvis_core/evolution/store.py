@@ -50,7 +50,7 @@ class EvolutionStore:
         self.path = self.root / 'evolution.db'
         with self.connection() as db:
             version = db.execute('PRAGMA user_version').fetchone()[0]
-            if version not in (0, 1, 2, 3, 4, 5, 6):
+            if version not in (0, 1, 2, 3, 4, 5, 6, 7):
                 raise policy.CoreError('evolution_schema_invalid', '进化账本版本不兼容。')
             db.executescript('''
                 CREATE TABLE IF NOT EXISTS settings(singleton INTEGER PRIMARY KEY,document TEXT NOT NULL);
@@ -62,13 +62,15 @@ class EvolutionStore:
                 CREATE TABLE IF NOT EXISTS tool_versions(id TEXT PRIMARY KEY,state TEXT NOT NULL,document TEXT NOT NULL);
                 CREATE TABLE IF NOT EXISTS tool_lifecycle(project_id TEXT NOT NULL,tool_id TEXT NOT NULL,document TEXT NOT NULL,PRIMARY KEY(project_id,tool_id));
                 CREATE TABLE IF NOT EXISTS maintenance_receipts(id TEXT PRIMARY KEY,binding TEXT NOT NULL,document TEXT NOT NULL);
+                CREATE TABLE IF NOT EXISTS growth_policies(project_id TEXT PRIMARY KEY,document TEXT NOT NULL);
+                CREATE TABLE IF NOT EXISTS growth_cycles(id TEXT PRIMARY KEY,project_id TEXT NOT NULL,document TEXT NOT NULL);
             ''')
             db.execute('INSERT OR IGNORE INTO settings VALUES(1,?)', (policy.canonical_json(
                 {'enabled': False, 'route': route, 'target_revision': 1, 'interval_seconds': 1800}),))
             db.execute('INSERT OR IGNORE INTO selection VALUES(1,NULL,NULL,0)')
             settings = migrate(json.loads(db.execute('SELECT document FROM settings WHERE singleton=1').fetchone()[0]))
             db.execute('UPDATE settings SET document=? WHERE singleton=1', (policy.canonical_json(settings),))
-            db.execute('PRAGMA user_version=6')
+            db.execute('PRAGMA user_version=7')
 
     @contextmanager
     def connection(self):

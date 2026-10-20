@@ -4,9 +4,9 @@
 
 项目代码仓库：[Samuel521199/JarvisSystem](https://github.com/Samuel521199/JarvisSystem)。仓库保存源码、锁定依赖清单、设计文档、图源和验证记录；本机凭据、业务数据库、模型、依赖缓存和构建的运行包不入库。首次运行按[安装与启动说明](docs/core-bootstrap.md#section-6a93004233bf)准备环境。
 
-当前源码与部署版本为 **0.1.77**，范围见[本轮记录](docs/delivery-validation.md#k4-maintenance-evidence)。这是以普通 PC 为主的个人助手与伙伴原型，已接入个人记忆、跨会话接续、项目工作区、技能与 MCP、语音和受限成长能力。**K3 编码协作已闭环**：从改进单到候选代码、独立检查、实际构建、隔离执行、审阅、应用与恢复，支持限定 Python 多文件/包、新文件、锁定查询依赖和 JavaScript 交互场景；详见[验收与效果](docs/delivery-validation.md#k3-closure-matrix)。**K4 已开始落地**：通过验收的 Python 候选可纳入项目工具库，跨同项目会话隔离调用、核对结果、停用或回退；新增点名工具与 JSON 的本地调用、用途候选待选和能力缺口到编码改进单的交接，并支持模型验收草案、明确审阅与独立留出案例；0.1.75 新增[候选准入、灰度收益与可恢复退役](docs/evolution-release.md#project-tool-lifecycle)，达标后仍须明确启用；0.1.76 增加[契约体检与校验归档](docs/evolution-release.md#project-tool-quality-storage)，载回包仍退役；0.1.77 增加[回执归档与目录收存/恢复](docs/evolution-release.md#growth-ledger-maintenance)，保留原编号、幂等与恢复材料，满在线名额仍可显式维护；[入口与使用](docs/interaction-persona.md#project-tool-ui)、[实测证据](docs/delivery-validation.md#k4-project-tool-evidence)。完整 K4 继续按[当前推进队列](docs/core-bootstrap.md#near-term-work-queue)推进。
+当前源码与本机部署版本为 **0.1.78**。这是以普通 PC 为主的个人助手与伙伴原型，已有个人记忆、跨会话接续、项目工作区、技能/MCP 与受限成长能力。**K3 已闭环，K4 在三个明确任务域完成独立验收、预授权灰度/启用、收益观察和失败停用，现已进入 K5 检索排序模块起步。** [本轮验收、费用负例与限制](docs/delivery-validation.md#k4-growth-closure-evidence) · [使用入口](docs/interaction-persona.md#project-tool-ui) · [下一步](docs/core-bootstrap.md#k4-next-delivery)。
 
-**源码上传与正式部署分开记录。** 各功能的已实现、已验证和部署状态，以[当前进度](docs/README.md#project-status)及[分版本验收](docs/delivery-validation.md#versioned-evidence)为准；不能仅凭源码版本判断本机正在运行的版本。完整设计仍为 `proposed`；K3 开发协作已验证，完整 K1/K2 仍保留原待验条件，K4—K6 尚未完成。
+**源码上传与正式部署分开记录。** 各功能的已实现、已验证和部署状态，以[当前进度](docs/README.md#project-status)及[分版本验收](docs/delivery-validation.md#versioned-evidence)为准；不能仅凭源码版本判断本机正在运行的版本。完整设计仍为 `proposed`；K3 开发协作已验证，完整 K1/K2 仍保留原待验条件，K4 仅在明确任务域收口，完整 K5—K6 尚未完成。
 
 - [打开本机工作台](http://127.0.0.1:18181/)：服务未启动时按[本机启动与端口说明](docs/core-bootstrap.md#section-6a93004233bf)操作。
 - [后续方向指南](docs/development-guide.md#direction-start)：现状、16项优化工作、全部原需求去向与未验边界；[当前推进队列](docs/core-bootstrap.md#near-term-work-queue)仍归唯一K路线。
