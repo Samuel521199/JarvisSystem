@@ -8,6 +8,10 @@ COMMON=('runtime/node-host/jarvis_core/skills.py','runtime/node-host/jarvis_core
 
 def fingerprint(item):
     paths=list(COMMON)
+    if item['id'] in {'matt-pocock.diagnosing-bugs','matt-pocock.tdd','matt-pocock.codebase-design','matt-pocock.code-review','anatomy.explainer'}:
+        paths+=['runtime/node-host/jarvis_core/'+name+'.py' for name in ('coding_task','coding_bundle','coding_build','coding_apply','coding_demand','coding_codex','coding_settings','coding_dependencies','coding_dependency_launcher','coding_package','coding_files','coding_js','coding_scene','coding_secrets')]
+        paths+=['adapters/skills/anatomy/candidate-viewer.html','config/coding-runtime.json','config/codex-proposal-model.json']
+    if item['workflow']=='game':paths+=['runtime/node-host/jarvis_core/web_game.py','adapters/skills/games/tank-defense.html']
     if item['workflow']=='rea':
         paths+=['runtime/node-host/jarvis_core/'+name+'.py' for name in ('rea','rea_process','rea_evidence','rea_asar','rea_focus','rea_explanation')]
         paths+=['config/skills/rea-runtime.json']

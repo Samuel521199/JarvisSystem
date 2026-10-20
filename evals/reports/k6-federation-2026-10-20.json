@@ -1,0 +1,176 @@
+{
+  "version": "0.1.83",
+  "captured_at": "2026-10-20T11:58:19.549926+00:00",
+  "processes": {
+    "status": "passed",
+    "checks": [
+      "separate_processes",
+      "pinned_tls_pair",
+      "two_way_sync",
+      "offline_edit_then_reconcile",
+      "process_restart_listener_off",
+      "stable_device_identity",
+      "reconnect_after_restart"
+    ],
+    "resources": {
+      "baseline_private_bytes": [
+        22405120,
+        22085632
+      ],
+      "post_sync_private_bytes": [
+        22663168,
+        23228416
+      ],
+      "one_second_idle_cpu_seconds": [
+        0.0,
+        0.0
+      ],
+      "shared_storage_bytes": {
+        "a": 10106,
+        "b": 10106
+      }
+    },
+    "limits": [
+      "Two processes on one Windows PC; not two physical machines.",
+      "One-second idle sample is not a long-term resource test; only one synthetic card."
+    ]
+  },
+  "ui": {
+    "status": "passed",
+    "checks": [
+      "visit_does_not_listen",
+      "pair_from_settings",
+      "save_and_two_way_sync",
+      "received_text_not_html",
+      "refresh_preserves_unsaved_draft",
+      "mobile_no_horizontal_overflow",
+      "local_api_requires_nonce",
+      "offline_toggle_closes_listener"
+    ],
+    "page_errors": [],
+    "screenshots": [
+      "H:\\JarvisData\\diagnostics\\k6-federation-20261020\\desktop.png",
+      "H:\\JarvisData\\diagnostics\\k6-federation-20261020\\mobile.png"
+    ]
+  },
+  "cloud_model_calls": 0,
+  "scope": "K6 bounded explicitly shared cards, not personal-memory federation or unified task authority",
+  "deployment": {
+    "status": "SUCCEEDED",
+    "source_version": "0.1.83",
+    "data_dir": "C:\\Users\\samuel\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\Jarvis\\data",
+    "previous_version": "0.1.82",
+    "previous_instance": "b84aed6211be0e8610345f3b1dbe0d09",
+    "current_instance": "0b3928fbecac1baab2af8168d0b16dcf",
+    "idle_graceful_reload": true,
+    "startup_from_absent": false,
+    "served_sha256": {
+      "dialogue.js": "ef95a69c43ec38d94d48c1b6ab40106faa8777426eb925ea3224a34bb61132a3",
+      "resources.js": "586e03243199134cec0c4da7bedde691f904f73ca8e7aee09ea2dd0202c99e2b",
+      "workspace.js": "d4a06de9863c55c59a5fc56135d9995690f9ee77b3a2c281fc9a118a12bcbb9f",
+      "conversation_tasks.js": "030e1f3d791988b33a8c2ddeec4baf129d9506cb93a6c8e1e592b5cf92d42a63",
+      "mcp_manager.js": "0c74df31951193bbe830bdfe24a10eb90b9cb31bb604ce54109acc5fb1cd9702"
+    },
+    "calculation": "84",
+    "personal_read_only": true,
+    "duplicate_did_not_repeat_calculation": true,
+    "cancel_before_submit": true,
+    "restart_fence": true,
+    "instance_fence": true,
+    "empty_restart_queue_reviewed_and_resumed": true,
+    "admission_ms": 42.135,
+    "backups": {
+      "/api/speech/fast": "stopped",
+      "/api/speech": "stopped"
+    },
+    "cloud_calls": 0,
+    "limits": "One local calculator and personal-settings query; no paid model, microphone, task replay, persistent dialogue recovery or physical voice timing.",
+    "sharing_uninitialized": true,
+    "sharing_listener_closed": true,
+    "sharing_database_absent": true,
+    "served_sharing_script_matches": true,
+    "state_fingerprint_changes": {}
+  },
+  "unit_tests": {
+    "count": 88,
+    "result": "passed",
+    "command": "python -m unittest test_federation test_team_tasks test_network_policy test_web test_runtime_start test_runtime_releases test_release_bundle -q"
+  },
+  "status": "verified_and_deployed",
+  "initial_findings": [
+    "Test fixture left a SQLite connection open; fixed with explicit closing before re-run.",
+    "Resource sampling initially targeted the Windows venv launcher; replaced by child process self-sampling.",
+    "Documentation checker required stable anchors for new subsections; added and synchronized."
+  ],
+  "package": {
+    "captured_at": "2026-10-20T12:04:37.807532+00:00",
+    "status": "passed",
+    "package": {
+      "version": "0.1.83",
+      "path": "H:\\JarvisData\\diagnostics\\jarvis-v0.1.83.zip",
+      "sha256": "b5c2527e798c99b3c61e10ade4c175b9875a4cd001a7c7cf502f64df8d824613",
+      "files": 1615,
+      "bytes": 70573545,
+      "status": "candidate_verified",
+      "dependencies": {
+        "playwright": "1.64.0",
+        "greenlet": "3.5.6",
+        "pyee": "14.0.0",
+        "typing_extensions": "4.16.0",
+        "cryptography": "50.0.2",
+        "cffi": "2.1.1",
+        "pycparser": "3.11",
+        "google-auth": "2.62.0",
+        "requests": "2.34.2",
+        "certifi": "2026.7.22",
+        "urllib3": "2.8.0",
+        "idna": "3.20",
+        "charset-normalizer": "3.5.2",
+        "pyasn1_modules": "0.4.2",
+        "pyasn1": "0.6.4",
+        "httpx": "0.28.1",
+        "httpcore": "1.0.9",
+        "h11": "0.16.0",
+        "anyio": "4.15.1",
+        "jsonschema": "4.26.0",
+        "rpds-py": "2026.9.1",
+        "referencing": "0.37.0",
+        "attrs": "26.1.0",
+        "jsonschema-specifications": "2025.9.1"
+      }
+    },
+    "runs": [
+      {
+        "executable": "C:\\Users\\samuel\\AppData\\Local\\Temp\\jarvis-package-probe-8mkcrkt6\\candidate\\python\\python.exe",
+        "version": "0.1.83",
+        "stopped": true,
+        "task_id": "task_37242e0115c45aa7845520ef7397b905",
+        "artifact_digest": "sha256:2aba68e31c1ccf2c347201bef4bc470c3543ac3564036014cc3b2360a24e713a",
+        "worker_manifest": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+        "network": "Python audit hook denies connect/DNS; not an OS network isolation test"
+      },
+      {
+        "executable": "C:\\Users\\samuel\\AppData\\Local\\Temp\\jarvis-package-probe-8mkcrkt6\\fallback\\python\\python.exe",
+        "version": "0.1.83",
+        "stopped": true,
+        "task_id": "task_37242e0115c45aa7845520ef7397b905",
+        "artifact_digest": "sha256:2aba68e31c1ccf2c347201bef4bc470c3543ac3564036014cc3b2360a24e713a",
+        "worker_manifest": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+        "network": "Python audit hook denies connect/DNS; not an OS network isolation test"
+      }
+    ],
+    "limitations": [
+      "Same-version fallback slot; no cross-version schema migration or protected service activation.",
+      "Python network-denial hook only; machine-wide disconnected boot not tested.",
+      "Optional browser/speech, model weights, owner keys and live state are excluded."
+    ]
+  },
+  "checks": {
+    "documentation": "25 documents, 21 diagrams, 42 artifacts; no errors",
+    "javascript_syntax": "admin.js and federation.js passed",
+    "whitespace": "passed using repository CRLF-aware policy",
+    "credential_patterns": "no credential patterns in changed/new source files",
+    "visual_review": "desktop and mobile screenshots inspected"
+  },
+  "cleanup_limit": "An optional command containing deletion of the first failed fixture temporary directory was denied with blocked by policy; that temporary directory was retained."
+}

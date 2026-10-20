@@ -34,8 +34,8 @@ class Fixture(unittest.TestCase):
 
 class PolicyTests(Fixture):
     def test_catalog_complete_unique_examples(self):
-        data,binding=catalog();self.assertEqual(len(data['skills']),15)
-        snapshot=self.skills.snapshot();self.assertEqual(len(snapshot['entries']),15)
+        data,binding=catalog();self.assertEqual(len(data['skills']),16)
+        snapshot=self.skills.snapshot();self.assertEqual(len(snapshot['entries']),16)
         self.assertEqual(sum(x['execution_kind']=='model_guidance' for x in snapshot['entries']),9)
         for entry in snapshot['entries']:
             self.assertNotIn('guide',entry)
@@ -44,8 +44,8 @@ class PolicyTests(Fixture):
 
     def test_capability_inventory_and_new_intents(self):
         snapshot=self.skills.snapshot();caps=[s for s in snapshot['entries'] if s.get('presentation')]
-        self.assertEqual(len(caps),11)
-        self.assertTrue(all(s['policy']['mode']=='auto' for s in caps))
+        self.assertEqual(len(caps),12)
+        self.assertTrue(all(s['policy']['mode']==('manual' if s['id']=='jarvis.tank-game' else 'auto') for s in caps))
         for item in caps:
             for example in item['positive_examples']:
                 self.assertEqual(infer_skill(example),item['id'],example)

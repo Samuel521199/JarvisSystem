@@ -23,7 +23,7 @@ MEMORY_LIMIT = 384 * 1024 * 1024
 
 class ProcessJob:
     """Attach before sending any input. Closing the job kills its owned child."""
-    def __init__(self):
+    def __init__(self, *, memory_limit=MEMORY_LIMIT):
         if os.name != 'nt':
             raise OSError('No verified dialogue process backend on this platform')
         from . import worker
@@ -34,7 +34,7 @@ class ProcessJob:
             limits = JobLimits()
             limits.basic.flags = 0x2000 | 0x8 | 0x200
             limits.basic.active = 1
-            limits.job_memory = MEMORY_LIMIT
+            limits.job_memory = memory_limit
             self.api.check(self.api.set_job(self.handle, 9, C.byref(limits), C.sizeof(limits)), 'Bound dialogue Job')
         except BaseException:
             self.api.close(self.handle)
@@ -82,12 +82,12 @@ class DialogueProcesses:
         packet = {'action': 'probe', 'config': config, 'provider': provider, 'prompt': prompt,
                   'data_dir': str(data_dir), 'deadline_seconds': deadline_seconds, 'options': options,
                   **({'task_id':task_id} if task_id else {})}
-        return self._run(packet, guard, cancel_event, min(85., max(1., float(deadline_seconds)+20.)))
+        return self._run(packet, guard, cancel_event, min(145., max(1., float(deadline_seconds)+20.)))
 
     def reply(self, chat, message, *, cancel_event=None, **options):
         packet = {'action': 'reply', 'config_path': str(chat.config_path), 'data_dir': str(chat.core.data_dir),
                   'message': message, 'options': options, 'task_id': getattr(chat.core, 'task_id', None)}
-        return self._run(packet, chat.core.assert_running, cancel_event, 110.)
+        return self._run(packet, chat.core.assert_running, cancel_event, 170.)
 
     def _run(self, packet, guard, cancel_event, limit):
         if cancel_event is not None and cancel_event.is_set():
@@ -100,7 +100,11 @@ class DialogueProcesses:
         started = time.monotonic()
         sent = False
         reason = 'start_failed'
+        lease = None
         try:
+            if packet.get('action') == 'reply' and not packet.get('task_id'):
+                from .runtime_admission import coordinator
+                lease = coordinator(self.core).acquire('chat', 256, owner=ident)
             control = guard()
             packet = {**packet, 'id': ident, 'epoch': control['security_epoch']}
             raw = json.dumps(packet, ensure_ascii=False, allow_nan=False).encode('utf-8')
@@ -214,6 +218,7 @@ class DialogueProcesses:
                 if job: job.close()
                 self.completed += 1
                 self.last = {'reason': reason, 'seconds': round(time.monotonic()-started, 3)}
+            if lease is not None: coordinator(self.core).release(lease)
             self.slots.release()
 
     def snapshot(self):

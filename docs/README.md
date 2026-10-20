@@ -23,17 +23,50 @@
 | **判断现在能否使用、智能有多强** | [v0.1.62 的实现、实测与剩余验收](delivery-validation.md#k2-completion-evidence) | [当前能力和完整性规则](models-offline.md#runtime-chat-context) |
 | **查看个人核心的使用与验证** | [聊天记忆与交流设置](interaction-persona.md#personal-core-ui) → [跨会话继续话题](interaction-persona.md#continuity-ui) | [当前 K2 验收结果与范围](delivery-validation.md#k2-completion-evidence) |
 | **从聊天提出改进并取回成果** | [改进与成长进度](interaction-persona.md#growth-demand-ui) | [0.1.41 需求成长验证](delivery-validation.md#growth-demand-evidence) |
-| **查看本轮修复与验收** | [K2 与关联 K1 基础修复](delivery-validation.md#k2-completion-evidence) | [原始基础验收](delivery-validation.md#foundation-repair-evidence) |
+| **查看本轮修复与验收** | [个人助理主动办事闭环](delivery-validation.md#personal-plan-evidence) | [既有记忆分域共享验证](delivery-validation.md#k6-scoped-sharing-evidence) |
 | **查看当前实现离个人助手目标还有多远** | [个人核心评价与工程审计](decisions-review.md#personal-core-assessment) | [助手核心架构图](architecture.md#pc-runtime-convergence) → [既有测试证据](delivery-validation.md#current-audit-evidence) |
 | **用自然语言执行首条任务** | [聊天任务入口](core-bootstrap.md#conversation-task-entry) | [执行边界与记录](tasks-agents.md#sample-task-runtime) |
 | **查看模块运行和准备升级** | [设置模块入口](core-bootstrap.md#module-monitor-entry) | [监控与维护边界](health-maintenance.md#module-monitoring) |
 | **看后续优化、缺口与原方案下一步** | [后续方向指南：16项工作清单](development-guide.md#direction-start) | [当前推进队列](core-bootstrap.md#near-term-work-queue) → [对应验收](development-guide.md#direction-evidence) |
-| **继续设计或开发** | [下一步具体工作](core-bootstrap.md#next-implementation) | [技术栈与代码结构](stack-project-layout.md#technology-selection) → [下一阶段验收](delivery-validation.md#next-k1-acceptance) |
+| **继续设计或开发** | [下一步具体工作](core-bootstrap.md#next-implementation) | [K4 收口标准](delivery-validation.md#k4-closure-readiness) → [技术栈与代码结构](stack-project-layout.md#technology-selection) |
 
 <a id="project-status"></a>
 ## 目前做到哪里了？
 
-**本次更新 · 0.1.64：** 设置 → 成长中心已接通自检、自愈、进化三标签及独立模型/备选/档位；[增量证据](delivery-validation.md#growth-purposes-evidence)。按主人要求停止重复验收，继续[后续开发](core-bootstrap.md#near-term-work-queue)。 已增加[仅此软件离线开关](models-offline.md#application-offline-control)，入口为设置 → 网络与离线；[本轮测试](delivery-validation.md#application-offline-evidence)与整机断网分别记录。 新增称呼与交流设置、带来源的话题推荐、相关事实选择和三库查询；取消/存储争用已修复。本轮本机实现与独立验证已收口，结果和剩余条件集中于 [K2 本轮收口](delivery-validation.md#k2-completion-evidence)。完整 K2 尚未签收：物理低配机、整机断网及主人体验仍须如实验收。
+**当前源码 0.1.89：个人计划与主动办事闭环。** [使用入口](interaction-persona.md#personal-plan-ui) · [验收与限制](delivery-validation.md#personal-plan-evidence)。聊天目标与未结事项可整理为计划，确认后由原执行器连续办事；结果经纠正确认再纳入记忆，后台运行期间可继续聊天。
+
+**既有 0.1.88：共同任务交接、助手接续、按需团队和需求学习四项已接通。** [实现、模拟验证与限制](delivery-validation.md#cooperation-learning-evidence)。只有一台电脑时使用[双进程模拟程序](../tools/probe_cooperation_learning.py)复现；没有把回环网络当真实跨机验收。设备与共享中的“共同任务”管理交接；聊天协作选择团队预算；成长中心的“进化”管理需求学习。
+
+
+**既有 0.1.87：已实现对端接收许可与选定个人／项目记忆分域共享；[本轮验证、部署与限制](delivery-validation.md#k6-scoped-sharing-evidence)。** “设置 → 设备与共享 → 分域共享”先选择发送条目，再由对端许可；项目记忆映射本机项目，接收内容留在独立共享层。已用两个独立进程模拟设备完成目录、正文、纠正、遗忘、离线和重启链路；真实第二台机器仍待安排。操作见[设备与共享](interaction-persona.md#shared-cards-ui)，后续见[当前工作顺序](core-bootstrap.md#k4-next-delivery)。
+
+0.1.85 的[本机模型用途、可失效引用与派生历史排除](delivery-validation.md#k6-shared-access-evidence)继续保留；撤销约束后续请求，已外发内容无法撤回，正式实例默认不开放监听。
+
+连续语音、Silero 门控和受限插话保持可用，入口为输入区耳机图标；[语音使用与边界](interaction-persona.md#voice-chat-plan)、[0.1.81 验证](delivery-validation.md#k6-continuous-voice-evidence)保留。
+
+**既有能力 · 0.1.79：K4 三个明确任务域闭环保持；K5 首个受限检索模块已完成模型生成、独立评估、试用/保留和重启回退。** [K5 实测与限制](delivery-validation.md#k5-ranking-module-evidence) · [模块如何工作](knowledge-learning.md#retrieval-ranking-module) · [唯一推进顺序](core-bootstrap.md#k4-next-delivery)。
+
+**使用入口 · 0.1.79：**设置 → 成长中心 → 进化 →「自身模块改造 · 检索排序」。生成后查看源码、质量与用量，再审阅试用；原内置排序仍是正式默认。模型候选的检索与回答对照均有有限范围收益，不等于通用自主重写。[使用方式](interaction-persona.md#ranking-module-ui)。
+
+**上一升级 · 0.1.78：**项目工具库 →「可持续成长」：项目预授权、独立验收、灰度、自动启用、收益观察与不达标停用；刷新和重启保留原回执。限定三类纯转换任务，不等于任意业务可自主验收。检索默认仍为旧算法，不因小开发集得分更高自动替换。
+
+**上一升级 · 0.1.77：**设置 → 成长中心新增“成长账本与容量整理”：手动预览、终态回执归档、退役目录收存/恢复；满在线名额仍可维护，原编号和恢复材料保留，不额外调用模型。[规则与边界](evolution-release.md#growth-ledger-maintenance) · [检查与部署](delivery-validation.md#k4-maintenance-evidence)。
+
+**上一升级 · 0.1.76：**新增[契约体检与旧版本归档](evolution-release.md#project-tool-quality-storage)：显示已观察的案例边界和待审阅问题；无引用退役包校验归档后释放在线名额，载回仍退役。三类实用任务的对照与部署状态见[本轮证据](delivery-validation.md#k4-quality-storage-evidence)。不宣称通用语义正确或磁盘空间释放。
+
+**上一升级 · 0.1.75：**候选先审阅进入灰度，稳定工具继续服务；新输入核验与用途证据达标后再明确启用，支持可恢复退役。见[流程与边界](evolution-release.md#project-tool-lifecycle)、[界面](interaction-persona.md#project-tool-ui)和[验收/部署状态](delivery-validation.md#k4-lifecycle-evidence)。仍不能自主证明任意业务验收正确。
+
+**上一修复 · 0.1.74：**网页和桌面均可通过本机服务创建项目/子文件夹；Argon 真实连接已通过，新增[可玩的坦克游戏原型](tasks-agents.md#tank-game-runtime)，[结果与限制](delivery-validation.md#assistant-game-evidence)。
+
+**上一升级 · 0.1.73：K4 验收草案与审阅。** 能力缺口可生成输入/输出和公开案例草案，明确审阅并补充独立留出案例后交给原 K3 编码；[使用方式](interaction-persona.md#project-tool-ui)及[实际模型与隔离执行验证](delivery-validation.md#k4-contract-evidence)。完整 K4 仍在推进，通用语义裁决与无人审阅自动发布仍未完成；本轮退役子集见上方 0.1.75。
+
+**上一版本 · 0.1.70：K3 编码协作已闭环。** 支持从会话改进单生成候选代码，经独立检查、实际构建和隔离运行，再审阅、应用或恢复；新增 Python 子目录包/新文件与 JavaScript 交互场景。五类真实任务的有/无技能指引对照均通过，未观察到成功率增益；范围与局限见[K3 最终验收](delivery-validation.md#k3-closure-matrix)。该版本之后已接通 K4 工具成长；当前工作以[推进队列](core-bootstrap.md#near-term-work-queue)为准。
+
+**0.1.66 已有基础：** K3 增加可运行 Python 工具包、产物入口独立复验、离线重建与语法损坏修复；三类真实 Codex 任务通过，结果见[本轮证据](delivery-validation.md#k3-build-evidence)。使用与限制仍归[编程工作流](tasks-agents.md#bounded-coding-workflow)。
+
+**0.1.65 已有基础：** 已完成本轮限定 K3 编码协作：候选副本、独立公开/留出案例检查、1—4 个 Python 模块、源码构建包、文件组应用与恢复，以及外部 Codex。入口为[设置 → 编码协作](http://127.0.0.1:18181/settings#coding)；[使用规则](tasks-agents.md#bounded-coding-workflow)与[实测证据](delivery-validation.md#k3-coding-evidence)集中维护。v0.1.64 基线已上传 GitHub。当时完整 K3 尚未收口；当前结果见上方 0.1.70，不将限定配方写成任意仓库自主开发。
+
+**0.1.64 已有基础：** 设置 → 成长中心已接通自检、自愈、进化三标签及独立模型/备选/档位；[增量证据](delivery-validation.md#growth-purposes-evidence)。按主人要求停止重复验收，继续[后续开发](core-bootstrap.md#near-term-work-queue)。 已增加[仅此软件离线开关](models-offline.md#application-offline-control)，入口为设置 → 网络与离线；[本轮测试](delivery-validation.md#application-offline-evidence)与整机断网分别记录。 新增称呼与交流设置、带来源的话题推荐、相关事实选择和三库查询；取消/存储争用已修复。本轮本机实现与独立验证已收口，结果和剩余条件集中于 [K2 本轮收口](delivery-validation.md#k2-completion-evidence)。完整 K2 尚未签收：物理低配机、整机断网及主人体验仍须如实验收。
 
 **0.1.61 已有基础：**[多轮记忆最终回答先导](delivery-validation.md#memory-final-answer-evidence)已运行；修正自动记忆承诺与聊天任务的过时能力说明。16 次真实回答复验、24 条报告校准及69项针对回归通过各自判据，仍保留少量措辞模糊等局限。
 
@@ -55,15 +88,15 @@
 
 | 状态 | 当前情况 |
 |---|---|
-| **已有可运行原型 · 0.1.64** | 新增[轻量事实分类与日常/工作用途](knowledge-learning.md#memory-domain-runtime)；新增 [REA 软件结构与行为解析](tasks-agents.md#rea-skill-policy)及[发布目录与证据分页改进](delivery-validation.md#rea-improvement-evidence)、[ASAR 与关注项](delivery-validation.md#rea-asar-focus-evidence)； 新增[候选事实来源与遗忘保护](knowledge-learning.md#candidate-fact-provenance)； 新增[候选记忆与未结事项](interaction-persona.md#personal-candidates-ui)、[中断重新分析](interaction-persona.md#growth-demand-ui)；新增[真实任务状态接续](interaction-persona.md#work-continuity-ui)； 新增[会话需求成长与真实交付](interaction-persona.md#growth-demand-ui)； 新增[有来源的话题接续](interaction-persona.md#continuity-ui)；保留[个人记忆指令与基础交流设置](interaction-persona.md#personal-core-ui)； 已修复[基础启动隔离与响应预算](delivery-validation.md#foundation-repair-evidence)；保留[限定代码与技能成长闭环](core-bootstrap.md#evolution-loop-entry)；新增[本地精确计算](core-bootstrap.md#calculator-entry)；新增[原生技能、源码报告与齿轮科普闭环](core-bootstrap.md#native-skills-entry)；新增[并行资源与延迟监控](core-bootstrap.md#parallel-runtime-entry)；保留[跨项目联合知识查询](core-bootstrap.md#memory-view-entry)；保留[本地模型启停与离线报告](core-bootstrap.md#offline-task-entry)；保留[会话关联任务与真实报告下载](core-bootstrap.md#conversation-task-entry)；保留[自然语言目录报告与产物核验](core-bootstrap.md#sample-task-entry)；保留[可缩放导航与右侧文件工作区](interaction-persona.md#workbench-layout)；保留[记忆/扩展真实状态](health-maintenance.md#module-monitoring)与[已校验种子入口](knowledge-learning.md#seed-runtime-entry)；保留[项目资源与工程文件](interaction-persona.md#project-resource-workbench)、[MCP / 技能管理入口](interaction-persona.md#extension-management-ui)，保留[项目资料检索与来源预览](interaction-persona.md#project-knowledge-ui)，保留[明确事实记忆](interaction-persona.md#explicit-memory-ui)，保留[本机会话自动保存与紧凑导出](interaction-persona.md#conversation-archive-ui)，保留[本会话要求与上下文编排](interaction-persona.md#composer-context-note)，保留[设置模块监控与升级](core-bootstrap.md#module-monitor-entry)，保留[拖拽附件与图片输入](interaction-persona.md#composer-attachments)，保留[页面配色](interaction-persona.md#workbench-appearance)，保留[模型与费用后台](core-bootstrap.md#model-admin-entry)、Eachlabs Claude、托盘、任务恢复、项目根目录和会话停止；验证见[分版本证据](delivery-validation.md#versioned-evidence)。 |
-| **当前交付重点** | 按主人最新要求，保存 v0.1.64 GitHub 基线后推进 K3 编码协作；顺序见[当前推进队列](core-bootstrap.md#near-term-work-queue)。K2 已有结果和未验项见[K2 收口](delivery-validation.md#k2-completion-evidence)，保留门槛而不重复验收。原需求去向见[后续方向指南](development-guide.md#direction-requirements)。 |
+| **已有可运行原型 · 0.1.79** | 新增[轻量事实分类与日常/工作用途](knowledge-learning.md#memory-domain-runtime)；新增 [REA 软件结构与行为解析](tasks-agents.md#rea-skill-policy)及[发布目录与证据分页改进](delivery-validation.md#rea-improvement-evidence)、[ASAR 与关注项](delivery-validation.md#rea-asar-focus-evidence)； 新增[候选事实来源与遗忘保护](knowledge-learning.md#candidate-fact-provenance)； 新增[候选记忆与未结事项](interaction-persona.md#personal-candidates-ui)、[中断重新分析](interaction-persona.md#growth-demand-ui)；新增[真实任务状态接续](interaction-persona.md#work-continuity-ui)； 新增[会话需求成长与真实交付](interaction-persona.md#growth-demand-ui)； 新增[有来源的话题接续](interaction-persona.md#continuity-ui)；保留[个人记忆指令与基础交流设置](interaction-persona.md#personal-core-ui)； 已修复[基础启动隔离与响应预算](delivery-validation.md#foundation-repair-evidence)；保留[限定代码与技能成长闭环](core-bootstrap.md#evolution-loop-entry)；新增[本地精确计算](core-bootstrap.md#calculator-entry)；新增[原生技能、源码报告与齿轮科普闭环](core-bootstrap.md#native-skills-entry)；新增[并行资源与延迟监控](core-bootstrap.md#parallel-runtime-entry)；保留[跨项目联合知识查询](core-bootstrap.md#memory-view-entry)；保留[本地模型启停与离线报告](core-bootstrap.md#offline-task-entry)；保留[会话关联任务与真实报告下载](core-bootstrap.md#conversation-task-entry)；保留[自然语言目录报告与产物核验](core-bootstrap.md#sample-task-entry)；保留[可缩放导航与右侧文件工作区](interaction-persona.md#workbench-layout)；保留[记忆/扩展真实状态](health-maintenance.md#module-monitoring)与[已校验种子入口](knowledge-learning.md#seed-runtime-entry)；保留[项目资源与工程文件](interaction-persona.md#project-resource-workbench)、[MCP / 技能管理入口](interaction-persona.md#extension-management-ui)，保留[项目资料检索与来源预览](interaction-persona.md#project-knowledge-ui)，保留[明确事实记忆](interaction-persona.md#explicit-memory-ui)，保留[本机会话自动保存与紧凑导出](interaction-persona.md#conversation-archive-ui)，保留[本会话要求与上下文编排](interaction-persona.md#composer-context-note)，保留[设置模块监控与升级](core-bootstrap.md#module-monitor-entry)，保留[拖拽附件与图片输入](interaction-persona.md#composer-attachments)，保留[页面配色](interaction-persona.md#workbench-appearance)，保留[模型与费用后台](core-bootstrap.md#model-admin-entry)、Eachlabs Claude、托盘、任务恢复、项目根目录和会话停止；验证见[分版本证据](delivery-validation.md#versioned-evidence)。 |
+| **当前交付重点** | v0.1.70 已完成 K3 并发布 GitHub；K4 限定范围已收口，当前进入 K5 检索模块，顺序见[当前推进队列](core-bootstrap.md#near-term-work-queue)。K2 已有结果和未验项见[K2 收口](delivery-validation.md#k2-completion-evidence)，保留门槛而不重复验收。原需求去向见[后续方向指南](development-guide.md#direction-requirements)。 |
 | **仍属设计目标** | 完整多形态人格、通用语义经历召回、完整主动跟进、自动正式记忆建档、完整知识检索、多设备共同体、任意源码自主编程发布、完整语音和 NPC 世界尚未实现。已有词法相关推荐与按需记忆候选不等于这些完整能力。 |
 
 以[当前实现说明](core-bootstrap.md#current-implementation)和[分版本验证记录](delivery-validation.md#versioned-evidence)为准。文档中的设计方案不代表功能已经上线。
 
 **记忆增量已随 0.1.58 部署（2026-10-19）：**[本地重复/差异核对与显式更新](delivery-validation.md#memory-candidate-review-evidence)已通过临时核心和界面验证，统一部署时另核对线上脚本摘要；未使用主人正式记忆做写入测试。使用方式见[候选窗口](interaction-persona.md#personal-candidates-ui)。
 
-**当前设计重心：**按主人要求将类贾维斯个人助手与伙伴放在核心，沿[K2 路线](core-bootstrap.md#next-implementation)补齐个人记忆、基础人格、交流接续和[最小自主进化](core-bootstrap.md#k2-growth-core)，按[V-PAL](delivery-validation.md#personal-companion-validation)验证。既有[成长中心三能力方案](evolution-release.md#growth-governance)、[动画交互预览](prototypes/growth-center/index.html)及[独立模型与备选](models-offline.md#growth-model-policy)继续保留；预览不替换正式工作台。
+**当前设计重心：**类贾维斯个人助手与伙伴始终是核心，个人记忆、基础人格和交流接续作为回归约束；当前主线是[K6 个人交流与受控多设备协同](core-bootstrap.md#k4-next-delivery)。K2 已有结果和原待验条件沿用[收口记录](delivery-validation.md#k2-completion-evidence)，不因工具成长而将个人核心视为完整通过。既有[成长中心三能力方案](evolution-release.md#growth-governance)、[动画交互预览](prototypes/growth-center/index.html)及[独立模型与备选](models-offline.md#growth-model-policy)继续保留；预览不替换正式工作台。
 
 <a id="quick-topics"></a>
 ## 直接查找你关心的内容

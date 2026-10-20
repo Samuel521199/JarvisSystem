@@ -28,7 +28,7 @@
   }
   function controls(){
     const locked=busy||Boolean(window.Dialogue?.hasPending())||operationBusy||Boolean(window.ProjectMenu?.isBusy());
-    for(const id of ["open-project","context-project","no-project","file-mode","output-path","project-open","project-pick"]){el(id).disabled=locked;}
+    for(const id of ["open-project","context-project","no-project","file-mode","output-path","project-open","project-pick","project-create"]){el(id).disabled=locked;}
     for(const button of document.querySelectorAll(".project-new-chat,.project-more,.session-row:not(#current-chat)"))button.disabled=locked;
     sidebarState();
     el("file-options").hidden=!project;
@@ -114,7 +114,7 @@
     s.archiveJSON=encoded;s.archiveState="saving";s.archiveError="";locationForProject();render();
     Conversations.save(id,document).then(()=>{s.archiveState="saved";s.archiveError="";archiveWarning="";}).catch(error=>{s.archiveState="failed";s.archiveError=error.message;}).finally(()=>{const current=sessions.get(id);if(current&&current.archiveJSON===encoded){current.archiveState=s.archiveState;current.archiveError=s.archiveError;}if(id===activeId)archiveStatus();else if(current?.archiveJSON===encoded&&current.archiveState==="failed"){render();notify("会话“"+current.title+"”保存失败："+current.archiveError);}});
   }
-  function locationForProject(){window.history.replaceState(null,"",sessions.has(activeId)&&!temporary?"#chat="+activeId:project?"#project="+project.id:location.pathname);}
+  function locationForProject(){window.history.replaceState(null,"",sessions.has(activeId)&&!temporary?"#chat="+activeId:project?"#project="+project.id:location.pathname);window.dispatchEvent(new Event("jarvis:conversation-context"));}
   function newSession(next=project,isTemporary=false){
     if(busy||Boolean(window.Dialogue?.hasPending())||operationBusy)return;
     remember();activeId=newId();project=next;temporary=isTemporary;resetConversation();el("file-mode").checked=false;el("output-path").value="";el("file-options").open=false;
@@ -155,17 +155,19 @@
     catch(error){notify(error.message);}finally{busyOperation(false);archiveStatus();}
   }
   async function refreshProjects(){const data=await api("/api/workspace/projects");projects=data.projects.map(p=>window.ProjectMenu?.decorate(p)||p);render();}
-  function openDialog(){if(busy||Boolean(window.Dialogue?.hasPending())||operationBusy)return;el("project-error").textContent="";el("folder-path").value=project?.path||"";el("project-dialog").showModal();el("folder-path").focus();}
-  async function openProject(usePicker){
+  let preparedProject=null;
+  function prepareProject(path,text,game){preparedProject={text,game};openDialog(true);el("folder-path").value=path||"";}
+  function openDialog(fromRequest=false){if(fromRequest!==true)preparedProject=null;if(busy||Boolean(window.Dialogue?.hasPending())||operationBusy)return;el("project-error").textContent="";el("folder-path").value=project?.path||"";el("project-dialog").showModal();el("folder-path").focus();}
+  async function openProject(usePicker,create=false){
     if(busy||Boolean(window.Dialogue?.hasPending())||operationBusy)return;el("project-error").textContent="";busyOperation(true);
     let chosen=null,engineering=null;
     try{
       if(usePicker){const result=await api("/api/workspace/pick-folder",{},125000);if(!result.cancelled)chosen=result.project;}
-      else {const path=el("folder-path").value.trim();if(path.endsWith(".jarvis-workspace")){engineering=await api("/api/project-files/open-project",{path});chosen=engineering.project;}else chosen=await api("/api/workspace/projects",{path});}
+      else {const path=el("folder-path").value.trim();if(path.endsWith(".jarvis-workspace")){engineering=await api("/api/project-files/open-project",{path});chosen=engineering.project;}else chosen=await api(create?"/api/workspace/create-project":"/api/workspace/projects",{path});}
       if(chosen){await window.ProjectMenu?.reopen(chosen);chosen=window.ProjectMenu?.decorate(chosen)||chosen;await refreshProjects();el("project-dialog").close();}
     }catch(error){el("project-error").textContent=error.message;}
     finally{busyOperation(false);}
-    if(chosen&&!el('project-error').textContent){newSession(chosen);if(engineering)await window.ProjectExplorer?.restoreProject(engineering);else window.ProjectExplorer?.show(true);}
+    if(chosen&&!el('project-error').textContent){newSession(chosen);const prepared=preparedProject;preparedProject=null;if(prepared){el("message").value=prepared.text;if(prepared.game)window.Creation?.prepareGame(prepared.text);notify("项目已打开，原需求已保留；核对当前任务范围后发送。");}if(engineering)await window.ProjectExplorer?.restoreProject(engineering);else window.ProjectExplorer?.show(true);}
   }
   async function beforeSend(){
     if(operationBusy)throw new Error("请先完成当前项目操作。");
@@ -215,13 +217,14 @@
       if(!el("export-list").childNodes.length)el("export-list").textContent="还没有保存记录。";
     }catch(error){el("export-list").textContent=error.message;}
   }
-  window.Workspace={currentConversation:()=>({id:activeId,temporary}),currentProject:()=>project,memoryContext:()=>({project_id:project?.id||null,temporary}),controls,isBusy:()=>operationBusy||Boolean(window.ProjectMenu?.isBusy()),newSession,beforeSend,attachAnswer,saveAnswer,remember,
+  window.Workspace={currentConversation:()=>({id:activeId,temporary}),currentProject:()=>project,memoryContext:()=>({project_id:project?.id||null,temporary}),controls,isBusy:()=>operationBusy||Boolean(window.ProjectMenu?.isBusy()),newSession,prepareProject,beforeSend,attachAnswer,saveAnswer,remember,
     allProjects:()=>projects,projectSessions:id=>{const rows=[...sessions].filter(([_,s])=>s.project?.id===id).map(([key,s])=>({id:key,...s}));if(project?.id===id&&!sessions.has(activeId))rows.push({id:activeId,title:el('session-title').textContent});return rows;},
     async flushConversation(){remember();await Conversations.flush();if(sessions.get(activeId)?.archiveState==='failed')throw new Error('当前聊天尚未保存成功，请先重试保存，再归档；页面内容已保留。');},
     afterProjectArchive(p){if(project?.id===p.id)newSession(p);},afterProjectRemoved(p){if(project?.id===p.id)newSession(null);},
     projectOrganizationChanged(){projects=projects.map(p=>ProjectMenu.decorate(p));const byId=new Map(projects.map(p=>[p.id,p]));if(project)project=byId.get(project.id)||project;for(const s of sessions.values())if(s.project)s.project=byId.get(s.project.id)||s.project;render();},
     fileContent:text=>{const match=text.match(/^\s*```[^\n]*\n([\s\S]*?)\n```\s*$/);return match&&!match[1].includes("```")?match[1]+"\n":text;}};
   el("open-project").addEventListener("click",openDialog);el("context-project").addEventListener("click",()=>project?ProjectMenu.show(project,el('context-project')):openDialog());
+  el("project-create").addEventListener("click",()=>openProject(false,true));
   el("project-form").addEventListener("submit",event=>{event.preventDefault();openProject(false);});el("project-pick").addEventListener("click",()=>openProject(true));
   el("no-project").addEventListener("click",()=>newSession(null));el("file-mode").addEventListener("change",controls);
   el("save-form").addEventListener("submit",event=>{event.preventDefault();confirmSave();});el("show-exports").addEventListener("click",showOutputs);

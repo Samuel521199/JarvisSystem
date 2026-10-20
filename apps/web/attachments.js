@@ -5,7 +5,7 @@
   const textExtensions=new Set('txt md markdown csv tsv json jsonl yaml yml toml xml html htm css scss js jsx mjs cjs ts tsx py pyi java c h cpp hpp cs go rs sh ps1 bat cmd sql log ini cfg conf svg srt vtt tex r rb php swift kt vue svelte gitignore env'.split(' '));
   let draft=[],previewURLs=[],dragDepth=0;
   const sizes=n=>n>=MiB?(n/MiB).toFixed(1)+' MiB':n>=1024?(n/1024).toFixed(1)+' KiB':n+' B';
-  const wire=()=>draft.filter(x=>x.status==='ready').map(x=>x.attachment);
+  const wire=()=>draft.filter(x=>x.status==='ready'&&x.attachment?.kind!=='shared').map(x=>x.attachment);
   const allImages=items=>items.flatMap(m=>m.attachments||[]).filter(a=>a.kind==='image');
   const imageBytes=a=>a.data.length/4*3-(a.data.endsWith('==')?2:a.data.endsWith('=')?1:0);
   function messageText(m){let text=m.content;for(const a of m.attachments||[])text+=a.kind==='text'?'\n\n[附件资料：'+a.name+']\n'+a.text+'\n[附件结束]':'\n[图片附件：'+a.name+']';return text;}
@@ -33,7 +33,7 @@
     if(a?.kind==='image'){const img=document.createElement('img'),url=blobURL(a);img.src=url;img.alt=item.name;row.append(img);if(removable)previewURLs.push(url);else{img.addEventListener('load',()=>URL.revokeObjectURL(url),{once:true});img.addEventListener('error',()=>URL.revokeObjectURL(url),{once:true});}}
     else{const icon=document.createElement('span');icon.className='attachment-file-icon';icon.textContent=item.name.split('.').pop().slice(0,5).toUpperCase();icon.setAttribute('aria-hidden','true');row.append(icon);}
     const copy=document.createElement('span'),title=document.createElement('strong'),detail=document.createElement('small');copy.className='attachment-copy';title.textContent=item.name;title.title=item.name;
-    detail.textContent=item.status==='error'?item.error:item.status==='reading'?'正在读取…':sizes(item.size)+' · '+(a?.kind==='image'?'图片已就绪':'正文已读取');copy.append(title,detail);row.append(copy);
+    detail.textContent=item.status==='error'?item.error:item.status==='reading'?'正在读取…':a?.kind==='shared'?'受控引用 · 派发前重新核对':sizes(item.size)+' · '+(a?.kind==='image'?'图片已就绪':'正文已读取');copy.append(title,detail);row.append(copy);
     if(removable){if(item.status==='error'){const retry=document.createElement('button');retry.type='button';retry.className='attachment-retry';retry.textContent='重新读取';retry.addEventListener('click',()=>read(item));copy.append(retry);}const remove=document.createElement('button');remove.type='button';remove.className='attachment-remove';remove.textContent='×';remove.setAttribute('aria-label','移除附件 '+item.name);remove.addEventListener('click',()=>{draft=draft.filter(x=>x!==item);render();el('message').focus();});row.append(remove);}
     return row;
   }
@@ -93,7 +93,20 @@
   el('attach-button').addEventListener('click',()=>el('attachment-input').click());
   el('attachment-input').addEventListener('change',event=>{add(event.target.files);event.target.value='';});
   el('message').addEventListener('input',update);
-  window.Attachments={
+  function addText(attachment){
+    if(!attachment||attachment.kind!=='text'||typeof attachment.name!=='string'||typeof attachment.text!=='string'||bytes(attachment.text)>49152||!attachment.text.trim())throw new Error('文字附件格式无效。');
+    if(draft.length>=8)throw new Error('每条消息最多添加 8 个附件。');
+    if(!fits([{content:el('message').value,attachments:[...wire(),attachment]}],65536))throw new Error('消息与附件超出本轮容量，请先缩短内容。');
+    const item={id:crypto.randomUUID(),name:attachment.name,size:bytes(attachment.text),status:'ready',attachment};draft.push(item);render();return item.id;
+  }
+  function addShared(value){
+    if(!value?.reference?.body||typeof value.name!=='string')throw new Error('共享引用格式无效。');
+    if(draft.length>=8)throw new Error('附件和共享引用合计最多 8 项。');
+    const attachment={kind:'shared',name:value.name,reference:value.reference};
+    draft.push({id:crypto.randomUUID(),name:value.name,size:0,status:'ready',attachment});render();
+  }
+  window.Attachments={addText,addShared,
+    shared:()=>draft.filter(x=>x.status==='ready'&&x.attachment?.kind==='shared').map(x=>x.attachment.reference),
     snapshot:()=>draft.slice(),restore:items=>{draft=(items||[]).slice();render();},hasDraft:()=>draft.length>0,
     clear:()=>{draft=[];render();},update,wire,issue,messageText,fits,context,
     consume:items=>{const ids=new Set(items.map(x=>x.id));draft=draft.filter(x=>!ids.has(x.id));render();},

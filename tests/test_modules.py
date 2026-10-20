@@ -56,7 +56,7 @@ class ModuleTests(unittest.TestCase):
         self.assertEqual(rows['calculator']['health'],'ready')
         self.assertTrue(rows['calculator']['enabled'])
         self.assertEqual(rows['calculator']['count_scope'],'host_lifetime')
-        self.assertEqual(rows['native-skills']['recent_uses'],11)
+        self.assertEqual(rows['native-skills']['recent_uses'],12)
         self.assertEqual(rows['native-skills']['count_scope'],'catalog')
         self.assertEqual(rows['host']['health'],'ready')
         self.assertEqual(rows['memory']['health'],'ready')

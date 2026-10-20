@@ -147,6 +147,19 @@ class ProjectFiles:
             fail('file_unsupported', '此类型暂不支持文本编辑。')
         return {'path': payload['path'], **read_text(target)}
 
+    def mkdir(self, payload):
+        fields(payload, {'project_id', 'path'})
+        self.workspace._ready()
+        with self.lock, self.core.effect_guard():
+            root = self.root(payload['project_id'], ready=False)
+            target = self.target(root, payload['path'])
+            safe_path(target.parent, directory=True)
+            if target.exists():
+                safe_path(target, directory=True)
+                return {'path': payload['path'], 'created': False}
+            target.mkdir(exist_ok=False)
+            return {'path': payload['path'], 'created': True}
+
     def write(self, payload):
         fields(payload, {'project_id', 'path', 'content', 'digest', 'bom'})
         content, expected = payload['content'], payload['digest']

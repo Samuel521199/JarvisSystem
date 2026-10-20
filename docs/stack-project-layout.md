@@ -47,10 +47,11 @@
   - [9.7.1 复用现有实现，按边界拆分](#dialogue-runtime-adoption)
 - [9.8 项目文件结构与依赖规则](#project-structure)
   - [9.8.1 当前实际落地范围（0.1.18）](#implemented-layout)
-  - [9.8.2 推荐源码结构](#project-structure-1)
-  - [9.8.3 单个模块模板](#project-structure-2)
-  - [9.8.4 运行数据结构](#project-structure-3)
-  - [9.8.5 依赖规则](#project-structure-4)
+  - [9.8.2 编码协作的实际模块（0.1.66）](#coding-module-layout)
+  - [9.8.3 推荐源码结构](#project-structure-1)
+  - [9.8.4 单个模块模板](#project-structure-2)
+  - [9.8.5 运行数据结构](#project-structure-3)
+  - [9.8.6 依赖规则](#project-structure-4)
 - [9.9 领域目录与受保护状态](#extensions-2)
 - [9.10 构建模块的目录与复用边界](#development-platform-11)
 <!-- book-nav:end -->
@@ -553,7 +554,7 @@ REA 可以帮助理解 AI 应用的界面、客户端逻辑、可见接口和本
 
 1. **K2 按需加载。** 复用 `ExtensionCatalog` 的来源与摘要，在此基础上解析名称、描述、显式/隐式调用策略和参考资源，按任务装配所需正文；初次查询的额外登记模块返回 `runtime_available=false`、登记数为 0；0.1.35 的原生目录与它分开，五项已准入能力有真实 readiness，额外登记仍 dormant。关联技能与相对参考必须一起解析，不能只复制包装入口。UI 继续显示真实登记/可加载/可执行状态，入口归设置内技能管理。
 2. **上下文预算。** 现有网关单次宿主 `instructions` 上限为 4,096 UTF-8 字节；云端文本总输入为 65,536 字节，本地为 4,096 字节。去掉 frontmatter 后，`code-review` 为 6,207 字节、`diagnosing-bugs` 为 8,462 字节、`codebase-design` 为 6,135 字节，直接拼入现有 instructions 会被拒绝。38 个技能文件合计 170,800 字节，亦不能整包加入云端一次请求。采用元数据发现、正文按需读取、参考文件再按需读取，并独立分配技能与代码预算；本地路线选择短流程。Codex 的分级加载方式可作参考，不能通过伪造用户历史/system 或提升记忆为规则绕过宿主语义。[S173](references.md#s173)
-3. **K3 编码执行。** 复用既定 CodingProvider，接入一个实际可用的文件/补丁/检查执行器；本机能找到 Codex CLI 启动器，外部 Codex 适配仍未接通。0.1.37 / evolution-v1 已采用现有 ModelGateway 实现限定 Python 工具的 CodingProvider 与独立验收，见[模块边界](evolution-release.md#bounded-evolution-loop)。另一条原生路线需要在现有 ModelGateway 上接通工具调用、工具结果回传、有限循环、取消和产物核验。两条路线选一条做首个闭环，避免同时搭建重复执行平台。
+3. **K3 编码执行。** 复用既定 CodingProvider，接入一个实际可用的文件/补丁/检查执行器；0.1.65 已接通外部 Codex 文本候选，0.1.66 增加实际工具包构建与独立复验，范围见[编码协作](tasks-agents.md#bounded-coding-workflow)。0.1.37 / evolution-v1 已采用现有 ModelGateway 实现限定 Python 工具的 CodingProvider 与独立验收，见[模块边界](evolution-release.md#bounded-evolution-loop)。另一条原生路线需要在现有 ModelGateway 上接通工具调用、工具结果回传、有限循环、取消和产物核验。两条路线选一条做首个闭环，避免同时搭建重复执行平台。
 4. **交付与用量。** 每个编程作业记录需求/基线、技能版本、所选模型、实际 diff、检查命令/退出码、tokens/费用与未完成项。外部编码器若自行请求模型，其身份和账单单独观察；当前网页 API Key 可用并不能证明外部 CLI 使用同一线路、同一 Key 或同一费用记录。上游自动提交、任务跟踪器发布和脚本运行必须与实际作业授权匹配。
 
 采用文本技能不会必然增加常驻服务；主要额外成本来自更长上下文、多次验证/修复请求和可选审阅。只导入文件时质量增益为零；加载后可以改善需求与审阅步骤；完整代码质量改善需要真实编译/测试反馈，幅度须由同模型对照验证，不能承诺固定提升百分比或消除错误。
@@ -604,9 +605,9 @@ REA 可以帮助理解 AI 应用的界面、客户端逻辑、可见接口和本
 | 拟新增 `intent.py` | 复用确定性命令解析；一般输入使用有界结构化模型输出并校验 | 通用语义不是堆关键词；不默认常驻另一个大模型，也不每轮启动多 Agent 投票 |
 | `task_queue.py`、`conversation_tasks.py`、技能/成长服务 | 共用 WorkAdmission 适配器，保留唯一账本与幂等键 | 不建立与原队列平行的新任务系统，逐项迁移旧前端拦截 |
 | `resources.py`、`runtime_metrics.py` 与模型网关 | 由内存准入扩展到用途额度、等待原因、预算与公平调度 | 用现有监控和生命周期，不先引入 Redis、Celery 或集群调度 |
-| 拟新增 STT 适配器＋现有 `speech.py`/Qwen | sherpa-onnx 的 SenseVoice int8＋已验证 VAD 起步；Qwen 短段合成 | 本地优先；精确模型/内存和云候补仍由[模型章](models-offline.md#voice-model-selection)维护；不把非流式切段识别包装为原生流式 |
+| `speech_input.py`/`speech_input_worker.py`＋现有 `speech.py`/Qwen | SenseVoice int8 按次进程与 Qwen 短段合成已接入；VAD 自动轮次待后续 | 本地优先；精确模型/内存和云候补仍由[模型章](models-offline.md#voice-model-selection)维护；不把非流式切段识别包装为原生流式 |
 | `server.py`＋已新增 `dialogue_routes.py` / 拟新增语音输入路由 | 先异步受理＋有界事件查询，按需加 SSE；连续 PCM 再加一个可关闭 WebSocket 适配层 | 保留现有 HTTP 边界和正常启动，不为长连接创建无限线程；跨协议共用 nonce/origin/实例与取消校验 |
-| `index.html`、`dialogue.js`、`conversations.js`、`readout.js` 与拟新增语音输入模块 | 抽出发送状态机，任务卡不占全局 busy；AudioWorklet/Web Audio 负责有界采集与播放调度 | 麦克风接入/撤销、重采样、缓冲和断线分别验证；保留可访问图标及 J 品牌 |
+| `index.html`、`dialogue.js`、`conversations.js`、`readout.js`、`voice-input.js`/`voice-capture.js` | 抽出发送状态机，任务卡不占全局 busy；AudioWorklet/Web Audio 负责有界采集与播放调度 | 麦克风接入/撤销、重采样、缓冲和断线分别验证；保留可访问图标及 J 品牌 |
 
 0.1.48 文件职责：`runtime/node-host/jarvis_core/turns.py` 管短期受理/结果/取消，`apps/web/dialogue_routes.py` 管 HTTP 边界，`apps/web/dialogue.js` 管页面待发与回执查询，`server.py` 只接线并共享旧聊天槽。验证入口为 `tests/test_dialogue_turns.py`、`tools/probe_dialogue_ui.py`、`tools/probe_dialogue_deployment.py`。0.1.49 新增 `jarvis_core/dialogue_journal.py`，共用 `conversations.db`，由 `tests/test_dialogue_recovery.py` 与两项 `probe_dialogue_recovery_*` 验证恢复与删除。尚未加入通用持久事件流、独立 Dialogue 进程、意图解析和新第三方依赖。
 
@@ -671,6 +672,10 @@ Python I/O 使用有界线程/异步任务，原生推理/重 CPU 工作保持�
 | `runtime/node-host/jarvis_core/work_state.py`、`tests/test_work_continuity.py`、`tools/probe_work_continuity.py` | 0.1.42 任务/成长账本的只读、有界状态视图，接续保存引用并在请求时核验，状态摘要使派生历史失效；没有新数据库、执行器或后台服务。见[关联契约](contracts.md#work-continuity-contract) |
 | `runtime/node-host/jarvis_core/personal.py` / `persona.py`、`tests/test_personal_core.py`、`tools/probe_personal_core_ui.py` | 0.1.39 当前输入的显式个人指令分流与独立持久表达；事实仍由原 MemoryStore 写入，Host 负责装配，UI 只负责显示/归档回执；没有新增运行依赖。接口见[个人核心契约](contracts.md#personal-core-contract) |
 | `runtime/node-host/jarvis_core/evolution/settings.py`、`apps/web/evolution.js` / `evolution.css` | 0.1.64 三用途策略、兼容迁移和真实成长中心；行为只在[成长运行](evolution-release.md#bounded-evolution-loop)维护 |
+| `runtime/node-host/jarvis_core/evolution/growth_domains.py` / `growth_policy.py` / `growth_cycle.py`、`apps/web/growth-cycles.js` | 0.1.78 宿主领域验收、项目预授权与回执推进；原 SQLite 和观察线程，规则归[限定成长](evolution-release.md#bounded-growth-policy) |
+| `runtime/node-host/jarvis_core/retrieval_ranking.py`、`ranking_program.py`、`ranking_evaluation.py`、`ranking_registry.py`、`evolution/ranking_module.py`、`apps/web/ranking-modules.js` | 0.1.79 独立排序边界、受限源码编译/解释、独立验收、持久选择与生成流程/UI；复用原 SQLite、LPAC 和成长队列。授权、候选资格与引用仍归知识宿主，见[模块边界](knowledge-learning.md#retrieval-ranking-module) |
+| `runtime/node-host/jarvis_core/evolution/catalog.py` / `lifecycle.py` / `quality.py` / `tool_archive.py`、`apps/web/project-tools.js` / `tool-lifecycle.js` | 分别管理项目工具执行/契约延续、准入状态、结构体检、旧版校验归档；复用原队列与 SQLite，无新增服务或模型。完整规则见[生命周期](evolution-release.md#project-tool-lifecycle)及[体检/存储](evolution-release.md#project-tool-quality-storage) |
+| `evals/cases/k4-quality-v1.json`、`tools/probe_k4_quality.py`、`tests/test_tool_quality_archive.py` | 固定三任务契约/独立挑战、实际 LPAC 对照和归档故障验证；默认合成候选，显式 `--live` 才使用已配置付费编码模型，不在后台自动运行。范围见[验收](delivery-validation.md#k4-quality-storage-evidence) |
 | `runtime/node-host/jarvis_core/evolution/demand.py`、`apps/web/growth_routes.py` / `growth.js` / `growth.css`、`tests/test_growth_demand.py`、`tools/probe_growth_demand.py` / `probe_growth_demand_ui.py` | 0.1.41 会话需求适配与实际成果交付；复用既有成长账本、单 Worker、LPAC 和能力包，不增加服务、数据库、模型或依赖。见[需求契约](contracts.md#growth-demand-contract) |
 | `runtime/node-host/jarvis_core/memory_view.py` | 0.1.33 协调事实与登记文档的请求级联合视图，不另建存储或后台进程；范围和预算见[运行契约](contracts.md#memory-view-runtime-contract) |
 | `runtime/node-host/jarvis_core/calculator.py`、`contracts/schemas/calculation.schema.json` | 0.1.37 纯标准库的精确算术能力与回执；`ChatService` 先匹配当前纯算式，再沿原模型路由。不新增表达式执行服务，见[分流规则](models-offline.md#deterministic-calculation-runtime) |
@@ -681,6 +686,8 @@ Python I/O 使用有界线程/异步任务，原生推理/重 CPU 工作保持�
 | `runtime/node-host/jarvis_core/workspace.py` | 项目目录身份登记、明确文本导出、独占写入与摘要核验；标准库 SQLite/Tk，不新增第三方依赖 |
 | `tests/test_workspace.py`、`tools/probe_workspace_ui.py` | 临时目录/HTTP 故障回归与 Edge 端到端验证；合成模型响应，无付费调用 |
 | `adapters/computer-use/jarvis_computer/web.py` | 有界网页接纳层、任务查询与 PNG 校验，不增加持久调度队列 |
+| `runtime/node-host/jarvis_core/team_protocol.py`、`team_tasks.py`、`apps/web/team-workbench.js` | 0.1.82 有界双职责契约、调用预留/回执与页面；复用原后台进程、FIFO、control.db，不新增 Agent 框架或服务；[行为权威](tasks-agents.md#bounded-team-runtime) |
+| `runtime/node-host/jarvis_core/federation*.py`、`apps/web/federation.js`、`shared-access.js`、`shared-connection.js`、`shared-scopes.js`、`shared-reference.js/css` | 0.1.87 可替换的协议、存储、身份、传输、生命周期、模型用途、分域来源/接收、连接恢复与交互；可选 `federation.db` 和 `federation/` 不并入个人记忆库，连接预览仅驻内存；[职责与限制](federation.md#shared-cards-runtime) |
 | `runtime/node-host/jarvis_core/task_queue.py`、`adapters/computer-use/jarvis_computer/task_queue.py` | 目录/浏览器共用 FIFO 调度与浏览器兼容包装，保留旧附表；版本/宿主与 UNKNOWN 检查，执行语义归[任务章](tasks-agents.md#browser-durable-queue) |
 | `tests/test_computer_queue.py`、`tests/test_computer_web.py`、`tools/probe_computer_ui.py` | 队列崩溃/交接、HTTP 权限/并行/取消与真实 Edge 网页、窄屏验证；不调用模型 |
 | `adapters/models/provider-native/jarvis_models/` | DPAPI vault、原生提供商适配、调用历史与数值用量；不再按累计调用次数拒绝请求，模型输出无执行权 |
@@ -733,6 +740,24 @@ Python I/O 使用有界线程/异步任务，原生推理/重 CPU 工作保持�
 | `%LOCALAPPDATA%\Jarvis\data` | 业务 control.db、独立 safety/control.db 与 safety/pending、model-probes.db 调用及价格快照、model-admin.db 有效模型配置（不含明文凭据）、workspace.db 项目/导出回执、conversations.db 会话文字及删除标记、memory.db 明确事实、project-sources.db 项目资料登记、extensions.db 扩展登记、任务产物和 diagnostics；清空聊天不删除这些记录 |
 
 `.gitignore` 排除凭据、数据库、虚拟环境、模型、构建缓存及 `artifacts/releases/*.zip`；源码、文档、图源与生成图、测试和验证报告纳入 Git。主人指定的项目仓库及历史规则见[受控历史](MAINTENANCE.md#retirement-and-history)，忽略规则不是访问控制。本次未下载全套 C++/Rust 编译器，也没有宣称能断网重建所有依赖。未来按[工具链能力](toolchains.md#development-platform)补离线依赖闭包，不能把下载推理引擎等同于拥有自主编译平台。
+
+<a id="coding-module-layout"></a>
+### 编码协作的实际模块（0.1.66）
+
+保持 Python 标准库和原队列/LPAC，不增加容器编排、数据库服务器、向量库或常驻编码 Agent。外部 Codex 是按需可选进程，现有 CLI 本体约 308 MiB 磁盘文件，不把磁盘大小当常驻 RAM；本轮新增代码无新的 pip/npm 依赖。
+
+| 模块 | 唯一职责 |
+|---|---|
+| `coding_workflow.py` / `coding_task.py` | 兼容入口与冻结任务编排；组装指导和反馈，独立检查并交付 |
+| `coding_bundle.py` | 模块图约束、受控测试驱动、确定性源码 ZIP 与 manifest |
+| `coding_build.py` / `tools/coding_build.py` | 固定配方、可运行 PYZ、严格归档检查与离线重建；不执行任意安装脚本，Host 不运行候选 |
+| `evolution/runner.py` | 复用既有固定 Python LPAC 工具链，不向候选开放 Host 执行 |
+| `coding_apply.py` | 多文件写入前检查、持久状态、继续/恢复；复用 ProjectFiles |
+| `evolution/provider.py` / `coding_codex.py` | 网关模型与外部 Codex 候选生成，均无应用或发布权 |
+| `coding_settings.py` / `config/coding-runtime.json` / `config/codex-proposal-model.json` | 小型本地设置、固定二进制与适配能力档案；不保存 Key |
+| `skills.js` / `coding.js` / `skill_routes.py` | 任务输入、结果面板与独立设置接线 |
+
+模块可以独立替换，但必须保留[候选接口](contracts.md#bounded-coding-contract)、[权限和凭据边界](security-sovereignty.md#bounded-coding-boundary)及当前回执/恢复语义。没有新增另一套聊天人格、记忆权威、调度器或自动发布者。
 
 <a id="project-structure-1"></a>
 ### 推荐源码结构

@@ -88,6 +88,8 @@ def validate_context(value):
 def infer_skill(message):
     """Conservative native intent rules; a name mention alone is not a call."""
     text = message.lower()
+    if not re.search(r'(不要|不用|禁止|如果|假如|例如|示例|翻译|解释|如何|怎么)',text) and re.search(r'^(?:请帮我|帮我|请)?\s*(?:制作|创建|生成|写|做).{0,25}(?:坦克|tank).{0,16}游戏',text):
+        return 'jarvis.tank-game'
     if re.search(r'^(翻译|校对|转述).{0,50}|^(总结|概述).{0,30}(审阅|调试|排错|测试|技能|设计)', text):
         return None
     if re.search(r'(不要|不用|不需要).{0,8}(审阅|审查|排查|调试|测试先行|教学|讲课)', text):
@@ -162,6 +164,14 @@ class SkillManager:
 
     @staticmethod
     def readiness(item, node=None):
+        if item['workflow'] == 'game':
+            from .web_game import TEMPLATE
+            ready=(os.name=='nt' and (ROOT/TEMPLATE).is_file()
+                   and importlib.util.find_spec('playwright') is not None
+                   and any((Path(os.environ.get(key,'C:/Program Files'))/'Microsoft/Edge/Application/msedge.exe').is_file()
+                           for key in ('PROGRAMFILES','PROGRAMFILES(X86)','LOCALAPPDATA')))
+            return {'loadable':True,'executable':ready,'execution_kind':'fixed_offline_game',
+                    'reason':'固定 2D 坦克引擎，模型设计关卡；保存前真实浏览器验收，不生成或执行自由脚本。' if ready else '游戏引擎、Windows/Edge 或已有浏览器验收组件未就绪。'}
         if item['workflow'] == 'rea':
             from .rea import runtime
             try:
@@ -258,6 +268,10 @@ class SkillManager:
             if item:
                 mode = self._mode(db, item, context)
                 ready = self.readiness(item)
+                if target == 'anatomy.explainer' and purpose == 'scene-guidance':
+                    from .coding_js import asset
+                    asset()  # This purpose composes guidance; it never calls the gear renderer.
+                    ready = {'executable': True}
                 reason = None
                 if not context['enabled']:
                     reason = '本轮已关闭技能。'
@@ -269,10 +283,12 @@ class SkillManager:
                     reason = '此技能仅允许显式指定。'
                 elif not ready['executable']:
                     reason = ready['reason']
-                elif target == 'anatomy.explainer' and re.search(r'(CAD|STEP|STL|公差|制造图|MP4|视频|发动机|机械手)', message, re.I):
+                elif target == 'anatomy.explainer' and purpose != 'scene-guidance' and re.search(r'(CAD|STEP|STL|公差|制造图|MP4|视频|发动机|机械手)', message, re.I):
                     reason = '当前已验证的是齿轮传动交互模板；自由结构、CAD 和视频任务尚未接通。'
-                elif target == 'anatomy.explainer' and not re.search(r'(齿轮|gear)', message, re.I):
+                elif target == 'anatomy.explainer' and purpose != 'scene-guidance' and not re.search(r'(齿轮|gear)', message, re.I):
                     reason = '当前科普执行器只支持齿轮传动，请在要求中明确齿轮主题。'
+                elif target == 'jarvis.tank-game' and purpose == 'chat':
+                    reason = '游戏需要产物任务，请选择坦克游戏技能任务；普通聊天不会创建文件。'
                 elif target == 'anatomy.explainer' and purpose == 'chat':
                     reason = '此技能需要真实产物任务，请使用科普技能任务入口。'
                 elif target == 'rea.software-analysis' and purpose == 'chat':

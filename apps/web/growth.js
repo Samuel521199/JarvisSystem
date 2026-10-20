@@ -18,6 +18,42 @@
     }
   }
   function controls(){for(const b of dialog.querySelectorAll('button'))b.disabled=acting;}
+  async function createCoding(payload){
+    const context=current();if(!context||context.temporary)throw new Error('请在已保存的普通项目会话中建立改进单。');
+    const contractOrigin=window.ToolContracts?.codingOrigin(payload.prompt),toolOrigin=contractOrigin?{id:contractOrigin.planId}:window.ToolIntents?.codingOrigin(payload.prompt),reviewKey=contractOrigin?JSON.stringify(contractOrigin):null;
+    const id=context.id,coding=Object.fromEntries(['paths','cases','heldout_cases','entrypoint','model','coding_provider','build_recipe','new_paths'].filter(k=>k in payload).map(k=>[k,payload[k]])),spec={prompt:payload.prompt,coding},old=pending.get(id);
+    if(old&&(JSON.stringify(old.spec)!==JSON.stringify(spec)||(old.toolOrigin||null)!==(toolOrigin?.id||null)||(old.reviewKey||null)!==reviewKey))throw new Error('上次改进单回执尚未确认，请先打开原回执查询。');
+    let node=old?.node;
+    if(!node){message('user','改进需求：'+payload.prompt);node=message('assistant','正在冻结目标、源文件与验收条件；尚未开始执行。',{growthRequestId:toolOrigin?.id||crypto.randomUUID().replaceAll('-','')});pending.set(id,{spec,node,toolOrigin:toolOrigin?.id||null,reviewKey});}
+    try{
+      await Workspace.flushConversation();
+      const path=contractOrigin?'/api/project-tools/'+id+'/plans/'+contractOrigin.planId+'/contracts/'+contractOrigin.id+'/review':toolOrigin?'/api/project-tools/'+id+'/plans/'+toolOrigin.id+'/coding':prefix(id);
+      const job=await api(path,{request_id:node.dataset.growthRequestId,...spec,...(contractOrigin?.review||{})});
+      node.dataset.growthRef=job.id;pending.delete(id);node.querySelector('.bubble').textContent='编码改进单已保存：'+payload.prompt+'。核对文件、验收案例和模型后开始；完成时由独立验收回填结果。';linkReceipts();Workspace.remember();notify('');
+      if(current()?.id===id)await show(node);
+    }catch(e){node.querySelector('.bubble').textContent=e.message+'；没有自动重发。';if(e.status&&e.status<500){pending.delete(id);delete node.dataset.growthRequestId;}linkReceipts();Workspace.remember();throw e;}
+  }
+  function renderCoding(job){
+    const make=(tag,text)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;return n;},card=make('article'),args=job.coding;
+    card.className='growth-card';card.dataset.growthId=job.id;card.dataset.active=String(active(job.status));
+    const marker='\n\n已审阅验收契约：\n',goal=job.request.origin.goal,parts=goal.split(marker);card.append(make('strong',(states[job.status]||job.status)+' · '+parts[0]));
+    if(parts.length>1){const details=make('details');details.append(make('summary','已审阅契约与澄清'),make('pre',parts.slice(1).join(marker)));card.append(details);}
+    const phases=make('div');phases.className='growth-steps';
+    for(const [label,reached] of [['需求已冻结',true],['编码任务',!!job.task_id],['独立验收',!!job.result],['结果回填',!!job.result]]){const n=make('span',label);n.title=label+(reached?'：已有记录':'：待完成');if(reached)n.className='reached';phases.append(n);}card.append(phases);
+    card.append(make('p',args.paths.length+' 个文件 · '+args.cases.length+' 条公开示例 + '+args.heldout_cases.length+' 条独立验收 · '+(args.build_recipe==='javascript-scene-v1'?'JavaScript 交互场景':args.build_recipe.startsWith('python-package')?'Python 包工具':args.build_recipe==='python-jmespath-v1'?'JSON 查询工具包 · JMESPath 1.1.0':args.build_recipe==='python-zipapp-v1'?'可运行工具包':'源码包')));
+    card.append(make('small','编码：'+(args.coding_provider==='codex'?'外部 Codex · '+(job.proposal.executor?.model||'编码协作设置')+' · '+(job.proposal.executor?.reasoning||'') :args.model)+'；最多 '+job.proposal.budget.max_model_calls+' 次模型调用，执行预算 '+job.proposal.budget.runtime_seconds+' 秒。独立案例保留在本机。'));
+    card.append(make('small','项目：'+args.project_root+'；文件：'+args.paths.join('、')));
+    if(job.result)card.append(make('p',job.result.verified?'候选与产物已通过 '+job.result.cases+' 条案例；模型调用 '+job.result.model_calls+' 次。可查看差异后应用，原文件未自动改写。':'候选未通过独立验收，保留诊断；原文件未改写。'));
+    if(job.error)card.append(make('p','本次未完成：'+(job.error.message||job.error)));
+    const actions=make('div');actions.className='growth-actions';const button=(label,fn)=>{const b=make('button',label);b.type='button';b.onclick=fn;actions.append(b);};
+    if(job.status==='PROPOSED')button('开始编码与独立验收',()=>act(job,'start'));
+    if(job.status==='PROPOSED'||active(job.status))button('取消本次',()=>act(job,'cancel'));
+    if(job.task_id)button(job.result?'查看差异、验收与应用':'查看编码任务',async()=>{try{const id=currentId,detail=await api('/api/conversation-tasks/'+id+'/'+job.task_id);if(current()?.id!==id)return;dialog.close();if(detail.report?.coding)window.SkillWorkbench.codingPreview(detail.report,job.task_id);else await window.ConversationTasks.openTask(job.task_id);}catch(e){error(e.message);}});
+    if(['FAILED','INTERRUPTED','UNKNOWN','CANCELLED'].includes(job.status)){card.append(make('p',job.status==='UNKNOWN'?'结果未知，先核对已有任务与远端用量；重新分析不会自动重试。':'可重新分析当前文件与规则，原记录保留；新单仍需开始。'));button('重新分析这项需求',()=>reanalyse(job));}
+    if(job.request.origin.previous_job)card.append(make('small','重新分析自：'+job.request.origin.previous_job));
+    const details=make('details');details.append(make('summary','文件基线、冻结验收与任务回执'),make('pre',JSON.stringify({binding:job.proposal.binding,sources:args.sources,cases:args.cases,heldout_cases:args.heldout_cases,task_id:job.task_id,result:job.result,events:job.events},null,2)));
+    card.append(actions,details);return card;
+  }
   async function act(job,action){
     if(acting)return;const id=currentId;acting=true;controls();error('');
     try{await api(prefix(id)+'/'+job.id+'/'+action,{});if(current()?.id===id)await load();}
@@ -48,8 +84,10 @@
   }
   function render(rows){
     const list=$('growth-list');list.replaceChildren();
-    if(!rows.length){list.textContent='本会话尚无改进单。先完成一份目录报告，再输入 /改进 把最近的目录报告导出为 TSV。';return;}
+    if(!rows.length){list.textContent='本会话尚无改进单。可以建立编码改进单，或将已完成的目录报告导出为 CSV、TSV、Markdown。';return;}
     for(const job of rows){
+      if(job.request.action==='project-tool-plan'){const card=document.createElement('article'),title=document.createElement('p'),open=document.createElement('button');card.className='growth-card';title.textContent='工具需求 · '+job.message+' · '+(job.invocation?.status||job.coding?.status||job.proposal.reason);open.textContent='查看工具选择与实际结果';open.onclick=()=>{dialog.close();window.ToolIntents?.open(job.id);};card.append(title,open);list.append(card);continue;}
+      if(job.request.action==='coding'){list.append(renderCoding(job));continue;}
       const card=document.createElement('article'),title=document.createElement('strong'),steps=document.createElement('div'),copy=document.createElement('p'),scope=document.createElement('small'),actions=document.createElement('div');
       card.className='growth-card';card.dataset.growthId=job.id;card.dataset.active=String(active(job.status));title.textContent=(states[job.status]||job.status)+' · '+job.request.origin.goal;
       steps.className='growth-steps';const phases=job.events.map(e=>e.phase),reached=[true,phases.includes('GENERATING'),phases.includes('VALIDATING'),Boolean(job.activation_confirmed)||Boolean(job.result),Boolean(job.result)];
@@ -92,6 +130,7 @@
     if(!context||context.temporary){notify('请在普通会话中提出改进；临时会话不建立持久改进单。');return;}
     if(Attachments.hasDraft()||$('file-mode').checked){notify('改进使用本会话已完成的目录报告；请先移除附件并关闭文件输出。');return;}
     if(match&&!match[1]){notify('例如：/改进 把最近的目录报告导出为 TSV');return;}
+    if(match&&!/^(?:请)?(?:把|将)?(?:本会话)?(?:最近的?|已完成的?)?(?:目录报告|文件清单|清单)?\s*(?:导出|转换|转)(?:成|为)?\s*(CSV|TSV|Markdown)(?:格式|表格)?[。！!]?$/i.test(match[1])&&!/^(CSV|TSV|Markdown)$/i.test(match[1])){window.SkillWorkbench?.prepareImprovement(match[1].replace(/^编码\s*/,''));return;}
     const prompt=match?.[1],old=pending.get(context.id);
     if(prompt&&old&&old.prompt!==prompt){notify('上次分析结果尚未确认，请先打开回执核对；没有重新生成。');return;}
     busy=true;setControls();let node;
@@ -112,8 +151,9 @@
     }finally{busy=false;window.Workspace?.remember();setControls();}
   }
   $('growth-close').addEventListener('click',()=>{if(!acting)dialog.close();});$('growth-refresh').addEventListener('click',load);
+  const newCoding=document.createElement('button');newCoding.type='button';newCoding.id='growth-new-coding';newCoding.textContent='新建编码改进单';newCoding.onclick=()=>{if(window.SkillWorkbench?.prepareImprovement(''))dialog.close();};$('growth-refresh').after(newCoding);
   dialog.addEventListener('cancel',e=>{if(acting)e.preventDefault();});dialog.addEventListener('close',()=>clearTimeout(timer));
   document.addEventListener('visibilitychange',()=>{clearTimeout(timer);if(!document.hidden)load();});window.addEventListener('pagehide',()=>clearTimeout(timer));
-  window.ConversationGrowth={handleSubmit,sessionChanged(){const id=current()?.id;if(id!==currentId){currentId=id;selected=null;clearTimeout(timer);if(dialog.open)dialog.close();}linkReceipts();}};
+  window.ConversationGrowth={handleSubmit,createCoding,sessionChanged(){const id=current()?.id;if(id!==currentId){currentId=id;selected=null;clearTimeout(timer);if(dialog.open)dialog.close();}linkReceipts();}};
   window.ConversationGrowth.sessionChanged();
 })();

@@ -1,0 +1,41 @@
+Optional coding dependency: JMESPath 1.1.0 (MIT)
+Upstream: https://github.com/jmespath/jmespath.py
+Release: https://pypi.org/project/jmespath/1.1.0/
+Retrieved: 2026-10-19
+Original wheel: jmespath-1.1.0-py3-none-any.whl (20,419 bytes)
+SHA-256: a5663118de4908c91729bea0acadca56526eb2698e83de10cd116ae0f4e97c64
+URL: https://files.pythonhosted.org/packages/14/2f/967ba146e6d58cf6a652da73885f52fc68001525b4197effc174321d70b4/jmespath-1.1.0-py3-none-any.whl
+
+The wheel is unmodified. Its LICENSE and METADATA are retained in generated
+dependency-enabled artifacts. The wheel is read as data, not installed or
+imported by the Jarvis host. The optional recipe copies library files and
+attribution only; the wheel's command-line script is not used.
+No Requires-Dist dependencies are declared by this release.
+The pinned catalog is maintained in jarvis_core/coding_dependencies.py.
+
+Copyright (c) 2013 Amazon.com, Inc. or its affiliates.  All Rights Reserved
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to
+deal in the Software without restriction, including without limitation the
+rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+sell copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+DEALINGS IN THE SOFTWARE.
+
+QuickJS-NG Python binding 0.17.0.1 (MIT), Windows AMD64 abi3.
+Source: https://github.com/genotrance/quickjs-ng
+Wheel: https://pypi.org/project/quickjs-ng/0.17.0.1/
+SHA-256: 355511615baa17bc98092680f068e3536ea1ee5a650b16f59bf6871f497f3780
+Vendored only for the optional JavaScript LPAC worker; no Host import or pip install.
+The wheel contains its wrapper license; upstream engine and original binding notices accompany it.

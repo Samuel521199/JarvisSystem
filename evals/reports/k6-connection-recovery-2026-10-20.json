@@ -1,0 +1,436 @@
+{
+  "version": "0.1.86",
+  "captured_at": "2026-10-20T14:09:34.043060+00:00",
+  "processes": {
+    "status": "passed",
+    "checks": [
+      "separate_process_readonly_probe",
+      "host_restart_listener_stays_off",
+      "offline_no_probe",
+      "different_loopback_address_and_port",
+      "preview_no_write",
+      "explicit_commit_and_duplicate_receipt",
+      "sync_after_recovery",
+      "client_restart_keeps_new_address"
+    ],
+    "resources": {
+      "private_bytes": [
+        23564288,
+        22065152
+      ],
+      "one_second_idle_cpu_seconds": [
+        0.0,
+        0.0
+      ]
+    },
+    "limits": [
+      "Two OS processes on the same Windows PC; 127.0.0.2 is loopback, not a second machine.",
+      "One-second idle sample is not a long-run or low-memory PC benchmark."
+    ]
+  },
+  "ui": {
+    "status": "passed",
+    "checks": [
+      "browser_diagnosis_does_not_sync_or_mutate",
+      "offline_diagnostic_shows_local_policy",
+      "preview_shows_identity_and_leaves_address_unchanged",
+      "editing_address_invalidates_visible_confirmation",
+      "confirmation_preserves_space_and_sync_is_separate",
+      "wrong_device_rejected_without_address_replacement",
+      "light_dark_mobile_layout_and_accessible_controls"
+    ],
+    "page_errors": [],
+    "screenshots": [
+      "H:\\JarvisData\\diagnostics\\k6-connection-20261020\\connection-panel-dark.png",
+      "H:\\JarvisData\\diagnostics\\k6-connection-20261020\\connection-panel-light.png",
+      "H:\\JarvisData\\diagnostics\\k6-connection-20261020\\connection-panel-mobile.png"
+    ],
+    "limits": [
+      "Loopback HTTPS only; no physical NIC, firewall or actual sleep test."
+    ]
+  },
+  "cloud_model_calls": 0,
+  "physical_second_device": "not_available_user_deferred",
+  "regression": {
+    "status": "passed",
+    "tests": 85,
+    "seconds": 71.373,
+    "command": "python -m unittest test_federation test_federation_lifecycle test_federation_access test_shared_dialogue_process.SharedProcessTests test_federation_connection test_web -q",
+    "new_connection_tests": 14,
+    "repairs": [
+      "Fixed release-schema compatibility syntax exposed by first regression; rerun 85 tests passed.",
+      "Preserved connection confirmation message across browser state refresh; browser probe rerun passed."
+    ],
+    "javascript_syntax": "passed",
+    "visual_review": "Light and 390px dark screenshots inspected; controls, long fingerprint wrap and confirmation readable."
+  },
+  "deployment": {
+    "status": "passed",
+    "source_version": "0.1.86",
+    "previous_version": "0.1.85",
+    "previous_instance": "2d8939aa9b3c5cf1603c3f74664658e8",
+    "current_instance": "a19a75104394b01cca7259cf4b0b3b87",
+    "idle_graceful_reload": true,
+    "calculation": "84",
+    "personal_read_only": true,
+    "duplicate_did_not_repeat_calculation": true,
+    "cancel_before_submit": true,
+    "restart_fence": true,
+    "empty_restart_queue_reviewed_and_resumed": true,
+    "admission_ms": 42.417,
+    "cloud_calls": 0,
+    "served_sha256": {
+      "shared-connection.js": "d8c5c068b31853bb3069041efde7f8b3314739d9931a6ab2741a40b71a8dc90e",
+      "federation.js": "f16b46865fcdb3ce70956f49690b1717be757d662e441ec9ef748ab8523c5021",
+      "shared-access.js": "9684c22be4c143418ceb52b87561e9ef5012e08aff9fba427a72d102a3af7d79",
+      "dialogue.js": "5703f81a4c594b6b7112bb7d0f2a4a16ec2603e834794db78ec2016c4e1ff530",
+      "resources.js": "586e03243199134cec0c4da7bedde691f904f73ca8e7aee09ea2dd0202c99e2b",
+      "workspace.js": "d4a06de9863c55c59a5fc56135d9995690f9ee77b3a2c281fc9a118a12bcbb9f",
+      "conversation_tasks.js": "030e1f3d791988b33a8c2ddeec4baf129d9506cb93a6c8e1e592b5cf92d42a63",
+      "mcp_manager.js": "0c74df31951193bbe830bdfe24a10eb90b9cb31bb604ce54109acc5fb1cd9702"
+    },
+    "federation_css_inline_verified": true,
+    "business_state_unchanged": true,
+    "business_state_comparison": "Before/after fingerprints compared equal in deployment invocation before subsequent asset check failed. Only post-state digest retained here.",
+    "state_after": {
+      "control.db": {
+        "present": true,
+        "schema": 2,
+        "tables": {
+          "actions": {
+            "rows": 18,
+            "sha256": "f0f3121a62d0b6e74483a0b5be7d8ac744e0fee11216b66c5ab037472529ebf7"
+          },
+          "artifacts": {
+            "rows": 16,
+            "sha256": "3e07687fc930429e1333c717e5fd1639f4990dbc36f257db1a639c5e02914acc"
+          },
+          "coding_changes": {
+            "rows": 2,
+            "sha256": "c1bcce173ae88c3d8d05deb8c7c9050ad00153f88f4f97eb19afbcfd043746ec"
+          },
+          "coding_demands": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "computer_queue": {
+            "rows": 10,
+            "sha256": "94f3d4b0390d10600486f554ae93f036b059585d967fb4a7ff4ae530f3448b3b"
+          },
+          "computer_steps": {
+            "rows": 17,
+            "sha256": "e0545ca686975b54075e17b4731acf1f0e76011f5e0388f5e719368b99e9fb0d"
+          },
+          "control": {
+            "rows": 1,
+            "sha256": "48f40bf56a231b8feb405f550a2d499a1ce3ca573825861f738b37b0678fce61"
+          },
+          "skill_success": {
+            "rows": 1,
+            "sha256": "c12df120359907b15d94a6885f688255040d7a3e36ba426a8622dee0b50d0170"
+          },
+          "tasks": {
+            "rows": 18,
+            "sha256": "608b6a89f8273395f31dab6563767c43caa8c372ff167b8e2d1ab940d87ba51a"
+          },
+          "team_calls": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "safety/control.db": {
+        "present": true,
+        "schema": 1,
+        "tables": {
+          "audit": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "challenges": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "incidents": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "state": {
+            "rows": 1,
+            "sha256": "7d1b6c645e716519211bb12f69c843400a8ee7dd2df509ed79508687e3be65f3"
+          }
+        }
+      },
+      "conversations.db": {
+        "present": true,
+        "schema": 0,
+        "tables": {
+          "conversations": {
+            "rows": 13,
+            "sha256": "d9113838ee9bebeab24fc904b5604826e6ea686a4748b4086486a6cac1916a50"
+          },
+          "dialogue_receipts": {
+            "rows": 9,
+            "sha256": "0606bd6ef96202cb8706e86c0c4a66f6bbf9b1e4cb832ef3359d1d0d97ca7e7a"
+          }
+        }
+      },
+      "memory.db": {
+        "present": true,
+        "schema": 3,
+        "tables": {
+          "candidate_bindings": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "fact_origins": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "facts": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "receipts": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "persona.db": {
+        "present": false
+      },
+      "continuity.db": {
+        "present": false
+      },
+      "extensions.db": {
+        "present": true,
+        "schema": 1,
+        "tables": {
+          "entries": {
+            "rows": 1,
+            "sha256": "9708b491ef1783ca4d78c61951270ce2b617f7fcd714f5aeff52dde67e608641"
+          },
+          "mcp_policies": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "skill_decisions": {
+            "rows": 6,
+            "sha256": "b4a5f2272f2e2281d27052a50a7814678ed4f010cfa1c575d3a1ccd26d77956f"
+          },
+          "skill_policies": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "project-sources.db": {
+        "present": true,
+        "schema": 1,
+        "tables": {
+          "sources": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "project-catalog.db": {
+        "present": true,
+        "schema": 1,
+        "tables": {
+          "archived_chats": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "profiles": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "workspace.db": {
+        "present": true,
+        "schema": 1,
+        "tables": {
+          "outputs": {
+            "rows": 6,
+            "sha256": "59a8c005756561ef13b6088017b495780a8ddc74cc490d9522d2e721b5105098"
+          },
+          "projects": {
+            "rows": 6,
+            "sha256": "dfaf49e4e880e4b293dc9bb0e4b9ab6bf3f0285061dc6f8a2f96551cc3020231"
+          }
+        }
+      },
+      "evolution/evolution.db": {
+        "present": true,
+        "schema": 8,
+        "tables": {
+          "growth_cycles": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "growth_policies": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "incidents": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "jobs": {
+            "rows": 33,
+            "sha256": "47fc11d2357287237dfe001dda9d037e797e14e8656dd8f09c937375c1f3172f"
+          },
+          "maintenance_receipts": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "packages": {
+            "rows": 1,
+            "sha256": "8b232f9ca8aaae5366ed4fcd9b36badd017ea6b96498f3eb4eb6ea2d61df904d"
+          },
+          "project_tools": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "ranking_selection": {
+            "rows": 1,
+            "sha256": "f6b7607bb95f8fb8487782f076f128916e772ea79c00cd37ad616608177fa439"
+          },
+          "ranking_versions": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "selection": {
+            "rows": 1,
+            "sha256": "0935b109577cc19f9dee5f7e834a1af42eafd01f85726f3576e809d9c7a33665"
+          },
+          "settings": {
+            "rows": 1,
+            "sha256": "a43e218bb971c8e61bd819130450962ae54eeaf91493bfe8687fa2c84015fb95"
+          },
+          "tool_lifecycle": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "tool_versions": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "network-policy.db": {
+        "present": false
+      },
+      "federation.db": {
+        "present": false
+      }
+    },
+    "excluded_tables": {
+      "dialogue_owner": "Host instance ownership is expected to change on restart.",
+      "computer_queue_control": "The idle queue is reviewed/resumed during the authorized reload; task rows are compared separately."
+    },
+    "production_sharing_uninitialized": true,
+    "probe_correction": "federation.css is embedded in /settings; standalone /federation.css returned expected 404. Retried read-only comparison against inline content; no second restart."
+  },
+  "package": {
+    "captured_at": "2026-10-20T14:18:29.775081+00:00",
+    "status": "passed",
+    "package": {
+      "version": "0.1.86",
+      "path": "H:\\JarvisData\\diagnostics\\jarvis-v0.1.86.zip",
+      "sha256": "57859ae84e61b18ba199a75887a95bec8a544b28727b2587199e7287648c8b21",
+      "files": 1622,
+      "bytes": 70607402,
+      "status": "candidate_verified",
+      "dependencies": {
+        "playwright": "1.64.0",
+        "greenlet": "3.5.6",
+        "pyee": "14.0.0",
+        "typing_extensions": "4.16.0",
+        "cryptography": "50.0.2",
+        "cffi": "2.1.1",
+        "pycparser": "3.11",
+        "google-auth": "2.62.0",
+        "requests": "2.34.2",
+        "certifi": "2026.7.22",
+        "urllib3": "2.8.0",
+        "idna": "3.20",
+        "charset-normalizer": "3.5.2",
+        "pyasn1_modules": "0.4.2",
+        "pyasn1": "0.6.4",
+        "httpx": "0.28.1",
+        "httpcore": "1.0.9",
+        "h11": "0.16.0",
+        "anyio": "4.15.1",
+        "jsonschema": "4.26.0",
+        "rpds-py": "2026.9.1",
+        "referencing": "0.37.0",
+        "attrs": "26.1.0",
+        "jsonschema-specifications": "2025.9.1"
+      }
+    },
+    "runs": [
+      {
+        "executable": "C:\\Users\\samuel\\AppData\\Local\\Temp\\jarvis-package-probe-ppk3x151\\candidate\\python\\python.exe",
+        "version": "0.1.86",
+        "stopped": true,
+        "task_id": "task_aa77f045fd18593587ab8063417f97fd",
+        "artifact_digest": "sha256:2aba68e31c1ccf2c347201bef4bc470c3543ac3564036014cc3b2360a24e713a",
+        "worker_manifest": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+        "network": "Python audit hook denies connect/DNS; not an OS network isolation test"
+      },
+      {
+        "executable": "C:\\Users\\samuel\\AppData\\Local\\Temp\\jarvis-package-probe-ppk3x151\\fallback\\python\\python.exe",
+        "version": "0.1.86",
+        "stopped": true,
+        "task_id": "task_aa77f045fd18593587ab8063417f97fd",
+        "artifact_digest": "sha256:2aba68e31c1ccf2c347201bef4bc470c3543ac3564036014cc3b2360a24e713a",
+        "worker_manifest": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+        "network": "Python audit hook denies connect/DNS; not an OS network isolation test"
+      }
+    ],
+    "limitations": [
+      "Same-version fallback slot; no cross-version schema migration or protected service activation.",
+      "Python network-denial hook only; machine-wide disconnected boot not tested.",
+      "Optional browser/speech, model weights, owner keys and live state are excluded."
+    ],
+    "source_files_verified": 377,
+    "activated": false
+  },
+  "checks": {
+    "documentation": "OK documents=25 diagrams=21 artifacts=42 errors=0",
+    "navigation": "synchronized",
+    "diff_whitespace": "passed with repository CRLF convention",
+    "python_ast": "9 changed Python files parsed",
+    "credential_patterns": "no matches in changed files",
+    "schema_compatibility": "v0.1.86 accepts shared schema 1/2/3; v0.1.85 accepts 3; v0.1.83/84 reject 3"
+  },
+  "source_sha256": {
+    "apps/web/shared-connection.js": "d8c5c068b31853bb3069041efde7f8b3314739d9931a6ab2741a40b71a8dc90e",
+    "runtime/node-host/jarvis_core/federation_connection.py": "9cabd0b280d5bacc56d1a9426478d3fdf5bd7fed3b40180c428b8b255655686f",
+    "tests/test_federation_connection.py": "4002c20ab3f18e46b5dea6f1ecc9aeedce5d4d4482879cb2ef969f6a4c586cc7",
+    "tools/probe_federation_connection.py": "99ed65bfcd2e36529faf3b90002154171dbb0b73d226fe7a5e0817e8f9322c2d",
+    "README.md": "a5319764a939779e33ded24afe6de51716fdd5e6165ce9d843753718e9cdc8f3",
+    "apps/web/admin.html": "ccb7f52eff84bc99543bb214dcd6dabb3bc5ca242116373f2132944af7730062",
+    "apps/web/federation.js": "f16b46865fcdb3ce70956f49690b1717be757d662e441ec9ef748ab8523c5021",
+    "apps/web/server.py": "7c12f9d9f32164b1c4f57a354a1de14586aaf56e9092d1835fdac9b0805b9217",
+    "docs/README.md": "ebc9843064e14539a20bb8c2b62d2c1e9a2ab87130626b239c707360f00a3263",
+    "docs/contracts.md": "c8e985b9e30327fb75eadec6a9ed353993a8b6afe76fcaed9170c6faaa3c6593",
+    "docs/core-bootstrap.md": "2a5fc9541e0706812f241a786bfc1e39cfec9dee05a33ee825b4df3614582464",
+    "docs/delivery-validation.md": "46203133c93982cf547ae2e39b6f63adeacfa818fdb6651ea28cc23798a4517e",
+    "docs/federation.md": "18ad4da4ff8f967c6878dee218b615f36808e5962036819a49c0a737ca97c49b",
+    "docs/interaction-persona.md": "7cd4c4b284f8c899a43dcf0fed1f7bc3898c83db2500e9d21d05b687bf8e4065",
+    "docs/manifest.json": "d8df684feb08733482b266be53c76c65e14a7209796b89cc63f4e5b1fe65c00c",
+    "docs/stack-project-layout.md": "c6a8a00259b76f9b39920f56d1d5d9870250bcc1eb3205be1aa03ccbb84c31f7",
+    "pyproject.toml": "59243ce1ddacfcf8dccc907a3d3ba8f73a32e9bce21358cb643786849ecdae99",
+    "runtime/node-host/jarvis_core/__init__.py": "4ae13ba12173358b8c6762bf68a46f00fb4bad123d765e89cad39ad88ffe5944",
+    "runtime/node-host/jarvis_core/federation.py": "5609c1606656d232a7decabc6b424efd888f0cd61884ab7533944a01b7064998",
+    "runtime/node-host/jarvis_core/federation_transport.py": "929d35635ed313f54b83cecaf2ff4a08a1c5750e5d4e821717cde54955c1abc2",
+    "runtime/node-host/jarvis_core/releases.py": "d6da11191e0d5b08d7927872bd6be7a82d4f477d03652851ec62aa2840bb99c7",
+    "tools/probe_release_bundle.py": "5b14d4c94e078ea232d2edb05ec4326533e6858efd6458501b25a1af7eb33f7a",
+    "uv.lock": "320195107e13d8baf2b26e89ebe50cf8c79b2283f24d34cd82a12ae43c32a632"
+  }
+}

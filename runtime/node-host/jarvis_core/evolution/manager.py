@@ -31,6 +31,8 @@ class EvolutionManager:
         self.busy = False
         self.thread = None
         self.observer = None
+        self.growth = None
+        self.ranking_modules = None
         self.last_check = None
         self.monitor_error = None
         self.schedule_changed = threading.Event()
@@ -73,6 +75,10 @@ class EvolutionManager:
             raise policy.CoreError('evolution_request_invalid', '动作参数不匹配。')
         if action == 'ensure': recipes.specification(payload['target_revision'])
         if action == 'execute': recipes.validate_input(payload['input'], 2)
+        return self._enqueue(payload, background=background, cause=cause)
+
+    def _enqueue(self, payload, *, background=False, cause=None):
+        """Shared bounded growth lane; adapters validate before entering here."""
         payload = copy.deepcopy(payload)
         with self.lock:
             if self.closed.is_set(): raise policy.CoreError('evolution_closed', '维护服务已关闭。')
@@ -374,12 +380,33 @@ class EvolutionManager:
             raise policy.CoreError('evolution_execution_recovered', '执行失败已触发回退/修复；请查看记录后重新调用。') from None
 
     def _work(self, job, background):
+        from ..runtime_admission import coordinator
+        lease = None
         try:
+            while lease is None:
+                self._checkpoint()
+                try: lease = coordinator(self.core).acquire('growth', 512, owner=job['id'])
+                except policy.CoreError as exc:
+                    if exc.code != 'resource_wait': raise
+                    self.cancel_event.wait(.5)
             with locked(self.store.root / '.lane.lock'):
                 self._checkpoint()
                 self.store.update(job, 'STARTED', status='RUNNING')
                 action = job['request']['action']
-                if action == 'ensure': result = self._ensure(job, job['request']['target_revision'])
+                if action == 'project-tool':
+                    from .catalog import ProjectTools
+                    result = ProjectTools(self).execute(job)
+                elif action == 'ranking-improve':
+                    if self.ranking_modules is None: raise policy.CoreError('evolution_unavailable', '检索成长未初始化。')
+                    result = self.ranking_modules.execute(job)
+                elif action == 'growth-baseline':
+                    from .growth_cycle import baseline
+                    result = baseline(self,job)
+                elif action == 'tool-contract':
+                    from .catalog import ProjectTools
+                    from .tool_contract import ToolContracts
+                    result = ToolContracts(ProjectTools(self)).execute(job)
+                elif action == 'ensure': result = self._ensure(job, job['request']['target_revision'])
                 elif action == 'check': result = self._check(job, background)
                 elif action == 'analyze': result = self._analyze(job)
                 elif action == 'heal': result = self._heal(job)
@@ -409,10 +436,15 @@ class EvolutionManager:
                 if background and action == 'check' and not job.get('issue') and not job['attempts']:
                     self.store.compact_health_checks()
         except Exception as exc:
+            if job['request']['action']=='project-tool':
+                from .catalog import ProjectTools
+                ProjectTools(self).abort(job)
             code = exc.code if isinstance(exc, policy.CoreError) else 'evolution_internal_error'
             status = 'CANCELLED' if code == 'evolution_cancelled' else 'UNKNOWN' if job.get('model_outcome') == 'UNKNOWN' else 'FAILED'
             self.store.update(job, 'STOPPED', status=status, error=code)
         finally:
+            if lease is not None: coordinator(self.core).release(lease)
+            coordinator(self.core).clear_waiters('growth')
             with self.lock: self.busy = False
         if background and job['request']['action'] == 'check':
             try: self._queue_automatic_heal(job)
@@ -422,6 +454,9 @@ class EvolutionManager:
         # One sleeping thread; no model process or model request while healthy.
         next_check = time.monotonic() + 15
         while not self.closed.wait(1):
+            if self.growth is not None:
+                try: self.growth.tick()
+                except Exception: self.monitor_error = '成长推进暂停，请核对原记录；未重发模型请求。'
             if self.schedule_changed.is_set():
                 self.schedule_changed.clear()
                 next_check = time.monotonic() + 15

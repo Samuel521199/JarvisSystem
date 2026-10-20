@@ -1,0 +1,386 @@
+{
+  "version": "0.1.78",
+  "stage": "K5 entry, not K5 closure",
+  "status": "passed",
+  "model_calls": 0,
+  "frozen_sha256": "e40851a53d4be9435bb7611005c35d3f65d459b8e2989f4ccee8775f733ad1a0",
+  "production_default": "lexical-v1",
+  "results": [
+    {
+      "module": "lexical-v1",
+      "cases": [
+        {
+          "id": "cache-invalidation",
+          "expected": "b",
+          "actual": "a",
+          "passed": false,
+          "metadata": {
+            "protocol": 1,
+            "requested": "lexical-v1",
+            "used": "lexical-v1",
+            "fallback": false,
+            "candidates": 2,
+            "elapsed_seconds": 6e-06
+          }
+        },
+        {
+          "id": "offline-recovery",
+          "expected": "b",
+          "actual": "a",
+          "passed": false,
+          "metadata": {
+            "protocol": 1,
+            "requested": "lexical-v1",
+            "used": "lexical-v1",
+            "fallback": false,
+            "candidates": 2,
+            "elapsed_seconds": 1.1e-05
+          }
+        },
+        {
+          "id": "source-permission",
+          "expected": "b",
+          "actual": "a",
+          "passed": false,
+          "metadata": {
+            "protocol": 1,
+            "requested": "lexical-v1",
+            "used": "lexical-v1",
+            "fallback": false,
+            "candidates": 2,
+            "elapsed_seconds": 2e-06
+          }
+        },
+        {
+          "id": "中文恢复",
+          "expected": "b",
+          "actual": "a",
+          "passed": false,
+          "metadata": {
+            "protocol": 1,
+            "requested": "lexical-v1",
+            "used": "lexical-v1",
+            "fallback": false,
+            "candidates": 2,
+            "elapsed_seconds": 1e-06
+          }
+        },
+        {
+          "id": "sqlite-lock",
+          "expected": "b",
+          "actual": "a",
+          "passed": false,
+          "metadata": {
+            "protocol": 1,
+            "requested": "lexical-v1",
+            "used": "lexical-v1",
+            "fallback": false,
+            "candidates": 2,
+            "elapsed_seconds": 1e-06
+          }
+        },
+        {
+          "id": "记忆纠正",
+          "expected": "b",
+          "actual": "a",
+          "passed": false,
+          "metadata": {
+            "protocol": 1,
+            "requested": "lexical-v1",
+            "used": "lexical-v1",
+            "fallback": false,
+            "candidates": 2,
+            "elapsed_seconds": 1e-06
+          }
+        },
+        {
+          "id": "single-term",
+          "expected": "a",
+          "actual": "a",
+          "passed": true,
+          "metadata": {
+            "protocol": 1,
+            "requested": "lexical-v1",
+            "used": "lexical-v1",
+            "fallback": false,
+            "candidates": 1,
+            "elapsed_seconds": 1e-06
+          }
+        },
+        {
+          "id": "single-chinese",
+          "expected": "a",
+          "actual": "a",
+          "passed": true,
+          "metadata": {
+            "protocol": 1,
+            "requested": "lexical-v1",
+            "used": "lexical-v1",
+            "fallback": false,
+            "candidates": 1,
+            "elapsed_seconds": 1e-06
+          }
+        },
+        {
+          "id": "exact-title",
+          "expected": "a",
+          "actual": "a",
+          "passed": true,
+          "metadata": {
+            "protocol": 1,
+            "requested": "lexical-v1",
+            "used": "lexical-v1",
+            "fallback": false,
+            "candidates": 2,
+            "elapsed_seconds": 1e-06
+          }
+        },
+        {
+          "id": "stable-tie",
+          "expected": "a",
+          "actual": "a",
+          "passed": true,
+          "metadata": {
+            "protocol": 1,
+            "requested": "lexical-v1",
+            "used": "lexical-v1",
+            "fallback": false,
+            "candidates": 2,
+            "elapsed_seconds": 1e-06
+          }
+        },
+        {
+          "id": "unmatched",
+          "expected": null,
+          "actual": null,
+          "passed": true,
+          "metadata": {
+            "protocol": 1,
+            "requested": "lexical-v1",
+            "used": "lexical-v1",
+            "fallback": false,
+            "candidates": 0,
+            "elapsed_seconds": 1e-06
+          }
+        },
+        {
+          "id": "empty",
+          "expected": null,
+          "actual": null,
+          "passed": true,
+          "metadata": {
+            "protocol": 1,
+            "requested": "lexical-v1",
+            "used": "lexical-v1",
+            "fallback": false,
+            "candidates": 0,
+            "elapsed_seconds": 1e-06
+          }
+        }
+      ],
+      "passed": 6,
+      "resources": {
+        "candidates": 2048,
+        "runs": 30,
+        "median_seconds": 0.0005900500000279862,
+        "maximum_seconds": 0.0021630999999615597,
+        "incremental_python_peak_bytes": 641672
+      }
+    },
+    {
+      "module": "coverage-v2",
+      "cases": [
+        {
+          "id": "cache-invalidation",
+          "expected": "b",
+          "actual": "b",
+          "passed": true,
+          "metadata": {
+            "protocol": 1,
+            "requested": "coverage-v2",
+            "used": "coverage-v2",
+            "fallback": false,
+            "candidates": 2,
+            "elapsed_seconds": 1.1e-05
+          }
+        },
+        {
+          "id": "offline-recovery",
+          "expected": "b",
+          "actual": "b",
+          "passed": true,
+          "metadata": {
+            "protocol": 1,
+            "requested": "coverage-v2",
+            "used": "coverage-v2",
+            "fallback": false,
+            "candidates": 2,
+            "elapsed_seconds": 4e-06
+          }
+        },
+        {
+          "id": "source-permission",
+          "expected": "b",
+          "actual": "b",
+          "passed": true,
+          "metadata": {
+            "protocol": 1,
+            "requested": "coverage-v2",
+            "used": "coverage-v2",
+            "fallback": false,
+            "candidates": 2,
+            "elapsed_seconds": 3e-06
+          }
+        },
+        {
+          "id": "中文恢复",
+          "expected": "b",
+          "actual": "b",
+          "passed": true,
+          "metadata": {
+            "protocol": 1,
+            "requested": "coverage-v2",
+            "used": "coverage-v2",
+            "fallback": false,
+            "candidates": 2,
+            "elapsed_seconds": 3e-06
+          }
+        },
+        {
+          "id": "sqlite-lock",
+          "expected": "b",
+          "actual": "b",
+          "passed": true,
+          "metadata": {
+            "protocol": 1,
+            "requested": "coverage-v2",
+            "used": "coverage-v2",
+            "fallback": false,
+            "candidates": 2,
+            "elapsed_seconds": 3e-06
+          }
+        },
+        {
+          "id": "记忆纠正",
+          "expected": "b",
+          "actual": "b",
+          "passed": true,
+          "metadata": {
+            "protocol": 1,
+            "requested": "coverage-v2",
+            "used": "coverage-v2",
+            "fallback": false,
+            "candidates": 2,
+            "elapsed_seconds": 3e-06
+          }
+        },
+        {
+          "id": "single-term",
+          "expected": "a",
+          "actual": "a",
+          "passed": true,
+          "metadata": {
+            "protocol": 1,
+            "requested": "coverage-v2",
+            "used": "coverage-v2",
+            "fallback": false,
+            "candidates": 1,
+            "elapsed_seconds": 2e-06
+          }
+        },
+        {
+          "id": "single-chinese",
+          "expected": "a",
+          "actual": "a",
+          "passed": true,
+          "metadata": {
+            "protocol": 1,
+            "requested": "coverage-v2",
+            "used": "coverage-v2",
+            "fallback": false,
+            "candidates": 1,
+            "elapsed_seconds": 2e-06
+          }
+        },
+        {
+          "id": "exact-title",
+          "expected": "a",
+          "actual": "a",
+          "passed": true,
+          "metadata": {
+            "protocol": 1,
+            "requested": "coverage-v2",
+            "used": "coverage-v2",
+            "fallback": false,
+            "candidates": 2,
+            "elapsed_seconds": 3e-06
+          }
+        },
+        {
+          "id": "stable-tie",
+          "expected": "a",
+          "actual": "a",
+          "passed": true,
+          "metadata": {
+            "protocol": 1,
+            "requested": "coverage-v2",
+            "used": "coverage-v2",
+            "fallback": false,
+            "candidates": 2,
+            "elapsed_seconds": 2e-06
+          }
+        },
+        {
+          "id": "unmatched",
+          "expected": null,
+          "actual": null,
+          "passed": true,
+          "metadata": {
+            "protocol": 1,
+            "requested": "coverage-v2",
+            "used": "coverage-v2",
+            "fallback": false,
+            "candidates": 0,
+            "elapsed_seconds": 2e-06
+          }
+        },
+        {
+          "id": "empty",
+          "expected": null,
+          "actual": null,
+          "passed": true,
+          "metadata": {
+            "protocol": 1,
+            "requested": "coverage-v2",
+            "used": "coverage-v2",
+            "fallback": false,
+            "candidates": 0,
+            "elapsed_seconds": 1e-06
+          }
+        }
+      ],
+      "passed": 12,
+      "resources": {
+        "candidates": 2048,
+        "runs": 30,
+        "median_seconds": 0.00201725000033548,
+        "maximum_seconds": 0.007258200000251236,
+        "incremental_python_peak_bytes": 718320
+      }
+    }
+  ],
+  "limitations": [
+    "12 deliberately targeted development cases, no holdout/general ranking conclusion",
+    "candidate is human-authored, not autonomous self-modification",
+    "timing is this machine; peak is incremental Python allocation, not process RSS"
+  ],
+  "tests": {
+    "count": 18,
+    "result": "passed",
+    "log": "H:/JarvisData/diagnostics/k5-ranking-20261020-tests.log"
+  },
+  "source_digests": {
+    "runtime\\node-host\\jarvis_core\\retrieval_ranking.py": "263885e6fac7baa41ca710b1936597b550fb7f19248e145e6bba5944892e5a22",
+    "runtime\\node-host\\jarvis_core\\knowledge.py": "ba7cde223c1f42e82b85c19e2dfc2eb9d37e6cdc9b4f26249d986c3e85e6a367"
+  }
+}

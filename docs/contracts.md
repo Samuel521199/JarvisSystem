@@ -45,10 +45,11 @@
   - [8.3.30 0.1.63 应用网络控制接口](#application-network-contract)
   - [8.3.31 0.1.22 模块观察与维护接口](#module-monitor-contract)
   - [8.3.32 独立 CosyVoice3 文件语音接口](#cosyvoice3-contract)
-  - [8.3.33 独立主力 Qwen 语音接口](#qwen-tts-contract)
-    - [8.3.33.1 分层表达、分段预览与语音合成](#speech-expression-score)
-    - [8.3.33.2 聊天回复的有界朗读通道](#chat-readout-contract)
-  - [8.3.34 独立快速本地语音接口](#fast-speech-contract)
+  - [8.3.33 本地语音输入与会话衔接](#speech-input-contract)
+  - [8.3.34 独立主力 Qwen 语音接口](#qwen-tts-contract)
+    - [8.3.34.1 分层表达、分段预览与语音合成](#speech-expression-score)
+    - [8.3.34.2 聊天回复的有界朗读通道](#chat-readout-contract)
+  - [8.3.35 独立快速本地语音接口](#fast-speech-contract)
 - [8.4 记忆组件的替换契约（proposed）](#memory-provider-contracts)
   - [8.4.1 开源提取器、编纂器与路由的适配要求（proposed）](#memory-extractor-adapter)
   - [8.4.2 联合知识视图运行契约（0.1.33）](#memory-view-runtime-contract)
@@ -63,19 +64,26 @@
   - [8.6.4 技能和模块包清单](#interfaces-4)
   - [8.6.5 接口类型选择](#interfaces-5)
 - [8.7 技能选择、策略与调用记录契约](#skill-selection-contract)
-  - [8.7.1 编程副本与验证状态字段（0.1.58）](#bounded-coding-contract)
+  - [8.7.1 编程副本与验证状态字段（0.1.70）](#bounded-coding-contract)
 - [8.8 资源租约、本地组件与安全事件契约](#extensions-3)
-- [8.9 项目资源与工程文件契约（0.1.27）](#project-resources-contract)
-- [8.10 MCP 与技能登记契约（0.1.27；0.1.37 管理增量）](#extension-catalog-contract)
-  - [8.10.1 Context7 只读文档任务（0.1.55）](#mcp-documentation-task-contract)
-- [8.11 限定成长运行接口](#evolution-runtime-contract)
-  - [8.11.1 会话需求适配接口（0.1.41）](#growth-demand-contract)
-- [8.12 三能力消息与旧接口迁移](#growth-center-contract)
-- [8.13 统一对话受理、意图与事件契约（proposed）](#dialogue-turn-contract)
-  - [8.13.1 对话意图与限定任务受理契约（0.1.56—0.1.59）](#dialogue-intent-shadow-contract)
-  - [8.13.2 已实现的回复回执接口（0.1.48—0.1.49 / dialogue-receipt-v1）](#dialogue-receipt-contract)
-    - [8.13.2.1 普通会话的持久回复恢复（0.1.49）](#dialogue-recovery-contract)
-    - [8.13.2.2 对话与后台模型进程边界（0.1.54）](#dialogue-process-contract)
+- [8.9 坦克游戏任务契约（0.1.74）](#tank-game-contract)
+- [8.10 项目资源与工程文件契约（0.1.27）](#project-resources-contract)
+- [8.11 MCP 与技能登记契约（0.1.27；0.1.37 管理增量）](#extension-catalog-contract)
+  - [8.11.1 Context7 只读文档任务（0.1.55）](#mcp-documentation-task-contract)
+- [8.12 限定成长运行接口](#evolution-runtime-contract)
+  - [8.12.1 会话需求适配接口（0.1.41）](#growth-demand-contract)
+  - [8.12.2 项目工具目录与调用接口（0.1.76）](#project-tool-contract)
+- [8.13 三能力消息与旧接口迁移](#growth-center-contract)
+- [8.14 K5 检索模块选择契约（0.1.79）](#ranking-module-contract)
+- [8.15 统一对话受理、意图与事件契约（proposed）](#dialogue-turn-contract)
+  - [8.15.1 对话意图与限定任务受理契约（0.1.56—0.1.59）](#dialogue-intent-shadow-contract)
+  - [8.15.2 已实现的回复回执接口（0.1.48—0.1.49 / dialogue-receipt-v1）](#dialogue-receipt-contract)
+    - [8.15.2.1 普通会话的持久回复恢复（0.1.49）](#dialogue-recovery-contract)
+    - [8.15.2.2 对话与后台模型进程边界（0.1.54）](#dialogue-process-contract)
+- [8.16 单机双职责协作契约（0.1.82）](#team-analysis-contract)
+- [8.17 双节点共享资料契约（0.1.87）](#shared-cards-contract)
+- [8.18 共同任务、动态团队与学习交接增量（0.1.88）](#cooperation-learning-contract)
+- [8.19 个人计划、预算与本机资源准入契约](#personal-plan-contract)
 <!-- book-nav:end -->
 
 <a id="k0-contracts"></a>
@@ -270,6 +278,7 @@ HTTP 接入由 [server.py](../apps/web/server.py)校验本机 Host/Origin 和页
 |---|---|
 | `GET /api/workspace/projects` | 最近项目，含稳定 ID、完整路径、目录身份是否仍有效；不枚举文件 |
 | `POST /api/workspace/projects` | 严格 `{path}`：登记现有绝对目录；同一路径重复打开复用 ID，目录已被替换则拒绝 |
+| `POST /api/workspace/create-project` | 严格 `{path}`，显式完整新目录路径；上级目录已存在、单层创建；返回项目和 `created`，同目录重试打开原目录，已有文件或受保护路径拒绝 |
 | `POST /api/workspace/pick-folder` | 严格空对象；调用一次本机目录选择器，取消不创建项目；最多一个选择器，120 秒退出 |
 | `POST /api/workspace/outputs/prepare` | `{project_id, request_id, path?}`；ID 为 32 位小写十六进制。固定项目、最终路径及现存父目录身份，返回准备回执 |
 | `POST /api/workspace/outputs/<request_id>` | 严格 `{content}`；只保存非空、无 NUL、至多 1 MiB 的 UTF-8 文本。保存端不接受另一个路径 |
@@ -620,6 +629,28 @@ queue 为原队列的 paused/owned/waiting/capacity/error/resources，加 runnin
 输出为 24kHz PCM16 WAV，单次至多 60 秒；生成超过边界或 300 秒请求超时会失败并回收本次受管语音进程。Windows Job 只持有本实例创建的进程；停止递增内部代次，丢弃旧代次的迟到回执。操作进行时检查核心控制状态；核心停止或宿主退出触发组件回收，不清除停止锁存。成功合成的 uses 是本次启动计数，不是长期账本；没有以此宣称无限并发或硬实时停止上界。
 
 上传参考音频仅保存为本机随机临时文件，操作结束清理；清理异常在回执中给出 cleanup_notice，不悄悄写入长期声纹库。生成 WAV 保留在本机组件输出目录，由有 nonce 的请求取得；浏览器通过受检请求转为 blob 播放/下载，不把 nonce 放进 URL。进程工作集、峰值工作集、私有提交和峰值提交分列；读不到时为 null，不能按零处理。first_internal_chunk_seconds 是后端第一块音频产生时间，不是浏览器首播时延。
+
+<a id="speech-input-contract"></a>
+### 本地语音输入与会话衔接
+
+`GET /api/speech/input` 返回独立识别槽、PID/内存和限制；`GET /api/speech/input/{id}` 只查询原编号；`POST /api/speech/input` 受现有 Host/Origin/nonce/核心运行门禁保护。输入接口仅接受：
+
+- `transcribe`：精确字段 `action,id,pcm,language`，id 为 32 位小写十六进制；pcm 为 base64 PCM16LE、单声道 16 kHz，0.2—20 秒，最多 640,000 原始字节；语言 auto/zh/en/ja/ko/yue。
+- `cancel` / `forget`：精确字段 `action,id`。前者取消此编号并丢弃结果，后者用于已填入草稿后的文本清理；两者均阻止该编号的迟到结果，不影响另一个请求。
+
+返回 RUNNING、SUCCEEDED、FAILED、CANCELLED、FORGOTTEN 或 MISSING。同编号同内容查询已有回执，不再识别；内容改变或取消先于开始则拒绝。响应丢失仅 GET 核对，不自动重新 POST；MISSING 不代表可以重放。最多 64 条内存回执，结束 5 分钟后在下次操作/查询时惰性淘汰，满额拒绝，重启清空。惰性清理不是 5 分钟整点内存擦除保证；录音本身仅存在处理期间的内存/管道，不写音频文件、日志或业务数据库。
+
+浏览器固定 AudioWorklet 产生有界样本，归一到输入格式，20 秒自动结束；CSP 仅为该同源固定脚本添加精确来源，其他脚本继续使用 nonce。转写先进入独立预览，编辑后显式追加到现有消息草稿；发送仍走原会话接口及模型/记忆/任务规则，不创建另一条语音大脑通道。
+
+`jarvis:message-start` / `jarvis:reply-ready` 携带原请求编号；自动朗读只消费本页启用后新请求的完整成功回复。会话编号、输入代次不符，取消、页面隐藏或切换会话均丢弃迟到结果。`jarvis:conversation-context` 从真实会话变更同步，不使用首次保存时改变的 URL 推断新会话。开始录音先停止本页旧朗读；不停止其他页面的语音操作，不提供声纹授权。
+
+0.1.81 增加可选聊天字段 `voice_mode: "conversation"`，同步与回执入口均验证，只接受该值或缺省/null；原消息摘要纳入此字段，同一编号不得切换权限语义。`ChatService` 在任何个人指令执行前返回无提交说明，关闭技能指导/意图自动识别；`DialogueTurns` 与 `WorkAdmission` 双层跳过自动任务受理。它是缩小权限的传输标记，不是新增认证。原只读记忆/人格上下文与纯计算仍按原规则可用；发送音频转写不等于授权写资料或执行任务。
+
+新增固定 `/voice-session.js` 控制器与 `/voice-session-capture.js` Worklet。后者最多缓存 18 秒 Float32 与 0.24 秒前导样本，禁用时清空，等待回复期间不排队录音；每次启停递增采集代次，旧代次消息即使迟到新监听阶段也丢弃；采样率按设备实际值换算，送入既有 16 kHz PCM 协议。停止/换会话通过同一识别回执取消；丢失响应只查询，不重发。新 ASR 结果附 `vad: "silero"` 与 `speech_seconds`，其余状态/容量兼容。
+
+`JarvisReadout.pause()` 返回当前暂停所有权 token，`resume(token)` 只恢复该次且未被手动接管的播放。新轮次与停止清空旧播放，迟到完成不得重开监听；控制器只在本会话完整回答的播报正常结束后接下一轮。权限等待取消时，随后返回的音轨立即关闭；隐藏页面、结束、模型失败和资源上限均退出。识别转写与 UI 会话时限是有界交互约束，数值只维护在[语音交互](interaction-persona.md#voice-chat-plan)。
+
+完整使用方式归[语音交互](interaction-persona.md#voice-chat-plan)，进程/模型与资源规则归[识别组件](models-offline.md#speech-input-runtime)。
 
 <a id="qwen-tts-contract"></a>
 ### 独立主力 Qwen 语音接口
@@ -981,13 +1012,27 @@ REA 任务增加可选布尔 `explain`（默认 false）。true 时只接受明�
 
 
 <a id="bounded-coding-contract"></a>
-### 编程副本与验证状态字段（0.1.58）
+### 编程副本与验证状态字段（0.1.70）
 
-既有技能提交增加 `coding:boolean`（默认 false）与 `cases:[{input,expected}]`。开启时必须显式指定四项工程技能之一、明确 `provider::model` 和唯一 `.py` 路径；不能同时指定自选 output_path 或 REA explain。cases 为 2—24 项，项内仅允许 input/expected；input 是有限 JSON，expected 是最多 4 KiB 的字符串，完整案例最多 16 KiB。原文件沿用 16 KiB 读取限制。任务总预算 240 秒、模型调用最多 2 次、每次等待 55 秒；不是两次自动重试未知请求。
+**改进单交接字段（0.1.68）。** 复用 `POST /api/conversation-growth/{conversation_id}`；编码请求为 `request_id`、`prompt`、`coding`。coding 必含 paths、cases、heldout_cases、model、coding_provider、build_recipe，可含 entrypoint、new_paths；项目身份从已保存会话读取。源码包改进单也必须有独立案例。创建、查询、开始、取消和重新分析继续使用已有路由及 nonce/Origin 保护。
 
-回执沿用 `jarvis.skill-report`，编程分支包含 text、source_references、coding；coding 记录原文件及 BOM/根路径/摘要、候选内容、diff、冻结案例摘要、四项指导摘要、基线、逐次模型/计费/验收结果及工作目录。`coding.passed` 仅指提供案例全部满足；CONFIRMED 表示报告交付完整，失败候选报告也可为 CONFIRMED。`POST /api/skills/coding-apply` 与 `coding-rollback` 只接收 conversation_id/task_id，从已确认且摘要匹配的回执取内容，不接受调用者另传文件或代码；复用 nonce、Origin、会话归属与文件版本保护。
+Host 保存 `frozen`（规范化参数、源码快照、项目根目录、实现/技能绑定、预算），并返回 `proposal.binding`、文件摘要和待开始状态；源码正文不在改进单列表中重复返回。Host 写入任务参数 `coding_demand={id,digest}`，受理和运行都核对保存内容，客户端不能凭一个引用替换目标或验收条件。`web-{改进单 id}` 为唯一任务请求键；关联与队列入账同事务提交。最多保留 1,000 项改进单。
 
-`GET /api/skills` 每项增加 validation：state（verified_scope / stale / needs_review / unverified）、binding、source_changed、evidence、latest_success、note。evidence 记录版本、日期、案例范围、模型及报告；binding 覆盖指导、相关执行器和正式报告 schema。latest_success 指新版已确认产物，带任务、时间、版本、作用范围和 current 摘要一致性；报告交付与质量审阅分别显示。旧任务不迁造成新证据；源码或正文变化后旧验证标记 stale，不伪造当前成功。状态维护实现为 `skill_validation.py` 与版本化 `config/skills/validation.json`；指导正文变化的准入约束仍按既有技能规则执行。
+`result` 包含 verified、task_id、artifact_digest、cases_digest、cases、model_calls、build_recipe、delivery、automatically_applied。delivery 为 verified_candidate 或 diagnostic_only；automatically_applied 固定 false。独立案例失败可对应“任务 CONFIRMED、改进单 FAILED”，二者含义不同。状态及结果投影可从原任务/产物重建，损坏产物不能保留“已核验”展示；重新分析只允许终态，保持 previous_job 来源链。当前交接流程见[任务规则](tasks-agents.md#bounded-coding-workflow)。
+
+0.1.67 的静态失败回执可含 `static_reason`，说明受限环境缺少的内置名称；该诊断不来自留出案例正文。候选生成提示包含实际内置函数清单，构建配方与允许执行能力不变。
+
+技能请求沿用 `coding:boolean` 与 `cases:[{input,expected}]`；新增 `heldout_cases`、`entrypoint`、`coding_provider=gateway|codex`（默认 gateway）；`build_recipe` 接受 python-source-v1、python-zipapp-v1、python-jmespath-v1、python-package-v1、python-package-query-v1、javascript-scene-v1，API 缺省保持原源码配方，当前 UI 默认可运行工具包。每组案例 2—24 项、总计最多 16 KiB；每项仅含 input/expected，预期为最多 4 KiB 字符串。独立输入不得与公开输入重复。多文件或可运行工具包必须有 heldout_cases；旧单文件请求兼容，但不宣称已做独立检查。旧 Python 配方的 paths 为 1—4 个同目录 `.py` 文件，模块名普通英文字母开头，可含数字和下划线；入口默认第一份且必须在清单中。包配方最多 8 个文件、三级子目录，父包 __init__.py 须在清单中；场景配方为单个 .js。new_paths 为显式声明的不存在文件子集，只适用于包/场景，新增与存在状态都参与冻结。场景输入为 {phase:0到360}，expected 为帧 JSON 字符串。原始/候选每文件最多 16 KiB、合计 32 KiB。四项工程技能之一必须明确指定，不能并用 output_path 或 REA explain。
+
+gateway 使用明确 `provider::model`，Codex 使用[编码协作设置](evolution-release.md#external-coding-executor)中的模型。入队时宿主写入 `coding_executor_binding`，绑定设置修订和内容；排队及调用期间变化即停止旧任务。任务执行截止时间读取账本预算，编码任务 240 秒；最多两次完整候选生成，网关每次 55 秒，Codex 每次 90 秒；不是自动重发未知请求。
+
+回执沿用 `jarvis.skill-report`，包含 text、source_references、coding；[报告 schema](../contracts/schemas/skill-report.schema.json)维护字段约束。原有 original/candidate 保持单文件兼容，多文件或新增文件增加 originals/candidates/entrypoint（1—8项，原 digest 可为 null）；validation 分 public/heldout 并标 independent_checks。build 绑定所选配方的 ZIP/PYZ、manifest、字节数和 SHA256；每个源文件与冻结案例摘要都进入清单。PYZ 增加 launcher_sha256、Python 版本范围；回执增加 build_recipe、build_validation（实际归档入口与案例）和 source_build（原无依赖配方的配套源码包）。依赖配方增加 dependencies（名称/版本/来源/许可证/原 wheel 摘要与公开接口），manifest 增加 dependency_files；具体锁定规则归[离线依赖配方](toolchains.md#bounded-python-dependencies)。文件名只接受 candidate-python.zip / candidate-python.pyz / candidate-scene.zip。场景回执另含 scene_html、scene_browser、scene_worker、toolchain；manifest 绑定帧、固定查看器和执行器；完整定义归[配方](toolchains.md#bounded-package-scene-recipes)。静态失败基线的 executed=false、diagnostics 含文件及语法行号；不执行原始损坏源码。构建复验失败使 coding.passed=false；仅 coding.passed=true 可应用；CONFIRMED 只表示报告交付完成，失败诊断也可为 CONFIRMED。
+
+`POST /api/skills/coding-apply`、`coding-rollback` 仍仅接收 conversation_id/task_id，从核验回执取源文件组，不接受客户端另传路径或代码。保留 nonce、Origin、会话归属、项目身份和内容冲突保护。部分多文件写入返回 coding_partial，允许在同一回执上继续/恢复；恢复日志不是自动回放命令。
+
+`GET/POST /api/coding` 为独立编码设置：revision、enabled、model、reasoning（low/medium/high/xhigh），写入比较修订号；不接受任意命令、可执行路径或 Key。GET 同时返回已固定 CLI 的可用性、离线状态、认证与费用边界，不进行付费探测。`coding-settings.db` schema 1 只在明确保存时创建，不新增常驻服务；新数据不交给不理解它的旧运行包接管。
+
+`GET /api/skills` 的 validation 继续分别呈现 evidence 与 latest_success。指导、执行器或报告 schema 改变使旧质量证据 stale，不将旧任务搬成新验证，也不由一次成功报告宣称所有技能已复验。
 
 <a id="extensions-3"></a>
 ## 资源租约、本地组件与安全事件契约
@@ -1036,6 +1081,15 @@ security_stop_event:
 
 上述额度、日期和编号均为示例，不是已完成验证的记录。真正运行时使用签名来源、实际评估和有效租约。
 
+<a id="tank-game-contract"></a>
+## 坦克游戏任务契约（0.1.74）
+
+复用 `POST /api/conversation-tasks/{conversation_id}` 的 `mode:skill`，`skill_id:jarvis.tank-game`、明确 `model:provider::model`、`project_id` 和本轮 `prompt`；`paths` 为空，不接受编程执行开关。可选 `output_path` 须以 `.html` 结尾。原请求号、会话范围、技能策略和不可覆盖保存语义不变。
+
+模型设计恰含 `title,player_color,enemy_color,ground_color,waves,base_hp,enemy_speed,obstacles`。标题 1—60 字符；三色为六位十六进制；波次 2—4 组，每组 1—4 敌军；基地生命 4—8，敌军速度 25—45。障碍 0—6 个，各为整数 `x,y,width,height`，位置/大小、开放通道及互不重叠规则只定义在 `web_game.validate`。原始回复最多 8 KiB，拒绝重复键、未知字段、非整数数值和脚本字段，可接受完整 JSON 代码围栏；错误不会自动修正后重发。
+
+任务只发起一次 75 秒模型响应调用，沿用原 120 秒技能任务预算。结果使用原 HTML 报告 schema：`model_data` 保存已验证设计，`model` 保存实际调用回执，`checks` 明确 `fixed_engine:tank-defense-v1/full_3d:false/generated_code_executed:false`，及浏览器检查范围。`verified.workflow_checks` 表示该固定工作流检查通过，不是通用游戏编程或完整 3D 验收。
+
 <a id="project-resources-contract"></a>
 ## 项目资源与工程文件契约（0.1.27）
 
@@ -1044,6 +1098,7 @@ security_stop_event:
 | API | 请求字段 | 结果与边界 |
 |---|---|---|
 | `/api/project-files/tree` | `project_id,path,exclude?` | `path` 可为空表示根目录；返回本层 `entries` 的 name/path/kind/editable/size_bytes，以及 excluded/truncated；不读文件正文 |
+| `/api/project-files/mkdir` | `project_id,path` | 当前项目内单层创建，父目录必须存在；返回 `path,created`，已有目录返回 false，链接/越界/凭据排除路径仍拒绝 |
 | `/api/project-files/read` | `project_id,path` | `content,digest,size_bytes,bom,path`；digest 为原始字节 SHA-256，UTF-8/BOM 解码，非文本拒绝 |
 | `/api/project-files/write` | `project_id,path,content,digest,bom` | digest 为读入版本，新文件用 null；内容相同的重试可回现有结果，不同旧版本返回 409；成功重新读盘核验摘要 |
 | `/api/project-files/save-project` | `project_id,path,document,digest` | 在项目根目录创建或按预期摘要更新 `.jarvis-workspace`，复用文本写入 |
@@ -1129,6 +1184,8 @@ security_stop_event:
 <a id="growth-demand-contract"></a>
 ### 会话需求适配接口（0.1.41）
 
+以下严格字段描述原目录报告格式分支。0.1.68 在相同路由加入编码改进单，其独立参数、状态投影和产物语义只维护在[编码交接契约](#bounded-coding-contract)；开始动作进入共享编码队列，不进入报告发布通道。两种请求不能复用同一会话请求编号。
+
 复用上述同源、nonce、核心状态与请求大小约束。`cid`、`job_id`、`request_id` 均为 32 位小写 hex；只有本机已有的普通会话可创建提案。所有会话接口复核来源会话及其当前项目归属，跨会话或归属变化返回未找到。
 
 | 接口 | 严格字段与返回 |
@@ -1147,6 +1204,78 @@ security_stop_event:
 `proposal` 保存 selection、route、baseline_revision、issue、decision、max_coding_attempts、acceptance_digest、input_digest；`decision` 为 reuse/create/upgrade/repair。在原 jobs 表新增 `PROPOSED` 状态，不更改数据库 schema 版本。开始后沿用原状态集合；`result` 增加 `growth` 与 `benefit={format,entries,source_digest,verified_on_user_input}`。UI 的成功说明只取真实终态，HTTP 成功不表示执行成功。
 
 会话归档消息可选 `growth_ref` / `growth_request_id`，均为 32 位标识且必须搭配 `personal_control:true`；仅恢复回执链接，不加入模型历史。不认识新字段的旧宿主会拒绝该新归档而非静默丢字段，回退前需检查归档格式兼容。完整行为、数据保留与重启语义只维护于[需求成长](evolution-release.md#demand-growth-runtime)。
+
+<a id="project-tool-contract"></a>
+### 项目工具目录与调用接口（0.1.76）
+
+所有接口沿用本机 Origin、页面 nonce 和核心状态检查；`cid` 必须是已保存项目会话。完整行为规则归[工具运行](evolution-release.md#project-tool-runtime)。
+
+| 接口 | 契约 |
+|---|---|
+| `GET /api/project-tools/{cid}` | 返回项目工具、选择代际、适用说明、保留案例数、用量、本会话最近任务，以及 `lifecycle/assessment/versions`；不把其他项目工具带入上下文 |
+| `POST /api/project-tools/{cid}` | 基础字段 `operation/request_id/tool_id/generation`；动作见下行，未知/多余字段拒绝 |
+| 生命周期公共字段 | `publish/trial/promote/pause/resume/discard/retire/restore/retire-version/archive-version/load-version` 另需非负整数 `lifecycle_revision`；除 `trial` 外须 `reviewed:true` 和 5—1000 字符 `review_note` |
+| `publish` | 另传 `task_id/name/when_to_use/when_not_to_use`、整数 `minimum_verified`（2—10）、`maximum_trials`（2—30，且不小于前者）、`maximum_seconds`（1—30）。从已确认回执取包和原案例；成功仅进入灰度，不直接启用 |
+| `trial` | 另传 JSON `input`、文本 `expected`（可为空，最多 16 KiB）、布尔 `useful`、5—1000 字符 `benefit_note`；返回独立结果与 `trial` 的版本、输入摘要、新颖性、用途声明、候选耗时/内存和可选旧版配对 |
+| `promote/pause/resume/discard/retire/restore` | 只有公共字段和明确审阅；每项核对当前状态/修订，不由请求携带包或客户端“达标”结果 |
+| `retire-version` | 另传本项目本工具的 64 位十六进制 `version`；仍有稳定/候选/恢复引用则拒绝 |
+| `archive-version/load-version` | 同样另传 64 位十六进制 `version`、生命周期修订和明确审阅；不接受路径、归档字节或客户端“释放空间”结论。任务冻结目标版本状态和原记录摘要，完成返回 `version/from/to/archive_digest/online_payload_bytes_released/online_slot_released/disk_space_freed_claimed/receipts_deleted/user_files_deleted/model_calls` |
+| `run` | 另传 JSON `input`，可选文本 `expected`；空文本也可作为预期。返回异步任务，完成结果包含 `text/result_digest/version/result_verified/regression/isolation/elapsed_seconds/model_calls` |
+| `disable/rollback` | 仅基础字段；退役工具不能通过旧接口恢复，必须 `restore` 后重新准入 |
+| `GET /api/project-tools/{cid}/jobs/{id}` | 核对当前会话所属原任务；不重新运行 |
+| `POST /api/project-tools/{cid}/jobs/{id}/cancel` | 空对象，取消当前绑定任务；不取消其他会话或聊天回复 |
+
+`request_id` 为 32 位小写十六进制；同编号同内容返回原回执，不因页面丢失响应而重复启用或调用。不同内容冲突；`generation` 或生命周期修订过时拒绝。任务冻结 `scope/base/runtime_binding/submission/lifecycle`，发布额外冻结来源、包和案例。任务状态复用 `QUEUED/RUNNING/OBSERVING/SUCCEEDED/FAILED/CANCELLED/INTERRUPTED`，与候选生命周期状态分开。调用结果若无独立预期，只能记执行成功。`assessment` 返回门槛、不同新输入/用途/失败/次数、运行时与基线状态、配对观察和建议；只有后端重新计算后才能启用。存储、计数、退役和回退规则只维护在[生命周期权威节](evolution-release.md#project-tool-lifecycle)。
+
+0.1.76 的 `lifecycle.contract_quality` 返回结构一致性、公开/留出/保留及不同输入/输出计数、观察形状、阻断原因、待审阅问题和 `semantic_truth_verified:false`。`GET` 顶层新增 `capacity`：全局在线/归档版本数、在线上限、账本分配/可复用页字节数及回执数量/上限；只报真实计数，不将载荷减少当作磁盘释放。
+
+归档边界：单份 4 MiB、归档区最多 256 份/64 MiB，包含遗留文件；文件名固定内容 ID＋`.json`，schema 1 包含 `schema/version/document`。在线名额仍 64，载回满额拒绝。普通任务按可复用页扣除后的逻辑用量保留 2 MiB 以上恢复估算，28 MiB 准入阈值不变；仅归档动作使用 256 KiB 维护预留与 30 MiB 阈值，物理账本 32 MiB 及 1,000 条回执上限不变。没有任意删除/上传/下载路径接口。完整恢复语义归[存储权威节](evolution-release.md#project-tool-quality-storage)。
+
+0.1.77 增加独立于任务受理配额的本机整理接口；完整引用、归档、失败与恢复语义只归[容量治理](evolution-release.md#growth-ledger-maintenance)：
+
+| 接口/字段 | 契约 |
+|---|---|
+| `GET /api/evolution/maintenance` | 受原 nonce/Origin/运行状态保护；返回 `jobs` 的资格/原因/原文摘要 `binding`、`directories` 的作用域/状态/代际/摘要、`capacity`、独立 `archive` 占用、最近 20 条 `recent_maintenance` 和 `model_calls:0`。不写归档，不列入定时轮询 |
+| `POST /api/evolution/maintenance` | 仅接受 `{request_id,operation,targets,reviewed:true,review_note}`；32 位小写十六进制请求 ID，审阅说明 5—1000 字符；动作仅 `archive-receipts/store-directory/restore-directory`，不接受路径、代码、上传材料或任意删除动作 |
+| `archive-receipts` | `targets` 为 1—20 个不同的 `{id,binding}`；目标必须仍是预览对应原文且满足资格。结果包含原整理 ID、目标、时间、`online_slots_released/model_calls/user_files_deleted/disk_space_freed_claimed`；后三项分别固定为 0、0、false |
+| `store-directory/restore-directory` | `targets` 恰好一个 `{project_id,tool_id,binding}`；再次核对当前生命周期与选择。收存为 `STORED`，恢复为 `RETIRED`，代际递增且不启用工具。同名新任务不能绕过原身份 |
+| 配额 | 在线回执最多 1,000 条，含归档投影的总索引最多 5,096 条；在线目录 32 个、含收存的身份总索引 288 个。归档最多 4,096 份/128 MiB，单份 4 MiB，完整及部分孤立文件均计入预算；整理审计最多 256 条。总预算用完拒绝新增，不自行回收审计 |
+| 存储与余量 | 文件位于核心数据 `evolution/receipt-archives/{sha256}.json`，schema 1 为 `{schema,job}`；投影内 `receipt_archive` 保存摘要/字节数。整理不占成长任务名额；账本逻辑已用量加 64 KiB 大于 31 MiB 时拒绝变更，原 32 MiB 文件限制保持。恢复目录仍检查在线名额 |
+| 幂等与错误 | 同整理 ID 同内容返回原结果，不同内容冲突；摘要/资格过期重新预览，响应未知先核对最近审计。原任务详情及重复提交通过归档完整材料核对；缺失/损坏拒绝，绝不变成重跑许可。旧程序须拒绝 schema 6 |
+
+0.1.76 的 1,000 条回执上限在此区分为在线记录与总索引，版本归档的原 256 份/64 MiB 配额保持。目录收存保留原恢复引用，不回收版本名额；整理不运行 VACUUM，也不自动清空任何物理材料。
+
+0.1.72 在相同路由域新增需求适配接口，判定规则见[需求选择](evolution-release.md#project-tool-intents)：
+
+| 接口 | 契约 |
+|---|---|
+| `POST /api/project-tools/{cid}/plans` | `{request_id,message}`；返回持久分析，创建本身不执行工具、不发起编码 |
+| `GET /api/project-tools/{cid}/plans` | 本作用域最近 30 条；`GET .../plans/{id}` 与 `GET .../plans/requests/{request_id}` 分别查询记录和核对未知响应 |
+| `POST .../plans/{id}/start` | 已明确调用可用 `{}`；选择模式为 `{tool_id,input,expected?}`，仅接受本次冻结候选。返回原执行任务 |
+| `POST .../plans/{id}/coding` | `{request_id:分析记录ID,prompt:原话,coding:原K3参数}`；仅目录未匹配可交接，返回待开始编码单 |
+| `POST .../plans/{id}/cancel` | `{}`；已有子任务时取消实际工具任务或编码单，否则取消分析 |
+
+分析响应为 `id/status/created_at/message/parsed/proposal/invocation/coding/coding_request_id/request`；`proposal` 带 `decision/candidates/reason`。内部请求以 `action:project-tool-plan` 保存原提交、作用域、解析输入、目录和执行器绑定；执行子任务以分析 ID 派生稳定请求编号，编码单使用相同分析 ID 对账。重试不得更换原内容，跨作用域查询拒绝；未知回执只查询，不自动重新创建。字段校验和正反例分别在 `evolution/tool_intent.py` 与 `tests/test_tool_intents.py`，不另维护平行调度协议。
+
+0.1.73 增加同一需求下的验收草案接口，定义归[草案与审阅流程](evolution-release.md#project-tool-contract-drafts)：
+
+| 接口 | 契约 |
+|---|---|
+| `POST .../plans/{plan_id}/contracts` | `{request_id}`，在原成长通道受理生成；同编号返回原记录，每个需求最多 4 条，不自动重放未知响应 |
+| `GET .../plans/{plan_id}/contracts` / `GET .../contracts/{id}` | 列表/详情；记录含原目标、作用域、冻结模型策略、尝试回执和草案结果，不因查询发起生成 |
+| `POST .../contracts/{id}/cancel` | `{}`，只取消本次生成；取消父需求也会停止其活动草案任务 |
+| `POST .../contracts/{id}/review` | `{request_id:plan_id,prompt:原话,coding,draft_digest,contract,answers,oracle_note,reviewed:true}`；审阅成功返回原 K3 待开始单，重试对账而不启动编码 |
+
+草案 `contract` 恰有 `input_contract/output_contract/non_goals/public_cases/questions`；前两项为不超过 2,000 字符的非空文本，两个文字列表各最多 8 项，每项最多 500 字符；草案整体不超过 24 KiB，原始模型回复不超过 32 KiB。`public_cases` 为 `{input,expected}` 列表，提议可空，审阅后需 2—24 条，输入不重复，另受原 K3 案例限额约束。问题不得直接删除，`answers` 须逐项非空且每项最多 1,000 字符；`oracle_note` 为 5—2,000 字符。原目标加公开审阅说明受现有 4 KiB 编码目标限制，案例单独传递。专用留出输入沿用 K3 的 2—24 条及不重复规则，不能由模型草案携带。
+
+结果包含 `draft/digest/review_required:true/independently_verified:false/model_calls`。接受的 `review` 保存提交内容摘要、源码摘要、时间和 `source:explicit_local_review/oracle_verified_by_system:false`；这表示已明确提交审阅，不是系统验真。原始草案不可变，审阅不能覆盖；交接通过确定请求编号关联 K3，使用 `expected_source_digest` 防止中断后换用新源码。正文与字段机器校验见 `evolution/tool_contract.py`，正反例见 `tests/test_tool_contracts.py`。
+
+
+**0.1.78 成长策略与连续进度：**同一 nonce、Origin 和核心运行检查保护 `GET/POST /api/project-tools/{conversation}/growth`，`POST .../growth/policy` 和 `POST .../growth/{id}/cancel`。开始字段为 `request_id / goal / domain / policy_revision`；请求编号就是持久化周期身份，相同编号与内容返回原状态。策略明确 `enabled/domains/model/expires_at`、修订、轮次、观察、延迟和内存预算；必须核对说明后保存。内部成长授权不能通过公开项目工具请求字段注入。
+
+每轮预留最多 8 次模型调用（K3 最多 2 次，正常对照 6 次），3 次灰度及 3 次启用后验证，两个独立窗口各 30—3600 秒；单次工具 1—30 秒，周期总时限 300—86400 秒，Worker 内存上限最多 192 MiB。每个策略修订最多 1—10 轮，授权最长 31 天，最多 32 个项目策略、128 份周期记录，账本保留原 32 MiB 硬上限及维护余量。策略修订或关闭不自动删除已达标工具；停用已有工具沿原明确入口。达到总保留配额提示维护，不能把无限成长当作实现承诺。
+
+schema 7 新增 `growth_policies / growth_cycles`，记录阶段、冻结契约、子回执和实际观测。在途周期引用保护子任务；完成周期仍保存子回执 ID，而子任务确定终态可以按原归档规则保留完整材料和幂等查询。旧版本不了解授权撤销与中断恢复，运行槽拒绝以旧程序打开 schema 7。无需新增模型/服务依赖。
 
 <a id="growth-center-contract"></a>
 ## 三能力消息与旧接口迁移
@@ -1171,6 +1300,24 @@ security_stop_event:
 迁移将成长库从 schema 1 升到 2；保留原包、指针、任务和历史混合 `check` 记录，不重写旧结果。旧 route 初始化三个独立用途，旧 enabled 只保留周期检查，新 auto_heal=false。使用同一观察器，不凭升级启用新付费诊断/修复。启动器识别 schema 2 并拒绝 0.1.63 及更旧包接管；未来格式仍明确拒绝，不覆盖降级。
 
 旧调用者仍走相同路径，但新请求的 `check` 统一收窄为纯检查；功能变化通过 `feature=growth-purposes-v2`、schema 及本契约明确声明。历史没有 purpose 的 check 在界面标记“历史混合维护”，不可当作新自检证据。取消、重启不重放、基线比较继续复用原实现；schema 迁移不是旧运行包兼容承诺。
+
+<a id="ranking-module-contract"></a>
+## K5 检索模块选择契约（0.1.79）
+
+规则实现位于 [ranking_module.py](../runtime/node-host/jarvis_core/evolution/ranking_module.py) 和 [ranking_registry.py](../runtime/node-host/jarvis_core/ranking_registry.py)。沿用本机 Origin、页面 nonce、停止控制和原成长队列；没有外部任意源码执行入口。
+
+| 入口 | 输入与语义 |
+|---|---|
+| `GET /api/evolution/ranking` | 当前选择、最多 32 个候选及评估/源码/模型用量、最近生成回执、当前契约绑定；只读，不请求模型 |
+| `POST /api/evolution/ranking/generate` | 恰含 `{request_id: 32位十六进制, model: "provider::model"}`。只生成并评估，绝不顺便启用；在原任务表记为 `ranking-improve`，一次模型请求 |
+| `POST /api/evolution/ranking/select` | 恰含 `{action, generation, version, review}`；action 为 `trial/confirm/rollback/baseline`；version 为目标 64 位摘要或 null；review 为 8—1000 字审阅依据 |
+| `POST /api/evolution/cancel` | 沿用 `{job_id}` 停止生成，不重发远端未知调用 |
+
+`trial` 只能选择通过当前绑定验收的候选，保留原 active 为 previous；`confirm` 要求当前仍为该试用版本且至少 3 组不同有效查询；`rollback/baseline` 要求提交的 version 等于当前 active。每次成功切换递增 generation；相同最近已完成选择请求返回当前回执，旧代次的新操作拒绝。页面响应丢失先读取原记录，不能重新创建生成编号。重启不重放生成，试用恢复规则归[生命周期](evolution-release.md#ranking-module-growth)。
+
+原 `evolution/evolution.db` 升为 schema 8，新增 `ranking_versions(id, document)`、`ranking_selection(singleton, document)`。版本 ID 是规范化完整记录摘要，包含候选源码、编译键序、固定验收结果、模型回执和绑定；绑定覆盖案例、验收器、受限解释器、排序边界、知识路径、选择读取器与隔离运行器。每次使用重新核对，不仅相信 UI 的“通过”。选择保存 active/previous、代次、试用标志、最多 12 个查询摘要和最近审阅请求；来源正文仍按原项目资料契约读取。
+
+遇到未来 schema，检索返回内置算法，不修改未知结构；可选成长初始化失败不应关闭聊天。运行槽兼容表明确禁止 0.1.78 及更早版本接管 schema 8，不能因为能读取旧核心表就冒称可降级。
 
 <a id="dialogue-turn-contract"></a>
 ## 统一对话受理、意图与事件契约（proposed）
@@ -1228,7 +1375,7 @@ JSON 不合规时，有完整 reply 就保留正文并标记识别失效；普�
 
 每实例最多 4096 个已发编号；正文最多保留 64 个完成结果，单结果最多 2 MiB，总预留 32 MiB（包括输入和进行中结果预算）。完成结果 600 秒后在访问/采样时可释放；已用 ID 的墓碑保留到实例结束，正文过期也不能自动重做。复用的取消句柄登记还有 256 条/600 秒保留上限；任一容量先满都明确拒绝新受理，草稿仍由前端保留。取消先于受理的短回执同样受数量上限与正文淘汰约束。
 
-**恢复边界：**0.1.48 仅有内存回执；0.1.49 的普通已归档会话增加下述持久恢复，临时会话与未声明持久范围的兼容请求仍只在内存。POST 响应丢失时，浏览器以原 ID 查询，不再次 POST；GET 临时失败继续查询，页面等待上限仍为 125 秒，单次 HTTP 最多 8 秒。超时、回执过期或实例变化不会自动重发。既有任务账本的恢复能力不受此回执替代；新静态资源缺失时旧同步聊天仍可用，界面显示降级。
+**恢复边界：**0.1.48 仅有内存回执；0.1.49 的普通已归档会话增加下述持久恢复，临时会话与未声明持久范围的兼容请求仍只在内存。POST 响应丢失时，浏览器以原 ID 查询，不再次 POST；GET 临时失败继续查询，页面等待上限通常为 125 秒；0.1.74 对明确选择 Gemini 4 / GPT-6 Astra 的重推理路由为 175 秒，单次 HTTP 最多 8 秒。超时、回执过期或实例变化不会自动重发。既有任务账本的恢复能力不受此回执替代；新静态资源缺失时旧同步聊天仍可用，界面显示降级。
 
 
 <a id="dialogue-recovery-contract"></a>
@@ -1262,12 +1409,113 @@ SQLite 写锁等待上限 150ms。受理落盘失败不调用模型；完成落�
 | 生命周期 | Windows 上按请求启动；普通回复最多 2 个、已接入后台分析最多 1 个，空闲不保留；一次完整回复一个进程。使用项目依赖路径和实际 Python 解释器，避开虚拟环境启动器的额外子进程 |
 | IPC | 私有 stdin/stdout JSON 行帧；请求含随机标识、经入口校验的本轮上下文引用/历史/附件、配置路径、数据目录、原授权代际与可选任务 ID；子进程按原规则筛选上下文。输入最多 24 MiB、输出累计最多 2 MiB、最多 16 帧；仅接受 context/model 阶段和单个结果，核对随机标识与顺序。不接受模型提供的程序路径/执行入口，不在参数、临时文件或监控中复制正文和密钥 |
 | 资源约束 | 发送输入前加入 Windows Job；单个 Job 最多 1 个进程、提交内存上限 384 MiB，kill-on-close。上限是保护预算，不是模型权重或实测占用；进程以当前用户运行，能读取既有凭据库，并非权限沙箱 |
-| 时间预算 | 每次回复总预算 110 秒；启动/上下文阶段每段 12 秒，卡住时回收，不仅依赖函数返回后才检查时间。保留网关单响应最多 60 秒及原自动路由预算；兼容 probe 子入口仍是 `min(85, max(1, response_deadline+20))` 秒。宿主约每 0.5 秒复查核心及任务检查点，取消/进程状态约 20ms 检查；这些周期不是负载下延迟保证 |
+| 时间预算 | 0.1.74 回复进程总预算为 170 秒；启动/上下文阶段仍每段 12 秒，卡住时回收。普通模型响应/路由预算仍为 60/90 秒，Gemini 4 与 GPT-6 Astra 为 120/150 秒；兼容 probe 子入口为 `min(145, max(1, response_deadline+20))` 秒，覆盖调用方声明的较长响应和认证清理。宿主约每 0.5 秒复查核心及任务检查点，取消/进程状态约 20ms 检查；这些周期不是负载下延迟保证 |
 | 停止与失败 | 发送前取消可确定未调用；输入开始传递后崩溃、超时、坏包或回收保守返回 UNKNOWN。现有回复层可将明确取消映射为 CANCELLED，但保留 `outcome_uncertain:true` 与 `cancel_requested`；禁止自动重发/切供应商。回收并等待本地进程退出后才释放槽。供应商或本地模型服务中的请求可能继续 |
 | 状态与授权 | 子进程沿用原核心授权代际；有任务 ID 时独立核查该任务，网络准入短事务同时核查任务取消。父进程保留超时/取消检查点，不把函数序列化给子进程。不初始化核心、不接管任务队列、不提交个人资料；取消/核心停止后不采用迟到输出 |
 | 正常与异常退出 | 成功结果进入原回执/恢复流程；Host 正常关闭回收活动 Job，Host 异常退出由 Job 关闭回收。进程被终止时供应商用量日志可能停在 RESERVED/DISPATCHING，不能据此认定零费用；不重放该日志 |
 
 不支持此后端或启动失败时，对话模型明确不可用，不静默退回 Host 执行。新请求可以重新创建进程；没有守护进程重启循环、额外队列、消息中间件或新依赖。任务规划/解释取消时先回收子进程，再让任务执行线程退出，避免下一个任务叠加尚未退出的调用。供应商配额、本地 LLM/GPU 和整机资源仍可能被不同通道共同使用，独立进程槽不等于独占推理容量。监控见[进程观察](health-maintenance.md#dialogue-runtime-monitoring)，验证见[0.1.54 证据](delivery-validation.md#conversation-lanes-evidence)。
+
+<a id="team-analysis-contract"></a>
+## 单机双职责协作契约（0.1.82）
+
+能力 `team.analysis.v1` 通过既有 `/api/conversation-tasks/{conversation_id}` 受理，`mode=team`。请求包含 `request_id`、`prompt`、`criteria`、`planner_model`、`reviewer_model`，可含两角色的 `*_reasoning`；会话 ID 由 URL 绑定。模型使用已登记的 `provider::model`，不接受 `auto`、历史、项目路径、权限、预算或子代理字段。调用前重新核对配置摘要；变化则停止，不暗中换模型。
+
+| 契约项 | 首期固定约束 |
+|---|---|
+| 输入 | 要求最多 4,000 字符且不超过 8,000 UTF-8 字节；1—6 条不重复检查要求，每条最多 300 字符 |
+| 调用 | 父任务固定最多 2 次；`planner → reviewer`，各一次；无自动重试/路由回退，固定深度 1 |
+| 输出与时间 | 每次输出上限 min(模型配置, 2,048 tokens)，原文最多 24,000 字节；每次模型等待最多 55 秒；父任务 180 秒检查点期限（不是 OS 硬实时保证） |
+| 输出契约 | 方案包含 summary、steps、assumptions、risks；审阅包含 summary、verdict、findings、criteria。可接受单个完整 JSON 代码围栏，不接受额外说明、重复键或任意工具字段；完整字段校验以 `team_protocol.py` 实现对应本文 |
+| 持久预算 | 原 `control.db` 的 `team_calls(task_id,ordinal,document)` 记录 schema_version、root_task_id、security_epoch、角色、预留量与回执；事务检查父任务可执行、前序有效、唯一序号及总额，先预留再调用 |
+| 子步骤状态 | RESERVED → SUCCEEDED / FAILED / INVALID / UNCERTAIN；父任务已终态但子步骤仍 RESERVED 时只读投影为 UNCERTAIN，不释放或复用调用额度 |
+| 结果 | `jarvis.team-report` 含候选、审阅、逐项要求、调用回执、预算与确定性检查；`semantic_acceptance_verified=false`。审阅意见不是执行许可 |
+| 查询与取消 | 复用会话作用域、原编号查询、产物摘要和取消端点。报告未知不下载为成功结果；同一请求与同一参数返回原任务，不再次派发 |
+| 权限与退回 | 没有模型工具、shell、文件扫描、记忆读取/修改或递归委派；只共享明确文本。程序检测和模型批评不能提升授权；旧模型输出不能解除停止锁存 |
+
+调用次数是本地额度单位，不是货币预算。实际 tokens/费用沿用网关回执；未知费用不能显示为零，令牌上限不能保证不同供应商的实际收费。原资源配置新增 512 MiB 准入估值，沿用前台预留与后台模型进程限制；不代表本地 LLM 服务、GPU、TTS 或整机峰值的硬限制。
+
+附表不会改动原任务/动作的状态权威或 control.db 版本。存在协作任务后，当前受控启动器拒绝回落到不能解释该能力的 0.1.81 及更早版本；不声称手工运行历史源码仍兼容。后续版本需明确扩充兼容名单。中断任务仍沿原 UNKNOWN 核对路径，不自动继续未完成角色。[执行流程](tasks-agents.md#bounded-team-runtime) · [验证](delivery-validation.md#k6-team-evidence)。
+
+
+<a id="shared-cards-contract"></a>
+## 双节点共享资料契约（0.1.87）
+
+协议标识 `jarvis.shared-cards.v1`。本机 `GET/POST /api/federation` 继承页面 nonce、Host/Origin 防护与核心停止守卫；基础动作为 `initialize/listen/close/invite/join/retry/sync/edit/revoke`；生命周期动作为 `export/archive_preview/archive/restore_archive/recovery_preview/recover`，全部拒绝未知字段。网络接收端独立，仅 `POST /pair`、`/sync` 、只读 `/inspect` 与 `/domains`，不暴露聊天、文件或任务 API。
+
+请求与回复为 `{body, signature}`，使用固定 JSON 序列化和 ECDSA P-256/SHA-256。配对请求携带协议、空间、两端身份、原请求编号、公开证书与一次性随机令牌；服务端只保存令牌摘要，加入端待确认令牌受 DPAPI 保护。客户端 TLS 握手后、发送任何配对码或正文前检查预期证书指纹；已配对请求还核验签名、目标、空间和当前撤销状态。回复必须匹配原请求编号。使用身份指纹绑定，不依赖公开 CA 签发或 DNS 认证。
+
+快照只含空间 ID、发送节点、源序号和各卡当前签名版本。单卡修订字段为 `space/item/author/seq/clock/deleted/title/text`；两维版本向量判断祖先与并发，签名覆盖这些字段。收到的自身修订必须已登记于本机；同源同序号不同摘要、越界计数、跨空间或签名错误整批拒绝。删除胜出、容量及保留规则只在[同步权威节](federation.md#shared-cards-runtime)定义。
+
+传输上限 512 KiB，最多两个接收请求并发，单请求 12 秒硬期限和 4 秒套接字等待；客户端连接/单段网络等待 8 秒，连接完成后另有 12 秒硬期限。客户端同步不自动重试，超时按可能已经远端提交处理，下一次同步继续幂等对账；配对超时可重试原编号。关闭/离线/停止拒绝后续准入和提交检查，不能撤回已发数据或已完成的对端提交。
+
+`archive_preview` 返回绑定当前空间摘要的 `expected`；`archive` 必须携带该值。`recovery_preview` 返回来源状态与独立标记摘要，`recover` 同样重新核对。导出格式为 `jarvis.shared-cards.export.v1`，外层仍为签名体；数据字段与生命周期规则仅在[资料生命周期](federation.md#shared-cards-lifecycle)维护。正常 GET 遇到本模块存储/身份错误返回 `recovery_required`，全局停止不能借恢复解除。
+
+| 0.1.85 动作 / 输入 | 返回与约束 |
+|---|---|
+| `access_options`：`space` | 本机 `policy`、可选卡、项目及接入方摘要；不读取模型密钥 |
+| `access_change`：`space/revision/cards/providers/project_id` | CAS 保存或空列表撤销；providers 为接入方 ID 到目标摘要的映射；project_id 为 null 或登记项目 ID；策略修订单调推进 |
+| `reference_issue`：`space/item/expected/scope` | 返回 `reference/name/notice`；scope 必含 conversation_id 和 project_id；不返回正文附件 |
+| 旧 `reference` | 拒绝，提示刷新页面；不继续签发无约束副本 |
+
+引用格式 `jarvis.shared-reference.v1`，签名体为 `format/node/space/item/expected/access_revision/conversation_id/project_id/expires`。计数、ID、签名、时效及范围必须匹配；单组最多 8 个、编码最多 32 KiB。`shared_context={scope,references}` 与逐条对应原 history 的 `history_shared` 加入聊天请求；使用引用时 scope 不得为空。异步 turn 外层 conversation_id 必须与 scope 一致；不是让模型文本决定授权。当前引用与普通附件合计最多 8 项，仍受原消息/模型上下文预算限制。
+
+ChatService 返回 `history_info.shared={references,dropped_history_messages,used}` 并保持原历史索引映射。宿主代理模型调用时，私有 IPC 携带范围、引用及实际配置路径，子进程自行构造准入守卫；不是只依赖主进程回调。错误输入返回受控 400；有效但失效的引用以拒绝结果返回。撤销、历史排除和在途不确定性的完整规则只在[可失效引用](federation.md#shared-live-references)维护。
+
+| 0.1.86 连接动作 / 输入 | 返回与约束 |
+|---|---|
+| `connection_check`：`space` | `reachable/identity_verified/endpoint/message`，成功附 `peer/fingerprint/latency_ms`，诊断失败附 `code`；不修改资料或连接 |
+| `connection_preview`：`space/endpoint` | 原身份证明与 `token/old_endpoint/space/expires_seconds/effect`；验证新地址但尚不保存 |
+| `connection_apply`：`space/token` | 重新证明后返回 `space/endpoint/peer/fingerprint/latency_ms/identity_verified/changed/message`；仅更新原连接地址 |
+
+`POST /inspect` 使用同一签名封装。请求体严格为 `protocol/kind/space/sender/target/request_id`，其中 kind 为 `jarvis.shared-connection.v1`；回复严格为同组字段加 `paired:true`，双方身份互换，原挑战不变。没有卡正文、快照、授权或同步计数。双方仍须校验原身份、活跃空间与联网策略；这不是新配对入口。预览绑定、失效、重试及确认规则只在[连接恢复](federation.md#shared-connection-recovery)维护。
+
+分域网络动作使用 `jarvis.scoped-sharing.v1`，仍为 `{body,signature}`。`POST /domains` 严格请求/回复字段为 `format/space/sender/target/request_id/operation/catalog/receive/receiver_revision/seq/items`；operation 为 catalog 或 transfer。catalog 仅含发布 ID → `domain/source_project/title`；receive 为 `revision/items`，其 item 为 `domain/source_project/project_id`，最后一项是接收端本地映射。目录请求不得携带正文；transfer 必须匹配当前接收修订。
+
+正文逐项签名，字段为 `format/space/sender/item/domain/source_project/title/text/source_revision/model_targets/expires_at/classification`。外层序号防版本倒退，同序异文拒绝；本机入站记录另带目标项目和准入代次，既有引用摘要覆盖来源正文及映射/代次，不受 ECDSA 随机签名变化影响。
+
+| 0.1.87 本机动作 / 输入 | 返回及语义 |
+|---|---|
+| `scope_options`：`space/kind/project_id` | 当前选择/接收修订、目录、投影、可用项目和精确域来源；kind 为 card 或 memory |
+| `scope_change`：`space/revision/selected/grants` | CAS 启用或保存；selected 每项为 kind/source/source_project/expected，grants 按目录 ID 绑定域和本机目标项目；清空即撤销 |
+| `scope_catalog`：`space` | 加入端交换目录与接收策略，不交换正文 |
+| `scope_sync`：`space` | 加入端先更新目录/策略，再按双方许可同步正文 |
+
+持久状态仍为可选 `federation.db` 与 `federation/`。0.1.87 读取 schema 1—4；首次启用分域控制升至 4，旧卡写入保留 schema 3。受管理运行槽只允许 0.1.87 读取 schema 4；schema 3 支持 0.1.85—0.1.87，schema 2 支持 0.1.84—0.1.87，schema 1 支持 0.1.83—0.1.87。分域导出格式 `jarvis.shared-cards.export.v2` 在 space 中增加 received，逐项保存来源签名及本机映射/准入代次，不导出发布选择或本机许可。旧 v1 仍可读；恢复不恢复权限。具体权限/容量归[分域共享](federation.md#scoped-memory-sharing)，[验收](delivery-validation.md#k6-scoped-sharing-evidence)另列。
+
+<a id="cooperation-learning-contract"></a>
+## 共同任务、动态团队与学习交接增量（0.1.88）
+
+流程分别归[共同任务](federation.md#delegated-task-runtime)、[动态团队](tasks-agents.md#dynamic-team-runtime)、[需求学习](evolution-release.md#demand-learning-loop)，本节只定义接口归属。
+
+| 接口 | 宿主边界 |
+|---|---|
+| `POST /api/federation` 的 `task_view/task_continuation` | 读取本机回执及接续投影，不调用对端或模型 |
+| `task_policy` | `space/revision/enabled`，CAS 改变任务许可，不改变资料分享许可 |
+| `task_create` | `space/task/title/text`，加入端固定所有权和执行者；明确文本输入 |
+| `task_sync` | 签名 `/tasks` 交换；仅命令与回执，不交换聊天数据库 |
+| `task_run/task_cancel` | `space/task`；逐项执行许可或取消；没有未知任务重跑入口 |
+| 协作任务 `auto_team/max_agents` | 可选布尔开关和 2—4 上限；原 planner/reviewer 模型与档位沿用。宿主冻结 `_team`，外部不能直接填写 |
+| `GET /api/evolution/learning` | 来源账本、原回执与只读改进机会，不触发模型 |
+| `POST /api/evolution/learning` | `create/capture/research/collect/evidence/review/start/feedback/withdraw`，逐操作字段校验；沿用本地 Origin、nonce 和核心运行检查 |
+| 排序生成的可选 `context` | 最多 3000 字符的不可信参考；不能改变候选语法和验收器 |
+
+任务 envelope 绑定 `format/space/sender/target/request_id`；spec 绑定 `id/owner/executor/generation/capability/title/text/scope`。所有者命令序号 1 为交接、2 为取消；执行回执独立版本单调增加。调用端重新检查许可修订、终态一致性和确定性结果。
+
+新受管理运行包兼容 federation schema 5、evolution schema 9；含动态 `_team` 的任务数据禁止回退到旧解释器。学习表和团队附表仍复用原数据库，未更改旧任务/动作的唯一状态权威。手工运行旧源码不属于受管理兼容保证。
+
+<a id="personal-plan-contract"></a>
+## 个人计划、预算与本机资源准入契约
+
+0.1.89 的 `AssistantPlans` 是可选 Host 协调模块，运行语义归[任务章](tasks-agents.md#personal-plan-runtime)。首次使用才创建 `assistant-plans.db`（schema 1），最多 64 份计划、每份 128 KiB，库文件上限 24 MiB；达到容量时明确拒绝，不自动清理主人资料。数据库损坏时计划接口不可用，前台聊天仍能启动；来源无法核验的记忆不可使用。存在该库时旧运行包不能绕过来源规则回退运行，需兼容版本。
+
+`GET /api/assistant-plans?conversation_id=…` 返回当前会话计划、同范围有效未结事项、默认政策及资源状态；`GET /api/assistant-plans/{id}` 返回详情。POST 创建，或携带 `action + revision` 执行 edit/start/pause/cancel/link/replan/candidate/accept/withdraw/ack。沿用回环 Host、页面 token、严格 JSON 与请求大小限制；修改采用乐观修订检查，计划范围还要核对当前持久会话与项目。暂停、取消和撤回不依赖新模型许可。
+
+模型 Gateway 在 HTTP 派发前，通过原任务请求号绑定计划，原子预留调用数和费用。USD/CNY 各自累计，不自动换汇；默认 12 次、USD 1、CNY 5，界面可在明确确认后调整。文本预算按配置价表、输入字节保守界限及输出／推理余量计算；价格未知、过期、输入超出适用层级或含图片时不自动派发。失败或 UNKNOWN 的预留不自动退还，不做模型自动重试。`usage.receipts` 保留实际返回用量与预留依据；这不是供应商账单的数学硬上限，也不包括独立执行后再关联的历史任务。
+
+站内跟进默认关闭；开启后的默认最短间隔 60 分钟、每日最多 3 条、22:00—08:00 安静时间，按保存的 UTC 偏移解释。间隔至少 15 分钟，每日最多 6 条；同一状态已有未读提醒时不重复。该限额管理站内提醒，不自动取消已授权运行中的任务。前端每 15 秒的状态读取与后台每 5 秒协调均不调用模型。
+
+`RuntimeAdmission` 统一同一 Host 内聊天、TaskQueue、成长、TTS/STT 的内存估算租约：前台聊天最多 2 槽；任务与成长共用 1 个后台槽并按等待顺序竞争；语音各自限并发。后台准入至少保留 1024 MiB 观察余量，聊天采用较低余量要求；取消、异常与正常结束均释放租约，等待不触发模型。它是本机进程内资源准入，不是 OS 实际预留、GPU 显存调度或跨节点全局调度；索引和其他外部进程不因此得到统一 CPU/GPU 限额，低内存设备仍需实机测量。
 
 <!-- book-footer:start -->
 [返回全书目录](README.md#book-tree) · [上一章：主人利益原则、身份授权与停止控制](security-sovereignty.md) · [下一章：技术栈、源码目录与运行数据](stack-project-layout.md)

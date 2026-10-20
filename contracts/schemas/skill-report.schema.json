@@ -11,8 +11,103 @@
     "verified"
   ],
   "properties": {
-    "validation_binding": {"type":"string","pattern":"^sha256:[a-f0-9]{64}$"},
-    "coding": {"type":"object", "required":["passed","original","candidate","diff","attempts","composition"]},
+    "validation_binding": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "coding": {
+      "type": "object",
+      "required": [
+        "passed",
+        "original",
+        "candidate",
+        "diff",
+        "attempts",
+        "composition"
+      ],
+      "properties": {
+        "passed": {
+          "type": "boolean"
+        },
+        "entrypoint": {
+          "type": "string"
+        },
+        "coding_provider": {
+          "enum": [
+            "gateway",
+            "codex"
+          ]
+        },
+        "originals": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8
+        },
+        "candidates": {
+          "type": "object",
+          "minProperties": 1,
+          "maxProperties": 8,
+          "additionalProperties": {
+            "type": "string",
+            "maxLength": 16384
+          }
+        },
+        "build": {
+          "type": "object",
+          "required": [
+            "manifest",
+            "sha256",
+            "size_bytes",
+            "filename",
+            "base64"
+          ],
+          "properties": {
+            "sha256": {
+              "type": "string",
+              "pattern": "^sha256:[a-f0-9]{64}$"
+            },
+            "filename": {
+              "enum": [
+                "candidate-python.zip",
+                "candidate-python.pyz",
+                "candidate-scene.zip"
+              ]
+            },
+            "size_bytes": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 65536
+            }
+          }
+        },
+        "build_recipe": {
+          "enum": [
+            "python-source-v1",
+            "python-zipapp-v1",
+            "python-jmespath-v1",
+            "python-package-v1",
+            "python-package-query-v1",
+            "javascript-scene-v1"
+          ]
+        },
+        "source_build": {
+          "type": "object"
+        },
+        "build_validation": {
+          "type": "object"
+        }
+      },
+      "dependentRequired": {
+        "originals": [
+          "candidates",
+          "entrypoint"
+        ],
+        "candidates": [
+          "originals",
+          "entrypoint"
+        ]
+      }
+    },
     "kind": {
       "const": "jarvis.skill-report"
     },
@@ -100,12 +195,35 @@
     },
     "explanation": {
       "type": "object",
-      "required": ["status", "findings", "unknowns", "sources", "coverage", "model_calls", "citations_verified", "semantics_verified"],
+      "required": [
+        "status",
+        "findings",
+        "unknowns",
+        "sources",
+        "coverage",
+        "model_calls",
+        "citations_verified",
+        "semantics_verified"
+      ],
       "properties": {
-        "status": {"enum": ["SUCCEEDED", "INSUFFICIENT_EVIDENCE"]},
-        "model_calls": {"enum": [0, 1]},
-        "citations_verified": {"const": true},
-        "semantics_verified": {"const": false}
+        "status": {
+          "enum": [
+            "SUCCEEDED",
+            "INSUFFICIENT_EVIDENCE"
+          ]
+        },
+        "model_calls": {
+          "enum": [
+            0,
+            1
+          ]
+        },
+        "citations_verified": {
+          "const": true
+        },
+        "semantics_verified": {
+          "const": false
+        }
       }
     },
     "evidence": {
@@ -113,13 +231,34 @@
     },
     "evidence_ref": {
       "type": "object",
-      "required": ["path", "digest", "size_bytes", "media_type", "evidence_id"],
+      "required": [
+        "path",
+        "digest",
+        "size_bytes",
+        "media_type",
+        "evidence_id"
+      ],
       "properties": {
-        "path": {"type": "string", "pattern": "^act_[a-f0-9]{32}-evidence\\.json$"},
-        "digest": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
-        "size_bytes": {"type": "integer", "minimum": 1, "maximum": 8388608},
-        "media_type": {"const": "application/json"},
-        "evidence_id": {"type": "string", "pattern": "^ev_"}
+        "path": {
+          "type": "string",
+          "pattern": "^act_[a-f0-9]{32}-evidence\\.json$"
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "size_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8388608
+        },
+        "media_type": {
+          "const": "application/json"
+        },
+        "evidence_id": {
+          "type": "string",
+          "pattern": "^ev_"
+        }
       },
       "additionalProperties": false
     },
@@ -134,7 +273,18 @@
     }
   },
   "oneOf": [
-    {"required":["text","coding","source_references"],"not":{"required":["model"]}},
+    {
+      "required": [
+        "text",
+        "coding",
+        "source_references"
+      ],
+      "not": {
+        "required": [
+          "model"
+        ]
+      }
+    },
     {
       "required": [
         "html",
@@ -157,7 +307,18 @@
         "input_manifest",
         "runtime"
       ],
-      "oneOf": [{"required": ["evidence"]}, {"required": ["evidence_ref"]}],
+      "oneOf": [
+        {
+          "required": [
+            "evidence"
+          ]
+        },
+        {
+          "required": [
+            "evidence_ref"
+          ]
+        }
+      ],
       "properties": {
         "skill_id": {
           "const": "rea.software-analysis"

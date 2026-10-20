@@ -93,8 +93,10 @@ def strict_json(data):
 
 
 def validate_chat(payload):
-    if not isinstance(payload, dict) or set(payload) - {"message", "provider", "history", "model", "reasoning", "attachments", "context_note", "memory_context", "history_memory", "knowledge_context", "history_knowledge", "skill_context", "personal_context", "continuity_context", "history_continuity"}:
+    if not isinstance(payload, dict) or set(payload) - {"message", "provider", "history", "model", "reasoning", "attachments", "context_note", "memory_context", "history_memory", "knowledge_context", "history_knowledge", "skill_context", "personal_context", "continuity_context", "history_continuity", "voice_mode", "shared_context", "history_shared"}:
         raise ValueError("invalid request fields")
+    from jarvis_core.voice_turn import validate as validate_voice
+    validate_voice(payload.get('voice_mode'))
     from jarvis_core.personal import validate_context as validate_personal_context
     validate_personal_context(payload.get('personal_context'))
     if 'skill_context' in payload:
@@ -124,6 +126,12 @@ def validate_chat(payload):
     from jarvis_core.continuity import validate_context as validate_continuity_context, validate_history_references as continuity_history
     validate_continuity_context(payload.get('continuity_context'))
     continuity_history(payload.get('history_continuity'), history)
+    from jarvis_core.federation_access import context as shared_context
+    from jarvis_core.policy import CoreError
+    try:
+        shared_context(payload.get('shared_context'), history, payload.get('history_shared'))
+    except CoreError as exc:
+        raise ValueError('invalid shared context') from exc
     if payload.get('knowledge_context') is not None:
         validate_knowledge('context', payload['knowledge_context'])
     knowledge_history_references(payload.get('history_knowledge'), history)
@@ -174,10 +182,12 @@ class LocalChatServer(ThreadingHTTPServer):
         self.conversations = None
         self.memory = None
         self.knowledge = None
+        self.federation = None
         self.admin = None
         self.modules = None
         self.evolution = None
         self.conversation_tasks = None
+        self.assistant_plans = None
         self.version = version
         self.instance_id = secrets.token_hex(16)
         self.nonce = secrets.token_urlsafe(32)
@@ -197,6 +207,7 @@ class LocalChatServer(ThreadingHTTPServer):
         self.theme_style = self.ui_assets.required('theme.css')
         self.theme_script = asset('theme.js')
         self.attachments_script = self.ui_assets.required('attachments.js')
+        self.shared_reference_script = asset('shared-reference.js')
         self.context_script = asset('context.js')
         self.conversation_script = self.ui_assets.required('conversations.js')
         self.conversation_tasks_script = asset('conversation_tasks.js')
@@ -218,7 +229,7 @@ class LocalChatServer(ThreadingHTTPServer):
         self.html = self.html.replace(b'__JARVIS_MEMORY_STYLE__', asset('memory.css'))
         self.html = self.html.replace(b'__JARVIS_KNOWLEDGE_STYLE__', asset('knowledge.css'))
         self.html = self.html.replace(b'__JARVIS_EXPLORER_STYLE__', asset('explorer.css'))
-        self.html = self.html.replace(b'__JARVIS_CONVERSATION_TASKS_STYLE__', asset('conversation_tasks.css'))
+        self.html = self.html.replace(b'__JARVIS_CONVERSATION_TASKS_STYLE__', asset('conversation_tasks.css') + b'\n' + asset('assistant-plans.css'))
         self.html = self.html.replace(b'__JARVIS_WORKBENCH_STYLE__', asset('workbench.css'))
         self.html = self.html.replace(b'__JARVIS_PROJECT_MENU_STYLE__', asset('project_menu.css'))
         # Exact public asset map; source artwork and arbitrary paths stay private.
@@ -245,18 +256,36 @@ class LocalChatServer(ThreadingHTTPServer):
             b'<style nonce="__JARVIS_NONCE__">' + asset('brand/preview.css') + b'</style>'
         ).replace(b'__JARVIS_NONCE__', self.nonce.encode('ascii'))
         self.computer_script = asset('computer.js')
-        self.html = self.html.replace(b'__JARVIS_ATTACHMENTS_STYLE__', asset('attachments.css'))
+        self.html = self.html.replace(b'__JARVIS_ATTACHMENTS_STYLE__', asset('attachments.css') + b'\n' + asset('shared-reference.css'))
         self.workspace_script = self.ui_assets.required('workspace.js')
         self.admin_html = asset('admin.html').replace(b'__JARVIS_ADMIN_STYLE__', asset('admin.css')).replace(b'__JARVIS_NONCE__', self.nonce.encode('ascii')).replace(b'__JARVIS_VERSION__', version.encode('ascii')).replace(b'__JARVIS_THEME_STYLE__', self.theme_style)
         self.admin_script = asset('admin.js')
+        self.federation_script = asset('federation.js')
+        self.shared_access_script = asset('shared-access.js')
+        self.shared_connection_script = asset('shared-connection.js')
+        self.shared_scopes_script = asset('shared-scopes.js')
+        self.shared_tasks_script = asset('shared-tasks.js')
         self.network_script = asset('network.js')
-        self.admin_html = self.admin_html.replace(b'__JARVIS_MODULE_STYLE__', asset('modules.css') + b'\n' + asset('evolution.css') + b'\n' + asset('speech.css')).replace(b'__JARVIS_BRAND_STYLE__', asset('brand/logo.css'))
+        self.coding_script = asset('coding.js')
+        self.admin_html = self.admin_html.replace(b'__JARVIS_MODULE_STYLE__', asset('modules.css') + b'\n' + asset('evolution.css') + b'\n' + asset('speech.css') + b'\n' + asset('federation.css')).replace(b'__JARVIS_BRAND_STYLE__', asset('brand/logo.css'))
         self.module_script = asset('modules.js')
         self.speech_script = asset('speech.js')
         self.readout_script = asset('readout.js')
+        self.voice_input_script = asset('voice-input.js')
+        self.voice_capture_script = asset('voice-capture.js')
+        self.voice_session_script = asset('voice-session.js')
+        self.voice_session_capture_script = asset('voice-session-capture.js')
         self.html = self.html.replace(b'__JARVIS_READOUT_STYLE__', asset('readout.css'))
         self.evolution_script = asset('evolution.js')
+        self.ranking_modules_script = asset('ranking-modules.js')
+        self.learning_loop_script = asset('learning-loop.js')
         self.growth_script = asset('growth.js')
+        self.project_tools_script = asset('project-tools.js')
+        self.growth_cycles_script = asset('growth-cycles.js')
+        self.tool_intents_script = asset('tool-intents.js')
+        self.creation_script = asset('creation.js')
+        self.tool_contracts_script = asset('tool-contracts.js')
+        self.tool_lifecycle_script = asset('tool-lifecycle.js')
         self.html = self.html.replace(b'__JARVIS_GROWTH_STYLE__', asset('growth.css'))
         self.admin_html = self.admin_html.replace(b'__JARVIS_EXTENSIONS_STYLE__', asset('extensions.css') + b'\n' + asset('skills.css') + b'\n' + asset('mcp.css'))
         if not asset('admin.html') or not self.admin_script:
@@ -321,7 +350,9 @@ class LocalChatServer(ThreadingHTTPServer):
 
     def server_close(self):
         try:
+            if self.federation:self.federation.close()
             self.chat_requests.cancel_all()
+            if self.assistant_plans:self.assistant_plans.close()
             self.dialogue.close()
             models = getattr(self.chat, 'dialogue_models', None)
             if models is not None: models.close()
@@ -359,7 +390,7 @@ class ChatHandler(BaseHTTPRequestHandler):
             self.send_header("X-Frame-Options", "DENY")
             self.send_header("Referrer-Policy", "no-referrer")
             self.send_header("Content-Security-Policy", "default-src 'none'; "
-                             f"script-src 'nonce-{self.server.nonce}'; style-src 'nonce-{self.server.nonce}'; "
+                             f"script-src 'nonce-{self.server.nonce}' http://127.0.0.1:{self.server.server_port}/voice-capture.js http://localhost:{self.server.server_port}/voice-capture.js http://127.0.0.1:{self.server.server_port}/voice-session-capture.js http://localhost:{self.server.server_port}/voice-session-capture.js; style-src 'nonce-{self.server.nonce}'; "
                              "connect-src 'self'; img-src 'self' blob:; media-src 'self' blob:; frame-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'")
             self.end_headers()
             self.wfile.write(body)
@@ -498,10 +529,14 @@ class ChatHandler(BaseHTTPRequestHandler):
         if self.path.lstrip('/') in self.server.ui_assets.failures:
             self._error(503, 'ui_asset_unavailable', '此界面资源暂不可用；聊天核心继续可用。')
             return
+        from assistant_plan_routes import handle as plan_route
+        if plan_route(self):return
         from speech_routes import get as speech_get
         from dialogue_routes import get as dialogue_get
         if dialogue_get(self): return
         if speech_get(self): return
+        from project_tool_routes import get as project_tools_get
+        if project_tools_get(self): return
         from skill_routes import get as skill_get
         if skill_get(self): return
         from growth_routes import get as growth_get
@@ -562,6 +597,8 @@ class ChatHandler(BaseHTTPRequestHandler):
             except Exception as exc:self._memory_error(exc)
         elif self.path == '/conversations.js':
             self._send(200, self.server.conversation_script, 'application/javascript; charset=utf-8')
+        elif self.path == '/team-workbench.js':
+            self._send(200, (ROOT/'apps/web/team-workbench.js').read_bytes(), 'application/javascript; charset=utf-8')
         elif self.path == '/conversation_tasks.js':
             self._send(200, self.server.conversation_tasks_script, 'application/javascript; charset=utf-8')
         elif self.path.startswith('/api/conversation-tasks/'):
@@ -587,6 +624,8 @@ class ChatHandler(BaseHTTPRequestHandler):
             self._send(200, self.server.theme_script, "application/javascript; charset=utf-8")
         elif self.path == '/context.js':
             self._send(200, self.server.context_script, 'application/javascript; charset=utf-8')
+        elif self.path == '/shared-reference.js':
+            self._send(200, self.server.shared_reference_script, 'application/javascript; charset=utf-8')
         elif self.path == '/attachments.js':
             self._send(200, self.server.attachments_script, 'application/javascript; charset=utf-8')
         elif self.path == '/brand/':
@@ -606,6 +645,20 @@ class ChatHandler(BaseHTTPRequestHandler):
             self._send(200, {**self.server.resource_usage.snapshot(), 'runtime':self.server.runtime_snapshot()})
         elif self.path == "/admin.js":
             self._send(200, self.server.admin_script, "application/javascript; charset=utf-8")
+        elif self.path == '/federation.js':
+            self._send(200, self.server.federation_script, 'application/javascript; charset=utf-8')
+        elif self.path == '/shared-access.js':
+            self._send(200, self.server.shared_access_script, 'application/javascript; charset=utf-8')
+        elif self.path == '/shared-connection.js':
+            self._send(200, self.server.shared_connection_script, 'application/javascript; charset=utf-8')
+        elif self.path == '/shared-tasks.js':
+            self._send(200, self.server.shared_tasks_script, 'application/javascript; charset=utf-8')
+        elif self.path == '/shared-scopes.js':
+            self._send(200, self.server.shared_scopes_script, 'application/javascript; charset=utf-8')
+        elif self.path == '/api/federation':
+            if not self._admin_token():return
+            try:self._send(200, self.server.federation.view())
+            except Exception as exc:self._admin_error(exc)
         elif self.path == '/network.js':
             self._send(200, self.server.network_script, 'application/javascript; charset=utf-8')
         elif self.path == '/api/network':
@@ -652,6 +705,8 @@ class ChatHandler(BaseHTTPRequestHandler):
                 from jarvis_core.mcp_catalog import McpManager
                 self._send(200, McpManager(self.server.core).snapshot())
             except Exception as exc:self._workspace_error(exc)
+        elif self.path == '/creation.js':
+            self._send(200,self.server.creation_script,'application/javascript; charset=utf-8')
         elif self.path == '/workspace.js':
             self._send(200,self.server.workspace_script,'application/javascript; charset=utf-8')
         elif self.path in {'/api/workspace/projects', '/api/workspace/outputs'}:
@@ -701,6 +756,8 @@ class ChatHandler(BaseHTTPRequestHandler):
     def do_POST(self):
         if not self._boundary(post=True):
             return
+        from assistant_plan_routes import handle as plan_route
+        if plan_route(self,post=True):return
         conversation_action = re.fullmatch(r'/api/conversations/([a-f0-9]{32})(/delete)?', self.path)
         conversation_task_action = re.fullmatch(r'/api/conversation-tasks/([a-f0-9]{32})(?:/(task_[a-f0-9]{32})/cancel|/(documentation-candidate))?',self.path)
         memory_action = re.fullmatch(r'/api/memory/([a-f0-9]{32})(/delete)?', self.path)
@@ -710,21 +767,21 @@ class ChatHandler(BaseHTTPRequestHandler):
         knowledge_source = re.fullmatch(r'/api/knowledge/([a-f0-9]{32})(/delete)?', self.path)
         knowledge_action = knowledge_source or self.path in {'/api/knowledge/search','/api/knowledge/read','/api/knowledge/view'}
         computer_start=self.path in {'/api/computer/tasks','/api/tasks'}
-        admin_action=self.path in {'/api/admin/config','/api/admin/balance','/api/network'}
+        admin_action=self.path in {'/api/admin/config','/api/admin/balance','/api/network','/api/federation'}
         module_action=self.path in {'/api/modules/refresh','/api/modules/maintenance'}
-        speech_action=self.path in {'/api/speech','/api/speech/fast','/api/speech/primary','/api/speech/readout'}
+        speech_action=self.path in {'/api/speech','/api/speech/fast','/api/speech/primary','/api/speech/readout','/api/speech/input'}
         growth_action=re.fullmatch(r'/api/conversation-growth/([a-f0-9]{32})(?:/([a-f0-9]{32})/(start|cancel|reanalyse))?',self.path)
-        evolution_action=self.path in {'/api/evolution/jobs','/api/evolution/policy','/api/evolution/cancel'}
+        evolution_action=self.path in {'/api/evolution/jobs','/api/evolution/policy','/api/evolution/cancel','/api/evolution/maintenance','/api/evolution/ranking/generate','/api/evolution/ranking/select','/api/evolution/learning'}
         chat_cancel = self.path == '/api/chat/cancel'
         dialogue_action = self.path in {'/api/dialogue/turns', '/api/dialogue/cancel'}
         computer_queue=self.path in {'/api/computer/queue','/api/tasks/queue'}
         computer_cancel=re.fullmatch(r'/api/(?:computer/tasks|tasks)/(task_[a-f0-9]{32})/cancel',self.path)
         workspace_save = re.fullmatch(r'/api/workspace/outputs/([a-f0-9]{32})', self.path)
         project_organization = re.fullmatch(r'/api/workspace/projects/([a-f0-9]{32})/(edit|archive|reveal)', self.path)
-        workspace_action = self.path in {'/api/workspace/projects', '/api/workspace/pick-folder', '/api/workspace/outputs/prepare'} or workspace_save or project_organization
-        files_action = re.fullmatch(r'/api/project-files/(tree|read|write|save-project|open-project)', self.path)
+        workspace_action = self.path in {'/api/workspace/projects', '/api/workspace/create-project', '/api/workspace/pick-folder', '/api/workspace/outputs/prepare'} or workspace_save or project_organization
+        files_action = re.fullmatch(r'/api/project-files/(tree|read|write|mkdir|save-project|open-project)', self.path)
         extension_action = re.fullmatch(r'/api/extensions/([a-f0-9]{32})(?:/(delete|inspect))?', self.path)
-        skill_action = self.path in {'/api/skills/policy','/api/skills/select','/api/skills/preview','/api/skills/coding-apply','/api/skills/coding-rollback'}
+        skill_action = bool(re.fullmatch(r'/api/project-tools/[a-f0-9]{32}/growth(?:/policy|/[a-f0-9]{32}/cancel)?',self.path)) or bool(re.fullmatch(r'/api/project-tools/[a-f0-9]{32}(?:/jobs/[a-f0-9]{32}/cancel|/plans(?:/[a-f0-9]{32}/(?:start|coding|cancel)|/[a-f0-9]{32}/contracts(?:/[a-f0-9]{32}/(?:review|cancel))?)?)?',self.path)) or self.path in {'/api/coding','/api/skills/policy','/api/skills/select','/api/skills/preview','/api/skills/coding-apply','/api/skills/coding-rollback'}
         mcp_action = self.path in {'/api/mcp/policy', '/api/mcp/view'}
         if self.path != "/api/chat" and not chat_cancel and not dialogue_action and not computer_start and not computer_cancel and not computer_queue and not workspace_action and not admin_action and not module_action and not speech_action and not conversation_action and not conversation_task_action and not memory_action and not knowledge_action and not files_action and not extension_action and not skill_action and not mcp_action and not evolution_action and not continuity_action and not growth_action and not candidate_action and not persona_action:
             self._error(404, "not_found", "此入口不存在。")
@@ -879,7 +936,9 @@ class ChatHandler(BaseHTTPRequestHandler):
             return
         if admin_action:
             try:
-                if self.path == '/api/network':
+                if self.path == '/api/federation':
+                    result = self.server.federation.action(payload)
+                elif self.path == '/api/network':
                     if not isinstance(payload, dict) or set(payload) != {'offline', 'revision'}:
                         raise ValueError('只接受离线开关与当前修订号。')
                     # Native browser jobs cannot be fenced by a Python socket hook.
@@ -892,6 +951,7 @@ class ChatHandler(BaseHTTPRequestHandler):
                         from jarvis_core.policy import CoreError
                         raise CoreError('network_busy', '当前仍有对话或后台工作，请先停止或等待结束，再启用仅此软件离线。')
                     result = self.server.network.change(payload['offline'], payload['revision'])
+                    if result['offline'] and self.server.federation:self.server.federation.close()
                 elif self.path.endswith('/balance'):
                     if not isinstance(payload,dict) or set(payload)!={'connection'} or not isinstance(payload['connection'],str):raise ValueError('余额查询参数无效。')
                     result=self.server.admin.balance(payload['connection'])
@@ -916,6 +976,7 @@ class ChatHandler(BaseHTTPRequestHandler):
                     result=getattr(self.server.project_catalog,method)(project_organization[1],payload)
                 elif workspace_save:result = self.server.workspace.save(workspace_save[1], payload)
                 elif self.path.endswith('/projects'):result = self.server.workspace.open_project(payload)
+                elif self.path.endswith('/create-project'):result = self.server.workspace.create_project(payload)
                 elif self.path.endswith('/pick-folder'):result = self.server.workspace.choose_project(payload)
                 else:result = self.server.workspace.prepare(payload)
                 self._send(200, result)
@@ -990,7 +1051,7 @@ class ChatHandler(BaseHTTPRequestHandler):
 
 
     def _admin_token(self):
-        if self.server.admin is None and self.path != '/api/network':
+        if self.server.admin is None and self.path not in {'/api/network','/api/federation'}:
             self._error(503, 'admin_unavailable', '配置后台未初始化。');return False
         values=self.headers.get_all('X-Jarvis-Nonce',[])
         if len(values)!=1 or not values[0].isascii() or not secrets.compare_digest(values[0],self.server.nonce):
@@ -1000,7 +1061,9 @@ class ChatHandler(BaseHTTPRequestHandler):
     def _admin_error(self, exc):
         # Only local validation messages are public; never reflect provider/vault errors.
         from jarvis_core.policy import CoreError
-        if isinstance(exc, CoreError) and exc.code.startswith('network_'):
+        if isinstance(exc, CoreError) and exc.code.startswith('federation_'):
+            self._error(409, exc.code, str(exc))
+        elif isinstance(exc, CoreError) and exc.code.startswith('network_'):
             self._error(409 if exc.code in {'network_conflict','network_busy'} else 503 if exc.code == 'network_policy_unavailable' else 400, exc.code, str(exc))
         elif type(exc) is ValueError:
             message=str(exc)
@@ -1035,6 +1098,8 @@ def create_server(*, core=None, chat=None, data_dir=None, config_path=None, port
     server = LocalChatServer(("127.0.0.1", port), core, chat, version=__version__, workspace=WorkspaceService(core))
     from jarvis_core.network_policy import NetworkPolicy
     server.network = NetworkPolicy(core.data_dir)
+    from jarvis_core.federation import Federation
+    server.federation = Federation(core, getattr(chat, 'config_path', None))
     try:
         from jarvis_core.chat import ChatService
         if isinstance(chat, ChatService) and chat.dialogue_models is None:
@@ -1067,8 +1132,25 @@ def create_server(*, core=None, chat=None, data_dir=None, config_path=None, port
         server.computer = ComputerWeb(core,chat,metrics=server.metrics)
         from jarvis_core.conversation_tasks import ConversationTasks
         server.conversation_tasks = ConversationTasks(core,server.computer)
+        if server.evolution is not None:
+            from jarvis_core.evolution.growth_cycle import GrowthCycles
+            server.evolution.growth = GrowthCycles(server.evolution,server.conversation_tasks)
+            from jarvis_core.evolution.ranking_module import RankingModules
+            server.evolution.ranking_modules = RankingModules(server.evolution, getattr(chat, 'background_models', None))
+            from jarvis_core.evolution.learning_loop import LearningLoop
+            server.evolution.learning = LearningLoop(server.evolution, server.conversation_tasks)
+            try: server.evolution.ranking_modules.recover()
+            except Exception: server.evolution.ranking_modules = None  # Optional corruption cannot take down chat.
         from jarvis_core.work_admission import WorkAdmission
         server.dialogue.work_admission = WorkAdmission(core,server.computer)
+        from jarvis_core.assistant_plans import AssistantPlans
+        try:
+            server.assistant_plans = AssistantPlans(core, server.conversation_tasks)
+        except Exception:
+            # An unreadable optional plan store must not take down foreground chat.
+            # Its routes return unavailable; memory provenance still fails closed.
+            server.assistant_plans = None
+        server.dialogue.work_admission.plans = server.assistant_plans
         from jarvis_core.modules import ModuleMonitor
         server.modules = ModuleMonitor(core,lambda:{'chat':server.chat_requests.active,
             'calculator_uses':server.metrics.snapshot()['counters'].get('calculation_completed',0),

@@ -24,3 +24,10 @@ class ValidationTests(fixture.Fixture):
             self.assertEqual(result['state'],'unverified');self.assertFalse(result['latest_success']['current'])
     def test_unrelated_name_does_not_invalidate_content(self):
         item=catalog()[0]['skills'][0];self.assertEqual(v.fingerprint(item),v.fingerprint({**item,'name':'display only'}))
+    def test_coding_implementation_change_invalidates_quality(self):
+        item=next(x for x in catalog()[0]['skills'] if x['id']=='matt-pocock.code-review')
+        original=v.fingerprint(item);read=Path.read_bytes
+        def changed(path):
+            value=read(path)
+            return value+b'\n# changed' if path.name=='coding_scene.py' else value
+        with patch.object(Path,'read_bytes',changed):self.assertNotEqual(v.fingerprint(item),original)

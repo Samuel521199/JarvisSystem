@@ -5,6 +5,8 @@ import json
 import re
 import secrets
 import time
+import io
+import zipfile
 from urllib.parse import parse_qs, urlsplit
 
 from jarvis_core.policy import CoreError
@@ -15,8 +17,17 @@ def confirmed(host, conversation, task):
     if host.conversation_tasks is None:
         raise CoreError('skill_unavailable', '任务模块尚未准备。')
     report = json.loads(host.conversation_tasks.artifact(conversation, task))
-    if report.get('kind') != 'jarvis.skill-report' or report.get('skill_id') != 'anatomy.explainer' or not isinstance(report.get('html'), str):
-        raise CoreError('artifact_unavailable', '此任务没有已确认的科普页面。')
+    raw = None
+    if report.get('kind') == 'jarvis.skill-report' and report.get('skill_id') in {'anatomy.explainer','jarvis.tank-game'} and isinstance(report.get('html'), str):
+        raw = report['html'].encode('utf-8')
+    value=report.get('coding',{})
+    if (report.get('kind')=='jarvis.skill-report' and value.get('build_recipe')=='javascript-scene-v1'
+            and value.get('passed') is True and value.get('build_validation',{}).get('passed') is True):
+        from jarvis_core.coding_build import bytes_from
+        with zipfile.ZipFile(io.BytesIO(bytes_from(value['build']))) as archive:
+            raw=archive.read('scene.html')
+    if raw is None:
+        raise CoreError('artifact_unavailable', '此任务没有已确认的交互页面。')
     # Revalidate the actual delivered project file, not only the ledger JSON.
     output = report['output']
     with host.workspace.connection() as db:
@@ -26,12 +37,22 @@ def confirmed(host, conversation, task):
         host.workspace._project(db, row['project_id'])
         host.workspace._validate_binding(row)
         host.workspace._verify(row)
-    return report['html'].encode('utf-8')
+    return raw
 
 
 def get(handler):
     host = handler.server
     parsed = urlsplit(handler.path)
+    if parsed.path == '/coding.js':
+        handler._send(200, host.coding_script, 'application/javascript; charset=utf-8')
+        return True
+    if parsed.path == '/api/coding':
+        if not handler._workspace_token() or not handler._guard(): return True
+        try:
+            from jarvis_core.coding_codex import CodexCodingProvider
+            handler._send(200, CodexCodingProvider(host.core).snapshot())
+        except Exception as exc: handler._workspace_error(exc)
+        return True
     evidence_match = re.fullmatch(r'/api/skills/evidence/([a-f0-9]{32})/(task_[a-f0-9]{32})', parsed.path)
     if evidence_match:
         if not handler._workspace_token() or not handler._guard(): return True
@@ -69,7 +90,7 @@ def get(handler):
         if item is None or item['expires'] < time.monotonic():
             raise CoreError('not_found', '预览已过期，请从任务重新打开。')
         raw = confirmed(host, item['conversation_id'], item['task_id'])
-        scripts = re.findall(rb'<script type="module">([\s\S]*?)</script>', raw)
+        scripts = re.findall(rb'<script(?: type="module")?>([\s\S]*?)</script>', raw)
         if len(scripts) != 1:
             raise CoreError('artifact_unavailable', '页面脚本结构未通过检查。')
         binding = base64.b64encode(hashlib.sha256(scripts[0]).digest()).decode('ascii')
@@ -86,10 +107,18 @@ def get(handler):
 
 
 def post(handler, payload):
+    if handler.path.startswith('/api/project-tools/'):
+        from project_tool_routes import post as tool_post
+        return tool_post(handler,payload)
     host = handler.server
     try:
-        if host.skills is None: raise CoreError('skill_unavailable','技能模块尚未启用。')
-        if handler.path in {'/api/skills/coding-apply','/api/skills/coding-rollback'}:
+        if host.skills is None and handler.path != '/api/coding': raise CoreError('skill_unavailable','技能模块尚未启用。')
+        if handler.path == '/api/coding':
+            from jarvis_core.coding_codex import CodexCodingProvider
+            provider=CodexCodingProvider(host.core)
+            provider.settings.write(payload)
+            result=provider.snapshot()
+        elif handler.path in {'/api/skills/coding-apply','/api/skills/coding-rollback'}:
             fields(payload, {'conversation_id','task_id'}, set())
             report=json.loads(host.conversation_tasks.artifact(payload['conversation_id'],payload['task_id']))
             from jarvis_core.coding_workflow import apply_result

@@ -1,0 +1,302 @@
+{
+  "version": "0.1.81",
+  "date": "2026-10-20",
+  "scope": "K6 explicit bounded continuous voice and limited interruption; no physical acoustic or full K6 acceptance",
+  "native_ui": {
+    "scope": "disposable core; synthetic browser mic; publisher audio; no owner microphone",
+    "paid_model_calls": 0,
+    "native": [
+      {
+        "case": "speech",
+        "id": "9303d0a123ab47f294c45181e783d787",
+        "status": "SUCCEEDED",
+        "local": true,
+        "language": "auto",
+        "audio_seconds": 5.592,
+        "text": "开饭时间早上9点至下午5点。",
+        "backend": "sensevoice-int8",
+        "vad": "silero",
+        "speech_seconds": 4.858,
+        "peak_working_set_bytes": 363618304,
+        "model_released": true,
+        "elapsed_seconds": 1.753
+      },
+      {
+        "case": "silence",
+        "id": "8255b39d400145d3bbc12e81adcc1429",
+        "status": "SUCCEEDED",
+        "local": true,
+        "language": "auto",
+        "audio_seconds": 2.0,
+        "text": "",
+        "backend": "sensevoice-int8",
+        "vad": "silero",
+        "speech_seconds": 0.0,
+        "peak_working_set_bytes": 32362496,
+        "model_released": true,
+        "elapsed_seconds": 0.29
+      },
+      {
+        "case": "noise",
+        "id": "cb3f9b8e29854302884c48bdf20ccbb2",
+        "status": "SUCCEEDED",
+        "local": true,
+        "language": "auto",
+        "audio_seconds": 2.0,
+        "text": "",
+        "backend": "sensevoice-int8",
+        "vad": "silero",
+        "speech_seconds": 0.0,
+        "peak_working_set_bytes": 63549440,
+        "model_released": true,
+        "elapsed_seconds": 0.749
+      },
+      {
+        "case": "tone",
+        "id": "3e7bd94c75a1476eacf21b1be6a09768",
+        "status": "SUCCEEDED",
+        "local": true,
+        "language": "auto",
+        "audio_seconds": 2.0,
+        "text": "",
+        "backend": "sensevoice-int8",
+        "vad": "silero",
+        "speech_seconds": 0.0,
+        "peak_working_set_bytes": 62910464,
+        "model_released": true,
+        "elapsed_seconds": 0.541
+      }
+    ],
+    "ui": {
+      "native_audio_pause_position_and_resume_ownership": true,
+      "native_capture_vad_asr_chat_tts_next_turn": true,
+      "file_mode_bypassed_draft_preserved": true,
+      "ack_and_exact_echo_resume_without_model": true,
+      "new_interruption_replaces_readout_once": true,
+      "spoken_stop_no_model_no_background_cancel": true,
+      "context_change_releases_tracks": true,
+      "silent_idle_expiry_no_model_advanced_clock": true,
+      "late_permission_releases_tracks": true,
+      "page_errors": []
+    }
+  },
+  "limits_ui": {
+    "scope": "synthetic recognition, chat and readout; injected worklet messages and advanced clock",
+    "paid_model_calls": 0,
+    "late_capture_epoch_rejected": true,
+    "turn_limit_20": true,
+    "lost_post_queried_once": true,
+    "no_duplicate_inference": true,
+    "model_failure_exits_without_retry": true,
+    "late_reply_after_exit_no_playback": true,
+    "ten_minute_cap_advanced_clock": true,
+    "device_disconnect_releases_tracks": true,
+    "page_errors": []
+  },
+  "automated_tests": {
+    "count": 135,
+    "status": "passed",
+    "command": "python -B -m unittest test_voice_turn test_speech_input test_readout test_speech test_web test_modules test_dialogue_process test_chat test_personal_core test_dialogue_turns test_runtime_releases test_release_bundle -q"
+  },
+  "gate_tests": {
+    "command": "node tests/voice_turn_gate.test.cjs",
+    "status": "passed",
+    "scope": "sample clock: silence, click rejection, hesitation, hard cap, muted intervals, buffer erasure"
+  },
+  "limitations": [
+    "Publisher Chinese sample and synthetic browser input only; no owner microphone",
+    "Chat response fixture; original routing regressions, zero paid model calls",
+    "Barge-in acknowledgement/echo scenarios use deterministic ASR/TTS fixtures; not proof of acoustic echo cancellation",
+    "10 minute and idle expiry used advanced UI clock, not wall-time soak",
+    "Real multilingual speech, room noise, speaker identification, low RAM PC and original K1/K2 external gates remain open",
+    "Default runtime archive does not bundle optional speech environment/models"
+  ],
+  "screenshots": [
+    "H:/JarvisData/diagnostics/k6-continuous-20261020/desktop.png",
+    "H:/JarvisData/diagnostics/k6-continuous-20261020/narrow.png"
+  ],
+  "earlier_failures": [
+    {
+      "scope": "new HTTP unit fixture",
+      "reason": "Legacy FakeChat did not accept voice_mode; dedicated test wrapper now checks forwarded field. No production exception suppression."
+    }
+  ],
+  "deployment": {
+    "initial": {
+      "status": "SUCCEEDED",
+      "source_version": "0.1.81",
+      "data_dir": "C:\\Users\\samuel\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\Jarvis\\data",
+      "previous_version": "0.1.80",
+      "previous_instance": "a3ddfa65eec16657e875eb6ce865d7d5",
+      "current_instance": "74ccb7f22ef69017d845eedfaefd958e",
+      "idle_graceful_reload": true,
+      "startup_from_absent": false,
+      "served_sha256": {
+        "dialogue.js": "ef95a69c43ec38d94d48c1b6ab40106faa8777426eb925ea3224a34bb61132a3",
+        "resources.js": "586e03243199134cec0c4da7bedde691f904f73ca8e7aee09ea2dd0202c99e2b",
+        "workspace.js": "d4a06de9863c55c59a5fc56135d9995690f9ee77b3a2c281fc9a118a12bcbb9f",
+        "conversation_tasks.js": "bcc474ac43ab1acd3ed38b965d7935a334eaa9fd6c53d1dbb60745097cd616b8",
+        "mcp_manager.js": "0c74df31951193bbe830bdfe24a10eb90b9cb31bb604ce54109acc5fb1cd9702",
+        "voice-session.js": "961feae63926761d90b2549592df8cf14ff428516fb73be7de4cbf5d35fa2d51",
+        "voice-session-capture.js": "671787ba17d7da87bb4882b87be024d13ac856e2bdc3a891a52ff8399cf8a47b",
+        "voice-input.js": "5228b9ce4564bc43f8413b78e70e43fbc7d2c01161ed50a38b04044258ca1682",
+        "readout.js": "fef7619cda03957d63bd73668c77b9cf09208d1b71ac453d7d450915fef976d6"
+      },
+      "calculation": "84",
+      "personal_read_only": true,
+      "duplicate_did_not_repeat_calculation": true,
+      "cancel_before_submit": true,
+      "restart_fence": true,
+      "instance_fence": true,
+      "empty_restart_queue_reviewed_and_resumed": true,
+      "admission_ms": 26.211,
+      "backups": {
+        "/api/speech/fast": "stopped",
+        "/api/speech": "stopped"
+      },
+      "cloud_calls": 0,
+      "limits": "One local calculator and personal-settings query; no paid model, microphone, task replay, persistent dialogue recovery or physical voice timing.",
+      "speech_input_idle_without_process": true,
+      "state_fingerprint": {
+        "all_compared_tables_equal": true,
+        "changed_tables": [],
+        "exclusions": "Existing instance ownership and queue-control exclusions from k2_state_fingerprint; no new exclusions."
+      }
+    },
+    "final": {
+      "status": "SUCCEEDED",
+      "source_version": "0.1.81",
+      "data_dir": "C:\\Users\\samuel\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\Jarvis\\data",
+      "previous_version": "0.1.81",
+      "previous_instance": "74ccb7f22ef69017d845eedfaefd958e",
+      "current_instance": "293935273e47eb23e13d13b326f5dddc",
+      "idle_graceful_reload": true,
+      "startup_from_absent": false,
+      "served_sha256": {
+        "dialogue.js": "ef95a69c43ec38d94d48c1b6ab40106faa8777426eb925ea3224a34bb61132a3",
+        "resources.js": "586e03243199134cec0c4da7bedde691f904f73ca8e7aee09ea2dd0202c99e2b",
+        "workspace.js": "d4a06de9863c55c59a5fc56135d9995690f9ee77b3a2c281fc9a118a12bcbb9f",
+        "conversation_tasks.js": "bcc474ac43ab1acd3ed38b965d7935a334eaa9fd6c53d1dbb60745097cd616b8",
+        "mcp_manager.js": "0c74df31951193bbe830bdfe24a10eb90b9cb31bb604ce54109acc5fb1cd9702",
+        "voice-session.js": "0aa27bc40c8993b5c716a336ef14e48e0c195942a3a4230121d407a136f43fcc",
+        "voice-session-capture.js": "408d46d52e2af8152c9f82f7b81991b1bce45517136b29e60713e048c4586f3f",
+        "voice-input.js": "5228b9ce4564bc43f8413b78e70e43fbc7d2c01161ed50a38b04044258ca1682",
+        "readout.js": "fef7619cda03957d63bd73668c77b9cf09208d1b71ac453d7d450915fef976d6"
+      },
+      "calculation": "84",
+      "personal_read_only": true,
+      "duplicate_did_not_repeat_calculation": true,
+      "cancel_before_submit": true,
+      "restart_fence": true,
+      "instance_fence": true,
+      "empty_restart_queue_reviewed_and_resumed": true,
+      "admission_ms": 32.312,
+      "backups": {
+        "/api/speech/fast": "stopped",
+        "/api/speech": "stopped"
+      },
+      "cloud_calls": 0,
+      "limits": "One local calculator and personal-settings query; no paid model, microphone, task replay, persistent dialogue recovery or physical voice timing.",
+      "speech_input_idle_without_process": true,
+      "state_fingerprint": {
+        "all_compared_tables_equal": true,
+        "changed_tables": [],
+        "exclusions": "Existing instance ownership and queue control exclusions only."
+      }
+    }
+  },
+  "earlier_native_ui": {
+    "scope": "disposable core; synthetic browser mic; publisher audio; no owner microphone",
+    "paid_model_calls": 0,
+    "native": [
+      {
+        "case": "speech",
+        "id": "25627b855fd847448fd8e709592354c4",
+        "status": "SUCCEEDED",
+        "local": true,
+        "language": "auto",
+        "audio_seconds": 5.592,
+        "text": "开饭时间早上9点至下午5点。",
+        "backend": "sensevoice-int8",
+        "vad": "silero",
+        "speech_seconds": 4.858,
+        "peak_working_set_bytes": 364400640,
+        "model_released": true,
+        "elapsed_seconds": 1.492
+      },
+      {
+        "case": "silence",
+        "id": "e7ad0e05d05f4de6a9d2484696cb8ac0",
+        "status": "SUCCEEDED",
+        "local": true,
+        "language": "auto",
+        "audio_seconds": 2.0,
+        "text": "",
+        "backend": "sensevoice-int8",
+        "vad": "silero",
+        "speech_seconds": 0.0,
+        "peak_working_set_bytes": 28442624,
+        "model_released": true,
+        "elapsed_seconds": 0.288
+      },
+      {
+        "case": "noise",
+        "id": "83513b18d6354291b54595382098f08e",
+        "status": "SUCCEEDED",
+        "local": true,
+        "language": "auto",
+        "audio_seconds": 2.0,
+        "text": "",
+        "backend": "sensevoice-int8",
+        "vad": "silero",
+        "speech_seconds": 0.0,
+        "peak_working_set_bytes": 63770624,
+        "model_released": true,
+        "elapsed_seconds": 0.366
+      },
+      {
+        "case": "tone",
+        "id": "a9870a415fa245cf9222a5b8dce4323d",
+        "status": "SUCCEEDED",
+        "local": true,
+        "language": "auto",
+        "audio_seconds": 2.0,
+        "text": "",
+        "backend": "sensevoice-int8",
+        "vad": "silero",
+        "speech_seconds": 0.0,
+        "peak_working_set_bytes": 63721472,
+        "model_released": true,
+        "elapsed_seconds": 0.482
+      }
+    ],
+    "ui": {
+      "native_audio_pause_position_and_resume_ownership": true,
+      "native_capture_vad_asr_chat_tts_next_turn": true,
+      "file_mode_bypassed_draft_preserved": true,
+      "ack_and_exact_echo_resume_without_model": true,
+      "new_interruption_replaces_readout_once": true,
+      "spoken_stop_no_model_no_background_cancel": true,
+      "context_change_releases_tracks": true,
+      "silent_idle_expiry_no_model_advanced_clock": true,
+      "late_permission_releases_tracks": true,
+      "page_errors": []
+    }
+  },
+  "checks": {
+    "docs": "25 documents / 21 diagrams / 42 artifacts",
+    "seed": "22 assets / 12 fixtures",
+    "syntax": "changed Python AST, four JS files and inline composer",
+    "secrets": "34 changed/new files pattern scan passed",
+    "version_regression": "13 checks passed (subset rerun after version change)"
+  },
+  "release_bundle": {
+    "path": "H:\\JarvisData\\diagnostics\\jarvis-v0.1.81-final.zip",
+    "sha256": "1f25485f6223d59cff6dfe087991bc4aa9974393982538d84f145d8395c28f62",
+    "files": 1605,
+    "bytes": 70532453,
+    "status": "candidate_verified",
+    "activated": false,
+    "limits": "Source deployment uses existing development speech environment; archive remains optional-speech-free."
+  }
+}

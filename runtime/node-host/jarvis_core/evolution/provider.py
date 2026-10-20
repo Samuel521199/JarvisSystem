@@ -60,6 +60,18 @@ class ModelCodingProvider:
             return None, receipt
         return text[:6000], receipt
 
+    def contract(self, goal, route, cancel, checkpoint, reasoning=None):
+        from .tool_contract import INSTRUCTIONS, decode
+        config, provider = self.configuration(route, reasoning)
+        checkpoint()
+        response = gateway.probe(config, provider, policy.canonical_json({'goal': goal}), self.core.data_dir, checkpoint,
+            admission_context=self.core.effect_guard, cancel_event=cancel, deadline_seconds=90, instructions=INSTRUCTIONS)
+        receipt = self.receipt(response, config, provider)
+        if response.get('status') != 'SUCCEEDED' or response.get('output_incomplete'): return None, receipt
+        try: return decode(response.get('text', '')), receipt
+        except (ValueError, TypeError, RecursionError, policy.CoreError):
+            return None, {**receipt, 'validation_error': 'contract_format'}
+
     def generate(self, revision, route, previous, feedback, cancel, checkpoint, reasoning=None):
         config, provider = self.configuration(route, reasoning)
         instructions = ('You implement a bounded Jarvis tool. Return exactly a JSON object with two string fields: '

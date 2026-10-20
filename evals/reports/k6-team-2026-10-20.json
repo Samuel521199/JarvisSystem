@@ -1,0 +1,1241 @@
+{
+  "version": "0.1.82",
+  "scope": "K6 single-PC bounded two-role analysis; not full autonomous Agent factory or federation",
+  "status": "verified_and_deployed",
+  "unit_tests": {
+    "count": 96,
+    "result": "passed",
+    "command": "python -m unittest test_team_tasks test_conversation_tasks test_resources test_mcp_runtime test_computer_queue test_dialogue_process test_runtime_start test_runtime_releases test_release_bundle test_voice_turn -q"
+  },
+  "ui": {
+    "status": "passed",
+    "checks": {
+      "empty_criteria_keeps_draft_no_call": true,
+      "foreground_chat_while_team_waits": true,
+      "report_rendered_without_html_execution": true,
+      "mobile_fits": true,
+      "reload_no_replay": true,
+      "cancel_inflight_no_review_unknown_pauses_queue": true,
+      "conversation_change_clears_criteria_draft": true
+    },
+    "page_errors": [],
+    "screenshots": [
+      "H:\\JarvisData\\diagnostics\\k6-team-20261020\\desktop.png",
+      "H:\\JarvisData\\diagnostics\\k6-team-20261020\\mobile.png"
+    ],
+    "limits": [
+      "Models are fixtures; HTTP, SQLite, FIFO and Edge are real.",
+      "No owner files, memory or microphone used."
+    ]
+  },
+  "live": {
+    "action_status": "CONFIRMED",
+    "seconds": 28.83,
+    "report": {
+      "budget": {
+        "automatic_retries": 0,
+        "max_model_calls": 2,
+        "max_output_tokens_per_call": 2048,
+        "max_runtime_seconds": 180,
+        "reserved_calls": 2
+      },
+      "checks": {
+        "personal_memory_accessed": false,
+        "references_valid": true,
+        "semantic_acceptance_verified": false,
+        "separate_model_contexts": true,
+        "structure_valid": true,
+        "tools_executed": false
+      },
+      "criteria": [
+        {
+          "id": "c1",
+          "text": "每个练习日总时长不超过20分钟"
+        },
+        {
+          "id": "c2",
+          "text": "包含休息日且未知英语水平明确标为假设"
+        }
+      ],
+      "decision": "ready_for_owner_review",
+      "goal": "为白天工作的成年人设计七天英语练习安排，每天只有20分钟，并留出休息日。不假定他的英语水平。",
+      "kind": "jarvis.team-report",
+      "limits": "模型审阅意见不等于事实核验或业务验收；没有自动应用方案、执行工具或更新记忆。",
+      "proposal": {
+        "assumptions": [
+          "待核实使用者的真实英语水平（零基础、初级、中级或高级），目前方案假定内容难度可通过素材自由适配",
+          "待核实学习者偏好的练习时间段（如晨起、午休或晚间睡前），假定其每天能连续抽出完整的20分钟专注时间"
+        ],
+        "risks": [
+          "若初始选材难度过高或过低，可能导致前两天体验不佳而丧失持续动力",
+          "每天20分钟时长较短，若缺乏长期连续坚持，短期内口语或听力突破可能不明显"
+        ],
+        "steps": [
+          {
+            "detail": "耗时20分钟。选择一个包含多难度梯度的英语播客或分级短文，花10分钟试听或试读以评估当前舒适区；剩余10分钟记录5个生词或句型，确定后续练习的起点难度。",
+            "id": "s1",
+            "title": "第1天：个人水平摸底与基础听读"
+          },
+          {
+            "detail": "耗时20分钟。基于第1天确定的难度级别，挑选一段1-2分钟的简短音频。先听2遍熟悉节奏（5分钟），随后进行句子跟读与模仿练习（15分钟），提升发音和语感。",
+            "id": "s2",
+            "title": "第2天：职场/日常影子跟读训练"
+          },
+          {
+            "detail": "休息日，不作强制训练安排。完全放松，或可选择在通勤、休闲时被动聆听喜欢的英文歌曲/背景广播，不计入正式练习。",
+            "id": "s3",
+            "title": "第3天：休息与无压力输入"
+          },
+          {
+            "detail": "耗时20分钟。回顾第1-2天学到的表达（5分钟），选择3个重点词汇或句型，尝试结合自己的实际生活或工作场景造句，口头表达或写在便签上（15分钟）。",
+            "id": "s4",
+            "title": "第4天：核心词汇与句型微输出"
+          },
+          {
+            "detail": "耗时20分钟。选定一个极简日常话题（如介绍今天的工作或一顿饭），前5分钟列出关键词，后15分钟开启手机录音，尝试用英语自述并回听，找出停顿和卡顿点。",
+            "id": "s5",
+            "title": "第5天：即兴口语碎片表达"
+          },
+          {
+            "detail": "耗时20分钟。选择一篇契合自身水平的100-200字微短文，通读了解大意（5分钟），重点分析1-2个复杂句子结构及用法（15分钟）。",
+            "id": "s6",
+            "title": "第6天：短文精读与语篇速览"
+          },
+          {
+            "detail": "休息日。安排15-20分钟彻底放松身心；若有余力，花最后5分钟翻看本周记录便签，简要总结哪类练习最适应、难度是否需要调整，为下周做准备。",
+            "id": "s7",
+            "title": "第7天：全面休息与周度复盘"
+          }
+        ],
+        "summary": "为成年上班族定制的7天微习惯英语练习计划，严格限制单日20分钟内，包含2天休息日，内容采用自适应难度的模块化设计。"
+      },
+      "review": {
+        "criteria": [
+          {
+            "criterion_id": "c1",
+            "reason": "所有具体练习日（第1、2、4、5、6天）以及包含复盘的第7天的任务总时长均被严格控制在20分钟以内。",
+            "status": "addressed"
+          },
+          {
+            "criterion_id": "c2",
+            "reason": "方案在第3天和第7天安排了休息日，并在assumptions中明确列出了“待核实使用者的真实英语水平”作为重要假设。",
+            "status": "addressed"
+          }
+        ],
+        "findings": [
+          {
+            "issue": "第7天被定义为休息日，但依然安排了5分钟的复盘任务。尽管总时间未超过限制，但可能影响休息日的完全放松体验。",
+            "severity": "concern",
+            "step_id": "s7"
+          }
+        ],
+        "summary": "方案整体设计合理，严格遵守了时间限制并包含了休息日，同时在前提假设中明确了对未知英语水平的处理。发现部分休息日仍有微小的复盘任务，可进一步优化以确保完全放松。",
+        "verdict": "ready_for_owner_review"
+      },
+      "roles": [
+        {
+          "created_at": "2026-10-20T11:23:29.709158+00:00",
+          "model": "vertex::gemini-3.8-flash",
+          "ordinal": 0,
+          "output": {
+            "assumptions": [
+              "待核实使用者的真实英语水平（零基础、初级、中级或高级），目前方案假定内容难度可通过素材自由适配",
+              "待核实学习者偏好的练习时间段（如晨起、午休或晚间睡前），假定其每天能连续抽出完整的20分钟专注时间"
+            ],
+            "risks": [
+              "若初始选材难度过高或过低，可能导致前两天体验不佳而丧失持续动力",
+              "每天20分钟时长较短，若缺乏长期连续坚持，短期内口语或听力突破可能不明显"
+            ],
+            "steps": [
+              {
+                "detail": "耗时20分钟。选择一个包含多难度梯度的英语播客或分级短文，花10分钟试听或试读以评估当前舒适区；剩余10分钟记录5个生词或句型，确定后续练习的起点难度。",
+                "id": "s1",
+                "title": "第1天：个人水平摸底与基础听读"
+              },
+              {
+                "detail": "耗时20分钟。基于第1天确定的难度级别，挑选一段1-2分钟的简短音频。先听2遍熟悉节奏（5分钟），随后进行句子跟读与模仿练习（15分钟），提升发音和语感。",
+                "id": "s2",
+                "title": "第2天：职场/日常影子跟读训练"
+              },
+              {
+                "detail": "休息日，不作强制训练安排。完全放松，或可选择在通勤、休闲时被动聆听喜欢的英文歌曲/背景广播，不计入正式练习。",
+                "id": "s3",
+                "title": "第3天：休息与无压力输入"
+              },
+              {
+                "detail": "耗时20分钟。回顾第1-2天学到的表达（5分钟），选择3个重点词汇或句型，尝试结合自己的实际生活或工作场景造句，口头表达或写在便签上（15分钟）。",
+                "id": "s4",
+                "title": "第4天：核心词汇与句型微输出"
+              },
+              {
+                "detail": "耗时20分钟。选定一个极简日常话题（如介绍今天的工作或一顿饭），前5分钟列出关键词，后15分钟开启手机录音，尝试用英语自述并回听，找出停顿和卡顿点。",
+                "id": "s5",
+                "title": "第5天：即兴口语碎片表达"
+              },
+              {
+                "detail": "耗时20分钟。选择一篇契合自身水平的100-200字微短文，通读了解大意（5分钟），重点分析1-2个复杂句子结构及用法（15分钟）。",
+                "id": "s6",
+                "title": "第6天：短文精读与语篇速览"
+              },
+              {
+                "detail": "休息日。安排15-20分钟彻底放松身心；若有余力，花最后5分钟翻看本周记录便签，简要总结哪类练习最适应、难度是否需要调整，为下周做准备。",
+                "id": "s7",
+                "title": "第7天：全面休息与周度复盘"
+              }
+            ],
+            "summary": "为成年上班族定制的7天微习惯英语练习计划，严格限制单日20分钟内，包含2天休息日，内容采用自适应难度的模块化设计。"
+          },
+          "receipt": {
+            "actual_reasoning": "low",
+            "billing": {
+              "amount": 0.00273225,
+              "basis": "estimated",
+              "currency": "USD",
+              "price": {
+                "cache_read": 0.075,
+                "cache_write": null,
+                "checked_at": "2026-10-16",
+                "currency": "USD",
+                "fee_percent": 0,
+                "input": 0.75,
+                "max_input_tokens": 1000000,
+                "output": 3.75,
+                "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+                "valid_until": "2026-12-31"
+              },
+              "reason": "token_rates",
+              "tokens": {
+                "cache_read": 0,
+                "cache_write": 0,
+                "input": 203,
+                "output": 688,
+                "reasoning": 0,
+                "total": 891
+              }
+            },
+            "elapsed_seconds": 11.928,
+            "http_status": 200,
+            "model": "gemini-3.8-flash",
+            "outcome_uncertain": false,
+            "output_incomplete": false,
+            "provider": "vertex",
+            "request_id": "77b9ab83361b4e73821248baa9353ed5",
+            "response_deadline_seconds": 55,
+            "status": "SUCCEEDED",
+            "usage": {
+              "candidatesTokenCount": 688,
+              "promptTokenCount": 203,
+              "totalTokenCount": 891
+            }
+          },
+          "reserved_calls": 1,
+          "role": "planner",
+          "root_task_id": "task_677ade57f424576494f8a6519da40cdc",
+          "security_epoch": 1,
+          "state": "SUCCEEDED",
+          "updated_at": "2026-10-20T11:23:42.041124+00:00"
+        },
+        {
+          "created_at": "2026-10-20T11:23:42.085209+00:00",
+          "model": "vertex::gemini-3.1-pro-preview",
+          "ordinal": 1,
+          "output": {
+            "criteria": [
+              {
+                "criterion_id": "c1",
+                "reason": "所有具体练习日（第1、2、4、5、6天）以及包含复盘的第7天的任务总时长均被严格控制在20分钟以内。",
+                "status": "addressed"
+              },
+              {
+                "criterion_id": "c2",
+                "reason": "方案在第3天和第7天安排了休息日，并在assumptions中明确列出了“待核实使用者的真实英语水平”作为重要假设。",
+                "status": "addressed"
+              }
+            ],
+            "findings": [
+              {
+                "issue": "第7天被定义为休息日，但依然安排了5分钟的复盘任务。尽管总时间未超过限制，但可能影响休息日的完全放松体验。",
+                "severity": "concern",
+                "step_id": "s7"
+              }
+            ],
+            "summary": "方案整体设计合理，严格遵守了时间限制并包含了休息日，同时在前提假设中明确了对未知英语水平的处理。发现部分休息日仍有微小的复盘任务，可进一步优化以确保完全放松。",
+            "verdict": "ready_for_owner_review"
+          },
+          "receipt": {
+            "actual_reasoning": "low",
+            "billing": {
+              "amount": 0.014198,
+              "basis": "estimated",
+              "currency": "USD",
+              "price": {
+                "cache_read": 0.2,
+                "cache_write": null,
+                "checked_at": "2026-10-16",
+                "currency": "USD",
+                "fee_percent": 0,
+                "input": 2,
+                "max_input_tokens": 200000,
+                "output": 12,
+                "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing"
+              },
+              "reason": "token_rates",
+              "tokens": {
+                "cache_read": 0,
+                "cache_write": 0,
+                "input": 937,
+                "output": 1027,
+                "reasoning": 730,
+                "total": 1964
+              }
+            },
+            "elapsed_seconds": 15.918,
+            "http_status": 200,
+            "model": "gemini-3.1-pro-preview",
+            "outcome_uncertain": false,
+            "output_incomplete": false,
+            "provider": "vertex",
+            "request_id": "2277e86ff1e24e749fa7471b0ed22616",
+            "response_deadline_seconds": 55,
+            "status": "SUCCEEDED",
+            "usage": {
+              "candidatesTokenCount": 297,
+              "promptTokenCount": 937,
+              "thoughtsTokenCount": 730,
+              "totalTokenCount": 1964
+            }
+          },
+          "reserved_calls": 1,
+          "role": "reviewer",
+          "root_task_id": "task_677ade57f424576494f8a6519da40cdc",
+          "security_epoch": 1,
+          "state": "SUCCEEDED",
+          "updated_at": "2026-10-20T11:23:58.440581+00:00"
+        }
+      ],
+      "schema_version": 1
+    },
+    "calls": [
+      {
+        "created_at": "2026-10-20T11:23:29.709158+00:00",
+        "model": "vertex::gemini-3.8-flash",
+        "ordinal": 0,
+        "output": {
+          "assumptions": [
+            "待核实使用者的真实英语水平（零基础、初级、中级或高级），目前方案假定内容难度可通过素材自由适配",
+            "待核实学习者偏好的练习时间段（如晨起、午休或晚间睡前），假定其每天能连续抽出完整的20分钟专注时间"
+          ],
+          "risks": [
+            "若初始选材难度过高或过低，可能导致前两天体验不佳而丧失持续动力",
+            "每天20分钟时长较短，若缺乏长期连续坚持，短期内口语或听力突破可能不明显"
+          ],
+          "steps": [
+            {
+              "detail": "耗时20分钟。选择一个包含多难度梯度的英语播客或分级短文，花10分钟试听或试读以评估当前舒适区；剩余10分钟记录5个生词或句型，确定后续练习的起点难度。",
+              "id": "s1",
+              "title": "第1天：个人水平摸底与基础听读"
+            },
+            {
+              "detail": "耗时20分钟。基于第1天确定的难度级别，挑选一段1-2分钟的简短音频。先听2遍熟悉节奏（5分钟），随后进行句子跟读与模仿练习（15分钟），提升发音和语感。",
+              "id": "s2",
+              "title": "第2天：职场/日常影子跟读训练"
+            },
+            {
+              "detail": "休息日，不作强制训练安排。完全放松，或可选择在通勤、休闲时被动聆听喜欢的英文歌曲/背景广播，不计入正式练习。",
+              "id": "s3",
+              "title": "第3天：休息与无压力输入"
+            },
+            {
+              "detail": "耗时20分钟。回顾第1-2天学到的表达（5分钟），选择3个重点词汇或句型，尝试结合自己的实际生活或工作场景造句，口头表达或写在便签上（15分钟）。",
+              "id": "s4",
+              "title": "第4天：核心词汇与句型微输出"
+            },
+            {
+              "detail": "耗时20分钟。选定一个极简日常话题（如介绍今天的工作或一顿饭），前5分钟列出关键词，后15分钟开启手机录音，尝试用英语自述并回听，找出停顿和卡顿点。",
+              "id": "s5",
+              "title": "第5天：即兴口语碎片表达"
+            },
+            {
+              "detail": "耗时20分钟。选择一篇契合自身水平的100-200字微短文，通读了解大意（5分钟），重点分析1-2个复杂句子结构及用法（15分钟）。",
+              "id": "s6",
+              "title": "第6天：短文精读与语篇速览"
+            },
+            {
+              "detail": "休息日。安排15-20分钟彻底放松身心；若有余力，花最后5分钟翻看本周记录便签，简要总结哪类练习最适应、难度是否需要调整，为下周做准备。",
+              "id": "s7",
+              "title": "第7天：全面休息与周度复盘"
+            }
+          ],
+          "summary": "为成年上班族定制的7天微习惯英语练习计划，严格限制单日20分钟内，包含2天休息日，内容采用自适应难度的模块化设计。"
+        },
+        "receipt": {
+          "actual_reasoning": "low",
+          "billing": {
+            "amount": 0.00273225,
+            "basis": "estimated",
+            "currency": "USD",
+            "price": {
+              "cache_read": 0.075,
+              "cache_write": null,
+              "checked_at": "2026-10-16",
+              "currency": "USD",
+              "fee_percent": 0,
+              "input": 0.75,
+              "max_input_tokens": 1000000,
+              "output": 3.75,
+              "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+              "valid_until": "2026-12-31"
+            },
+            "reason": "token_rates",
+            "tokens": {
+              "cache_read": 0,
+              "cache_write": 0,
+              "input": 203,
+              "output": 688,
+              "reasoning": 0,
+              "total": 891
+            }
+          },
+          "elapsed_seconds": 11.928,
+          "http_status": 200,
+          "model": "gemini-3.8-flash",
+          "outcome_uncertain": false,
+          "output_incomplete": false,
+          "provider": "vertex",
+          "request_id": "77b9ab83361b4e73821248baa9353ed5",
+          "response_deadline_seconds": 55,
+          "status": "SUCCEEDED",
+          "usage": {
+            "candidatesTokenCount": 688,
+            "promptTokenCount": 203,
+            "totalTokenCount": 891
+          }
+        },
+        "reserved_calls": 1,
+        "role": "planner",
+        "root_task_id": "task_677ade57f424576494f8a6519da40cdc",
+        "security_epoch": 1,
+        "state": "SUCCEEDED",
+        "updated_at": "2026-10-20T11:23:42.041124+00:00"
+      },
+      {
+        "created_at": "2026-10-20T11:23:42.085209+00:00",
+        "model": "vertex::gemini-3.1-pro-preview",
+        "ordinal": 1,
+        "output": {
+          "criteria": [
+            {
+              "criterion_id": "c1",
+              "reason": "所有具体练习日（第1、2、4、5、6天）以及包含复盘的第7天的任务总时长均被严格控制在20分钟以内。",
+              "status": "addressed"
+            },
+            {
+              "criterion_id": "c2",
+              "reason": "方案在第3天和第7天安排了休息日，并在assumptions中明确列出了“待核实使用者的真实英语水平”作为重要假设。",
+              "status": "addressed"
+            }
+          ],
+          "findings": [
+            {
+              "issue": "第7天被定义为休息日，但依然安排了5分钟的复盘任务。尽管总时间未超过限制，但可能影响休息日的完全放松体验。",
+              "severity": "concern",
+              "step_id": "s7"
+            }
+          ],
+          "summary": "方案整体设计合理，严格遵守了时间限制并包含了休息日，同时在前提假设中明确了对未知英语水平的处理。发现部分休息日仍有微小的复盘任务，可进一步优化以确保完全放松。",
+          "verdict": "ready_for_owner_review"
+        },
+        "receipt": {
+          "actual_reasoning": "low",
+          "billing": {
+            "amount": 0.014198,
+            "basis": "estimated",
+            "currency": "USD",
+            "price": {
+              "cache_read": 0.2,
+              "cache_write": null,
+              "checked_at": "2026-10-16",
+              "currency": "USD",
+              "fee_percent": 0,
+              "input": 2,
+              "max_input_tokens": 200000,
+              "output": 12,
+              "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing"
+            },
+            "reason": "token_rates",
+            "tokens": {
+              "cache_read": 0,
+              "cache_write": 0,
+              "input": 937,
+              "output": 1027,
+              "reasoning": 730,
+              "total": 1964
+            }
+          },
+          "elapsed_seconds": 15.918,
+          "http_status": 200,
+          "model": "gemini-3.1-pro-preview",
+          "outcome_uncertain": false,
+          "output_incomplete": false,
+          "provider": "vertex",
+          "request_id": "2277e86ff1e24e749fa7471b0ed22616",
+          "response_deadline_seconds": 55,
+          "status": "SUCCEEDED",
+          "usage": {
+            "candidatesTokenCount": 297,
+            "promptTokenCount": 937,
+            "thoughtsTokenCount": 730,
+            "totalTokenCount": 1964
+          }
+        },
+        "reserved_calls": 1,
+        "role": "reviewer",
+        "root_task_id": "task_677ade57f424576494f8a6519da40cdc",
+        "security_epoch": 1,
+        "state": "SUCCEEDED",
+        "updated_at": "2026-10-20T11:23:58.440581+00:00"
+      }
+    ],
+    "error": null,
+    "processes": {
+      "enabled": true,
+      "closed": false,
+      "capacity": 1,
+      "active": 0,
+      "memory_limit_bytes": 402653184,
+      "completed": 2,
+      "last": {
+        "reason": "succeeded",
+        "seconds": 16.351
+      },
+      "processes": []
+    },
+    "limits": [
+      "One new disposable task and at most two paid requests; no retries.",
+      "A single successful sample does not establish general planning quality."
+    ]
+  },
+  "initial_failures": [
+    {
+      "action_status": "FAILED",
+      "error": {
+        "code": "team_model_failed",
+        "message": "角色调用未完成；未启动后续角色。"
+      },
+      "calls": [
+        {
+          "role": "planner",
+          "state": "FAILED",
+          "receipt": {
+            "actual_reasoning": "low",
+            "error_category": "dialogue_process",
+            "outcome_uncertain": false,
+            "status": "FAILED"
+          }
+        }
+      ],
+      "resolution": "Checkpoint now returns the security epoch required by native model IPC; failed before dispatch."
+    },
+    {
+      "action_status": "FAILED",
+      "error": {
+        "code": "team_format",
+        "message": "模型输出未通过结构、引用或一致性检查；未自动重试。"
+      },
+      "calls": [
+        {
+          "role": "planner",
+          "state": "SUCCEEDED",
+          "receipt": {
+            "actual_reasoning": "low",
+            "billing": {
+              "amount": 0.002961,
+              "basis": "estimated",
+              "currency": "USD",
+              "price": {
+                "cache_read": 0.075,
+                "cache_write": null,
+                "checked_at": "2026-10-16",
+                "currency": "USD",
+                "fee_percent": 0,
+                "input": 0.75,
+                "max_input_tokens": 1000000,
+                "output": 3.75,
+                "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+                "valid_until": "2026-12-31"
+              },
+              "reason": "token_rates",
+              "tokens": {
+                "cache_read": 0,
+                "cache_write": 0,
+                "input": 203,
+                "output": 749,
+                "reasoning": 0,
+                "total": 952
+              }
+            },
+            "elapsed_seconds": 11.402,
+            "http_status": 200,
+            "model": "gemini-3.8-flash",
+            "outcome_uncertain": false,
+            "output_incomplete": false,
+            "provider": "vertex",
+            "request_id": "64e788d7e0374afaaecd0fff9eefaae5",
+            "response_deadline_seconds": 55,
+            "status": "SUCCEEDED",
+            "usage": {
+              "candidatesTokenCount": 749,
+              "promptTokenCount": 203,
+              "totalTokenCount": 952
+            }
+          }
+        },
+        {
+          "role": "reviewer",
+          "state": "INVALID",
+          "receipt": {
+            "actual_reasoning": "low",
+            "billing": {
+              "amount": 0.007108,
+              "basis": "estimated",
+              "currency": "USD",
+              "price": {
+                "cache_read": 0.2,
+                "cache_write": null,
+                "checked_at": "2026-10-16",
+                "currency": "USD",
+                "fee_percent": 0,
+                "input": 2,
+                "max_input_tokens": 200000,
+                "output": 12,
+                "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing"
+              },
+              "reason": "token_rates",
+              "tokens": {
+                "cache_read": 0,
+                "cache_write": 0,
+                "input": 998,
+                "output": 426,
+                "reasoning": 244,
+                "total": 1424
+              }
+            },
+            "elapsed_seconds": 9.477,
+            "http_status": 200,
+            "model": "gemini-3.1-pro-preview",
+            "outcome_uncertain": false,
+            "output_incomplete": false,
+            "provider": "vertex",
+            "request_id": "0fa356bbdb414f53bdd49bffb457e30e",
+            "response_deadline_seconds": 55,
+            "status": "SUCCEEDED",
+            "usage": {
+              "candidatesTokenCount": 182,
+              "promptTokenCount": 998,
+              "thoughtsTokenCount": 244,
+              "totalTokenCount": 1424
+            }
+          }
+        }
+      ],
+      "resolution": "Reviewer format rejected after successful planner. Added bounded rejected text evidence and exact single-JSON-fence normalization; later full rerun succeeded. Original rejected text unavailable; exact first response shape not established."
+    }
+  ],
+  "deployment": {
+    "status": "SUCCEEDED",
+    "source_version": "0.1.82",
+    "data_dir": "C:\\Users\\samuel\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\Jarvis\\data",
+    "previous_version": "0.1.81",
+    "previous_instance": "293935273e47eb23e13d13b326f5dddc",
+    "current_instance": "b84aed6211be0e8610345f3b1dbe0d09",
+    "idle_graceful_reload": true,
+    "startup_from_absent": false,
+    "served_sha256": {
+      "dialogue.js": "ef95a69c43ec38d94d48c1b6ab40106faa8777426eb925ea3224a34bb61132a3",
+      "resources.js": "586e03243199134cec0c4da7bedde691f904f73ca8e7aee09ea2dd0202c99e2b",
+      "workspace.js": "d4a06de9863c55c59a5fc56135d9995690f9ee77b3a2c281fc9a118a12bcbb9f",
+      "conversation_tasks.js": "030e1f3d791988b33a8c2ddeec4baf129d9506cb93a6c8e1e592b5cf92d42a63",
+      "mcp_manager.js": "0c74df31951193bbe830bdfe24a10eb90b9cb31bb604ce54109acc5fb1cd9702"
+    },
+    "calculation": "84",
+    "personal_read_only": true,
+    "duplicate_did_not_repeat_calculation": true,
+    "cancel_before_submit": true,
+    "restart_fence": true,
+    "instance_fence": true,
+    "empty_restart_queue_reviewed_and_resumed": true,
+    "admission_ms": 37.544,
+    "backups": {
+      "/api/speech/fast": "stopped",
+      "/api/speech": "stopped"
+    },
+    "cloud_calls": 0,
+    "limits": "One local calculator and personal-settings query; no paid model, microphone, task replay, persistent dialogue recovery or physical voice timing.",
+    "business_state": {
+      "existing_table_differences": [],
+      "added_tables": [
+        "control.db/team_calls"
+      ],
+      "before": {
+        "control.db": {
+          "present": true,
+          "schema": 2,
+          "tables": {
+            "actions": {
+              "rows": 18,
+              "sha256": "f0f3121a62d0b6e74483a0b5be7d8ac744e0fee11216b66c5ab037472529ebf7"
+            },
+            "artifacts": {
+              "rows": 16,
+              "sha256": "3e07687fc930429e1333c717e5fd1639f4990dbc36f257db1a639c5e02914acc"
+            },
+            "coding_changes": {
+              "rows": 2,
+              "sha256": "c1bcce173ae88c3d8d05deb8c7c9050ad00153f88f4f97eb19afbcfd043746ec"
+            },
+            "coding_demands": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "computer_queue": {
+              "rows": 10,
+              "sha256": "94f3d4b0390d10600486f554ae93f036b059585d967fb4a7ff4ae530f3448b3b"
+            },
+            "computer_steps": {
+              "rows": 17,
+              "sha256": "e0545ca686975b54075e17b4731acf1f0e76011f5e0388f5e719368b99e9fb0d"
+            },
+            "control": {
+              "rows": 1,
+              "sha256": "48f40bf56a231b8feb405f550a2d499a1ce3ca573825861f738b37b0678fce61"
+            },
+            "skill_success": {
+              "rows": 1,
+              "sha256": "c12df120359907b15d94a6885f688255040d7a3e36ba426a8622dee0b50d0170"
+            },
+            "tasks": {
+              "rows": 18,
+              "sha256": "608b6a89f8273395f31dab6563767c43caa8c372ff167b8e2d1ab940d87ba51a"
+            }
+          }
+        },
+        "safety/control.db": {
+          "present": true,
+          "schema": 1,
+          "tables": {
+            "audit": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "challenges": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "incidents": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "state": {
+              "rows": 1,
+              "sha256": "7d1b6c645e716519211bb12f69c843400a8ee7dd2df509ed79508687e3be65f3"
+            }
+          }
+        },
+        "conversations.db": {
+          "present": true,
+          "schema": 0,
+          "tables": {
+            "conversations": {
+              "rows": 13,
+              "sha256": "d9113838ee9bebeab24fc904b5604826e6ea686a4748b4086486a6cac1916a50"
+            },
+            "dialogue_receipts": {
+              "rows": 9,
+              "sha256": "0606bd6ef96202cb8706e86c0c4a66f6bbf9b1e4cb832ef3359d1d0d97ca7e7a"
+            }
+          }
+        },
+        "memory.db": {
+          "present": true,
+          "schema": 3,
+          "tables": {
+            "candidate_bindings": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "fact_origins": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "facts": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "receipts": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          }
+        },
+        "persona.db": {
+          "present": false
+        },
+        "continuity.db": {
+          "present": false
+        },
+        "extensions.db": {
+          "present": true,
+          "schema": 1,
+          "tables": {
+            "entries": {
+              "rows": 1,
+              "sha256": "9708b491ef1783ca4d78c61951270ce2b617f7fcd714f5aeff52dde67e608641"
+            },
+            "mcp_policies": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "skill_decisions": {
+              "rows": 6,
+              "sha256": "b4a5f2272f2e2281d27052a50a7814678ed4f010cfa1c575d3a1ccd26d77956f"
+            },
+            "skill_policies": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          }
+        },
+        "project-sources.db": {
+          "present": true,
+          "schema": 1,
+          "tables": {
+            "sources": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          }
+        },
+        "project-catalog.db": {
+          "present": true,
+          "schema": 1,
+          "tables": {
+            "archived_chats": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "profiles": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          }
+        },
+        "workspace.db": {
+          "present": true,
+          "schema": 1,
+          "tables": {
+            "outputs": {
+              "rows": 6,
+              "sha256": "59a8c005756561ef13b6088017b495780a8ddc74cc490d9522d2e721b5105098"
+            },
+            "projects": {
+              "rows": 6,
+              "sha256": "dfaf49e4e880e4b293dc9bb0e4b9ab6bf3f0285061dc6f8a2f96551cc3020231"
+            }
+          }
+        },
+        "evolution/evolution.db": {
+          "present": true,
+          "schema": 8,
+          "tables": {
+            "growth_cycles": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "growth_policies": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "incidents": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "jobs": {
+              "rows": 33,
+              "sha256": "9e49632a55fd378e0b8573a2f66fcc2ae7c86ae64c2d08eb383b02d4b50240f1"
+            },
+            "maintenance_receipts": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "packages": {
+              "rows": 1,
+              "sha256": "8b232f9ca8aaae5366ed4fcd9b36badd017ea6b96498f3eb4eb6ea2d61df904d"
+            },
+            "project_tools": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "ranking_selection": {
+              "rows": 1,
+              "sha256": "f6b7607bb95f8fb8487782f076f128916e772ea79c00cd37ad616608177fa439"
+            },
+            "ranking_versions": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "selection": {
+              "rows": 1,
+              "sha256": "0935b109577cc19f9dee5f7e834a1af42eafd01f85726f3576e809d9c7a33665"
+            },
+            "settings": {
+              "rows": 1,
+              "sha256": "a43e218bb971c8e61bd819130450962ae54eeaf91493bfe8687fa2c84015fb95"
+            },
+            "tool_lifecycle": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "tool_versions": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          }
+        },
+        "network-policy.db": {
+          "present": false
+        }
+      },
+      "after": {
+        "control.db": {
+          "present": true,
+          "schema": 2,
+          "tables": {
+            "actions": {
+              "rows": 18,
+              "sha256": "f0f3121a62d0b6e74483a0b5be7d8ac744e0fee11216b66c5ab037472529ebf7"
+            },
+            "artifacts": {
+              "rows": 16,
+              "sha256": "3e07687fc930429e1333c717e5fd1639f4990dbc36f257db1a639c5e02914acc"
+            },
+            "coding_changes": {
+              "rows": 2,
+              "sha256": "c1bcce173ae88c3d8d05deb8c7c9050ad00153f88f4f97eb19afbcfd043746ec"
+            },
+            "coding_demands": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "computer_queue": {
+              "rows": 10,
+              "sha256": "94f3d4b0390d10600486f554ae93f036b059585d967fb4a7ff4ae530f3448b3b"
+            },
+            "computer_steps": {
+              "rows": 17,
+              "sha256": "e0545ca686975b54075e17b4731acf1f0e76011f5e0388f5e719368b99e9fb0d"
+            },
+            "control": {
+              "rows": 1,
+              "sha256": "48f40bf56a231b8feb405f550a2d499a1ce3ca573825861f738b37b0678fce61"
+            },
+            "skill_success": {
+              "rows": 1,
+              "sha256": "c12df120359907b15d94a6885f688255040d7a3e36ba426a8622dee0b50d0170"
+            },
+            "tasks": {
+              "rows": 18,
+              "sha256": "608b6a89f8273395f31dab6563767c43caa8c372ff167b8e2d1ab940d87ba51a"
+            },
+            "team_calls": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          }
+        },
+        "safety/control.db": {
+          "present": true,
+          "schema": 1,
+          "tables": {
+            "audit": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "challenges": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "incidents": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "state": {
+              "rows": 1,
+              "sha256": "7d1b6c645e716519211bb12f69c843400a8ee7dd2df509ed79508687e3be65f3"
+            }
+          }
+        },
+        "conversations.db": {
+          "present": true,
+          "schema": 0,
+          "tables": {
+            "conversations": {
+              "rows": 13,
+              "sha256": "d9113838ee9bebeab24fc904b5604826e6ea686a4748b4086486a6cac1916a50"
+            },
+            "dialogue_receipts": {
+              "rows": 9,
+              "sha256": "0606bd6ef96202cb8706e86c0c4a66f6bbf9b1e4cb832ef3359d1d0d97ca7e7a"
+            }
+          }
+        },
+        "memory.db": {
+          "present": true,
+          "schema": 3,
+          "tables": {
+            "candidate_bindings": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "fact_origins": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "facts": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "receipts": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          }
+        },
+        "persona.db": {
+          "present": false
+        },
+        "continuity.db": {
+          "present": false
+        },
+        "extensions.db": {
+          "present": true,
+          "schema": 1,
+          "tables": {
+            "entries": {
+              "rows": 1,
+              "sha256": "9708b491ef1783ca4d78c61951270ce2b617f7fcd714f5aeff52dde67e608641"
+            },
+            "mcp_policies": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "skill_decisions": {
+              "rows": 6,
+              "sha256": "b4a5f2272f2e2281d27052a50a7814678ed4f010cfa1c575d3a1ccd26d77956f"
+            },
+            "skill_policies": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          }
+        },
+        "project-sources.db": {
+          "present": true,
+          "schema": 1,
+          "tables": {
+            "sources": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          }
+        },
+        "project-catalog.db": {
+          "present": true,
+          "schema": 1,
+          "tables": {
+            "archived_chats": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "profiles": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          }
+        },
+        "workspace.db": {
+          "present": true,
+          "schema": 1,
+          "tables": {
+            "outputs": {
+              "rows": 6,
+              "sha256": "59a8c005756561ef13b6088017b495780a8ddc74cc490d9522d2e721b5105098"
+            },
+            "projects": {
+              "rows": 6,
+              "sha256": "dfaf49e4e880e4b293dc9bb0e4b9ab6bf3f0285061dc6f8a2f96551cc3020231"
+            }
+          }
+        },
+        "evolution/evolution.db": {
+          "present": true,
+          "schema": 8,
+          "tables": {
+            "growth_cycles": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "growth_policies": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "incidents": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "jobs": {
+              "rows": 33,
+              "sha256": "9e49632a55fd378e0b8573a2f66fcc2ae7c86ae64c2d08eb383b02d4b50240f1"
+            },
+            "maintenance_receipts": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "packages": {
+              "rows": 1,
+              "sha256": "8b232f9ca8aaae5366ed4fcd9b36badd017ea6b96498f3eb4eb6ea2d61df904d"
+            },
+            "project_tools": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "ranking_selection": {
+              "rows": 1,
+              "sha256": "f6b7607bb95f8fb8487782f076f128916e772ea79c00cd37ad616608177fa439"
+            },
+            "ranking_versions": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "selection": {
+              "rows": 1,
+              "sha256": "0935b109577cc19f9dee5f7e834a1af42eafd01f85726f3576e809d9c7a33665"
+            },
+            "settings": {
+              "rows": 1,
+              "sha256": "a43e218bb971c8e61bd819130450962ae54eeaf91493bfe8687fa2c84015fb95"
+            },
+            "tool_lifecycle": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "tool_versions": {
+              "rows": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          }
+        },
+        "network-policy.db": {
+          "present": false
+        }
+      }
+    },
+    "team_ui_asset_matches_source": true,
+    "team_ui_sha256": "be3438a627b2a44de578d53856784dacaec501496c997560c797dff6846f9598"
+  },
+  "verification_runner_note": "One interim test command named non-existent test_releases; corrected to test_runtime_start/test_runtime_releases/test_release_bundle. Final explicit suite passed.",
+  "limits": [
+    "Two logical agents run sequentially in one existing background lane; no new idle process or downloaded model.",
+    "Model critique is not business/factual acceptance. Same-model roles may share errors.",
+    "No private memory/history/files automatically copied; no automatic execution, recursive teams, cross-node rights or fallback.",
+    "Injected crash state and pressure are not a real machine failure or low-memory endurance certification.",
+    "Physical multi-device, full-duplex acoustic, low-resource PC and long-term growth gates remain open."
+  ],
+  "final_targeted_tests": {
+    "command": "python -m unittest test_team_tasks -q",
+    "count": 16,
+    "result": "passed",
+    "reason": "Final pre-dispatch cancellation state fix and additional test; overlaps main suite."
+  },
+  "javascript": {
+    "syntax": [
+      "team-workbench.js",
+      "conversation_tasks.js"
+    ],
+    "voice_gate": "passed"
+  },
+  "docs": {
+    "documents": 25,
+    "diagrams": 21,
+    "artifacts": 42,
+    "result": "passed"
+  },
+  "additional_web_tests": {
+    "command": "python -m unittest test_web test_computer_web test_task_queue -q",
+    "count": 41,
+    "result": "passed"
+  },
+  "package": {
+    "captured_at": "2026-10-20T11:35:39.991579+00:00",
+    "status": "passed",
+    "package": {
+      "version": "0.1.82",
+      "path": "H:\\JarvisData\\diagnostics\\jarvis-v0.1.82.zip",
+      "sha256": "43552e5a505b7c1e57c1f20e521440c28e9fdf95a5cfadba527b6fb307abed95",
+      "files": 1608,
+      "bytes": 70548261,
+      "status": "candidate_verified",
+      "dependencies": {
+        "playwright": "1.64.0",
+        "greenlet": "3.5.6",
+        "pyee": "14.0.0",
+        "typing_extensions": "4.16.0",
+        "cryptography": "50.0.2",
+        "cffi": "2.1.1",
+        "pycparser": "3.11",
+        "google-auth": "2.62.0",
+        "requests": "2.34.2",
+        "certifi": "2026.7.22",
+        "urllib3": "2.8.0",
+        "idna": "3.20",
+        "charset-normalizer": "3.5.2",
+        "pyasn1_modules": "0.4.2",
+        "pyasn1": "0.6.4",
+        "httpx": "0.28.1",
+        "httpcore": "1.0.9",
+        "h11": "0.16.0",
+        "anyio": "4.15.1",
+        "jsonschema": "4.26.0",
+        "rpds-py": "2026.9.1",
+        "referencing": "0.37.0",
+        "attrs": "26.1.0",
+        "jsonschema-specifications": "2025.9.1"
+      }
+    },
+    "runs": [
+      {
+        "executable": "C:\\Users\\samuel\\AppData\\Local\\Temp\\jarvis-package-probe-snfve_i3\\candidate\\python\\python.exe",
+        "version": "0.1.82",
+        "stopped": true,
+        "task_id": "task_1e55d30adb505d48b60a9e1a912e0504",
+        "artifact_digest": "sha256:2aba68e31c1ccf2c347201bef4bc470c3543ac3564036014cc3b2360a24e713a",
+        "worker_manifest": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+        "network": "Python audit hook denies connect/DNS; not an OS network isolation test"
+      },
+      {
+        "executable": "C:\\Users\\samuel\\AppData\\Local\\Temp\\jarvis-package-probe-snfve_i3\\fallback\\python\\python.exe",
+        "version": "0.1.82",
+        "stopped": true,
+        "task_id": "task_1e55d30adb505d48b60a9e1a912e0504",
+        "artifact_digest": "sha256:2aba68e31c1ccf2c347201bef4bc470c3543ac3564036014cc3b2360a24e713a",
+        "worker_manifest": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+        "network": "Python audit hook denies connect/DNS; not an OS network isolation test"
+      }
+    ],
+    "limitations": [
+      "Same-version fallback slot; no cross-version schema migration or protected service activation.",
+      "Python network-denial hook only; machine-wide disconnected boot not tested.",
+      "Optional browser/speech, model weights, owner keys and live state are excluded."
+    ]
+  },
+  "live_probe_total_estimated_usd": 0.02699925
+}

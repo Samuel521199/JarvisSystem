@@ -1,0 +1,812 @@
+{
+  "version": "0.1.77",
+  "date": "2026-10-20",
+  "status": "verified-bounded-subset",
+  "scope": "Explicit receipt archive preserving complete original lookup/idempotency and regression cases; retired directory store/restore without activation; manual capacity UI and reviewed bounded maintenance.",
+  "complete_k4_gate": false,
+  "acceptance_ids": [
+    "V-K4-T25",
+    "V-K4-T26",
+    "V-K4-T27",
+    "V-K4-T28"
+  ],
+  "limitations": [
+    "Independent domain semantic quality, longitudinal net benefit, policy-based automatic admission and complete K4 chain remain open.",
+    "Online slots are bounded; total receipt index 5096, directory identities 288, receipt archives 4096 files / 128 MiB, one file 4 MiB, audit 256 operations. Exhaustion reports refusal, never deletes owner data.",
+    "Archival retains bytes and may increase disk usage. No VACUUM or physical disk space saving claim; ledger and archive files must be preserved together.",
+    "Reference checks across conversations and growth stores are conservative snapshots, not a cross-database transaction. Original receipt IDs remain resolvable for later references.",
+    "File/database failure injected in temporary cores; no physical power loss or full-disk experiment. No maintenance mutation on production personal/project data.",
+    "One local 1000-record preview measurement excludes SQLite C memory, browser/models and total RSS. No low-PC or long-term resource conclusion.",
+    "Schema 6 compatibility rejects historical runtimes; no downgrade migration or arbitrary executable rollback is claimed."
+  ],
+  "tests": {
+    "unique_test_count": 96,
+    "executions_successful": 108,
+    "broad_regression": {
+      "version": "0.1.77",
+      "tests": 93,
+      "seconds": 720.1968004,
+      "test_ids": [
+        "test_growth_maintenance.MaintenanceHTTPTests.test_maintenance_auth_and_query_remain_available_when_queue_full",
+        "test_growth_maintenance.MaintenanceTests.test_archive_file_and_audit_budgets_remain_bounded",
+        "test_growth_maintenance.MaintenanceTests.test_archive_original_identity_lookup_and_idempotency_survive_restart",
+        "test_growth_maintenance.MaintenanceTests.test_busy_lane_archive_budget_and_review_checks",
+        "test_growth_maintenance.MaintenanceTests.test_commit_failure_keeps_original_then_verified_orphan_can_be_reused",
+        "test_growth_maintenance.MaintenanceTests.test_conversation_lifecycle_and_parent_references_are_blocked",
+        "test_growth_maintenance.MaintenanceTests.test_corrupt_archive_fails_closed_and_original_request_never_reexecutes",
+        "test_growth_maintenance.MaintenanceTests.test_directory_restore_rejects_full_capacity_and_pending_project",
+        "test_growth_maintenance.MaintenanceTests.test_directory_store_and_restore_release_slot_keep_identity_and_never_activate",
+        "test_growth_maintenance.MaintenanceTests.test_full_job_quota_does_not_block_maintenance_or_idempotent_lookup",
+        "test_growth_maintenance.MaintenanceTests.test_preview_is_readonly_and_protects_unknown_proposed_and_unconfirmed",
+        "test_growth_maintenance.MaintenanceTests.test_stale_preview_and_batch_failure_do_not_change_online_receipts",
+        "test_evolution.ActualWorkerTests.test_compiles_and_executes_candidate_with_real_lpac",
+        "test_evolution.ActualWorkerTests.test_infinite_candidate_is_terminated_by_real_limits",
+        "test_evolution.EvolutionHTTPTests.test_auth_assets_strict_requests_and_asynchronous_job",
+        "test_evolution.EvolutionHTTPTests.test_coding_does_not_occupy_chat_lane",
+        "test_evolution.EvolutionHTTPTests.test_growth_initialization_failure_does_not_block_host_start",
+        "test_evolution.EvolutionTests.test_automatic_heal_requires_opt_in_and_separate_fault_job",
+        "test_evolution.EvolutionTests.test_background_incident_dedupe_and_daily_budget",
+        "test_evolution.EvolutionTests.test_candidate_static_rejection_before_execution",
+        "test_evolution.EvolutionTests.test_config_compare_and_swap_and_job_policy_snapshot",
+        "test_evolution.EvolutionTests.test_corrupt_package_detected_and_fallback_verified",
+        "test_evolution.EvolutionTests.test_diagnosis_is_advisory_and_has_independent_model",
+        "test_evolution.EvolutionTests.test_disabled_primary_can_fallback_before_dispatch",
+        "test_evolution.EvolutionTests.test_enabled_check_records_missing_optional_without_building",
+        "test_evolution.EvolutionTests.test_failed_candidate_is_rejected_then_repaired_with_feedback",
+        "test_evolution.EvolutionTests.test_fallback_counts_against_two_calls_and_preserves_actual_route",
+        "test_evolution.EvolutionTests.test_future_database_not_migrated",
+        "test_evolution.EvolutionTests.test_gap_is_not_a_fault_and_inspection_never_runs_worker",
+        "test_evolution.EvolutionTests.test_generation_independent_validation_activation_and_real_use",
+        "test_evolution.EvolutionTests.test_heal_restores_original_contract_using_its_own_model",
+        "test_evolution.EvolutionTests.test_healthy_automatic_records_bounded_and_failure_preserved",
+        "test_evolution.EvolutionTests.test_healthy_checks_and_repeated_ensure_do_not_call_model",
+        "test_evolution.EvolutionTests.test_inspection_diagnosis_fallback_does_not_publish",
+        "test_evolution.EvolutionTests.test_interrupted_publication_deactivated_and_not_replayed",
+        "test_evolution.EvolutionTests.test_invalid_inputs_never_reach_worker",
+        "test_evolution.EvolutionTests.test_memory_pressure_stops_before_paid_call",
+        "test_evolution.EvolutionTests.test_metadata_or_extra_file_drift_rejected",
+        "test_evolution.EvolutionTests.test_no_model_when_auto_disabled",
+        "test_evolution.EvolutionTests.test_post_activation_failure_rolls_back",
+        "test_evolution.EvolutionTests.test_real_input_regression_rolls_back_without_returning_bad_output",
+        "test_evolution.EvolutionTests.test_runtime_repair_survives_restart_while_original_call_stays_failed",
+        "test_evolution.EvolutionTests.test_singleflight_cancellation_and_idempotent_request",
+        "test_evolution.EvolutionTests.test_stale_base_and_unverified_packages_cannot_activate",
+        "test_evolution.EvolutionTests.test_stopped_core_blocks_dispatch",
+        "test_evolution.EvolutionTests.test_temporary_resource_failure_does_not_quarantine_healthy_code",
+        "test_evolution.EvolutionTests.test_two_bad_candidates_do_not_replace_good_version",
+        "test_evolution.EvolutionTests.test_unknown_model_result_never_retried",
+        "test_evolution.EvolutionTests.test_unknown_partial_and_offline_never_switch_models",
+        "test_evolution.EvolutionTests.test_upgrade_preserves_old_contract_and_manual_rollback",
+        "test_evolution.EvolutionTests.test_v1_settings_migration_preserves_artifacts_without_enabling_healing",
+        "test_project_tools.ProjectToolTests.test_actual_publish_use_disable_restore_restart_and_idempotency",
+        "test_project_tools.ProjectToolTests.test_capacity_reserves_recovery_space_and_contract_is_bounded",
+        "test_project_tools.ProjectToolTests.test_runtime_change_and_cancel_during_observation_disable_candidate",
+        "test_project_tools.ProjectToolTests.test_shared_project_context_other_project_and_corrupt_json",
+        "test_project_tools.ProjectToolTests.test_source_scope_generation_and_contract_cannot_be_bypassed",
+        "test_project_tools.ProjectToolTests.test_unchanged_regression_with_bad_input_does_not_quarantine",
+        "test_project_tools.ProjectToolTests.test_unconfirmed_publication_is_deactivated_on_recovery",
+        "test_project_tools.ProjectToolTests.test_upgrade_failure_rolls_back_without_replaying_real_input",
+        "test_tool_lifecycle.LifecycleTests.test_corrupt_baseline_is_evidence_but_corrupt_candidate_is_quarantined",
+        "test_tool_lifecycle.LifecycleTests.test_failure_quarantines_only_candidate_and_stable_keeps_serving",
+        "test_tool_lifecycle.LifecycleTests.test_legacy_publication_without_review_and_evidence_cannot_bypass_gate",
+        "test_tool_lifecycle.LifecycleTests.test_new_admission_does_not_activate_until_distinct_novel_real_inputs_and_feedback",
+        "test_tool_lifecycle.LifecycleTests.test_old_versions_retire_only_after_live_and_recovery_references_release",
+        "test_tool_lifecycle.LifecycleTests.test_paired_quality_evidence_and_interrupted_upgrade_restore_stable_without_replay",
+        "test_tool_lifecycle.LifecycleTests.test_restart_pauses_without_replay_resume_and_revision_scope_guards",
+        "test_tool_lifecycle.LifecycleTests.test_retirement_blocks_bypass_restore_requires_fresh_canary_and_keeps_files",
+        "test_tool_lifecycle.LifecycleTests.test_schema3_migration_keeps_selection_legacy_and_old_receipt_is_query_only",
+        "test_tool_lifecycle.LifecycleTests.test_trial_budget_and_stable_change_cannot_reuse_old_admission",
+        "test_tool_quality_archive.ArchiveTests.test_archive_before_db_failure_leaves_original_and_retry_uses_same_bytes",
+        "test_tool_quality_archive.ArchiveTests.test_archive_load_idempotency_and_receipts_keep_stable_and_source",
+        "test_tool_quality_archive.ArchiveTests.test_capacity_summary_has_bounded_memory_with_large_stored_packages",
+        "test_tool_quality_archive.ArchiveTests.test_corrupt_archive_cannot_load_or_be_overwritten_and_scope_is_strict",
+        "test_tool_quality_archive.ArchiveTests.test_live_recovery_refs_and_unretired_versions_cannot_archive",
+        "test_tool_quality_archive.ArchiveTests.test_online_limit_released_but_restoration_respects_capacity",
+        "test_tool_quality_archive.QualityTests.test_counts_conflicts_duplicates_overlap_and_never_certifies_semantic_truth",
+        "test_tool_intents.ParserTests.test_direct_calls_retain_exact_json_and_never_guess",
+        "test_tool_intents.ParserTests.test_negation_questions_quotes_conditions_and_ambiguity",
+        "test_tool_intents.ToolIntentTests.test_actual_named_invocation_reconciles_without_duplicate_after_change",
+        "test_tool_intents.ToolIntentTests.test_cancelled_gap_and_discussion_cannot_handoff",
+        "test_tool_intents.ToolIntentTests.test_changed_directory_runtime_and_candidate_forgery_rejected",
+        "test_tool_intents.ToolIntentTests.test_foreign_receipt_collision_never_returns_other_scope",
+        "test_tool_intents.ToolIntentTests.test_gap_to_original_coding_demand_persists_and_never_starts_model",
+        "test_tool_intents.ToolIntentTests.test_growth_receipts_lookup_list_cancel_and_reanalysis_share_plan",
+        "test_tool_intents.ToolIntentTests.test_scope_idempotency_cancel_and_input_unchanged",
+        "test_tool_contracts.ContractParserTests.test_strict_model_shape_never_accepts_executable_or_approval",
+        "test_tool_contracts.ToolContractTests.test_capacity_and_same_request_wrong_plan_rejected",
+        "test_tool_contracts.ToolContractTests.test_crash_between_review_and_handoff_reconciles_or_blocks_changed_source",
+        "test_tool_contracts.ToolContractTests.test_draft_to_review_code_publish_and_actual_use",
+        "test_tool_contracts.ToolContractTests.test_fallback_and_unknown_are_bounded_and_recorded",
+        "test_tool_contracts.ToolContractTests.test_parent_cancel_stops_inflight_draft_and_restart_does_not_replay",
+        "test_tool_contracts.ToolContractTests.test_review_requires_answers_nonoverlapping_oracle_and_exact_contract",
+        "test_tool_contracts.ToolContractTests.test_scope_stale_directory_runtime_and_cancel_block_acceptance"
+      ],
+      "failures": [],
+      "errors": [],
+      "skipped": []
+    },
+    "final_maintenance_and_real_tool_integration": {
+      "version": "0.1.77",
+      "tests": 15,
+      "seconds": 68.41193500000008,
+      "test_ids": [
+        "test_growth_maintenance.MaintenanceHTTPTests.test_maintenance_auth_and_query_remain_available_when_queue_full",
+        "test_growth_maintenance.MaintenanceTests.test_archive_file_and_audit_budgets_remain_bounded",
+        "test_growth_maintenance.MaintenanceTests.test_archive_original_identity_lookup_and_idempotency_survive_restart",
+        "test_growth_maintenance.MaintenanceTests.test_busy_lane_archive_budget_and_review_checks",
+        "test_growth_maintenance.MaintenanceTests.test_commit_failure_keeps_original_then_verified_orphan_can_be_reused",
+        "test_growth_maintenance.MaintenanceTests.test_conversation_lifecycle_and_parent_references_are_blocked",
+        "test_growth_maintenance.MaintenanceTests.test_corrupt_archive_fails_closed_and_original_request_never_reexecutes",
+        "test_growth_maintenance.MaintenanceTests.test_directory_restore_rejects_full_capacity_and_pending_project",
+        "test_growth_maintenance.MaintenanceTests.test_directory_store_and_restore_release_slot_keep_identity_and_never_activate",
+        "test_growth_maintenance.MaintenanceTests.test_full_job_quota_does_not_block_maintenance_or_idempotent_lookup",
+        "test_growth_maintenance.MaintenanceTests.test_preview_is_readonly_and_protects_unknown_proposed_and_unconfirmed",
+        "test_growth_maintenance.MaintenanceTests.test_small_terminal_receipts_can_release_online_slot_without_claiming_byte_savings",
+        "test_growth_maintenance.MaintenanceTests.test_stale_preview_and_batch_failure_do_not_change_online_receipts",
+        "test_growth_maintenance.MaintenanceToolTests.test_archived_verified_run_keeps_result_and_regression_for_future_candidates",
+        "test_growth_maintenance.MaintenanceToolTests.test_stored_identity_cannot_be_reused_and_restore_requires_fresh_canary"
+      ],
+      "failures": [],
+      "errors": [],
+      "skipped": []
+    },
+    "qualification_note": "Broad 93 passed before final delta removing byte-savings eligibility restriction for tiny terminal receipts and rejecting non-string operations. Final 15 reran maintenance/auth/reference/quota/failure/restart and real LPAC integration against final source; no unrelated K2 or paid model evaluation rerun.",
+    "broad_maintenance_sha256": "05f627e44bc2fa122b5f1682cbfe2040458031756fe9ac33a74dd3696cb41b74",
+    "final_maintenance_sha256": "491a672bac27ef560f544e75e1fc5bb771a21f3c11a422e33e0f3fed1ab8e2d8"
+  },
+  "browser": {
+    "maintenance_final": {
+      "version": "0.1.77",
+      "status": "passed",
+      "paid_model_calls": 0,
+      "checks": [
+        "explicit preview, unknown protected; reviewed actual archive frees online slot, original ID/request and result intact",
+        "reviewed directory store releases slot; restore remains retired with original identity and increasing generation",
+        "committed POST reply lost; recent maintenance receipt reconciles same operation with no second admission",
+        "reload retains archives and audit; narrow layout no document overflow; zero browser errors and zero model calls"
+      ],
+      "page_errors": [],
+      "chat_calls": 0,
+      "capacity": {
+        "online_jobs": 1,
+        "archived_jobs": 2,
+        "online_limit": 1000,
+        "index_limit": 5096,
+        "online_directories": 1,
+        "directory_limit": 32,
+        "maintenance_receipts": 4,
+        "maintenance_limit": 256,
+        "ledger_allocated_bytes": 86016,
+        "ledger_reusable_bytes": 0
+      }
+    },
+    "existing_project_tools_and_archives": {
+      "version": "0.1.77",
+      "status": "passed",
+      "paid_model_calls": 0,
+      "checks": [
+        "reviewed staging keeps inactive; two novel independent LPAC trials and usefulness unlock explicit promotion",
+        "new input actual LPAC execution with independent result; usage counted once",
+        "missing nonce / foreign origin rejected",
+        "reload retains receipts; disable and validated restore update controls",
+        "retirement disables capability; restore is inactive until a new reviewed canary qualifies",
+        "unreferenced retired package fixture -> reviewed real archive and load UI; slot counts update, load remains retired and stable unchanged"
+      ],
+      "intent_checks": [
+        "exact named natural request dispatched once",
+        "result displayed and archived as control receipt",
+        "reload opens original receipt without replay",
+        "lexical suggestion waits for explicit input and independent expectation",
+        "gap binds original coding demand without model dispatch",
+        "negation remains non-executable",
+        "ordinary prose remains chat",
+        "selection form survives panel refresh",
+        "all plan mutations reject foreign origin; plan reads require nonce"
+      ],
+      "execution": {
+        "elapsed_seconds": 1.527,
+        "isolation": {
+          "active_process_limit": 1,
+          "appcontainer": true,
+          "backend": "windows-lpac-job",
+          "capabilities": [
+            "registryRead"
+          ],
+          "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+          "cpu_seconds": 0.28125,
+          "cpu_time_limit_seconds": 3,
+          "elapsed_seconds": 0.5923,
+          "lpac": true,
+          "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+          "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+          "memory_limit_bytes": 201326592,
+          "package_sid": "S-1-15-2-3725021823-463195254-690884987-4115332973-4294824647-3471625638-1248896229",
+          "peak_process_memory_bytes": 17641472,
+          "pid": 37416,
+          "runtime_bytes": 22904399,
+          "wall_time_limit_seconds": 12
+        },
+        "model_calls": 0,
+        "regression": {
+          "cases": 4,
+          "isolation": {
+            "active_process_limit": 1,
+            "appcontainer": true,
+            "backend": "windows-lpac-job",
+            "capabilities": [
+              "registryRead"
+            ],
+            "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+            "cpu_seconds": 0.296875,
+            "cpu_time_limit_seconds": 3,
+            "elapsed_seconds": 0.5788,
+            "lpac": true,
+            "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+            "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+            "memory_limit_bytes": 201326592,
+            "package_sid": "S-1-15-2-4141587881-3227107005-357291359-535832966-3211049314-1216064146-411106788",
+            "peak_process_memory_bytes": 18231296,
+            "pid": 14024,
+            "runtime_bytes": 22904399,
+            "wall_time_limit_seconds": 12
+          },
+          "passed": true
+        },
+        "result_digest": "sha256:e629fa6598d732768f7c726b4b621285f9c3b85303900aa912017db7617d8bdb",
+        "result_verified": true,
+        "text": "15",
+        "version": "935a4188e46081848704fe7a880b26a10721b1bc41d62a55ade4a73c22c21bf5"
+      },
+      "ledger_bytes": 188416,
+      "synthetic_proposal_calls": 1,
+      "tool_model_calls": 0,
+      "page_errors": [],
+      "business_source_unchanged": true,
+      "conversation_id": "700dd057f3874039a672167283083019"
+    },
+    "screenshots_local": "H:\\JarvisData\\diagnostics\\k4-maintenance-20261020\\ui-final",
+    "qualification_note": "Maintenance UI rerun after final backend delta; original project-tool archive/intent/lifecycle UI regression ran before that delta. Actual Edge, HTTP and SQLite; original tool execution used Windows LPAC. Proposal model in existing probe synthetic, no paid model."
+  },
+  "resources": {
+    "version": "0.1.77",
+    "fixture": "1000 synthetic terminal receipts with 3000 character events each",
+    "preview_seconds": 0.05972509999992326,
+    "python_peak_allocated_bytes": 731393,
+    "online_jobs": 1000,
+    "paid_model_calls": 0,
+    "limits": "Single manual preview on final source, current host. tracemalloc excludes SQLite C memory, browser, models, whole RSS and low-PC or long-term behavior."
+  },
+  "resolved_issues": [
+    "Read-only sqlite3 conversation reference connection now closes explicitly; context-manager transaction scope alone leaked the handle and blocked temporary-directory cleanup.",
+    "Tiny terminal receipts were incorrectly excluded when a query projection was not smaller. Failing edge test retained externally; final implementation releases online slots without claiming byte savings and final test passes.",
+    "Malformed operation types now return validation error rather than generic unavailable; HTTP and direct validation covered.",
+    "Lost committed HTTP response reconciles the existing maintenance receipt; no new request identity is silently created."
+  ],
+  "source_sha256": {
+    "apps/web/evolution.css": "74644efed0496aac6b9755fd2567159919d58f6e5caef47a1efd3dc0e557d36a",
+    "apps/web/evolution.js": "b1708380f58b50fb5b1e95a665c60f156e77bc25661e6d4fe935b791dca96b80",
+    "apps/web/evolution_routes.py": "5762d590cb371c70ace514918955152347dbdd3f43feb76a2a5612d95e0c3701",
+    "apps/web/project-tools.js": "5031c96434c501ea8fe8d014c33b5d9892315ccd172dce305a54545d45011f0d",
+    "apps/web/server.py": "a481d2f8953463ce58e1c76db70f7b2e5c297ff1996b09470d52457a748240c1",
+    "apps/web/tool-lifecycle.js": "471b962bb53bc28c7ebb6128c738e3cd30b2f87f1e144403a6a6a42ce385a568",
+    "pyproject.toml": "8d09d1fa503bc9cfa742f271971d36bb9d38be5309bd336943f3c424737cf4c8",
+    "runtime/node-host/jarvis_core/__init__.py": "eccfb403fd951056e440b2001286ce34ddc9bae5207611cca1e38c65fc19d370",
+    "runtime/node-host/jarvis_core/evolution/catalog.py": "9c410e1de4a810ad4ce8b0f10ab5fb98f7408b36e52afea36e254d4184955fd4",
+    "runtime/node-host/jarvis_core/evolution/lifecycle.py": "f1805bdb3b0cb04d0779a7b2a8f2ff2d0cb6bd14bf0fea787660732f654a530f",
+    "runtime/node-host/jarvis_core/evolution/maintenance.py": "491a672bac27ef560f544e75e1fc5bb771a21f3c11a422e33e0f3fed1ab8e2d8",
+    "runtime/node-host/jarvis_core/evolution/store.py": "2ab9758de72408db890d5b9689ae1158ac9dbba2a116c3b4378208088461caef",
+    "runtime/node-host/jarvis_core/evolution/tool_archive.py": "f73c306837f07cf1a2ccf3c07cefdbe6708436352cf57951494ca78a0a8b3997",
+    "runtime/node-host/jarvis_core/evolution/tool_intent.py": "0332ea4eacc3f99f586f2215f588e790146ba06f168331e74db67a653bd95179",
+    "runtime/node-host/jarvis_core/releases.py": "8ebc2f4f7d3755145a2b86251d8fa86148e89d75ed3abbf2099380942a2555b4",
+    "tests/test_growth_maintenance.py": "e2abb05c7085aea3f4e315f9bbcbaf2f7da250797fadec221a86bda419d05b6c",
+    "tests/test_tool_lifecycle.py": "520fa4df18e6d3fbdf1c89b04201bc2a0469354678784836ae2b3b07defd891a",
+    "tools/probe_growth_maintenance_ui.py": "7ee30230f61bb9f8f72980a6fe1cdfaba9a870f67b8c020495ba1effaaecefe2",
+    "uv.lock": "5f440b069c73a55a9d8312b58b4a1dae45241795dd1894b660b4e5b52ea31c0a"
+  },
+  "diagram_review": {
+    "changed_sources": [],
+    "note": "Existing Host / SQLite / bounded archive adapters retained; no baseline Mermaid topology change or diagram rerender claimed."
+  },
+  "static_checks": {
+    "javascript_syntax": "passed for evolution.js, project-tools.js, tool-lifecycle.js",
+    "seed_check": {
+      "ok": true,
+      "assets": 22,
+      "fixture_cases": 12
+    },
+    "docs_check": {
+      "status": "passed",
+      "documents": 25,
+      "diagrams": 21,
+      "artifacts": 42,
+      "errors": 0
+    },
+    "navigation_sync": "up to date",
+    "git_whitespace_check": "passed (repository mixed line endings preserved)"
+  },
+  "deployment": {
+    "status": "SUCCEEDED",
+    "source_version": "0.1.77",
+    "data_dir": "C:\\Users\\samuel\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\Jarvis\\data",
+    "previous_version": null,
+    "previous_instance": null,
+    "current_instance": "aae0b10e345327b8f9734a01eeb45713",
+    "idle_graceful_reload": false,
+    "startup_from_absent": true,
+    "served_sha256": {
+      "dialogue.js": "ef95a69c43ec38d94d48c1b6ab40106faa8777426eb925ea3224a34bb61132a3",
+      "resources.js": "586e03243199134cec0c4da7bedde691f904f73ca8e7aee09ea2dd0202c99e2b",
+      "workspace.js": "295e8a18545e5f73649f382205da3d8e76d462396bdb0189223cdf1beae4e76a",
+      "conversation_tasks.js": "bcc474ac43ab1acd3ed38b965d7935a334eaa9fd6c53d1dbb60745097cd616b8",
+      "mcp_manager.js": "0c74df31951193bbe830bdfe24a10eb90b9cb31bb604ce54109acc5fb1cd9702",
+      "evolution.js": "b1708380f58b50fb5b1e95a665c60f156e77bc25661e6d4fe935b791dca96b80",
+      "tool-lifecycle.js": "471b962bb53bc28c7ebb6128c738e3cd30b2f87f1e144403a6a6a42ce385a568",
+      "project-tools.js": "5031c96434c501ea8fe8d014c33b5d9892315ccd172dce305a54545d45011f0d",
+      "evolution.css": "74644efed0496aac6b9755fd2567159919d58f6e5caef47a1efd3dc0e557d36a"
+    },
+    "calculation": "84",
+    "personal_read_only": true,
+    "duplicate_did_not_repeat_calculation": true,
+    "cancel_before_submit": true,
+    "restart_fence": null,
+    "instance_fence": true,
+    "empty_restart_queue_reviewed_and_resumed": true,
+    "admission_ms": 41.928,
+    "backups": {
+      "/api/speech/fast": "stopped",
+      "/api/speech": "stopped"
+    },
+    "cloud_calls": 0,
+    "limits": "One local calculator and personal-settings query; no paid model, microphone, task replay, persistent dialogue recovery or physical voice timing.",
+    "maintenance_preview": {
+      "capacity": {
+        "online_jobs": 33,
+        "archived_jobs": 0,
+        "online_limit": 1000,
+        "index_limit": 5096,
+        "online_directories": 0,
+        "directory_limit": 32,
+        "maintenance_receipts": 0,
+        "maintenance_limit": 256,
+        "ledger_allocated_bytes": 147456,
+        "ledger_reusable_bytes": 0
+      },
+      "archive": {
+        "files": 0,
+        "bytes": 0,
+        "file_limit": 4096,
+        "byte_limit": 134217728
+      },
+      "model_calls": 0
+    },
+    "before_fingerprint": {
+      "control.db": {
+        "present": true,
+        "schema": 2,
+        "tables": {
+          "actions": {
+            "rows": 18,
+            "sha256": "f0f3121a62d0b6e74483a0b5be7d8ac744e0fee11216b66c5ab037472529ebf7"
+          },
+          "artifacts": {
+            "rows": 16,
+            "sha256": "3e07687fc930429e1333c717e5fd1639f4990dbc36f257db1a639c5e02914acc"
+          },
+          "coding_changes": {
+            "rows": 2,
+            "sha256": "c1bcce173ae88c3d8d05deb8c7c9050ad00153f88f4f97eb19afbcfd043746ec"
+          },
+          "computer_queue": {
+            "rows": 10,
+            "sha256": "94f3d4b0390d10600486f554ae93f036b059585d967fb4a7ff4ae530f3448b3b"
+          },
+          "computer_steps": {
+            "rows": 17,
+            "sha256": "e0545ca686975b54075e17b4731acf1f0e76011f5e0388f5e719368b99e9fb0d"
+          },
+          "control": {
+            "rows": 1,
+            "sha256": "48f40bf56a231b8feb405f550a2d499a1ce3ca573825861f738b37b0678fce61"
+          },
+          "skill_success": {
+            "rows": 1,
+            "sha256": "c12df120359907b15d94a6885f688255040d7a3e36ba426a8622dee0b50d0170"
+          },
+          "tasks": {
+            "rows": 18,
+            "sha256": "608b6a89f8273395f31dab6563767c43caa8c372ff167b8e2d1ab940d87ba51a"
+          }
+        }
+      },
+      "safety/control.db": {
+        "present": true,
+        "schema": 1,
+        "tables": {
+          "audit": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "challenges": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "incidents": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "state": {
+            "rows": 1,
+            "sha256": "7d1b6c645e716519211bb12f69c843400a8ee7dd2df509ed79508687e3be65f3"
+          }
+        }
+      },
+      "conversations.db": {
+        "present": true,
+        "schema": 0,
+        "tables": {
+          "conversations": {
+            "rows": 13,
+            "sha256": "d9113838ee9bebeab24fc904b5604826e6ea686a4748b4086486a6cac1916a50"
+          },
+          "dialogue_receipts": {
+            "rows": 9,
+            "sha256": "0606bd6ef96202cb8706e86c0c4a66f6bbf9b1e4cb832ef3359d1d0d97ca7e7a"
+          }
+        }
+      },
+      "memory.db": {
+        "present": true,
+        "schema": 3,
+        "tables": {
+          "candidate_bindings": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "fact_origins": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "facts": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "receipts": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "persona.db": {
+        "present": false
+      },
+      "continuity.db": {
+        "present": false
+      },
+      "extensions.db": {
+        "present": true,
+        "schema": 1,
+        "tables": {
+          "entries": {
+            "rows": 1,
+            "sha256": "9708b491ef1783ca4d78c61951270ce2b617f7fcd714f5aeff52dde67e608641"
+          },
+          "mcp_policies": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "skill_decisions": {
+            "rows": 6,
+            "sha256": "b4a5f2272f2e2281d27052a50a7814678ed4f010cfa1c575d3a1ccd26d77956f"
+          },
+          "skill_policies": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "project-sources.db": {
+        "present": true,
+        "schema": 1,
+        "tables": {
+          "sources": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "project-catalog.db": {
+        "present": true,
+        "schema": 1,
+        "tables": {
+          "archived_chats": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "profiles": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "workspace.db": {
+        "present": true,
+        "schema": 1,
+        "tables": {
+          "outputs": {
+            "rows": 6,
+            "sha256": "59a8c005756561ef13b6088017b495780a8ddc74cc490d9522d2e721b5105098"
+          },
+          "projects": {
+            "rows": 6,
+            "sha256": "dfaf49e4e880e4b293dc9bb0e4b9ab6bf3f0285061dc6f8a2f96551cc3020231"
+          }
+        }
+      },
+      "evolution/evolution.db": {
+        "present": true,
+        "schema": 5,
+        "tables": {
+          "incidents": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "jobs": {
+            "rows": 33,
+            "sha256": "20e30ac02ef16c9e854a6813542ed01e8bfdf12bf4b8255ff52ccb4979c19867"
+          },
+          "packages": {
+            "rows": 1,
+            "sha256": "8b232f9ca8aaae5366ed4fcd9b36badd017ea6b96498f3eb4eb6ea2d61df904d"
+          },
+          "project_tools": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "selection": {
+            "rows": 1,
+            "sha256": "0935b109577cc19f9dee5f7e834a1af42eafd01f85726f3576e809d9c7a33665"
+          },
+          "settings": {
+            "rows": 1,
+            "sha256": "a43e218bb971c8e61bd819130450962ae54eeaf91493bfe8687fa2c84015fb95"
+          },
+          "tool_lifecycle": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "tool_versions": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "network-policy.db": {
+        "present": false
+      }
+    },
+    "after_fingerprint": {
+      "control.db": {
+        "present": true,
+        "schema": 2,
+        "tables": {
+          "actions": {
+            "rows": 18,
+            "sha256": "f0f3121a62d0b6e74483a0b5be7d8ac744e0fee11216b66c5ab037472529ebf7"
+          },
+          "artifacts": {
+            "rows": 16,
+            "sha256": "3e07687fc930429e1333c717e5fd1639f4990dbc36f257db1a639c5e02914acc"
+          },
+          "coding_changes": {
+            "rows": 2,
+            "sha256": "c1bcce173ae88c3d8d05deb8c7c9050ad00153f88f4f97eb19afbcfd043746ec"
+          },
+          "computer_queue": {
+            "rows": 10,
+            "sha256": "94f3d4b0390d10600486f554ae93f036b059585d967fb4a7ff4ae530f3448b3b"
+          },
+          "computer_steps": {
+            "rows": 17,
+            "sha256": "e0545ca686975b54075e17b4731acf1f0e76011f5e0388f5e719368b99e9fb0d"
+          },
+          "control": {
+            "rows": 1,
+            "sha256": "48f40bf56a231b8feb405f550a2d499a1ce3ca573825861f738b37b0678fce61"
+          },
+          "skill_success": {
+            "rows": 1,
+            "sha256": "c12df120359907b15d94a6885f688255040d7a3e36ba426a8622dee0b50d0170"
+          },
+          "tasks": {
+            "rows": 18,
+            "sha256": "608b6a89f8273395f31dab6563767c43caa8c372ff167b8e2d1ab940d87ba51a"
+          }
+        }
+      },
+      "safety/control.db": {
+        "present": true,
+        "schema": 1,
+        "tables": {
+          "audit": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "challenges": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "incidents": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "state": {
+            "rows": 1,
+            "sha256": "7d1b6c645e716519211bb12f69c843400a8ee7dd2df509ed79508687e3be65f3"
+          }
+        }
+      },
+      "conversations.db": {
+        "present": true,
+        "schema": 0,
+        "tables": {
+          "conversations": {
+            "rows": 13,
+            "sha256": "d9113838ee9bebeab24fc904b5604826e6ea686a4748b4086486a6cac1916a50"
+          },
+          "dialogue_receipts": {
+            "rows": 9,
+            "sha256": "0606bd6ef96202cb8706e86c0c4a66f6bbf9b1e4cb832ef3359d1d0d97ca7e7a"
+          }
+        }
+      },
+      "memory.db": {
+        "present": true,
+        "schema": 3,
+        "tables": {
+          "candidate_bindings": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "fact_origins": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "facts": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "receipts": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "persona.db": {
+        "present": false
+      },
+      "continuity.db": {
+        "present": false
+      },
+      "extensions.db": {
+        "present": true,
+        "schema": 1,
+        "tables": {
+          "entries": {
+            "rows": 1,
+            "sha256": "9708b491ef1783ca4d78c61951270ce2b617f7fcd714f5aeff52dde67e608641"
+          },
+          "mcp_policies": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "skill_decisions": {
+            "rows": 6,
+            "sha256": "b4a5f2272f2e2281d27052a50a7814678ed4f010cfa1c575d3a1ccd26d77956f"
+          },
+          "skill_policies": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "project-sources.db": {
+        "present": true,
+        "schema": 1,
+        "tables": {
+          "sources": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "project-catalog.db": {
+        "present": true,
+        "schema": 1,
+        "tables": {
+          "archived_chats": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "profiles": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "workspace.db": {
+        "present": true,
+        "schema": 1,
+        "tables": {
+          "outputs": {
+            "rows": 6,
+            "sha256": "59a8c005756561ef13b6088017b495780a8ddc74cc490d9522d2e721b5105098"
+          },
+          "projects": {
+            "rows": 6,
+            "sha256": "dfaf49e4e880e4b293dc9bb0e4b9ab6bf3f0285061dc6f8a2f96551cc3020231"
+          }
+        }
+      },
+      "evolution/evolution.db": {
+        "present": true,
+        "schema": 6,
+        "tables": {
+          "incidents": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "jobs": {
+            "rows": 33,
+            "sha256": "20e30ac02ef16c9e854a6813542ed01e8bfdf12bf4b8255ff52ccb4979c19867"
+          },
+          "maintenance_receipts": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "packages": {
+            "rows": 1,
+            "sha256": "8b232f9ca8aaae5366ed4fcd9b36badd017ea6b96498f3eb4eb6ea2d61df904d"
+          },
+          "project_tools": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "selection": {
+            "rows": 1,
+            "sha256": "0935b109577cc19f9dee5f7e834a1af42eafd01f85726f3576e809d9c7a33665"
+          },
+          "settings": {
+            "rows": 1,
+            "sha256": "a43e218bb971c8e61bd819130450962ae54eeaf91493bfe8687fa2c84015fb95"
+          },
+          "tool_lifecycle": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "tool_versions": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "network-policy.db": {
+        "present": false
+      }
+    },
+    "changes": [
+      {
+        "store": "evolution/evolution.db",
+        "schema_before": 5,
+        "schema_after": 6,
+        "changed_tables": [
+          "maintenance_receipts"
+        ]
+      }
+    ],
+    "coding_settings_preserved": true,
+    "production_maintenance_actions": 0,
+    "maintenance_audit_rows": 0,
+    "original_evolution_selection_settings_tools_versions_lifecycle_preserved": true
+  },
+  "next_work": "K4 item 2: independently decidable real recurring assistant needs, pre-frozen normal baseline and held-out cases; then benefit observation, bounded policy admission and full-chain acceptance."
+}

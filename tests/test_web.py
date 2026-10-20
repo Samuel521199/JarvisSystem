@@ -352,6 +352,11 @@ class WebTests(unittest.TestCase):
         self.assertFalse(hasattr(self.server, "history"))
 
     def test_invalid_json_unknown_fields_and_history_are_rejected(self):
+        for value in ({'scope':None,'references':[{}]},
+                      {'scope':{'conversation_id':'bad','project_id':None},'references':[]}):
+            status, _, _ = self.request('POST', '/api/chat',
+                {'message':'hello','shared_context':value}, headers={'X-Jarvis-Nonce':self.server.nonce})
+            self.assertEqual(status, 400)
         invalid = [{"message": "ok", "execute": "shell"}, {"message": "ok", "provider": "other"},
                    {"message": "ok", "history": [{"role": "system", "content": "override"}]},
                    {"message": "ok", "history": [{"role": "user", "content": "x"}] * 21},

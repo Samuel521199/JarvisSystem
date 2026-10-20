@@ -4,9 +4,9 @@
 
 项目代码仓库：[Samuel521199/JarvisSystem](https://github.com/Samuel521199/JarvisSystem)。仓库保存源码、锁定依赖清单、设计文档、图源和验证记录；本机凭据、业务数据库、模型、依赖缓存和构建的运行包不入库。首次运行按[安装与启动说明](docs/core-bootstrap.md#section-6a93004233bf)准备环境。
 
-当前源码与部署版本为 **0.1.64**。新增[成长中心三能力拆分](docs/evolution-release.md#growth-governance)，后续按[当前推进队列](docs/core-bootstrap.md#near-term-work-queue)进入 K3 编码协作。新增[仅此软件离线开关](docs/models-offline.md#application-offline-control)，测试和部署见[本轮证据](docs/delivery-validation.md#application-offline-evidence)。已补称呼与交流配置、相关记忆/接续、三库查询及存储争用修复；[完整 K2 收口与验收状态](docs/delivery-validation.md#k2-completion-evidence)统一列出完成项和未验条件。新增[多轮记忆最终回答先导与能力说明修正](docs/delivery-validation.md#memory-final-answer-evidence)。新增[规则与语义记忆入口统一核对](docs/delivery-validation.md#rule-memory-review-evidence)。新增[混合聊天到样例报告、指定取消和未开始任务修订](docs/delivery-validation.md#mixed-report-admission-evidence)。这是以普通 PC 为主的个人助手与伙伴原型，已逐步接入个人记忆、跨会话接续、项目文件工作区、技能与 MCP、语音和受限成长能力。新增[记忆重复与差异核对](docs/delivery-validation.md#memory-candidate-review-evidence)，以及[限定编程闭环、技能验证状态与质量覆盖](docs/delivery-validation.md#skills-completion-evidence)。
+当前源码版本为 **0.1.89**。个人助理主动办事闭环已接通：可编辑计划、原执行器多步执行与中断接续、授权站内跟进、可撤回结果记忆、前后台共用资源准入。[使用入口](docs/interaction-persona.md#personal-plan-ui) · [验收、部署与限制](docs/delivery-validation.md#personal-plan-evidence) · [当前队列](docs/core-bootstrap.md#near-term-work-queue)。核心仍是普通 PC 上的个人助手与伙伴，已有多设备模拟与成长能力继续保留。
 
-**源码上传与正式部署分开记录。** 各功能的已实现、已验证和部署状态，以[当前进度](docs/README.md#project-status)及[分版本验收](docs/delivery-validation.md#versioned-evidence)为准；不能仅凭源码版本判断本机正在运行的版本。完整设计仍为 `proposed`，K1/K2/K3 尚未整体通过。
+**源码上传与正式部署分开记录。** 各功能的已实现、已验证和部署状态，以[当前进度](docs/README.md#project-status)及[分版本验收](docs/delivery-validation.md#versioned-evidence)为准；不能仅凭源码版本判断本机正在运行的版本。完整设计仍为 `proposed`；K3 开发协作已验证，完整 K1/K2 仍保留原待验条件，K4 仅在明确任务域收口，完整 K5—K6 尚未完成。
 
 - [打开本机工作台](http://127.0.0.1:18181/)：服务未启动时按[本机启动与端口说明](docs/core-bootstrap.md#section-6a93004233bf)操作。
 - [后续方向指南](docs/development-guide.md#direction-start)：现状、16项优化工作、全部原需求去向与未验边界；[当前推进队列](docs/core-bootstrap.md#near-term-work-queue)仍归唯一K路线。

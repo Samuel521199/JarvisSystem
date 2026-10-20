@@ -1,0 +1,219 @@
+{
+  "version": "0.1.80",
+  "date": "2026-10-20",
+  "scope": "K6 push-to-talk local ASR, editable preview and opt-in new-reply TTS; not continuous/full duplex",
+  "native_and_ui": {
+    "scope": "publisher audio, real local ASR, browser fake microphone; no owner microphone",
+    "native": [
+      {
+        "case": "publisher_zh",
+        "result": {
+          "id": "b18665a44e2b434597df98e4c31a0268",
+          "status": "SUCCEEDED",
+          "local": true,
+          "language": "auto",
+          "audio_seconds": 5.592,
+          "text": "开饭时间早上9点至下午5点。",
+          "backend": "sensevoice-int8",
+          "peak_working_set_bytes": 362020864,
+          "model_released": true,
+          "elapsed_seconds": 1.449
+        },
+        "parallel_chat_status": 200,
+        "parallel_chat_ms": 18.570599999293336
+      },
+      {
+        "case": "silence",
+        "result": {
+          "id": "25c5821c6fd64d1e90185229529473f1",
+          "status": "SUCCEEDED",
+          "local": true,
+          "language": "auto",
+          "audio_seconds": 1.0,
+          "text": "",
+          "backend": "sensevoice-int8",
+          "peak_working_set_bytes": 33419264,
+          "model_released": true,
+          "elapsed_seconds": 0.282
+        },
+        "parallel_chat_status": 200,
+        "parallel_chat_ms": 15.937699999994948
+      }
+    ],
+    "ui": {
+      "transcript": "开饭时间早上9点至下午5点。",
+      "background_task": "SUCCEEDED",
+      "draft_preserved": true,
+      "edited_then_inserted": true,
+      "no_auto_send": true,
+      "native_readout": true,
+      "interrupted_readout": true,
+      "released_tracks": true,
+      "permission_denied_recoverable": true,
+      "no_horizontal_overflow": true,
+      "page_errors": []
+    },
+    "paid_model_calls": 0,
+    "status": "passed"
+  },
+  "automated_tests": {
+    "count": 91,
+    "status": "passed",
+    "command": "python -B -m unittest test_speech_input test_readout test_speech test_web test_modules test_dialogue_process test_runtime_releases test_release_bundle -q"
+  },
+  "earlier_attempts": [
+    {
+      "attempt": 1,
+      "result": "native passed; probe incorrectly assumed empty composer send button is disabled",
+      "evidence": "H:/JarvisData/diagnostics/k6-voice-20261020/attempt-1.json"
+    },
+    {
+      "attempt": 2,
+      "result": "automatic playback missed first conversation because URL changed during first save; fixed to use stable conversation identity",
+      "evidence": "H:/JarvisData/diagnostics/k6-voice-20261020/attempt-2.json"
+    },
+    {
+      "attempt": 3,
+      "result": "native playback and interruption passed, then probe evaluated returned permission-denial function; wrapped evaluate callback. Temporary worker.log deletion raced child termination; cleanup now waits after shutdown",
+      "evidence": "H:/JarvisData/diagnostics/k6-voice-20261020/attempt-3.json"
+    },
+    {
+      "suite": "earlier modules suite",
+      "result": "50 tests: one stale expected skill count 11, current catalog has 12; corrected expected count, final 91 passed"
+    }
+  ],
+  "performance_notes": [
+    "First measured cold/file-cache run: 5.592-second audio, 8.04-second recognition. Later independent worker: 1.449 seconds; not a permanently loaded model.",
+    "Small publisher Chinese fixture, transcript has a homophone error; no universal accuracy claim.",
+    "Memory figures are process working set, not complete assistant RSS. TTS has separate existing CPU/GPU resource costs."
+  ],
+  "not_verified": [
+    "Owner physical microphone/noisy room/acoustic echo cancellation",
+    "English or mixed-language quality benchmark",
+    "Voice authentication, continuous listening or full duplex",
+    "Low-RAM physical PC and long-duration whole-machine workloads",
+    "Optional speech runtime in the default minimal release bundle"
+  ],
+  "paid_cloud_requests": 0,
+  "source_sha256": {
+    "apps/web/voice-input.js": "09a7cd0a3ac60b7201951676ace1617513172660c24a26d9ff05b5252006873a",
+    "apps/web/voice-capture.js": "de662fce9d7b378b32ccf82dbfbdd5de32f27503c431ce8ef54a4b9d70b3eb95",
+    "apps/web/readout.js": "edf6767df08a0b64c4eb63cdbceba631c18e6e1a19b3de66f26843b53f569603",
+    "apps/web/workspace.js": "d4a06de9863c55c59a5fc56135d9995690f9ee77b3a2c281fc9a118a12bcbb9f",
+    "apps/web/speech_routes.py": "3bae64492e3dd337908ee7e3e3447d29a77a03afd7534d0e05f8d613df524005",
+    "apps/web/server.py": "b65a5b9019e0a4791ee943444a192b69fec15354ff3e6a2d7b57399f73953485",
+    "runtime/node-host/jarvis_core/speech_input.py": "41bba22df1c3e6b829230b85034fd184b193252ac3796c4f690ae237567338c0",
+    "runtime/node-host/jarvis_core/speech_input_worker.py": "c4276359e876008770647c7f61d8a58ea392528d55aa8b7debfbb0e3c17c61cf",
+    "runtime/node-host/jarvis_core/dialogue_process.py": "81a51f9b88c730b22e3d86ddb5942b1d22ff2f951e7295e72f54ea4f619ad167",
+    "runtime/node-host/jarvis_core/modules.py": "616c76c22ca36dbec58cd191934beed9c7fe9384e3b31709ba3ed3de820c08d2",
+    "apps/web/admin.html": "ba7c0c6e38df44a741c2e379c6f42c63b0db13c349c25e4513d13f9bb4549af6"
+  },
+  "fault_injection": {
+    "native": {
+      "missing_model_failed": true,
+      "cancelled_owned_process": true,
+      "cancellation_seconds": 0.07
+    },
+    "ui": {
+      "cancel_permission_pending": true,
+      "conversation_change_cancels": true,
+      "device_disconnect": true,
+      "lost_response_reconciled": true,
+      "recognition_calls": 1,
+      "max_pcm_bytes": 640000,
+      "auto_stop_20_seconds": true,
+      "draft_preserved": true,
+      "microphone_adjacent_to_send": true,
+      "page_errors": []
+    },
+    "status": "passed"
+  },
+  "deployment": {
+    "status": "SUCCEEDED",
+    "source_version": "0.1.80",
+    "data_dir": "C:\\Users\\samuel\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\Jarvis\\data",
+    "previous_version": "0.1.79",
+    "previous_instance": "4897403e5363f8f881d48cb889068c36",
+    "current_instance": "a3ddfa65eec16657e875eb6ce865d7d5",
+    "idle_graceful_reload": true,
+    "startup_from_absent": false,
+    "served_sha256": {
+      "dialogue.js": "ef95a69c43ec38d94d48c1b6ab40106faa8777426eb925ea3224a34bb61132a3",
+      "resources.js": "586e03243199134cec0c4da7bedde691f904f73ca8e7aee09ea2dd0202c99e2b",
+      "workspace.js": "d4a06de9863c55c59a5fc56135d9995690f9ee77b3a2c281fc9a118a12bcbb9f",
+      "conversation_tasks.js": "bcc474ac43ab1acd3ed38b965d7935a334eaa9fd6c53d1dbb60745097cd616b8",
+      "mcp_manager.js": "0c74df31951193bbe830bdfe24a10eb90b9cb31bb604ce54109acc5fb1cd9702"
+    },
+    "calculation": "84",
+    "personal_read_only": true,
+    "duplicate_did_not_repeat_calculation": true,
+    "cancel_before_submit": true,
+    "restart_fence": true,
+    "instance_fence": true,
+    "empty_restart_queue_reviewed_and_resumed": true,
+    "admission_ms": 31.042,
+    "backups": {
+      "/api/speech/fast": "stopped",
+      "/api/speech": "stopped"
+    },
+    "cloud_calls": 0,
+    "limits": "One local calculator and personal-settings query; no paid model, microphone, task replay, persistent dialogue recovery or physical voice timing.",
+    "original_business_stores_identical": false,
+    "unchanged_except": [
+      "evolution/evolution.db:jobs"
+    ],
+    "differences": [
+      {
+        "store": "evolution/evolution.db",
+        "table": "jobs",
+        "before": {
+          "rows": 33,
+          "sha256": "b7ae187bd9a8d2313b24c45d9db988801cc1e2457e8d242787067be04f937c06"
+        },
+        "after": {
+          "rows": 33,
+          "sha256": "96e96c5cffb246507b6294ade1f1bf211b3d724be244e0a3ea655fbd98f0da02"
+        }
+      }
+    ],
+    "recent_health_checks": [
+      [
+        "SUCCEEDED",
+        "check",
+        "2026-10-20T10:27:32.143530+00:00",
+        1
+      ],
+      [
+        "SUCCEEDED",
+        "check",
+        "2026-10-20T10:24:47.139787+00:00",
+        1
+      ],
+      [
+        "SUCCEEDED",
+        "check",
+        "2026-10-20T10:19:46.425859+00:00",
+        1
+      ]
+    ],
+    "difference_explanation": "Existing enabled automatic health checks continued; job ledger rotated successful checks. Other original tables, including growth settings, memory, conversations and selections, match. Entire job-table identity was not proved.",
+    "voice_assets": {
+      "voice-input.js": "09a7cd0a3ac60b7201951676ace1617513172660c24a26d9ff05b5252006873a",
+      "voice-capture.js": "de662fce9d7b378b32ccf82dbfbdd5de32f27503c431ce8ef54a4b9d70b3eb95",
+      "readout.js": "edf6767df08a0b64c4eb63cdbceba631c18e6e1a19b3de66f26843b53f569603"
+    },
+    "speech_input_idle": true,
+    "owner_microphone_opened": false,
+    "automatic_readout_default": false
+  },
+  "runtime_bundle": {
+    "path": "H:/JarvisData/diagnostics/jarvis-v0.1.80.zip",
+    "files": 1602,
+    "bytes": 70521384,
+    "sha256": "e2887d97fc78deb6cc4b1539ad01bb50d6222d0a8fea052d42b511913542ea61",
+    "status": "candidate_verified",
+    "activated": false,
+    "optional_speech_dependencies_included": false,
+    "native_asr_verified_in_installed_development_environment": true
+  }
+}

@@ -25,7 +25,9 @@ class ConversationTasks:
         conversation_id(ident)
         allowed = {'request_id','prompt','model','relative_path'}
         if isinstance(payload, dict) and payload.get('mode') == 'skill':
-            allowed = {'request_id','mode','prompt','model','project_id','skill_id','paths','output_path','ratio','theme','target_path','focus','explain','coding','cases'}
+            allowed = {'request_id','mode','prompt','model','project_id','skill_id','paths','output_path','ratio','theme','target_path','focus','explain','coding','cases','heldout_cases','entrypoint','coding_provider','coding_executor_binding','build_recipe','coding_demand','new_paths'}
+        if isinstance(payload, dict) and payload.get('mode') == 'team':
+            allowed = {'request_id', 'mode', 'prompt', 'criteria', 'planner_model', 'reviewer_model', 'planner_reasoning', 'reviewer_reasoning', 'auto_team', 'max_agents'}
         if isinstance(payload, dict) and payload.get('mode') == 'mcp':
             allowed = {'request_id', 'mode', 'prompt', 'library', 'project_id'}
         if not isinstance(payload,dict) or set(payload)-allowed:
@@ -50,7 +52,7 @@ class ConversationTasks:
             raise CoreError('not_found','未找到此会话的任务。')
         record=self.core.ledger.record(task_id=task_id)
         action=record['action']
-        if action['capability_id'] not in {CAPABILITY,'skill.report.v1','mcp.documentation.v1'} or action['arguments'].get('conversation_id')!=ident:
+        if action['capability_id'] not in {CAPABILITY,'skill.report.v1','mcp.documentation.v1','team.analysis.v1'} or action['arguments'].get('conversation_id')!=ident:
             raise CoreError('not_found','未找到此会话的任务。')
         return record
 
@@ -59,13 +61,13 @@ class ConversationTasks:
         if not isinstance(request_id,str) or not re.fullmatch(r'web-[a-f0-9]{32}',request_id):
             raise CoreError('invalid_request','任务请求编号无效。')
         with self.core.ledger.connection() as db:
-            row=db.execute("SELECT tasks.task_id FROM tasks JOIN actions USING(task_id) WHERE request_key=? AND json_extract(actions.document,'$.capability_id') IN (?, 'skill.report.v1', 'mcp.documentation.v1') AND json_extract(actions.document,'$.arguments.conversation_id')=?",
+            row=db.execute("SELECT tasks.task_id FROM tasks JOIN actions USING(task_id) WHERE request_key=? AND json_extract(actions.document,'$.capability_id') IN (?, 'skill.report.v1', 'mcp.documentation.v1', 'team.analysis.v1') AND json_extract(actions.document,'$.arguments.conversation_id')=?",
                            (request_id,CAPABILITY,ident)).fetchone()
         if row is None:raise CoreError('not_found','暂未找到此请求；没有重新提交或重放。')
         record=self._bound(ident,row['task_id'])
         return {'task':record['task'],'conversation_id':ident,
                 'action_status':record['action']['status'],'report':None,'steps':[],
-                'error':record['action'].get('error'),'kind':{'mcp.documentation.v1':'mcp','skill.report.v1':'skill'}.get(record['action']['capability_id'],'natural')}
+                'error':record['action'].get('error'),'kind':{'team.analysis.v1':'team','mcp.documentation.v1':'mcp','skill.report.v1':'skill'}.get(record['action']['capability_id'],'natural')}
 
     def detail(self, ident, task_id):
         record=self._bound(ident,task_id)

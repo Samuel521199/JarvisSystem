@@ -288,7 +288,7 @@ def classify_http_error(status: int, body: bytes) -> tuple[str, str]:
 
 def probe(config: dict, provider: str, prompt: str, data_dir: Path, guard, *, client=None,
           credentials_loader=load, admission_context=nullcontext, deadline_seconds=60.0, history=None,
-          cancel_event=None, attachments=None, instructions="", response_schema=None) -> dict:
+          cancel_event=None, attachments=None, instructions="", response_schema=None, task_id=None) -> dict:
     guard()
     if (isinstance(deadline_seconds, bool) or not isinstance(deadline_seconds, (int, float))
             or not math.isfinite(deadline_seconds) or deadline_seconds <= 0):
@@ -407,6 +407,8 @@ def probe(config: dict, provider: str, prompt: str, data_dir: Path, guard, *, cl
         max_output = config.get("local_max_output_tokens", 256) if adapter == "local" else config["max_output_tokens"]
         max_output = item.get("max_output_tokens", max_output)
         url, headers, payload = build_request(provider, item, prompt, max_output, credentials, history=messages, attachments=attachments, instructions=instructions,response_schema=response_schema)
+        from jarvis_core.plan_budget import reserve as reserve_plan
+        reserve_plan(data_dir, ident, item, provider, len(instructions.encode()) + text_size(current) + sum(text_size(m) for m in messages), max_output, images=images_count, task_id=task_id)
         # The same short core transaction serializes admission with stop. Once
         # committed this is in-flight, even before socket transmission completes.
         # Never hold that transaction while waiting for a remote response.
@@ -478,6 +480,8 @@ def probe(config: dict, provider: str, prompt: str, data_dir: Path, guard, *, cl
         metadata["outcome_uncertain"] = status == "UNKNOWN"
         metadata["elapsed_seconds"] = round(time.monotonic() - started, 3)
         journal.finish(ident, status, metadata)
+        from jarvis_core.plan_budget import settle as settle_plan
+        settle_plan(data_dir, ident, metadata['billing'], status)
     result = {**metadata, "status": status, "automatic_retry": False}
     if status == "SUCCEEDED":
         result["text"] = response_text

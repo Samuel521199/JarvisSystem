@@ -1,0 +1,626 @@
+{
+  "version": "0.1.76",
+  "date": "2026-10-20",
+  "status": "verified_and_deployed",
+  "scope": "Deterministic contract observations, frozen multi-task comparisons and reversible retired-version storage",
+  "complete_k4_gate": false,
+  "limitations": [
+    "Structural consistency and explicit local review do not prove arbitrary business semantics.",
+    "Seeded naive baselines and preselected challenges are development cases, not a broad independent benchmark.",
+    "Archiving retains files and receipts; it releases online package slots and reusable pages, not overall disk space.",
+    "Receipt and tool-directory reclamation, long-term resource/net-benefit evaluation and autonomous general contract approval remain open."
+  ],
+  "tests": {
+    "tests": 87,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "test_ids": [
+      "test_evolution.ActualWorkerTests.test_compiles_and_executes_candidate_with_real_lpac",
+      "test_evolution.ActualWorkerTests.test_infinite_candidate_is_terminated_by_real_limits",
+      "test_evolution.EvolutionHTTPTests.test_auth_assets_strict_requests_and_asynchronous_job",
+      "test_evolution.EvolutionHTTPTests.test_coding_does_not_occupy_chat_lane",
+      "test_evolution.EvolutionHTTPTests.test_growth_initialization_failure_does_not_block_host_start",
+      "test_evolution.EvolutionTests.test_automatic_heal_requires_opt_in_and_separate_fault_job",
+      "test_evolution.EvolutionTests.test_background_incident_dedupe_and_daily_budget",
+      "test_evolution.EvolutionTests.test_candidate_static_rejection_before_execution",
+      "test_evolution.EvolutionTests.test_config_compare_and_swap_and_job_policy_snapshot",
+      "test_evolution.EvolutionTests.test_corrupt_package_detected_and_fallback_verified",
+      "test_evolution.EvolutionTests.test_diagnosis_is_advisory_and_has_independent_model",
+      "test_evolution.EvolutionTests.test_disabled_primary_can_fallback_before_dispatch",
+      "test_evolution.EvolutionTests.test_enabled_check_records_missing_optional_without_building",
+      "test_evolution.EvolutionTests.test_failed_candidate_is_rejected_then_repaired_with_feedback",
+      "test_evolution.EvolutionTests.test_fallback_counts_against_two_calls_and_preserves_actual_route",
+      "test_evolution.EvolutionTests.test_future_database_not_migrated",
+      "test_evolution.EvolutionTests.test_gap_is_not_a_fault_and_inspection_never_runs_worker",
+      "test_evolution.EvolutionTests.test_generation_independent_validation_activation_and_real_use",
+      "test_evolution.EvolutionTests.test_heal_restores_original_contract_using_its_own_model",
+      "test_evolution.EvolutionTests.test_healthy_automatic_records_bounded_and_failure_preserved",
+      "test_evolution.EvolutionTests.test_healthy_checks_and_repeated_ensure_do_not_call_model",
+      "test_evolution.EvolutionTests.test_inspection_diagnosis_fallback_does_not_publish",
+      "test_evolution.EvolutionTests.test_interrupted_publication_deactivated_and_not_replayed",
+      "test_evolution.EvolutionTests.test_invalid_inputs_never_reach_worker",
+      "test_evolution.EvolutionTests.test_memory_pressure_stops_before_paid_call",
+      "test_evolution.EvolutionTests.test_metadata_or_extra_file_drift_rejected",
+      "test_evolution.EvolutionTests.test_no_model_when_auto_disabled",
+      "test_evolution.EvolutionTests.test_post_activation_failure_rolls_back",
+      "test_evolution.EvolutionTests.test_real_input_regression_rolls_back_without_returning_bad_output",
+      "test_evolution.EvolutionTests.test_runtime_repair_survives_restart_while_original_call_stays_failed",
+      "test_evolution.EvolutionTests.test_singleflight_cancellation_and_idempotent_request",
+      "test_evolution.EvolutionTests.test_stale_base_and_unverified_packages_cannot_activate",
+      "test_evolution.EvolutionTests.test_stopped_core_blocks_dispatch",
+      "test_evolution.EvolutionTests.test_temporary_resource_failure_does_not_quarantine_healthy_code",
+      "test_evolution.EvolutionTests.test_two_bad_candidates_do_not_replace_good_version",
+      "test_evolution.EvolutionTests.test_unknown_model_result_never_retried",
+      "test_evolution.EvolutionTests.test_unknown_partial_and_offline_never_switch_models",
+      "test_evolution.EvolutionTests.test_upgrade_preserves_old_contract_and_manual_rollback",
+      "test_evolution.EvolutionTests.test_v1_settings_migration_preserves_artifacts_without_enabling_healing",
+      "test_project_tools.ProjectToolTests.test_actual_publish_use_disable_restore_restart_and_idempotency",
+      "test_project_tools.ProjectToolTests.test_capacity_reserves_recovery_space_and_contract_is_bounded",
+      "test_project_tools.ProjectToolTests.test_runtime_change_and_cancel_during_observation_disable_candidate",
+      "test_project_tools.ProjectToolTests.test_shared_project_context_other_project_and_corrupt_json",
+      "test_project_tools.ProjectToolTests.test_source_scope_generation_and_contract_cannot_be_bypassed",
+      "test_project_tools.ProjectToolTests.test_unchanged_regression_with_bad_input_does_not_quarantine",
+      "test_project_tools.ProjectToolTests.test_unconfirmed_publication_is_deactivated_on_recovery",
+      "test_project_tools.ProjectToolTests.test_upgrade_failure_rolls_back_without_replaying_real_input",
+      "test_runtime_releases.RuntimeReleaseTests.test_failed_health_or_tampered_slot_never_replaces_active",
+      "test_runtime_releases.RuntimeReleaseTests.test_install_is_idempotent_and_unchecked_release_cannot_be_selected",
+      "test_runtime_releases.RuntimeReleaseTests.test_manifest_or_extra_file_blocks_rollback",
+      "test_runtime_releases.RuntimeReleaseTests.test_running_release_prevents_switch_and_only_fixed_entry_is_used",
+      "test_runtime_releases.RuntimeReleaseTests.test_select_and_rollback_keep_previous_and_unrelated_data",
+      "test_runtime_releases.RuntimeReleaseTests.test_selection_transaction_failure_keeps_original_pointer",
+      "test_tool_contracts.ContractParserTests.test_strict_model_shape_never_accepts_executable_or_approval",
+      "test_tool_contracts.ToolContractTests.test_capacity_and_same_request_wrong_plan_rejected",
+      "test_tool_contracts.ToolContractTests.test_crash_between_review_and_handoff_reconciles_or_blocks_changed_source",
+      "test_tool_contracts.ToolContractTests.test_draft_to_review_code_publish_and_actual_use",
+      "test_tool_contracts.ToolContractTests.test_fallback_and_unknown_are_bounded_and_recorded",
+      "test_tool_contracts.ToolContractTests.test_parent_cancel_stops_inflight_draft_and_restart_does_not_replay",
+      "test_tool_contracts.ToolContractTests.test_review_requires_answers_nonoverlapping_oracle_and_exact_contract",
+      "test_tool_contracts.ToolContractTests.test_scope_stale_directory_runtime_and_cancel_block_acceptance",
+      "test_tool_intents.ParserTests.test_direct_calls_retain_exact_json_and_never_guess",
+      "test_tool_intents.ParserTests.test_negation_questions_quotes_conditions_and_ambiguity",
+      "test_tool_intents.ToolIntentTests.test_actual_named_invocation_reconciles_without_duplicate_after_change",
+      "test_tool_intents.ToolIntentTests.test_cancelled_gap_and_discussion_cannot_handoff",
+      "test_tool_intents.ToolIntentTests.test_changed_directory_runtime_and_candidate_forgery_rejected",
+      "test_tool_intents.ToolIntentTests.test_foreign_receipt_collision_never_returns_other_scope",
+      "test_tool_intents.ToolIntentTests.test_gap_to_original_coding_demand_persists_and_never_starts_model",
+      "test_tool_intents.ToolIntentTests.test_growth_receipts_lookup_list_cancel_and_reanalysis_share_plan",
+      "test_tool_intents.ToolIntentTests.test_scope_idempotency_cancel_and_input_unchanged",
+      "test_tool_lifecycle.LifecycleTests.test_corrupt_baseline_is_evidence_but_corrupt_candidate_is_quarantined",
+      "test_tool_lifecycle.LifecycleTests.test_failure_quarantines_only_candidate_and_stable_keeps_serving",
+      "test_tool_lifecycle.LifecycleTests.test_legacy_publication_without_review_and_evidence_cannot_bypass_gate",
+      "test_tool_lifecycle.LifecycleTests.test_new_admission_does_not_activate_until_distinct_novel_real_inputs_and_feedback",
+      "test_tool_lifecycle.LifecycleTests.test_old_versions_retire_only_after_live_and_recovery_references_release",
+      "test_tool_lifecycle.LifecycleTests.test_paired_quality_evidence_and_interrupted_upgrade_restore_stable_without_replay",
+      "test_tool_lifecycle.LifecycleTests.test_restart_pauses_without_replay_resume_and_revision_scope_guards",
+      "test_tool_lifecycle.LifecycleTests.test_retirement_blocks_bypass_restore_requires_fresh_canary_and_keeps_files",
+      "test_tool_lifecycle.LifecycleTests.test_schema3_migration_keeps_selection_legacy_and_old_receipt_is_query_only",
+      "test_tool_lifecycle.LifecycleTests.test_trial_budget_and_stable_change_cannot_reuse_old_admission",
+      "test_tool_quality_archive.ArchiveTests.test_archive_before_db_failure_leaves_original_and_retry_uses_same_bytes",
+      "test_tool_quality_archive.ArchiveTests.test_archive_load_idempotency_and_receipts_keep_stable_and_source",
+      "test_tool_quality_archive.ArchiveTests.test_capacity_summary_has_bounded_memory_with_large_stored_packages",
+      "test_tool_quality_archive.ArchiveTests.test_corrupt_archive_cannot_load_or_be_overwritten_and_scope_is_strict",
+      "test_tool_quality_archive.ArchiveTests.test_live_recovery_refs_and_unretired_versions_cannot_archive",
+      "test_tool_quality_archive.ArchiveTests.test_online_limit_released_but_restoration_respects_capacity",
+      "test_tool_quality_archive.QualityTests.test_counts_conflicts_duplicates_overlap_and_never_certifies_semantic_truth"
+    ],
+    "regression_seconds": 749.267786999997,
+    "final_targeted": {
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 108.5109102000024,
+      "test_ids": [
+        "test_tool_quality_archive.ArchiveTests.test_archive_before_db_failure_leaves_original_and_retry_uses_same_bytes",
+        "test_tool_quality_archive.ArchiveTests.test_archive_load_idempotency_and_receipts_keep_stable_and_source",
+        "test_tool_quality_archive.ArchiveTests.test_capacity_summary_has_bounded_memory_with_large_stored_packages",
+        "test_tool_quality_archive.ArchiveTests.test_corrupt_archive_cannot_load_or_be_overwritten_and_scope_is_strict",
+        "test_tool_quality_archive.ArchiveTests.test_live_recovery_refs_and_unretired_versions_cannot_archive",
+        "test_tool_quality_archive.ArchiveTests.test_online_limit_released_but_restoration_respects_capacity",
+        "test_tool_quality_archive.QualityTests.test_counts_conflicts_duplicates_overlap_and_never_certifies_semantic_truth"
+      ],
+      "capacity_peak_python_bytes": 10277,
+      "failure_details": []
+    },
+    "counting": "Related regression plus final storage/capacity targeted checks; repeated test IDs counted once."
+  },
+  "browser": {
+    "version": "0.1.76",
+    "status": "passed",
+    "paid_model_calls": 0,
+    "checks": [
+      "reviewed staging keeps inactive; two novel independent LPAC trials and usefulness unlock explicit promotion",
+      "new input actual LPAC execution with independent result; usage counted once",
+      "missing nonce / foreign origin rejected",
+      "reload retains receipts; disable and validated restore update controls",
+      "retirement disables capability; restore is inactive until a new reviewed canary qualifies",
+      "unreferenced retired package fixture -> reviewed real archive and load UI; slot counts update, load remains retired and stable unchanged"
+    ],
+    "intent_checks": [
+      "exact named natural request dispatched once",
+      "result displayed and archived as control receipt",
+      "reload opens original receipt without replay",
+      "lexical suggestion waits for explicit input and independent expectation",
+      "gap binds original coding demand without model dispatch",
+      "negation remains non-executable",
+      "ordinary prose remains chat",
+      "selection form survives panel refresh",
+      "all plan mutations reject foreign origin; plan reads require nonce"
+    ],
+    "execution": {
+      "elapsed_seconds": 1.585,
+      "isolation": {
+        "active_process_limit": 1,
+        "appcontainer": true,
+        "backend": "windows-lpac-job",
+        "capabilities": [
+          "registryRead"
+        ],
+        "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+        "cpu_seconds": 0.296875,
+        "cpu_time_limit_seconds": 3,
+        "elapsed_seconds": 0.5914,
+        "lpac": true,
+        "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+        "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+        "memory_limit_bytes": 201326592,
+        "package_sid": "S-1-15-2-523041153-2662361250-3968577718-3895200947-2423406489-4278473272-3556958651",
+        "peak_process_memory_bytes": 17784832,
+        "pid": 40480,
+        "runtime_bytes": 22904399,
+        "wall_time_limit_seconds": 12
+      },
+      "model_calls": 0,
+      "regression": {
+        "cases": 4,
+        "isolation": {
+          "active_process_limit": 1,
+          "appcontainer": true,
+          "backend": "windows-lpac-job",
+          "capabilities": [
+            "registryRead"
+          ],
+          "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+          "cpu_seconds": 0.3125,
+          "cpu_time_limit_seconds": 3,
+          "elapsed_seconds": 0.6148,
+          "lpac": true,
+          "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+          "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+          "memory_limit_bytes": 201326592,
+          "package_sid": "S-1-15-2-2166229136-1032233291-2709876990-2055561984-25250326-4111818858-3824249868",
+          "peak_process_memory_bytes": 17952768,
+          "pid": 40288,
+          "runtime_bytes": 22904399,
+          "wall_time_limit_seconds": 12
+        },
+        "passed": true
+      },
+      "result_digest": "sha256:e629fa6598d732768f7c726b4b621285f9c3b85303900aa912017db7617d8bdb",
+      "result_verified": true,
+      "text": "15",
+      "version": "0b28b238e4715c16879fd16f92b6f7170ae574b94e7fe5e0e4e95f5477a00c3d"
+    },
+    "ledger_bytes": 180224,
+    "synthetic_proposal_calls": 1,
+    "tool_model_calls": 0,
+    "page_errors": [],
+    "business_source_unchanged": true,
+    "conversation_id": "a039777d02414dd4a12b6f94c770fa6a"
+  },
+  "comparison": {
+    "status": "passed",
+    "actual_model_candidates": true,
+    "paid_model_calls": 3,
+    "estimated_usd": 0.02573,
+    "billing_basis": "Configured rate snapshot and returned usage, not account settlement or a freshly quoted tariff.",
+    "case_sha256": "ddba8dd3eb90eac8ceebafb7d30d5dff4947011f59fd9de42f8208b4248cdb59",
+    "case_source": "evals/cases/k4-quality-v1.json",
+    "tasks": [
+      {
+        "id": "binary-units",
+        "status": "passed",
+        "baseline": "seeded naive implementation",
+        "candidate_models": [
+          {
+            "billing": {
+              "amount": 0.006804,
+              "basis": "estimated",
+              "currency": "USD",
+              "price": {
+                "cache_read": 0.2,
+                "cache_write": null,
+                "checked_at": "2026-10-16",
+                "currency": "USD",
+                "fee_percent": 0,
+                "input": 2,
+                "max_input_tokens": 200000,
+                "output": 12,
+                "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing"
+              },
+              "reason": "token_rates",
+              "tokens": {
+                "cache_read": 0,
+                "cache_write": 0,
+                "input": 690,
+                "output": 452,
+                "reasoning": 307,
+                "total": 1142
+              }
+            },
+            "model": "gemini-3.1-pro-preview",
+            "outcome_uncertain": false,
+            "provider": "vertex",
+            "request_id": "54552b710abf4574afbd8e56cbab46d9",
+            "status": "SUCCEEDED",
+            "usage": {
+              "candidatesTokenCount": 145,
+              "promptTokenCount": 690,
+              "thoughtsTokenCount": 307,
+              "totalTokenCount": 1142
+            }
+          }
+        ],
+        "contract_quality": {
+          "basis": "只检查来源分组、案例一致性和已观察形状，不自动创造预期或给通用契约质量打分。",
+          "blockers": [],
+          "distinct_inputs": 4,
+          "distinct_outputs": 4,
+          "heldout_cases": 2,
+          "model_calls": 0,
+          "observed_features": [],
+          "observed_types": [
+            "dict",
+            "int",
+            "str"
+          ],
+          "public_cases": 2,
+          "retained_cases": 0,
+          "review_questions": [
+            "请独立核对单位、精度、顺序、格式和不适用输入；本检查不能判断业务预期正确。",
+            "未观察到空值/空集合样本；请核对它是否属于用途边界。",
+            "未观察到负数；请核对数值域与边界。"
+          ],
+          "semantic_truth_verified": false,
+          "structurally_consistent": true
+        },
+        "paired_observations": [
+          {
+            "candidate_seconds": 0.6867,
+            "baseline_seconds": 0.7102,
+            "baseline_correct": false,
+            "baseline_error": null,
+            "candidate_peak_process_memory_bytes": 18313216,
+            "baseline_peak_process_memory_bytes": 18280448
+          },
+          {
+            "candidate_seconds": 0.6917,
+            "baseline_seconds": 0.6316,
+            "baseline_correct": false,
+            "baseline_error": null,
+            "candidate_peak_process_memory_bytes": 18051072,
+            "baseline_peak_process_memory_bytes": 18120704
+          }
+        ],
+        "verified_novel_inputs": 2,
+        "baseline_wrong_on_challenges": 2,
+        "actual_result": "1024",
+        "actual_result_verified": true,
+        "worker_isolation": {
+          "active_process_limit": 1,
+          "appcontainer": true,
+          "backend": "windows-lpac-job",
+          "capabilities": [
+            "registryRead"
+          ],
+          "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+          "cpu_seconds": 0.28125,
+          "cpu_time_limit_seconds": 3,
+          "elapsed_seconds": 0.5459,
+          "lpac": true,
+          "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+          "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+          "memory_limit_bytes": 201326592,
+          "package_sid": "S-1-15-2-4041824207-93564601-938359170-2079940590-3610551037-1228958646-2444301686",
+          "peak_process_memory_bytes": 18407424,
+          "pid": 43000,
+          "runtime_bytes": 22904399,
+          "wall_time_limit_seconds": 12
+        },
+        "source_unchanged": true
+      },
+      {
+        "id": "stable-lines",
+        "status": "passed",
+        "baseline": "seeded naive implementation",
+        "candidate_models": [
+          {
+            "billing": {
+              "amount": 0.010556,
+              "basis": "estimated",
+              "currency": "USD",
+              "price": {
+                "cache_read": 0.2,
+                "cache_write": null,
+                "checked_at": "2026-10-16",
+                "currency": "USD",
+                "fee_percent": 0,
+                "input": 2,
+                "max_input_tokens": 200000,
+                "output": 12,
+                "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing"
+              },
+              "reason": "token_rates",
+              "tokens": {
+                "cache_read": 0,
+                "cache_write": 0,
+                "input": 646,
+                "output": 772,
+                "reasoning": 637,
+                "total": 1418
+              }
+            },
+            "model": "gemini-3.1-pro-preview",
+            "outcome_uncertain": false,
+            "provider": "vertex",
+            "request_id": "e8d3d4f888b942e4b8fc86606659af78",
+            "status": "SUCCEEDED",
+            "usage": {
+              "candidatesTokenCount": 135,
+              "promptTokenCount": 646,
+              "thoughtsTokenCount": 637,
+              "totalTokenCount": 1418
+            }
+          }
+        ],
+        "contract_quality": {
+          "basis": "只检查来源分组、案例一致性和已观察形状，不自动创造预期或给通用契约质量打分。",
+          "blockers": [],
+          "distinct_inputs": 4,
+          "distinct_outputs": 4,
+          "heldout_cases": 2,
+          "model_calls": 0,
+          "observed_features": [
+            "empty_or_null",
+            "unicode"
+          ],
+          "observed_types": [
+            "list",
+            "str"
+          ],
+          "public_cases": 2,
+          "retained_cases": 0,
+          "review_questions": [
+            "请独立核对单位、精度、顺序、格式和不适用输入；本检查不能判断业务预期正确。"
+          ],
+          "semantic_truth_verified": false,
+          "structurally_consistent": true
+        },
+        "paired_observations": [
+          {
+            "candidate_seconds": 0.793,
+            "baseline_seconds": 0.8626,
+            "baseline_correct": false,
+            "baseline_error": null,
+            "candidate_peak_process_memory_bytes": 18538496,
+            "baseline_peak_process_memory_bytes": 18628608
+          },
+          {
+            "candidate_seconds": 0.7279,
+            "baseline_seconds": 0.7784,
+            "baseline_correct": false,
+            "baseline_error": null,
+            "candidate_peak_process_memory_bytes": 18092032,
+            "baseline_peak_process_memory_bytes": 18321408
+          }
+        ],
+        "verified_novel_inputs": 2,
+        "baseline_wrong_on_challenges": 2,
+        "actual_result": "甲\n乙",
+        "actual_result_verified": true,
+        "worker_isolation": {
+          "active_process_limit": 1,
+          "appcontainer": true,
+          "backend": "windows-lpac-job",
+          "capabilities": [
+            "registryRead"
+          ],
+          "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+          "cpu_seconds": 0.328125,
+          "cpu_time_limit_seconds": 3,
+          "elapsed_seconds": 0.5995,
+          "lpac": true,
+          "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+          "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+          "memory_limit_bytes": 201326592,
+          "package_sid": "S-1-15-2-2949829717-3513010153-1763188221-673376296-2223709172-2867208625-18607017",
+          "peak_process_memory_bytes": 18227200,
+          "pid": 6044,
+          "runtime_bytes": 22904399,
+          "wall_time_limit_seconds": 12
+        },
+        "source_unchanged": true
+      },
+      {
+        "id": "stable-groups",
+        "status": "passed",
+        "baseline": "seeded naive implementation",
+        "candidate_models": [
+          {
+            "billing": {
+              "amount": 0.00837,
+              "basis": "estimated",
+              "currency": "USD",
+              "price": {
+                "cache_read": 0.2,
+                "cache_write": null,
+                "checked_at": "2026-10-16",
+                "currency": "USD",
+                "fee_percent": 0,
+                "input": 2,
+                "max_input_tokens": 200000,
+                "output": 12,
+                "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing"
+              },
+              "reason": "token_rates",
+              "tokens": {
+                "cache_read": 0,
+                "cache_write": 0,
+                "input": 681,
+                "output": 584,
+                "reasoning": 414,
+                "total": 1265
+              }
+            },
+            "model": "gemini-3.1-pro-preview",
+            "outcome_uncertain": false,
+            "provider": "vertex",
+            "request_id": "8edf08ec673e4561a9e1281ff89707a5",
+            "status": "SUCCEEDED",
+            "usage": {
+              "candidatesTokenCount": 170,
+              "promptTokenCount": 681,
+              "thoughtsTokenCount": 414,
+              "totalTokenCount": 1265
+            }
+          }
+        ],
+        "contract_quality": {
+          "basis": "只检查来源分组、案例一致性和已观察形状，不自动创造预期或给通用契约质量打分。",
+          "blockers": [],
+          "distinct_inputs": 4,
+          "distinct_outputs": 4,
+          "heldout_cases": 2,
+          "model_calls": 0,
+          "observed_features": [
+            "empty_or_null",
+            "negative",
+            "singleton",
+            "zero"
+          ],
+          "observed_types": [
+            "dict",
+            "int",
+            "list",
+            "str"
+          ],
+          "public_cases": 2,
+          "retained_cases": 0,
+          "review_questions": [
+            "请独立核对单位、精度、顺序、格式和不适用输入；本检查不能判断业务预期正确。"
+          ],
+          "semantic_truth_verified": false,
+          "structurally_consistent": true
+        },
+        "paired_observations": [
+          {
+            "candidate_seconds": 0.746,
+            "baseline_seconds": 0.7893,
+            "baseline_correct": false,
+            "baseline_error": null,
+            "candidate_peak_process_memory_bytes": 17960960,
+            "baseline_peak_process_memory_bytes": 18485248
+          },
+          {
+            "candidate_seconds": 0.9372,
+            "baseline_seconds": 0.7762,
+            "baseline_correct": false,
+            "baseline_error": null,
+            "candidate_peak_process_memory_bytes": 18358272,
+            "baseline_peak_process_memory_bytes": 18276352
+          }
+        ],
+        "verified_novel_inputs": 2,
+        "baseline_wrong_on_challenges": 2,
+        "actual_result": "z:5\na:4",
+        "actual_result_verified": true,
+        "worker_isolation": {
+          "active_process_limit": 1,
+          "appcontainer": true,
+          "backend": "windows-lpac-job",
+          "capabilities": [
+            "registryRead"
+          ],
+          "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+          "cpu_seconds": 0.28125,
+          "cpu_time_limit_seconds": 3,
+          "elapsed_seconds": 0.5918,
+          "lpac": true,
+          "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+          "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+          "memory_limit_bytes": 201326592,
+          "package_sid": "S-1-15-2-3695435137-3084482578-2604983624-555109994-2222357515-3458258451-156482703",
+          "peak_process_memory_bytes": 17739776,
+          "pid": 40840,
+          "runtime_bytes": 22904399,
+          "wall_time_limit_seconds": 12
+        },
+        "source_unchanged": true
+      }
+    ],
+    "interpretation": "Six preselected challenge inputs expose seeded unit/order bugs. Candidate outputs match explicit expectations; mixed timings include worker startup. This is not a broad independent semantic or net-benefit benchmark."
+  },
+  "resources": {
+    "new_dependencies": 0,
+    "new_resident_services": 0,
+    "new_schedulers": 0,
+    "new_tables": 0,
+    "evolution_schema": 5,
+    "capacity_summary_before_peak_python_bytes": 9610134,
+    "capacity_summary_after_peak_python_bytes": 10277,
+    "capacity_fixture_payload_bytes": 9600000,
+    "capacity_measurement": "tracemalloc during aggregate query only; excludes SQLite C allocations, host/browser RSS and long-term low-end-PC resource validation.",
+    "archive_scope": "Online immutable-package slot and payload reclamation only. Files and job receipts remain. No VACUUM, user-file deletion or physical disk reduction claim."
+  },
+  "resolved_issues": [
+    "Capacity aggregate formerly materialized large package documents; final query reads only state, verified under large synthetic stored payloads.",
+    "Python regex literal warning corrected without changing archive matching semantics."
+  ],
+  "source_sha256": {
+    "apps/web/project-tools.js": "d76ab6cf2a5487131d7171710273da94cf2cc9ce2c1cca2a9dfe5e564c25ec98",
+    "apps/web/tool-lifecycle.js": "d41455f61f19df4c9c39e27840c816130b3ddc3969aa5c1c58f2055da39fe84b",
+    "evals/cases/k4-quality-v1.json": "ddba8dd3eb90eac8ceebafb7d30d5dff4947011f59fd9de42f8208b4248cdb59",
+    "pyproject.toml": "f0b1b14b87046720a0f1334df626bc18d4ca231f9bdf52caccfc2d1dae7d6dd2",
+    "runtime/node-host/jarvis_core/__init__.py": "1b6b1d7b16df4263decd8258fbca56a3952bfe8396e9f334580462191e03f133",
+    "runtime/node-host/jarvis_core/evolution/catalog.py": "d2b8fd9eea876ef14747267b958882e22101913f2a53a6cc7e9ca4464558d7f3",
+    "runtime/node-host/jarvis_core/evolution/lifecycle.py": "56a8b97a8d356f179758ffb59f9e792f8698afe0a78db2dd597fa8252688a84d",
+    "runtime/node-host/jarvis_core/evolution/quality.py": "459b4ae4701aa4bcc0b31ab94071e66bf361bd048c5475140050c79546d8d702",
+    "runtime/node-host/jarvis_core/evolution/store.py": "5679bee7c07de3e40046cd93b2749afe28c3b3116858ede75123c1f2a5cb5b01",
+    "runtime/node-host/jarvis_core/evolution/tool_archive.py": "f0c8a9643b53eb93a86c9f39c122e24928f2a17d66dda897d20d95dcb0326546",
+    "runtime/node-host/jarvis_core/releases.py": "6d84032a0bf9a3bff0f5965ae8dce2bccbcd249d448a63aaf1b4e914b06b04fc",
+    "tests/test_tool_lifecycle.py": "c1f1d8fdbe782fcd8f94c618d73145a40c9a9bf7ff03c3442ccea7de0b99a192",
+    "tests/test_tool_quality_archive.py": "7a20113ee8cc1a6b0dd6159e8f8ba2048fce910c3016f78afeca3ae8cd365fc5",
+    "tools/probe_k4_quality.py": "0f218e69dc61bb70096f417beb20f8f9107a44788a295f5e8e2f177b25faef11",
+    "tools/probe_project_tools_ui.py": "e8b6467d8bfd5bb111ab5e10ba6f1807f623481a60846e3e13a46afb3fbaabd7",
+    "uv.lock": "d1940ef104165252ecc0477552626017b889effb81a6c1563461e939c0c0fa6e"
+  },
+  "diagram_review": "Existing proposed build/evolution/health diagrams still match admission, bounded trials and recovery; no diagram source or generated asset changed.",
+  "deployment": {
+    "status": "passed",
+    "version": "0.1.76",
+    "previous_version": "0.1.75",
+    "instance_id": "9f4d4701b19998b463899776f61fe8fc",
+    "idle_graceful_reload": true,
+    "served_sha256": {
+      "tool-lifecycle.js": "d41455f61f19df4c9c39e27840c816130b3ddc3969aa5c1c58f2055da39fe84b",
+      "project-tools.js": "d76ab6cf2a5487131d7171710273da94cf2cc9ce2c1cca2a9dfe5e564c25ec98",
+      "tool-intents.js": "dfe71dda751161226a32d9be6fe04f2b22d38b25aa8a2fc3016e0e80194f3449",
+      "tool-contracts.js": "410cc289e507a0e52691eb4f51dddd60ec784fa170d1183a04c6d3971734c293",
+      "growth.js": "ab13c97445ac63ed51fc709414b37471bf62018b07d67c88445bbdc82c42af7a",
+      "skills.js": "f2263d9234324bf8f6016a6bddc8424aa340cc40a55e3f803c26a1c6d0c8e268",
+      "dialogue.js": "ef95a69c43ec38d94d48c1b6ab40106faa8777426eb925ea3224a34bb61132a3",
+      "workspace.js": "295e8a18545e5f73649f382205da3d8e76d462396bdb0189223cdf1beae4e76a"
+    },
+    "business_tables_compared": 11,
+    "business_unchanged": true,
+    "coding_settings_unchanged": true,
+    "existing_growth_settings_tools_versions_unchanged": true,
+    "schema_before": 4,
+    "schema_after": 5,
+    "empty_restart_queue_reviewed_and_resumed": true,
+    "cloud_calls": 0,
+    "runtime_archive_built": false,
+    "installer_built": false
+  }
+}

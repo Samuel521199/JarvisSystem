@@ -1,0 +1,29 @@
+{
+  "id": "k3-dependencies-v1",
+  "frozen_before_model_call": true,
+  "cases": [
+    {
+      "id": "json-query-report",
+      "category": "pinned-offline-dependency",
+      "recipe": "python-jmespath-v1",
+      "entry": "report.py",
+      "goal": "修复两文件 JSON 查询报告。report.transform(data) 输入含 query（JMESPath 表达式）和 rows（JSON 值）。必须在 querydata.py 中使用已提供的 jmespath.search(query, rows)，支持表达式动态变化；report.py 调用该模块，使用已提供的 json.dumps 返回 JSON 字符串，ensure_ascii=False、sort_keys=True、其余保持默认分隔符。不修改输入，不安装依赖。保持两个文件分工，不新增文件。",
+      "files": {
+        "report.py": "import querydata\ndef transform(data):\n    return str(querydata.select(data))\n",
+        "querydata.py": "def select(data):\n    return 'wrong'\n"
+      },
+      "public": [
+        {"input": {"query": "[*].name", "rows": [{"name": "小明"}, {"name": "Sam"}]}, "expected": "[\"小明\", \"Sam\"]"},
+        {"input": {"query": "length(@)", "rows": []}, "expected": "0"}
+      ],
+      "private": [
+        {"input": {"query": "sort(@)", "rows": [3, -1, 2]}, "expected": "[-1, 2, 3]"},
+        {"input": {"query": "[?active == `true`].name", "rows": [{"name": "保留", "active": true}, {"name": "忽略", "active": false}]}, "expected": "[\"保留\"]"},
+        {"input": {"query": "missing", "rows": {}}, "expected": "null"},
+        {"input": {"query": "{z: b, a: a}", "rows": {"a": "中文", "b": 2}}, "expected": "{\"a\": \"中文\", \"z\": 2}"},
+        {"input": {"query": "join(',', @)", "rows": ["a", "b"]}, "expected": "\"a,b\""},
+        {"input": {"query": "sum(@)", "rows": [-4, 6, 0]}, "expected": "2"}
+      ]
+    }
+  ]
+}

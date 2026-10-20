@@ -1,0 +1,645 @@
+{
+  "version": "0.1.66",
+  "status": "implemented_with_targeted_verification",
+  "observed_at": "2026-10-19T07:41:27.470761+00:00",
+  "raw_report": "H:\\JarvisData\\diagnostics\\k3-build-v0166-20261019\\report.json",
+  "dataset": "evals/cases/k3-coding-v2.json",
+  "dataset_digest": "sha256:e2f13ca1e4071d146fd42e279db4fdd9a531c90982f11eaed64483e357804f54",
+  "checks": {
+    "coding_tests": 35,
+    "related_tests": 50,
+    "total": 85,
+    "passed": true,
+    "full_k2_repeated": false
+  },
+  "real_codex": {
+    "status": "passed",
+    "scenarios": [
+      {
+        "id": "repair-expense-summary",
+        "category": "syntax_repair_and_multifile",
+        "status": "passed",
+        "baseline_passed": false,
+        "validation": {
+          "cases": 4,
+          "failures": [],
+          "heldout": {
+            "cases": 2,
+            "failures": [],
+            "passed": true,
+            "worker": {
+              "active_process_limit": 1,
+              "appcontainer": true,
+              "backend": "windows-lpac-job",
+              "capabilities": [
+                "registryRead"
+              ],
+              "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+              "cpu_seconds": 0.140625,
+              "cpu_time_limit_seconds": 3,
+              "elapsed_seconds": 4.4874,
+              "lpac": true,
+              "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+              "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+              "memory_limit_bytes": 201326592,
+              "package_sid": "S-1-15-2-1053259836-720027963-3378421788-3218417158-2411910697-3847257400-1894096431",
+              "peak_process_memory_bytes": 12984320,
+              "pid": 46944,
+              "runtime_bytes": 22904399,
+              "wall_time_limit_seconds": 12
+            }
+          },
+          "independent_checks": true,
+          "passed": true,
+          "public": {
+            "cases": 2,
+            "failures": [],
+            "passed": true,
+            "worker": {
+              "active_process_limit": 1,
+              "appcontainer": true,
+              "backend": "windows-lpac-job",
+              "capabilities": [
+                "registryRead"
+              ],
+              "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+              "cpu_seconds": 0.140625,
+              "cpu_time_limit_seconds": 3,
+              "elapsed_seconds": 3.9578,
+              "lpac": true,
+              "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+              "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+              "memory_limit_bytes": 201326592,
+              "package_sid": "S-1-15-2-1716234841-2051386129-840982750-1334186792-2662132271-1561727805-1425786859",
+              "peak_process_memory_bytes": 13058048,
+              "pid": 38620,
+              "runtime_bytes": 22904399,
+              "wall_time_limit_seconds": 12
+            }
+          },
+          "worker": {
+            "active_process_limit": 1,
+            "appcontainer": true,
+            "backend": "windows-lpac-job",
+            "capabilities": [
+              "registryRead"
+            ],
+            "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+            "cpu_seconds": 0.140625,
+            "cpu_time_limit_seconds": 3,
+            "elapsed_seconds": 3.9578,
+            "lpac": true,
+            "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+            "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+            "memory_limit_bytes": 201326592,
+            "package_sid": "S-1-15-2-1716234841-2051386129-840982750-1334186792-2662132271-1561727805-1425786859",
+            "peak_process_memory_bytes": 13058048,
+            "pid": 38620,
+            "runtime_bytes": 22904399,
+            "wall_time_limit_seconds": 12
+          }
+        },
+        "build_validation": {
+          "actual_archive_entry": true,
+          "cases": 4,
+          "failures": [],
+          "passed": true,
+          "reproducible": true,
+          "worker": {
+            "active_process_limit": 1,
+            "appcontainer": true,
+            "backend": "windows-lpac-job",
+            "capabilities": [
+              "registryRead"
+            ],
+            "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+            "cpu_seconds": 0.28125,
+            "cpu_time_limit_seconds": 3,
+            "elapsed_seconds": 3.598,
+            "lpac": true,
+            "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+            "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+            "memory_limit_bytes": 201326592,
+            "package_sid": "S-1-15-2-3958709508-2362249875-4070964997-3114412871-1137583768-3214730119-2045608",
+            "peak_process_memory_bytes": 17690624,
+            "pid": 44060,
+            "runtime_bytes": 22904399,
+            "wall_time_limit_seconds": 12
+          }
+        },
+        "model_receipts": [
+          {
+            "billing": {
+              "amount": null,
+              "basis": "external_codex_account"
+            },
+            "executor": {
+              "candidate_execution": false,
+              "command_sandbox": "deny-filesystem",
+              "process": {
+                "active_process_limit": 4,
+                "elapsed_seconds": 20.391,
+                "job_cpu_limit_seconds": 45,
+                "job_memory_limit_bytes": 1073741824,
+                "kill_on_close": true,
+                "os_sandbox": false,
+                "peak_job_memory_bytes": 26255360,
+                "pid": 9608,
+                "wall_limit_seconds": 90
+              },
+              "settings_revision": 1,
+              "stage": "H:\\JarvisData\\diagnostics\\k3-build-v0166-20261019\\repair-expense-summary\\data\\coding-external\\9832e365370146829a108c3ae551a8e0",
+              "tool_policy": "proposal-only",
+              "version": "0.142.1"
+            },
+            "model": "gpt-6.1-sol",
+            "outcome_uncertain": false,
+            "provider": "codex-cli",
+            "request_id": "01a1531b-d009-7681-ac98-1929f17b5954",
+            "status": "SUCCEEDED",
+            "usage": {
+              "cached_input_tokens": 0,
+              "input_tokens": 1652,
+              "output_tokens": 387,
+              "reasoning_output_tokens": 94
+            }
+          }
+        ],
+        "apply": {
+          "status": "applied",
+          "files": 3
+        },
+        "rollback": {
+          "status": "restored",
+          "files": 3
+        },
+        "offline_build": {
+          "status": "verified",
+          "recipe": "python-zipapp-v1",
+          "sha256": "sha256:a66318f9fd53b54c23ec7bdac01829f789ef4b76aa72f746666dff1bd69b8ce5",
+          "bytes": 2726,
+          "byte_identical": true,
+          "model_calls": 0,
+          "expected_digest_checked": true,
+          "execution": "windows-lpac",
+          "validation": {
+            "passed": true,
+            "cases": 2,
+            "failures": [],
+            "worker": {
+              "backend": "windows-lpac-job",
+              "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+              "runtime_bytes": 22904399,
+              "appcontainer": true,
+              "lpac": true,
+              "capabilities": [
+                "registryRead"
+              ],
+              "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+              "pid": 32556,
+              "package_sid": "S-1-15-2-1312292075-554356536-2480415367-3080681012-1190798160-2873613368-3021363857",
+              "active_process_limit": 1,
+              "cpu_time_limit_seconds": 3,
+              "wall_time_limit_seconds": 12,
+              "cpu_seconds": 0.28125,
+              "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+              "memory_limit_bytes": 201326592,
+              "peak_process_memory_bytes": 18423808,
+              "elapsed_seconds": 0.3493
+            }
+          }
+        },
+        "artifact_bytes": 2726
+      },
+      {
+        "id": "csv-escaping",
+        "category": "bugfix",
+        "status": "passed",
+        "baseline_passed": false,
+        "validation": {
+          "cases": 4,
+          "failures": [],
+          "heldout": {
+            "cases": 2,
+            "failures": [],
+            "passed": true,
+            "worker": {
+              "active_process_limit": 1,
+              "appcontainer": true,
+              "backend": "windows-lpac-job",
+              "capabilities": [
+                "registryRead"
+              ],
+              "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+              "cpu_seconds": 0.140625,
+              "cpu_time_limit_seconds": 3,
+              "elapsed_seconds": 3.0789,
+              "lpac": true,
+              "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+              "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+              "memory_limit_bytes": 201326592,
+              "package_sid": "S-1-15-2-1621286400-223839747-3394012292-1310826466-3211162725-3166847437-2356650141",
+              "peak_process_memory_bytes": 12861440,
+              "pid": 44860,
+              "runtime_bytes": 22904399,
+              "wall_time_limit_seconds": 12
+            }
+          },
+          "independent_checks": true,
+          "passed": true,
+          "public": {
+            "cases": 2,
+            "failures": [],
+            "passed": true,
+            "worker": {
+              "active_process_limit": 1,
+              "appcontainer": true,
+              "backend": "windows-lpac-job",
+              "capabilities": [
+                "registryRead"
+              ],
+              "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+              "cpu_seconds": 0.140625,
+              "cpu_time_limit_seconds": 3,
+              "elapsed_seconds": 3.1227,
+              "lpac": true,
+              "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+              "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+              "memory_limit_bytes": 201326592,
+              "package_sid": "S-1-15-2-3298297675-24477663-867105922-4091223084-3389829302-3946936069-3243245468",
+              "peak_process_memory_bytes": 12976128,
+              "pid": 48540,
+              "runtime_bytes": 22904399,
+              "wall_time_limit_seconds": 12
+            }
+          },
+          "worker": {
+            "active_process_limit": 1,
+            "appcontainer": true,
+            "backend": "windows-lpac-job",
+            "capabilities": [
+              "registryRead"
+            ],
+            "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+            "cpu_seconds": 0.140625,
+            "cpu_time_limit_seconds": 3,
+            "elapsed_seconds": 3.1227,
+            "lpac": true,
+            "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+            "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+            "memory_limit_bytes": 201326592,
+            "package_sid": "S-1-15-2-3298297675-24477663-867105922-4091223084-3389829302-3946936069-3243245468",
+            "peak_process_memory_bytes": 12976128,
+            "pid": 48540,
+            "runtime_bytes": 22904399,
+            "wall_time_limit_seconds": 12
+          }
+        },
+        "build_validation": {
+          "actual_archive_entry": true,
+          "cases": 4,
+          "failures": [],
+          "passed": true,
+          "reproducible": true,
+          "worker": {
+            "active_process_limit": 1,
+            "appcontainer": true,
+            "backend": "windows-lpac-job",
+            "capabilities": [
+              "registryRead"
+            ],
+            "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+            "cpu_seconds": 0.265625,
+            "cpu_time_limit_seconds": 3,
+            "elapsed_seconds": 3.2305,
+            "lpac": true,
+            "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+            "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+            "memory_limit_bytes": 201326592,
+            "package_sid": "S-1-15-2-94093594-836090840-654906850-4266415348-2701613385-2232448606-4027076861",
+            "peak_process_memory_bytes": 18251776,
+            "pid": 30320,
+            "runtime_bytes": 22904399,
+            "wall_time_limit_seconds": 12
+          }
+        },
+        "model_receipts": [
+          {
+            "billing": {
+              "amount": null,
+              "basis": "external_codex_account"
+            },
+            "executor": {
+              "candidate_execution": false,
+              "command_sandbox": "deny-filesystem",
+              "process": {
+                "active_process_limit": 4,
+                "elapsed_seconds": 21.866,
+                "job_cpu_limit_seconds": 45,
+                "job_memory_limit_bytes": 1073741824,
+                "kill_on_close": true,
+                "os_sandbox": false,
+                "peak_job_memory_bytes": 27074560,
+                "pid": 40520,
+                "wall_limit_seconds": 90
+              },
+              "settings_revision": 1,
+              "stage": "H:\\JarvisData\\diagnostics\\k3-build-v0166-20261019\\csv-escaping\\data\\coding-external\\6bd363f1e7ce4ec088885fe2fd87742b",
+              "tool_policy": "proposal-only",
+              "version": "0.142.1"
+            },
+            "model": "gpt-6.1-sol",
+            "outcome_uncertain": false,
+            "provider": "codex-cli",
+            "request_id": "01a1531c-c05f-7982-9fef-74cf0cfdd268",
+            "status": "SUCCEEDED",
+            "usage": {
+              "cached_input_tokens": 0,
+              "input_tokens": 1562,
+              "output_tokens": 327,
+              "reasoning_output_tokens": 145
+            }
+          }
+        ],
+        "apply": {
+          "status": "applied",
+          "files": 2
+        },
+        "rollback": {
+          "status": "restored",
+          "files": 2
+        },
+        "offline_build": {
+          "status": "verified",
+          "recipe": "python-zipapp-v1",
+          "sha256": "sha256:715f92762c5017963f4da635cf7c242365863be49320d45abb4ed183d5ccfef2",
+          "bytes": 2436,
+          "byte_identical": true,
+          "model_calls": 0,
+          "expected_digest_checked": true,
+          "execution": "windows-lpac",
+          "validation": {
+            "passed": true,
+            "cases": 2,
+            "failures": [],
+            "worker": {
+              "backend": "windows-lpac-job",
+              "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+              "runtime_bytes": 22904399,
+              "appcontainer": true,
+              "lpac": true,
+              "capabilities": [
+                "registryRead"
+              ],
+              "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+              "pid": 45340,
+              "package_sid": "S-1-15-2-3115712295-983339359-2378044159-3432557825-4006402231-3575967468-3076288937",
+              "active_process_limit": 1,
+              "cpu_time_limit_seconds": 3,
+              "wall_time_limit_seconds": 12,
+              "cpu_seconds": 0.265625,
+              "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+              "memory_limit_bytes": 201326592,
+              "peak_process_memory_bytes": 18206720,
+              "elapsed_seconds": 0.3304
+            }
+          }
+        },
+        "artifact_bytes": 2436
+      },
+      {
+        "id": "status-report",
+        "category": "feature_and_regression",
+        "status": "passed",
+        "baseline_passed": false,
+        "validation": {
+          "cases": 4,
+          "failures": [],
+          "heldout": {
+            "cases": 2,
+            "failures": [],
+            "passed": true,
+            "worker": {
+              "active_process_limit": 1,
+              "appcontainer": true,
+              "backend": "windows-lpac-job",
+              "capabilities": [
+                "registryRead"
+              ],
+              "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+              "cpu_seconds": 0.171875,
+              "cpu_time_limit_seconds": 3,
+              "elapsed_seconds": 3.1288,
+              "lpac": true,
+              "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+              "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+              "memory_limit_bytes": 201326592,
+              "package_sid": "S-1-15-2-3330667341-3722036416-237515594-84417662-4064226431-2496537161-686368339",
+              "peak_process_memory_bytes": 12795904,
+              "pid": 21328,
+              "runtime_bytes": 22904399,
+              "wall_time_limit_seconds": 12
+            }
+          },
+          "independent_checks": true,
+          "passed": true,
+          "public": {
+            "cases": 2,
+            "failures": [],
+            "passed": true,
+            "worker": {
+              "active_process_limit": 1,
+              "appcontainer": true,
+              "backend": "windows-lpac-job",
+              "capabilities": [
+                "registryRead"
+              ],
+              "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+              "cpu_seconds": 0.140625,
+              "cpu_time_limit_seconds": 3,
+              "elapsed_seconds": 3.1768,
+              "lpac": true,
+              "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+              "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+              "memory_limit_bytes": 201326592,
+              "package_sid": "S-1-15-2-2037741754-907111025-1433112814-3441209159-1730304608-2147707961-1085030963",
+              "peak_process_memory_bytes": 12775424,
+              "pid": 17520,
+              "runtime_bytes": 22904399,
+              "wall_time_limit_seconds": 12
+            }
+          },
+          "worker": {
+            "active_process_limit": 1,
+            "appcontainer": true,
+            "backend": "windows-lpac-job",
+            "capabilities": [
+              "registryRead"
+            ],
+            "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+            "cpu_seconds": 0.140625,
+            "cpu_time_limit_seconds": 3,
+            "elapsed_seconds": 3.1768,
+            "lpac": true,
+            "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+            "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+            "memory_limit_bytes": 201326592,
+            "package_sid": "S-1-15-2-2037741754-907111025-1433112814-3441209159-1730304608-2147707961-1085030963",
+            "peak_process_memory_bytes": 12775424,
+            "pid": 17520,
+            "runtime_bytes": 22904399,
+            "wall_time_limit_seconds": 12
+          }
+        },
+        "build_validation": {
+          "actual_archive_entry": true,
+          "cases": 4,
+          "failures": [],
+          "passed": true,
+          "reproducible": true,
+          "worker": {
+            "active_process_limit": 1,
+            "appcontainer": true,
+            "backend": "windows-lpac-job",
+            "capabilities": [
+              "registryRead"
+            ],
+            "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+            "cpu_seconds": 0.28125,
+            "cpu_time_limit_seconds": 3,
+            "elapsed_seconds": 3.4079,
+            "lpac": true,
+            "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+            "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+            "memory_limit_bytes": 201326592,
+            "package_sid": "S-1-15-2-1203802767-1894433958-144291088-3942615560-3512328142-253126841-3370617078",
+            "peak_process_memory_bytes": 18366464,
+            "pid": 43276,
+            "runtime_bytes": 22904399,
+            "wall_time_limit_seconds": 12
+          }
+        },
+        "model_receipts": [
+          {
+            "billing": {
+              "amount": null,
+              "basis": "external_codex_account"
+            },
+            "executor": {
+              "candidate_execution": false,
+              "command_sandbox": "deny-filesystem",
+              "process": {
+                "active_process_limit": 4,
+                "elapsed_seconds": 17.72,
+                "job_cpu_limit_seconds": 45,
+                "job_memory_limit_bytes": 1073741824,
+                "kill_on_close": true,
+                "os_sandbox": false,
+                "peak_job_memory_bytes": 26804224,
+                "pid": 39588,
+                "wall_limit_seconds": 90
+              },
+              "settings_revision": 1,
+              "stage": "H:\\JarvisData\\diagnostics\\k3-build-v0166-20261019\\status-report\\data\\coding-external\\f6946457e3da425b97d82efb95175689",
+              "tool_policy": "proposal-only",
+              "version": "0.142.1"
+            },
+            "model": "gpt-6.1-sol",
+            "outcome_uncertain": false,
+            "provider": "codex-cli",
+            "request_id": "01a1531d-a24f-7441-8ac8-1469d71e1e53",
+            "status": "SUCCEEDED",
+            "usage": {
+              "cached_input_tokens": 0,
+              "input_tokens": 1600,
+              "output_tokens": 253,
+              "reasoning_output_tokens": 0
+            }
+          }
+        ],
+        "apply": {
+          "status": "applied",
+          "files": 2
+        },
+        "rollback": {
+          "status": "restored",
+          "files": 2
+        },
+        "offline_build": {
+          "status": "verified",
+          "recipe": "python-zipapp-v1",
+          "sha256": "sha256:bbe524113545ad9c5d92e103e27c781540fce877e088856d7d8c1d641040a77f",
+          "bytes": 2470,
+          "byte_identical": true,
+          "model_calls": 0,
+          "expected_digest_checked": true,
+          "execution": "windows-lpac",
+          "validation": {
+            "passed": true,
+            "cases": 2,
+            "failures": [],
+            "worker": {
+              "backend": "windows-lpac-job",
+              "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+              "runtime_bytes": 22904399,
+              "appcontainer": true,
+              "lpac": true,
+              "capabilities": [
+                "registryRead"
+              ],
+              "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+              "pid": 11016,
+              "package_sid": "S-1-15-2-1659260016-4095129182-1227245037-1383895137-332606827-1794801858-3524200236",
+              "active_process_limit": 1,
+              "cpu_time_limit_seconds": 3,
+              "wall_time_limit_seconds": 12,
+              "cpu_seconds": 0.28125,
+              "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+              "memory_limit_bytes": 201326592,
+              "peak_process_memory_bytes": 18309120,
+              "elapsed_seconds": 0.343
+            }
+          }
+        },
+        "artifact_bytes": 2470
+      }
+    ]
+  },
+  "ui": {
+    "scope": "isolated data, localhost:18182, real completed task",
+    "result_panel": true,
+    "apply_disk_match": true,
+    "restore_original_bytes": true,
+    "focus_toggle": true,
+    "offline_help": true,
+    "download_button": "clicked; browser file save not independently observed",
+    "screenshot": "H:/JarvisData/diagnostics/k3-build-ui-v0166.png"
+  },
+  "deployment": {
+    "status": "passed",
+    "previous_version": "0.1.65",
+    "version": "0.1.66",
+    "previous_instance": "d63393fce1a2953a6ccc1e40930d8528",
+    "instance": "87ec77fa49f01314c7cee69525775e41",
+    "idle_graceful_reload": true,
+    "served_sha256": {
+      "skills.js": "e9270a16072a903e636929bf5f426535bece37fc682f227e6d617721075b74e8",
+      "coding.js": "3547507e77569145601f7d50660359172185269f5b566fddeefafcb54b04dae2",
+      "admin.js": "09d93597e84408dfd48ce8aaecb5b7a9b1554023a38811526c3b6bb291661c43",
+      "admin.css (inline)": "deeb0de5f96ac1f2d35b1ba40ad0eb7093e59ec1103e90541ce88e6554776584"
+    },
+    "business_tables_compared": 11,
+    "business_data_unchanged": true,
+    "comparison_baseline": "Persisted v0.1.65 deployment snapshot; initial in-memory v0.1.66 reload check exited on an incorrect standalone admin.css URL. CSS is served inline, verified here.",
+    "coding_settings_unchanged": true,
+    "empty_restart_queue_reviewed_and_resumed": true,
+    "cloud_calls": 0,
+    "deployment": "source; no new installer/runtime release bundle"
+  },
+  "limitations": [
+    "Fixed 1-4 same-directory Python modules; no arbitrary repo, nested package, third-party dependency installer or native executable.",
+    "Three development scenarios, one run each; not an unseen benchmark or model/skill superiority comparison.",
+    "Standalone downloaded PYZ uses the local Python account; OS isolation is provided by Jarvis LPAC verification only.",
+    "Full K3/B-series fault and multi-language gates remain open."
+  ]
+}

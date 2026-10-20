@@ -1,0 +1,44 @@
+{
+  "slug": "gpt-6.1-sol",
+  "display_name": "GPT-6.1-Sol",
+  "default_reasoning_level": "low",
+  "supported_reasoning_levels": [
+    {
+      "effort": "low",
+      "description": "Fast responses with lighter reasoning"
+    },
+    {
+      "effort": "medium",
+      "description": "Balances speed and reasoning depth for everyday tasks"
+    },
+    {
+      "effort": "high",
+      "description": "Greater reasoning depth for complex problems"
+    },
+    {
+      "effort": "xhigh",
+      "description": "Extra high reasoning depth for complex problems"
+    }
+  ],
+  "shell_type": "unified_exec",
+  "visibility": "list",
+  "supported_in_api": true,
+  "priority": 1,
+  "supports_reasoning_summaries": true,
+  "supports_parallel_tool_calls": false,
+  "support_verbosity": true,
+  "default_verbosity": "low",
+  "truncation_policy": {
+    "mode": "tokens",
+    "limit": 10000
+  },
+  "context_window": 32768,
+  "effective_context_window_percent": 95,
+  "base_instructions": "You are a code proposal generator. Return structured text without tools.",
+  "input_modalities": [
+    "text"
+  ],
+  "experimental_supported_tools": [],
+  "description": "Jarvis proposal-only capability profile; not a provider model capability advertisement.",
+  "node_repl_disabled": true
+}

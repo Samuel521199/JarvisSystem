@@ -22,12 +22,13 @@
   - [10.1.9 语音主选与候补：本地优先（2026-10-18）](#voice-model-selection)
     - [10.1.9.1 本地主选、备选与真实能力边界](#voice-local-candidates)
     - [10.1.9.2 内存、显存与模型文件分开预算](#voice-resource-footprint)
-    - [10.1.9.3 Qwen 本地主力语音组件](#qwen-tts-runtime)
-    - [10.1.9.4 ZipVoice 快速备用组件（2026-10-18）](#fast-speech-runtime)
-    - [10.1.9.5 CosyVoice3 独立文件语音组件（2026-10-18）](#cosyvoice3-runtime)
-    - [10.1.9.6 说话人识别、分段和重叠分离分开验收](#voice-overlap-separation)
-    - [10.1.9.7 国内外云端候补与价格口径](#voice-cloud-candidates)
-    - [10.1.9.8 资源与效果驱动的候补规则](#voice-routing-policy)
+    - [10.1.9.3 按需本地语音识别（0.1.81）](#speech-input-runtime)
+    - [10.1.9.4 Qwen 本地主力语音组件](#qwen-tts-runtime)
+    - [10.1.9.5 ZipVoice 快速备用组件（2026-10-18）](#fast-speech-runtime)
+    - [10.1.9.6 CosyVoice3 独立文件语音组件（2026-10-18）](#cosyvoice3-runtime)
+    - [10.1.9.7 说话人识别、分段和重叠分离分开验收](#voice-overlap-separation)
+    - [10.1.9.8 国内外云端候补与价格口径](#voice-cloud-candidates)
+    - [10.1.9.9 资源与效果驱动的候补规则](#voice-routing-policy)
 - [10.2 Computer Use：已验证的 DOM 规划与视觉候选](#computer-use-models)
 - [10.3 本地嵌入模型的候选与资源边界（proposed）](#embedding-candidates)
 - [10.4 双路模型连接与恢复设计](#model-routing)
@@ -197,7 +198,7 @@ Google JSON 是服务账户凭据，以 OAuth 换取短期令牌，并非普通 
 
 派发先在核心短事务内检查停止并提交 `dispatch_admitted`，该提交是“已在途”的边界；停止先获得事务时拒绝接纳。已接纳请求可能在停止后完成网络发送、远端执行和计费，不能承诺撤回。0.1.12 的单次聊天取消沿用该已接纳边界：网页传入请求级取消事件，异步等待响应头或正文时检查取消并关闭/等待 HTTPX 传输清理；取消后不自动回退、不采用迟到输出。同步凭据/Google 认证阶段仍按原有超时退出，随后拒绝派发；不会通过提前释放槽位制造无限后台请求。未派发取消记为 CANCELLED，已派发且远端结果不明仍记 UNKNOWN，并附 `cancel_requested`；网页停止回复不证明供应商已经停止计算或免除计费。
 
-网络等待不占核心写锁；0.1.38 起，HTTP 响应协程总期限和读取等待统一取调用方 `deadline_seconds`（须为有限正数）：普通调用默认 60 秒，限定编码调用为 90 秒；连接取至多 10 秒，写入和连接池等待取至多 45 秒，各自也不超过调用方期限。持续到达的数据不会绕过协程总期限。Google 令牌请求另限 15 秒且禁止隐式重试。路由按单家异步等待至多 60 秒、总计 90 秒的合作式预算接纳候选；Google 认证可能额外占用最多 15 秒，不能承诺墙钟时间在 90 秒硬终止，也不是独立进程强制终止能力。传输、超大/坏响应或派发后的停止导致结果不确定时保留 UNKNOWN，不输出结果、不自动重试。本地调用禁用环境代理，固定发往 loopback。诊断账本保留请求摘要、尝试状态和数值用量；0.1.38 另记响应期限，成长回执保留异常类型（如 `ReadTimeout`）、HTTP 状态及期限，不反射异常原文。旧 UNKNOWN 不因改期限而自动补发。诊断记录不持久保存提示原文、模型回答或密钥；浏览器/CLI 会话历史也没有升级为长期记忆。
+网络等待不占核心写锁；0.1.38 起，HTTP 响应协程总期限和读取等待统一取调用方 `deadline_seconds`（须为有限正数）：普通调用默认 60 秒，限定编码调用为 90 秒；连接取至多 10 秒，写入和连接池等待取至多 45 秒，各自也不超过调用方期限。持续到达的数据不会绕过协程总期限。Google 令牌请求另限 15 秒且禁止隐式重试。路由通常按单家响应 60 秒、合计 90 秒的合作式预算接纳候选；0.1.74 对模型 ID 为 `gemini-4-*` / `gpt-6-astra*` 的路由使用 120/150 秒，减少重推理被普通期限提前截断。Google 认证另限 15 秒。独立回复进程和浏览器等待上限见[进程契约](contracts.md#dialogue-process-contract)，不要把响应期限当作整个墙钟时间保证。传输、超大/坏响应或派发后的停止导致结果不确定时保留 UNKNOWN，不输出结果、不自动重试。本地调用禁用环境代理，固定发往 loopback。诊断账本保留请求摘要、尝试状态和数值用量；0.1.38 另记响应期限，成长回执保留异常类型（如 `ReadTimeout`）、HTTP 状态及期限，不反射异常原文。旧 UNKNOWN 不因改期限而自动补发。诊断记录不持久保存提示原文、模型回答或密钥；浏览器/CLI 会话历史也没有升级为长期记忆。
 
 模型输出额度属于单次资源参数：云端默认 4096 token，当前推理型档案为 8192（包含供应商计入的思考 token），本地仍为 256；配置校验允许云端档案至多 32768。该数值不限制累计调用次数，也不是模型厂商的最大上下文声明。
 
@@ -213,6 +214,10 @@ Google JSON 是服务账户凭据，以 OAuth 换取短期令牌，并非普通 
 网关解析各家完成原因：已知长度截断或其他未完整结束返回 `output_incomplete=true`，`completion_reason` 只保留归一化类型，不保存供应商任意字段。部分正文可在聊天中显示并有持久警示，但不自动保存为完整文件，浏览器规划器也拒绝采用。用户检查后可明确手动另存；不会静默续写、自动重试或自动切换到另一家再次计费。若供应商明确返回不完整且无正文，记为已知失败 `response_incomplete`，保留数值用量；只有未确定的传输结果才按既有 UNKNOWN 规则处理。旧兼容接口未给完成原因时标记 `unspecified`，不伪造完成凭证。
 
 “完整”只表示供应商的协议结束状态，不保证内容满足用户要求。本轮本地模型被要求列出 1—500，却列到 50 就正常结束；此类漏项必须用任务内容验收识别，不能靠 finish reason 发现。另用临时 32-token 输出预算触发了真实 `length` 截断，并确认警示生效；用户持久配置未修改。
+
+0.1.74 已核对截图中的 Argon 连接问题：历史记录既有成功，也有约 60 秒的 UNKNOWN；UNKNOWN 不证明账号无权使用。2026-10-20 实际凭据短探针、真实网页普通回复和游戏设计均返回 HTTP 200；[机器证据](delivery-validation.md#assistant-game-evidence)记录用量与局限。Google 的[Argon 官方指南](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/guides/gemini-4-argon)使用 `gemini-4-argon` 标识。后续若返回 403/404，仍应按真实响应核查权限/模型，而不是以这次成功永久保证可用。
+
+宿主能力说明同步告知模型：文件夹可通过本机 UI 创建/打开，网页与桌面共享后端；固定 2D 坦克游戏可由技能任务制作，普通文字回答的执行声明仍不能替代真实回执。
 
 <a id="deterministic-calculation-runtime"></a>
 #### 本地精确计算与能力分流（0.1.37 implemented）
@@ -267,7 +272,7 @@ API 收到附件、非空“本会话要求”或显式专业技能时，自动�
 | VAD | 已有 Silero ONNX，文件约 1.81 MB | 按键说话作为无 VAD 降级 | 按需判断有无语音；不识别人，也不消除回声 |
 | 说话人辨认 | 已有 CAM++ ONNX，文件约 28.28 MB、192 维 | 3D-Speaker ERes2Net ONNX，待同集比较 | 登记多个人的参考样本后比较特征；保留 unknown，跨语种/噪声须校准；现在只有特征诊断，没有完成任何人的登记 |
 | 谁在何时说话 | sherpa-onnx 的 pyannote segmentation 3.0 + 声纹 + 聚类，按需启动 | 完整 pyannote.audio 管线作质量对照 | 首期以离线分段/有延迟的增量结果起步，不承诺实时零延迟。分段结果再与登记身份匹配；不是两条独立干净音轨 [S190](references.md#s190) |
-| STT 日常 | 已有 SenseVoiceSmall int8，相关文件约 239.73 MB | Qwen3-ASR-0.6B，准确性/语种增强时再加载 | SenseVoice 先覆盖中、英、粤、日、韩，VAD 后整段识别，不是原生逐字流式；当前诊断固定 zh，正式多语入口需开放自动语种并验证中英混说。Qwen 候选支持 30 种语言及 22 种中文方言，但运行依赖和资源须另测，不能按 0.6B 聊天模型复用 [S192](references.md#s192) |
+| STT 日常 | 已有 SenseVoiceSmall int8，相关文件约 239.73 MB | Qwen3-ASR-0.6B，准确性/语种增强时再加载 | SenseVoice 先覆盖中、英、粤、日、韩，VAD 后整段识别，不是原生逐字流式；现有入口已开放 auto/zh/en/ja/ko/yue，仍需真实中英混说与各语言质量验收。Qwen 候选支持 30 种语言及 22 种中文方言，但运行依赖和资源须另测，不能按 0.6B 聊天模型复用 [S192](references.md#s192) |
 | TTS 日常主力 | **Qwen3-TTS-12Hz-1.7B-CustomVoice Q5_K + speech.cpp 0.8.10，本机优先 Vulkan** | EmotiVoice 已测 CPU 速度可用，但情绪区分不足，暂不作为主力 | 主人已确认 Serena 的三段样本自然、情绪明显，同意作为主力；已接入[独立文件 TTS](#qwen-tts-runtime)。9 个预设音色、10 语种是模型目录，未逐项验收；0.6B 官方未列指令控制，不代替 1.7B [S216](references.md#s216)、[S217](references.md#s217)、[S218](references.md#s218) |
 | TTS 快速备选 | **ZipVoice-Distill int8 + Vocos，CPU / sherpa-onnx，4 步；已有独立文件 TTS** | 已有 VITS 作低资源应急；Kokoro int8 已作对照，本机较慢 | 按主人要求默认不启动、手动备用；已测短句及时性，但没有通用情绪指令，不满足主力三项要求。使用见[备用组件](#fast-speech-runtime) [S189](references.md#s189) |
 | TTS 克隆与情绪指令 | **Fun-CosyVoice3-0.5B-2512，已接入独立文件 TTS** | 资源不够时按已准入候补降级；当前未接通自动云端 TTS | 本机 Windows/AMD CPU 已通过中文克隆、开心指令与英文跨语种短样本；不自动常驻。原生 CPU 路径明显慢于实时，语气听感/相似度和其他语种仍待验收，详见[真实证据](delivery-validation.md#cosyvoice3-evidence)，不引用上游 150ms 为本机承诺 [S191](references.md#s191) |
@@ -322,6 +327,19 @@ CosyVoice3 的 **0.5B 不是整条语音流水线的全部权重**。2026-10-18 
 ZipVoice 尚未安装，163.32 MB 下载量不能当成运行 RAM。即使仅按参数估算，0.6B 的 FP16 参数本身约 1.12 GiB、0.5B 约 0.93 GiB，也未计入前后端模型、激活、缓存和推理库，不能据此宣传整套只占这些内存。当前普通 PC 的轻量目标组合为 Silero + CAM++ + SenseVoiceSmall int8 + ZipVoice int8，先为**语音推理进程合计预留 2—3 GiB RAM、无需独立显存**；这是待测集成预算，当前顺序诊断不能证明该克隆组合已运行，也不构成整台机器只需 3 GiB 的配置建议。
 
 后续记录候选进程的基线、冷加载、预热、单轮、并发和释放后读数，再冻结准入预算；共同运行时的实际峰值不能简单相加各进程独测值。GPU 表仅为兼容后端的候选预算，不证明当前 Windows/AMD 设备支持 CUDA；能分配共享显存也不等于对应算子可运行。集成 GPU 的共享内存来自同一物理 RAM 池，不能把系统内存和共享显存当作两份额外容量。默认不同时常驻全部候选，资源不足时按[候补规则](#voice-routing-policy)降级。
+
+<a id="speech-input-runtime"></a>
+#### 按需本地语音识别（0.1.81）
+
+**implemented：**复用已固定的 SenseVoiceSmall int8 ONNX 与 sherpa-onnx 1.13.8，当前 Windows 主机已有组件，无新增模型下载、云端 STT 或常驻服务。浏览器只在主人点击麦克风或开启连续语音后采集；[SpeechInput](../runtime/node-host/jarvis_core/speech_input.py) 经管道交给[固定识别入口](../runtime/node-host/jarvis_core/speech_input_worker.py)，按原清单校验模型摘要，然后退出释放模型。该进程是资源隔离，不是运行不可信代码的安全沙箱。支持语言枚举不等于各语言质量均已验收。
+
+单次最多 20 秒，CPU 两线程、低于普通优先级，独立单槽；启动至少保留 2 GiB 可用物理/提交余量，Windows Job 提交上限 1.5 GiB、45 秒处理时限。上限不是常驻占用，实测另见[本轮证据](delivery-validation.md#k6-voice-input-evidence)。取消和核心停止回收此进程，不取消后台任务。不加载声纹模型，不做身份认证、云端候补或自动模型替换。
+
+0.1.81 复用既有 Silero ONNX，在同一个短生命周期 Worker 中核对摘要并做语音检测；有效语音至少 0.18 秒才加载 SenseVoice，静音/未检出语音返回空文本。浏览器只做低成本能量分段，不能把能量阈值称作人声判断；神经 VAD 不认证身份或区分扬声器回声。连续模式不常驻 ASR/VAD，不新增模型下载。资源和样本证据见[连续语音验收](delivery-validation.md#k6-continuous-voice-evidence)。
+
+运行环境需要已有可选 `speech` 依赖及 `config/model-profiles/local-candidates.json` 的 STT 和 Silero 文件；默认精简运行包不包含语音依赖或模型。缺失、损坏、版本不符或资源不足时返回失败并保留文字入口，不静默下载安装。模型根目录沿用现有配置；本轮未更换组件版本或扩大模型分发许可。该非流式识别按段处理，不能称为全双工实时 ASR。
+
+录音不落盘；转写回执只在 Host 内存中有界保留，取消/填入消息后清除转写文本，服务重启丢弃，不重放。具体时限、去重和清理语义见[输入接口](contracts.md#speech-input-contract)。回答语音仍复用下方 Qwen 与[原朗读生命周期](interaction-persona.md#chat-readout-ui)，已有 TTS 音频缓存规则不改变。
 
 <a id="qwen-tts-runtime"></a>
 #### Qwen 本地主力语音组件

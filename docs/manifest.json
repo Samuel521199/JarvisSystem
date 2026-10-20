@@ -116,7 +116,8 @@
         "growth-center-next",
         "k2-growth-core",
         "dialogue-upgrade-order",
-        "near-term-work-queue"
+        "near-term-work-queue",
+        "k4-next-delivery"
       ],
       "status": "proposed",
       "reader_summary": "个人助手与自主成长核心从哪里开始，怎样沿 K0—K6 扩展？"
@@ -161,7 +162,8 @@
         "extension-registration-boundary",
         "sample-task-boundary",
         "rea-static-boundary",
-        "bounded-coding-boundary"
+        "bounded-coding-boundary",
+        "project-tool-boundary"
       ],
       "status": "proposed",
       "reader_summary": "当前个人使用边界是什么，哪些监督与认证设计已延期？"
@@ -172,7 +174,16 @@
       "title": "离线自治、多设备共同体与重连",
       "owns": [
         "单机/局域网/外网模式、统一意志的一致性边界、所有权、租约、记忆复制协议、同步选型与冲突",
-        "unified-intent-memory"
+        "unified-intent-memory",
+        "shared-cards-runtime",
+        "shared-cards-lifecycle",
+        "shared-cards-recovery",
+        "shared-card-copies",
+        "shared-model-use",
+        "shared-live-references",
+        "shared-connection-recovery",
+        "scoped-memory-sharing",
+        "delegated-task-runtime"
       ],
       "status": "proposed",
       "reader_summary": "断网怎样独立工作，重连怎样共享记忆与协同？"
@@ -214,7 +225,13 @@
         "dialogue-receipt-ui",
         "dialogue-recovery-ui",
         "dialogue-intent-shadow-ui",
-        "mixed-report-ui"
+        "mixed-report-ui",
+        "project-tool-ui",
+        "ranking-module-ui",
+        "team-analysis-ui",
+        "shared-cards-ui",
+        "cooperation-learning-ui",
+        "personal-plan-ui"
       ],
       "status": "proposed",
       "reader_summary": "怎样自然交流、延续人格，并在需要时展开工作台？"
@@ -234,7 +251,11 @@
         "conversation-intent-routing",
         "conversation-task-context-separation",
         "conversation-resource-isolation",
-        "bounded-coding-workflow"
+        "bounded-coding-workflow",
+        "tank-game-runtime",
+        "bounded-team-runtime",
+        "dynamic-team-runtime",
+        "personal-plan-runtime"
       ],
       "status": "proposed",
       "reader_summary": "怎样一边交流一边执行任务，如何组织多 Agent？"
@@ -260,7 +281,8 @@
         "cosyvoice3-runtime",
         "fast-speech-runtime",
         "qwen-tts-runtime",
-        "application-offline-control"
+        "application-offline-control",
+        "speech-input-runtime"
       ],
       "status": "proposed",
       "reader_summary": "用哪些云端和本地模型，怎样切换与离线降级？"
@@ -291,7 +313,11 @@
         "memory-sharing-bridges",
         "memory-use-boundary",
         "memory-domain-runtime",
-        "semantic-candidates-runtime"
+        "semantic-candidates-runtime",
+        "retrieval-ranking-module",
+        "shared-memory-projection",
+        "learning-candidate-provenance",
+        "plan-result-provenance"
       ],
       "status": "proposed",
       "reader_summary": "记住什么，怎样检索、纠正、遗忘和持续学习？"
@@ -306,7 +332,16 @@
         "bounded-evolution-loop",
         "growth-governance",
         "growth-learning-ledger",
-        "demand-growth-runtime"
+        "demand-growth-runtime",
+        "project-tool-runtime",
+        "project-tool-intents",
+        "project-tool-contract-drafts",
+        "project-tool-lifecycle",
+        "project-tool-quality-storage",
+        "growth-ledger-maintenance",
+        "bounded-growth-policy",
+        "ranking-module-growth",
+        "demand-learning-loop"
       ],
       "status": "proposed",
       "reader_summary": "怎样自编工具、改进模块，并验证和回退？"
@@ -316,7 +351,9 @@
       "path": "docs/toolchains.md",
       "title": "开发环境、多语言工具链与构建",
       "owns": [
-        "开发能力、构建配方、依赖闭包、目标验证与隔离"
+        "开发能力、构建配方、依赖闭包、目标验证与隔离",
+        "bounded-python-dependencies",
+        "bounded-package-scene-recipes"
       ],
       "status": "proposed",
       "reader_summary": "怎样准备编译环境，构建和测试不同语言的程序？"
@@ -370,7 +407,15 @@
         "dialogue-intent-shadow-contract",
         "memory-candidate-review-contract",
         "bounded-coding-contract",
-        "application-network-contract"
+        "application-network-contract",
+        "project-tool-contract",
+        "tank-game-contract",
+        "ranking-module-contract",
+        "speech-input-contract",
+        "team-analysis-contract",
+        "shared-cards-contract",
+        "cooperation-learning-contract",
+        "personal-plan-contract"
       ],
       "status": "proposed",
       "reader_summary": "模块之间怎样交换任务、事件和记忆数据？"
@@ -503,7 +548,31 @@
         "memory-final-answer-evidence",
         "k2-completion-evidence",
         "application-offline-evidence",
-        "growth-purposes-evidence"
+        "growth-purposes-evidence",
+        "coding-demand-evidence",
+        "coding-dependencies-evidence",
+        "k3-closure-matrix",
+        "k4-project-tool-evidence",
+        "k4-tool-intent-evidence",
+        "k4-contract-evidence",
+        "assistant-game-evidence",
+        "k4-lifecycle-evidence",
+        "k4-quality-storage-evidence",
+        "k4-maintenance-evidence",
+        "k4-closure-readiness",
+        "k4-growth-closure-evidence",
+        "k5-ranking-entry-evidence",
+        "k5-ranking-module-evidence",
+        "k6-voice-input-evidence",
+        "k6-continuous-voice-evidence",
+        "k6-team-evidence",
+        "k6-federation-evidence",
+        "k6-shared-lifecycle-evidence",
+        "k6-shared-access-evidence",
+        "k6-connection-recovery-evidence",
+        "k6-scoped-sharing-evidence",
+        "cooperation-learning-evidence",
+        "personal-plan-evidence"
       ],
       "status": "proposed",
       "reader_summary": "哪些能力测过，证据在哪里，下一阶段怎样验收？"
@@ -3063,13 +3132,13 @@
     }
   ],
   "implementation": {
-    "version": "0.1.64",
-    "scope": "Deployed 0.1.64 separates bounded inspection, healing and evolution with independent model purposes, a fallback and reasoning settings, and a dedicated growth center. Application-only offline control and the single-node personal assistant remain available. K2 pending physical-device and owner-experience acceptance is retained; development continues into K3 by explicit user direction. Full K1/K2/K3 gates remain incomplete.",
-    "evidence": "evals/reports/application-offline-2026-10-19.json",
+    "version": "0.1.89",
+    "scope": "Personal assistant loop: reviewed multi-step plans, existing executors and recovery, local authorized follow-up and price-table budgets, revocable result provenance, shared Host admission. Bounded local and live probes; universal planning, physical low-RAM PC and cross-node resource scheduling remain unverified.",
+    "evidence": "evals/reports/personal-assistant-loop-2026-10-21.json",
     "overall_design_status": "proposed",
     "complete_k1_gate": false,
     "complete_k2_gate": false,
-    "complete_k3_gate": false,
+    "complete_k3_gate": true,
     "supplemental_evidence": [
       "evals/reports/local-deployment.json",
       "evals/reports/idle-resources.json",
@@ -3318,7 +3387,42 @@
       "evals/reports/k2-independent-review-2026-10-19.json",
       "evals/reports/k2-completion-2026-10-19.json",
       "evals/reports/application-offline-2026-10-19.json",
-      "evals/reports/growth-purposes-2026-10-19.json"
-    ]
+      "evals/reports/growth-purposes-2026-10-19.json",
+      "evals/reports/k3-coding-2026-10-19.json",
+      "evals/reports/k3-build-2026-10-19.json",
+      "evals/cases/k3-coding-v2.json",
+      "evals/reports/k3-acceptance-2026-10-19.json",
+      "evals/cases/k3-acceptance-v1.json",
+      "evals/reports/k3-dependencies-2026-10-19.json",
+      "evals/reports/k3-closure-2026-10-19.json",
+      "evals/reports/k4-project-tools-2026-10-19.json",
+      "evals/reports/k4-tool-intents-2026-10-19.json",
+      "evals/reports/k4-contracts-2026-10-19.json",
+      "evals/reports/assistant-game-2026-10-20.json",
+      "evals/reports/k4-lifecycle-2026-10-20.json",
+      "evals/reports/k4-quality-storage-2026-10-20.json",
+      "evals/reports/k4-maintenance-2026-10-20.json",
+      "evals/reports/k4-growth-closure-2026-10-20.json",
+      "evals/reports/k5-ranking-entry-2026-10-20.json",
+      "evals/reports/k5-ranking-module-2026-10-20.json",
+      "evals/reports/k6-voice-input-2026-10-20.json",
+      "evals/reports/k6-continuous-voice-2026-10-20.json",
+      "evals/reports/k6-team-2026-10-20.json",
+      "evals/reports/k6-federation-2026-10-20.json",
+      "evals/reports/k6-shared-lifecycle-2026-10-20.json",
+      "evals/reports/k6-shared-access-2026-10-20.json",
+      "evals/reports/k6-connection-recovery-2026-10-20.json",
+      "evals/reports/k6-scoped-sharing-2026-10-20.json",
+      "evals/reports/k6-cooperation-regression-2026-10-21.json",
+      "evals/reports/k6-dynamic-team-live-2026-10-21.json",
+      "evals/reports/k6-learning-live-2026-10-21.json",
+      "evals/reports/k6-cooperation-deployment-2026-10-21.json",
+      "evals/reports/k6-cooperation-deployment-final-2026-10-21.json",
+      "evals/reports/k6-cooperation-package-2026-10-21.json",
+      "evals/reports/k6-cooperation-learning-2026-10-21.json",
+      "evals/reports/personal-assistant-ui-2026-10-21.json",
+      "evals/reports/personal-assistant-live-2026-10-21.json"
+    ],
+    "complete_k4_gate": false
   }
 }

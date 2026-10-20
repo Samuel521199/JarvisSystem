@@ -6,7 +6,7 @@ from pathlib import Path
 import sqlite3
 
 STORES=('control.db','safety/control.db','conversations.db','memory.db','persona.db','continuity.db',
-        'extensions.db','project-sources.db','project-catalog.db','workspace.db','evolution/evolution.db','network-policy.db')
+        'extensions.db','project-sources.db','project-catalog.db','workspace.db','evolution/evolution.db','network-policy.db','federation.db')
 EXCLUDED={'dialogue_owner':'Host instance ownership is expected to change on restart.',
           'computer_queue_control':'The idle queue is reviewed/resumed during the authorized reload; task rows are compared separately.'}
 

@@ -185,6 +185,34 @@ class WorkspaceService:
         finally:
             self.picker_lock.release()
 
+    def create_project(self, payload):
+        """Explicit single-directory creation, shared by browser and desktop UI."""
+        fields(payload, {'path'})
+        self._ready()
+        value = payload['path']
+        if not isinstance(value, str) or not value or len(value) > 4096 or '\0' in value:
+            fail('invalid_path', '请输入新文件夹的完整路径。')
+        path = Path(value)
+        if not path.is_absolute() or not path.name:
+            fail('invalid_path', '请指定完整路径和新文件夹名称。')
+        from .project_files import relative
+        relative(path.name)
+        with self.core.effect_guard():
+            parent = safe_path(path.parent, directory=True)
+            target = safe_path(parent / path.name, must_exist=False)
+            self._allowed_destination(target)
+            if target.exists():
+                # A repeated request may observe the directory already created.
+                # Opening never replaces files or changes an existing directory.
+                safe_path(target, directory=True)
+                created = False
+            else:
+                target.mkdir(exist_ok=False)
+                created = True
+        # Registration owns its own control transaction. Never nest effect
+        # guards: that would acquire the same SQLite write lock twice.
+        return {**self.open_project({'path': str(target)}), 'created': created}
+
     def _project(self, db, project_id):
         row = db.execute("SELECT * FROM projects WHERE id=?", (identifier(project_id),)).fetchone()
         if row is None:

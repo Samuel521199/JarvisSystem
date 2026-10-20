@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "backend": "codex-cli-proposer",
+  "version": "0.142.1",
+  "windows_sha256": "0c363b5badffe2f04071da22867ba9532348770bb780d525c390c4a87977acda",
+  "wall_seconds": 90,
+  "disabled_features": ["shell_tool", "unified_exec", "apps", "plugins", "hooks", "memories", "multi_agent", "multi_agent_v2", "computer_use", "browser_use", "browser_use_external", "in_app_browser", "image_generation", "imagegenext", "workspace_dependencies", "tool_suggest", "skill_mcp_dependency_install", "code_mode", "code_mode_only", "goals", "request_permissions_tool", "sleep_tool", "shell_snapshot", "realtime_conversation"]
+}

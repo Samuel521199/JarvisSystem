@@ -11,8 +11,31 @@ def failure(handler, exc):
 
 
 def get(handler):
+    if handler.path == '/learning-loop.js':
+        handler._send(200, handler.server.learning_loop_script, 'application/javascript; charset=utf-8')
+        return True
+    if handler.path == '/api/evolution/learning':
+        if not handler._workspace_token() or not handler._guard(): return True
+        try: handler._send(200, handler.server.evolution.learning.snapshot())
+        except Exception as exc: failure(handler, exc)
+        return True
+    if handler.path == '/ranking-modules.js':
+        handler._send(200, handler.server.ranking_modules_script, 'application/javascript; charset=utf-8')
+        return True
+    if handler.path == '/api/evolution/ranking':
+        if not handler._workspace_token() or not handler._guard(): return True
+        try: handler._send(200, handler.server.evolution.ranking_modules.snapshot())
+        except Exception as exc: failure(handler, exc)
+        return True
     if handler.path == '/evolution.js':
         handler._send(200, handler.server.evolution_script, 'application/javascript; charset=utf-8')
+        return True
+    if handler.path == '/api/evolution/maintenance':
+        if not handler._workspace_token() or not handler._guard(): return True
+        try:
+            from jarvis_core.evolution.maintenance import LedgerMaintenance
+            handler._send(200, LedgerMaintenance(handler.server.evolution).preview())
+        except Exception as exc: failure(handler, exc)
         return True
     match = re.fullmatch(r'/api/evolution(?:/(jobs|packages)/([a-f0-9]{32}|[a-f0-9]{64}))?', handler.path)
     if not match: return False
@@ -34,7 +57,28 @@ def post(handler, payload):
     try:
         manager = handler.server.evolution
         if manager is None: raise CoreError('evolution_unavailable', '成长模块未初始化。')
-        if handler.path == '/api/evolution/policy':
+        if handler.path == '/api/evolution/learning':
+            learning=manager.learning
+            fields={'create':{'action','id','goal','conversation_id'},'capture':{'action','id','task_id'},
+                    'research':{'action','id','library'},'collect':{'action','id'},'evidence':{'action','id','source','notes','task_id'},
+                    'review':{'action','id','note'},'start':{'action','id','target','model','domain','policy_revision'},
+                    'feedback':{'action','id','useful','note'},'withdraw':{'action','id'}}
+            if not isinstance(payload,dict) or payload.get('action') not in fields or set(payload)!=fields[payload['action']]:
+                raise CoreError('learning_invalid','学习操作字段不符合契约。')
+            op=payload['action'];lid=payload['id']
+            values={k:v for k,v in payload.items() if k not in ('action','id')}
+            if op=='capture': result=learning.capture(payload['task_id'])
+            elif op=='create': result=learning.create(dict(id=lid,**values))
+            elif op in ('evidence','start'): result=getattr(learning,op)(lid,values)
+            else: result=getattr(learning,op)(lid,**values)
+        elif handler.path == '/api/evolution/ranking/generate':
+            result = manager.ranking_modules.submit(payload)
+        elif handler.path == '/api/evolution/ranking/select':
+            result = manager.ranking_modules.transition(payload)
+        elif handler.path == '/api/evolution/maintenance':
+            from jarvis_core.evolution.maintenance import LedgerMaintenance
+            result = LedgerMaintenance(manager).apply(payload)
+        elif handler.path == '/api/evolution/policy':
             result = manager.configure(payload)
         elif handler.path == '/api/evolution/jobs':
             result = manager.submit(payload)

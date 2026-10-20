@@ -1,0 +1,1015 @@
+{
+  "version": "0.1.67",
+  "baseline_commit": "ab43828ff3ade95f103c8eec83b360222c02d7f7",
+  "captured_at": "2026-10-19T08:57:39.020664+00:00",
+  "status": "bounded_coding_passed_full_k3_not_accepted",
+  "complete_k3_gate": false,
+  "raw_directory": "H:\\JarvisData\\diagnostics\\k3-acceptance-20261019",
+  "frozen_case_set": {
+    "path": "evals/cases/k3-acceptance-v1.json",
+    "sha256": "72f100cf5f56fd5ff63f7e9950946f9fc84e73490400acdf778790bb440ed54e"
+  },
+  "regression": {
+    "status": "passed",
+    "tests": 99,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "cases": [
+      {
+        "id": "test_coding_workflow.CodingTests.test_actual_lpac_repair_apply_rollback_bom",
+        "seconds": 7.689,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_coding_workflow.CodingTests.test_all_composed_skills_must_be_available",
+        "seconds": 0.211,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_coding_workflow.CodingTests.test_cancellation_and_source_change_during_model",
+        "seconds": 5.198,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_coding_workflow.CodingTests.test_changed_codex_settings_reject_queued_binding_without_model",
+        "seconds": 0.762,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_coding_workflow.CodingTests.test_coding_route_preserves_prices_and_profile_parameters",
+        "seconds": 0.089,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_coding_workflow.CodingTests.test_failed_candidate_and_unknown_never_apply",
+        "seconds": 10.571,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_coding_workflow.CodingTests.test_invalid_candidate_repaired_without_host_execution",
+        "seconds": 6.715,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_coding_workflow.CodingTests.test_passing_baseline_no_paid_call",
+        "seconds": 3.404,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_coding_workflow.CodingTests.test_receipt_interrupted_after_write_reconciles_without_rewrite",
+        "seconds": 5.724,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_coding_workflow.CodingTests.test_single_json_fence_normalization_is_still_strict",
+        "seconds": 5.611,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_coding_workflow.CodingTests.test_source_conflict_no_overwrite",
+        "seconds": 6.743,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_coding_workflow.CodingTests.test_validation_boundaries",
+        "seconds": 0.149,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_coding_workflow.CodingTests.test_worker_cannot_omit_cases",
+        "seconds": 0.093,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_coding_bundle.BundleTests.test_contract_rejects_public_private_overlap_and_cycles",
+        "seconds": 0.1,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_coding_bundle.BundleTests.test_extra_path_and_bad_import_never_delivered",
+        "seconds": 7.614,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_coding_bundle.BundleTests.test_hidden_overfit_is_rejected_without_leaking_values",
+        "seconds": 15.661,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_coding_bundle.BundleTests.test_multifile_real_build_apply_and_rollback",
+        "seconds": 11.314,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_coding_bundle.BundleTests.test_partial_external_edit_is_never_overwritten",
+        "seconds": 11.316,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_coding_bundle.BundleTests.test_partial_receipt_can_resume_or_restore",
+        "seconds": 23.414,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_coding_bundle.BundleTests.test_whole_group_conflict_before_any_write",
+        "seconds": 11.43,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_coding_codex.CodexTests.test_pinned_cli_rejects_file_read_and_execution_tools",
+        "seconds": 1.745,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_coding_codex.CodexTests.test_process_stdin_isolated_env_and_cancellation",
+        "seconds": 0.243,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_coding_codex.CodexTests.test_settings_cas_and_offline_before_executable",
+        "seconds": 0.022,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_coding_codex.CodexTests.test_unknown_or_tool_event_cannot_be_a_success",
+        "seconds": 0.0,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_coding_codex.CodexTests.test_unknown_settings_schema_blocks_writes_and_older_runtime",
+        "seconds": 0.015,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_coding_http.CodingHTTPTests.test_coding_settings_token_origin_and_round_trip",
+        "seconds": 0.18,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_coding_build.BuildTests.test_actual_archive_entry_cannot_mutate_input",
+        "seconds": 0.426,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_coding_build.BuildTests.test_missing_dependency_and_receipt_swap_fail_before_execution",
+        "seconds": 0.002,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_coding_build.BuildTests.test_real_archive_lpac_unicode_and_no_implicit_newline",
+        "seconds": 0.376,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_coding_build.BuildTests.test_reproducible_and_legacy_recipe",
+        "seconds": 0.002,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_coding_build.BuildTests.test_tampered_digest_launcher_and_duplicate_member",
+        "seconds": 0.002,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_coding_build.BuildWorkflowTests.test_artifact_failure_prevents_delivery_and_application",
+        "seconds": 9.593,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_coding_build.BuildWorkflowTests.test_broken_baseline_can_be_repaired_and_built",
+        "seconds": 8.34,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_coding_build.BuildWorkflowTests.test_passing_baseline_builds_offline_without_model",
+        "seconds": 7.704,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_coding_build.BuildWorkflowTests.test_zipapp_requires_independent_cases_and_known_recipe",
+        "seconds": 0.121,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_evolution.EvolutionTests.test_automatic_heal_requires_opt_in_and_separate_fault_job",
+        "seconds": 0.765,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_evolution.EvolutionTests.test_background_incident_dedupe_and_daily_budget",
+        "seconds": 0.091,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_evolution.EvolutionTests.test_candidate_static_rejection_before_execution",
+        "seconds": 0.049,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_evolution.EvolutionTests.test_config_compare_and_swap_and_job_policy_snapshot",
+        "seconds": 0.2,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_evolution.EvolutionTests.test_corrupt_package_detected_and_fallback_verified",
+        "seconds": 0.827,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_evolution.EvolutionTests.test_diagnosis_is_advisory_and_has_independent_model",
+        "seconds": 0.197,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_evolution.EvolutionTests.test_disabled_primary_can_fallback_before_dispatch",
+        "seconds": 0.308,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_evolution.EvolutionTests.test_enabled_check_records_missing_optional_without_building",
+        "seconds": 0.149,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_evolution.EvolutionTests.test_failed_candidate_is_rejected_then_repaired_with_feedback",
+        "seconds": 0.385,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_evolution.EvolutionTests.test_fallback_counts_against_two_calls_and_preserves_actual_route",
+        "seconds": 0.303,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_evolution.EvolutionTests.test_future_database_not_migrated",
+        "seconds": 0.06,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_evolution.EvolutionTests.test_gap_is_not_a_fault_and_inspection_never_runs_worker",
+        "seconds": 0.42,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_evolution.EvolutionTests.test_generation_independent_validation_activation_and_real_use",
+        "seconds": 0.327,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_evolution.EvolutionTests.test_heal_restores_original_contract_using_its_own_model",
+        "seconds": 0.619,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_evolution.EvolutionTests.test_healthy_automatic_records_bounded_and_failure_preserved",
+        "seconds": 0.982,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_evolution.EvolutionTests.test_healthy_checks_and_repeated_ensure_do_not_call_model",
+        "seconds": 0.48,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_evolution.EvolutionTests.test_inspection_diagnosis_fallback_does_not_publish",
+        "seconds": 0.205,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_evolution.EvolutionTests.test_interrupted_publication_deactivated_and_not_replayed",
+        "seconds": 0.13,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_evolution.EvolutionTests.test_invalid_inputs_never_reach_worker",
+        "seconds": 0.247,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_evolution.EvolutionTests.test_memory_pressure_stops_before_paid_call",
+        "seconds": 0.1,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_evolution.EvolutionTests.test_metadata_or_extra_file_drift_rejected",
+        "seconds": 0.249,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_evolution.EvolutionTests.test_no_model_when_auto_disabled",
+        "seconds": 0.115,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_evolution.EvolutionTests.test_post_activation_failure_rolls_back",
+        "seconds": 0.445,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_evolution.EvolutionTests.test_real_input_regression_rolls_back_without_returning_bad_output",
+        "seconds": 0.609,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_evolution.EvolutionTests.test_runtime_repair_survives_restart_while_original_call_stays_failed",
+        "seconds": 0.818,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_evolution.EvolutionTests.test_singleflight_cancellation_and_idempotent_request",
+        "seconds": 0.114,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_evolution.EvolutionTests.test_stale_base_and_unverified_packages_cannot_activate",
+        "seconds": 0.143,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_evolution.EvolutionTests.test_stopped_core_blocks_dispatch",
+        "seconds": 0.071,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_evolution.EvolutionTests.test_temporary_resource_failure_does_not_quarantine_healthy_code",
+        "seconds": 0.303,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_evolution.EvolutionTests.test_two_bad_candidates_do_not_replace_good_version",
+        "seconds": 0.458,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_evolution.EvolutionTests.test_unknown_model_result_never_retried",
+        "seconds": 0.114,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_evolution.EvolutionTests.test_unknown_partial_and_offline_never_switch_models",
+        "seconds": 0.276,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_evolution.EvolutionTests.test_upgrade_preserves_old_contract_and_manual_rollback",
+        "seconds": 0.615,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_evolution.EvolutionTests.test_v1_settings_migration_preserves_artifacts_without_enabling_healing",
+        "seconds": 0.272,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_evolution.ActualWorkerTests.test_compiles_and_executes_candidate_with_real_lpac",
+        "seconds": 0.325,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_evolution.ActualWorkerTests.test_infinite_candidate_is_terminated_by_real_limits",
+        "seconds": 3.107,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_runtime_start.RuntimeStartTests.test_both_bad_preserve_pointer_and_record_failure_without_business_launch",
+        "seconds": 0.122,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_runtime_start.RuntimeStartTests.test_changed_data_version_or_identity_never_triggers_a_downgrade",
+        "seconds": 0.112,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_runtime_start.RuntimeStartTests.test_corrupt_active_falls_back_and_preserves_business_data",
+        "seconds": 0.159,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_runtime_start.RuntimeStartTests.test_failed_selection_transaction_never_launches_or_changes_pointer",
+        "seconds": 0.129,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_runtime_start.RuntimeStartTests.test_health_timeout_is_bounded_then_previous_is_checked",
+        "seconds": 0.127,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_runtime_start.RuntimeStartTests.test_healthy_active_starts_once_and_keeps_selection",
+        "seconds": 0.122,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_runtime_start.RuntimeStartTests.test_no_previous_or_unverified_previous_is_not_guessed",
+        "seconds": 0.137,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_runtime_start.RuntimeStartTests.test_nonzero_business_exit_or_spawn_failure_does_not_retry",
+        "seconds": 0.168,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_runtime_start.RuntimeStartTests.test_old_latched_state_is_not_cleared_by_start",
+        "seconds": 0.149,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_runtime_start.RuntimeStartTests.test_personal_store_blocks_historical_fallback_and_unknown_schema",
+        "seconds": 0.132,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_runtime_start.RuntimeStartTests.test_unknown_release_compatibility_does_not_guess_previous",
+        "seconds": 0.125,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_worker_recovery.RecoveryTests.test_crash_reclaims_registered_profile_and_stage_after_job_death",
+        "seconds": 0.232,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_worker_recovery.RecoveryTests.test_live_lease_retained_then_registered_stage_removed",
+        "seconds": 0.012,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_worker_recovery.RecoveryTests.test_unregistered_or_changed_identity_and_extra_content_are_retained",
+        "seconds": 0.012,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_coding_acceptance.AcceptanceTests.test_archive_staging_disk_full_does_not_deliver_or_block_chat",
+        "seconds": 10.842,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_coding_acceptance.AcceptanceTests.test_cancel_busy_coding_worker_keeps_chat_and_kills_process",
+        "seconds": 2.265,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_coding_acceptance.AcceptanceTests.test_missing_builtin_is_diagnosed_before_execution_and_repaired",
+        "seconds": 14.312,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_coding_acceptance.AcceptanceTests.test_process_death_mid_apply_can_restore_with_fresh_core",
+        "seconds": 12.144,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_worker.WorkerProtocolTests.test_reply_binding_and_metadata_cannot_be_changed",
+        "seconds": 0.001,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_worker.WorkerTests.test_bundle_digest_and_file_allowlist_are_actually_checked",
+        "seconds": 0.01,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_worker.WorkerTests.test_cancel_and_stop_during_real_worker_prevent_artifact",
+        "seconds": 0.47,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_worker.WorkerTests.test_cpu_quota_terminates_busy_worker",
+        "seconds": 3.066,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_worker.WorkerTests.test_effective_identity_verification_failure_cannot_resume_worker",
+        "seconds": 0.074,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_worker.WorkerTests.test_invalid_bundle_fails_without_unrestricted_fallback",
+        "seconds": 0.103,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_worker.WorkerTests.test_memory_quota_is_enforced",
+        "seconds": 0.09,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_worker.WorkerTests.test_parent_crash_kills_worker",
+        "seconds": 0.237,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_worker.WorkerTests.test_real_denials_files_network_child_and_secret_environment",
+        "seconds": 0.277,
+        "outcome": "passed"
+      },
+      {
+        "id": "test_worker.WorkerTests.test_timeout_and_output_quota_terminate_job",
+        "seconds": 0.613,
+        "outcome": "passed"
+      }
+    ]
+  },
+  "initial_probe_issues": [
+    "Initial runner omitted repository root from sys.path: one HTTP test setup import error; corrected test harness, retained log and reran.",
+    "First live probe omitted optional category metadata and stopped before dispatch: zero model calls; probe accepts default metadata now."
+  ],
+  "initial_real_failure": {
+    "id": "four-module-money-report",
+    "status": "failed",
+    "passed": false,
+    "baseline_passed": false,
+    "validation": {
+      "cases": 10,
+      "error": "candidate_execution_failed",
+      "heldout": {
+        "cases": 8,
+        "error": "candidate_execution_failed",
+        "message": "隔离代码执行失败。",
+        "passed": false
+      },
+      "independent_checks": true,
+      "message": "隔离代码执行失败。",
+      "passed": false,
+      "public": {
+        "cases": 2,
+        "error": "candidate_execution_failed",
+        "message": "隔离代码执行失败。",
+        "passed": false
+      }
+    },
+    "build_validation": null,
+    "model_receipts": [
+      {
+        "billing": {
+          "amount": null,
+          "basis": "external_codex_account"
+        },
+        "executor": {
+          "candidate_execution": false,
+          "command_sandbox": "deny-filesystem",
+          "process": {
+            "active_process_limit": 4,
+            "elapsed_seconds": 27.328,
+            "job_cpu_limit_seconds": 45,
+            "job_memory_limit_bytes": 1073741824,
+            "kill_on_close": true,
+            "os_sandbox": false,
+            "peak_job_memory_bytes": 26644480,
+            "pid": 47276,
+            "wall_limit_seconds": 90
+          },
+          "settings_revision": 1,
+          "stage": "H:\\JarvisData\\diagnostics\\k3-acceptance-20261019\\live-r2\\four-module-money-report\\data\\coding-external\\b2fe2afdd84e41d8a2c1ca73c3dd7b15",
+          "tool_policy": "proposal-only",
+          "version": "0.142.1"
+        },
+        "model": "gpt-6.1-sol",
+        "outcome_uncertain": false,
+        "provider": "codex-cli",
+        "request_id": "01a15358-3101-7921-aca4-14d56d7c8436",
+        "status": "SUCCEEDED",
+        "usage": {
+          "cached_input_tokens": 0,
+          "input_tokens": 1769,
+          "output_tokens": 619,
+          "reasoning_output_tokens": 187
+        }
+      },
+      {
+        "billing": {
+          "amount": null,
+          "basis": "external_codex_account"
+        },
+        "executor": {
+          "candidate_execution": false,
+          "command_sandbox": "deny-filesystem",
+          "process": {
+            "active_process_limit": 4,
+            "elapsed_seconds": 27.17,
+            "job_cpu_limit_seconds": 45,
+            "job_memory_limit_bytes": 1073741824,
+            "kill_on_close": true,
+            "os_sandbox": false,
+            "peak_job_memory_bytes": 26791936,
+            "pid": 49612,
+            "wall_limit_seconds": 90
+          },
+          "settings_revision": 1,
+          "stage": "H:\\JarvisData\\diagnostics\\k3-acceptance-20261019\\live-r2\\four-module-money-report\\data\\coding-external\\8c9024a17e804d1ab5f674b95b785cec",
+          "tool_policy": "proposal-only",
+          "version": "0.142.1"
+        },
+        "model": "gpt-6.1-sol",
+        "outcome_uncertain": false,
+        "provider": "codex-cli",
+        "request_id": "01a15358-df8a-7093-baa9-1cf6cf8f142f",
+        "status": "SUCCEEDED",
+        "usage": {
+          "cached_input_tokens": 0,
+          "input_tokens": 1924,
+          "output_tokens": 539,
+          "reasoning_output_tokens": 87
+        }
+      }
+    ]
+  },
+  "repair": {
+    "cause": "divmod is unavailable in the bounded Python runtime; prompt omitted the builtin whitelist and runtime failure feedback was generic.",
+    "change": "Declare exact builtin set to the coder and reject unprovided builtin references before execution with a concrete static_reason, preserving local name shadowing. No added builtin or sandbox privilege.",
+    "original_acceptance_cases_unchanged": true
+  },
+  "repaired_real_task": {
+    "id": "four-module-money-report",
+    "status": "passed",
+    "passed": true,
+    "baseline_passed": false,
+    "validation": {
+      "cases": 10,
+      "failures": [],
+      "heldout": {
+        "cases": 8,
+        "failures": [],
+        "passed": true,
+        "worker": {
+          "active_process_limit": 1,
+          "appcontainer": true,
+          "backend": "windows-lpac-job",
+          "capabilities": [
+            "registryRead"
+          ],
+          "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+          "cpu_seconds": 0.15625,
+          "cpu_time_limit_seconds": 3,
+          "elapsed_seconds": 4.5714,
+          "lpac": true,
+          "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+          "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+          "memory_limit_bytes": 201326592,
+          "package_sid": "S-1-15-2-1404026354-4015296690-286919334-3104868150-658087139-1379888816-3894053300",
+          "peak_process_memory_bytes": 13205504,
+          "pid": 52980,
+          "runtime_bytes": 22904399,
+          "wall_time_limit_seconds": 12
+        }
+      },
+      "independent_checks": true,
+      "passed": true,
+      "public": {
+        "cases": 2,
+        "failures": [],
+        "passed": true,
+        "worker": {
+          "active_process_limit": 1,
+          "appcontainer": true,
+          "backend": "windows-lpac-job",
+          "capabilities": [
+            "registryRead"
+          ],
+          "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+          "cpu_seconds": 0.140625,
+          "cpu_time_limit_seconds": 3,
+          "elapsed_seconds": 4.4612,
+          "lpac": true,
+          "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+          "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+          "memory_limit_bytes": 201326592,
+          "package_sid": "S-1-15-2-406237808-2934200532-240392424-1325447903-668833038-2565066745-3178400387",
+          "peak_process_memory_bytes": 13062144,
+          "pid": 47684,
+          "runtime_bytes": 22904399,
+          "wall_time_limit_seconds": 12
+        }
+      },
+      "worker": {
+        "active_process_limit": 1,
+        "appcontainer": true,
+        "backend": "windows-lpac-job",
+        "capabilities": [
+          "registryRead"
+        ],
+        "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+        "cpu_seconds": 0.140625,
+        "cpu_time_limit_seconds": 3,
+        "elapsed_seconds": 4.4612,
+        "lpac": true,
+        "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+        "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+        "memory_limit_bytes": 201326592,
+        "package_sid": "S-1-15-2-406237808-2934200532-240392424-1325447903-668833038-2565066745-3178400387",
+        "peak_process_memory_bytes": 13062144,
+        "pid": 47684,
+        "runtime_bytes": 22904399,
+        "wall_time_limit_seconds": 12
+      }
+    },
+    "build_validation": {
+      "actual_archive_entry": true,
+      "cases": 10,
+      "failures": [],
+      "passed": true,
+      "reproducible": true,
+      "worker": {
+        "active_process_limit": 1,
+        "appcontainer": true,
+        "backend": "windows-lpac-job",
+        "capabilities": [
+          "registryRead"
+        ],
+        "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+        "cpu_seconds": 0.28125,
+        "cpu_time_limit_seconds": 3,
+        "elapsed_seconds": 4.4952,
+        "lpac": true,
+        "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+        "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+        "memory_limit_bytes": 201326592,
+        "package_sid": "S-1-15-2-2153513398-1372072087-2378132973-950893900-583208089-54423174-3366195826",
+        "peak_process_memory_bytes": 18624512,
+        "pid": 49512,
+        "runtime_bytes": 22904399,
+        "wall_time_limit_seconds": 12
+      }
+    },
+    "model_receipts": [
+      {
+        "billing": {
+          "amount": null,
+          "basis": "external_codex_account"
+        },
+        "executor": {
+          "candidate_execution": false,
+          "command_sandbox": "deny-filesystem",
+          "process": {
+            "active_process_limit": 4,
+            "elapsed_seconds": 29.887,
+            "job_cpu_limit_seconds": 45,
+            "job_memory_limit_bytes": 1073741824,
+            "kill_on_close": true,
+            "os_sandbox": false,
+            "peak_job_memory_bytes": 27226112,
+            "pid": 23012,
+            "wall_limit_seconds": 90
+          },
+          "settings_revision": 1,
+          "stage": "H:\\JarvisData\\diagnostics\\k3-acceptance-20261019\\repaired\\four-module-money-report\\data\\coding-external\\6d072c038b70416aaa2e413444453544",
+          "tool_policy": "proposal-only",
+          "version": "0.142.1"
+        },
+        "model": "gpt-6.1-sol",
+        "outcome_uncertain": false,
+        "provider": "codex-cli",
+        "request_id": "01a1535c-21d5-7892-955c-3f1439bcfd13",
+        "status": "SUCCEEDED",
+        "usage": {
+          "cached_input_tokens": 0,
+          "input_tokens": 1844,
+          "output_tokens": 632,
+          "reasoning_output_tokens": 220
+        }
+      }
+    ],
+    "apply": {
+      "status": "applied",
+      "files": 4
+    },
+    "rollback": {
+      "status": "restored",
+      "files": 4
+    },
+    "original_bytes_restored": true,
+    "offline_build": {
+      "status": "verified",
+      "recipe": "python-zipapp-v1",
+      "sha256": "sha256:5ddb1564e33856b3adca7712b867040267ceb4c0281a048656a61ca436284261",
+      "bytes": 3115,
+      "byte_identical": true,
+      "model_calls": 0,
+      "expected_digest_checked": true,
+      "execution": "windows-lpac",
+      "validation": {
+        "passed": true,
+        "cases": 8,
+        "failures": [],
+        "worker": {
+          "backend": "windows-lpac-job",
+          "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+          "runtime_bytes": 22904399,
+          "appcontainer": true,
+          "lpac": true,
+          "capabilities": [
+            "registryRead"
+          ],
+          "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+          "pid": 52352,
+          "package_sid": "S-1-15-2-4034388660-3297282522-3101842666-4038019809-1059951899-2430491884-2719920082",
+          "active_process_limit": 1,
+          "cpu_time_limit_seconds": 3,
+          "wall_time_limit_seconds": 12,
+          "cpu_seconds": 0.28125,
+          "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+          "memory_limit_bytes": 201326592,
+          "peak_process_memory_bytes": 18403328,
+          "elapsed_seconds": 0.3344
+        }
+      }
+    },
+    "artifact_bytes": 3115
+  },
+  "extra_input_checks": {
+    "status": "verified",
+    "recipe": "python-zipapp-v1",
+    "sha256": "sha256:5ddb1564e33856b3adca7712b867040267ceb4c0281a048656a61ca436284261",
+    "bytes": 3115,
+    "byte_identical": true,
+    "model_calls": 0,
+    "expected_digest_checked": true,
+    "execution": "windows-lpac",
+    "validation": {
+      "passed": true,
+      "cases": 24,
+      "failures": [],
+      "worker": {
+        "backend": "windows-lpac-job",
+        "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+        "runtime_bytes": 22904399,
+        "appcontainer": true,
+        "lpac": true,
+        "capabilities": [
+          "registryRead"
+        ],
+        "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+        "pid": 40628,
+        "package_sid": "S-1-15-2-3118281223-1291775974-2807059778-456366274-3775564874-1497642569-484508",
+        "active_process_limit": 1,
+        "cpu_time_limit_seconds": 3,
+        "wall_time_limit_seconds": 12,
+        "cpu_seconds": 0.28125,
+        "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+        "memory_limit_bytes": 201326592,
+        "peak_process_memory_bytes": 18182144,
+        "elapsed_seconds": 0.3775
+      }
+    }
+  },
+  "legacy_v0166_artifact": {
+    "status": "verified",
+    "recipe": "python-zipapp-v1",
+    "sha256": "sha256:a66318f9fd53b54c23ec7bdac01829f789ef4b76aa72f746666dff1bd69b8ce5",
+    "bytes": 2726,
+    "byte_identical": true,
+    "model_calls": 0,
+    "expected_digest_checked": true,
+    "execution": "windows-lpac",
+    "validation": {
+      "passed": true,
+      "cases": 2,
+      "failures": [],
+      "worker": {
+        "backend": "windows-lpac-job",
+        "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+        "runtime_bytes": 22904399,
+        "appcontainer": true,
+        "lpac": true,
+        "capabilities": [
+          "registryRead"
+        ],
+        "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+        "pid": 45964,
+        "package_sid": "S-1-15-2-1971042410-1116679229-2609183648-2274973125-3934842422-1667614469-3425222029",
+        "active_process_limit": 1,
+        "cpu_time_limit_seconds": 3,
+        "wall_time_limit_seconds": 12,
+        "cpu_seconds": 0.265625,
+        "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+        "memory_limit_bytes": 201326592,
+        "peak_process_memory_bytes": 17862656,
+        "elapsed_seconds": 0.3273
+      }
+    },
+    "matches_original_delivery_receipt": true
+  },
+  "usage": {
+    "total_model_calls": 3,
+    "before_fix_calls": 2,
+    "after_fix_calls": 1,
+    "input_tokens": 5537,
+    "output_tokens": 1790,
+    "reasoning_output_tokens": 494,
+    "billing_amount": null
+  },
+  "ui": {
+    "scope": "localhost:18182 isolated real task data",
+    "real_receipts_visible": true,
+    "cases_displayed": 10,
+    "apply_four_files_disk_match": true,
+    "restore_four_files_original_bytes": true,
+    "focus_mode": true,
+    "screenshot": "H:\\JarvisData\\diagnostics\\k3-acceptance-20261019\\ui-verified.png",
+    "browser_download_save": "not independently verified; backend archive bytes executed and reconstructed"
+  },
+  "k3_exit": {
+    "candidate_workspace": "passed_bounded_1_to_4_python_files",
+    "offline_toolchain": "passed_bounded_python_artifact",
+    "codex_adapter": "passed_pinned_cli",
+    "failure_limits_and_unknown": "passed",
+    "real_build_artifact": "passed",
+    "credential_boundary": "passed_tested_canaries_not_universal_proof",
+    "improvement_request_to_generic_coding": "not_implemented; evolution/demand.py only accepts fixed CSV/TSV/Markdown inventory transformations; manual coding tasks are a separate entry"
+  },
+  "build_platform_matrix": [
+    {
+      "id": "B01",
+      "status": "partial",
+      "evidence_or_gap": "PYZ artifact rebuilt offline; full current Jarvis reference implementation was not rebuilt in an isolated clean development closure."
+    },
+    {
+      "id": "B02",
+      "status": "not_implemented",
+      "evidence_or_gap": "Two language providers cannot yet replace the same capability through one tested contract."
+    },
+    {
+      "id": "B03",
+      "status": "not_implemented",
+      "evidence_or_gap": "Install/run/uninstall language-provider lifecycle not implemented."
+    },
+    {
+      "id": "B04",
+      "status": "partial",
+      "evidence_or_gap": "Unsupported dependency rejected; fixture offline command has zero model calls and rejects network. No controlled dependency installer exists."
+    },
+    {
+      "id": "B05",
+      "status": "partial",
+      "evidence_or_gap": "Actual LPAC blocks synthetic credential/source read/write, network and child process; desktop-control attack set not covered."
+    },
+    {
+      "id": "B06",
+      "status": "partial",
+      "evidence_or_gap": "Real process death during multi-file apply, synthetic ENOSPC while staging, real worker CPU/time/memory caps and cancel/chat tests pass. Not an actual full-disk or complete host-continuity matrix."
+    },
+    {
+      "id": "B07",
+      "status": "not_implemented",
+      "evidence_or_gap": "Immutable recipes exist; versioned toolchain upgrade/regression/rollback workflow not implemented."
+    },
+    {
+      "id": "B08",
+      "status": "not_implemented",
+      "evidence_or_gap": "No cross-compilation provider or target execution gate."
+    },
+    {
+      "id": "B09",
+      "status": "partial",
+      "evidence_or_gap": "False claims, hidden-case overfit, corrupt archive/receipt and failed artifact rejected in bounded coding path; generic publisher gate not complete."
+    },
+    {
+      "id": "B10",
+      "status": "not_verified",
+      "evidence_or_gap": "Short deterministic text chat under coding cancellation tested; real voice first-response/interruption under build load not measured."
+    }
+  ],
+  "deployment": {
+    "status": "passed",
+    "version": "0.1.67",
+    "previous_version": "0.1.66",
+    "instance_id": "019b2e8d01ebe91a5a3e54bead0bac20",
+    "idle_graceful_reload": true,
+    "served_sha256": {
+      "skills.js": "e9270a16072a903e636929bf5f426535bece37fc682f227e6d617721075b74e8",
+      "coding.js": "3547507e77569145601f7d50660359172185269f5b566fddeefafcb54b04dae2",
+      "admin.js": "09d93597e84408dfd48ce8aaecb5b7a9b1554023a38811526c3b6bb291661c43"
+    },
+    "business_tables_compared": 11,
+    "business_unchanged": true,
+    "coding_settings_unchanged": true,
+    "empty_restart_queue_reviewed_and_resumed": true,
+    "cloud_calls": 0,
+    "installer_built": false
+  },
+  "limitations": [
+    "No full K2 repeat, no machine-wide network shutdown, no owner data write tests.",
+    "B matrix spans development-platform capabilities; missing multi-language items remain open and are not reclassified as complete.",
+    "One new real task after the fix is not a general quality benchmark; failed attempts retained.",
+    "No new third-party dependency or resident service."
+  ],
+  "source_sha256": {
+    "runtime/node-host/jarvis_core/coding_task.py": "dafd6da5218def0015598f9025dd406baf195144cd479d002058a26c53cb684a",
+    "runtime/node-host/jarvis_core/evolution/runner.py": "f873e745873131c860d5f896d345e9f952a3fa9ad7f258ad747bbe24b72902fd",
+    "runtime/node-host/jarvis_core/coding_build.py": "c7e574a62acc04e7c9189af83c8f9ac558c36d1daded4371071c64964e09c644",
+    "runtime/node-host/jarvis_core/coding_apply.py": "fa3226bdcc89c8a538f4edaaf0fba379d78d08fcf18943a6912ebb8ce21c68ff",
+    "runtime/node-host/jarvis_core/coding_codex.py": "99021e8ebc3458524dfab25501217c68445a4ab51c92ce9d8832e8a16bf9cc25",
+    "runtime/node-host/jarvis_core/releases.py": "cc18cb8280c123985efa8f794da9e84aefb1dae921cfe0c3b61a5161fd9ef87a",
+    "tests/test_coding_acceptance.py": "0999f95a519663db085ff07467682f39ff7ce91cfed89a9ce6c63c1981689091",
+    "tools/probe_k3_build.py": "ec0cb45eba4c93ec2030504b4106b8880cc95cae9467c2cb9d6028e3b96a99c8"
+  },
+  "reproduce": [
+    "python -m unittest discover -s tests -p test_coding*.py -v",
+    "python -m unittest tests.test_evolution.EvolutionTests tests.test_evolution.ActualWorkerTests tests.test_runtime_start tests.test_worker_recovery tests.test_worker -v",
+    "python tools/probe_k3_build.py --directory <new-empty-path> --dataset evals/cases/k3-acceptance-v1.json (paid Codex; no automatic rerun after UNKNOWN)",
+    "python tools/check_docs.py --root ."
+  ]
+}

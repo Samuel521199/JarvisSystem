@@ -56,6 +56,8 @@ class ModuleMonitor:
         self.fast_speech = FastSpeechService(core)
         from .qwen_speech import QwenSpeechService
         self.primary_speech = QwenSpeechService(core)
+        from .speech_input import SpeechInput
+        self.speech_input = SpeechInput(core, model_root=self.model_root)
 
     def _load_jobs(self):
         try:
@@ -85,6 +87,7 @@ class ModuleMonitor:
         self.speech.close()
         self.fast_speech.close()
         self.primary_speech.close()
+        self.speech_input.close()
 
     def snapshot(self, *, refresh=False):
         with self.lock:
@@ -338,6 +341,14 @@ class ModuleMonitor:
             result.append(self._row(ident,name,installed=installed,enabled=False,health='ready' if installed else 'unavailable',
                           activity='not_integrated',version=component+' / '+(engine or '引擎未安装'),update='external',
                           message=assets['message']+' 当前仅文件诊断，未接入工作台实时语音；不推断外部诊断进程状态。'))
+            if ident == 'stt':
+                state = self.speech_input.snapshot()
+                result[-1].update(enabled=installed, activity='busy' if state['busy'] else 'on_demand',
+                                  active=int(state['busy']), runtime=state,
+                                  message='本地按键转写与显式开启的连续语音共用单个识别槽；先用 Silero 判断语音再识别，结束释放模型；不认证身份。')
+            if ident == 'vad':
+                result[-1].update(enabled=installed, activity='on_demand',
+                    message='已接入本地识别 Worker 的 Silero 语音门控；仅随音频片段运行，不常驻，不做身份或回声认证。')
         status = self.speech.snapshot()
         row = self._row('cosyvoice3', 'CosyVoice3 克隆与情绪语音', installed=status['installed'],
             enabled=status['owned'], health='ready' if status['installed'] and status['state'] != 'failed' else 'unavailable',

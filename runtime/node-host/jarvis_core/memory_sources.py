@@ -79,7 +79,8 @@ def annotate(core, rows, origins):
             current = message is not None and matches(source, document, message)
             row['provenance']['state'] = 'current' if current else 'source_changed_or_missing'
             if current: row['provenance']['excerpt'] = message['content'][:800]
-    return rows
+    from .assistant_plan_store import annotate_facts
+    return annotate_facts(core, rows)
 
 
 def usable(row):

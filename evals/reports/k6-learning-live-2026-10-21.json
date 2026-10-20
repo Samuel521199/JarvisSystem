@@ -1,0 +1,229 @@
+{
+  "version": "0.1.88",
+  "max_model_calls": 1,
+  "synthetic_goal": true,
+  "production_data_used": false,
+  "automatic_retries": 0,
+  "research_status": "CONFIRMED",
+  "evidence": {
+    "source": "Context7 /python/cpython · task_aca56c89808e599f9347580ab051f244",
+    "digest": "sha256:7ace5ba310736769178a70fa3b9d09aa5757e4823f60cfa7a3836a68cd17f487",
+    "artifact": {
+      "artifact_id": "artifact_aca56c89808e599f9347580ab051f244",
+      "digest": "sha256:e909445921af9edfc6c626a62e3f13767db02fd53f534c7eb7bac23ccd50d769",
+      "task_id": "task_aca56c89808e599f9347580ab051f244"
+    },
+    "trust": "untrusted_reference"
+  },
+  "outcome": {
+    "status": "SUCCEEDED",
+    "result": {
+      "activated": false,
+      "candidate_id": "67308f759b86983c2d99502fbebb880e56bf4b4d8ef93ed21bdc400fb4e618a4",
+      "eligible": true,
+      "evaluation": {
+        "baseline": 12,
+        "binding": "a766c5835e8541a882cdf88a031a0082bdbcacc04e06e855fd2b56d02e2d192e",
+        "candidate": 20,
+        "cases": [
+          {
+            "baseline": false,
+            "candidate": true,
+            "equivalent": true,
+            "id": "english-two-concepts"
+          },
+          {
+            "baseline": false,
+            "candidate": true,
+            "equivalent": true,
+            "id": "three-concepts"
+          },
+          {
+            "baseline": false,
+            "candidate": true,
+            "equivalent": true,
+            "id": "english-casefold"
+          },
+          {
+            "baseline": false,
+            "candidate": true,
+            "equivalent": true,
+            "id": "chinese-two-concepts"
+          },
+          {
+            "baseline": false,
+            "candidate": true,
+            "equivalent": true,
+            "id": "source-and-action"
+          },
+          {
+            "baseline": false,
+            "candidate": true,
+            "equivalent": true,
+            "id": "identity-and-scope"
+          },
+          {
+            "baseline": false,
+            "candidate": true,
+            "equivalent": true,
+            "id": "different-punctuation"
+          },
+          {
+            "baseline": false,
+            "candidate": true,
+            "equivalent": true,
+            "id": "rare-term"
+          },
+          {
+            "baseline": true,
+            "candidate": true,
+            "equivalent": true,
+            "id": "single-term-english"
+          },
+          {
+            "baseline": true,
+            "candidate": true,
+            "equivalent": true,
+            "id": "single-term-chinese"
+          },
+          {
+            "baseline": true,
+            "candidate": true,
+            "equivalent": true,
+            "id": "complete-heading"
+          },
+          {
+            "baseline": true,
+            "candidate": true,
+            "equivalent": true,
+            "id": "complete-body-tie"
+          },
+          {
+            "baseline": true,
+            "candidate": true,
+            "equivalent": true,
+            "id": "no-match"
+          },
+          {
+            "baseline": true,
+            "candidate": true,
+            "equivalent": true,
+            "id": "empty-query"
+          },
+          {
+            "baseline": true,
+            "candidate": true,
+            "equivalent": true,
+            "id": "no-documents"
+          },
+          {
+            "baseline": true,
+            "candidate": true,
+            "equivalent": true,
+            "id": "fullwidth-normalization"
+          },
+          {
+            "baseline": true,
+            "candidate": true,
+            "equivalent": true,
+            "id": "negative-fact-preserved"
+          },
+          {
+            "baseline": true,
+            "candidate": true,
+            "equivalent": true,
+            "id": "proposal-not-implementation"
+          },
+          {
+            "baseline": true,
+            "candidate": true,
+            "equivalent": true,
+            "id": "order-independent-query"
+          },
+          {
+            "baseline": true,
+            "candidate": true,
+            "equivalent": true,
+            "id": "source-content-injection-is-data"
+          },
+          {
+            "baseline": false,
+            "candidate": false,
+            "equivalent": true,
+            "id": "known-paraphrase-gap"
+          },
+          {
+            "baseline": false,
+            "candidate": false,
+            "equivalent": true,
+            "id": "known-chinese-paraphrase-gap"
+          },
+          {
+            "baseline": false,
+            "candidate": false,
+            "equivalent": true,
+            "id": "known-ambiguous-context-gap"
+          },
+          {
+            "baseline": false,
+            "candidate": false,
+            "equivalent": true,
+            "id": "known-semantic-conflict-gap"
+          }
+        ],
+        "criteria": {
+          "baseline_regressions": 0,
+          "max_2048_rows_ms": 50,
+          "minimum_additional_top1": 4
+        },
+        "isolation": {
+          "active_process_limit": 1,
+          "appcontainer": true,
+          "backend": "windows-lpac-job",
+          "capabilities": [
+            "registryRead"
+          ],
+          "cpu_enforcement": "Host polls OS process accounting and terminates Job",
+          "cpu_seconds": 0.171875,
+          "cpu_time_limit_seconds": 3,
+          "elapsed_seconds": 0.2914,
+          "lpac": true,
+          "lpac_verification": "OS AccessCheck: own package allowed, ALL APPLICATION PACKAGES denied",
+          "manifest_sha256": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+          "memory_limit_bytes": 201326592,
+          "package_sid": "S-1-15-2-3965774677-2743546077-3436539837-3152447690-34740920-2087118632-771394383",
+          "peak_process_memory_bytes": 12935168,
+          "pid": 14612,
+          "runtime_bytes": 22904399,
+          "wall_time_limit_seconds": 12
+        },
+        "limitation": "Fixed lexical retrieval judgments, not final-answer quality or general semantic relevance.",
+        "passed": true,
+        "timing": {
+          "baseline": {
+            "maximum_ms": 1.293,
+            "median_ms": 0.989
+          },
+          "candidate": {
+            "maximum_ms": 5.354,
+            "median_ms": 5.0
+          }
+        },
+        "total": 24
+      },
+      "message": "候选与对照已保存；启用仍需审阅。"
+    },
+    "selection": {
+      "active": null,
+      "generation": 0,
+      "last_event": "initial",
+      "previous": null,
+      "samples": [],
+      "trial": false
+    }
+  },
+  "status": "passed",
+  "trial_and_confirmation": true,
+  "exact_rollback": true,
+  "actual_model_calls": 1
+}

@@ -37,7 +37,7 @@ def stop_idle(before):
     queue=get('/api/resources',token)['runtime']['queue']
     assert queue and not queue.get('unavailable') and not queue['waiting'] and not queue['running'] and not queue.get('unreviewed_unknown'),'Queue needs attention; do not reload'
     assert not queue['paused'] or queue.get('error')=='restart_review','Preserve an intentional queue pause'
-    for path in ['/api/speech/primary','/api/speech/fast','/api/speech']:
+    for path in ['/api/speech/primary','/api/speech/fast','/api/speech','/api/speech/input']:
         assert not get(path,token)['busy']
     kernel=C.WinDLL('kernel32',use_last_error=True)
     kernel.OpenEventW.argtypes=[W.DWORD,W.BOOL,W.LPCWSTR];kernel.OpenEventW.restype=W.HANDLE
