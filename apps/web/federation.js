@@ -27,6 +27,7 @@
     <div class="shared-row"><button id="shared-save" class="primary">保存到本机</button><button id="shared-delete">删除此卡</button></div></div></div>
     <div class="panel" id="shared-connection-root" hidden></div>
     <div class="panel" id="shared-scopes-root" hidden></div>
+    <div class="panel" id="shared-tasks-root" hidden></div>
     <div class="panel" id="shared-access-root"></div>
     <div class="panel"><h2>已归档空间</h2><p>归档释放在线名额并保留来源、冲突和删除记录；恢复后仅可阅读，不重新连接。</p><div id="shared-archives"></div></div>
     <p class="muted">聊天、个人记忆、项目文件和任务各自留在本机。共享卡需另行设置本机模型用途后，在聊天输入区引用；不自动写入记忆。撤销连接不能擦除已发送的副本。每空间最多 32 张卡（含删除记录），8 个在线空间，32 个归档；导出文件为明文资料，需自行妥善保存。</p>`;
@@ -109,6 +110,7 @@
     window.dispatchEvent(new CustomEvent('jarvis:shared-space',{detail:s||null}));
   }
   async function run(body, success, onResult) {
+    if (body && window.SharedTasks && !SharedTasks.canSwitch()) return;
     if (body && ['invite','join','archive','restore_archive','recover','revoke'].includes(body.action) &&
         window.SharedScopes && !SharedScopes.canSwitch()) return;
     if (body && ['invite','join','archive','restore_archive','recover','revoke'].includes(body.action) &&
@@ -150,7 +152,7 @@
   $('recovery-close').onclick = () => run({action:'close'}, '共享监听已关闭。');
   $('recovery-preview').onclick = () => run({action:'recovery_preview'}, '检查完成；尚未改变原件。', value => {recoveryPlan=value;$('recovery-detail').textContent=`${value.spaces} 个空间、${value.cards} 张卡、${value.archives} 个归档。${value.effect}`;});
   $('recover').onclick = () => {if(!recoveryPlan||!discard())return;run({action:'recover',expected:recoveryPlan.expected}, '已保留原件并恢复只读资料；需要使用新空间重新配对。',()=>{recoveryPlan=null;item='';});};
-  $('spaces').onchange = () => { if (window.SharedScopes && !SharedScopes.canSwitch()) { $('spaces').value = selected; return; } if (window.SharedConnection && !SharedConnection.canSwitch()) { $('spaces').value = selected; return; } if (window.SharedAccess && !SharedAccess.canSwitch()) { $('spaces').value = selected; return; } if (!discard()) { $('spaces').value = selected; return; } selected = $('spaces').value; item = ''; render(); };
+  $('spaces').onchange = () => { if (window.SharedTasks && !SharedTasks.canSwitch()) { $('spaces').value = selected; return; } if (window.SharedScopes && !SharedScopes.canSwitch()) { $('spaces').value = selected; return; } if (window.SharedConnection && !SharedConnection.canSwitch()) { $('spaces').value = selected; return; } if (window.SharedAccess && !SharedAccess.canSwitch()) { $('spaces').value = selected; return; } if (!discard()) { $('spaces').value = selected; return; } selected = $('spaces').value; item = ''; render(); };
   $('cards').onchange = () => { if (!discard()) { $('cards').value = item; return; } item = $('cards').value; render(); };
   $('new').onclick = () => { if (discard()) {item = ''; render(); $('title').focus();} };
   for (const id of ['title', 'text']) $(id).oninput = () => { dirty = true; };

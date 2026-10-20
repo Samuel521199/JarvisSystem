@@ -263,6 +263,7 @@ class LocalChatServer(ThreadingHTTPServer):
         self.shared_access_script = asset('shared-access.js')
         self.shared_connection_script = asset('shared-connection.js')
         self.shared_scopes_script = asset('shared-scopes.js')
+        self.shared_tasks_script = asset('shared-tasks.js')
         self.network_script = asset('network.js')
         self.coding_script = asset('coding.js')
         self.admin_html = self.admin_html.replace(b'__JARVIS_MODULE_STYLE__', asset('modules.css') + b'\n' + asset('evolution.css') + b'\n' + asset('speech.css') + b'\n' + asset('federation.css')).replace(b'__JARVIS_BRAND_STYLE__', asset('brand/logo.css'))
@@ -276,6 +277,7 @@ class LocalChatServer(ThreadingHTTPServer):
         self.html = self.html.replace(b'__JARVIS_READOUT_STYLE__', asset('readout.css'))
         self.evolution_script = asset('evolution.js')
         self.ranking_modules_script = asset('ranking-modules.js')
+        self.learning_loop_script = asset('learning-loop.js')
         self.growth_script = asset('growth.js')
         self.project_tools_script = asset('project-tools.js')
         self.growth_cycles_script = asset('growth-cycles.js')
@@ -645,6 +647,8 @@ class ChatHandler(BaseHTTPRequestHandler):
             self._send(200, self.server.shared_access_script, 'application/javascript; charset=utf-8')
         elif self.path == '/shared-connection.js':
             self._send(200, self.server.shared_connection_script, 'application/javascript; charset=utf-8')
+        elif self.path == '/shared-tasks.js':
+            self._send(200, self.server.shared_tasks_script, 'application/javascript; charset=utf-8')
         elif self.path == '/shared-scopes.js':
             self._send(200, self.server.shared_scopes_script, 'application/javascript; charset=utf-8')
         elif self.path == '/api/federation':
@@ -761,7 +765,7 @@ class ChatHandler(BaseHTTPRequestHandler):
         module_action=self.path in {'/api/modules/refresh','/api/modules/maintenance'}
         speech_action=self.path in {'/api/speech','/api/speech/fast','/api/speech/primary','/api/speech/readout','/api/speech/input'}
         growth_action=re.fullmatch(r'/api/conversation-growth/([a-f0-9]{32})(?:/([a-f0-9]{32})/(start|cancel|reanalyse))?',self.path)
-        evolution_action=self.path in {'/api/evolution/jobs','/api/evolution/policy','/api/evolution/cancel','/api/evolution/maintenance','/api/evolution/ranking/generate','/api/evolution/ranking/select'}
+        evolution_action=self.path in {'/api/evolution/jobs','/api/evolution/policy','/api/evolution/cancel','/api/evolution/maintenance','/api/evolution/ranking/generate','/api/evolution/ranking/select','/api/evolution/learning'}
         chat_cancel = self.path == '/api/chat/cancel'
         dialogue_action = self.path in {'/api/dialogue/turns', '/api/dialogue/cancel'}
         computer_queue=self.path in {'/api/computer/queue','/api/tasks/queue'}
@@ -1127,6 +1131,8 @@ def create_server(*, core=None, chat=None, data_dir=None, config_path=None, port
             server.evolution.growth = GrowthCycles(server.evolution,server.conversation_tasks)
             from jarvis_core.evolution.ranking_module import RankingModules
             server.evolution.ranking_modules = RankingModules(server.evolution, getattr(chat, 'background_models', None))
+            from jarvis_core.evolution.learning_loop import LearningLoop
+            server.evolution.learning = LearningLoop(server.evolution, server.conversation_tasks)
             try: server.evolution.ranking_modules.recover()
             except Exception: server.evolution.ranking_modules = None  # Optional corruption cannot take down chat.
         from jarvis_core.work_admission import WorkAdmission

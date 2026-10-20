@@ -23,7 +23,7 @@
 | **判断现在能否使用、智能有多强** | [v0.1.62 的实现、实测与剩余验收](delivery-validation.md#k2-completion-evidence) | [当前能力和完整性规则](models-offline.md#runtime-chat-context) |
 | **查看个人核心的使用与验证** | [聊天记忆与交流设置](interaction-persona.md#personal-core-ui) → [跨会话继续话题](interaction-persona.md#continuity-ui) | [当前 K2 验收结果与范围](delivery-validation.md#k2-completion-evidence) |
 | **从聊天提出改进并取回成果** | [改进与成长进度](interaction-persona.md#growth-demand-ui) | [0.1.41 需求成长验证](delivery-validation.md#growth-demand-evidence) |
-| **查看本轮修复与验收** | [K6 接收许可与记忆分域共享](delivery-validation.md#k6-scoped-sharing-evidence) | [既有共享引用验证](delivery-validation.md#k6-shared-access-evidence) |
+| **查看本轮修复与验收** | [共同任务、动态团队与需求学习](delivery-validation.md#cooperation-learning-evidence) | [既有记忆分域共享验证](delivery-validation.md#k6-scoped-sharing-evidence) |
 | **查看当前实现离个人助手目标还有多远** | [个人核心评价与工程审计](decisions-review.md#personal-core-assessment) | [助手核心架构图](architecture.md#pc-runtime-convergence) → [既有测试证据](delivery-validation.md#current-audit-evidence) |
 | **用自然语言执行首条任务** | [聊天任务入口](core-bootstrap.md#conversation-task-entry) | [执行边界与记录](tasks-agents.md#sample-task-runtime) |
 | **查看模块运行和准备升级** | [设置模块入口](core-bootstrap.md#module-monitor-entry) | [监控与维护边界](health-maintenance.md#module-monitoring) |
@@ -33,7 +33,10 @@
 <a id="project-status"></a>
 ## 目前做到哪里了？
 
-**当前 0.1.87：已实现对端接收许可与选定个人／项目记忆分域共享；[本轮验证、部署与限制](delivery-validation.md#k6-scoped-sharing-evidence)。** “设置 → 设备与共享 → 分域共享”先选择发送条目，再由对端许可；项目记忆映射本机项目，接收内容留在独立共享层。已用两个独立进程模拟设备完成目录、正文、纠正、遗忘、离线和重启链路；真实第二台机器仍待安排。操作见[设备与共享](interaction-persona.md#shared-cards-ui)，后续见[当前工作顺序](core-bootstrap.md#k4-next-delivery)。
+**当前源码 0.1.88：共同任务交接、助手接续、按需团队和需求学习四项已接通。** [实现、模拟验证与限制](delivery-validation.md#cooperation-learning-evidence)。只有一台电脑时使用[双进程模拟程序](../tools/probe_cooperation_learning.py)复现；没有把回环网络当真实跨机验收。设备与共享中的“共同任务”管理交接；聊天协作选择团队预算；成长中心的“进化”管理需求学习。
+
+
+**既有 0.1.87：已实现对端接收许可与选定个人／项目记忆分域共享；[本轮验证、部署与限制](delivery-validation.md#k6-scoped-sharing-evidence)。** “设置 → 设备与共享 → 分域共享”先选择发送条目，再由对端许可；项目记忆映射本机项目，接收内容留在独立共享层。已用两个独立进程模拟设备完成目录、正文、纠正、遗忘、离线和重启链路；真实第二台机器仍待安排。操作见[设备与共享](interaction-persona.md#shared-cards-ui)，后续见[当前工作顺序](core-bootstrap.md#k4-next-delivery)。
 
 0.1.85 的[本机模型用途、可失效引用与派生历史排除](delivery-validation.md#k6-shared-access-evidence)继续保留；撤销约束后续请求，已外发内容无法撤回，正式实例默认不开放监听。
 

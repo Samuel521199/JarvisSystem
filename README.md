@@ -4,7 +4,7 @@
 
 项目代码仓库：[Samuel521199/JarvisSystem](https://github.com/Samuel521199/JarvisSystem)。仓库保存源码、锁定依赖清单、设计文档、图源和验证记录；本机凭据、业务数据库、模型、依赖缓存和构建的运行包不入库。首次运行按[安装与启动说明](docs/core-bootstrap.md#section-6a93004233bf)准备环境。
 
-当前源码版本为 **0.1.87**，本机运行状态见[本轮验收与部署](docs/delivery-validation.md#k6-scoped-sharing-evidence)。Jarvis 的核心是普通 PC 上的个人助手与伙伴；K3 已闭环，K4 明确任务域、K5 首个检索模块及 K6 语音/协作基础保留。本轮增加对端逐项接收许可、个人/项目事实分域投影与受控模型引用，用本机两个独立进程完成模拟；不写入接收端原记忆库，不新增常驻服务。真实跨机/休眠仍待验。[使用入口](docs/interaction-persona.md#shared-cards-ui) · [下一步](docs/core-bootstrap.md#k4-next-delivery)。
+当前源码版本为 **0.1.88**，实现与运行状态见[本轮验收与部署](docs/delivery-validation.md#cooperation-learning-evidence)。核心仍是普通 PC 上的个人助手与伙伴。本轮接通共同任务交接、助手接续、2—4 角色按需团队，以及需求／研究来源到原 K4/K5 的改造链；用本机独立进程模拟多设备，不新增数据库服务或后台模型巡检。真实跨机与通用自主改造仍有明确边界。[使用入口](docs/interaction-persona.md#cooperation-learning-ui) · [当前队列](docs/core-bootstrap.md#near-term-work-queue)。
 
 **源码上传与正式部署分开记录。** 各功能的已实现、已验证和部署状态，以[当前进度](docs/README.md#project-status)及[分版本验收](docs/delivery-validation.md#versioned-evidence)为准；不能仅凭源码版本判断本机正在运行的版本。完整设计仍为 `proposed`；K3 开发协作已验证，完整 K1/K2 仍保留原待验条件，K4 仅在明确任务域收口，完整 K5—K6 尚未完成。
 

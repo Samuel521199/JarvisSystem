@@ -25,6 +25,9 @@
 #federation-view .shared-choice span{min-width:0;overflow-wrap:anywhere}
 #shared-access-root [data-status]{color:var(--muted);font-size:13px}
 #shared-versions pre{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit}
+#shared-tasks-root pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:360px;overflow:auto;font-size:13px}
+#shared-tasks-root [data-tasks]>section{padding:14px 0;border-bottom:1px solid var(--line)}
+#shared-tasks-root [data-tasks] button{margin:8px 8px 0 0}
 .shared-intro{display:flex;align-items:center;gap:22px;padding:24px;border-radius:18px;background:linear-gradient(110deg,rgba(75,159,218,.13),rgba(125,100,230,.06))}
 .shared-intro h2{margin:0 0 8px}.shared-intro p{margin:0}
 .shared-orbit{display:grid;place-items:center;flex:none;width:62px;height:62px;border:1px solid #73b7ec;border-radius:18px;color:#73b7ec;font-size:34px;animation:shared-breathe 5s ease-in-out infinite}

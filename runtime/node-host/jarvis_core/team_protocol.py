@@ -36,7 +36,7 @@ def text(value, limit=1200):
 
 def validate(payload):
     fields(payload, {'prompt', 'planner_model', 'reviewer_model', 'criteria'},
-           {'conversation_id', 'planner_reasoning', 'reviewer_reasoning'})
+           {'conversation_id', 'planner_reasoning', 'reviewer_reasoning', 'auto_team', 'max_agents'})
     result = {'prompt': text(payload['prompt'], 4000)}
     if len(result['prompt'].encode()) > 8000:
         raise CoreError('team_format', '协作要求最多 8,000 UTF-8 字节。')
@@ -55,6 +55,14 @@ def validate(payload):
     if 'conversation_id' in payload:
         identifier(payload['conversation_id'])
         result['conversation_id'] = payload['conversation_id']
+    if 'auto_team' in payload:
+        if type(payload['auto_team']) is not bool:
+            raise CoreError('team_format', '自动分工必须是开关。')
+        result['auto_team'] = payload['auto_team']
+    if 'max_agents' in payload:
+        if type(payload['max_agents']) is not int or not 2 <= payload['max_agents'] <= 4:
+            raise CoreError('team_budget', '当前协作预算支持 2—4 个 Agent。')
+        result['max_agents'] = payload['max_agents']
     return result
 
 

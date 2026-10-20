@@ -27,7 +27,7 @@ class ConversationTasks:
         if isinstance(payload, dict) and payload.get('mode') == 'skill':
             allowed = {'request_id','mode','prompt','model','project_id','skill_id','paths','output_path','ratio','theme','target_path','focus','explain','coding','cases','heldout_cases','entrypoint','coding_provider','coding_executor_binding','build_recipe','coding_demand','new_paths'}
         if isinstance(payload, dict) and payload.get('mode') == 'team':
-            allowed = {'request_id', 'mode', 'prompt', 'criteria', 'planner_model', 'reviewer_model', 'planner_reasoning', 'reviewer_reasoning'}
+            allowed = {'request_id', 'mode', 'prompt', 'criteria', 'planner_model', 'reviewer_model', 'planner_reasoning', 'reviewer_reasoning', 'auto_team', 'max_agents'}
         if isinstance(payload, dict) and payload.get('mode') == 'mcp':
             allowed = {'request_id', 'mode', 'prompt', 'library', 'project_id'}
         if not isinstance(payload,dict) or set(payload)-allowed:

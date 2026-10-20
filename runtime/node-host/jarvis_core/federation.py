@@ -34,6 +34,8 @@ class Federation:
         self.connection = Connection(self)
         from .federation_scoped import Scoped
         self.scoped = Scoped(self)
+        from .federation_tasks import Delegation
+        self.delegation = Delegation(self)
 
     @property
     def node(self):
@@ -211,6 +213,8 @@ class Federation:
         return self.status()
 
     def receive(self, route, signed):
+        if route == '/tasks':
+            return self.delegation.receive(signed)
         if route == '/domains':
             return self.scoped.receive(signed)
         if route == '/inspect':
@@ -342,6 +346,22 @@ class Federation:
         if not isinstance(payload, dict):
             p.fail()
         action = payload.get('action')
+        if isinstance(action, str) and action.startswith('task_'):
+            schemas = {'task_view':'action space', 'task_continuation':'action space',
+                       'task_policy':'action space revision enabled',
+                       'task_create':'action space task title text',
+                       'task_sync':'action space', 'task_cancel':'action space task',
+                       'task_run':'action space task'}
+            if action not in schemas: p.fail()
+            p.fields(payload, schemas[action])
+            sid = payload['space']
+            if action == 'task_view': return self.delegation.view(sid)
+            if action == 'task_continuation': return self.delegation.continuation(sid)
+            if action == 'task_policy': return self.delegation.configure(sid, payload['revision'], payload['enabled'])
+            if action == 'task_create': return self.delegation.create(sid, payload['task'], payload['title'], payload['text'])
+            if action == 'task_sync': return self.delegation.sync(sid)
+            if action == 'task_cancel': return self.delegation.cancel(sid, payload['task'])
+            return self.delegation.run(sid, payload['task'])
         schemas = {'initialize': 'action', 'listen': 'action address port', 'close': 'action',
                    'invite': 'action label', 'join': 'action invitation', 'retry': 'action space',
                    'sync': 'action space', 'revoke': 'action space',

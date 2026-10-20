@@ -82,6 +82,7 @@
     - [8.15.2.2 对话与后台模型进程边界（0.1.54）](#dialogue-process-contract)
 - [8.16 单机双职责协作契约（0.1.82）](#team-analysis-contract)
 - [8.17 双节点共享资料契约（0.1.87）](#shared-cards-contract)
+- [8.18 共同任务、动态团队与学习交接增量（0.1.88）](#cooperation-learning-contract)
 <!-- book-nav:end -->
 
 <a id="k0-contracts"></a>
@@ -1480,6 +1481,27 @@ ChatService 返回 `history_info.shared={references,dropped_history_messages,use
 | `scope_sync`：`space` | 加入端先更新目录/策略，再按双方许可同步正文 |
 
 持久状态仍为可选 `federation.db` 与 `federation/`。0.1.87 读取 schema 1—4；首次启用分域控制升至 4，旧卡写入保留 schema 3。受管理运行槽只允许 0.1.87 读取 schema 4；schema 3 支持 0.1.85—0.1.87，schema 2 支持 0.1.84—0.1.87，schema 1 支持 0.1.83—0.1.87。分域导出格式 `jarvis.shared-cards.export.v2` 在 space 中增加 received，逐项保存来源签名及本机映射/准入代次，不导出发布选择或本机许可。旧 v1 仍可读；恢复不恢复权限。具体权限/容量归[分域共享](federation.md#scoped-memory-sharing)，[验收](delivery-validation.md#k6-scoped-sharing-evidence)另列。
+
+<a id="cooperation-learning-contract"></a>
+## 共同任务、动态团队与学习交接增量（0.1.88）
+
+流程分别归[共同任务](federation.md#delegated-task-runtime)、[动态团队](tasks-agents.md#dynamic-team-runtime)、[需求学习](evolution-release.md#demand-learning-loop)，本节只定义接口归属。
+
+| 接口 | 宿主边界 |
+|---|---|
+| `POST /api/federation` 的 `task_view/task_continuation` | 读取本机回执及接续投影，不调用对端或模型 |
+| `task_policy` | `space/revision/enabled`，CAS 改变任务许可，不改变资料分享许可 |
+| `task_create` | `space/task/title/text`，加入端固定所有权和执行者；明确文本输入 |
+| `task_sync` | 签名 `/tasks` 交换；仅命令与回执，不交换聊天数据库 |
+| `task_run/task_cancel` | `space/task`；逐项执行许可或取消；没有未知任务重跑入口 |
+| 协作任务 `auto_team/max_agents` | 可选布尔开关和 2—4 上限；原 planner/reviewer 模型与档位沿用。宿主冻结 `_team`，外部不能直接填写 |
+| `GET /api/evolution/learning` | 来源账本、原回执与只读改进机会，不触发模型 |
+| `POST /api/evolution/learning` | `create/capture/research/collect/evidence/review/start/feedback/withdraw`，逐操作字段校验；沿用本地 Origin、nonce 和核心运行检查 |
+| 排序生成的可选 `context` | 最多 3000 字符的不可信参考；不能改变候选语法和验收器 |
+
+任务 envelope 绑定 `format/space/sender/target/request_id`；spec 绑定 `id/owner/executor/generation/capability/title/text/scope`。所有者命令序号 1 为交接、2 为取消；执行回执独立版本单调增加。调用端重新检查许可修订、终态一致性和确定性结果。
+
+新受管理运行包兼容 federation schema 5、evolution schema 9；含动态 `_team` 的任务数据禁止回退到旧解释器。学习表和团队附表仍复用原数据库，未更改旧任务/动作的唯一状态权威。手工运行旧源码不属于受管理兼容保证。
 
 <!-- book-footer:start -->
 [返回全书目录](README.md#book-tree) · [上一章：主人利益原则、身份授权与停止控制](security-sovereignty.md) · [下一章：技术栈、源码目录与运行数据](stack-project-layout.md)

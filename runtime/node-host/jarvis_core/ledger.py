@@ -303,9 +303,9 @@ class Ledger:
                             budget={'max_cost_units': model_requests, 'max_runtime_seconds': runtime_seconds, 'max_attempts': 1})
                 action.update(capability_id=capability, resource_id='project-skill')
             elif capability == 'team.analysis.v1':
-                task.update(title='Two-role analysis', authorization_ref='local:team-task:'+arguments_digest[7:],
+                task.update(title='Bounded team analysis', authorization_ref='local:team-task:'+arguments_digest[7:],
                             required_capabilities=[capability, 'artifact.write.v1'],
-                            budget={'max_cost_units': 2, 'max_runtime_seconds': runtime_seconds, 'max_attempts': 1})
+                            budget={'max_cost_units': len(arguments.get('_team', {'roles':['planner','reviewer']})['roles']), 'max_runtime_seconds': runtime_seconds, 'max_attempts': 1})
                 action.update(capability_id=capability, resource_id='team-analysis', idempotency_support='local_ledger')
             elif capability == 'mcp.documentation.v1':
                 task.update(title='Context7 documentation query', authorization_ref='local:mcp-task:'+arguments_digest[7:],

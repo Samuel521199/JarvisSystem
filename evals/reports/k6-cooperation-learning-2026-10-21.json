@@ -1,0 +1,41 @@
+{
+  "version": "0.1.88",
+  "at": "2026-10-20T17:54:05.938423+00:00",
+  "processes": {
+    "checks": [
+      "two_process_offer_approval_independent_result_check",
+      "duplicate_exchange_no_reexecution",
+      "offline_cancel_pending_then_acknowledged",
+      "both_processes_restart_receipts_survive_endpoint_recovery",
+      "executor_process_crash_after_durable_reservation_no_replay"
+    ],
+    "status": "passed",
+    "memory": [
+      {
+        "pid": 33344,
+        "created": 134369924495286156,
+        "cpu_seconds": 0.46875,
+        "working_set_bytes": 45355008,
+        "private_bytes": 26836992
+      },
+      {
+        "pid": 31328,
+        "created": 134369924483379521,
+        "cpu_seconds": 1.0,
+        "working_set_bytes": 44408832,
+        "private_bytes": 27820032
+      }
+    ]
+  },
+  "ui": {
+    "status": "passed",
+    "checks": [
+      "ui_task_submit_sync_result_and_continuation",
+      "ui_learning_provenance_review_feedback_withdrawal",
+      "mobile_layout_capture"
+    ],
+    "page_errors": []
+  },
+  "physical_second_device": false,
+  "cloud_calls": 0
+}

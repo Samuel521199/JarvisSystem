@@ -78,7 +78,7 @@ class StoredRanking:
                 schema = db.execute('PRAGMA user_version').fetchone()[0]
                 if schema < 8:
                     return LexicalV1.order(rows, words)
-                if schema != 8:
+                if schema not in (8, 9):
                     raise ValueError('unsupported ranking store schema')
                 selected = select_row(db)
                 if not selected['active']:

@@ -182,7 +182,8 @@
         "shared-model-use",
         "shared-live-references",
         "shared-connection-recovery",
-        "scoped-memory-sharing"
+        "scoped-memory-sharing",
+        "delegated-task-runtime"
       ],
       "status": "proposed",
       "reader_summary": "断网怎样独立工作，重连怎样共享记忆与协同？"
@@ -228,7 +229,8 @@
         "project-tool-ui",
         "ranking-module-ui",
         "team-analysis-ui",
-        "shared-cards-ui"
+        "shared-cards-ui",
+        "cooperation-learning-ui"
       ],
       "status": "proposed",
       "reader_summary": "怎样自然交流、延续人格，并在需要时展开工作台？"
@@ -250,7 +252,8 @@
         "conversation-resource-isolation",
         "bounded-coding-workflow",
         "tank-game-runtime",
-        "bounded-team-runtime"
+        "bounded-team-runtime",
+        "dynamic-team-runtime"
       ],
       "status": "proposed",
       "reader_summary": "怎样一边交流一边执行任务，如何组织多 Agent？"
@@ -310,7 +313,8 @@
         "memory-domain-runtime",
         "semantic-candidates-runtime",
         "retrieval-ranking-module",
-        "shared-memory-projection"
+        "shared-memory-projection",
+        "learning-candidate-provenance"
       ],
       "status": "proposed",
       "reader_summary": "记住什么，怎样检索、纠正、遗忘和持续学习？"
@@ -333,7 +337,8 @@
         "project-tool-quality-storage",
         "growth-ledger-maintenance",
         "bounded-growth-policy",
-        "ranking-module-growth"
+        "ranking-module-growth",
+        "demand-learning-loop"
       ],
       "status": "proposed",
       "reader_summary": "怎样自编工具、改进模块，并验证和回退？"
@@ -405,7 +410,8 @@
         "ranking-module-contract",
         "speech-input-contract",
         "team-analysis-contract",
-        "shared-cards-contract"
+        "shared-cards-contract",
+        "cooperation-learning-contract"
       ],
       "status": "proposed",
       "reader_summary": "模块之间怎样交换任务、事件和记忆数据？"
@@ -560,7 +566,8 @@
         "k6-shared-lifecycle-evidence",
         "k6-shared-access-evidence",
         "k6-connection-recovery-evidence",
-        "k6-scoped-sharing-evidence"
+        "k6-scoped-sharing-evidence",
+        "cooperation-learning-evidence"
       ],
       "status": "proposed",
       "reader_summary": "哪些能力测过，证据在哪里，下一阶段怎样验收？"
@@ -3120,9 +3127,9 @@
     }
   ],
   "implementation": {
-    "version": "0.1.87",
-    "scope": "K3 closed; bounded K4/K5 and K6 voice/team retained. K6 scoped channel adds source selection, peer per-item receive grants, explicit personal/project mapping, source-owned projections and inherited model constraints. Two local OS processes and browser simulation verified; full memory federation, physical LAN/sleep and task ownership remain open.",
-    "evidence": "evals/reports/k6-scoped-sharing-2026-10-20.json",
+    "version": "0.1.88",
+    "scope": "Four bounded increments: fixed-owner peer text tasks, cached assistant continuity, 2-4 sequential role allocation, demand/evidence handoff to existing K4/K5. One-PC independent process and browser simulation; physical LAN, arbitrary effects and universal autonomous acceptance remain unverified.",
+    "evidence": "evals/reports/k6-cooperation-learning-2026-10-21.json",
     "overall_design_status": "proposed",
     "complete_k1_gate": false,
     "complete_k2_gate": false,
@@ -3399,7 +3406,14 @@
       "evals/reports/k6-federation-2026-10-20.json",
       "evals/reports/k6-shared-lifecycle-2026-10-20.json",
       "evals/reports/k6-shared-access-2026-10-20.json",
-      "evals/reports/k6-connection-recovery-2026-10-20.json"
+      "evals/reports/k6-connection-recovery-2026-10-20.json",
+      "evals/reports/k6-scoped-sharing-2026-10-20.json",
+      "evals/reports/k6-cooperation-regression-2026-10-21.json",
+      "evals/reports/k6-dynamic-team-live-2026-10-21.json",
+      "evals/reports/k6-learning-live-2026-10-21.json",
+      "evals/reports/k6-cooperation-deployment-2026-10-21.json",
+      "evals/reports/k6-cooperation-deployment-final-2026-10-21.json",
+      "evals/reports/k6-cooperation-package-2026-10-21.json"
     ],
     "complete_k4_gate": false
   }

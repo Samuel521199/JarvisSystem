@@ -1,0 +1,63 @@
+{
+  "captured_at": "2026-10-20T17:59:33.784573+00:00",
+  "status": "passed",
+  "package": {
+    "version": "0.1.88",
+    "path": "H:\\JarvisData\\diagnostics\\jarvis-v0.1.88.zip",
+    "sha256": "b805a619c845a8143f90c0fe9b072b85b6a913dbace154a8e4772fcb5ca319ee",
+    "files": 1630,
+    "bytes": 70650317,
+    "status": "candidate_verified",
+    "dependencies": {
+      "playwright": "1.64.0",
+      "greenlet": "3.5.6",
+      "pyee": "14.0.0",
+      "typing_extensions": "4.16.0",
+      "cryptography": "50.0.2",
+      "cffi": "2.1.1",
+      "pycparser": "3.11",
+      "google-auth": "2.62.0",
+      "requests": "2.34.2",
+      "certifi": "2026.7.22",
+      "urllib3": "2.8.0",
+      "idna": "3.20",
+      "charset-normalizer": "3.5.2",
+      "pyasn1_modules": "0.4.2",
+      "pyasn1": "0.6.4",
+      "httpx": "0.28.1",
+      "httpcore": "1.0.9",
+      "h11": "0.16.0",
+      "anyio": "4.15.1",
+      "jsonschema": "4.26.0",
+      "rpds-py": "2026.9.1",
+      "referencing": "0.37.0",
+      "attrs": "26.1.0",
+      "jsonschema-specifications": "2025.9.1"
+    }
+  },
+  "runs": [
+    {
+      "executable": "C:\\Users\\samuel\\AppData\\Local\\Temp\\jarvis-package-probe-us5hfn6u\\candidate\\python\\python.exe",
+      "version": "0.1.88",
+      "stopped": true,
+      "task_id": "task_336584aba02e5395bf66f2b7c2a89c05",
+      "artifact_digest": "sha256:2aba68e31c1ccf2c347201bef4bc470c3543ac3564036014cc3b2360a24e713a",
+      "worker_manifest": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+      "network": "Python audit hook denies connect/DNS; not an OS network isolation test"
+    },
+    {
+      "executable": "C:\\Users\\samuel\\AppData\\Local\\Temp\\jarvis-package-probe-us5hfn6u\\fallback\\python\\python.exe",
+      "version": "0.1.88",
+      "stopped": true,
+      "task_id": "task_336584aba02e5395bf66f2b7c2a89c05",
+      "artifact_digest": "sha256:2aba68e31c1ccf2c347201bef4bc470c3543ac3564036014cc3b2360a24e713a",
+      "worker_manifest": "a884e62847a711885fcacd92df629cc95fd44107c2773faa6cf61e50e0a19c02",
+      "network": "Python audit hook denies connect/DNS; not an OS network isolation test"
+    }
+  ],
+  "limitations": [
+    "Same-version fallback slot; no cross-version schema migration or protected service activation.",
+    "Python network-denial hook only; machine-wide disconnected boot not tested.",
+    "Optional browser/speech, model weights, owner keys and live state are excluded."
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "modules": [
+    "test_team_tasks",
+    "test_team_planning",
+    "test_learning_loop",
+    "test_learning_ranking",
+    "test_ranking_modules",
+    "test_web",
+    "test_runtime_releases"
+  ],
+  "tests": 67,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "seconds": 49.144,
+  "passed": true,
+  "cloud_model_calls": 0,
+  "model_responses": "deterministic_fixtures",
+  "previous_attempt": "59 tests passed; one loader error for incorrect test_releases module name. Corrected to test_runtime_releases.",
+  "final_targeted": {
+    "modules": [
+      "test_federation_tasks",
+      "test_team_planning",
+      "test_learning_loop",
+      "test_learning_ranking"
+    ],
+    "tests": 15,
+    "passed": true,
+    "failures": 0,
+    "errors": 0,
+    "seconds": 47.834
+  }
+}

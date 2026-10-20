@@ -50,7 +50,7 @@ class EvolutionStore:
         self.path = self.root / 'evolution.db'
         with self.connection() as db:
             version = db.execute('PRAGMA user_version').fetchone()[0]
-            if version not in (0, 1, 2, 3, 4, 5, 6, 7, 8):
+            if version not in (0, 1, 2, 3, 4, 5, 6, 7, 8, 9):
                 raise policy.CoreError('evolution_schema_invalid', '进化账本版本不兼容。')
             db.executescript('''
                 CREATE TABLE IF NOT EXISTS settings(singleton INTEGER PRIMARY KEY,document TEXT NOT NULL);
@@ -74,7 +74,7 @@ class EvolutionStore:
             db.execute('UPDATE settings SET document=? WHERE singleton=1', (policy.canonical_json(settings),))
             db.execute('INSERT OR IGNORE INTO ranking_selection VALUES(1,?)', (policy.canonical_json(
                 {'active':None,'previous':None,'generation':0,'trial':False,'samples':[],'last_event':'initial'}),))
-            db.execute('PRAGMA user_version=8')
+            db.execute('PRAGMA user_version='+str(max(8,version)))
 
     @contextmanager
     def connection(self):

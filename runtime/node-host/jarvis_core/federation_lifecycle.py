@@ -119,6 +119,8 @@ class Lifecycle:
 
     def preview(self, sid):
         space = self.service._space(self.store.read(self.service.node), sid, active=False)
+        if space.get('delegation', {}).get('tasks'):
+            p.fail('此空间含独立任务回执，当前资料归档不覆盖任务账本，未释放空间。', 'federation_task_retention')
         value = make_export(space, self.service._identity().load())
         # ECDSA signatures vary; CAS binds the source state, not a new signature.
         return {'space': sid, 'expected': p.digest(space), 'label': space['label'],
@@ -129,6 +131,8 @@ class Lifecycle:
         identity = self.service._identity().load()
         def update(state):
             space = self.service._space(state, sid, active=False)
+            if space.get('delegation', {}).get('tasks'):
+                p.fail('含任务回执的空间须保留，资料归档不能删除任务历史。', 'federation_task_retention')
             if p.digest(space) != expected:
                 p.fail('空间已变化，请重新预览。', 'federation_conflict')
             archives = state.setdefault('archives', {})
@@ -218,6 +222,13 @@ class Lifecycle:
                 if sid != space['id'] or space['members'].get(node) != identity.pem:
                     p.fail('设备身份与待恢复资料不匹配。', 'federation_recovery')
                 spaces[sid] = read_only_space(make_export(space, identity), node)
+                if 'delegation' in space:
+                    delegation = copy.deepcopy(space['delegation'])
+                    delegation.update(enabled=False, revision=delegation['revision']+1)
+                    for row in delegation['tasks'].values():
+                        if row['state'] not in {'SUCCEEDED','CANCELLED','FAILED','UNKNOWN'}:
+                            row.update(state='UNKNOWN', version=row['version']+1)
+                    spaces[sid]['delegation'] = delegation
             archives = state.get('archives', {})
             if len(archives) > MAX_ARCHIVES:
                 p.fail()
@@ -273,6 +284,8 @@ class Lifecycle:
                                (p.encode(preview['_state']).decode('utf-8'), preview['next_revision']))
                     db.execute('PRAGMA user_version=4' if db.execute('PRAGMA user_version').fetchone()[0]==4 or any(
                         'scoped' in s for s in preview['_state']['spaces'].values()) else 'PRAGMA user_version=3')
+                    if any('delegation' in s for s in preview['_state']['spaces'].values()):
+                        db.execute('PRAGMA user_version=5')
             return self.service.status()
         finally:
             self.service.flight.release()

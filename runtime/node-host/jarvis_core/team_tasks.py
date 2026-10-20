@@ -6,10 +6,12 @@ import time
 from . import policy
 from .ledger import TERMINAL_ACTIONS, now
 from .team_protocol import CAPABILITY, TIMEOUT_SECONDS, ROLES, INSTRUCTIONS, validate, criterion_rows, decode
+from .team_planning import allocate, model_role
 
 SOURCE_PATHS = (
     'runtime/node-host/jarvis_core/team_tasks.py',
     'runtime/node-host/jarvis_core/team_protocol.py',
+    'runtime/node-host/jarvis_core/team_planning.py',
     'runtime/node-host/jarvis_core/evolution/provider.py',
     'runtime/node-host/jarvis_core/dialogue_process.py',
     'runtime/node-host/jarvis_core/dialogue_worker.py',
@@ -32,6 +34,7 @@ class TeamTaskService:
             p: policy.digest((policy.REPOSITORY_ROOT/p).read_bytes()) for p in SOURCE_PATHS}).encode())
 
     def configuration(self, args, role):
+        role = model_role(role)
         config, provider = self.provider.configuration(args[role+'_model'], args.get(role+'_reasoning'))
         from jarvis_models.catalog import resolve_settings
         settings = resolve_settings(config, provider)
@@ -46,6 +49,8 @@ class TeamTaskService:
         if self.model_calls is None:
             raise policy.CoreError('team_unavailable', '后台模型进程尚未接入。')
         args['_bindings'] = {role: policy.digest(policy.canonical_json(self.configuration(args, role)).encode()) for role in ROLES}
+        if args.get('auto_team'):
+            args['_team'] = allocate(args)
         return args
 
     def calls(self, task_id):
@@ -60,19 +65,20 @@ class TeamTaskService:
         return rows
 
     def reserve(self, task_id, role):
-        ordinal = ROLES.index(role)
         with self.core.ledger.effect_guard(task_id, expected_epoch=self.core._security_epoch) as db:
             action_id = db.execute('SELECT action_id FROM actions WHERE task_id=?', (task_id,)).fetchone()['action_id']
             record = self.core.ledger._record(db, action_id)
+            plan = record['action']['arguments'].get('_team', {'roles':list(ROLES)})
+            ordinal = plan['roles'].index(role)
             used = db.execute('SELECT ordinal,document FROM team_calls WHERE task_id=? ORDER BY ordinal', (task_id,)).fetchall()
-            if record['action']['status'] != 'DISPATCHING' or len(used) != ordinal or len(used) >= min(2, record['task']['budget']['max_cost_units']):
+            if record['action']['status'] != 'DISPATCHING' or len(used) != ordinal or len(used) >= min(len(plan['roles']), record['task']['budget']['max_cost_units']):
                 raise policy.CoreError('team_budget', '角色顺序或父任务预算不允许新的调用。')
             if any(json.loads(r['document'])['state'] != 'SUCCEEDED' for r in used):
                 raise policy.CoreError('team_dependency', '前序角色没有有效回执。')
             args = record['action']['arguments']
             row = {'schema_version': 1, 'ordinal': ordinal, 'role': role, 'state': 'RESERVED', 'reserved_calls': 1,
                    'root_task_id': task_id, 'security_epoch': self.core._security_epoch,
-                   'model': args[role+'_model'], 'created_at': now()}
+                   'model': args[model_role(role)+'_model'], 'created_at': now()}
             db.execute('INSERT INTO team_calls VALUES(?,?,?)', (task_id, ordinal, policy.canonical_json(row)))
         return row
 
@@ -108,19 +114,28 @@ class TeamTaskService:
 
             try:
                 arguments = record['action']['arguments']
-                args = validate({k: v for k, v in arguments.items() if k != '_bindings'})
+                args = validate({k: v for k, v in arguments.items() if not k.startswith('_')})
+                team = arguments.get('_team', {'roles':list(ROLES), 'reason':'固定双角色', 'concurrency':1})
                 proposal = None
-                for role in ROLES:
+                specialists = []
+                for role in team['roles']:
                     checkpoint()
                     config, provider = self.configuration(args, role)
-                    if policy.digest(policy.canonical_json((config, provider)).encode()) != arguments['_bindings'][role]:
+                    if policy.digest(policy.canonical_json((config, provider)).encode()) != arguments['_bindings'][model_role(role)]:
                         raise policy.CoreError('team_route_changed', '角色模型配置已变化，请核对后重新提交。')
                     prompt = {'goal': args['prompt'], 'criteria': criterion_rows(args)}
                     if proposal is not None: prompt['proposal'] = proposal
+                    if role.startswith('specialist'):
+                        focus = int(role[-1])-1
+                        prompt['focus'] = args['criteria'][focus::max(1,len(team['roles'])-2)]
+                    if specialists and role == 'reviewer': prompt['specialist_suggestions'] = specialists
                     pending = self.reserve(task_id, role)
                     # No history, personal memory, tools, file access or nested delegation.
+                    instructions = INSTRUCTIONS[model_role(role)]
+                    if role.startswith('specialist'):
+                        instructions += '本次你是专项分析角色，重点分析 focus 所列要求；proposal 是待质疑的参考，保持同一 JSON 契约。'
                     response = self.model_calls.probe(config, provider, policy.canonical_json(prompt),
-                        self.core.data_dir, checkpoint, task_id=task_id, instructions=INSTRUCTIONS[role],
+                        self.core.data_dir, checkpoint, task_id=task_id, instructions=instructions,
                         deadline_seconds=min(55, max(1, deadline-time.monotonic())))
                     receipt = self.provider.receipt(response, config, provider)
                     if response.get('status') == 'UNKNOWN' or response.get('outcome_uncertain'):
@@ -131,7 +146,7 @@ class TeamTaskService:
                         checkpoint()
                         raise policy.CoreError('team_model_failed', '角色调用未完成；未启动后续角色。')
                     try:
-                        output = decode(response.get('text'), role, args, proposal)
+                        output = decode(response.get('text'), model_role(role), args, proposal)
                     except policy.CoreError:
                         raw_text = response.get('text', '')
                         from .team_protocol import MAX_REPLY_BYTES
@@ -141,11 +156,13 @@ class TeamTaskService:
                     self.settle(pending, 'SUCCEEDED', receipt=receipt, output=output); pending = None
                     checkpoint()
                     if role == 'planner': proposal = output
+                    elif role.startswith('specialist'): specialists.append({'role':role, 'proposal':output})
                 report = {
                     'schema_version': 1, 'kind': 'jarvis.team-report', 'goal': args['prompt'],
                     'criteria': criterion_rows(args), 'proposal': proposal, 'review': output,
                     'roles': self.calls(task_id), 'decision': output['verdict'],
-                    'budget': {'max_model_calls': 2, 'reserved_calls': 2, 'max_runtime_seconds': TIMEOUT_SECONDS,
+                    'allocation':team, 'specialists':specialists,
+                    'budget': {'max_model_calls': len(team['roles']), 'reserved_calls': len(team['roles']), 'max_runtime_seconds': TIMEOUT_SECONDS,
                                'max_output_tokens_per_call': 2048, 'automatic_retries': 0},
                     'checks': {'structure_valid': True, 'references_valid': True,
                                'separate_model_contexts': True, 'semantic_acceptance_verified': False,

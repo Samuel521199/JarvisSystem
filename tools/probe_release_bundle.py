@@ -52,6 +52,12 @@ if sys.argv[3]=='first':
     data={'id':'a'*32,'label':'Package probe','members':{sharing.node:identity.pem},'peer':None,'items':{}}
     assert validate_export(make_export(data,identity))['space']==data
     assert received_cards(data)==[]
+    from jarvis_core.federation_tasks import report as text_inventory
+    from jarvis_core.team_planning import allocate
+    from jarvis_core.evolution.learning_loop import LearningLoop
+    assert text_inventory('a b\nc')['lines']==2
+    assert allocate({'criteria':['one'],'max_agents':2})['roles']==['planner','reviewer']
+    assert LearningLoop.__name__=='LearningLoop'
     from jarvis_core.federation_access import context, empty_policy, destination
     assert not empty_policy()['providers']
     assert context(None)[0]['references']==[]
