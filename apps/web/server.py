@@ -578,6 +578,8 @@ class ChatHandler(BaseHTTPRequestHandler):
             except Exception as exc:self._memory_error(exc)
         elif self.path == '/conversations.js':
             self._send(200, self.server.conversation_script, 'application/javascript; charset=utf-8')
+        elif self.path == '/team-workbench.js':
+            self._send(200, (ROOT/'apps/web/team-workbench.js').read_bytes(), 'application/javascript; charset=utf-8')
         elif self.path == '/conversation_tasks.js':
             self._send(200, self.server.conversation_tasks_script, 'application/javascript; charset=utf-8')
         elif self.path.startswith('/api/conversation-tasks/'):

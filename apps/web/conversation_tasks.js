@@ -27,6 +27,7 @@ function receiptLinks(){
  }
 }
 function controls(){
+ window.TeamWorkbench?.controls();
  const temp=current()?.temporary;
  $('composer-mode').disabled=busy||Boolean(window.Workspace?.isBusy())||submitting;
  mcpControls.hidden=$('composer-mode').value!=='mcp';
@@ -64,6 +65,9 @@ function render(){
      button('下载产物',()=>window.SkillWorkbench.download(row.task_id,detail.report));
      if(detail.report.evidence||detail.report.evidence_ref)button('查看分析报告',()=>window.SkillWorkbench.reportPreview(detail.report,row.task_id));
      if(detail.report.evidence||detail.report.evidence_ref)button('下载完整证据',()=>window.SkillWorkbench.evidence(row.task_id,detail.report));
+    }else if(detail.report.kind==='jarvis.team-report'){
+     text.textContent=detail.report.decision==='needs_revision'?'协作报告已生成 · 审阅发现需要修改；尚未执行业务操作。':'协作报告已生成 · 待你审阅；模型意见不是事实或业务验收。';
+     button('查看协作报告',()=>window.TeamWorkbench.preview(detail.report));button('下载协作回执',()=>download(row.task_id));
     }else if(detail.report.kind==='jarvis.mcp-report'){
      text.textContent='Context7 已返回'+(detail.report.tool==='query-docs'?'文档资料':'候选文档库')+' · 1 次只读工具调用 · 未调用模型。内容来自外部服务，使用前核对来源及版本。';
      button('查看文档结果',()=>mcpPreview(detail.report));button('下载调用回执',()=>download(row.task_id));
@@ -72,7 +76,7 @@ function render(){
    }else text.textContent=detail.task.status==='CANCELLED'?'已取消；未确认产物不会作为完成结果提供。':detail.error?.message||'当前状态：'+(states[detail.task.status]||detail.task.status);
    card.append(text);
    if(selected===row.task_id){
-    const info=document.createElement('small');info.textContent=(detail.steps||[]).map(s=>'规划 '+(s.ordinal+1)+'：'+s.state).join(' · ');card.append(info);
+    const info=document.createElement('small');info.textContent=(detail.steps||[]).map(s=>(s.role==='planner'?'方案':s.role==='reviewer'?'审阅':'规划 '+(s.ordinal+1))+'：'+s.state).join(' · ');card.append(info);
    }
   }
   card.append(actions);host.append(card);
@@ -135,7 +139,7 @@ async function cancelTask(task){
 }
 function sessionChanged(){
  const id=current()?.id;if(!id)return;
- if(id!==currentId){$('mcp-result-dialog')?.remove();currentId=id;rows=[];snapshot=null;selected=null;generation++;clearTimeout(timer);$('composer-mode').value='chat';$('conversation-task-error').textContent='';render();
+ if(id!==currentId){$('mcp-result-dialog')?.remove();$('team-result-dialog')?.remove();currentId=id;rows=[];snapshot=null;selected=null;generation++;clearTimeout(timer);$('composer-mode').value='chat';$('conversation-task-error').textContent='';render();
   if(!$('conversation-task-panel').hidden||document.querySelector('#messages [data-task-control="true"]'))schedule(0);
  }else receiptLinks();
  controls();
@@ -170,8 +174,8 @@ async function submit(prompt,original,extra=null){
  const context=current(),id=context.id,item=chosenModel(),model=item?item.provider+'::'+item.model:'auto';
  if(submitting){notify('上个任务提交仍在核对中，草稿保留。');return;}
  if(Attachments.hasDraft()||$('file-mode').checked){notify('此任务不使用附件或回答文件输出，请先移除附件并关闭该选项。');return;}
- if(!prompt.trim()||encoder.encode(prompt).length>(extra?2048:1024)){notify('请输入单个有界任务要求。');return;}
- if(extra&&!extra.library.trim()){notify('请填写文档库名称或 ID。');return;}
+ if(!prompt.trim()||encoder.encode(prompt).length>(extra?.mode==='team'?8000:extra?2048:1024)){notify('请输入单个有界任务要求。');return;}
+ if(extra?.mode==='mcp'&&!extra.library.trim()){notify('请填写文档库名称或 ID。');return;}
  const old=pending.get(id),payload={request_id:old?.payload.request_id||'web-'+crypto.randomUUID().replaceAll('-',''),prompt:prompt.trim(),...(extra||{model,relative_path:'.'})};
  if(old&&JSON.stringify(payload)!==JSON.stringify(old.payload)){notify('此前任务提交结果尚未确认，请先核对本会话任务；当前草稿保留。');show();return;}
  let article=old?.article;
@@ -206,6 +210,10 @@ async function cancelCommand(command,task){
  window.Workspace?.remember();
 }
 function handleSubmit(){
+ if($('composer-mode').value==='team'){
+  if(!current()){notify('会话尚未就绪，草稿保留。');return true;}
+  try{const value=window.TeamWorkbench.payload();submit($('message').value,$('message').value,value);}catch(e){notify(e.message);document.getElementById('team-controls').open=true;}return true;
+ }
  const docs=$('message').value.trim().match(/^\/文档\s+(\S+)\s+([\s\S]+)$/);
  if(docs||$('composer-mode').value==='mcp'){
   if(!current()){notify('会话尚未就绪，草稿保留。');return true;}

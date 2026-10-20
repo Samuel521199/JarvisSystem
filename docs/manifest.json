@@ -218,7 +218,8 @@
         "dialogue-intent-shadow-ui",
         "mixed-report-ui",
         "project-tool-ui",
-        "ranking-module-ui"
+        "ranking-module-ui",
+        "team-analysis-ui"
       ],
       "status": "proposed",
       "reader_summary": "怎样自然交流、延续人格，并在需要时展开工作台？"
@@ -239,7 +240,8 @@
         "conversation-task-context-separation",
         "conversation-resource-isolation",
         "bounded-coding-workflow",
-        "tank-game-runtime"
+        "tank-game-runtime",
+        "bounded-team-runtime"
       ],
       "status": "proposed",
       "reader_summary": "怎样一边交流一边执行任务，如何组织多 Agent？"
@@ -391,7 +393,8 @@
         "project-tool-contract",
         "tank-game-contract",
         "ranking-module-contract",
-        "speech-input-contract"
+        "speech-input-contract",
+        "team-analysis-contract"
       ],
       "status": "proposed",
       "reader_summary": "模块之间怎样交换任务、事件和记忆数据？"
@@ -540,7 +543,8 @@
         "k5-ranking-entry-evidence",
         "k5-ranking-module-evidence",
         "k6-voice-input-evidence",
-        "k6-continuous-voice-evidence"
+        "k6-continuous-voice-evidence",
+        "k6-team-evidence"
       ],
       "status": "proposed",
       "reader_summary": "哪些能力测过，证据在哪里，下一阶段怎样验收？"
@@ -3100,9 +3104,9 @@
     }
   ],
   "implementation": {
-    "version": "0.1.81",
-    "scope": "K3 closed; K4 bounded closure in three accepted domains; K5 first bounded ranking-module cycle; K6 adds explicit bounded continuous voice, local VAD/ASR and limited interruption. Full acoustic, long-term, low-resource and multi-device gates remain open.",
-    "evidence": "evals/reports/k6-continuous-voice-2026-10-20.json",
+    "version": "0.1.82",
+    "scope": "K3 closed; bounded K4 and first K5 cycle retained. K6 adds a single-PC planner/reviewer team with two calls, durable budget reservations, scoped inputs and report aggregation; full Agent factory, federation, acoustic and long-term gates remain open.",
+    "evidence": "evals/reports/k6-team-2026-10-20.json",
     "overall_design_status": "proposed",
     "complete_k1_gate": false,
     "complete_k2_gate": false,
@@ -3373,7 +3377,8 @@
       "evals/reports/k4-growth-closure-2026-10-20.json",
       "evals/reports/k5-ranking-entry-2026-10-20.json",
       "evals/reports/k5-ranking-module-2026-10-20.json",
-      "evals/reports/k6-voice-input-2026-10-20.json"
+      "evals/reports/k6-voice-input-2026-10-20.json",
+      "evals/reports/k6-continuous-voice-2026-10-20.json"
     ],
     "complete_k4_gate": false
   }

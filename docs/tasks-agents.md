@@ -1,6 +1,6 @@
 # 任务、动作、多 Agent 与资源调度
 
-> 状态：完整调度与 Agent 设计 proposed；0.1.16 增加共用队列内存准入，后台通用规划与团队尚未实现 · 更新：2026-10-16  
+> 状态：完整调度与 Agent 工厂 proposed；0.1.82 实现单机双职责协作、预算和报告；通用递归团队仍未实现 · 更新：2026-10-20
 > [文档入口](README.md) · [维护规则](MAINTENANCE.md) · [架构图册](architecture-atlas.md)
 
 <!-- book-nav:start -->
@@ -25,6 +25,7 @@
   - [12.3.6 坦克小游戏制作：模型关卡与固定引擎（0.1.74）](#tank-game-runtime)
   - [12.3.7 REA 软件解析的使用规则（含可选中文解释）](#rea-skill-policy)
 - [12.4 多 Agent 组织](#interaction-tasks-4)
+  - [12.4.1 单机方案与审阅协作（0.1.82）](#bounded-team-runtime)
 - [12.5 冲突与调度](#interaction-tasks-5)
 - [12.6 核心端到端流程](#end-to-end-flows)
   - [12.6.1 聊天同时完成任务](#end-to-end-flows-1)
@@ -292,6 +293,26 @@ Agent 是带模型、工具、状态和任务契约的工作者。共享的是�
 
 每个委派包含：目标、输入、输出格式、可用工具、不可改动范围、预算、截止时间、父任务、验收标准。多个 Agent 的一致意见不能替代可检查的结果。[S10](references.md#s10)
 
+<a id="bounded-team-runtime"></a>
+### 单机方案与审阅协作（0.1.82）
+
+**implemented；验证范围见[本轮证据](delivery-validation.md#k6-team-evidence)。** 这是个人助手的按需分析能力，可用于学习安排、生活计划、方案比较或工作规划，不要求先打开工程。当前是两个独立模型上下文：方案 Agent 分解任务，审阅 Agent 接收同一要求与候选方案、逐项检查；Host 做确定性检查和报告汇总。它们是两个逻辑角色，共用原后台单槽，顺序运行，不声称两个模型同时常驻或已实现任意 Agent 工厂。
+
+| 步骤 | 实际行为与状态归属 |
+|---|---|
+| 明确受理 | 主人选择两个角色的模型/档位，提供当前要求与检查项。不可变参数、模型配置摘要、任务 ID 和会话关联进入原 `control.db` 与 FIFO |
+| 方案 | Host 在同一账本事务内从父任务额度预留一次调用，记录 `team_calls`；只传本条要求与检查项，产生步骤、假设和风险 |
+| 审阅 | 前序输出契约有效才可再预留一次；新上下文审阅候选，不复制方案 Agent 的历史对话、私人记忆或项目索引 |
+| 汇总 | Host 核验 JSON、重复键、步骤/检查项引用、覆盖项与判定一致性，再一次提交带摘要的报告。审阅意见与机器检查分别列出 |
+| 异常收口 | 原取消与全局停止检查贯穿调用和提交；未知调用保留预算占用，未知父任务暂停原队列；重启不重放。已失败角色、有效中间方案与有限无效原文保留供核对 |
+
+仅模型分析和本机报告写入具备执行入口；模型不能添加工具、子 Agent、文件访问、记忆写入或新预算。使用同一模型也可分离上下文，但相关错误可能仍然相同；切换不同供应商也不构成独立事实证明。`ready_for_owner_review` 只代表可交给主人审阅，`needs_revision` 会保留问题；报告交付成功不是业务任务执行成功。
+
+资源上复用原聊天/后台分离：每个协作占一个后台槽，前台仍可聊天；没有新服务、依赖或模型下载。排队时使用既有物理/提交内存准入，等待不消耗模型调用。具体上限、协议及状态只维护于[协作契约](contracts.md#team-analysis-contract)，实际内存不能从逻辑 Agent 数直接推算。长期任务记录仍占磁盘，不承诺无限保存。
+
+[页面使用](interaction-persona.md#team-analysis-ui) · [模块位置](stack-project-layout.md#implemented-layout) · [后续顺序](core-bootstrap.md#near-term-work-queue)。自主蓝图生成、递归分工、并行工具 Agent、自动方案修订、跨节点委派仍为后续设计。
+
+
 <a id="interaction-tasks-5"></a>
 ## 冲突与调度
 
@@ -309,7 +330,7 @@ Agent 是带模型、工具、状态和任务契约的工作者。共享的是�
 <a id="end-to-end-flows-1"></a>
 ### 聊天同时完成任务
 
-**2026-10-18 改造目标 proposed。** 当前已有明确任务入口和独立后台队列，通用意图分流、实时语音与下面的资源隔离尚未实现；现状见[代码核对](architecture.md#dialogue-separation-audit)，实施归入[现有 K2 工作包](core-bootstrap.md#dialogue-upgrade-order)。本图描述目标流程，不能作为已运行的证据。
+**2026-10-18 改造目标 proposed。** 当前已有明确任务入口、独立后台队列、有限连续语音和单机双职责协作；通用意图分流、完整双工语音及下图的全部隔离仍未实现；现状见[代码核对](architecture.md#dialogue-separation-audit)，实施归入[现有 K2 工作包](core-bootstrap.md#dialogue-upgrade-order)。本图描述目标流程，不能作为已运行的证据。
 
 ![parallel-dialogue-task](diagrams/parallel-dialogue-task.png)
 

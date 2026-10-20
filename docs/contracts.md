@@ -80,6 +80,7 @@
   - [8.15.2 已实现的回复回执接口（0.1.48—0.1.49 / dialogue-receipt-v1）](#dialogue-receipt-contract)
     - [8.15.2.1 普通会话的持久回复恢复（0.1.49）](#dialogue-recovery-contract)
     - [8.15.2.2 对话与后台模型进程边界（0.1.54）](#dialogue-process-contract)
+- [8.16 单机双职责协作契约（0.1.82）](#team-analysis-contract)
 <!-- book-nav:end -->
 
 <a id="k0-contracts"></a>
@@ -1411,6 +1412,28 @@ SQLite 写锁等待上限 150ms。受理落盘失败不调用模型；完成落�
 | 正常与异常退出 | 成功结果进入原回执/恢复流程；Host 正常关闭回收活动 Job，Host 异常退出由 Job 关闭回收。进程被终止时供应商用量日志可能停在 RESERVED/DISPATCHING，不能据此认定零费用；不重放该日志 |
 
 不支持此后端或启动失败时，对话模型明确不可用，不静默退回 Host 执行。新请求可以重新创建进程；没有守护进程重启循环、额外队列、消息中间件或新依赖。任务规划/解释取消时先回收子进程，再让任务执行线程退出，避免下一个任务叠加尚未退出的调用。供应商配额、本地 LLM/GPU 和整机资源仍可能被不同通道共同使用，独立进程槽不等于独占推理容量。监控见[进程观察](health-maintenance.md#dialogue-runtime-monitoring)，验证见[0.1.54 证据](delivery-validation.md#conversation-lanes-evidence)。
+
+<a id="team-analysis-contract"></a>
+## 单机双职责协作契约（0.1.82）
+
+能力 `team.analysis.v1` 通过既有 `/api/conversation-tasks/{conversation_id}` 受理，`mode=team`。请求包含 `request_id`、`prompt`、`criteria`、`planner_model`、`reviewer_model`，可含两角色的 `*_reasoning`；会话 ID 由 URL 绑定。模型使用已登记的 `provider::model`，不接受 `auto`、历史、项目路径、权限、预算或子代理字段。调用前重新核对配置摘要；变化则停止，不暗中换模型。
+
+| 契约项 | 首期固定约束 |
+|---|---|
+| 输入 | 要求最多 4,000 字符且不超过 8,000 UTF-8 字节；1—6 条不重复检查要求，每条最多 300 字符 |
+| 调用 | 父任务固定最多 2 次；`planner → reviewer`，各一次；无自动重试/路由回退，固定深度 1 |
+| 输出与时间 | 每次输出上限 min(模型配置, 2,048 tokens)，原文最多 24,000 字节；每次模型等待最多 55 秒；父任务 180 秒检查点期限（不是 OS 硬实时保证） |
+| 输出契约 | 方案包含 summary、steps、assumptions、risks；审阅包含 summary、verdict、findings、criteria。可接受单个完整 JSON 代码围栏，不接受额外说明、重复键或任意工具字段；完整字段校验以 `team_protocol.py` 实现对应本文 |
+| 持久预算 | 原 `control.db` 的 `team_calls(task_id,ordinal,document)` 记录 schema_version、root_task_id、security_epoch、角色、预留量与回执；事务检查父任务可执行、前序有效、唯一序号及总额，先预留再调用 |
+| 子步骤状态 | RESERVED → SUCCEEDED / FAILED / INVALID / UNCERTAIN；父任务已终态但子步骤仍 RESERVED 时只读投影为 UNCERTAIN，不释放或复用调用额度 |
+| 结果 | `jarvis.team-report` 含候选、审阅、逐项要求、调用回执、预算与确定性检查；`semantic_acceptance_verified=false`。审阅意见不是执行许可 |
+| 查询与取消 | 复用会话作用域、原编号查询、产物摘要和取消端点。报告未知不下载为成功结果；同一请求与同一参数返回原任务，不再次派发 |
+| 权限与退回 | 没有模型工具、shell、文件扫描、记忆读取/修改或递归委派；只共享明确文本。程序检测和模型批评不能提升授权；旧模型输出不能解除停止锁存 |
+
+调用次数是本地额度单位，不是货币预算。实际 tokens/费用沿用网关回执；未知费用不能显示为零，令牌上限不能保证不同供应商的实际收费。原资源配置新增 512 MiB 准入估值，沿用前台预留与后台模型进程限制；不代表本地 LLM 服务、GPU、TTS 或整机峰值的硬限制。
+
+附表不会改动原任务/动作的状态权威或 control.db 版本。存在协作任务后，当前受控启动器拒绝回落到不能解释该能力的 0.1.81 及更早版本；不声称手工运行历史源码仍兼容。后续版本需明确扩充兼容名单。中断任务仍沿原 UNKNOWN 核对路径，不自动继续未完成角色。[执行流程](tasks-agents.md#bounded-team-runtime) · [验证](delivery-validation.md#k6-team-evidence)。
+
 
 <!-- book-footer:start -->
 [返回全书目录](README.md#book-tree) · [上一章：主人利益原则、身份授权与停止控制](security-sovereignty.md) · [下一章：技术栈、源码目录与运行数据](stack-project-layout.md)

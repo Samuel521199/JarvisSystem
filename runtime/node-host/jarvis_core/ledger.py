@@ -252,7 +252,7 @@ class Ledger:
     def prepare(self, request_key, arguments, *, capability="filesystem.read_sample.v1", runtime_seconds=policy.MAX_SECONDS, model_requests=0, _on_prepared=None):
         # Internal extension point: model output cannot select a capability or
         # enlarge a budget. Browser tasks enter only through their own validator.
-        if capability not in {"filesystem.read_sample.v1", "browser.operate.v1", "sample.report.v1", "skill.report.v1", "mcp.documentation.v1"}:
+        if capability not in {"filesystem.read_sample.v1", "browser.operate.v1", "sample.report.v1", "skill.report.v1", "mcp.documentation.v1", "team.analysis.v1"}:
             raise CoreError("invalid_capability", "Unsupported task executor")
         if not isinstance(request_key, str) or not 1 <= len(request_key) <= 128:
             raise CoreError("invalid_arguments", "request_id must contain 1 to 128 characters")
@@ -302,6 +302,11 @@ class Ledger:
                             required_capabilities=[capability, 'artifact.write.v1'],
                             budget={'max_cost_units': model_requests, 'max_runtime_seconds': runtime_seconds, 'max_attempts': 1})
                 action.update(capability_id=capability, resource_id='project-skill')
+            elif capability == 'team.analysis.v1':
+                task.update(title='Two-role analysis', authorization_ref='local:team-task:'+arguments_digest[7:],
+                            required_capabilities=[capability, 'artifact.write.v1'],
+                            budget={'max_cost_units': 2, 'max_runtime_seconds': runtime_seconds, 'max_attempts': 1})
+                action.update(capability_id=capability, resource_id='team-analysis', idempotency_support='local_ledger')
             elif capability == 'mcp.documentation.v1':
                 task.update(title='Context7 documentation query', authorization_ref='local:mcp-task:'+arguments_digest[7:],
                             required_capabilities=[capability, 'artifact.write.v1'],

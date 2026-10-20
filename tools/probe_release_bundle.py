@@ -33,6 +33,11 @@ if sys.argv[3]=='first':
     from jarvis_core.evolution.runner import IsolatedRunner
     artifact=build({'tool/__init__.py':'','tool/run.py':'def transform(data):\n    return str(sum(data))\n'},'tool/run.py','sha256:'+'0'*64,'python-package-v1')
     assert IsolatedRunner().run_build(artifact,[[1,2]],lambda:None)[0]==['3']
+    from jarvis_core.team_tasks import TeamTaskService
+    from jarvis_core.team_protocol import validate
+    TeamTaskService(core)
+    assert validate({'prompt':'Package smoke','criteria':['bounded'],
+                     'planner_model':'local::fixture','reviewer_model':'local::fixture'})['criteria']==['bounded']
     core.stop('synthetic release recovery probe')
 else:
     state=core.status();assert state['stopped']

@@ -17,11 +17,12 @@ ROOT = policy.REPOSITORY_ROOT
 class TaskQueue:
     capacity = 20  # Waiting tasks; the one executing task has its own slot.
 
-    def __init__(self, core, executor=None, *, error_type=CoreError, resources=None, sample_executor=None, skill_executor=None, mcp_executor=None, metrics=None):
+    def __init__(self, core, executor=None, *, error_type=CoreError, resources=None, sample_executor=None, skill_executor=None, mcp_executor=None, team_executor=None, metrics=None):
         self.core, self.executor = core, executor
         self.sample_executor = sample_executor
         self.skill_executor = skill_executor
         self.mcp_executor = mcp_executor
+        self.team_executor = team_executor
         self.error_type = error_type
         self.owner = uuid.uuid4().hex
         self.wake, self.closing = threading.Event(), threading.Event()
@@ -228,6 +229,27 @@ class TaskQueue:
         self.wake.set()
         return {'task_id': record['task']['task_id'], 'request_id': request_id}
 
+    def enqueue_team(self, *, request_id, payload):
+        from .team_protocol import CAPABILITY, TIMEOUT_SECONDS
+        if self.team_executor is None:
+            raise CoreError('executor_unavailable', '协作执行器尚未接入。')
+        control = self.core.assert_running()
+        service = self.team_executor()
+        args, binding = service.admit(payload), service.binding()
+        def register(db, record):
+            self._owned(db)
+            if self.core.ledger._admit(db)['security_epoch'] != control['security_epoch']:
+                raise CoreError('stale_authorization', '协作任务受理期间状态代际已变化。')
+            if record['action']['status'] != 'PREPARED': return
+            if db.execute('SELECT 1 FROM computer_queue WHERE task_id=?', (record['task']['task_id'],)).fetchone(): return
+            if len(self._pending(db)) >= self.capacity:
+                raise CoreError('queue_full', '等待队列已满。')
+            db.execute('INSERT INTO computer_queue(task_id,version,demo_digest) VALUES(?,?,?)', (record['task']['task_id'], __version__, binding))
+        record = self.core.ledger.prepare(request_id, args, capability=CAPABILITY, runtime_seconds=TIMEOUT_SECONDS,
+                                          model_requests=2, _on_prepared=register)
+        self.wake.set()
+        return {'task_id': record['task']['task_id'], 'request_id': request_id}
+
     def set_paused(self, paused):
         if type(paused) is not bool:
             raise self.error_type('invalid_request', 'paused 必须是布尔值。')
@@ -248,6 +270,11 @@ class TaskQueue:
     def _validate_binding(self, row):
         if row['version'] != __version__:
             raise self.error_type('queue_version_changed', '队列中有旧版本任务，请核对并取消后按当前版本重新提交。')
+        if row['capability'] == 'team.analysis.v1':
+            from .team_tasks import TeamTaskService
+            if row['demo_digest'] != TeamTaskService.binding():
+                raise CoreError('queue_content_changed', '协作执行器已变化，请核对旧任务。')
+            return None
         if row['capability'] == 'sample.report.v1':
             if row['demo_digest'] != self.sample_digest():
                 raise self.error_type('queue_content_changed', '报告规划/执行器或种子清单已改变，请核对并取消旧任务后重新提交。')
@@ -332,6 +359,9 @@ class TaskQueue:
                     elif row['capability'] == 'skill.report.v1':
                         if self.skill_executor is None: raise CoreError('executor_unavailable', '技能执行器尚未接入。')
                         result = self.skill_executor().run(record['action']['action_id'], _before_dispatch=self._admission)
+                    elif row['capability'] == 'team.analysis.v1':
+                        if self.team_executor is None: raise CoreError('executor_unavailable', '协作执行器尚未接入。')
+                        result = self.team_executor().run(record['action']['action_id'], _before_dispatch=self._admission)
                     elif row['capability'] == 'mcp.documentation.v1':
                         if self.mcp_executor is None: raise CoreError('executor_unavailable', 'MCP 执行器尚未接入。')
                         result = self.mcp_executor().run(record['action']['action_id'], _before_dispatch=self._admission)

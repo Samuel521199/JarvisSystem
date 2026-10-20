@@ -9,6 +9,7 @@
     "browser.operate.v1": 1024,
     "sample.report.v1": 256,
     "skill.report.v1": 1024,
-    "mcp.documentation.v1": 128
+    "mcp.documentation.v1": 128,
+    "team.analysis.v1": 512
   }
 }

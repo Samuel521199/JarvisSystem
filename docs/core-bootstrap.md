@@ -141,7 +141,7 @@
 
 0.1.27 部署记录：2026-10-16 默认端口 18181 更新至 0.1.27，沿用原有 Python 环境和数据目录，保留浏览器依赖。本轮源码刷新核对保留 10 项任务和 1 项会话归档，项目/资料/扩展登记未改动；项目资源与扩展入口验证见[0.1.27 记录](delivery-validation.md#project-resources-evidence)，资料检索历史见[0.1.26 记录](delivery-validation.md#project-knowledge-evidence)，明确事实证据见[0.1.25 记录](delivery-validation.md#explicit-memory-evidence)，归档历史证据见[0.1.24 记录](delivery-validation.md#conversation-archive-evidence)；实际工作台聊天已验证，见[本轮使用测试](delivery-validation.md#readiness-evidence)；托盘和先前版本部署分别见[托盘记录](delivery-validation.md#tray-evidence)、[历史部署](delivery-validation.md#local-deployment-idle-evidence)。这是源码启动，不是运行槽位激活；以后更改源码仍需显式重启后端，普通页面刷新不能替代。服务重启后旧页签 nonce 失效，先检查会话保存状态并保留未发送草稿与附件，再刷新或另开工作台；0.1.23 及更早页面的聊天尚未自动归档。
 
-**日常使用入口：[打开 Jarvis 工作台](http://127.0.0.1:18181/)。** 当前版本 0.1.64，设置 → 成长中心为本轮新增入口。沿用空闲实例正常退出与源码重启，不重放旧任务；本轮变更与部署记录见[成长职责增量](delivery-validation.md#growth-purposes-evidence)。历史部署及 K2 未验条件保留于[K2 收口](delivery-validation.md#k2-completion-evidence)。
+**日常使用入口：[打开 Jarvis 工作台](http://127.0.0.1:18181/)。** 当前版本与本轮入口以[文档首页](README.md#project-status)为准；设置 → 成长中心保留自检、自愈与进化入口。沿用空闲实例正常退出与源码重启，不重放旧任务；本轮变更与部署记录见[成长职责增量](delivery-validation.md#growth-purposes-evidence)。历史部署及 K2 未验条件保留于[K2 收口](delivery-validation.md#k2-completion-evidence)。
 
 当前能否日用、各模型表现和未完成功能，先看[2026-10-16 真实模型与功能测试](delivery-validation.md#readiness-evidence)。可以从云端问答、计划、单份文件生成和限定浏览器任务开始；本地微型模型仅作简单应急应答。源码现在会传入实际能力说明，截断回答不自动保存，规则见[模型上下文与完整性](models-offline.md#runtime-chat-context)。
 
@@ -637,7 +637,7 @@ K1 可以暂时用假模型/规则输入验证可靠性，但它还不能叫完�
 <a id="next-implementation"></a>
 ## 接下来具体做什么、什么时候进入下一步
 
-**截至 2026-10-20，源码与本机部署 0.1.79；验收见[本轮记录](delivery-validation.md#k5-ranking-module-evidence)。K3 已闭环，K4 三个明确任务域闭环保持；K5 首个受限检索模块已通过模型生成、独立评估、实际切换与恢复。** 本机可独立完成的 K2 实现与验证沿用既有结果；完整 K1/K2 的物理低配机、整机断网及主人实际体验仍待原条件。K3 的实际范围、质量对照与局限统一查[K3 收口记录](delivery-validation.md#k3-closure-matrix)，当前推进 K6 按需语音扩展；已有工具成长规则见[限定成长](evolution-release.md#bounded-growth-policy)。
+**截至 2026-10-20，当前版本见[首页](README.md#project-status)；K5 0.1.79 验收见[历史记录](delivery-validation.md#k5-ranking-module-evidence)。K3 已闭环，K4 三个明确任务域闭环保持；K5 首个受限检索模块已通过模型生成、独立评估、实际切换与恢复。** 本机可独立完成的 K2 实现与验证沿用既有结果；完整 K1/K2 的物理低配机、整机断网及主人实际体验仍待原条件。K3 的实际范围、质量对照与局限统一查[K3 收口记录](delivery-validation.md#k3-closure-matrix)，当前推进 K6 语音、单机协作和后续双节点扩展；已有工具成长规则见[限定成长](evolution-release.md#bounded-growth-policy)。
 
 本节是**当前工作顺序的唯一权威位置**。下面细分既有 K 工作包；后续指南的 F 编号只是工作项索引，不建立第二套 K/M 路线。日期较早的进度段落保留为历史，不再充当下一步队列。继续复用现有单机底座，K1 可靠性收口与 K2 个人核心增量按依赖推进。
 
@@ -658,14 +658,14 @@ K1 可以暂时用假模型/规则输入验证可靠性，但它还不能叫完�
 | 输入适配：K2/W3 | [F05 按键录音、本地转写、编辑发送和独立播报](development-guide.md#direction-voice) | 复用已稳定的文字受理；不等待完整记忆框架/所有工具建成。接口及真实设备测试可独立准备；连续语音和自动动作另过门，遵守下节③④ |
 | K3 已闭环，转入 K4 | [F07 编码协作](delivery-validation.md#k3-closure-matrix)的候选、独立检查、多文件/包、新文件、离线构建与 Codex 通路已验收 | 保留支持配方边界；后续多语言工具链按各自出口扩展，不重复开放已完成的 K3 清单 |
 | 已完成限定 K4：工具成长 | 已实现[项目工具发布/复用/回退](evolution-release.md#project-tool-runtime)和[有界需求选用/缺口交接](evolution-release.md#project-tool-intents)；[检查记录](delivery-validation.md#k4-tool-intent-evidence) | 已补[契约草案/明确审阅与候选链](evolution-release.md#project-tool-contract-drafts)，0.1.75 增加[受控准入、灰度收益与退役](evolution-release.md#project-tool-lifecycle)；[证据](delivery-validation.md#k4-lifecycle-evidence)。0.1.76 增加[结构体检与无引用旧版归档](evolution-release.md#project-tool-quality-storage)；[三任务对照与检查](delivery-validation.md#k4-quality-storage-evidence)。0.1.77 新增[回执与目录容量整理](evolution-release.md#growth-ledger-maintenance)。0.1.78 补齐三个领域的[按策略连续成长](evolution-release.md#bounded-growth-policy)，[C01—05 对应证据](delivery-validation.md#k4-growth-closure-evidence)已收口；不承诺域外语义、无限存储或长期表现 |
-| 当前 K6 语音增量，K5 持续维护 | K5 首个受限模块已闭环；0.1.81 接入连续轮次、本地 VAD/STT、播报与受限插话。后续补真实声学与交谈质量，推进单机 Agent 和双节点能力 | 逐项见[工作清单](development-guide.md#direction-work)，按[唯一 K 阶段表](#bootstrap-5)及原出口。没有需求或前置证据时保持 proposed，不预装全部组件 |
+| 当前 K6 语音/协作增量，K5 持续维护 | K5 首个受限模块已闭环；0.1.81 接入连续轮次、本地 VAD/STT、播报与受限插话。0.1.82 已补单机双职责协作；后续补真实声学与交谈质量，推进双节点能力 | 逐项见[工作清单](development-guide.md#direction-work)，按[唯一 K 阶段表](#bootstrap-5)及原出口。没有需求或前置证据时保持 proposed，不预装全部组件 |
 
 顺序表达依赖和产品重点，不是日历承诺。单个增量的范围、产物和冻结判据应在编码前明确；如果前置能力已满足可直接复用，不重新开发，也不为了“下一版”强行跳过未解决失败。当前下一项以下节为准，旧版本演示场景保留其原证据，不再充当待办。
 
 <a id="k4-next-delivery"></a>
 #### K4/K5 已有闭环与 K6 当前工作（2026-10-20）
 
-**0.1.78 已完成下表①—⑤的三个明确领域闭环，0.1.79 已完成 K5 首个受限模块；当前进入 K6 语音工作包。** [收口证据](delivery-validation.md#k4-growth-closure-evidence)保留范围、费用负例与历史失败；下表是已完成 K4 的交付映射，不能再作为五项待办。 0.1.77 沿用原 SQLite/本地文件，终态回执归档后原编号仍可查询，退役目录收存可释放在线名额，恢复仍退役；[实现与限制](evolution-release.md#growth-ledger-maintenance)、[验证与部署](delivery-validation.md#k4-maintenance-evidence)分别记录。总索引、归档和整理审计仍有配额，不承诺无限成长；②—⑤现已实现并通过限定范围验证，通用业务语义与长期净收益仍未获证明。
+**0.1.78 已完成下表①—⑤的三个明确领域闭环，0.1.79 已完成 K5 首个受限模块；当前推进 K6 语音与单机协作工作包。** [收口证据](delivery-validation.md#k4-growth-closure-evidence)保留范围、费用负例与历史失败；下表是已完成 K4 的交付映射，不能再作为五项待办。 0.1.77 沿用原 SQLite/本地文件，终态回执归档后原编号仍可查询，退役目录收存可释放在线名额，恢复仍退役；[实现与限制](evolution-release.md#growth-ledger-maintenance)、[验证与部署](delivery-validation.md#k4-maintenance-evidence)分别记录。总索引、归档和整理审计仍有配额，不承诺无限成长；②—⑤现已实现并通过限定范围验证，通用业务语义与长期净收益仍未获证明。
 
 | K4 内部顺序 | 交付目标与模块边界 | 对应收口检查 |
 |---|---|---|
@@ -679,7 +679,7 @@ K1 可以暂时用假模型/规则输入验证可靠性，但它还不能叫完�
 
 ②③ 的案例应服务个人助手的实际用途，例如资料清单整理、笔记格式转换与重复报告；不能只用植入缺陷的旧实现制造正收益。优先复用本机 SQLite、按需 Worker 和模型路由，新增评估与整理通过适配器接入，不引入重型集群或多套常驻数据库。
 
-**阶段出口保持原定义：**按[收口差距与判定](delivery-validation.md#k4-closure-readiness)逐项补证；仅有人审阅的流程可用，不足以关闭原 K4 的自动成长目标。可以对明确任务域给出有限范围结论，无需承诺“任意业务标准都能自主判对”。本轮 K4 证据成立，K5 已选择实际检索排序模块并完成[接口与失败回退](knowledge-learning.md#retrieval-ranking-module)。0.1.79 已完成[首个受限模块闭环](delivery-validation.md#k5-ranking-module-evidence)，不能再把模型候选、持久选择和重启回退列为未实现。K5 持续维护包括：①实际使用观察与人工反馈，②候选配额下的显式整理/恢复，③更广泛语义回归及其他模块独立验收；这些不是所有 K6 工作的前置阻塞。没有自然使用证据时不声称长期收益；不自动创建后台监控。按主人本轮要求，K6 先交付[按键语音交流](interaction-persona.md#voice-chat-plan)：录音、本地识别、可编辑转写与原会话发送、新回复播报、取消/恢复和资源验证。0.1.81 已交付[连续轮次与受限插话](delivery-validation.md#k6-continuous-voice-evidence)。下一项可独立开发的是单机两职责 Agent 的分工、预算与汇总，真实声学与交谈质量另按证据补验；之后推进双节点离线自治/同步，再按需扩展设备与形态；不同时预装全部框架。个人记忆、伙伴连续性和前台可用性始终是回归约束。原 K1/K2 外部条件保留，不在此安排重复验收。
+**阶段出口保持原定义：**按[收口差距与判定](delivery-validation.md#k4-closure-readiness)逐项补证；仅有人审阅的流程可用，不足以关闭原 K4 的自动成长目标。可以对明确任务域给出有限范围结论，无需承诺“任意业务标准都能自主判对”。本轮 K4 证据成立，K5 已选择实际检索排序模块并完成[接口与失败回退](knowledge-learning.md#retrieval-ranking-module)。0.1.79 已完成[首个受限模块闭环](delivery-validation.md#k5-ranking-module-evidence)，不能再把模型候选、持久选择和重启回退列为未实现。K5 持续维护包括：①实际使用观察与人工反馈，②候选配额下的显式整理/恢复，③更广泛语义回归及其他模块独立验收；这些不是所有 K6 工作的前置阻塞。没有自然使用证据时不声称长期收益；不自动创建后台监控。按主人本轮要求，K6 先交付[按键语音交流](interaction-persona.md#voice-chat-plan)：录音、本地识别、可编辑转写与原会话发送、新回复播报、取消/恢复和资源验证。0.1.81 已交付[连续轮次与受限插话](delivery-validation.md#k6-continuous-voice-evidence)。0.1.82 已交付[单机两职责协作](tasks-agents.md#bounded-team-runtime)，包括独立调用、检查项、预算、取消和汇总；[证据与限制](delivery-validation.md#k6-team-evidence)单列。下一项推进双节点离线自治/同步的受限基础：设备身份、配对、明确资料范围、版本/删除对账及断网重连，先同机双实例故障验证，再第二台设备实测；不直接同步全部个人记忆或取得远端执行权。真实声学与交谈质量另按证据补验；再按需扩展设备与形态；不同时预装全部框架。个人记忆、伙伴连续性和前台可用性始终是回归约束。原 K1/K2 外部条件保留，不在此安排重复验收。
 
 <a id="dialogue-upgrade-order"></a>
 ### K2 内优先完成文字/语音对话与工作的分离

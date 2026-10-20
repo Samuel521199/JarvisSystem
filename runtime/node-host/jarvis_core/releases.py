@@ -23,10 +23,10 @@ from .worker_recovery import locked
 SPEC = importlib.util.spec_from_file_location('jarvis_release_bundle', policy.REPOSITORY_ROOT/'tools/release_bundle.py')
 bundle = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(bundle)
-START_DATA_VERSIONS = frozenset({'0.1.13','0.1.14','0.1.15','0.1.16','0.1.17','0.1.18','0.1.19','0.1.20','0.1.21','0.1.22','0.1.62','0.1.63','0.1.64','0.1.65','0.1.66','0.1.67','0.1.68', '0.1.69','0.1.70','0.1.71','0.1.72','0.1.73','0.1.74','0.1.75','0.1.76','0.1.77','0.1.78','0.1.79','0.1.80','0.1.81'})
+START_DATA_VERSIONS = frozenset({'0.1.13','0.1.14','0.1.15','0.1.16','0.1.17','0.1.18','0.1.19','0.1.20','0.1.21','0.1.22','0.1.62','0.1.63','0.1.64','0.1.65','0.1.66','0.1.67','0.1.68', '0.1.69','0.1.70','0.1.71','0.1.72','0.1.73','0.1.74','0.1.75','0.1.76','0.1.77','0.1.78','0.1.79','0.1.80','0.1.81','0.1.82'})
 # Explicitly measured families, never a >= version guess. A newer personal store
 # must not be handed to a historical core-only fallback that ignores its state.
-PERSONAL_DATA_VERSIONS = frozenset({'0.1.62','0.1.63','0.1.64','0.1.65','0.1.66','0.1.67','0.1.68', '0.1.69','0.1.70','0.1.71','0.1.72','0.1.73','0.1.74','0.1.75','0.1.76','0.1.77','0.1.78','0.1.79','0.1.80','0.1.81'})
+PERSONAL_DATA_VERSIONS = frozenset({'0.1.62','0.1.63','0.1.64','0.1.65','0.1.66','0.1.67','0.1.68', '0.1.69','0.1.70','0.1.71','0.1.72','0.1.73','0.1.74','0.1.75','0.1.76','0.1.77','0.1.78','0.1.79','0.1.80','0.1.81','0.1.82'})
 OPTIONAL_DATA_SCHEMAS = {'conversations.db':(0,), 'memory.db':(1,2,3), 'persona.db':(1,),
     'continuity.db':(1,), 'workspace.db':(1,), 'project-catalog.db':(1,),
     'project-sources.db':(1,), 'extensions.db':(1,), 'evolution/evolution.db':(1,2,3,4,5,6,7,8), 'network-policy.db':(1,), 'coding-settings.db':(1,)}
@@ -265,6 +265,8 @@ class RuntimeSlots:
                         raise ValueError('Business configuration is missing or corrupt')
                     config = json.loads(row[0]);policy.validate_config(config,data)
                     result['node_id'] = config['node_id']
+                    result['team_tasks_present'] = bool(db.execute(
+                        "SELECT 1 FROM actions WHERE json_extract(document,'$.capability_id')='team.analysis.v1' LIMIT 1").fetchone())
                 else:
                     row = db.execute('SELECT node_id,epoch,stopped FROM state WHERE id=1').fetchone()
                     if row is None or row[0] != result['node_id'] or row[1] < 1 or row[2] not in (0,1):
@@ -288,23 +290,25 @@ class RuntimeSlots:
 
     @staticmethod
     def _compatible(version, data_format):
-        if data_format['optional_versions'].get('evolution/evolution.db') == 8 and version not in {'0.1.79','0.1.80','0.1.81'}:
+        if data_format.get('team_tasks_present') and version not in {'0.1.82'}:
+            return False  # Older task projections cannot interpret team arguments.
+        if data_format['optional_versions'].get('evolution/evolution.db') == 8 and version not in {'0.1.79','0.1.80','0.1.81','0.1.82'}:
             return False  # Persistent ranking selection needs schema 8 recovery.
-        if data_format['optional_versions'].get('evolution/evolution.db') == 7 and version not in {'0.1.78','0.1.79','0.1.80','0.1.81'}:
+        if data_format['optional_versions'].get('evolution/evolution.db') == 7 and version not in {'0.1.78','0.1.79','0.1.80','0.1.81','0.1.82'}:
             return False  # Growth grants and interrupted cycles require schema 7 support.
-        if data_format['optional_versions'].get('evolution/evolution.db') == 6 and version not in {'0.1.77','0.1.78','0.1.79','0.1.80','0.1.81'}:
+        if data_format['optional_versions'].get('evolution/evolution.db') == 6 and version not in {'0.1.77','0.1.78','0.1.79','0.1.80','0.1.81','0.1.82'}:
             return False  # Archived receipt projections and stored identities need schema 6 support.
-        if data_format['optional_versions'].get('evolution/evolution.db') == 5 and version not in {'0.1.76','0.1.77','0.1.78','0.1.79','0.1.80','0.1.81'}:
+        if data_format['optional_versions'].get('evolution/evolution.db') == 5 and version not in {'0.1.76','0.1.77','0.1.78','0.1.79','0.1.80','0.1.81','0.1.82'}:
             return False  # Older workers do not understand archived version tombstones.
-        if data_format['optional_versions'].get('evolution/evolution.db') == 4 and version not in {'0.1.75','0.1.76','0.1.77','0.1.78','0.1.79','0.1.80','0.1.81'}:
+        if data_format['optional_versions'].get('evolution/evolution.db') == 4 and version not in {'0.1.75','0.1.76','0.1.77','0.1.78','0.1.79','0.1.80','0.1.81','0.1.82'}:
             return False  # Older workers can bypass staged admission and retirement.
-        if data_format['optional_versions'].get('evolution/evolution.db') == 3 and version not in {'0.1.71','0.1.72','0.1.73','0.1.74','0.1.75','0.1.76','0.1.77','0.1.78','0.1.79','0.1.80','0.1.81'}:
+        if data_format['optional_versions'].get('evolution/evolution.db') == 3 and version not in {'0.1.71','0.1.72','0.1.73','0.1.74','0.1.75','0.1.76','0.1.77','0.1.78','0.1.79','0.1.80','0.1.81','0.1.82'}:
             return False  # Older growth workers cannot reconcile project tool publication.
-        if 'coding-settings.db' in data_format['optional_versions'] and version not in {'0.1.65','0.1.66','0.1.67','0.1.68', '0.1.69','0.1.70','0.1.71','0.1.72','0.1.73','0.1.74','0.1.75','0.1.76','0.1.77','0.1.78','0.1.79','0.1.80','0.1.81'}:
+        if 'coding-settings.db' in data_format['optional_versions'] and version not in {'0.1.65','0.1.66','0.1.67','0.1.68', '0.1.69','0.1.70','0.1.71','0.1.72','0.1.73','0.1.74','0.1.75','0.1.76','0.1.77','0.1.78','0.1.79','0.1.80','0.1.81','0.1.82'}:
             return False  # Older runtimes cannot recover multi-file coding tasks.
-        if data_format['optional_versions'].get('evolution/evolution.db') == 2 and version not in {'0.1.64','0.1.65','0.1.66','0.1.67','0.1.68', '0.1.69','0.1.70','0.1.71','0.1.72','0.1.73','0.1.74','0.1.75','0.1.76','0.1.77','0.1.78','0.1.79','0.1.80','0.1.81'}:
+        if data_format['optional_versions'].get('evolution/evolution.db') == 2 and version not in {'0.1.64','0.1.65','0.1.66','0.1.67','0.1.68', '0.1.69','0.1.70','0.1.71','0.1.72','0.1.73','0.1.74','0.1.75','0.1.76','0.1.77','0.1.78','0.1.79','0.1.80','0.1.81','0.1.82'}:
             return False
-        if 'network-policy.db' in data_format['optional_versions'] and version not in {'0.1.63','0.1.64','0.1.65','0.1.66','0.1.67','0.1.68', '0.1.69','0.1.70','0.1.71','0.1.72','0.1.73','0.1.74','0.1.75','0.1.76','0.1.77','0.1.78','0.1.79','0.1.80','0.1.81'}:
+        if 'network-policy.db' in data_format['optional_versions'] and version not in {'0.1.63','0.1.64','0.1.65','0.1.66','0.1.67','0.1.68', '0.1.69','0.1.70','0.1.71','0.1.72','0.1.73','0.1.74','0.1.75','0.1.76','0.1.77','0.1.78','0.1.79','0.1.80','0.1.81','0.1.82'}:
             return False  # A previous runtime must not silently ignore the saved offline switch.
         return version in START_DATA_VERSIONS and (not data_format['optional_versions'] or version in PERSONAL_DATA_VERSIONS)
 
