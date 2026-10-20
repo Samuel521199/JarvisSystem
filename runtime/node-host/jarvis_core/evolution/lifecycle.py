@@ -86,7 +86,9 @@ class ToolLifecycle:
                 if db.execute('UPDATE tool_versions SET state=?,document=? WHERE id=? AND state=? AND document=?',
                               (target,new_raw,ident,old_state,old_raw)).rowcount!=1:fail('版本存储修订冲突。','evolution_conflict')
             if row is None and not db.execute('SELECT 1 FROM project_tools WHERE project_id=? AND tool_id=?',(base['project_id'],base['tool_id'])).fetchone():
-                if db.execute('SELECT COUNT(*) FROM project_tools').fetchone()[0]>=32: fail('工具目录达到上限。')
+                from .maintenance import directory_count
+                if directory_count(db)>=32: fail('工具目录达到上限。')
+                if db.execute('SELECT COUNT(*) FROM project_tools').fetchone()[0]>=288: fail('目录身份总索引达到 288 项上限。')
                 db.execute('INSERT INTO project_tools VALUES(?,?,?,?,?)',(base['project_id'],base['tool_id'],base['active'],base['previous'],base['generation']))
             if selection is not None:
                 db.execute('UPDATE project_tools SET active=?,previous=?,generation=generation+1 WHERE project_id=? AND tool_id=?',
@@ -108,7 +110,7 @@ class ToolLifecycle:
         value = value or self.state(project, tool)
         if jobs is None:
             with self.store.connection() as db:
-                jobs = [json.loads(r[0]) for r in db.execute("SELECT document FROM jobs WHERE json_extract(document,'$.request.action')='project-tool' AND json_extract(document,'$.request.scope.project_id')=? AND json_extract(document,'$.request.submission.tool_id')=? ORDER BY rowid", (project, tool))]
+                jobs = [self.store.hydrate(r[0]) for r in db.execute("SELECT document FROM jobs WHERE json_extract(document,'$.request.action')='project-tool' AND json_extract(document,'$.request.scope.project_id')=? AND json_extract(document,'$.request.submission.tool_id')=? ORDER BY rowid", (project, tool))]
         trials = [j for j in jobs if j['request']['submission']['operation'] == 'trial' and j['request'].get('lifecycle', {}).get('admission_id') == value.get('admission_id')]
         eligible = {}; paired = []
         for j in sorted(trials,key=lambda j:j['created_at']):

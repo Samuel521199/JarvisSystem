@@ -1,6 +1,6 @@
 # 后续方向指南：现状、缺口与优化工作清单
 
-> 文档 ID：docs-development-guide｜分析基线：v0.1.58；增量更新至 v0.1.70，2026-10-19｜状态：现状为代码/既有证据复核，后续建议 proposed。
+> 文档 ID：docs-development-guide｜分析基线：v0.1.58；增量更新至 v0.1.77，2026-10-20｜状态：现状为代码/既有证据复核，后续建议 proposed。
 > 本章独占维护跨主题缺口清单与优化建议；K0—K6、阶段内推进顺序仍归[核心路线](core-bootstrap.md#next-implementation)，正式通过条件仍归[验收章](delivery-validation.md#next-k1-acceptance)。这里没有第二套开发时间线，也不宣布完整 K1/K2 已通过。
 
 <!-- book-nav:start -->
@@ -79,7 +79,7 @@
 | 记忆与经历 | 局部 verified：明确记忆、按需候选、修订屏障、本地核对；0.1.62 补相关事实选择与话题推荐 | 复杂转述、有效时间、通用语义经历召回、完整受众与跨来源遗忘仍缺 | [F03](#direction-memory-integrity)、[F04](#direction-memory-quality) |
 | 人格与主动性 | implemented/局部 verified：自定义称呼、固定交流风格/关系、持久修订与整组撤销界面 | 自定义复杂表达/多形态、长期情境一致性、可撤回的主动跟进 | [F06](#direction-persona) |
 | 技能与工具 | 局部 verified：11 个可见技能；Context7 有实际调用 | 其他 MCP 多为目录推荐；自动组合仍有限，技能生效条件与收益不均 | [F01](#direction-dialogue)、[F07](#direction-coding) |
-| 编程与成长 | 局部 verified：单文件转换函数、LPAC 测试、应用/回退；已知配方成长 | 0.1.65 已接多文件、独立案例和外部 Codex 子集；任意依赖/工具链、完整事件调度与广泛净收益仍未完成 | [F07](#direction-coding)、[F08](#direction-growth) |
+| 编程与成长 | [K3 已闭环](delivery-validation.md#k3-closure-matrix)；K4 已有受审阅工具发布、灰度/回退、契约体检及退役版本归档 | 完整 K4 未收口：有界回执/目录整理已补；独立领域质量、长期收益及按策略自动准入仍待补；任意工具链与自身模块替换未完成 | [F07](#direction-coding)、[F08](#direction-growth) |
 | 模型与离线 | 局部 verified：多供应商、用量/估算、固定本地小模型及封闭任务 | 跨用途统一策略、质量驱动路由、真实整机断网和组件自更新 | [F09](#direction-offline)、[F10](#direction-routing) |
 | 资源与可靠性 | 局部 verified：准入、进程回收、UNKNOWN、短时与本机长时子集 | 跨通道原子资源预留、CPU/GPU/配额公平、完整设备/磁盘故障矩阵 | [F02](#direction-resources)、[F09](#direction-offline) |
 | 模块管理与版本 | implemented/局部 verified：监控、运行包切换、技能验证失效显示 | 任意有状态模块热换、在途版本兼容、跨库迁移、长期退役 | [F11](#direction-maintenance)、[F12](#direction-architecture) |
@@ -173,9 +173,9 @@
 
 **0.1.65 完成候选、独立案例、多文件源码构建和 Codex 适配；0.1.66 补可运行 PYZ、严格离线重建与损坏源码修复。0.1.67 [阶段验收](delivery-validation.md#k3-acceptance-evidence)修复内置能力声明/诊断问题，0.1.68 已接通[改进单到编码任务的有界交接](delivery-validation.md#coding-demand-evidence)；后续按原阶段扩大受控构建与故障矩阵。** 证据见[K3 编码协作](delivery-validation.md#k3-coding-evidence)，完整使用规则只归[编程工作流](tasks-agents.md#bounded-coding-workflow)。原有单文件 `transform(data) -> str`、LPAC、冻结可见案例、差异、明确应用/恢复已经可用。下一步不应立即开放任意终端和整个仓库写入。
 
-已补独立输入、输入不变/输出契约检查、基线变化与失败产物检查，并完成两模块文件清单汇总。本轮已增加三个真实开发场景与第二种固定构建配方，证据见[构建验收](delivery-validation.md#k3-build-evidence)。0.1.69 已增加[锁定的轻量离线依赖配方](toolchains.md#bounded-python-dependencies)，本轮结果见[依赖验收](delivery-validation.md#coding-dependencies-evidence)。0.1.70 已增加[Python 包、新文件与 JavaScript 场景](toolchains.md#bounded-package-scene-recipes)，已通过[K3 收口清单](delivery-validation.md#k3-closure-matrix)的真实任务、质量对照和故障检查；下一步接 K4 版本化工具准入与发布，冻结路径与交付契约不变。将“生成者写的测试”“宿主冻结测试”“真实需求结果”分别保留；通过三个可见案例不能证明任意输入正确。
+已补独立输入、输入不变/输出契约检查、基线变化与失败产物检查，并完成两模块文件清单汇总。本轮已增加三个真实开发场景与第二种固定构建配方，证据见[构建验收](delivery-validation.md#k3-build-evidence)。0.1.69 已增加[锁定的轻量离线依赖配方](toolchains.md#bounded-python-dependencies)，本轮结果见[依赖验收](delivery-validation.md#coding-dependencies-evidence)。0.1.70 已增加[Python 包、新文件与 JavaScript 场景](toolchains.md#bounded-package-scene-recipes)，已通过[K3 收口清单](delivery-validation.md#k3-closure-matrix)的真实任务、质量对照和故障检查；0.1.71—0.1.76 已接入 K4 受审阅工具发布、灰度和归档子集，当前剩余工作只见[推进队列](core-bootstrap.md#k4-next-delivery)，冻结路径与交付契约不变。将“生成者写的测试”“宿主冻结测试”“真实需求结果”分别保留；通过三个可见案例不能证明任意输入正确。
 
-外部 Codex 已以文本候选方式接到现有 CodingProvider，约束作业而非赋予发布权。先完成一次候选补丁/真实构建/取消恢复/用量归属，再扩大交互或工具范围。无需为支持多语言而预装所有编译器；先保证一个按需工具链可离线重建。
+外部 Codex 已以文本候选方式接到现有 CodingProvider，约束作业而非赋予发布权。候选、真实构建、取消恢复与用量已纳入[K3 收口证据](delivery-validation.md#k3-closure-matrix)；扩大交互或工具范围仍按新增范围独立验收。无需为支持多语言而预装所有编译器；先保证一个按需工具链可离线重建。
 
 **主要落点：**[coding_workflow.py](../runtime/node-host/jarvis_core/coding_workflow.py)、[skill_tasks.py](../runtime/node-host/jarvis_core/skill_tasks.py)、[evolution/provider.py](../runtime/node-host/jarvis_core/evolution/provider.py)、[evolution/runner.py](../runtime/node-host/jarvis_core/evolution/runner.py) 和 [evolution/recipes.py](../runtime/node-host/jarvis_core/evolution/recipes.py)。当前仓库没有已部署的通用 `toolchains/` 实现；未来工具链资产按[唯一源码树](stack-project-layout.md#project-structure)逐项接入。范围规则见[编程工作流](tasks-agents.md#bounded-coding-workflow)、[外部执行器](evolution-release.md#external-coding-executor)，退出按 [B 系列](delivery-validation.md#development-platform-12)、[V-OSS](delivery-validation.md#open-source-adoption-validation)。
 
@@ -188,7 +188,7 @@
 
 本轮已使 Inspect 只产出观察，Heal 消费故障并恢复原契约，Evolve 消费需求并增加能力；三者共享已有账本/候选/验证/发布底座。健康旧版本低于目标版本应是能力差距，余额不足、网络失败、低内存不能自动变成改代码任务。
 
-随后用一个宿主未预先实现完整答案、却能独立验收的真实需求验证收益。例如改善既有检索的一个已定位失败类别：冻结保留集、比较质量/成本、验证原能力不退化、坏候选拒绝和回退。修复通过不应把触发它的原失败任务改写为成功。自检触发与去重按[分层检查](health-maintenance.md#inspection-scheduling)，不另加一套常驻模型心跳。
+K4 继续用宿主未预先实现完整答案、但能独立验收的真实工具需求验证收益，现有[三任务挑战](delivery-validation.md#k4-quality-storage-evidence)不代替正常基线和长期使用证据。若要替换 Jarvis 自身检索实现，则归 K5：冻结同一任务集、比较质量/成本、验证原能力不退化、坏候选拒绝和回退。具体推进只见[当前队列](core-bootstrap.md#k4-next-delivery)。修复通过不应把触发它的原失败任务改写为成功。自检触发与去重按[分层检查](health-maintenance.md#inspection-scheduling)，不另加一套常驻模型心跳。
 
 **主要落点：**[evolution/manager.py](../runtime/node-host/jarvis_core/evolution/manager.py)、[evolution/store.py](../runtime/node-host/jarvis_core/evolution/store.py)、[evolution/recipes.py](../runtime/node-host/jarvis_core/evolution/recipes.py)、[evolution/demand.py](../runtime/node-host/jarvis_core/evolution/demand.py) 及用途路由。准入和退出仍按[三能力治理](evolution-release.md#growth-governance)、[净收益](delivery-validation.md#bootstrap-8)、[V-PAL-10](delivery-validation.md#personal-companion-validation)；任意自身模块改写仍需 K5 证据。
 
@@ -236,7 +236,7 @@
 
 模块“可替换”的最低材料是输入输出契约、版本、状态所有者、资源估计、确定性测试、迁移与回退入口。跨库事务要有可重放对账协议，不强行合并所有 SQLite，也不把一次 Python 调用当成跨库原子提交。
 
-长期增长先补引用分析和只读清理预览：活动包、回退包、在途任务、审计及证据不能按年龄直接删除。evolution-v1 的 64 包/1,000 条重要任务上限可以止住无界增长，但达到阈值会停止新增，尚不是长期退役机制。开发调试文件、已替代文档、可重建缓存、用户材料、恢复材料分别依[退役规则](health-maintenance.md#system-health-7)处理；本次指南不执行清理。
+长期增长需要引用分析和只读整理预览：活动包、回退包、在途任务、审计及证据不能按年龄直接删除。0.1.76 已增加[无引用退役版本归档](evolution-release.md#project-tool-quality-storage)，可释放 64 个在线版本中的名额；0.1.77 增加[回执归档与退役目录收存/恢复](evolution-release.md#growth-ledger-maintenance)，满在线名额仍可显式整理，原编号与恢复材料保留；总索引、归档和整理审计仍有上限。归档不释放整机磁盘，尚不是无限期自动存储治理。后续交付只归[当前队列](core-bootstrap.md#k4-next-delivery)。开发调试文件、已替代文档、可重建缓存、用户材料、恢复材料分别依[退役规则](health-maintenance.md#system-health-7)处理；本次指南不执行清理。
 
 当前仓库未见 `.github` 自动检查配置，可把已有检查入口接成轻量持续集成：无云契约/业务测试、导航/链接、源码依赖方向、配置/版本一致性和暂存资产检查。真实 Windows 隔离、麦克风、模型质量及资源测试单列环境条件，不将跳过项计为通过；默认 CI 不读取个人凭据或自动启动付费评测。发布清单绑定提交、配置、验证器与报告摘要；依赖来源/许可、锁文件及可重建运行包一起核对。CI 接通属于后续实现，本指南没有创建流水线。
 
@@ -292,7 +292,7 @@ NPC 小镇先采用小规模、可暂停的虚拟场景，区分世界事实、�
 | [R05](product-requirements.md#r05)、[R17](product-requirements.md#r17)、[R20](product-requirements.md#r20) | [F03](#direction-memory-integrity)、[F04](#direction-memory-quality)、[F06](#direction-persona) | 基础人格/记忆已实现；长期接续、受众及纠正/遗忘扩展待补 |
 | [R10](product-requirements.md#r10)、[R16](product-requirements.md#r16)、[R22](product-requirements.md#r22)、[R34](product-requirements.md#r34)、[R35](product-requirements.md#r35) | [F09](#direction-offline)、[F10](#direction-routing) | 现有目录/路由和固定离线任务可用；整机离线、独立恢复、质量路由、组件自换和网络自修待补 |
 | [R12](product-requirements.md#r12)、[R18](product-requirements.md#r18) | [F06](#direction-persona)、[F08](#direction-growth) | 待命和限定后台已有；通用目标推进、主动跟进及打扰控制待补 |
-| [R13](product-requirements.md#r13)、[R14](product-requirements.md#r14)、[R15](product-requirements.md#r15)、[R29](product-requirements.md#r29)、[R30](product-requirements.md#r30) | [F07](#direction-coding)、[F08](#direction-growth)、[F11](#direction-maintenance)、[F12](#direction-architecture)、[F13](#direction-learning) | 受限成长与编程已有；真实净收益、多语言/外部编码、自身替换和知识重构待补 |
+| [R13](product-requirements.md#r13)、[R14](product-requirements.md#r14)、[R15](product-requirements.md#r15)、[R29](product-requirements.md#r29)、[R30](product-requirements.md#r30) | [F07](#direction-coding)、[F08](#direction-growth)、[F11](#direction-maintenance)、[F12](#direction-architecture)、[F13](#direction-learning) | K3 多文件/外部编码已闭环，K4 有受审阅成长子集；长期净收益、更多语言工具链、自身替换和知识重构待补 |
 | [R02](product-requirements.md#r02)、[R03](product-requirements.md#r03)、[R06](product-requirements.md#r06) | [F14](#direction-connectors) | 浏览器/静态解析/固定科普有子集；桌面、硬件、通用可编辑创作待补 |
 | [R08](product-requirements.md#r08)、[R24](product-requirements.md#r24) | [F09](#direction-offline)、[F11](#direction-maintenance)、[F15](#direction-federation) | 单机回退有基础；数据迁移、版本协商、双节点自治合并待补 |
 | [R11](product-requirements.md#r11)、[R26](product-requirements.md#r26)、[R27](product-requirements.md#r27) | [F02](#direction-resources)、[F16](#direction-agents) | 动态 Agent 工厂和 NPC 运行系统尚未验证 |

@@ -724,7 +724,7 @@ class ChatHandler(BaseHTTPRequestHandler):
         module_action=self.path in {'/api/modules/refresh','/api/modules/maintenance'}
         speech_action=self.path in {'/api/speech','/api/speech/fast','/api/speech/primary','/api/speech/readout'}
         growth_action=re.fullmatch(r'/api/conversation-growth/([a-f0-9]{32})(?:/([a-f0-9]{32})/(start|cancel|reanalyse))?',self.path)
-        evolution_action=self.path in {'/api/evolution/jobs','/api/evolution/policy','/api/evolution/cancel'}
+        evolution_action=self.path in {'/api/evolution/jobs','/api/evolution/policy','/api/evolution/cancel','/api/evolution/maintenance'}
         chat_cancel = self.path == '/api/chat/cancel'
         dialogue_action = self.path in {'/api/dialogue/turns', '/api/dialogue/cancel'}
         computer_queue=self.path in {'/api/computer/queue','/api/tasks/queue'}

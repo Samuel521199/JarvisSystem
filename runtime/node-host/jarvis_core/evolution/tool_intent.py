@@ -59,6 +59,7 @@ class ToolIntents:
             row=dict(raw);meta=None;issue=None
             from .lifecycle import ToolLifecycle
             life=ToolLifecycle(self.tools).state(scope['project_id'],row['tool_id'])
+            if life['phase']=='STORED':continue
             try:
                 ident=row['active'] or row['previous'] or life.get('candidate') or life.get('retired_version')
                 if ident:meta=self.tools.package(ident,row)[0]['metadata']

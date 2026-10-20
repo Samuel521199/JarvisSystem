@@ -1,6 +1,6 @@
 # 最小核心、初始资产与开发路线
 
-> 状态：整体 proposed；当前源码版本 0.1.76；部署状态见[本轮记录](delivery-validation.md#k4-quality-storage-evidence)；K4 工具与需求增量已验证，见[契约审阅证据](delivery-validation.md#k4-contract-evidence)，K3 开发协作通过，证据见[K3 收口](delivery-validation.md#k3-closure-matrix)，新增[K3 编码协作](delivery-validation.md#k3-coding-evidence)，保留[应用离线控制](models-offline.md#application-offline-control)；范围、验证与阻塞见[K2 本轮收口](delivery-validation.md#k2-completion-evidence)；完整 K1/K2 仍待原验收条件。跨主题差距见[后续方向指南](development-guide.md#direction-start)，实施次序见[当前推进队列](#near-term-work-queue) · 更新：2026-10-20
+> 状态：整体 proposed；当前源码版本 0.1.77；部署状态见[本轮记录](delivery-validation.md#k4-maintenance-evidence)；K4 工具与需求增量已验证，见[契约审阅证据](delivery-validation.md#k4-contract-evidence)，K3 开发协作通过，证据见[K3 收口](delivery-validation.md#k3-closure-matrix)，新增[K3 编码协作](delivery-validation.md#k3-coding-evidence)，保留[应用离线控制](models-offline.md#application-offline-control)；范围、验证与阻塞见[K2 本轮收口](delivery-validation.md#k2-completion-evidence)；完整 K1/K2 仍待原验收条件。跨主题差距见[后续方向指南](development-guide.md#direction-start)，实施次序见[当前推进队列](#near-term-work-queue) · 更新：2026-10-20
 > [文档入口](README.md) · [维护规则](MAINTENANCE.md) · [架构图册](architecture-atlas.md)
 
 <!-- book-nav:start -->
@@ -45,7 +45,8 @@
   - [4.2.6 两个层次：哪些能长大，哪些不能自行放开](#bootstrap-4)
 - [4.3 开发顺序与每一步的出口](#bootstrap-5)
 - [4.4 接下来具体做什么、什么时候进入下一步](#next-implementation)
-  - [4.4.1 当前推进队列（更新至0.1.76）](#near-term-work-queue)
+  - [4.4.1 当前推进队列（更新至0.1.77）](#near-term-work-queue)
+    - [4.4.1.1 K4 剩余工作如何连续推进（2026-10-20 整理）](#k4-next-delivery)
   - [4.4.2 K2 内优先完成文字/语音对话与工作的分离](#dialogue-upgrade-order)
   - [4.4.3 K2 内的最小自主进化核心](#k2-growth-core)
   - [4.4.4 历史进度核对与优先事项（2026-10-16）](#progress-audit-2026-10-16)
@@ -636,12 +637,12 @@ K1 可以暂时用假模型/规则输入验证可靠性，但它还不能叫完�
 <a id="next-implementation"></a>
 ## 接下来具体做什么、什么时候进入下一步
 
-**截至 2026-10-20，源码 0.1.76；部署与验收见[本轮记录](delivery-validation.md#k4-quality-storage-evidence)。K3 已闭环，K4 在受控生命周期上增加契约体检、三任务对照和旧版本归档。** 本机可独立完成的 K2 实现与验证沿用既有结果；完整 K1/K2 的物理低配机、整机断网及主人实际体验仍待原条件。K3 的实际范围、质量对照与局限统一查[K3 收口记录](delivery-validation.md#k3-closure-matrix)，当前进入 K4，首个增量见[项目工具运行](evolution-release.md#project-tool-runtime)。
+**截至 2026-10-20，源码 0.1.77；部署与验收见[本轮记录](delivery-validation.md#k4-maintenance-evidence)。K3 已闭环，K4 新增有界回执归档与退役目录收存/恢复。** 本机可独立完成的 K2 实现与验证沿用既有结果；完整 K1/K2 的物理低配机、整机断网及主人实际体验仍待原条件。K3 的实际范围、质量对照与局限统一查[K3 收口记录](delivery-validation.md#k3-closure-matrix)，当前进入 K4，首个增量见[项目工具运行](evolution-release.md#project-tool-runtime)。
 
 本节是**当前工作顺序的唯一权威位置**。下面细分既有 K 工作包；后续指南的 F 编号只是工作项索引，不建立第二套 K/M 路线。日期较早的进度段落保留为历史，不再充当下一步队列。继续复用现有单机底座，K1 可靠性收口与 K2 个人核心增量按依赖推进。
 
 <a id="near-term-work-queue"></a>
-### 当前推进队列（更新至0.1.76）
+### 当前推进队列（更新至0.1.77）
 
 **2026-10-19 按主人最新要求停止重复验收，恢复向下开发。** 既有 K2 收口与待验条件保留，不降低门槛也不冒称整体验收通过。F08 的限定职责拆分已随 0.1.64 完成；按主人要求先上传该版本，再在 0.1.65 完成 F07 的候选代码、独立检查、多文件任务和外部 Codex 子集。每轮只做受影响的新改动必要检查，不重跑整套 K2、付费回答评审或离线验收。
 
@@ -656,10 +657,29 @@ K1 可以暂时用假模型/规则输入验证可靠性，但它还不能叫完�
 | 已交付 K2 子集，更广泛验证仍开放 | [F04 扩大人物/时序/项目资料/保留历史的多轮回答对照](development-guide.md#direction-memory-quality)，并逐项完善 [F06 人格/接续](development-guide.md#direction-persona) | 来源与修订规则稳定后补检索；不再以30条公开提取同分决定框架胜负，不先换事实库。按 V-MEM/V-PAL 验收 |
 | 输入适配：K2/W3 | [F05 按键录音、本地转写、编辑发送和独立播报](development-guide.md#direction-voice) | 复用已稳定的文字受理；不等待完整记忆框架/所有工具建成。接口及真实设备测试可独立准备；连续语音和自动动作另过门，遵守下节③④ |
 | K3 已闭环，转入 K4 | [F07 编码协作](delivery-validation.md#k3-closure-matrix)的候选、独立检查、多文件/包、新文件、离线构建与 Codex 通路已验收 | 保留支持配方边界；后续多语言工具链按各自出口扩展，不重复开放已完成的 K3 清单 |
-| 当前 K4：工具成长 | 已实现[项目工具发布/复用/回退](evolution-release.md#project-tool-runtime)和[有界需求选用/缺口交接](evolution-release.md#project-tool-intents)；[检查记录](delivery-validation.md#k4-tool-intent-evidence) | 已补[契约草案/明确审阅与候选链](evolution-release.md#project-tool-contract-drafts)，0.1.75 增加[受控准入、灰度收益与退役](evolution-release.md#project-tool-lifecycle)；[证据](delivery-validation.md#k4-lifecycle-evidence)。0.1.76 增加[结构体检与无引用旧版归档](evolution-release.md#project-tool-quality-storage)；[三任务对照与检查](delivery-validation.md#k4-quality-storage-evidence)。接下来补更独立的领域契约质量样本、长期收益/负收益判断、任务回执归档和目录名额治理；当前归档不释放整机磁盘。广泛语义匹配与通用自主验收仍开放，完整 K4 未收口 |
+| 当前 K4：工具成长 | 已实现[项目工具发布/复用/回退](evolution-release.md#project-tool-runtime)和[有界需求选用/缺口交接](evolution-release.md#project-tool-intents)；[检查记录](delivery-validation.md#k4-tool-intent-evidence) | 已补[契约草案/明确审阅与候选链](evolution-release.md#project-tool-contract-drafts)，0.1.75 增加[受控准入、灰度收益与退役](evolution-release.md#project-tool-lifecycle)；[证据](delivery-validation.md#k4-lifecycle-evidence)。0.1.76 增加[结构体检与无引用旧版归档](evolution-release.md#project-tool-quality-storage)；[三任务对照与检查](delivery-validation.md#k4-quality-storage-evidence)。0.1.77 新增[回执与目录容量整理](evolution-release.md#growth-ledger-maintenance)。剩余工作按下方[本轮整理后的顺序](#k4-next-delivery)推进，退出依据见[K4 收口差距](delivery-validation.md#k4-closure-readiness)。当前归档不释放整机磁盘，完整 K4 未收口 |
 | 后续按需求：K5—K6 | 检索/模型替换、联网学习、双节点、Agent/NPC、硬件和形态 | 逐项见[工作清单](development-guide.md#direction-work)，按[唯一 K 阶段表](#bootstrap-5)及原出口。没有需求或前置证据时保持 proposed，不预装全部组件 |
 
-顺序表达依赖和产品重点，不是日历承诺。单个增量的范围、产物和冻结判据应在编码前明确；如果前置能力已满足可直接复用，不重新开发，也不为了“下一版”强行跳过未解决失败。最先推荐的可演示场景为：陪伴回应同时生成一个真实目录报告，随后只取消/修改该报告，刷新和重启不重复执行。
+顺序表达依赖和产品重点，不是日历承诺。单个增量的范围、产物和冻结判据应在编码前明确；如果前置能力已满足可直接复用，不重新开发，也不为了“下一版”强行跳过未解决失败。当前下一项以下节为准，旧版本演示场景保留其原证据，不再充当待办。
+
+<a id="k4-next-delivery"></a>
+#### K4 剩余工作如何连续推进（2026-10-20 整理）
+
+**当前已实现第①项的有界容量整理；下一项推进②独立可判定的真实需求。** 0.1.77 沿用原 SQLite/本地文件，终态回执归档后原编号仍可查询，退役目录收存可释放在线名额，恢复仍退役；[实现与限制](evolution-release.md#growth-ledger-maintenance)、[验证与部署](delivery-validation.md#k4-maintenance-evidence)分别记录。总索引、归档和整理审计仍有配额，不承诺无限成长；②—⑤仍为 **proposed / 待实现与验收**。
+
+| K4 内部顺序 | 交付目标与模块边界 | 对应收口检查 |
+|---|---|---|
+| ① 回执与目录容量治理 | 0.1.77 已实现只读资格预览、终态完整回执校验归档、原 ID/幂等查询及退役目录收存/恢复；满在线回执时维护独立可用。保留恢复版本和在途/未知材料；总存储配额及长期表现见证据限制 | [V-K4-C01](delivery-validation.md#k4-closure-readiness) |
+| ② 独立可判定的真实需求 | 选择不同类型的真实重复工作，在生成代码前固定输入/输出、歧义澄清、来源、正常基线及独立留出；复用原契约草案和 K3 编码通路，补领域验证器。新契约仍明确审阅，不能让生成者自己定义成功 | [V-K4-C02](delivery-validation.md#k4-closure-readiness) |
+| ③ 实际收益与负收益处置 | 在原改进账本记录匹配任务的正确性、干预、耗时、资源、费用与失败；区分主人反馈、客观结果和未知。补观察窗口、样本不足说明、预设阈值下暂停/回退与重新审阅，不新增常驻 LLM 检查 | [V-K4-C03](delivery-validation.md#k4-closure-readiness) |
+| ④ 已授权范围内的自动准入 | 在上面证据成立的明确任务域，补版本化准入策略：允许的契约/验证器、项目作用域、预算、灰度门槛与停止条件。达标可按预先授权策略启用，域外/验收不明继续澄清或审阅；模型输出不能扩大准入范围 | [V-K4-C04](delivery-validation.md#k4-closure-readiness) |
+| ⑤ 一次完整闭环验收 | 普通聊天提出需求 → 复用或发现缺口 → 独立验收 → 编码候选 → 灰度 → 使用与收益 → 坏版本拒绝/回退 → 旧材料整理；同时聊天、刷新、重启与取消不乱。汇总本阶段所有已有证据和剩余条件 | [V-K4-C05](delivery-validation.md#k4-closure-readiness) |
+
+① 的实现入口是**只读预览**，同一工作包已接通受控整理与恢复；不能把只有一个预览按钮记为容量治理完成。归档必须保留原任务身份、幂等查询和恢复引用，未知/在途任务不得按终态处理；满额时仍须保留查询、停止与维护的可用路径。在线索引、归档材料和磁盘分别设有界预算，达到总配额明确提示维护，不承诺无限保存或靠自动删除主人资料腾空间。详细状态/API 维护于原[成长契约](contracts.md#project-tool-contract)，不在路线页另定义协议。
+
+②③ 的案例应服务个人助手的实际用途，例如资料清单整理、笔记格式转换与重复报告；不能只用植入缺陷的旧实现制造正收益。优先复用本机 SQLite、按需 Worker 和模型路由，新增评估与整理通过适配器接入，不引入重型集群或多套常驻数据库。
+
+**K4 何时结束：**按[收口差距与判定](delivery-validation.md#k4-closure-readiness)逐项补证；仅有人审阅的流程可用，不足以关闭原 K4 的自动成长目标。可以对明确任务域给出有限范围结论，无需承诺“任意业务标准都能自主判对”。K4 证据成立后，K5 才选择一个真实检索或规划模块做自身替换、迁移、同集比较与回退；K6 再按需求扩展设备、共同体与 Agent。个人记忆、伙伴连续性和前台可用性始终是回归约束。原 K1/K2 外部条件保留，不在此安排重复验收。
 
 <a id="dialogue-upgrade-order"></a>
 ### K2 内优先完成文字/语音对话与工作的分离

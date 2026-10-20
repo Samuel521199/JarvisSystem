@@ -1203,6 +1203,20 @@ security_stop_event:
 
 归档边界：单份 4 MiB、归档区最多 256 份/64 MiB，包含遗留文件；文件名固定内容 ID＋`.json`，schema 1 包含 `schema/version/document`。在线名额仍 64，载回满额拒绝。普通任务按可复用页扣除后的逻辑用量保留 2 MiB 以上恢复估算，28 MiB 准入阈值不变；仅归档动作使用 256 KiB 维护预留与 30 MiB 阈值，物理账本 32 MiB 及 1,000 条回执上限不变。没有任意删除/上传/下载路径接口。完整恢复语义归[存储权威节](evolution-release.md#project-tool-quality-storage)。
 
+0.1.77 增加独立于任务受理配额的本机整理接口；完整引用、归档、失败与恢复语义只归[容量治理](evolution-release.md#growth-ledger-maintenance)：
+
+| 接口/字段 | 契约 |
+|---|---|
+| `GET /api/evolution/maintenance` | 受原 nonce/Origin/运行状态保护；返回 `jobs` 的资格/原因/原文摘要 `binding`、`directories` 的作用域/状态/代际/摘要、`capacity`、独立 `archive` 占用、最近 20 条 `recent_maintenance` 和 `model_calls:0`。不写归档，不列入定时轮询 |
+| `POST /api/evolution/maintenance` | 仅接受 `{request_id,operation,targets,reviewed:true,review_note}`；32 位小写十六进制请求 ID，审阅说明 5—1000 字符；动作仅 `archive-receipts/store-directory/restore-directory`，不接受路径、代码、上传材料或任意删除动作 |
+| `archive-receipts` | `targets` 为 1—20 个不同的 `{id,binding}`；目标必须仍是预览对应原文且满足资格。结果包含原整理 ID、目标、时间、`online_slots_released/model_calls/user_files_deleted/disk_space_freed_claimed`；后三项分别固定为 0、0、false |
+| `store-directory/restore-directory` | `targets` 恰好一个 `{project_id,tool_id,binding}`；再次核对当前生命周期与选择。收存为 `STORED`，恢复为 `RETIRED`，代际递增且不启用工具。同名新任务不能绕过原身份 |
+| 配额 | 在线回执最多 1,000 条，含归档投影的总索引最多 5,096 条；在线目录 32 个、含收存的身份总索引 288 个。归档最多 4,096 份/128 MiB，单份 4 MiB，完整及部分孤立文件均计入预算；整理审计最多 256 条。总预算用完拒绝新增，不自行回收审计 |
+| 存储与余量 | 文件位于核心数据 `evolution/receipt-archives/{sha256}.json`，schema 1 为 `{schema,job}`；投影内 `receipt_archive` 保存摘要/字节数。整理不占成长任务名额；账本逻辑已用量加 64 KiB 大于 31 MiB 时拒绝变更，原 32 MiB 文件限制保持。恢复目录仍检查在线名额 |
+| 幂等与错误 | 同整理 ID 同内容返回原结果，不同内容冲突；摘要/资格过期重新预览，响应未知先核对最近审计。原任务详情及重复提交通过归档完整材料核对；缺失/损坏拒绝，绝不变成重跑许可。旧程序须拒绝 schema 6 |
+
+0.1.76 的 1,000 条回执上限在此区分为在线记录与总索引，版本归档的原 256 份/64 MiB 配额保持。目录收存保留原恢复引用，不回收版本名额；整理不运行 VACUUM，也不自动清空任何物理材料。
+
 0.1.72 在相同路由域新增需求适配接口，判定规则见[需求选择](evolution-release.md#project-tool-intents)：
 
 | 接口 | 契约 |

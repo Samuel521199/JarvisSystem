@@ -15,6 +15,7 @@ function admission(parent,notify){
 }
 function render(item,parent,{send,input,expected,verify,getDraft,setDraft,notify}){
  const life=item.lifecycle||{revision:0,phase:'LEGACY'},a=item.assessment||{},box=el('section');box.className='tool-lifecycle';box.dataset.phase=life.phase;
+ if(life.phase==='STORED'){box.append(el('h4','目录已收存'),el('p','原身份与恢复版本保留。到设置 → 成长中心 → 成长账本与容量整理恢复目录后，仍需按退役能力重新准入。'));parent.append(box);return;}
  box.append(el('h4',labels[life.phase]||life.phase),el('p','本轮独立新输入 '+(a.verified_novel_inputs||0)+' / '+(a.limits?.minimum_verified||2)+' · 有用途反馈 '+(a.useful_inputs||0)+' · 试用 '+(a.trials||0)+' / '+(a.limits?.maximum_trials||10)));
  if(life.reason)box.append(el('p','状态依据：'+life.reason));
  if(life.contract_quality){const q=life.contract_quality,review=el('details');review.className='tool-contract-quality';review.append(el('summary','契约体检 · 结构'+(q.structurally_consistent?'一致':'待修正')+'，业务正确性仍需审阅'),el('p','公开 '+q.public_cases+' / 独立留出 '+q.heldout_cases+' / 不同输入 '+q.distinct_inputs));for(const s of [...q.blockers,...q.review_questions])review.append(el('p',s));review.append(el('pre',JSON.stringify(q,null,2)));box.append(review);}

@@ -50,7 +50,7 @@ class EvolutionStore:
         self.path = self.root / 'evolution.db'
         with self.connection() as db:
             version = db.execute('PRAGMA user_version').fetchone()[0]
-            if version not in (0, 1, 2, 3, 4, 5):
+            if version not in (0, 1, 2, 3, 4, 5, 6):
                 raise policy.CoreError('evolution_schema_invalid', '进化账本版本不兼容。')
             db.executescript('''
                 CREATE TABLE IF NOT EXISTS settings(singleton INTEGER PRIMARY KEY,document TEXT NOT NULL);
@@ -61,13 +61,14 @@ class EvolutionStore:
                 CREATE TABLE IF NOT EXISTS project_tools(project_id TEXT NOT NULL,tool_id TEXT NOT NULL,active TEXT,previous TEXT,generation INTEGER NOT NULL,PRIMARY KEY(project_id,tool_id));
                 CREATE TABLE IF NOT EXISTS tool_versions(id TEXT PRIMARY KEY,state TEXT NOT NULL,document TEXT NOT NULL);
                 CREATE TABLE IF NOT EXISTS tool_lifecycle(project_id TEXT NOT NULL,tool_id TEXT NOT NULL,document TEXT NOT NULL,PRIMARY KEY(project_id,tool_id));
+                CREATE TABLE IF NOT EXISTS maintenance_receipts(id TEXT PRIMARY KEY,binding TEXT NOT NULL,document TEXT NOT NULL);
             ''')
             db.execute('INSERT OR IGNORE INTO settings VALUES(1,?)', (policy.canonical_json(
                 {'enabled': False, 'route': route, 'target_revision': 1, 'interval_seconds': 1800}),))
             db.execute('INSERT OR IGNORE INTO selection VALUES(1,NULL,NULL,0)')
             settings = migrate(json.loads(db.execute('SELECT document FROM settings WHERE singleton=1').fetchone()[0]))
             db.execute('UPDATE settings SET document=? WHERE singleton=1', (policy.canonical_json(settings),))
-            db.execute('PRAGMA user_version=5')
+            db.execute('PRAGMA user_version=6')
 
     @contextmanager
     def connection(self):
@@ -104,21 +105,27 @@ class EvolutionStore:
         with self.connection() as db:
             row = db.execute('SELECT document FROM jobs WHERE id=?', (ident,)).fetchone()
             if row is None: raise policy.CoreError('not_found', '改进任务不存在。')
-            return json.loads(row[0])
+            return self.hydrate(row[0])
+
+    def hydrate(self, raw):
+        from .maintenance import LedgerMaintenance
+        return LedgerMaintenance.read(self, json.loads(raw))
 
     def create_job(self, payload, *, proposal=None):
         with self.core.effect_guard(), self.connection() as db:
             db.execute('BEGIN IMMEDIATE')
             existing = db.execute('SELECT document FROM jobs WHERE request_id=?', (payload['request_id'],)).fetchone()
             if existing:
-                value = json.loads(existing[0])
+                value = self.hydrate(existing[0])
                 if value['request'] != payload:
                     raise policy.CoreError('evolution_conflict', '同一请求编号对应了不同内容。')
                 return value, False
             if proposal is None and db.execute("SELECT 1 FROM jobs WHERE status IN ('QUEUED','RUNNING','OBSERVING')").fetchone():
                 raise policy.CoreError('evolution_busy', '已有一个改进或工具任务正在处理。')
-            if db.execute('SELECT COUNT(*) FROM jobs').fetchone()[0] >= 1000:
+            if db.execute("SELECT COUNT(*) FROM jobs WHERE json_extract(document,'$.receipt_archive') IS NULL").fetchone()[0] >= 1000:
                 raise policy.CoreError('evolution_quota', '改进账本达到保留上限，请整理证据后再继续。')
+            if db.execute('SELECT COUNT(*) FROM jobs').fetchone()[0] >= 5096:
+                raise policy.CoreError('evolution_quota', '回执总索引达到上限，原任务编号继续保留。')
             if payload.get('action') in {'project-tool','project-tool-plan','tool-contract'}:
                 # Leave room for the immutable package, escaped output, recovery
                 # receipt and SQLite page growth; never fill the 32 MiB ledger.
@@ -153,6 +160,9 @@ class EvolutionStore:
 
     @staticmethod
     def write_job(db, value):
+        row = db.execute("SELECT json_extract(document,'$.receipt_archive') FROM jobs WHERE id=?", (value['id'],)).fetchone()
+        if row and row[0] is not None:
+            raise policy.CoreError('evolution_conflict', '已归档的终态回执不可改写或重新执行。')
         value['updated_at'] = now()
         db.execute('UPDATE jobs SET status=?,document=? WHERE id=?',
                    (value['status'], policy.canonical_json(value), value['id']))
@@ -290,7 +300,7 @@ class EvolutionStore:
     def existing_job(self, request_id):
         with self.connection() as db:
             row = db.execute('SELECT document FROM jobs WHERE request_id=?', (request_id,)).fetchone()
-            return json.loads(row[0]) if row else None
+            return self.hydrate(row[0]) if row else None
 
     def reserve_incident(self, ident):
         with self.connection() as db:
@@ -305,7 +315,7 @@ class EvolutionStore:
         # Only redundant successful, read-only automatic checks. Never remove
         # changes, model calls, user jobs, failure/UNKNOWN or recovery evidence.
         with self.core.effect_guard(), self.connection() as db:
-            rows = db.execute("SELECT id,document FROM jobs WHERE request_id LIKE 'auto-%' AND status='SUCCEEDED' ORDER BY rowid DESC").fetchall()
+            rows = db.execute("SELECT id,document FROM jobs WHERE request_id LIKE 'auto-%' AND status='SUCCEEDED' AND json_extract(document,'$.receipt_archive') IS NULL ORDER BY rowid DESC").fetchall()
             healthy = []
             for row in rows:
                 value = json.loads(row['document'])

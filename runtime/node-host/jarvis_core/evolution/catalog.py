@@ -48,7 +48,7 @@ def merge_cases(old, new):
 
 def runtime_binding():
     from ..skill_tasks import SkillTaskService
-    paths=('catalog','manager','store','runner','tool_intent','tool_contract','provider','demand','lifecycle','quality','tool_archive')
+    paths=('catalog','manager','store','runner','tool_intent','tool_contract','provider','demand','lifecycle','quality','tool_archive','maintenance')
     return policy.digest(policy.canonical_json({'coding':SkillTaskService.binding(),
         'tools':{p:policy.digest((policy.REPOSITORY_ROOT/'runtime/node-host/jarvis_core/evolution'/f'{p}.py').read_bytes()) for p in paths}}).encode())
 
@@ -91,7 +91,7 @@ class ProjectTools:
         scope=self.scope(cid);tools=[]
         with self.store.connection() as db:
             rows=db.execute('SELECT * FROM project_tools WHERE project_id=? ORDER BY tool_id',(scope['project_id'],)).fetchall()
-            jobs=[json.loads(r[0]) for r in db.execute("SELECT document FROM jobs WHERE json_extract(document,'$.request.action')='project-tool' AND json_extract(document,'$.request.scope.project_id')=? ORDER BY rowid DESC LIMIT 1000",(scope['project_id'],))]
+            jobs=[self.store.hydrate(r[0]) for r in db.execute("SELECT document FROM jobs WHERE json_extract(document,'$.request.action')='project-tool' AND json_extract(document,'$.request.scope.project_id')=? ORDER BY rowid DESC LIMIT 5096",(scope['project_id'],))]
         for raw in rows:
             row=dict(raw);meta=None;issue=None
             from .lifecycle import ToolLifecycle
@@ -138,6 +138,7 @@ class ProjectTools:
         base=self.selected(scope['project_id'],payload['tool_id'])
         if base['generation']!=payload['generation']:fail('工具版本已变化，请刷新后重试。','evolution_conflict')
         life=lifecycle.state(scope['project_id'],payload['tool_id'])
+        if life['phase']=='STORED':fail('工具目录身份已收存，请先明确恢复目录；旧请求只查询原回执。')
         if op in OPERATIONS and life['revision']!=payload['lifecycle_revision']:fail('灰度或退役状态已变化，请刷新。','evolution_conflict')
         if life['phase']=='RETIRED' and op not in {'restore','retire-version','archive-version','load-version'}:fail('此能力已经退役；重新准入后才可使用。')
         if op=='rollback' and life['phase'] in {'CANARY','PAUSED'} and base['previous']==life.get('candidate'):
@@ -165,7 +166,7 @@ class ProjectTools:
             prior=self.package(base['active'],base)[0]['cases'] if base['active'] else self.package(base['previous'],base)[0]['cases'] if base['previous'] else []
             retained=base['active'] or base['previous']
             with self.store.connection() as db:
-                history=[json.loads(r[0]) for r in db.execute("SELECT document FROM jobs WHERE status='SUCCEEDED' AND json_extract(document,'$.request.action')='project-tool' AND json_extract(document,'$.request.scope.project_id')=? AND json_extract(document,'$.request.submission.tool_id')=?",(scope['project_id'],payload['tool_id']))]
+                history=[self.store.hydrate(r[0]) for r in db.execute("SELECT document FROM jobs WHERE status='SUCCEEDED' AND json_extract(document,'$.request.action')='project-tool' AND json_extract(document,'$.request.scope.project_id')=? AND json_extract(document,'$.request.submission.tool_id')=?",(scope['project_id'],payload['tool_id']))]
             for old in history:
                 p=old['request']['submission'];result=old.get('result') or {}
                 if p.get('operation') in {'run','trial'} and 'expected' in p and result.get('result_verified') and result.get('text')==p['expected'] and (result.get('version') or result.get('trial',{}).get('version'))==retained:
@@ -201,7 +202,9 @@ class ProjectTools:
             row=db.execute('SELECT * FROM project_tools WHERE project_id=? AND tool_id=?',(base['project_id'],base['tool_id'])).fetchone()
             current=dict(row) if row else {**base,'generation':0,'active':None,'previous':None}
             if current!=base:fail('活动工具已变化，未覆盖其他版本。','evolution_conflict')
-            if row is None and db.execute('SELECT COUNT(*) FROM project_tools').fetchone()[0]>=32:fail('工具目录达到 32 项上限。')
+            from .maintenance import directory_count
+            if row is None and directory_count(db)>=32:fail('工具目录达到 32 项上限。')
+            if row is None and db.execute('SELECT COUNT(*) FROM project_tools').fetchone()[0]>=288:fail('目录身份总索引达到 288 项上限。')
             db.execute('INSERT INTO project_tools VALUES(?,?,?,?,?) ON CONFLICT(project_id,tool_id) DO UPDATE SET active=excluded.active,previous=excluded.previous,generation=excluded.generation',
                        (base['project_id'],base['tool_id'],target,previous,base['generation']+1))
             if quarantine:db.execute("UPDATE tool_versions SET state='QUARANTINED' WHERE id=?",(quarantine,))

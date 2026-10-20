@@ -14,6 +14,13 @@ def get(handler):
     if handler.path == '/evolution.js':
         handler._send(200, handler.server.evolution_script, 'application/javascript; charset=utf-8')
         return True
+    if handler.path == '/api/evolution/maintenance':
+        if not handler._workspace_token() or not handler._guard(): return True
+        try:
+            from jarvis_core.evolution.maintenance import LedgerMaintenance
+            handler._send(200, LedgerMaintenance(handler.server.evolution).preview())
+        except Exception as exc: failure(handler, exc)
+        return True
     match = re.fullmatch(r'/api/evolution(?:/(jobs|packages)/([a-f0-9]{32}|[a-f0-9]{64}))?', handler.path)
     if not match: return False
     if not handler._workspace_token() or not handler._guard(): return True
@@ -34,7 +41,10 @@ def post(handler, payload):
     try:
         manager = handler.server.evolution
         if manager is None: raise CoreError('evolution_unavailable', '成长模块未初始化。')
-        if handler.path == '/api/evolution/policy':
+        if handler.path == '/api/evolution/maintenance':
+            from jarvis_core.evolution.maintenance import LedgerMaintenance
+            result = LedgerMaintenance(manager).apply(payload)
+        elif handler.path == '/api/evolution/policy':
             result = manager.configure(payload)
         elif handler.path == '/api/evolution/jobs':
             result = manager.submit(payload)

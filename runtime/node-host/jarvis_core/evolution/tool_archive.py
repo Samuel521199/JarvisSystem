@@ -101,5 +101,6 @@ def capacity(store):
         reusable=db.execute('PRAGMA freelist_count').fetchone()[0]*page
         return {'online_versions':sum(r['state']!='ARCHIVED' for r in rows),'archived_versions':sum(r['state']=='ARCHIVED' for r in rows),
                 'online_version_limit':64,'ledger_allocated_bytes':allocated,'ledger_reusable_bytes':reusable,
-                'jobs':db.execute('SELECT COUNT(*) FROM jobs').fetchone()[0],'job_limit':1000,
+                'jobs':db.execute("SELECT COUNT(*) FROM jobs WHERE json_extract(document,'$.receipt_archive') IS NULL").fetchone()[0],'job_limit':1000,
+                'archived_jobs':db.execute("SELECT COUNT(*) FROM jobs WHERE json_extract(document,'$.receipt_archive') IS NOT NULL").fetchone()[0],
                 'note':'归档释放在线包名额并让 SQLite 页可复用；文件、历史回执保留，不宣称磁盘总占用下降。'}

@@ -20,7 +20,7 @@ let data=null,models=[],timer=null,loading=false,visible=false,loadedModels=fals
 const statuses={PROPOSED:'待启动',QUEUED:'排队',RUNNING:'执行中',OBSERVING:'发布后观察',SUCCEEDED:'已完成',FAILED:'失败',UNKNOWN:'结果待核对',CANCELLED:'已停止',INTERRUPTED:'进程中断'};
 const actions={check:'快速自检',analyze:'模型解释',heal:'自愈',ensure:'进化',fulfill:'需求进化',execute:'执行工具',rollback:'回退'};
 const labels={healthy:'包完整，满足当前目标',capability_gap:'当前包完整，有尚未实现的目标能力',missing_optional:'可选技能尚未生成',fault:'发现包故障'};
-async function api(path,body){const control=new AbortController(),timeout=setTimeout(()=>control.abort(),22000);try{const response=await fetch(path,{method:body===undefined?'GET':'POST',cache:'no-store',headers:{'X-Jarvis-Nonce':nonce,...(body===undefined?{}:{'Content-Type':'application/json'})},body:body===undefined?undefined:JSON.stringify(body),signal:control.signal});const result=await response.json();if(!response.ok)throw Error(result.user_message||result.message||'成长服务暂不可用');return result;}finally{clearTimeout(timeout);}}
+async function api(path,body){const control=new AbortController(),timeout=setTimeout(()=>control.abort(),22000);try{const response=await fetch(path,{method:body===undefined?'GET':'POST',cache:'no-store',headers:{'X-Jarvis-Nonce':nonce,...(body===undefined?{}:{'Content-Type':'application/json'})},body:body===undefined?undefined:JSON.stringify(body),signal:control.signal});const result=await response.json();if(!response.ok){const e=Error(result.user_message||result.message||'成长服务暂不可用');e.status=response.status;throw e;}return result;}finally{clearTimeout(timeout);}}
 function error(text){$('error').textContent=text;$('error').hidden=!text;}
 function option(select,value,label){const el=document.createElement('option');el.value=value;el.textContent=label;select.append(el);}
 function modelChoice(id,selection,optional){const select=$(id);select.replaceChildren();if(optional)option(select,'','不启用备选');for(const m of models)option(select,m.provider+'::'+m.model,m.label+' · '+m.provider);if(selection&&!models.some(m=>m.provider+'::'+m.model===selection.route))option(select,selection.route,selection.route+'（需检查可用性）');select.value=selection?.route||'';reasoning(id,selection?.reasoning||'');}
@@ -52,8 +52,40 @@ $('act-inspect').onclick=()=>act({action:'check'});$('act-heal').onclick=()=>act
 $('execute').onclick=()=>{try{act({action:'execute',input:JSON.parse($('input').value)});}catch{error('请填写有效 JSON。');}};
 $('source').onclick=async()=>{try{selectedJob=null;$('detail').textContent=JSON.stringify(await api('/api/evolution/packages/'+data.selection.active),null,2);}catch(e){error(e.message);}};
 $('stop').onclick=async()=>{const job=data?.jobs.find(x=>['QUEUED','RUNNING','OBSERVING'].includes(x.status));if(!job)return;try{await api('/api/evolution/cancel',{job_id:job.id});await load();}catch(e){error(e.message);}};
+// Manual maintenance is independent of the full job queue. Opening settings
+// does not scan archives; only the explicit preview button starts this read.
+const maintenance=document.createElement('details');maintenance.id='evolution-maintenance';
+maintenance.innerHTML='<summary>成长账本与容量整理</summary><p>此处管理所有项目的成长回执与工具目录。先预览引用，再选择最多 20 条确定终态回执归档。原编号和完整材料保留；未知、在途和恢复引用不会删除。收存目录只释放在线目录名额，不启用工具，也不释放版本名额或磁盘空间。</p><button type="button" class="secondary" id="evolution-maintenance-preview">预览引用与容量</button><p id="evolution-maintenance-summary" role="status"></p><div id="evolution-maintenance-items"></div><label>整理审阅依据<textarea id="evolution-maintenance-note" rows="2"></textarea></label><label><input type="checkbox" id="evolution-maintenance-reviewed">我已核对所选记录、引用和恢复范围</label><button type="button" class="secondary" id="evolution-maintenance-archive" disabled>校验并归档所选回执</button><p id="evolution-maintenance-result" role="status"></p><details><summary>最近整理回执（响应中断时先核对）</summary><pre id="evolution-maintenance-recent"></pre></details>';
+$('panel').append(maintenance);
+let maintenanceData=null,maintenanceBusy=false,maintenancePending=null;
+const make=(tag,text)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
+function maintenanceControls(value){maintenanceBusy=value;for(const n of maintenance.querySelectorAll('button,input,textarea'))n.disabled=value;$('maintenance-archive').disabled=value||!maintenanceData;}
+async function maintenancePreview(){if(maintenanceBusy)return;maintenanceControls(true);try{
+ maintenanceData=await api('/api/evolution/maintenance');const c=maintenanceData.capacity,a=maintenanceData.archive;
+ $('maintenance-summary').textContent='在线回执 '+c.online_jobs+' / '+c.online_limit+' · 已归档 '+c.archived_jobs+' · 在线目录 '+c.online_directories+' / '+c.directory_limit+' · 归档材料 '+a.bytes+' / '+a.byte_limit+' 字节。'+maintenanceData.note;
+ $('maintenance-items').replaceChildren();$('maintenance-reviewed').checked=false;
+ const records=make('div');records.className='maintenance-records';
+ for(const row of maintenanceData.jobs){const label=make('label'),check=make('input');check.type='checkbox';check.value=row.id;check.disabled=!row.eligible;check.dataset.blocked=String(!row.eligible);label.append(check,make('span',row.id.slice(0,12)+' · '+(statuses[row.status]||row.status)+' · '+(actions[row.action]||row.action)+(row.eligible?' · 可归档':' · 保留：'+row.reasons.join('；'))));records.append(label);}
+ $('maintenance-items').append(records);
+ for(const row of maintenanceData.directories){const card=make('div');card.className='maintenance-directory';card.append(make('p',row.tool_id+' · 项目 '+row.project_id.slice(0,12)+' · '+(row.phase==='STORED'?'已收存':'未收存')+(row.reasons.length?' · '+row.reasons.join('；'):'')));const b=make('button',row.phase==='STORED'?'恢复目录（保持退役）':'收存退役目录');b.type='button';b.disabled=!row.eligible;b.dataset.blocked=String(!row.eligible);b.onclick=()=>maintenanceApply(row.phase==='STORED'?'restore-directory':'store-directory',[Object.fromEntries(['project_id','tool_id','binding'].map(k=>[k,row[k]]))]);card.append(b);$('maintenance-items').append(card);}
+ $('maintenance-recent').textContent=JSON.stringify(maintenanceData.recent_maintenance,null,2);
+ if(maintenancePending){const found=maintenanceData.recent_maintenance.find(x=>x.id===maintenancePending.request_id);if(found){$('maintenance-result').textContent='原整理已完成：'+found.id+'；释放在线名额 '+found.online_slots_released+'。没有重新执行任务。';maintenancePending=null;}}
+}catch(e){$('maintenance-result').textContent=e.message;}finally{maintenanceControls(false);for(const n of maintenance.querySelectorAll('[data-blocked="true"]'))n.disabled=true;}}
+async function maintenanceApply(operation,targets){if(maintenanceBusy)return;
+ if(!$('maintenance-reviewed').checked){$('maintenance-result').textContent='请先核对所选记录、引用和恢复范围。';return;}
+ const spec={operation,targets,reviewed:true,review_note:$('maintenance-note').value};
+ if(maintenancePending&&JSON.stringify(spec)!==JSON.stringify(Object.fromEntries(Object.entries(maintenancePending).filter(([k])=>k!=='request_id')))){$('maintenance-result').textContent='上次整理响应尚未确认，请先预览并核对原整理回执。';return;}
+ maintenancePending??={...spec,request_id:crypto.randomUUID().replaceAll('-','')};maintenanceControls(true);
+ $('maintenance-result').textContent='正在核对整理 '+maintenancePending.request_id+'；不执行工具或调用模型。';
+ try{const result=await api('/api/evolution/maintenance',maintenancePending);maintenancePending=null;$('maintenance-result').textContent='整理完成，释放在线名额 '+result.online_slots_released+'；原任务编号与恢复材料保留。';}
+ catch(e){const id=maintenancePending.request_id;if(e.status&&e.status<500){maintenancePending=null;$('maintenance-result').textContent=e.message+'；本次未受理，请重新预览后核对。';}else $('maintenance-result').textContent=e.message+'；请先刷新预览核对原整理 '+id+'，不要另发新操作。';}
+ finally{maintenanceControls(false);await maintenancePreview();}
+}
+$('maintenance-preview').onclick=maintenancePreview;
+$('maintenance-archive').onclick=()=>{const ids=[...maintenance.querySelectorAll('.maintenance-records input:checked')].map(n=>n.value);if(!ids.length||ids.length>20){$('maintenance-result').textContent='每次请选择 1—20 条可归档回执。';return;}maintenanceApply('archive-receipts',ids.map(id=>({id,binding:maintenanceData.jobs.find(x=>x.id===id).binding})));};
 function sync(){const next=!document.hidden&&!view.hidden;view.classList.toggle('growth-paused',!next);if(next===visible)return;visible=next;if(visible)load();else clearTimeout(timer);}
 for(const button of view.querySelectorAll('button:not([role=tab])'))button.disabled=true;
 $('reset').disabled=false;
+$('maintenance-preview').disabled=false;
 document.addEventListener('jarvis:settings-view',sync);document.addEventListener('visibilitychange',sync);choose('inspect');sync();
 })();
