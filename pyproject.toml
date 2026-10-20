@@ -1,6 +1,6 @@
 [project]
 name = "jarvis-seed"
-version = "0.1.84"
+version = "0.1.85"
 description = "K0 contracts and a restricted local core prototype"
 requires-python = ">=3.11,<3.14"
 dependencies = [

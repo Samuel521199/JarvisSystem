@@ -34,8 +34,16 @@ def main():
         chat.phase_hook = phase
         result = chat.reply(request['message'], **request['options'])
     else:
+        guard, admission = core.assert_running, core.effect_guard
+        shared = request['options'].pop('shared_dispatch', None)
+        if shared:
+            from jarvis_core.federation import Federation
+            from jarvis_core.federation_access import context
+            validated, _ = context({'scope':shared['scope'],'references':shared['references']})
+            guard, admission = Federation(core, shared['config_path']).access.gate(
+                validated['scope'], validated['references'], request['config'], request['provider'])
         result = gateway.probe(request['config'], request['provider'], request['prompt'], core.data_dir,
-            core.assert_running, admission_context=core.effect_guard,
+            guard, admission_context=admission,
             deadline_seconds=request['deadline_seconds'], **request['options'])
     packet = json.dumps({'id': request['id'], 'result': result}, ensure_ascii=False, allow_nan=False).encode('utf-8')
     if len(packet) > MAX_OUTPUT: return 3

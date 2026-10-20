@@ -167,7 +167,7 @@ class LifecycleTests(unittest.TestCase):
             self.assertEqual(db.execute('PRAGMA user_version').fetchone()[0], 1)
         self.edit(self.a)
         with closing(sqlite3.connect(self.a.store.path)) as db:
-            self.assertEqual(db.execute('PRAGMA user_version').fetchone()[0], 2)
+            self.assertEqual(db.execute('PRAGMA user_version').fetchone()[0], 3)
 
 
     def test_schema_two_cannot_open_in_old_managed_runtime(self):

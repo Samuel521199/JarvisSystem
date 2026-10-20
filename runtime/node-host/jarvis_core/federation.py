@@ -19,7 +19,7 @@ from .policy import CoreError
 
 
 class Federation:
-    def __init__(self, core):
+    def __init__(self, core, config_path=None):
         self.core = core
         self.store = FederationStore(core)
         self.network = NetworkPolicy(core.data_dir)
@@ -28,6 +28,8 @@ class Federation:
         self.lock = threading.RLock()
         self.flight = threading.Lock()
         self.lifecycle = Lifecycle(self)
+        from .federation_access import Access
+        self.access = Access(self, config_path)
 
     @property
     def node(self):
@@ -64,6 +66,7 @@ class Federation:
             result.append({'id': space['id'], 'label': space['label'], 'role': space['role'],
                            'state': space['state'], 'peer': space.get('peer'),
                            'endpoint': space.get('endpoint'), 'cards': cards,
+                           'access_revision': space.get('model_access', {}).get('revision', 0),
                            'revisions': len(space['seen']), 'last_sync': space.get('last_sync')})
         identity = self._identity()
         enabled = identity.root.exists()
@@ -328,17 +331,24 @@ class Federation:
                    'export': 'action space archived', 'archive_preview': 'action space',
                    'archive': 'action space expected', 'restore_archive': 'action space',
                    'reference': 'action space item expected', 'recovery_preview': 'action',
-                   'recover': 'action expected'}
+                   'recover': 'action expected', 'access_options': 'action space',
+                   'access_change': 'action space revision cards providers project_id',
+                   'reference_issue': 'action space item expected scope'}
         if action not in schemas:
             p.fail()
         p.fields(payload, schemas[action])
+        if action == 'access_options': return self.access.options(payload['space'])
+        if action == 'access_change':
+            return self.access.change(payload['space'], payload['revision'], payload['cards'], payload['providers'], payload['project_id'])
+        if action == 'reference_issue':
+            return self.access.issue(payload['space'], payload['item'], payload['expected'], payload['scope'])
         if action == 'export':
             if type(payload['archived']) is not bool: p.fail()
             return self.lifecycle.export(payload['space'], payload['archived'])
         if action == 'archive_preview': return self.lifecycle.preview(payload['space'])
         if action == 'archive': return self.lifecycle.archive(payload['space'], payload['expected'])
         if action == 'restore_archive': return self.lifecycle.restore(payload['space'])
-        if action == 'reference': return self.lifecycle.reference(payload['space'], payload['item'], payload['expected'])
+        if action == 'reference': p.fail('共享资料已改为受控引用，请保存草稿后刷新页面。', 'federation_reference_upgrade')
         if action == 'recovery_preview':
             return {k:v for k,v in self.lifecycle.recovery_preview().items() if not k.startswith('_')}
         if action == 'recover': return self.lifecycle.recover(payload['expected'])

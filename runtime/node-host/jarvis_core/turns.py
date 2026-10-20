@@ -36,7 +36,7 @@ def invoke_reply(core, chat, payload, cancel_event, request_id):
                 'outcome_uncertain': False, 'user_message': '已停止，本次未调用模型。'}
     selection = {k: payload[k] for k in ('model', 'reasoning', 'context_note', 'attachments',
         'memory_context', 'history_memory', 'knowledge_context', 'history_knowledge',
-        'skill_context', 'personal_context', 'continuity_context', 'history_continuity', 'voice_mode')
+        'skill_context', 'personal_context', 'continuity_context', 'history_continuity', 'voice_mode', 'shared_context', 'history_shared')
         if payload.get(k) is not None}
     if cancel_event is not None:
         selection['cancel_event'] = cancel_event
@@ -54,7 +54,7 @@ def invoke_reply(core, chat, payload, cancel_event, request_id):
         pool = getattr(chat, 'dialogue_models', None)
         computation = select_request(payload['message'])
         host_calculation = computation and (computation['explicit'] or not (
-            payload.get('attachments') or payload.get('context_note') or (payload.get('skill_context') or {}).get('explicit')))
+            payload.get('attachments') or (payload.get('shared_context') or {}).get('references') or payload.get('context_note') or (payload.get('skill_context') or {}).get('explicit')))
         # Bounded deterministic/committing commands retain their Host authority.
         if pool is not None and not parse(payload['message']) and not host_calculation:
             result = pool.reply(chat, payload['message'], provider=payload.get('provider','auto'),
@@ -147,6 +147,9 @@ class DialogueTurns:
 
     @interactive
     def submit(self, instance_id, conversation_id, request_id, payload):
+        if (payload.get('shared_context') or {}).get('scope') is not None:
+            if payload['shared_context']['scope']['conversation_id'] != conversation_id:
+                raise TurnError('shared_scope_mismatch', '共享引用不属于当前会话。')
         encoded = json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(',', ':'), allow_nan=False).encode()
         digest = hashlib.sha256(encoded).hexdigest()
         with self.lock:

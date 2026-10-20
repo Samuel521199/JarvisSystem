@@ -134,6 +134,9 @@ async function checkRecovery(){
      const cr=window.Continuity?.mark(article,result.history_info?.continuity)||[];
      const mr=window.MemoryPanel?.mark(article,result.history_info?.memory)||[];
      const kr=window.ProjectKnowledge?.mark(article,result.history_info?.knowledge)||[];
+     if(result.history_info?.shared?.references?.length){
+      article.dataset.attachmentsOmitted='true';user.dataset.attachmentsOmitted='true';
+     }
      if(!result.personal)Workspace.attachAnswer(article,result.text,{project:Workspace.currentProject()});
      // Only extend current model context when this is its latest unpaired input.
      const latest=[...$('messages').querySelectorAll('.user:not([data-task-control]):not([data-personal-control])')].at(-1);

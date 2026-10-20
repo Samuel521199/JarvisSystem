@@ -37,5 +37,16 @@ const drop=(files,extra={})=>{let prevented=false;document.emit('drop',{preventD
   ui.clear();el('message').value='x'.repeat(65530);
   assert.throws(()=>ui.addText({kind:'text',name:'x',text:'x'.repeat(100)}),/容量/);
   assert.equal(ui.wire().length,0);
+  ui.clear();el('message').value='';
+  const reference={body:{item:'a'.repeat(32)},signature:'fixture'};
+  ui.addShared({name:'受控资料',reference});
+  assert.equal(ui.wire().length,0);
+  assert.equal(ui.shared()[0],reference);
+  const sharedDraft=ui.snapshot();ui.consume(sharedDraft);
+  assert.equal(ui.shared().length,0);assert.equal(ui.retry(sharedDraft),true);
+  assert.equal(ui.shared()[0],reference);
+  for(let i=1;i<8;i++)ui.addText({kind:'text',name:'x',text:'x'});
+  assert.throws(()=>ui.addShared({name:'ninth',reference}),/8/);
+  ui.clear();ui.restore(sharedDraft);assert.equal(ui.shared()[0],reference);assert.equal(ui.wire().length,0);
   console.log('PASS: drag, paste, text insertion, read errors, removal races, session drafts, count limits and new-draft preservation');
 })().catch(error=>{console.error(error);process.exitCode=1;});

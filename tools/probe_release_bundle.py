@@ -48,6 +48,11 @@ if sys.argv[3]=='first':
     identity=sharing._identity().load()
     data={'id':'a'*32,'label':'Package probe','members':{sharing.node:identity.pem},'peer':None,'items':{}}
     assert validate_export(make_export(data,identity))['space']==data
+    from jarvis_core.federation_access import context, empty_policy, destination
+    assert not empty_policy()['providers']
+    assert context(None)[0]['references']==[]
+    from jarvis_models.gateway import read_config
+    assert len(destination(read_config(root/'config/model-profiles/providers.json'),'local'))==64
     core.stop('synthetic release recovery probe')
 else:
     state=core.status();assert state['stopped']

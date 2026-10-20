@@ -257,7 +257,7 @@ class Lifecycle:
                     vault.save({'node': self.service.node, 'revision': preview['next_revision']}, guard)
                     db.execute('UPDATE shared_state SET state=?,revision=? WHERE id=1',
                                (p.encode(preview['_state']).decode('utf-8'), preview['next_revision']))
-                    db.execute('PRAGMA user_version=2')
+                    db.execute('PRAGMA user_version=3')
             return self.service.status()
         finally:
             self.service.flight.release()

@@ -25,8 +25,9 @@
     <p id="shared-card-state"></p><div id="shared-versions"></div>
     <label>标题<input id="shared-title" maxlength="100"></label><label>正文<textarea id="shared-text" rows="7" placeholder="仅填写你明确要共享的内容；最多 4000 UTF-8 字节"></textarea></label>
     <div class="shared-row"><button id="shared-save" class="primary">保存到本机</button><button id="shared-delete">删除此卡</button></div></div></div>
+    <div class="panel" id="shared-access-root"></div>
     <div class="panel"><h2>已归档空间</h2><p>归档释放在线名额并保留来源、冲突和删除记录；恢复后仅可阅读，不重新连接。</p><div id="shared-archives"></div></div>
-    <p class="muted">聊天、个人记忆、项目文件和任务各自留在本机。共享卡可在聊天附件区明确引用副本，不自动写入记忆。撤销连接不能擦除已发送的副本。每空间最多 32 张卡（含删除记录），8 个在线空间，32 个归档；导出文件为明文资料，需自行妥善保存。</p>`;
+    <p class="muted">聊天、个人记忆、项目文件和任务各自留在本机。共享卡需另行设置本机模型用途后，在聊天输入区引用；不自动写入记忆。撤销连接不能擦除已发送的副本。每空间最多 32 张卡（含删除记录），8 个在线空间，32 个归档；导出文件为明文资料，需自行妥善保存。</p>`;
   const $ = id => document.getElementById('shared-' + id);
   const nonce = document.querySelector('meta[name="jarvis-nonce"]').content;
   const EMPTY = '4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945';
@@ -102,8 +103,11 @@
     options($('cards'), [['', s?.state === 'revoked' ? '选择资料卡' : '新建资料卡'], ...(s?.cards || []).map(c => [c.id, c.deleted ? '已删除 · ' + c.id.slice(0, 8) : (c.conflict ? '待合并 · ' : '') + c.versions[0].title])], item);
     $('new').disabled = busy || s?.state !== 'active';
     editor();
+    window.dispatchEvent(new CustomEvent('jarvis:shared-space',{detail:s||null}));
   }
   async function run(body, success, onResult) {
+    if (body && ['invite','join','archive','restore_archive','recover','revoke'].includes(body.action) &&
+        window.SharedAccess && !SharedAccess.canSwitch()) return;
     if (busy) return;
     busy = true; render(); message(body ? '正在处理…' : '正在读取…');
     try {
@@ -139,7 +143,7 @@
   $('recovery-close').onclick = () => run({action:'close'}, '共享监听已关闭。');
   $('recovery-preview').onclick = () => run({action:'recovery_preview'}, '检查完成；尚未改变原件。', value => {recoveryPlan=value;$('recovery-detail').textContent=`${value.spaces} 个空间、${value.cards} 张卡、${value.archives} 个归档。${value.effect}`;});
   $('recover').onclick = () => {if(!recoveryPlan||!discard())return;run({action:'recover',expected:recoveryPlan.expected}, '已保留原件并恢复只读资料；需要使用新空间重新配对。',()=>{recoveryPlan=null;item='';});};
-  $('spaces').onchange = () => { if (!discard()) { $('spaces').value = selected; return; } selected = $('spaces').value; item = ''; render(); };
+  $('spaces').onchange = () => { if (window.SharedAccess && !SharedAccess.canSwitch()) { $('spaces').value = selected; return; } if (!discard()) { $('spaces').value = selected; return; } selected = $('spaces').value; item = ''; render(); };
   $('cards').onchange = () => { if (!discard()) { $('cards').value = item; return; } item = $('cards').value; render(); };
   $('new').onclick = () => { if (discard()) {item = ''; render(); $('title').focus();} };
   for (const id of ['title', 'text']) $(id).oninput = () => { dirty = true; };

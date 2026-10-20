@@ -93,7 +93,7 @@ def strict_json(data):
 
 
 def validate_chat(payload):
-    if not isinstance(payload, dict) or set(payload) - {"message", "provider", "history", "model", "reasoning", "attachments", "context_note", "memory_context", "history_memory", "knowledge_context", "history_knowledge", "skill_context", "personal_context", "continuity_context", "history_continuity", "voice_mode"}:
+    if not isinstance(payload, dict) or set(payload) - {"message", "provider", "history", "model", "reasoning", "attachments", "context_note", "memory_context", "history_memory", "knowledge_context", "history_knowledge", "skill_context", "personal_context", "continuity_context", "history_continuity", "voice_mode", "shared_context", "history_shared"}:
         raise ValueError("invalid request fields")
     from jarvis_core.voice_turn import validate as validate_voice
     validate_voice(payload.get('voice_mode'))
@@ -126,6 +126,12 @@ def validate_chat(payload):
     from jarvis_core.continuity import validate_context as validate_continuity_context, validate_history_references as continuity_history
     validate_continuity_context(payload.get('continuity_context'))
     continuity_history(payload.get('history_continuity'), history)
+    from jarvis_core.federation_access import context as shared_context
+    from jarvis_core.policy import CoreError
+    try:
+        shared_context(payload.get('shared_context'), history, payload.get('history_shared'))
+    except CoreError as exc:
+        raise ValueError('invalid shared context') from exc
     if payload.get('knowledge_context') is not None:
         validate_knowledge('context', payload['knowledge_context'])
     knowledge_history_references(payload.get('history_knowledge'), history)
@@ -254,6 +260,7 @@ class LocalChatServer(ThreadingHTTPServer):
         self.admin_html = asset('admin.html').replace(b'__JARVIS_ADMIN_STYLE__', asset('admin.css')).replace(b'__JARVIS_NONCE__', self.nonce.encode('ascii')).replace(b'__JARVIS_VERSION__', version.encode('ascii')).replace(b'__JARVIS_THEME_STYLE__', self.theme_style)
         self.admin_script = asset('admin.js')
         self.federation_script = asset('federation.js')
+        self.shared_access_script = asset('shared-access.js')
         self.network_script = asset('network.js')
         self.coding_script = asset('coding.js')
         self.admin_html = self.admin_html.replace(b'__JARVIS_MODULE_STYLE__', asset('modules.css') + b'\n' + asset('evolution.css') + b'\n' + asset('speech.css') + b'\n' + asset('federation.css')).replace(b'__JARVIS_BRAND_STYLE__', asset('brand/logo.css'))
@@ -632,6 +639,8 @@ class ChatHandler(BaseHTTPRequestHandler):
             self._send(200, self.server.admin_script, "application/javascript; charset=utf-8")
         elif self.path == '/federation.js':
             self._send(200, self.server.federation_script, 'application/javascript; charset=utf-8')
+        elif self.path == '/shared-access.js':
+            self._send(200, self.server.shared_access_script, 'application/javascript; charset=utf-8')
         elif self.path == '/api/federation':
             if not self._admin_token():return
             try:self._send(200, self.server.federation.view())
@@ -1074,7 +1083,7 @@ def create_server(*, core=None, chat=None, data_dir=None, config_path=None, port
     from jarvis_core.network_policy import NetworkPolicy
     server.network = NetworkPolicy(core.data_dir)
     from jarvis_core.federation import Federation
-    server.federation = Federation(core)
+    server.federation = Federation(core, getattr(chat, 'config_path', None))
     try:
         from jarvis_core.chat import ChatService
         if isinstance(chat, ChatService) and chat.dialogue_models is None:

@@ -5,8 +5,8 @@
   const dialog = document.createElement('dialog');
   dialog.className = 'shared-reference-dialog';
   dialog.setAttribute('aria-labelledby', 'shared-reference-title');
-  dialog.innerHTML = `<div class="shared-reference-heading"><h2 id="shared-reference-title">引用共享资料副本</h2><button type="button" data-close aria-label="关闭共享资料选择" title="关闭">×</button></div>
-    <p>只选择本次要使用的资料。副本会作为附件发给当前选定模型，回答可保存到本会话；不会自动写入个人记忆。副本不随原卡的修改或撤销更新。</p>
+  dialog.innerHTML = `<div class="shared-reference-heading"><h2 id="shared-reference-title">引用共享资料</h2><button type="button" data-close aria-label="关闭共享资料选择" title="关闭">×</button></div>
+    <p>只引用本次会话获准的资料。发送及切换备选模型前会核对用途、接入方和版本；变化后停止使用原引用及相关历史。已经外发的内容无法撤回，回答仍可留在本地会话中。</p>
     <p data-status role="status" aria-live="polite"></p><div data-list></div>
     <a href="/settings#federation">管理设备与共享</a>`;
   document.body.append(dialog);
@@ -42,16 +42,16 @@
             preview = document.createElement('p'), button = document.createElement('button');
           title.textContent = space.label + ' · ' + card.versions[0].title;
           preview.textContent = card.versions[0].text.slice(0, 240);
-          button.type = 'button'; button.textContent = '加入当前对话附件';
+          button.type = 'button'; button.textContent = '加入当前对话引用';
           button.onclick = async () => {
             if (window.Workspace?.isBusy?.()) {status.textContent = '请等待当前发送结束。'; return;}
             button.disabled = true;
             try {
-              const value = await request({action: 'reference', space: space.id, item: card.id, expected: card.expected});
+              const value = await request({action: 'reference_issue', space: space.id, item: card.id, expected: card.expected, scope: {conversation_id:conversation,project_id:window.Workspace?.memoryContext?.()?.project_id || null}});
               if (ticket !== serial || conversation !== scope() || !dialog.open || window.Workspace?.isBusy?.()) return;
-              window.Attachments.addText(value.attachment);
-              status.textContent = '已添加资料副本；可在发送前移除，点击发送时才会交给模型。';
-              button.textContent = '已加入附件';
+              window.Attachments.addShared(value);
+              status.textContent = '已加入受控引用；可移除。发送时重新检查，不提前复制正文。';
+              button.textContent = '已加入引用';
             } catch (error) {
               if (ticket === serial) {status.textContent = error.message; button.disabled = false;}
             }
@@ -59,7 +59,7 @@
           section.append(title, preview, button); list.append(section);
         }
       }
-      status.textContent = count ? '选择一张或多张资料卡；附件沿用本轮容量限制。' : '没有可引用的资料卡。已删除、未配对、已撤销或存在冲突的卡不在此列出。';
+      status.textContent = count ? '选择已授权的资料卡；每轮附件与引用合计最多 8 项。' : '没有可引用的资料卡。已删除、未配对、已撤销或存在冲突的卡不在此列出。';
     } catch (error) { if (ticket === serial) status.textContent = error.message; }
   };
 })();
