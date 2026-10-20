@@ -175,7 +175,10 @@
       "owns": [
         "单机/局域网/外网模式、统一意志的一致性边界、所有权、租约、记忆复制协议、同步选型与冲突",
         "unified-intent-memory",
-        "shared-cards-runtime"
+        "shared-cards-runtime",
+        "shared-cards-lifecycle",
+        "shared-cards-recovery",
+        "shared-card-copies"
       ],
       "status": "proposed",
       "reader_summary": "断网怎样独立工作，重连怎样共享记忆与协同？"
@@ -548,7 +551,8 @@
         "k6-voice-input-evidence",
         "k6-continuous-voice-evidence",
         "k6-team-evidence",
-        "k6-federation-evidence"
+        "k6-federation-evidence",
+        "k6-shared-lifecycle-evidence"
       ],
       "status": "proposed",
       "reader_summary": "哪些能力测过，证据在哪里，下一阶段怎样验收？"
@@ -3108,9 +3112,9 @@
     }
   ],
   "implementation": {
-    "version": "0.1.83",
-    "scope": "K3 closed; bounded K4/K5 and K6 voice/team retained. K6 adds explicitly shared two-node cards with pinned TLS pairing, offline editing, conflict/delete reconciliation and opt-in listener. Full personal-memory federation, task authority, physical LAN and long-term gates remain open.",
-    "evidence": "evals/reports/k6-federation-2026-10-20.json",
+    "version": "0.1.84",
+    "scope": "K3 closed; bounded K4/K5 and K6 voice/team/two-node sharing retained. K6 adds signed data export, bounded archival retirement, data-only recovery and explicit per-chat attachment copies. No old peer authority is restored; full personal-memory federation, live-reference revocation, task authority and physical LAN gates remain open.",
+    "evidence": "evals/reports/k6-shared-lifecycle-2026-10-20.json",
     "overall_design_status": "proposed",
     "complete_k1_gate": false,
     "complete_k2_gate": false,
@@ -3383,7 +3387,8 @@
       "evals/reports/k5-ranking-module-2026-10-20.json",
       "evals/reports/k6-voice-input-2026-10-20.json",
       "evals/reports/k6-continuous-voice-2026-10-20.json",
-      "evals/reports/k6-team-2026-10-20.json"
+      "evals/reports/k6-team-2026-10-20.json",
+      "evals/reports/k6-federation-2026-10-20.json"
     ],
     "complete_k4_gate": false
   }

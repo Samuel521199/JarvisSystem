@@ -1,0 +1,11 @@
+.shared-reference-dialog{width:min(620px,calc(100vw - 36px));max-height:80vh;overflow:auto;padding:24px;border:1px solid var(--line,#536271);border-radius:18px;background:var(--surface,#fff);color:var(--ink,#182838);box-sizing:border-box}
+.shared-reference-dialog::backdrop{background:#07111e77;backdrop-filter:blur(5px)}
+.shared-reference-heading{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.shared-reference-heading h2{font-size:20px;margin:0}
+.shared-reference-dialog p{line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere}
+.shared-reference-dialog section{padding:16px 0;border-top:1px solid var(--line,#536271)}
+.shared-reference-dialog h3{font-size:15px;overflow-wrap:anywhere}
+.shared-reference-dialog button{padding:8px 12px;border:1px solid var(--line,#536271);border-radius:8px;background:transparent;color:inherit;cursor:pointer}
+.shared-reference-dialog button:disabled{opacity:.55;cursor:default}
+.shared-reference-dialog a{display:inline-block;margin-top:16px;color:inherit}
+.shared-reference-dialog :focus-visible{outline:2px solid #65ade8;outline-offset:3px}

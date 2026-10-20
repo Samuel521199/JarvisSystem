@@ -20,10 +20,10 @@ class FederationStore:
         return self.path
 
     def _read(self, db, node):
-        if db.execute('PRAGMA user_version').fetchone()[0] != 1:
+        if db.execute('PRAGMA user_version').fetchone()[0] not in (1, 2):
             p.fail('共享资料版本无法识别。', 'federation_storage')
         row = db.execute('SELECT node,state,revision FROM shared_state WHERE id=1').fetchone()
-        if not row or row[0] != node:
+        if not row or row[0] != node or len(row[1].encode('utf-8')) > 5 * 1024 * 1024:
             p.fail('共享资料与本机身份不匹配。', 'federation_storage')
         return json.loads(row[1]), row[2]
 
@@ -74,4 +74,5 @@ class FederationStore:
             vault.save({'node': node, 'revision': revision + 1}, self._guard_path())
             db.execute('UPDATE shared_state SET state=?,revision=? WHERE id=1',
                        (p.encode(state).decode('utf-8'), revision + 1))
+            db.execute('PRAGMA user_version=2')
             return result

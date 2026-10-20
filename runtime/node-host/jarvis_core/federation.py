@@ -7,12 +7,15 @@ import threading
 import time
 import uuid
 import secrets
+import sqlite3
 
 from . import federation_protocol as p
 from .federation_identity import Identity
 from .federation_store import FederationStore
 from .federation_transport import Listener, exchange
 from .network_policy import NetworkPolicy
+from .federation_lifecycle import Lifecycle, MAX_ARCHIVES
+from .policy import CoreError
 
 
 class Federation:
@@ -24,6 +27,7 @@ class Federation:
         self.identity = None
         self.lock = threading.RLock()
         self.flight = threading.Lock()
+        self.lifecycle = Lifecycle(self)
 
     @property
     def node(self):
@@ -46,7 +50,8 @@ class Federation:
 
     def status(self):
         node = self.node
-        spaces = self.store.read(node)['spaces']
+        stored = self.store.read(node)
+        spaces = stored['spaces']
         result = []
         for space in spaces.values():
             cards = []
@@ -70,8 +75,22 @@ class Federation:
         return {'initialized': enabled, 'node': node, 'protocol': p.PROTOCOL,
                 'fingerprint': p.fingerprint(identity.pem) if enabled else None,
                 'endpoint': endpoint, 'offline': self.network.snapshot()['offline'],
-                'spaces': result, 'limits': {'spaces': p.MAX_SPACES, 'cards': p.MAX_CARDS,
-                                            'text_bytes': 4000, 'revisions': p.MAX_SEEN}}
+                'spaces': result, 'archives': [
+                    {'id': sid, **row, 'restored': sid in spaces}
+                    for sid, row in stored.get('archives', {}).items()],
+                'recovery_required': False,
+                'limits': {'spaces': p.MAX_SPACES, 'cards': p.MAX_CARDS,
+                           'text_bytes': 4000, 'revisions': p.MAX_SEEN, 'archives': MAX_ARCHIVES}}
+
+    def view(self):
+        try:
+            return self.status()
+        except (CoreError, OSError, ValueError, sqlite3.Error) as exc:
+            if isinstance(exc, CoreError) and not exc.code.startswith('federation_'):
+                raise
+            return {'recovery_required': True, 'spaces': [], 'archives': [],
+                    'message': '共享状态无法正常读取。可关闭监听并检查恢复材料；聊天继续使用原有功能。',
+                    'listener_open': self.listener is not None}
 
     def listen(self, address, port):
         if type(port) is not int or not 0 <= port <= 65535:
@@ -135,7 +154,7 @@ class Federation:
         sid = data['space']
         with self.flight:
             def pending(state):
-                if sid in state['spaces']:
+                if sid in state['spaces'] or sid in state.get('archives', {}):
                     p.fail('配对已登记，请使用该空间的重试配对入口。')
                 if len(state['spaces']) >= p.MAX_SPACES:
                     p.fail('共享空间容量已满。')
@@ -305,15 +324,29 @@ class Federation:
         schemas = {'initialize': 'action', 'listen': 'action address port', 'close': 'action',
                    'invite': 'action label', 'join': 'action invitation', 'retry': 'action space',
                    'sync': 'action space', 'revoke': 'action space',
-                   'edit': 'action space item expected title text deleted'}
+                   'edit': 'action space item expected title text deleted',
+                   'export': 'action space archived', 'archive_preview': 'action space',
+                   'archive': 'action space expected', 'restore_archive': 'action space',
+                   'reference': 'action space item expected', 'recovery_preview': 'action',
+                   'recover': 'action expected'}
         if action not in schemas:
             p.fail()
         p.fields(payload, schemas[action])
+        if action == 'export':
+            if type(payload['archived']) is not bool: p.fail()
+            return self.lifecycle.export(payload['space'], payload['archived'])
+        if action == 'archive_preview': return self.lifecycle.preview(payload['space'])
+        if action == 'archive': return self.lifecycle.archive(payload['space'], payload['expected'])
+        if action == 'restore_archive': return self.lifecycle.restore(payload['space'])
+        if action == 'reference': return self.lifecycle.reference(payload['space'], payload['item'], payload['expected'])
+        if action == 'recovery_preview':
+            return {k:v for k,v in self.lifecycle.recovery_preview().items() if not k.startswith('_')}
+        if action == 'recover': return self.lifecycle.recover(payload['expected'])
         if action == 'initialize': return self.initialize()
         if action == 'listen': return self.listen(payload['address'], payload['port'])
         if action == 'close':
             self.close()
-            return self.status()
+            return self.view()
         if action == 'invite': return self.invite(payload['label'])
         if action == 'join': return self.join(payload['invitation'])
         if action == 'retry': return self.retry(payload['space'])

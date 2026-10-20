@@ -200,6 +200,7 @@ class LocalChatServer(ThreadingHTTPServer):
         self.theme_style = self.ui_assets.required('theme.css')
         self.theme_script = asset('theme.js')
         self.attachments_script = self.ui_assets.required('attachments.js')
+        self.shared_reference_script = asset('shared-reference.js')
         self.context_script = asset('context.js')
         self.conversation_script = self.ui_assets.required('conversations.js')
         self.conversation_tasks_script = asset('conversation_tasks.js')
@@ -248,7 +249,7 @@ class LocalChatServer(ThreadingHTTPServer):
             b'<style nonce="__JARVIS_NONCE__">' + asset('brand/preview.css') + b'</style>'
         ).replace(b'__JARVIS_NONCE__', self.nonce.encode('ascii'))
         self.computer_script = asset('computer.js')
-        self.html = self.html.replace(b'__JARVIS_ATTACHMENTS_STYLE__', asset('attachments.css'))
+        self.html = self.html.replace(b'__JARVIS_ATTACHMENTS_STYLE__', asset('attachments.css') + b'\n' + asset('shared-reference.css'))
         self.workspace_script = self.ui_assets.required('workspace.js')
         self.admin_html = asset('admin.html').replace(b'__JARVIS_ADMIN_STYLE__', asset('admin.css')).replace(b'__JARVIS_NONCE__', self.nonce.encode('ascii')).replace(b'__JARVIS_VERSION__', version.encode('ascii')).replace(b'__JARVIS_THEME_STYLE__', self.theme_style)
         self.admin_script = asset('admin.js')
@@ -608,6 +609,8 @@ class ChatHandler(BaseHTTPRequestHandler):
             self._send(200, self.server.theme_script, "application/javascript; charset=utf-8")
         elif self.path == '/context.js':
             self._send(200, self.server.context_script, 'application/javascript; charset=utf-8')
+        elif self.path == '/shared-reference.js':
+            self._send(200, self.server.shared_reference_script, 'application/javascript; charset=utf-8')
         elif self.path == '/attachments.js':
             self._send(200, self.server.attachments_script, 'application/javascript; charset=utf-8')
         elif self.path == '/brand/':
@@ -631,7 +634,7 @@ class ChatHandler(BaseHTTPRequestHandler):
             self._send(200, self.server.federation_script, 'application/javascript; charset=utf-8')
         elif self.path == '/api/federation':
             if not self._admin_token():return
-            try:self._send(200, self.server.federation.status())
+            try:self._send(200, self.server.federation.view())
             except Exception as exc:self._admin_error(exc)
         elif self.path == '/network.js':
             self._send(200, self.server.network_script, 'application/javascript; charset=utf-8')

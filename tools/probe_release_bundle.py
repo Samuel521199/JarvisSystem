@@ -44,6 +44,10 @@ if sys.argv[3]=='first':
     assert not sharing.status()['initialized']
     sharing.initialize()
     assert sharing.status()['fingerprint'] and sharing.status()['endpoint'] is None
+    from jarvis_core.federation_lifecycle import make_export, validate_export
+    identity=sharing._identity().load()
+    data={'id':'a'*32,'label':'Package probe','members':{sharing.node:identity.pem},'peer':None,'items':{}}
+    assert validate_export(make_export(data,identity))['space']==data
     core.stop('synthetic release recovery probe')
 else:
     state=core.status();assert state['stopped']

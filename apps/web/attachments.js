@@ -93,7 +93,13 @@
   el('attach-button').addEventListener('click',()=>el('attachment-input').click());
   el('attachment-input').addEventListener('change',event=>{add(event.target.files);event.target.value='';});
   el('message').addEventListener('input',update);
-  window.Attachments={
+  function addText(attachment){
+    if(!attachment||attachment.kind!=='text'||typeof attachment.name!=='string'||typeof attachment.text!=='string'||bytes(attachment.text)>49152||!attachment.text.trim())throw new Error('文字附件格式无效。');
+    if(draft.length>=8)throw new Error('每条消息最多添加 8 个附件。');
+    if(!fits([{content:el('message').value,attachments:[...wire(),attachment]}],65536))throw new Error('消息与附件超出本轮容量，请先缩短内容。');
+    const item={id:crypto.randomUUID(),name:attachment.name,size:bytes(attachment.text),status:'ready',attachment};draft.push(item);render();return item.id;
+  }
+  window.Attachments={addText,
     snapshot:()=>draft.slice(),restore:items=>{draft=(items||[]).slice();render();},hasDraft:()=>draft.length>0,
     clear:()=>{draft=[];render();},update,wire,issue,messageText,fits,context,
     consume:items=>{const ids=new Set(items.map(x=>x.id));draft=draft.filter(x=>!ids.has(x.id));render();},

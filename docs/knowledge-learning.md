@@ -495,6 +495,8 @@ MemoryStore 管理事实/事件和导出；Extractor 只产生带来源的候选
 <a id="memory-data-2"></a>
 ### 同步策略
 
+0.1.84 的共享资料可由主人明确选为本轮聊天附件；它是带来源的副本，不是主人事实或自动记忆晋升。原文省略、候选排除、会话隔离及撤回限制统一见[共享副本边界](federation.md#shared-card-copies)。
+
 同步机制、按数据类型的合并规则及冲突处理统一维护于[共同体记忆复制](federation.md#memory-replication)。本页定义哪些资料可以分享与遗忘；共同体页定义它们怎样送达、确认和避免旧副本复活。
 
 <a id="memory-data-3"></a>

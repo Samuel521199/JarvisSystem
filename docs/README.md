@@ -23,7 +23,7 @@
 | **判断现在能否使用、智能有多强** | [v0.1.62 的实现、实测与剩余验收](delivery-validation.md#k2-completion-evidence) | [当前能力和完整性规则](models-offline.md#runtime-chat-context) |
 | **查看个人核心的使用与验证** | [聊天记忆与交流设置](interaction-persona.md#personal-core-ui) → [跨会话继续话题](interaction-persona.md#continuity-ui) | [当前 K2 验收结果与范围](delivery-validation.md#k2-completion-evidence) |
 | **从聊天提出改进并取回成果** | [改进与成长进度](interaction-persona.md#growth-demand-ui) | [0.1.41 需求成长验证](delivery-validation.md#growth-demand-evidence) |
-| **查看本轮修复与验收** | [K6 双节点共享资料卡](delivery-validation.md#k6-federation-evidence) | [原始基础验收](delivery-validation.md#foundation-repair-evidence) |
+| **查看本轮修复与验收** | [K6 共享资料维护与聊天引用](delivery-validation.md#k6-shared-lifecycle-evidence) | [原始基础验收](delivery-validation.md#foundation-repair-evidence) |
 | **查看当前实现离个人助手目标还有多远** | [个人核心评价与工程审计](decisions-review.md#personal-core-assessment) | [助手核心架构图](architecture.md#pc-runtime-convergence) → [既有测试证据](delivery-validation.md#current-audit-evidence) |
 | **用自然语言执行首条任务** | [聊天任务入口](core-bootstrap.md#conversation-task-entry) | [执行边界与记录](tasks-agents.md#sample-task-runtime) |
 | **查看模块运行和准备升级** | [设置模块入口](core-bootstrap.md#module-monitor-entry) | [监控与维护边界](health-maintenance.md#module-monitoring) |
@@ -33,13 +33,13 @@
 <a id="project-status"></a>
 ## 目前做到哪里了？
 
-**当前已部署 0.1.83：K6 双节点共享资料卡已接通；[本轮验证与限制](delivery-validation.md#k6-federation-evidence)。** 在“设置 → 设备与共享”启用身份、按需配对，只同步明确写入的共享卡；支持离线编辑、冲突合并与删除记录。聊天、个人记忆与项目文件仍按原范围保存，默认不开放监听。使用方法见[交互入口](interaction-persona.md#shared-cards-ui)，后续安排见[当前工作顺序](core-bootstrap.md#k4-next-delivery)。
+**当前已部署 0.1.84：K6 共享资料的导出、归档、只读恢复与显式聊天副本已接通；[本轮验证与限制](delivery-validation.md#k6-shared-lifecycle-evidence)。** “设置 → 设备与共享”维护空间；聊天输入区资料图标可选择本次使用的共享卡。恢复资料不会恢复旧连接，引用副本不自动写入个人记忆；默认不开放监听。使用方法见[交互入口](interaction-persona.md#shared-cards-ui)，后续安排见[当前工作顺序](core-bootstrap.md#k4-next-delivery)。
 
 连续语音、Silero 门控和受限插话保持可用，入口为输入区耳机图标；[语音使用与边界](interaction-persona.md#voice-chat-plan)、[0.1.81 验证](delivery-validation.md#k6-continuous-voice-evidence)保留。
 
-**上一部署 0.1.79：K4 三个明确任务域闭环保持；K5 首个受限检索模块已完成模型生成、独立评估、试用/保留和重启回退。** [K5 实测与限制](delivery-validation.md#k5-ranking-module-evidence) · [模块如何工作](knowledge-learning.md#retrieval-ranking-module) · [唯一推进顺序](core-bootstrap.md#k4-next-delivery)。
+**既有能力 · 0.1.79：K4 三个明确任务域闭环保持；K5 首个受限检索模块已完成模型生成、独立评估、试用/保留和重启回退。** [K5 实测与限制](delivery-validation.md#k5-ranking-module-evidence) · [模块如何工作](knowledge-learning.md#retrieval-ranking-module) · [唯一推进顺序](core-bootstrap.md#k4-next-delivery)。
 
-**本次升级 · 0.1.79：**设置 → 成长中心 → 进化 →「自身模块改造 · 检索排序」。生成后查看源码、质量与用量，再审阅试用；原内置排序仍是正式默认。模型候选的检索与回答对照均有有限范围收益，不等于通用自主重写。[使用方式](interaction-persona.md#ranking-module-ui)。
+**使用入口 · 0.1.79：**设置 → 成长中心 → 进化 →「自身模块改造 · 检索排序」。生成后查看源码、质量与用量，再审阅试用；原内置排序仍是正式默认。模型候选的检索与回答对照均有有限范围收益，不等于通用自主重写。[使用方式](interaction-persona.md#ranking-module-ui)。
 
 **上一升级 · 0.1.78：**项目工具库 →「可持续成长」：项目预授权、独立验收、灰度、自动启用、收益观察与不达标停用；刷新和重启保留原回执。限定三类纯转换任务，不等于任意业务可自主验收。检索默认仍为旧算法，不因小开发集得分更高自动替换。
 
@@ -89,7 +89,7 @@
 
 **记忆增量已随 0.1.58 部署（2026-10-19）：**[本地重复/差异核对与显式更新](delivery-validation.md#memory-candidate-review-evidence)已通过临时核心和界面验证，统一部署时另核对线上脚本摘要；未使用主人正式记忆做写入测试。使用方式见[候选窗口](interaction-persona.md#personal-candidates-ui)。
 
-**当前设计重心：**类贾维斯个人助手与伙伴始终是核心，个人记忆、基础人格和交流接续作为回归约束；当前主线是[K4 收口后的 K5 检索模块改造](core-bootstrap.md#k4-next-delivery)。K2 已有结果和原待验条件沿用[收口记录](delivery-validation.md#k2-completion-evidence)，不因工具成长而将个人核心视为完整通过。既有[成长中心三能力方案](evolution-release.md#growth-governance)、[动画交互预览](prototypes/growth-center/index.html)及[独立模型与备选](models-offline.md#growth-model-policy)继续保留；预览不替换正式工作台。
+**当前设计重心：**类贾维斯个人助手与伙伴始终是核心，个人记忆、基础人格和交流接续作为回归约束；当前主线是[K6 个人交流与受控多设备协同](core-bootstrap.md#k4-next-delivery)。K2 已有结果和原待验条件沿用[收口记录](delivery-validation.md#k2-completion-evidence)，不因工具成长而将个人核心视为完整通过。既有[成长中心三能力方案](evolution-release.md#growth-governance)、[动画交互预览](prototypes/growth-center/index.html)及[独立模型与备选](models-offline.md#growth-model-policy)继续保留；预览不替换正式工作台。
 
 <a id="quick-topics"></a>
 ## 直接查找你关心的内容
