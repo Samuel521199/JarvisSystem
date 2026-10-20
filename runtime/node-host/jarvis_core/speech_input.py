@@ -190,7 +190,9 @@ class SpeechInput:
                 raise SpeechError('识别输出无效。')
             result = json.loads(received[0])
             process.wait(timeout=2)
-            if process.returncode or set(result) != {'text', 'backend'}:
+            if (process.returncode or set(result) != {'text', 'backend', 'vad', 'speech_seconds'}
+                    or result['vad'] != 'silero' or type(result['speech_seconds']) not in (int, float)
+                    or not 0 <= result['speech_seconds'] <= 21):
                 raise SpeechError('识别进程未正常结束。')
             return {**result, 'peak_working_set_bytes': peak, 'model_released': True}
         finally:

@@ -6,6 +6,8 @@ from jarvis_core.policy import CoreError
 
 def get(handler):
     path = handler.path
+    if path in {'/voice-session.js', '/voice-session-capture.js'}:
+        handler._send(200, getattr(handler.server, 'voice_session_script' if path == '/voice-session.js' else 'voice_session_capture_script'), 'application/javascript; charset=utf-8'); return True
     if path in {'/voice-input.js', '/voice-capture.js'}:
         handler._send(200, getattr(handler.server, 'voice_input_script' if path == '/voice-input.js' else 'voice_capture_script'), 'application/javascript; charset=utf-8'); return True
     transcribe = re.fullmatch(r'/api/speech/input(?:/([a-f0-9]{32}))?', path)

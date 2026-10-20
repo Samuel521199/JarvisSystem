@@ -15,7 +15,8 @@ def main():
     base = Path(packet['model_root'] or manifest['default_root'])
     paths = {}
     for item in manifest['files']:
-        if item['component'] != 'sensevoice-int8' or not item['path'].endswith(('model.int8.onnx', 'tokens.txt')):
+        if not ((item['component'] == 'sensevoice-int8' and item['path'].endswith(('model.int8.onnx', 'tokens.txt')))
+                or item['component'] == 'silero-vad' and item['path'].endswith('silero_vad.onnx')):
             continue
         path = policy.safe_path(base/item['path'], directory=False)
         if path.stat().st_size != item['size_bytes'] or path.stat().st_nlink != 1:
@@ -30,10 +31,24 @@ def main():
         raise ValueError('Unverified speech runtime')
     pcm = base64.b64decode(packet['pcm'], validate=True)
     samples = np.frombuffer(pcm, dtype='<i2').astype(np.float32) / 32768
-    # Quiet audio must not produce a hallucinated command.
-    if float(np.sqrt(np.mean(samples**2))) < .002:
-        text = ''
-    else:
+    # Energy detects candidate segments in the browser, not human speech.
+    # Run the small neural gate before loading ASR; never infer from silence/noise alone.
+    text, speech_seconds = '', 0.
+    if float(np.sqrt(np.mean(samples**2))) >= .002:
+        config = sherpa_onnx.VadModelConfig(
+            silero_vad=sherpa_onnx.SileroVadModelConfig(model=paths['silero_vad.onnx']),
+            sample_rate=16000, num_threads=1, provider='cpu')
+        vad = sherpa_onnx.VoiceActivityDetector(config, buffer_size_in_seconds=21)
+        window = config.silero_vad.window_size
+        for offset in range(0, len(samples), window):
+            block = samples[offset:offset+window]
+            vad.accept_waveform(np.pad(block, (0, window-len(block))))
+        vad.flush()
+        while not vad.empty():
+            speech_seconds += len(vad.front.samples)/16000
+            vad.pop()
+        del vad
+    if speech_seconds >= .18:
         recognizer = sherpa_onnx.OfflineRecognizer.from_sense_voice(
             model=paths['model.int8.onnx'], tokens=paths['tokens.txt'],
             language=packet['language'], use_itn=True, num_threads=2, provider='cpu')
@@ -41,7 +56,8 @@ def main():
         stream.accept_waveform(16000, samples)
         recognizer.decode_stream(stream)
         text = stream.result.text.strip()
-    print(json.dumps(dict(text=text, backend='sensevoice-int8'), ensure_ascii=False))
+    print(json.dumps(dict(text=text, backend='sensevoice-int8', vad='silero',
+                          speech_seconds=round(speech_seconds, 3)), ensure_ascii=False))
 
 
 if __name__ == '__main__':

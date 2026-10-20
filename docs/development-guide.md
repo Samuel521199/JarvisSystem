@@ -151,9 +151,9 @@
 
 **优先：近期可交付体验；归属 K2 输入适配，完整语音按 K6/M2。** 复用已有 Qwen 主力、ZipVoice 手动备用和 CosyVoice 按需增强；本轮不重新选一整套 TTS，也不把九种音色/十语种目录写成全部验过。
 
-0.1.80 已实现[首个语音增量](interaction-persona.md#voice-chat-plan)：麦克风开始/结束、录音状态、本地 STT、可编辑转写及同一文字发送入口，另有显式新回复播报。录音先暂停旧播报；权限拒绝、设备拔出、模型未加载和识别失败时仍可打字。只保存用户选择发送的文本，音频缓存按现有语音契约管理。用真实中文/英文和混合句测转写，而非仅用 TTS 生成的干净音频。
+0.1.81 已增加[连续语音轮次](interaction-persona.md#voice-chat-plan)：麦克风开始/结束、录音状态、本地 STT、可编辑转写及同一文字发送入口，另有显式新回复播报。录音先暂停旧播报；权限拒绝、设备拔出、模型未加载和识别失败时仍可打字。按键模式保存用户检查后发送的文本；连续模式自动发送转写用于交流，行动入口保持隔离。音频缓存按现有语音契约管理。用真实中文/英文和混合句测转写，而非仅用 TTS 生成的干净音频。
 
-下一增量才是增量回答与短段自动播报、VAD 轮次、有效代际过滤、AEC/插话及匿名说话人分段。声纹匹配、多人分离、声音克隆各自测试；声纹不是动作授权凭证。用户已认可的自然度/情绪继续做回归，克隆与复杂分离不抢占基本交谈预算。
+连续轮次、VAD 门控与受限插话已接入。后续仍需增量回答、真实 AEC/交谈轮次质量及匿名说话人分段，不把片段识别当成原生流式。声纹匹配、多人分离、声音克隆各自测试；声纹不是动作授权凭证。用户已认可的自然度/情绪继续做回归，克隆与复杂分离不抢占基本交谈预算。
 
 **主要落点：**现有 [speech_routes.py](../apps/web/speech_routes.py)、[speech.js](../apps/web/speech.js)、[readout.js](../apps/web/readout.js)、[readout.py](../runtime/node-host/jarvis_core/readout.py)、[qwen_speech.py](../runtime/node-host/jarvis_core/qwen_speech.py) 和独立 STT 适配器。逐字流式要与结束状态、取消、断线和未完成回答保存语义共同设计；部分文本不能提前成为可执行工具参数。具体交互与目标见[语音接入计划](interaction-persona.md#voice-chat-plan)、[V-DLG-06—08](delivery-validation.md#conversation-separation-validation)。
 

@@ -345,7 +345,10 @@ class ModuleMonitor:
                 state = self.speech_input.snapshot()
                 result[-1].update(enabled=installed, activity='busy' if state['busy'] else 'on_demand',
                                   active=int(state['busy']), runtime=state,
-                                  message='输入区麦克风：20 秒以内本地转写，检查后填入消息。每次独立识别，结束释放模型；不自动发送或认证身份。')
+                                  message='本地按键转写与显式开启的连续语音共用单个识别槽；先用 Silero 判断语音再识别，结束释放模型；不认证身份。')
+            if ident == 'vad':
+                result[-1].update(enabled=installed, activity='on_demand',
+                    message='已接入本地识别 Worker 的 Silero 语音门控；仅随音频片段运行，不常驻，不做身份或回声认证。')
         status = self.speech.snapshot()
         row = self._row('cosyvoice3', 'CosyVoice3 克隆与情绪语音', installed=status['installed'],
             enabled=status['owned'], health='ready' if status['installed'] and status['state'] != 'failed' else 'unavailable',

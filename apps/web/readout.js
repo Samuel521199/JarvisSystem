@@ -28,7 +28,7 @@ async function start(article,button){const pending=stop(),ticket=serial;await pe
   s.total=view.total;$('preparation').textContent=(view.notices||[]).join('；')||'本地合成，按短句连续播放；暂停保留位置，停止会取消本次合成。';
   while(active===s&&!s.cancelled){
    if(!s.article.isConnected){await stop('已切换会话，旧回复朗读已停止。');break;}
-   if(s.playIndex>=s.total){await operation({action:'finish',id:s.id});if(active===s){active=null;dispose(s);controls(null);status('朗读完成。');}break;}
+   if(s.playIndex>=s.total){await operation({action:'finish',id:s.id});if(active===s){s.completed=true;active=null;dispose(s);controls(null);status('朗读完成。');}break;}
    const canGenerate=s.generateIndex<s.total&&s.generateIndex<=s.playIndex+1;
    if(canGenerate){
     try{view=await operation({action:'next',id:s.id,index:s.generateIndex});}
@@ -45,17 +45,18 @@ async function start(article,button){const pending=stop(),ticket=serial;await pe
    await wait(canGenerate?250:1500);
   }
  }catch(error){if(active===s){$('error').textContent=error.message;$('options').open=true;await stop('朗读未完成，文字回复仍可使用。');}}
+ return Boolean(s.completed);
 }
 function attach(article){if(!article.matches?.('.message.assistant')||article.querySelector('.readout-message-action'))return;const actions=document.createElement('div');actions.className='readout-message-action';const button=document.createElement('button');button.type='button';button.className='readout-button';button.title='朗读这条回复';button.setAttribute('aria-label',button.title);button.setAttribute('aria-pressed','false');button.innerHTML='<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Zm4 3a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></svg>';
- button.addEventListener('click',()=>{if(active?.article===article){$('pause').click();return;}$('text').value=article.querySelector('.bubble')?.textContent||'';start(article,button);});actions.append(button);article.append(actions);}
+ button.addEventListener('click',()=>{window.dispatchEvent(new Event('jarvis:readout-control'));if(active?.article===article){$('pause').click();return;}$('text').value=article.querySelector('.bubble')?.textContent||'';start(article,button);});actions.append(button);article.append(actions);}
 for(const article of messages.children)attach(article);
 new MutationObserver(records=>{for(const record of records)for(const node of record.addedNodes)attach(node);if(active&&!active.article.isConnected)stop('已切换会话，旧回复朗读已停止。');if(lastArticle&&!lastArticle.isConnected){root.hidden=true;$('text').value='';lastArticle=lastButton=null;}}).observe(messages,{childList:true});
-$('pause').addEventListener('click',async()=>{const s=active;if(!s)return;s.paused=!s.paused;controls(s);if(s.paused){s.audio?.pause();status('朗读已暂停。');}else if(s.audio){try{await s.audio.play();status(`正在朗读第 ${s.playIndex+1} / ${s.total} 段`);}catch{s.paused=true;controls(s);status('请再次点击播放。');}}else play(s);});
-$('stop').addEventListener('click',()=>stop());$('restart').addEventListener('click',()=>{if(lastArticle?.isConnected)start(lastArticle,lastButton);});
+$('pause').addEventListener('click',async()=>{window.dispatchEvent(new Event('jarvis:readout-control'));if(active)active.pauseOwner=null;const s=active;if(!s)return;s.paused=!s.paused;controls(s);if(s.paused){s.audio?.pause();status('朗读已暂停。');}else if(s.audio){try{await s.audio.play();status(`正在朗读第 ${s.playIndex+1} / ${s.total} 段`);}catch{s.paused=true;controls(s);status('请再次点击播放。');}}else play(s);});
+$('stop').addEventListener('click',()=>{window.dispatchEvent(new Event('jarvis:readout-control'));stop();});$('restart').addEventListener('click',()=>{if(lastArticle?.isConnected)start(lastArticle,lastButton);});
 $('close-options').addEventListener('click',()=>{$('options').open=false;$('options').querySelector('summary').focus();});
 document.addEventListener('click',event=>{if($('options').open&&!event.target.closest('#readout-options'))$('options').open=false;});
 document.addEventListener('keydown',event=>{if(event.key==='Escape'&&$('options').open){$('options').open=false;$('options').querySelector('summary').focus();}});
 $('options').addEventListener('toggle',()=>{if($('options').open)options().catch(e=>{$('error').textContent=e.message;});});
-window.JarvisReadout={stop,speak(article){if(!article?.isConnected)return;attach(article);$('text').value=article.querySelector('.bubble')?.textContent||'';return start(article,article.querySelector('.readout-button'));}};
+window.JarvisReadout={stop,state:()=>active?{id:active.id,paused:active.paused,ownedPause:Boolean(active.pauseOwner),text:active.article.querySelector('.bubble')?.textContent||''}:null,pause(){const s=active;if(!s||s.paused)return null;const token=crypto.randomUUID();s.pauseOwner=token;s.paused=true;s.audio?.pause();controls(s);status('检测到可能的插话，暂缓播报…');return token;},async resume(token){const s=active;if(!s||!token||s.pauseOwner!==token)return;s.pauseOwner=null;s.paused=false;controls(s);if(s.audio){try{await s.audio.play();status(`继续朗读第 ${s.playIndex+1} / ${s.total} 段`);}catch{s.paused=true;controls(s);}}else await play(s);},speak(article){if(!article?.isConnected)return;attach(article);$('text').value=article.querySelector('.bubble')?.textContent||'';return start(article,article.querySelector('.readout-button'));}};
 window.addEventListener('pagehide',()=>{stop('页面已关闭，朗读已停止。',true);});
 })();

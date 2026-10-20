@@ -140,7 +140,10 @@ class ChatService:
                 "cancel_requested": True, "outcome_uncertain": uncertain,
                 "user_message": "已停止本次生成，后续输出不再采用；已接收的远端请求可能仍有用量。"}
 
-    def reply(self, message, provider="auto", history=None, model=None, reasoning=None, cancel_event=None, attachments=None, context_note=None, memory_context=None, history_memory=None, knowledge_context=None, history_knowledge=None, skill_context=None, personal_context=None, continuity_context=None, history_continuity=None, _request_id=None, _route_attempt_limit=None, _purpose=None, _sample_scope=None, _intent_shadow=False):
+    def reply(self, message, provider="auto", history=None, model=None, reasoning=None, cancel_event=None, attachments=None, context_note=None, memory_context=None, history_memory=None, knowledge_context=None, history_knowledge=None, skill_context=None, personal_context=None, continuity_context=None, history_continuity=None, _request_id=None, _route_attempt_limit=None, _purpose=None, _sample_scope=None, _intent_shadow=False, voice_mode=None):
+        from .voice_turn import validate as validate_voice, effect_response
+        voice_only = validate_voice(voice_mode)
+        if voice_only: _intent_shadow = False
         if type(_intent_shadow) is not bool or (_intent_shadow and _purpose):
             raise ValueError('Invalid internal intent mode')
         if _purpose not in {None,'sample_report','memory_candidates','rea_explanation'}:
@@ -182,6 +185,8 @@ class ChatService:
                 raise ValueError('消息超过输入字节上限。')
             base_history, base_info = bounded_history(history)
             command = personal_command(message) if not _purpose else None
+            if command and voice_only:
+                return self._package(effect_response(), attempts, notice, info)
             if command:
                 try:
                     if attachments or skill_context.get('explicit'):
@@ -307,6 +312,8 @@ class ChatService:
                                 'Classifying a request does not execute it. The full request must fit the fixed workflow.')
             else:
                 instructions = chat_instructions(selected, model, catalog_summary=self.runtime_catalog.chat_summary())
+            if voice_only:
+                instructions += '\nThis is an automatically transcribed voice conversation, with no action authority. Discuss and explain only. No memory, persona, task or file changes are executed; never claim otherwise. Keep spoken replies concise.'
             if persona is not None:
                 instructions += PersonaStore.instructions(persona)
             if route_intent:
@@ -314,7 +321,7 @@ class ChatService:
                 instructions += INSTRUCTIONS
             try:
                 skill_decision = None
-                if not _purpose and (skill_context.get('explicit') or infer_skill(message)):
+                if not _purpose and not voice_only and (skill_context.get('explicit') or infer_skill(message)):
                     skill_decision = self.skills.select(message, skill_context, record=True)
                     guide = self.skills.guidance(skill_decision)
                     if guide:

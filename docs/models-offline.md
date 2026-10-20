@@ -22,7 +22,7 @@
   - [10.1.9 语音主选与候补：本地优先（2026-10-18）](#voice-model-selection)
     - [10.1.9.1 本地主选、备选与真实能力边界](#voice-local-candidates)
     - [10.1.9.2 内存、显存与模型文件分开预算](#voice-resource-footprint)
-    - [10.1.9.3 按需本地语音识别（0.1.80）](#speech-input-runtime)
+    - [10.1.9.3 按需本地语音识别（0.1.81）](#speech-input-runtime)
     - [10.1.9.4 Qwen 本地主力语音组件](#qwen-tts-runtime)
     - [10.1.9.5 ZipVoice 快速备用组件（2026-10-18）](#fast-speech-runtime)
     - [10.1.9.6 CosyVoice3 独立文件语音组件（2026-10-18）](#cosyvoice3-runtime)
@@ -272,7 +272,7 @@ API 收到附件、非空“本会话要求”或显式专业技能时，自动�
 | VAD | 已有 Silero ONNX，文件约 1.81 MB | 按键说话作为无 VAD 降级 | 按需判断有无语音；不识别人，也不消除回声 |
 | 说话人辨认 | 已有 CAM++ ONNX，文件约 28.28 MB、192 维 | 3D-Speaker ERes2Net ONNX，待同集比较 | 登记多个人的参考样本后比较特征；保留 unknown，跨语种/噪声须校准；现在只有特征诊断，没有完成任何人的登记 |
 | 谁在何时说话 | sherpa-onnx 的 pyannote segmentation 3.0 + 声纹 + 聚类，按需启动 | 完整 pyannote.audio 管线作质量对照 | 首期以离线分段/有延迟的增量结果起步，不承诺实时零延迟。分段结果再与登记身份匹配；不是两条独立干净音轨 [S190](references.md#s190) |
-| STT 日常 | 已有 SenseVoiceSmall int8，相关文件约 239.73 MB | Qwen3-ASR-0.6B，准确性/语种增强时再加载 | SenseVoice 先覆盖中、英、粤、日、韩，VAD 后整段识别，不是原生逐字流式；当前诊断固定 zh，正式多语入口需开放自动语种并验证中英混说。Qwen 候选支持 30 种语言及 22 种中文方言，但运行依赖和资源须另测，不能按 0.6B 聊天模型复用 [S192](references.md#s192) |
+| STT 日常 | 已有 SenseVoiceSmall int8，相关文件约 239.73 MB | Qwen3-ASR-0.6B，准确性/语种增强时再加载 | SenseVoice 先覆盖中、英、粤、日、韩，VAD 后整段识别，不是原生逐字流式；现有入口已开放 auto/zh/en/ja/ko/yue，仍需真实中英混说与各语言质量验收。Qwen 候选支持 30 种语言及 22 种中文方言，但运行依赖和资源须另测，不能按 0.6B 聊天模型复用 [S192](references.md#s192) |
 | TTS 日常主力 | **Qwen3-TTS-12Hz-1.7B-CustomVoice Q5_K + speech.cpp 0.8.10，本机优先 Vulkan** | EmotiVoice 已测 CPU 速度可用，但情绪区分不足，暂不作为主力 | 主人已确认 Serena 的三段样本自然、情绪明显，同意作为主力；已接入[独立文件 TTS](#qwen-tts-runtime)。9 个预设音色、10 语种是模型目录，未逐项验收；0.6B 官方未列指令控制，不代替 1.7B [S216](references.md#s216)、[S217](references.md#s217)、[S218](references.md#s218) |
 | TTS 快速备选 | **ZipVoice-Distill int8 + Vocos，CPU / sherpa-onnx，4 步；已有独立文件 TTS** | 已有 VITS 作低资源应急；Kokoro int8 已作对照，本机较慢 | 按主人要求默认不启动、手动备用；已测短句及时性，但没有通用情绪指令，不满足主力三项要求。使用见[备用组件](#fast-speech-runtime) [S189](references.md#s189) |
 | TTS 克隆与情绪指令 | **Fun-CosyVoice3-0.5B-2512，已接入独立文件 TTS** | 资源不够时按已准入候补降级；当前未接通自动云端 TTS | 本机 Windows/AMD CPU 已通过中文克隆、开心指令与英文跨语种短样本；不自动常驻。原生 CPU 路径明显慢于实时，语气听感/相似度和其他语种仍待验收，详见[真实证据](delivery-validation.md#cosyvoice3-evidence)，不引用上游 150ms 为本机承诺 [S191](references.md#s191) |
@@ -329,13 +329,15 @@ ZipVoice 尚未安装，163.32 MB 下载量不能当成运行 RAM。即使仅按
 后续记录候选进程的基线、冷加载、预热、单轮、并发和释放后读数，再冻结准入预算；共同运行时的实际峰值不能简单相加各进程独测值。GPU 表仅为兼容后端的候选预算，不证明当前 Windows/AMD 设备支持 CUDA；能分配共享显存也不等于对应算子可运行。集成 GPU 的共享内存来自同一物理 RAM 池，不能把系统内存和共享显存当作两份额外容量。默认不同时常驻全部候选，资源不足时按[候补规则](#voice-routing-policy)降级。
 
 <a id="speech-input-runtime"></a>
-#### 按需本地语音识别（0.1.80）
+#### 按需本地语音识别（0.1.81）
 
-**implemented：**复用已固定的 SenseVoiceSmall int8 ONNX 与 sherpa-onnx 1.13.8，当前 Windows 主机已有组件，无新增模型下载、云端 STT 或常驻服务。浏览器只在主人点击麦克风后采集；[SpeechInput](../runtime/node-host/jarvis_core/speech_input.py) 经管道交给[固定识别入口](../runtime/node-host/jarvis_core/speech_input_worker.py)，按原清单校验模型摘要，然后退出释放模型。该进程是资源隔离，不是运行不可信代码的安全沙箱。支持语言枚举不等于各语言质量均已验收。
+**implemented：**复用已固定的 SenseVoiceSmall int8 ONNX 与 sherpa-onnx 1.13.8，当前 Windows 主机已有组件，无新增模型下载、云端 STT 或常驻服务。浏览器只在主人点击麦克风或开启连续语音后采集；[SpeechInput](../runtime/node-host/jarvis_core/speech_input.py) 经管道交给[固定识别入口](../runtime/node-host/jarvis_core/speech_input_worker.py)，按原清单校验模型摘要，然后退出释放模型。该进程是资源隔离，不是运行不可信代码的安全沙箱。支持语言枚举不等于各语言质量均已验收。
 
 单次最多 20 秒，CPU 两线程、低于普通优先级，独立单槽；启动至少保留 2 GiB 可用物理/提交余量，Windows Job 提交上限 1.5 GiB、45 秒处理时限。上限不是常驻占用，实测另见[本轮证据](delivery-validation.md#k6-voice-input-evidence)。取消和核心停止回收此进程，不取消后台任务。不加载声纹模型，不做身份认证、云端候补或自动模型替换。
 
-运行环境需要已有可选 `speech` 依赖及 `config/model-profiles/local-candidates.json` 的 STT 文件；默认精简运行包不包含语音依赖或模型。缺失、损坏、版本不符或资源不足时返回失败并保留文字入口，不静默下载安装。模型根目录沿用现有配置；本轮未更换组件版本或扩大模型分发许可。该非流式识别按段处理，不能称为全双工实时 ASR。
+0.1.81 复用既有 Silero ONNX，在同一个短生命周期 Worker 中核对摘要并做语音检测；有效语音至少 0.18 秒才加载 SenseVoice，静音/未检出语音返回空文本。浏览器只做低成本能量分段，不能把能量阈值称作人声判断；神经 VAD 不认证身份或区分扬声器回声。连续模式不常驻 ASR/VAD，不新增模型下载。资源和样本证据见[连续语音验收](delivery-validation.md#k6-continuous-voice-evidence)。
+
+运行环境需要已有可选 `speech` 依赖及 `config/model-profiles/local-candidates.json` 的 STT 和 Silero 文件；默认精简运行包不包含语音依赖或模型。缺失、损坏、版本不符或资源不足时返回失败并保留文字入口，不静默下载安装。模型根目录沿用现有配置；本轮未更换组件版本或扩大模型分发许可。该非流式识别按段处理，不能称为全双工实时 ASR。
 
 录音不落盘；转写回执只在 Host 内存中有界保留，取消/填入消息后清除转写文本，服务重启丢弃，不重放。具体时限、去重和清理语义见[输入接口](contracts.md#speech-input-contract)。回答语音仍复用下方 Qwen 与[原朗读生命周期](interaction-persona.md#chat-readout-ui)，已有 TTS 音频缓存规则不改变。
 

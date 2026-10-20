@@ -640,6 +640,12 @@ queue 为原队列的 paused/owned/waiting/capacity/error/resources，加 runnin
 
 `jarvis:message-start` / `jarvis:reply-ready` 携带原请求编号；自动朗读只消费本页启用后新请求的完整成功回复。会话编号、输入代次不符，取消、页面隐藏或切换会话均丢弃迟到结果。`jarvis:conversation-context` 从真实会话变更同步，不使用首次保存时改变的 URL 推断新会话。开始录音先停止本页旧朗读；不停止其他页面的语音操作，不提供声纹授权。
 
+0.1.81 增加可选聊天字段 `voice_mode: "conversation"`，同步与回执入口均验证，只接受该值或缺省/null；原消息摘要纳入此字段，同一编号不得切换权限语义。`ChatService` 在任何个人指令执行前返回无提交说明，关闭技能指导/意图自动识别；`DialogueTurns` 与 `WorkAdmission` 双层跳过自动任务受理。它是缩小权限的传输标记，不是新增认证。原只读记忆/人格上下文与纯计算仍按原规则可用；发送音频转写不等于授权写资料或执行任务。
+
+新增固定 `/voice-session.js` 控制器与 `/voice-session-capture.js` Worklet。后者最多缓存 18 秒 Float32 与 0.24 秒前导样本，禁用时清空，等待回复期间不排队录音；每次启停递增采集代次，旧代次消息即使迟到新监听阶段也丢弃；采样率按设备实际值换算，送入既有 16 kHz PCM 协议。停止/换会话通过同一识别回执取消；丢失响应只查询，不重发。新 ASR 结果附 `vad: "silero"` 与 `speech_seconds`，其余状态/容量兼容。
+
+`JarvisReadout.pause()` 返回当前暂停所有权 token，`resume(token)` 只恢复该次且未被手动接管的播放。新轮次与停止清空旧播放，迟到完成不得重开监听；控制器只在本会话完整回答的播报正常结束后接下一轮。权限等待取消时，随后返回的音轨立即关闭；隐藏页面、结束、模型失败和资源上限均退出。识别转写与 UI 会话时限是有界交互约束，数值只维护在[语音交互](interaction-persona.md#voice-chat-plan)。
+
 完整使用方式归[语音交互](interaction-persona.md#voice-chat-plan)，进程/模型与资源规则归[识别组件](models-offline.md#speech-input-runtime)。
 
 <a id="qwen-tts-contract"></a>

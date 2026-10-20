@@ -131,7 +131,7 @@
 | K2/W2 固定报告实验 | 后台自然语言需求、两步固定计划、真实目录 Worker、类型统计 JSON、摘要回执及取消/恢复 | 仅样例范围；普通聊天通用自动工具派发、通用技能/MCP、完整 K2 验收及真实离线任务未完成 |
 | K2/W3 会话任务关联 | 0.1.31 明确任务模式及 /任务、/进度、/取消，本会话账本投影、刷新后关联恢复与核验报告下载；不额外调用模型查询状态 | 固定目录报告子集；并行性能指标、通用工具选择与完整 K2 验收仍待完成 |
 | 项目工作台子集 | 持久登记项目文件夹、按需文件树、文本/脚本编辑、冲突检查、单根工程文件、会话切换与明确文本导出 | 普通会话文字可在本机归档，草稿/附件仅页面内存；只检索明确登记的项目文本；普通会话不执行生成代码，明确启用的编程副本见[技能入口](#native-skills-entry)；不支持通用图片/Word 产物，完整桌面工作台仍待完成 |
-| 回复朗读、文件语音与前置诊断 | [聊天回复朗读](interaction-persona.md#chat-readout-ui)支持短句连续播放、暂停恢复与会话切换停止；[Qwen 主力文件 TTS](models-offline.md#qwen-tts-runtime) 支持组合表达，已获有限样本听感接受；[ZipVoice 文件 TTS](models-offline.md#fast-speech-runtime) 已改为默认停止的备选；[CosyVoice3](models-offline.md#cosyvoice3-runtime) 按需增强情绪；[按键 STT](models-offline.md#speech-input-runtime) 已接入本地识别，声纹向量、VAD 仍为文件诊断 | 已验证按键录音/转写与新回复播报；CosyVoice3 原生 CPU 仍慢；主人登记、活体检测、全双工对话未实现；不改变 K0—K6 顺序 |
+| 回复朗读、文件语音与前置诊断 | [聊天回复朗读](interaction-persona.md#chat-readout-ui)支持短句连续播放、暂停恢复与会话切换停止；[Qwen 主力文件 TTS](models-offline.md#qwen-tts-runtime) 支持组合表达，已获有限样本听感接受；[ZipVoice 文件 TTS](models-offline.md#fast-speech-runtime) 已改为默认停止的备选；[CosyVoice3](models-offline.md#cosyvoice3-runtime) 按需增强情绪；[按键 STT](models-offline.md#speech-input-runtime) 已接入本地识别，Silero 已接识别门控，声纹向量仍为文件诊断 | 已验证按键录音/转写与新回复播报；CosyVoice3 原生 CPU 仍慢；主人登记、活体检测、全双工对话未实现；不改变 K0—K6 顺序 |
 | 明确任务范围的浏览器实验 | 独立 CLI、网页任务面板、持久 FIFO 队列、DOM 规划、四种元素操作、步骤与截图、取消；聊天并行 | 无通用工作流、原生桌面、视觉定位、登录态导入或开放式网页探索；不代表完整 K2/K6 达标 |
 
 固定目录能力当前可做的真实任务是：枚举获准样例目录的文件元数据，保存带摘要的 JSON 产物；查询持久任务状态；拒绝越界路径与重复 ID 的不同参数。任务失败或进程崩溃不能简单改成“没发生”：未确认的 DISPATCHING 进入 UNKNOWN，不自动重放。
@@ -208,7 +208,7 @@ $py = 'H:\JarvisData\envs\dev\Scripts\python.exe'
 & 'H:\JarvisData\envs\dev\Scripts\python.exe' apps/web/server.py
 ```
 
-浏览器打开 `http://127.0.0.1:18181`。网页采用侧栏、中央会话和底部输入区，保留 Jarvis 的 J 标识与星形图标。点击输入区下方模型名称，在同一个可搜索列表中选择各家模型，供应商自动匹配；旁边可调整该模型支持的推理级别。`auto` 跟随各家的默认模型和参数。初始六条线路注册可选，新增或停用后以后台有效配置为准，每条消息调用当前选中的一个模型；不同页面可并发，服务器现有上限为两个在途请求。该界面不表示同一条消息自动由多个模型联合回答。级别映射与限制见[推理级别](models-offline.md#reasoning-controls)。0.1.24 起普通会话文字自动保存在本机，“新对话”保留旧会话供切换；临时会话和未发送草稿仅在页面内存。新对话不会删除持久调用记录。Eachlabs 可在[后台](#model-admin-entry)显式查询余额；已有明确事实记忆与项目资料检索，0.1.80 已接入[按键语音输入](interaction-persona.md#voice-chat-plan)，持续免按键语音仍待实现。网页服务与本地推理服务均需显式启动；关闭网页页签只关闭界面，服务仍可工作；完整退出语义见[私人助手生命周期](interaction-persona.md#personal-assistant-lifecycle)。
+浏览器打开 `http://127.0.0.1:18181`。网页采用侧栏、中央会话和底部输入区，保留 Jarvis 的 J 标识与星形图标。点击输入区下方模型名称，在同一个可搜索列表中选择各家模型，供应商自动匹配；旁边可调整该模型支持的推理级别。`auto` 跟随各家的默认模型和参数。初始六条线路注册可选，新增或停用后以后台有效配置为准，每条消息调用当前选中的一个模型；不同页面可并发，服务器现有上限为两个在途请求。该界面不表示同一条消息自动由多个模型联合回答。级别映射与限制见[推理级别](models-offline.md#reasoning-controls)。0.1.24 起普通会话文字自动保存在本机，“新对话”保留旧会话供切换；临时会话和未发送草稿仅在页面内存。新对话不会删除持久调用记录。Eachlabs 可在[后台](#model-admin-entry)显式查询余额；已有明确事实记忆与项目资料检索，0.1.81 已接入[连续语音与按键输入](interaction-persona.md#voice-chat-plan)，物理全双工与声纹仍待验收。网页服务与本地推理服务均需显式启动；关闭网页页签只关闭界面，服务仍可工作；完整退出语义见[私人助手生命周期](interaction-persona.md#personal-assistant-lifecycle)。
 
 **0.1.12：运行时发送箭头变为方形“停止生成”按钮。** 点击后停止接收本次回复、提交后台取消，并恢复发送；原问题会回到空输入框，已输入的新草稿保留。运行中按 Enter 不会误触停止。停止后的迟到回答不追加、不进入后续历史，也不会触发尚未开始的自动文件保存；已经进入文件落盘时显示“正在保存文件”并等待回执，不把写完的文件假装撤回。此按钮仅作用于本次聊天，其他页面、浏览器任务和核心停止锁存不受影响。远端已接收的请求仍可能产生用量；具体处理边界见[模型调用边界](models-offline.md#section-896f72aed9a9)，验证见[停止验收](delivery-validation.md#chat-stop-evidence)。
 
@@ -658,7 +658,7 @@ K1 可以暂时用假模型/规则输入验证可靠性，但它还不能叫完�
 | 输入适配：K2/W3 | [F05 按键录音、本地转写、编辑发送和独立播报](development-guide.md#direction-voice) | 复用已稳定的文字受理；不等待完整记忆框架/所有工具建成。接口及真实设备测试可独立准备；连续语音和自动动作另过门，遵守下节③④ |
 | K3 已闭环，转入 K4 | [F07 编码协作](delivery-validation.md#k3-closure-matrix)的候选、独立检查、多文件/包、新文件、离线构建与 Codex 通路已验收 | 保留支持配方边界；后续多语言工具链按各自出口扩展，不重复开放已完成的 K3 清单 |
 | 已完成限定 K4：工具成长 | 已实现[项目工具发布/复用/回退](evolution-release.md#project-tool-runtime)和[有界需求选用/缺口交接](evolution-release.md#project-tool-intents)；[检查记录](delivery-validation.md#k4-tool-intent-evidence) | 已补[契约草案/明确审阅与候选链](evolution-release.md#project-tool-contract-drafts)，0.1.75 增加[受控准入、灰度收益与退役](evolution-release.md#project-tool-lifecycle)；[证据](delivery-validation.md#k4-lifecycle-evidence)。0.1.76 增加[结构体检与无引用旧版归档](evolution-release.md#project-tool-quality-storage)；[三任务对照与检查](delivery-validation.md#k4-quality-storage-evidence)。0.1.77 新增[回执与目录容量整理](evolution-release.md#growth-ledger-maintenance)。0.1.78 补齐三个领域的[按策略连续成长](evolution-release.md#bounded-growth-policy)，[C01—05 对应证据](delivery-validation.md#k4-growth-closure-evidence)已收口；不承诺域外语义、无限存储或长期表现 |
-| 当前 K6 语音增量，K5 持续维护 | K5 首个受限模块已闭环；0.1.80 接入按键录音、本地转写与新回复播报。后续接连续轮次、语音打断与适用声学验证，再扩大单机 Agent 和双节点能力 | 逐项见[工作清单](development-guide.md#direction-work)，按[唯一 K 阶段表](#bootstrap-5)及原出口。没有需求或前置证据时保持 proposed，不预装全部组件 |
+| 当前 K6 语音增量，K5 持续维护 | K5 首个受限模块已闭环；0.1.81 接入连续轮次、本地 VAD/STT、播报与受限插话。后续补真实声学与交谈质量，推进单机 Agent 和双节点能力 | 逐项见[工作清单](development-guide.md#direction-work)，按[唯一 K 阶段表](#bootstrap-5)及原出口。没有需求或前置证据时保持 proposed，不预装全部组件 |
 
 顺序表达依赖和产品重点，不是日历承诺。单个增量的范围、产物和冻结判据应在编码前明确；如果前置能力已满足可直接复用，不重新开发，也不为了“下一版”强行跳过未解决失败。当前下一项以下节为准，旧版本演示场景保留其原证据，不再充当待办。
 
@@ -679,7 +679,7 @@ K1 可以暂时用假模型/规则输入验证可靠性，但它还不能叫完�
 
 ②③ 的案例应服务个人助手的实际用途，例如资料清单整理、笔记格式转换与重复报告；不能只用植入缺陷的旧实现制造正收益。优先复用本机 SQLite、按需 Worker 和模型路由，新增评估与整理通过适配器接入，不引入重型集群或多套常驻数据库。
 
-**阶段出口保持原定义：**按[收口差距与判定](delivery-validation.md#k4-closure-readiness)逐项补证；仅有人审阅的流程可用，不足以关闭原 K4 的自动成长目标。可以对明确任务域给出有限范围结论，无需承诺“任意业务标准都能自主判对”。本轮 K4 证据成立，K5 已选择实际检索排序模块并完成[接口与失败回退](knowledge-learning.md#retrieval-ranking-module)。0.1.79 已完成[首个受限模块闭环](delivery-validation.md#k5-ranking-module-evidence)，不能再把模型候选、持久选择和重启回退列为未实现。K5 持续维护包括：①实际使用观察与人工反馈，②候选配额下的显式整理/恢复，③更广泛语义回归及其他模块独立验收；这些不是所有 K6 工作的前置阻塞。没有自然使用证据时不声称长期收益；不自动创建后台监控。按主人本轮要求，K6 先交付[按键语音交流](interaction-persona.md#voice-chat-plan)：录音、本地识别、可编辑转写与原会话发送、新回复播报、取消/恢复和资源验证。随后按适用证据推进连续轮次与声学打断、单机两职责 Agent、双节点离线自治/同步，再按需扩展设备与形态；不同时预装全部框架。个人记忆、伙伴连续性和前台可用性始终是回归约束。原 K1/K2 外部条件保留，不在此安排重复验收。
+**阶段出口保持原定义：**按[收口差距与判定](delivery-validation.md#k4-closure-readiness)逐项补证；仅有人审阅的流程可用，不足以关闭原 K4 的自动成长目标。可以对明确任务域给出有限范围结论，无需承诺“任意业务标准都能自主判对”。本轮 K4 证据成立，K5 已选择实际检索排序模块并完成[接口与失败回退](knowledge-learning.md#retrieval-ranking-module)。0.1.79 已完成[首个受限模块闭环](delivery-validation.md#k5-ranking-module-evidence)，不能再把模型候选、持久选择和重启回退列为未实现。K5 持续维护包括：①实际使用观察与人工反馈，②候选配额下的显式整理/恢复，③更广泛语义回归及其他模块独立验收；这些不是所有 K6 工作的前置阻塞。没有自然使用证据时不声称长期收益；不自动创建后台监控。按主人本轮要求，K6 先交付[按键语音交流](interaction-persona.md#voice-chat-plan)：录音、本地识别、可编辑转写与原会话发送、新回复播报、取消/恢复和资源验证。0.1.81 已交付[连续轮次与受限插话](delivery-validation.md#k6-continuous-voice-evidence)。下一项可独立开发的是单机两职责 Agent 的分工、预算与汇总，真实声学与交谈质量另按证据补验；之后推进双节点离线自治/同步，再按需扩展设备与形态；不同时预装全部框架。个人记忆、伙伴连续性和前台可用性始终是回归约束。原 K1/K2 外部条件保留，不在此安排重复验收。
 
 <a id="dialogue-upgrade-order"></a>
 ### K2 内优先完成文字/语音对话与工作的分离
@@ -693,7 +693,7 @@ K1 可以暂时用假模型/规则输入验证可靠性，但它还不能叫完�
 | ③ K2/W3 的输入/输出适配 | 按键录音、本地 STT、可编辑最终转写；复用文字入口与 Qwen 短段播报 | 麦克风失败可打字，中文/英文可用；工作、朗读、输入独立取消；实测内存和首声 |
 | ④ K2/W3＋W4 的连续交流增量 | 显式开启连续语音、VAD/轮次、AEC 验证、说话打断、句间情绪；CPU/GPU/配额公平调度 | 通过真实房间音频及负载测试，只有有效代际能播放，后台工作仍有进展 |
 
-当前已有[回执/待发](delivery-validation.md#dialogue-receipt-evidence)、[普通会话持久恢复](delivery-validation.md#dialogue-recovery-evidence)和[上下文与后台模型分槽](delivery-validation.md#conversation-lanes-evidence)。第①项已补普通上下文阶段超时和目录/技能/解释规划进程；仍需核对维护与网页规划路径、完整 WorkAdmission 和压力公平性。第②项已完成[200 条新合成样例的分集评测与限定受理](delivery-validation.md#dialogue-intent-shadow-evidence)：40 条校准、160 条留出，Flash 单项只读文档查询已有真实任务闭环，0.1.59进一步完成[混合样例报告子集](delivery-validation.md#mixed-report-admission-evidence)，独立人工标注、更多工具/模型、模糊指代和多行动依赖仍待补齐。0.1.80 已验证按键麦克风输入的限定链路；整个 R07、持续语音与资源公平调度仍未验收，不能把待发队列视为已经理解连续补充。
+当前已有[回执/待发](delivery-validation.md#dialogue-receipt-evidence)、[普通会话持久恢复](delivery-validation.md#dialogue-recovery-evidence)和[上下文与后台模型分槽](delivery-validation.md#conversation-lanes-evidence)。第①项已补普通上下文阶段超时和目录/技能/解释规划进程；仍需核对维护与网页规划路径、完整 WorkAdmission 和压力公平性。第②项已完成[200 条新合成样例的分集评测与限定受理](delivery-validation.md#dialogue-intent-shadow-evidence)：40 条校准、160 条留出，Flash 单项只读文档查询已有真实任务闭环，0.1.59进一步完成[混合样例报告子集](delivery-validation.md#mixed-report-admission-evidence)，独立人工标注、更多工具/模型、模糊指代和多行动依赖仍待补齐。0.1.81 已验证按键与连续轮次的限定链路；整个 R07、物理全双工语音与资源公平调度仍未验收，不能把待发队列视为已经理解连续补充。
 
 完整 M2 语音体验和 K6 多设备验收归属不变；本轮提出的单机语音增量可先沿已有 K2 入口实施，不必等 NPC、完整 Agent 工厂或共同体。按步骤验证后再默认启用相应能力，阶段性仍允许文字或按键模式。每个增量采用功能开关/适配器与故障降级；撤回新路由不影响既有已入账任务。验收统一见[分离与并行验收](delivery-validation.md#conversation-separation-validation)，不以生成文件数量、模型自评分或异步函数数量判定完成。
 

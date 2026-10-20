@@ -44,6 +44,8 @@ class WorkAdmission:
             return None
 
     def admit(self, row, payload, result):
+        if payload.get('voice_mode') == 'conversation':
+            return result
         choice = select_report(payload.get('message', ''), result.get('intent_decision'))
         if choice is None:
             result = self.documentation.admit(row, payload, result)

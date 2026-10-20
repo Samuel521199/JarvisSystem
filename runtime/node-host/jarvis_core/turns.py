@@ -27,6 +27,8 @@ def identifier(value):
 
 def invoke_reply(core, chat, payload, cancel_event, request_id):
     """One invocation boundary for old synchronous and new receipt endpoints."""
+    from .voice_turn import validate as validate_voice
+    validate_voice(payload.get('voice_mode'))
     from .personal import parse
     core.assert_running()
     if cancel_event is not None and cancel_event.is_set():
@@ -34,7 +36,7 @@ def invoke_reply(core, chat, payload, cancel_event, request_id):
                 'outcome_uncertain': False, 'user_message': '已停止，本次未调用模型。'}
     selection = {k: payload[k] for k in ('model', 'reasoning', 'context_note', 'attachments',
         'memory_context', 'history_memory', 'knowledge_context', 'history_knowledge',
-        'skill_context', 'personal_context', 'continuity_context', 'history_continuity')
+        'skill_context', 'personal_context', 'continuity_context', 'history_continuity', 'voice_mode')
         if payload.get(k) is not None}
     if cancel_event is not None:
         selection['cancel_event'] = cancel_event
@@ -44,7 +46,7 @@ def invoke_reply(core, chat, payload, cancel_event, request_id):
         selection['_request_id'] = request_id
     from .chat import ChatService
     if isinstance(chat, ChatService):
-        selection['_intent_shadow'] = True
+        selection['_intent_shadow'] = payload.get('voice_mode') != 'conversation'
     from .dialogue_process import in_dialogue
     token = in_dialogue.set(True)
     try:
@@ -229,7 +231,7 @@ class DialogueTurns:
                           'user_message': '本次回复已停止；远端请求可能仍有用量。'}
             # Under the same per-turn lock as cancellation/publication. Only a
             # local queue admission is allowed here; remote work runs in FIFO.
-            elif self.work_admission is not None:
+            elif self.work_admission is not None and row.get('work_payload', {}).get('voice_mode') != 'conversation':
                 try: result = self.work_admission.admit(row, row.get('work_payload', {}), result)
                 except Exception:
                     result = {**result, 'work_admission': {'status': 'unconfirmed', 'automatic': False,

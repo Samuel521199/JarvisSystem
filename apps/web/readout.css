@@ -13,3 +13,5 @@
 .voice-pulse{width:6px;height:6px;border-radius:50%;background:var(--focus)}
 @keyframes voice-glow{50%{box-shadow:0 0 0 5px transparent;opacity:.65}}
 @media(prefers-reduced-motion:reduce){.voice-record[data-state=recording]{animation:none}}
+
+#voice-session-open{margin-left:6px}#voice-session-toggle,#voice-interject{margin:8px 6px 6px 0;padding:7px 12px;border:1px solid var(--line);border-radius:8px;background:var(--soft);color:var(--ink)}#voice-session-toggle[aria-pressed=true]{color:var(--blue);border-color:var(--blue)}#voice-session-toggle[data-state=listening]{animation:voice-glow 1.8s ease-in-out infinite}#voice-session-info{line-height:1.6;overflow-wrap:anywhere}@media(prefers-reduced-motion:reduce){#voice-session-toggle[data-state=listening]{animation:none}}

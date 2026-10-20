@@ -107,7 +107,7 @@ $('voice-insert').addEventListener('click',()=>{
 window.addEventListener('jarvis:message-start',event=>{
  if(current)cancel('已发送文字，本轮语音输入取消。');
  window.JarvisReadout?.stop('新消息已发送，旧播报停止。');
- replyTicket={id:event.detail.id,epoch:generation,context:context(),enabled:$('voice-auto').checked};
+ replyTicket={id:event.detail.id,epoch:generation,context:context(),enabled:!event.detail.voice&&$('voice-auto').checked};
 });
 window.addEventListener('jarvis:reply-ready',event=>{
  const t=replyTicket,d=event.detail;
@@ -121,5 +121,6 @@ window.addEventListener('jarvis:conversation-context',()=>{
 });
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&current)cancel('页面已隐藏，语音输入已取消。');if(document.hidden){generation++;replyTicket=null;}});
 window.addEventListener('pagehide',()=>cancel('页面已关闭。',true));
+window.JarvisVoiceInput={api,encode,context,cancel};
 controls('idle');
 })();

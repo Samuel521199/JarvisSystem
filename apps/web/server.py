@@ -93,8 +93,10 @@ def strict_json(data):
 
 
 def validate_chat(payload):
-    if not isinstance(payload, dict) or set(payload) - {"message", "provider", "history", "model", "reasoning", "attachments", "context_note", "memory_context", "history_memory", "knowledge_context", "history_knowledge", "skill_context", "personal_context", "continuity_context", "history_continuity"}:
+    if not isinstance(payload, dict) or set(payload) - {"message", "provider", "history", "model", "reasoning", "attachments", "context_note", "memory_context", "history_memory", "knowledge_context", "history_knowledge", "skill_context", "personal_context", "continuity_context", "history_continuity", "voice_mode"}:
         raise ValueError("invalid request fields")
+    from jarvis_core.voice_turn import validate as validate_voice
+    validate_voice(payload.get('voice_mode'))
     from jarvis_core.personal import validate_context as validate_personal_context
     validate_personal_context(payload.get('personal_context'))
     if 'skill_context' in payload:
@@ -257,6 +259,8 @@ class LocalChatServer(ThreadingHTTPServer):
         self.readout_script = asset('readout.js')
         self.voice_input_script = asset('voice-input.js')
         self.voice_capture_script = asset('voice-capture.js')
+        self.voice_session_script = asset('voice-session.js')
+        self.voice_session_capture_script = asset('voice-session-capture.js')
         self.html = self.html.replace(b'__JARVIS_READOUT_STYLE__', asset('readout.css'))
         self.evolution_script = asset('evolution.js')
         self.ranking_modules_script = asset('ranking-modules.js')
@@ -369,7 +373,7 @@ class ChatHandler(BaseHTTPRequestHandler):
             self.send_header("X-Frame-Options", "DENY")
             self.send_header("Referrer-Policy", "no-referrer")
             self.send_header("Content-Security-Policy", "default-src 'none'; "
-                             f"script-src 'nonce-{self.server.nonce}' http://127.0.0.1:{self.server.server_port}/voice-capture.js http://localhost:{self.server.server_port}/voice-capture.js; style-src 'nonce-{self.server.nonce}'; "
+                             f"script-src 'nonce-{self.server.nonce}' http://127.0.0.1:{self.server.server_port}/voice-capture.js http://localhost:{self.server.server_port}/voice-capture.js http://127.0.0.1:{self.server.server_port}/voice-session-capture.js http://localhost:{self.server.server_port}/voice-session-capture.js; style-src 'nonce-{self.server.nonce}'; "
                              "connect-src 'self'; img-src 'self' blob:; media-src 'self' blob:; frame-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'")
             self.end_headers()
             self.wfile.write(body)
