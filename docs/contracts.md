@@ -81,7 +81,7 @@
     - [8.15.2.1 普通会话的持久回复恢复（0.1.49）](#dialogue-recovery-contract)
     - [8.15.2.2 对话与后台模型进程边界（0.1.54）](#dialogue-process-contract)
 - [8.16 单机双职责协作契约（0.1.82）](#team-analysis-contract)
-- [8.17 双节点共享资料契约（0.1.85）](#shared-cards-contract)
+- [8.17 双节点共享资料契约（0.1.86）](#shared-cards-contract)
 <!-- book-nav:end -->
 
 <a id="k0-contracts"></a>
@@ -1437,9 +1437,9 @@ SQLite 写锁等待上限 150ms。受理落盘失败不调用模型；完成落�
 
 
 <a id="shared-cards-contract"></a>
-## 双节点共享资料契约（0.1.85）
+## 双节点共享资料契约（0.1.86）
 
-协议标识 `jarvis.shared-cards.v1`。本机 `GET/POST /api/federation` 继承页面 nonce、Host/Origin 防护与核心停止守卫；基础动作为 `initialize/listen/close/invite/join/retry/sync/edit/revoke`；生命周期动作为 `export/archive_preview/archive/restore_archive/recovery_preview/recover`，全部拒绝未知字段。网络接收端独立，仅 `POST /pair` 和 `/sync`，不暴露聊天、文件或任务 API。
+协议标识 `jarvis.shared-cards.v1`。本机 `GET/POST /api/federation` 继承页面 nonce、Host/Origin 防护与核心停止守卫；基础动作为 `initialize/listen/close/invite/join/retry/sync/edit/revoke`；生命周期动作为 `export/archive_preview/archive/restore_archive/recovery_preview/recover`，全部拒绝未知字段。网络接收端独立，仅 `POST /pair`、`/sync` 和只读 `/inspect`，不暴露聊天、文件或任务 API。
 
 请求与回复为 `{body, signature}`，使用固定 JSON 序列化和 ECDSA P-256/SHA-256。配对请求携带协议、空间、两端身份、原请求编号、公开证书与一次性随机令牌；服务端只保存令牌摘要，加入端待确认令牌受 DPAPI 保护。客户端 TLS 握手后、发送任何配对码或正文前检查预期证书指纹；已配对请求还核验签名、目标、空间和当前撤销状态。回复必须匹配原请求编号。使用身份指纹绑定，不依赖公开 CA 签发或 DNS 认证。
 
@@ -1460,7 +1460,15 @@ SQLite 写锁等待上限 150ms。受理落盘失败不调用模型；完成落�
 
 ChatService 返回 `history_info.shared={references,dropped_history_messages,used}` 并保持原历史索引映射。宿主代理模型调用时，私有 IPC 携带范围、引用及实际配置路径，子进程自行构造准入守卫；不是只依赖主进程回调。错误输入返回受控 400；有效但失效的引用以拒绝结果返回。撤销、历史排除和在途不确定性的完整规则只在[可失效引用](federation.md#shared-live-references)维护。
 
-持久状态为可选 `federation.db` 与 `federation/`。0.1.85 兼容读取 schema 1/2/3，首次成功写入升级至 schema 3；策略为本机字段，不在同步/导出中出现。短写事务沿用核心 effect guard。受管理运行槽只允许 0.1.85 读取 schema 3；schema 2 支持 0.1.84/0.1.85，schema 1 支持 0.1.83—0.1.85。这不限制手动运行旧源码。[验证](delivery-validation.md#k6-shared-access-evidence)与[交互](interaction-persona.md#shared-cards-ui)分别维护。
+| 0.1.86 连接动作 / 输入 | 返回与约束 |
+|---|---|
+| `connection_check`：`space` | `reachable/identity_verified/endpoint/message`，成功附 `peer/fingerprint/latency_ms`，诊断失败附 `code`；不修改资料或连接 |
+| `connection_preview`：`space/endpoint` | 原身份证明与 `token/old_endpoint/space/expires_seconds/effect`；验证新地址但尚不保存 |
+| `connection_apply`：`space/token` | 重新证明后返回 `space/endpoint/peer/fingerprint/latency_ms/identity_verified/changed/message`；仅更新原连接地址 |
+
+`POST /inspect` 使用同一签名封装。请求体严格为 `protocol/kind/space/sender/target/request_id`，其中 kind 为 `jarvis.shared-connection.v1`；回复严格为同组字段加 `paired:true`，双方身份互换，原挑战不变。没有卡正文、快照、授权或同步计数。双方仍须校验原身份、活跃空间与联网策略；这不是新配对入口。预览绑定、失效、重试及确认规则只在[连接恢复](federation.md#shared-connection-recovery)维护。
+
+持久状态为可选 `federation.db` 与 `federation/`。0.1.86 兼容读取 schema 1/2/3，首次成功写入旧结构升级至 schema 3；本轮未新增 schema。策略为本机字段，不在同步/导出中出现，连接预览仅在内存。短写事务沿用核心 effect guard。受管理运行槽允许 0.1.85/0.1.86 读取 schema 3；schema 2 支持 0.1.84—0.1.86，schema 1 支持 0.1.83—0.1.86。这不限制手动运行旧源码。[模型用途验证](delivery-validation.md#k6-shared-access-evidence)、[连接验证](delivery-validation.md#k6-connection-recovery-evidence)与[交互](interaction-persona.md#shared-cards-ui)分别维护。
 
 <!-- book-footer:start -->
 [返回全书目录](README.md#book-tree) · [上一章：主人利益原则、身份授权与停止控制](security-sovereignty.md) · [下一章：技术栈、源码目录与运行数据](stack-project-layout.md)

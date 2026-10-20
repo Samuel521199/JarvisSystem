@@ -41,6 +41,7 @@ if sys.argv[3]=='first':
     sys.path.insert(0,str(root/'adapters/models/provider-native'))
     from jarvis_core.federation import Federation
     sharing=Federation(core)
+    assert not sharing.connection.previews
     assert not sharing.status()['initialized']
     sharing.initialize()
     assert sharing.status()['fingerprint'] and sharing.status()['endpoint'] is None

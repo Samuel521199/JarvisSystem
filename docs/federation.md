@@ -1,6 +1,6 @@
 # 离线自治、多设备共同体与重连
 
-> 状态：总体 proposed；0.1.85 已实现双节点共享卡、本机模型用途与可失效引用，未实现全记忆共同体 · 更新：2026-10-20
+> 状态：总体 proposed；0.1.86 已实现双节点共享卡、本机模型用途、可失效引用与原设备地址恢复，未实现全记忆共同体 · 更新：2026-10-20
 > [文档入口](README.md) · [维护规则](MAINTENANCE.md) · [架构图册](architecture-atlas.md)
 
 <!-- book-nav:start -->
@@ -22,7 +22,7 @@
   - [13.2.3 复制顺序与收敛条件](#section-f7d85c1ef91d)
   - [13.2.4 哪些内容可以合并，哪些不能](#section-6f50d96f4bfc)
 - [13.3 单机离线继续工作](#end-to-end-flows-2)
-- [13.4 双节点共享资料卡（0.1.85）](#shared-cards-runtime)
+- [13.4 双节点共享资料卡（0.1.86）](#shared-cards-runtime)
   - [13.4.1 运行结构与选择](#shared-cards-components)
   - [13.4.2 一次完整使用流程](#shared-cards-flow)
   - [13.4.3 导出、归档与容量维护](#shared-cards-lifecycle)
@@ -30,7 +30,8 @@
   - [13.4.5 旧版副本与当前引用的关系](#shared-card-copies)
   - [13.4.6 本机模型用途授权](#shared-model-use)
   - [13.4.7 会话引用、重新核验与派生历史](#shared-live-references)
-  - [13.4.8 限制与恢复边界](#shared-cards-boundaries)
+  - [13.4.8 原设备连接诊断与地址恢复](#shared-connection-recovery)
+  - [13.4.9 限制与恢复边界](#shared-cards-boundaries)
 <!-- book-nav:end -->
 
 <a id="offline-federation"></a>
@@ -180,7 +181,7 @@
 [矢量图](diagrams/offline-task-flow.svg) · [可编辑图源](diagrams/offline-task-flow.mmd)
 
 <a id="shared-cards-runtime"></a>
-## 双节点共享资料卡（0.1.85）
+## 双节点共享资料卡（0.1.86）
 
 **implemented；配对同步见[0.1.83 证据](delivery-validation.md#k6-federation-evidence)，资料生命周期与聊天副本见[0.1.84 证据](delivery-validation.md#k6-shared-lifecycle-evidence)。** 这是 K6 联网共同体的首个受限数据模块。每台设备仍是完整的本机助手；只有主人在专用共享空间中新写入的资料卡才参与同步。生活计划和工作笔记都可以手工填写；聊天、个人画像、人格、个人/项目记忆、项目文件、凭据、技能及任务账本不自动复制。收到的文字不是指令，不自动注入模型上下文或提升为个人记忆；0.1.85 的聊天引用按[模型用途授权](#shared-model-use)与[可失效引用](#shared-live-references)使用，并遵守[记忆作用域](knowledge-learning.md#memory-scope-model)。
 
@@ -193,10 +194,11 @@
 | `federation_identity.py` | P-256 设备密钥、证书、Windows 当前用户 DPAPI | 密钥独立于模型供应商；损坏不自动生成新身份 |
 | `federation_lifecycle.py` | 导出、归档、只读恢复与副本生成 | 资料恢复不恢复连接授权；不调用模型或写入个人记忆 |
 | `federation_access.py` | 本机模型用途、签名引用、路由解析与依赖检查 | 授权不复制给对端；真实模型子进程重建使用守卫 |
+| `federation_connection.py` | 只读连接证明、地址预览与确认更新 | 固定原设备身份；不修改资料或模型授权，不自动同步 |
 | `federation_store.py` | 独立 SQLite 与版本标记 | 业务记忆库不变；不复制 SQLite/WAL 文件 |
 | `federation_protocol.py` | 签名、版本关系、冲突、删除与容量约束 | 协议版本明确，未来替换协议须迁移/另建空间 |
 | `federation_transport.py` | 按需 HTTPS 接收端与证书指纹固定的客户端 | 不复用或暴露本机工作台 HTTP 接口 |
-| `apps/web/federation.js`、`shared-access.js`、`shared-reference.js` | 设置页生命周期与聊天资料选择 | 交互权威见[设备与共享](interaction-persona.md#shared-cards-ui) |
+| `apps/web/federation.js`、`shared-access.js`、`shared-connection.js`、`shared-reference.js` | 设置页生命周期、用途与连接管理、聊天资料选择 | 交互权威见[设备与共享](interaction-persona.md#shared-cards-ui) |
 
 复用 Python 标准库、SQLite 和已有 cryptography；没有新数据库服务器、集群组件、模型下载或后台定时同步。只在主人打开监听后占用一个接收线程，最多两个请求工作线程；密钥初始化和建空间均为显式操作。真实消耗以[实测及限制](delivery-validation.md#k6-federation-evidence)为准。
 
@@ -254,14 +256,25 @@
 
 本机撤销只约束本机后续使用；离线副本无法得知另一端尚未同步的编辑、删除或撤销。同步到新版本后，旧引用拒绝使用。两端各自授予的模型用途彼此独立；不能把这一子集称为跨设备即时撤回、全记忆授权或共同体统一意识。[本轮验证与限制](delivery-validation.md#k6-shared-access-evidence)单列。
 
+<a id="shared-connection-recovery"></a>
+### 原设备连接诊断与地址恢复
+
+**0.1.86 implemented；[本机验证与限制](delivery-validation.md#k6-connection-recovery-evidence)。** 加入端可按需检查原设备连接；请求只携带原配对范围和随机挑战，不发送卡正文、快照或模型许可，不更新同步计数。先固定原设备 TLS 证书，再核验对端签名、空间、双方身份和挑战回执。成功只证明检查时原设备可达且接受该空间，不代表资料已经同步，也不保证对端随后不会离线或撤销。
+
+共享端重启后仍须手动打开监听。若 IP 或端口变化，加入端填写新地址并预览；只有原身份和原空间通过核验才生成确认凭据，不接受更换证书或另一设备。确认时再次验证对端并比较本机原连接状态，随后只更新地址；空间编号、资料、冲突、删除记录及模型用途保持原样。之后由主人另行点击双向同步。更换设备身份、已撤销或只读空间不能借此恢复旧权限。
+
+预览仅保存在当前宿主内存，单调时钟有效期 120 秒，每空间最多一份、全机最多八份。替换预览、关闭共享、切换网络策略、重启、原连接变化或过期均使旧确认无效；网络变化后即便恢复联网也需重新检查。成功确认在预览仍有效且连接未变时可返回原回执，不重复网络请求或写入。检查与配对/同步共用单次操作锁；内容编辑可继续，确认不覆盖这些编辑。失败保留原地址，资料不自动迁移。
+
+没有定时轮询、地址扫描、新数据库结构或常驻进程；只有点击检查/预览/确认才发起相应网络请求。双方需支持连接证明接口；旧版对端可能拒绝诊断，原 `/sync` 仍按原协议使用，错误提示不能据此断言身份或空间已被撤销。交互入口归[设备与共享](interaction-persona.md#shared-cards-ui)，字段归[共享资料契约](contracts.md#shared-cards-contract)。
+
 <a id="shared-cards-boundaries"></a>
 ### 限制与恢复边界
 
 当前每空间只连接两个身份，最多 8 个在线空间（包括未归档的已撤销/只读空间），每空间最多 32 张卡（包括删除记录）、4096 个修订摘要，正文最多 4000 UTF-8 字节。独立归档最多 32 个、目录合计 16 MiB、单文件 512 KiB；异常恢复原件最多 8 组、合计 64 MiB。达到容量时拒绝新增，不静默删资料；归档释放在线名额，但不代表无限增长。这里使用有界**全状态快照**，并非上文设计的连续事件游标协议，不宣称已经具备缺口补传、全记忆域复制或大规模同步能力。
 
-默认不监听、不开放防火墙、不发现设备；仅接受明确的 IPv4 回环/RFC1918 地址，拒绝公网、DNS 名称、重定向和任意 URL 路径。地址变化需重新配对新空间；没有自动漫游、IPv6、互联网中继或 NAT 穿透。原工作台继续绑定回环。首次配对码只能通过主人选择的可信途径交给目标设备；已有副本无法靠撤销即时远程抹除。资料分享是持久的可撤销空间关系，不是远端任务租约，不赋予设备接管或动作执行权。
+默认不监听、不开放防火墙、不发现设备；仅接受明确的 IPv4 回环/RFC1918 地址，拒绝公网、DNS 名称、重定向和任意 URL 路径。原身份不变时可[确认恢复地址](#shared-connection-recovery)；没有自动漫游、IPv6、互联网中继或 NAT 穿透。原工作台继续绑定回环。首次配对码只能通过主人选择的可信途径交给目标设备；已有副本无法靠撤销即时远程抹除。资料分享是持久的可撤销空间关系，不是远端任务租约，不赋予设备接管或动作执行权。
 
-后续先补第二台真实设备的网络/休眠证据，再按实际需求扩展对端接收许可和记忆域同步；本机模型用途与可失效引用已实现，不再列为待办。任务唯一所有权和共同体协调属于另一个控制平面，继续按[总体设计](#offline-federation)独立实现。
+主人暂时没有第二台 Windows 设备，真实网络/防火墙/休眠证据另行补验，不将同机回环视为通过。可独立推进对端接收许可和记忆域授权；本机模型用途、可失效引用和原身份地址恢复已实现，不再列为待办。任务唯一所有权和共同体协调属于另一个控制平面，继续按[总体设计](#offline-federation)独立实现。
 
 <!-- book-footer:start -->
 [返回全书目录](README.md#book-tree) · [上一章：任务、动作、多 Agent 与资源调度](tasks-agents.md) · [下一章：自主进化、外部编码协作与版本发布](evolution-release.md)

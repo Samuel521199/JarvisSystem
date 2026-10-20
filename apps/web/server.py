@@ -261,6 +261,7 @@ class LocalChatServer(ThreadingHTTPServer):
         self.admin_script = asset('admin.js')
         self.federation_script = asset('federation.js')
         self.shared_access_script = asset('shared-access.js')
+        self.shared_connection_script = asset('shared-connection.js')
         self.network_script = asset('network.js')
         self.coding_script = asset('coding.js')
         self.admin_html = self.admin_html.replace(b'__JARVIS_MODULE_STYLE__', asset('modules.css') + b'\n' + asset('evolution.css') + b'\n' + asset('speech.css') + b'\n' + asset('federation.css')).replace(b'__JARVIS_BRAND_STYLE__', asset('brand/logo.css'))
@@ -641,6 +642,8 @@ class ChatHandler(BaseHTTPRequestHandler):
             self._send(200, self.server.federation_script, 'application/javascript; charset=utf-8')
         elif self.path == '/shared-access.js':
             self._send(200, self.server.shared_access_script, 'application/javascript; charset=utf-8')
+        elif self.path == '/shared-connection.js':
+            self._send(200, self.server.shared_connection_script, 'application/javascript; charset=utf-8')
         elif self.path == '/api/federation':
             if not self._admin_token():return
             try:self._send(200, self.server.federation.view())

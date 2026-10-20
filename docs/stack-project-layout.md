@@ -687,7 +687,7 @@ Python I/O 使用有界线程/异步任务，原生推理/重 CPU 工作保持�
 | `tests/test_workspace.py`、`tools/probe_workspace_ui.py` | 临时目录/HTTP 故障回归与 Edge 端到端验证；合成模型响应，无付费调用 |
 | `adapters/computer-use/jarvis_computer/web.py` | 有界网页接纳层、任务查询与 PNG 校验，不增加持久调度队列 |
 | `runtime/node-host/jarvis_core/team_protocol.py`、`team_tasks.py`、`apps/web/team-workbench.js` | 0.1.82 有界双职责契约、调用预留/回执与页面；复用原后台进程、FIFO、control.db，不新增 Agent 框架或服务；[行为权威](tasks-agents.md#bounded-team-runtime) |
-| `runtime/node-host/jarvis_core/federation*.py`、`apps/web/federation.js`、`shared-access.js`、`shared-reference.js/css` | 0.1.85 可替换的协议、存储、身份、传输、生命周期、模型用途与交互；可选 `federation.db` 和 `federation/` 不并入个人记忆库；[职责与限制](federation.md#shared-cards-runtime) |
+| `runtime/node-host/jarvis_core/federation*.py`、`apps/web/federation.js`、`shared-access.js`、`shared-connection.js`、`shared-reference.js/css` | 0.1.86 可替换的协议、存储、身份、传输、生命周期、模型用途、连接恢复与交互；可选 `federation.db` 和 `federation/` 不并入个人记忆库，连接预览仅驻内存；[职责与限制](federation.md#shared-cards-runtime) |
 | `runtime/node-host/jarvis_core/task_queue.py`、`adapters/computer-use/jarvis_computer/task_queue.py` | 目录/浏览器共用 FIFO 调度与浏览器兼容包装，保留旧附表；版本/宿主与 UNKNOWN 检查，执行语义归[任务章](tasks-agents.md#browser-durable-queue) |
 | `tests/test_computer_queue.py`、`tests/test_computer_web.py`、`tools/probe_computer_ui.py` | 队列崩溃/交接、HTTP 权限/并行/取消与真实 Edge 网页、窄屏验证；不调用模型 |
 | `adapters/models/provider-native/jarvis_models/` | DPAPI vault、原生提供商适配、调用历史与数值用量；不再按累计调用次数拒绝请求，模型输出无执行权 |

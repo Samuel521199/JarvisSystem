@@ -23,7 +23,7 @@
 | **判断现在能否使用、智能有多强** | [v0.1.62 的实现、实测与剩余验收](delivery-validation.md#k2-completion-evidence) | [当前能力和完整性规则](models-offline.md#runtime-chat-context) |
 | **查看个人核心的使用与验证** | [聊天记忆与交流设置](interaction-persona.md#personal-core-ui) → [跨会话继续话题](interaction-persona.md#continuity-ui) | [当前 K2 验收结果与范围](delivery-validation.md#k2-completion-evidence) |
 | **从聊天提出改进并取回成果** | [改进与成长进度](interaction-persona.md#growth-demand-ui) | [0.1.41 需求成长验证](delivery-validation.md#growth-demand-evidence) |
-| **查看本轮修复与验收** | [K6 模型用途与可失效共享引用](delivery-validation.md#k6-shared-access-evidence) | [原始基础验收](delivery-validation.md#foundation-repair-evidence) |
+| **查看本轮修复与验收** | [K6 原设备连接诊断与地址恢复](delivery-validation.md#k6-connection-recovery-evidence) | [既有共享引用验证](delivery-validation.md#k6-shared-access-evidence) |
 | **查看当前实现离个人助手目标还有多远** | [个人核心评价与工程审计](decisions-review.md#personal-core-assessment) | [助手核心架构图](architecture.md#pc-runtime-convergence) → [既有测试证据](delivery-validation.md#current-audit-evidence) |
 | **用自然语言执行首条任务** | [聊天任务入口](core-bootstrap.md#conversation-task-entry) | [执行边界与记录](tasks-agents.md#sample-task-runtime) |
 | **查看模块运行和准备升级** | [设置模块入口](core-bootstrap.md#module-monitor-entry) | [监控与维护边界](health-maintenance.md#module-monitoring) |
@@ -33,7 +33,9 @@
 <a id="project-status"></a>
 ## 目前做到哪里了？
 
-**当前已部署 0.1.85：共享卡已接通本机模型用途授权、可失效引用与派生历史排除；[本轮验证、部署与限制](delivery-validation.md#k6-shared-access-evidence)。** “设置 → 设备与共享 → 模型使用授权”选择卡、个人/项目用途与接入方；聊天输入区资料图标选择本轮引用。撤销后后续模型请求排除相关历史，已经外发的内容无法撤回；默认不开放监听。使用方法见[交互入口](interaction-persona.md#shared-cards-ui)，后续安排见[当前工作顺序](core-bootstrap.md#k4-next-delivery)。
+**当前已部署 0.1.86：共享卡增加只读连接诊断与原设备地址恢复；[本轮验证、部署与限制](delivery-validation.md#k6-connection-recovery-evidence)。** “设置 → 设备与共享 → 连接诊断与恢复”在已配对加入端显示；对端换地址时先核验原身份，再明确保存，资料、冲突、删除记录和模型用途保留，之后单独同步。没有后台扫描或新增常驻服务；真实第二台设备测试按主人要求另行安排。使用方法见[交互入口](interaction-persona.md#shared-cards-ui)，后续安排见[当前工作顺序](core-bootstrap.md#k4-next-delivery)。
+
+0.1.85 的[本机模型用途、可失效引用与派生历史排除](delivery-validation.md#k6-shared-access-evidence)继续保留；撤销约束后续请求，已外发内容无法撤回，正式实例默认不开放监听。
 
 连续语音、Silero 门控和受限插话保持可用，入口为输入区耳机图标；[语音使用与边界](interaction-persona.md#voice-chat-plan)、[0.1.81 验证](delivery-validation.md#k6-continuous-voice-evidence)保留。
 

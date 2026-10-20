@@ -1,6 +1,6 @@
 # 最小核心、初始资产与开发路线
 
-> 状态：整体 proposed；当前源码版本 0.1.85；部署状态见[本轮记录](delivery-validation.md#k6-shared-access-evidence)；K4 工具与需求增量已验证，见[契约审阅证据](delivery-validation.md#k4-contract-evidence)，K3 开发协作通过，证据见[K3 收口](delivery-validation.md#k3-closure-matrix)，新增[K3 编码协作](delivery-validation.md#k3-coding-evidence)，保留[应用离线控制](models-offline.md#application-offline-control)；范围、验证与阻塞见[K2 本轮收口](delivery-validation.md#k2-completion-evidence)；完整 K1/K2 仍待原验收条件。跨主题差距见[后续方向指南](development-guide.md#direction-start)，实施次序见[当前推进队列](#near-term-work-queue) · 更新：2026-10-20
+> 状态：整体 proposed；当前源码版本 0.1.86；部署状态见[本轮记录](delivery-validation.md#k6-connection-recovery-evidence)；K4 工具与需求增量已验证，见[契约审阅证据](delivery-validation.md#k4-contract-evidence)，K3 开发协作通过，证据见[K3 收口](delivery-validation.md#k3-closure-matrix)，新增[K3 编码协作](delivery-validation.md#k3-coding-evidence)，保留[应用离线控制](models-offline.md#application-offline-control)；范围、验证与阻塞见[K2 本轮收口](delivery-validation.md#k2-completion-evidence)；完整 K1/K2 仍待原验收条件。跨主题差距见[后续方向指南](development-guide.md#direction-start)，实施次序见[当前推进队列](#near-term-work-queue) · 更新：2026-10-20
 > [文档入口](README.md) · [维护规则](MAINTENANCE.md) · [架构图册](architecture-atlas.md)
 
 <!-- book-nav:start -->
@@ -45,7 +45,7 @@
   - [4.2.6 两个层次：哪些能长大，哪些不能自行放开](#bootstrap-4)
 - [4.3 开发顺序与每一步的出口](#bootstrap-5)
 - [4.4 接下来具体做什么、什么时候进入下一步](#next-implementation)
-  - [4.4.1 当前推进队列（更新至 0.1.85）](#near-term-work-queue)
+  - [4.4.1 当前推进队列（更新至 0.1.86）](#near-term-work-queue)
     - [4.4.1.1 K4/K5 已有闭环与 K6 当前工作（2026-10-20）](#k4-next-delivery)
   - [4.4.2 K2 内优先完成文字/语音对话与工作的分离](#dialogue-upgrade-order)
   - [4.4.3 K2 内的最小自主进化核心](#k2-growth-core)
@@ -642,7 +642,7 @@ K1 可以暂时用假模型/规则输入验证可靠性，但它还不能叫完�
 本节是**当前工作顺序的唯一权威位置**。下面细分既有 K 工作包；后续指南的 F 编号只是工作项索引，不建立第二套 K/M 路线。日期较早的进度段落保留为历史，不再充当下一步队列。继续复用现有单机底座，K1 可靠性收口与 K2 个人核心增量按依赖推进。
 
 <a id="near-term-work-queue"></a>
-### 当前推进队列（更新至 0.1.85）
+### 当前推进队列（更新至 0.1.86）
 
 **2026-10-19 按主人最新要求停止重复验收，恢复向下开发。** 既有 K2 收口与待验条件保留，不降低门槛也不冒称整体验收通过。F08 的限定职责拆分已随 0.1.64 完成；按主人要求先上传该版本，再在 0.1.65 完成 F07 的候选代码、独立检查、多文件任务和外部 Codex 子集。每轮只做受影响的新改动必要检查，不重跑整套 K2、付费回答评审或离线验收。
 
@@ -679,7 +679,7 @@ K1 可以暂时用假模型/规则输入验证可靠性，但它还不能叫完�
 
 ②③ 的案例应服务个人助手的实际用途，例如资料清单整理、笔记格式转换与重复报告；不能只用植入缺陷的旧实现制造正收益。优先复用本机 SQLite、按需 Worker 和模型路由，新增评估与整理通过适配器接入，不引入重型集群或多套常驻数据库。
 
-**阶段出口保持原定义：**按[收口差距与判定](delivery-validation.md#k4-closure-readiness)逐项补证；仅有人审阅的流程可用，不足以关闭原 K4 的自动成长目标。可以对明确任务域给出有限范围结论，无需承诺“任意业务标准都能自主判对”。本轮 K4 证据成立，K5 已选择实际检索排序模块并完成[接口与失败回退](knowledge-learning.md#retrieval-ranking-module)。0.1.79 已完成[首个受限模块闭环](delivery-validation.md#k5-ranking-module-evidence)，不能再把模型候选、持久选择和重启回退列为未实现。K5 持续维护包括：①实际使用观察与人工反馈，②候选配额下的显式整理/恢复，③更广泛语义回归及其他模块独立验收；这些不是所有 K6 工作的前置阻塞。没有自然使用证据时不声称长期收益；不自动创建后台监控。按主人本轮要求，K6 先交付[按键语音交流](interaction-persona.md#voice-chat-plan)：录音、本地识别、可编辑转写与原会话发送、新回复播报、取消/恢复和资源验证。0.1.81 已交付[连续轮次与受限插话](delivery-validation.md#k6-continuous-voice-evidence)。0.1.82 已交付[单机两职责协作](tasks-agents.md#bounded-team-runtime)，包括独立调用、检查项、预算、取消和汇总；[证据与限制](delivery-validation.md#k6-team-evidence)单列。0.1.83 已接通[双节点共享资料卡](federation.md#shared-cards-runtime)：设备身份、配对、明确资料范围、并发/删除对账与重连，完成同机双进程验证；[证据](delivery-validation.md#k6-federation-evidence)另列。0.1.84 已完成[资料导出、归档、只读恢复与聊天副本](delivery-validation.md#k6-shared-lifecycle-evidence)，不恢复旧连接权限。0.1.85 已补[本机模型用途与可失效引用](delivery-validation.md#k6-shared-access-evidence)，包含逐卡/项目/接入方限制、子进程派发前检查及派生历史排除。下一项先以第二台真实设备验证连接/休眠，再扩展对端接收许可与记忆域授权；个人记忆共享需逐域授权，任务共同体需独立的唯一所有权协议，不直接复制全部记忆或取得远端执行权。真实声学与交谈质量另按证据补验；再按需扩展设备与形态；不同时预装全部框架。个人记忆、伙伴连续性和前台可用性始终是回归约束。原 K1/K2 外部条件保留，不在此安排重复验收。
+**阶段出口保持原定义：**按[收口差距与判定](delivery-validation.md#k4-closure-readiness)逐项补证；仅有人审阅的流程可用，不足以关闭原 K4 的自动成长目标。可以对明确任务域给出有限范围结论，无需承诺“任意业务标准都能自主判对”。本轮 K4 证据成立，K5 已选择实际检索排序模块并完成[接口与失败回退](knowledge-learning.md#retrieval-ranking-module)。0.1.79 已完成[首个受限模块闭环](delivery-validation.md#k5-ranking-module-evidence)，不能再把模型候选、持久选择和重启回退列为未实现。K5 持续维护包括：①实际使用观察与人工反馈，②候选配额下的显式整理/恢复，③更广泛语义回归及其他模块独立验收；这些不是所有 K6 工作的前置阻塞。没有自然使用证据时不声称长期收益；不自动创建后台监控。按主人本轮要求，K6 先交付[按键语音交流](interaction-persona.md#voice-chat-plan)：录音、本地识别、可编辑转写与原会话发送、新回复播报、取消/恢复和资源验证。0.1.81 已交付[连续轮次与受限插话](delivery-validation.md#k6-continuous-voice-evidence)。0.1.82 已交付[单机两职责协作](tasks-agents.md#bounded-team-runtime)，包括独立调用、检查项、预算、取消和汇总；[证据与限制](delivery-validation.md#k6-team-evidence)单列。0.1.83 已接通[双节点共享资料卡](federation.md#shared-cards-runtime)：设备身份、配对、明确资料范围、并发/删除对账与重连，完成同机双进程验证；[证据](delivery-validation.md#k6-federation-evidence)另列。0.1.84 已完成[资料导出、归档、只读恢复与聊天副本](delivery-validation.md#k6-shared-lifecycle-evidence)，不恢复旧连接权限。0.1.85 已补[本机模型用途与可失效引用](delivery-validation.md#k6-shared-access-evidence)，包含逐卡/项目/接入方限制、子进程派发前检查及派生历史排除。0.1.86 已补[只读连接诊断与原设备地址恢复](delivery-validation.md#k6-connection-recovery-evidence)，同机独立进程和浏览器验证通过。主人暂时没有第二台设备，真实 LAN/防火墙/休眠验证另行安排，不将同机测试记作跨机通过。下一项可独立推进对端接收许可，再按逐域授权扩展记忆共享；任务共同体需独立的唯一所有权协议，不直接复制全部记忆或取得远端执行权。真实声学与交谈质量另按证据补验；再按需扩展设备与形态；不同时预装全部框架。个人记忆、伙伴连续性和前台可用性始终是回归约束。原 K1/K2 外部条件保留，不在此安排重复验收。
 
 <a id="dialogue-upgrade-order"></a>
 ### K2 内优先完成文字/语音对话与工作的分离

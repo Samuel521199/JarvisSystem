@@ -30,6 +30,8 @@ class Federation:
         self.lifecycle = Lifecycle(self)
         from .federation_access import Access
         self.access = Access(self, config_path)
+        from .federation_connection import Connection
+        self.connection = Connection(self)
 
     @property
     def node(self):
@@ -108,6 +110,7 @@ class Federation:
         return self.status()
 
     def close(self):
+        self.connection.clear()
         with self.lock:
             listener, self.listener = self.listener, None
         if listener:
@@ -201,6 +204,8 @@ class Federation:
         return self.status()
 
     def receive(self, route, signed):
+        if route == '/inspect':
+            return self.connection.receive(signed)
         revision = self.online()
         identity = self._identity().load()
         body = signed.get('body', {}) if isinstance(signed, dict) else {}
@@ -333,10 +338,15 @@ class Federation:
                    'reference': 'action space item expected', 'recovery_preview': 'action',
                    'recover': 'action expected', 'access_options': 'action space',
                    'access_change': 'action space revision cards providers project_id',
-                   'reference_issue': 'action space item expected scope'}
+                   'reference_issue': 'action space item expected scope',
+                   'connection_check': 'action space', 'connection_preview': 'action space endpoint',
+                   'connection_apply': 'action space token'}
         if action not in schemas:
             p.fail()
         p.fields(payload, schemas[action])
+        if action == 'connection_check': return self.connection.check(payload['space'])
+        if action == 'connection_preview': return self.connection.preview(payload['space'], payload['endpoint'])
+        if action == 'connection_apply': return self.connection.apply(payload['space'], payload['token'])
         if action == 'access_options': return self.access.options(payload['space'])
         if action == 'access_change':
             return self.access.change(payload['space'], payload['revision'], payload['cards'], payload['providers'], payload['project_id'])

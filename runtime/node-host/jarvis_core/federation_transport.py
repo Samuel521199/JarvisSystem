@@ -145,7 +145,7 @@ class Handler(BaseHTTPRequestHandler):
         self.close_connection = True
         try:
             lengths = self.headers.get_all('Content-Length', [])
-            if (self.path not in {'/pair', '/sync'} or len(lengths) != 1 or
+            if (self.path not in {'/pair', '/sync', '/inspect'} or len(lengths) != 1 or
                     not lengths[0].isdigit() or not 0 < int(lengths[0]) <= p.MAX_WIRE or
                     self.headers.get_all('Transfer-Encoding') or
                     self.headers.get('Content-Type') != 'application/json'):
